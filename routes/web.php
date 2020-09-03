@@ -38,3 +38,11 @@ Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
 route::get('/','Controller@index')->name('welcome');
 
 });
+
+route::get('/sistema/taller1', 'TallersController@taller1')->name('taller1');
+route::get('/sistema/taller2', 'TallersController@taller2')->name('taller2');
+route::get('/sistema/taller3', 'TallersController@taller3')->name('taller3');
+route::get('/sistema/taller4', 'TallersController@taller4')->name('taller4');
+route::get('/sistema/taller5', 'TallersController@taller5')->name('taller5');
+route::get('/sistema/taller6', 'TallersController@taller6')->name('taller6');
+route::get('/sistema/taller7', 'TallersController@taller7')->name('taller7');
