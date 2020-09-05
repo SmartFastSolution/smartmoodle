@@ -9,7 +9,8 @@
 
     <title> @yield('title')</title>
 
-    <link rel="stylesheet" href="../css/app.css">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
 
 </head>
@@ -179,7 +180,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="./index.html" class="nav-link">
+                                    <a href="{{ route('taller1') }}" class="nav-link">
                                         <i class="fas fa-circle nav-icon"></i>
                                         <p>taller 1</p>
                                     </a>
@@ -230,10 +231,10 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+            <br>
             @yield('contenido')
 
-            <section class="content">
-            </section>
+        
 
         </div>
 
@@ -251,7 +252,7 @@
 
 
 
-    <script src="../js/app.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
 
 

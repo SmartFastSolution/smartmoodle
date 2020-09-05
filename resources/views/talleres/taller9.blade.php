@@ -1,0 +1,45 @@
+@extends('layouts.master')
+
+@section('title', 'Taller 9')
+@section('contenido')
+
+
+<h1 class="text-center  mt-5 text-danger"> Taller #9</h1>
+     <h3 class="text-center mt-5 mb-3 text-info">ESCRIBA  EN  LOS  CÍRCULOS  EJEMPLOS  DE  PERSONAS  INCAPACES  PARA 
+EJERCER  EL  COMERCIO,  CON  CREATIVIDAD.</h3>
+
+<form action="">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-4 mt-5">
+                <input class="form-control inputdesign" name="" id="">
+            </div>
+        </div>
+
+         <div class="row row justify-content-md-center">
+        <div class="col-4 mt-5">
+            <input class="form-control inputdesign" name="" id="">
+        </div>
+            <div class="col-3 text-center mt-3 mb-3 ">
+                <img src="{{ asset('img/talleres/imagen-10.jpg') }}" alt="">
+            </div>
+        <div class="col-4 mt-5">
+            <input class="form-control inputdesign" name="" id=""
+            >
+        </div>
+
+    </div>
+
+    <div class="row justify-content-center">
+            <div class="col-4 m-2">
+                <input class="form-control inputdesign" name="" id="">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+        	<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
+    	</div>
+    </div>
+</form>
+
+
+@endsection
