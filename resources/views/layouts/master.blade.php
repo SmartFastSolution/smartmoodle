@@ -9,8 +9,13 @@
 
     <title> @yield('title')</title>
 
-    <link rel="stylesheet" href="../css/app.css">
 
+
+    <link rel="stylesheet" href="../../../../css/app.css">
+  
+
+
+    @yield('css_role_page')
 
 </head>
 
@@ -106,7 +111,7 @@
             <!-- Brand Logo -->
 
             <a href="{{ url('/') }}" class="brand-link">
-                <img src="../img/escuela.png" alt="img/hombre.png" class="brand-image img-circle elevation-3"
+                <img src="../../../../img/escuela.png" alt="img/hombre.png" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
                 <span class="brand-text font-weight-blue">Sistema Educativo</span>
             </a>
@@ -117,7 +122,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../img/hombre.png" class="img-circle elevation-2" alt="User Image">
+                        <img src="../../../../../img/hombre.png" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">
@@ -141,21 +146,33 @@
                                 <!--  <i class="nav-icon fas fa-tachometer-alt"></i> -->
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                    Ingreso
+                                    Perfil Administrador
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="./index.html" class="nav-link">
+                                    <a href="{{route('roles.index')}}" class="nav-link">
                                         <i class="fas fa-business-time"></i>
-                                        <p>Perfil Administrador</p>
+                                        <p>Roles</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="./index2.html" class="nav-link ">
-                                        <i class="fas fa-address-card"></i>
-                                        <p>Perfil Docente</p>
+                                    <a href="" class="nav-link">
+                                        <i class="fas fa-business-time"></i>
+                                        <p>Permisos</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="fas fa-business-time"></i>
+                                        <p>Instituto</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('users.index')}}" class="nav-link">
+                                        <i class="fas fa-business-time"></i>
+                                        <p>Usuario</p>
                                     </a>
                                 </li>
 
@@ -205,12 +222,12 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <li class="nav-item has-treeview menu-open">
-                            
+
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a class="dropdown-item nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
-                                       <i class="fas fa-sign-in-alt"></i>
+                                        <i class="fas fa-sign-in-alt"></i>
                                         <p> Cerrar Sesión</p>
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -249,15 +266,16 @@
         </footer>
     </div>
 
-
-
-    <script src="../js/app.js"></script>
-
-
+    <script src="../../../../js/app.js"></script>
+    
+ 
 
     @yield('script')
 
 
 </body>
+
+
+
 
 </html>

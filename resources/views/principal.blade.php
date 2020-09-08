@@ -21,6 +21,7 @@
         rel="stylesheet">
     <link href="../principal/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
+
     <!-- Custom styles for this template -->
     <link href="../principal/css/coming-soon.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/app.css">
