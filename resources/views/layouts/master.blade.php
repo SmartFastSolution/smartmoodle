@@ -158,7 +158,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{route('permisos.index')}}" class="nav-link">
                                         <i class="fas fa-business-time"></i>
                                         <p>Permisos</p>
                                     </a>

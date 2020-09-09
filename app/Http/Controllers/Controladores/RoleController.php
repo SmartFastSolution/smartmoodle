@@ -72,7 +72,21 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        return \view('Roles.showr',['rol'=> $role]);
+       
+        $permission_role=[];
+    
+        foreach($role->permissions as $permission){
+            $permission_role[]=$permission->id;
+   
+        }
+       
+           $permissions=Permission::get();
+       
+       
+       
+       
+       
+        return \view('Roles.showr', compact('permissions', 'role','permission_role'));
     }
 
     /**

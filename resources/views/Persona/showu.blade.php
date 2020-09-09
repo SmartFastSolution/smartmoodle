@@ -9,8 +9,10 @@
 
 <div class="card-header">
 
-<h3>Nombre :{{ $user->name}}</h3>
-<h3>Apellido :{{ $user->apellido}}</h3>
+<h3>Nombre :{{  $user->name}}</h3>
+<h3>Apellido :{{ $user->sname}}</h3>
+<h3>Apellido :{{ $user->sapellido}}</h3>
+<h3>telefono :{{ $user->telefono}}</h3>
 <h3>email: {{ $user->email}}</h3>
 </div>
 
