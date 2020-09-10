@@ -49,9 +49,9 @@
                                     value="{{$role->name}}" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="slug">Rol Slug</label>
-                                <input type="text" class="form-control" name="slug" id="slug" placeholder="Rol Slug"
-                                    value="{{$role->slug}}" readonly>
+                                <label for="descripcion">Rol Detalle</label>
+                                <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Rol Descripcion"
+                                    value="{{$role->descripcion}}" readonly>
                             </div>
 
                             <div class="form-group">
@@ -72,7 +72,7 @@
 
                             <div class="card-body">
 
-                                <h4>Lista de Permisos</h4>
+                                <h4>Lista de Menú</h4>
 
                                 @foreach($permissions as $permission)
 
@@ -88,8 +88,8 @@
 
                                         {{$permission->id}}
                                         -
-                                        {{$permission->name}}
-                                        <em>({{$permission->slug}})</em>
+                                        {{$permission->namep}}
+                                        <em>({{$permission->descripcionp}})</em>
                                     </label>
                                 </div>
                                 @endforeach

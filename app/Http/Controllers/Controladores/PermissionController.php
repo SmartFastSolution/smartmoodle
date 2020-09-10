@@ -40,8 +40,8 @@ class PermissionController extends Controller
     {
         $request->validate([
         
-            'name' => [ 'string', 'max:50','unique:permissions,name'],
-            'slug' => [ 'string', 'max:50','unique:permissions,slug'],
+            'namep' => [ 'string', 'max:50','unique:permissions,namep'],
+            'descripcionp' => [ 'string', 'max:50','unique:permissions,descripcionp'],
             
 
 
@@ -89,15 +89,15 @@ class PermissionController extends Controller
         
         $request->validate([
         
-            'name' => [ 'string', 'max:50','permissions,name' ],
-            'slug' => [ 'string', 'max:50','permissions,slug' ],
+            'namep' => [ 'string', 'max:50','unique:permissions,namep'],
+            'descripcionp' => [ 'string', 'max:50','unique:permissions,descripcionp'],
             
 
 
         ]);
 
-        $permission->name=$request->name;
-        $permission->slug=$request->slug;
+        $permission->namep=$request->namep;
+        $permission->descripcionp=$request->descripcionp;
         $permission->save();
        
       // redireccionamos a sistema y el enlace que tenemos como url ya 

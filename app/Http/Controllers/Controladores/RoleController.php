@@ -47,7 +47,7 @@ class RoleController extends Controller
         $request->validate([
         
             'name' => [ 'string', 'max:50','unique:roles,name'],
-            'slug' => [ 'string', 'max:50','unique:roles,slug'],
+            'descripcion' => [ 'string', 'max:50','unique:roles,descripcion'],
             'fullacces' => ['required' ,'in:yes,no'],
 
 
@@ -122,7 +122,7 @@ class RoleController extends Controller
         $request->validate([
         
             'name' => [ 'string', 'max:50','unique:roles,name,' .$role->id,],
-            'slug' => [ 'string', 'max:50','unique:roles,slug,' .$role->id,],
+            'descripcion' => [ 'string', 'max:50','unique:roles,descripcion,' .$role->id,],
             'fullacces' => ['required' ,'in:yes,no'],
 
 

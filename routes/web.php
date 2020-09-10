@@ -52,6 +52,8 @@ route::POST('storeee','UsersController@store')->name('users.store');
 
 // rutas instituto
 
+route::resource('institutos','InstitutoController');
+
 
 
 
@@ -66,8 +68,7 @@ route::PUT('/roles/roles/{role}','Controladores\RoleController@update')->name('r
 //permisos
 
 
-route::resource('permisos','Controladores\PermissionController')->names('permisos');
-
+route::resource('permisos','Controladores\PermissionController');
 
 
 

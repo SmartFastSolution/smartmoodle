@@ -13,7 +13,7 @@
                 <!-- la referencia que hace este boton es al Rolecontroller en el 
                        cual esta llamando al metodo create y nos redirecciona al crud Roles.createroler...-->
                 <a class="btn btn-info float-right btn-xs" href="{{route('permisos.create')}}"><i
-                        class="fas fa-user-plus"></i>Permisos</a>
+                        class="fas fa-user-plus"></i>Menu</a>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -35,7 +35,7 @@
                 <!-- general form elements -->
                 <div class="card card-dark">
                     <div class="card-header">
-                        <h3 class="card-title">Información de Permisos </h3>
+                        <h3 class="card-title">Información Menu </h3>
                         <div class="card-tools">
 
 
@@ -52,8 +52,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Slug</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Detalle</th>
 
                                     <th></th>
                                     <th scope="col" coldspan="3">Tools</th>
@@ -68,13 +68,13 @@
                                 <tr>
                                     @foreach ($permissions as $permission)
                                     <th scope="row">{{$permission['id']}}</th>
-                                    <td>{{$permission['name']}}</td>
-                                    <td>{{$permission['slug']}}</td>
+                                    <td>{{$permission['namep']}}</td>
+                                    <td>{{$permission['descripcionp']}}</td>
 
                                     <td> </td>
 
 
-                                    <td class="table-button ">
+                                    <!-- <td class="table-button ">
                                         <a class="btn btn-info btn-xs" href="permisos/{{ $permission['id']}}"><i
                                                 class="fas fa-eye"></i></a>
 
@@ -82,7 +82,7 @@
                                     <td class="table-button ">
                                         <a class="btn btn-success btn-xs" href="permisos/{{ $permission['id']}}/edit"><i
                                                 class=" fas fa-pencil-alt"></i></a>
-                                    </td>
+                                    </td> -->
                                     <td class="table-button ">
                                         <!--metodo delete funciona pero hay que almacenar la variable array en una variable temporal-->
                                         <form method="POST" action="{{route('permisos.destroy', $permission->id)}}}">

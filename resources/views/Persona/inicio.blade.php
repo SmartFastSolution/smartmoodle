@@ -41,13 +41,8 @@
                     <div class="card-header">
                         <h3 class="card-title">Informacion de los Usuario</h3>
                         <div class="card-tools">
-
-
-
                         </div>
-
                     </div>
-
                     <!--Table-->
                     <div class="card-body">
                         <table class="table table-hover">

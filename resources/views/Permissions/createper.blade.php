@@ -37,7 +37,7 @@
         <div class="col-md-6">
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Formulario Permisos</h3>
+                    <h3 class="card-title">Formulario Menu</h3>
                 </div>
                 <div class="card-body">
 
@@ -46,14 +46,14 @@
 
                         <div class=" card-body">
                             <div class="form-group">
-                                <label for="name"> Name Permission</label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Permision Name"
-                                    value="{{old('name')}}">
+                                <label for="namep"> Nombre del Menú</label>
+                                <input type="text" class="form-control" name="namep" id="namep" placeholder="Nombre"
+                                    value="{{old('namep')}}">
                             </div>
                             <div class="form-group">
-                                <label for="slug">Permission Slug</label>
-                                <input type="text" class="form-control" name="slug" tag="slug" id="slug"
-                                    placeholder="Permission Slug" value="{{old('slug')}}">
+                                <label for="descripcionp">Detalle del Menu</label>
+                                <input type="text" class="form-control" name="descripcionp" tag="descripcionp" id="descripcionp"
+                                    placeholder="Descripcion" value="{{old('descripcionp')}}">
                             </div>
                             <input type="submit" class="btn btn-dark " value="Guardar">
                         </div>

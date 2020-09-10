@@ -40,8 +40,6 @@
                     <form method="POST" action="{{route('roles.update', $role->id)}}">
                         @method('PUT')
                         @csrf
-
-
                         <div class=" card-body">
                             <div class="form-group">
                                 <label for="name">Rol Name</label>
@@ -49,9 +47,9 @@
                                     value="{{$role->name}}">
                             </div>
                             <div class="form-group">
-                                <label for="slug">Rol Slug</label>
-                                <input type="text" class="form-control" name="slug" id="slug" placeholder="Rol Slug"
-                                    value="{{$role->slug}}">
+                                <label for="descripcion">Rol descripcion</label>
+                                <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Rol descripcion"
+                                    value="{{$role->descripcion}}">
                             </div>
 
                             <div class="form-group">
@@ -72,7 +70,7 @@
 
                             <div class="card-body">
 
-                                <h4>Lista de Permisos</h4>
+                                <h4>Lista de Menú</h4>
 
                                 @foreach($permissions as $permission)
 
@@ -86,29 +84,21 @@
                                         checked @endif >
 
                                     <label class="custom-control-label" for="permission_{{$permission->id}}">
-
                                         {{$permission->id}}
                                         -
-                                        {{$permission->name}}
-                                        <em>({{$permission->slug}})</em>
+                                        {{$permission->namep}}
+                                        <em>({{$permission->descripcionp}})</em>
                                     </label>
                                 </div>
                                 @endforeach
                             </div>
                             <input type="submit" class="btn btn-dark " value="Guardar">
-
-
                     </form>
-
-
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-
-
 
 @endsection
 @section('script')

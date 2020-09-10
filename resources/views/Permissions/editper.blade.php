@@ -49,22 +49,16 @@
 
                         <div class=" card-body">
                             <div class="form-group">
-                                <label for="name"> Name Permission</label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Permission Name"
-                                    value="{{ $permission->name}}" required>
+                                <label for="namep"> Nombre del Menu</label>
+                                <input type="text" class="form-control" name="namep" id="namep" placeholder="Menu"
+                                    value="{{ $permission->namep}}" required>
                             </div>
                             <div class="form-group">
-                                <label for="slug">Permission Slug</label>
-                                <input type="text" class="form-control" name="slug" tag="slug" id="slug"
-                                    placeholder="Permission Slug" value="{{$permission->slug}}">
-                            </div>
-                            
-
-                           
-                    
+                                <label for="descripcionp"> descripcionp</label>
+                                <input type="text" class="form-control" name="descripcionp" tag="descripcionp" id="descripcionp"
+                                    placeholder="Descripción" value="{{$permission->descripcionp}}">
+                            </div>                   
                             <input type="submit" class="btn btn-dark " value="Guardar">
-
-
 
                         </div>
                     </form>
@@ -72,16 +66,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
-
-        </div>
     </div>
 </section>
-
-
-
-
-
 @endsection
 @section('script')
 

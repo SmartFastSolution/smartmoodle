@@ -154,25 +154,25 @@
                                 <li class="nav-item">
                                     <a href="{{route('roles.index')}}" class="nav-link">
                                         <i class="fas fa-business-time"></i>
-                                        <p>Roles</p>
+                                        <p>Sección Roles</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('permisos.index')}}" class="nav-link">
                                         <i class="fas fa-business-time"></i>
-                                        <p>Permisos</p>
+                                        <p>Sección Menú</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{route('instituto.index')}}" class="nav-link">
                                         <i class="fas fa-business-time"></i>
-                                        <p>Instituto</p>
+                                        <p>Sección Instituto</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('users.index')}}" class="nav-link">
                                         <i class="fas fa-business-time"></i>
-                                        <p>Usuario</p>
+                                        <p>Sección Usuario</p>
                                     </a>
                                 </li>
 

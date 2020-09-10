@@ -52,9 +52,9 @@
                                     value="{{old('name')}}">
                             </div>
                             <div class="form-group">
-                                <label for="slug">Rol Slug</label>
-                                <input type="text" class="form-control" name="slug" tag="slug" id="slug"
-                                    placeholder="Rol Slug" value="{{old('slug')}}">
+                                <label for="descripcion">Rol Descripcion</label>
+                                <input type="text" class="form-control" name="descripcion" tag="descripcion" id="descripcion"
+                                    placeholder="Rol descripcion" value="{{old('descripcion')}}">
                             </div>
                             <div class="form-group">
                                 <h3>Acceso Completo</h3>
@@ -72,7 +72,7 @@
 
                             <div class="card-body">
 
-                                <h4>Lista de Permisos</h4>
+                                <h4>Lista de Menu</h4>
 
                                 @foreach($permissions as $permission)
 
@@ -84,8 +84,8 @@
 
                                         {{$permission->id}}
                                         -
-                                        {{$permission->name}}
-                                        <em>({{$permission->slug}})</em>
+                                        {{$permission->namep}}
+                                        <em>({{$permission->descripcionp}})</em>
                                     </label>
                                 </div>
                                 @endforeach
@@ -119,8 +119,8 @@ $(document).ready(function() {
     $('#name').keyup(function(e) {
         var str = $('#name').val();
         str = str.replace(/\W+(?!$)/g, '-').toLowerCase(); // remplazamos el estdo de dashe
-        $('#slug').val(str);
-        $('slug').attr('placeholder', str);
+        $('#descripcion').val(str);
+        $('descripcion').attr('placeholder', str);
     });
 
 });

@@ -40,14 +40,14 @@
                     <form>
                         <div class=" card-body">
                             <div class="form-group">
-                                <label for="name">Permission Name</label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Permiso Name"
-                                    value="{{$permission->name}}" readonly>
+                                <label for="namep">Menu Name</label>
+                                <input type="text" class="form-control" name="namep" id="namep" placeholder="Menu "
+                                    value="{{$permission->namep}}" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="slug">Permission Slug</label>
-                                <input type="text" class="form-control" name="slug" id="slug" placeholder="Permiso Slug"
-                                    value="{{$permission->slug}}" readonly>
+                                <label for="slug">Descripción</label>
+                                <input type="text" class="form-control" name="slug" id="slug" placeholder="Detalle"
+                                    value="{{$permission->descripcionp}}" readonly>
                             </div>
 
 

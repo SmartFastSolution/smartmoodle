@@ -50,7 +50,7 @@
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Rol</th>
-                                    <th scope="col">Slug</th>
+                                    <th scope="col">Detalle</th>
                                     <th scope="col">Acceso Completo</th>
                                     <th></th>
                                     <th scope="col" coldspan="3">Tools</th>
@@ -66,7 +66,7 @@
                                     @foreach ($roles as $role)
                                     <th scope="row">{{$role['id']}}</th>
                                     <td>{{$role['name']}}</td>
-                                    <td>{{$role['slug']}}</td>
+                                    <td>{{$role['descripcion']}}</td>
                                     <td>{{$role['fullacces']}}</td>
                                     <td> </td>
                                    
