@@ -9,7 +9,7 @@ class Role extends Model
 {
 
     protected $fillable = [
-        'name','descripcion','fullacces',
+        'name','descripcion','fullacces','estado',
     ];
 
 

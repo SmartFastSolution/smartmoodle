@@ -49,7 +49,7 @@ class RoleController extends Controller
             'name' => [ 'string', 'max:50','unique:roles,name'],
             'descripcion' => [ 'string', 'max:50','unique:roles,descripcion'],
             'fullacces' => ['required' ,'in:yes,no'],
-
+            'estado' => ['required' ,'in:on,off'],
 
         ]);
 
@@ -124,6 +124,7 @@ class RoleController extends Controller
             'name' => [ 'string', 'max:50','unique:roles,name,' .$role->id,],
             'descripcion' => [ 'string', 'max:50','unique:roles,descripcion,' .$role->id,],
             'fullacces' => ['required' ,'in:yes,no'],
+            'estado' => ['required' ,'in:on,off'],
 
 
         ]);

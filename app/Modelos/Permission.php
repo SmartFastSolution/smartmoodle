@@ -9,7 +9,7 @@ class Permission extends Model
 {
 
     protected $fillable = [
-        'namep','descripcionp',
+        'namep','descripcionp','estado',
     ];
 
 

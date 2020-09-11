@@ -107,6 +107,17 @@
                                 <input type="password" class="form-control" name="password_confirmation"
                                     id="password_confirmation" placeholder="Confirmar Contraseña">
                             </div>
+                            <h3>Estado del Usuario</h3>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estadoon" name="estado" class="custom-control-input"
+                                        value="on" @if(old('estado')=="on" ) checked @endif>
+                                    <label class="custom-control-label" for="estadoon">Activo</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estadooff" name="estado" class="custom-control-input"
+                                        value="off" @if(old('estado')=="off" ) checked @endif>
+                                    <label class="custom-control-label" for="estadooff">No Activo</label>
+                                </div>
 
                             <input type="submit" class="btn btn-dark " value="Guardar">
 

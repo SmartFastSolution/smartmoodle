@@ -18,7 +18,8 @@ class UsersController extends Controller
     {
        $users= User::orderBy('id','Asc')->paginate(5);
     
-        return view('Persona.inicio',['users'=>$users]);
+       // return view('Persona.inicio',['users'=>$users]);
+        return view('administracion.menuadmin',['users'=>$users]);
     }
 
     /**
@@ -52,7 +53,7 @@ class UsersController extends Controller
             'telefono' => ['required', 'string', 'max:13'],
             'celular' => ['required', 'string', 'max:13'],
             'titulo' => ['required', 'string', 'max:255'],
-            
+            'estado' => ['required' ,'in:on,off'],
             'name' => ['required', 'string', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -73,6 +74,7 @@ class UsersController extends Controller
         $user->celular = $request->celular;
         $user->titulo = $request->titulo;
         $user->email = $request->email;
+        $user->estado = $request->estado;
 
         if($request->password !=null){
            $user->password= Hash::make($request->email);
@@ -129,11 +131,10 @@ class UsersController extends Controller
             'telefono' => [ 'string', 'max:13'],
             'celular' => [ 'string', 'max:13'],
             'titulo' => [ 'string', 'max:255'],
-            
             'name' => [ 'string', 'max:20'],
             'email' => [ 'string', 'email', 'max:255',],
             'password' => [ 'string', 'min:8', 'confirmed'],
-            
+            'estado' => ['required' ,'in:on,off'],
 
         ]);
 
@@ -149,6 +150,8 @@ class UsersController extends Controller
         $user->celular = $request->celular;
         $user->titulo = $request->titulo;
         $user->email = $request->email;
+        $user->estado = $request->estado;
+
 
         if($request->password !=null){
            $user->password= Hash::make($request->email);

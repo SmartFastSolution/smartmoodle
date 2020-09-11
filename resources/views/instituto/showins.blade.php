@@ -9,11 +9,11 @@
 
         <div class="card-header">
 
-            <h3>Nombre :{{  $user->name}}</h3>
-            <h3>Apellido :{{ $user->sname}}</h3>
-            <h3>Apellido :{{ $user->sapellido}}</h3>
-            <h3>telefono :{{ $user->telefono}}</h3>
-            <h3>estado: {{ $user->estado}}</h3>
+            <h3>Nombre :{{  $instituto->nombre}}</h3>
+            <h3>Apellido :{{ $instituto->descripcion}}</h3>
+            <h3>Apellido :{{ $instituto->provincia}}</h3>
+            <h3>email: {{ $instituto->email}}</h3>
+            <h3>Estado: {{ $instituto->estado}}</h3>
         </div>
 
 
@@ -27,6 +27,9 @@
     </div>
 
 </div>
+
+
+
 
 
 

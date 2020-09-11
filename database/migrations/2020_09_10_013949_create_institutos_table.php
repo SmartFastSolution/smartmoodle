@@ -15,6 +15,14 @@ class CreateInstitutosTable extends Migration
     {
         Schema::create('institutos', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->string('descripcion');
+            $table->string('provincia');
+            $table->string('canton');
+            $table->string('direccion');
+            $table->string('telefono');
+            $table->string('email')->unique();
+            $table->enum('estado',['on','off'])->nullable;
             $table->timestamps();
         });
     }

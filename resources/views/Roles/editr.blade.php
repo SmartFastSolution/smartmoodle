@@ -43,13 +43,13 @@
                         <div class=" card-body">
                             <div class="form-group">
                                 <label for="name">Rol Name</label>
-                                <input type="text"  class="form-control" name="name" id="name" placeholder="Rol Name"
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Rol Name"
                                     value="{{$role->name}}">
                             </div>
                             <div class="form-group">
                                 <label for="descripcion">Rol descripcion</label>
-                                <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Rol descripcion"
-                                    value="{{$role->descripcion}}">
+                                <input type="text" class="form-control" name="descripcion" id="descripcion"
+                                    placeholder="Rol descripcion" value="{{$role->descripcion}}">
                             </div>
 
                             <div class="form-group">
@@ -67,7 +67,21 @@
                                     <label class="custom-control-label" for="fullaccesno">No</label>
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <h3>Estado del Usuario</h3>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estadoon" name="estado" class="custom-control-input"
+                                        value="on" @if($role['estado']=="on" ) checked
+                                        @elseif(old('estado')=="on" ) checked @endif>
+                                    <label class="custom-control-label" for="estadoon">Activo</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estadooff" name="estado" class="custom-control-input"
+                                        value="off" @if($role['estado']=="off" ) checked
+                                        @elseif(old('estado')=="off" ) checked @endif>
+                                    <label class="custom-control-label" for="estadooff">No Activo</label>
+                                </div>
+                            </div>
                             <div class="card-body">
 
                                 <h4>Lista de Menú</h4>
@@ -77,11 +91,10 @@
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input"
                                         id="permission_{{$permission->id}}" value="{{$permission->id}}"
-                                        name="permission[]" 
-                                        @if( is_array(old('permission')) && in_array( " $permission->id ",old ('permission'))) checked
-                                        @elseif (is_array( $permission_role ) && in_array( " $permission->id",
-                                         $permission_role))
-                                        checked @endif >
+                                        name="permission[]" @if( is_array(old('permission')) &&
+                                        in_array( " $permission->id " ,old ('permission'))) checked @elseif (is_array(
+                                        $permission_role ) && in_array( " $permission->id" , $permission_role)) checked
+                                        @endif>
 
                                     <label class="custom-control-label" for="permission_{{$permission->id}}">
                                         {{$permission->id}}

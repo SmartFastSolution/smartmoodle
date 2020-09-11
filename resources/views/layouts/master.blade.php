@@ -12,6 +12,7 @@
 
 
     <link rel="stylesheet" href="../../../../css/app.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/af-2.3.5/b-1.6.3/datatables.min.css"/>
   
 
 
@@ -151,6 +152,13 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                    <a href="{{route('admin.admin')}}" class="nav-link">
+                                        <i class="fas fa-business-time"></i>
+                                        <p>Menú Administrativo</p>
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a href="{{route('roles.index')}}" class="nav-link">
                                         <i class="fas fa-business-time"></i>
@@ -164,7 +172,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('instituto.index')}}" class="nav-link">
+                                    <a href="{{route('institutos.index')}}" class="nav-link">
                                         <i class="fas fa-business-time"></i>
                                         <p>Sección Instituto</p>
                                     </a>
@@ -268,7 +276,33 @@
 
     <script src="../../../../js/app.js"></script>
     
+    <script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
  
+</script>
+
+<script>
+$(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+
+</script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/af-2.3.5/b-1.6.3/datatables.min.js"></script>
+
 
     @yield('script')
 

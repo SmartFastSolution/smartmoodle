@@ -52,6 +52,7 @@
                                     <th scope="col">Rol</th>
                                     <th scope="col">Detalle</th>
                                     <th scope="col">Acceso Completo</th>
+                                    <th scope="col">Estado1</th>
                                     <th></th>
                                     <th scope="col" coldspan="3">Tools</th>
                                     <th></th>
@@ -68,6 +69,7 @@
                                     <td>{{$role['name']}}</td>
                                     <td>{{$role['descripcion']}}</td>
                                     <td>{{$role['fullacces']}}</td>
+                                    <td>{{$role['estado']}}</td>
                                     <td> </td>
                                    
 

@@ -50,7 +50,19 @@
                                     value="{{$permission->descripcionp}}" readonly>
                             </div>
 
-
+                            <h3>Estado del Menu</h3>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="estadoesactivo" name="estado" class="custom-control-input"
+                                    value="activo" @if($permission['estado']=="activo" ) checked
+                                    @elseif(old('estado')=="activo" ) checked @endif  disabled>
+                                <label class="custom-control-label" for="estadoactivo">Activo</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="estadonoactivo" name="estado" class="custom-control-input"
+                                    value="no_activo" @if($permission['estado']=="no_activo" ) checked
+                                    @elseif(old('estado')=="no_activo" ) checked @endif  disabled>
+                                <label class="custom-control-label" for="estadonoactivo">No Activo</label>
+                            </div> 
 
                             <div class="card-footer">
                                 <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>

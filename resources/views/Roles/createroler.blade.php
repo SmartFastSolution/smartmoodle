@@ -53,8 +53,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="descripcion">Rol Descripcion</label>
-                                <input type="text" class="form-control" name="descripcion" tag="descripcion" id="descripcion"
-                                    placeholder="Rol descripcion" value="{{old('descripcion')}}">
+                                <input type="text" class="form-control" name="descripcion" tag="descripcion"
+                                    id="descripcion" placeholder="Rol descripcion" value="{{old('descripcion')}}">
                             </div>
                             <div class="form-group">
                                 <h3>Acceso Completo</h3>
@@ -69,7 +69,19 @@
                                     <label class="custom-control-label" for="fullaccesno">No</label>
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <h3>Estado del Rol</h3>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estadoon" name="estado" class="custom-control-input"
+                                        value="on" @if(old('estado')=="on" ) checked @endif>
+                                    <label class="custom-control-label" for="estadoon">Activo</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estadooff" name="estado" class="custom-control-input"
+                                        value="off" @if(old('estado')=="off" ) checked @endif>
+                                    <label class="custom-control-label" for="estadooff">No Activo</label>
+                                </div>
+                            </div>
                             <div class="card-body">
 
                                 <h4>Lista de Menu</h4>

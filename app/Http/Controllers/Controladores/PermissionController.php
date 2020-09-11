@@ -42,7 +42,7 @@ class PermissionController extends Controller
         
             'namep' => [ 'string', 'max:50','unique:permissions,namep'],
             'descripcionp' => [ 'string', 'max:50','unique:permissions,descripcionp'],
-            
+            'estado' => ['required' ,'in:on,off'],
 
 
         ]);
@@ -91,7 +91,7 @@ class PermissionController extends Controller
         
             'namep' => [ 'string', 'max:50','unique:permissions,namep'],
             'descripcionp' => [ 'string', 'max:50','unique:permissions,descripcionp'],
-            
+            'estado' => ['required' ,'in:on,off'],
 
 
         ]);

@@ -51,10 +51,24 @@
                                     value="{{old('namep')}}">
                             </div>
                             <div class="form-group">
-                                <label for="descripcionp">Detalle del Menu</label>
+                                <label for="descripcionp">Detalle del Menú</label>
                                 <input type="text" class="form-control" name="descripcionp" tag="descripcionp" id="descripcionp"
                                     placeholder="Descripcion" value="{{old('descripcionp')}}">
                             </div>
+                            <h3>Estado del Menú</h3>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estadoon" name="estado" class="custom-control-input"
+                                        value="on" @if(old('estado')=="on" ) checked @endif>
+                                    <label class="custom-control-label" for="estadoon">Activo</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estadooff" name="estado" class="custom-control-input"
+                                        value="off" @if(old('estado')=="off" ) checked @endif>
+                                    <label class="custom-control-label" for="estadooff">No Activo</label>
+                                </div>
+                                <br>
+                                <br>
+                                <br>
                             <input type="submit" class="btn btn-dark " value="Guardar">
                         </div>
                     </form>

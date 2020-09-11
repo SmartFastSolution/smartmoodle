@@ -36,7 +36,14 @@ Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
      //   return view('welcome');
    // });
 
+
+ 
+
 route::get('/','Controller@index')->name('welcome');
+
+//ruta del menu general de administracion 
+route::get('/admin','Controller@menuadmin')->name('admin.admin');
+
 
 
 //rutas usuario

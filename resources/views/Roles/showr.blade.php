@@ -50,8 +50,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="descripcion">Rol Detalle</label>
-                                <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Rol Descripcion"
-                                    value="{{$role->descripcion}}" readonly>
+                                <input type="text" class="form-control" name="descripcion" id="descripcion"
+                                    placeholder="Rol Descripcion" value="{{$role->descripcion}}" readonly>
                             </div>
 
                             <div class="form-group">
@@ -69,7 +69,21 @@
                                     <label class="custom-control-label" for="fullaccesno">No</label>
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                <h3>Estado del Usuario</h3>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estadoon" name="estado" class="custom-control-input"
+                                        value="on" @if($role['estado']=="on" ) checked @elseif(old('estado')=="on" )
+                                        checked @endif disabled>
+                                    <label class="custom-control-label" for="estadoon">Activo</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estadooff" name="estado" class="custom-control-input"
+                                        value="off" @if($role['estado']=="off" ) checked @elseif(old('estado')=="off" )
+                                        checked @endif disabled>
+                                    <label class="custom-control-label" for="estadooff">No Activo</label>
+                                </div>
+                            </div>
                             <div class="card-body">
 
                                 <h4>Lista de Menú</h4>

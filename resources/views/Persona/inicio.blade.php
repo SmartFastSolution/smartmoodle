@@ -3,6 +3,8 @@
 @section('title')
 
 
+ 
+
 
 @endsection
 
@@ -44,92 +46,85 @@
                         </div>
                     </div>
                     <!--Table-->
-                    <div class="card-body">
-                        <table class="table table-hover">
+                    <div class="card">
+                        
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Cedula</th>
+                                        <th scope="col">Primer Nombre</th>
+                                        <th scope="col">Primer Apellido</th>
+                                        <th scope="col">Domicilio</th>
+                                        <th scope="col">Teléfono</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Estado</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th scope="col" coldspan="3">Tools</th>
+                                        <th></th>
 
-                            <!--Table head-->
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Cedula</th>
-                                    <!--  <th scope="col">Fecha de Nacimiento</th> -->
-                                    <th scope="col">Primer Nombre</th>
-                                    <!--  <th scope="col">Segundo Nombre</th> -->
-                                    <th scope="col">Primer Apellido</th>
-                                    <!--  <th scope="col">Segundo Apellido</th> -->
-                                    <th scope="col">Domicilio</th>
-                                    <th scope="col">Teléfono</th>
-                                    <!--   <th scope="col">Celular</th>  -->
-                                    <!-- <th scope="col">Profesion</th> -->
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Permisos </th>
-                                    <th scope="col">Roles</th>
-                                    <th></th>
-                                    <th scope="col" coldspan="3">Tools</th>
-                                    <th></th>
+                                    </tr>
+                                </thead>
+                                <!--Table head-->
 
-                                </tr>
-                            </thead>
-                            <!--Table head-->
-
-                            <!--Table body-->
-                            <tbody>
-                                <tr>
-                                    @foreach ($users as $user)
-                                    <th scope="row">{{$user->id}}</th>
-                                    <td>{{$user->cedula}}</td>
-                                    <!--  <td>{{$user->fechanacimiento}}</td> -->
-                                    <td>{{$user->name}}</td>
-                                    <!-- <td>{{$user->sname}}</td>  -->
-                                    <td>{{$user->apellido}}</td>
-                                    <!-- <td>{{$user->sapellido}}</td> -->
-                                    <td>{{$user->domicilio}}</td>
-                                    <td>{{$user->telefono}}</td>
-                                    <!--   <td>{{$user->celular}}</td> -->
-                                    <!--   <td>{{$user->titulo}}</td> -->
-                                    <td>{{$user->email}}</td>
-                                    <td> </td>
-                                    <td> </td>
+                                <!--Table body-->
+                                <tbody>
+                                    <tr>
+                                        @foreach ($users as $user)
+                                        <th scope="row">{{$user->id}}</th>
+                                        <td>{{$user->cedula}}</td>
+                                        <td>{{$user->name}}</td>
+                                        <td>{{$user->apellido}}</td>
+                                        <td>{{$user->domicilio}}</td>
+                                        <td>{{$user->telefono}}</td>
+                                        <td>{{$user->email}}</td>
+                                        <td>{{$user->estado}}</td>
+                                        <td> </td>
+                                        <td> </td>
 
 
-                                    <td class="table-button ">
-                                        <a class="btn btn-info btn-xs" href="users/users/{{ $user['id']}}"><i
-                                                class="fas fa-eye"></i></a>
+                                        <td class="table-button ">
+                                            <a class="btn btn-info btn-xs" href="users/users/{{ $user['id']}}"><i
+                                                    class="fas fa-eye"></i></a>
 
-                                    </td>
-                                    <td class="table-button ">
-                                        <a class="btn btn-success btn-xs" href="users/users/{{ $user['id']}}/edit"><i
-                                                class=" fas fa-pencil-alt"></i></a>
-                                    </td>
-                                    <td class="table-button ">
-                                        <!--metodo delete funciona pero hay que almacenar la variable array en una variable temporal-->
-                                        <form method="POST" action="{{route('users.destroy', $user->id)}}}">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger "><i
-                                                    class="fas fa-trash"></i></button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                            <!--Table body-->
-                            {{$users->links()}}
-                        </table>
-                        <!--Table-->
+                                        </td>
+                                        <td class="table-button ">
+                                            <a class="btn btn-success btn-xs"
+                                                href="users/users/{{ $user['id']}}/edit"><i
+                                                    class=" fas fa-pencil-alt"></i></a>
+                                        </td>
+                                        <td class="table-button ">
+                                            <!--metodo delete funciona pero hay que almacenar la variable array en una variable temporal-->
+                                            <form method="POST" action="{{route('users.destroy', $user->id)}}}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger "><i
+                                                        class="fas fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                                <!--Table body-->
+                              
+                            </table>
+                            <!--Table-->
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-    </div>
 </section>
 
 
 @endsection
 
 @section('script')
-
 
 
 @endsection

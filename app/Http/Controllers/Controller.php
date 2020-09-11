@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -14,5 +15,10 @@ class Controller extends BaseController
     public function index (){
 
         return view('welcome');
+    }
+
+    public function menuadmin (){
+
+        return view('administracion.menuadmin');
     }
 }
