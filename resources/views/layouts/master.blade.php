@@ -184,7 +184,18 @@
                                         <p>Sección Usuario</p>
                                     </a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a href="{{route('users.index')}}" class="nav-link">
+                                        <i class="fas fa-business-time"></i>
+                                        <p>Sección Cursos</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('users.index')}}" class="nav-link">
+                                        <i class="fas fa-business-time"></i>
+                                        <p>Sección Talleres</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
