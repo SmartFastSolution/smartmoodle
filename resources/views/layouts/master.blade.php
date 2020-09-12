@@ -11,8 +11,8 @@
 
 
 
-    <link rel="stylesheet" href="../../../../css/app.css">
-    <link rel="stylesheet" href="../../../../css/dataTables.boostrap.css">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <!-- <link rel="stylesheet" href="css/dataTables.boostrap.css"> -->
    
   
 
@@ -275,8 +275,8 @@
         </footer>
     </div>
 
-    <script src="../../../../js/app.js"></script>
-    <script src="../../../../js/dataTables.bootstrap.js"></script>
+    <script src="{{asset('js/app.js')}}"></script>
+    <!-- <script src="js/dataTables.bootstrap.js"></script> -->
     
     @yield('script')
 
