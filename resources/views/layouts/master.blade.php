@@ -12,13 +12,16 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
+    @yield('styles')
+    
+
 
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 
 
-    <div class="wrapper" id="app">
+    <div class="wrapper" >
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-info navbar-light">
             <!-- Left navbar links -->
@@ -233,13 +236,8 @@
         <div class="content-wrapper">
             <br>
             @yield('contenido')
-
-        
-
         </div>
-
-
-        <!-- /.control-sidebar -->
+    <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
         <footer class="main-footer">
@@ -251,9 +249,8 @@
     </div>
 
 
-
+   
     <script src="{{ asset('js/app.js') }}"></script>
-
 
 
     @yield('script')

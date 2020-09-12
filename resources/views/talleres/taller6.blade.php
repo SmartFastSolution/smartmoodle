@@ -57,9 +57,13 @@ PRODUCCIÓN</label>
 			</div>
 		</div>
 <div class="row justify-content-center">
-        		<input type="submit" value="Enviar Respuestas" class="btn p-2 mt-3 btn-danger">
+        		<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
     		 </div>
 	</div>
+
+@foreach ($info as $e)
+	<div>{{ $e }}</div>
+@endforeach
 
 	</div>
 </form>

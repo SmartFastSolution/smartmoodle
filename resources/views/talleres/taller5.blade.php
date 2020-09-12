@@ -7,7 +7,8 @@
      <h3 class="text-center mt-5 mb-3 text-info">ESCRIBA  DIFERENCIAS  ENTRE  PERSONAS  CAPACES  E  INCAPACES  PARA 
 EJERCER  EL  COMERCIO,  CON  ORIGINALIDAD</h3>
 
-<form action="">
+<form action="{{ route('taller5') }}" method="POST">
+    @csrf
 	<div class="container">
 		<div class="row">
 			<div class="col-6 border-right border-info ">
@@ -16,9 +17,9 @@ EJERCER  EL  COMERCIO,  CON  ORIGINALIDAD</h3>
 				</div>
 				<div class="row">
 					<div class="col">
-						<input class="form-control mb-3 mt-3" type="text">
-				       <input class="form-control mb-3" type="text">
-				      <input class="form-control mb-3" type="text">
+						<input class="form-control mb-3 mt-3" name="diferencia_1a" type="text">
+				       <input class="form-control mb-3" name="diferencia_2a" type="text">
+				      <input class="form-control mb-3" name="diferencia_3a" type="text">
 
 					</div>
 				</div>
@@ -29,9 +30,9 @@ EJERCER  EL  COMERCIO,  CON  ORIGINALIDAD</h3>
 				</div>
 				<div class="row">
 					<div class="col">
-						<input class="form-control mb-3 mt-3" type="text">
-				       <input class="form-control mb-3" type="text">
-				      <input class="form-control mb-3" type="text">
+						<input class="form-control mb-3 mt-3" name="diferencia_1b" type="text">
+				       <input class="form-control mb-3" name="diferencia_2b" type="text">
+				      <input class="form-control mb-3" name="diferencia_3b" type="text">
 
 					</div>
 				</div>
@@ -39,7 +40,7 @@ EJERCER  EL  COMERCIO,  CON  ORIGINALIDAD</h3>
 			</div>
 		</div>
 		<div class="row justify-content-center">
-        		<input type="submit" value="Enviar Respuestas" class="btn p-2 mt-3 btn-danger">
+        		<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
     	</div>
 	</div>
 

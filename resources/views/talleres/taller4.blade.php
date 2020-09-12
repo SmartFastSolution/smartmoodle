@@ -6,7 +6,8 @@
 
 <h1 class="text-center  mt-5 text-danger"> Taller #4</h1>
      <h3 class="text-center mt-5 text-info">COMPLETE  LOS  ENUNCIADOS  CORRECTAMENTE</h3>
-     <form action="">
+     <form action="{{ route('taller4') }}" method="POST">
+           @csrf
      	<div class="container">
      		<div class="row justify-content-center">
      			<div class="col-7">
@@ -16,7 +17,7 @@
      						
      					</div>
      					<div class="col-6">
-     						<input type="text" class="form-control inputcurrent">
+     						<input type="text"  name="respuesta1" class="form-control inputcurrent">
      					</div>
      				</div>
 <br>
@@ -26,7 +27,7 @@
  
      					</div>
      					<div class="col-6">
-     						<input type="text" class="form-control inputcurrent">
+     						<input type="text"  name="respuesta2" class="form-control inputcurrent">
      					</div>
      				</div>
 
@@ -37,7 +38,7 @@ realizan  en  forma</label>
  
      					</div>
      					<div class="col-6">
-     						<input type="text" class="form-control inputcurrent">
+     						<input type="text" name="respuesta3" class="form-control inputcurrent">
      					</div>
      				</div>
 <br>
@@ -48,7 +49,7 @@ el  RUC  en  un  periodo  de </label>
  
      					</div>
      					<div class="col-6">
-     						<input type="text" class="form-control inputcurrent">
+     						<input type="text" name="respuesta4" class="form-control inputcurrent">
      					</div>
      				</div>
 <br>
@@ -58,13 +59,13 @@ el  RUC  en  un  periodo  de </label>
  
      					</div>
      					<div class="col-6">
-     						<input type="text" class="form-control inputcurrent">
+     						<input type="text" name="respuesta5" class="form-control inputcurrent">
      					</div>
      				</div>
      			</div>
      		</div>
      		<div class="row justify-content-center">
-        		<input type="submit" value="Enviar Respuestas" class="btn p-2 mt-3 btn-danger">
+        		<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
     		 </div>
      	</div>
      </form>

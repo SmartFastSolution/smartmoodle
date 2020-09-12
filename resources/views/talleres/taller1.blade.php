@@ -11,9 +11,7 @@
 
      <div class="row justify-content-md-center">
          <div class="col-10 mt-5 mb-5">
-            <textarea class="form-control inputdesign" name="respuesta" id="" cols="40" rows="10"
-            >
-            El  Comercio  es  importante  porque
+            <textarea class="form-control inputdesign" name="respuesta" id="" cols="40" rows="10">El  Comercio  es  importante  porque
 
             </textarea>
         </div>

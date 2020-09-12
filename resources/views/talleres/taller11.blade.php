@@ -12,7 +12,7 @@ CORRESPONDIENTE</h3>
 		<div class="row justify-content-center align-items-center mb-5">
 			<div class="col-5 text-justify">
 				
-     				<label class="form-control-label"><span class="badge-danger badge-pill">A.</span> El hombre fue perfeccionando los instrumentos de trabajo que sirvieron para producir mercaderías</label>
+     				<label class="form-control-label"><span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'A');" class="badge-danger badge-pill">A.</span> El hombre fue perfeccionando los instrumentos de trabajo que sirvieron para producir mercaderías</label>
 			</div>
 			<div class="col-5">
 				<div class="row align-items-center">
