@@ -30,7 +30,7 @@ Auth::routes();
 
 Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
    
-  
+ route::get('/','Controller@index')->name('welcome');
 
 
 
