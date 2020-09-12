@@ -9,7 +9,8 @@
             <div class="col-sm-10">
                 <h1>Sección Administrador</h1>
             </div>
-            <div class="card-tools">  <!-- la referencia que hace este boton es al Rolecontroller en el 
+            <div class="card-tools">
+                <!-- la referencia que hace este boton es al Rolecontroller en el 
                        cual esta llamando al metodo create y nos redirecciona al crud Roles.createroler...-->
                 <a class="btn btn-info float-right btn-xs" href="{{route('roles.create')}}"><i
                         class="fas fa-user-plus"></i>ROLES</a>
@@ -43,9 +44,7 @@
 
                     <!--Table-->
                     <div class="card-body">
-                        <table class="table table-hover">
-
-                            <!--Table head-->
+                        <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
@@ -53,6 +52,8 @@
                                     <th scope="col">Detalle</th>
                                     <th scope="col">Acceso Completo</th>
                                     <th scope="col">Estado1</th>
+
+                                    <th></th>
                                     <th></th>
                                     <th scope="col" coldspan="3">Tools</th>
                                     <th></th>
@@ -71,7 +72,7 @@
                                     <td>{{$role['fullacces']}}</td>
                                     <td>{{$role['estado']}}</td>
                                     <td> </td>
-                                   
+                                  
 
                                     <td class="table-button ">
                                         <a class="btn btn-info btn-xs" href="roles/{{ $role['id']}}"><i
@@ -95,7 +96,7 @@
                                 @endforeach
                             </tbody>
                             <!--Table body-->
-                            {{$roles->links()}}
+
                         </table>
                         <!--Table-->
                     </div>

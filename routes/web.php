@@ -59,7 +59,7 @@ route::POST('storeee','UsersController@store')->name('users.store');
 
 // rutas instituto
 
-route::resource('institutos','InstitutoController');
+route::resource('institutos','InstitutoController');// FUNCIONA AL 100%
 
 
 
@@ -72,10 +72,11 @@ route::get('iniciorole','Controladores\RoleController@index')->name('roles.inici
 route::PUT('/roles/roles/{role}','Controladores\RoleController@update')->name('role.update');
 
 
-//permisos
+//MENU
 
 
-route::resource('permisos','Controladores\PermissionController');
+route::resource('permisos','PermissionController');// FUNCIONA AL 100%
+
 
 
 

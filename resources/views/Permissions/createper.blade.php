@@ -1,12 +1,7 @@
 @extends('layouts.master')
 @section('title')
-
-
 @endsection
 @section('contenido')
-
-
-
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -14,7 +9,6 @@
                 <h1>Crear Permisos</h1>
             </div>
             <div class="col-sm-6">
-
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -31,17 +25,16 @@
 </div>
 @endif
 
-
 <section class="content">
     <div class="row">
         <div class="col-md-6">
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Formulario Menu</h3>
+                    <h3 class="card-title">Añadir un  Menú</h3>
                 </div>
                 <div class="card-body">
 
-                    <form method="POST" action="{{route('permisos.store')}} ">
+                    <form method="POST" action="{{route('permisos.index')}} ">
                         @csrf
 
                         <div class=" card-body">
@@ -52,23 +45,23 @@
                             </div>
                             <div class="form-group">
                                 <label for="descripcionp">Detalle del Menú</label>
-                                <input type="text" class="form-control" name="descripcionp" tag="descripcionp" id="descripcionp"
-                                    placeholder="Descripcion" value="{{old('descripcionp')}}">
+                                <input type="text" class="form-control" name="descripcionp" tag="descripcionp"
+                                    id="descripcionp" placeholder="Descripcion" value="{{old('descripcionp')}}">
                             </div>
                             <h3>Estado del Menú</h3>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="estadoon" name="estado" class="custom-control-input"
-                                        value="on" @if(old('estado')=="on" ) checked @endif>
-                                    <label class="custom-control-label" for="estadoon">Activo</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="estadooff" name="estado" class="custom-control-input"
-                                        value="off" @if(old('estado')=="off" ) checked @endif>
-                                    <label class="custom-control-label" for="estadooff">No Activo</label>
-                                </div>
-                                <br>
-                                <br>
-                                <br>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="estadoon" name="estado" class="custom-control-input" value="on"
+                                    @if(old('estado')=="on" ) checked @endif>
+                                <label class="custom-control-label" for="estadoon">Activo</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="estadooff" name="estado" class="custom-control-input"
+                                    value="off" @if(old('estado')=="off" ) checked @endif>
+                                <label class="custom-control-label" for="estadooff">No Activo</label>
+                            </div>
+                            <br>
+                            <br>
+                            <br>
                             <input type="submit" class="btn btn-dark " value="Guardar">
                         </div>
                     </form>

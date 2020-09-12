@@ -3,8 +3,6 @@
 @endsection
 @section('contenido')
 
-
-
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -17,15 +15,13 @@
     </div><!-- /.container-fluid -->
 </section>
 
-
-
 <section class="content">
     <div class="container-fluid">
 
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                    aria-controls="nav-home" aria-selected="true">Usuarios</a>
+                    aria-controls="nav-home" aria-selected="true">Docente</a>
                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                     aria-controls="nav-profile" aria-selected="false">Institución</a>
                 <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
@@ -34,8 +30,13 @@
         </nav>
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                <!-- inicio seccion usuario -->
-asdaadasd
+                <!--\\\\\\\\ inicio seccion usuario //////// -->
+
+
+
+
+
+                <!-- fin  seccion usuario -->
             </div>
 
 

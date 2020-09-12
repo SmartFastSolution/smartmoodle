@@ -23,11 +23,11 @@
 
 <section class="content">
 
-@if ($message = Session::get('success'))
-<div class="alert alert-success">
-    <p>{{ $message }}</p>
-</div>
-@endif
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success">
+        <p>{{ $message }}</p>
+    </div>
+    @endif
     <div class="container-fluid">
         <div class="row">
             <!-- left column -->
@@ -44,50 +44,46 @@
 
                     </div>
 
-                    <!--Table-->
-                    <div class="card-body">
-                        <table class="table table-hover">
 
-                            <!--Table head-->
+
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="dataTable" class="table table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Detalle</th>
                                     <th scope="col">Estado</th>
-
                                     <th></th>
-                                    <th scope="col" coldspan="3">Tools</th>
-                                    <th></th>
-
+                                    <th scope="col">Tools</th>
                                 </tr>
                             </thead>
-                            <!--Table head-->
-
-                            <!--Table body-->
                             <tbody>
                                 <tr>
-                                    @foreach ($permissions as $permission)
-                                    <th scope="row">{{$permission['id']}}</th>
-                                    <td>{{$permission['namep']}}</td>
-                                    <td>{{$permission['descripcionp']}}</td>
-                                    <td>{{$permission['estado']}}</td>
+                                    @foreach ($permissions as $permiso)
+                                    <th scope="row">{{ $permiso['id']}}</th>
+                                    <td>{{ $permiso['namep']}}</td>
+                                    <td>{{ $permiso['descripcionp']}}</td>
+                                    <td>{{ $permiso['estado']}}</td>
 
                                     <td> </td>
 
 
-                                    <td class="table-button ">
-                                        <a class="btn btn-info btn-xs" href="permisos/{{ $permission['id']}}"><i
+                                    <!-- <td class="table-button ">
+                                        <a class="btn btn-info btn-xs"
+                                            href="{{route('permisos.show', $permiso->id)}}"><i
                                                 class="fas fa-eye"></i></a>
 
                                     </td>
                                     <td class="table-button ">
-                                        <a class="btn btn-success btn-xs" href="permisos/{{ $permission['id']}}/edit"><i
+                                        <a class="btn btn-success btn-xs"
+                                            href="{{route('permisos.edit',$permiso->id)}}"><i
                                                 class=" fas fa-pencil-alt"></i></a>
-                                    </td>
+                                    </td> -->
                                     <td class="table-button ">
                                         <!--metodo delete funciona pero hay que almacenar la variable array en una variable temporal-->
-                                        <form method="POST" action="{{route('permisos.destroy', $permission->id)}}}">
+                                        <form method="POST" action="{{route('permisos.destroy', $permiso->id)}}}">
                                             @method('DELETE')
                                             @csrf
                                             <button type="submit" class="btn btn-danger "><i
@@ -104,17 +100,9 @@
                         <!--Table-->
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
 </section>
-
-
-
-
-
-
 
 @endsection
 @section('script')

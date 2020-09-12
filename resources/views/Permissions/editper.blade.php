@@ -11,7 +11,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Editar  Permisos</h1>
+                <h1>Editar Menú</h1>
             </div>
             <div class="col-sm-6">
 
@@ -41,7 +41,7 @@
                 </div>
                 <div class="card-body">
 
-                <form method="POST" action="/permisos/{{ $permission->id}}" >
+                <form method="POST" action="permisos/{$permission->['id']}" >
                         @method('PUT')
                         @csrf
 
@@ -50,13 +50,13 @@
                         <div class=" card-body">
                             <div class="form-group">
                                 <label for="namep"> Nombre del Menu</label>
-                                <input type="text" class="form-control" name="namep" id="namep" placeholder="Menu"
-                                    value="{{ $permission->namep}}" required>
+                                <input type="text" class="form-control"  value="{{$permission->namep}}" name="namep" id="namep" placeholder="Menu"
+                                    required>
                             </div>
                             <div class="form-group">
                                 <label for="descripcionp"> descripcionp</label>
-                                <input type="text" class="form-control" name="descripcionp" tag="descripcionp" id="descripcionp"
-                                    placeholder="Descripción" value="{{$permission->descripcionp}}">
+                                <input type="text" class="form-control"  value="{{$permission->descripcionp}}" name="descripcionp" tag="descripcionp" id="descripcionp"
+                                    placeholder="Descripción">
                             </div>   
 
                               <h3>Estado del Menú</h3>

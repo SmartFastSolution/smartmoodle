@@ -12,7 +12,8 @@
 
 
     <link rel="stylesheet" href="../../../../css/app.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.21/af-2.3.5/b-1.6.3/datatables.min.css"/>
+    <link rel="stylesheet" href="../../../../css/dataTables.boostrap.css">
+   
   
 
 
@@ -275,35 +276,8 @@
     </div>
 
     <script src="../../../../js/app.js"></script>
+    <script src="../../../../js/dataTables.bootstrap.js"></script>
     
-    <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
- 
-</script>
-
-<script>
-$(document).ready( function () {
-    $('#myTable').DataTable();
-} );
-
-</script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.21/af-2.3.5/b-1.6.3/datatables.min.js"></script>
-
-
     @yield('script')
 
 

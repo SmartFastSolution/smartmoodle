@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Controladores;
+namespace App\Http\Controllers;
 
-use App\Modelos\Permission;
+use App\Permission;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -39,76 +39,67 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        
-            'namep' => [ 'string', 'max:50','unique:permissions,namep'],
-            'descripcionp' => [ 'string', 'max:50','unique:permissions,descripcionp'],
-            'estado' => ['required' ,'in:on,off'],
 
+            'namep'      => 'required|string|max:150',
+            'descripcionp' => 'required|string|max:150',
+            'estado'      => 'required|in:on,off',
+            
 
         ]);
 
         $permission = Permission::create($request->all());
-        return redirect ('sistema/permisos ')->with('success','Haz creado un permiso con exito');
-       
+   
+       return \redirect('sistema/permisos');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Modelos\Permission  $permission
+     * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
     public function show(Permission $permission)
     {
-
-        
-        return view('Permissions.showper', ['permission' =>$permission]);
-       
+        return \view ('Permissions.showper',['permisos' =>$permission]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Modelos\Permission  $permission
+     * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
     public function edit(Permission $permission)
     {
-        return view('Permissions.editper',['permission' =>$permission]);
+        return \view('Permissions.editper',['permission'=>$permission]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Modelos\Permission  $permission
+     * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Permission $permission)
     {
-        
         $request->validate([
-        
-            'namep' => [ 'string', 'max:50','unique:permissions,namep'],
-            'descripcionp' => [ 'string', 'max:50','unique:permissions,descripcionp'],
-            'estado' => ['required' ,'in:on,off'],
 
-
+            'namep'      => 'required|string|max:150',
+            'descripcionp' => 'required|string|max:150',
+            'estado'      => 'required|in:on,off',
+            
         ]);
 
-        $permission->namep=$request->namep;
-        $permission->descripcionp=$request->descripcionp;
-        $permission->save();
-       
-      // redireccionamos a sistema y el enlace que tenemos como url ya 
-      //que sistema es nuestra base para la seguridad
-       return redirect('sistema/inicioper')->with('success','Haz editado un permiso con exito');
+        $permission->update($request->all());
+   
+       return \redirect('sistema/permisos');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Modelos\Permission  $permission
+     * @param  \App\Permission  $permission
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

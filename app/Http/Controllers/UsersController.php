@@ -18,8 +18,8 @@ class UsersController extends Controller
     {
        $users= User::orderBy('id','Asc')->paginate(5);
     
-       // return view('Persona.inicio',['users'=>$users]);
-        return view('administracion.menuadmin',['users'=>$users]);
+         return view('Persona.inicio',['users'=>$users]);
+        //return view('administracion.menuadmin',['users'=>$users]);
     }
 
     /**
@@ -82,7 +82,9 @@ class UsersController extends Controller
         }
 
         $user->save();
+        
         return redirect('sistema/iniciouser');
+        //return redirect('sistema/admin');
 
     }
 
@@ -152,7 +154,6 @@ class UsersController extends Controller
         $user->email = $request->email;
         $user->estado = $request->estado;
 
-
         if($request->password !=null){
            $user->password= Hash::make($request->email);
            
@@ -162,6 +163,7 @@ class UsersController extends Controller
       // redireccionamos a sistema y el enlace que tenemos como url ya 
       //que sistema es nuestra base para la seguridad
        return redirect('sistema/iniciouser');
+       //return redirect('sistema/admin');
     }
 
     /**
@@ -176,5 +178,6 @@ class UsersController extends Controller
         $user->delete();
 
         return redirect('sistema/iniciouser')->with('success','Haz eliminado un rol con exito');
+       // return redirect('sistema/admin')->with('success','Haz eliminado un rol con exito');
     }
 }
