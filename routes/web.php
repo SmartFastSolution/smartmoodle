@@ -35,6 +35,12 @@ Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
 
 
 });
+Route::group(['prefix' => 'sistema/admin'], function() {
+
+route::post('/taller1', 'AdminController@taller1')->name('admin.taller1');
+route::post('/taller2', 'AdminController@taller2')->name('admin.taller2');
+route::post('/taller3', 'AdminController@taller3')->name('admin.taller3');
+	});
 
 route::get('/sistema/taller1', 'TallersController@taller1')->name('taller1');
 route::post('/sistema/taller1', 'TallersController@store1')->name('taller1');

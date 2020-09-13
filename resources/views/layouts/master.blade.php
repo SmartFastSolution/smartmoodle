@@ -7,7 +7,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title> @yield('title')</title>
+    <title> @yield('title', 'Administracion')</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
@@ -180,123 +180,17 @@
                                     Talleres
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
-                            </a>
+                            </a>{{ $i = 0 }}
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('taller1') }}" class="nav-link">
+                                @foreach ($talleres = App\Taller::get() as $e)
+                                    <li class="nav-item">
+                                    <a href="{{ route('taller'.++$i) }}" class="nav-link">
                                         <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 1</p>
+                                        <p>{{ $e->nombre }}</p>
                                     </a>
-                                </li>
-                                   <li class="nav-item">
-                                    <a href="{{ route('taller2') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 2</p>
-                                    </a>
-                                </li>
-                                   <li class="nav-item">
-                                    <a href="{{ route('taller3') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 3</p>
-                                    </a>
-                                </li>
-                                   <li class="nav-item">
-                                    <a href="{{ route('taller4') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 4</p>
-                                    </a>
-                                </li>
-                                   <li class="nav-item">
-                                    <a href="{{ route('taller5') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 5</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('taller5') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 5</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('taller6') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 6</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('taller7') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 7</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('taller8') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 8</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('taller9') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 9</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('taller10') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 10</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('taller11') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 11</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('taller12') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 12</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('taller13') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 13</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('taller14') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 14</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('taller15') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 15</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('taller16') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 16</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('taller17') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 17</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('taller18') }}" class="nav-link">
-                                        <i class="fas fa-circle nav-icon"></i>
-                                        <p>Taller 18</p>
-                                    </a>
-                                </li>
-                             
+                                </li> 
+                                @endforeach
+                                                          
                             </ul>
                         </li>
                     </ul>

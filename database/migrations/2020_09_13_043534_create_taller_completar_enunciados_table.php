@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTallerClasificarsTable extends Migration
+class CreateTallerCompletarEnunciadosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,17 @@ class CreateTallerClasificarsTable extends Migration
      */
     public function up()
     {
-        Schema::create('taller_clasificars', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('taller_completar_enunciados', function (Blueprint $table) {
+             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->string('enunciado');
-            $table->string('img')->nullable();
+            $table->string('enunciado1');
+            $table->string('enunciado2');
+            $table->string('enunciado3');
+            $table->string('enunciado4');
+            $table->string('enunciado5');
             $table->timestamps();
+
             $table->foreign('taller_id')
             ->references('id')
             ->on('tallers')
@@ -33,6 +38,6 @@ class CreateTallerClasificarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taller_clasificars');
+        Schema::dropIfExists('taller_completar_enunciados');
     }
 }

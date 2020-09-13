@@ -22,19 +22,7 @@ class CreateTallersTable extends Migration
             $table->timestamps();
         });
 
-         Schema::create('taller_completar', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
-            $table->string('leyenda');
-            $table->timestamps();
-
-            $table->foreign('taller_id')
-            ->references('id')
-            ->on('tallers')
-            ->onDelete('cascade');
-                
-        });
+        
               Schema::create('taller_clasificar_res', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
