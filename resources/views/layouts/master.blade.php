@@ -223,7 +223,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link ">
-                                    <i class="fas fa-file-alt"></i>
+                                    <i class="fas fa-folder-plus"></i>
                                         <p>Actividades y Revisiones</p>
                                     </a>
                                 </li>
@@ -274,13 +274,13 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link ">
-                                    <i class="fas fa-file-alt"></i>
+                                    <i class="fas fa-folder-plus"></i>
                                         <p>Talleres</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link">
-                                    <i class="fas fa-file-alt"></i>
+                                    <i class="fas fa-folder-plus"></i>
                                         <p>lecciones</p>
                                     </a>
                                 </li>

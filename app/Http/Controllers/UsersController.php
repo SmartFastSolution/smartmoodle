@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Modelos\Role;
+use App\Instituto;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\facades\Hash;
 
 class UsersController extends Controller
@@ -41,9 +43,7 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         //validacion de datos 
-
         $request->validate([
-
             'cedula' => ['required', 'string', 'max:10', ],
             'fechanacimiento' => ['required', 'string', 'max:10'],
             'sname' => ['required', 'string', 'max:20'],
@@ -58,10 +58,7 @@ class UsersController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'password_confirmation'=>'required'
-
         ]);
-
-
         $user = new User;
         $user->cedula = $request->cedula;
         $user->fechanacimiento = $request->fechanacimiento;
@@ -77,7 +74,7 @@ class UsersController extends Controller
         $user->estado = $request->estado;
 
         if($request->password !=null){
-           $user->password= Hash::make($request->email);
+           $user->password= Hash::make(($request->email));
            
         }
 
