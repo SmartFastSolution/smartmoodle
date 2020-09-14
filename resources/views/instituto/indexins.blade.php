@@ -18,20 +18,23 @@
                 <h1>Sección Administrador</h1>
             </div>
             <div class="card-tools">
-                <a class="btn btn-info float-right btn-xs" href="{{route('institutos.create')}}"><i class="fas fa-plus"></i></i> Instituto</a>
+                <a class="btn btn-info float-right btn-xs" href="{{route('institutos.create')}}"><i
+                        class="fas fa-plus"></i></i> Instituto</a>
             </div>
         </div>
     </div><!-- /.container-fluid -->
 </section>
 
-@if ($message = Session::get('success'))
-<div class="alert alert-success">
-    <p>{{ $message }}</p>
-</div>
-@endif
 
 <section class="content">
     <div class="container-fluid">
+
+
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+        @endif
         <div class="row">
             <!-- left column -->
             <div class="col-md-13">

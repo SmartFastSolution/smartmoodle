@@ -13,8 +13,8 @@
 
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <!-- <link rel="stylesheet" href="css/dataTables.boostrap.css"> -->
-   
-  
+
+
 
 
     @yield('css_role_page')
@@ -112,8 +112,8 @@
 
             <!-- Brand Logo -->
 
-            <a href="{{ url('/') }}" class="brand-link">
-                <img src="../../../../img/escuela.png" alt="img/hombre.png" class="brand-image img-circle elevation-3"
+            <a href="{{ url('/sistema') }}" class="brand-link">
+                <img src="{{asset('img/escuela.png')}}" alt="img/hombre.png" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
                 <span class="brand-text font-weight-blue">Sistema Educativo</span>
             </a>
@@ -124,7 +124,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../../../../../img/hombre.png" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{asset('img/hombre.png')}}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">
@@ -138,6 +138,8 @@
                 </div>
 
                 <!-- Sidebar Menu -->
+
+                @can('Administrador')
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
@@ -154,7 +156,7 @@
                             </a>
                             <ul class="nav nav-treeview">
 
-                            <!-- <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a href="{{route('admin.admin')}}" class="nav-link">
                                         <i class="fas fa-business-time"></i>
                                         <p>Menú Administrativo</p>
@@ -178,6 +180,7 @@
                                         <p>Sección Instituto</p>
                                     </a>
                                 </li>
+
                                 <li class="nav-item">
                                     <a href="{{route('users.index')}}" class="nav-link">
                                         <i class="fas fa-business-time"></i>
@@ -200,6 +203,8 @@
                         </li>
                     </ul>
                 </nav>
+                @endcan
+                @can('Docente')
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
@@ -217,39 +222,41 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="" class="nav-link">
-                                    <i class="fas fa-user-circle"></i>
+                                        <i class="fas fa-user-circle"></i>
                                         <p>Perfil</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link ">
-                                    <i class="fas fa-folder-plus"></i>
+                                        <i class="fas fa-folder-plus"></i>
                                         <p>Actividades y Revisiones</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link">
-                                    <i class="fas fa-file-alt"></i>
+                                        <i class="fas fa-file-alt"></i>
                                         <p>Desarrollo de Talleres</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link">
-                                    <i class="fas fa-file-alt"></i>
+                                        <i class="fas fa-file-alt"></i>
                                         <p>Desarrollo de Lecciones</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link">
-                                    <i class="fas fa-comments"></i>
+                                        <i class="fas fa-comments"></i>
                                         <p>Chat</p>
                                     </a>
                                 </li>
-                               
+
                             </ul>
                         </li>
                     </ul>
                 </nav>
+                @endcan
+                @can('Estudiante')
                 <!-- /.sidebar-menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
@@ -268,25 +275,25 @@
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="" class="nav-link">
-                                    <i class="fas fa-user-circle"></i>
+                                        <i class="fas fa-user-circle"></i>
                                         <p>Perfil</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link ">
-                                    <i class="fas fa-folder-plus"></i>
+                                        <i class="fas fa-folder-plus"></i>
                                         <p>Talleres</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link">
-                                    <i class="fas fa-folder-plus"></i>
+                                        <i class="fas fa-folder-plus"></i>
                                         <p>lecciones</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="" class="nav-link">
-                                    <i class="fas fa-comments"></i>
+                                        <i class="fas fa-comments"></i>
                                         <p>Chat</p>
                                     </a>
                                 </li>
@@ -294,7 +301,9 @@
                         </li>
                     </ul>
                 </nav>
+                @endcan
                 <!-- seccion estudiante -->
+              
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
@@ -345,7 +354,7 @@
 
     <script src="{{asset('js/app.js')}}"></script>
     <!-- <script src="js/dataTables.bootstrap.js"></script> -->
-    
+
     @yield('script')
 
 

@@ -17,7 +17,7 @@ class CreatePermissionsTable extends Migration
             $table->id();
             $table->string('namep');
             $table->string('descripcionp');
-            $table->enum('estado',['on','off'])->nullable;
+            $table->enum('estado',['on','off'])->nullable();
             $table->timestamps();
         });
     }

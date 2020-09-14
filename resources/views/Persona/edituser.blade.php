@@ -91,50 +91,69 @@
                                 <input class="form-control" name="celular" id="celular" placeholder="Celular"
                                     value="{{$user->celular}}" required>
                             </div>
-                            <div class="form-group">
-                                <label for="titulo">Profesión</label>
-                                <input class="form-control" name="titulo" id="titulo" placeholder="Profesión"
-                                    value="{{$user->titulo}}" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input class="form-control" name="email" id="email" placeholder="Email"
-                                    value="{{$user->email}}">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Contraseña</label>
-                                <input type="password" class="form-control" name="password" id="password"
-                                    placeholder="Password" value="{{$user->password}}" minlength="8">
-                            </div>
-                            <div class="form-group">
-                                <label for="password_confirmation">Confirmar Contraseña</label>
-                                <input type="password" class="form-control" name="password_confirmation"
-                                    id="password_confirmation" placeholder="Confirmar Contraseña">
-                            </div>
-                            <h3>Estado del Usuario</h3>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="estadoon" name="estado" class="custom-control-input"
-                                    value="on" @if($user['estado']=="on" ) checked
-                                    @elseif(old('estado')=="on" ) checked @endif>
-                                <label class="custom-control-label" for="estadoon">Activo</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="estadooff" name="estado" class="custom-control-input"
-                                    value="off" @if($user['estado']=="off" ) checked
-                                    @elseif(old('estado')=="off" ) checked @endif>
-                                <label class="custom-control-label" for="estadooff">No Activo</label>
-                            </div>
-
-                            <input type="submit" class="btn btn-dark " value="Guardar">
-
+                        </div>
+                        <div class="form-group">
+                            <label>Unidad Educativa</label>
+                            <select class="form-control select2" style="width: 100%;">
+                                <option selected="selected">Elija una Unidad Educativa para el Usuario..</option>
+                               @foreach($institutos as $instituto)
+                                <option value="{{$instituto->id}}">{{$instituto->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
+                        <div class="form-group">
+                            <label>Rol</label>
+                            <select class="form-control select2" style="width: 100%;">
+                                <option selected="selected">Elija un rol para el Usuario</option>
+                                @foreach($roles as $role)
+                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                @endforeach
+                               
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="titulo">Profesión</label>
+                            <input class="form-control" name="titulo" id="titulo" placeholder="Profesión"
+                                value="{{$user->titulo}}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input class="form-control" name="email" id="email" placeholder="Email"
+                                value="{{$user->email}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <input type="password" class="form-control" name="password" id="password"
+                                placeholder="Password" value="{{$user->password}}" minlength="8">
+                        </div>
+                        <div class="form-group">
+                            <label for="password_confirmation">Confirmar Contraseña</label>
+                            <input type="password" class="form-control" name="password_confirmation"
+                                id="password_confirmation" placeholder="Confirmar Contraseña">
+                        </div>
+                        <h3>Estado del Usuario</h3>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="estadoon" name="estado" class="custom-control-input" value="on"
+                                @if($user['estado']=="on" ) checked @elseif(old('estado')=="on" ) checked @endif>
+                            <label class="custom-control-label" for="estadoon">Activo</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="estadooff" name="estado" class="custom-control-input" value="off"
+                                @if($user['estado']=="off" ) checked @elseif(old('estado')=="off" ) checked @endif>
+                            <label class="custom-control-label" for="estadooff">No Activo</label>
+                        </div>
 
-                    </form>
+                        <input type="submit" class="btn btn-dark " value="Guardar">
 
                 </div>
+
+
+                </form>
+
             </div>
         </div>
+    </div>
     </div>
 </section>
 

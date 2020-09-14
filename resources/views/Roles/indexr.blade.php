@@ -19,14 +19,16 @@
     </div><!-- /.container-fluid -->
 </section>
 
+<section class="content">
+    <div class="container-fluid">
+
+    
 @if ($message = Session::get('success'))
 <div class="alert alert-success">
     <p>{{ $message }}</p>
 </div>
 @endif
 
-<section class="content">
-    <div class="container-fluid">
         <div class="row">
             <!-- left column -->
             <div class="col-md-13">

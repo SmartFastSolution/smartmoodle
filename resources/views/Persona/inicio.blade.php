@@ -19,14 +19,15 @@
     </div>
 </section>
 
-@if ($message = Session::get('success'))
+
+
+<section class="content">
+    <div class="container-fluid">
+    @if ($message = Session::get('success'))
 <div class="alert alert-success">
     <p>{{ $message }}</p>
 </div>
 @endif
-
-<section class="content">
-    <div class="container-fluid">
         <div class="row">
             <div class="col-md-13">
                 <div class="card card-secondary">
@@ -68,12 +69,12 @@
                                     <td> </td>
                                     <td> </td>
                                     <td class="table-button ">
-                                        <a class="btn btn-info btn-xs" href="users/users/{{ $user['id']}}"><i
+                                        <a class="btn btn-info btn-xs" href="users/{{ $user['id']}}"><i
                                                 class="fas fa-eye"></i></a>
 
                                     </td>
                                     <td class="table-button ">
-                                        <a class="btn btn-success btn-xs" href="users/users/{{ $user['id']}}/edit"><i
+                                        <a class="btn btn-success btn-xs" href="users/{{ $user['id']}}/edit"><i
                                                 class=" fas fa-pencil-alt"></i></a>
                                     </td>
                                     <td class="table-button ">
@@ -88,6 +89,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {{$users->links()}}
                     </div>
                 </div>
             </div>

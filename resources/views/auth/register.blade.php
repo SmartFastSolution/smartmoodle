@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>SMARTMOODLE | REGISTRO</title>
-    <!-- Tell the browser to be responsive to screen width --> 
+    <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -170,6 +170,166 @@
                         </span>
                         @enderror
                     </div>
+                    <div class="input-group mb-3">
+                        <input id="titulo" type="text" placeholder="Profesion"
+                            class="form-control @error('titulo') is-invalid @enderror" name="titulo"
+                            value="{{ old('titulo') }}" required autocomplete="titulo">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+
+                        @error('titulo')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <!-- desde aqui empieza todo csm -->
+                    <!-- desde aqui empieza todo csm -->
+                    <!-- desde aqui empieza todo csm -->
+                    <!-- desde aqui empieza todo csm -->
+                    <!-- particion de datos-->
+                    <div class="input-group mb-3">
+                        <input id="fcontrato" type="text" placeholder="fecha contrato"
+                            class="form-control @error('fcontrato') is-invalid @enderror" name="fcontrato"
+                            value="{{ old('fcontrato') }}" required autocomplete="fcontrato">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+
+                        @error('fcontrato')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <!-- particion de datos-->
+                    <div class="input-group mb-3">
+                        <input id="cirepre" type="text" placeholder="Cedula Representante"
+                            class="form-control @error('cirepre') is-invalid @enderror" name="cirepre"
+                            value="{{ old('cirepre') }}" required autocomplete="cirepre">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+
+                        @error('cirepre')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <!-- particion de datos-->
+                    <div class="input-group mb-3">
+                        <input id="namerepre" type="text" placeholder="Nombre del representante"
+                            class="form-control @error('namerepre') is-invalid @enderror" name="namerepre"
+                            value="{{ old('namerepre') }}" required autocomplete="namerepre">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+
+                        @error('namerepre')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <!-- particion de datos-->
+                    <div class="input-group mb-3">
+                        <input id="namema" type="text" placeholder="nombre de la Mama"
+                            class="form-control @error('namema') is-invalid @enderror" name="namema"
+                            value="{{ old('namema') }}" required autocomplete="namema">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+
+                        @error('namema')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <!-- particion de datos-->
+                    <div class="input-group mb-3">
+                        <input id="namepa" type="text" placeholder="Nombre del Papa"
+                            class="form-control @error('namepa') is-invalid @enderror" name="namepa"
+                            value="{{ old('namepa') }}" required autocomplete="namepa">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+
+                        @error('namepa')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <!-- particion de datos-->
+                    <div class="input-group mb-3">
+                        <input id="telefonorep" type="text" placeholder="Telefono representante"
+                            class="form-control @error('telefonorep') is-invalid @enderror" name="telefonorep"
+                            value="{{ old('telefonorep') }}" required autocomplete="telefonorep">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+
+                        @error('telefonorep')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <!-- particion de datos-->
+                    <div class="input-group mb-3">
+                        <input id="fregistro" type="text" placeholder="Fecha Registro"
+                            class="form-control @error('fregistro') is-invalid @enderror" name="fregistro"
+                            value="{{ old('fregistro') }}" required autocomplete="fregistro">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+
+                        @error('fregistro')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <!-- particion de datos-->
+                    <div class="input-group mb-3">
+                        <h3>Estado del Usuario</h3>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="estadoon" name="estado" class="custom-control-input" value="on"
+                                @if(old('estado')=="on" ) checked @endif>
+                            <label class="custom-control-label" for="estadoon">Activo</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="estadooff" name="estado" class="custom-control-input" value="off"
+                                @if(old('estado')=="off" ) checked @endif>
+                            <label class="custom-control-label" for="estadooff">No Activo</label>
+                        </div>
+                        <br><br>
+
+                        @error('estado')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
                     <!-- particion de datos-->
                     <div class="input-group mb-3">
                         <input id="email" type="email" placeholder="Email"
@@ -187,24 +347,9 @@
                         </span>
                         @enderror
                     </div>
-                     <!-- particion de datos-->
-                     <div class="input-group mb-3">
-                        <input id="email" type="text" placeholder="Profesion"
-                            class="form-control @error('titulo') is-invalid @enderror" name="titulo"
-                            value="{{ old('titulo') }}" required autocomplete="titulo">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
-                            </div>
-                        </div>
+                    <!-- particion de datos-->
 
-                        @error('titulo')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                    </div>
-                     <!-- particion de datos-->
+                    <!-- particion de datos-->
                     <div class="input-group mb-3">
                         <input id="password" type="password" placeholder="Password"
                             class="form-control @error('password') is-invalid @enderror" name="password" required
@@ -221,6 +366,7 @@
                         </span>
                         @enderror
                     </div>
+
                     <div class="input-group mb-3">
                         <input id="password-confirm" type="password" placeholder="Confirme password"
                             class="form-control" name="password_confirmation" required autocomplete="new-password">

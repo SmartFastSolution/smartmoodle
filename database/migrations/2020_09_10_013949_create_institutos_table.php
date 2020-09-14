@@ -22,7 +22,7 @@ class CreateInstitutosTable extends Migration
             $table->string('direccion');
             $table->string('telefono');
             $table->string('email')->unique();
-            $table->enum('estado',['on','off'])->nullable;
+            $table->enum('estado',['on','off'])->nullable();
             $table->timestamps();
         });
     }

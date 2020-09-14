@@ -82,8 +82,7 @@ class RoleController extends Controller
        
            $permissions=Permission::get();
        
-       
-       
+             
        
        
         return \view('Roles.showr', compact('permissions', 'role','permission_role'));

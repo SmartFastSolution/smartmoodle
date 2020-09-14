@@ -60,6 +60,15 @@ class RegisterController extends Controller
             'celular' => ['required', 'string', 'max:13'],
             'titulo' => ['required', 'string', 'max:255'],
             
+            'fcontrato' => ['required', 'string', 'max:255'],
+            'cirepre' => ['required', 'string', 'max:255'],
+            'namerepre' => ['required', 'string', 'max:255'],
+            'namema' => ['required', 'string', 'max:255'],
+            'namepa' => ['required', 'string', 'max:255'],
+            'telefonorep' => ['required', 'string', 'max:255'],
+            'fregistro' => ['required', 'string', 'max:255'],
+            'estado' => ['required', 'in:on,off'],
+            
             'name' => ['required', 'string', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -88,8 +97,18 @@ class RegisterController extends Controller
             'celular' => $data['celular'],
             'titulo' => $data['titulo'],
             'email' => $data['email'],
-           
+            'email' => $data['email'],
             'password' => Hash::make($data['password']),
+
+            'estado' => $data['estado'],
+            'fcontrato' => $data['fcontrato'],
+            'cirepre' => $data['cirepre'],
+            'namema' => $data['namema'],
+            'telefonorep' => $data['telefonorep'],
+            'namepa' => $data['namepa'],
+            'namerepre' => $data['namerepre'],
+            'fregistro' => $data['fregistro'],
+
             
         ]);
     }

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Auth;
 use App\Modelos\Role;
 use App\Instituto;
 use App\User;
@@ -31,7 +33,10 @@ class UsersController extends Controller
      */
     public function create()
     {
-       return \view('Persona.createuser');
+          // $institutos=Instituto::get();
+           $roles=Role::get();
+
+       return \view('Persona.createuser',compact('roles'));
     }
 
     /**
@@ -43,7 +48,7 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         //validacion de datos 
-        $request->validate([
+        $validatedData = $request->validate([
             'cedula' => ['required', 'string', 'max:10', ],
             'fechanacimiento' => ['required', 'string', 'max:10'],
             'sname' => ['required', 'string', 'max:20'],
@@ -52,13 +57,24 @@ class UsersController extends Controller
             'domicilio' => ['required', 'string', 'max:255'],
             'telefono' => ['required', 'string', 'max:13'],
             'celular' => ['required', 'string', 'max:13'],
-            'titulo' => ['required', 'string', 'max:255'],
+            'titulo' => ['required', 'string', 'max:255',],
             'estado' => ['required' ,'in:on,off'],
             'name' => ['required', 'string', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'password_confirmation'=>'required'
+            'password_confirmation'=>'required',
+//agregados estudiantes y docente sen la misma tabla de persona 
+            'fcontrato' => ['required', 'string', 'max:13'],
+            'cirepre' => ['required', 'string', 'max:10'],
+            'namerepre' => ['required', 'string', 'max:250'],
+            'namema' => ['required', 'string', 'max:250'],
+            'namepa' => ['required', 'string', 'max:250'],
+            'telefonorep' => ['required', 'string', 'max:13'],
+            'fregistro' => ['required', 'string', 'max:10'],
+
+
         ]);
+
         $user = new User;
         $user->cedula = $request->cedula;
         $user->fechanacimiento = $request->fechanacimiento;
@@ -72,15 +88,28 @@ class UsersController extends Controller
         $user->titulo = $request->titulo;
         $user->email = $request->email;
         $user->estado = $request->estado;
-
-        if($request->password !=null){
-           $user->password= Hash::make(($request->email));
-           
-        }
-
+        $user->password = Hash::make($request->password);
+//agregados estudiantes y docente sen la misma tabla de persona 
+        $user->fcontrato = $request->fcontrato;
+        $user->cirepre = $request->cirepre;
+        $user->namerepre = $request->namerepre;
+        $user->namema = $request->namema;
+        $user->namepa = $request->namepa;
+        $user->telefonorep = $request->telefonorep;
+        $user->fregistro = $request->fregistro;
+         
         $user->save();
-        
-        return redirect('sistema/iniciouser');
+       
+          
+
+        //       if ($request->get('instituto')) {
+        //  $user->institutos()->sync($request->get('instituto'));
+           
+        // }
+
+        $user->asignarRol($request->get('role'));
+
+        return redirect('sistema/users');
         //return redirect('sistema/admin');
 
     }
@@ -134,6 +163,15 @@ class UsersController extends Controller
             'email' => [ 'string', 'email', 'max:255',],
             'password' => [ 'string', 'min:8', 'confirmed'],
             'estado' => ['required' ,'in:on,off'],
+//agregados estudiantes y docente sen la misma tabla de persona 
+            'fcontrato' => ['', 'string', 'max:13'],
+            'cirepre' => ['', 'string', 'max:10'],
+            'namerepre' => ['', 'string', 'max:250'],
+            'namema' => ['', 'string', 'max:250'],
+            'namepa' => ['', 'string', 'max:250'],
+            'telefonorep' => ['', 'string', 'max:13'],
+            'fregistro' => ['', 'string', 'max:10'],
+
 
         ]);
 
@@ -150,6 +188,14 @@ class UsersController extends Controller
         $user->titulo = $request->titulo;
         $user->email = $request->email;
         $user->estado = $request->estado;
+//agregados estudiantes y docente sen la misma tabla de persona 
+        $user->fcontrato = $request->fcontrato;
+        $user->cirepre = $request->cirepre;
+        $user->namerepre = $request->namerepre;
+        $user->namema = $request->namema;
+        $user->namepa = $request->namepa;
+        $user->telefonorep = $request->telefonorep;
+        $user->fregistro = $request->fregistro;
 
         if($request->password !=null){
            $user->password= Hash::make($request->email);
@@ -159,7 +205,7 @@ class UsersController extends Controller
        
       // redireccionamos a sistema y el enlace que tenemos como url ya 
       //que sistema es nuestra base para la seguridad
-       return redirect('sistema/iniciouser');
+       return redirect('sistema/users');
        //return redirect('sistema/admin');
     }
 
@@ -174,7 +220,7 @@ class UsersController extends Controller
         $user= User::find($id);
         $user->delete();
 
-        return redirect('sistema/iniciouser')->with('success','Haz eliminado un rol con exito');
+        return redirect('sistema/users')->with('success','Haz eliminado un rol con exito');
        // return redirect('sistema/admin')->with('success','Haz eliminado un rol con exito');
     }
 }

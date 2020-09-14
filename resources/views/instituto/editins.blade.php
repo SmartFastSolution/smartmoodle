@@ -16,6 +16,11 @@
     </div><!-- /.container-fluid -->
 </section>
 
+
+
+
+<section class="content">
+
 @if ($errors->any())
 <div class="alert alert-danger">
     <strong>Whoops!</strong> Parece que hay porblemas o Malas decisiones <br><br>
@@ -26,9 +31,6 @@
     </ul>
 </div>
 @endif
-
-
-<section class="content">
     <div class="row">
         <div class="col-md-6">
             <div class="card card-info">

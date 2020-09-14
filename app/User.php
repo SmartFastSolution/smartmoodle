@@ -2,7 +2,8 @@
 
 namespace App;
 
-use App\Modelos\Roles;
+use App\Modelos\Role;
+use App\Instituto;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,6 +21,9 @@ class User extends Authenticatable
         'cedula','fechanacimiento','name','sname',
         'apellido','sapellido','domicilio','telefono',
         'celular','titulo', 'email','estado', 'password',
+        'fcontrato','cirepre','namerepre',
+         'namema','namepa','telefonorep','fregistro',
+
     ];
 
     /**
@@ -43,10 +47,37 @@ class User extends Authenticatable
 
     public function roles(){
           
-        return $this->belongsToMany(Role::class)->withTimestamps();
+        return $this->belongsToMany('App\Modelos\Role')->withTimestamps();
 
     }
 
+    
+
+
+    //relacion de muchos a 1 es decir muchos usuarios 
+    //tomaran 1 dato de instituto
+    public function instituto(){
+          
+        return $this->belongsTo(Instituto::class)->withTimestamps();
+
+    }
+
+
+
+
+
+
+    public function asignarRol($role){  //para asignar los roles de manera automatica
+    
+    $this->roles()->sync($role, false);
+        
+    }
+
+    public function tieneROl(){
+
+     return $this->roles->flatten()->pluck('name')->unique();
+
+    }
 
 
     
