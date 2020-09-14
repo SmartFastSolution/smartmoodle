@@ -1,35 +1,46 @@
 @extends('layouts.master')
 
-@section('title', 'Taller 8')
+@section('title', 'Taller 9')
 @section('contenido')
 
-<h1 class="text-center  mt-5 text-danger"> Taller #8</h1>
-     <h3 class="text-center mt-5 mb-3 text-info">ESCRIBA  EN  EL  GUSANILLO  LAS  PROHIBICIONES  DEL  COMERCIANTE,  CON 
-EFICACIA</h3>
 
-<form action="{{ route('taller8') }}" method="POST">
+<h1 class="text-center  mt-5 text-danger"> Taller #9</h1>
+     <h3 class="text-center mt-5 mb-3 text-info">ESCRIBA  EN  LOS  CÍRCULOS  EJEMPLOS  DE  PERSONAS  INCAPACES  PARA 
+EJERCER  EL  COMERCIO,  CON  CREATIVIDAD.</h3>
+
+<form action="{{ route('taller9') }}" method="POST">
     @csrf
-	<div class="container">
-		<div class="row align-items-center justify-content-center">
-			<div class="col-2">
-				<img class="text-center" src="{{ asset('img/talleres/imagen-8.jpg') }}" alt="">
-			</div>
-			<div class="col-3 mt-5 rounded-circle bg-danger p-5">
-				<textarea name="respuesta1" class="form-control border-0" id="" cols="5" rows="5"></textarea>
-			</div>
-			<div class="col-3 mt-3 rounded-circle bg-info p-5">
-				<textarea name="respuesta2" class="form-control border-0" id="" cols="5" rows="5"></textarea>
-			</div>
-			<div class="col-3 rounded-circle bg-success p-5">
-				<textarea name="respuesta3" class="form-control border-0" id="" cols="5" rows="5"></textarea>
-			</div>
-		</div>
-		<div class="row justify-content-center">
-        		<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
-    		 </div>
-	</div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-4 mt-5">
+                <input class="form-control inputdesign" name="respuesta1" id="">
+            </div>
+        </div>
 
+         <div class="row row justify-content-md-center">
+        <div class="col-4 mt-5">
+            <input class="form-control inputdesign" name="respuesta2" id="">
+        </div>
+            <div class="col-3 text-center mt-3 mb-3 ">
+                <img src="{{ asset('img/talleres/imagen-10.jpg') }}" alt="">
+            </div>
+        <div class="col-4 mt-5">
+            <input class="form-control inputdesign" name="respuesta3" id=""
+            >
+        </div>
 
+    </div>
+
+    <div class="row justify-content-center">
+            <div class="col-4 m-2">
+                <input class="form-control inputdesign" name="respuesta4" id="">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+        	<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
+    	</div>
+    </div>
 </form>
+
 
 @endsection

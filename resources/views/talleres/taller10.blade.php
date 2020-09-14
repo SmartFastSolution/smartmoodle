@@ -1,58 +1,51 @@
 @extends('layouts.master')
 
-@section('title', 'Taller 10')
+@section('title', 'Taller 11')
 @section('contenido')
 
+<h1 class="text-center  mt-5 text-danger"> Taller #11</h1>
+     <h3 class="text-center mt-5 mb-3 text-info">RELACIONE LOS ENUNCIADOS ESCRIBIENDO EN EL CUADRO EL LITERAL
+CORRESPONDIENTE</h3>
 
-<h1 class="text-center  mt-5 text-danger"> Taller #10</h1>
-     <h3 class="text-center mt-5 mb-3 text-info">SUBRAYE  LA  ALTERNATIVA  CORRECTA.</h3>
+<form action="">
+	<div class="container">
+		<div class="row justify-content-center align-items-center mb-5">
+			<div class="col-5 text-justify">
+				
+     				<label class="form-control-label"><span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'A');" class="badge-danger badge-pill">A.</span> El hombre fue perfeccionando los instrumentos de trabajo que sirvieron para producir mercaderías</label>
+			</div>
+			<div class="col-5">
+				<div class="row align-items-center">
+					<div class="col-6 text-center">
+						<img src="{{ asset('img/talleres/imagen-11.jpg') }}">
+					</div>
+					<div class="col-6 text-center ">
+						<label for="">Trueque</label><br>
+						<input type="text" size="2" class="border-0 bg-info">
+					</div>
+				</div>
+			</div>
+		</div>
 
-<form action="{{ route('taller10') }}" method="POST">
-    @csrf
-     	<div class="container">
-     		<div class="row mb-4 justify-content-center ">
-     			<div class="col-10">
-     				<span class="badge-danger badge-pill">1.</span>
-     				<label class="form-control-label">Persona  incapaz  de  ejercer  el  comercio :</label>
-     				<div class="row">
-     						<div class="col-4"><input type="radio" name="item" value="niño"> <label>Niño</label></div>
-     						<div class="col-4"><input type="radio" name="item" value="profesional"> <label>Profesional</label></div>
-     						<div class="col-4"><input type="radio" name="item" value="obrero"> <label>Obrero</label></div>
-     					</div>	
-     			</div>
-     		</div>
-
-     		<div class="row mb-4  justify-content-center   ">
-     			<div class="col-10">
-     				<span class="badge-danger badge-pill">2.</span>
-     				<label class="form-control-label">Adquirir  un  bien :</label>
-     				<div class="row">
-     						<div class="col-4"><input type="radio" name="item1" value="vender"> <label>Vender</label></div>
-     						<div class="col-4"><input type="radio" name="item1" value="cambiar"> <label>Cambiar</label></div>
-     						<div class="col-4"><input type="radio" name="item1" value="comprar"> <label>Comprar</label></div>
-     					</div>	
-     			</div>
-     		</div>
-     		<div class="row mb-4 justify-content-center  ">
-     			<div class="col-10">
-     				<span class="badge-danger badge-pill">3.</span>
-     				<label class="form-control-label">Persona  capaz  de  ejercer  el  comercio :</label>
-     				<div class="row">
-     						<div class="col-4"><input type="radio" name="item2" value="un profesional"> <label>Un Profesional</label></div>
-     						<div class="col-4"><input type="radio" name="item2" value="un niño"> <label>Un Niño</label></div>
-     						<div class="col-4"><input type="radio" name="item2" value="un reo"> <label>Un Reo</label></div>
-     					</div>	
-     			</div>
-     		</div>
-     	</div>
-               <div class="row justify-content-center">
-                  <input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
-               </div>
-     	</div>
-
-     	
+		<div class="row justify-content-center align-items-center">
+			<div class="col-5 text-justify">
+				
+     				<label class="form-control-label"><span class="badge-danger badge-pill">B.</span> El  hombre  en  su  primera etapa  aparece  recolectando frutos  y  alimentándose  de  la caza  y  de  la  pesca</label>
+			</div>
+			<div class="col-5">
+				<div class="row align-items-center">
+					<div class="col-6 text-center">
+						<img src="{{ asset('img/talleres/imagen-12.jpg') }}">
+					</div>
+					<div class="col-6 text-center">
+						<label for="">Organizacion Social</label><br>
+						<input type="text" size="2" class="border-0 bg-info">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-     </form>
-
+</form>
 @endsection

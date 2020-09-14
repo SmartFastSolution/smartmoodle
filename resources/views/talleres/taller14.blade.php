@@ -1,41 +1,40 @@
 @extends('layouts.master')
 
-@section('title', 'Taller 14')
+@section('title', 'Taller 15')
 @section('contenido')
 
-<h1 class="text-center  mt-5 text-danger"> Taller #14</h1>
-     <h3 class="text-center mt-5 mb-3 text-info">DEFINA  LOS  ENUNCIADOS  EN  LOS  CUADROS,  CON  ORIGINALIDAD.</h3>
 
+<h1 class="text-center  mt-5 text-danger"> Taller #15</h1>
+     <h3 class="text-center mt-5 mb-3 text-info">IDENTIFIQUE  LAS  PERSONAS  QUE  INTERVIENEN  EN  EL  CHEQUE,  CON 
+CERTEZA</h3>
 <form action="">
-	
 <div class="container">
-	<div class="row justify-content-center border p-2 border-info">
-		<div class="col-10">
-			<div class="row justify-content-between">
-				<div class="col-5 border-danger border mb-4">
-					<h2 class="text-center mt-1 mb-3">Factura</h2>
-					<textarea name="" class="form-control mb-2" id="" cols="30" rows="8"></textarea>
-				</div>
-				<div class="col-5 border-danger border mb-4">
-					<h2 class="text-center mt-1 mb-3">Factura</h2>
-					<textarea name="" class="form-control mb-2" id="" cols="30" rows="8"></textarea>
-				</div>
+	<div class="row justify-content-center">
+		<div class="col-8">
+			<p class="text-justify">Jorge  Almeida  posee  una  cuenta  corriente  en  el  Banco 
+Bolivariano  y  firma  un  cheque  a  nombre  de  Pamela  Anderson 
+por  $ 5.300</p>
+		
+		</div>
+	</div>
 
-				<div class="col-5 border-danger border mb-4">
-					<h2 class="text-center mt-1 mb-3">Factura</h2>
-					<textarea name="" class="form-control mb-2" id="" cols="30" rows="8"></textarea>
+	<div class="row justify-content-center">
+		<div class="col-5">
+			<div class="row">
+				<div class="col-2">
+					<label class="mb-4 form-control-label" for="">Girador</label>
+					<label class="mb-4 form-control-label" for="">Girado</label>
+					<label class="mb-4 form-control-label" for="">Beneficiario</label>
 				</div>
-				<div class="col-5 border-danger border mb-4">
-					<h2 class="text-center mt-1 mb-3">Factura</h2>
-					<textarea name="" class="form-control mb-2" id="" cols="30" rows="8"></textarea>
+				<div class="col-10">
+					<input type="text" class="form-control mb-2 border-left-0 border-right-0 border-top-0 border-bottom border-success">
+					<input type="text" class="form-control mb-2 border-left-0 border-right-0 border-top-0 border-bottom border-success">
+					<input type="text" class="form-control mb-2 border-left-0 border-right-0 border-top-0 border-bottom border-success">
 				</div>
 			</div>
-		</div>
 		
+		</div>
 	</div>
-	    <div class="row justify-content-center">
-        	<input type="submit" value="Enviar Respuestas" class="btn p-2 mt-3 btn-danger">
-    	</div>
 </div>
 
 </form>

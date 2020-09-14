@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\TallerCompletarRes;
 use App\Admin\TallerCompletar;
 use App\Admin\TallerClasificar;
+use App\Admin\TallerCompletarEnunciado;
 use App\TallerCompleteEnRes;
 use App\TallerClasificarRes;
 use App\TallerDiferencia;
@@ -30,10 +31,225 @@ class TallersController extends Controller
             $consul = Taller::findorfail($id);
              $datos = TallerClasificar::where('taller_id', $consul->id)->get();
             return view('talleres.taller2', compact('datos', 'd'));
+        }elseif ($plant == 3) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerCompletarEnunciado::where('taller_id', $consul->id)->get();
+            return view('talleres.taller3', compact('datos', 'd'));
+        }elseif ($plant == 4) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller4', compact('datos', 'd'));
+        }elseif ($plant == 5) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller5', compact('datos', 'd'));
+        }elseif ($plant == 6) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller6', compact('datos', 'd'));
+        }elseif ($plant == 7) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller7', compact('datos', 'd'));
+        }elseif ($plant == 8) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller8', compact('datos', 'd'));
+        }elseif ($plant == 9) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller9', compact('datos', 'd'));
+        }elseif ($plant == 10) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller10', compact('datos', 'd'));
+        }elseif ($plant == 11) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller11', compact('datos', 'd'));
+        }elseif ($plant == 12) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller12', compact('datos', 'd'));
+        }elseif ($plant == 13) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller13', compact('datos', 'd'));
+        }elseif ($plant == 14) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller14', compact('datos', 'd'));
+        }elseif ($plant == 15) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller15', compact('datos', 'd'));
+        }elseif ($plant == 16) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller16', compact('datos', 'd'));
+        }elseif ($plant == 17) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller17', compact('datos', 'd'));
+        }elseif ($plant == 18) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller18', compact('datos', 'd'));
+        }elseif ($plant == 19) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller19', compact('datos', 'd'));
+        }elseif ($plant == 20) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller20', compact('datos', 'd'));
+        }elseif ($plant == 21) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller21', compact('datos', 'd'));
+        }elseif ($plant == 22) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller22', compact('datos', 'd'));
+        }elseif ($plant == 23) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller23', compact('datos', 'd'));
+        }elseif ($plant == 24) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller24', compact('datos', 'd'));
+        }elseif ($plant == 25) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller25', compact('datos', 'd'));
+        }elseif ($plant == 26) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller26', compact('datos', 'd'));
+        }elseif ($plant == 7) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller7', compact('datos', 'd'));
+        }elseif ($plant == 28) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller28', compact('datos', 'd'));
+        }elseif ($plant == 29) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller29', compact('datos', 'd'));
+        }elseif ($plant == 30) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller30', compact('datos', 'd'));
+        }elseif ($plant == 31) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller31', compact('datos', 'd'));
+        }elseif ($plant == 32) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller32', compact('datos', 'd'));
+        }elseif ($plant == 33) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller33', compact('datos', 'd'));
+        }elseif ($plant == 34) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller34', compact('datos', 'd'));
+        }elseif ($plant == 35) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller35', compact('datos', 'd'));
+        }elseif ($plant == 36) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller36', compact('datos', 'd'));
+        }elseif ($plant == 37) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller37', compact('datos', 'd'));
+        }elseif ($plant == 38) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller38', compact('datos', 'd'));
+        }elseif ($plant == 39) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller39', compact('datos', 'd'));
+        }elseif ($plant == 40) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller40', compact('datos', 'd'));
+        }elseif ($plant == 41) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller41', compact('datos', 'd'));
+        }elseif ($plant == 42) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller42', compact('datos', 'd'));
+        }elseif ($plant == 43) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller43', compact('datos', 'd'));
+        }elseif ($plant == 44) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller44', compact('datos', 'd'));
+        }elseif ($plant == 45) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller45', compact('datos', 'd'));
+        }elseif ($plant == 46) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller46', compact('datos', 'd'));
+        }elseif ($plant == 47) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller47', compact('datos', 'd'));
+        }elseif ($plant == 48) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller48', compact('datos', 'd'));
+        }elseif ($plant == 49) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller49', compact('datos', 'd'));
+        }elseif ($plant == 50) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller50', compact('datos', 'd'));
+        }elseif ($plant == 51) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller51', compact('datos', 'd'));
+        }elseif ($plant == 52) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller52', compact('datos', 'd'));
+        }elseif ($plant == 53) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller53', compact('datos', 'd'));
+        }elseif ($plant == 54) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller54', compact('datos', 'd'));
+        }elseif ($plant == 55) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller55', compact('datos', 'd'));
+        }elseif ($plant == 56) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller56', compact('datos', 'd'));
         }
         
     }
-
     public function store1(Request $request){
     $taller1 = new TallerCompletarRes; 
     $taller1->taller_id  = '1';

@@ -1,83 +1,93 @@
 @extends('layouts.master')
 
-@section('title', 'Taller 30')
+@section('title', 'Taller 31')
 @section('contenido')
 
-	<h1 class="text-center  mt-5 text-danger"> Taller #30</h1>
-    <h3 class="text-center mt-5 mb-3 text-info">EN  EL  PRESENTE  TEXTO  IDENTIFIQUE  LAS  ABREVIATURAS  COMERCIALES  Y 
-ESCRÍBALAS  EN  LA  SIGUIENTE  CARTA,  EFICAZMENTE</h3>
+	<h1 class="text-center  mt-5 text-danger"> Taller #31</h1>
+    <h3 class="text-center mt-5 mb-3 text-info">UTILIZA  LAS  ABREVIATURAS  COMERCIALES  EN   LA  CARTA, 
+CORRECTAMENTE.</h3>
 
 <form action="">
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-8 border border-danger p-3">
-				<div class="row justify-content-end">
-					<div  class="col-6 mt-3">
-						<h4 draggable="true">Señor  Ingeniero.</h4>
-						<h3>Sergio  Castro  Montero.</h3>
-						<h4>GERENTE  DE  “DINAMO”.</h4>
-						<h5>Ciudad.</h5>
-						<h5>Estimado <strong>Señor</strong> </h5>
+				<ul class="nav justify-content-center">
+					<li draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'Cheque')" class="nav-item mr-4">Cheque</li>
+					<li draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'Cuenta')" class="nav-item mr-4">Cuenta</li>
+					<li draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'Factura')" class="nav-item mr-4">Factura</li>
+					<li draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'Artículos')" class="nav-item mr-4">Artículos</li>
+					<li draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'Doctora')" class="nav-item mr-4">Doctora</li>
+					<li draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'Factura')" class="nav-item mr-4">Factura</li>
+					<li draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'Presente')" class="nav-item mr-4">Presente</li>
+					<li draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'Economista')" class="nav-item mr-4">Economista</li>
+					<li draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'Factura')" class="nav-item mr-4">Factura</li>
+					<li draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'Cuenta corriente')" class="nav-item mr-4">Cuenta corriente</li>
+					<li draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'Ustedes')" class="nav-item mr-4">Ustedes</li>
+					<li draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'Banco')" class="nav-item mr-4">Banco</li>
+				  <li draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'Remesa')" class="nav-item mr-4">
+				    Remesa
+				  </li>
+				  <li draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'Compañía')" class="nav-item mr-4">
+				    Compañía
+				  </li>
+				</ul>
+				
+			</div>
+			<div class="col-7 border border-danger mt-3">
+				<div class="row p-2">
+					<div class="col-4">
+						<img class="img-fluid" src="{{ asset('img/talleres/imagen-29.jpg') }}" alt="">
+					</div>
+					<div class="col-5 text-center">
+						<h1 class="text-danger"><strong>COMUNICADO</strong></h1>
+						<h5>“IMPORTADORA GARY S.A.”</h5>
+						<h5>TELF: 2415287 - 2425689</h5>
 					</div>
 					<div class="col-6">
-						<h4>Guayaquil,  15  de  Julio  del  2019</h4>
+						<p>Guayaquil, 25 de Octubre del 201</p>
+						<p>
+							Doctora  <br>
+							Carolina Robles <br>
+							Gerente de "COMERCIAL XAVI” <br>
+							Ciudad.
+						</p>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-12">
-						<p class="text-justify" style="font-size: 16px;">La  presente  tiene  por  objeto  saludarlo  y  a  la  vez  solicitarle  me envíe  la  <strong>cuenta</strong>  de  los  pedidos  según  <strong>Factura  número</strong>   1830 correspondiente  al <strong>presente</strong>    mes,  con  el  detalle  de  cada  uno  de los <strong>artículos</strong> artículos  entregados.  La  <strong>Factura</strong>   contiene  15  cocinas,  con las  características  ya  señaladas.    El  valor  de  la <strong>Factura</strong>    asciende  a  la  cantidad  de  $ 4.800  dicho  valor  será  depositado en  su <strong>cuenta  corriente </strong> </p>
-						<p class="text-justify" style="font-size: 16px;">Nos  despedimos  de <strong> usted </strong> no  sin  antes  reiterarle  nuestra consideración  y  estima</p>
-					</div>
-
-				</div>
-				<div class="row ">
-					<div class="col-12 text-center">
-						<h2>Cordialmente</h2>
-						<h5>Ingeniero  David  Reinoso</h5>
-						<h3>GERENTE  ADMINISTRATIVO</h3>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-8">
-						<h3 class="mt-3">Convertir</h3>
-			</div>
-		</div>
-
-
-		<div class="row justify-content-center">
-			<div class="col-8 border border-danger p-3">
-				<div class="row justify-content-end">
-					<div class="col-6 mt-3">
-						<h4>Señor  Ingeniero.</h4>
-						<h3>Sergio  Castro  Montero.</h3>
-						<h4>GERENTE  DE  “DINAMO”.</h4>
-						<h5>Ciudad.</h5>
-						<h5>Estimado <strong>Señor</strong> </h5>
-					</div>
-					<div class="col-6">
-						<h4>Guayaquil,  15  de  Julio  del  2019</h4>
-					</div>
-				</div>
-				<div class="row">
 					<div class="col-12 form-inline">
-						<p class="text-justify" style="font-size: 16px;">La  presente  tiene  por  objeto  saludarlo  y  a  la  vez  solicitarle  me envíe  la  <input type="text" class="form-control m-1" size="5" name="">  de  los  pedidos  según  <input type="text" class="form-control m-1" size="5" name="">   1830 correspondiente  al <input type="text" class="form-control m-1" size="5" name="">    mes,  con  el  detalle  de  cada  uno  de los <input type="text" class="form-control m-1" size="5" name=""> artículos  entregados.  La  <input type="text" class="form-control m-1" size="5" name="">   contiene  15  cocinas,  con las  características  ya  señaladas.    El  valor  de  la <input type="text" class="form-control m-1" size="5" name="">    asciende  a  la  cantidad  de  $ 4.800  dicho  valor  será  depositado en  su <input type="text" class="form-control m-1" size="5" name=""> </p>
-						<p class="text-justify" style="font-size: 16px;">Nos  despedimos  de <input type="text" class="form-control m-1" size="5" name=""> no  sin  antes  reiterarle  nuestra consideración  y  estima</p>
+						<p>Estimada <input type="text"  class="form-control"></p>
+						
+					</div>
+					<div class="col-12 form-inline">
+						<p class="text-justify">Es grato enviarle la <input type="text"  class="form-control"> o. 124 correspondiente  a cuatro  bultos  de mercaderías  que  hemos  enviado  por  vía terrestre, utilizando transportes ECUADOR, el 3 de Mayo del <input type="text"  class="form-control" size="5"> año</p>
 					</div>
 
-				</div>
-				<div class="row ">
-					<div class="col-12 text-center">
-						<h2>Cordialmente</h2>
-						<h5>Ingeniero  David  Reinoso</h5>
-						<h3>GERENTE  ADMINISTRATIVO</h3>
+					<div class="col-12 form-inline">
+						<p class="text-justify">
+							Esta <input type="text"  class="form-control"> contiene <input type="text"  class="form-control m-1" size="7"> con  las  características señaladas  por <input type="text"  class="form-control m-1" size="7"> a  nuestra <input type="text"  class="form-control m-1" size="7">
+						</p>
+					</div>
+					<div class="col-12 form-inline">
+						<p class="text-justify">
+							El  valor  de  la <input type="text"  class="form-control m-1" size="7"> asciende  a  la  cantidad  de $ 8.500; la hemos cargado a su <input type="text"  class="form-control m-1" size="7"> ogando nos envíe  un <input type="text"  class="form-control m-1" size="4"> certificado  por  dicho  valor.
+						</p>
+					</div>
+					<div class="col-12 form-inline">
+						<p class="text-justify">
+							De  no  ser  posible  esperamos  que  el  valor  de  la <input type="text"  class="form-control m-1" size="7"> lo  deposite  en  nuestra <input type="text"  class="form-control m-1" size="7"> del <input type="text"  class="form-control m-1" size="7"> Produbanco  No. 40035873.
+						</p>
+					</div>
+					<div class="col-12">
+						<p class="text-justify">
+							Sin  otro  particular  por  el  momento  aprovechamos  la oportunidad  para  reiterarles  nuestras  consideraciones  y aprecio.
+						</p>
+					</div>
+					<div class="col-5 text-center">
+						<h4>Cordialmente,</h4>
+						<p>Diana  Flores <br>
+						Gerente General</p>
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
 </form>
-
 @endsection

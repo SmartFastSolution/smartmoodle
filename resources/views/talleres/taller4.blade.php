@@ -1,73 +1,49 @@
 @extends('layouts.master')
 
-@section('title', 'Taller 4')
+@section('title', 'Taller 5')
 @section('contenido')
 
+<h1 class="text-center  mt-5 text-danger"> Taller #5</h1>
+     <h3 class="text-center mt-5 mb-3 text-info">ESCRIBA  DIFERENCIAS  ENTRE  PERSONAS  CAPACES  E  INCAPACES  PARA 
+EJERCER  EL  COMERCIO,  CON  ORIGINALIDAD</h3>
 
-<h1 class="text-center  mt-5 text-danger"> Taller #4</h1>
-     <h3 class="text-center mt-5 text-info">COMPLETE  LOS  ENUNCIADOS  CORRECTAMENTE</h3>
-     <form action="{{ route('taller4') }}" method="POST">
-           @csrf
-     	<div class="container">
-     		<div class="row justify-content-center">
-     			<div class="col-7">
-     				<div class="row mt-4 p-2">
-     					<div class="col-6 ">
-     						<label class="col-form-label " for="">Los  trámites  del  RUC  se  realizan  en  forma</label>
-     						
-     					</div>
-     					<div class="col-6">
-     						<input type="text"  name="respuesta1" class="form-control inputcurrent">
-     					</div>
-     				</div>
-<br>
-     				<div class="row mt-4 p-2">
-     					<div class="col-6">
-     						<label class="col-form-label" for="">El  RUC  está  compuesto  por :</label>
- 
-     					</div>
-     					<div class="col-6">
-     						<input type="text"  name="respuesta2" class="form-control inputcurrent">
-     					</div>
-     				</div>
+<form action="{{ route('taller5') }}" method="POST">
+    @csrf
+	<div class="container">
+		<div class="row">
+			<div class="col-6 border-right border-info ">
+				<div class="row justify-content-center">
+					<img class="mt-3 img-fluid" src="{{ asset('img/talleres/imagen-2.jpg') }}" alt="">
+				</div>
+				<div class="row">
+					<div class="col">
+						<input class="form-control mb-3 mt-3" name="diferencia_1a" type="text">
+				       <input class="form-control mb-3" name="diferencia_2a" type="text">
+				      <input class="form-control mb-3" name="diferencia_3a" type="text">
 
-     				<div class="row mt-4 p-2">
-     					<div class="col-6">
-     						<label class="col-form-label" for="">Los  trámites  del  RUC  se 
-realizan  en  forma</label>
- 
-     					</div>
-     					<div class="col-6">
-     						<input type="text" name="respuesta3" class="form-control inputcurrent">
-     					</div>
-     				</div>
-<br>
-     				<div class="row mt-4 p-2">
-     					<div class="col-6">
-     						<label class="col-form-label" for="">El  Comerciante  debe  inscribir 
-el  RUC  en  un  periodo  de </label>
- 
-     					</div>
-     					<div class="col-6">
-     						<input type="text" name="respuesta4" class="form-control inputcurrent">
-     					</div>
-     				</div>
-<br>
-     				<div class="row p-2">
-     					<div class="col-6">
-     						<label class="col-form-label" for="">l  RUC  se  lo  obtiene  en</label>
- 
-     					</div>
-     					<div class="col-6">
-     						<input type="text" name="respuesta5" class="form-control inputcurrent">
-     					</div>
-     				</div>
-     			</div>
-     		</div>
-     		<div class="row justify-content-center">
+					</div>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="row justify-content-center">
+					<img class="mt-3 img-fluid" src="{{ asset('img/talleres/imagen-3.jpg') }}" alt="">
+				</div>
+				<div class="row">
+					<div class="col">
+						<input class="form-control mb-3 mt-3" name="diferencia_1b" type="text">
+				       <input class="form-control mb-3" name="diferencia_2b" type="text">
+				      <input class="form-control mb-3" name="diferencia_3b" type="text">
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="row justify-content-center">
         		<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
-    		 </div>
-     	</div>
-     </form>
+    	</div>
+	</div>
+
+</form>
 
 @endsection

@@ -24,5 +24,9 @@ class Taller extends Model
     {
         return $this->belongsTo('App\Admin\TallerClasificar');
     }
+     public function tallerCompletarEnunciado()
+    {
+        return $this->belongsTo('App\Admin\TallerCompletarEnunciado');
+    }
 }
 

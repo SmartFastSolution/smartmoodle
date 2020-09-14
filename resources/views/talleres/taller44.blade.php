@@ -1,60 +1,54 @@
 @extends('layouts.master')
 
-@section('title', 'Taller 44')
+@section('title', 'Taller 45')
 @section('contenido')
 
-	<h1 class="text-center  mt-5 text-danger"> Taller #44</h1>
-	<h3 class="text-center mt-5 mb-3 text-info">DESARROLLE  EL  MAPA  CONCEPTUAL,  CON  AGILIDAD.</h3>
-<form action="">
-	<div class="container">
-		<div class="row justify-content-center mb-2">
-			<div class="col-10">
-				<div class="row justify-content-center">
-					<div class="col-6  align-self-center">
-						<h4  class="text-center bg-success p-2 rounded">FORMAS DE TRANSACCIONES</h4 >
+<h1 class="text-center  mt-5 text-danger"> Taller #45</h1>
+<h3 class="text-center mt-5 mb-3 text-info">ORDENE  LAS  IDEAS  Y  ANÓTALAS  ADECUADAMENTE.</h3>
+	<form action="">
+		<div class="container">
+			<div class="row justify-content-center ">
+				<div class="col-10">
+					<div class="row">
+						<div class="col-8 border border-danger p-3">
+							<div class="row justify-content-around p-2">
+								<div draggable="true"  ondragstart="event.dataTransfer.setData('text/plain', 'SE LO OBTIENE'); this.classList.add('dragabling');  this.classList.remove('border');" class="col-3 align-self-center drag text-center border border-danger mt-2 ">
+									<p class="m-2"> SE LO OBTIENE</p>
+								</div>
+
+								<div draggable="true"  ondragstart="event.dataTransfer.setData('text/plain', 'CORRESPONDE A LOS PROPIETARIOS'); this.classList.add('dragabling');  this.classList.remove('border');" class="col-3 align-self-center drag text-center border border-danger mt-2 ">
+									<p class="m-2"> CORRESPONDE A LOS PROPIETARIOS</p>
+								</div>
+
+								<div draggable="true"  ondragstart="event.dataTransfer.setData('text/plain', 'MENOS PASIVO'); this.classList.add('dragabling');  this.classList.remove('border');" class="col-3 align-self-center drag text-center border border-danger mt-2 ">
+									<p class="m-2"> MENOS PASIVO</p>
+								</div>
+							</div>
+
+								<div class="row justify-content-around p-2">
+								<div draggable="true"  ondragstart="event.dataTransfer.setData('text/plain', 'RESTANDO ACTIVO'); this.classList.add('dragabling');  this.classList.remove('border');" class="col-3 align-self-center drag text-center border border-danger mt-2 ">
+									<p class="m-2"> RESTANDO ACTIVO</p>
+								</div>
+
+								
+
+								<div draggable="true"  ondragstart="event.dataTransfer.setData('text/plain', 'DE LA EMPRESA'); this.classList.add('dragabling');  this.classList.remove('border');" class="col-3 align-self-center drag text-center border border-danger mt-2 ">
+									<p class="m-2"> DE LA EMPRESA</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-4">
+							<input type="text" class="form-control mb-2">
+							<input type="text" class="form-control mb-2">
+							<input type="text" class="form-control mb-2">
+							<input type="text" class="form-control mb-2">
+							<input type="text" class="form-control mb-2">
+							
+						</div>
 					</div>
 				</div>
-				<div class="row mb-2">
-					<div class="col-4 align-self-center">
-						<h5 class="bg-warning border border-secondary p-1 rounded text-center">VENDER</h5>
-						<input type="text" class="form-control">
-					</div>
-					<div class="col-4 text-center">
-						<img class="img-fluid" src="{{ asset('img/talleres/imagen-32.jpg') }}" alt="">
-					</div>
-					<div class="col-4 align-self-center">
-						<h5 class="bg-warning border border-secondary p-1 rounded text-center">COMPRAR</h5>
-						<input type="text" class="form-control">
-					</div>
-				</div>
-
-				<div class="row justify-content-lg-between">
-					<div class="col-3 align-self-center text-center border-danger border p-3">
-						<h5>1</h5>
-						<input type="text" class="form-control">
-						<img class="img-fluid mb-1 mt-1 " src="{{ asset('img/talleres/imagen-32.jpg') }}" alt="">
-						<input type="text" class="form-control">
-					</div>
-					<div class="col-3 align-self-center text-center border-danger border p-3">
-						<h5>2</h5>
-
-						<input type="text" class="form-control">
-						<img class="img-fluid mb-1 mt-1 " src="{{ asset('img/talleres/imagen-32.jpg') }}" alt="">
-						<input type="text" class="form-control">
-					</div>
-					<div class="col-3 align-self-center text-center border-danger border p-3">
-						<h5>3</h5>
-
-						<input type="text" class="form-control">
-						<img class="img-fluid mb-1 mt-1 " src="{{ asset('img/talleres/imagen-32.jpg') }}" alt="">
-						<input type="text" class="form-control">
-					</div>
-				</div>
-		
-				
 			</div>
 		</div>
-	</div>
-</form>
+	</form>
 
 @endsection
