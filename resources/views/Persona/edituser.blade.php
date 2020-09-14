@@ -92,15 +92,7 @@
                                     value="{{$user->celular}}" required>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>Unidad Educativa</label>
-                            <select class="form-control select2" style="width: 100%;">
-                                <option selected="selected">Elija una Unidad Educativa para el Usuario..</option>
-                               @foreach($institutos as $instituto)
-                                <option value="{{$instituto->id}}">{{$instituto->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                      
 
                         <div class="form-group">
                             <label>Rol</label>
