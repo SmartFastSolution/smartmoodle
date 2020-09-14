@@ -17,7 +17,7 @@
 
 
 
-    @yield('css_role_page')
+    
 
 </head>
 
@@ -139,7 +139,7 @@
 
                 <!-- Sidebar Menu -->
 
-                @can('Administrador')
+                @can('Administrador') 
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
@@ -203,7 +203,106 @@
                         </li>
                     </ul>
                 </nav>
+
+
+
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                            with font-awesome or any other icon font library -->
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link active">
+                                <!--  <i class="nav-icon fas fa-tachometer-alt"></i> -->
+                                <i class="fas fa-edit"></i>
+                                <p>
+                                    Perfil Docente
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="fas fa-user-circle"></i>
+                                        <p>Perfil</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link ">
+                                        <i class="fas fa-folder-plus"></i>
+                                        <p>Actividades y Revisiones</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="fas fa-file-alt"></i>
+                                        <p>Desarrollo de Talleres</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="fas fa-file-alt"></i>
+                                        <p>Desarrollo de Lecciones</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="fas fa-comments"></i>
+                                        <p>Chat</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+
+
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                            with font-awesome or any other icon font library -->
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link active">
+                                <!--  <i class="nav-icon fas fa-tachometer-alt"></i> -->
+                                <i class="fas fa-edit"></i>
+                                <p>
+                                    Perfil Estudiante
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="fas fa-user-circle"></i>
+                                        <p>Perfil</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link ">
+                                        <i class="fas fa-folder-plus"></i>
+                                        <p>Talleres</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="fas fa-folder-plus"></i>
+                                        <p>lecciones</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="" class="nav-link">
+                                        <i class="fas fa-comments"></i>
+                                        <p>Chat</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
                 @endcan
+                
                 @can('Docente')
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
@@ -303,7 +402,7 @@
                 </nav>
                 @endcan
                 <!-- seccion estudiante -->
-              
+
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
@@ -335,8 +434,7 @@
         <div class="content-wrapper">
             @yield('contenido')
 
-            <section class="content">
-            </section>
+           
 
         </div>
 

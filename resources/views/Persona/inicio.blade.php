@@ -23,11 +23,11 @@
 
 <section class="content">
     <div class="container-fluid">
-    @if ($message = Session::get('success'))
-<div class="alert alert-success">
-    <p>{{ $message }}</p>
-</div>
-@endif
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+        @endif
         <div class="row">
             <div class="col-md-13">
                 <div class="card card-secondary">
@@ -37,17 +37,16 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Cedula</th>
                                     <th scope="col">Primer Nombre</th>
-                                    <th scope="col">Primer Apellido</th>
-                                    <th scope="col">Domicilio</th>
-                                    <th scope="col">Teléfono</th>
+                                    <th scope="col">Primer Apellido</th>                                
                                     <th scope="col">Email</th>
                                     <th scope="col">Estado</th>
+                                    <th scope="col">Rol</th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
@@ -62,10 +61,13 @@
                                     <td>{{$user->cedula}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->apellido}}</td>
-                                    <td>{{$user->domicilio}}</td>
-                                    <td>{{$user->telefono}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->estado}}</td>
+                                    <td>
+                                        @foreach($user->roles as $role)
+                                        {{$role->name}}
+                                        @endforeach
+                                    </td>
                                     <td> </td>
                                     <td> </td>
                                     <td class="table-button ">

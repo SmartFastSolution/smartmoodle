@@ -46,7 +46,7 @@
                             Bienvenido al nuevo proyecto en curso!!!
                         </p>
                         <a class="btn btn-block btn-outline-primary" href="{{ route('login') }}" role="submit"> {{ __('Login') }}</a>
-                        <a  class="btn btn-block btn-outline-primary"href="{{ route('register') }}" type="submit"> {{ __('Registrar') }}</a>
+                        <!-- <a  class="btn btn-block btn-outline-primary"href="{{ route('register') }}" type="submit"> {{ __('Registrar') }}</a> -->
                     </div>
                 </div>
             </div>

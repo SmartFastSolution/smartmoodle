@@ -35,8 +35,9 @@ class UsersController extends Controller
     {
           // $institutos=Instituto::get();
            $roles=Role::get();
+           $institutos=Instituto::get();
 
-       return \view('Persona.createuser',compact('roles'));
+       return \view('Persona.createuser',compact('roles','institutos'));
     }
 
     /**
@@ -76,6 +77,7 @@ class UsersController extends Controller
         ]);
 
         $user = new User;
+        $user->instituto_id = $request->instituto;
         $user->cedula = $request->cedula;
         $user->fechanacimiento = $request->fechanacimiento;
         $user->name = $request->name;
@@ -100,13 +102,10 @@ class UsersController extends Controller
          
         $user->save();
        
-          
+         
 
-        //       if ($request->get('instituto')) {
-        //  $user->institutos()->sync($request->get('instituto'));
-           
-        // }
-
+           // 
+        
         $user->asignarRol($request->get('role'));
 
         return redirect('sistema/users');
@@ -135,7 +134,11 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-       return view('Persona.edituser',['user'=>$user]);
+
+        $roles = Role::all();
+        $institutos = Instituto::get(); // todos los datos de la bd
+        $institutouser = User::find($user->id)->instituto()->get(); //llama al instituto que este relacionado a un usuario 
+       return view('Persona.edituser',['user'=>$user, 'roles'=>$roles,'institutos'=>$institutos,'institutouser'=>$institutouser]);
     
     }
 
@@ -150,7 +153,7 @@ class UsersController extends Controller
     {
         $request->validate([
 
-            'cedula' => [ 'string', 'max:10', ],
+            'cedula' => [ 'string', 'max:10,', ],
             'fechanacimiento' => [ 'string', 'max:10'],
             'sname' => [ 'string', 'max:20'],
             'apellido' => [ 'string', 'max:20'],
@@ -160,7 +163,7 @@ class UsersController extends Controller
             'celular' => [ 'string', 'max:13'],
             'titulo' => [ 'string', 'max:255'],
             'name' => [ 'string', 'max:20'],
-            'email' => [ 'string', 'email', 'max:255',],
+            'email' => [ 'string', 'email', 'max:255,'.$user->id,],
             'password' => [ 'string', 'min:8', 'confirmed'],
             'estado' => ['required' ,'in:on,off'],
 //agregados estudiantes y docente sen la misma tabla de persona 
@@ -175,7 +178,7 @@ class UsersController extends Controller
 
         ]);
 
-
+        $user->instituto_id = $request->instituto;
         $user->cedula = $request->cedula;
         $user->fechanacimiento = $request->fechanacimiento;
         $user->name = $request->name;
@@ -196,11 +199,21 @@ class UsersController extends Controller
         $user->namepa = $request->namepa;
         $user->telefonorep = $request->telefonorep;
         $user->fregistro = $request->fregistro;
-
-        if($request->password !=null){
-           $user->password= Hash::make($request->email);
+        
+        $password = $request->get('password');
+        if($password !=null){
+          $user->password = Hash::make($request->password);
            
+        } else{
+           unset($user->password); 
         }
+
+
+        if ($request->get('role')) {
+            $user->roles()->sync($request->get('role'));
+        }
+        
+
         $user->save();
        
       // redireccionamos a sistema y el enlace que tenemos como url ya 

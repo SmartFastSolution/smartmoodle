@@ -20,7 +20,7 @@ class Instituto extends Model
 
     public function users(){
           
-        return $this->hasMany(User::class)->withTimestamps();
+        return $this->hasMany('App\User');
 
     }
 

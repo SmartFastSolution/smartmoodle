@@ -14,7 +14,8 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('instituto_id');
             $table->string('cedula');
             $table->string('fechanacimiento');
             $table->string('name');
@@ -38,6 +39,8 @@ class CreateUsersTable extends Migration
             $table->string('fregistro');    
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('instituto_id')->references('id')->on('institutos')->onDelete('cascade');
         });
     }
 

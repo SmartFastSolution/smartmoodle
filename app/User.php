@@ -53,21 +53,17 @@ class User extends Authenticatable
 
     
 
-
     //relacion de muchos a 1 es decir muchos usuarios 
     //tomaran 1 dato de instituto
     public function instituto(){
           
-        return $this->belongsTo(Instituto::class)->withTimestamps();
+        return $this->belongsTo('App\Instituto');
 
     }
 
-
-
-
-
-
-    public function asignarRol($role){  //para asignar los roles de manera automatica
+  
+// estos son metodos para el rol 
+   public function asignarRol($role){  //para asignar los roles de manera automatica
     
     $this->roles()->sync($role, false);
         
