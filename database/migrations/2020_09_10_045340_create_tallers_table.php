@@ -15,15 +15,20 @@ class CreateTallersTable extends Migration
     {
         Schema::create('tallers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedbigInteger('plantilla_id');
             $table->string('nombre');
-            $table->string('descripcion');
             $table->unsignedbigInteger('id_materia');
             $table->boolean('estado');
             $table->timestamps();
-        });
 
-        
-              Schema::create('taller_clasificar_res', function (Blueprint $table) {
+             $table->foreign('plantilla_id')
+            ->references('id')
+            ->on('plantillas')
+            ->onDelete('cascade');
+
+
+        });       
+            Schema::create('taller_clasificar_res', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');

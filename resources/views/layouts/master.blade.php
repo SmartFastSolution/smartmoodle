@@ -110,7 +110,7 @@
             <!-- Brand Logo -->
 
             <a href="{{ url('/') }}" class="brand-link">
-                <img src="../img/escuela.png" alt="img/hombre.png" class="brand-image img-circle elevation-3"
+                <img src="{{ asset('/img/escuela.png') }}" alt="img/hombre.png" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
                 <span class="brand-text font-weight-blue">Sistema Educativo</span>
             </a>
@@ -121,7 +121,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="../img/hombre.png" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ asset('/img/hombre.png') }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">
@@ -180,11 +180,11 @@
                                     Talleres
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
-                            </a>{{ $i = 0 }}
+                            </a>
                             <ul class="nav nav-treeview">
                                 @foreach ($talleres = App\Taller::get() as $e)
                                     <li class="nav-item">
-                                    <a href="{{ route('taller'.++$i) }}" class="nav-link">
+                                    <a href="{{ route('taller',['plant' => $e->plantilla_id, 'id' => $e->id] ) }}" class="nav-link">
                                         <i class="fas fa-circle nav-icon"></i>
                                         <p>{{ $e->nombre }}</p>
                                     </a>

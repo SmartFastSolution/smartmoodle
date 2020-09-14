@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class TallerCompletar extends Model
 {
 
-    public function Tallers(){
+    public function Taller(){
 
-        return $this->belongsToMany('App\Taller');
+        return $this->belongsTo('App\Taller');
     }
+
+
 }

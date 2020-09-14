@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Admin\TallerCompletar;
 use App\Taller;
+use App\Plantilla;
 use App\Admin\TallerClasificar;
 use App\Admin\TallerCompletarEnunciado;
 
@@ -15,9 +16,15 @@ class AdminController extends Controller
    {
    	  return view('admin.admin');
    }
-   public function store(Request $request)
+   public function plantilla(Request $request)
    {
-   	  return $request->all();
+   	$i = Plantilla::get()->count();
+   	  $plantilla = new Plantilla;
+   	  $plantilla->nombre = 'TALLER '.++$i.' - '.$request->input('nombre');
+   	  $plantilla->descripcion = $request->input('descripcion');
+   	  $plantilla->save();
+
+   	   return redirect()->route('admin')->with('datos', 'Plantilla creada correctamente!'); 
    }
    public function taller1(Request $request)
    {
@@ -25,7 +32,7 @@ class AdminController extends Controller
    	//return $request->all();
    	$taller1 = new Taller;
    	$taller1->nombre = 'Taller '.++$i;
-   	$taller1->descripcion = 'Completar los enunciados de manera correcta';
+   	$taller1->plantilla_id = $request->input('id_plantilla');
    	$taller1->id_materia = $request->input('id_materia');
    	$taller1->estado = 1;
    	$taller1->save();
@@ -47,16 +54,16 @@ class AdminController extends Controller
    		$taller_1->save();
 
    	}
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!'); 
+    return redirect()->route('welcome')->with('datos', 'Taller creado correctamente!'); 
    }
 
      public function taller2(Request $request)
    {
    	$i = Taller::get()->count();
    	//return $request->all();
-   	$taller2 = new Taller;
+   $taller2 = new Taller;
    	$taller2->nombre = 'Taller '.++$i;
-   	$taller2->descripcion = 'Clasifique con originalidad';
+   	$taller2->plantilla_id = $request->input('id_plantilla');
    	$taller2->id_materia = $request->input('id_materia');
    	$taller2->estado = 1;
    	$taller2->save();
@@ -85,9 +92,9 @@ class AdminController extends Controller
    {
    	$i = Taller::get()->count();
    	//return $request->all();
-   	$taller3 = new Taller;
+   $taller3 = new Taller;
    	$taller3->nombre = 'Taller '.++$i;
-   	$taller3->descripcion = 'Completar enunciados';
+   	$taller3->plantilla_id = $request->input('id_plantilla');
    	$taller3->id_materia = $request->input('id_materia');
    	$taller3->estado = 1;
    	$taller3->save();

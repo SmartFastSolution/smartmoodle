@@ -13,6 +13,7 @@
              <form action="{{ route('admin.taller1') }}" method="POST">
                 @csrf
               <div class="form-group">
+                <input type="hidden" value="1" name="id_plantilla">
                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                 <input type="text" name="enunciado" class="form-control" id="recipient-name">
               </div>
@@ -46,8 +47,6 @@
     </div>
   </div>
 
-
-
 <div class="modal fade" id="taller2" tabindex="-1" role="dialog" aria-labelledby="taller2Label" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -63,6 +62,8 @@
                 @csrf
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                <input type="hidden" value="2" name="id_plantilla">
+
                 <input type="text" name="enunciado" class="form-control" id="recipient-name">
               </div>
               <div class="form-group">
@@ -108,6 +109,7 @@
                 @csrf
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                <input type="hidden" value="3" name="id_plantilla">
                 <input type="text" name="enunciado" class="form-control" id="recipient-name">
               </div>
               <div class="form-group">

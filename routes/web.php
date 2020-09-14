@@ -37,14 +37,16 @@ Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
 });
 Route::group(['prefix' => 'sistema/admin'], function() {
 
+route::post('/plantilla', 'AdminController@plantilla')->name('admin.plantilla');
 route::post('/taller1', 'AdminController@taller1')->name('admin.taller1');
 route::post('/taller2', 'AdminController@taller2')->name('admin.taller2');
 route::post('/taller3', 'AdminController@taller3')->name('admin.taller3');
 	});
 
-route::get('/sistema/taller1', 'TallersController@taller1')->name('taller1');
+route::get('/sistema/taller/{plant}/{id}', 'TallersController@taller')->name('taller');
 route::post('/sistema/taller1', 'TallersController@store1')->name('taller1');
 
+/*
 route::get('/sistema/taller2', 'TallersController@taller2')->name('taller2');
 route::post('/sistema/taller2', 'TallersController@store2')->name('taller2');
 
@@ -118,6 +120,6 @@ route::get('/sistema/taller53', 'TallersController@taller53')->name('taller53');
 route::get('/sistema/taller54', 'TallersController@taller54')->name('taller54');
 route::get('/sistema/taller55', 'TallersController@taller55')->name('taller55');
 route::get('/sistema/taller56', 'TallersController@taller56')->name('taller56');
-
+*/
 route::get('/sistema/admin', 'AdminController@admin')->name('admin');
 route::post('/sistema/admin', 'AdminController@store')->name('admin');

@@ -5,20 +5,33 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\TallerCompletarRes;
+use App\Admin\TallerCompletar;
+use App\Admin\TallerClasificar;
 use App\TallerCompleteEnRes;
 use App\TallerClasificarRes;
 use App\TallerDiferencia;
 use App\TallerSeñalar;
 use App\TallerIdentificarRe;
 use App\TallerGusanoRe;
+use App\Taller;
 use App\TallerCirEjemploRe;
 use App\TallerSubrayarRe;
 
 class TallersController extends Controller
 {
-    public function taller1(){
+    public function taller($plant, $id){
+        $d = $id;
+        if ($plant == 1) {
+            $consul = Taller::findorfail($id);
+            $datos = TallerCompletar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller1', compact('datos', 'd'));
 
-    	return view('talleres.taller1');
+        }elseif ($plant == 2) {
+            $consul = Taller::findorfail($id);
+             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            return view('talleres.taller2', compact('datos', 'd'));
+        }
+        
     }
 
     public function store1(Request $request){
