@@ -168,7 +168,7 @@
       <div class="modal-body">
         <div class="row justify-content-center">
           <div class="col-12">
-             <form action="{{ route('admin.taller4') }}" method="POST" enctype="multipart/form-data">
+             <form action="" method="POST" enctype="multipart/form-data">
                 @csrf
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
