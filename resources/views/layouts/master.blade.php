@@ -7,7 +7,14 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title> @yield('title')</title>
+    <title> @yield('title', 'Administracion')</title>
+
+
+ 
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
+    @yield('styles')
+    
 
 
 
@@ -24,7 +31,7 @@
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 
 
-    <div class="wrapper" id="app">
+    <div class="wrapper" >
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-info navbar-light">
             <!-- Left navbar links -->
@@ -111,9 +118,9 @@
         <aside class="main-sidebar sidebar-skin-blue-light elevation-4">
 
             <!-- Brand Logo -->
-
             <a href="{{ url('/sistema') }}" class="brand-link">
                 <img src="{{asset('img/escuela.png')}}" alt="img/hombre.png" class="brand-image img-circle elevation-3"
+
                     style="opacity: .8">
                 <span class="brand-text font-weight-blue">Sistema Educativo</span>
             </a>
@@ -124,7 +131,10 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{asset('img/hombre.png')}}" class="img-circle elevation-2" alt="User Image">
+
+                        <img src="{{ asset('/img/hombre.png') }}" class="img-circle elevation-2" alt="User Image">
+
+
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">
@@ -279,6 +289,17 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+
+                                @foreach ($talleres = App\Taller::get() as $e)
+                                    <li class="nav-item">
+                                    <a href="{{ route('taller',['plant' => $e->plantilla_id, 'id' => $e->id] ) }}" class="nav-link">
+                                        <i class="fas fa-circle nav-icon"></i>
+                                        <p>{{ $e->nombre }}</p>
+                                    </a>
+                                </li> 
+                                @endforeach
+                                                          
+
                                 <li class="nav-item">
                                     <a href="" class="nav-link">
                                         <i class="fas fa-user-circle"></i>
@@ -303,6 +324,7 @@
                                         <p>Chat</p>
                                     </a>
                                 </li>
+
                             </ul>
                         </li>
                     </ul>
@@ -438,14 +460,15 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
+            <br>
             @yield('contenido')
+
 
            
 
+
         </div>
-
-
-        <!-- /.control-sidebar -->
+    <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
         <footer class="main-footer">
@@ -459,7 +482,9 @@
     <script src="{{asset('js/app.js')}}"></script>
     <!-- <script src="js/dataTables.bootstrap.js"></script> -->
 
+
     @yield('script')
+
 
 
 </body>

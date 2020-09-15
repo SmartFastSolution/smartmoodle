@@ -17,8 +17,12 @@ class Controller extends BaseController
         return view('welcome');
     }
 
+
+     
+
     public function menuadmin (){
 
         return view('administracion.menuadmin');
     }
+
 }

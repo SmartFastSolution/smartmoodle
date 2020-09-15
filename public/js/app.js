@@ -49761,6 +49761,14 @@ var app = new Vue({
   el: '#app'
 });
 
+__webpack_require__(/*! ./talleres */ "./resources/js/talleres.js");
+
+if (document.getElementById('tallerlist')) {}
+
+if (document.getElementById('cruc')) {
+  __webpack_require__(/*! ./crucigrama */ "./resources/js/crucigrama.js");
+}
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -49879,6 +49887,222 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/crucigrama.js":
+/*!************************************!*\
+  !*** ./resources/js/crucigrama.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+/*Downloaded from https://www.codeseek.co/arandaschimpf/crucigrama-vRgKZP */
+// Arreglo de palabras indicando la posición de su inicio, su sentido (vertical u horizontal),
+// la palabra en cuestión y la pista que se presenta al usuario
+var palabras = [{
+  pos: [0, 0],
+  sentido: 0,
+  palabra: 'gravedad',
+  pista: 'Fuerza que nos mantiene unidos a la superficie del planeta'
+}, {
+  pos: [2, 0],
+  sentido: 1,
+  palabra: 'agua',
+  pista: 'Compuesta por dos moléculas de hidrógeno y una de oxígeno'
+}, {
+  pos: [0, 3],
+  sentido: 0,
+  palabra: 'plantas',
+  pista: 'Renuevan el aire que respiramos'
+}, {
+  pos: [4, 3],
+  sentido: 1,
+  palabra: 'tierra',
+  pista: 'Planeta en donde vivimos'
+}, {
+  pos: [0, 5],
+  sentido: 0,
+  palabra: 'oxigeno',
+  pista: 'Gas incoloro e inodoro esencial para la vida'
+}]; // Objeto default para celdas vacías de la grilla
+
+var empty = {
+  start: false,
+  letter: '',
+  words: [],
+  empty: true
+};
+var crucigrama = new Vue({
+  el: '#cruc',
+  data: function data() {
+    return {
+      // Arreglo de booleanos indicando si una palabra fue completada
+      completed: Array(palabras.length).fill(false),
+      // Entero indicando la palabra que fue seleccionada para completar
+      selected: undefined,
+      // String donde se guarda lo que ingresa el usuario
+      answer: '',
+      // Cantidad de veces que se solicitó una pista
+      penalties: 0,
+      // Temporizador en segundos desde el comienzo de la partida. Comienza en 5 minutos.
+      timer: 60 * 5,
+      // La tabla que será armada al inicio, conteniendo todas las celdas
+      matrix: [],
+      // Mensaje final a mostrar
+      mensaje: undefined
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    // Creación de la tabla que contiene las celdas.
+    var width = palabras.reduce(function (max, cur) {
+      return Math.max(max, cur.pos[0] + (cur.sentido === 0 ? cur.palabra.length : 1));
+    }, 0);
+    var height = palabras.reduce(function (max, cur) {
+      return Math.max(max, cur.pos[1] + (cur.sentido === 1 ? cur.palabra.length : 1));
+    }, 0);
+    var matrix = Array(height).fill(0).map(function () {
+      return Array(width).fill(null).map(function () {
+        return empty;
+      });
+    });
+    palabras.forEach(function (palabra, index) {
+      var _palabra$pos = _slicedToArray(palabra.pos, 2),
+          x = _palabra$pos[0],
+          y = _palabra$pos[1];
+
+      palabra.palabra.split('').forEach(function (l, i) {
+        var cell = matrix[y + (palabra.sentido ? i : 0)][x + (palabra.sentido ? 0 : i)];
+
+        if (cell === empty) {
+          cell = matrix[y + (palabra.sentido ? i : 0)][x + (palabra.sentido ? 0 : i)] = {
+            words: []
+          };
+        }
+
+        cell.empty = false;
+        cell.words.push(index);
+
+        if (i === 0) {
+          cell.start = index + 1;
+        }
+
+        cell.letter = l;
+      });
+    });
+    this.matrix = matrix; // Control del temporizador y disparador del evento final cuando éste se acabe
+
+    this.$options.interval = setInterval(function () {
+      _this.timer--;
+
+      if (_this.timer <= 0) {
+        clearInterval(_this.$options.interval);
+
+        _this.finalizar();
+      }
+    }, 1000);
+  },
+  computed: {
+    // Contiene la pista de la palabra seleccionada
+    pista: function pista() {
+      if (this.selected === undefined) return undefined;
+      return "".concat(palabras[this.selected].sentido ? 'Vertical' : 'Horizontal', " ").concat(this.selected + 1, ": ").concat(palabras[this.selected].pista);
+    },
+    // Formato a mostrar del cronómetro
+    cronometro: function cronometro() {
+      var minutes = Math.floor(this.timer / 60).toString().padStart(2, '0');
+      var seconds = Math.floor(this.timer % 60).toString().padStart(2, '0');
+      return "".concat(minutes, ":").concat(seconds);
+    }
+  },
+  methods: {
+    selectWord: function selectWord(index) {
+      var _this2 = this;
+
+      if (index > 0) {
+        this.selected = index - 1;
+        this.answer = '';
+        setTimeout(function () {
+          return _this2.$refs.input.focus();
+        }, 50);
+      }
+    },
+    // Se fija si la palabra ingresada es correcta y de ser así, modifica el arreglo de palabras completas
+    corregir: function corregir() {
+      var solucion = palabras[this.selected].palabra;
+      var answer = this.answer.toLowerCase();
+
+      if (answer === solucion) {
+        this.completed[this.selected] = true;
+        this.selected = undefined;
+      }
+    },
+    // Agrega una letra correcta más a la respuesta actual
+    solucion: function solucion() {
+      var solucion = palabras[this.selected].palabra;
+      var answer = this.answer.toLowerCase();
+
+      if (answer === solucion) {
+        return;
+      }
+
+      if (answer !== solucion.slice(0, answer.length)) {
+        this.penalties++;
+        this.answer = '';
+      }
+
+      this.answer = solucion.slice(0, this.answer.length + 1);
+      this.penalties++;
+    },
+    // Calcula el puntaje final del jugador en base a las respuestas correctas y las penalidades por pistas
+    finalizar: function finalizar() {
+      var total = this.completed.reduce(function (total, current, i) {
+        return total + palabras[i].palabra.length;
+      }, 0);
+      var completo = this.completed.reduce(function (total, current, i) {
+        return current ? total + palabras[i].palabra.length : total;
+      }, 0);
+      var tempScore = Math.ceil(100 * completo / total);
+      var finalScore = Math.max(tempScore - this.penalties, 0);
+
+      if (tempScore < 100) {
+        this.penalties++;
+      }
+
+      this.mensaje = "\n        Tu puntuaci\xF3n es ".concat(finalScore, "%.\n      ");
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/talleres.js":
+/*!**********************************!*\
+  !*** ./resources/js/talleres.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var llamartalleres = new Vue({
+  el: '#tallerlist',
+  data: {
+    numbreTaller: ''
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -49897,8 +50121,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laragon\www\Sistema-Educativo-Virtual\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\laragon\www\Sistema-Educativo-Virtual\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\smartmoodle\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\smartmoodle\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

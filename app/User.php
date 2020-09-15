@@ -45,6 +45,13 @@ class User extends Authenticatable
     ];
 
 
+     public function tallersCompletar(){
+
+        return $this->belongsToMany('App\Taller');
+    }
+
+
+
     public function roles(){
           
         return $this->belongsToMany('App\Modelos\Role')->withTimestamps();
@@ -78,3 +85,4 @@ class User extends Authenticatable
 
     
 }
+
