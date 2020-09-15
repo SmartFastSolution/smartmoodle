@@ -14,13 +14,33 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('instituto_id');
+            $table->string('cedula');
+            $table->string('fechanacimiento');
             $table->string('name');
+            $table->string('sname');
+            $table->string('apellido');
+            $table->string('sapellido');
+            $table->string('domicilio');
+            $table->string('telefono');
+            $table->string('celular');
+            $table->string('fcontrato');
+            $table->string('titulo', 100)->nullable();
             $table->string('email')->unique();
+            $table->enum('estado',['on','off'])->nullable();
+            $table->string('password');    
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('cirepre');
+            $table->string('namerepre');        
+            $table->string('namema');    
+            $table->string('namepa');    
+            $table->string('telefonorep');    
+            $table->string('fregistro');    
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('instituto_id')->references('id')->on('institutos')->onDelete('cascade');
         });
     }
 

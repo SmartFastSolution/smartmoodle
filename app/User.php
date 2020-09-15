@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Modelos\Role;
+use App\Instituto;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -16,7 +18,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'cedula','fechanacimiento','name','sname',
+        'apellido','sapellido','domicilio','telefono',
+        'celular','titulo', 'email','estado', 'password',
+        'fcontrato','cirepre','namerepre',
+         'namema','namepa','telefonorep','fregistro',
+
     ];
 
     /**
@@ -37,8 +44,45 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+<<<<<<< HEAD
      public function tallersCompletar(){
 
         return $this->belongsToMany('App\Taller');
     }
 }
+=======
+
+    public function roles(){
+          
+        return $this->belongsToMany('App\Modelos\Role')->withTimestamps();
+
+    }
+
+    
+
+    //relacion de muchos a 1 es decir muchos usuarios 
+    //tomaran 1 dato de instituto
+    public function instituto(){
+          
+        return $this->belongsTo('App\Instituto');
+
+    }
+
+  
+// estos son metodos para el rol 
+   public function asignarRol($role){  //para asignar los roles de manera automatica
+    
+    $this->roles()->sync($role, false);
+        
+    }
+
+    public function tieneROl(){
+
+     return $this->roles->flatten()->pluck('name')->unique();
+
+    }
+
+
+    
+}
+>>>>>>> origin/modelos_sistema

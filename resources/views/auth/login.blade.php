@@ -70,7 +70,7 @@
                             </div>
                         </div>
                         <!-- /.col -->
-                        <div class="col-12">
+                        <div class="col-12"> 
                             <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
                         </div>
                         <!-- /.col -->
@@ -83,11 +83,11 @@
                         </a>
                         @endif
                     </p>
-                    <p class="mb-0">
+                    <!-- <p class="mb-0">
                         <a class="btn btn-link" href="{{ route('register') }}">
                             {{ __('Registrar un nueva usuario') }}
                         </a>
-                    </p>
+                    </p> -->
 
                 </form>
             </div>

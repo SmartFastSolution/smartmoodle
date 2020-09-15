@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::HOME; //para redireccionar a la pagina de inicio del dasboard en este caso welcome
 
     /**
      * Create a new controller instance.
@@ -50,9 +50,29 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'cedula' => ['required', 'string', 'max:10', ],
+            'fechanacimiento' => ['required', 'string', 'max:10'],
+            'sname' => ['required', 'string', 'max:20'],
+            'apellido' => ['required', 'string', 'max:20'],
+            'sapellido' => ['required', 'string', 'max:20'],
+            'domicilio' => ['required', 'string', 'max:255'],
+            'telefono' => ['required', 'string', 'max:13'],
+            'celular' => ['required', 'string', 'max:13'],
+            'titulo' => ['required', 'string', 'max:255'],
+            
+            'fcontrato' => ['required', 'string', 'max:255'],
+            'cirepre' => ['required', 'string', 'max:255'],
+            'namerepre' => ['required', 'string', 'max:255'],
+            'namema' => ['required', 'string', 'max:255'],
+            'namepa' => ['required', 'string', 'max:255'],
+            'telefonorep' => ['required', 'string', 'max:255'],
+            'fregistro' => ['required', 'string', 'max:255'],
+            'estado' => ['required', 'in:on,off'],
+            
+            'name' => ['required', 'string', 'max:20'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            
         ]);
     }
 
@@ -65,9 +85,31 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
+           
+            'cedula' => $data['cedula'],
+            'fechanacimiento' => $data['fechanacimiento'],
             'name' => $data['name'],
+            'sname' => $data['sname'],
+            'apellido' => $data['apellido'],
+            'sapellido' => $data['sapellido'],
+            'domicilio' => $data['domicilio'],
+            'telefono' => $data['telefono'],
+            'celular' => $data['celular'],
+            'titulo' => $data['titulo'],
+            'email' => $data['email'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+
+            'estado' => $data['estado'],
+            'fcontrato' => $data['fcontrato'],
+            'cirepre' => $data['cirepre'],
+            'namema' => $data['namema'],
+            'telefonorep' => $data['telefonorep'],
+            'namepa' => $data['namepa'],
+            'namerepre' => $data['namerepre'],
+            'fregistro' => $data['fregistro'],
+
+            
         ]);
     }
 }
