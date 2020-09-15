@@ -94,13 +94,14 @@
                                 <div class="form-group">
                                     <label>Instituto</label>
                                     <select class="form-control select" name="instituto" style="width: 99%;">
-                                    @foreach($institutouser as $instuser)
-                                        <option selected disabled value="{{ $instuser->id }}">{{ $instuser->nombre }}</option>
-                                    @endforeach
+                                        @foreach($institutouser as $instuser)
+                                        <option selected disabled value="{{ $instuser->id }}">{{ $instuser->nombre }}
+                                        </option>
+                                        @endforeach
                                         @foreach($institutos as $instituto)
                                         <option value="{{$instituto->id}}">{{$instituto->nombre}}</option>
                                         @endforeach
-                                   
+
                                     </select>
                                 </div>
 
