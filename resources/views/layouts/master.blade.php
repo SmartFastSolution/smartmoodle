@@ -9,14 +9,13 @@
 
     <title> @yield('title', 'Administracion')</title>
 
-<<<<<<< HEAD
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+ 
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
     @yield('styles')
     
-=======
->>>>>>> origin/modelos_sistema
+
 
 
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
@@ -119,14 +118,9 @@
         <aside class="main-sidebar sidebar-skin-blue-light elevation-4">
 
             <!-- Brand Logo -->
-
-<<<<<<< HEAD
-            <a href="{{ url('/') }}" class="brand-link">
-                <img src="{{ asset('/img/escuela.png') }}" alt="img/hombre.png" class="brand-image img-circle elevation-3"
-=======
             <a href="{{ url('/sistema') }}" class="brand-link">
                 <img src="{{asset('img/escuela.png')}}" alt="img/hombre.png" class="brand-image img-circle elevation-3"
->>>>>>> origin/modelos_sistema
+
                     style="opacity: .8">
                 <span class="brand-text font-weight-blue">Sistema Educativo</span>
             </a>
@@ -137,11 +131,10 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-<<<<<<< HEAD
+
                         <img src="{{ asset('/img/hombre.png') }}" class="img-circle elevation-2" alt="User Image">
-=======
-                        <img src="{{asset('img/hombre.png')}}" class="img-circle elevation-2" alt="User Image">
->>>>>>> origin/modelos_sistema
+
+
                     </div>
                     <div class="info">
                         <a href="#" class="d-block">
@@ -290,7 +283,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-<<<<<<< HEAD
+
                                 @foreach ($talleres = App\Taller::get() as $e)
                                     <li class="nav-item">
                                     <a href="{{ route('taller',['plant' => $e->plantilla_id, 'id' => $e->id] ) }}" class="nav-link">
@@ -300,7 +293,7 @@
                                 </li> 
                                 @endforeach
                                                           
-=======
+
                                 <li class="nav-item">
                                     <a href="" class="nav-link">
                                         <i class="fas fa-user-circle"></i>
@@ -325,7 +318,7 @@
                                         <p>Chat</p>
                                     </a>
                                 </li>
->>>>>>> origin/modelos_sistema
+
                             </ul>
                         </li>
                     </ul>
@@ -463,12 +456,11 @@
         <div class="content-wrapper">
             <br>
             @yield('contenido')
-<<<<<<< HEAD
-=======
+
 
            
 
->>>>>>> origin/modelos_sistema
+
         </div>
     <!-- /.control-sidebar -->
 
@@ -484,13 +476,10 @@
     <script src="{{asset('js/app.js')}}"></script>
     <!-- <script src="js/dataTables.bootstrap.js"></script> -->
 
-<<<<<<< HEAD
-   
-    <script src="{{ asset('js/app.js') }}"></script>
-=======
+
     @yield('script')
 
->>>>>>> origin/modelos_sistema
+
 
 </body>
 

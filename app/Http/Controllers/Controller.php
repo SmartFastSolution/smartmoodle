@@ -17,12 +17,12 @@ class Controller extends BaseController
         return view('welcome');
     }
 
-<<<<<<< HEAD
+
      
-=======
+
     public function menuadmin (){
 
         return view('administracion.menuadmin');
     }
->>>>>>> origin/modelos_sistema
+
 }

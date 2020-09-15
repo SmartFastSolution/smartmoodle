@@ -44,13 +44,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-<<<<<<< HEAD
+
      public function tallersCompletar(){
 
         return $this->belongsToMany('App\Taller');
     }
-}
-=======
+
+
 
     public function roles(){
           
@@ -85,4 +85,4 @@ class User extends Authenticatable
 
     
 }
->>>>>>> origin/modelos_sistema
+

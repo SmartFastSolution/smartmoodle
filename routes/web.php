@@ -16,15 +16,14 @@ use Illuminate\Support\Facades\Route;
 
 
 
-<<<<<<< HEAD
+
  Route::get('/', function () {
        return view('principal');
    })->name('welcome');
 
 
 
-=======
->>>>>>> origin/modelos_sistema
+
 Auth::routes();
 // Auth::routes(["register" => false]);
 // Auth::routes(["login" => false]);
@@ -39,8 +38,6 @@ Auth::routes();
  route::get('/','Controller@index')->name('welcome');
 
 
-<<<<<<< HEAD
-=======
 route::get('/','Controller@index')->name('welcome');
 //ruta del menu general de administracion 
 route::get('/admin','Controller@menuadmin')->name('admin.admin');// donde se va a colocar todas las ventanas juntas
@@ -65,7 +62,7 @@ route::resource('permisos','PermissionController');// FUNCIONA AL 50%
 
 
 
->>>>>>> origin/modelos_sistema
+
 
 });
 Route::group(['prefix' => 'sistema/admin'], function() {
