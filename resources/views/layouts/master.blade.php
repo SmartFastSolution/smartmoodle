@@ -11,7 +11,7 @@
 
 
  
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('css/styles.css') }}"> -->
 
     @yield('styles')
     
@@ -166,12 +166,7 @@
                             </a>
                             <ul class="nav nav-treeview">
 
-                                <!-- <li class="nav-item">
-                                    <a href="{{route('admin.admin')}}" class="nav-link">
-                                        <i class="fas fa-business-time"></i>
-                                        <p>Menú Administrativo</p>
-                                    </a>
-                                </li> -->
+                              
                                 <li class="nav-item">
                                     <a href="{{route('roles.index')}}" class="nav-link">
                                         <i class="fas fa-business-time"></i>
@@ -198,15 +193,15 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{route('cursos.index')}}" class="nav-link">
                                         <i class="fas fa-business-time"></i>
                                         <p>Sección Cursos</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{route('nivels.index')}}" class="nav-link">
                                         <i class="fas fa-business-time"></i>
-                                        <p>Sección Talleres</p>
+                                        <p>Sección Niveles</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

@@ -43,7 +43,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Cedula</th>
                                     <th scope="col">Primer Nombre</th>
-                                    <th scope="col">Primer Apellido</th>                                
+                                    <th scope="col">Primer Apellido</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Estado</th>
                                     <th scope="col">Rol</th>
@@ -65,7 +65,8 @@
                                     <td>{{$user->estado}}</td>
                                     <td>
                                         @foreach($user->roles as $role)
-                                        {{$role->name}}
+                                        <span class="badge badge-danger"> {{$role->name}}
+                                        </span>
                                         @endforeach
                                     </td>
                                     <td> </td>

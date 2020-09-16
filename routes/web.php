@@ -40,7 +40,7 @@ Auth::routes();
 
 route::get('/','Controller@index')->name('welcome');
 //ruta del menu general de administracion 
-route::get('/admin','Controller@menuadmin')->name('admin.admin');// donde se va a colocar todas las ventanas juntas
+
 
 
 //rutas usuario
@@ -60,11 +60,19 @@ route::PUT('/roles/roles/{role}','Controladores\RoleController@update')->name('r
 route::resource('permisos','PermissionController');// FUNCIONA AL 50%
 
 
+//Ruta Resource de Niveles que va aliada con el curso
+route::resource('nivels','NivelController'); //ojo en este caso le cambie niveles -> nivels como esta en la tabla 
+//al parecer el nombre de la tabla en bd tiene relacion con las rutas que asignamos como metodo resource
 
-
+//Ruta Resource de Niveles que va aliada con el curso
+route::resource('cursos','CursoController');
 
 
 });
+
+
+
+
 Route::group(['prefix' => 'sistema/admin'], function() {
 
 route::post('/plantilla', 'AdminController@plantilla')->name('admin.plantilla');
