@@ -57,16 +57,18 @@ route::PUT('/roles/roles/{role}','Controladores\RoleController@update')->name('r
 
 
 //MENU o permisos donde tendra acceso el usuario
-route::resource('permisos','PermissionController');// FUNCIONA AL 50%
+route::resource('permissions','PermissionController');// FUNCIONA AL 50%
 
 
 //Ruta Resource de Niveles que va aliada con el curso
 route::resource('nivels','NivelController'); //ojo en este caso le cambie niveles -> nivels como esta en la tabla 
 //al parecer el nombre de la tabla en bd tiene relacion con las rutas que asignamos como metodo resource
 
-//Ruta Resource de Niveles que va aliada con el curso
+//Ruta Resource de Cursos que va aliada con el curso
 route::resource('cursos','CursoController');
 
+//Ruta Resource de Materias que va aliada con el curso
+route::resource('materias','MateriaController');
 
 });
 

@@ -174,7 +174,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('permisos.index')}}" class="nav-link">
+                                    <a href="{{route('permissions.index')}}" class="nav-link">
                                         <i class="fas fa-business-time"></i>
                                         <p>Sección Menú</p>
                                     </a>
@@ -205,7 +205,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{route('materias.index')}}" class="nav-link">
                                         <i class="fas fa-business-time"></i>
                                         <p>Sección Materias</p>
                                     </a>

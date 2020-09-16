@@ -41,7 +41,7 @@
                 </div>
                 <div class="card-body">
 
-                <form method="POST" action="permisos/{$permission->['id']}" >
+                <form method="POST" action="{{route('permissions.update', $permission->id)}}"  >
                         @method('PUT')
                         @csrf
 
@@ -72,7 +72,8 @@
                                     @elseif(old('estado')=="off" ) checked @endif>
                                 <label class="custom-control-label" for="estadooff">No Activo</label>
                             </div> 
-                            <br><br><br>               
+                            <br><br><br>   
+
                             <input type="submit" class="btn btn-dark " value="Guardar">
 
                         </div>

@@ -233,7 +233,7 @@ class UsersController extends Controller
         $user= User::find($id);
         $user->delete();
 
-        return redirect('sistema/users')->with('success','Haz eliminado un rol con exito');
+        return redirect('sistema/users')->with('success','Haz eliminado un Usuario con exito');
        // return redirect('sistema/admin')->with('success','Haz eliminado un rol con exito');
     }
 }

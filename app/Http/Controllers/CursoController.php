@@ -69,7 +69,7 @@ class CursoController extends Controller
      */
     public function show(Curso $curso)
     {
-        //
+        return view ('Cursos.showc',['curso'=>$curso]);
     }
 
     /**
@@ -80,7 +80,11 @@ class CursoController extends Controller
      */
     public function edit(Curso $curso)
     {
-        //
+       $nivels=Nivel::get();
+       $nivelcurso= Curso::find($curso->id)->nivel()->get(); //llama al nivel que esta relacionado con el modelo curso
+    
+      return \view('Cursos.editc',['curso'=>$curso,'nivels'=>$nivels,'nivelcurso'=>$nivelcurso]);
+    
     }
 
     /**
@@ -92,7 +96,21 @@ class CursoController extends Controller
      */
     public function update(Request $request, Curso $curso)
     {
-        //
+        
+        $request->validate([
+
+            'nombre'      => 'required|string|max:60',
+            'paralelo'      => 'required|string|max:1',
+            'estado'      => 'required|in:on,off',
+        ]);
+
+        
+        $curso->nivel_id = $request->nivel;
+        $curso->nombre = $request->nombre;
+        $curso->paralelo = $request->paralelo;
+        $curso->estado = $request->estado;
+        $curso->save();
+        return redirect('sistema/cursos');
     }
 
     /**
@@ -103,6 +121,10 @@ class CursoController extends Controller
      */
     public function destroy(Curso $curso)
     {
-        //
+        $curso= Curso::find($curso->id);
+        $curso->delete();
+
+        return redirect('sistema/cursos')->with('success','Haz eliminado un Curso con exito');
+   
     }
 }

@@ -49,7 +49,7 @@ class PermissionController extends Controller
 
         $permission = Permission::create($request->all());
    
-       return \redirect('sistema/permisos');
+       return \redirect('sistema/permissions');
     }
 
     /**
@@ -93,7 +93,7 @@ class PermissionController extends Controller
 
         $permission->update($request->all());
    
-       return \redirect('sistema/permisos');
+       return \redirect('sistema/permissions');
     }
 
     /**
@@ -107,6 +107,6 @@ class PermissionController extends Controller
         $permission= Permission::find($id);
         $permission->delete();
 
-        return redirect('sistema/permisos')->with('success','Haz eliminado un permiso con exito');
+        return redirect('sistema/permissions')->with('success','Haz eliminado un permiso con exito');
     }
 }
