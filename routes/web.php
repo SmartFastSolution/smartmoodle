@@ -32,15 +32,15 @@ Auth::routes();
 
 ///rutas protegidas On 
 
-// Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
-  Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
+ Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
+  //Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
    
  route::get('/','Controller@index')->name('welcome');
 
 
 route::get('/','Controller@index')->name('welcome');
 //ruta del menu general de administracion 
-route::get('/admin','Controller@menuadmin')->name('admin.admin');// donde se va a colocar todas las ventanas juntas
+
 
 
 //rutas usuario
@@ -57,14 +57,24 @@ route::PUT('/roles/roles/{role}','Controladores\RoleController@update')->name('r
 
 
 //MENU o permisos donde tendra acceso el usuario
-route::resource('permisos','PermissionController');// FUNCIONA AL 50%
+route::resource('permissions','PermissionController');// FUNCIONA AL 50%
 
 
+//Ruta Resource de Niveles que va aliada con el curso
+route::resource('nivels','NivelController'); //ojo en este caso le cambie niveles -> nivels como esta en la tabla 
+//al parecer el nombre de la tabla en bd tiene relacion con las rutas que asignamos como metodo resource
 
+//Ruta Resource de Cursos que va aliada con el curso
+route::resource('cursos','CursoController');
 
-
+//Ruta Resource de Materias que va aliada con el curso
+route::resource('materias','MateriaController');
 
 });
+
+
+
+
 Route::group(['prefix' => 'sistema/admin'], function() {
 
 route::post('/plantilla', 'AdminController@plantilla')->name('admin.plantilla');
@@ -77,6 +87,7 @@ route::post('/taller6', 'AdminController@taller6')->name('admin.taller6');
 route::post('/taller7', 'AdminController@taller7')->name('admin.taller7');
 route::post('/taller8', 'AdminController@taller8')->name('admin.taller8');
 route::post('/taller9', 'AdminController@taller9')->name('admin.taller9');
+route::post('/taller10', 'AdminController@taller10')->name('admin.taller10');
 	});
 
 route::get('/sistema/taller/{plant}/{id}/{id1}', 'TallersController@taller')->name('taller');

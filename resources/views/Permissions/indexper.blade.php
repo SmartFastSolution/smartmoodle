@@ -12,7 +12,7 @@
             <div class="card-tools">
                 <!-- la referencia que hace este boton es al Rolecontroller en el 
                        cual esta llamando al metodo create y nos redirecciona al crud Roles.createroler...-->
-                <a class="btn btn-info float-right btn-xs" href="{{route('permisos.create')}}"><i
+                <a class="btn btn-info float-right btn-xs" href="{{route('permissions.create')}}"><i
                         class="fas fa-user-plus"></i>Menu</a>
             </div>
         </div>
@@ -70,20 +70,20 @@
                                     <td> </td>
 
 
-                                    <!-- <td class="table-button ">
+                                    <td class="table-button ">
                                         <a class="btn btn-info btn-xs"
-                                            href="{{route('permisos.show', $permiso->id)}}"><i
+                                            href="{{route('permissions.show', $permiso->id)}}"><i
                                                 class="fas fa-eye"></i></a>
 
                                     </td>
                                     <td class="table-button ">
                                         <a class="btn btn-success btn-xs"
-                                            href="{{route('permisos.edit',$permiso->id)}}"><i
+                                            href="{{route('permissions.edit',$permiso->id)}}"><i
                                                 class=" fas fa-pencil-alt"></i></a>
-                                    </td> -->
+                                    </td>
                                     <td class="table-button ">
                                         <!--metodo delete funciona pero hay que almacenar la variable array en una variable temporal-->
-                                        <form method="POST" action="{{route('permisos.destroy', $permiso->id)}}}">
+                                        <form method="POST" action="{{route('permissions.destroy', $permiso->id)}}}">
                                             @method('DELETE')
                                             @csrf
                                             <button type="submit" class="btn btn-danger "><i

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Permission;
+use App\Nivel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class PermissionController extends Controller
+class NivelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permission= Permission::orderBy('id','Asc')->paginate(5);
+        $nivels= Nivel::orderBy('id','Asc')->paginate(5);
     
-        return view('Permissions.indexper',['permissions'=>$permission]);
+        return view('Niveles.indexn',['nivels'=>$nivels]);
     }
 
     /**
@@ -27,7 +27,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return \view('Permissions.createper');
+        return \view('Niveles.createn');
     }
 
     /**
@@ -40,73 +40,71 @@ class PermissionController extends Controller
     {
         $request->validate([
 
-            'namep'      => 'required|string|max:150',
-            'descripcionp' => 'required|string|max:150',
+            'nombre'      => 'required|string|max:150',
             'estado'      => 'required|in:on,off',
-            
-
         ]);
 
-        $permission = Permission::create($request->all());
+        $nivels = Nivel::create($request->all());
    
-       return \redirect('sistema/permissions');
+        return \redirect('sistema/nivels');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Permission  $permission
+     * @param  \App\Nivel  $nivel
      * @return \Illuminate\Http\Response
      */
-    public function show(Permission $permission)
+    public function show(Nivel $nivel)
     {
-        return \view ('Permissions.showper',['permisos' =>$permission]);
+        return view ('Niveles.shown',['nivels'=>$nivel]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Permission  $permission
+     * @param  \App\Nivel  $nivel
      * @return \Illuminate\Http\Response
      */
-    public function edit(Permission $permission)
+    public function edit(Nivel $nivel)
     {
-        return \view('Permissions.editper',['permission'=>$permission]);
+        
+        return view('Niveles.editn',['nivel'=>$nivel]);
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Permission  $permission
+     * @param  \App\Nivel  $nivel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Permission $permission)
+    public function update(Request $request, Nivel $nivel)
     {
         $request->validate([
 
-            'namep'      => 'required|string|max:150',
-            'descripcionp' => 'required|string|max:150',
+            'nombre'      => 'required|string|max:150',
             'estado'      => 'required|in:on,off',
-            
         ]);
 
-        $permission->update($request->all());
+        $nivel->update($request->all());
    
-       return \redirect('sistema/permissions');
+        return \redirect('sistema/nivels');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Permission  $permission
+     * @param  \App\Nivel  $nivel
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $permission= Permission::find($id);
-        $permission->delete();
+        $nivel= Nivel::find($id);
+        $nivel->delete();
 
-        return redirect('sistema/permissions')->with('success','Haz eliminado un permiso con exito');
+        return redirect('sistema/nivels')->with('success','Haz eliminado un Dato con exito');
+   
     }
 }

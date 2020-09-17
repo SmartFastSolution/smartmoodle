@@ -4,9 +4,9 @@
 
 <section class="content-header">
     <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Crear Usuarios</h1>
+        <div class="row mb-2 ">
+            <div class="col-sm-6 ">
+                <h1 >Crear Usuarios</h1>
             </div>
             <div class="col-sm-6">
 
@@ -39,47 +39,47 @@
                         <div class=" card-body">
                             <div class="form-group">
                                 <label for="cedula">Cédula</label>
-                                <input type="text" class="form-control" name="cedula" id="cedula" placeholder="Cédula">
+                                <input type="text" class="form-control"   value="{{ old('cedula') }}" name="cedula" id="cedula" placeholder="Cédula">
                             </div>
                             <div class="form-group">
                                 <label for="fechanacimiento">Fecha Nacimiento</label>
-                                <input type="text" class="form-control" name="fechanacimiento" id="fechanacimiento"
+                                <input type="text" class="form-control"    value="{{ old('fechanacimiento') }}" name="fechanacimiento" id="fechanacimiento"
                                     placeholder="Fecha Nacimiento">
                             </div>
                             <div class="form-group">
                                 <label for="name">Primer Nombre</label>
                                 <input type="text" class="form-control" name="name" id="name"
-                                    placeholder="Primer Nombre">
+                                value="{{ old('name') }}" placeholder="Primer Nombre">
                             </div>
                             <div class="form-group">
                                 <label for="sname">Segundo Nombre</label>
                                 <input type="text" class="form-control" name="sname" id="sname"
-                                    placeholder="Segundo Nombre">
+                                value="{{ old('sname') }}" placeholder="Segundo Nombre">
                             </div>
                             <div class="form-group">
                                 <label for="apellido">Primer Apellido</label>
                                 <input type="text" class="form-control" name="apellido" id="apellido"
-                                    placeholder="Primer Apellido">
+                                value="{{ old('apellido') }}" placeholder="Primer Apellido">
                             </div>
                             <div class="form-group">
                                 <label for="sapellido">Segundo Apellido</label>
                                 <input type="text" class="form-control" name="sapellido" id="sapellido"
-                                    placeholder="Segundo Apellido">
+                                value="{{ old('sapellido') }}" placeholder="Segundo Apellido">
                             </div>
                             <div class="form-group">
                                 <label for="domicilio">Domicilio</label>
                                 <input type="text" class="form-control" name="domicilio" id="domicilio"
-                                    placeholder="Domicilio">
+                                value="{{ old('domicilio') }}"  placeholder="Domicilio">
                             </div>
                             <div class="form-group">
                                 <label for="telefono">Teléfono</label>
                                 <input type="text" class="form-control" name="telefono" id="telefono"
-                                    placeholder="Télefono">
+                                value="{{ old('telefono') }}"  placeholder="Télefono">
                             </div>
                             <div class="form-group">
                                 <label for="celular">Celular</label>
                                 <input type="text" class="form-control" name="celular" id="celular"
-                                    placeholder="Celular">
+                                value="{{ old('celular') }}" placeholder="Celular">
                                 <div class="form-group">
 
                                     <div class="form-group">
@@ -105,13 +105,13 @@
                                     <div class="form-group">
                                         <label for="email">Correo Electrónico</label>
                                         <input type="text" class="form-control" name="email" id="email"
-                                            placeholder="Email">
+                                        value="{{ old('email') }}"  placeholder="Email">
                                     </div>
 
                                     <div class=" form-group">
                                         <label for="password">Contraseña</label>
                                         <input type="password" class="form-control" name="password" id="password"
-                                            placeholder="Password" minlength="8">
+                                        value="{{ old('password') }}" placeholder="Password" minlength="8">
                                     </div>
                                     <div class="form-group">
                                         <label for="password_confirmation">Confirmar Contraseña</label>
@@ -144,12 +144,12 @@
                                                 <div class="form-group">
                                                     <label for="titulo">Profesión</label>
                                                     <input type="text" class="form-control" name="titulo" id="titulo"
-                                                        placeholder="Profesión">
+                                                    value="{{ old('titulo') }}" placeholder="Profesión">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="fcontrato">Fecha Contrato</label>
                                                     <input type="text" class="form-control" name="fcontrato"
-                                                        id="fcontrato" placeholder="Fecha Contrato">
+                                                    value="{{ old('fcontrato') }}" id="fcontrato" placeholder="Fecha Contrato">
                                                 </div>
                                             </div>
                                         </div>
@@ -167,32 +167,32 @@
                                                 <div class="form-group">
                                                     <label for="cirepre">Cedula Representante</label>
                                                     <input type="text" class="form-control" name="cirepre" id="cirepre"
-                                                        placeholder="Profesión">
+                                                    value="{{ old('cirepre') }}" placeholder="Profesión">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="namerepre">Nombres del Representante</label>
                                                     <input type="text" class="form-control" name="namerepre"
-                                                        id="namerepre" placeholder="Nombre del Representante">
+                                                    value="{{ old('namerepre') }}" id="namerepre" placeholder="Nombre del Representante">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="namema">Nombres de la Madre</label>
                                                     <input type="text" class="form-control" name="namema" id="namema"
-                                                        placeholder="Nombre de la Madre">
+                                                    value="{{ old('namema') }}" placeholder="Nombre de la Madre">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="namepa">Nombres del Padre</label>
                                                     <input type="text" class="form-control" name="namepa" id="namepa"
-                                                        placeholder="Nombre del Padre">
+                                                    value="{{ old('namepa') }}" placeholder="Nombre del Padre">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="telefonorep">Teléfono Representante</label>
                                                     <input type="text" class="form-control" name="telefonorep"
-                                                        id="telefonorep" placeholder="Teléfono Representante">
+                                                    value="{{ old('telefonorep') }}"  id="telefonorep" placeholder="Teléfono Representante">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="fregistro">Fecha Registro</label>
                                                     <input type="text" class="form-control" name="fregistro"
-                                                        id="fregistro" placeholder="Fecha Registro">
+                                                    value="{{ old('fregistro') }}" id="fregistro" placeholder="Fecha Registro">
                                                 </div>
 
                                             </div>
