@@ -55,8 +55,8 @@
                             <tbody>
                                 <tr>
                                     @foreach ($cursos as $curso)
-                                    <th scope="row">{{ $curso['id']}}</th>                                   
-                                    <td>{{ $curso['nivel_id']}}</td>
+                                    <th scope="row">{{ $curso['id']}}</th>                                                                   
+                                    <td>{{ $curso->nivel->nombre}}</td>
                                     <td>{{ $curso['nombre']}}</td>
                                     <td>{{ $curso['paralelo']}}</td>
                                     <td>{{ $curso['estado']}}</td>

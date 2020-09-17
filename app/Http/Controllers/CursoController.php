@@ -17,8 +17,7 @@ class CursoController extends Controller
     public function index()
     {
 
-       
-         
+               
         $cursos= Curso::orderBy('id','Asc')->paginate(5);
        
         return \view('Cursos.indexc',['cursos'=>$cursos,]);

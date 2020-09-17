@@ -45,6 +45,7 @@
                                     <th scope="col">Primer Nombre</th>
                                     <th scope="col">Primer Apellido</th>
                                     <th scope="col">Email</th>
+                                    <th scope="col">U. Educativa</th>
                                     <th scope="col">Estado</th>
                                     <th scope="col">Rol</th>
                                     <th></th>
@@ -62,6 +63,7 @@
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->apellido}}</td>
                                     <td>{{$user->email}}</td>
+                                    <td>{{$user->instituto->nombre}}</td>
                                     <td>{{$user->estado}}</td>
                                     <td>
                                         @foreach($user->roles as $role)
