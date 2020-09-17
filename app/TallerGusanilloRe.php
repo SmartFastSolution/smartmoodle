@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TallerDiferencia extends Model
+class TallerGusanilloRe extends Model
 {
-      public function Tallers(){
+    public function Tallers(){
 
         return $this->belongsToMany('App\Taller');
     }

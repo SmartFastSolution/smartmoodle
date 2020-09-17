@@ -2,63 +2,137 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\TallerCompletarRes;
-use App\Admin\TallerCompletar;
+use App\Admin\TallerCirculo;
 use App\Admin\TallerClasificar;
+use App\Admin\TallerCompletar;
 use App\Admin\TallerCompletarEnunciado;
-use App\TallerCompleteEnRes;
-use App\TallerClasificarRes;
-use App\TallerDiferencia;
-use App\TallerSeñalar;
-use App\TallerIdentificarRe;
-use App\TallerGusanoRe;
+use App\Admin\TallerDiferencia;
+use App\Admin\TallerGusanillo;
+use App\Admin\TallerIdentificarImagen;
+use App\Admin\TallerSenalar;
+use App\Admin\TallerSenalarOpcion;
+use App\Admin\TallerSubrayar;
+use App\Http\Controllers\Controller;
 use App\Taller;
 use App\TallerCirEjemploRe;
+use App\TallerCirculoRe;
+use App\TallerClasificarRes;
+use App\TallerCompletarRes;
+use App\TallerCompleteEnRes;
+use App\TallerDiferenciaRes;
+use App\TallerGusanilloRe;
+use App\TallerIdentificarImagenRe;
 use App\TallerSubrayarRe;
+use Illuminate\Http\Request;
 
 class TallersController extends Controller
 {
-    public function taller($plant, $id){
+    public function taller($plant, $id, $id1){
         $d = $id;
         if ($plant == 1) {
             $consul = Taller::findorfail($id);
+             $consul1 = TallerCompletar::findorfail($id1);
+             if($consul1->taller_id == $id){
             $datos = TallerCompletar::where('taller_id', $consul->id)->get();
             return view('talleres.taller1', compact('datos', 'd'));
+             }else {
+                   return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
+                }
 
         }elseif ($plant == 2) {
             $consul = Taller::findorfail($id);
+             $consul1 = TallerClasificar::findorfail($id1);
+                if($consul1->taller_id == $id){
              $datos = TallerClasificar::where('taller_id', $consul->id)->get();
             return view('talleres.taller2', compact('datos', 'd'));
+            }else {
+                   return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
+                }
+
+
+
         }elseif ($plant == 3) {
             $consul = Taller::findorfail($id);
+             $consul1 = TallerCompletarEnunciado::findorfail($id1);
+              if($consul1->taller_id == $id){
              $datos = TallerCompletarEnunciado::where('taller_id', $consul->id)->get();
             return view('talleres.taller3', compact('datos', 'd'));
+             }else {
+                   return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
+                }
+
+
+
         }elseif ($plant == 4) {
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            $consul1 = TallerDiferencia::findorfail($id1);
+                if($consul1->taller_id == $id){
+             $datos = TallerDiferencia::where('taller_id', $consul->id)->get();
             return view('talleres.taller4', compact('datos', 'd'));
+              }else {
+                   return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
+                }
+
+
+
         }elseif ($plant == 5) {
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
-            return view('talleres.taller5', compact('datos', 'd'));
+            $consul1 = TallerSenalar::findorfail($id1);
+                if($consul1->taller_id == $id){
+             $datos = TallerSenalar::where('taller_id', $consul->id)->firstOrFail();
+            return view('talleres.taller5', compact('datos', 'd' ));
+        }else {
+        return redirect()->route('welcome')->with('datos', 'La ruta que quieres acceder no existe!!');
+        }
+
+
         }elseif ($plant == 6) {
+            $i= 0;
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
-            return view('talleres.taller6', compact('datos', 'd'));
+            $consul1 = TallerIdentificarImagen::findorfail($id1);
+                if($consul1->taller_id == $id){
+             $datos = TallerIdentificarImagen::where('taller_id', $consul->id)->firstOrFail();
+            return view('talleres.taller6', compact('datos', 'd', 'i'));
+             }else {
+        return redirect()->route('welcome')->with('datos', 'La ruta que quieres acceder no existe!!');
+        }
+
         }elseif ($plant == 7) {
+
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            $consul1 = TallerGusanillo::findorfail($id1);
+                if($consul1->taller_id == $id){
+             $datos = TallerGusanillo::where('taller_id', $consul->id)->firstOrFail();
             return view('talleres.taller7', compact('datos', 'd'));
+                 }else {
+            return redirect()->route('welcome')->with('datos', 'La ruta que quieres acceder no existe!!');
+            }
+
+
         }elseif ($plant == 8) {
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            $consul1 = TallerCirculo::findorfail($id1);
+             if($consul1->taller_id == $id){
+             $datos = TallerCirculo::where('taller_id', $consul->id)->firstOrFail();
             return view('talleres.taller8', compact('datos', 'd'));
+
+                }else {
+            return redirect()->route('welcome')->with('datos', 'La ruta que quieres acceder no existe!!');
+            }
+
         }elseif ($plant == 9) {
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+             $consul1 = TallerSubrayar::findorfail($id1);
+             if($consul1->taller_id == $id){
+             $datos = TallerSubrayar::where('taller_id', $consul->id)->first();
+             
             return view('talleres.taller9', compact('datos', 'd'));
+               }else {
+            return redirect()->route('welcome')->with('datos', 'La ruta que quieres acceder no existe!!');
+            }
+
+
+
         }elseif ($plant == 10) {
             $consul = Taller::findorfail($id);
              $datos = TallerClasificar::where('taller_id', $consul->id)->get();
@@ -277,7 +351,7 @@ class TallersController extends Controller
     //return response($content = 'Taller completado correctamente', $status = 200);
     }
 
-        public function store4(Request $request){
+        public function store3(Request $request){
     $taller1 = new TallerCompleteEnRes; 
     $taller1->taller_id  = '1';
     $taller1->user_id =    '1';           
@@ -292,13 +366,14 @@ class TallersController extends Controller
     return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
     //return response($content = 'Taller completado correctamente', $status = 200);
     }
-     public function store5(Request $request){
-    $taller1 = new TallerDiferencia; 
-    $taller1->taller_id  = '1';
+     public function store4(Request $request, $idtaller){
+       $contenido = TallerDiferencia::select('enunciado')->where('taller_id', $idtaller)->get(); 
+    $taller1 = new TallerDiferenciaRes; 
+    $taller1->taller_id  = $idtaller;
     $taller1->user_id =    '1';           
-    $taller1->enunciado =  'COMPLETE LOS ENUNCIADOS CORRECTAMENTE';
-    $taller1->item_a =          'Personas Capaces';   
-    $taller1->item_b =          'personas incapaces';             
+    $taller1->enunciado =  $contenido;
+    //$taller1->item_a =          'Personas Capaces';   
+    //$taller1->item_b =          'personas incapaces';             
     $taller1->diferencia_1a =   $request->input('diferencia_1a');   
     $taller1->diferencia_2a =   $request->input('diferencia_2a');   
     $taller1->diferencia_3a =   $request->input('diferencia_3a');   
@@ -307,68 +382,78 @@ class TallersController extends Controller
     $taller1->diferencia_3b =   $request->input('diferencia_3b');   
     $taller1->save();
 
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
+    return redirect()->route('welcome')->with('datos', 'Taller completado correctamente!');
     //return response($content = 'Taller completado correctamente', $status = 200);
     }
 
-    public function store6(Request $request){
+    public function store5(Request $request){
 
-     $encoitem1 = 'Comercio/'.$request->input('comercio');   
-     $encoitem2 = 'SECTOR PRODUCCIÓN/'.$request->input('sector_produccion');   
-    $taller1 = new TallerSeñalar; 
-    $taller1->taller_id  = '1';
-    $taller1->user_id =    '1';           
-    $taller1->enunciado =  'SEÑALE  LA  ALTERNATIVA  CORRECTA.';            
-    $taller1->item_1 =   $encoitem1;
-    $taller1->item_2 =   $encoitem2;   
-    $taller1->save();
-
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    //return response($content = 'Taller completado correctamente', $status = 200);
+    
+ 
     }
-    public function store7(Request $request)
+    public function store6(Request $request, $idtaller)
     {
-    $taller7 = new TallerIdentificarRe; 
-    $taller7->taller_id  = '1';
-    $taller7->user_id =    '1';           
-    $taller7->enunciado =  'ESCRIBA  EN  EL  GUSANILLO  LAS  PROHIBICIONES  DEL  COMERCIANTE,  CON EFICACIA';            
-    $taller7->foto1 =   $request->input('foto1');   
-    $taller7->foto2 =   $request->input('foto2');   
-    $taller7->foto3 =   $request->input('foto3');   
-    $taller7->foto4 =   $request->input('foto4');   
-    $taller7->foto5 =   $request->input('foto5');   
-    $taller7->foto6 =   $request->input('foto6');  
+       $contenido = TallerIdentificarImagen::select('enunciado')->where('taller_id', $idtaller)->first(); 
+    $taller6 = new TallerIdentificarImagenRe; 
+    $taller6->taller_id  = $idtaller;
+    $taller6->user_id =    '1';           
+    $taller6->enunciado =  $contenido->enunciado;  
+    if ($request->input('foto1')) {
+    $taller6->foto1 =   $request->input('foto1'); 
+     }elseif ($request->input('foto2')) {
+    $taller6->foto2 =   $request->input('foto2');
+    }elseif ($request->input('foto3')) {
+    $taller6->foto3 =   $request->input('foto3'); 
+    }elseif ($request->input('foto4')) {
+    $taller6->foto4 =   $request->input('foto4');   
+    }elseif ($request->input('foto5')) {
+    $taller6->foto5 =   $request->input('foto5');          
+    }elseif ($request->input('foto6')) {
+    $taller6->foto6 =   $request->input('foto6');      
+    }elseif ($request->input('foto7')) {
+    $taller6->foto7 =   $request->input('foto7');     
+    } elseif ($request->input('foto8')) {
+    $taller6->foto8 =   $request->input('foto8');   
+    } elseif ($request->input('foto9')) {
+    $taller6->foto9 =   $request->input('foto9');  
+    } elseif ($request->input('foto10')) {
+    $taller6->foto10 =   $request->input('foto10');    
+    }      
+    $taller6->save();
+
+    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
+    }
+    public function store7(Request $request, $idtaller)
+    {
+    $contenido = TallerGusanillo::select('enunciado')->where('taller_id', $idtaller)->first(); 
+    $taller7 = new TallerGusanilloRe; 
+    $taller7->taller_id  = $idtaller;
+    $taller7->user_id    =    '1';           
+    $taller7->enunciado  =  $contenido->enunciado;                       
+    $taller7->respuesta1 =   $request->input('respuesta1');   
+    $taller7->respuesta2 =   $request->input('respuesta2');   
+    $taller7->respuesta3 =   $request->input('respuesta3');    
     $taller7->save();
 
     return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
     }
-    public function store8(Request $request)
+
+        public function store8(Request $request, $idtaller)
     {
-    $taller8 = new TallerGusanoRe; 
-    $taller8->taller_id  = '1';
-    $taller8->user_id =    '1';           
-    $taller8->enunciado =  'ESCRIBA  EN  EL  GUSANILLO  LAS  PROHIBICIONES  DEL  COMERCIANTE,  CON EFICACIA';           
+    $contenido = TallerCirculo::select('enunciado')->where('taller_id', $idtaller)->first(); 
+    $taller8 = new TallerCirculoRe; 
+    $taller8->taller_id  = $idtaller;
+    $taller8->user_id    =    '1';           
+    $taller8->enunciado  =  $contenido->enunciado;                       
     $taller8->respuesta1 =   $request->input('respuesta1');   
     $taller8->respuesta2 =   $request->input('respuesta2');   
     $taller8->respuesta3 =   $request->input('respuesta3');    
+    $taller8->respuesta4 =   $request->input('respuesta4');    
     $taller8->save();
 
     return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
     }
-        public function store9(Request $request)
-    {
-    $taller9 = new TallerCirEjemploRe; 
-    $taller9->taller_id  = '1';
-    $taller9->user_id =    '1';           
-    $taller9->enunciado =  'SUBRAYE LA ALTERNATIVA CORRECTA.';           
-    $taller9->respuesta1 =   $request->input('respuesta1');   
-    $taller9->respuesta2 =   $request->input('respuesta2');   
-    $taller9->respuesta3 =   $request->input('respuesta3');    
-    $taller9->respuesta4 =   $request->input('respuesta4');    
-    $taller9->save();
 
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
     public function store10(Request $request)
     {
 
@@ -386,26 +471,8 @@ class TallersController extends Controller
 
     return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
     }
-    public function taller2(){
-
-    	return view('talleres.taller2');
-    }
-
-    public function taller3(){
-
-    	return view('talleres.taller3');
-    }
-
-    public function taller4(){
-
-    	return view('talleres.taller4');
-    }
     public function taller5(){
-
-    	return view('talleres.taller5');
-    }
-    public function taller6(){
-        $dato = TallerSeñalar::where('id', 1)->get();
+            $dato = TallerSeñalar::where('id', 1)->get();
             foreach ($dato as $value) { 
                 $info = explode('/', $value->item_1);
                  //$for1 = $info[0];
@@ -413,12 +480,16 @@ class TallersController extends Controller
                 
                 } 
         //return view('talleres.taller6', compact('for1', 'for2'));
-    return view('talleres.taller6', compact('info'));
+    	return view('talleres.taller5', compact('info'));
+    }
+    public function taller6(){
+       $i= 0;
+    return view('talleres.taller6', compact('i'));
     }
      public function taller7(){
-        $i= 0;
+     
 
-    	return view('talleres.taller7', compact('i'));
+    	return view('talleres.taller7');
     }
       public function taller8(){
 

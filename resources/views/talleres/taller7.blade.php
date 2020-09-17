@@ -1,13 +1,14 @@
 @extends('layouts.master')
 
-@section('title', 'Taller 8')
+<!-- ESCRIBIR EN EL GUSANILLO -->
+
+@section('title', $datos->taller->nombre)
 @section('contenido')
 
-<h1 class="text-center  mt-5 text-danger"> Taller #8</h1>
-     <h3 class="text-center mt-5 mb-3 text-info">ESCRIBA  EN  EL  GUSANILLO  LAS  PROHIBICIONES  DEL  COMERCIANTE,  CON 
-EFICACIA</h3>
+<h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>
+     <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}
 
-<form action="{{ route('taller8') }}" method="POST">
+<form action="{{ route('taller7', ['idtaller' => $d]) }}" method="POST">
     @csrf
 	<div class="container">
 		<div class="row align-items-center justify-content-center">
@@ -28,8 +29,6 @@ EFICACIA</h3>
         		<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
     		 </div>
 	</div>
-
-
 </form>
 
 @endsection

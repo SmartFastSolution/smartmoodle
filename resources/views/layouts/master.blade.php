@@ -10,22 +10,13 @@
     <title> @yield('title', 'Administracion')</title>
 
 
- 
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+
+    <!-- <link rel="stylesheet" href="css/dataTables.boostrap.css"> -->
+    <!--<link rel="stylesheet" href="{{ asset('css/styles.css') }}"> -->
 
     @yield('styles')
     
-
-
-
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
-    <!-- <link rel="stylesheet" href="css/dataTables.boostrap.css"> -->
-
-
-
-
-    
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -474,9 +465,8 @@
     </div>
 
     <script src="{{asset('js/app.js')}}"></script>
+    
     <!-- <script src="js/dataTables.bootstrap.js"></script> -->
-
-
     @yield('script')
 
 

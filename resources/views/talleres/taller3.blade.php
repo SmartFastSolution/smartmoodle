@@ -20,7 +20,7 @@
      						<input type="text"  name="respuesta1" class="form-control inputcurrent">
      					</div>
      				</div>
-<br>
+                         <br>
      				<div class="row mt-4 p-2">
      					<div class="col-6">
      						<label class="col-form-label" for="">{{ $dato->enunciado2 }}:</label>

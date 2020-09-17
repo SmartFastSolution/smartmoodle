@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTallerIdentificarResTable extends Migration
+class CreateTallerDiferenciaResTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,17 @@ class CreateTallerIdentificarResTable extends Migration
      */
     public function up()
     {
-        Schema::create('taller_identificar_res', function (Blueprint $table) {
+        Schema::create('taller_diferencia_res', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->string('enunciado');
-            $table->string('foto1')->nullable();
-            $table->string('foto2')->nullable();
-            $table->string('foto3')->nullable();
-            $table->string('foto4')->nullable();
-            $table->string('foto5')->nullable();
-            $table->string('foto6')->nullable();
-            $table->string('foto7')->nullable();
-            $table->string('foto8')->nullable();
-            $table->string('foto9')->nullable();
-            $table->string('foto10')->nullable();
+            $table->string('diferencia_1a');
+            $table->string('diferencia_2a');
+            $table->string('diferencia_3a');
+            $table->string('diferencia_1b');
+            $table->string('diferencia_2b');
+            $table->string('diferencia_3b');
             $table->timestamps();
 
             $table->foreign('taller_id')
@@ -49,6 +45,6 @@ class CreateTallerIdentificarResTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taller_identificar_res');
+        Schema::dropIfExists('taller_diferencia_res');
     }
 }

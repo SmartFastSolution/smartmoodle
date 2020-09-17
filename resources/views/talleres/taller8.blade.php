@@ -3,12 +3,12 @@
 @section('title', 'Taller 9')
 @section('contenido')
 
+<!--ESCRIBA  EN  LOS  CÍRCULOS  EJEMPLOS. -->
 
-<h1 class="text-center  mt-5 text-danger"> Taller #9</h1>
-     <h3 class="text-center mt-5 mb-3 text-info">ESCRIBA  EN  LOS  CÍRCULOS  EJEMPLOS  DE  PERSONAS  INCAPACES  PARA 
-EJERCER  EL  COMERCIO,  CON  CREATIVIDAD.</h3>
+<h1 class="text-center  mt-5 text-danger">{{ $datos->taller->nombre }}</h1>
+     <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
-<form action="{{ route('taller9') }}" method="POST">
+<form action="{{ route('taller8', ['idtaller' => $d]) }}" method="POST">
     @csrf
     <div class="container">
         <div class="row justify-content-center">

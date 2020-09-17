@@ -1,53 +1,117 @@
 @extends('layouts.master')
 
-@section('title', 'Taller 7')
+@section('title', 'Taller '.$datos->taller->id)
 @section('contenido')
+<!--TALLER IDENTIFICAR IMAGENES -->
 
-<h1 class="text-center  mt-5 text-danger"> Taller #7</h1>
-     <h3 class="text-center mt-5 mb-3 text-info">IDENTIFIQUE  LAS  PERSONAS  QUE  PUEDEN  EJERCER  EL  COMERCIO 
-CORRECTAMENTE.</h3>
+<h1 class="text-center  mt-5 text-danger"> Taller {{ $datos->taller->id }}</h1>
+     <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
-<form action="{{ route('taller7') }}" method="POST">
+<form action="{{ route('taller6',['idtaller' => $d]) }}" method="POST">
     @csrf	
     <div class="container">
 		<div class="row justify-content-center">
 			<div class="col-6">
 				<div class="row justify-content-center">
 					<div class="col-4">
-						<img src="{{ asset('img/talleres/imagen-4.jpg') }}" alt="Imagen 1">
+						<img src="{{ asset($datos->img1) }}" width="100" alt="Imagen 1">
 					</div>
 					<div class="col-4 align-self-center" >
-						<input type="checkbox" name="foto{{++$i}}" value="img/talleres/imagen-4.jpg" n class="form-control">
+						<input type="checkbox" name="foto{{++$i}}" value="{{ $datos->img1 }}" n class="form-control">
 					</div>
 				</div>
 
 				<div class="row justify-content-center">
 					<div class="col-4">
-						<img src="{{ asset('img/talleres/imagen-5.jpg') }}" alt="Imagen 1">
+						<img src="{{ asset($datos->img2) }}" width="100" alt="Imagen 1">
 					</div>
 					<div class="col-4 align-self-center" >
-						<input type="checkbox" name="foto{{++$i}}" value="img/talleres/imagen-5.jpg" class="form-control">
+						<input type="checkbox" name="foto{{++$i}}" value="{{ $datos->img2 }}" class="form-control">
 					</div>
 				</div>
 			</div>
 			<div class="col-6">
 				<div class="row justify-content-center">
 					<div class="col-4">
-						<img src="{{ asset('img/talleres/imagen-6.jpg') }}" alt="Imagen 1">
+						<img src="{{ asset($datos->img3) }}" width="100" alt="Imagen 1">
 					</div>
 					<div class="col-4 align-self-center" >
-						<input type="checkbox" name="foto{{++$i}}" value="img/talleres/imagen-6.jpg" class="form-control">
+						<input type="checkbox" name="foto{{++$i}}" value="{{ $datos->img3 }}" class="form-control">
 					</div>
 				</div>
 
 				<div class="row justify-content-center">
 					<div class="col-4">
-						<img src="{{ asset('img/talleres/imagen-7.jpg') }}" alt="Imagen 1">
+						<img src="{{ asset($datos->img4) }}" width="100" alt="Imagen 1">
 					</div>
 					<div class="col-4 align-self-center" >
-						<input type="checkbox" name="foto{{++$i}}" value="img/talleres/imagen-7.jpg" class="form-control">
+						<input type="checkbox" name="foto{{++$i}}" value="{{ $datos->img4 }}" class="form-control">
 					</div>
 				</div>
+			</div>
+
+
+			<div class="col-6">
+				@if($datos->img5 != null)
+					<div class="row justify-content-center">
+					<div class="col-4">
+						<img src="{{ asset($datos->img5) }}" width="100" alt="Imagen 1">
+					</div>
+					<div class="col-4 align-self-center" >
+						<input type="checkbox" name="foto{{++$i}}" value="{{ $datos->img5 }}" class="form-control">
+					</div>
+				</div>
+				@elseif($datos->img6 != null)
+				<div class="row justify-content-center">
+					<div class="col-4">
+						<img src="{{ asset($datos->img6) }}" width="100" alt="Imagen 1">
+					</div>
+					<div class="col-4 align-self-center" >
+						<input type="checkbox" name="foto{{++$i}}" value="{{ $datos->img6 }}" class="form-control">
+					</div>
+				</div>
+			</div>
+				@elseif($datos->img7 != null)
+				<div class="col-6">
+				<div class="row justify-content-center">
+					<div class="col-4">
+						<img src="{{ asset($datos->img7) }}" width="100" alt="Imagen 1">
+					</div>
+					<div class="col-4 align-self-center" >
+						<input type="checkbox" name="foto{{++$i}}" value="{{ $datos->img7 }}" class="form-control">
+					</div>
+				</div>
+				@elseif($datos->img8 != null)
+				<div class="row justify-content-center">
+					<div class="col-4">
+						<img src="{{ asset($datos->img8) }}" width="100" alt="Imagen 1">
+					</div>
+					<div class="col-4 align-self-center" >
+						<input type="checkbox" name="foto{{++$i}}" value="{{ $datos->img8 }}" class="form-control">
+					</div>
+				</div>
+			</div>
+				@elseif($datos->img9 != null)
+				<div class="col-6">
+				<div class="row justify-content-center">
+					<div class="col-4">
+						<img src="{{ asset($datos->img9) }}" width="100" alt="Imagen 1">
+					</div>
+					<div class="col-4 align-self-center" >
+						<input type="checkbox" name="foto{{++$i}}" value="{{ $datos->img9 }}" class="form-control">
+					</div>
+				</div>
+				@elseif($datos->img10 != null)
+				<div class="row justify-content-center">
+					<div class="col-4">
+						<img src="{{ asset($datos->img10) }}" width="100" alt="Imagen 1">
+					</div>
+					<div class="col-4 align-self-center" >
+						<input type="checkbox" name="foto{{++$i}}" value="{{ $datos->img10 }}" class="form-control">
+					</div>
+				</div>
+
+				@endif
 			</div>
 		</div>
 		 <div class="row justify-content-center">

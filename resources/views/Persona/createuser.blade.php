@@ -1,6 +1,5 @@
 @extends('layouts.master')
-@section('title')
-@endsection
+@section('title', 'Crear usuario')
 @section('contenido')
 
 <section class="content-header">

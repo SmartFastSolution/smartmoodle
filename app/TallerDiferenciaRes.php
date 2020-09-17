@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TallerSeñalar extends Model
+class TallerDiferenciaRes extends Model
 {
-        public function Tallers(){
+         public function Tallers(){
 
-        return $this->belongsToMany('App\Taller');
+        return $this->hasMany('App\Taller');
     }
     
      public function Users(){

@@ -1,19 +1,21 @@
 @extends('layouts.master')
-
-@section('title', 'Taller 5')
+<!--TALLER PARA ESCRIBIR DIFERENCIAS -->
+@section('title', 'Taller '.$d)
 @section('contenido')
 
-<h1 class="text-center  mt-5 text-danger"> Taller #5</h1>
-     <h3 class="text-center mt-5 mb-3 text-info">ESCRIBA  DIFERENCIAS  ENTRE  PERSONAS  CAPACES  E  INCAPACES  PARA 
-EJERCER  EL  COMERCIO,  CON  ORIGINALIDAD</h3>
 
-<form action="{{ route('taller5') }}" method="POST">
+    @foreach ($datos as $dato)
+<h1 class="text-center  mt-5 text-danger">{{ $dato->taller->nombre }}</h1>
+     <h3 class="text-center mt-5 mb-3 text-info">{{ $dato->enunciado }}</h3>
+
+
+<form action="{{ route('taller4',['idtaller' => $d]) }}" method="POST">
     @csrf
 	<div class="container">
 		<div class="row">
 			<div class="col-6 border-right border-info ">
 				<div class="row justify-content-center">
-					<img class="mt-3 img-fluid" src="{{ asset('img/talleres/imagen-2.jpg') }}" alt="">
+					<img class="mt-3 img-fluid" with="10" src="{{ asset($dato->img1) }}" alt="">
 				</div>
 				<div class="row">
 					<div class="col">
@@ -26,7 +28,7 @@ EJERCER  EL  COMERCIO,  CON  ORIGINALIDAD</h3>
 			</div>
 			<div class="col-6">
 				<div class="row justify-content-center">
-					<img class="mt-3 img-fluid" src="{{ asset('img/talleres/imagen-3.jpg') }}" alt="">
+					<img class="mt-3 img-fluid" with="100" src="{{ asset($dato->img2) }}" alt="">
 				</div>
 				<div class="row">
 					<div class="col">
@@ -45,5 +47,5 @@ EJERCER  EL  COMERCIO,  CON  ORIGINALIDAD</h3>
 	</div>
 
 </form>
-
+@endforeach
 @endsection

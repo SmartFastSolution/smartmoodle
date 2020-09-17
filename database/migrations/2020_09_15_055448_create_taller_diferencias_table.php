@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTallerGusanoResTable extends Migration
+class CreateTallerDiferenciasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,24 +13,17 @@ class CreateTallerGusanoResTable extends Migration
      */
     public function up()
     {
-        Schema::create('taller_gusano_res', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('taller_diferencias', function (Blueprint $table) {
+            $table->id();
             $table->unsignedbigInteger('taller_id');
-            $table->unsignedbigInteger('user_id');
             $table->string('enunciado');
-            $table->string('respuesta1')->nullable();
-            $table->string('respuesta2')->nullable();
-            $table->string('respuesta3')->nullable();
+            $table->string('img1');
+            $table->string('img2');
             $table->timestamps();
 
             $table->foreign('taller_id')
             ->references('id')
             ->on('tallers')
-            ->onDelete('cascade');
-
-            $table->foreign('user_id')
-            ->references('id')
-            ->on('users')
             ->onDelete('cascade');
         });
     }
@@ -42,6 +35,6 @@ class CreateTallerGusanoResTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taller_gusano_res');
+        Schema::dropIfExists('taller_diferencias');
     }
 }

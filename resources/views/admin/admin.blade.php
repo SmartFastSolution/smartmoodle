@@ -1,6 +1,9 @@
 @extends('layouts.master')
 
 @section('title', 'Creador de plantillas')
+@section('styles')
+    <link rel="stylesheet" href="{{asset('css/bootstrap-tagsinput.css')}}">
+@endsection
 @section('contenido')
 
 
@@ -58,5 +61,9 @@
      		</div>
      	</div>
 @include('layouts.modal')
+@section('script')
+    <script src="{{asset('js/bootstrap-tagsinput.js')}}"></script>
+
+@endsection
 </div> 
 @endsection
