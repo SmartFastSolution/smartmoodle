@@ -11,4 +11,9 @@ class Materia extends Model
 
     ];
 
+    public function contenidos(){
+          
+        return $this->hasMany('App\Contenido');
+
+    }
 }

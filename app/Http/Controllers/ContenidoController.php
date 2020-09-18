@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Contenido;
+use App\Materia;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 
 class ContenidoController extends Controller
 {
@@ -15,7 +18,9 @@ class ContenidoController extends Controller
      */
     public function index()
     {
-        //
+        $contenido= Contenido::orderBy('id','Asc')->paginate(5);
+    
+        return view('Contenido.indexcon',['contenidos'=>$contenido]);
     }
 
     /**
@@ -25,7 +30,9 @@ class ContenidoController extends Controller
      */
     public function create()
     {
-        //
+      $materias=Materia::get();
+        return \view('Contenido.createco',compact('materias',));
+
     }
 
     /**
@@ -36,7 +43,36 @@ class ContenidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+
+            'nombre'      => 'required|string|max:150',
+            'descripcion' => 'required|string|max:250',
+            'documentod'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf',
+            'estado'      => 'required|in:on,off',
+        ]);
+
+     
+
+        $contenido = new Contenido ;
+        $contenido->materia_id = $request->materia;
+        $contenido->nombre = $request->nombre;
+        $contenido->descripcion = $request->descripcion;
+        $contenido->documentod= $request->file('documentod')->store('public');    
+        $contenido->estado = $request->estado;
+        $contenido->save();
+
+        return redirect('sistema/contenidos');
+  
+
+
+
+
+    //pruebas 
+    //dd($request->file('documentod'));
+    //$contenido =\request()->except('_token');
+    //Contenido:: insert($contenido);
+    //return \response()->json($contenido);
     }
 
     /**
@@ -47,7 +83,7 @@ class ContenidoController extends Controller
      */
     public function show(Contenido $contenido)
     {
-        //
+        
     }
 
     /**
@@ -58,7 +94,9 @@ class ContenidoController extends Controller
      */
     public function edit(Contenido $contenido)
     {
-        //
+        $materias=Materia::get();
+        $materiacontenido=Contenido::find($contenido->id)->materia()->get();
+        return \view('Contenido.editcon',['contenido'=>$contenido,'materias'=>$materias,'materiacontenido'=> $materiacontenido]);
     }
 
     /**
@@ -70,7 +108,25 @@ class ContenidoController extends Controller
      */
     public function update(Request $request, Contenido $contenido)
     {
-        //
+        $request->validate([
+
+            'nombre'      => 'required|string|max:150',
+            'descripcion' => 'required|string|max:250',
+            'documentod'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf',
+            'estado'      => 'required|in:on,off',
+        ]);
+
+     
+
+     
+        $contenido->materia_id = $request->materia;
+        $contenido->nombre = $request->nombre;
+        $contenido->descripcion = $request->descripcion;
+        $contenido->documentod= $request->file('documentod')->store('public');    
+        $contenido->estado = $request->estado;
+        $contenido->save();
+
+        return redirect('sistema/contenidos');
     }
 
     /**
@@ -81,6 +137,10 @@ class ContenidoController extends Controller
      */
     public function destroy(Contenido $contenido)
     {
-        //
+        $contenido= Contenido::find($contenido->id);
+        $contenido->delete();
+
+        return redirect('sistema/contenidos')->with('success','Haz eliminado un Contenido con exito');
+   
     }
 }

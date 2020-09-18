@@ -211,7 +211,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                    <a href="{{route('contenidos.index')}}" class="nav-link">
                                         <i class="fas fa-business-time"></i>
                                         <p>Sección Contenido</p>
                                     </a>
