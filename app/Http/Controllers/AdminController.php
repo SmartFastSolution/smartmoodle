@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Admin\Taller2Relacionar;
 use App\Admin\Taller2RelacionarOpcion;
 use App\Admin\TallerCheque;
+use App\Admin\TallerChequeEndoso;
 use App\Admin\TallerCirculo;
 use App\Admin\TallerClasificar;
 use App\Admin\TallerCompletar;
@@ -739,4 +740,25 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
       }
    }
+   public function taller16(Request $request)
+      {
+         $i = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller16 = new Taller;
+         $taller16->nombre = 'Taller '.++$i;
+         $taller16->plantilla_id = $request->input('id_plantilla');
+         $taller16->materia_id = $request->input('materia_id');
+         $taller16->estado = 1;
+         $taller16->save();
+
+           if ($taller16 = true) {
+            $a = Taller::get()->last();
+
+            $taller_16 = new TallerChequeEndoso;
+            $taller_16->taller_id = $a->id;
+            $taller_16->enunciado = $request->input('enunciado');
+            $taller_16->endoso = $request->input('endoso');
+            $taller_16->save();
+      return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
+      }
+      }
 }

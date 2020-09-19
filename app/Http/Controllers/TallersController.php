@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Admin\TallerCheque;
+use App\Admin\TallerChequeEndoso;
 use App\Admin\TallerCirculo;
 use App\Admin\TallerClasificar;
 use App\Admin\TallerCompletar;
@@ -19,6 +20,7 @@ use App\Admin\TallerSubrayar;
 use App\Admin\TallerVerdaderoFalso;
 use App\Http\Controllers\Controller;
 use App\Taller;
+use App\TallerChequeEndosoRe;
 use App\TallerChequeRe;
 use App\TallerCirEjemploRe;
 use App\TallerCirculoRe;
@@ -209,8 +211,14 @@ class TallersController extends Controller
 
         }elseif ($plant == 16) {
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+             $consul1 = TallerChequeEndoso::findorfail($id1);
+            if($consul1->taller_id == $id){
+             $datos = TallerChequeEndoso::where('taller_id', $consul->id)->first();
             return view('talleres.taller16', compact('datos', 'd'));
+               }else {
+            return redirect()->route('welcome')->with('datos', 'La ruta que quieres acceder no existe!!');
+            }
+
         }elseif ($plant == 17) {
             $consul = Taller::findorfail($id);
              $datos = TallerClasificar::where('taller_id', $consul->id)->get();
@@ -579,12 +587,24 @@ class TallersController extends Controller
         $taller15->girador        =   $request->input('girador');
         $taller15->girado         =   $request->input('girado');
         $taller15->cantidad       =   $request->input('cantidad');
-        $taller15->lugar       =   $request->input('lugar');
-        $taller15->fecha       =   $request->input('fecha');
+        $taller15->lugar          =   $request->input('lugar');
+        $taller15->fecha          =   $request->input('fecha');
         $taller15->save();
     return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
         
 
+    }
+     public function store16(Request $request,  $idtaller)
+    {
+        $contenido = TallerChequeEndoso::select('enunciado')->where('taller_id', $idtaller)->first();
+        $taller16 = new TallerChequeEndosoRe; 
+        $taller16->taller_id      =   $idtaller;
+        $taller16->user_id        =   '1'; 
+        $taller16->enunciado      =   $contenido->enunciado; 
+        $taller16->endoso        =   $request->input('endoso');
+        $taller16->firma        =   $request->input('firma');
+        $taller16->save();
+    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
     }
 
     public function taller5(){

@@ -113,6 +113,14 @@ class Taller extends Model
     {
         return $this->belongsTo('App\TallerChequeRe');
     }
+          public function tallerChequeEndoso()
+    {
+        return $this->belongsTo('App\Admin\TallerChequeEndoso');
+    }
+          public function tallerChequeEndosoRe()
+    {
+        return $this->belongsTo('App\TallerChequeEndosoRe');
+    }
 }
 
 
