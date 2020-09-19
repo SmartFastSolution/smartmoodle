@@ -17,18 +17,18 @@
                         class="fas fa-user-plus"></i> Contenido</a>
             </div>
         </div>
-    </div><!-- /.container-fluid -->
+    </div><!-- container-fluid -->
 </section>
 
 
 
 <section class="content">
     <div class="container-fluid">
-    @if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <p>{{ $message }}</p>
-    </div>
-    @endif
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+        @endif
         <div class="row">
             <!-- left column -->
             <div class="col-md-13">
@@ -39,7 +39,7 @@
                         <div class="card-tools">
                         </div>
                     </div>
-                    <!-- /.card-header -->
+                    <!-- .card-header -->
                     <div class="card-body">
                         <table id="dataTable" class="table table-hover">
                             <thead>
@@ -59,12 +59,13 @@
                                     @foreach ($contenidos as $contenido)
                                     <th scope="row">{{ $contenido['id']}}</th>
                                     <td>{{ $contenido['nombre']}}</td>
-                                   / <td>{{ $contenido->materia->nombre}}</td>
+                                    <td>{{ $contenido->materia->nombre}}</td>
                                     <td>{{ $contenido['descripcion']}}</td>
                                     <td>
-                                    <a target="_blank" href="{{Storage::url($contenido['documentod'])}}">pdf</a>
-                                     </td>
-                                    
+                                        <a target="_blank"
+                                            href="{{Storage::url($contenido['documentod'])}}">{{ $contenido['nombre']}}</a>
+                                    </td>
+
                                     <td>{{ $contenido['estado']}}</td>
                                     <td> </td>
                                     <td class="table-button ">
@@ -74,7 +75,7 @@
                                     </td>
                                     <td class="table-button ">
                                         <a class="btn btn-success btn-xs"
-                                        href="{{route('contenidos.edit', $contenido->id)}}"><i
+                                            href="{{route('contenidos.edit', $contenido->id)}}"><i
                                                 class=" fas fa-pencil-alt"></i></a>
                                     </td>
                                     <td class="table-button ">

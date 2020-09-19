@@ -64,27 +64,11 @@ class ContenidoController extends Controller
             $contenido->materia_id = $request->materia;
          }
         
-    
-        // $contenido = new Contenido ;
-        // $contenido->materia_id = $request->materia;
-        // $contenido->nombre = $request->nombre;
-        // $contenido->descripcion = $request->descripcion;
-        // $contenido-> 
-        // //$contenido->documentod= $request->file('documentod')->store('public');    
-        // $contenido->estado = $request->estado;
+
          $contenido->save();
 
         return redirect('sistema/contenidos');
   
-
-
-
-
-    //pruebas 
-    //dd($request->file('documentod'));
-    //$contenido =\request()->except('_token');
-    //Contenido:: insert($contenido);
-    //return \response()->json($contenido);
     }
 
     /**
@@ -124,18 +108,29 @@ class ContenidoController extends Controller
 
             'nombre'      => 'required|string|max:150',
             'descripcion' => 'required|string|max:250',
-            'documentod'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf',
+            'documentod'  => 'mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:8000',
             'estado'      => 'required|in:on,off',
         ]);
+       
+        $contenido->update($request->all());
 
-     
+      //validacion y que al momento de actualizar el documento no sea obligatorio subir el documento 
+      //sino que se mantenga alli mismo y solo actualizar el documento requerido 
+        if($request->hasFile('documentod')){
 
-     
-        $contenido->materia_id = $request->materia;
-        $contenido->nombre = $request->nombre;
-        $contenido->descripcion = $request->descripcion;
-        $contenido->documentod= $request->file('documentod')->store('public');    
-        $contenido->estado = $request->estado;
+        Storage::delete('public'.$contenido->documentod);
+         $contenido['documentod']= $request->file('documentod')->store('public');
+        
+        }else{ 
+                unset($contenido->documentod); 
+        }
+      //al actualizar el contenido no sea necesario que materia tenga que ir requerido y se pueda mantener 
+      //la que estuvo almacenada anteriormente
+        if($request->get('materia')){
+         
+            $contenido->materia_id = $request->materia;
+         }
+        // hasta aqui 
         $contenido->save();
 
         return redirect('sistema/contenidos');
@@ -150,9 +145,14 @@ class ContenidoController extends Controller
     public function destroy(Contenido $contenido)
     {
         $contenido= Contenido::find($contenido->id);
+        if( Storage::delete('public'.$contenido->documentod)){
         $contenido->delete();
 
-        return redirect('sistema/contenidos')->with('success','Haz eliminado un Contenido con exito');
+      
    
+       }
+
+       return redirect('sistema/contenidos')->with('success','Haz eliminado un Contenido con exito');
+       
     }
 }

@@ -66,6 +66,12 @@
                             <!-- subir imagen en laravel prueba 1 -->
                             <div class="form-group">
                                 <label for="documentod">
+                                    <br>
+                                    {{$contenido->documentod}}
+                                    <br>
+                                    <a target="_blank"
+                                        href="{{Storage::url($contenido['documentod'])}}">{{ $contenido['nombre']}}</a>
+                                    <br>
                                     <input multiple type="file" name="documentod" value="{{old('documentod')}}">
                                     {!! $errors->first('documento','<span style="color:red">:message</span>')!!}
                                 </label>
