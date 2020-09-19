@@ -5,7 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Taller extends Model
-{
+{   
+    public function materia(){
+        return $this->belongsTo('App\Materia');
+    }
 
     public function Users(){
         return $this->belongsToMany('App\User');
@@ -68,6 +71,47 @@ class Taller extends Model
       public function tallerSubrayarRe()
     {
         return $this->belongsTo('App\tallerSubrayarRe');
+    }
+     public function tallerRelacionar()
+    {
+        return $this->belongsTo('App\Admin\TallerRelacionar');
+    }
+    public function taller2Relacionar()
+    {
+        return $this->belongsTo('App\Admin\Taller2Relacionar');
+    }
+    public function tallerVerdaderofalso()
+    {
+        return $this->belongsTo('App\Admin\TallerVerdaderoFalso');
+    }
+     public function tallerVerdaderofalsoRe()
+    {
+        return $this->belongsTo('App\TallerVerdaderoFalsoRe');
+    }
+     public function tallerIdentificarpersona()
+    {
+        return $this->belongsTo('App\Admin\TallerIdentificarPersona');
+    }
+      public function tallerIdentificarpersonaRe()
+    {
+        return $this->belongsTo('App\Admin\TallerIdentificarPersonaRe');
+    }
+
+       public function tallerdefinirEnunciado()
+    {
+        return $this->belongsTo('App\Admin\TallerDefinirEnunciado');
+    }
+       public function tallerdefinirEnunciadoRe()
+    {
+        return $this->belongsTo('App\TallerDefinirEnunciadoRe');
+    }
+          public function tallerCheque()
+    {
+        return $this->belongsTo('App\Admin\TallerCheque');
+    }
+           public function tallerChequeRe()
+    {
+        return $this->belongsTo('App\TallerChequeRe');
     }
 }
 

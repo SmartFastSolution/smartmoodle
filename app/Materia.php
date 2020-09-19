@@ -11,4 +11,10 @@ class Materia extends Model
 
     ];
 
+    public function tallers(){
+          
+        return $this->hasMany('App\Taller');
+
+    }
+
 }

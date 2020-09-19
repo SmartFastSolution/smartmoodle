@@ -32,8 +32,8 @@ Auth::routes();
 
 ///rutas protegidas On 
 
- Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
-  //Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
+ //Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
+  Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
    
  route::get('/','Controller@index')->name('welcome');
 
@@ -88,6 +88,11 @@ route::post('/taller7', 'AdminController@taller7')->name('admin.taller7');
 route::post('/taller8', 'AdminController@taller8')->name('admin.taller8');
 route::post('/taller9', 'AdminController@taller9')->name('admin.taller9');
 route::post('/taller10', 'AdminController@taller10')->name('admin.taller10');
+route::post('/taller11', 'AdminController@taller11')->name('admin.taller11');
+route::post('/taller12', 'AdminController@taller12')->name('admin.taller12');
+route::post('/taller13', 'AdminController@taller13')->name('admin.taller13');
+route::post('/taller14', 'AdminController@taller14')->name('admin.taller14');
+route::post('/taller15', 'AdminController@taller15')->name('admin.taller15');
 	});
 
 route::get('/sistema/taller/{plant}/{id}/{id1}', 'TallersController@taller')->name('taller');
@@ -117,21 +122,26 @@ route::post('/sistema/admin/taller8/{idtaller}', 'TallersController@store8')->na
 
 
 route::get('/sistema/taller9', 'TallersController@taller9')->name('taller9');
-route::post('/sistema/taller9', 'TallersController@store9')->name('taller9');
 route::post('/sistema/admin/taller9/{idtaller}', 'TallersController@store9')->name('taller9');
 
 route::get('/sistema/taller10', 'TallersController@taller10')->name('taller10');
-route::post('/sistema/taller10', 'TallersController@store10')->name('taller10');
-/*
+route::post('/sistema/admin/taller10/{idtaller}', 'TallersController@store10')->name('taller10');
+
+
 route::get('/sistema/taller11', 'TallersController@taller11')->name('taller11');
-route::get('/sistema/taller12', 'TallersController@taller12')->name('taller12');
-route::get('/sistema/taller13', 'TallersController@taller13')->name('taller13');
-route::get('/sistema/taller14', 'TallersController@taller14')->name('taller14');
-route::get('/sistema/taller15', 'TallersController@taller15')->name('taller15');
+
+route::post('/sistema/admin/taller12/{idtaller}', 'TallersController@store12')->name('taller12');
+
+route::post('/sistema/admin/taller13/{idtaller}', 'TallersController@store13')->name('taller13');
+
+route::post('/sistema/admin/taller14/{idtaller}', 'TallersController@store14')->name('taller14');
+route::post('/sistema/admin/taller15/{idtaller}', 'TallersController@store15')->name('taller15');
+
 route::get('/sistema/taller16', 'TallersController@taller16')->name('taller16');
 route::get('/sistema/taller17', 'TallersController@taller17')->name('taller17');
 route::get('/sistema/taller18', 'TallersController@taller18')->name('taller18');
 route::get('/sistema/taller19', 'TallersController@taller19')->name('taller19');
+
 route::get('/sistema/taller20', 'TallersController@taller20')->name('taller20');
 route::get('/sistema/taller21', 'TallersController@taller21')->name('taller21');
 route::get('/sistema/taller22', 'TallersController@taller22')->name('taller22');
@@ -169,6 +179,8 @@ route::get('/sistema/taller53', 'TallersController@taller53')->name('taller53');
 route::get('/sistema/taller54', 'TallersController@taller54')->name('taller54');
 route::get('/sistema/taller55', 'TallersController@taller55')->name('taller55');
 route::get('/sistema/taller56', 'TallersController@taller56')->name('taller56');
+
+/*
 */
 route::get('/sistema/admin/create', 'AdminController@admin')->name('admin.create');
 route::post('/sistema/admin', 'AdminController@store')->name('admin');
