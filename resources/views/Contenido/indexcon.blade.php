@@ -59,10 +59,10 @@
                                     @foreach ($contenidos as $contenido)
                                     <th scope="row">{{ $contenido['id']}}</th>
                                     <td>{{ $contenido['nombre']}}</td>
-                                    <td>{{ $contenido->materia->nombre}}</td>
+                                   / <td>{{ $contenido->materia->nombre}}</td>
                                     <td>{{ $contenido['descripcion']}}</td>
                                     <td>
-                                    <a target="_blank" href="{{Storage::url($contenido['documentod'])}}">PDF</a>
+                                    <a target="_blank" href="{{Storage::url($contenido['documentod'])}}">pdf</a>
                                      </td>
                                     
                                     <td>{{ $contenido['estado']}}</td>

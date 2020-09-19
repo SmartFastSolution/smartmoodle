@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\UploadedFile;
+use League\CommonMark\Context;
 
 class ContenidoController extends Controller
 {
@@ -51,16 +52,27 @@ class ContenidoController extends Controller
             'documentod'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf',
             'estado'      => 'required|in:on,off',
         ]);
-
      
-
-        $contenido = new Contenido ;
-        $contenido->materia_id = $request->materia;
-        $contenido->nombre = $request->nombre;
-        $contenido->descripcion = $request->descripcion;
-        $contenido->documentod= $request->file('documentod')->store('public');    
-        $contenido->estado = $request->estado;
-        $contenido->save();
+        $contenido=(new Contenido)->fill($request->all());
+       
+        if($request->hasFile('documentod')){
+         $contenido['documentod']= $request->file('documentod')->store('public');
+        }
+      
+        if($request->get('materia')){
+         
+            $contenido->materia_id = $request->materia;
+         }
+        
+    
+        // $contenido = new Contenido ;
+        // $contenido->materia_id = $request->materia;
+        // $contenido->nombre = $request->nombre;
+        // $contenido->descripcion = $request->descripcion;
+        // $contenido-> 
+        // //$contenido->documentod= $request->file('documentod')->store('public');    
+        // $contenido->estado = $request->estado;
+         $contenido->save();
 
         return redirect('sistema/contenidos');
   

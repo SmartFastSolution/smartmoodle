@@ -38,14 +38,12 @@
                         enctype="multipart/form-data">
                         @method('PUT')
                         @csrf
-
                         <div class=" card-body">
                             <div class="form-group">
                                 <label for="nombre">Nombre</label>
                                 <input type="text" class="form-control" name="nombre" id="nombre"
                                     value="{{$contenido->nombre}}" placeholder="Añadir nombre del contenido">
                             </div>
-
                             <div class="form-group">
                                 <label for="descripcion">Descripción</label>
                                 <input type="text" class="form-control" name="descripcion" id="descripcion"
@@ -72,27 +70,28 @@
                                     {!! $errors->first('documento','<span style="color:red">:message</span>')!!}
                                 </label>
                             </div>
-                           
-                           
+
+
                             <!-- fin de la prueba imagen en laravel  -->
 
                             <div class="form-group">
                                 <label for="nombre">Estado </label>
                                 <br>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="estadoon" name="estado" class="custom-control-input" value="on"
-                                    @if($contenido['estado']=="on" ) checked @elseif(old('estado')=="on" ) checked @endif>
-                                <label class="custom-control-label" for="estadoon">Activo</label>
+                                    <input type="radio" id="estadoon" name="estado" class="custom-control-input"
+                                        value="on" @if($contenido['estado']=="on" ) checked @elseif(old('estado')=="on"
+                                        ) checked @endif>
+                                    <label class="custom-control-label" for="estadoon">Activo</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estadooff" name="estado" class="custom-control-input"
+                                        value="off" @if($contenido['estado']=="off" ) checked
+                                        @elseif(old('estado')=="off" ) checked @endif>
+                                    <label class="custom-control-label" for="estadooff">No Activo</label>
+                                </div>
+                                <br><br><br>
+                                <input type="submit" class="btn btn-dark " value="Guardar">
                             </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="estadooff" name="estado" class="custom-control-input"
-                                    value="off" @if($contenido['estado']=="off" ) checked @elseif(old('estado')=="off" )
-                                    checked @endif>
-                                <label class="custom-control-label" for="estadooff">No Activo</label>
-                            </div>
-                            <br><br><br>
-                            <input type="submit" class="btn btn-dark " value="Guardar">
-                        </div>
                     </form>
                 </div>
             </div>

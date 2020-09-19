@@ -101,9 +101,7 @@ class UsersController extends Controller
         $user->fregistro = $request->fregistro;
          
         $user->save();
-       
-         
-
+               
            // 
         
         $user->asignarRol($request->get('role'));

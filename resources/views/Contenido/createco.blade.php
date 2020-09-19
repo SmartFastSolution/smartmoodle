@@ -61,11 +61,17 @@
                             </div>
                             <!-- subir imagen en laravel prueba 1 -->
                             <div class="form-group">
-                                <label for="documentod">
-                                    <input  multiple type="file" name="documentod" value="{{old('documentod')}}">
-                                    {!! $errors->first('documento','<span style="color:red">:message</span>')!!}
-                                </label>
+                                <label for="documentod">Añadir Documento(s)</label>
+                                <input type="file" class="form-control-file" name="documentod" id="documentod">
+                                {!! $errors->first('documento','<span style="color:red">:message</span>')!!}
+
+                                <div class="descripcion">
+                                    Un numero ilimitado de Archivos pueden ser almacenados en este campo
+                                    <br>
+                                    Limite de 8000 MB por Documento
+                                </div>
                             </div>
+
                             <!-- fin de la prueba imagen en laravel  -->
 
                             <div class="form-group">
