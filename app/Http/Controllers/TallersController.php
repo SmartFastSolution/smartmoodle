@@ -13,10 +13,16 @@ use App\Admin\TallerDiferencia;
 use App\Admin\TallerGusanillo;
 use App\Admin\TallerIdentificarImagen;
 use App\Admin\TallerIdentificarPersona;
+use App\Admin\TallerCertificadoDeposito;
 use App\Admin\TallerRelacionar;
 use App\Admin\TallerSenalar;
+use App\Admin\TallerConvertirCheque;
 use App\Admin\TallerSenalarOpcion;
 use App\Admin\TallerSubrayar;
+use App\Admin\TallerPagare;
+use App\Admin\TallerNotaPedido;
+use App\Admin\TallerValeCaja;
+use App\TallerLetraCambioRe;
 use App\Admin\TallerVerdaderoFalso;
 use App\Http\Controllers\Controller;
 use App\Taller;
@@ -24,7 +30,11 @@ use App\TallerChequeEndosoRe;
 use App\TallerChequeRe;
 use App\TallerCirEjemploRe;
 use App\TallerCirculoRe;
+use App\TallerPagareRe;
+use App\Admin\TallerLetraCambio;
 use App\TallerClasificarRes;
+use App\TallerValeCajaRe;
+use App\TallerCertificadoDepositoRe;
 use App\TallerCompletarRes;
 use App\TallerCompleteEnRes;
 use App\TallerDefinirEnunciadoRe;
@@ -33,6 +43,7 @@ use App\TallerGusanilloRe;
 use App\TallerIdentificarImagenRe;
 use App\TallerIdentificarPersonaRe;
 use App\TallerSubrayarRe;
+use App\TallerConvertirChequeRe;
 use App\TallerVerdaderoFalsoRe;
 use Illuminate\Http\Request;
 
@@ -221,28 +232,71 @@ class TallersController extends Controller
 
         }elseif ($plant == 17) {
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+             $consul1 = TallerConvertirCheque::findorfail($id1);
+                if($consul1->taller_id == $id){  
+             $datos = TallerConvertirCheque::where('taller_id', $consul->id)->first();
             return view('talleres.taller17', compact('datos', 'd'));
+               }else {
+            return redirect()->route('welcome')->with('datos', 'La ruta que quieres acceder no existe!!');
+            }
+
         }elseif ($plant == 18) {
+
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            $consul1 = TallerLetraCambio::findorfail($id1);
+                if($consul1->taller_id == $id){  
+
+            $datos = TallerLetraCambio::where('taller_id', $consul->id)->first();
             return view('talleres.taller18', compact('datos', 'd'));
+            }else {
+            return redirect()->route('welcome')->with('datos', 'La ruta que quieres acceder no existe!!');
+            }
+
         }elseif ($plant == 19) {
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            $consul1 = TallerCertificadoDeposito::findorfail($id1);
+                if($consul1->taller_id == $id){  
+
+             $datos = TallerCertificadoDeposito::where('taller_id', $consul->id)->first();
             return view('talleres.taller19', compact('datos', 'd'));
+            }else {
+            return redirect()->route('welcome')->with('datos', 'La ruta que quieres acceder no existe!!');
+            }
+
         }elseif ($plant == 20) {
+
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+              $consul1 = TallerPagare::findorfail($id1);
+                if($consul1->taller_id == $id){  
+             $datos = TallerPagare::where('taller_id', $consul->id)->first();
             return view('talleres.taller20', compact('datos', 'd'));
+             }else {
+            return redirect()->route('welcome')->with('datos', 'La ruta que quieres acceder no existe!!');
+            }
+
         }elseif ($plant == 21) {
+
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+               $consul1 = TallerValeCaja::findorfail($id1);
+                if($consul1->taller_id == $id){  
+             $datos = TallerValeCaja::where('taller_id', $consul->id)->first();
             return view('talleres.taller21', compact('datos', 'd'));
+             }else {
+            return redirect()->route('welcome')->with('datos', 'La ruta que quieres acceder no existe!!');
+            }
+
+
         }elseif ($plant == 22) {
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+             $consul1 = TallerNotaPedido::findorfail($id1);
+                if($consul1->taller_id == $id){ 
+             $datos = TallerNotaPedido::where('taller_id', $consul->id)->first();
             return view('talleres.taller22', compact('datos', 'd'));
+             }else {
+            return redirect()->route('welcome')->with('datos', 'La ruta que quieres acceder no existe!!');
+            }
+
+
         }elseif ($plant == 23) {
             $consul = Taller::findorfail($id);
              $datos = TallerClasificar::where('taller_id', $consul->id)->get();
@@ -606,6 +660,107 @@ class TallersController extends Controller
         $taller16->save();
     return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
     }
+      public function store17(Request $request,  $idtaller)
+    {
+        $contenido = TallerConvertirCheque::select('enunciado')->where('taller_id', $idtaller)->first();
+        $taller17 = new TallerConvertirChequeRe; 
+        $taller17->taller_id      =   $idtaller;
+        $taller17->user_id        =   '1'; 
+        $taller17->enunciado      =   $contenido->enunciado; 
+        $taller17->endoso        =   $request->input('endoso');
+        $taller17->firma        =   $request->input('firma');
+        $taller17->save();
+    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
+    }
+      public function store18(Request $request,  $idtaller)
+    {
+        $contenido = TallerLetraCambio::select('enunciado')->where('taller_id', $idtaller)->first();
+        $taller18 = new TallerLetraCambioRe; 
+        $taller18->taller_id      =   $idtaller;
+        $taller18->user_id        =   '1'; 
+        $taller18->enunciado      =   $contenido->enunciado; 
+        $taller18->vencimiento        =   $request->input('vencimiento');
+        $taller18->numero        =   $request->input('numero');
+        $taller18->por        =   $request->input('por');
+        $taller18->ciudad        =   $request->input('ciudad');
+        $taller18->fecha        =   $request->input('fecha');
+        $taller18->orden_de        =   $request->input('orden_de');
+        $taller18->cantidad        =   $request->input('cantidad');
+        $taller18->direccion        =   $request->input('direccion');
+        $taller18->ciudad2        =   $request->input('ciudad2');
+        $taller18->atentamente        =   $request->input('atentamente');
+        $taller18->save();
+    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
+    }
+       public function store19(Request $request,  $idtaller)
+    {
+        $contenido = TallerCertificadoDeposito::select('enunciado')->where('taller_id', $idtaller)->first();
+        $taller19 = new TallerCertificadoDepositoRe; 
+        $taller19->taller_id      =   $idtaller;
+        $taller19->user_id        =   '1'; 
+        $taller19->enunciado      =   $contenido->enunciado; 
+        $taller19->valor_inicial        =   $request->input('valor_inicial');
+        $taller19->caracter        =   $request->input('caracter');
+        $taller19->beneficiario        =   $request->input('beneficiario');
+        $taller19->cantidad        =   $request->input('cantidad');
+        $taller19->plazo        =   $request->input('plazo');
+        $taller19->interes_anual        =   $request->input('interes_anual');
+        $taller19->fecha_emision        =   $request->input('fecha_emision');
+        $taller19->plazo_de_vencimiento        =   $request->input('plazo_de_vencimiento');
+        $taller19->fecha_de_vencimiento        =   $request->input('fecha_de_vencimiento');
+        $taller19->atentamente        =   $request->input('atentamente');
+        $taller19->save();
+    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
+    }
+
+      public function store20(Request $request,  $idtaller)
+    {
+        $contenido = TallerPagare::select('enunciado')->where('taller_id', $idtaller)->first();
+        $taller20 = new TallerPagareRe; 
+        $taller20->taller_id      =   $idtaller;
+        $taller20->user_id        =   '1'; 
+        $taller20->enunciado      =   $contenido->enunciado; 
+        $taller20->cantidad        =   $request->input('cantidad');
+        $taller20->resp1        =   $request->input('resp1');
+        $taller20->resp2        =   $request->input('resp2');
+        $taller20->resp3        =   $request->input('resp3');
+        $taller20->resp4        =   $request->input('resp4');
+        $taller20->resp5        =   $request->input('resp5');
+        $taller20->resp6        =   $request->input('resp6');
+        $taller20->resp7        =   $request->input('resp7');
+        $taller20->resp8        =   $request->input('resp8');
+        $taller20->resp9        =   $request->input('resp9');
+        $taller20->resp10        =   $request->input('resp10');
+        $taller20->resp11        =   $request->input('resp11');
+        $taller20->resp12        =   $request->input('resp12');
+        $taller20->resp13        =   $request->input('resp13');
+        $taller20->resp14        =   $request->input('resp14');
+        $taller20->resp15        =   $request->input('resp15');
+        $taller20->resp16        =   $request->input('resp16');
+        $taller20->resp17        =   $request->input('resp17');
+        $taller20->resp18        =   $request->input('resp18');
+        $taller20->resp19        =   $request->input('resp19');  
+        $taller20->save();
+    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
+    }
+     public function store21(Request $request,  $idtaller)
+    {
+        $contenido = TallerValeCaja::select('enunciado')->where('taller_id', $idtaller)->first();
+        $taller21 = new TallerValeCajaRe; 
+        $taller21->taller_id      =   $idtaller;
+        $taller21->user_id        =   '1'; 
+        $taller21->enunciado      =   $contenido->enunciado; 
+        $taller21->por        =   $request->input('por');
+        $taller21->deudor        =   $request->input('deudor');
+        $taller21->cantidad        =   $request->input('cantidad');
+        $taller21->concepto        =   $request->input('concepto');
+        $taller21->fecha        =   $request->input('fecha');
+        $taller21->vto_bueno        =   $request->input('vto_bueno');
+        $taller21->conforme        =   $request->input('conforme');
+        $taller21->save();
+    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
+    }
+
 
     public function taller5(){
             $dato = TallerSeñalar::where('id', 1)->get();

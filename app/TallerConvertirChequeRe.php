@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TallerChequeEndosoRe extends Model
+class TallerConvertirChequeRe extends Model
 {
-     public function Tallers(){
+            public function Tallers(){
 
         return $this->hasMany('App\Taller');
     }

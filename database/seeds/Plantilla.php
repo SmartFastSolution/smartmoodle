@@ -51,5 +51,35 @@ class Plantilla extends Seeder
           'nombre' => 'TALLER 10 - RELACIONAR ENUNCIADOS',
           'descripcion' => 'Taller designado para completar un resultado',
         ]);
+                DB::table('plantillas')->insert([
+          'nombre' => 'TALLER 11 - RELACIONAR ENUNCIADOS',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
+                 DB::table('plantillas')->insert([
+          'nombre' => 'TALLER 12 - RELACIONAR ENUNCIADOS',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
+                  DB::table('plantillas')->insert([
+          'nombre' => 'TALLER 13 - RELACIONAR ENUNCIADOS',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
+                   DB::table('plantillas')->insert([
+          'nombre' => 'TALLER 14 - RELACIONAR ENUNCIADOS',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
+                    DB::table('plantillas')->insert([
+          'nombre' => 'TALLER 15 - RELACIONAR ENUNCIADOS',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
+                     DB::table('plantillas')->insert([
+          'nombre' => 'TALLER 16 - RELACIONAR ENUNCIADOS',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
+                      DB::table('plantillas')->insert([
+          'nombre' => 'TALLER 17 - CONVERTIR CHEQUES',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
+         
+
     }
 }

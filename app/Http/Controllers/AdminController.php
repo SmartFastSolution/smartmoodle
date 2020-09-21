@@ -12,10 +12,16 @@ use App\Admin\TallerCompletar;
 use App\Admin\TallerCompletarEnunciado;
 use App\Admin\TallerDefinirEnunciado;
 use App\Admin\TallerDiferencia;
+use App\Admin\TallerConvertirCheque;
 use App\Admin\TallerGusanillo;
+use App\Admin\TallerLetraCambio;
+use App\Admin\TallerPagare;
+use App\Admin\TallerValeCaja;
+use App\Admin\TallerNotaPedido;
 use App\Admin\TallerIdentificarImagen;
 use App\Admin\TallerIdentificarPersona;
 use App\Admin\TallerRelacionar;
+use App\Admin\TallerCertificadoDeposito;
 use App\Admin\TallerRelacionarOpcion;
 use App\Admin\TallerSenalar;
 use App\Admin\TallerSenalarOpcion;
@@ -761,4 +767,168 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
       }
       }
+       public function taller17(Request $request)
+      {
+         $i = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller17 = new Taller;
+         $taller17->nombre = 'Taller '.++$i;
+         $taller17->plantilla_id = $request->input('id_plantilla');
+         $taller17->materia_id = $request->input('materia_id');
+         $taller17->estado = 1;
+         $taller17->save();
+
+           if ($taller17 = true) {
+            $a = Taller::get()->last();
+
+            $taller_17 = new TallerConvertirCheque;
+            $taller_17->taller_id = $a->id;
+            $taller_17->enunciado = $request->input('enunciado');
+            $taller_17->nombre = $request->input('nombre');
+            $taller_17->cantidad = $request->input('cantidad');
+            $taller_17->numero = $request->input('numero');
+            $taller_17->lugar = $request->input('lugar');
+            $taller_17->fecha = $request->input('fecha');
+            $taller_17->save();
+      return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
+      }
+      }
+
+      public function taller18(Request $request)
+      {
+         $i = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller18 = new Taller;
+         $taller18->nombre = 'Taller '.++$i;
+         $taller18->plantilla_id = $request->input('id_plantilla');
+         $taller18->materia_id = $request->input('materia_id');
+         $taller18->estado = 1;
+         $taller18->save();
+
+           if ($taller18 = true) {
+            $a = Taller::get()->last();
+            $taller_18 = new TallerLetraCambio;
+            $taller_18->taller_id = $a->id;
+            $taller_18->enunciado = $request->input('enunciado');
+            $taller_18->valor = $request->input('valor');
+            $taller_18->acreedor = $request->input('acreedor');
+            $taller_18->deudor = $request->input('deudor');
+            $taller_18->tasa_de_interes = $request->input('tasa_de_interes');
+            $taller_18->fecha_de_vencimiento = $request->input('fecha_de_vencimiento');
+            $taller_18->lugar = $request->input('lugar');
+            $taller_18->fecha_de_emision = $request->input('fecha_de_emision');
+            $taller_18->save();
+      return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
+      }
+      }
+
+
+      public function taller19(Request $request)
+      {
+         $i = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller19 = new Taller;
+         $taller19->nombre = 'Taller '.++$i;
+         $taller19->plantilla_id = $request->input('id_plantilla');
+         $taller19->materia_id = $request->input('materia_id');
+         $taller19->estado = 1;
+         $taller19->save();
+
+           if ($taller19 = true) {
+            $a = Taller::get()->last();
+            $taller_19 = new TallerCertificadoDeposito;
+            $taller_19->taller_id = $a->id;
+            $taller_19->enunciado = $request->input('enunciado');
+            $taller_19->valor = $request->input('valor');
+            $taller_19->beneficiario = $request->input('beneficiario');
+            $taller_19->interes_anual = $request->input('interes_anual');
+            $taller_19->lugar = $request->input('lugar');
+            $taller_19->fecha_de_emision = $request->input('fecha_de_emision');
+            $taller_19->plazo_de_vencimiento = $request->input('plazo_de_vencimiento');
+            $taller_19->fecha_de_vencimiento = $request->input('fecha_de_vencimiento');
+            $taller_19->save();
+      return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
+      }
+      }
+
+        public function taller20(Request $request)
+      {
+         $i = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller20 = new Taller;
+         $taller20->nombre = 'Taller '.++$i;
+         $taller20->plantilla_id = $request->input('id_plantilla');
+         $taller20->materia_id = $request->input('materia_id');
+         $taller20->estado = 1;
+         $taller20->save();
+
+           if ($taller20 = true) {
+            $a                               = Taller::get()->last();
+            $taller_20                       = new TallerPagare;
+            $taller_20->taller_id            = $a->id;
+            $taller_20->enunciado            = $request->input('enunciado');
+            $taller_20->beneficiario         = $request->input('beneficiario');
+            $taller_20->deudor               = $request->input('deudor');
+            $taller_20->garante              = $request->input('garante');
+            $taller_20->valor                = $request->input('valor');
+            $taller_20->plazo_pago           = $request->input('plazo_pago');
+            $taller_20->tasa_interes         = $request->input('tasa_interes');
+            $taller_20->lugar                = $request->input('lugar');
+            $taller_20->fecha_emision        = $request->input('fecha_emision');
+            $taller_20->fecha_de_vencimiento = $request->input('fecha_de_vencimiento');
+            $taller_20->save();
+      return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
+      }
+      }
+
+       public function taller21(Request $request)
+      {
+         $i = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller21 = new Taller;
+         $taller21->nombre = 'Taller '.++$i;
+         $taller21->plantilla_id = $request->input('id_plantilla');
+         $taller21->materia_id = $request->input('materia_id');
+         $taller21->estado = 1;
+         $taller21->save();
+
+           if ($taller21 = true) {
+            $a                               = Taller::get()->last();
+            $taller_21                       = new TallerValeCaja;
+            $taller_21->taller_id            = $a->id;
+            $taller_21->enunciado            = $request->input('enunciado');
+            $taller_21->valor                = $request->input('valor');
+            $taller_21->deudor               = $request->input('deudor');
+            $taller_21->detalle              = $request->input('detalle');
+            $taller_21->lugar                = $request->input('lugar');
+            $taller_21->fecha                = $request->input('fecha');
+            $taller_21->save();
+      return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
+      }
+      }
+
+        public function taller22(Request $request)
+      {
+         $i = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller22 = new Taller;
+         $taller22->nombre = 'Taller '.++$i;
+         $taller22->plantilla_id = $request->input('id_plantilla');
+         $taller22->materia_id = $request->input('materia_id');
+         $taller22->estado = 1;
+         $taller22->save();
+
+           if ($taller22 = true) {
+            $a                               = Taller::get()->last();
+            $taller_22                       = new TallerNotaPedido;
+            $taller_22->taller_id            = $a->id;
+            $taller_22->enunciado            = $request->input('enunciado');
+            $taller_22->pedido                = $request->input('pedido');
+            $taller_22->cantidad               = $request->input('cantidad');
+            $taller_22->codigo              = $request->input('codigo');
+            $taller_22->detalle                = $request->input('detalle');
+            $taller_22->lugar                = $request->input('lugar');
+            $taller_22->fecha                = $request->input('fecha');
+            $taller_22->firma                = $request->input('firma');
+            $taller_22->plazo_entrega                = $request->input('plazo_entrega');
+
+            $taller_22->save();
+      return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
+      }
+      }
+
 }

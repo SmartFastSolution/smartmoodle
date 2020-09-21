@@ -16,7 +16,7 @@ class CreateTallerRelacionarOpcionsTable extends Migration
         Schema::create('taller_relacionar_opcions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_relacionar_id');
-            $table->int('orden')->nullable();
+            $table->integer('orden')->nullable();
             $table->string('enunciado')->nullable();
             $table->string('definicion')->nullable();
             $table->string('img')->nullable();

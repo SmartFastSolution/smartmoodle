@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TallerChequeEndosoRe extends Model
+class TallerLetraCambioRe extends Model
 {
-     public function Tallers(){
+    public function Tallers(){
 
-        return $this->hasMany('App\Taller');
+        return $this->belongsToMany('App\Taller');
     }
     
      public function Users(){

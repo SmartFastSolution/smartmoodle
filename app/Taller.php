@@ -121,6 +121,56 @@ class Taller extends Model
     {
         return $this->belongsTo('App\TallerChequeEndosoRe');
     }
+        public function tallerConvertirCheque()
+    {
+        return $this->belongsTo('App\Admin\TallerConvertirCheque');
+    }
+         public function tallerConvertirChequeRe()
+    {
+        return $this->belongsTo('App\TallerConvertirChequeRe');
+    }
+         public function tallerLetraCambio()
+    {
+        return $this->belongsTo('App\Admin\TallerLetraCambio');
+    }
+         public function tallerLetraCambioRe()
+    {
+        return $this->belongsTo('App\TallerLetraCambioRe');
+    }
+         public function tallerCertificadoDeposito()
+    {
+        return $this->belongsTo('App\Admin\TallerCertificadoDeposito');
+    }
+         public function tallerCertificadoDepositoRe()
+    {
+        return $this->belongsTo('App\TallerCertificadoDepositoRe');
+    }
+         public function tallerPagare()
+    {
+        return $this->belongsTo('App\Admin\TallerPagare');
+    }
+       public function tallerPagareRe()
+    {
+        return $this->belongsTo('App\TallerPagareRe');
+    }
+     public function tallerValeCaja()
+    {
+        return $this->belongsTo('App\Admin\TallerValeCaja');
+    }
+    public function tallerValeCajaRe()
+    {
+        return $this->belongsTo('App\TallerValeCajaRe');
+    }
+     public function tallerNotaPedido()
+    {
+        return $this->belongsTo('App\Admin\TallerNotaPedido');
+    }
+     public function tallerNotaPedidoRe()
+    {
+        return $this->belongsTo('App\TallerNotaPedidoRe');
+    }
+
+
 }
 
 
