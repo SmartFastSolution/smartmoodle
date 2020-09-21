@@ -1,10 +1,10 @@
-@extends('layouts.master')
+@extends('adminlte::page')
 
 @section('title', 'Creador de plantillas')
 @section('styles')
     <link rel="stylesheet" href="{{asset('css/bootstrap-tagsinput.css')}}">
 @endsection
-@section('contenido')
+@section('content')
 
 
 	<h1 class="text-center  mt-5 text-danger"> Administrador de Talleres</h1>
