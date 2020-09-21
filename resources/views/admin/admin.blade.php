@@ -1,7 +1,8 @@
 @extends('adminlte::page')
 
 @section('title', 'Creador de plantillas')
-@section('styles')
+@section('css')
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/bootstrap-tagsinput.css')}}">
 @endsection
 @section('content')
@@ -60,10 +61,11 @@
             </div>
      		</div>
      	</div>
-@include('layouts.modal')
-@section('script')
-    <script src="{{asset('js/bootstrap-tagsinput.js')}}"></script>
 
+@include('layouts.modal')
+
+@section('js')
+    <script src="{{asset('js/bootstrap-tagsinput.js')}}"></script>
 @endsection
 </div> 
 @endsection
