@@ -1,21 +1,17 @@
-@extends('layouts.master')
-@section('title')
-@endsection
-@section('contenido')
+@extends('adminlte::page')
+
+@section('title', 'Curso Crear')
 
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Añadir Cursos</h1>
-            </div>
-            <div class="col-sm-6">
+@section('plugins.Select2', true) 
+@section('plugins.Sweetalert2', true) 
+@section('content_header')
+<h1>Añadir Cursos</h1>
+@stop
 
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+@section('content')
+
+
 
 
 
@@ -99,10 +95,7 @@
                             </div>
 
                             <input type="submit" class="btn btn-dark " value="Guardar">
-
                         </div>
-
-
                     </form>
 
                 </div>
@@ -113,8 +106,20 @@
 </section>
 
 
-@endsection
-@section('script')
+@stop
+
+@section('css')
+<link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+<script>
+    Swal.fire(
+  'Good job!',
+  'Haz Accedido!',
+  'success'
+)
+</script>
 
 <script>
 $(function() {
@@ -124,7 +129,7 @@ $(function() {
     //Initialize Select2 Elements
     $('.select2bs4').select2({
         theme: 'bootstrap4'
-    })  
+    })
 })
 </script>
-@endsection
+@stop

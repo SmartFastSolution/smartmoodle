@@ -1,21 +1,12 @@
-@extends('layouts.master')
-@section('title')
-@endsection
-@section('contenido')
+@extends('adminlte::page')
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2 ">
-            <div class="col-sm-6 ">
-                <h1 >Crear Usuarios</h1>
-            </div>
-            <div class="col-sm-6">
+@section('title', 'Crear Usuario')
 
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+@section('content_header')
+<h1>Crear Usuarios</h1>
+@stop
 
+@section('content')
 
 <section class="content">
     @if ($errors->any())
@@ -40,47 +31,48 @@
                         <div class=" card-body">
                             <div class="form-group">
                                 <label for="cedula">Cédula</label>
-                                <input type="text" class="form-control"   value="{{ old('cedula') }}" name="cedula" id="cedula" placeholder="Cédula">
+                                <input type="text" class="form-control" value="{{ old('cedula') }}" name="cedula"
+                                    id="cedula" placeholder="Cédula">
                             </div>
                             <div class="form-group">
                                 <label for="fechanacimiento">Fecha Nacimiento</label>
-                                <input type="text" class="form-control"    value="{{ old('fechanacimiento') }}" name="fechanacimiento" id="fechanacimiento"
-                                    placeholder="Fecha Nacimiento">
+                                <input type="text" class="form-control" value="{{ old('fechanacimiento') }}"
+                                    name="fechanacimiento" id="fechanacimiento" placeholder="Fecha Nacimiento">
                             </div>
                             <div class="form-group">
                                 <label for="name">Primer Nombre</label>
-                                <input type="text" class="form-control" name="name" id="name"
-                                value="{{ old('name') }}" placeholder="Primer Nombre">
+                                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}"
+                                    placeholder="Primer Nombre">
                             </div>
                             <div class="form-group">
                                 <label for="sname">Segundo Nombre</label>
                                 <input type="text" class="form-control" name="sname" id="sname"
-                                value="{{ old('sname') }}" placeholder="Segundo Nombre">
+                                    value="{{ old('sname') }}" placeholder="Segundo Nombre">
                             </div>
                             <div class="form-group">
                                 <label for="apellido">Primer Apellido</label>
                                 <input type="text" class="form-control" name="apellido" id="apellido"
-                                value="{{ old('apellido') }}" placeholder="Primer Apellido">
+                                    value="{{ old('apellido') }}" placeholder="Primer Apellido">
                             </div>
                             <div class="form-group">
                                 <label for="sapellido">Segundo Apellido</label>
                                 <input type="text" class="form-control" name="sapellido" id="sapellido"
-                                value="{{ old('sapellido') }}" placeholder="Segundo Apellido">
+                                    value="{{ old('sapellido') }}" placeholder="Segundo Apellido">
                             </div>
                             <div class="form-group">
                                 <label for="domicilio">Domicilio</label>
                                 <input type="text" class="form-control" name="domicilio" id="domicilio"
-                                value="{{ old('domicilio') }}"  placeholder="Domicilio">
+                                    value="{{ old('domicilio') }}" placeholder="Domicilio">
                             </div>
                             <div class="form-group">
                                 <label for="telefono">Teléfono</label>
                                 <input type="text" class="form-control" name="telefono" id="telefono"
-                                value="{{ old('telefono') }}"  placeholder="Télefono">
+                                    value="{{ old('telefono') }}" placeholder="Télefono">
                             </div>
                             <div class="form-group">
                                 <label for="celular">Celular</label>
                                 <input type="text" class="form-control" name="celular" id="celular"
-                                value="{{ old('celular') }}" placeholder="Celular">
+                                    value="{{ old('celular') }}" placeholder="Celular">
                                 <div class="form-group">
 
                                     <div class="form-group">
@@ -106,13 +98,13 @@
                                     <div class="form-group">
                                         <label for="email">Correo Electrónico</label>
                                         <input type="text" class="form-control" name="email" id="email"
-                                        value="{{ old('email') }}"  placeholder="Email">
+                                            value="{{ old('email') }}" placeholder="Email">
                                     </div>
 
                                     <div class=" form-group">
                                         <label for="password">Contraseña</label>
                                         <input type="password" class="form-control" name="password" id="password"
-                                        value="{{ old('password') }}" placeholder="Password" minlength="8">
+                                            value="{{ old('password') }}" placeholder="Password" minlength="8">
                                     </div>
                                     <div class="form-group">
                                         <label for="password_confirmation">Confirmar Contraseña</label>
@@ -145,12 +137,13 @@
                                                 <div class="form-group">
                                                     <label for="titulo">Profesión</label>
                                                     <input type="text" class="form-control" name="titulo" id="titulo"
-                                                    value="{{ old('titulo') }}" placeholder="Profesión">
+                                                        value="{{ old('titulo') }}" placeholder="Profesión">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="fcontrato">Fecha Contrato</label>
                                                     <input type="text" class="form-control" name="fcontrato"
-                                                    value="{{ old('fcontrato') }}" id="fcontrato" placeholder="Fecha Contrato">
+                                                        value="{{ old('fcontrato') }}" id="fcontrato"
+                                                        placeholder="Fecha Contrato">
                                                 </div>
                                             </div>
                                         </div>
@@ -168,32 +161,35 @@
                                                 <div class="form-group">
                                                     <label for="cirepre">Cedula Representante</label>
                                                     <input type="text" class="form-control" name="cirepre" id="cirepre"
-                                                    value="{{ old('cirepre') }}" placeholder="Profesión">
+                                                        value="{{ old('cirepre') }}" placeholder="Profesión">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="namerepre">Nombres del Representante</label>
                                                     <input type="text" class="form-control" name="namerepre"
-                                                    value="{{ old('namerepre') }}" id="namerepre" placeholder="Nombre del Representante">
+                                                        value="{{ old('namerepre') }}" id="namerepre"
+                                                        placeholder="Nombre del Representante">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="namema">Nombres de la Madre</label>
                                                     <input type="text" class="form-control" name="namema" id="namema"
-                                                    value="{{ old('namema') }}" placeholder="Nombre de la Madre">
+                                                        value="{{ old('namema') }}" placeholder="Nombre de la Madre">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="namepa">Nombres del Padre</label>
                                                     <input type="text" class="form-control" name="namepa" id="namepa"
-                                                    value="{{ old('namepa') }}" placeholder="Nombre del Padre">
+                                                        value="{{ old('namepa') }}" placeholder="Nombre del Padre">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="telefonorep">Teléfono Representante</label>
                                                     <input type="text" class="form-control" name="telefonorep"
-                                                    value="{{ old('telefonorep') }}"  id="telefonorep" placeholder="Teléfono Representante">
+                                                        value="{{ old('telefonorep') }}" id="telefonorep"
+                                                        placeholder="Teléfono Representante">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="fregistro">Fecha Registro</label>
                                                     <input type="text" class="form-control" name="fregistro"
-                                                    value="{{ old('fregistro') }}" id="fregistro" placeholder="Fecha Registro">
+                                                        value="{{ old('fregistro') }}" id="fregistro"
+                                                        placeholder="Fecha Registro">
                                                 </div>
 
                                             </div>
@@ -216,7 +212,14 @@
 
 
 
+@stop
 
-@endsection
-@section('script')
-@endsection
+@section('css')
+<link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+<script>
+console.log('Hi!');
+</script>
+@stop

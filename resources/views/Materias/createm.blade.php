@@ -1,21 +1,12 @@
-@extends('layouts.master')
-@section('title')
-@endsection
-@section('contenido')
+@extends('adminlte::page')
 
+@section('title', 'Materias')
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Añadir Materias</h1>
-            </div>
-            <div class="col-sm-6">
+@section('content_header')
+<h1>Añadir Materias</h1>
+@stop
 
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+@section('content')
 
 
 
@@ -88,6 +79,12 @@
 </section>
 
 
-@endsection
-@section('script')
-@endsection
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop

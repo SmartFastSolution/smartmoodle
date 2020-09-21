@@ -1,29 +1,19 @@
-@extends('layouts.master')
+@extends('adminlte::page')
 
-@section('title')
+@section('title', 'Unidad Educativa')
 
+@section('content_header')
+<h1>Unidad Educativa</h1>
+<br>
+<a class="btn btn-info float-right " href="{{route('institutos.create')}}"><i class="fas fa-plus"></i></i> Instituto</a>
+<br>
+<br>
+@stop
 
-
-@endsection
-
-
-@section('contenido')
+@section('content')
 
 
 <!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-10">
-                <h1>Sección Administrador</h1>
-            </div>
-            <div class="card-tools">
-                <a class="btn btn-info float-right btn-xs" href="{{route('institutos.create')}}"><i
-                        class="fas fa-plus"></i></i> Instituto</a>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
 
 
 <section class="content">
@@ -89,13 +79,12 @@
 
 
                                     <td class="table-button ">
-                                        <a class="btn btn-info btn-xs" href="institutos/{{ $instituto['id']}}"><i
+                                        <a class="btn btn-info " href="institutos/{{ $instituto['id']}}"><i
                                                 class="fas fa-eye"></i></a>
 
                                     </td>
                                     <td class="table-button ">
-                                        <a class="btn btn-success btn-xs"
-                                            href="institutos/{{ $instituto['id']}}/edit"><i
+                                        <a class="btn btn-success" href="institutos/{{ $instituto['id']}}/edit"><i
                                                 class=" fas fa-pencil-alt"></i></a>
                                     </td>
                                     <td class="table-button ">
@@ -123,10 +112,14 @@
 </section>
 
 
-@endsection
+@stop
 
-@section('script')
+@section('css')
+<link rel="stylesheet" href="/css/admin_custom.css">
+@stop
 
-
-
-@endsection
+@section('js')
+<script>
+console.log('Hi!');
+</script>
+@stop

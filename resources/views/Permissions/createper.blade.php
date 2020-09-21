@@ -1,18 +1,13 @@
-@extends('layouts.master')
-@section('title')
-@endsection
-@section('contenido')
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Crear Permisos</h1>
-            </div>
-            <div class="col-sm-6">
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+@extends('adminlte::page')
+
+@section('title', 'Crear Permisos')
+
+@section('content_header')
+    <h1>Crear Permisos</h1>
+@stop
+
+@section('content')
+
 
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -77,13 +72,12 @@
 
 
 
+@stop
 
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
 
-@endsection
-@section('script')
-
-
-
-
-
-@endsection
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop

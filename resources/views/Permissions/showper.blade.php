@@ -1,7 +1,12 @@
-@extends('layouts.master')
-@section('title')
-@endsection
-@section('contenido')
+@extends('adminlte::page')
+
+@section('title', 'Detalle Menú')
+
+@section('content_header')
+    <h1>Detalle Menú</h1>
+@stop
+
+@section('content')
 
 <div class="container">
 
@@ -16,8 +21,6 @@
         </div>
 
 
-
-
     </div>
 
     <div class="card-footer">
@@ -28,10 +31,12 @@
 </div>
 
 
+@stop
 
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
 
-
-
-@endsection
-@section('script')
-@endsection
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop

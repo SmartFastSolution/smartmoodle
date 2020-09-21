@@ -1,22 +1,12 @@
-@extends('layouts.master')
-@section('title')
-@endsection
-@section('contenido')
+@extends('adminlte::page')
 
+@section('title', ' Materias')
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1> Materias</h1>
-            </div>
-            <div class="col-sm-6">
-            <a class="btn btn-info float-right btn-xs" href="{{route('contenidos.create')}}"><i
-                        class="fas fa-user-plus"></i> Contenido</a>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+@section('content_header')
+    <h1> Materias</h1>
+@stop
+
+@section('content')
 
 
 

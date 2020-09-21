@@ -1,24 +1,24 @@
-@extends('layouts.master')
-@section('title')
-@endsection
-@section('contenido')
+@extends('adminlte::page')
 
+@section('title', 'Dashboard')
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-10">
-                <h1>Sección Administrador</h1>
-            </div>
-            <div class="card-tools">
-                <!-- la referencia que hace este boton es al Rolecontroller en el 
+@section('content_header')
+<h1>Contenido</h1>
+<br>
+<div class="card-tools">
+    <!-- la referencia que hace este boton es al Rolecontroller en el 
                        cual esta llamando al metodo create y nos redirecciona al crud Roles.createroler...-->
-                <a class="btn btn-info float-right btn-xs" href="{{route('contenidos.create')}}"><i
-                        class="fas fa-user-plus"></i> Contenido</a>
-            </div>
-        </div>
-    </div><!-- container-fluid -->
-</section>
+    <a class="btn btn-info float-right " href="{{route('contenidos.create')}}"><i class="fas fa-user-plus"></i>
+        Contenido</a>
+</div>
+<br><br>
+@stop
+
+
+@section('content')
+
+
+
 
 
 
@@ -69,22 +69,23 @@
                                     <td>{{ $contenido['estado']}}</td>
                                     <td> </td>
                                     <td class="table-button ">
-                                        <a class="btn btn-info btn-xs"
+                                        <a class="btn btn-info btn"
                                             href="{{route('contenidos.show', $contenido->id)}}"><i
                                                 class="fas fa-eye"></i></a>
                                     </td>
                                     <td class="table-button ">
-                                        <a class="btn btn-success btn-xs"
+                                        <a class="btn btn-success btn"
                                             href="{{route('contenidos.edit', $contenido->id)}}"><i
                                                 class=" fas fa-pencil-alt"></i></a>
                                     </td>
                                     <td class="table-button ">
                                         <!--metodo delete funciona pero hay que almacenar la variable array en una variable temporal-->
-                                        <form method="POST" action="{{route('contenidos.destroy',$contenido->id)}}}"   enctype="multipart/form-data">
+                                        <form method="POST" action="{{route('contenidos.destroy',$contenido->id)}}}"
+                                            enctype="multipart/form-data">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" onclick="return confirm('¿Borrar?');" class="btn btn-danger "><i
-                                                    class="fas fa-trash"></i></button>
+                                            <button type="submit" onclick="return confirm('¿Borrar?');"
+                                                class="btn btn-danger "><i class="fas fa-trash"></i></button>
                                         </form>
                                     </td>
                                 </tr>
@@ -102,6 +103,14 @@
 
 
 
-@endsection
-@section('script')
-@endsection
+@stop
+
+@section('css')
+<link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+<script>
+console.log('Hi!');
+</script>
+@stop

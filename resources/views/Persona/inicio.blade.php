@@ -1,7 +1,15 @@
-@extends('layouts.master')
-@section('title')
-@endsection
-@section('contenido')
+@extends('adminlte::page')
+
+@section('title', 'Usuarios')
+
+@section('content_header')
+<h1>Sección Administrador</h1>
+<br>
+<a class="btn btn-info float-right btn" href="{{route('users.create')}}"><i class="fas fa-user-plus"></i>USUARIO</a>
+<br>
+@stop
+
+@section('content')
 
 
 <!-- Content Header (Page header) -->
@@ -9,11 +17,10 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-10">
-                <h1>Sección Administrador</h1>
+
             </div>
             <div class="card-tools">
-                <a class="btn btn-info float-right btn-xs" href="{{route('users.create')}}"><i
-                        class="fas fa-user-plus"></i>USUARIO</a>
+
             </div>
         </div>
     </div>
@@ -74,12 +81,12 @@
                                     <td> </td>
                                     <td> </td>
                                     <td class="table-button ">
-                                        <a class="btn btn-info btn-xs" href="users/{{ $user['id']}}"><i
+                                        <a class="btn btn-info " href="users/{{ $user['id']}}"><i
                                                 class="fas fa-eye"></i></a>
 
                                     </td>
                                     <td class="table-button ">
-                                        <a class="btn btn-success btn-xs" href="users/{{ $user['id']}}/edit"><i
+                                        <a class="btn btn-success" href="users/{{ $user['id']}}/edit"><i
                                                 class=" fas fa-pencil-alt"></i></a>
                                     </td>
                                     <td class="table-button ">
@@ -88,6 +95,8 @@
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger "><i
                                                     class="fas fa-trash"></i></button>
+
+
                                         </form>
                                     </td>
                                 </tr>
@@ -101,6 +110,13 @@
         </div>
 </section>
 
-@endsection
-@section('script')
-@endsection
+@stop
+@section('css')
+<link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+<script>
+console.log('Hi!');
+</script>
+@stop

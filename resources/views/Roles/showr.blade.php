@@ -1,20 +1,14 @@
-@extends('layouts.master')
-@section('title')
-@endsection
-@section('contenido')
+@extends('adminlte::page')
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Vista de Roles</h1>
-            </div>
-            <div class="col-sm-6">
+@section('title', 'Vista Roles')
 
-            </div>
-        </div>
-    </div>
-</section>
+@section('content_header')
+<h1>Vista de Roles</h1>
+@stop
+
+@section('content')
+
+
 
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -35,7 +29,7 @@
                 <!-- general form elements -->
                 <div class="card card-outline-secondary">
                     <div class="card-header">
-                        <h3 class="card-title">Informacion del ROl</h3>
+                        <h3 class="card-title">Informacion del Rol</h3>
                     </div>
                     <form method="POST" action="{{route('roles.update', $role->id)}}">
                         @method('PUT')
@@ -126,6 +120,12 @@
 
 
 
-@endsection
-@section('script')
-@endsection
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop

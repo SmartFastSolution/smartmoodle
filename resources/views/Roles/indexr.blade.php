@@ -1,34 +1,25 @@
-@extends('layouts.master')
-@section('title')
-@endsection
-@section('contenido')
+@extends('adminlte::page')
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-10">
-                <h1>Sección Administrador</h1>
-            </div>
-            <div class="card-tools">
-                <!-- la referencia que hace este boton es al Rolecontroller en el 
-                       cual esta llamando al metodo create y nos redirecciona al crud Roles.createroler...-->
-                <a class="btn btn-info float-right btn-xs" href="{{route('roles.create')}}"><i
-                        class="fas fa-user-plus"></i>ROLES</a>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+@section('title', 'Roles')
+
+@section('content_header')
+<h1>Roles</h1>
+<br><a class="btn btn-info float-right" href="{{route('roles.create')}}"><i
+        class="fas fa-user-plus"></i>ROLES</a>
+<br>
+@stop
+
+@section('content')
+
 
 <section class="content">
     <div class="container-fluid">
 
-    
-@if ($message = Session::get('success'))
-<div class="alert alert-success">
-    <p>{{ $message }}</p>
-</div>
-@endif
-
+       @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+        @endif
         <div class="row">
             <!-- left column -->
             <div class="col-md-13">
@@ -37,13 +28,8 @@
                     <div class="card-header">
                         <h3 class="card-title">Informacion de los Roles</h3>
                         <div class="card-tools">
-
-
-
                         </div>
-
                     </div>
-
                     <!--Table-->
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -74,15 +60,15 @@
                                     <td>{{$role['fullacces']}}</td>
                                     <td>{{$role['estado']}}</td>
                                     <td> </td>
-                                  
+
 
                                     <td class="table-button ">
-                                        <a class="btn btn-info btn-xs" href="roles/{{ $role['id']}}"><i
+                                        <a class="btn btn-info" href="roles/{{ $role['id']}}"><i
                                                 class="fas fa-eye"></i></a>
 
                                     </td>
                                     <td class="table-button ">
-                                        <a class="btn btn-success btn-xs" href="roles/{{ $role['id']}}/edit"><i
+                                        <a class="btn btn-success " href="roles/{{ $role['id']}}/edit"><i
                                                 class=" fas fa-pencil-alt"></i></a>
                                     </td>
                                     <td class="table-button ">
@@ -111,10 +97,12 @@
 
 
 
+@stop
 
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
 
-
-
-@endsection
-@section('script')
-@endsection
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop

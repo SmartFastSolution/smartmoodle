@@ -18,8 +18,7 @@
 
 
     <!-- Select2 -->
-    <link rel="stylesheet" href="{{asset('admin-lte/plugins/select2/select2.min.css')}}">
-    <link rel="stylesheet" href="{{asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+   
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <!-- <link rel="stylesheet" href="css/dataTables.boostrap.css"> -->
 
@@ -489,7 +488,7 @@
     <!-- <script src="js/dataTables.bootstrap.js"></script> -->
 
 
-    @yield('script')
+   
 
 
 

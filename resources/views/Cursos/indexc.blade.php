@@ -1,24 +1,19 @@
-@extends('layouts.master')
-@section('title')
-@endsection
-@section('contenido')
+@extends('adminlte::page')
+
+@section('title', 'Curso')
+
+@section('content_header')
+<h1>Curso</h1>
+<br>
+<br>
+<a class="btn btn-info float-right " href="{{route('cursos.create')}}"><i class="fas fa-user-plus"></i> Cursos</a>
+<br>
+@stop
+
+@section('content')
 
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-10">
-                <h1>Sección Administrador</h1>
-            </div>
-            <div class="card-tools">
-                <!-- la referencia que hace este boton es al Rolecontroller en el 
-                       cual esta llamando al metodo create y nos redirecciona al crud Roles.createroler...-->
-                <a class="btn btn-info float-right btn-xs" href="{{route('cursos.create')}}"><i
-                        class="fas fa-user-plus"></i> Cursos</a>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+
 
 
 <section class="content">
@@ -55,8 +50,8 @@
                             <tbody>
                                 <tr>
                                     @foreach ($cursos as $curso)
-                                    <th scope="row">{{ $curso['id']}}</th>                                                                                          
-                                    <td>{{ $curso['nombre']}}</td>                      
+                                    <th scope="row">{{ $curso['id']}}</th>
+                                    <td>{{ $curso['nombre']}}</td>
                                     <td>{{ $curso['paralelo']}}</td>
                                     <td>{{ $curso->nivel->nombre}}</td>
                                     <td>{{ $curso['estado']}}</td>
@@ -65,12 +60,12 @@
 
 
                                     <td class="table-button ">
-                                        <a class="btn btn-info btn-xs" href="{{route('cursos.show', $curso->id)}}"><i
+                                        <a class="btn btn-info " href="{{route('cursos.show', $curso->id)}}"><i
                                                 class="fas fa-eye"></i></a>
 
                                     </td>
                                     <td class="table-button ">
-                                        <a class="btn btn-success btn-xs" href="{{route('cursos.edit', $curso->id)}}"><i
+                                        <a class="btn btn-success " href="{{route('cursos.edit', $curso->id)}}"><i
                                                 class=" fas fa-pencil-alt"></i></a>
                                     </td>
                                     <td class="table-button ">
@@ -97,7 +92,14 @@
 </section>
 
 
+@stop
 
-@endsection
-@section('script')
-@endsection
+@section('css')
+<link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+<script>
+console.log('Hi!');
+</script>
+@stop
