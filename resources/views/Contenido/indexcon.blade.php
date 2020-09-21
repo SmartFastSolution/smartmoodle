@@ -80,10 +80,10 @@
                                     </td>
                                     <td class="table-button ">
                                         <!--metodo delete funciona pero hay que almacenar la variable array en una variable temporal-->
-                                        <form method="POST" action="{{route('contenidos.destroy', $contenido->id)}}}">
+                                        <form method="POST" action="{{route('contenidos.destroy',$contenido->id)}}}"   enctype="multipart/form-data">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" class="btn btn-danger "><i
+                                            <button type="submit" onclick="return confirm('¿Borrar?');" class="btn btn-danger "><i
                                                     class="fas fa-trash"></i></button>
                                         </form>
                                     </td>

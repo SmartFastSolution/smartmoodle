@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Curso;
 use App\Nivel;
+use App\Materia;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -31,8 +32,9 @@ class CursoController extends Controller
     public function create()
     {
         $nivels=Nivel::get();
+        $materias=Materia::get();
 
-        return \view('Cursos.createc',compact('nivels',));
+        return \view('Cursos.createc',compact('nivels','materias',));
     }
 
     /**
@@ -79,6 +81,8 @@ class CursoController extends Controller
      */
     public function edit(Curso $curso)
     {
+
+
        $nivels=Nivel::get();
        $nivelcurso= Curso::find($curso->id)->nivel()->get(); //llama al nivel que esta relacionado con el modelo curso
     
@@ -103,12 +107,14 @@ class CursoController extends Controller
             'estado'      => 'required|in:on,off',
         ]);
 
-        
-        $curso->nivel_id = $request->nivel;
-        $curso->nombre = $request->nombre;
-        $curso->paralelo = $request->paralelo;
-        $curso->estado = $request->estado;
-        $curso->save();
+        $curso->update($request->all());
+
+        if($request->get('nivel')){
+         
+            $curso->nivel_id = $request->nivel;
+         }
+          
+     
         return redirect('sistema/cursos');
     }
 

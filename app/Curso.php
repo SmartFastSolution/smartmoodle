@@ -16,4 +16,11 @@ class Curso extends Model
         return $this->belongsTo('App\Nivel');
 
     }
+
+    public function roles(){
+          
+        return $this->belongsToMany('App\Materia')->withTimestamps();
+
+    }
+
 }

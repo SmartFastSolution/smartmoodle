@@ -16,4 +16,13 @@ class Materia extends Model
         return $this->hasMany('App\Contenido');
 
     }
+
+
+
+    public function roles(){
+          
+        return $this->belongsToMany('App\Curso')->withTimestamps();
+
+    }
+
 }

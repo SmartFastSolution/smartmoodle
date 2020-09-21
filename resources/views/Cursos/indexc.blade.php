@@ -44,9 +44,9 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Nivel</th>
-                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Curso</th>
                                     <th scope="col">Paralelo</th>
+                                    <th scope="col">Nivel</th>
                                     <th scope="col">Estado</th>
                                     <th></th>
                                     <th scope="col">Tools</th>
@@ -55,10 +55,10 @@
                             <tbody>
                                 <tr>
                                     @foreach ($cursos as $curso)
-                                    <th scope="row">{{ $curso['id']}}</th>                                                                   
-                                    <td>{{ $curso->nivel->nombre}}</td>
-                                    <td>{{ $curso['nombre']}}</td>
+                                    <th scope="row">{{ $curso['id']}}</th>                                                                                          
+                                    <td>{{ $curso['nombre']}}</td>                      
                                     <td>{{ $curso['paralelo']}}</td>
+                                    <td>{{ $curso->nivel->nombre}}</td>
                                     <td>{{ $curso['estado']}}</td>
 
                                     <td> </td>

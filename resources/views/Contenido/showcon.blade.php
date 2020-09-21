@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Añadir Contenidos</h1>
+                <h1>Editar Contenidos</h1>
             </div>
             <div class="col-sm-6">
             </div>
@@ -34,41 +34,49 @@
                 </div>
                 <div class="card-body">
 
-                    <form method="POST" action="{{route('contenidos.index')}} " enctype="multipart/form-data">
+                    <form method="POST" action="{{route('contenidos.update', $contenido->id)}} "
+                        enctype="multipart/form-data">
+                        @method('PUT')
                         @csrf
-
                         <div class=" card-body">
                             <div class="form-group">
                                 <label for="nombre">Nombre</label>
                                 <input type="text" class="form-control" name="nombre" id="nombre"
-                                    value="{{ old('nombre') }}" placeholder="Añadir nombre del contenido">
+                                    value="{{$contenido->nombre}}" placeholder="Añadir nombre del contenido"readonly>
                             </div>
-
                             <div class="form-group">
                                 <label for="descripcion">Descripción</label>
                                 <input type="text" class="form-control" name="descripcion" id="descripcion"
-                                    value="{{ old('descripcion') }}" placeholder="Añadir una Descripción">
+                                    value="{{$contenido->descripcion}}" placeholder="Añadir una Descripción"readonly>
                             </div>
 
                             <div class="form-group">
-                                <label>Añadir Materia</label>
-                                <select class="form-control select" name="materia" style="width: 99%;">
-                                    <option selected disabled>Elija la Materia...</option>
+                                <label>Editar Materia</label>
+                                <select class="form-control select" name="materia" style="width: 99%;" disabled>
+                                    @foreach($materiacontenido as $materiac)
+                                    <option selected disabled value="{{ $materiac->id }}">{{ $materiac->nombre }}
+                                    </option>
+                                    @endforeach
                                     @foreach($materias as $materia)
                                     <option value="{{$materia->id}}">{{$materia->nombre}}</option>
                                     @endforeach
                                 </select>
                             </div>
+
                             <!-- subir imagen en laravel prueba 1 -->
                             <div class="form-group">
-                                <label for="documentod">Añadir Documento(s)</label>
-                                <input type="file" class="form-control-file" name="documentod" id="documentod">
-                                {!! $errors->first('documento','<span style="color:red">:message</span>')!!}
-
-                                <div class="descripcion">
-                                    Limite de 8MB por Documento
-                                </div>
+                                <label for="documentod">
+                                    <br>
+                                    {{$contenido->documentod}}
+                                    <br>
+                                    <a target="_blank"
+                                        href="{{Storage::url($contenido['documentod'])}}">{{ $contenido['nombre']}}</a>
+                                    <br>
+                                    <input multiple type="file" name="documentod" value="{{old('documentod')}}" disabled>
+                                    {!! $errors->first('documento','<span style="color:red">:message</span>')!!}
+                                </label>
                             </div>
+
 
                             <!-- fin de la prueba imagen en laravel  -->
 
@@ -77,17 +85,19 @@
                                 <br>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="estadoon" name="estado" class="custom-control-input"
-                                        value="on" @if(old('estado')=="on" ) checked @endif>
+                                        value="on" @if($contenido['estado']=="on" ) checked @elseif(old('estado')=="on"
+                                        ) checked @endif disabled>
                                     <label class="custom-control-label" for="estadoon">Activo</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="estadooff" name="estado" class="custom-control-input"
-                                        value="off" @if(old('estado')=="off" ) checked @endif>
+                                        value="off" @if($contenido['estado']=="off" ) checked
+                                        @elseif(old('estado')=="off" ) checked @endif disabled>
                                     <label class="custom-control-label" for="estadooff">No Activo</label>
                                 </div>
+                                <br><br><br>
+                               
                             </div>
-                            <input type="submit" class="btn btn-dark " value="Guardar">
-                        </div>
                     </form>
                 </div>
             </div>

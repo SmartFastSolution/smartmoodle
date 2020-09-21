@@ -67,6 +67,22 @@
 
                                 </select>
                             </div>
+
+                            <div class="form-group">
+                                <label>Multiple</label>
+                                <select class="select2" multiple="multiple" data-placeholder="Select a State"
+                                    style="width: 100%;">
+                                    <option>Alabama</option>
+                                    <option>Alaska</option>
+                                    <option>California</option>
+                                    <option>Delaware</option>
+                                    <option>Tennessee</option>
+                                    <option>Texas</option>
+                                    <option>Washington</option>
+                                </select>
+                            </div>
+
+
                             <div class="form-group">
                                 <label for="nombre">Estado </label>
                                 <br>
@@ -99,4 +115,16 @@
 
 @endsection
 @section('script')
+
+<script>
+$(function() {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+        theme: 'bootstrap4'
+    })  
+})
+</script>
 @endsection

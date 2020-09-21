@@ -8,10 +8,11 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Editar Materias</h1>
+                <h1> Materias</h1>
             </div>
             <div class="col-sm-6">
-
+            <a class="btn btn-info float-right btn-xs" href="{{route('contenidos.create')}}"><i
+                        class="fas fa-user-plus"></i> Contenido</a>
             </div>
         </div>
     </div><!-- /.container-fluid -->
@@ -38,6 +39,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Formulario Materias</h3>
                 </div>
+               
                 <div class="card-body">
 
 

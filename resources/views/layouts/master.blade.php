@@ -10,28 +10,30 @@
     <title> @yield('title', 'Administracion')</title>
 
 
- 
+
     <!-- <link rel="stylesheet" href="{{ asset('css/styles.css') }}"> -->
 
     @yield('styles')
-    
 
 
 
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{asset('admin-lte/plugins/select2/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <!-- <link rel="stylesheet" href="css/dataTables.boostrap.css"> -->
 
 
 
 
-    
+
 
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 
 
-    <div class="wrapper" >
+    <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-info navbar-light">
             <!-- Left navbar links -->
@@ -120,7 +122,6 @@
             <!-- Brand Logo -->
             <a href="{{ url('/sistema') }}" class="brand-link">
                 <img src="{{asset('img/escuela.png')}}" alt="img/hombre.png" class="brand-image img-circle elevation-3"
-
                     style="opacity: .8">
                 <span class="brand-text font-weight-blue">Sistema Educativo</span>
             </a>
@@ -149,7 +150,7 @@
 
                 <!-- Sidebar Menu -->
 
-                @can('Administrador') 
+                @can('Administrador')
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
@@ -166,7 +167,7 @@
                             </a>
                             <ul class="nav nav-treeview">
 
-                              
+
                                 <li class="nav-item">
                                     <a href="{{route('roles.index')}}" class="nav-link">
                                         <i class="fas fa-business-time"></i>
@@ -292,14 +293,15 @@
                             <ul class="nav nav-treeview">
 
                                 @foreach ($talleres = App\Taller::get() as $e)
-                                    <li class="nav-item">
-                                    <a href="{{ route('taller',['plant' => $e->plantilla_id, 'id' => $e->id] ) }}" class="nav-link">
+                                <li class="nav-item">
+                                    <a href="{{ route('taller',['plant' => $e->plantilla_id, 'id' => $e->id] ) }}"
+                                        class="nav-link">
                                         <i class="fas fa-circle nav-icon"></i>
                                         <p>{{ $e->nombre }}</p>
                                     </a>
-                                </li> 
+                                </li>
                                 @endforeach
-                                                          
+
 
                                 <li class="nav-item">
                                     <a href="" class="nav-link">
@@ -331,7 +333,7 @@
                     </ul>
                 </nav>
                 @endcan
-                
+
                 @can('Docente')
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
@@ -465,11 +467,11 @@
             @yield('contenido')
 
 
-           
+
 
 
         </div>
-    <!-- /.control-sidebar -->
+        <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
         <footer class="main-footer">
@@ -481,6 +483,9 @@
     </div>
 
     <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('public/plugins/select2/js/select2.full.min.js')}}">
+
+    </script>
     <!-- <script src="js/dataTables.bootstrap.js"></script> -->
 
 

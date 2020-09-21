@@ -15,7 +15,7 @@ class ContenidoController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responses
      */
     public function index()
     {
@@ -79,6 +79,11 @@ class ContenidoController extends Controller
      */
     public function show(Contenido $contenido)
     {
+
+        $materias=Materia::get();
+        $materiacontenido=Contenido::find($contenido->id)->materia()->get();
+        return \view('Contenido.showcon',['contenido'=>$contenido,'materias'=>$materias,'materiacontenido'=> $materiacontenido]);
+    
         
     }
 
@@ -131,7 +136,7 @@ class ContenidoController extends Controller
             $contenido->materia_id = $request->materia;
          }
         // hasta aqui 
-        $contenido->save();
+       
 
         return redirect('sistema/contenidos');
     }
@@ -145,14 +150,20 @@ class ContenidoController extends Controller
     public function destroy(Contenido $contenido)
     {
         $contenido= Contenido::find($contenido->id);
-        if( Storage::delete('public'.$contenido->documentod)){
-        $contenido->delete();
-
       
-   
-       }
+    
+           $contenido->delete();
 
-       return redirect('sistema/contenidos')->with('success','Haz eliminado un Contenido con exito');
+           if(Storage::delete('public/',$contenido->documentod)){
+
+           $contenido->delete($contenido->documentod);
+            }
+
+            
+            return redirect('sistema/contenidos')->with('success','Haz eliminado un Contenido con exito');     
+
+
+       
        
     }
 }
