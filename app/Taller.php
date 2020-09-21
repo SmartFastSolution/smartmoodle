@@ -177,9 +177,9 @@ class Taller extends Model
     {
         return $this->belongsTo('App\TallerReciboRe');
     }
-    public function tallerFactura()
+    public function tallerOrdenPago()
     {
-        return $this->belongsTo('App\Admin\TallerFactura');
+        return $this->belongsTo('App\Admin\tallerOrdenPago');
     }
 
 

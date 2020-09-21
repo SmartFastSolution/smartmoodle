@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
-@section('title', 'Taller 26')
+@section('title', 'Taller 25')
 @section('contenido')
 
-	<h1 class="text-center  mt-5 text-danger"> Taller #26</h1>
+	<h1 class="text-center  mt-5 text-danger"> Taller #25</h1>
     <h3 class="text-center mt-5 mb-3 text-info">LLENE  CON  LOS  SIGUIENTES  DATOS  LA  ORDEN  DE  PAGO CORRECTAMENTE</h3>
 
 	<form action="">

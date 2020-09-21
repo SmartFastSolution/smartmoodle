@@ -1502,7 +1502,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title" id="taller24Label">FACTURA</h2>
+        <h2 class="modal-title" id="taller24Label">Orden de Pago</h2>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -1567,22 +1567,70 @@
 
 
 
+  <!-- FORMULARIO PARA PLANTILLA 25 -->
+<div class="modal fade" id="taller25" tabindex="-1" role="dialog" aria-labelledby="taller25Label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="taller25Label">FACTURA</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-center">
+          <div class="col-12">
+             <form action="{{ route('admin.taller25') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                <input required="" type="hidden" value="25" name="id_plantilla">
+                <input required="" type="text" name="enunciado" class="form-control" id="recipient-name">
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Materia:</label>
+                <select name="materia_id" class="custom-select" id="">
+                 @foreach ($materias = App\Materia::get() as $materia)
+                  <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Beneficiario :</label>
+                <input required="" type="text" name="beneficiario" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Comprobante :</label>
+                <input required="" type="text" name="comprobante" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Cantidad :</label>
+                <input required="" type="text" name="detalle" class="form-control">
+              </div>
+               <div class="form-group">
+                <label for="message-text" class="col-form-label">Firmas :</label>
+                <input required="" type="text" name="firmas" class="form-control">
+              </div>
+               <div class="form-group">
+                <label for="message-text" class="col-form-label">Lugar :</label>
+                <input required="" type="text" name="lugar" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Fecha :</label>
+                <input required="" type="date" name="fecha" class="form-control">
+              </div> 
+                <div class="row justify-content-center">
+                  <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                </div>
+            </form>
+              </div>
+          </div>
+        </div>
 
+        <div class="modal-footer">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        </div>
+      </div>
+    </div>
+  </div>
 

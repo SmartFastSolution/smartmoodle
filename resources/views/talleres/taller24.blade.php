@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
-@section('title', $datos->taller->nombre)
+@section('title')
 @section('contenido')
 
 <!-- LLENE  CON  LOS  SIGUIENTES  DATOS  LA  ORDEN  DE  PAGO CORRECTAMENTE. -->
-	<h1 class="text-center  mt-5 text-danger">{{ $datos->taller->nombre }}</h1>
+	<h1 class="text-center  mt-5 text-danger"></h1>
     <h3 class="text-center mt-5 mb-3 text-info"></h3>
 
 <form action="">

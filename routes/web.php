@@ -102,6 +102,7 @@ route::post('/taller21', 'AdminController@taller21')->name('admin.taller21');
 route::post('/taller22', 'AdminController@taller22')->name('admin.taller22');
 route::post('/taller23', 'AdminController@taller23')->name('admin.taller23');
 route::post('/taller24', 'AdminController@taller24')->name('admin.taller24');
+route::post('/taller25', 'AdminController@taller25')->name('admin.taller25');
 	});
 
 route::get('/sistema/taller/{plant}/{id}/{id1}', 'TallersController@taller')->name('taller');
