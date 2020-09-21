@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTallerNotaPedidoResTable extends Migration
+class CreateTallerReciboResTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,24 +13,20 @@ class CreateTallerNotaPedidoResTable extends Migration
      */
     public function up()
     {
-        Schema::create('taller_nota_pedido_res', function (Blueprint $table) {
+        Schema::create('taller_recibo_res', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->string('enunciado');
             $table->string('no');
-            $table->string('fecha');
-            $table->string('dependencia');
-            $table->string('destino');
-            $table->string('plazo_entrega');
+            $table->string('por');
+            $table->string('recibi');
             $table->string('cantidad');
-            $table->string('codigo');
-            $table->string('descripcion');
-            $table->string('precio_unit');
-            $table->string('total');
-            $table->string('observaciones');
-            $table->string('fabrica');
-            $table->string('recibido');
+            $table->string('arriendo');
+            $table->string('propiedad');
+            $table->string('situado');
+            $table->string('hasta');
+            $table->string('firma');
             $table->timestamps();
             
             $table->foreign('taller_id')
@@ -52,6 +48,6 @@ class CreateTallerNotaPedidoResTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taller_nota_pedido_res');
+        Schema::dropIfExists('taller_recibo_res');
     }
 }

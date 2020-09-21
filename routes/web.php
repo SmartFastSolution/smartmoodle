@@ -100,6 +100,8 @@ route::post('/taller19', 'AdminController@taller19')->name('admin.taller19');
 route::post('/taller20', 'AdminController@taller20')->name('admin.taller20');
 route::post('/taller21', 'AdminController@taller21')->name('admin.taller21');
 route::post('/taller22', 'AdminController@taller22')->name('admin.taller22');
+route::post('/taller23', 'AdminController@taller23')->name('admin.taller23');
+route::post('/taller24', 'AdminController@taller24')->name('admin.taller24');
 	});
 
 route::get('/sistema/taller/{plant}/{id}/{id1}', 'TallersController@taller')->name('taller');
@@ -144,17 +146,17 @@ route::post('/sistema/admin/taller13/{idtaller}', 'TallersController@store13')->
 route::post('/sistema/admin/taller14/{idtaller}', 'TallersController@store14')->name('taller14');
 
 route::post('/sistema/admin/taller15/{idtaller}', 'TallersController@store15')->name('taller15');
-
 route::post('/sistema/admin/taller16/{idtaller}', 'TallersController@store16')->name('taller16');
+
 route::post('/sistema/admin/taller17/{idtaller}', 'TallersController@store17')->name('taller17');
 route::post('/sistema/admin/taller18/{idtaller}', 'TallersController@store18')->name('taller18');
 route::post('/sistema/admin/taller19/{idtaller}', 'TallersController@store19')->name('taller19');
 route::post('/sistema/admin/taller20/{idtaller}', 'TallersController@store20')->name('taller20');
 route::post('/sistema/admin/taller21/{idtaller}', 'TallersController@store21')->name('taller21');
+route::post('/sistema/admin/taller22/{idtaller}', 'TallersController@store22')->name('taller22');
+route::post('/sistema/admin/taller23/{idtaller}', 'TallersController@store23')->name('taller23');
 
 
-route::get('/sistema/taller22', 'TallersController@taller22')->name('taller22');
-route::get('/sistema/taller23', 'TallersController@taller23')->name('taller23');
 route::get('/sistema/taller24', 'TallersController@taller24')->name('taller24');
 route::get('/sistema/taller25', 'TallersController@taller25')->name('taller25');
 route::get('/sistema/taller26', 'TallersController@taller26')->name('taller26');

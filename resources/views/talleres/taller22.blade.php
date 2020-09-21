@@ -87,14 +87,14 @@ ADECUADAMENTE. -->
 					  </thead>
 					  <tbody>
 					    <tr>
-					      <th><input name="cantidad" type="text" class="form-control" name=""></th>
-					      <td><input name="codigo" type="text" class="form-control" name=""></td>
-					      <td><input type="text" name="descripcion" class="form-control" name=""></td>
-					      <td><input type="text" name="precio_unit" class="form-control" name=""></td>
-					      <td><input name="total" type="text" class="form-control" name=""></td>
+					      <th><input name="cantidad" type="text" class="form-control" ></th>
+					      <td><input name="codigo" type="text" class="form-control" ></td>
+					      <td><input type="text" name="descripcion" class="form-control" ></td>
+					      <td><input type="text" name="precio_unit" class="form-control" ></td>
+					      <td><input name="total" type="text" class="form-control" ></td>
 					    </tr>
 					    <tr>
-					      <th ><input type="text" class="form-control" name=""></th>
+					      <th><input type="text" class="form-control" name=""></th>
 					      <td><input type="text" class="form-control" name=""></td>
 					      <td><input type="text" class="form-control" name=""></td>
 					      <td><input type="text" class="form-control" name=""></td>
@@ -116,21 +116,24 @@ ADECUADAMENTE. -->
 						<h4 class="">OBSERVACIONES</h4>
 					</div>
 					<div class="col-8">
-						<input type="text" class="form-control">
+						<input name="observaciones" type="text" class="form-control">
 					</div>
 				</div>
 				<div class="row justify-content-around">
 					<div class="col-4 text-center">
-						<input type="text" name="" class="form-control">
+						<input name="fabrica" type="text" name="" class="form-control">
 						<label >Ing. Fabrica</label>
 					</div>
 					<div class="col-4 text-center">
-						<input type="text" name="" class="form-control">
+						<input name="recibido" type="text" name="" class="form-control">
 						<label >Recibido</label>
 					</div>
 				</div>
 			</div>
 		</div>
+			<div class="row justify-content-center">
+        	<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
+    	</div>
 	</div>
 </form>
 @endsection

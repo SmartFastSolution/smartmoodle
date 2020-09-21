@@ -15,11 +15,13 @@ use App\Admin\TallerIdentificarImagen;
 use App\Admin\TallerIdentificarPersona;
 use App\Admin\TallerCertificadoDeposito;
 use App\Admin\TallerRelacionar;
+use App\Admin\TallerRecibo;
 use App\Admin\TallerSenalar;
 use App\Admin\TallerConvertirCheque;
 use App\Admin\TallerSenalarOpcion;
 use App\Admin\TallerSubrayar;
 use App\Admin\TallerPagare;
+use App\Admin\TallerFactura;
 use App\Admin\TallerNotaPedido;
 use App\Admin\TallerValeCaja;
 use App\TallerLetraCambioRe;
@@ -31,9 +33,11 @@ use App\TallerChequeRe;
 use App\TallerCirEjemploRe;
 use App\TallerCirculoRe;
 use App\TallerPagareRe;
+use App\TallerNotaPedidoRe;
 use App\Admin\TallerLetraCambio;
 use App\TallerClasificarRes;
 use App\TallerValeCajaRe;
+use App\TallerReciboRe;
 use App\TallerCertificadoDepositoRe;
 use App\TallerCompletarRes;
 use App\TallerCompleteEnRes;
@@ -299,12 +303,27 @@ class TallersController extends Controller
 
         }elseif ($plant == 23) {
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+             $consul1 = TallerRecibo::findorfail($id1);
+                if($consul1->taller_id == $id){ 
+             $datos = TallerRecibo::where('taller_id', $consul->id)->first();
             return view('talleres.taller23', compact('datos', 'd'));
+             }else {
+            return redirect()->route('welcome')->with('datos', 'La ruta que quieres acceder no existe!!');
+            }
+
         }elseif ($plant == 24) {
+
+
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
+            $consul1 = TallerFactura::findorfail($id1);
+                if($consul1->taller_id == $id){ 
+             $datos = TallerFactura::where('taller_id', $consul->id)->first();
             return view('talleres.taller24', compact('datos', 'd'));
+              }else {
+            return redirect()->route('welcome')->with('datos', 'La ruta que quieres acceder no existe!!');
+            }
+
+
         }elseif ($plant == 25) {
             $consul = Taller::findorfail($id);
              $datos = TallerClasificar::where('taller_id', $consul->id)->get();
@@ -760,6 +779,51 @@ class TallersController extends Controller
         $taller21->save();
     return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
     }
+
+     public function store22(Request $request,  $idtaller)
+    {
+        $contenido = TallerNotaPedido::select('enunciado')->where('taller_id', $idtaller)->first();
+        $taller22 = new TallerNotaPedidoRe; 
+        $taller22->taller_id      =   $idtaller;
+        $taller22->user_id        =   '1'; 
+        $taller22->enunciado      =   $contenido->enunciado; 
+        $taller22->no             =   $request->input('no');
+        $taller22->fecha          =   $request->input('fecha');
+        $taller22->dependencia    =   $request->input('dependencia');
+        $taller22->destino        =   $request->input('destino');
+        $taller22->plazo_entrega  =   $request->input('plazo_entrega');
+        $taller22->cantidad       =   $request->input('cantidad');
+        $taller22->codigo         =   $request->input('codigo');
+        $taller22->descripcion    =   $request->input('descripcion');
+        $taller22->precio_unit    =   $request->input('precio_unit');
+        $taller22->total          =   $request->input('total');
+        $taller22->observaciones  =   $request->input('observaciones');
+        $taller22->fabrica        =   $request->input('fabrica');
+        $taller22->recibido       =   $request->input('recibido');
+        $taller22->save();
+    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
+    }
+    public function store23(Request $request,  $idtaller)
+    {
+        $contenido = TallerRecibo::select('enunciado')->where('taller_id', $idtaller)->first();
+        $taller23 = new TallerReciboRe; 
+        $taller23->taller_id  =   $idtaller;
+        $taller23->user_id    =   '1'; 
+        $taller23->enunciado  =   $contenido->enunciado; 
+        $taller23->no         =   $request->input('no');
+        $taller23->por        =   $request->input('por');
+        $taller23->recibi     =   $request->input('recibi');
+        $taller23->cantidad   =   $request->input('cantidad');
+        $taller23->arriendo   =   $request->input('arriendo');
+        $taller23->propiedad  =   $request->input('propiedad');
+        $taller23->situado    =   $request->input('situado');
+        $taller23->hasta      =   $request->input('hasta');
+        $taller23->firma      =   $request->input('firma');
+        $taller23->save();
+    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
+    }
+
+
 
 
     public function taller5(){
