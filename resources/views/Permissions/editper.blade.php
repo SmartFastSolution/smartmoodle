@@ -1,24 +1,13 @@
-@extends('layouts.master')
-@section('title')
+@extends('adminlte::page')
 
+@section('title', 'Editar Menú')
 
-@endsection
-@section('contenido')
+@section('content_header')
+    <h1>Editar Menú</h1>
+@stop
 
+@section('content')
 
-
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Editar Menú</h1>
-            </div>
-            <div class="col-sm-6">
-
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
 
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -84,12 +73,13 @@
         </div>
     </div>
 </section>
-@endsection
-@section('script')
 
+@stop
 
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
 
-
-
-
-@endsection
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop

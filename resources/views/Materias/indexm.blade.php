@@ -1,33 +1,24 @@
-@extends('layouts.master')
-@section('title')
-@endsection
-@section('contenido')
+@extends('adminlte::page')
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-10">
-                <h1>Sección Administrador</h1>
-            </div>
-            <div class="card-tools">
-                <!-- la referencia que hace este boton es al Rolecontroller en el 
-                       cual esta llamando al metodo create y nos redirecciona al crud Roles.createroler...-->
-                <a class="btn btn-info float-right btn-xs" href="{{route('materias.create')}}"><i
-                        class="fas fa-user-plus"></i>Materias</a>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+@section('title', 'Materias')
 
+@section('content_header')
+<h1>Materia</h1>
+
+<br> <a class="btn btn-info float-right" href="{{route('materias.create')}}"><i
+        class="fas fa-user-plus"></i>Materias</a> <br>
+@stop
+
+@section('content')
 
 
 <section class="content">
     <div class="container-fluid">
-    @if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <p>{{ $message }}</p>
-    </div>
-    @endif
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+        @endif
         <div class="row">
             <!-- left column -->
             <div class="col-md-13">
@@ -62,14 +53,13 @@
 
 
                                     <td class="table-button ">
-                                        <a class="btn btn-info btn-xs"
-                                            href="{{route('materias.show', $materia->id)}}"><i
+                                        <a class="btn btn-info " href="{{route('materias.show', $materia->id)}}"><i
                                                 class="fas fa-eye"></i></a>
 
                                     </td>
                                     <td class="table-button ">
-                                        <a class="btn btn-success btn-xs"
-                                        href="{{route('materias.edit', $materia->id)}}"><i
+                                        <a class="btn btn-success btn"
+                                            href="{{route('materias.edit', $materia->id)}}"><i
                                                 class=" fas fa-pencil-alt"></i></a>
                                     </td>
                                     <td class="table-button ">
@@ -95,8 +85,12 @@
         </div>
 </section>
 
+@stop
 
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
 
-@endsection
-@section('script')
-@endsection
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop

@@ -1,21 +1,14 @@
-@extends('layouts.master')
-@section('title')
-@endsection
-@section('contenido')
+@extends('adminlte::page')
+
+@section('title', 'Añadir Niveles')
+
+@section('content_header')
+<h1>Añadir Niveles</h1>
+@stop
+
+@section('content')
 
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Añadir Niveles</h1>
-            </div>
-            <div class="col-sm-6">
-
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
 
 
 
@@ -69,12 +62,8 @@
                             </div>
 
                             <input type="submit" class="btn btn-dark " value="Guardar">
-
                         </div>
-
-
                     </form>
-
                 </div>
             </div>
         </div>
@@ -82,7 +71,14 @@
     </div>
 </section>
 
+@stop
 
-@endsection
-@section('script')
-@endsection
+@section('css')
+<link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+<script>
+console.log('Hi!');
+</script>
+@stop

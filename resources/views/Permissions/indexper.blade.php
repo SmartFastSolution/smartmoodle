@@ -1,24 +1,16 @@
-@extends('layouts.master')
-@section('title')
-@endsection
-@section('contenido')
+@extends('adminlte::page')
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-10">
-                <h1>Sección Administrador</h1>
-            </div>
-            <div class="card-tools">
-                <!-- la referencia que hace este boton es al Rolecontroller en el 
-                       cual esta llamando al metodo create y nos redirecciona al crud Roles.createroler...-->
-                <a class="btn btn-info float-right btn-xs" href="{{route('permissions.create')}}"><i
-                        class="fas fa-user-plus"></i>Menu</a>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+@section('title', 'Menu')
 
+@section('content_header')
+<h1>Menu</h1>
+<br>
+<a class="btn btn-info float-right" href="{{route('permissions.create')}}"><i
+        class="fas fa-user-plus"></i>Menu</a>
+<br>
+@stop
+
+@section('content')
 
 
 <section class="content">
@@ -71,13 +63,13 @@
 
 
                                     <td class="table-button ">
-                                        <a class="btn btn-info btn-xs"
+                                        <a class="btn btn-info"
                                             href="{{route('permissions.show', $permiso->id)}}"><i
                                                 class="fas fa-eye"></i></a>
 
                                     </td>
                                     <td class="table-button ">
-                                        <a class="btn btn-success btn-xs"
+                                        <a class="btn btn-success "
                                             href="{{route('permissions.edit',$permiso->id)}}"><i
                                                 class=" fas fa-pencil-alt"></i></a>
                                     </td>
@@ -104,6 +96,12 @@
         </div>
 </section>
 
-@endsection
-@section('script')
-@endsection
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop

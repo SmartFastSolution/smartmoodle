@@ -70,6 +70,10 @@ route::resource('cursos','CursoController');
 //Ruta Resource de Materias que va aliada con el curso
 route::resource('materias','MateriaController');
 
+
+//Ruta Resource de Materias que va aliada con el curso
+route::resource('contenidos','ContenidoController');
+
 });
 
 

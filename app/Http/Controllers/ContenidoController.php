@@ -3,19 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Contenido;
+use App\Materia;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
+use League\CommonMark\Context;
 
 class ContenidoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responses
      */
     public function index()
     {
-        //
+        $contenido= Contenido::orderBy('id','Asc')->paginate(5);
+    
+        return view('Contenido.indexcon',['contenidos'=>$contenido]);
     }
 
     /**
@@ -25,7 +31,9 @@ class ContenidoController extends Controller
      */
     public function create()
     {
-        //
+      $materias=Materia::get();
+        return \view('Contenido.createco',compact('materias',));
+
     }
 
     /**
@@ -36,7 +44,31 @@ class ContenidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+
+            'nombre'      => 'required|string|max:150',
+            'descripcion' => 'required|string|max:250',
+            'documentod'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf',
+            'estado'      => 'required|in:on,off',
+        ]);
+     
+        $contenido=(new Contenido)->fill($request->all());
+       
+        if($request->hasFile('documentod')){
+         $contenido['documentod']= $request->file('documentod')->store('public');
+        }
+      
+        if($request->get('materia')){
+         
+            $contenido->materia_id = $request->materia;
+         }
+        
+
+         $contenido->save();
+
+        return redirect('sistema/contenidos');
+  
     }
 
     /**
@@ -47,7 +79,12 @@ class ContenidoController extends Controller
      */
     public function show(Contenido $contenido)
     {
-        //
+
+        $materias=Materia::get();
+        $materiacontenido=Contenido::find($contenido->id)->materia()->get();
+        return \view('Contenido.showcon',['contenido'=>$contenido,'materias'=>$materias,'materiacontenido'=> $materiacontenido]);
+    
+        
     }
 
     /**
@@ -58,7 +95,9 @@ class ContenidoController extends Controller
      */
     public function edit(Contenido $contenido)
     {
-        //
+        $materias=Materia::get();
+        $materiacontenido=Contenido::find($contenido->id)->materia()->get();
+        return \view('Contenido.editcon',['contenido'=>$contenido,'materias'=>$materias,'materiacontenido'=> $materiacontenido]);
     }
 
     /**
@@ -70,7 +109,36 @@ class ContenidoController extends Controller
      */
     public function update(Request $request, Contenido $contenido)
     {
-        //
+        $request->validate([
+
+            'nombre'      => 'required|string|max:150',
+            'descripcion' => 'required|string|max:250',
+            'documentod'  => 'mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:8000',
+            'estado'      => 'required|in:on,off',
+        ]);
+       
+        $contenido->update($request->all());
+
+      //validacion y que al momento de actualizar el documento no sea obligatorio subir el documento 
+      //sino que se mantenga alli mismo y solo actualizar el documento requerido 
+        if($request->hasFile('documentod')){
+
+        Storage::delete('public'.$contenido->documentod);
+         $contenido['documentod']= $request->file('documentod')->store('public');
+        
+        }else{ 
+                unset($contenido->documentod); 
+        }
+      //al actualizar el contenido no sea necesario que materia tenga que ir requerido y se pueda mantener 
+      //la que estuvo almacenada anteriormente
+        if($request->get('materia')){
+         
+            $contenido->materia_id = $request->materia;
+         }
+        // hasta aqui 
+       
+
+        return redirect('sistema/contenidos');
     }
 
     /**
@@ -81,6 +149,21 @@ class ContenidoController extends Controller
      */
     public function destroy(Contenido $contenido)
     {
-        //
+        $contenido= Contenido::find($contenido->id);
+      
+    
+           $contenido->delete();
+
+           if(Storage::delete('public/',$contenido->documentod)){
+
+           $contenido->delete($contenido->documentod);
+            }
+
+            
+            return redirect('sistema/contenidos')->with('success','Haz eliminado un Contenido con exito');     
+
+
+       
+       
     }
 }

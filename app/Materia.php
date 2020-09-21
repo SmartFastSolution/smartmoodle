@@ -14,6 +14,17 @@ class Materia extends Model
     public function tallers(){
           
         return $this->hasMany('App\Taller');
+    }
+
+    public function contenidos(){
+          
+        return $this->hasMany('App\Contenido');
+
+    }
+
+    public function roles(){
+          
+        return $this->belongsToMany('App\Curso')->withTimestamps();
 
     }
 

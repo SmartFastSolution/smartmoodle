@@ -2,7 +2,6 @@
 
 @section('title', 'Creador de plantillas')
 @section('css')
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
     <link rel="stylesheet" href="{{asset('css/bootstrap-tagsinput.css')}}">
 @endsection
 @section('content')

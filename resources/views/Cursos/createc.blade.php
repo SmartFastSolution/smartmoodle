@@ -1,21 +1,17 @@
-@extends('layouts.master')
-@section('title')
-@endsection
-@section('contenido')
+@extends('adminlte::page')
+
+@section('title', 'Curso Crear')
 
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Añadir Cursos</h1>
-            </div>
-            <div class="col-sm-6">
+@section('plugins.Select2', true) 
+@section('plugins.Sweetalert2', true) 
+@section('content_header')
+<h1>Añadir Cursos</h1>
+@stop
 
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+@section('content')
+
+
 
 
 
@@ -67,6 +63,22 @@
 
                                 </select>
                             </div>
+
+                            <div class="form-group">
+                                <label>Multiple</label>
+                                <select class="select2" multiple="multiple" data-placeholder="Select a State"
+                                    style="width: 100%;">
+                                    <option>Alabama</option>
+                                    <option>Alaska</option>
+                                    <option>California</option>
+                                    <option>Delaware</option>
+                                    <option>Tennessee</option>
+                                    <option>Texas</option>
+                                    <option>Washington</option>
+                                </select>
+                            </div>
+
+
                             <div class="form-group">
                                 <label for="nombre">Estado </label>
                                 <br>
@@ -83,10 +95,7 @@
                             </div>
 
                             <input type="submit" class="btn btn-dark " value="Guardar">
-
                         </div>
-
-
                     </form>
 
                 </div>
@@ -97,6 +106,30 @@
 </section>
 
 
-@endsection
-@section('script')
-@endsection
+@stop
+
+@section('css')
+<link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+<script>
+    Swal.fire(
+  'Good job!',
+  'Haz Accedido!',
+  'success'
+)
+</script>
+
+<script>
+$(function() {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+        theme: 'bootstrap4'
+    })
+})
+</script>
+@stop

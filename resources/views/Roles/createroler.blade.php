@@ -1,24 +1,13 @@
-@extends('layouts.master')
-@section('title')
+@extends('adminlte::page')
 
+@section('title', 'Crear Roles')
 
-@endsection
-@section('contenido')
+@section('content_header')
+<h1>Crear Roles</h1>
+@stop
 
+@section('content')
 
-
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Crear Roles</h1>
-            </div>
-            <div class="col-sm-6">
-
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
 
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -103,27 +92,30 @@
                                 @endforeach
                             </div>
                             <input type="submit" class="btn btn-dark " value="Guardar">
-
-
-
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
         <div class="col-md-6">
-
         </div>
     </div>
 </section>
 
 
 
+@stop
+
+@section('css')
+<link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
 
 
-@endsection
-@section('script')
+<script>
+console.log('Hi!');
+</script>
 
 <script>
 $(document).ready(function() {
@@ -138,6 +130,4 @@ $(document).ready(function() {
 });
 </script>
 
-
-
-@endsection
+@stop

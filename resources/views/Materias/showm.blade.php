@@ -1,21 +1,12 @@
-@extends('layouts.master')
-@section('title')
-@endsection
-@section('contenido')
+@extends('adminlte::page')
 
+@section('title', ' Materias')
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Editar Materias</h1>
-            </div>
-            <div class="col-sm-6">
+@section('content_header')
+    <h1> Materias</h1>
+@stop
 
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+@section('content')
 
 
 
@@ -38,6 +29,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Formulario Materias</h3>
                 </div>
+               
                 <div class="card-body">
 
 

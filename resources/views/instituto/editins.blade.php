@@ -1,20 +1,14 @@
-@extends('layouts.master')
-@section('title')
-@endsection
-@section('contenido')
+@extends('adminlte::page')
 
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Editar Unidad Educativa</h1>
-            </div>
-            <div class="col-sm-6">
+@section('title', 'Editar Unidad Educativa')
 
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
+@section('content_header')
+    <h1>Editar Unidad Educativa</h1>
+    <br>
+    <br>
+@stop
+
+@section('content')
 
 
 
@@ -109,6 +103,12 @@
     </div>
 </section>
 
-@endsection
-@section('script')
-@endsection
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop
