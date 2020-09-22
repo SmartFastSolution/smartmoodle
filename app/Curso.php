@@ -1,15 +1,25 @@
 <?php
 
 namespace App;
+
 use App\Nivel;
+use App\Materia;
 use Illuminate\Database\Eloquent\Model;
 
 class Curso extends Model
 {
     protected $fillable = [
-        'nombre','paralelo','estado'
+        'nombre','paralelo','estado',
 
     ];
+
+    
+    public function materias(){
+          
+        return $this->belongsToMany('App\Materia')->withTimestamps();
+
+    }
+
 
     public function nivel(){
           
@@ -17,10 +27,5 @@ class Curso extends Model
 
     }
 
-    public function roles(){
-          
-        return $this->belongsToMany('App\Materia')->withTimestamps();
-
-    }
-
+   
 }

@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Crear Permisos')
+@section('title', 'Crear Menú')
 
 @section('content_header')
-    <h1>Crear Permisos</h1>
+    <h1>Crear Menú</h1>
 @stop
 
 @section('content')

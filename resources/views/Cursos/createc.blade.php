@@ -1,18 +1,15 @@
 @extends('adminlte::page')
 
-@section('title', 'Curso Crear')
+@section('title', ' Crear Curso')
 
 
-@section('plugins.Select2', true) 
-@section('plugins.Sweetalert2', true) 
+@section('plugins.Select2', true)
+<!-- @section('plugins.Sweetalert2', true)  -->
 @section('content_header')
 <h1>Añadir Cursos</h1>
 @stop
 
 @section('content')
-
-
-
 
 
 <section class="content">
@@ -36,7 +33,7 @@
                 </div>
                 <div class="card-body">
 
-                    <form method="POST" action="{{route('cursos.index')}} ">
+                    <form method="POST" action="{{route('cursos.store')}} ">
 
                         @csrf
 
@@ -63,19 +60,27 @@
 
                                 </select>
                             </div>
+                            <div class="card-body">
 
-                            <div class="form-group">
-                                <label>Multiple</label>
-                                <select class="select2" multiple="multiple" data-placeholder="Select a State"
-                                    style="width: 100%;">
-                                    <option>Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
+                                <h4>Lista de Materias</h4>
+                                @foreach($materias as $materia)
+
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" 
+                                     class="custom-control-input"
+                                        id="materia_{{$materia->id}}"
+                                         value="{{$materia->id}}"
+                                          name="materia[]">
+
+                                    <label class="custom-control-label" for="materia_{{$materia->id}}">
+
+                                        {{$materia->id}}
+                                        -
+                                        {{$materia->nombre}}
+                                        <em>({{$materia->descripcion}})</em>
+                                    </label>
+                                </div>
+                                @endforeach
                             </div>
 
 
@@ -113,13 +118,13 @@
 @stop
 
 @section('js')
-<script>
+<!-- <script>
     Swal.fire(
   'Good job!',
   'Haz Accedido!',
   'success'
 )
-</script>
+</script> -->
 
 <script>
 $(function() {

@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Menu')
+@section('title', 'Menú')
 
 @section('content_header')
-<h1>Menu</h1>
+<h1>Menú</h1>
 <br>
 <a class="btn btn-info float-right" href="{{route('permissions.create')}}"><i
         class="fas fa-user-plus"></i>Menu</a>
@@ -103,5 +103,5 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+  
 @stop
