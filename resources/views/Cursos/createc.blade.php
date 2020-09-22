@@ -60,30 +60,6 @@
 
                                 </select>
                             </div>
-                            <div class="card-body">
-
-                                <h4>Lista de Materias</h4>
-                                @foreach($materias as $materia)
-
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" 
-                                     class="custom-control-input"
-                                        id="materia_{{$materia->id}}"
-                                         value="{{$materia->id}}"
-                                          name="materia[]">
-
-                                    <label class="custom-control-label" for="materia_{{$materia->id}}">
-
-                                        {{$materia->id}}
-                                        -
-                                        {{$materia->nombre}}
-                                        <em>({{$materia->descripcion}})</em>
-                                    </label>
-                                </div>
-                                @endforeach
-                            </div>
-
-
                             <div class="form-group">
                                 <label for="nombre">Estado </label>
                                 <br>
