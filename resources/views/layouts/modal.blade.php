@@ -1535,7 +1535,7 @@
               </div>
               <div class="form-group">
                 <label for="message-text" class="col-form-label">Cantidad :</label>
-                <input required="" type="text" name="detalle" class="form-control">
+                <input required="" type="text" name="cantidad" class="form-control">
               </div>
                <div class="form-group">
                 <label for="message-text" class="col-form-label">Firmas :</label>
@@ -1596,28 +1596,68 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="message-text" class="col-form-label">Beneficiario :</label>
-                <input required="" type="text" name="beneficiario" class="form-control">
+                <label for="message-text" class="col-form-label">Cliente :</label>
+                <input required="" type="text" name="cliente" class="form-control">
               </div>
               <div class="form-group">
-                <label for="message-text" class="col-form-label">Comprobante :</label>
-                <input required="" type="text" name="comprobante" class="form-control">
+                <label for="message-text" class="col-form-label">RUC :</label>
+                <input required="" type="text" name="ruc" class="form-control">
               </div>
               <div class="form-group">
-                <label for="message-text" class="col-form-label">Cantidad :</label>
-                <input required="" type="text" name="detalle" class="form-control">
+                <label for="message-text" class="col-form-label">Descuento :</label>
+                <input required="" type="text" name="descuento" class="form-control">
               </div>
                <div class="form-group">
-                <label for="message-text" class="col-form-label">Firmas :</label>
-                <input required="" type="text" name="firmas" class="form-control">
-              </div>
-               <div class="form-group">
-                <label for="message-text" class="col-form-label">Lugar :</label>
-                <input required="" type="text" name="lugar" class="form-control">
+                <label for="message-text" class="col-form-label">Guia de Remision :</label>
+                <input required="" type="text" name="remision" class="form-control">
               </div>
               <div class="form-group">
-                <label for="message-text" class="col-form-label">Fecha :</label>
-                <input required="" type="date" name="fecha" class="form-control">
+                <label for="message-text" class="col-form-label">Fecha de emision :</label>
+                <input required="" type="date" name="fecha_emision" class="form-control">
+              </div> 
+              <div class="form-group">
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Cantidad</th>
+                      <th scope="col">Descripcion</th>
+                      <th scope="col">Precio Unitario</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td><input type="text" class="form-control" name="cant[]"></td>
+                      <td><input type="text" class="form-control" name="desc[]"></td>
+                      <td><input type="text" class="form-control" name="precio[]"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td><input type="text" class="form-control" name="cant[]"></td>
+                      <td><input type="text" class="form-control" name="desc[]"></td>
+                      <td><input type="text" class="form-control" name="precio[]"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td><input type="text" class="form-control" name="cant[]"></td>
+                      <td><input type="text" class="form-control" name="desc[]"></td>
+                      <td><input type="text" class="form-control" name="precio[]"></td>
+                    </tr>
+                      <tr>
+                      <th scope="row">4</th>
+                      <td><input type="text" class="form-control" name="cant[]"></td>
+                      <td><input type="text" class="form-control" name="desc[]"></td>
+                      <td><input type="text" class="form-control" name="precio[]"></td>
+                    </tr>
+                      <tr>
+                      <th scope="row">5</th>
+                      <td><input type="text" class="form-control" name="cant[]"></td>
+                      <td><input type="text" class="form-control" name="desc[]"></td>
+                      <td><input type="text" class="form-control" name="precio[]"></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div> 
                 <div class="row justify-content-center">
                   <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
@@ -1634,3 +1674,89 @@
     </div>
   </div>
 
+ <!-- FORMULARIO PARA PLANTILLA 26 -->
+<div class="modal fade" id="taller26" tabindex="-1" role="dialog" aria-labelledby="taller26Label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="taller26Label">ORDEN DE VENTA</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row justify-content-center">
+          <div class="col-12">
+             <form action="{{ route('admin.taller26') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                <input required="" type="hidden" value="26" name="id_plantilla">
+                <input required="" type="text" name="enunciado" class="form-control" id="recipient-name">
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Materia:</label>
+                <select name="materia_id" class="custom-select" id="">
+                 @foreach ($materias = App\Materia::get() as $materia)
+                  <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Nombre :</label>
+                <input required="" type="text" name="nombre" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">RUC :</label>
+                <input required="" type="text" name="ruc" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label">Fecha :</label>
+                <input required="" type="text" name="fecha" class="form-control">
+              </div>
+              <div class="form-group">
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Cantidad</th>
+                      <th scope="col">Descripcion</th>
+                      <th scope="col">Precio Unitario</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td><input type="text" class="form-control" name="cant[]"></td>
+                      <td><input type="text" class="form-control" name="desc[]"></td>
+                      <td><input type="text" class="form-control" name="precio[]"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td><input type="text" class="form-control" name="cant[]"></td>
+                      <td><input type="text" class="form-control" name="desc[]"></td>
+                      <td><input type="text" class="form-control" name="precio[]"></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td><input type="text" class="form-control" name="cant[]"></td>
+                      <td><input type="text" class="form-control" name="desc[]"></td>
+                      <td><input type="text" class="form-control" name="precio[]"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div> 
+                <div class="row justify-content-center">
+                  <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                </div>
+            </form>
+              </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+
+        </div>
+      </div>
+    </div>
+  </div>

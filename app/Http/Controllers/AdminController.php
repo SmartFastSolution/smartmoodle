@@ -4,30 +4,34 @@ namespace App\Http\Controllers;
 
 use App\Admin\Taller2Relacionar;
 use App\Admin\Taller2RelacionarOpcion;
+use App\Admin\TallerCertificadoDeposito;
 use App\Admin\TallerCheque;
 use App\Admin\TallerChequeEndoso;
 use App\Admin\TallerCirculo;
 use App\Admin\TallerClasificar;
 use App\Admin\TallerCompletar;
 use App\Admin\TallerCompletarEnunciado;
+use App\Admin\TallerConvertirCheque;
 use App\Admin\TallerDefinirEnunciado;
 use App\Admin\TallerDiferencia;
-use App\Admin\TallerConvertirCheque;
-use App\Admin\TallerGusanillo;
-use App\Admin\TallerLetraCambio;
-use App\Admin\TallerPagare;
 use App\Admin\TallerFactura;
-use App\Admin\TallerRecibo;
-use App\Admin\TallerValeCaja;
-use App\Admin\TallerNotaPedido;
+use App\Admin\TallerFacturaDato;
+use App\Admin\TallerGusanillo;
 use App\Admin\TallerIdentificarImagen;
 use App\Admin\TallerIdentificarPersona;
+use App\Admin\TallerLetraCambio;
+use App\Admin\TallerNotaPedido;
+use App\Admin\TallerNotaVenta;
+use App\Admin\TallerNotaVentaDato;
+use App\Admin\TallerOrdenPago;
+use App\Admin\TallerPagare;
+use App\Admin\TallerRecibo;
 use App\Admin\TallerRelacionar;
-use App\Admin\TallerCertificadoDeposito;
 use App\Admin\TallerRelacionarOpcion;
 use App\Admin\TallerSenalar;
 use App\Admin\TallerSenalarOpcion;
 use App\Admin\TallerSubrayar;
+use App\Admin\TallerValeCaja;
 use App\Admin\TallerVerdaderoFalso;
 use App\Http\Controllers\Controller;
 use App\Plantilla;
@@ -971,12 +975,12 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
            if ($taller24 = true) {
             $a                               = Taller::get()->last();
-            $taller_24                       = new TallerFactura;
+            $taller_24                       = new TallerOrdenPago;
             $taller_24->taller_id            = $a->id;
             $taller_24->enunciado            = $request->input('enunciado');
             $taller_24->beneficiario               = $request->input('beneficiario');
             $taller_24->comprobante               = $request->input('comprobante');
-            $taller_24->detalle             = $request->input('detalle');
+            $taller_24->cantidad             = $request->input('cantidad');
             $taller_24->firmas               = $request->input('firmas');
             $taller_24->lugar                = $request->input('lugar');
             $taller_24->fecha                = $request->input('fecha');
@@ -984,6 +988,86 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
       }
       }
+        public function taller25(Request $request)
+      {
+         $i = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller25 = new Taller;
+         $taller25->nombre = 'Taller '.++$i;
+         $taller25->plantilla_id = $request->input('id_plantilla');
+         $taller25->materia_id = $request->input('materia_id');
+         $taller25->estado = 1;
+         $taller25->save();
+
+           if ($taller25 = true) {
+            $a                               = Taller::get()->last();
+            $taller_25                       = new TallerFactura;
+            $taller_25->taller_id            = $a->id;
+            $taller_25->enunciado            = $request->input('enunciado');
+            $taller_25->cliente              = $request->input('cliente');
+            $taller_25->ruc                  = $request->input('ruc');
+            $taller_25->descuento            = $request->input('descuento');
+            $taller_25->remision             = $request->input('remision');
+            $taller_25->fecha_emision        = $request->input('fecha_emision');
+            $taller_25->save();
+
+             if ($taller_25 = true) {
+               $o = TallerFactura::get()->last();              
+               foreach ($request->cant as $key=>$v) {
+                  $datos=array(
+                     'taller_factura_id'=> $o->id,
+                     'cantidad'=> $request->cant[$key],
+                     'descripcion'=> $request->desc[$key],
+                     'precio' => $request->precio[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  TallerFacturaDato::insert($datos);
+               }
+             }
+
+      return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
+      }
+      }
+
+       public function taller26(Request $request)
+      {
+         $i = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller26 = new Taller;
+         $taller26->nombre = 'Taller '.++$i;
+         $taller26->plantilla_id = $request->input('id_plantilla');
+         $taller26->materia_id = $request->input('materia_id');
+         $taller26->estado = 1;
+         $taller26->save();
+
+           if ($taller26 = true) {
+            $a                               = Taller::get()->last();
+            $taller_26                       = new TallerNotaVenta;
+            $taller_26->taller_id            = $a->id;
+            $taller_26->enunciado            = $request->input('enunciado');
+            $taller_26->nombre               = $request->input('nombre');
+            $taller_26->ruc                  = $request->input('ruc');
+            $taller_26->fecha                = $request->input('fecha');
+            $taller_26->save();
+
+             if ($taller_26 = true) {
+               $o = TallerNotaVenta::get()->last();              
+               foreach ($request->cant as $key=>$v) {
+                  $datos=array(
+                     'taller_nota_venta_id'=> $o->id,
+                     'cantidad'=> $request->cant[$key],
+                     'descripcion'=> $request->desc[$key],
+                     'precio' => $request->precio[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  TallerNotaVentaDato::insert($datos);
+               }
+             }
+
+      return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
+      }
+      }
+
 
 
 }

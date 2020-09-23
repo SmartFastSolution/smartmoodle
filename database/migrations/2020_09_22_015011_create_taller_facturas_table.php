@@ -17,12 +17,11 @@ class CreateTallerFacturasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->string('enunciado');
-            $table->string('beneficiario');
-            $table->string('comprobante');
-            $table->string('detalle');
-            $table->string('firmas');
-            $table->string('lugar');
-            $table->string('fecha');
+            $table->string('cliente');
+            $table->string('ruc');
+            $table->string('descuento');
+            $table->string('remision');
+            $table->string('fecha_emision');
             $table->timestamps();
             
             $table->foreign('taller_id')

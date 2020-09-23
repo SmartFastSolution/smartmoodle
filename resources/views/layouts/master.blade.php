@@ -10,26 +10,11 @@
     <title> @yield('title', 'Administracion')</title>
 
 
-
-
-    <!-- <link rel="stylesheet" href="{{ asset('css/styles.css') }}"> -->
-
-    @yield('styles')
-
-
-
-
     <!-- Select2 -->
-   
-  
-
-
     <link rel="stylesheet" href="{{asset('css/app.css')}}">
 
     <!-- <link rel="stylesheet" href="css/dataTables.boostrap.css"> -->
     <!--<link rel="stylesheet" href="{{ asset('css/styles.css') }}"> -->
-
-
     @yield('styles')
     
 

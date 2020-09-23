@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
-@section('title', 'Taller 27')
+@section('title', 'Taller 26')
 @section('contenido')
-
-<h1 class="text-center  mt-5 text-danger"> Taller #27</h1>
+<!-- LLENE  CON  LOS  SIGUIENTES  DATOS  LA  ORDEN  DE  PAGO CORRECTAMENTE-->
+<h1 class="text-center  mt-5 text-danger"> Taller #26</h1>
   
 <h3 class="text-center mt-5 mb-3 text-info">LLENE  CON  LOS  SIGUIENTES  DATOS  LA  ORDEN  DE  PAGO CORRECTAMENTE</h3>
 
@@ -18,10 +18,10 @@
 					<div class="col-6 text-center">
 						<h1>TECNOLOGY  S.A.</h1>
 						<h6>Ing. Diego Arcos Quezada <br>
-Contribuyente Régimen Simplificado</h6>
+							Contribuyente Régimen Simplificado</h6>
 
-<input type="text" class="form-control">
-<h5>Dirección  Matriz :  Malecón y Olmedo</h5>
+						<input type="text" class="form-control">
+						<h5>Dirección  Matriz :  Malecón y Olmedo</h5>
 					</div>
 					<div class="col-6">
 						<table class="table table-bordered">

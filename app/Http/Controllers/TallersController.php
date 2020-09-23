@@ -2,52 +2,56 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin\TallerCertificadoDeposito;
 use App\Admin\TallerCheque;
 use App\Admin\TallerChequeEndoso;
 use App\Admin\TallerCirculo;
 use App\Admin\TallerClasificar;
 use App\Admin\TallerCompletar;
 use App\Admin\TallerCompletarEnunciado;
+use App\Admin\TallerConvertirCheque;
 use App\Admin\TallerDefinirEnunciado;
 use App\Admin\TallerDiferencia;
+use App\Admin\TallerFactura;
 use App\Admin\TallerGusanillo;
 use App\Admin\TallerIdentificarImagen;
 use App\Admin\TallerIdentificarPersona;
-use App\Admin\TallerCertificadoDeposito;
-use App\Admin\TallerRelacionar;
+use App\Admin\TallerLetraCambio;
+use App\Admin\TallerNotaPedido;
+use App\Admin\TallerOrdenPago;
+use App\Admin\TallerPagare;
 use App\Admin\TallerRecibo;
+use App\Admin\TallerRelacionar;
 use App\Admin\TallerSenalar;
-use App\Admin\TallerConvertirCheque;
 use App\Admin\TallerSenalarOpcion;
 use App\Admin\TallerSubrayar;
-use App\Admin\TallerPagare;
-use App\Admin\TallerFactura;
-use App\Admin\TallerNotaPedido;
 use App\Admin\TallerValeCaja;
-use App\TallerLetraCambioRe;
 use App\Admin\TallerVerdaderoFalso;
 use App\Http\Controllers\Controller;
 use App\Taller;
+use App\TallerCertificadoDepositoRe;
 use App\TallerChequeEndosoRe;
 use App\TallerChequeRe;
 use App\TallerCirEjemploRe;
 use App\TallerCirculoRe;
-use App\TallerPagareRe;
-use App\TallerNotaPedidoRe;
-use App\Admin\TallerLetraCambio;
 use App\TallerClasificarRes;
-use App\TallerValeCajaRe;
-use App\TallerReciboRe;
-use App\TallerCertificadoDepositoRe;
 use App\TallerCompletarRes;
 use App\TallerCompleteEnRes;
+use App\TallerConvertirChequeRe;
 use App\TallerDefinirEnunciadoRe;
 use App\TallerDiferenciaRes;
+use App\TallerFacturaDatosRe;
+use App\TallerFacturaRe;
 use App\TallerGusanilloRe;
 use App\TallerIdentificarImagenRe;
 use App\TallerIdentificarPersonaRe;
+use App\TallerLetraCambioRe;
+use App\TallerNotaPedidoRe;
+use App\TallerOrdenPagoRe;
+use App\TallerPagareRe;
+use App\TallerReciboRe;
 use App\TallerSubrayarRe;
-use App\TallerConvertirChequeRe;
+use App\TallerValeCajaRe;
 use App\TallerVerdaderoFalsoRe;
 use Illuminate\Http\Request;
 
@@ -315,19 +319,27 @@ class TallersController extends Controller
 
 
             $consul = Taller::findorfail($id);
-            $consul1 = TallerFactura::findorfail($id1);
+            $consul1 = TallerOrdenPago::findorfail($id1);
                 if($consul1->taller_id == $id){ 
-             $datos = TallerFactura::where('taller_id', $consul->id)->first();
+             $datos = TallerOrdenPago::where('taller_id', $consul->id)->first();
             return view('talleres.taller24', compact('datos', 'd'));
-              }else {
+              }else{
             return redirect()->route('welcome')->with('datos', 'La ruta que quieres acceder no existe!!');
             }
 
 
         }elseif ($plant == 25) {
+            $i= 0;
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->get();
-            return view('talleres.taller25', compact('datos', 'd'));
+            $consul1 = TallerFactura::findorfail($id1);
+                if($consul1->taller_id == $id){ 
+             $datos = TallerFactura::where('taller_id', $consul->id)->first();
+            return view('talleres.taller25', compact('datos', 'd', 'i'));
+              }else{
+            return redirect()->route('welcome')->with('datos', 'La ruta que quieres acceder no existe!!');
+            }
+
+
         }elseif ($plant == 26) {
             $consul = Taller::findorfail($id);
              $datos = TallerClasificar::where('taller_id', $consul->id)->get();
@@ -822,9 +834,70 @@ class TallersController extends Controller
         $taller23->save();
     return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
     }
+     public function store24(Request $request,  $idtaller)
+    {
+        $contenido = TallerOrdenPago::select('enunciado')->where('taller_id', $idtaller)->first();
+        $taller24 = new TallerOrdenPagoRe; 
+        $taller24->taller_id =  $idtaller;
+        $taller24->user_id   =  '1'; 
+        $taller24->enunciado =  $contenido->enunciado; 
+        $taller24->señor        =  $request->input('señor');
+        $taller24->fecha       =  $request->input('fecha');
+        $taller24->fecha_c    =  $request->input('fecha_c');
+        $taller24->numero  =  $request->input('numero');
+        $taller24->tipo  =  $request->input('tipo');
+        $taller24->debe =  $request->input('debe');
+        $taller24->haber   =  $request->input('haber');
+        $taller24->saldo     =  $request->input('saldo');
+        $taller24->save();
+    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
+    }
+    public function store25(Request $request,  $idtaller)
+    {
+        $contenido = TallerFactura::select('enunciado')->where('taller_id', $idtaller)->first();
+        $taller25 = new TallerFacturaRe; 
+        $taller25->taller_id        =  $idtaller;
+        $taller25->user_id          =  '1'; 
+        $taller25->enunciado        =  $contenido->enunciado; 
+        $taller25->nombre           =  $request->input('nombre');
+        $taller25->fecha_emision    =  $request->input('fecha_emision');
+        $taller25->ruc              =  $request->input('ruc');
+        $taller25->direccion              =  $request->input('direccion');
+        $taller25->telefono              =  $request->input('telefono');
+        $taller25->email              =  $request->input('email');
+        $taller25->subtotal_12          =  $request->input('subtotal_12');
+        $taller25->subtotal_0          =  $request->input('subtotal_0');
+        $taller25->subtotal_iva          =  $request->input('subtotal_iva');
+        $taller25->subtotal_siniva          =  $request->input('subtotal_siniva');
+        $taller25->subtotal_sin_imp          =  $request->input('subtotal_sin_imp');
+        $taller25->descuento_total          =  $request->input('descuento_total');
+        $taller25->ice          =  $request->input('ice');
+        $taller25->iva12          =  $request->input('iva12');
+        $taller25->irbpnr          =  $request->input('irbpnr');
+        $taller25->propina          =  $request->input('propina');
+        $taller25->valor_total          =  $request->input('valor_total');
+        $taller25->save();
 
+        if ($taller25 = true) {
 
-
+               $o = TallerFacturaRe::get()->last();              
+              foreach ($request->codigo as $key=>$v) {
+                  $datos=array(
+                     'taller_factura_re_id'=> $o->id,
+                     'codigo'=> $request->codigo[$key],
+                     'cod_aux'=> $request->cod_aux[$key],
+                     'cantidad' => $request->cantidad[$key],
+                     'precio' => $request->precio[$key],
+                     'descuento' => $request->descuento[$key],
+                     'valor' => $request->valor[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  TallerFacturaDatosRe::insert($datos);
+               }
+        }
+    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
+    }
 
     public function taller5(){
             $dato = TallerSeñalar::where('id', 1)->get();

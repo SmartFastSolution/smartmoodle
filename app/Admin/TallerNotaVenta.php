@@ -4,13 +4,13 @@ namespace App\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TallerFactura extends Model
+class TallerNotaVenta extends Model
 {
-      public function Taller(){
+    public function Taller(){
 
         return $this->belongsTo('App\Taller');
     }
-       public function facturaDatos(){
+       public function notaventaDatos(){
 
         return $this->hasMany('App\Admin\TallerFacturaDato');
     }

@@ -79,6 +79,42 @@ class Plantilla extends Seeder
           'nombre' => 'TALLER 17 - CONVERTIR CHEQUES',
           'descripcion' => 'Taller designado para completar un resultado',
         ]);
+                   DB::table('plantillas')->insert([
+          'nombre' => 'TALLER 18 - LETRA  DE  CAMBIO',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
+                   DB::table('plantillas')->insert([
+          'nombre' => 'TALLER 19 - CERTIFICADO DE DEPOSITO',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
+                   DB::table('plantillas')->insert([
+          'nombre' => 'TALLER 20 - PAGARE',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
+                   DB::table('plantillas')->insert([
+          'nombre' => 'TALLER 21 - VALE DE CAJA',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
+                   DB::table('plantillas')->insert([
+          'nombre' => 'TALLER 22 - NOTA DE PEDIDO',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
+                   DB::table('plantillas')->insert([
+          'nombre' => 'TALLER 23 - RECIBO',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
+                   DB::table('plantillas')->insert([
+          'nombre' => 'TALLER 24 - ORDEN DE PAGO',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
+                   DB::table('plantillas')->insert([
+          'nombre' => 'TALLER 25 - FACTURA',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
+                   DB::table('plantillas')->insert([
+          'nombre' => 'TALLER 26 - ORDEN DE VENTA',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
          
 
     }
