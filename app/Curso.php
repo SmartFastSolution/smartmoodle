@@ -8,18 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Curso extends Model
 {
+
+    protected $guarded= [];
+
     protected $fillable = [
         'nombre','paralelo','estado',
 
     ];
 
-    
-    public function materias(){
-          
-        return $this->belongsToMany('App\Materia')->withTimestamps();
-
-    }
-
+      
 
     public function nivel(){
           
@@ -27,5 +24,6 @@ class Curso extends Model
 
     }
 
+  
    
 }

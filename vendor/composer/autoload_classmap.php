@@ -12,6 +12,7 @@ return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Contenido' => $baseDir . '/app/Contenido.php',
     'App\\Curso' => $baseDir . '/app/Curso.php',
+    'App\\Distribucionmacu' => $baseDir . '/app/Distribucionmacu.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\AdminController' => $baseDir . '/app/Http/Controllers/AdminController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',

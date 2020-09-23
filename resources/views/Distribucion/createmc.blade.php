@@ -1,13 +1,13 @@
 @extends('adminlte::page')
 
-@section('title', 'Materias')
+@section('title', 'Crear Asignación')
 
 @section('content_header')
-<h1>Añadir Materias</h1>
+    <h1>Crear Asignación MAteria/Curso</h1>
 @stop
 
 @section('content')
-
+   
 
 
 <section class="content">
@@ -27,27 +27,21 @@
         <div class="col-md-6">
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Formulario Materias</h3>
+               
                 </div>
                 <div class="card-body">
 
-                    <form method="POST" action="{{route('materias.index')}} ">
+                    <form method="POST" action="{{route('distribucionmacus.index')}} ">
 
                         @csrf
 
                         <div class=" card-body">
-                            <div class="form-group">
-                                <label for="nombre">Nombre</label>
-                                <input type="text" class="form-control" name="nombre" id="nombre"
-                                    value="{{ old('nombre') }}" placeholder="Añadir Materia">
-                            </div>
+                           
                             <div class="form-group">
                                 <label for="descripcion">Descripción</label>
                                 <input type="text" class="form-control" name="descripcion" id="descripcion"
                                     value="{{ old('descripcion') }}" placeholder="Añadir Descripcion">
                             </div>
-
-                         
 
                             <div class="form-group">
                                 <label for="nombre">Estado </label>
@@ -68,7 +62,6 @@
 
                         </div>
 
-
                     </form>
 
                 </div>
@@ -77,6 +70,8 @@
 
     </div>
 </section>
+
+
 
 
 @stop

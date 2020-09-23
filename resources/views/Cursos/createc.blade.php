@@ -2,15 +2,15 @@
 
 @section('title', ' Crear Curso')
 
-
 @section('plugins.Select2', true)
+
 <!-- @section('plugins.Sweetalert2', true)  -->
+
 @section('content_header')
 <h1>Añadir Cursos</h1>
 @stop
 
 @section('content')
-
 
 <section class="content">
 
@@ -59,7 +59,7 @@
                                     @endforeach
 
                                 </select>
-                            </div>
+                            </div>                                          
                             <div class="form-group">
                                 <label for="nombre">Estado </label>
                                 <br>
@@ -107,10 +107,6 @@ $(function() {
     //Initialize Select2 Elements
     $('.select2').select2()
 
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-        theme: 'bootstrap4'
-    })
 })
 </script>
 @stop

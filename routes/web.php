@@ -74,6 +74,10 @@ route::resource('materias','MateriaController');
 //Ruta Resource de Materias que va aliada con el curso
 route::resource('contenidos','ContenidoController');
 
+
+
+//Ruta Resource par asignacion de cursos y materias prueba 2 
+route::resource('distribucionmacus','DistribucionmacuController');
 });
 
 

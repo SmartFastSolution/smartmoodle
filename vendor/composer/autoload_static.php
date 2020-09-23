@@ -510,6 +510,7 @@ class ComposerStaticInitb5c2bf8c0b0c3f0979a750c5cc95b532
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Contenido' => __DIR__ . '/../..' . '/app/Contenido.php',
         'App\\Curso' => __DIR__ . '/../..' . '/app/Curso.php',
+        'App\\Distribucionmacu' => __DIR__ . '/../..' . '/app/Distribucionmacu.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',

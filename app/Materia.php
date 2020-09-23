@@ -2,7 +2,9 @@
 
 namespace App;
 
+
 use App\Contenido;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Materia extends Model
@@ -13,13 +15,16 @@ class Materia extends Model
     ];
 
 
-   
+      
     
+      
     public function contenidos(){
           
         return $this->hasMany('App\Contenido');
-
     }
+
+  
+
 
     
 

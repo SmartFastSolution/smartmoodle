@@ -27,7 +27,8 @@ class MateriaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    { 
+         
         return \view('Materias.createm');
     }
 
@@ -48,6 +49,7 @@ class MateriaController extends Controller
 
         $materia = Materia::create($request->all());
    
+        
         return \redirect('sistema/materias');
     }
 
@@ -70,7 +72,7 @@ class MateriaController extends Controller
      */
     public function edit(Materia $materia)
     {
-        
+       
         return view('Materias.editm',['materias'=>$materia]);
 
 

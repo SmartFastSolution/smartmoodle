@@ -278,6 +278,12 @@ return [
                     'can'  => 'Administrador',
                 ],
                 [
+                    'text' => 'Asignacion C/M',
+                    'url'  => 'sistema/distribucionmacus',
+                    'icon' => 'fas fa-business-time',
+                    'can'  => 'Administrador',
+                ],
+                [
                     'text' => 'Curso',
                     'url'  => 'sistema/cursos',
                     'icon' => 'fas fa-business-time',

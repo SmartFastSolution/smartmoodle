@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCursosTable extends Migration
+class CreateDistribucionmacusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateCursosTable extends Migration
      */
     public function up()
     {
-        Schema::create('cursos', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('nivel_id');
-            $table->string('nombre');
-             $table->string('paralelo'); 
+        Schema::create('distribucionmacus', function (Blueprint $table) {
+            $table->id();
+            $table->string('descripcion'); 
             $table->enum('estado',['on','off'])->nullable();
             $table->timestamps();
-            $table->foreign('nivel_id')->references('id')->on('nivels')->onDelete('cascade');
         });
     }
 
@@ -31,6 +28,6 @@ class CreateCursosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cursos');
+        Schema::dropIfExists('distribucionmacus');
     }
 }
