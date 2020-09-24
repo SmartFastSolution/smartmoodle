@@ -48,6 +48,14 @@ class User extends Authenticatable
      public function tallersCompletar(){
 
         return $this->belongsToMany('App\Taller');
+    } 
+     public function tallerDiferenciaRes(){
+
+        return $this->belongsToMany('App\TallerDiferenciaRes');
+    }
+     public function tallerCirculoRe(){
+
+        return $this->belongsToMany('App\TallerCirculoRe');
     }
 
 

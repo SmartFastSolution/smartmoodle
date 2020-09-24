@@ -17,7 +17,7 @@ class CreateTallersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('plantilla_id');
             $table->string('nombre');
-            $table->unsignedbigInteger('id_materia');
+            $table->unsignedbigInteger('materia_id');
             $table->boolean('estado');
             $table->timestamps();
 
@@ -26,32 +26,13 @@ class CreateTallersTable extends Migration
             ->on('plantillas')
             ->onDelete('cascade');
 
+            $table->foreign('materia_id')
+            ->references('id')
+            ->on('materias')
+            ->onDelete('cascade');
+
 
         });       
-            Schema::create('taller_clasificar_res', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedbigInteger('taller_id');
-            $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
-            $table->string('resp1');
-            $table->string('resp2');
-            $table->string('resp3');
-            $table->string('resp4');
-            $table->timestamps();
-
-            $table->foreign('taller_id')
-            ->references('id')
-            ->on('tallers')
-            ->onDelete('cascade');
-
-            $table->foreign('user_id')
-            ->references('id')
-            ->on('users')
-            ->onDelete('cascade');
-                
-        });
-
-      
     }
 
     /**
@@ -62,6 +43,5 @@ class CreateTallersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('tallers');
-        Schema::dropIfExists('taller_completar');
     }
 }

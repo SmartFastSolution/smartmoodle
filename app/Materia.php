@@ -13,7 +13,14 @@ class Materia extends Model
         'nombre','descripcion','estado'
 
     ];
-      
+
+
+    public function tallers(){
+          
+        return $this->hasMany('App\Taller');
+    }
+
+
     public function contenidos(){
           
         return $this->hasMany('App\Contenido');
@@ -21,7 +28,7 @@ class Materia extends Model
 
 
     public function distribucionmacus(){
-          
+
         return $this->belongsToMany(Distribucionmacu::class)->withTimestamps();
 
     }
