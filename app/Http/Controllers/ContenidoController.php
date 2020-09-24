@@ -49,7 +49,7 @@ class ContenidoController extends Controller
 
             'nombre'      => 'required|string|max:150',
             'descripcion' => 'required|string|max:250',
-            'documentod'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf',
+            'documentod'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:8000',
             'estado'      => 'required|in:on,off',
         ]);
      
