@@ -197,6 +197,22 @@ class Taller extends Model
     {
         return $this->belongsTo('App\Admin\TallerNotaVenta');
     }
+    public function tallerNotaVentaRe()
+    {
+        return $this->belongsTo('App\TallerNotaVentaRe');
+    }
+     public function tallerAbre()
+    {
+        return $this->belongsTo('App\Admin\TallerAbreviatura');
+    }
+     public function tallerAbreRe()
+    {
+        return $this->belongsTo('App\TallerAbreviaturaRe');
+    }
+     public function tallerCollage()
+    {
+        return $this->belongsTo('App\Admin\TallerCollage');
+    }
 }
 
 

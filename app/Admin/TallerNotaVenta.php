@@ -12,6 +12,6 @@ class TallerNotaVenta extends Model
     }
        public function notaventaDatos(){
 
-        return $this->hasMany('App\Admin\TallerFacturaDato');
+        return $this->hasMany('App\Admin\TallerNotaVentaDato');
     }
 }

@@ -64,6 +64,24 @@
 @include('layouts.modal')
 
 @section('js')
+<script type="text/javascript">
+    $('.addRow').on('click', function(evt) {
+      evt.preventDefault();
+      addRow();
+    });
+
+    function addRow(){
+      
+      var tr='<tr>'+
+          '<th scope="row"><input type="file" name="col_a[]" class="custom-file" ></th>'+
+          '<th scope="row"><input type="file" name="col_b[]" class="custom-file" ></th> '+ 
+        '</tr>';
+      $('.prin').append(tr);
+      toastr.success("Columna agregada correctamente", "Smarmoddle",{
+         "timeOut": "1000"
+      });
+    }
+  </script>
     <script src="{{asset('js/bootstrap-tagsinput.js')}}"></script>
 @endsection
 </div> 
