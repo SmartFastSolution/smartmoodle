@@ -17,7 +17,8 @@ class CreateTallerCompletarsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->string('enunciado');
-            $table->string('leyenda');
+            $table->string('img')->nullable();
+            $table->string('leyenda')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

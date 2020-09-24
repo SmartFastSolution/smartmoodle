@@ -18,12 +18,16 @@ class CreateTallerIdentificarResTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->string('enunciado');
-            $table->string('foto1');
-            $table->string('foto2');
+            $table->string('foto1')->nullable();
+            $table->string('foto2')->nullable();
             $table->string('foto3')->nullable();
             $table->string('foto4')->nullable();
             $table->string('foto5')->nullable();
             $table->string('foto6')->nullable();
+            $table->string('foto7')->nullable();
+            $table->string('foto8')->nullable();
+            $table->string('foto9')->nullable();
+            $table->string('foto10')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

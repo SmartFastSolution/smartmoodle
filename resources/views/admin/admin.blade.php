@@ -1,7 +1,10 @@
-@extends('layouts.master')
+@extends('adminlte::page')
 
 @section('title', 'Creador de plantillas')
-@section('contenido')
+@section('css')
+    <link rel="stylesheet" href="{{asset('css/bootstrap-tagsinput.css')}}">
+@endsection
+@section('content')
 
 
 	<h1 class="text-center  mt-5 text-danger"> Administrador de Talleres</h1>
@@ -57,6 +60,29 @@
             </div>
      		</div>
      	</div>
+
 @include('layouts.modal')
+
+@section('js')
+<script type="text/javascript">
+    $('.addRow').on('click', function(evt) {
+      evt.preventDefault();
+      addRow();
+    });
+
+    function addRow(){
+      
+      var tr='<tr>'+
+          '<th scope="row"><input type="file" name="col_a[]" class="custom-file" ></th>'+
+          '<th scope="row"><input type="file" name="col_b[]" class="custom-file" ></th> '+ 
+        '</tr>';
+      $('.prin').append(tr);
+      toastr.success("Columna agregada correctamente", "Smarmoddle",{
+         "timeOut": "1000"
+      });
+    }
+  </script>
+    <script src="{{asset('js/bootstrap-tagsinput.js')}}"></script>
+@endsection
 </div> 
 @endsection
