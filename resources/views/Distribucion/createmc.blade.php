@@ -3,7 +3,7 @@
 @section('title', 'Crear Asignación')
 @section('plugins.Select2', true)
 @section('content_header')
-<h1>Crear Asignación MAteria/Curso</h1>
+<h1>Crear Asignación Materia/Curso</h1>
 @stop
 
 @section('content')
