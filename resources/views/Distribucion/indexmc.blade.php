@@ -4,8 +4,8 @@
 
 @section('content_header')
 <h1>Asignación de Materia/Curso</h1>
-<br> <a class="btn btn-info float-right" href="{{route('distribucionmacus.create')}}"><i
-        class="fas fa-plus"></i> Crear Asignación</a> <br>
+<br> <a class="btn btn-info float-right" href="{{route('distribucionmacus.create')}}"><i class="fas fa-plus"></i> Crear
+    Asignación</a> <br>
 @stop
 
 @section('content')
@@ -46,27 +46,41 @@
                                 <tr>
                                     @foreach ($distribucionmacus as $distribucionmacu)
                                     <th scope="row">{{$distribucionmacu['id']}}</th>
-                                    <td> </td>
-                                    <td> </td>
-                                    <td>{{ $distribucionmacus['descripcion']}}</td>
-                                    <td>{{ $distribucionmacus['estado']}}</td>
-                                 
+                                    <td>{{$distribucionmacu->curso->nombre}}
+                                        -
+                                        {{$distribucionmacu->curso->paralelo}}
+
+                                    </td>
+                                    <td>
+                                        @if($distribucionmacu->materias != null)
+                                        @foreach($distribucionmacu->materias as $dismacu)
+                                        <span class="badge badge-success">
+                                            {{$dismacu->nombre}}
+                                        </span>
+                                        @endforeach
+                                        @endif
+                                    </td>
+                                    <td>{{ $distribucionmacu['descripcion']}}</td>
+                                    <td>{{ $distribucionmacu['estado']}}</td>
+
                                     <td> </td>
 
 
                                     <td class="table-button ">
-                                        <a class="btn btn-info " href="{{route('distribucionmacus.show',$distribucionmacus->id)}}"><i
+                                        <a class="btn btn-info "
+                                            href="{{route('distribucionmacus.show',$distribucionmacu->id)}}"><i
                                                 class="fas fa-eye"></i></a>
 
                                     </td>
                                     <td class="table-button ">
                                         <a class="btn btn-success btn"
-                                            href="{{route('distribucionmacus.edit', $distribucionmacus->id)}}"><i
+                                            href="{{route('distribucionmacus.edit', $distribucionmacu->id)}}"><i
                                                 class=" fas fa-pencil-alt"></i></a>
                                     </td>
                                     <td class="table-button ">
                                         <!--metodo delete funciona pero hay que almacenar la variable array en una variable temporal-->
-                                        <form method="POST" action="{{route('distribucionmacus.destroy', $distribucionmacus->id)}}}">
+                                        <form method="POST"
+                                            action="{{route('distribucionmacus.destroy', $distribucionmacu->id)}}}">
                                             @method('DELETE')
                                             @csrf
                                             <button type="submit" class="btn btn-danger "><i

@@ -14,10 +14,12 @@ class CreateDistribucionmacusTable extends Migration
     public function up()
     {
         Schema::create('distribucionmacus', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('curso_id');
             $table->string('descripcion'); 
             $table->enum('estado',['on','off'])->nullable();
             $table->timestamps();
+            $table->foreign('curso_id')->references('id')->on('cursos');
         });
     }
 

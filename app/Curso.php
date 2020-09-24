@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Nivel;
+use App\Distribucionmacu;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,6 +25,11 @@ class Curso extends Model
 
     }
 
+    public function distribucionmacus(){
+          
+        return $this->hasMany('App\Distribucionmacu');
+
+    }
   
    
 }

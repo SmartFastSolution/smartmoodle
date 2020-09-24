@@ -43,14 +43,16 @@
                                 <input type="text" class="form-control" name="nombre" id="nombre"
                                     value="{{$materias->nombre}}" placeholder="Edición de Materia">
                             </div>
-                            <label for="descripcion">Nombre</label>
+                            <div class="form-group">
+                                <label for="descripcion">Descripción</label>
                                 <input type="text" class="form-control" name="descripcion" id="descripcion"
                                     value="{{$materias->descripcion}}" placeholder="Descripción">
                             </div>
                             <label for="nombre">Estado</label><br>
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" id="estadoon" name="estado" class="custom-control-input" value="on"
-                                    @if($materias['estado']=="on" ) checked @elseif(old('estado')=="on" ) checked @endif>
+                                    @if($materias['estado']=="on" ) checked @elseif(old('estado')=="on" ) checked
+                                    @endif>
                                 <label class="custom-control-label" for="estadoon">Activo</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
@@ -73,9 +75,11 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+<link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+<script>
+console.log('Hi!');
+</script>
 @stop

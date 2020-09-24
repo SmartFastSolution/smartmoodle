@@ -20,6 +20,8 @@ class UsersController extends Controller
      */
     public function index()
     {
+      //  $users= User::where('Titulo','Administrador')->orderBy('id','Asc')->paginate(5);
+
        $users= User::orderBy('id','Asc')->paginate(5);
     
          return view('Persona.inicio',['users'=>$users]);

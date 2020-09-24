@@ -353,6 +353,48 @@ return [
         
             ],
         ],
+        [
+            'text'    => 'DOCENTE',
+            'icon'    => 'fas fa-users-cog',
+            'can'  => 'Docente',
+            'submenu' => [
+                [
+                    'text' => 'Perfil',
+                    'url'  => '#',
+                    'icon' => 'fas fa-business-time',
+                    'can'  => 'Docente',
+                ],
+                [
+                    'text' => 'Actividades',
+                    'url'  => '#',
+                    'icon' => 'fas fa-business-time',
+                    'can'  => 'Docente',
+                ],
+        
+        
+            ],
+        ],
+        [
+            'text'    => 'ESTUDIANTE',
+            'icon'    => 'fas fa-users-cog',
+            'can'  => 'Estudiante',
+            'submenu' => [
+                [
+                    'text' => 'Perfil',
+                    'url'  => '#',
+                    'icon' => 'fas fa-business-time',
+                    'can'  => 'Estudiante',
+                ],
+                [
+                    'text' => 'Actividades',
+                    'url'  => '#',
+                    'icon' => 'fas fa-business-time',
+                    'can'  => 'Estudiante',
+                ],
+        
+        
+            ],
+        ],
        
     ],
 

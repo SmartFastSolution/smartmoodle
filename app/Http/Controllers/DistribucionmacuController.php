@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Materia;
+use App\Curso;
 use App\Distribucionmacu;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -29,8 +30,9 @@ class DistribucionmacuController extends Controller
     {
         $materias=Materia::get();
        
+        $cursos=Curso::get();
       
-        return \view('Distribucion.createmc',compact('materias',));
+        return \view('Distribucion.createmc',compact('materias','cursos'));
     }
 
     /**
@@ -41,7 +43,27 @@ class DistribucionmacuController extends Controller
      */
     public function store(Request $request)
     {
-        
+         //return $request->all();
+
+        $request->validate([
+
+            'descripcion' => [ 'string', 'max:150'],
+            'estado' => ['required' ,'in:on,off'],
+        ]);
+
+        $distribucionmacu =new  Distribucionmacu;
+        $distribucionmacu ->descripcion = $request->descripcion;
+        $distribucionmacu ->estado = $request->estado;
+        $distribucionmacu->curso_id=$request->cursos;
+          
+      
+
+       $distribucionmacu->save();
+       if($request->get('materia')){
+        $distribucionmacu->materias()->sync($request->get('materia'));
+      }
+        return redirect('sistema/distribucionmacus ');
+
     }
 
     /**
@@ -52,7 +74,7 @@ class DistribucionmacuController extends Controller
      */
     public function show(Distribucionmacu $distribucionmacu)
     {
-        //
+        return \view('Distribucion.showmacu');
     }
 
     /**
@@ -63,7 +85,17 @@ class DistribucionmacuController extends Controller
      */
     public function edit(Distribucionmacu $distribucionmacu)
     {
-        //
+        $distribucionmacu_materia=[]; //creo una variable array para almacenar los datos relacionados de la tabla pivote entre materia y distribucion
+      
+        foreach($distribucionmacu->materias as $materia){   //realizo el recorrido
+        $distribucionmacu_materia[]=$materia->id;
+       }
+        
+        $materias= Materia::all();
+        $cursos = Curso::get(); //todos los datos de la bd de cursos
+        $distcursos=Distribucionmacu::find($distribucionmacu->id)->curso()->get(); //llama al curso que esta relacionado a esta distribucion
+
+        return view('Distribucion.editmacu',compact('distribucionmacu','materias','cursos','distcursos','distribucionmacu_materia'));
     }
 
     /**
@@ -75,7 +107,29 @@ class DistribucionmacuController extends Controller
      */
     public function update(Request $request, Distribucionmacu $distribucionmacu)
     {
-        //
+
+        $request->validate([
+
+           
+            'descripcion'      => 'required|string|max:150',
+            'estado'      => 'required|in:on,off',
+        ]);
+
+        $distribucionmacu->update($request->all());
+   
+        if($request->get('curso')){
+          
+            $distribucionmacu->curso_id = $request->curso;
+          }
+
+          if($request->get('materia')){
+            $distribucionmacu->materias()->sync($request->get('materia'));
+          }
+         
+
+        $distribucionmacu->save();
+        return redirect('sistema/distribucionmacus');
+    
     }
 
     /**
@@ -86,6 +140,9 @@ class DistribucionmacuController extends Controller
      */
     public function destroy(Distribucionmacu $distribucionmacu)
     {
-        //
+        $distribucionmacu= Distribucionmacu::find($distribucionmacu->id);
+        $distribucionmacu->delete();
+
+        return redirect('sistema/distribucionmacus')->with('success','Haz eliminado una Asignación con exito');
     }
 }

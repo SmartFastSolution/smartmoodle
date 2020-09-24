@@ -26,7 +26,7 @@
         <div class="col-md-6">
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Formulario Roles</h3>
+
                 </div>
                 <div class="card-body">
 
@@ -46,7 +46,8 @@
                                     id="descripcion" placeholder="Rol descripcion" value="{{old('descripcion')}}">
                             </div>
                             <div class="form-group">
-                                <h3>Acceso Completo</h3>
+                                <label for="name"> Acceso Completo</label>
+                                <br>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="fullaccesyes" name="fullacces" class="custom-control-input"
                                         value="yes" @if(old('fullacces')=="yes" ) checked @endif>
@@ -59,7 +60,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <h3>Estado del Rol</h3>
+                                <label for="name"> Estado del Rol</label>
+                                <br>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="estadoon" name="estado" class="custom-control-input"
                                         value="on" @if(old('estado')=="on" ) checked @endif>
@@ -73,7 +75,7 @@
                             </div>
                             <div class="card-body">
 
-                                <h4>Lista de Menu</h4>
+                                <label for="name"> Lista de Menu</label>
 
                                 @foreach($permissions as $permission)
 

@@ -523,6 +523,7 @@ class ComposerStaticInitb5c2bf8c0b0c3f0979a750c5cc95b532
         'App\\Http\\Controllers\\Controladores\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Controladores/RoleController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\CursoController' => __DIR__ . '/../..' . '/app/Http/Controllers/CursoController.php',
+        'App\\Http\\Controllers\\DistribucionmacuController' => __DIR__ . '/../..' . '/app/Http/Controllers/DistribucionmacuController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\InstitutoController' => __DIR__ . '/../..' . '/app/Http/Controllers/InstitutoController.php',
         'App\\Http\\Controllers\\MateriaController' => __DIR__ . '/../..' . '/app/Http/Controllers/MateriaController.php',
