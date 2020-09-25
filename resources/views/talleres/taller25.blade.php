@@ -108,6 +108,7 @@
 					      <th scope="col">CÓDIGO</th>
 					      <th scope="col">CÓD. AUXILIAR</th>
 					      <th scope="col">CANT.</th>
+					      <th scope="col">DESCRIPCION.</th>
 					      <th scope="col">P. UNITARIO</th>
 					      <th>DESCUENTO</th>
 					      <th>VALOR VENTA</th>
@@ -118,6 +119,7 @@
 					  		<td><input type="text" name="codigo[]" class="form-control"></td>
 					  		<td><input type="text" name="cod_aux[]" class="form-control"></td>
 					  		<td><input type="text" name="cantidad[]" class="form-control"></td>
+					  		<td><input size="4" type="text" name="descripcion[]" class="form-control"></td>
 					  		<td><input type="text" name="precio[]" class="form-control"></td>
 					  		<td><input type="text" name="descuento[]" class="form-control"></td>
 					  		<td><input type="text" name="valor[]" class="form-control"></td>

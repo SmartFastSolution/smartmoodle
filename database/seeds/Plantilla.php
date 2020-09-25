@@ -56,23 +56,23 @@ class Plantilla extends Seeder
           'descripcion' => 'Taller designado para completar un resultado',
         ]);
                  DB::table('plantillas')->insert([
-          'nombre' => 'TALLER 12 - RELACIONAR ENUNCIADOS',
+          'nombre' => 'TALLER 12 - COMPLETE EL ENUNCIADO',
           'descripcion' => 'Taller designado para completar un resultado',
         ]);
                   DB::table('plantillas')->insert([
-          'nombre' => 'TALLER 13 - RELACIONAR ENUNCIADOS',
+          'nombre' => 'TALLER 13 - DEFINIR ENUNCIADOS',
           'descripcion' => 'Taller designado para completar un resultado',
         ]);
                    DB::table('plantillas')->insert([
-          'nombre' => 'TALLER 14 - RELACIONAR ENUNCIADOS',
+          'nombre' => 'TALLER 14 - IDENTIFICAR PERSONAS',
           'descripcion' => 'Taller designado para completar un resultado',
         ]);
                     DB::table('plantillas')->insert([
-          'nombre' => 'TALLER 15 - RELACIONAR ENUNCIADOS',
+          'nombre' => 'TALLER 15 - LLENAR CHEQUE',
           'descripcion' => 'Taller designado para completar un resultado',
         ]);
                      DB::table('plantillas')->insert([
-          'nombre' => 'TALLER 16 - RELACIONAR ENUNCIADOS',
+          'nombre' => 'TALLER 16 - ENDOSAR CHEQUE',
           'descripcion' => 'Taller designado para completar un resultado',
         ]);
                       DB::table('plantillas')->insert([
@@ -112,9 +112,19 @@ class Plantilla extends Seeder
           'descripcion' => 'Taller designado para completar un resultado',
         ]);
                    DB::table('plantillas')->insert([
-          'nombre' => 'TALLER 26 - ORDEN DE VENTA',
+          'nombre' => 'TALLER 26 - NOTA DE VENTA',
           'descripcion' => 'Taller designado para completar un resultado',
         ]);
+          DB::table('plantillas')->insert([
+          'nombre' => 'TALLER 27 - SIGNIFICADO DE ABREVIATURA',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
+          DB::table('plantillas')->insert([
+          'id' => '34',
+          'nombre' => 'TALLER 28 - COLLAGE',
+          'descripcion' => 'Taller designado para completar un resultado',
+        ]);
+
          
 
     }

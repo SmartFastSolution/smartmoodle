@@ -45,10 +45,12 @@ class AdminController extends Controller
 {
    public function admin()
    {
-   	  return view('admin.admin');
+         $g = 0;
+   	  return view('admin.admin', compact('g'));
    }
    public function plantilla(Request $request)
    {
+
    	$i = Plantilla::get()->count();
    	  $plantilla = new Plantilla;
    	  $plantilla->nombre = 'TALLER '.++$i.' - '.$request->input('nombre');

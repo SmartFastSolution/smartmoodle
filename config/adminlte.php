@@ -215,7 +215,7 @@ return [
     */
 
 
-    'enabled_laravel_mix' => true,
+    'enabled_laravel_mix' => false,
     'laravel_mix_css_path' => 'css/app.css',
     'laravel_mix_js_path' => 'js/app.js',
 
@@ -403,6 +403,21 @@ return [
                     'type' => 'css',
                     'asset' => false,
                     'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
+                ],
+            ],
+        ],
+        'App' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'js/app.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'css/app.css',
                 ],
             ],
         ],

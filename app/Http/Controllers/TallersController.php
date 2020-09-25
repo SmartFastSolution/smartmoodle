@@ -991,14 +991,14 @@ class TallersController extends Controller
         
     return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
     }
-     public function store34(Request $request)
+     public function store34(Request $request,  $idtaller)
       {
         $contenido = TallerCollage::select('enunciado')->where('taller_id', $idtaller)->first();
-        $taller27 = new TallerCollageRe; 
-        $taller27->taller_id        =  $idtaller;
-        $taller27->user_id          =  '1'; 
-        $taller27->enunciado        =  $contenido->enunciado; 
-        $taller27->save();
+        $taller34 = new TallerCollageRe; 
+        $taller34->taller_id        =  $idtaller;
+        $taller34->user_id          =  '1'; 
+        $taller34->enunciado        =  $contenido->enunciado; 
+        $taller34->save();
 
             $imagen = $request->file('file');
             $nombre = time().'_'.$imagen->getClientOriginalName();
