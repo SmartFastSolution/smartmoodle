@@ -589,6 +589,7 @@ class ComposerStaticInitb5c2bf8c0b0c3f0979a750c5cc95b532
         'App\\TallerCirEjemploRe' => __DIR__ . '/../..' . '/app/TallerCirEjemploRe.php',
         'App\\TallerCirculoRe' => __DIR__ . '/../..' . '/app/TallerCirculoRe.php',
         'App\\TallerClasificarRes' => __DIR__ . '/../..' . '/app/TallerClasificarRes.php',
+        'App\\TallerCollageRe' => __DIR__ . '/../..' . '/app/TallerCollageRe.php',
         'App\\TallerCompletarRes' => __DIR__ . '/../..' . '/app/TallerCompletarRes.php',
         'App\\TallerCompleteEnRes' => __DIR__ . '/../..' . '/app/TallerCompleteEnRes.php',
         'App\\TallerConvertirChequeRe' => __DIR__ . '/../..' . '/app/TallerConvertirChequeRe.php',

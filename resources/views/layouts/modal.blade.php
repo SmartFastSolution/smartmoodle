@@ -1791,7 +1791,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="" class="col-form-label">Cliente :</label>
-                   <input required="" type="cliente" name="ruc" class="form-control">
+                   <input required="" type="cliente" name="cliente" class="form-control">
                   </div>
                   <div class="form-group col-md-1">
                     <label for="" class="col-form-label">IVA :</label>
@@ -1799,7 +1799,7 @@
                   </div>
                    <div class="form-group col-md-2">
                      <label for="" class="col-form-label">Descuento :</label>
-                  <input required="" type="text" name="descuento" class="form-control">
+                  <input required="" type="numeric" name="descuento" class="form-control">
                   </div>
                   <div class="form-group col-md-3">
                     <label for="" class="col-form-label">RUC :</label>
@@ -1821,6 +1821,7 @@
                   <thead>
                     <tr>
                       <th scope="col">#</th>
+                      <th scope="col">Codigo</th>
                       <th scope="col">Codigo Auxiliar</th>
                       <th scope="col">Cantidad</th>
                       <th scope="col">Descripcion</th>
@@ -1830,6 +1831,7 @@
                   <tbody class="fac">
                     <tr>
                       <th scope="row" id="num"></th>
+                      <td><input type="text" class="form-control" name="cod[]"></td>
                       <td><input type="text" class="form-control" name="cod_aux[]"></td>
                       <td><input type="text" class="form-control" name="cant[]"></td>
                       <td><input type="text" class="form-control" name="desc[]"></td>
@@ -1892,6 +1894,7 @@
               </div>
               <div class="form-group">
                 <label for="" class="col-form-label">Nombre :</label>
+
                 <input required="" type="text" name="nombre" class="form-control">
               </div>
 
@@ -1916,27 +1919,19 @@
                       <th scope="col">Precio Unitario</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody class="nota_v">
                     <tr>
-                      <th scope="row">1</th>
+                      <th scope="row" id="num1"></th>
                       <td><input type="text" class="form-control" name="cant[]"></td>
                       <td><input type="text" class="form-control" name="desc[]"></td>
                       <td><input type="text" class="form-control" name="precio[]"></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td><input type="text" class="form-control" name="cant[]"></td>
-                      <td><input type="text" class="form-control" name="desc[]"></td>
-                      <td><input type="text" class="form-control" name="precio[]"></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td><input type="text" class="form-control" name="cant[]"></td>
-                      <td><input type="text" class="form-control" name="desc[]"></td>
-                      <td><input type="text" class="form-control" name="precio[]"></td>
+                      <td><a href="#" class="btn btn-danger rem"><span class="glyphicon glyphicon-remove">X</span></a></td>
                     </tr>
                   </tbody>
                 </table>
+                <div class="row">
+                  <a href="#" class="addNot btn btn-outline-danger">Agregar Columna</a>
+                </div>
               </div> 
                 <div class="row justify-content-center">
                   <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
@@ -1991,14 +1986,29 @@
                       <th scope="col">Fila B</th>
                     </tr>
                   </thead>
+
                   <tbody class="prin">
                     <tr>
-                      <th scope="row"><input type="file" name="col_a[]" class="custom-file" ></th>
-                      <th scope="row"><input type="file" name="col_b[]" class="custom-file" ></th>
+                      <td scope="row">
+                           <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="col_a[]" lang="es">
+                            <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                          </div>
+                      </td>
+                      <td scope="row">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="col_b[] " lang="es">
+                            <label class="custom-file-label" for="customFile">Seleciona un archivo</label>
+                          </div>
+                      </td>
+                      <td><a href="#" class="btn btn-danger remover"><span class="glyphicon glyphicon-remove">X</span></a></td>
                     </tr>
                   </tbody>
+
                 </table>
-                <a href="#" class="addRow btn btn-outline-danger">Agregar Columna</a>
+                 <div class="row">
+                  <a href="#" class="addRow btn btn-outline-danger">Agregar Columna</a>
+                </div>
               </div> 
                 <div class="row justify-content-center">
                   <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
@@ -2064,7 +2074,7 @@
                       <th scope="col">Fila B</th>
                     </tr>
                   </thead>
-                  <tbody class="prin">
+                  <tbody class="">
                     <tr>
                       <th scope="row"><input type="file" name="col_a[]" class="custom-file" ></th>
                       <th scope="row"><input type="file" name="col_b[]" class="custom-file" ></th>

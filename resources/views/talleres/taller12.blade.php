@@ -1,7 +1,6 @@
-@extends('layouts.master')
-
+@extends('adminlte::page')
 @section('title',  $datos->taller->nombre)
-@section('contenido')
+@section('content')
 
 <!--IDENTIFICA  EL  ENUNCIADO  ESCRIBIENDO  (V) DE  VERDADERO   O  (F)  DE 
 FALSO,  CON  CERTEZA. -->

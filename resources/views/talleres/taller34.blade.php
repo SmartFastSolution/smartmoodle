@@ -9,7 +9,7 @@
 <h1 class="text-center  mt-5 text-danger">{{$datos->taller->nombre }} </h1>
 <h3 class="text-center mt-5 mb-3 text-info">EN  EL  S IGUIENTE  COLLAGE  APLIQUE  FIGURAS  QUE  SE  RELACIONEN  CON CONTABILIDAD  HOTELERA,  CON  EFICACIA</h3>
 	<div class="container">
-	<form action="{{ route('taller_34', ['idtaller' => 1]) }}"
+	<form action="{{ route('taller_34', ['idtaller' => $d]) }}"
       class="dropzone"
       id="my-awesome-dropzone"
      enctype="multipart/form-data">
@@ -24,8 +24,6 @@
 		</form>
 		<div class="row justify-content-center">
      <button class="btn btn-outline-danger mt-5 text-center" id="sendAll">Enviar Imagenes</button>
-			
-
 		</div>
 
 	</div>
@@ -50,6 +48,12 @@
   			if (this.getQueuedFiles().length == 0 && this. getUploadingFiles().length == 0) {
   				var _this = this;
   				_this.removeAllFiles();
+          Swal.fire({
+            title: 'Smarmoddle',
+            text: 'Datos enviados correctamente',
+          }).then(function() {
+                window.location = "/sistema";
+            });
   			}
   		});
   			}

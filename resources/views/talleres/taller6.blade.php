@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('adminlte::page')
 
 @section('title', 'Taller '.$datos->taller->id)
-@section('contenido')
+@section('content')
 <!--TALLER IDENTIFICAR IMAGENES -->
 
 <h1 class="text-center  mt-5 text-danger"> Taller {{ $datos->taller->id }}</h1>

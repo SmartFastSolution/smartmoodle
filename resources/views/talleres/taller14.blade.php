@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('adminlte::page')
 
 @section('title',  $datos->taller->nombre )
-@section('contenido')
+@section('content')
 
 <!-- IDENTIFIQUE  LAS  PERSONAS  QUE  INTERVIENEN  EN  EL  CHEQUE,  CON CERTEZA -->
 <h1 class="text-center  mt-5 text-danger">{{ $datos->taller->nombre }}</h1>

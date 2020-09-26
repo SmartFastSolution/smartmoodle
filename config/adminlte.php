@@ -252,55 +252,51 @@ return [
         [
             'text'    => 'ADMINISTRADOR',
             'icon'    => 'fas fa-users-cog',
-            'can'  => 'Administrador',
             'submenu' => [
                 [
                     'text' => 'Roles',
                     'url'  => '/sistema/roles',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Menu',
                     'url'  => 'sistema/permissions',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Instituto',
                     'url'  => 'sistema/institutos',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Usuarios',
                     'url'  => 'sistema/users',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Curso',
                     'url'  => 'sistema/cursos',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Niveles',
                     'url'  => 'sistema/nivels',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Materias',
                     'url'  => 'sistema/materias',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
+                ],
+                [
+                    'text' => 'Talleres',
+                    'url'  => 'sistema/admin/create',
+                    'icon' => 'fas fa-business-time',
                 ],
                 [
                     'text' => 'Contenido',
                     'url'  => 'sistema/contenidos',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
                 ],
                
                
@@ -309,19 +305,16 @@ return [
         [
             'text'    => 'ESTUDIANTE',
             'icon'    => 'fas fa-users-cog',
-            'can'  => 'Administrador',
             'submenu' => [
                 [
                     'text' => 'Perfil',
                     'url'  => '#',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Actividades',
                     'url'  => '#',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
                 ],
         
         
@@ -330,19 +323,16 @@ return [
         [
             'text'    => 'DOCENTE',
             'icon'    => 'fas fa-users-cog',
-            'can'  => 'Administrador',
             'submenu' => [
                 [
                     'text' => 'Perfil',
                     'url'  => '#',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Actividades',
                     'url'  => '#',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
                 ],
         
         
@@ -462,7 +452,7 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',

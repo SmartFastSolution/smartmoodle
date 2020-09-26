@@ -1,7 +1,6 @@
-@extends('layouts.master')
-
+@extends('adminlte::page')
 @section('title', $datos->taller->nombre)
-@section('contenido')
+@section('content')
 
 <!-- LLENE  CON  LOS SIGUIENTES DATOS LAS LETRAS  DE  CAMBIO CORRECTAMENTE -->
 

@@ -91,6 +91,7 @@ return array(
     'App\\TallerCirEjemploRe' => $baseDir . '/app/TallerCirEjemploRe.php',
     'App\\TallerCirculoRe' => $baseDir . '/app/TallerCirculoRe.php',
     'App\\TallerClasificarRes' => $baseDir . '/app/TallerClasificarRes.php',
+    'App\\TallerCollageRe' => $baseDir . '/app/TallerCollageRe.php',
     'App\\TallerCompletarRes' => $baseDir . '/app/TallerCompletarRes.php',
     'App\\TallerCompleteEnRes' => $baseDir . '/app/TallerCompleteEnRes.php',
     'App\\TallerConvertirChequeRe' => $baseDir . '/app/TallerConvertirChequeRe.php',

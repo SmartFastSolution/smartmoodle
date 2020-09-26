@@ -35,6 +35,7 @@
                </div>
      				
      			</div>
+
             <div class="col-6">
                <form action="{{ route('admin.plantilla') }}" method="POST">
                    @csrf
@@ -60,9 +61,17 @@
                </form>
             </div>
      		</div>
-
+</div> 
      	</div>
 
+<ul class="list-group m-3">
+  @foreach ($sub = App\Taller::paginate(5) as $taller)
+     <li class="list-group-item "><a class="nav-link" href="{{ route('taller', ['plant' => $taller->plantilla_id, 'id' => $taller->id]) }}">{{ $taller->nombre }} - {{ $taller->materia->nombre }}  {{ $taller->enunciado }}</a></li>
+  @endforeach
+ 
+  <div class="row justify-content-center mt-3"> {{ $sub->links() }}</div>
+
+</ul>
 @include('layouts.modal')
 
 @section('js')
@@ -71,13 +80,13 @@
 
 <script type="text/javascript">
    var i = 1;
-   var last=$('.fac tr').length;
+
    var objetivo = document.getElementById('num');
-
-
-    if (last == 1) {
       objetivo.innerHTML = 1;
-    }
+
+      var objetivo1 = document.getElementById('num1');
+      objetivo1.innerHTML = 1;
+    
     $('.addRow').on('click', function(evt) {
       evt.preventDefault();
       addRow();
@@ -87,35 +96,75 @@
 
       addFac();
     });
+      $('.addNot').on('click', function(evt) {
+      evt.preventDefault();
+
+      addNot();
+    });
 
 
     function addRow(){
-      
+    var prin = $('.prin tr').length;
+
       var tr='<tr>'+
-          '<th scope="row"><input type="file" name="col_a[]" class="custom-file" ></th>'+
-          '<th scope="row"><input type="file" name="col_b[]" class="custom-file" ></th> '+ 
+          '<td scope="row">'+ 
+              '<div class="custom-file">'+
+                  '<input type="file" class="custom-file-input" name="col_a[]" lang="es">'+
+                  '<label class="custom-file-label" for="customFile">Seleciona un archivo</label>'+
+              '</div>'+
+            '</td>'+
+            '<td scope="row">'+ 
+              '<div class="custom-file">'+
+                  '<input type="file" class="custom-file-input" name="col_b[]" lang="es">'+
+                  '<label class="custom-file-label" for="customFile">Seleciona un archivo</label>'+
+              '</div>'+
+            '</td>'+
+          '<td><a href="#" class="btn btn-danger remover"><span class="glyphicon glyphicon-remove">X</span></a></td>'
         '</tr>';
       $('.prin').append(tr);
       toastr.success("Columna agregada correctamente", "Smarmoddle",{
          "timeOut": "1000"
       });
+    
     }
+       $('.remover').live('click', function(){
+
+      if ($('.prin tr').length == 1 ) {
+        toastr.error("Esta columna no se puede eliminar", "Smarmoddle",{
+         "timeOut": "1000"
+      });
+      }else{
+      $(this).parent().parent().remove();
+    
+}
+    });
+
      function addFac(){
       
-      
+      var max=$('.fac tr').length;
       var tr='<tr>'+
            '<th scope="row" id="num">'+(++i)+'</th>'+
+              ' <td><input type="text" class="form-control" name="cod[]"></td>'+
               '<td><input type="text" class="form-control" name="cod_aux[]"></td>'+
               '<td><input type="text" class="form-control" name="cant[]"></td>'+
               '<td><input type="text" class="form-control" name="desc[]"></td>'+
               '<td><input type="text" class="form-control" name="precio[]"></td>'+
-              '<td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>'
+              '<td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>'+
         '</tr>';
+      if (max == 10) {
+        toastr.error("Limite de columnas creadas", "Smarmoddle",{
+         "timeOut": "1000"
+      });
+        
+
+      }else{
       $('.fac').append(tr);
       toastr.success("Columna agregada correctamente", "Smarmoddle",{
          "timeOut": "1000"
       });
+      console.log(max)
     }
+}
 
     $('.remove').live('click', function(){
       var last=$('.fac tr').length;
@@ -126,6 +175,36 @@
       });
       }else{
       $(this).parent().parent().remove();
+       i = last;
+}
+    });
+
+      function addNot(){
+      var nota_v = $('.nota_v tr').length;
+
+      var tr='<tr>'+
+           '<th scope="row" id="num1">'+(++i)+'</th>'+
+          '<td><input type="text" class="form-control" name="cant[]"></td>'+
+          '<td><input type="text" class="form-control" name="desc[]"></td>'+
+          '<td><input type="text" class="form-control" name="precio[]"></td>'+
+          '<td><a href="#" class="btn btn-danger rem"><span class="glyphicon glyphicon-remove">X</span></a></td>'
+        '</tr>';
+      $('.nota_v').append(tr);
+      toastr.success("Columna agregada correctamente", "Smarmoddle",{
+         "timeOut": "1000"
+      });
+    
+    }
+        $('.rem').live('click', function(){
+      var not=$('.nota_v tr').length;
+      if (not == 1) {
+        i = 1;
+        toastr.error("Esta columna no se puede eliminar", "Smarmoddle",{
+         "timeOut": "1000"
+      });
+      }else{
+      $(this).parent().parent().remove();
+       i = not;
 }
     });
 
@@ -134,5 +213,5 @@
   </script>
     <script src="{{asset('js/bootstrap-tagsinput.js')}}"></script>
 @endsection
-</div> 
+
 @endsection

@@ -31,6 +31,8 @@
                   <thead>
                     <tr class="text-center">
                       <th scope="col">#</th>
+                      <th scope="col">Codigo</th>
+                      <th scope="col">Cod. Auxiliar</th>
                       <th scope="col">Cantidad</th>
                       <th scope="col">Descripcion</th>
                       <th scope="col">Precio Unitario</th>
@@ -40,6 +42,8 @@
                   	@foreach ($datos->facturaDatos as $dato)
                     <tr class="text-center">
                       <th scope="row">{{ ++$i }}</th>
+                      <td>{{ $dato->cod }}</td>
+                      <td>{{ $dato->cod_auxiliar }}</td>
                       <td>{{ $dato->cantidad }}</td>
                       <td>{{ $dato->descripcion }}</td>
                       <td>{{ $dato->precio }}</td>
@@ -50,7 +54,7 @@
                 </table>
 								 
 			</div>
-			<div class="col-8 border border-danger">
+			<div class="col-9 border border-danger">
 				<div class="row p-3 justify-content-between">
 					<div class="col-5">
 					 	<img class="img-fluid" src="{{ asset('img/talleres/imagen-27.jpg') }}" alt="">
@@ -81,17 +85,17 @@
 				<div class="row p-3 m-0 mb-2 border border-info">
 					<div class="col-7">
 						<div class="row">
-							<div class="col-5"><h6>RAZÓN SOCIAL/NOMBRES Y APELLIDOS</h6></div>
-							<div class="col-7"><input name="nombre" type="text " class="form-control"></div>
+							<div class="col-6"><h6>RAZÓN SOCIAL/NOMBRES Y APELLIDOS</h6></div>
+							<div class="col-6"><input name="nombre" type="text " class="form-control"></div>
 						</div>
 						<div class="row">
-							<div class="col-5"><label class="col-form-label" for="">FECHA EMISIÓN :</label></div>
-							<div class="col-7"><input name="fecha_emision" type="text " class="form-control"></div>
+							<div class="col-6"><label class="col-form-label" for="">FECHA EMISIÓN :</label></div>
+							<div class="col-6"><input name="fecha_emision" type="text " class="form-control"></div>
 						</div>
 					</div>
 					<div class="col-5">
 						<div class="row mb-3">
-							<div class="col-5"><h6>R.U.C/C.I. :</h6></div>
+							<div class="col-5"><label class="col-form-label">R.U.C/C.I. :</label></div>
 							<div class="col-7"><input name="ruc" type="text " class="form-control"></div>
 						</div>
 						<div class="row">
@@ -101,10 +105,10 @@
 					</div>
 				</div>
 
-				<div class="row p-3  mb-2">
-					<table class="table table-bordered">
+				<div class="row p-3  mb-2 ">
+					<table class="table table-bordered table-sm">
 					  <thead>
-					    <tr>
+					    <tr align="center">
 					      <th scope="col">CÓDIGO</th>
 					      <th scope="col">CÓD. AUXILIAR</th>
 					      <th scope="col">CANT.</th>
@@ -112,17 +116,20 @@
 					      <th scope="col">P. UNITARIO</th>
 					      <th>DESCUENTO</th>
 					      <th>VALOR VENTA</th>
+					      <th></th>
 					    </tr>
 					  </thead>
 					  <tbody class="prin">
 					  	<tr>
-					  		<td><input type="text" name="codigo[]" class="form-control"></td>
-					  		<td><input type="text" name="cod_aux[]" class="form-control"></td>
-					  		<td><input type="text" name="cantidad[]" class="form-control"></td>
-					  		<td><input size="4" type="text" name="descripcion[]" class="form-control"></td>
-					  		<td><input type="text" name="precio[]" class="form-control"></td>
-					  		<td><input type="text" name="descuento[]" class="form-control"></td>
-					  		<td><input type="text" name="valor[]" class="form-control"></td>
+					  		<td width="100"> <input type="text" name="codigo[]" class="form-control" required></td>
+					  		<td width="100"><input type="text" name="cod_aux[]" class="form-control" required></td>
+					  		<td width="50"><input type="text" name="cantidad[]" class="form-control" required></td>
+					  		<td ><textarea  name="descripcion[]" class="form-control" required></textarea> </td>
+					  		<td width="50"><input type="text" name="precio[]" class="form-control" required></td>
+					  		<td width="50"><input type="text" name="descuento[]" class="form-control" required></td>
+					  		<td width="75"><input type="text" name="valor[]" class="form-control" required></td>
+                      		<td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>
+
 					  	</tr>
 								  
 					  </tbody>
@@ -150,7 +157,7 @@
 					  
 					  <tbody>
 					    <tr>
-					      <th scope="row">SUBTOTAL 12%</th>
+					      <th scope="row">SUBTOTAL {{ $datos->iva }}%</th>
 					      <td><input type="text" name="subtotal_12" class="form-control"></td>
 					    </tr>
 					    <tr>
@@ -179,7 +186,7 @@
 					      <td><input type="text" name="ice" class="form-control"></td>
 					    </tr>
 					    <tr>
-					      <th scope="row">IVA 12%</th>
+					      <th scope="row">IVA {{ $datos->iva }}%</th>
 					      <td><input type="text" name="iva12" class="form-control"></td>
 					    </tr>
 					     <tr>
@@ -207,12 +214,13 @@
 		</div>
 		
 		<div class="row justify-content-center">
-        		<input type="submit" value="Enviar Respuestas" class="btn p-2 mt-3 btn-danger">
+        		<input type="submit" value="Guardar Datos" class="btn p-2 mt-3 mb-5 btn-danger">
     		 </div>
 	</div>
 	</form>
 
 @section('js')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script src="{{ asset('vendor/toastr/toastr.min.js') }}"></script>
 	<script type="text/javascript">
 		$('.addRow').on('click', function(evt) {
@@ -223,12 +231,14 @@
 		function addRow(){
 			
 			var tr='<tr>'+
-			'<td><input type="text" name="codigo[]" class="form-control"></td>'+
-			'<td><input type="text" name="cod_aux[]" class="form-control"></td>'+
-			'<td><input type="text" name="cantidad[]" class="form-control"></td>'+
-			'<td><input type="text" name="precio[]" class="form-control"></td>'+
-			'<td><input type="text" name="descuento[]" class="form-control"></td>'+
-			'<td><input type="text" name="valor[]" class="form-control"></td>'+
+			'<td><input type="text" name="codigo[]" class="form-control" required></td>'+
+			'<td><input type="text" name="cod_aux[]" class="form-control" required></td>'+
+			'<td><input type="text" name="cantidad[]" class="form-control" required></td>'+
+			'<td><textarea  name="descripcion[]" class="form-control" required></textarea></td>'+
+			'<td><input type="text" name="precio[]" class="form-control" required></td>'+
+			'<td><input type="text" name="descuento[]" class="form-control" required></td>'+
+			'<td><input type="text" name="valor[]" class="form-control" required></td>'+
+            '<td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>'
 			'</tr>';
 			$('.prin').append(tr);
 		  toastr.success("Columna agregada correctamente", "Smarmoddle",{
@@ -236,6 +246,19 @@
 		  });
 
 		}
+		$('.remove').live('click', function(evt){
+	evt.preventDefault();
+      var last=$('.prin tr').length;
+      if (last == 1) {
+        toastr.error("Esta columna no se puede eliminar", "Smarmoddle",{
+         "timeOut": "1000"
+      });
+      }else{
+      $(this).parent().parent().remove();
+       i = last;
+}
+    });
+
 	</script>
 	@endsection
 @endsection

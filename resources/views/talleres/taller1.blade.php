@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('adminlte::page')
 
 @section('title', $datos->taller->nombre)
-@section('contenido')
+@section('content')
 
 <form action="{{ route('taller1', ['idtaller' => $d]) }}" method="POST">
     @csrf

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('adminlte::page')
 
 @section('title', 'Taller '.$d)
 @section('contenido')

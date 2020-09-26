@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('adminlte::page')
 
 @section('title', $datos->taller->nombre)
-@section('contenido')
+@section('content')
 <!-- DEFINA  LOS  ENUNCIADOS  EN  LOS  CUADROS,  CON  ORIGINALIDAD. -->
 
 <h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>

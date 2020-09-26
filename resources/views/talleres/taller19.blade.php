@@ -1,7 +1,6 @@
-@extends('layouts.master')
-
+@extends('adminlte::page')
 @section('title', $datos->taller->nombre)
-@section('contenido')
+@section('content')
 <!-- LLENE  CON  LOS  SIGUIENTES  DATOS  LOS  CERTIFICADOS DE DEPÓSITO 
 ADECUADAMENTE -->
 	<h1 class="text-center  mt-5 text-danger">{{ $datos->taller->nombre }}</h1>
