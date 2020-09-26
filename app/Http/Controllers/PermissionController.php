@@ -41,6 +41,7 @@ class PermissionController extends Controller
         $request->validate([
 
             'namep'      => 'required|string|max:150',
+            'slug'      => 'required|string|max:150',
             'descripcionp' => 'required|string|max:150',
             'estado'      => 'required|in:on,off',
             
@@ -86,6 +87,7 @@ class PermissionController extends Controller
         $request->validate([
 
             'namep'      => 'required|string|max:150',
+            'slug'      => 'required|string|max:150',
             'descripcionp' => 'required|string|max:150',
             'estado'      => 'required|in:on,off',
             

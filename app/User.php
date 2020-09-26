@@ -59,13 +59,11 @@ class User extends Authenticatable
     }
 
 
-
-    public function roles(){
+    public function role(){
           
-        return $this->belongsToMany('App\Modelos\Role')->withTimestamps();
+        return $this->belongsTo('App\Modelos\Role');
 
     }
-
     
 
     //relacion de muchos a 1 es decir muchos usuarios 
@@ -78,17 +76,20 @@ class User extends Authenticatable
 
   
 // estos son metodos para el rol 
-   public function asignarRol($role){  //para asignar los roles de manera automatica
+//    public function asignarRol($role){  //para asignar los roles de manera automatica
     
-    $this->roles()->sync($role, false);
+//     $this->roles()->sync($role, false);
         
-    }
+//     }
+    
+//esta funcion la aplico en el serviceprovider para el metodo gate del service provider
+//no puedo borrar esta funcion 
 
-    public function tieneROl(){
+    // public function tieneROl(){
 
-     return $this->roles->flatten()->pluck('name')->unique();
+    //  return $this->roles->flatten()->pluck('name')->unique();
 
-    }
+    // }
 
     public function adminlte_image()
     {

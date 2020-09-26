@@ -35,6 +35,7 @@
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Curso</th>
+                                    <th scope="col">Nivel</th>
                                     <th scope="col">Materia(s)</th>
                                     <th scope="col">Descripción</th>
                                     <th scope="col">Estado</th>
@@ -49,8 +50,8 @@
                                     <td>{{$distribucionmacu->curso->nombre}}
                                         -
                                         {{$distribucionmacu->curso->paralelo}}
-
                                     </td>
+                                    <td>{{$distribucionmacu->curso->nivel->nombre}}  </td>
                                     <td>
                                         @if($distribucionmacu->materias != null)
                                         @foreach($distribucionmacu->materias as $dismacu)

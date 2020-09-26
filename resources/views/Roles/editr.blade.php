@@ -114,4 +114,17 @@
 
 @section('js')
     <script> console.log('Hi!'); </script>
+
+    <script>
+$(document).ready(function() {
+
+    $('#name').keyup(function(e) {
+        var str = $('#name').val();
+        str = str.replace(/\W+(?!$)/g, '-').toLowerCase(); // remplazamos el estdo de dashe
+        $('#descripcion').val(str);
+        $('descripcion').attr('placeholder', str);
+    });
+
+});
+</script>
 @stop

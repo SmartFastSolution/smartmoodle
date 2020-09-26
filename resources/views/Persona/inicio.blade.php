@@ -73,12 +73,10 @@
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->instituto->nombre}}</td>
                                     <td>{{$user->estado}}</td>
-                                    <td>
-                                        @foreach($user->roles as $role)
-                                        <span class="badge badge-danger"> {{$role->name}}
-                                        </span>
-                                        @endforeach
-                                    </td>
+                                    <td> <span class="badge badge-danger">
+                                            {{$user->role->name}}
+                                        </span></td>
+
                                     <td> </td>
                                     <td> </td>
                                     <td class="table-button ">
