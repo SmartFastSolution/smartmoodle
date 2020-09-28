@@ -1,10 +1,11 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Editar Usuario')
 
-@section('content_header')
+@section('encabezado')
 <h1>Edicion de Usuarios</h1>
 @stop
+
 
 @section('content')
 
@@ -96,19 +97,21 @@
 
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label>Roles</label>
-                                    <select class="form-control select" name="role" style="width: 99%;">
-                                        @foreach($roleuser as $roluser)
-                                        <option selected disabled value="{{  $roluser->id }}">{{  $roluser->name }}
-                                        </option>
-                                        @endforeach
-                                        @foreach($roles as $rol)
-                                        <option value="{{ $rol->id}}">{{ $rol->name}}</option>
-                                        @endforeach
 
+                                <div class="form-group">
+                                    <select class="form-control" name="roles" id="roles">
+                                        @foreach($roles as $role)
+                                        <option value="{{ $role->id }}"
+                                            @isset($user->roles[0]->name)
+                                            @if($role->name == $user->roles[0]->name)
+                                            selected 
+                                            @endif
+                                            @endisset
+                                            >{{ $role->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
+                               
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input class="form-control" name="email" id="email" placeholder="Email"
@@ -219,11 +222,9 @@
 @stop
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')
-<script>
-console.log('Hi!');
-</script>
+    <script> console.log('Hi!'); </script>
 @stop

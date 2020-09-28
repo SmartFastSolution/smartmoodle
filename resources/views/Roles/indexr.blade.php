@@ -1,12 +1,11 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
-@section('title', 'Roles')
+@section('title', 'Roles | SmartMoodle')
 
-@section('content_header')
+@section('encabezado')
 <h1>Roles</h1>
-<br><a class="btn btn-info float-right" href="{{route('roles.create')}}"><i
-        class="fas fa-user-plus"></i>ROLES</a>
-<br>
+<a class="btn btn-info float-right" href="{{route('roles.create')}}"><i class="fas fa-user-plus"></i>ROLES</a>
+
 @stop
 
 @section('content')
@@ -15,7 +14,7 @@
 <section class="content">
     <div class="container-fluid">
 
-       @if ($message = Session::get('success'))
+        @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
@@ -57,7 +56,7 @@
                                     <th scope="row">{{$role['id']}}</th>
                                     <td>{{$role['name']}}</td>
                                     <td>{{$role['descripcion']}}</td>
-                                    <td>{{$role['fullacces']}}</td>
+                                    <td>{{ $role['full-access']}}</td>
                                     <td>{{$role['estado']}}</td>
                                     <td> </td>
 
@@ -99,10 +98,13 @@
 
 @stop
 
+
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+<script>
+console.log('Hi!');
+</script>
 @stop

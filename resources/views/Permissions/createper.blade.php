@@ -1,8 +1,8 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Crear Menú')
 
-@section('content_header')
+@section('encabezado')
 <h1>Crear Menú</h1>
 @stop
 
@@ -52,7 +52,8 @@
                             <br>
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" id="estadoon" name="estado" class="custom-control-input" value="on"
-                                    @if(old('estado')=="on" ) checked @endif>
+                                    @if(old('estado')=="on" ) checked @endif  @if (old('estado')===null)
+                                        checked @endif>
                                 <label class="custom-control-label" for="estadoon">Activo</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">

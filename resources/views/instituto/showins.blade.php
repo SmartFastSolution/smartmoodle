@@ -1,8 +1,10 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
+
 
 @section('title', 'Detalle')
 
-@section('content_header')
+
+@section('encabezado')
     <h1>Detalle de la Unidad Educativa</h1>
 @stop
 
@@ -35,12 +37,13 @@
 
 
 
+
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    
 @stop

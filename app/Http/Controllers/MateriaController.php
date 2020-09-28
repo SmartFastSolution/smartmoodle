@@ -43,6 +43,7 @@ class MateriaController extends Controller
         $request->validate([
 
             'nombre'      => 'required|string|max:60',
+            'slug'      => 'required|string|max:60',
             'descripcion'      => 'required|string|max:150',
             'estado'      => 'required|in:on,off',
         ]);
@@ -91,6 +92,7 @@ class MateriaController extends Controller
         $request->validate([
 
             'nombre'      => 'required|string|max:60',
+            'slug'      => 'required|string|max:60',
             'descripcion'      => 'required|string|max:150',
             'estado'      => 'required|in:on,off',
         ]);

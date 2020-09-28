@@ -1,8 +1,8 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
-@section('title', 'Edicion de Roles')
+@section('title', 'Edicion de Roles|SmartMoodle')
 
-@section('content_header')
+@section('encabezado')
 <h1>Edicion de Roles</h1>
 @stop
 
@@ -48,30 +48,30 @@
                             <div class="form-group">
                                 <h3>Acceso Completo</h3>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="fullaccesyes" name="fullacces" class="custom-control-input"
-                                        value="yes" @if($role['fullacces']=="yes" ) checked
-                                        @elseif(old('fullacces')=="yes" ) checked @endif>
-                                    <label class="custom-control-label" for="fullaccesyes">SI</label>
+                                    <input type="radio" id="fullaccessyes" name="full-access"
+                                        class="custom-control-input" value="yes" @if ( $role['full-access']=="yes" )
+                                        checked @elseif (old('full-access')=="yes" ) checked @endif>
+                                    <label class="custom-control-label" for="fullaccessyes">Yes</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="fullaccesno" name="fullacces" class="custom-control-input"
-                                        value="no" @if($role['fullacces']=="no" ) checked @elseif(old('fullacces')=="no"
-                                        ) checked @endif>
-                                    <label class="custom-control-label" for="fullaccesno">No</label>
+                                    <input type="radio" id="fullaccessno" name="full-access"
+                                        class="custom-control-input" value="no" @if ( $role['full-access']=="no" )
+                                        checked @elseif (old('full-access')=="no" ) checked @endif>
+                                    <label class="custom-control-label" for="fullaccessno">No</label>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <h3>Estado del Usuario</h3>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="estadoon" name="estado" class="custom-control-input"
-                                        value="on" @if($role['estado']=="on" ) checked
-                                        @elseif(old('estado')=="on" ) checked @endif>
+                                        value="on" @if($role['estado']=="on" ) checked @elseif(old('estado')=="on" )
+                                        checked @endif>
                                     <label class="custom-control-label" for="estadoon">Activo</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="estadooff" name="estado" class="custom-control-input"
-                                        value="off" @if($role['estado']=="off" ) checked
-                                        @elseif(old('estado')=="off" ) checked @endif>
+                                        value="off" @if($role['estado']=="off" ) checked @elseif(old('estado')=="off" )
+                                        checked @endif>
                                     <label class="custom-control-label" for="estadooff">No Activo</label>
                                 </div>
                             </div>
@@ -109,13 +109,15 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+<link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+<script>
+console.log('Hi!');
+</script>
 
-    <script>
+<script>
 $(document).ready(function() {
 
     $('#name').keyup(function(e) {

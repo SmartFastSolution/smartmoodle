@@ -1,8 +1,8 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Editar Menú')
 
-@section('content_header')
+@section('encabezado')
 <h1>Editar Menú</h1>
 @stop
 
@@ -84,6 +84,7 @@
 @section('css')
 <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
+
 
 @section('js')
 

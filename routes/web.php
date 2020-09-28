@@ -1,6 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Routes;
 use Illuminate\Support\Facades\Route;
+use App\User;
+use Illuminate\Support\Facades\Gate;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,16 @@ use Illuminate\Support\Facades\Route;
  Route::get('/', function () {
        return view('principal');
    })->name('welcome');
+
+
+   //prueba gate rol all
+//    Route::get('/test', function () {
+//        $user=User::find(3);
+//       // $user->roles()->sync([3]);
+//      Gate::authorize('haveaccess', 'rol.index');
+//       return $user;
+//    //  return $user->havePermission('rol.create');
+// });
 
 Auth::routes();
 // Auth::routes(["register" => false]);

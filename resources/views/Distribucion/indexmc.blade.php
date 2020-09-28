@@ -1,8 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
+
 
 @section('title', 'Asignación')
 
-@section('content_header')
+@section('encabezado')
 <h1>Asignación de Materia/Curso</h1>
 <br> <a class="btn btn-info float-right" href="{{route('distribucionmacus.create')}}"><i class="fas fa-plus"></i> Crear
     Asignación</a> <br>
@@ -109,11 +110,9 @@
 @stop
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')
-<script>
-console.log('Hi!');
-</script>
+    
 @stop

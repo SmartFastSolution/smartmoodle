@@ -12,4 +12,19 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+   .sass('resources/sass/app.scss', 'public/css')
+
+mix.styles([
+    'resources/vendor/toastr/toastr.css',
+    'resources/vendor/select2/css/select2.css'
+    
+], 'public/css/plugins.css');
+
+
+ mix.scripts([
+    'resources/vendor/toastr/toastr.min.js',
+    'resources/vendor/select2/js/select2.full.min.js',
+    'resources/vendor/datatables/jquery.dataTables.js',
+
+
+], 'public/js/plugins.js');

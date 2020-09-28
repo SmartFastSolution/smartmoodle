@@ -1,8 +1,8 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Menú')
 
-@section('content_header')
+@section('encabezado')
 <h1>Menú</h1>
 <br>
 <a class="btn btn-info float-right" href="{{route('permissions.create')}}"><i
@@ -45,6 +45,7 @@
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Nombre</th>
+                                    <th scope="col">Slug</th>
                                     <th scope="col">Detalle</th>
                                     <th scope="col">Estado</th>
                                     <th></th>
@@ -56,6 +57,7 @@
                                     @foreach ($permissions as $permiso)
                                     <th scope="row">{{ $permiso['id']}}</th>
                                     <td>{{ $permiso['namep']}}</td>
+                                    <td>{{ $permiso['slug']}}</td>
                                     <td>{{ $permiso['descripcionp']}}</td>
                                     <td>{{ $permiso['estado']}}</td>
 

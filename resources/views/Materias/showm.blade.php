@@ -1,10 +1,11 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', ' Materias')
 
-@section('content_header')
+@section('encabezado')
     <h1> Materias</h1>
 @stop
+
 
 @section('content')
 
@@ -69,6 +70,14 @@
     </div>
 </section>
 
-@endsection
-@section('script')
-@endsection
+
+
+@stop
+
+@section('css')
+    
+@stop
+
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop

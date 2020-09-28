@@ -1,10 +1,13 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
+
 
 @section('title', 'Crear Asignación')
-@section('plugins.Select2', true)
-@section('content_header')
+
+
+@section('encabezado')
 <h1>Crear Asignación Materia/Curso</h1>
 @stop
+
 
 @section('content')
 
@@ -110,9 +113,12 @@
 <script>
 $(function() {
     //Initialize Select2 Elements
-    $('.select2').select2()
+    $(".select2").select2({
+  theme: "classic"
+});
 
 })
+
 </script>
 
 @stop

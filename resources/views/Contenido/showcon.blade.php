@@ -1,12 +1,12 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
 @section('title', 'Dashboard')
 
-@section('content_header')
+@section('encabezado')
     <h1>Dashboard</h1>
 @stop
 
-@section('content')
+@section('contenido')
 
 
 <section class="content-header">
@@ -109,12 +109,14 @@
         </div>
     </div>
 </section>
-@stop
 
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
 
-@section('js')
-    <script> console.log('Hi!'); </script>
+
+@stop 
+
+@section ('styles')
+@stop 
+
+@section('script')
+    
 @stop

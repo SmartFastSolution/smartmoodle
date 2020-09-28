@@ -251,61 +251,61 @@ return [
         [
             'text'    => 'ADMINISTRADOR',
             'icon'    => 'fas fa-users-cog',
-            'can'  => 'Administrador',
+            // 'can'  => 'Administrador',
             'submenu' => [
                 [
                     'text' => 'Roles',
                     'url'  => '/sistema/roles',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
+                    // 'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Menu',
                     'url'  => 'sistema/permissions',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
+                    // 'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Instituto',
                     'url'  => 'sistema/institutos',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
+                    // 'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Usuarios',
                     'url'  => 'sistema/users',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
+                    // 'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Asignacion C/M',
                     'url'  => 'sistema/distribucionmacus',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
+                    // 'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Curso',
                     'url'  => 'sistema/cursos',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
+                    // 'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Niveles',
                     'url'  => 'sistema/nivels',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
+                    // 'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Materias',
                     'url'  => 'sistema/materias',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
+                    // 'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Contenido',
                     'url'  => 'sistema/contenidos',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
+                    // 'can'  => 'Administrador',
                 ],
                
                
@@ -314,19 +314,19 @@ return [
         [
             'text'    => 'ESTUDIANTE',
             'icon'    => 'fas fa-users-cog',
-            'can'  => 'Administrador',
+            // 'can'  => 'Administrador',
             'submenu' => [
                 [
                     'text' => 'Perfil',
                     'url'  => '#',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
+                    // 'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Actividades',
                     'url'  => '#',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
+                    // 'can'  => 'Administrador',
                 ],
         
         
@@ -335,19 +335,19 @@ return [
         [
             'text'    => 'DOCENTE',
             'icon'    => 'fas fa-users-cog',
-            'can'  => 'Administrador',
+            // 'can'  => 'Administrador',
             'submenu' => [
                 [
                     'text' => 'Perfil',
                     'url'  => '#',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
+                    // 'can'  => 'Administrador',
                 ],
                 [
                     'text' => 'Actividades',
                     'url'  => '#',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Administrador',
+                    // 'can'  => 'Administrador',
                 ],
         
         
@@ -356,19 +356,19 @@ return [
         [
             'text'    => 'DOCENTE',
             'icon'    => 'fas fa-users-cog',
-            'can'  => 'Docente',
+            // 'can'  => 'Docente',
             'submenu' => [
                 [
                     'text' => 'Perfil',
                     'url'  => '#',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Docente',
+                    // 'can'  => 'Docente',
                 ],
                 [
                     'text' => 'Actividades',
                     'url'  => '#',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Docente',
+                    // 'can'  => 'Docente',
                 ],
         
         
@@ -377,19 +377,19 @@ return [
         [
             'text'    => 'ESTUDIANTE',
             'icon'    => 'fas fa-users-cog',
-            'can'  => 'Estudiante',
+            // 'can'  => 'Estudiante',
             'submenu' => [
                 [
                     'text' => 'Perfil',
                     'url'  => '#',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Estudiante',
+                    // 'can'  => 'Estudiante',
                 ],
                 [
                     'text' => 'Actividades',
                     'url'  => '#',
                     'icon' => 'fas fa-business-time',
-                    'can'  => 'Estudiante',
+                    // 'can'  => 'Estudiante',
                 ],
         
         

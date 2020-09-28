@@ -1,8 +1,8 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Editar')
-@section('plugins.Select2', true)
-@section('content_header')
+
+@section('encabezado')
 <h1>Editar Asignación</h1>
 @stop
 
@@ -56,7 +56,14 @@
                                 data-placeholder="Select a State" style="width: 100%;">
 
                                 @foreach($materias as $materia)
-                                <option value="{{$materia->id}}">{{$materia->nombre}}</option>
+                                <option value="{{$materia->id}}" @isset( $distribucionmacu->materias[0]->nombre)
+                                    @if($materia->nombre == $distribucionmacu->materias[0]->nombre)
+                                    selected
+                                    @endif
+                                    @endisset
+
+                                    >{{$materia->nombre}}</option>
+
                                 @endforeach
                             </select>
                         </div>
@@ -96,20 +103,17 @@
 @stop
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')
 <script>
 $(function() {
     //Initialize Select2 Elements
-    $('.select2').select2()
+    $(".select2").select2({
+  theme: "classic"
+});
 
 })
 
-//Initialize Select2 Elements
-$('.select2bs4').select2({
-    theme: 'bootstrap4'
-})
 </script>
 @stop

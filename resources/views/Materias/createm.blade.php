@@ -1,8 +1,8 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Materias')
 
-@section('content_header')
+@section('encabezado')
 <h1>Añadir Materias</h1>
 @stop
 
@@ -42,12 +42,17 @@
                                     value="{{ old('nombre') }}" placeholder="Añadir Materia">
                             </div>
                             <div class="form-group">
+                                <label for="slug">Slug Materia</label>
+                                <input type="text" class="form-control" name="slug" tag="slug"
+                                    id="slug" placeholder="Slug Materia" value="{{old('slug')}}">
+                            </div>
+                            <div class="form-group">
                                 <label for="descripcion">Descripción</label>
                                 <input type="text" class="form-control" name="descripcion" id="descripcion"
                                     value="{{ old('descripcion') }}" placeholder="Añadir Descripcion">
                             </div>
 
-                         
+
 
                             <div class="form-group">
                                 <label for="nombre">Estado </label>
@@ -79,12 +84,24 @@
 </section>
 
 
+
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+<script>
+$(document).ready(function() {
+
+    $('#nombre').keyup(function(e) {
+        var str = $('#nombre').val();
+        str = str.replace(/\W+(?!$)/g, '-').toLowerCase(); // remplazamos el estdo de dashe
+        $('#slug').val(str);
+        $('slug').attr('placeholder', str);
+    });
+
+});
+</script>
 @stop

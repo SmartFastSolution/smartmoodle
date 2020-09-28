@@ -6,6 +6,7 @@ use App\Modelos\Role;
 use App\Permission;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RoleController extends Controller
 {
@@ -16,6 +17,8 @@ class RoleController extends Controller
      */
     public function index()
     {
+        Gate::authorize('haveaccess', 'rol.index');
+
         $roles= Role::orderBy('id','Asc')->paginate(5);
     
         return view('Roles.indexr',['roles'=>$roles]);
@@ -28,6 +31,8 @@ class RoleController extends Controller
      */
     public function create()
     {
+        
+        Gate::authorize('haveaccess', 'rol.create');
         /// añadido la linea de permision y el compact
      $permissions =Permission::get();
 
@@ -42,13 +47,13 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-
+        Gate::authorize('haveaccess', 'rol.store');
         
         $request->validate([
         
             'name' => [ 'string', 'max:50','unique:roles,name'],
             'descripcion' => [ 'string', 'max:50','unique:roles,descripcion'],
-            'fullacces' => ['required' ,'in:yes,no'],
+            'full-access'   => 'required|in:yes,no',
             'estado' => ['required' ,'in:on,off'],
 
         ]);
@@ -72,15 +77,14 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-       
+        Gate::authorize('haveaccess', 'rol.show');
         $permission_role=[];
     
         foreach($role->permissions as $permission){
             $permission_role[]=$permission->id;
    
         }
-       
-           $permissions=Permission::get();
+                  $permissions=Permission::get();
        
              
        
@@ -96,7 +100,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-
+        Gate::authorize('haveaccess', 'rol.edit');
      $permission_role=[];
     
      foreach($role->permissions as $permission){
@@ -117,12 +121,12 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-
+        Gate::authorize('haveaccess', 'rol.update');
         $request->validate([
         
             'name' => [ 'string', 'max:50','unique:roles,name,' .$role->id,],
             'descripcion' => [ 'string', 'max:50','unique:roles,descripcion,' .$role->id,],
-            'fullacces' => ['required' ,'in:yes,no'],
+            'full-access'   =>  ['required' ,'in:yes,no'],
             'estado' => ['required' ,'in:on,off'],
 
 
@@ -130,12 +134,11 @@ class RoleController extends Controller
         
         $role->update($request->all());
     
-        if ($request->get('permission')) {
-           
+        //if ($request->get('permission')) {
+             $role->permissions()->sync($request->get('permission')); //solo quite la validacion por caso de si tiene o no permiso
+        //}
 
-            $role->permissions()->sync($request->get('permission'));
-        }
-        return redirect ('sistema/iniciorole '); // en el accion tenemos el index ya que de aqui nos redireccion al index 
+        return redirect ('sistema/iniciorole ')->with('success','Rol Actualizado con Exito'); // en el accion tenemos el index ya que de aqui nos redireccion al index 
     }
 
     /**
@@ -146,6 +149,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('haveaccess', 'rol.destroy');
         $user= Role::find($id);
         $user->delete();
 

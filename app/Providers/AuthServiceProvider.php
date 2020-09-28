@@ -27,32 +27,19 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         
-          
-        //  Gate::define('haveacces', function(User $user, $perm){
-        //     return $user->havePermission($perm); 
-        //  });
-       
-       
-        // Gate::before(function($user, $role){
-        //     return $user->tieneRol()->contains($role);
-        // });
-      
-        Gate::define('Administrador', function($user) {
-            return $user->role->name == 'Administrador';
+
+
+
+
+         Gate::define('haveaccess', function(User $user, $perm){
+            return $user->havePermission($perm); 
          });
+
         
-         /* define a manager user role */
-         Gate::define('Docente', function($user) {
-             return $user->role->name == 'Docente';
-         });
-       
-         /* define a user role */
-         Gate::define('Estudiante', function($user) {
-             return $user->role->name == 'Estudiante';
-         });
-
-
-
+ 
+        
 
     }
+    
+    
 }

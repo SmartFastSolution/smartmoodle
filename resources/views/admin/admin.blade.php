@@ -1,6 +1,6 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
-@section('title', 'Creador de plantillas')
+@section('titulo', 'Creador de plantillas')
 @section('css')
     <link rel="stylesheet" href="{{asset('css/bootstrap-tagsinput.css')}}">
 @endsection

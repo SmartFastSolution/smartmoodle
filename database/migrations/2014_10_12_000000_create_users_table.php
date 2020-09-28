@@ -16,7 +16,6 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('instituto_id');
-            $table->unsignedBigInteger('role_id');
             $table->string('cedula');
             $table->string('fechanacimiento');
             $table->string('name');
@@ -42,7 +41,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 
             $table->foreign('instituto_id')->references('id')->on('institutos')->onDelete('cascade');
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            
         });
     }
 

@@ -7,10 +7,13 @@ use App\Instituto;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Traits\UserTrait;
+
+
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, UserTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -59,13 +62,12 @@ class User extends Authenticatable
     }
 
 
-    public function role(){
-          
-        return $this->belongsTo('App\Modelos\Role');
-
-    }
+    
+ 
     
 
+
+    
     //relacion de muchos a 1 es decir muchos usuarios 
     //tomaran 1 dato de instituto
     public function instituto(){
@@ -74,22 +76,7 @@ class User extends Authenticatable
 
     }
 
-  
-// estos son metodos para el rol 
-//    public function asignarRol($role){  //para asignar los roles de manera automatica
-    
-//     $this->roles()->sync($role, false);
-        
-//     }
-    
-//esta funcion la aplico en el serviceprovider para el metodo gate del service provider
-//no puedo borrar esta funcion 
-
-    // public function tieneROl(){
-
-    //  return $this->roles->flatten()->pluck('name')->unique();
-
-    // }
+ 
 
     public function adminlte_image()
     {
@@ -100,4 +87,3 @@ class User extends Authenticatable
 
     
 }
-

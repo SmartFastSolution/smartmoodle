@@ -1161,63 +1161,6 @@
         ]
     },
     {
-        "name": "jeroennoten/laravel-adminlte",
-        "version": "v3.4.4",
-        "version_normalized": "3.4.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/jeroennoten/Laravel-AdminLTE.git",
-            "reference": "496e7cb3a770fcf05e78627d1b3cb0f3e4c865f3"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/jeroennoten/Laravel-AdminLTE/zipball/496e7cb3a770fcf05e78627d1b3cb0f3e4c865f3",
-            "reference": "496e7cb3a770fcf05e78627d1b3cb0f3e4c865f3",
-            "shasum": ""
-        },
-        "require": {
-            "almasaeed2010/adminlte": "^3.0",
-            "laravel/framework": ">=6.0",
-            "php": ">=7.2.0"
-        },
-        "require-dev": {
-            "orchestra/testbench": ">=4.0",
-            "phpunit/phpunit": "^8.3"
-        },
-        "time": "2020-07-17T17:35:17+00:00",
-        "type": "library",
-        "extra": {
-            "laravel": {
-                "providers": [
-                    "JeroenNoten\\LaravelAdminLte\\AdminLteServiceProvider"
-                ]
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "JeroenNoten\\LaravelAdminLte\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Jeroen Noten",
-                "email": "jeroennoten@me.com"
-            }
-        ],
-        "description": "Easy AdminLTE integration with Laravel",
-        "keywords": [
-            "AdminLTE",
-            "admin",
-            "administrator",
-            "laravel"
-        ]
-    },
-    {
         "name": "laravel/framework",
         "version": "v7.28.3",
         "version_normalized": "7.28.3.0",

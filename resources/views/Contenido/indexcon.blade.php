@@ -1,8 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Contenido | SmartMoodle')
 
-@section('content_header')
+
+@section('encabezado')
 <h1>Contenido</h1>
 <br>
 <div class="card-tools">
@@ -14,8 +15,7 @@
 <br><br>
 @stop
 
-
-@section('content')
+@section('contenido')
 
 
 
@@ -103,14 +103,16 @@
 
 
 
+
+
+
+
 @stop
 
-@section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
+@section('styles')
+    
 @stop
 
-@section('js')
-<script>
-console.log('Hi!');
-</script>
+@section('script')
+    
 @stop

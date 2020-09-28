@@ -8,6 +8,7 @@ use App\Instituto;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 use Illuminate\Support\facades\Hash;
 
@@ -20,7 +21,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-    
+        Gate::authorize('haveaccess', 'user.index');
       //  $users= User::where('Titulo','Administrador')->orderBy('id','Asc')->paginate(5);
 
        $users= User::orderBy('id','Asc')->paginate(5);
@@ -36,6 +37,7 @@ class UsersController extends Controller
      */
     public function create()
     {
+        Gate::authorize('haveaccess', 'user.create');
           // $institutos=Instituto::get();
            $roles=Role::get();
            $institutos=Instituto::get();
@@ -51,6 +53,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('haveaccess', 'user.store');
         //validacion de datos 
          $request->validate([
             'cedula'          =>  'required|string|max:10',
@@ -81,7 +84,7 @@ class UsersController extends Controller
 
         $user = new User;
         $user->instituto_id = $request->instituto;  //relacion con el instituto y usuario
-        $user->role_id = $request->role; // relacion con el rol y usuario
+       
         $user->cedula = $request->cedula;
         $user->fechanacimiento = $request->fechanacimiento;
         $user->name = $request->name;
@@ -108,7 +111,11 @@ class UsersController extends Controller
                
            
         
-        // $user->asignarRol($request->get('role'));
+        if ($request->get('role')) {
+           
+
+            $user->roles()->sync($request->get('role'));
+        }
 
         return redirect('sistema/users');
         //return redirect('sistema/admin');
@@ -123,9 +130,8 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
+        Gate::authorize('haveaccess', 'user.show');
         return view ('Persona.showu',['user'=>$user]);
-
-       
     }
 
     /**
@@ -136,12 +142,13 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-
-        $roles = Role::all();
-        $roleuser = User::find($user->id)->role()->get();
+        Gate::authorize('haveaccess', 'user.edit');
+        $roles= Role::orderBy('name')->get();
+        // $roles = Role::all();
+        
         $institutos = Instituto::get(); // todos los datos de la bd
         $institutouser = User::find($user->id)->instituto()->get(); //llama al instituto que este relacionado a un usuario 
-       return view('Persona.edituser',['user'=>$user, 'roles'=>$roles,'institutos'=>$institutos,'institutouser'=>$institutouser,'roleuser' =>$roleuser]);
+       return view('Persona.edituser',['user'=>$user, 'roles'=>$roles,'institutos'=>$institutos,'institutouser'=>$institutouser]);
     
     }
 
@@ -154,6 +161,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        Gate::authorize('haveaccess', 'user.update');
         $request->validate([
 
             'cedula'          =>  'required|string|max:10',
@@ -199,10 +207,8 @@ class UsersController extends Controller
             $user->instituto_id = $request->instituto;
           }
 
-          if($request->get('role')){
-          
-            $user->role_id = $request->role;
-          }
+          $user->roles()->sync($request->get('roles'));
+         
        //ejemplo para decision al guarda docente alumno
         // if($request->input('rol') == 'estudiante'){
         //     $user = User::get()->last();
@@ -213,16 +219,11 @@ class UsersController extends Controller
         // }elseif($request->input('rol') == 'admin'){
         // }
 
-        // if ($request->get('role')) {
-        //     $user->roles()->sync($request->get('role'));
-        // }
 
         $user->save();
-       
-      // redireccionamos a sistema y el enlace que tenemos como url ya 
-      //que sistema es nuestra base para la seguridad
+    
        return redirect('sistema/users');
-       //return redirect('sistema/admin');
+      
     }
 
     /**
@@ -233,6 +234,7 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
+        Gate::authorize('haveaccess', 'user.destroy');
         $user= User::find($user->id);
         $user->delete();
 

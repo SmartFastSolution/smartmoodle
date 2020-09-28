@@ -1,11 +1,12 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Usuarios')
 
-@section('content_header')
+@section('encabezado')
 <h1>Sección Administrador</h1>
 <br>
 <a class="btn btn-info float-right btn" href="{{route('users.create')}}"><i class="fas fa-user-plus"></i>USUARIO</a>
+<br>
 <br>
 @stop
 
@@ -28,9 +29,9 @@
 </section>
 
 
-
 <section class="content">
-    <div class="container-fluid">
+    <div class="container">
+
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
@@ -73,9 +74,12 @@
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->instituto->nombre}}</td>
                                     <td>{{$user->estado}}</td>
-                                    <td> <span class="badge badge-danger">
-                                            {{$user->role->name}}
-                                        </span></td>
+                                    <td>
+                                        @foreach($user->roles as $role)
+                                        <span class="badge badge-danger"> {{$role->name}}
+                                        </span>
+                                        @endforeach
+                                    </td>
 
                                     <td> </td>
                                     <td> </td>
@@ -112,11 +116,9 @@
 @stop
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')
-<script>
-console.log('Hi!');
-</script>
+    <script> console.log('Hi!'); </script>
 @stop
