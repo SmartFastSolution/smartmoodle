@@ -1,14 +1,13 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
-@section('title', 'Creador de plantillas')
-@section('plugins.Sweetalert2', true)
+@section('titulo', 'Creador de plantillas')
 @section('css')
     <link rel="stylesheet" href="{{asset('css/bootstrap-tagsinput.css')}}">
 @endsection
 @section('content')
 
 
-	<h1 class="text-center  mt-5 text-danger"> Administrador de Talleres</h1>
+	<h1 class="text-center  mt-5 text-danger">Administrador de Talleres</h1>
      
   <div id="tallerlist"> 
      	<div class="container" >
@@ -75,10 +74,10 @@
 @include('layouts.modal')
 
 @section('js')
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 
 <script type="text/javascript">
+  $(function() {
    var i = 1;
 
    var objetivo = document.getElementById('num');
@@ -159,6 +158,7 @@
 
       }else{
       $('.fac').append(tr);
+      
       toastr.success("Columna agregada correctamente", "Smarmoddle",{
          "timeOut": "1000"
       });
@@ -208,8 +208,7 @@
 }
     });
 
-
-
+});
   </script>
     <script src="{{asset('js/bootstrap-tagsinput.js')}}"></script>
 @endsection

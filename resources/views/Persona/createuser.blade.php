@@ -1,5 +1,6 @@
+@extends('layouts.nav')
   
-@extends('adminlte::page')
+
 
 @section('title', 'Crear Usuario')
 

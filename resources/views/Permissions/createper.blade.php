@@ -1,4 +1,5 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
+
 
 @section('title', 'Crear Permisos')
 

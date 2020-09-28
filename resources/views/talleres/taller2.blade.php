@@ -1,12 +1,11 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
-@section('title', 'Taller '.$d)
-@section('contenido')
-    @foreach ($datos as $dato)
-<h1 class="text-center  mt-5"> {{ $dato->taller->nombre }}</h1>
-     <h3 class="text-center mt-3">{{$dato->enunciado}}</h3>
+@section('title', $datos->taller->nombre)
+@section('content')
+<h1 class="text-center  mt-5"> {{ $datos->taller->nombre }}</h1>
+     <h3 class="text-center mt-3">{{$datos->enunciado}}</h3>
 
-<form action="" action="{{ route('taller1') }}" method="POST">
+<form action="" action="{{ route('taller2', ['idtaller' => $d]) }}" method="POST">
     @csrf
 <div class="container">
 
@@ -22,7 +21,7 @@
             <textarea class="form-control areadesign" name="resp2" id="" cols="40" rows="5"></textarea>
         </div>
             <div class="col-3 text-center ">
-                <img class="img-fluid" src="{{ asset($dato->img) }}" alt="">
+                <img class="img-fluid" src="{{ asset($datos->img) }}" alt="">
             </div>
         <div class="col-4 mt-5">
             <textarea class="form-control areadesign" name="resp3" id="" cols="40" rows="5"
@@ -42,5 +41,4 @@
 </div>
 
 </form>
-    @endforeach
 @endsection

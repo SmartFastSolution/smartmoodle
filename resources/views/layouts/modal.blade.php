@@ -1,7 +1,7 @@
 
-<div class="modal fade" id="taller1" tabindex="-1" role="dialog" aria-labelledby="taller1Label" aria-hidden="true">
+<div class="modal fade" id="taller1" tabindex="-1" role="dialog"  aria-labelledby="taller1Label" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
+    <div class="modal-content bg-warning">
       <div class="modal-header">
         <h5 class="modal-title" id="taller1Label">TALLER COMPLETE EL ENUNCIADO</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -36,7 +36,7 @@
             </div>
               <div class="form-group">
                 <label for="" class="col-form-label">Leyenda(Usar cuando no hay imagen):</label>
-                <textarea required=""  class="form-control" name="leyenda" ></textarea>
+                <textarea  class="form-control" name="leyenda" ></textarea>
               </div>
                     <div class="row justify-content-center">
                 <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
@@ -195,11 +195,17 @@
               <div class="form-row justify-content-center">
                <div class="form-group col-md-4">
                 <label for="" class="col-form-label ">Imagen 1:</label>
-                <input required="" type="file" name="img1" class="custom-file">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img1" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                  </div>
               </div>
                <div class="form-group col-md-4">
                 <label for="" class="col-form-label ">Imagen 2:</label>
-                <input required="" type="file" name="img2" class="custom-file">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img2" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                  </div>
               </div>
               </div>
               <div class="row justify-content-center">

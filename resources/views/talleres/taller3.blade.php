@@ -1,19 +1,18 @@
-@extends('layouts.master')
+@extends('layouts.nav')
 
-@section('title', 'Taller 4')
-@section('contenido')
+@section('title', $datos->taller->nombre)
+@section('content')
 
-    @foreach ($datos as $dato)
-<h1 class="text-center  mt-5 text-danger">{{ $dato->taller->nombre }}</h1>
-     <h3 class="text-center mt-5 text-info">{{ $dato->enunciado }}</h3>
-     <form action="{{ route('taller3') }}" method="POST">
+<h1 class="text-center  mt-5 text-danger">{{ $datos->taller->nombre }}</h1>
+     <h3 class="text-center mt-5 text-info">{{ $datos->enunciado }}</h3>
+     <form action="{{ route('taller3', ['idtaller' => $d]) }}" method="POST">
            @csrf
      	<div class="container">
      		<div class="row justify-content-center">
      			<div class="col-7">
      				<div class="row mt-4 p-2">
      					<div class="col-6 ">
-     						<label class="col-form-label " for="">{{ $dato->enunciado1 }}</label>
+     						<label class="col-form-label " for="">{{ $datos->enunciado1 }}</label>
      						
      					</div>
      					<div class="col-6">
@@ -23,7 +22,7 @@
                          <br>
      				<div class="row mt-4 p-2">
      					<div class="col-6">
-     						<label class="col-form-label" for="">{{ $dato->enunciado2 }}:</label>
+     						<label class="col-form-label" for="">{{ $datos->enunciado2 }}:</label>
  
      					</div>
      					<div class="col-6">
@@ -33,7 +32,7 @@
 
      				<div class="row mt-4 p-2">
      					<div class="col-6">
-     						<label class="col-form-label" for="">{{ $dato->enunciado3 }}</label>
+     						<label class="col-form-label" for="">{{ $datos->enunciado3 }}</label>
  
      					</div>
      					<div class="col-6">
@@ -43,7 +42,7 @@
 <br>
      				<div class="row mt-4 p-2">
      					<div class="col-6">
-     						<label class="col-form-label" for="">{{ $dato->enunciado4 }}</label>
+     						<label class="col-form-label" for="">{{ $datos->enunciado4 }}</label>
  
      					</div>
      					<div class="col-6">
@@ -53,7 +52,7 @@
 <br>
      				<div class="row p-2">
      					<div class="col-6">
-     						<label class="col-form-label" for="">{{ $dato->enunciado5 }}</label>
+     						<label class="col-form-label" for="">{{ $datos->enunciado5 }}</label>
  
      					</div>
      					<div class="col-6">
@@ -67,5 +66,4 @@
     		 </div>
      	</div>
      </form>
-@endforeach
 @endsection

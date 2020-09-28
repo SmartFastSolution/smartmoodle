@@ -1,6 +1,6 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
-@section('title', $datos->taller->nombre)
+@section('titulo', $datos->taller->nombre)
 @section('content')
 
 <form action="{{ route('taller1', ['idtaller' => $d]) }}" method="POST">
@@ -28,7 +28,3 @@
  </div>
 </form>
 @endsection
-
-     <!--
-              
-            -->
