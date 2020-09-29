@@ -1,15 +1,28 @@
+<<<<<<< HEAD
 /*! Responsive 2.2.6
  * 2014-2020 SpryMedia Ltd - datatables.net/license
+=======
+/*! Responsive 2.2.3
+ * 2014-2018 SpryMedia Ltd - datatables.net/license
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  */
 
 /**
  * @summary     Responsive
  * @description Responsive tables plug-in for DataTables
+<<<<<<< HEAD
  * @version     2.2.6
  * @file        dataTables.responsive.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
  * @copyright   Copyright 2014-2020 SpryMedia Ltd.
+=======
+ * @version     2.2.3
+ * @file        dataTables.responsive.js
+ * @author      SpryMedia Ltd (www.sprymedia.co.uk)
+ * @contact     www.sprymedia.co.uk/contact
+ * @copyright   Copyright 2014-2018 SpryMedia Ltd.
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  *
  * This source file is free software, available under the following license:
  *   MIT license - http://datatables.net/license/mit
@@ -144,7 +157,11 @@ $.extend( Responsive.prototype, {
 		var that = this;
 		var dt = this.s.dt;
 		var dtPrivateSettings = dt.settings()[0];
+<<<<<<< HEAD
 		var oldWindowWidth = $(window).innerWidth();
+=======
+		var oldWindowWidth = $(window).width();
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 		dt.settings()[0]._responsive = this;
 
@@ -153,7 +170,11 @@ $.extend( Responsive.prototype, {
 		$(window).on( 'resize.dtr orientationchange.dtr', DataTable.util.throttle( function () {
 			// iOS has a bug whereby resize can fire when only scrolling
 			// See: http://stackoverflow.com/questions/8898412
+<<<<<<< HEAD
 			var width = $(window).innerWidth();
+=======
+			var width = $(window).width();
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 			if ( width !== oldWindowWidth ) {
 				that._resize();
@@ -181,7 +202,10 @@ $.extend( Responsive.prototype, {
 			dt.off( '.dtr' );
 			$( dt.table().body() ).off( '.dtr' );
 			$(window).off( 'resize.dtr orientationchange.dtr' );
+<<<<<<< HEAD
 			dt.cells('.dtr-control').nodes().to$().removeClass('dtr-control');
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 			// Restore the columns that we've hidden
 			$.each( that.s.current, function ( i, val ) {
@@ -220,7 +244,11 @@ $.extend( Responsive.prototype, {
 
 					that._classLogic();
 					that._resizeAuto();
+<<<<<<< HEAD
 					that._resize(true);
+=======
+					that._resize();
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 					that._redrawChildren();
 				}, 100 );
@@ -239,7 +267,11 @@ $.extend( Responsive.prototype, {
 		dt.on( 'column-reorder.dtr', function (e, settings, details) {
 			that._classLogic();
 			that._resizeAuto();
+<<<<<<< HEAD
 			that._resize(true);
+=======
+			that._resize();
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		} );
 
 		// Change in column sizes means we need to calc
@@ -268,6 +300,7 @@ $.extend( Responsive.prototype, {
 			} );
 		});
 
+<<<<<<< HEAD
 		dt
 			.on( 'draw.dtr', function () {
 				that._controlClass();
@@ -286,6 +319,18 @@ $.extend( Responsive.prototype, {
 					dt.columns.adjust();
 				}
 			} );
+=======
+		dt.on( 'init.dtr', function (e, settings, details) {
+			that._resizeAuto();
+			that._resize();
+
+			// If columns were hidden, then DataTables needs to adjust the
+			// column sizing
+			if ( $.inArray( false, that.s.current ) ) {
+				dt.columns.adjust();
+			}
+		} );
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 		// First pass - draw the table for the current viewport size
 		this._resize();
@@ -450,12 +495,22 @@ $.extend( Responsive.prototype, {
 			var column = this.column(i);
 			var className = column.header().className;
 			var priority = dt.settings()[0].aoColumns[i].responsivePriority;
+<<<<<<< HEAD
 			var dataPriority = column.header().getAttribute('data-priority');
 
 			if ( priority === undefined ) {
 				priority = dataPriority === undefined || dataPriority === null?
 					10000 :
 					dataPriority * 1;
+=======
+
+			if ( priority === undefined ) {
+				var dataPriority = $(column.header()).data('priority');
+
+				priority = dataPriority !== undefined ?
+					dataPriority * 1 :
+					10000;
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			}
 
 			return {
@@ -522,7 +577,11 @@ $.extend( Responsive.prototype, {
 
 			// Split the class name up so multiple rules can be applied if needed
 			for ( var k=0, ken=classNames.length ; k<ken ; k++ ) {
+<<<<<<< HEAD
 				var className = classNames[k].trim();
+=======
+				var className = $.trim( classNames[k] );
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 				if ( className === 'all' ) {
 					// Include in all
@@ -537,7 +596,11 @@ $.extend( Responsive.prototype, {
 					hasClass = true;
 					return;
 				}
+<<<<<<< HEAD
 				else if ( className === 'control' || className === 'dtr-control' ) {
+=======
+				else if ( className === 'control' ) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 					// Special column that is only visible, when one of the other
 					// columns is hidden. This is used for the details control
 					hasClass = true;
@@ -575,6 +638,7 @@ $.extend( Responsive.prototype, {
 		this.s.columns = columns;
 	},
 
+<<<<<<< HEAD
 	/**
 	 * Update the cells to show the correct control class / button
 	 * @private
@@ -605,6 +669,8 @@ $.extend( Responsive.prototype, {
 				.addClass('dtr-control');
 		}
 	},
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 	/**
 	 * Show the details for the child row
@@ -646,7 +712,11 @@ $.extend( Responsive.prototype, {
 
 		// The inline type always uses the first child as the target
 		if ( details.type === 'inline' ) {
+<<<<<<< HEAD
 			details.target = 'td.dtr-control, th.dtr-control';
+=======
+			details.target = 'td:first-child, th:first-child';
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		}
 
 		// Keyboard accessibility
@@ -665,6 +735,7 @@ $.extend( Responsive.prototype, {
 		var target   = details.target;
 		var selector = typeof target === 'string' ? target : 'td, th';
 
+<<<<<<< HEAD
 		if ( target !== undefined || target !== null ) {
 			// Click handler to show / hide the details rows when they are available
 			$( dt.table().body() )
@@ -712,6 +783,53 @@ $.extend( Responsive.prototype, {
 					}
 				} );
 		}
+=======
+		// Click handler to show / hide the details rows when they are available
+		$( dt.table().body() )
+			.on( 'click.dtr mousedown.dtr mouseup.dtr', selector, function (e) {
+				// If the table is not collapsed (i.e. there is no hidden columns)
+				// then take no action
+				if ( ! $(dt.table().node()).hasClass('collapsed' ) ) {
+					return;
+				}
+
+				// Check that the row is actually a DataTable's controlled node
+				if ( $.inArray( $(this).closest('tr').get(0), dt.rows().nodes().toArray() ) === -1 ) {
+					return;
+				}
+
+				// For column index, we determine if we should act or not in the
+				// handler - otherwise it is already okay
+				if ( typeof target === 'number' ) {
+					var targetIdx = target < 0 ?
+						dt.columns().eq(0).length + target :
+						target;
+
+					if ( dt.cell( this ).index().column !== targetIdx ) {
+						return;
+					}
+				}
+
+				// $().closest() includes itself in its check
+				var row = dt.row( $(this).closest('tr') );
+
+				// Check event type to do an action
+				if ( e.type === 'click' ) {
+					// The renderer is given as a function so the caller can execute it
+					// only when they need (i.e. if hiding there is no point is running
+					// the renderer)
+					that._detailsDisplay( row, false );
+				}
+				else if ( e.type === 'mousedown' ) {
+					// For mouse users, prevent the focus ring from showing
+					$(this).css('outline', 'none');
+				}
+				else if ( e.type === 'mouseup' ) {
+					// And then re-allow at the end of the click
+					$(this).blur().css('outline', '');
+				}
+			} );
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	},
 
 
@@ -731,6 +849,7 @@ $.extend( Responsive.prototype, {
 				return;
 			}
 
+<<<<<<< HEAD
 			var dtCol = dt.settings()[0].aoColumns[ i ];
 
 			return {
@@ -742,6 +861,14 @@ $.extend( Responsive.prototype, {
 				title:       dtCol.sTitle !== null ?
 					dtCol.sTitle :
 					$(dt.column(i).header()).text()
+=======
+			return {
+				title:       dt.settings()[0].aoColumns[ i ].sTitle,
+				data:        dt.cell( rowIdx, i ).render( that.c.orthogonal ),
+				hidden:      dt.column( i ).visible() && !that.s.current[ i ],
+				columnIndex: i,
+				rowIndex:    rowIdx
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			};
 		} );
 	},
@@ -790,6 +917,7 @@ $.extend( Responsive.prototype, {
 	 * determining what breakpoint the window currently is in, getting the
 	 * column visibilities to apply and then setting them.
 	 *
+<<<<<<< HEAD
 	 * @param  {boolean} forceRedraw Force a redraw
 	 * @private
 	 */
@@ -798,6 +926,15 @@ $.extend( Responsive.prototype, {
 		var that = this;
 		var dt = this.s.dt;
 		var width = $(window).innerWidth();
+=======
+	 * @private
+	 */
+	_resize: function ()
+	{
+		var that = this;
+		var dt = this.s.dt;
+		var width = $(window).width();
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		var breakpoints = this.c.breakpoints;
 		var breakpoint = breakpoints[0].name;
 		var columns = this.s.columns;
@@ -820,7 +957,10 @@ $.extend( Responsive.prototype, {
 		// listeners know what the state is. Need to determine if there are
 		// any columns that are not visible but can be shown
 		var collapsedClass = false;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		for ( i=0, ien=columns.length ; i<ien ; i++ ) {
 			if ( columnsVis[i] === false && ! columns[i].never && ! columns[i].control && ! dt.column(i).visible() === false ) {
 				collapsedClass = true;
@@ -838,7 +978,11 @@ $.extend( Responsive.prototype, {
 				visible++;
 			}
 
+<<<<<<< HEAD
 			if ( forceRedraw || columnsVis[i] !== oldVis[i] ) {
+=======
+			if ( columnsVis[i] !== oldVis[i] ) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				changed = true;
 				that._setColumnVis( colIdx, columnsVis[i] );
 			}
@@ -855,8 +999,11 @@ $.extend( Responsive.prototype, {
 				$('td', dt.table().body()).eq(0).attr('colspan', visible);
 			}
 		}
+<<<<<<< HEAD
 
 		that._controlClass();
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	},
 
 
@@ -900,8 +1047,11 @@ $.extend( Responsive.prototype, {
 		var clonedHeader = $( dt.table().header().cloneNode( false ) ).appendTo( clonedTable );
 		var clonedBody   = $( dt.table().body() ).clone( false, false ).empty().appendTo( clonedTable ); // use jQuery because of IE8
 
+<<<<<<< HEAD
 		clonedTable.style.width = 'auto';
 
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		// Header
 		var headerCells = dt.columns()
 			.header()
@@ -911,7 +1061,10 @@ $.extend( Responsive.prototype, {
 			.to$()
 			.clone( false )
 			.css( 'display', 'table-cell' )
+<<<<<<< HEAD
 			.css( 'width', 'auto' )
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			.css( 'min-width', 0 );
 
 		// Body rows - we don't need to take account of DataTables' column
@@ -979,6 +1132,7 @@ $.extend( Responsive.prototype, {
 	},
 
 	/**
+<<<<<<< HEAD
 	 * Get the state of the current hidden columns - controlled by Responsive only
 	 */
 	_responsiveOnlyHidden: function ()
@@ -996,6 +1150,8 @@ $.extend( Responsive.prototype, {
 	},
 
 	/**
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	 * Set a column's visibility.
 	 *
 	 * We don't use DataTables' column visibility controls in order to ensure
@@ -1248,12 +1404,17 @@ Responsive.renderer = {
 
 			var data = $.each( columns, function ( i, col ) {
 				if ( col.hidden ) {
+<<<<<<< HEAD
 					var klass = col.className ?
 						'class="'+ col.className +'"' :
 						'';
 	
 					$(
 						'<li '+klass+' data-dtr-index="'+col.columnIndex+'" data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
+=======
+					$(
+						'<li data-dtr-index="'+col.columnIndex+'" data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 							'<span class="dtr-title">'+
 								col.title+
 							'</span> '+
@@ -1275,12 +1436,17 @@ Responsive.renderer = {
 	listHidden: function () {
 		return function ( api, rowIdx, columns ) {
 			var data = $.map( columns, function ( col ) {
+<<<<<<< HEAD
 				var klass = col.className ?
 					'class="'+ col.className +'"' :
 					'';
 
 				return col.hidden ?
 					'<li '+klass+' data-dtr-index="'+col.columnIndex+'" data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
+=======
+				return col.hidden ?
+					'<li data-dtr-index="'+col.columnIndex+'" data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 						'<span class="dtr-title">'+
 							col.title+
 						'</span> '+
@@ -1304,11 +1470,15 @@ Responsive.renderer = {
 
 		return function ( api, rowIdx, columns ) {
 			var data = $.map( columns, function ( col ) {
+<<<<<<< HEAD
 				var klass = col.className ?
 					'class="'+ col.className +'"' :
 					'';
 
 				return '<tr '+klass+' data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
+=======
+				return '<tr data-dt-row="'+col.rowIndex+'" data-dt-column="'+col.columnIndex+'">'+
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 						'<td>'+col.title+':'+'</td> '+
 						'<td>'+col.data+'</td>'+
 					'</tr>';
@@ -1424,14 +1594,22 @@ Api.register( 'responsive.hasHidden()', function () {
 	var ctx = this.context[0];
 
 	return ctx._responsive ?
+<<<<<<< HEAD
 		$.inArray( false, ctx._responsive._responsiveOnlyHidden() ) !== -1 :
+=======
+		$.inArray( false, ctx._responsive.s.current ) !== -1 :
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		false;
 } );
 
 Api.registerPlural( 'columns().responsiveHidden()', 'column().responsiveHidden()', function () {
 	return this.iterator( 'column', function ( settings, column ) {
 		return settings._responsive ?
+<<<<<<< HEAD
 			settings._responsive._responsiveOnlyHidden()[ column ] :
+=======
+			settings._responsive.s.current[ column ] :
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			false;
 	}, 1 );
 } );
@@ -1443,7 +1621,11 @@ Api.registerPlural( 'columns().responsiveHidden()', 'column().responsiveHidden()
  * @name Responsive.version
  * @static
  */
+<<<<<<< HEAD
 Responsive.version = '2.2.6';
+=======
+Responsive.version = '2.2.3';
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 
 $.fn.dataTable.Responsive = Responsive;

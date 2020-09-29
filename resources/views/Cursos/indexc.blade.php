@@ -5,14 +5,10 @@
 @section('encabezado')
 <h1>Curso</h1>
 <br>
-<br>
 <a class="btn btn-info float-right " href="{{route('cursos.create')}}"><i class="fas fa-user-plus"></i> Cursos</a>
-<br>
 @stop
 
 @section('content')
-
-
 
 
 
@@ -97,9 +93,9 @@
 @stop
 
 @section('css')
-    
+
 @stop
 
 @section('js')
-    
-@sto
+
+@stop

@@ -1,5 +1,6 @@
 @extends('layouts.nav')
 
+
 @section('title', 'Crear Menú')
 
 @section('encabezado')

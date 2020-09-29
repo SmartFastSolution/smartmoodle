@@ -83,7 +83,11 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 		for ( i=0, ien=buttons.length ; i<ien ; i++ ) {
 			button = buttons[i];
 
+<<<<<<< HEAD
 			if ( Array.isArray( button ) ) {
+=======
+			if ( $.isArray( button ) ) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				attach( container, button );
 			}
 			else {
@@ -175,7 +179,11 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
 	);
 
 	if ( activeEl !== undefined ) {
+<<<<<<< HEAD
 		$(host).find( '[data-dt-idx='+activeEl+']' ).trigger('focus');
+=======
+		$(host).find( '[data-dt-idx='+activeEl+']' ).focus();
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	}
 };
 

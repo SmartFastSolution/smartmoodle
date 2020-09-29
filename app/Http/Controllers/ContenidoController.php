@@ -150,10 +150,8 @@ class ContenidoController extends Controller
     public function destroy(Contenido $contenido)
     {
         $contenido= Contenido::find($contenido->id);
-      
     
            $contenido->delete();
-
            if(Storage::delete('public/',$contenido->documentod)){
 
            $contenido->delete($contenido->documentod);

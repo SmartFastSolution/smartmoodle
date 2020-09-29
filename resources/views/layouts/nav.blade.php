@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +11,7 @@
 
     <link rel="stylesheet" href="{{ asset('css/plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-   
+
 
     <!-- datatabes -->
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
@@ -22,7 +23,7 @@
 <body class="hold-transition sidebar-mini  layout-fixed">
     <div class="wrapper">
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light"> 
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- layout-navbar-fixed -->
             <!-- Left navbar links -->
             <ul class="navbar-nav">
@@ -357,18 +358,15 @@
                 </div><!-- /.container-fluid -->
             </section>
             <section class="content">
-               
-                            @yield('content')
 
-                      
+                @yield('content')
+
+
 
             </section>
         </div>
 
     </div>
-
-
-
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>
@@ -384,3 +382,5 @@
 </body>
 
 </html>
+
+

@@ -1,5 +1,9 @@
 /*!
+<<<<<<< HEAD
 * sweetalert2 v9.17.2
+=======
+* sweetalert2 v9.10.8
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 * Released under the MIT License.
 */
 (function (global, factory) {
@@ -95,7 +99,11 @@
     return _setPrototypeOf(o, p);
   }
 
+<<<<<<< HEAD
   function _isNativeReflectConstruct() {
+=======
+  function isNativeReflectConstruct() {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
     if (typeof Reflect === "undefined" || !Reflect.construct) return false;
     if (Reflect.construct.sham) return false;
     if (typeof Proxy === "function") return true;
@@ -109,7 +117,11 @@
   }
 
   function _construct(Parent, args, Class) {
+<<<<<<< HEAD
     if (_isNativeReflectConstruct()) {
+=======
+    if (isNativeReflectConstruct()) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       _construct = Reflect.construct;
     } else {
       _construct = function _construct(Parent, args, Class) {
@@ -141,6 +153,7 @@
     return _assertThisInitialized(self);
   }
 
+<<<<<<< HEAD
   function _createSuper(Derived) {
     var hasNativeReflectConstruct = _isNativeReflectConstruct();
 
@@ -160,6 +173,8 @@
     };
   }
 
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
   function _superPropBase(object, property) {
     while (!Object.prototype.hasOwnProperty.call(object, property)) {
       object = _getPrototypeOf(object);
@@ -216,7 +231,11 @@
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
   /**
+<<<<<<< HEAD
    * Returns the array of object values (Object.values isn't supported in IE11)
+=======
+   * Returns the array ob object values (Object.values isn't supported in IE11)
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
    * @param obj
    */
 
@@ -283,12 +302,15 @@
   var callIfFunction = function callIfFunction(arg) {
     return typeof arg === 'function' ? arg() : arg;
   };
+<<<<<<< HEAD
   var hasToPromiseFn = function hasToPromiseFn(arg) {
     return arg && typeof arg.toPromise === 'function';
   };
   var asPromise = function asPromise(arg) {
     return hasToPromiseFn(arg) ? arg.toPromise() : Promise.resolve(arg);
   };
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
   var isPromise = function isPromise(arg) {
     return arg && Promise.resolve(arg) === arg;
   };
@@ -753,7 +775,11 @@
     target.textContent = '';
 
     if (0 in elem) {
+<<<<<<< HEAD
       for (var i = 0; (i in elem); i++) {
+=======
+      for (var i = 0; i in elem; i++) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
         target.appendChild(elem[i].cloneNode(true));
       }
     } else {
@@ -837,11 +863,17 @@
     } // Loading state
 
 
+<<<<<<< HEAD
     if (!isLoading()) {
       var confirmButtonBackgroundColor = window.getComputedStyle(confirmButton).getPropertyValue('background-color');
       confirmButton.style.borderLeftColor = confirmButtonBackgroundColor;
       confirmButton.style.borderRightColor = confirmButtonBackgroundColor;
     }
+=======
+    var confirmButtonBackgroundColor = window.getComputedStyle(confirmButton).getPropertyValue('background-color');
+    confirmButton.style.borderLeftColor = confirmButtonBackgroundColor;
+    confirmButton.style.borderRightColor = confirmButtonBackgroundColor;
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
   }
 
   function renderButton(button, buttonType, params) {
@@ -1218,7 +1250,11 @@
       return hide(image);
     }
 
+<<<<<<< HEAD
     show(image, ''); // Src, alt
+=======
+    show(image); // Src, alt
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
     image.setAttribute('src', params.imageUrl);
     image.setAttribute('alt', params.imageAlt); // Width, height
@@ -1272,7 +1308,11 @@
    */
 
   var getQueueStep = function getQueueStep() {
+<<<<<<< HEAD
     return getContainer() && getContainer().getAttribute('data-queue-step');
+=======
+    return getContainer().getAttribute('data-queue-step');
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
   };
   /*
    * Global function for inserting a popup to the queue
@@ -1337,7 +1377,11 @@
       }
 
       if (index !== params.progressSteps.length - 1) {
+<<<<<<< HEAD
         var lineEl = createLineElement(params);
+=======
+        var lineEl = createLineElement(step);
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
         progressStepsContainer.appendChild(lineEl);
       }
     });
@@ -1481,12 +1525,19 @@
     var MixinSwal = /*#__PURE__*/function (_this) {
       _inherits(MixinSwal, _this);
 
+<<<<<<< HEAD
       var _super = _createSuper(MixinSwal);
 
       function MixinSwal() {
         _classCallCheck(this, MixinSwal);
 
         return _super.apply(this, arguments);
+=======
+      function MixinSwal() {
+        _classCallCheck(this, MixinSwal);
+
+        return _possibleConstructorReturn(this, _getPrototypeOf(MixinSwal).apply(this, arguments));
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       }
 
       _createClass(MixinSwal, [{
@@ -1695,7 +1746,11 @@
     onDestroy: undefined,
     scrollbarPadding: true
   };
+<<<<<<< HEAD
   var updatableParams = ['allowEscapeKey', 'allowOutsideClick', 'buttonsStyling', 'cancelButtonAriaLabel', 'cancelButtonColor', 'cancelButtonText', 'closeButtonAriaLabel', 'closeButtonHtml', 'confirmButtonAriaLabel', 'confirmButtonColor', 'confirmButtonText', 'currentProgressStep', 'customClass', 'footer', 'hideClass', 'html', 'icon', 'imageAlt', 'imageHeight', 'imageUrl', 'imageWidth', 'onAfterClose', 'onClose', 'onDestroy', 'progressSteps', 'reverseButtons', 'showCancelButton', 'showCloseButton', 'showConfirmButton', 'text', 'title', 'titleText'];
+=======
+  var updatableParams = ['title', 'titleText', 'text', 'html', 'icon', 'hideClass', 'customClass', 'allowOutsideClick', 'allowEscapeKey', 'showConfirmButton', 'showCancelButton', 'confirmButtonText', 'confirmButtonAriaLabel', 'confirmButtonColor', 'cancelButtonText', 'cancelButtonAriaLabel', 'cancelButtonColor', 'buttonsStyling', 'reverseButtons', 'imageUrl', 'imageWidth', 'imageHeight', 'imageAlt', 'progressSteps', 'currentProgressStep'];
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
   var deprecatedParams = {
     animation: 'showClass" and "hideClass'
   };
@@ -1875,6 +1930,7 @@
       document.body.style.top = "".concat(offset * -1, "px");
       addClass(document.body, swalClasses.iosfix);
       lockBodyScroll();
+<<<<<<< HEAD
       addBottomPaddingForTallPopups(); // #1948
     }
   };
@@ -1888,6 +1944,8 @@
       if (getPopup().scrollHeight > window.innerHeight - bottomPanelHeight) {
         getContainer().style.paddingBottom = "".concat(bottomPanelHeight, "px");
       }
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
     }
   };
 
@@ -1897,7 +1955,12 @@
     var preventTouchMove;
 
     container.ontouchstart = function (e) {
+<<<<<<< HEAD
       preventTouchMove = shouldPreventTouchMove(e.target);
+=======
+      preventTouchMove = e.target === container || !isScrollable(container) && e.target.tagName !== 'INPUT' // #1603
+      ;
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
     };
 
     container.ontouchmove = function (e) {
@@ -1908,6 +1971,7 @@
     };
   };
 
+<<<<<<< HEAD
   var shouldPreventTouchMove = function shouldPreventTouchMove(target) {
     var container = getContainer();
 
@@ -1924,6 +1988,8 @@
     return false;
   };
 
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
   var undoIOSfix = function undoIOSfix() {
     if (hasClass(document.body, swalClasses.iosfix)) {
       var offset = parseInt(document.body.style.top, 10);
@@ -2059,6 +2125,7 @@
     var backdrop = getContainer();
     removeClass(backdrop, innerParams.showClass.backdrop);
     addClass(backdrop, innerParams.hideClass.backdrop);
+<<<<<<< HEAD
     handlePopupAnimation(this, popup, innerParams);
 
     if (typeof resolveValue !== 'undefined') {
@@ -2071,6 +2138,9 @@
       };
     } // Resolve Swal promise
 
+=======
+    handlePopupAnimation(this, popup, innerParams); // Resolve Swal promise
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
     swalPromiseResolve(resolveValue || {});
   }
@@ -2263,8 +2333,13 @@
       return /^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9-]{2,24}$/.test(string) ? Promise.resolve() : Promise.resolve(validationMessage || 'Invalid email address');
     },
     url: function url(string, validationMessage) {
+<<<<<<< HEAD
       // taken from https://stackoverflow.com/a/3809435 with a small change from #1306 and #2013
       return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-z]{2,63}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/.test(string) ? Promise.resolve() : Promise.resolve(validationMessage || 'Invalid URL');
+=======
+      // taken from https://stackoverflow.com/a/3809435 with a small change from #1306
+      return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,63}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/.test(string) ? Promise.resolve() : Promise.resolve(validationMessage || 'Invalid URL');
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
     }
   };
 
@@ -2329,15 +2404,22 @@
       params.onBeforeOpen(popup);
     }
 
+<<<<<<< HEAD
     var bodyStyles = window.getComputedStyle(document.body);
     var initialBodyOverflow = bodyStyles.overflowY;
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
     addClasses$1(container, popup, params); // scrolling is 'hidden' until animation is done, after that 'auto'
 
     setScrollingVisibility(container, popup);
 
     if (isModal()) {
+<<<<<<< HEAD
       fixScrollContainer(container, params.scrollbarPadding, initialBodyOverflow);
       setAriaHidden();
+=======
+      fixScrollContainer(container, params.scrollbarPadding);
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
     }
 
     if (!isToast() && !globalState.previousActiveElement) {
@@ -2374,11 +2456,20 @@
     }
   };
 
+<<<<<<< HEAD
   var fixScrollContainer = function fixScrollContainer(container, scrollbarPadding, initialBodyOverflow) {
     iOSfix();
     IEfix();
 
     if (scrollbarPadding && initialBodyOverflow !== 'hidden') {
+=======
+  var fixScrollContainer = function fixScrollContainer(container, scrollbarPadding) {
+    iOSfix();
+    IEfix();
+    setAriaHidden();
+
+    if (scrollbarPadding) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       fixScrollbar();
     } // sweetalert2/issues/1247
 
@@ -2403,7 +2494,11 @@
   var handleInputOptionsAndValue = function handleInputOptionsAndValue(instance, params) {
     if (params.input === 'select' || params.input === 'radio') {
       handleInputOptions(instance, params);
+<<<<<<< HEAD
     } else if (['text', 'email', 'number', 'tel', 'textarea'].indexOf(params.input) !== -1 && (hasToPromiseFn(params.inputValue) || isPromise(params.inputValue))) {
+=======
+    } else if (['text', 'email', 'number', 'tel', 'textarea'].indexOf(params.input) !== -1 && isPromise(params.inputValue)) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       handleInputValue(instance, params);
     }
   };
@@ -2448,9 +2543,15 @@
       return populateInputOptions[params.input](content, formatInputOptions(inputOptions), params);
     };
 
+<<<<<<< HEAD
     if (hasToPromiseFn(params.inputOptions) || isPromise(params.inputOptions)) {
       showLoading();
       asPromise(params.inputOptions).then(function (inputOptions) {
+=======
+    if (isPromise(params.inputOptions)) {
+      showLoading();
+      params.inputOptions.then(function (inputOptions) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
         instance.hideLoading();
         processInputOptions(inputOptions);
       });
@@ -2464,7 +2565,11 @@
   var handleInputValue = function handleInputValue(instance, params) {
     var input = instance.getInput();
     hide(input);
+<<<<<<< HEAD
     asPromise(params.inputValue).then(function (inputValue) {
+=======
+    params.inputValue.then(function (inputValue) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       input.value = params.input === 'number' ? parseFloat(inputValue) || 0 : "".concat(inputValue);
       show(input);
       input.focus();
@@ -2481,8 +2586,14 @@
   var populateInputOptions = {
     select: function select(content, inputOptions, params) {
       var select = getChildByClass(content, swalClasses.select);
+<<<<<<< HEAD
 
       var renderOption = function renderOption(parent, optionLabel, optionValue) {
+=======
+      inputOptions.forEach(function (inputOption) {
+        var optionValue = inputOption[0];
+        var optionLabel = inputOption[1];
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
         var option = document.createElement('option');
         option.value = optionValue;
         setInnerHtml(option, optionLabel);
@@ -2491,6 +2602,7 @@
           option.selected = true;
         }
 
+<<<<<<< HEAD
         parent.appendChild(option);
       };
 
@@ -2515,6 +2627,9 @@
           // case of <option>
           renderOption(select, optionLabel, optionValue);
         }
+=======
+        select.appendChild(option);
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       });
       select.focus();
     },
@@ -2557,6 +2672,7 @@
 
     if (typeof Map !== 'undefined' && inputOptions instanceof Map) {
       inputOptions.forEach(function (value, key) {
+<<<<<<< HEAD
         var valueFormatted = value;
 
         if (_typeof(valueFormatted) === 'object') {
@@ -2576,6 +2692,13 @@
         }
 
         result.push([key, valueFormatted]);
+=======
+        result.push([key, value]);
+      });
+    } else {
+      Object.keys(inputOptions).forEach(function (key) {
+        result.push([key, inputOptions[key]]);
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       });
     }
 
@@ -2602,7 +2725,11 @@
     if (innerParams.inputValidator) {
       instance.disableInput();
       var validationPromise = Promise.resolve().then(function () {
+<<<<<<< HEAD
         return asPromise(innerParams.inputValidator(inputValue, innerParams.validationMessage));
+=======
+        return innerParams.inputValidator(inputValue, innerParams.validationMessage);
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       });
       validationPromise.then(function (validationMessage) {
         instance.enableButtons();
@@ -2636,7 +2763,11 @@
     if (innerParams.preConfirm) {
       instance.resetValidationMessage();
       var preConfirmPromise = Promise.resolve().then(function () {
+<<<<<<< HEAD
         return asPromise(innerParams.preConfirm(value, innerParams.validationMessage));
+=======
+        return innerParams.preConfirm(value, innerParams.validationMessage);
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       });
       preConfirmPromise.then(function (preConfirmValue) {
         if (isVisible(getValidationMessage()) || preConfirmValue === false) {
@@ -2923,11 +3054,17 @@
       handleInputOptionsAndValue(instance, innerParams);
       openPopup(innerParams);
       setupTimer(globalState, innerParams, dismissWith);
+<<<<<<< HEAD
       initFocus(domCache, innerParams); // Scroll container to top on open (#1247, #1946)
 
       setTimeout(function () {
         domCache.container.scrollTop = 0;
       });
+=======
+      initFocus(domCache, innerParams); // Scroll container to top on open (#1247)
+
+      domCache.container.scrollTop = 0;
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
     });
   };
 
@@ -3096,6 +3233,7 @@
     _destroy: _destroy
   });
 
+<<<<<<< HEAD
   var currentInstance;
 
   var SweetAlert = /*#__PURE__*/function () {
@@ -3150,6 +3288,56 @@
 
     return SweetAlert;
   }(); // Assign instance methods from src/instanceMethods/*.js to prototype
+=======
+  var currentInstance; // SweetAlert constructor
+
+  function SweetAlert() {
+    // Prevent run in Node env
+
+    /* istanbul ignore if */
+    if (typeof window === 'undefined') {
+      return;
+    } // Check for the existence of Promise
+
+    /* istanbul ignore if */
+
+
+    if (typeof Promise === 'undefined') {
+      error('This package requires a Promise library, please include a shim to enable it in this browser (See: https://github.com/sweetalert2/sweetalert2/wiki/Migration-from-SweetAlert-to-SweetAlert2#1-ie-support)');
+    }
+
+    currentInstance = this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    var outerParams = Object.freeze(this.constructor.argsToParams(args));
+    Object.defineProperties(this, {
+      params: {
+        value: outerParams,
+        writable: false,
+        enumerable: true,
+        configurable: true
+      }
+    });
+
+    var promise = this._main(this.params);
+
+    privateProps.promise.set(this, promise);
+  } // `catch` cannot be the name of a module export, so we define our thenable methods here instead
+
+
+  SweetAlert.prototype.then = function (onFulfilled) {
+    var promise = privateProps.promise.get(this);
+    return promise.then(onFulfilled);
+  };
+
+  SweetAlert.prototype["finally"] = function (onFinally) {
+    var promise = privateProps.promise.get(this);
+    return promise["finally"](onFinally);
+  }; // Assign instance methods from src/instanceMethods/*.js to prototype
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 
   _extends(SweetAlert.prototype, instanceMethods); // Assign static methods from src/staticMethods/*.js to constructor
@@ -3168,7 +3356,11 @@
     };
   });
   SweetAlert.DismissReason = DismissReason;
+<<<<<<< HEAD
   SweetAlert.version = '9.17.2';
+=======
+  SweetAlert.version = '9.10.8';
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
   var Swal = SweetAlert;
   Swal["default"] = Swal;

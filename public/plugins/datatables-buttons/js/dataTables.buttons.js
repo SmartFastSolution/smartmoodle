@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 /*! Buttons for DataTables 1.6.4
  * ©2016-2020 SpryMedia Ltd - datatables.net/license
+=======
+/*! Buttons for DataTables 1.6.1
+ * ©2016-2019 SpryMedia Ltd - datatables.net/license
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  */
 
 (function( factory ){
@@ -41,6 +46,7 @@ var _buttonCounter = 0;
 
 var _dtButtons = DataTable.ext.buttons;
 
+<<<<<<< HEAD
 // Allow for jQuery slim
 function _fadeIn(el, duration, fn) {
 	if ($.fn.animate) {
@@ -72,6 +78,8 @@ function _fadeOut(el, duration, fn) {
 	}
 }
 
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 /**
  * [Buttons description]
  * @param {[type]}
@@ -99,7 +107,11 @@ var Buttons = function( dt, config )
 	}
 
 	// For easy configuration of buttons an array can be given
+<<<<<<< HEAD
 	if ( Array.isArray( config ) ) {
+=======
+	if ( $.isArray( config ) ) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		config = { buttons: config };
 	}
 
@@ -220,9 +232,13 @@ $.extend( Buttons.prototype, {
 	disable: function ( node ) {
 		var button = this._nodeToButton( node );
 
+<<<<<<< HEAD
 		$(button.node)
 			.addClass( this.c.dom.button.disabled )
 			.attr('disabled', true);
+=======
+		$(button.node).addClass( this.c.dom.button.disabled );
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 		return this;
 	},
@@ -275,9 +291,13 @@ $.extend( Buttons.prototype, {
 		}
 
 		var button = this._nodeToButton( node );
+<<<<<<< HEAD
 		$(button.node)
 			.removeClass( this.c.dom.button.disabled )
 			.removeAttr('disabled');
+=======
+		$(button.node).removeClass( this.c.dom.button.disabled );
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 		return this;
 	},
@@ -508,7 +528,11 @@ $.extend( Buttons.prototype, {
 	{
 		var dt = this.s.dt;
 		var buttonCounter = 0;
+<<<<<<< HEAD
 		var buttons = ! Array.isArray( button ) ?
+=======
+		var buttons = ! $.isArray( button ) ?
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			[ button ] :
 			button;
 
@@ -521,7 +545,11 @@ $.extend( Buttons.prototype, {
 
 			// If the configuration is an array, then expand the buttons at this
 			// point
+<<<<<<< HEAD
 			if ( Array.isArray( conf ) ) {
+=======
+			if ( $.isArray( conf ) ) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				this._expandButton( attachTo, conf, inCollection, attachPoint );
 				continue;
 			}
@@ -531,7 +559,11 @@ $.extend( Buttons.prototype, {
 				continue;
 			}
 
+<<<<<<< HEAD
 			if ( attachPoint !== undefined && attachPoint !== null ) {
+=======
+			if ( attachPoint !== undefined ) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				attachTo.splice( attachPoint, 0, built );
 				attachPoint++;
 			}
@@ -611,7 +643,11 @@ $.extend( Buttons.prototype, {
 					action( e, dt, button, config );
 				}
 				if( clickBlurs ) {
+<<<<<<< HEAD
 					button.trigger('blur');
+=======
+					button.blur();
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				}
 			} )
 			.on( 'keyup.dtb', function (e) {
@@ -854,7 +890,11 @@ $.extend( Buttons.prototype, {
 			// Loop until we have resolved to a button configuration, or an
 			// array of button configurations (which will be iterated
 			// separately)
+<<<<<<< HEAD
 			while ( ! $.isPlainObject(base) && ! Array.isArray(base) ) {
+=======
+			while ( ! $.isPlainObject(base) && ! $.isArray(base) ) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				if ( base === undefined ) {
 					return;
 				}
@@ -881,7 +921,11 @@ $.extend( Buttons.prototype, {
 				}
 			}
 
+<<<<<<< HEAD
 			return Array.isArray( base ) ?
+=======
+			return $.isArray( base ) ?
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				base :
 				$.extend( {}, base );
 		};
@@ -896,7 +940,11 @@ $.extend( Buttons.prototype, {
 			}
 
 			var objArray = toConfObject( _dtButtons[ conf.extend ] );
+<<<<<<< HEAD
 			if ( Array.isArray( objArray ) ) {
+=======
+			if ( $.isArray( objArray ) ) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				return objArray;
 			}
 			else if ( ! objArray ) {
@@ -980,6 +1028,7 @@ $.extend( Buttons.prototype, {
 		var hostNode = hostButton.node();
 
 		var close = function () {
+<<<<<<< HEAD
 			_fadeOut(
 				$('.dt-button-collection'),
 				options.fade,
@@ -987,6 +1036,11 @@ $.extend( Buttons.prototype, {
 					$(this).detach();
 				}
 			);
+=======
+			$('.dt-button-collection').stop().fadeOut( options.fade, function () {
+				$(this).detach();
+			} );
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 			$(dt.buttons( '[aria-haspopup="true"][aria-expanded="true"]' ).nodes())
 				.attr('aria-expanded', 'false');
@@ -1029,7 +1083,13 @@ $.extend( Buttons.prototype, {
 			display.prepend('<div class="dt-button-collection-title">'+options.collectionTitle+'</div>');
 		}
 
+<<<<<<< HEAD
 		_fadeIn( display.insertAfter( hostNode ), options.fade );
+=======
+		display
+			.insertAfter( hostNode )
+			.fadeIn( options.fade );
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 		var tableContainer = $( hostButton.table().container() );
 		var position = display.css( 'position' );
@@ -1039,6 +1099,7 @@ $.extend( Buttons.prototype, {
 			display.css('width', tableContainer.width());
 		}
 
+<<<<<<< HEAD
 		// Align the popover relative to the DataTables container
 		// Useful for wide popovers such as SearchPanes
 		if (
@@ -1050,6 +1111,9 @@ $.extend( Buttons.prototype, {
 			)
 		) {
 
+=======
+		if ( position === 'absolute' ) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			var hostPosition = hostNode.position();
 
 			display.css( {
@@ -1059,6 +1123,10 @@ $.extend( Buttons.prototype, {
 
 			// calculate overflow when positioned beneath
 			var collectionHeight = display.outerHeight();
+<<<<<<< HEAD
+=======
+			var collectionWidth = display.outerWidth();
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			var tableBottom = tableContainer.offset().top + tableContainer.height();
 			var listBottom = hostPosition.top + hostNode.outerHeight() + collectionHeight;
 			var bottomOverflow = listBottom - tableBottom;
@@ -1074,6 +1142,7 @@ $.extend( Buttons.prototype, {
 				display.css( 'top', moveTop);
 			}
 
+<<<<<<< HEAD
 			// Get the size of the container (left and width - and thus also right)
 			var tableLeft = tableContainer.offset().left;
 			var tableWidth = tableContainer.width();
@@ -1175,6 +1244,26 @@ $.extend( Buttons.prototype, {
 				: buttonsLeft - popoverLeft;
 
 			display.css('left', display.position().left + popoverShuffle);
+=======
+			// Right alignment is enabled on a class, e.g. bootstrap:
+			// $.fn.dataTable.Buttons.defaults.dom.collection.className += " dropdown-menu-right"; 
+			if ( display.hasClass( options.rightAlignClassName ) || options.align === 'button-right' ) {
+				display.css( 'left', hostPosition.left + hostNode.outerWidth() - collectionWidth );
+			}
+
+			// Right alignment in table container
+			var listRight = hostPosition.left + collectionWidth;
+			var tableRight = tableContainer.offset().left + tableContainer.width();
+			if ( listRight > tableRight ) {
+				display.css( 'left', hostPosition.left - ( listRight - tableRight ) );
+			}
+
+			// Right alignment to window
+			var listOffsetRight = hostNode.offset().left + collectionWidth;
+			if ( listOffsetRight > $(window).width() ) {
+				display.css( 'left', hostPosition.left - (listOffsetRight-$(window).width()) );
+			}
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		}
 		else {
 			// Fix position - centre on screen
@@ -1200,9 +1289,14 @@ $.extend( Buttons.prototype, {
 			.on( 'click.dtb-collection', function (e) {
 				// andSelf is deprecated in jQ1.8, but we want 1.7 compat
 				var back = $.fn.addBack ? 'addBack' : 'andSelf';
+<<<<<<< HEAD
 				var parent = $(e.target).parent()[0];
 
 				if (( ! $(e.target).parents()[back]().filter( content ).length  && !$(parent).hasClass('dt-buttons')) || $(e.target).hasClass('dt-button-background')) {
+=======
+
+				if ( ! $(e.target).parents()[back]().filter( content ).length ) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 					close();
 				}
 			} )
@@ -1222,8 +1316,11 @@ $.extend( Buttons.prototype, {
 				} );
 			}, 0);
 		}
+<<<<<<< HEAD
 
 		$(display).trigger('buttons-popover.dt');
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	}
 } );
 
@@ -1249,6 +1346,7 @@ Buttons.background = function ( show, className, fade, insertPoint ) {
 	}
 
 	if ( show ) {
+<<<<<<< HEAD
 		_fadeIn(
 			$('<div/>')
 				.addClass( className )
@@ -1267,6 +1365,23 @@ Buttons.background = function ( show, className, fade, insertPoint ) {
 					.remove();
 			}
 		);
+=======
+		$('<div/>')
+			.addClass( className )
+			.css( 'display', 'none' )
+			.insertAfter( insertPoint )
+			.stop()
+			.fadeIn( fade );
+	}
+	else {
+		$('div.'+className)
+			.stop()
+			.fadeOut( fade, function () {
+				$(this)
+					.removeClass( className )
+					.remove();
+			} );
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	}
 };
 
@@ -1296,7 +1411,11 @@ Buttons.instanceSelector = function ( group, buttons )
 
 	// Flatten the group selector into an array of single options
 	var process = function ( input ) {
+<<<<<<< HEAD
 		if ( Array.isArray( input ) ) {
+=======
+		if ( $.isArray( input ) ) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			for ( var i=0, ien=input.length ; i<ien ; i++ ) {
 				process( input[i] );
 			}
@@ -1310,7 +1429,11 @@ Buttons.instanceSelector = function ( group, buttons )
 			}
 			else {
 				// String selector individual name
+<<<<<<< HEAD
 				var idx = $.inArray( input.trim(), names );
+=======
+				var idx = $.inArray( $.trim(input), names );
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 				if ( idx !== -1 ) {
 					ret.push( buttons[ idx ].inst );
@@ -1375,7 +1498,11 @@ Buttons.buttonSelector = function ( insts, selector )
 			return v.node;
 		} );
 
+<<<<<<< HEAD
 		if ( Array.isArray( selector ) || selector instanceof $ ) {
+=======
+		if ( $.isArray( selector ) || selector instanceof $ ) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			for ( i=0, ien=selector.length ; i<ien ; i++ ) {
 				run( selector[i], inst );
 			}
@@ -1404,7 +1531,11 @@ Buttons.buttonSelector = function ( insts, selector )
 				var a = selector.split(',');
 
 				for ( i=0, ien=a.length ; i<ien ; i++ ) {
+<<<<<<< HEAD
 					run( a[i].trim(), inst );
+=======
+					run( $.trim(a[i]), inst );
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				}
 			}
 			else if ( selector.match( /^\d+(\-\d+)*$/ ) ) {
@@ -1505,7 +1636,11 @@ Buttons.defaults = {
  * @type {string}
  * @static
  */
+<<<<<<< HEAD
 Buttons.version = '1.6.4';
+=======
+Buttons.version = '1.6.1';
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 
 $.extend( _dtButtons, {
@@ -1569,8 +1704,13 @@ $.extend( _dtButtons, {
 	},
 	pageLength: function ( dt ) {
 		var lengthMenu = dt.settings()[0].aLengthMenu;
+<<<<<<< HEAD
 		var vals = Array.isArray( lengthMenu[0] ) ? lengthMenu[0] : lengthMenu;
 		var lang = Array.isArray( lengthMenu[0] ) ? lengthMenu[1] : lengthMenu;
+=======
+		var vals = $.isArray( lengthMenu[0] ) ? lengthMenu[0] : lengthMenu;
+		var lang = $.isArray( lengthMenu[0] ) ? lengthMenu[1] : lengthMenu;
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		var text = function ( dt ) {
 			return dt.i18n( 'buttons.pageLength', {
 				"-1": 'Show all rows',
@@ -1818,6 +1958,7 @@ DataTable.Api.register( 'buttons.info()', function ( title, message, time ) {
 
 	if ( title === false ) {
 		this.off('destroy.btn-info');
+<<<<<<< HEAD
 		_fadeOut(
 			$('#datatables_buttons_info'),
 			400,
@@ -1825,6 +1966,11 @@ DataTable.Api.register( 'buttons.info()', function ( title, message, time ) {
 				$(this).remove();
 			}
 		);
+=======
+		$('#datatables_buttons_info').fadeOut( function () {
+			$(this).remove();
+		} );
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		clearTimeout( _infoTimer );
 		_infoTimer = null;
 
@@ -1841,6 +1987,7 @@ DataTable.Api.register( 'buttons.info()', function ( title, message, time ) {
 
 	title = title ? '<h2>'+title+'</h2>' : '';
 
+<<<<<<< HEAD
 	_fadeIn(
 		$('<div id="datatables_buttons_info" class="dt-button-info"/>')
 			.html( title )
@@ -1848,6 +1995,14 @@ DataTable.Api.register( 'buttons.info()', function ( title, message, time ) {
 			.css( 'display', 'none' )
 			.appendTo( 'body' )
 	);
+=======
+	$('<div id="datatables_buttons_info" class="dt-button-info"/>')
+		.html( title )
+		.append( $('<div/>')[ typeof message === 'string' ? 'html' : 'append' ]( message ) )
+		.css( 'display', 'none' )
+		.appendTo( 'body' )
+		.fadeIn();
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 	if ( time !== undefined && time !== 0 ) {
 		_infoTimer = setTimeout( function () {
@@ -1909,7 +2064,11 @@ var _filename = function ( config )
 	}
 
 	if ( filename.indexOf( '*' ) !== -1 ) {
+<<<<<<< HEAD
 		filename = filename.replace( '*', $('head > title').text() ).trim();
+=======
+		filename = $.trim( filename.replace( '*', $('head > title').text() ) );
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	}
 
 	// Strip characters which the OS will object to
@@ -2024,7 +2183,11 @@ var _exportData = function ( dt, inOpts )
 		str = str.replace( /<!\-\-.*?\-\->/g, '' );
 
 		if ( config.stripHtml ) {
+<<<<<<< HEAD
 			str = str.replace( /<([^>'"]*('[^']*'|"[^"]*")?)*>/g, '' );
+=======
+			str = str.replace( /<[^>]*>/g, '' );
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		}
 
 		if ( config.trim ) {
@@ -2132,11 +2295,17 @@ $(document).on( 'init.dt plugin-init.dt', function (e, settings) {
 	}
 } );
 
+<<<<<<< HEAD
 function _init ( settings, options ) {
 	var api = new DataTable.Api( settings );
 	var opts = options
 		? options
 		: api.init().buttons || DataTable.defaults.buttons;
+=======
+function _init ( settings ) {
+	var api = new DataTable.Api( settings );
+	var opts = api.init().buttons || DataTable.defaults.buttons;
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 	return new Buttons( api, opts ).container();
 }

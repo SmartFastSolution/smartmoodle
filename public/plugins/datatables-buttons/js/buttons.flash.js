@@ -1235,7 +1235,11 @@ DataTable.ext.buttons.excelFlash = $.extend( {}, flashButton, {
 					}
 				}
 
+<<<<<<< HEAD
 				row[i] = row[i].trim();
+=======
+				row[i] = $.trim( row[i] );
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 				// Special number formatting options
 				for ( var j=0, jen=_excelSpecials.length ; j<jen ; j++ ) {

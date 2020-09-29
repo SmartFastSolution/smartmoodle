@@ -1,6 +1,7 @@
 @extends('layouts.nav')
 
 
+
 @section('title', 'Crear Unidad Educativa')
 
 @section('encabezado')

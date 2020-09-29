@@ -45,10 +45,12 @@ class AdminController extends Controller
 {
    public function admin()
    {
-   	  return view('admin.admin');
+         $g = 0;
+   	  return view('admin.admin', compact('g'));
    }
    public function plantilla(Request $request)
    {
+
    	$i = Plantilla::get()->count();
    	  $plantilla = new Plantilla;
    	  $plantilla->nombre = 'TALLER '.++$i.' - '.$request->input('nombre');
@@ -1015,6 +1017,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
             $taller_25->enunciado            = $request->input('enunciado');
             $taller_25->cliente              = $request->input('cliente');
             $taller_25->ruc                  = $request->input('ruc');
+            $taller_25->iva                  = $request->input('iva');
             $taller_25->descuento            = $request->input('descuento');
             $taller_25->remision             = $request->input('remision');
             $taller_25->fecha_emision        = $request->input('fecha_emision');
@@ -1025,6 +1028,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
                foreach ($request->cant as $key=>$v) {
                   $datos=array(
                      'taller_factura_id'=> $o->id,
+                     'cod_auxiliar'=> $request->cod_aux[$key],
                      'cantidad'=> $request->cant[$key],
                      'descripcion'=> $request->desc[$key],
                      'precio' => $request->precio[$key],

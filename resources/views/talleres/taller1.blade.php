@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 @extends('layouts.app')
+=======
+@extends('layouts.nav')
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
-@section('title', $datos->taller->nombre)
-@section('contenido')
+@section('titulo', $datos->taller->nombre)
+@section('content')
 
 <form action="{{ route('taller1', ['idtaller' => $d]) }}" method="POST">
     @csrf
@@ -28,7 +32,3 @@
  </div>
 </form>
 @endsection
-
-     <!--
-              
-            -->

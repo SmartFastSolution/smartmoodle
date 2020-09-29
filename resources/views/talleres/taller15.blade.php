@@ -1,7 +1,6 @@
-@extends('layouts.master')
-
+@extends('layouts.nav')
 @section('title', $datos->taller->nombre)
-@section('contenido')
+@section('content')
 <!--CON LOS SIGUIENTES DATOS LLENE EL CHEQUE AL PORTADOR, CON CERTEZA. -->
 
 <h1 class="text-center  mt-5 text-danger">{{ $datos->taller->nombre }}</h1>
@@ -26,7 +25,7 @@
 			<div class="col-9 border">
 				<div class="row ">
 					<div class="col-6">
-						<img class="img-fluid" src="{{ asset('img/talleres/imagen-15.jpg') }}" alt="">
+						<input type="text" name="girado" class="form-control mt-2">
 					</div>	
 					<div class="col-2 align-self-center">
 						<p>16457 <br>

@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.nav')
 
 @section('title', $datos->taller->nombre )
-@section('contenido')
+@section('content')
 
 <!-- LENE  CON  LOS  SIGUIENTES  DATOS  LA  NOTA  DE  PEDIDO, 
 ADECUADAMENTE. -->

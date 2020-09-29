@@ -9,11 +9,16 @@ window._ = require('lodash');
 try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
-    require('overlayscrollbars');
+
+   
+    require('bootstrap');
+ 	require('overlayscrollbars');
  	require('../../vendor/almasaeed2010/adminlte/plugins/bootstrap/js/bootstrap.bundle.min');
 	require('../../vendor/almasaeed2010/adminlte/dist/js/adminlte');
-    require('bootstrap');
+    
+
 } catch (e) {}
+
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

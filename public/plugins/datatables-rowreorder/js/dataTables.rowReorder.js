@@ -1,15 +1,28 @@
+<<<<<<< HEAD
 /*! RowReorder 1.2.7
  * 2015-2020 SpryMedia Ltd - datatables.net/license
+=======
+/*! RowReorder 1.2.6
+ * 2015-2019 SpryMedia Ltd - datatables.net/license
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  */
 
 /**
  * @summary     RowReorder
  * @description Row reordering extension for DataTables
+<<<<<<< HEAD
  * @version     1.2.7
  * @file        dataTables.rowReorder.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
  * @copyright   Copyright 2015-2020 SpryMedia Ltd.
+=======
+ * @version     1.2.6
+ * @file        dataTables.rowReorder.js
+ * @author      SpryMedia Ltd (www.sprymedia.co.uk)
+ * @contact     www.sprymedia.co.uk/contact
+ * @copyright   Copyright 2015-2019 SpryMedia Ltd.
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  *
  * This source file is free software, available under the following license:
  *   MIT license - http://datatables.net/license/mit
@@ -139,15 +152,21 @@ var RowReorder = function ( dt, opts ) {
 	// Check if row reorder has already been initialised on this table
 	var settings = this.s.dt.settings()[0];
 	var exisiting = settings.rowreorder;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	if ( exisiting ) {
 		return exisiting;
 	}
 
+<<<<<<< HEAD
 	if ( !this.dom.dtScroll.length ) {
 		this.dom.dtScroll = $(this.s.dt.table().container(), 'tbody')
 	}
 
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	settings.rowreorder = this;
 	this._constructor();
 };
@@ -235,10 +254,21 @@ $.extend( RowReorder.prototype, {
 		// not what DataTables thinks it is, since we have been altering the
 		// order
 		var nodes = $.unique( dt.rows( { page: 'current' } ).nodes().toArray() );
+<<<<<<< HEAD
 		var middles = $.map( nodes, function ( node, i ) {
 			var top = $(node).position().top - headerHeight;
 
 			return (top + top + $(node).outerHeight() ) / 2;
+=======
+		var tops = $.map( nodes, function ( node, i ) {
+			return $(node).position().top - headerHeight;
+		} );
+
+		var middles = $.map( tops, function ( top, i ) {
+			return tops.length < i-1 ?
+				(top + tops[i+1]) / 2 :
+				(top + top + $( dt.row( ':last-child' ).node() ).outerHeight() ) / 2;
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		} );
 
 		this.s.middles = middles;
@@ -430,6 +460,10 @@ $.extend( RowReorder.prototype, {
 		var middles = this.s.middles;
 		var insertPoint = null;
 		var dt = this.s.dt;
+<<<<<<< HEAD
+=======
+		var body = dt.table().body();
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 		// Determine where the row should be inserted based on the mouse
 		// position
@@ -446,6 +480,7 @@ $.extend( RowReorder.prototype, {
 
 		// Perform the DOM shuffle if it has changed from last time
 		if ( this.s.lastInsert === null || this.s.lastInsert !== insertPoint ) {
+<<<<<<< HEAD
 			var nodes = $.unique( dt.rows( { page: 'current' } ).nodes().toArray() );
 
 			if ( insertPoint > this.s.lastInsert ) {
@@ -453,6 +488,20 @@ $.extend( RowReorder.prototype, {
 			}
 			else {
 				this.dom.target.insertBefore( nodes[ insertPoint ] );
+=======
+			if ( insertPoint === 0 ) {
+				this.dom.target.prependTo( body );
+			}
+			else {
+				var nodes = $.unique( dt.rows( { page: 'current' } ).nodes().toArray() );
+
+				if ( insertPoint > this.s.lastInsert ) {
+					this.dom.target.insertAfter( nodes[ insertPoint-1 ] );
+				}
+				else {
+					this.dom.target.insertBefore( nodes[ insertPoint ] );
+				}
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			}
 
 			this._cachePositions();
@@ -616,10 +665,17 @@ $.extend( RowReorder.prototype, {
 
 		// Window calculations - based on the mouse position in the window,
 		// regardless of scrolling
+<<<<<<< HEAD
 		if ( windowY < $(window).scrollTop() + buffer ) {
 			windowVert = scrollSpeed * -1;
 		}
 		else if ( windowY > scroll.windowHeight + $(window).scrollTop() - buffer ) {
+=======
+		if ( windowY < buffer ) {
+			windowVert = scrollSpeed * -1;
+		}
+		else if ( windowY > scroll.windowHeight - buffer ) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			windowVert = scrollSpeed;
 		}
 
@@ -658,6 +714,7 @@ $.extend( RowReorder.prototype, {
 				// Don't need to worry about setting scroll <0 or beyond the
 				// scroll bound as the browser will just reject that.
 				if ( scroll.windowVert ) {
+<<<<<<< HEAD
 					var top = $(document).scrollTop();
 					$(document).scrollTop(top + scroll.windowVert);
 
@@ -665,6 +722,9 @@ $.extend( RowReorder.prototype, {
 						var move = parseFloat(that.dom.clone.css("top"));
 						that.dom.clone.css("top", move + scroll.windowVert);					
 					}
+=======
+					document.body.scrollTop += scroll.windowVert;
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				}
 
 				// DataTables scrolling

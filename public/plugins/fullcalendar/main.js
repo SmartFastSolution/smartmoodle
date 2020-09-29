@@ -1,5 +1,9 @@
 /*!
+<<<<<<< HEAD
 FullCalendar Core Package v4.4.2
+=======
+FullCalendar Core Package v4.4.0
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 Docs & License: https://fullcalendar.io/
 (c) 2019 Adam Shaw
 */
@@ -1131,6 +1135,7 @@ Docs & License: https://fullcalendar.io/
     }
 
     /*! *****************************************************************************
+<<<<<<< HEAD
     Copyright (c) Microsoft Corporation.
 
     Permission to use, copy, modify, and/or distribute this software for any
@@ -1143,6 +1148,20 @@ Docs & License: https://fullcalendar.io/
     LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
     OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
     PERFORMANCE OF THIS SOFTWARE.
+=======
+    Copyright (c) Microsoft Corporation. All rights reserved.
+    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
+    this file except in compliance with the License. You may obtain a copy of the
+    License at http://www.apache.org/licenses/LICENSE-2.0
+
+    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
+    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
+    MERCHANTABLITY OR NON-INFRINGEMENT.
+
+    See the Apache Version 2.0 License for specific language governing permissions
+    and limitations under the License.
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
     ***************************************************************************** */
     /* global Reflect, Promise */
 
@@ -2463,7 +2482,11 @@ Docs & License: https://fullcalendar.io/
                 ]);
             }
         }
+<<<<<<< HEAD
         if (!calendar.state.eventSourceLoadingLevel) { // avoid initial empty state while pending
+=======
+        if (!calendar.state.loadingLevel) { // avoid initial empty state while pending
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
             calendar.afterSizingTriggers._eventsPositioned = [null]; // fire once
         }
     }
@@ -3937,13 +3960,17 @@ Docs & License: https://fullcalendar.io/
     }());
     var Component = /** @class */ (function () {
         function Component() {
+<<<<<<< HEAD
             this.everRendered = false;
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
             this.uid = String(guid++);
         }
         Component.addEqualityFuncs = function (newFuncs) {
             this.prototype.equalityFuncs = __assign({}, this.prototype.equalityFuncs, newFuncs);
         };
         Component.prototype.receiveProps = function (props, context) {
+<<<<<<< HEAD
             this.receiveContext(context);
             var _a = recycleProps(this.props || {}, props, this.equalityFuncs), anyChanges = _a.anyChanges, comboProps = _a.comboProps;
             this.props = comboProps;
@@ -3964,6 +3991,24 @@ Docs & License: https://fullcalendar.io/
             if (!oldContext) {
                 this.firstContext(context);
             }
+=======
+            var oldContext = this.context;
+            this.context = context;
+            if (!oldContext) {
+                this.firstContext(context);
+            }
+            var _a = recycleProps(this.props || {}, props, this.equalityFuncs), anyChanges = _a.anyChanges, comboProps = _a.comboProps;
+            this.props = comboProps;
+            if (anyChanges) {
+                if (oldContext) {
+                    this.beforeUpdate();
+                }
+                this.render(comboProps, context);
+                if (oldContext) {
+                    this.afterUpdate();
+                }
+            }
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
         };
         Component.prototype.render = function (props, context) {
         };
@@ -8583,7 +8628,11 @@ Docs & License: https://fullcalendar.io/
 
     // exports
     // --------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
     var version = '4.4.2';
+=======
+    var version = '4.4.0';
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
     exports.Calendar = Calendar;
     exports.Component = Component;

@@ -1,12 +1,11 @@
-@extends('layouts.master')
+@extends('layouts.nav')
 <!--TALLER PARA ESCRIBIR DIFERENCIAS -->
-@section('title', 'Taller '.$d)
-@section('contenido')
+@section('title', $datos->taller->nombre)
+@section('content')
 
 
-    @foreach ($datos as $dato)
-<h1 class="text-center  mt-5 text-danger">{{ $dato->taller->nombre }}</h1>
-     <h3 class="text-center mt-5 mb-3 text-info">{{ $dato->enunciado }}</h3>
+<h1 class="text-center  mt-5 text-danger">{{ $datos->taller->nombre }}</h1>
+     <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
 
 <form action="{{ route('taller4',['idtaller' => $d]) }}" method="POST">
@@ -15,7 +14,7 @@
 		<div class="row">
 			<div class="col-6 border-right border-info ">
 				<div class="row justify-content-center">
-					<img class="mt-3 img-fluid" with="10" src="{{ asset($dato->img1) }}" alt="">
+					<img class="mt-3 img-fluid" with="10" src="{{ asset($datos->img1) }}" alt="">
 				</div>
 				<div class="row">
 					<div class="col">
@@ -28,7 +27,7 @@
 			</div>
 			<div class="col-6">
 				<div class="row justify-content-center">
-					<img class="mt-3 img-fluid" with="100" src="{{ asset($dato->img2) }}" alt="">
+					<img class="mt-3 img-fluid" with="100" src="{{ asset($datos->img2) }}" alt="">
 				</div>
 				<div class="row">
 					<div class="col">
@@ -47,5 +46,4 @@
 	</div>
 
 </form>
-@endforeach
 @endsection

@@ -4,8 +4,6 @@
 
 
 
-<!-- @section('plugins.Sweetalert2', true)  -->
-
 @section('encabezado')
 <h1>Añadir Cursos</h1>
 @stop

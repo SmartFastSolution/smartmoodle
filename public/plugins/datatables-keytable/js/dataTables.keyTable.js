@@ -1,15 +1,28 @@
+<<<<<<< HEAD
 /*! KeyTable 2.5.3
  * ©2009-2020 SpryMedia Ltd - datatables.net/license
+=======
+/*! KeyTable 2.5.1
+ * ©2009-2019 SpryMedia Ltd - datatables.net/license
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  */
 
 /**
  * @summary     KeyTable
  * @description Spreadsheet like keyboard navigation for DataTables
+<<<<<<< HEAD
  * @version     2.5.3
  * @file        dataTables.keyTable.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
  * @copyright   Copyright 2009-2020 SpryMedia Ltd.
+=======
+ * @version     2.5.1
+ * @file        dataTables.keyTable.js
+ * @author      SpryMedia Ltd (www.sprymedia.co.uk)
+ * @contact     www.sprymedia.co.uk/contact
+ * @copyright   Copyright 2009-2019 SpryMedia Ltd.
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  *
  * This source file is free software, available under the following license:
  *   MIT license - http://datatables.net/license/mit
@@ -50,7 +63,10 @@
 'use strict';
 var DataTable = $.fn.dataTable;
 var namespaceCounter = 0;
+<<<<<<< HEAD
 var editorNamespaceCounter = 0;
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 
 var KeyTable = function ( dt, opts ) {
@@ -85,10 +101,14 @@ var KeyTable = function ( dt, opts ) {
 		lastFocus: null,
 
 		/** @type {string} Unique namespace per instance */
+<<<<<<< HEAD
 		namespace: '.keyTable-'+(namespaceCounter++),
 
 		/** @type {Node} Input element for tabbing into the table */
 		tabInput: null
+=======
+		namespace: '.keyTable-'+(namespaceCounter++)
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	};
 
 	// DOM items
@@ -276,10 +296,13 @@ $.extend( KeyTable.prototype, {
 					return;
 				}
 
+<<<<<<< HEAD
 				if ( that.s.lastFocus && this !== that.s.lastFocus.cell.node() ) {
 					return;
 				}
 
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				that._editor( null, e, true );
 			} );
 
@@ -305,6 +328,7 @@ $.extend( KeyTable.prototype, {
 			} );
 		}
 
+<<<<<<< HEAD
 		dt.on( 'column-visibility'+namespace, function (e) {
 			that._tabInput();
 		} );
@@ -313,13 +337,21 @@ $.extend( KeyTable.prototype, {
 		dt.on( 'draw'+namespace, function (e) {
 			that._tabInput();
 
+=======
+		// Redraw - retain focus on the current cell
+		dt.on( 'draw'+namespace, function (e) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			if ( that.s.focusDraw ) {
 				return;
 			}
 
 			var lastFocus = that.s.lastFocus;
 
+<<<<<<< HEAD
 			if ( lastFocus ) {
+=======
+			if ( lastFocus && lastFocus.node && $(lastFocus.node).closest('body') === document.body ) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				var relative = that.s.lastFocus.relative;
 				var info = dt.page.info();
 				var row = relative.row + info.start;
@@ -508,16 +540,23 @@ $.extend( KeyTable.prototype, {
 	 */
 	_editor: function ( key, orig, hardEdit )
 	{
+<<<<<<< HEAD
 		// If nothing focused, we can't take any action
 		if (! this.s.lastFocus) {
 			return;	
 		}
 
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		var that = this;
 		var dt = this.s.dt;
 		var editor = this.c.editor;
 		var editCell = this.s.lastFocus.cell;
+<<<<<<< HEAD
 		var namespace = this.s.namespace + 'e' + editorNamespaceCounter++;
+=======
+		var namespace = this.s.namespace;
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 		// Do nothing if there is already an inline edit in this cell
 		if ( $('div.DTE', editCell.node()).length ) {
@@ -582,7 +621,11 @@ $.extend( KeyTable.prototype, {
 					} );
 
 					// Restore full key navigation on close
+<<<<<<< HEAD
 					editor.one( 'close'+namespace, function () {
+=======
+					editor.one( 'close', function () {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 						dt.keys.enable( true );
 						dt.off( 'key-blur.editor' );
 						editor.off( namespace );
@@ -1039,8 +1082,13 @@ $.extend( KeyTable.prototype, {
 
 
 	/**
+<<<<<<< HEAD
 	 * Create and insert a hidden input element that can receive focus on behalf
 	 * of the table
+=======
+	 * Create a hidden input element that can receive focus on behalf of the
+	 * table
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	 *
 	 * @private
 	 */
@@ -1056,6 +1104,7 @@ $.extend( KeyTable.prototype, {
 			return;
 		}
 
+<<<<<<< HEAD
 		// Only create the input element once on first class
 		if (! this.s.tabInput) {
 			var div = $('<div><input type="text" tabindex="'+tabIndex+'"/></div>')
@@ -1082,6 +1131,24 @@ $.extend( KeyTable.prototype, {
 		if (cell) {
 			$(cell).prepend(this.s.tabInput);
 		}
+=======
+		var div = $('<div><input type="text" tabindex="'+tabIndex+'"/></div>')
+			.css( {
+				position: 'absolute',
+				height: 1,
+				width: 0,
+				overflow: 'hidden'
+			} )
+			.insertBefore( dt.table().node() );
+
+		div.children().on( 'focus', function (e) {
+			var cell = dt.cell(':eq(0)', that._columns(), {page: 'current'});
+
+			if ( cell.any() ) {
+				that._focus( cell, null, true, e );
+			}
+		} );
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	},
 
 	/**
@@ -1180,7 +1247,11 @@ KeyTable.defaults = {
 
 
 
+<<<<<<< HEAD
 KeyTable.version = "2.5.3";
+=======
+KeyTable.version = "2.5.1";
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 
 $.fn.dataTable.KeyTable = KeyTable;
