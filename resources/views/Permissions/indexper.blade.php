@@ -5,8 +5,7 @@
 @section('encabezado')
 <h1>Menú</h1>
 <br>
-<a class="btn btn-info float-right" href="{{route('permissions.create')}}"><i
-        class="fas fa-user-plus"></i>Menu</a>
+<a class="btn btn-info float-right" href="{{route('permissions.create')}}"><i class="fas fa-user-plus"></i>Menu</a>
 <br>
 @stop
 
@@ -40,7 +39,7 @@
 
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="dataTable" class="table table-hover">
+                        <table id="example1" class="table table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
@@ -65,14 +64,12 @@
 
 
                                     <td class="table-button ">
-                                        <a class="btn btn-info"
-                                            href="{{route('permissions.show', $permiso->id)}}"><i
+                                        <a class="btn btn-info" href="{{route('permissions.show', $permiso->id)}}"><i
                                                 class="fas fa-eye"></i></a>
 
                                     </td>
                                     <td class="table-button ">
-                                        <a class="btn btn-success "
-                                            href="{{route('permissions.edit',$permiso->id)}}"><i
+                                        <a class="btn btn-success " href="{{route('permissions.edit',$permiso->id)}}"><i
                                                 class=" fas fa-pencil-alt"></i></a>
                                     </td>
                                     <td class="table-button ">
@@ -101,9 +98,27 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+
 @stop
 
 @section('js')
-  
+
+
+<script>
+$(function() {
+    $("#example1").DataTable({
+        "responsive": true,
+        "autoWidth": false,
+    });
+    $('#example2').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+    });
+});
+</script>
 @stop

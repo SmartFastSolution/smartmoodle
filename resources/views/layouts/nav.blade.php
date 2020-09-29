@@ -8,9 +8,13 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/plugins.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+   
+
+    <!-- datatabes -->
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     @yield('css')
 
 </head>
@@ -149,6 +153,7 @@
                             </ul>
                         </li>
                         @endcan
+                        @can('haveaccess', 'instituto.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
@@ -166,6 +171,8 @@
                                 </li>
                             </ul>
                         </li>
+                        @endcan
+                        @can('haveaccess', 'curso.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
@@ -183,6 +190,8 @@
                                 </li>
                             </ul>
                         </li>
+                        @endcan
+                        @can('haveaccess', 'nivel.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
@@ -200,6 +209,7 @@
                                 </li>
                             </ul>
                         </li>
+                        @endcan
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
@@ -346,15 +356,10 @@
                 </div><!-- /.container-fluid -->
             </section>
             <section class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <!-- left column -->
-                        <div class="col-md-8">
+               
                             @yield('content')
 
-                        </div>
-                    </div>
-                </div>
+                      
 
             </section>
         </div>
@@ -366,6 +371,12 @@
 
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>
+
+    <!-- datatables script -->
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
 
     @yield('js')
 

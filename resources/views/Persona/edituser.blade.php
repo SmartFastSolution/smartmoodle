@@ -97,7 +97,6 @@
 
                                     </select>
                                 </div>
-
                                 <div class="form-group">
                                     <select class="form-control" name="roles" id="roles">
                                         @foreach($roles as $role)
