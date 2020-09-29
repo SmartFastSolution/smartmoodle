@@ -31,7 +31,10 @@
               </div>
                <div class="form-group col-6">
                 <label for="" class="col-form-label">Imagen(Opcional):</label>
-                <input type="file" name="imagen" class="custom-file">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="imagen" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
               </div>
             </div>
               <div class="form-group">
@@ -70,9 +73,7 @@
                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                 <input required="" type="hidden" value="2" name="id_plantilla">
 
-               <textarea required=""  name="enunciado" class="form-control" rows="5">
-
-</textarea>
+               <textarea required=""  name="enunciado" class="form-control" rows="5"></textarea>
               </div>
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Materia:</label>
@@ -84,7 +85,10 @@
               </div>
               <div class="form-group">
                 <label for="" class="col-form-label">Imagen:</label>
-                <input required="" type="file" name="imagen" class="custom-file">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="imagen" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
               </div>
               <div class="row justify-content-center">
           <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
@@ -370,52 +374,82 @@
           <div class="form-row">
                <div class="form-group col-6">
                 <label for="" class="col-form-label">Imagen 1:</label>
-                <input required="" type="file" name="img1" class="custom-file">
+                 <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img1" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
               </div>
                <div class="form-group col-6">
                 <label for="" class="col-form-label">Imagen 2: </label>
-                <input required="" type="file" name="img2" class="custom-file">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img2" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
               </div>
           </div>
           <div class="form-row">
 
               <div class="form-group col-6">
                 <label for="" class="col-form-label">Imagen 3: </label>
-                <input required="" type="file" name="img3" class="custom-file">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img3" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
               </div>
               <div class="form-group col-6">
                 <label for="" class="col-form-label">Imagen 4: </label>
-                <input required="" type="file" name="img4" class="custom-file">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img4" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
               </div>
           </div>
             <div class="form-row">
               <div class="form-group col-6">
                 <label for="" class="col-form-label">Imagen 5: </label>
-                <input required="" type="file" name="img5" class="custom-file">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img5" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
               </div>
               <div class="form-group col-6">
                 <label for="" class="col-form-label">Imagen 6: </label>
-                <input required="" type="file" name="img6" class="custom-file">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img6" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-6">
                 <label for="" class="col-form-label">Imagen 7: </label>
-                <input required="" type="file" name="img7" class="custom-file">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img7" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
               </div>
               <div class="form-group col-6">
                 <label for="" class="col-form-label">Imagen 8: </label>
-                <input required="" type="file" name="img8" class="custom-file">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img8" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
               </div>
             </div>
           <div class="form-row">
               <div class="form-group col-6">
                 <label for="" class="col-form-label">Imagen 9: </label>
-                <input required="" type="file" name="img9" class="custom-file">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img9" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
               </div>
               <div class="form-group col-6">
                 <label for="" class="col-form-label">Imagen 10 : </label>
-                <input required="" type="file" name="img10" class="custom-file">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img10" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
               </div>
             </div>
               <div class="row justify-content-center">
@@ -509,7 +543,10 @@
               </div>
               <div class="form-group">
                 <label for="" class="col-form-label">Imagen Central: </label>
-                <input required="" type="file" name="img" class="custom-file">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
               </div>
                 <div class="row justify-content-center">
                   <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
@@ -660,7 +697,11 @@
                   <div class="form-inline">
                     <label for="img1" class="col-form-label">Imagen 1:</label>
                   </div>
-                  <input required="" type="file" name="img1" class="custom-file" >
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img1" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
+                
                     <label for="concepto6" class="col-form-label">Definicion 1:</label>
                <textarea required=""  name="definicion1" class="form-control" rows="5"></textarea>
 
@@ -674,7 +715,10 @@
                   <div class="form-inline">
                     <label for="img2" class="col-form-label">Imagen 2:</label>
                   </div>
-                  <input required="" type="file" name="img2" class="custom-file">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img2" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
                     <label for="concepto6" class="col-form-label">Definicion 2:</label>
                <textarea required=""  name="definicion2" class="form-control" rows="5"></textarea>
 
@@ -688,7 +732,10 @@
                   <div class="form-inline">
                     <label for="img3" class="col-form-label">Imagen 3:</label>
                   </div>
-                  <input required="" type="file" name="img3" class="custom-file" id="img3">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img3" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
                     <label for="concepto6" class="col-form-label">Definicion 3:</label>
                <textarea required=""  name="definicion3" class="form-control" rows="5"></textarea>
 
@@ -702,7 +749,10 @@
                   <div class="form-inline">
                     <label for="img4" class="col-form-label">Imagen 4:</label>
                   </div>
-                  <input required="" type="file" name="img4" class="custom-file" id="img4">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img4" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
                     <label for="concepto6" class="col-form-label">Definicion 4:</label>
                <textarea required=""  name="definicion4" class="form-control" rows="5"></textarea>
 
@@ -716,7 +766,10 @@
                   <div class="form-inline">
                     <label for="img5" class="col-form-label">Imagen 5:</label>
                   </div>
-                  <input required="" type="file" name="img5" class="custom-file" id="img5">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img5" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
                     <label for="concepto6" class="col-form-label">Definicion 5:</label>
                <textarea required=""  name="definicion5" class="form-control" rows="5"></textarea>
 
@@ -730,7 +783,10 @@
                   <div class="form-inline">
                     <label for="img6" class="col-form-label">Imagen 6:</label>
                   </div>
-                  <input required="" type="file" name="img6" class="custom-file" id="img6">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img6" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
                     <label for="concepto6" class="col-form-label">Definicion 6:</label>
                <textarea required=""  name="definicion6" class="form-control" rows="5"></textarea>        
                 </div>
@@ -788,7 +844,10 @@
                   <div class="form-inline">
                     <label for="img1" class="col-form-label">Imagen 1:</label>
                   </div>
-                  <input required="" type="file" name="img1" class="custom-file" >
+                   <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img1" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
                     
                 </div>
 
@@ -800,7 +859,10 @@
                   <div class="form-inline">
                     <label for="img2" class="col-form-label">Imagen 2:</label>
                   </div>
-                  <input required="" type="file" name="img2" class="custom-file">    
+                   <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="img2" lang="es">
+                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
+                </div>
                 </div>
                 <div class="form-group bg-light p-2">
                     <label for="concepto6" class="col-form-label">Definicion 1:</label>

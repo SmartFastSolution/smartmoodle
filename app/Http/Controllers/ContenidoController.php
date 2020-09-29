@@ -32,7 +32,7 @@ class ContenidoController extends Controller
     public function create()
     {
       $materias=Materia::get();
-        return \view('Contenido.createco',compact('materias',));
+        return \view('Contenido.createco',compact('materias'));
 
     }
 

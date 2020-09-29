@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 @section('css')
 <link rel="stylesheet" href="{{ asset('vendor/toastr/toastr.min.css') }}">
 @endsection

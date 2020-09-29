@@ -1,4 +1,5 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
+
 @section('title', $datos->taller->nombre)
 @section('content')
 <!-- LLENE  CON  LOS  SIGUIENTES  DATOS  LOS  CERTIFICADOS DE DEPÓSITO 

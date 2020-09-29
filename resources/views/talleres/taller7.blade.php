@@ -1,5 +1,4 @@
-@extends('adminlte::page')
-
+@extends('layouts.nav')
 <!-- ESCRIBIR EN EL GUSANILLO -->
 
 @section('title', $datos->taller->nombre)

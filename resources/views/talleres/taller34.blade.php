@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
  @section('css')
  <link rel="stylesheet" href="{{ asset('css/dropzone.min.css') }}">

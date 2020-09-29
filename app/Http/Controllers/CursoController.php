@@ -21,7 +21,7 @@ class CursoController extends Controller
                
         $cursos= Curso::orderBy('id','Asc')->paginate(5);
        
-        return \view('Cursos.indexc',['cursos'=>$cursos,]);
+        return \view('Cursos.indexc',['cursos'=>$cursos]);
     }
 
     /**
@@ -34,7 +34,7 @@ class CursoController extends Controller
         $nivels=Nivel::get();
         $materias=Materia::get();
 
-        return \view('Cursos.createc',compact('nivels','materias',));
+        return \view('Cursos.createc',compact('nivels','materias'));
     }
 
     /**

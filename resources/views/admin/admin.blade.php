@@ -50,7 +50,7 @@
                     </div>
                      <div class="form-group">
                       <label for="message-text" class="col-form-label">Descripcion</label>
-                      <textarea class="form-control" name="descripcion" ></textarea>
+                      <textarea class="form-control" name="descripcion" required=""></textarea>
                     </div>       
                  </div>
                  <div class="card-footer text-muted">

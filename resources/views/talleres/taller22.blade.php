@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', $datos->taller->nombre )
 @section('content')

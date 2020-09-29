@@ -5,6 +5,38 @@
 
 
 @section('content')
+<div id="app">
+      <drag-component :datos="{{ $datos = App\Materia::get() }}" inline-template>
+          <div class="row">
+          <div class="col-3">
+            <h3>Draggable 1</h3>
+            <draggable class="list-group" :list="datos" group="people" @change="log">
+              <div
+                class="list-group-item"
+                v-for="(element, index) in datos"
+                :key="element.name"
+              >
+              @{{ index + 1}} -  @{{ element.nombre }} 
+              </div>
+            </draggable>
+          </div>
+
+          <div class="col-3">
+            <h3>Draggable 2</h3>
+            <draggable class="list-group" :list="list2" group="people" @change="log">
+              <div
+                class="list-group-item"
+                v-for="(element, index) in list2"
+                :key="element.name"
+              >
+               @{{ index }} - @{{ element.nombre }} 
+              </div>
+            </draggable>
+          </div>
+  </div>
+
+             </drag-component>
+</div>
         <div class="col-md-6">
                 <div class="form-group">
                   <label>Multiple</label>
@@ -33,7 +65,6 @@
                 </div>
                 <!-- /.form-group -->
               </div>
-
 @stop
 @section('js')
 

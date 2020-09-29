@@ -1,5 +1,4 @@
-@extends('adminlte::page')
-
+@extends('layouts.nav')
 @section('title', 'Taller '.$datos->taller->id)
 @section('content')
 <!--TALLER IDENTIFICAR IMAGENES -->
