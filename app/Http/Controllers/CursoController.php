@@ -36,7 +36,7 @@ class CursoController extends Controller
         $nivels=Nivel::get();
        
       
-        return \view('Cursos.createc',compact('nivels',));
+        return \view('Cursos.createc',compact('nivels'));
     }
 
     /**

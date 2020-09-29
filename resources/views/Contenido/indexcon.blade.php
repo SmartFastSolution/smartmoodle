@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.nav')
 
 @section('title', 'Contenido | SmartMoodle')
 
@@ -15,7 +15,7 @@
 <br><br>
 @stop
 
-@section('contenido')
+@section('content')
 
 
 
@@ -109,10 +109,10 @@
 
 @stop
 
-@section('styles')
+@section('css')
     
 @stop
 
-@section('script')
+@section('js')
     
 @stop

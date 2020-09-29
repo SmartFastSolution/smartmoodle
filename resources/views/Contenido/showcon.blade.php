@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.nav')
 
 @section('title', 'Dashboard')
 
@@ -6,7 +6,7 @@
     <h1>Dashboard</h1>
 @stop
 
-@section('contenido')
+@section('content')
 
 
 <section class="content-header">
@@ -114,9 +114,9 @@
 
 @stop 
 
-@section ('styles')
+@section ('css')
 @stop 
 
-@section('script')
+@section('js')
     
 @stop

@@ -80,16 +80,23 @@
                             <th scope="col">Nombre del Taller </th>
                             <th scope="col">Nombre de la Plantilla </th>
                             <th scope="col">Estado</th>
+                            <th></th>
+                            <th scope="col">Vista Taller</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                          @foreach($tallers->where('materia_id', $materia->id)  as $taller)
+                            @foreach($tallers->where('materia_id', $materia->id) as $taller)
                             <th scope="row">{{$taller->materia['id']}}</th>
                             <td>{{$taller->materia->nombre}}</td>
                             <td>{{$taller['nombre']}}</td>
                             <td>{{$taller->Plantilla->nombre}}</td>
-                            <td>{{$taller['estado']}}</td>                         
+                            <td>{{$taller['estado']}}</td>
+                            <td> </td>
+                            <td class="table-button ">
+                                <a class="btn btn-info" href=""><i class="fas fa-eye"></i></a>
+
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
