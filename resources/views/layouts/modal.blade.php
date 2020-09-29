@@ -32,9 +32,9 @@
                <div class="form-group col-6">
                 <label for="" class="col-form-label">Imagen(Opcional):</label>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="imagen" lang="es">
-                    <label class="custom-file-label" for="customFile" >Seleciona un archivo</label>
-                </div>
+  <input type="file" class="custom-file-input" id="customFile">
+  <label class="custom-file-label" for="customFile">Choose file</label>
+</div>
               </div>
             </div>
               <div class="form-group">

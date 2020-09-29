@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Admin\TallerAbreviatura;
 use App\Admin\TallerCertificadoDeposito;
 use App\Admin\TallerCheque;
@@ -30,6 +29,7 @@ use App\Admin\TallerSubrayar;
 use App\Admin\TallerValeCaja;
 use App\Admin\TallerVerdaderoFalso;
 use App\Http\Controllers\Controller;
+use App\Materia;
 use App\Taller;
 use App\TallerAbreviaturaDatoRe;
 use App\TallerAbreviaturaRe;
@@ -61,6 +61,7 @@ use App\TallerSubrayarRe;
 use App\TallerValeCajaRe;
 use App\TallerVerdaderoFalsoRe;
 use Illuminate\Http\Request;
+use JavaScript;
 
 class TallersController extends Controller
 {
@@ -1036,6 +1037,11 @@ class TallersController extends Controller
         return view('talleres.taller47');
     }
      public function taller48(){
+        $materias = ['Matematicas', 'Lenguaje', 'Ingles', 'Ciencias', 'Sociales', 'Fisica','Programacion', 'Literatura','Educacion', 'Parlantes'];
+
+        JavaScript::put([
+            'materias' => $materias,
+            ]);
 
         return view('talleres.taller48');
     }

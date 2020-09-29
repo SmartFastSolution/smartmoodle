@@ -60,8 +60,15 @@
                </form>
             </div>
      		</div>
+         <div class="row justify-content-start">
+        <div class="col-3">
+            <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-outline-danger">Atras</a>
+        </div>
+      </div>
 </div> 
+
      	</div>
+     
 
 <ul class="list-group m-3">
   @foreach ($sub = App\Taller::paginate(5) as $taller)
@@ -74,6 +81,10 @@
 @include('layouts.modal')
 
 @section('js')
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
+<script type="text/javascript">
+    bsCustomFileInput.init()
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 
 <script type="text/javascript">

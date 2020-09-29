@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+//require('./wordfind');
 
 window.Vue = require('vue');
 
@@ -21,6 +22,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('drag-component', require('./components/DragComponent.vue').default);
+//Vue.component('letra-component', require('./components/LetraComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -33,9 +35,8 @@ if(document.getElementById('app')){
     		el: '#app',
 		}); 
                 }
-  require('./talleres');   
 if(document.getElementById('tallerlist')){
-         
+  require('./talleres');   
                 }
 
 if(document.getElementById('cruc')){
