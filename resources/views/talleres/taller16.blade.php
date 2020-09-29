@@ -1,7 +1,8 @@
-@extends('layouts.master')
+@extends('layouts.nav')
+
 
 @section('title', $datos->taller->nombre)
-@section('contenido')
+@section('content')
 
 <!-- ENDOSE  EL  CHEQUE  A  NOMBRE DE  LA  ING. ISABEL  PANTOJA -->
 <h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>

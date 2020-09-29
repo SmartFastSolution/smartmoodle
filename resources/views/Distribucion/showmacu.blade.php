@@ -1,13 +1,14 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Detalle Asignacon')
 
-@section('content_header')
+@section('encabezado')
     <h1>Detalle</h1>
 @stop
-
 @section('content')
    
+
+
 
 
 
@@ -17,9 +18,9 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    
 @stop

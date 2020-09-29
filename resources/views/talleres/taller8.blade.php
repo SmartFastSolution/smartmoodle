@@ -1,7 +1,8 @@
-@extends('layouts.master')
+@extends('layouts.nav')
+
 
 @section('title', 'Taller 9')
-@section('contenido')
+@section('content')
 
 <!--ESCRIBA  EN  LOS  CÍRCULOS  EJEMPLOS. -->
 

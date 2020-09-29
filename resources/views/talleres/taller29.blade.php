@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.nav')
 
 @section('title', 'Taller 30')
 @section('contenido')

@@ -11,9 +11,23 @@ class Usuario extends Seeder
      */
     public function run()
     {
-        DB::table('plantillas')->insert([
-          'nombre' => 'TALLER 1 - COMPLETE EL ENUNCIADO CORRECTAMENTE',
-          'descripcion' => 'Taller designado para completar un resultado',
+        DB::table('materias')->insert([
+          'nombre' => 'Matematicas',
+          'slug' => 'matematicas',
+          'descripcion' => 'Materia de matematicas',
+          'estado' => 'on',
+        ]);
+        DB::table('materias')->insert([
+          'nombre' => 'Contabilidad',
+          'slug' => 'contabilidad',
+          'descripcion' => 'Materia de contabilidad',
+          'estado' => 'on',
+        ]);
+        DB::table('materias')->insert([
+          'nombre' => 'Lenguaje',
+          'slug' => 'lenguaje',
+          'descripcion' => 'Materia de lenguaje',
+          'estado' => 'on',
         ]);
     }
 }

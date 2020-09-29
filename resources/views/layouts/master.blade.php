@@ -128,7 +128,7 @@
 
 
                     </div>
-                    <div class="info">
+                    <!-- <div class="info">
                         <a href="#" class="d-block">
                             @guest
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a>
@@ -136,7 +136,7 @@
                             {{ Auth::user()->name }}
 
                         </a>
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- Sidebar Menu -->

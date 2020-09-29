@@ -1,7 +1,8 @@
-@extends('layouts.master')
+@extends('layouts.nav')
 
-@section('title', $datos->taller->nombre)
-@section('contenido')
+
+@section('titulo', $datos->taller->nombre)
+@section('content')
 
 <form action="{{ route('taller1', ['idtaller' => $d]) }}" method="POST">
     @csrf
@@ -28,7 +29,3 @@
  </div>
 </form>
 @endsection
-
-     <!--
-              
-            -->

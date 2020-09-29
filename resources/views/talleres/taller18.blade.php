@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.nav')
 
 @section('title', $datos->taller->nombre)
-@section('contenido')
+@section('content')
 
 <!-- LLENE  CON  LOS SIGUIENTES DATOS LAS LETRAS  DE  CAMBIO CORRECTAMENTE -->
 

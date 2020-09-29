@@ -1,9 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Editar Menú')
 
-@section('content_header')
-    <h1>Editar Menú</h1>
+@section('encabezado')
+<h1>Editar Menú</h1>
 @stop
 
 @section('content')
@@ -30,38 +30,43 @@
                 </div>
                 <div class="card-body">
 
-                <form method="POST" action="{{route('permissions.update', $permission->id)}}"  >
+                    <form method="POST" action="{{route('permissions.update', $permission->id)}}">
                         @method('PUT')
                         @csrf
 
-                    
+
 
                         <div class=" card-body">
                             <div class="form-group">
                                 <label for="namep"> Nombre del Menu</label>
-                                <input type="text" class="form-control"  value="{{$permission->namep}}" name="namep" id="namep" placeholder="Menu"
-                                    required>
+                                <input type="text" class="form-control" value="{{$permission->namep}}" name="namep"
+                                    id="namep" placeholder="Menu" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="slug">Slug del Menú</label>
+                                <input type="text" class="form-control" name="slug" tag="slug" id="slug"
+                                    placeholder="Slug" value="{{$permission->slug}}">
                             </div>
                             <div class="form-group">
                                 <label for="descripcionp"> descripcionp</label>
-                                <input type="text" class="form-control"  value="{{$permission->descripcionp}}" name="descripcionp" tag="descripcionp" id="descripcionp"
-                                    placeholder="Descripción">
-                            </div>   
+                                <input type="text" class="form-control" value="{{$permission->descripcionp}}"
+                                    name="descripcionp" tag="descripcionp" id="descripcionp" placeholder="Descripción">
+                            </div>
 
-                              <h3>Estado del Menú</h3>
+                            <h3>Estado del Menú</h3>
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="estadoon" name="estado" class="custom-control-input"
-                                    value="on" @if($permission['estado']=="on" ) checked
-                                    @elseif(old('estado')=="on" ) checked @endif>
+                                <input type="radio" id="estadoon" name="estado" class="custom-control-input" value="on"
+                                    @if($permission['estado']=="on" ) checked @elseif(old('estado')=="on" ) checked
+                                    @endif>
                                 <label class="custom-control-label" for="estadoon">Activo</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" id="estadooff" name="estado" class="custom-control-input"
-                                    value="off" @if($permission['estado']=="off" ) checked
-                                    @elseif(old('estado')=="off" ) checked @endif>
+                                    value="off" @if($permission['estado']=="off" ) checked @elseif(old('estado')=="off"
+                                    ) checked @endif>
                                 <label class="custom-control-label" for="estadooff">No Activo</label>
-                            </div> 
-                            <br><br><br>   
+                            </div>
+                            <br><br><br>
 
                             <input type="submit" class="btn btn-dark " value="Guardar">
 
@@ -77,9 +82,24 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+<link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
+
 @section('js')
-    <script> console.log('Hi!'); </script>
+
+
+<script>
+$(document).ready(function() {
+
+    $('#namep').keyup(function(e) {
+        var str = $('#namep').val();
+        str = str.replace(/\W+(?!$)/g, '.').toLowerCase(); // remplazamos el estdo de dashe el punto se lo puede cambiar
+        $('#slug').val(str);
+        $('slug').attr('placeholder', str);
+    });
+
+});
+</script>
+
 @stop

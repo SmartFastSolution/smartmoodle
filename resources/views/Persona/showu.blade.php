@@ -1,14 +1,13 @@
 
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Usuarios')
 
-@section('content_header')
+@section('encabezado')
     <h1>Detalles de Usuarios</h1>
 @stop
 
 @section('content')
-
 <div class="container">
 
     <div class="card">
@@ -35,10 +34,11 @@
 </div>
 
 
+
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')

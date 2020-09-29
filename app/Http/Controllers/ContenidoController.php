@@ -32,7 +32,7 @@ class ContenidoController extends Controller
     public function create()
     {
       $materias=Materia::get();
-        return \view('Contenido.createco',compact('materias',));
+        return \view('Contenido.createco',compact('materias'));
 
     }
 
@@ -49,7 +49,7 @@ class ContenidoController extends Controller
 
             'nombre'      => 'required|string|max:150',
             'descripcion' => 'required|string|max:250',
-            'documentod'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf',
+            'documentod'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:8000',
             'estado'      => 'required|in:on,off',
         ]);
      
@@ -150,10 +150,8 @@ class ContenidoController extends Controller
     public function destroy(Contenido $contenido)
     {
         $contenido= Contenido::find($contenido->id);
-      
     
            $contenido->delete();
-
            if(Storage::delete('public/',$contenido->documentod)){
 
            $contenido->delete($contenido->documentod);
