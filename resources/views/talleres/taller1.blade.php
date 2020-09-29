@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-@extends('layouts.app')
-=======
 @extends('layouts.nav')
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
+
 
 @section('titulo', $datos->taller->nombre)
 @section('content')

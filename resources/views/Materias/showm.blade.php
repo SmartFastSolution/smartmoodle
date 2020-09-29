@@ -4,6 +4,8 @@
 
 @section('encabezado')
 <h1> Materias</h1>
+<br> <a class="btn btn-info float-right" href="{{route('admin.create')}}"><i class="fas fa-plus"> Crear Talleres</i></a>
+<br>
 @stop
 
 
@@ -94,7 +96,9 @@
                             <td>{{$taller['estado']}}</td>
                             <td> </td>
                             <td class="table-button ">
-                                <a class="btn btn-info" href=""><i class="fas fa-eye"></i></a>
+                                <a class="btn btn-info"
+                                    href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
+                                        class="fas fa-eye"></i></a>
 
                             </td>
                         </tr>
