@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Nivel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class NivelController extends Controller
 {
@@ -15,6 +16,8 @@ class NivelController extends Controller
      */
     public function index()
     {
+        Gate::authorize('haveaccess', 'nivel.index');
+
         $nivels= Nivel::orderBy('id','Asc')->paginate(5);
     
         return view('Niveles.indexn',['nivels'=>$nivels]);
@@ -27,6 +30,7 @@ class NivelController extends Controller
      */
     public function create()
     {
+        Gate::authorize('haveaccess', 'nivel.create');
         return \view('Niveles.createn');
     }
 
@@ -38,6 +42,8 @@ class NivelController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('haveaccess', 'nivel.store');
+        
         $request->validate([
 
             'nombre'      => 'required|string|max:150',
@@ -68,7 +74,7 @@ class NivelController extends Controller
      */
     public function edit(Nivel $nivel)
     {
-        
+        Gate::authorize('haveaccess', 'nivel.edit');
         return view('Niveles.editn',['nivel'=>$nivel]);
 
     }
@@ -82,6 +88,7 @@ class NivelController extends Controller
      */
     public function update(Request $request, Nivel $nivel)
     {
+        Gate::authorize('haveaccess', 'nivel.update');
         $request->validate([
 
             'nombre'      => 'required|string|max:150',
@@ -101,6 +108,7 @@ class NivelController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('haveaccess', 'nivel.destroy');
         $nivel= Nivel::find($id);
         $nivel->delete();
 

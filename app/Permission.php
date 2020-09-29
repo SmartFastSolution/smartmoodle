@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Permission extends Model
 {
     protected $fillable = [
-        'namep','descripcionp','estado',
+        'namep','slug','descripcionp','estado',
     ];
 
 

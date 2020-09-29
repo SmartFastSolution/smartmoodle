@@ -1,13 +1,14 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Editar Usuario')
 
-@section('content_header')
+@section('encabezado')
 <h1>Edicion de Usuarios</h1>
 @stop
 
+
 @section('content')
-   
+
 @if ($errors->any())
 <div class="alert alert-danger">
     <strong>Whoops!</strong> Parece que hay porblemas o Malas decisiones <br><br>
@@ -96,22 +97,20 @@
 
                                     </select>
                                 </div>
-
                                 <div class="form-group">
-                                    <label>Rol</label>
-                                    <select class="form-control select" name="role" style="width: 99%;">
-                                        <option selected disabled>Elija un rol para el Usuario</option>
+                                    <select class="form-control" name="roles" id="roles">
                                         @foreach($roles as $role)
-
-                                        @if($role->name == str_replace(array('["','"]'),'', $user->tieneRol()))
-                                        <option value="{{$role->id}}" selected>{{$role->name}}</option>
-                                        @else
-                                        <option value="{{$role->id}}">{{$role->name}}</option>
-                                        @endif
+                                        <option value="{{ $role->id }}"
+                                            @isset($user->roles[0]->name)
+                                            @if($role->name == $user->roles[0]->name)
+                                            selected 
+                                            @endif
+                                            @endisset
+                                            >{{ $role->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-
+                               
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input class="form-control" name="email" id="email" placeholder="Email"
@@ -222,7 +221,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')

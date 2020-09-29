@@ -1,13 +1,11 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Editar Materias')
-
-@section('content_header')
+@section('encabezado')
 <h1>Editar Materias</h1>
 @stop
 
 @section('content')
-
 
 
 
@@ -44,6 +42,11 @@
                                     value="{{$materias->nombre}}" placeholder="Edición de Materia">
                             </div>
                             <div class="form-group">
+                                <label for="slug">Slug Materia</label>
+                                <input type="text" class="form-control" name="slug" tag="slug"
+                                    id="slug" placeholder="Slug Materia" value="{{$materias->slug}}">
+                            </div>
+                            <div class="form-group">
                                 <label for="descripcion">Descripción</label>
                                 <input type="text" class="form-control" name="descripcion" id="descripcion"
                                     value="{{$materias->descripcion}}" placeholder="Descripción">
@@ -72,14 +75,25 @@
     </div>
 </section>
 
+
 @stop
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')
+   
 <script>
-console.log('Hi!');
+$(document).ready(function() {
+
+    $('#nombre').keyup(function(e) {
+        var str = $('#nombre').val();
+        str = str.replace(/\W+(?!$)/g, '-').toLowerCase(); // remplazamos el estdo de dashe
+        $('#slug').val(str);
+        $('slug').attr('placeholder', str);
+    });
+
+});
 </script>
 @stop

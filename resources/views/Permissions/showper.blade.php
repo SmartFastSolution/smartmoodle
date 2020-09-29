@@ -1,8 +1,8 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Detalle Menú')
 
-@section('content_header')
+@section('encabezado')
     <h1>Detalle Menú</h1>
 @stop
 
@@ -31,10 +31,11 @@
 </div>
 
 
+
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')

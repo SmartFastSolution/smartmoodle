@@ -1,8 +1,8 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Materias')
 
-@section('content_header')
+@section('encabezado')
 <h1>Materia</h1>
 
 <br> <a class="btn btn-info float-right" href="{{route('materias.create')}}"><i
@@ -10,8 +10,6 @@
 @stop
 
 @section('content')
-
-
 <section class="content">
     <div class="container-fluid">
         @if ($message = Session::get('success'))
@@ -36,6 +34,7 @@
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Nombre</th>
+                                    <th scope="col">Slug</th>
                                     <th scope="col">Descripción</th>
                                     <th scope="col">Estado</th>
                                     <th></th>
@@ -47,6 +46,7 @@
                                     @foreach ($materias as $materia)
                                     <th scope="row">{{ $materia['id']}}</th>
                                     <td>{{ $materia['nombre']}}</td>
+                                    <td>{{ $materia['slug']}}</td>
                                     <td>{{ $materia['descripcion']}}</td>
                                     <td>{{ $materia['estado']}}</td>
                                     <td> </td>
@@ -85,10 +85,11 @@
         </div>
 </section>
 
+
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')

@@ -213,6 +213,10 @@ class Taller extends Model
     {
         return $this->belongsTo('App\Admin\TallerCollage');
     }
+     public function tallerCollageRe()
+    {
+        return $this->belongsTo('App\TallerCollageRe');
+    }
 }
 
 

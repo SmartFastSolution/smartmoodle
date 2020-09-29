@@ -1,8 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
-@section('title', 'Dashboard')
+@section('title', 'Contenido | SmartMoodle')
 
-@section('content_header')
+
+@section('encabezado')
 <h1>Contenido</h1>
 <br>
 <div class="card-tools">
@@ -13,7 +14,6 @@
 </div>
 <br><br>
 @stop
-
 
 @section('content')
 
@@ -48,7 +48,7 @@
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Materia</th>
                                     <th scope="col">Descripcion</th>
-                                    <th scope="col">Documento(s)</th>
+                                    <!-- <th scope="col">Documento(s)</th> -->
                                     <th scope="col">Estado</th>
                                     <th></th>
                                     <th scope="col">Tools</th>
@@ -61,10 +61,10 @@
                                     <td>{{ $contenido['nombre']}}</td>
                                     <td>{{ $contenido->materia->nombre}}</td>
                                     <td>{{ $contenido['descripcion']}}</td>
-                                    <td>
+                                    <!-- <td>
                                         <a target="_blank"
                                             href="{{Storage::url($contenido['documentod'])}}">{{ $contenido['nombre']}}</a>
-                                    </td>
+                                    </td> -->
 
                                     <td>{{ $contenido['estado']}}</td>
                                     <td> </td>
@@ -103,14 +103,16 @@
 
 
 
+
+
+
+
 @stop
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')
-<script>
-console.log('Hi!');
-</script>
+    
 @stop

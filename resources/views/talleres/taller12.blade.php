@@ -1,7 +1,7 @@
-@extends('layouts.master')
+@extends('layouts.nav')
 
 @section('title',  $datos->taller->nombre)
-@section('contenido')
+@section('content')
 
 <!--IDENTIFICA  EL  ENUNCIADO  ESCRIBIENDO  (V) DE  VERDADERO   O  (F)  DE 
 FALSO,  CON  CERTEZA. -->

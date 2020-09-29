@@ -1,12 +1,10 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', ' Crear Curso')
 
-@section('plugins.Select2', true)
 
-<!-- @section('plugins.Sweetalert2', true)  -->
 
-@section('content_header')
+@section('encabezado')
 <h1>Añadir Cursos</h1>
 @stop
 
@@ -87,26 +85,14 @@
 </section>
 
 
+
+
 @stop
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')
-<!-- <script>
-    Swal.fire(
-  'Good job!',
-  'Haz Accedido!',
-  'success'
-)
-</script> -->
-
-<script>
-$(function() {
-    //Initialize Select2 Elements
-    $('.select2').select2()
-
-})
-</script>
+    
 @stop

@@ -1,8 +1,8 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Unidad Educativa')
 
-@section('content_header')
+@section('encabezado')
 <h1>Unidad Educativa</h1>
 <br>
 <a class="btn btn-info float-right " href="{{route('institutos.create')}}"><i class="fas fa-plus"></i></i> Instituto</a>
@@ -112,14 +112,14 @@
 </section>
 
 
+
+
 @stop
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')
-<script>
-console.log('Hi!');
-</script>
+    
 @stop
