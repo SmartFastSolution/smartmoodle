@@ -212,6 +212,7 @@
                             </ul>
                         </li>
                         @endcan
+                        @can('haveaccess', 'materia.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
@@ -229,6 +230,8 @@
                                 </li>
                             </ul>
                         </li>
+                        @endcan
+                        @can('haveaccess', 'contenido.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
@@ -246,6 +249,8 @@
                                 </li>
                             </ul>
                         </li>
+                        @endcan
+                        @can('haveaccess', 'asignacion.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
@@ -263,6 +268,8 @@
                                 </li>
                             </ul>
                         </li>
+                        @endcan
+                        @can('haveaccess', 'talleres.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
@@ -280,7 +287,7 @@
                                 </li>
                             </ul>
                         </li>
-                        
+                        @endcan
 
                         <li class="nav-header">DOCENTE</li>
                         <li class="nav-item">

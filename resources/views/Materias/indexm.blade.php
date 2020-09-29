@@ -10,8 +10,6 @@
 @stop
 
 @section('content')
-
-
 <section class="content">
     <div class="container-fluid">
         @if ($message = Session::get('success'))
