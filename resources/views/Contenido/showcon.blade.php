@@ -126,6 +126,7 @@
                     data-dismiss="modal">Close</button>
 
             </div>
+            
         </div>
         <!--/.Content-->
 

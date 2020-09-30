@@ -27,7 +27,7 @@ class PcuentaController extends Controller
      */
     public function create()
     {
-        return \view('Cuentas.indexcuenta');
+      return \view('Cuentas.createcp');
     }
 
     /**

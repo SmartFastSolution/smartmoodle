@@ -1,10 +1,10 @@
 @extends('layouts.nav')
 
-@section('title', 'Niveles')
+@section('title', 'Plan de Cuenta')
 
 
 @section('encabezado')
-<h1>Niveles</h1>
+<h1>Plan de Cuentas</h1>
 <br>
 <!-- <a class="btn btn-info float-right " ><i class="fas fa-file-invoice"></i>  Añadir
     Cuenta</a> -->
@@ -94,9 +94,10 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="POST" action="{{route('pcuentas.store')}}">
-                    <div class="modal-body">
 
+                <!--action="{{route('pcuentas.store')}}"-->
+                <div class="modal-body">
+                    <form method="POST" action="{{action('PcuentaController@store')}}">
                         @csrf
                         <div class="form-group">
                             <label for="tpcuenta">Seleccione el Tipo de Cuenta</label>
@@ -134,8 +135,9 @@
                             <button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
                             <input type="submit" class="btn btn-dark " value="Guardar">
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>
