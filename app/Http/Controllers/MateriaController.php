@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Contenido;
 use App\Taller;
 use App\Materia;
 use App\Plantilla;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -68,8 +71,9 @@ class MateriaController extends Controller
         $materia =Materia::where('id', $id)->firstOrfail();
         //$taller=Taller::all(array("id","materia_id","nombre" ));
         $tallers=Taller::get();
+        $contenido=Contenido::get();
         //$tallers=Taller::get();
-         return view ('Materias.showm',['materia'=>$materia,'tallers'=>$tallers,]);
+         return view ('Materias.showm',['materia'=>$materia,'tallers'=>$tallers,'contenidos'=>$contenido]);
     }
 
     /**

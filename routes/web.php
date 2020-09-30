@@ -38,8 +38,8 @@ Auth::routes();
 
 ///rutas protegidas On 
 
- //Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
-  Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
+ Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
+  //Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
    
  route::get('/','Controller@index')->name('welcome');
 
@@ -84,6 +84,9 @@ route::resource('contenidos','ContenidoController');
 
 //Ruta Resource par asignacion de cursos y materias prueba 2 
 route::resource('distribucionmacus','DistribucionmacuController');
+
+//Ruta Resource para plan de cuentas
+route::resource('pcuentas','PcuentaController');
 });
 
 

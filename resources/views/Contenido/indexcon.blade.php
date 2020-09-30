@@ -84,7 +84,7 @@
                                             enctype="multipart/form-data">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" onclick="return confirm('¿Borrar?');"
+                                            <button type="submit" onclick="return confirm('¿Desea Borrar?');"
                                                 class="btn btn-danger "><i class="fas fa-trash"></i></button>
                                         </form>
                                     </td>

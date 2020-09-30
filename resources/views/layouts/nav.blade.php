@@ -288,6 +288,25 @@
                             </ul>
                         </li>
                         @endcan
+                        @can('haveaccess', 'cuentas.index')
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-user-cog"></i>
+                                <p>
+                                   Plan de Cuentas
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('pcuentas.index')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lista Plan de Cuentas</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endcan
 
                         <li class="nav-header">DOCENTE</li>
                         <li class="nav-item">
