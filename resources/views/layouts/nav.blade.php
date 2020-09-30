@@ -93,10 +93,10 @@
 
 
 
-
+                        @can('haveaccess', 'rol.index')
                         <li class="nav-header">ADMINISTRACIÓN</li>
                         <li class="nav-item">
-                            @can('haveaccess', 'rol.index')
+
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-lock"></i>
@@ -274,7 +274,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
                                 <p>
-                                   Talleres
+                                    Talleres
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -293,7 +293,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
                                 <p>
-                                   Plan de Cuentas
+                                    Plan de Cuentas
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -307,7 +307,7 @@
                             </ul>
                         </li>
                         @endcan
-
+                        @can('haveaccess', 'docente')
                         <li class="nav-header">DOCENTE</li>
                         <li class="nav-item">
                             <a href="https://adminlte.io/docs/3.0" class="nav-link">
@@ -315,6 +315,60 @@
                                 <p>Documentation</p>
                             </a>
                         </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-circle"></i>
+                                <p>
+                                    Level 1
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Level 2</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>
+                                            Level 2
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="far fa-dot-circle nav-icon"></i>
+                                                <p>Level 3</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="far fa-dot-circle nav-icon"></i>
+                                                <p>Level 3</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="far fa-dot-circle nav-icon"></i>
+                                                <p>Level 3</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Level 2</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endcan
+                        @can('haveaccess', 'estudiante')
                         <li class="nav-header">ESTUDIANTE</li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -380,7 +434,7 @@
                                 <p>Level 1</p>
                             </a>
                         </li>
-
+                        @endcan
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -426,5 +480,3 @@
 </body>
 
 </html>
-
-
