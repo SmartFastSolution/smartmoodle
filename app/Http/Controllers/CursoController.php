@@ -68,7 +68,7 @@ class CursoController extends Controller
         $curso->save();
   
         
-        return redirect('sistema/cursos');
+        return redirect('sistema/cursos')->with('success','Haz Creado un Paralelo con exito');
        
     }
 
@@ -81,7 +81,11 @@ class CursoController extends Controller
     public function show(Curso $curso)
     {
         Gate::authorize('haveaccess', 'curso.show');
-        return view ('Cursos.showc',['curso'=>$curso]);
+        $nivels=Nivel::get();
+        $nivelcurso= Curso::find($curso->id)->nivel()->get(); //llama al nivel que esta relacionado con el modelo curso
+     
+       return \view('Cursos.showc',['curso'=>$curso,'nivels'=>$nivels,'nivelcurso'=>$nivelcurso]);
+     
     }
 
     /**
@@ -128,7 +132,7 @@ class CursoController extends Controller
          }
           
      
-        return redirect('sistema/cursos');
+        return redirect('sistema/cursos')->with('success','Haz Actualizado un Paralelo con exito');
     }
 
     /**
@@ -143,7 +147,7 @@ class CursoController extends Controller
         $curso= Curso::find($curso->id);
         $curso->delete();
 
-        return redirect('sistema/cursos')->with('success','Haz eliminado un Curso con exito');
+        return redirect('sistema/cursos')->with('success','Haz eliminado un Paralelo con exito');
    
     }
 }

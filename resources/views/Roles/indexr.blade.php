@@ -2,30 +2,25 @@
 
 @section('title', 'Roles | SmartMoodle')
 
-@section('encabezado')
-<h1>Roles</h1>
-<a class="btn btn-info float-right" href="{{route('roles.create')}}"><i class="fas fa-user-plus"></i>ROLES</a>
-
-@stop
-
 @section('content')
 
-
+@if ($message = Session::get('success'))
+<div class="alert alert-success">
+    <p>{{ $message }}</p>
+</div>
+@endif
 <section class="content">
-    <div class="container-fluid">
+    <div class="container">
+        <div class="row justify-content-center">
 
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-        @endif
-        <div class="row">
-            <!-- left column -->
             <div class="col-md-13">
-                <!-- general form elements -->
-                <div class="card card-dark">
+                <a class="btn btn-info float-right" href="{{route('roles.create')}}"><i class="fas fa-plus"></i>
+                    ROLES</a>
+                <h1>Roles</h1>
+
+                <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title">Informacion de los Roles</h3>
+
                         <div class="card-tools">
                         </div>
                     </div>
@@ -92,9 +87,9 @@
             </div>
         </div>
     </div>
+
+
 </section>
-
-
 
 @stop
 

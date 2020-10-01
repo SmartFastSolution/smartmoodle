@@ -2,14 +2,11 @@
 
 @section('title', 'Contenido |SmartMoodle')
 
-@section('encabezado')
-<h1>Añadir Contenido</h1>
-@stop
 
 @section('content')
 
 
-<section class="content">
+
     @if ($errors->any())
     <div class="alert alert-danger">
         <strong>Whoops!</strong> Parece que hay porblemas o Malas decisiones <br><br>
@@ -20,17 +17,15 @@
         </ul>
     </div>
     @endif
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card card-info">
-                <div class="card-header">
-                    <h3 class="card-title">Formulario Contenidos</h3>
-                </div>
-                <div class="card-body">
-
+    <section class="content">
+    <div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
+                <h1 class="font-weight-light">Añadir una Unidad</h1>
+                <div class="row">
+                    <div class="col-md-10">
                     <form method="POST" action="{{route('contenidos.index')}} " enctype="multipart/form-data">
                         @csrf
-
                         <div class=" card-body">
                             <div class="form-group">
                                 <label for="nombre">Nombre</label>
@@ -71,7 +66,8 @@
                                 <br>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="estadoon" name="estado" class="custom-control-input"
-                                        value="on" @if(old('estado')=="on" ) checked @endif>
+                                        value="on" @if(old('estado')=="on" ) checked @endif @if(old('estado')===null)
+                                        checked @endif>
                                     <label class="custom-control-label" for="estadoon">Activo</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
@@ -81,6 +77,7 @@
                                 </div>
                             </div>
                             <input type="submit" class="btn btn-dark " value="Guardar">
+                            <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
                         </div>
                     </form>
                 </div>

@@ -3,27 +3,24 @@
 
 @section('title', 'Asignación')
 
-@section('encabezado')
-<h1>Asignación de Materia/Curso</h1>
-<br> <a class="btn btn-info float-right" href="{{route('distribucionmacus.create')}}"><i class="fas fa-plus"></i> Crear
-    Asignación</a> <br>
-@stop
+
 
 @section('content')
 
 
 <section class="content">
-    <div class="container-fluid">
+    <div class="container">
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
         @endif
-        <div class="row">
-            <!-- left column -->
+        <div class="row justify-content-center">
             <div class="col-md-13">
-                <!-- general form elements -->
-                <div class="card card-dark">
+                <a class="btn btn-info float-right" href="{{route('distribucionmacus.create')}}"><i
+                        class="fas fa-plus"></i> CREAR ASIGNACION</a>
+                <h1>Asignación de Materia/Paralelo</h1>
+                <div class="card card-secondary">
                     <div class="card-header">
 
                         <div class="card-tools">
@@ -35,8 +32,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
+                                    <th scope="col">Paralelo</th>
                                     <th scope="col">Curso</th>
-                                    <th scope="col">Nivel</th>
                                     <th scope="col">Materia(s)</th>
                                     <th scope="col">Descripción</th>
                                     <th scope="col">Estado</th>
@@ -52,7 +49,7 @@
                                         -
                                         {{$distribucionmacu->curso->paralelo}}
                                     </td>
-                                    <td>{{$distribucionmacu->curso->nivel->nombre}}  </td>
+                                    <td>{{$distribucionmacu->curso->nivel->nombre}} </td>
                                     <td>
                                         @if($distribucionmacu->materias != null)
                                         @foreach($distribucionmacu->materias as $dismacu)
@@ -110,9 +107,9 @@
 @stop
 
 @section('css')
-    
+
 @stop
 
 @section('js')
-    
+
 @stop

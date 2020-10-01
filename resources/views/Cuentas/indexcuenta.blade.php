@@ -4,28 +4,30 @@
 
 
 @section('encabezado')
-<h1>Plan de Cuentas</h1>
+
 <br>
-<!-- <a class="btn btn-info float-right " ><i class="fas fa-file-invoice"></i>  Añadir
-    Cuenta</a> -->
-<button type="button" class="btn btn-info float-right " data-toggle="modal" href="{{route('pcuentas.create')}}"
+
+<!-- <button type="button" class="btn btn-info float-right " data-toggle="modal" href="{{route('pcuentas.create')}}"
     data-target="#modalCR"> Añadir Cuenta</button>
-<br>
+<br> -->
 @stop
 
 @section('content')
 <section class="content">
-    <div class="container-fluid">
+    <div class="container">
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
         @endif
-        <div class="row">
-            <!-- left column -->
+        <div class="row justify-content-center">
+
             <div class="col-md-13">
-                <!-- general form elements -->
-                <div class="card card-dark">
+                <a class="btn btn-info float-right " href="{{route('pcuentas.create')}}"><i
+                        class="fas fa-file-invoice"></i> AÑADIR CUENTA</a>
+                <h1>Plan de Cuentas</h1>
+
+                <div class="card card-secondary">
                     <div class="card-header">
 
                         <div class="card-tools">
@@ -48,7 +50,7 @@
                                 <tr>
                                     @foreach ($cuentas as $cuenta)
                                     <th scope="row">{{ $cuenta['id']}}</th>
-                                    <td>{{ $cuenta['Tpcuenta']}}</td>
+                                    <td>{{ $cuenta['tpcuenta']}}</td>
                                     <td>{{ $cuenta['cuenta']}}</td>
                                     <td>{{ $cuenta['estado']}}</td>
                                     <td> </td>
@@ -83,6 +85,7 @@
         </div>
 </section>
 <section>
+
     <!-- Modal Crear Cuenta  -->
     <div class="modal fade" id="modalCR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
         aria-hidden="true">

@@ -73,8 +73,18 @@ class DistribucionmacuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Distribucionmacu $distribucionmacu)
-    {
-        return \view('Distribucion.showmacu');
+    {$distribucionmacu_materia=[]; //creo una variable array para almacenar los datos relacionados de la tabla pivote entre materia y distribucion
+      
+        foreach($distribucionmacu->materias as $materia){   //realizo el recorrido
+        $distribucionmacu_materia[]=$materia->id;
+       }
+        
+        $materias= Materia::all();
+        $cursos = Curso::get(); //todos los datos de la bd de cursos
+        $distcursos=Distribucionmacu::find($distribucionmacu->id)->curso()->get(); //llama al curso que esta relacionado a esta distribucion
+
+        return view('Distribucion.showmacu',compact('distribucionmacu','materias','cursos','distcursos','distribucionmacu_materia'));
+       
     }
 
     /**

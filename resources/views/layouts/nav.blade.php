@@ -141,7 +141,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
                                 <p>
-                                    Menú
+                                    Permisos de Acceso
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -160,7 +160,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
                                 <p>
-                                    Instituto
+                                    U. Educativa
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -168,7 +168,7 @@
                                 <li class="nav-item">
                                     <a href="{{route('institutos.index')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Lista de Institutos</p>
+                                        <p>Lista de Unidades</p>
                                     </a>
                                 </li>
                             </ul>
@@ -179,7 +179,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
                                 <p>
-                                    Cursos
+                                    Paralelos
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -198,7 +198,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
                                 <p>
-                                    Niveles
+                                    Cursos
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -206,7 +206,7 @@
                                 <li class="nav-item">
                                     <a href="{{route('nivels.index')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Lista de Niveles</p>
+                                        <p>Lista de Curso</p>
                                     </a>
                                 </li>
                             </ul>
@@ -236,7 +236,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
                                 <p>
-                                    Contenido
+                                    Unidades
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -244,7 +244,7 @@
                                 <li class="nav-item">
                                     <a href="{{route('contenidos.index')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Lista de Conteidos</p>
+                                        <p>Lista de Unidades</p>
                                     </a>
                                 </li>
                             </ul>

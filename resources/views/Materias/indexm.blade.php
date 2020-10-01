@@ -2,28 +2,24 @@
 
 @section('title', 'Materias')
 
-@section('encabezado')
-<h1>Materia</h1>
-
-<br> <a class="btn btn-info float-right" href="{{route('materias.create')}}"><i
-        class="fas fa-user-plus"></i>Materias</a> <br>
-@stop
-
 @section('content')
 <section class="content">
-    <div class="container-fluid">
+    <div class="container">
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
         @endif
-        <div class="row">
+
+        <div class="row justify-content-center">
             <!-- left column -->
             <div class="col-md-13">
-                <!-- general form elements -->
-                <div class="card card-dark">
+                <a class="btn btn-info float-right" href="{{route('materias.create')}}"><i class="fas fa-plus"></i>
+                    MATERIAS</a>
+                <h1>Materia</h1>
+                <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title">Información de Materias </h3>
+                        
                         <div class="card-tools">
                         </div>
                     </div>
@@ -89,9 +85,11 @@
 @stop
 
 @section('css')
-    
+
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+<script>
+console.log('Hi!');
+</script>
 @stop

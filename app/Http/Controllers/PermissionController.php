@@ -66,7 +66,7 @@ class PermissionController extends Controller
     public function show(Permission $permission)
     {
         Gate::authorize('haveaccess', 'menu.show');
-        return \view ('Permissions.showper',['permisos' =>$permission]);
+        return \view ('Permissions.showper',['permission' =>$permission]);
     }
 
     /**

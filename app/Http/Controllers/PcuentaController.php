@@ -48,6 +48,7 @@ class PcuentaController extends Controller
         $pcuenta = Pcuenta::create($request->all());
    
         return \redirect('sistema/pcuentas');
+        
     }
 
     /**
@@ -58,7 +59,7 @@ class PcuentaController extends Controller
      */
     public function show(Pcuenta $pcuenta)
     {
-        //
+        return \view('Cuentas.showcp',['pcuentas'=>$pcuenta]);
     }
 
     /**
@@ -69,7 +70,7 @@ class PcuentaController extends Controller
      */
     public function edit(Pcuenta $pcuenta)
     {
-        //
+        return \view('Cuentas.editcp',['pcuentas'=>$pcuenta]);
     }
 
     /**
@@ -81,7 +82,19 @@ class PcuentaController extends Controller
      */
     public function update(Request $request, Pcuenta $pcuenta)
     {
-        //
+       
+       
+        $request->validate([
+
+            'tpcuenta'      => 'string|max:150',
+            'cuenta'      => 'string|max:150',
+            'estado'      => 'required|in:on,off',
+        ]);
+
+        $pcuenta->update($request->all());
+   
+        return \redirect('sistema/pcuentas');
+
     }
 
     /**
@@ -92,6 +105,11 @@ class PcuentaController extends Controller
      */
     public function destroy(Pcuenta $pcuenta)
     {
-        //
+        
+        $pcuenta= Pcuenta::find($pcuenta->id);
+        $pcuenta->delete();
+
+        return redirect('sistema/pcuentas')->with('success','Haz eliminado un Plan de Cuenta con exito');
+   
     }
 }

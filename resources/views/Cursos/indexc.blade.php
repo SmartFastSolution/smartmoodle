@@ -3,9 +3,8 @@
 @section('title', 'Curso')
 
 @section('encabezado')
-<h1>Curso</h1>
-<br>
-<a class="btn btn-info float-right " href="{{route('cursos.create')}}"><i class="fas fa-user-plus"></i> Cursos</a>
+
+
 @stop
 
 @section('content')
@@ -13,19 +12,21 @@
 
 
 <section class="content">
-    <div class="container-fluid">
+    <div class="container">
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
         @endif
-        <div class="row">
+        <div class="row justify-content-center">
             <!-- left column -->
             <div class="col-md-13">
-                <!-- general form elements -->
-                <div class="card card-dark">
+                <a class="btn btn-info float-right " href="{{route('cursos.create')}}"><i class="fas fa-plus"></i>
+                    PARALELO</a>
+                <h1>Paralelos</h1>
+                <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title">Información de Cursos </h3>
+                        
                         <div class="card-tools">
                         </div>
                     </div>
@@ -35,10 +36,11 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Curso</th>
                                     <th scope="col">Paralelo</th>
-                                    <th scope="col">Nivel</th>
+                                    <th scope="col">Modulo</th>
+                                    <th scope="col">Curso</th>
                                     <th scope="col">Estado</th>
+                                    <th></th>
                                     <th></th>
                                     <th scope="col">Tools</th>
                                 </tr>
@@ -51,10 +53,7 @@
                                     <td>{{ $curso['paralelo']}}</td>
                                     <td>{{ $curso->nivel->nombre}}</td>
                                     <td>{{ $curso['estado']}}</td>
-
-                                    <td> </td>
-
-
+                                   <td></td>
                                     <td class="table-button ">
                                         <a class="btn btn-info " href="{{route('cursos.show', $curso->id)}}"><i
                                                 class="fas fa-eye"></i></a>
