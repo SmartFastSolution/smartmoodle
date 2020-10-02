@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Permission;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PermissionController extends Controller
 {
@@ -15,7 +16,8 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permission= Permission::orderBy('id','Asc')->paginate(5);
+        Gate::authorize('haveaccess', 'menu.index');
+        $permission= Permission::orderBy('id','Asc')->paginate(7);
     
         return view('Permissions.indexper',['permissions'=>$permission]);
     }
@@ -27,6 +29,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
+        Gate::authorize('haveaccess', 'menu.create');
         return \view('Permissions.createper');
     }
 
@@ -38,9 +41,11 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('haveaccess', 'menu.store');
         $request->validate([
 
             'namep'      => 'required|string|max:150',
+            'slug'      => 'required|string|max:150',
             'descripcionp' => 'required|string|max:150',
             'estado'      => 'required|in:on,off',
             
@@ -60,6 +65,7 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission)
     {
+        Gate::authorize('haveaccess', 'menu.show');
         return \view ('Permissions.showper',['permisos' =>$permission]);
     }
 
@@ -71,6 +77,7 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
+        Gate::authorize('haveaccess', 'menu.edit');
         return \view('Permissions.editper',['permission'=>$permission]);
     }
 
@@ -83,9 +90,11 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
+        Gate::authorize('haveaccess', 'menu.update');
         $request->validate([
 
             'namep'      => 'required|string|max:150',
+            'slug'      => 'required|string|max:150',
             'descripcionp' => 'required|string|max:150',
             'estado'      => 'required|in:on,off',
             
@@ -104,6 +113,7 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('haveaccess', 'menu.destroy');
         $permission= Permission::find($id);
         $permission->delete();
 

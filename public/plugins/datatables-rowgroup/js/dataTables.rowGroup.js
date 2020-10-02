@@ -1,15 +1,28 @@
+<<<<<<< HEAD
+/*! RowGroup 1.1.2
+ * ©2017-2020 SpryMedia Ltd - datatables.net/license
+=======
 /*! RowGroup 1.1.1
  * ©2017-2019 SpryMedia Ltd - datatables.net/license
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  */
 
 /**
  * @summary     RowGroup
  * @description RowGrouping for DataTables
+<<<<<<< HEAD
+ * @version     1.1.2
+ * @file        dataTables.rowGroup.js
+ * @author      SpryMedia Ltd (www.sprymedia.co.uk)
+ * @contact     datatables.net
+ * @copyright   Copyright 2017-2020 SpryMedia Ltd.
+=======
  * @version     1.1.1
  * @file        dataTables.rowGroup.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     datatables.net
  * @copyright   Copyright 2017-2019 SpryMedia Ltd.
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  *
  * This source file is free software, available under the following license:
  *   MIT license - http://datatables.net/license/mit
@@ -135,6 +148,18 @@ $.extend( RowGroup.prototype, {
 		return this;
 	},
 
+<<<<<<< HEAD
+	/**
+	 * Get enabled flag
+	 * @returns boolean
+	 */
+	enabled: function ()
+	{
+		return this.c.enable;
+	},
+
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 	 * Constructor
@@ -143,9 +168,16 @@ $.extend( RowGroup.prototype, {
 	{
 		var that = this;
 		var dt = this.s.dt;
+<<<<<<< HEAD
+		var hostSettings = dt.settings()[0];
+
+		dt.on( 'draw.dtrg', function (e, s) {
+			if ( that.c.enable && hostSettings === s ) {
+=======
 
 		dt.on( 'draw.dtrg', function () {
 			if ( that.c.enable ) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				that._draw();
 			}
 		} );
@@ -157,10 +189,13 @@ $.extend( RowGroup.prototype, {
 		dt.on( 'destroy', function () {
 			dt.off( '.dtrg' );
 		} );
+<<<<<<< HEAD
+=======
 
 		dt.on('responsive-resize.dt', function () {
 			that._adjustColspan();
 		})
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	},
 
 
@@ -174,7 +209,11 @@ $.extend( RowGroup.prototype, {
 	 */
 	_adjustColspan: function ()
 	{
+<<<<<<< HEAD
+		$( 'tr.'+this.c.className, this.s.dt.table().body() ).find('td:visible')
+=======
 		$( 'tr.'+this.c.className, this.s.dt.table().body() ).find('td')
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			.attr( 'colspan', this._colspan() );
 	},
 
@@ -407,7 +446,11 @@ RowGroup.defaults = {
 };
 
 
+<<<<<<< HEAD
+RowGroup.version = "1.1.2";
+=======
 RowGroup.version = "1.1.1";
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 
 $.fn.dataTable.RowGroup = RowGroup;
@@ -434,6 +477,17 @@ DataTable.Api.register( 'rowGroup().enable()', function ( opts ) {
 	} );
 } );
 
+<<<<<<< HEAD
+DataTable.Api.register( 'rowGroup().enabled()', function () {
+	var ctx = this.context;
+
+	return ctx.length && ctx[0].rowGroup ?
+		ctx[0].rowGroup.enabled() :
+		false;
+} );
+
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 DataTable.Api.register( 'rowGroup().dataSrc()', function ( val ) {
 	if ( val === undefined ) {
 		return this.context[0].rowGroup.dataSrc();

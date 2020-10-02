@@ -1,5 +1,9 @@
 /*!
+<<<<<<< HEAD
+FullCalendar Core Package v4.4.2
+=======
 FullCalendar Core Package v4.4.0
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 Docs & License: https://fullcalendar.io/
 (c) 2019 Adam Shaw
 */
@@ -1125,6 +1129,20 @@ function diffDates(date0, date1, dateEnv, largeUnit) {
 }
 
 /*! *****************************************************************************
+<<<<<<< HEAD
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+=======
 Copyright (c) Microsoft Corporation. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
 this file except in compliance with the License. You may obtain a copy of the
@@ -1137,6 +1155,7 @@ MERCHANTABLITY OR NON-INFRINGEMENT.
 
 See the Apache Version 2.0 License for specific language governing permissions
 and limitations under the License.
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 ***************************************************************************** */
 /* global Reflect, Promise */
 
@@ -2457,7 +2476,11 @@ function triggerRenderedSegs(context, segs, isMirrors) {
             ]);
         }
     }
+<<<<<<< HEAD
+    if (!calendar.state.eventSourceLoadingLevel) { // avoid initial empty state while pending
+=======
     if (!calendar.state.loadingLevel) { // avoid initial empty state while pending
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
         calendar.afterSizingTriggers._eventsPositioned = [null]; // fire once
     }
 }
@@ -3931,12 +3954,38 @@ var ComponentContext = /** @class */ (function () {
 }());
 var Component = /** @class */ (function () {
     function Component() {
+<<<<<<< HEAD
+        this.everRendered = false;
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
         this.uid = String(guid++);
     }
     Component.addEqualityFuncs = function (newFuncs) {
         this.prototype.equalityFuncs = __assign({}, this.prototype.equalityFuncs, newFuncs);
     };
     Component.prototype.receiveProps = function (props, context) {
+<<<<<<< HEAD
+        this.receiveContext(context);
+        var _a = recycleProps(this.props || {}, props, this.equalityFuncs), anyChanges = _a.anyChanges, comboProps = _a.comboProps;
+        this.props = comboProps;
+        if (anyChanges) {
+            if (this.everRendered) {
+                this.beforeUpdate();
+            }
+            this.render(comboProps, context);
+            if (this.everRendered) {
+                this.afterUpdate();
+            }
+        }
+        this.everRendered = true;
+    };
+    Component.prototype.receiveContext = function (context) {
+        var oldContext = this.context;
+        this.context = context;
+        if (!oldContext) {
+            this.firstContext(context);
+        }
+=======
         var oldContext = this.context;
         this.context = context;
         if (!oldContext) {
@@ -3953,6 +4002,7 @@ var Component = /** @class */ (function () {
                 this.afterUpdate();
             }
         }
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
     };
     Component.prototype.render = function (props, context) {
     };
@@ -8572,6 +8622,10 @@ function computeActiveRange(dateProfile, isComponentAllDay) {
 
 // exports
 // --------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
+var version = '4.4.2';
+=======
 var version = '4.4.0';
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 export { Calendar, Component, ComponentContext, DateComponent, DateEnv, DateProfileGenerator, DayHeader, DaySeries, DayTable, ElementDragging, ElementScrollController, EmitterMixin, EventApi, FgEventRenderer, FillRenderer, Interaction, Mixin, NamedTimeZoneImpl, PositionCache, ScrollComponent, ScrollController, Slicer, Splitter, Theme, View, WindowScrollController, addDays, addDurations, addMs, addWeeks, allowContextMenu, allowSelection, appendToElement, applyAll, applyMutationToEventStore, applyStyle, applyStyleProp, asRoughMinutes, asRoughMs, asRoughSeconds, buildGotoAnchorHtml, buildSegCompareObj, capitaliseFirstLetter, combineEventUis, compareByFieldSpec, compareByFieldSpecs, compareNumbers, compensateScroll, computeClippingRect, computeEdges, computeEventDraggable, computeEventEndResizable, computeEventStartResizable, computeFallbackHeaderFormat, computeHeightAndMargins, computeInnerRect, computeRect, computeVisibleDayRange, config, constrainPoint, createDuration, createElement, createEmptyEventStore, createEventInstance, createFormatter, createPlugin, cssToStr, debounce, diffDates, diffDayAndTime, diffDays, diffPoints, diffWeeks, diffWholeDays, diffWholeWeeks, disableCursor, distributeHeight, elementClosest, elementMatches, enableCursor, eventTupleToStore, filterEventStoreDefs, filterHash, findChildren, findElements, flexibleCompare, forceClassName, formatDate, formatIsoTimeString, formatRange, getAllDayHtml, getClippingParents, getDayClasses, getElSeg, getRectCenter, getRelevantEvents, globalDefaults, greatestDurationDenominator, hasBgRendering, htmlEscape, htmlToElement, insertAfterElement, interactionSettingsStore, interactionSettingsToStore, intersectRanges, intersectRects, isArraysEqual, isDateSpansEqual, isInt, isInteractionValid, isMultiDayRange, isPropsEqual, isPropsValid, isSingleDay, isValidDate, listenBySelector, mapHash, matchCellWidths, memoize, memoizeOutput, memoizeRendering, mergeEventStores, multiplyDuration, padStart, parseBusinessHours, parseDragMeta, parseEventDef, parseFieldSpecs, parse as parseMarker, pointInsideRect, prependToElement, preventContextMenu, preventDefault, preventSelection, processScopedUiProps, rangeContainsMarker, rangeContainsRange, rangesEqual, rangesIntersect, refineProps, removeElement, removeExact, renderDateCell, requestJson, sliceEventStore, startOfDay, subtractInnerElHeight, translateRect, uncompensateScroll, undistributeHeight, unpromisify, version, whenTransitionDone, wholeDivideDurations };

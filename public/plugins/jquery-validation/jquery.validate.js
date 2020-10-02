@@ -1,9 +1,17 @@
 /*!
+<<<<<<< HEAD
+ * jQuery Validation Plugin v1.19.2
+ *
+ * https://jqueryvalidation.org/
+ *
+ * Copyright (c) 2020 Jörn Zaefferer
+=======
  * jQuery Validation Plugin v1.19.1
  *
  * https://jqueryvalidation.org/
  *
  * Copyright (c) 2019 Jörn Zaefferer
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  * Released under the MIT license
  */
 (function( factory ) {
@@ -216,18 +224,36 @@ $.extend( $.fn, {
 	}
 } );
 
+<<<<<<< HEAD
+// JQuery trim is deprecated, provide a trim method based on String.prototype.trim
+var trim = function( str ) {
+
+	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim#Polyfill
+	return str.replace( /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, "" );
+};
+
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 // Custom selectors
 $.extend( $.expr.pseudos || $.expr[ ":" ], {		// '|| $.expr[ ":" ]' here enables backwards compatibility to jQuery 1.7. Can be removed when dropping jQ 1.7.x support
 
 	// https://jqueryvalidation.org/blank-selector/
 	blank: function( a ) {
+<<<<<<< HEAD
+		return !trim( "" + $( a ).val() );
+=======
 		return !$.trim( "" + $( a ).val() );
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	},
 
 	// https://jqueryvalidation.org/filled-selector/
 	filled: function( a ) {
 		var val = $( a ).val();
+<<<<<<< HEAD
+		return val !== null && !!trim( "" + val );
+=======
 		return val !== null && !!$.trim( "" + val );
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	},
 
 	// https://jqueryvalidation.org/unchecked-selector/

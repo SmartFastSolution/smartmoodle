@@ -1,8 +1,8 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Edicion Curso')
 
-@section('content_header')
+@section('encabezado')
     <h1>Editar Curso</h1>
 @stop
 
@@ -87,13 +87,12 @@
 
 
 
-
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    
 @stop

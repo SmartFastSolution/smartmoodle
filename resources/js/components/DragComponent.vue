@@ -10,7 +10,8 @@ export default {
   },
   data() {
     return {
-      list2: []
+      list2: [],
+      list3: [],
     };
   },
   methods: {

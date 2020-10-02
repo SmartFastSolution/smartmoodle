@@ -2,13 +2,21 @@
  * OverlayScrollbars
  * https://github.com/KingSora/OverlayScrollbars
  *
+<<<<<<< HEAD
+ * Version: 1.13.0
+=======
  * Version: 1.11.0
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  *
  * Copyright KingSora | Rene Haas.
  * https://github.com/KingSora
  *
  * Released under the MIT license.
+<<<<<<< HEAD
+ * Date: 02.08.2020
+=======
  * Date: 29.02.2020
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  */
 
 /*
@@ -149,7 +157,10 @@ body.os-dragging * {
     right: 0;
     width: auto !important;
     height: auto !important;
+<<<<<<< HEAD
+=======
     z-index: 1;
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 }
 .os-host-overflow > .os-padding {
     overflow: hidden;
@@ -269,11 +280,31 @@ body.os-dragging * {
     border-style: solid;
     box-sizing: border-box;
 }
+<<<<<<< HEAD
+.os-resize-observer-host.observed {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.os-resize-observer-host > .os-resize-observer,
+.os-resize-observer-host.observed > .os-resize-observer {
+=======
 .os-resize-observer-host > .os-resize-observer {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
     height: 200%;
     width: 200%;
     padding: inherit;
     border: inherit;
+<<<<<<< HEAD
+    margin: 0;
+    display: block;
+    box-sizing: content-box;
+}
+.os-resize-observer-host.observed > .os-resize-observer,
+.os-resize-observer-host.observed > .os-resize-observer:before {
+    display: flex;
+=======
     margin: 0px;
     display: block;
     box-sizing: content-box;
@@ -285,10 +316,22 @@ body.os-dragging * {
     align-items: flex-start;
 }
 .os-resize-observer-host.observed > .os-resize-observer {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
     position: relative;
     flex-grow: 1;
     flex-shrink: 0;
     flex-basis: auto;
+<<<<<<< HEAD
+    box-sizing: border-box;
+}
+.os-resize-observer-host.observed > .os-resize-observer:before {
+    content: '';
+    box-sizing: content-box;
+    padding: inherit;
+    border: inherit;
+    margin: 0;
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 }
 .os-size-auto-observer {
     box-sizing: inherit !important;

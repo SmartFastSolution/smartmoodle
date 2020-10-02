@@ -1,8 +1,7 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Dashboard')
-
-@section('content_header')
+@section('encabezado')
     <h1>Dashboard</h1>
 @stop
 
@@ -14,10 +13,11 @@
 <h3>estado: {{ $nivels->estado}}</h3>
 
 
+
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')

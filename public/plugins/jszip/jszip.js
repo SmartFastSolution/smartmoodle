@@ -1,6 +1,10 @@
 /*!
 
+<<<<<<< HEAD
+JSZip v3.5.0 - A JavaScript class for generating and reading zip files
+=======
 JSZip v3.3.0 - A JavaScript class for generating and reading zip files
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 <http://stuartk.com/jszip>
 
 (c) 2009-2016 Stuart Knightley <stuart [at] stuartk.com>
@@ -1057,7 +1061,11 @@ JSZip.defaults = require('./defaults');
 
 // TODO find a better way to handle this version,
 // a require('package.json').version doesn't work with webpack, see #327
+<<<<<<< HEAD
+JSZip.version = "3.5.0";
+=======
 JSZip.version = "3.2.0";
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 JSZip.loadAsync = function (content, options) {
     return new JSZip().loadAsync(content, options);
@@ -3976,7 +3984,11 @@ ZipEntry.prototype = {
             this.extraFields = {};
         }
 
+<<<<<<< HEAD
+        while (reader.index + 4 < end) {
+=======
         while (reader.index < end) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
             extraFieldId = reader.readInt(2);
             extraFieldLength = reader.readInt(2);
             extraFieldValue = reader.readData(extraFieldLength);
@@ -3987,6 +3999,11 @@ ZipEntry.prototype = {
                 value: extraFieldValue
             };
         }
+<<<<<<< HEAD
+
+        reader.setIndex(end);
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
     },
     /**
      * Apply an UTF8 transformation if needed.

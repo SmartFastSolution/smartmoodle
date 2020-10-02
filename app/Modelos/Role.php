@@ -11,7 +11,7 @@ class Role extends Model
 
     
     protected $fillable = [
-        'name','descripcion','fullacces','estado',
+        'name','descripcion', 'full-access','estado',
     ];
 
 
@@ -23,8 +23,8 @@ class Role extends Model
 
     
     public function users(){
-          
-        return $this->belongsToMany(User::class)->withTimestamps();
+                  
+        return $this->belongsToMany(User::class);
 
     }
 }

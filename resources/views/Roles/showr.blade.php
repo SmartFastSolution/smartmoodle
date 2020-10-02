@@ -1,8 +1,8 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
-@section('title', 'Vista Roles')
+@section('title', 'Vista Roles| SmartMoodle')
 
-@section('content_header')
+@section('encabezado')
 <h1>Vista de Roles</h1>
 @stop
 
@@ -47,22 +47,23 @@
                                 <input type="text" class="form-control" name="descripcion" id="descripcion"
                                     placeholder="Rol Descripcion" value="{{$role->descripcion}}" readonly>
                             </div>
-
                             <div class="form-group">
                                 <h3>Acceso Completo</h3>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="fullaccesyes" name="fullacces" class="custom-control-input"
-                                        value="yes" @if($role['fullacces']=="yes" ) checked
-                                        @elseif(old('fullacces')=="yes" ) checked @endif disabled>
-                                    <label class="custom-control-label" for="fullaccesyes">SI</label>
+                                    <input type="radio" id="fullaccessyes" name="full-access"
+                                        class="custom-control-input" value="yes" @if ( $role['full-access']=="yes" )
+                                        checked @elseif (old('full-access')=="yes" ) checked @endif disabled>
+                                    <label class="custom-control-label" for="fullaccessyes">Yes</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="fullaccesno" name="fullacces" class="custom-control-input"
-                                        value="no" @if($role['fullacces']=="no" ) checked @elseif(old('fullacces')=="no"
-                                        ) checked @endif disabled>
-                                    <label class="custom-control-label" for="fullaccesno">No</label>
+                                    <input type="radio" id="fullaccessno" name="full-access"
+                                        class="custom-control-input" value="no" @if ( $role['full-access']=="no" )
+                                        checked @elseif (old('full-access')=="no" ) checked @endif disabled>
+                                    <label class="custom-control-label" for="fullaccessno">No</label>
                                 </div>
                             </div>
+
+                           
                             <div class="form-group">
                                 <h3>Estado del Usuario</h3>
                                 <div class="custom-control custom-radio custom-control-inline">
@@ -123,9 +124,9 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+   
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    
 @stop

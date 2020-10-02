@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Taller;
 use App\Materia;
+use App\Plantilla;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,8 @@ class MateriaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    { 
+         
         return \view('Materias.createm');
     }
 
@@ -42,12 +44,14 @@ class MateriaController extends Controller
         $request->validate([
 
             'nombre'      => 'required|string|max:60',
+            'slug'      => 'required|string|max:60',
             'descripcion'      => 'required|string|max:150',
             'estado'      => 'required|in:on,off',
         ]);
 
         $materia = Materia::create($request->all());
    
+        
         return \redirect('sistema/materias');
     }
 
@@ -57,9 +61,15 @@ class MateriaController extends Controller
      * @param  \App\Materia  $materia
      * @return \Illuminate\Http\Response
      */
-    public function show(Materia $materia)
+    public function show ($id)
     {
-        return view ('Materias.showm',['materias'=>$materia]);
+        // $tallers=Taller::get();()
+        // dd($tallers);
+        $materia =Materia::where('id', $id)->firstOrfail();
+        //$taller=Taller::all(array("id","materia_id","nombre" ));
+        $tallers=Taller::get();
+        //$tallers=Taller::get();
+         return view ('Materias.showm',['materia'=>$materia,'tallers'=>$tallers,]);
     }
 
     /**
@@ -70,7 +80,7 @@ class MateriaController extends Controller
      */
     public function edit(Materia $materia)
     {
-        
+       
         return view('Materias.editm',['materias'=>$materia]);
 
 
@@ -89,6 +99,7 @@ class MateriaController extends Controller
         $request->validate([
 
             'nombre'      => 'required|string|max:60',
+            'slug'      => 'required|string|max:60',
             'descripcion'      => 'required|string|max:150',
             'estado'      => 'required|in:on,off',
         ]);

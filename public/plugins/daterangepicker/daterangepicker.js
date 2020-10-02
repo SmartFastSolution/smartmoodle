@@ -1,5 +1,9 @@
 /**
+<<<<<<< HEAD
+* @version: 3.1
+=======
 * @version: 3.0.5
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 * @author: Dan Grossman http://www.dangrossman.info/
 * @copyright: Copyright (c) 2012-2019 Dan Grossman. All rights reserved.
 * @license: Licensed under the MIT license. See http://www.opensource.org/licenses/mit-license.php
@@ -11,7 +15,11 @@
         // AMD. Make globaly available as well
         define(['moment', 'jquery'], function (moment, jquery) {
             if (!jquery.fn) jquery.fn = {}; // webpack server rendering
+<<<<<<< HEAD
+            if (typeof moment !== 'function' && moment.hasOwnProperty('default')) moment = moment['default']
+=======
             if (typeof moment !== 'function' && moment.default) moment = moment.default
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
             return factory(moment, jquery);
         });
     } else if (typeof module === 'object' && module.exports) {
@@ -386,7 +394,11 @@
             this.container.find('.drp-calendar.left').addClass('single');
             this.container.find('.drp-calendar.left').show();
             this.container.find('.drp-calendar.right').hide();
+<<<<<<< HEAD
+            if (!this.timePicker && this.autoApply) {
+=======
             if (!this.timePicker) {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
                 this.container.addClass('auto-apply');
             }
         }
@@ -417,6 +429,16 @@
             .on('mouseenter.daterangepicker', 'td.available', $.proxy(this.hoverDate, this))
             .on('change.daterangepicker', 'select.yearselect', $.proxy(this.monthOrYearChanged, this))
             .on('change.daterangepicker', 'select.monthselect', $.proxy(this.monthOrYearChanged, this))
+<<<<<<< HEAD
+            .on('change.daterangepicker', 'select.hourselect,select.minuteselect,select.secondselect,select.ampmselect', $.proxy(this.timeChanged, this));
+
+        this.container.find('.ranges')
+            .on('click.daterangepicker', 'li', $.proxy(this.clickRange, this));
+
+        this.container.find('.drp-buttons')
+            .on('click.daterangepicker', 'button.applyBtn', $.proxy(this.clickApply, this))
+            .on('click.daterangepicker', 'button.cancelBtn', $.proxy(this.clickCancel, this));
+=======
             .on('change.daterangepicker', 'select.hourselect,select.minuteselect,select.secondselect,select.ampmselect', $.proxy(this.timeChanged, this))
 
         this.container.find('.ranges')
@@ -425,6 +447,7 @@
         this.container.find('.drp-buttons')
             .on('click.daterangepicker', 'button.applyBtn', $.proxy(this.clickApply, this))
             .on('click.daterangepicker', 'button.cancelBtn', $.proxy(this.clickCancel, this))
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
         if (this.element.is('input') || this.element.is('button')) {
             this.element.on({
@@ -526,9 +549,15 @@
                 this.renderTimePicker('left');
                 this.renderTimePicker('right');
                 if (!this.endDate) {
+<<<<<<< HEAD
+                    this.container.find('.right .calendar-time select').prop('disabled', true).addClass('disabled');
+                } else {
+                    this.container.find('.right .calendar-time select').prop('disabled', false).removeClass('disabled');
+=======
                     this.container.find('.right .calendar-time select').attr('disabled', 'disabled').addClass('disabled');
                 } else {
                     this.container.find('.right .calendar-time select').removeAttr('disabled').removeClass('disabled');
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
                 }
             }
             if (this.endDate)
@@ -1014,16 +1043,28 @@
         updateFormInputs: function() {
 
             if (this.singleDatePicker || (this.endDate && (this.startDate.isBefore(this.endDate) || this.startDate.isSame(this.endDate)))) {
+<<<<<<< HEAD
+                this.container.find('button.applyBtn').prop('disabled', false);
+            } else {
+                this.container.find('button.applyBtn').prop('disabled', true);
+=======
                 this.container.find('button.applyBtn').removeAttr('disabled');
             } else {
                 this.container.find('button.applyBtn').attr('disabled', 'disabled');
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
             }
 
         },
 
         move: function() {
             var parentOffset = { top: 0, left: 0 },
+<<<<<<< HEAD
+                containerTop,
+                drops = this.drops;
+
+=======
                 containerTop;
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
             var parentRightEdge = $(window).width();
             if (!this.parentEl.is('body')) {
                 parentOffset = {
@@ -1033,10 +1074,28 @@
                 parentRightEdge = this.parentEl[0].clientWidth + this.parentEl.offset().left;
             }
 
+<<<<<<< HEAD
+            switch (drops) {
+            case 'auto':
+                containerTop = this.element.offset().top + this.element.outerHeight() - parentOffset.top;
+                if (containerTop + this.container.outerHeight() >= this.parentEl[0].scrollHeight) {
+                    containerTop = this.element.offset().top - this.container.outerHeight() - parentOffset.top;
+                    drops = 'up';
+                }
+                break;
+            case 'up':
+                containerTop = this.element.offset().top - this.container.outerHeight() - parentOffset.top;
+                break;
+            default:
+                containerTop = this.element.offset().top + this.element.outerHeight() - parentOffset.top;
+                break;
+            }
+=======
             if (this.drops == 'up')
                 containerTop = this.element.offset().top - this.container.outerHeight() - parentOffset.top;
             else
                 containerTop = this.element.offset().top + this.element.outerHeight() - parentOffset.top;
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
             // Force the container to it's actual width
             this.container.css({
@@ -1046,7 +1105,11 @@
             });
             var containerWidth = this.container.outerWidth();
 
+<<<<<<< HEAD
+            this.container.toggleClass('drop-up', drops == 'up');
+=======
             this.container[this.drops == 'up' ? 'addClass' : 'removeClass']('drop-up');
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
             if (this.opens == 'left') {
                 var containerRight = parentRightEdge - this.element.offset().left - this.element.outerWidth();
@@ -1341,7 +1404,11 @@
 
             if (this.singleDatePicker) {
                 this.setEndDate(this.startDate);
+<<<<<<< HEAD
+                if (!this.timePicker && this.autoApply)
+=======
                 if (!this.timePicker)
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
                     this.clickApply();
             }
 

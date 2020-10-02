@@ -1,6 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Routes;
 use Illuminate\Support\Facades\Route;
+use App\User;
+use Illuminate\Support\Facades\Gate;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,16 @@ use Illuminate\Support\Facades\Route;
  Route::get('/', function () {
        return view('principal');
    })->name('welcome');
+
+
+   //prueba gate rol all
+//    Route::get('/test', function () {
+//        $user=User::find(3);
+//       // $user->roles()->sync([3]);
+//      Gate::authorize('haveaccess', 'rol.index');
+//       return $user;
+//    //  return $user->havePermission('rol.create');
+// });
 
 Auth::routes();
 // Auth::routes(["register" => false]);
@@ -68,6 +80,10 @@ route::resource('materias','MateriaController');
 //Ruta Resource de Materias que va aliada con el curso
 route::resource('contenidos','ContenidoController');
 
+
+
+//Ruta Resource par asignacion de cursos y materias prueba 2 
+route::resource('distribucionmacus','DistribucionmacuController');
 });
 
 
@@ -104,7 +120,7 @@ route::post('/taller25', 'AdminController@taller25')->name('admin.taller25');
 route::post('/taller26', 'AdminController@taller26')->name('admin.taller26');
 route::post('/taller27', 'AdminController@taller27')->name('admin.taller27');
 route::post('/taller28', 'AdminController@taller28')->name('admin.taller28');
-route::post('/taller28', 'AdminController@taller28')->name('admin.taller28');
+route::post('/taller29', 'AdminController@taller29')->name('admin.taller29');
 route::post('/taller34', 'AdminController@taller34')->name('admin.taller34');
 	});
 
@@ -163,13 +179,12 @@ route::post('/sistema/admin/taller24/{idtaller}', 'TallersController@store24')->
 route::post('/sistema/admin/taller25/{idtaller}', 'TallersController@store25')->name('taller25');
 route::post('/sistema/admin/taller26/{idtaller}', 'TallersController@store26')->name('taller26');
 route::post('/sistema/admin/taller27/{idtaller}', 'TallersController@store27')->name('taller27');
+route::post('/sistema/admin/taller29/{idtaller}', 'TallersController@store29')->name('taller29');
+route::post('/sistema/admin/taller30/{idtaller}', 'TallersController@store30')->name('taller30');
+route::post('/sistema/admin/taller31/{idtaller}', 'TallersController@store31')->name('taller31');
 route::post('/sistema/admin/taller34/{idtaller}', 'TallersController@store34')->name('taller_34');
 
 
-route::get('/sistema/taller28', 'TallersController@taller28')->name('taller28');
-route::get('/sistema/taller29', 'TallersController@taller29')->name('taller29');
-route::get('/sistema/taller30', 'TallersController@taller30')->name('taller30');
-route::get('/sistema/taller31', 'TallersController@taller31')->name('taller31');
 route::get('/sistema/taller32', 'TallersController@taller32')->name('taller32');
 route::get('/sistema/taller33', 'TallersController@taller33')->name('taller33');
 

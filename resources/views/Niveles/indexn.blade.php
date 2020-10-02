@@ -1,8 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
 @section('title', 'Niveles')
 
-@section('content_header')
+
+@section('encabezado')
     <h1>Niveles</h1>
     <br>
     <a class="btn btn-info float-right " href="{{route('nivels.create')}}"><i
@@ -98,7 +99,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')

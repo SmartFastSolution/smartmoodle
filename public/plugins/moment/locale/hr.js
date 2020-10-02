@@ -1,4 +1,9 @@
 //! moment.js locale configuration
+<<<<<<< HEAD
+//! locale : Croatian [hr]
+//! author : Bojan Marković : https://github.com/bmarkovic
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 ;(function (global, factory) {
    typeof exports === 'object' && typeof module !== 'undefined'
@@ -7,6 +12,10 @@
    factory(global.moment)
 }(this, (function (moment) { 'use strict';
 
+<<<<<<< HEAD
+    //! moment.js locale configuration
+=======
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
     function translate(number, withoutSuffix, key) {
         var result = number + ' ';
@@ -71,6 +80,38 @@
     }
 
     var hr = moment.defineLocale('hr', {
+<<<<<<< HEAD
+        months: {
+            format: 'siječnja_veljače_ožujka_travnja_svibnja_lipnja_srpnja_kolovoza_rujna_listopada_studenoga_prosinca'.split(
+                '_'
+            ),
+            standalone: 'siječanj_veljača_ožujak_travanj_svibanj_lipanj_srpanj_kolovoz_rujan_listopad_studeni_prosinac'.split(
+                '_'
+            ),
+        },
+        monthsShort: 'sij._velj._ožu._tra._svi._lip._srp._kol._ruj._lis._stu._pro.'.split(
+            '_'
+        ),
+        monthsParseExact: true,
+        weekdays: 'nedjelja_ponedjeljak_utorak_srijeda_četvrtak_petak_subota'.split(
+            '_'
+        ),
+        weekdaysShort: 'ned._pon._uto._sri._čet._pet._sub.'.split('_'),
+        weekdaysMin: 'ne_po_ut_sr_če_pe_su'.split('_'),
+        weekdaysParseExact: true,
+        longDateFormat: {
+            LT: 'H:mm',
+            LTS: 'H:mm:ss',
+            L: 'DD.MM.YYYY',
+            LL: 'Do MMMM YYYY',
+            LLL: 'Do MMMM YYYY H:mm',
+            LLLL: 'dddd, Do MMMM YYYY H:mm',
+        },
+        calendar: {
+            sameDay: '[danas u] LT',
+            nextDay: '[sutra u] LT',
+            nextWeek: function () {
+=======
         months : {
             format: 'siječnja_veljače_ožujka_travnja_svibnja_lipnja_srpnja_kolovoza_rujna_listopada_studenoga_prosinca'.split('_'),
             standalone: 'siječanj_veljača_ožujak_travanj_svibanj_lipanj_srpanj_kolovoz_rujan_listopad_studeni_prosinac'.split('_')
@@ -93,6 +134,7 @@
             sameDay  : '[danas u] LT',
             nextDay  : '[sutra u] LT',
             nextWeek : function () {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
                 switch (this.day()) {
                     case 0:
                         return '[u] [nedjelju] [u] LT';
@@ -107,12 +149,22 @@
                         return '[u] dddd [u] LT';
                 }
             },
+<<<<<<< HEAD
+            lastDay: '[jučer u] LT',
+            lastWeek: function () {
+                switch (this.day()) {
+                    case 0:
+                        return '[prošlu] [nedjelju] [u] LT';
+                    case 3:
+                        return '[prošlu] [srijedu] [u] LT';
+=======
             lastDay  : '[jučer u] LT',
             lastWeek : function () {
                 switch (this.day()) {
                     case 0:
                     case 3:
                         return '[prošlu] dddd [u] LT';
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
                     case 6:
                         return '[prošle] [subote] [u] LT';
                     case 1:
@@ -122,6 +174,32 @@
                         return '[prošli] dddd [u] LT';
                 }
             },
+<<<<<<< HEAD
+            sameElse: 'L',
+        },
+        relativeTime: {
+            future: 'za %s',
+            past: 'prije %s',
+            s: 'par sekundi',
+            ss: translate,
+            m: translate,
+            mm: translate,
+            h: translate,
+            hh: translate,
+            d: 'dan',
+            dd: translate,
+            M: 'mjesec',
+            MM: translate,
+            y: 'godinu',
+            yy: translate,
+        },
+        dayOfMonthOrdinalParse: /\d{1,2}\./,
+        ordinal: '%d.',
+        week: {
+            dow: 1, // Monday is the first day of the week.
+            doy: 7, // The week that contains Jan 7th is the first week of the year.
+        },
+=======
             sameElse : 'L'
         },
         relativeTime : {
@@ -146,6 +224,7 @@
             dow : 1, // Monday is the first day of the week.
             doy : 7  // The week that contains Jan 7th is the first week of the year.
         }
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
     });
 
     return hr;

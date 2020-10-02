@@ -16,6 +16,7 @@ class CreatePermissionsTable extends Migration
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
             $table->string('namep');
+            $table->string('slug');
             $table->string('descripcionp');
             $table->enum('estado',['on','off'])->nullable();
             $table->timestamps();

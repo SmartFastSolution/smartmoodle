@@ -7,6 +7,7 @@ use App\Nivel;
 use App\Materia;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CursoController extends Controller
 {
@@ -17,7 +18,7 @@ class CursoController extends Controller
      */
     public function index()
     {
-
+        Gate::authorize('haveaccess', 'curso.index');
                
         $cursos= Curso::orderBy('id','Asc')->paginate(5);
        
@@ -31,10 +32,12 @@ class CursoController extends Controller
      */
     public function create()
     {
+        Gate::authorize('haveaccess', 'curso.create');
         $nivels=Nivel::get();
-        $materias=Materia::get();
+         $materias=Materia::get();
 
         return \view('Cursos.createc',compact('nivels','materias'));
+
     }
 
     /**
@@ -45,19 +48,26 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('haveaccess', 'curso.store');
         $request->validate([
 
             'nombre'      => 'required|string|max:60',
             'paralelo'      => 'required|string|max:1',
             'estado'      => 'required|in:on,off',
         ]);
-
+       
+//    $curso=Curso::create($request->all());
         $curso = new Curso ;
         $curso->nivel_id = $request->nivel;
         $curso->nombre = $request->nombre;
         $curso->paralelo = $request->paralelo;
         $curso->estado = $request->estado;
+        
+       
+
         $curso->save();
+  
+        
         return redirect('sistema/cursos');
        
     }
@@ -70,6 +80,7 @@ class CursoController extends Controller
      */
     public function show(Curso $curso)
     {
+        Gate::authorize('haveaccess', 'curso.show');
         return view ('Cursos.showc',['curso'=>$curso]);
     }
 
@@ -81,6 +92,7 @@ class CursoController extends Controller
      */
     public function edit(Curso $curso)
     {
+        Gate::authorize('haveaccess', 'curso.edit');
 
 
        $nivels=Nivel::get();
@@ -99,6 +111,7 @@ class CursoController extends Controller
      */
     public function update(Request $request, Curso $curso)
     {
+        Gate::authorize('haveaccess', 'curso.update');
         
         $request->validate([
 
@@ -126,6 +139,7 @@ class CursoController extends Controller
      */
     public function destroy(Curso $curso)
     {
+        Gate::authorize('haveaccess', 'curso.destroy');
         $curso= Curso::find($curso->id);
         $curso->delete();
 

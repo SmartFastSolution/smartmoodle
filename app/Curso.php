@@ -1,15 +1,23 @@
 <?php
 
 namespace App;
+
 use App\Nivel;
+use App\Distribucionmacu;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Curso extends Model
 {
+
+    protected $guarded= [];
+
     protected $fillable = [
-        'nombre','paralelo','estado'
+        'nombre','paralelo','estado',
 
     ];
+
+      
 
     public function nivel(){
           
@@ -17,10 +25,11 @@ class Curso extends Model
 
     }
 
-    public function roles(){
+    public function distribucionmacus(){
           
-        return $this->belongsToMany('App\Materia')->withTimestamps();
+        return $this->hasMany('App\Distribucionmacu');
 
     }
-
+  
+   
 }

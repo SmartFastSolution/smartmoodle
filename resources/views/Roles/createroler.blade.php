@@ -1,13 +1,13 @@
 @extends('layouts.nav')
 
-@section('title', 'Crear Roles')
+@section('title', 'Crear Roles | SmartMoodle')
 
-@section('content_header')
+@section('encabezado')
 <h1>Crear Roles</h1>
 @stop
 
-@section('content')
 
+@section('content')
 
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -21,12 +21,12 @@
 @endif
 
 
-<section class="content">
+<section>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-10">
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Formulario Roles</h3>
+
                 </div>
                 <div class="card-body">
 
@@ -46,23 +46,29 @@
                                     id="descripcion" placeholder="Rol descripcion" value="{{old('descripcion')}}">
                             </div>
                             <div class="form-group">
-                                <h3>Acceso Completo</h3>
+                                <label for="name"> Acceso Completo</label>
+                                <br>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="fullaccesyes" name="fullacces" class="custom-control-input"
-                                        value="yes" @if(old('fullacces')=="yes" ) checked @endif>
-                                    <label class="custom-control-label" for="fullaccesyes">SI</label>
+                                    <input type="radio" id="fullaccessyes" name="full-access"
+                                        class="custom-control-input" value="yes" @if (old('full-access')=="yes" )
+                                        checked @endif>
+                                    <label class="custom-control-label" for="fullaccessyes">Yes</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="fullaccesno" name="fullacces" class="custom-control-input"
-                                        value="no" @if(old('fullacces')=="no" ) checked @endif>
-                                    <label class="custom-control-label" for="fullaccesno">No</label>
+                                    <input type="radio" id="fullaccessno" name="full-access"
+                                        class="custom-control-input" value="no" @if (old('full-access')=="no" ) checked
+                                        @endif @if (old('full-access')===null) checked @endif>
+                                    <label class="custom-control-label" for="fullaccessno">No</label>
                                 </div>
                             </div>
+                            <hr>
                             <div class="form-group">
-                                <h3>Estado del Rol</h3>
+                                <label for="name"> Estado del Rol</label>
+                                <br>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="estadoon" name="estado" class="custom-control-input"
-                                        value="on" @if(old('estado')=="on" ) checked @endif>
+                                        value="on" @if(old('estado')=="on" ) checked @endif @if (old('estado')===null)
+                                        checked @endif>
                                     <label class="custom-control-label" for="estadoon">Activo</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
@@ -73,7 +79,7 @@
                             </div>
                             <div class="card-body">
 
-                                <h4>Lista de Menu</h4>
+                                <label for="name"> Lista de Menu</label>
 
                                 @foreach($permissions as $permission)
 
@@ -116,6 +122,7 @@
 <script>
 console.log('Hi!');
 </script>
+
 
 <script>
 $(document).ready(function() {

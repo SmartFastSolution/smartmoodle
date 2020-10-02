@@ -1,15 +1,28 @@
+<<<<<<< HEAD
+/*! AutoFill 2.3.5
+ * ©2008-2020 SpryMedia Ltd - datatables.net/license
+=======
 /*! AutoFill 2.3.4
  * ©2008-2019 SpryMedia Ltd - datatables.net/license
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  */
 
 /**
  * @summary     AutoFill
  * @description Add Excel like click and drag auto-fill options to DataTables
+<<<<<<< HEAD
+ * @version     2.3.5
+ * @file        dataTables.autoFill.js
+ * @author      SpryMedia Ltd (www.sprymedia.co.uk)
+ * @contact     www.sprymedia.co.uk/contact
+ * @copyright   Copyright 2010-2020 SpryMedia Ltd.
+=======
  * @version     2.3.4
  * @file        dataTables.autoFill.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
  * @copyright   Copyright 2010-2019 SpryMedia Ltd.
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  *
  * This source file is free software, available under the following license:
  *   MIT license - http://datatables.net/license/mit
@@ -294,7 +307,11 @@ $.extend( AutoFill.prototype, {
 			var result = actions[ available[0] ].execute( dt, cells );
 			this._update( result, cells );
 		}
+<<<<<<< HEAD
+		else if ( available.length > 1 ) {
+=======
 		else {
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			// Multiple actions available - ask the end user what they want to do
 			var list = this.dom.list.children('ul').empty();
 
@@ -1061,7 +1078,11 @@ AutoFill.actions = {
 
 	fillVertical: {
 		available: function ( dt, cells ) {
+<<<<<<< HEAD
+			return cells.length > 1;
+=======
 			return cells.length > 1 && cells[0].length > 1;
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		},
 
 		option: function ( dt, cells ) {
@@ -1102,7 +1123,11 @@ AutoFill.actions = {
  * @static
  * @type      String
  */
+<<<<<<< HEAD
+AutoFill.version = '2.3.5';
+=======
 AutoFill.version = '2.3.4';
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 
 /**

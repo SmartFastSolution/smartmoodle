@@ -1,4 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" id="flag-icon-css-se" viewBox="0 0 512 512">
+<<<<<<< HEAD
+  <path fill="#066aa7" d="M0 0h512v512H0z"/>
+  <path fill="#fecc00" d="M0 204.8h512v102.4H0z"/>
+  <path fill="#fecc00" d="M134 0h102.4v512H134z"/>
+=======
   <defs>
     <clipPath id="a">
       <path fill-opacity=".7" d="M119 7.3h490.7V498H119z"/>
@@ -13,4 +18,5 @@
       <path fill="#006aa7" d="M345.3 301.8H787V498H345.3zm0-294.2H787v196.3H345.3z"/>
     </g>
   </g>
+>>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 </svg>

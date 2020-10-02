@@ -1,5 +1,6 @@
 @extends('layouts.nav')
 
+
 @section('titulo', $datos->taller->nombre)
 @section('content')
 

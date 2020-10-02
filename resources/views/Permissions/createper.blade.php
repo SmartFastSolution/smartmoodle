@@ -1,10 +1,10 @@
 @extends('layouts.nav')
 
 
-@section('title', 'Crear Permisos')
+@section('title', 'Crear Menú')
 
-@section('content_header')
-    <h1>Crear Permisos</h1>
+@section('encabezado')
+<h1>Crear Menú</h1>
 @stop
 
 @section('content')
@@ -26,7 +26,7 @@
         <div class="col-md-6">
             <div class="card card-info">
                 <div class="card-header">
-                    <h3 class="card-title">Añadir un  Menú</h3>
+                    <h3 class="card-title">Añadir un Menú</h3>
                 </div>
                 <div class="card-body">
 
@@ -40,14 +40,21 @@
                                     value="{{old('namep')}}">
                             </div>
                             <div class="form-group">
-                                <label for="descripcionp">Detalle del Menú</label>
+                                <label for="slug">Slug del Menú</label>
+                                <input type="text" class="form-control" name="slug" tag="slug"
+                                    id="slug" placeholder="Slug" value="{{old('slug')}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="descripcionp">Descripcion</label>
                                 <input type="text" class="form-control" name="descripcionp" tag="descripcionp"
                                     id="descripcionp" placeholder="Descripcion" value="{{old('descripcionp')}}">
                             </div>
-                            <h3>Estado del Menú</h3>
+                            <label>Estado del Menú</label>
+                            <br>
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" id="estadoon" name="estado" class="custom-control-input" value="on"
-                                    @if(old('estado')=="on" ) checked @endif>
+                                    @if(old('estado')=="on" ) checked @endif  @if (old('estado')===null)
+                                        checked @endif>
                                 <label class="custom-control-label" for="estadoon">Activo</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
@@ -76,9 +83,22 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+<link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+
+
+<script>
+$(document).ready(function() {
+
+    $('#namep').keyup(function(e) {
+        var str = $('#namep').val();
+        str = str.replace(/\W+(?!$)/g, '.').toLowerCase(); // remplazamos el estdo de dashe
+        $('#slug').val(str);
+        $('slug').attr('placeholder', str);
+    });
+
+});
+</script>
 @stop

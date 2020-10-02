@@ -1,19 +1,14 @@
-@extends('adminlte::page')
+@extends('layouts.nav')
 
-@section('title', 'Curso Crear')
+@section('title', ' Crear Curso')
 
 
-@section('plugins.Select2', true) 
-@section('plugins.Sweetalert2', true) 
-@section('content_header')
+
+@section('encabezado')
 <h1>Añadir Cursos</h1>
 @stop
 
 @section('content')
-
-
-
-
 
 <section class="content">
 
@@ -36,7 +31,7 @@
                 </div>
                 <div class="card-body">
 
-                    <form method="POST" action="{{route('cursos.index')}} ">
+                    <form method="POST" action="{{route('cursos.store')}} ">
 
                         @csrf
 
@@ -62,23 +57,7 @@
                                     @endforeach
 
                                 </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Multiple</label>
-                                <select class="select2" multiple="multiple" data-placeholder="Select a State"
-                                    style="width: 100%;">
-                                    <option>Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option>Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                </select>
-                            </div>
-
-
+                            </div>                                          
                             <div class="form-group">
                                 <label for="nombre">Estado </label>
                                 <br>
@@ -106,30 +85,14 @@
 </section>
 
 
+
+
 @stop
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')
-<script>
-    Swal.fire(
-  'Good job!',
-  'Haz Accedido!',
-  'success'
-)
-</script>
-
-<script>
-$(function() {
-    //Initialize Select2 Elements
-    $('.select2').select2()
-
-    //Initialize Select2 Elements
-    $('.select2bs4').select2({
-        theme: 'bootstrap4'
-    })
-})
-</script>
+    
 @stop

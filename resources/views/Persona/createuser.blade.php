@@ -2,16 +2,19 @@
   
 
 
+
 @section('title', 'Crear Usuario')
 
-@section('content_header')
+@section('encabezado')
 <h1>Crear Usuarios</h1>
 @stop
 
 @section('content')
 
-<section class="content">
-    @if ($errors->any())
+
+   
+    <div class="row justify-content-center">
+         @if ($errors->any())
     <div class="alert alert-danger">
         <strong>Whoops!</strong> Parece que hay porblemas o Malas decisiones <br><br>
         <ul>
@@ -21,7 +24,6 @@
         </ul>
     </div>
     @endif
-    <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card card-info">
                 <div class="card-header">
@@ -210,18 +212,16 @@
 
         </div>
     </div>
-</section>
+
 
 
 
 @stop
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')
-<script>
-console.log('Hi!');
-</script>
+    
 @stop
