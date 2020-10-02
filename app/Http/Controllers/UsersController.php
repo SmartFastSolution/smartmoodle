@@ -110,7 +110,16 @@ class UsersController extends Controller
     public function show(User $user)
     {
         Gate::authorize('haveaccess', 'user.show');
-        return view ('Persona.showu',['user'=>$user]);
+       
+        $roles= Role::orderBy('name')->get();
+        // $roles = Role::all();
+        
+        $institutos = Instituto::get(); // todos los datos de la bd
+        $institutouser = User::find($user->id)->instituto()->get(); //llama al instituto que este relacionado a un usuario 
+      
+        return view('Persona.showu',['user'=>$user, 'roles'=>$roles,'institutos'=>$institutos,'institutouser'=>$institutouser]);
+    
+        
     }
 
     /**
@@ -143,27 +152,18 @@ class UsersController extends Controller
         Gate::authorize('haveaccess', 'user.update');
         $request->validate([
 
-            'cedula'          =>  'required|string|max:10',
-            'fechanacimiento' =>  'required|string|max:10',
-            'sname'           =>  'required|string|max:20',
-            'apellido'        =>  'required|string|max:20',
-            'sapellido'       =>  'required|string|max:20',
+            'cedula'          =>  'required|string|max:10',        
+            'apellido'        =>  'required|string|max:20',         
             'domicilio'       =>  'required|string|max:255',
             'telefono'        =>  'required|string|max:13',
             'celular'         =>  'required|string|max:13',
             'titulo'          =>  'required|string|max:255',
             'name'            =>  'required|string|max:20',
             'email'           => [ 'string', 'email', 'max:255,'.$user->id,],
-            'password'        =>  '|string|min:8|confirmed',
-            'estado'          =>  'required|in:on,off',
+            'password'        =>  '|string|min:8|',
+         
 //agregados estudiantes y docente sen la misma tabla de persona 
-            'fcontrato'       =>  'required|string|max:13',
-            'cirepre'         =>  'required|string|max:10',
-            'namerepre'       =>  'required|string|max:250',
-            'namema'          =>  'required|string|max:250',
-            'namepa'          =>  'required|string|max:250',
-            'telefonorep'     =>  'required|string|max:13',
-            'fregistro'       =>  'required|string|max:10',
+          
 
 
         ]);

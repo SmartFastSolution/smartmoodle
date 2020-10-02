@@ -32,7 +32,7 @@
                                     <th scope="col">Nombres</th>
                                     <th scope="col">Apellidos</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">U. Educativa</th>
+                                    <th scope="col">Unidad Educativa</th>
                                     <th scope="col">Rol</th>
                                     <th></th>
                                     <th></th>

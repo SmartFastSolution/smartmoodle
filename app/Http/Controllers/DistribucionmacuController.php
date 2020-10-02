@@ -73,7 +73,8 @@ class DistribucionmacuController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Distribucionmacu $distribucionmacu)
-    {$distribucionmacu_materia=[]; //creo una variable array para almacenar los datos relacionados de la tabla pivote entre materia y distribucion
+    {
+        $distribucionmacu_materia=[]; //creo una variable array para almacenar los datos relacionados de la tabla pivote entre materia y distribucion
       
         foreach($distribucionmacu->materias as $materia){   //realizo el recorrido
         $distribucionmacu_materia[]=$materia->id;

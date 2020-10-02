@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Gate;
    })->name('welcome');
 
 
+ 
    //prueba gate rol all
 //    Route::get('/test', function () {
 //        $user=User::find(3);
@@ -38,13 +39,17 @@ Auth::routes();
 
 ///rutas protegidas On 
 
- //Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
-  Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
+ Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
+ // Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
    
- route::get('/','Controller@index')->name('welcome');
+ route::get('home','Controller@index')->name('administrador'); //ruta administracion
 
 
-route::get('/','Controller@index')->name('welcome');
+ route::get('homedoc','DocenteController@index')->name('docente'); //ruta docente
+
+
+ route::get('homees','EstudianteController@index')->name('estudiante'); //ruta estudiante
+
 //ruta del menu general de administracion 
 
 

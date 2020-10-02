@@ -9,6 +9,8 @@ use App\Plantilla;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class MateriaController extends Controller
 {
@@ -19,6 +21,8 @@ class MateriaController extends Controller
      */
     public function index()
     {
+      
+
         $materias= Materia::orderBy('id','Asc')->paginate(5);
     
         return view('Materias.indexm',['materias'=>$materias]);
@@ -66,13 +70,14 @@ class MateriaController extends Controller
      */
     public function show ($id)
     {
-        // $tallers=Taller::get();()
-        // dd($tallers);
-        $materia =Materia::where('id', $id)->firstOrfail();
-        //$taller=Taller::all(array("id","materia_id","nombre" ));
-        $tallers=Taller::get();
+       
         $contenido=Contenido::get();
-        //$tallers=Taller::get();
+       
+        $materia =Materia::where('id', $id)->firstOrfail();
+       
+        $tallers=Taller::get();
+      
+       
          return view ('Materias.showm',['materia'=>$materia,'tallers'=>$tallers,'contenidos'=>$contenido]);
     }
 

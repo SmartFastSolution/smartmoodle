@@ -172,15 +172,20 @@
                     <div class="modal-dialog modal-lg" role="document">
 
                         <!--Content-->
+
                         <div class="modal-content">
 
                             <!--Body-->
+
                             <div class="modal-body mb-0 p-0">
 
                                 <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+
                                     <iframe class="embed-responsive-item" width="1000" height="1000"
-                                        src="{{asset(Storage::url($contenido['documentod']))}}"
+                                        @if(!Storage::exists($contenido))
+                                        src="{{asset(Storage::url($contenido['documentod']))}}" @endif
                                         allowfullscreen></iframe>
+
                                 </div>
 
                             </div>

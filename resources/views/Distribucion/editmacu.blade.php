@@ -59,7 +59,6 @@
                                             selected
                                             @endif
                                             @endisset
-
                                             >{{$materia->nombre}}</option>
 
                                         @endforeach
