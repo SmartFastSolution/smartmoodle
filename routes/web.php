@@ -38,8 +38,8 @@ Auth::routes();
 
 ///rutas protegidas On 
 
- Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
-  //Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
+ //Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
+  Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
    
  route::get('/','Controller@index')->name('welcome');
 

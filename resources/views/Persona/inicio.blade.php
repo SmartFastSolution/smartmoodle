@@ -14,11 +14,12 @@
         @endif
         <div class="row justify-content-center">
             <div class="col-md-13">
-            <a class="btn btn-info float-right btn" href="{{route('users.create')}}"><i class="fas fa-user-plus"></i>USUARIO</a>
-            <h1>Usuarios</h1>   
-            <div class="card card-secondary">
+                <a class="btn btn-info float-right btn" href="{{route('users.create')}}"><i
+                        class="fas fa-user-plus"></i>USUARIO</a>
+                <h1>Usuarios</h1>
+                <div class="card card-secondary">
                     <div class="card-header">
-                      
+
                         <div class="card-tools">
                         </div>
                     </div>
@@ -28,11 +29,10 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Cedula</th>
-                                    <th scope="col">Primer Nombre</th>
-                                    <th scope="col">Primer Apellido</th>
+                                    <th scope="col">Nombres</th>
+                                    <th scope="col">Apellidos</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">U. Educativa</th>
-                                    <th scope="col">Estado</th>
                                     <th scope="col">Rol</th>
                                     <th></th>
                                     <th></th>
@@ -50,7 +50,7 @@
                                     <td>{{$user->apellido}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->instituto->nombre}}</td>
-                                    <td>{{$user->estado}}</td>
+                                 
                                     <td>
                                         @foreach($user->roles as $role)
                                         <span class="badge badge-danger"> {{$role->name}}
