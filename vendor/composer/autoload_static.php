@@ -507,7 +507,6 @@ class ComposerStaticInitb5c2bf8c0b0c3f0979a750c5cc95b532
     );
 
     public static $classMap = array (
-        'App\\Admin\\TalleIdentificarImagenOpcion' => __DIR__ . '/../..' . '/app/Admin/TalleIdentificarvcImagenOpcion.php',
         'App\\Admin\\Taller2Relacionar' => __DIR__ . '/../..' . '/app/Admin/Taller2Relacionar.php',
         'App\\Admin\\Taller2RelacionarOpcion' => __DIR__ . '/../..' . '/app/Admin/Taller2RelacionarOpcion.php',
         'App\\Admin\\TallerAbreviatura' => __DIR__ . '/../..' . '/app/Admin/TallerAbreviatura.php',
@@ -521,6 +520,7 @@ class ComposerStaticInitb5c2bf8c0b0c3f0979a750c5cc95b532
         'App\\Admin\\TallerCompletar' => __DIR__ . '/../..' . '/app/Admin/TallerCompletar.php',
         'App\\Admin\\TallerCompletarEnunciado' => __DIR__ . '/../..' . '/app/Admin/TallerCompletarEnunciado.php',
         'App\\Admin\\TallerConvertirCheque' => __DIR__ . '/../..' . '/app/Admin/TallerConvertirCheque.php',
+        'App\\Admin\\TallerDefinirEnunOp' => __DIR__ . '/../..' . '/app/Admin/TallerDefinirEnunOp.php',
         'App\\Admin\\TallerDefinirEnunciado' => __DIR__ . '/../..' . '/app/Admin/TallerDefinirEnunciado.php',
         'App\\Admin\\TallerDiferencia' => __DIR__ . '/../..' . '/app/Admin/TallerDiferencia.php',
         'App\\Admin\\TallerFactura' => __DIR__ . '/../..' . '/app/Admin/TallerFactura.php',
@@ -541,7 +541,9 @@ class ComposerStaticInitb5c2bf8c0b0c3f0979a750c5cc95b532
         'App\\Admin\\TallerSenalar' => __DIR__ . '/../..' . '/app/Admin/TallerSenalar.php',
         'App\\Admin\\TallerSenalarOpcion' => __DIR__ . '/../..' . '/app/Admin/TallerSenalarOpcion.php',
         'App\\Admin\\TallerSubrayar' => __DIR__ . '/../..' . '/app/Admin/TallerSubrayar.php',
+        'App\\Admin\\TallerSubrayarOp' => __DIR__ . '/../..' . '/app/Admin/TallerSubrayarOp.php',
         'App\\Admin\\TallerValeCaja' => __DIR__ . '/../..' . '/app/Admin/TallerValeCaja.php',
+        'App\\Admin\\TallerVerdaFalsoOp' => __DIR__ . '/../..' . '/app/Admin/TallerVerdaFalsoOp.php',
         'App\\Admin\\TallerVerdaderoFalso' => __DIR__ . '/../..' . '/app/Admin/TallerVerdaderoFalso.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Contenido' => __DIR__ . '/../..' . '/app/Contenido.php',

@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'App\\Admin\\TalleIdentificarImagenOpcion' => $baseDir . '/app/Admin/TalleIdentificarvcImagenOpcion.php',
     'App\\Admin\\Taller2Relacionar' => $baseDir . '/app/Admin/Taller2Relacionar.php',
     'App\\Admin\\Taller2RelacionarOpcion' => $baseDir . '/app/Admin/Taller2RelacionarOpcion.php',
     'App\\Admin\\TallerAbreviatura' => $baseDir . '/app/Admin/TallerAbreviatura.php',
@@ -20,6 +19,7 @@ return array(
     'App\\Admin\\TallerCompletar' => $baseDir . '/app/Admin/TallerCompletar.php',
     'App\\Admin\\TallerCompletarEnunciado' => $baseDir . '/app/Admin/TallerCompletarEnunciado.php',
     'App\\Admin\\TallerConvertirCheque' => $baseDir . '/app/Admin/TallerConvertirCheque.php',
+    'App\\Admin\\TallerDefinirEnunOp' => $baseDir . '/app/Admin/TallerDefinirEnunOp.php',
     'App\\Admin\\TallerDefinirEnunciado' => $baseDir . '/app/Admin/TallerDefinirEnunciado.php',
     'App\\Admin\\TallerDiferencia' => $baseDir . '/app/Admin/TallerDiferencia.php',
     'App\\Admin\\TallerFactura' => $baseDir . '/app/Admin/TallerFactura.php',
@@ -40,7 +40,9 @@ return array(
     'App\\Admin\\TallerSenalar' => $baseDir . '/app/Admin/TallerSenalar.php',
     'App\\Admin\\TallerSenalarOpcion' => $baseDir . '/app/Admin/TallerSenalarOpcion.php',
     'App\\Admin\\TallerSubrayar' => $baseDir . '/app/Admin/TallerSubrayar.php',
+    'App\\Admin\\TallerSubrayarOp' => $baseDir . '/app/Admin/TallerSubrayarOp.php',
     'App\\Admin\\TallerValeCaja' => $baseDir . '/app/Admin/TallerValeCaja.php',
+    'App\\Admin\\TallerVerdaFalsoOp' => $baseDir . '/app/Admin/TallerVerdaFalsoOp.php',
     'App\\Admin\\TallerVerdaderoFalso' => $baseDir . '/app/Admin/TallerVerdaderoFalso.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Contenido' => $baseDir . '/app/Contenido.php',

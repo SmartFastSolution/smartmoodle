@@ -15,6 +15,7 @@ use App\Admin\TallerCollage;
 use App\Admin\TallerCompletar;
 use App\Admin\TallerCompletarEnunciado;
 use App\Admin\TallerConvertirCheque;
+use App\Admin\TallerDefinirEnunOp;
 use App\Admin\TallerDefinirEnunciado;
 use App\Admin\TallerDiferencia;
 use App\Admin\TallerFactura;
@@ -35,7 +36,9 @@ use App\Admin\TallerRelacionarOpcion;
 use App\Admin\TallerSenalar;
 use App\Admin\TallerSenalarOpcion;
 use App\Admin\TallerSubrayar;
+use App\Admin\TallerSubrayarOp;
 use App\Admin\TallerValeCaja;
+use App\Admin\TallerVerdaFalsoOp;
 use App\Admin\TallerVerdaderoFalso;
 use App\Http\Controllers\Controller;
 use App\Plantilla;
@@ -342,29 +345,24 @@ class AdminController extends Controller
          $taller_9 = new TallerSubrayar;
          $taller_9->taller_id = $a->id;
          $taller_9->enunciado = $request->input('enunciado');
-
-         $taller_9->concepto1 = $request->input('concepto1');
-         $taller_9->alternativas1 = $request->input('alternativas1');
-
-         $taller_9->concepto2 = $request->input('concepto2');
-         $taller_9->alternativas2 = $request->input('alternativas2');
-
-         $taller_9->concepto3 = $request->input('concepto3');
-         $taller_9->alternativas3 = $request->input('alternativas3');
-
-         $taller_9->concepto4 = $request->input('concepto4');
-         $taller_9->alternativas4 = $request->input('alternativas4');
-
-         $taller_9->concepto5 = $request->input('concepto5');
-         $taller_9->alternativas5 = $request->input('alternativas5');
-
-         $taller_9->concepto6 = $request->input('concepto6');
-         $taller_9->alternativas6 = $request->input('alternativas6');
-
          $taller_9->save();
 
-         return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
       }
+      if ($taller_9 = true) {
+         $o = TallerSubrayar::get()->last();              
+            foreach ($request->concep as $key=>$v) {
+               $datos=array(
+                  'taller_subrayars_id'=> $o->id,
+                  'concepto'=> $request->concep[$key],
+                  'alternativas'=> $request->alter[$key],
+                  'created_at'=> now(),
+                  'updated_at'=> now(),
+               );
+                  TallerSubrayarOp::insert($datos);
+               }
+             }
+         return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
+      
       
 
       }
@@ -586,14 +584,25 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
             $taller_12 = new TallerVerdaderoFalso;
             $taller_12->taller_id = $a->id;
             $taller_12->enunciado = $request->input('enunciado');
-            $taller_12->enunciado1 = $request->input('descripcion1');
-            $taller_12->enunciado2 = $request->input('descripcion2');
-            $taller_12->enunciado3 = $request->input('descripcion3');
-            $taller_12->enunciado4 = $request->input('descripcion4');
-            $taller_12->enunciado5 = $request->input('descripcion5');
             $taller_12->save();
-           }
+         }
+         if ($taller_12 = true) {
+
+         $o = TallerVerdaderoFalso::get()->last();              
+            foreach ($request->descripcion as $key=>$v) {
+               $datos=array(
+                  'taller_verdadero_falso_id'=> $o->id,
+                  'descripcion'=> $request->descripcion[$key],
+                  'created_at'=> now(),
+                  'updated_at'=> now(),
+               );
+                  TallerVerdaFalsoOp::insert($datos);
+               }
       return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
+
+             }
+
+           
 
       }
       public function taller13(Request $request)
@@ -611,13 +620,25 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
             $taller_13 = new TallerDefinirEnunciado;
             $taller_13->taller_id = $a->id;
             $taller_13->enunciado = $request->input('enunciado');
-            $taller_13->concepto1 = $request->input('concepto1');
-            $taller_13->concepto2 = $request->input('concepto2');
-            $taller_13->concepto3 = $request->input('concepto3');
-            $taller_13->concepto4 = $request->input('concepto4');
             $taller_13->save();
-               return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
          }
+         if ($taller_12 = true) {
+
+         $o = TallerDefinirEnunciado::get()->last();              
+            foreach ($request->concepto as $key=>$v) {
+               $datos=array(
+                  'taller_definir_enunciado_id'=> $o->id,
+                  'concepto'=> $request->concepto[$key],
+                  'created_at'=> now(),
+                  'updated_at'=> now(),
+               );
+                  TallerDefinirEnunOp::insert($datos);
+               }
+               return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
+               
+             }
+
+
       }
        public function taller14(Request $request)
       {

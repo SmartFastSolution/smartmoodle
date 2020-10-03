@@ -774,7 +774,7 @@ class TallersController extends Controller
 
         if ($taller25 = true) {
 
-               $o = TallerFacturaRe::firstOrFail()->last();              
+               $o = TallerFacturaRe::where('user_id', 1)->last();              
               foreach ($request->codigo as $key=>$v) {
                   $datos=array(
                      'taller_factura_re_id'=> $o->id,

@@ -503,7 +503,7 @@
                                       <label for="concepto6" class="col-form-label">Concepto 1 : </label>
                                     </div>
                                     <div class="col-9">
-                                      <textarea name="concepto1" class="form-control" rows="3"></textarea>
+                                      <textarea name="concep[]" class="form-control" rows="3"></textarea>
                                     </div>
                                     <div class="col-1">
                                       <a href="#" class="btn btn-danger re_tall9"><span class="glyphicon glyphicon-remove">X</span></a>
@@ -512,7 +512,7 @@
                               </div>
                               <div class="form-group col-12">
                                 <label for="concepto6" class="col-form-label">Alternativas:</label>
-                                <input required="" type="text" data-role="tagsinput" name="alternativas1"
+                                <input required="" type="text" data-role="tagsinput" name="alter[]"
                                     class="form-control">
                               </div>
                             </div>
@@ -562,110 +562,26 @@
                                     @endforeach
                                 </select>
                             </div>
+                          <div class="tall_10">
                             <div class="form-group bg-light p-2">
                                 <div class="form-inline">
-                                    <label for="enunciado1" class="col-form-label pr-2">Enunciado 1 : </label>
-                                    <input required="" type="text" name="enunciado1" class="form-control">
-                                </div>
+                                    <label for="enunciado1" class="col-form-label pr-2">Enunciado 1 </label>
+                                    <input required="" type="text" name="enunciado[]" class="form-control m-2">
+                                    <a href="#" class="btn btn-danger re_tall10">
+                                      <span class="glyphicon glyphicon-remove">X</span></a>                                </div>
                                 <div class="form-inline">
                                     <label for="img1" class="col-form-label">Imagen 1:</label>
                                 </div>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="img1" lang="es">
+                                    <input type="file" class="custom-file-input" name="img[]" lang="es">
                                     <label class="custom-file-label" for="customFile">Seleciona un archivo</label>
                                 </div>
-
                                 <label for="concepto6" class="col-form-label">Definicion 1:</label>
-                                <textarea required="" name="definicion1" class="form-control" rows="5"></textarea>
-
+                                <textarea required="" name="definicion[]" class="form-control" rows="5"></textarea>
                             </div>
-
-                            <div class="form-group bg-light p-2">
-                                <div class="form-inline">
-                                    <label for="enunciado2" class="col-form-label pr-2">Enunciado 2 : </label>
-                                    <input required="" type="text" name="enunciado2" class="form-control">
-                                </div>
-                                <div class="form-inline">
-                                    <label for="img2" class="col-form-label">Imagen 2:</label>
-                                </div>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="img2" lang="es">
-                                    <label class="custom-file-label" for="customFile">Seleciona un archivo</label>
-                                </div>
-                                <label for="concepto6" class="col-form-label">Definicion 2:</label>
-                                <textarea required="" name="definicion2" class="form-control" rows="5"></textarea>
-
-                            </div>
-
-                            <div class="form-group bg-light p-2">
-                                <div class="form-inline">
-                                    <label for="enunciado3" class="col-form-label pr-2">Enunciado 3 : </label>
-                                    <input required="" type="text" name="enunciado3" class="form-control"
-                                        id="enunciado3">
-                                </div>
-                                <div class="form-inline">
-                                    <label for="img3" class="col-form-label">Imagen 3:</label>
-                                </div>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="img3" lang="es">
-                                    <label class="custom-file-label" for="customFile">Seleciona un archivo</label>
-                                </div>
-                                <label for="concepto6" class="col-form-label">Definicion 3:</label>
-                                <textarea required="" name="definicion3" class="form-control" rows="5"></textarea>
-
-                            </div>
-
-                            <div class="form-group bg-light p-2">
-                                <div class="form-inline">
-                                    <label for="enunciado4" class="col-form-label pr-2">Enunciado 4 : </label>
-                                    <input required="" type="text" name="enunciado4" class="form-control"
-                                        id="enunciado4">
-                                </div>
-                                <div class="form-inline">
-                                    <label for="img4" class="col-form-label">Imagen 4:</label>
-                                </div>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="img4" lang="es">
-                                    <label class="custom-file-label" for="customFile">Seleciona un archivo</label>
-                                </div>
-                                <label for="concepto6" class="col-form-label">Definicion 4:</label>
-                                <textarea required="" name="definicion4" class="form-control" rows="5"></textarea>
-
-                            </div>
-
-                            <div class="form-group bg-light p-2">
-                                <div class="form-inline">
-                                    <label for="enunciado5" class="col-form-label pr-2">Enunciado 5 : </label>
-                                    <input required="" type="text" name="enunciado5" class="form-control"
-                                        id="enunciado5">
-                                </div>
-                                <div class="form-inline">
-                                    <label for="img5" class="col-form-label">Imagen 5:</label>
-                                </div>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="img5" lang="es">
-                                    <label class="custom-file-label" for="customFile">Seleciona un archivo</label>
-                                </div>
-                                <label for="concepto6" class="col-form-label">Definicion 5:</label>
-                                <textarea required="" name="definicion5" class="form-control" rows="5"></textarea>
-
-                            </div>
-
-                            <div class="form-group bg-light p-2">
-                                <div class="form-inline">
-                                    <label for="enunciado6" class="col-form-label pr-2">Enunciado 6 : </label>
-                                    <input required="" type="text" name="enunciado6" class="form-control"
-                                        id="enunciado6">
-                                </div>
-                                <div class="form-inline">
-                                    <label for="img6" class="col-form-label">Imagen 6:</label>
-                                </div>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="img6" lang="es">
-                                    <label class="custom-file-label" for="customFile">Seleciona un archivo</label>
-                                </div>
-                                <label for="concepto6" class="col-form-label">Definicion 6:</label>
-                                <textarea required="" name="definicion6" class="form-control" rows="5"></textarea>
+                          </div>
+                            <div class="row">
+                                  <a href="#" class="addTaller10 btn btn-outline-danger">Agregar Fila</a>
                             </div>
                             <div class="row justify-content-center">
                                 <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
@@ -701,9 +617,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="11" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
@@ -741,21 +655,15 @@
                                     <label class="custom-file-label" for="customFile">Seleciona un archivo</label>
                                 </div>
                             </div>
+                          <div class="tall_11">
                             <div class="form-group bg-light p-2">
-                                <label for="concepto6" class="col-form-label">Definicion 1:</label>
-                                <textarea required="" name="definicion1" class="form-control" rows="5"></textarea>
+                                <label for="concepto6" class="col-form-label m-2">Definicion  1  <a href="#" class="btn btn-danger re_tall11">
+                                      <span class="glyphicon glyphicon-remove">X</span></a> </label>
+                                <textarea required="" name="definicion[]" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group bg-light p-2">
-                                <label for="concepto6" class="col-form-label">Definicion 2:</label>
-                                <textarea required="" name="definicion2" class="form-control" rows="5"></textarea>
-                            </div>
-                            <div class="form-group bg-light p-2">
-                                <label for="concepto6" class="col-form-label">Definicion 3:</label>
-                                <textarea required="" name="definicion3" class="form-control" rows="5"></textarea>
-                            </div>
-                            <div class="form-group bg-light p-2">
-                                <label for="concepto6" class="col-form-label">Definicion 4:</label>
-                                <textarea required="" name="definicion4" class="form-control" rows="5"></textarea>
+                          </div>
+                          <div class="row">
+                                  <a href="#" class="addTaller11 btn btn-outline-danger">Agregar Fila</a>
                             </div>
 
                             <div class="row justify-content-center">
@@ -776,7 +684,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="taller12Label">TALLER COMPLETE EL ENUNCIADO</h5>
+                <h5 class="modal-title" id="taller12Label">TALLER VERDADERO & FALSO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -801,32 +709,16 @@
                                     @endforeach
                                 </select>
                             </div>
+                        <div class="tall_12">
                             <div class="form-group">
-                                <label for="" class="col-form-label">Descripcion 1:</label>
-                                <textarea required="" class="form-control" name="descripcion1"></textarea>
+                                <label for="" class="col-form-label">Descripcion 1 <a href="#" class="btn btn-danger re_tall12"><span class="glyphicon glyphicon-remove">X</span></a></label>
+                                <textarea required="" class="form-control" name="descripcion[]"></textarea>
                             </div>
-
-                            <div class="form-group">
-                                <label for="" class="col-form-label">Descripcion 2:</label>
-                                <textarea required="" class="form-control" name="descripcion2"></textarea>
+                        </div>
+        
+                           <div class="row">
+                                  <a href="#" class="addTaller12 btn btn-outline-danger">Agregar Fila</a>
                             </div>
-
-                            <div class="form-group">
-                                <label for="" class="col-form-label">Descripcion 3:</label>
-                                <textarea required="" class="form-control" name="descripcion3"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="" class="col-form-label">Descripcion 4:</label>
-                                <textarea required="" class="form-control" name="descripcion4"></textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="" class="col-form-label">Descripcion 5:</label>
-                                <textarea required="" class="form-control" name="descripcion5"></textarea>
-                            </div>
-
-
                             <div class="row justify-content-center">
                                 <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
@@ -870,23 +762,15 @@
                                     @endforeach
                                 </select>
                             </div>
+                           <div class="tall_13">
                             <div class="form-group">
-                                <label for="" class="col-form-label">Concepto 1:</label>
-                                <input required="" type="text" name="concepto1" class="form-control">
+                                <label for="" class="col-form-label">Concepto 1 <a href="#" class="btn btn-danger re_tall13"><span class="glyphicon glyphicon-remove">X</span></a></label>
+                                <input required="" type="text" name="concepto[]" class="form-control">
                             </div>
-                            <div class="form-group">
-                                <label for="" class="col-form-label">Concepto 2:</label>
-                                <input required="" type="text" name="concepto2" class="form-control">
+                          </div>
+                          <div class="row">
+                                  <a href="#" class="addTaller13 btn btn-outline-danger">Agregar Fila</a>
                             </div>
-                            <div class="form-group">
-                                <label for="" class="col-form-label">Concepto 3:</label>
-                                <input required="" type="text" name="concepto3" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="col-form-label">Concepto 4:</label>
-                                <input required="" type="text" name="concepto4" class="form-control">
-                            </div>
-
                             <div class="row justify-content-center">
                                 <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>

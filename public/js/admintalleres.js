@@ -27,7 +27,22 @@ $(function(document, window, index ) {
         evt.preventDefault();
         addTaller9()();
     });
-
+       $('.addTaller10').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller10()();
+    });
+          $('.addTaller11').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller11()();
+    });
+        $('.addTaller12').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller12()();
+    });
+     $('.addTaller13').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller13()();
+    });
     $('.addRow').on('click', function(evt) {
         evt.preventDefault();
         addRow();
@@ -53,7 +68,7 @@ $(function(document, window, index ) {
                                       '<label for="concepto6" class="col-form-label">Concepto '+(tall9 + 1)+' : </label>'+
                                     '</div>'+
                                     '<div class="col-9">'+
-                                      '<textarea name="concepto1" class="form-control" rows="3"></textarea>'+
+                                      '<textarea name="concep[]" class="form-control" rows="3"></textarea>'+
                                    ' </div>'+
                                     '<div class="col-1">'+
                                       '<a href="#" class="btn btn-danger re_tall9"><span class="glyphicon glyphicon-remove">X</span></a>'+
@@ -62,7 +77,7 @@ $(function(document, window, index ) {
                               '</div>'+
                               '<div class="form-group col-12">'+
                                 '<label for="concepto6" class="col-form-label">Alternativas:</label>'+
-                                '<input required="" type="text" data-role="tagsinput" name="alternativas1"'+
+                                '<input required="" type="text" data-role="tagsinput" name="alter[]"'+
                                     'class="form-control">'+
                               '</div>'+
                             '</div>';
@@ -107,6 +122,202 @@ $(function(document, window, index ) {
         }
     });
 
+function addTaller10() {
+        var tall10 = $('.tall_10 .form-group').length;
+        console.log(tall10)
+        var a = 1;
+        var e = 1;
+        var t10 = 
+             '<div class="form-group bg-light p-2">'+
+                '<div class="form-inline">'+
+                     '<label for="enunciado1" class="col-form-label pr-2">Enunciado '+(tall10 + 1)+' </label>'+
+                    '<input required="" type="text" name="enunciado1" class="form-control m-2">'+
+                     '<a href="#" class="btn btn-danger re_tall10">'+
+                         '<span class="glyphicon glyphicon-remove">X</span></a></label>'+
+                '</div>'+
+               ' <div class="form-inline">'+
+                    '<label for="img1" class="col-form-label">Imagen :</label>'+
+                '</div>'+
+               ' <div class="custom-file">'+
+                    '<input type="file" class="custom-file-input" name="img1">'+
+                   ' <label class="custom-file-label" for="customFile">Seleciona un archivo</label>'+
+                '</div>'+
+                '<label for="concepto6" class="col-form-label">Definicion :</label>'+
+                '<textarea required="" name="definicion1" class="form-control" rows="5"></textarea>'+
+            '</div>';
+
+        if (tall10 == 10) {
+        function alert10(){
+            toastr.error("Limite de enunciados creados", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }
+        } else {
+        $('.tall_10').append(t10);
+        function alert10(){
+        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+            "timeOut": "1000"
+        });
+        }
+
+        //console.log(enun)
+           
+        }
+       return alert10;
+    }
+     $('.re_tall10').live('click', function() {
+        num = $('.tall_10 .form-group').toArray();
+        //console.log(num);
+        if ($('.tall_10 .form-group').length == 2) 
+        {
+            $.each(num, function( index, value ) {
+            $(value).remove();
+            });
+            addTaller10();
+        }else if($('.tall_10 .form-group').length == 1){
+             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }else {
+            $(this).parent().parent().remove();
+        }
+    });
+function addTaller11() {
+        var tall11 = $('.tall_11 .form-group').length;
+        console.log(tall11)
+        var a = 1;
+        var e = 1;
+        var t11 = 
+             '<div class="form-group bg-light p-2">'+
+                '<label for="concepto6" class="col-form-label m-2">Definicion  '+(tall11 + 1)+'  <a href="#" class="btn btn-danger re_tall11">'+
+                '<span class="glyphicon glyphicon-remove">X</span></a> </label>'+
+                '<textarea required="" name="definicion[]" class="form-control" rows="5"></textarea>'+
+            '</div>';
+        if (tall11 == 11) {
+        function alert11(){
+            toastr.error("Limite de enunciados creados", "Smarmoddle", {
+                "timeOut": "1100"
+            });
+        }
+        } else {
+        $('.tall_11').append(t11);
+        function alert11(){
+        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+            "timeOut": "1100"
+        });
+        }
+
+        //console.log(enun)
+           
+        }
+       return alert11;
+    }
+     $('.re_tall11').live('click', function() {
+        num = $('.tall_11 .form-group').toArray();
+        //console.log(num);
+       if($('.tall_11 .form-group').length == 2){
+             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1100"
+            });
+        }else {
+            $(this).parent().parent().remove();
+        }
+    });
+
+     function addTaller12() {
+        var tall12 = $('.tall_12 .form-group').length;
+        console.log(tall12)
+        var a = 1;
+        var e = 1;
+        var t12 = 
+        '<div class="form-group">'+
+            '<label for="" class="col-form-label">Descripcion '+(tall12 + 1)+' <a href="#" class="btn btn-danger re_tall12"><span class="glyphicon glyphicon-remove">X</span></a></label>'+
+            '<textarea required="" class="form-control" name="descripcion[]"></textarea>'+
+        '</div>';
+        $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
+        if (tall12 == 10) {
+        function alert12(){
+            toastr.error("Limite de enunciados creados", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }
+        } else {
+        $('.tall_12').append(t12);
+        function alert12(){
+        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+            "timeOut": "1000"
+        });
+        }
+
+        //console.log(enun)
+           
+        }
+       return alert12;
+    }
+     $('.re_tall12').live('click', function() {
+        num = $('.tall_12 .form-group').toArray();
+        //console.log(num);
+        if ($('.tall_12 .form-group').length == 2) 
+        {
+            $.each(num, function( index, value ) {
+            $(value).remove();
+            });
+            addTaller12();
+        }else if($('.tall_12 .form-group').length == 1){
+             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }else {
+            $(this).parent().parent().remove();
+        }
+    });
+
+      function addTaller13() {
+        var tall13 = $('.tall_13 .form-group').length;
+        console.log(tall13)
+        var a = 1;
+        var e = 1;
+        var t13 = 
+        '<div class="form-group">'+
+            '<label for="" class="col-form-label">Concepto '+(tall13 + 1)+' <a href="#" class="btn btn-danger re_tall13"><span class="glyphicon glyphicon-remove">X</span></a></label>'+
+            '<input required="" type="text" name="concepto[]" class="form-control">'+
+        '</div>';
+        if (tall13 == 10) {
+        function alert13(){
+            toastr.error("Limite de enunciados creados", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }
+        } else {
+        $('.tall_13').append(t13);
+        function alert13(){
+        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+            "timeOut": "1000"
+        });
+        }
+
+        //console.log(enun)
+           
+        }
+       return alert13;
+    }
+     $('.re_tall13').live('click', function() {
+        num = $('.tall_13 .form-group').toArray();
+        //console.log(num);
+        if ($('.tall_13 .form-group').length == 2) 
+        {
+            $.each(num, function( index, value ) {
+            $(value).remove();
+            });
+            addTaller13();
+        }else if($('.tall_13 .form-group').length == 1){
+             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }else {
+            $(this).parent().parent().remove();
+        }
+    });
 
 
      function addEnun() {

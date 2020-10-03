@@ -74,7 +74,7 @@
 </div>
 
  <ul class="list-group m-3">
-    @foreach ($sub = App\Taller::paginate(5) as $taller)
+    @foreach ($sub = App\Taller::paginate(10) as $taller)
     <li class="list-group-item "><a class="nav-link"
             href="{{ route('taller', ['plant' => $taller->plantilla_id, 'id' => $taller->id]) }}">{{ $taller->nombre }}
             - {{ $taller->materia->nombre }} {{ $taller->enunciado }}</a></li>

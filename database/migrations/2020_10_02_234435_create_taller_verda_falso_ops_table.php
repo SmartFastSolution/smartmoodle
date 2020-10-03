@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTallerDefinirEnunciadosTable extends Migration
+class CreateTallerVerdaFalsoOpsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateTallerDefinirEnunciadosTable extends Migration
      */
     public function up()
     {
-        Schema::create('taller_definir_enunciados', function (Blueprint $table) {
+        Schema::create('taller_verda_falso_ops', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
+            $table->unsignedbigInteger('taller_verdadero_falso_id');
+            $table->string('descripcion');
             $table->timestamps();
             
-            $table->foreign('taller_id')
+            $table->foreign('taller_verdadero_falso_id')
             ->references('id')
-            ->on('tallers')
+            ->on('taller_verdadero_falsos')
             ->onDelete('cascade');
         });
     }
@@ -33,6 +33,6 @@ class CreateTallerDefinirEnunciadosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taller_definir_enunciados');
+        Schema::dropIfExists('taller_verda_falso_ops');
     }
 }
