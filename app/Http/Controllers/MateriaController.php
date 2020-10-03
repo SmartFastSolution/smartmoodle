@@ -71,8 +71,8 @@ class MateriaController extends Controller
     public function show ($id)
     {
        
-        $contenido=Contenido::get();
-       
+         $contenido=Contenido::get();
+          
         $materia =Materia::where('id', $id)->firstOrfail();
        
         $tallers=Taller::get();

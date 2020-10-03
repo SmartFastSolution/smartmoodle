@@ -156,6 +156,50 @@
                                                 </td>
 
                                             </tr>
+                                            <!-- inicio del modal para visualizacion del archivo de contenido -->
+                                            <div class="modal fade" id="modalYT" tabindex="-1" role="dialog"
+                                                aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg" role="document">
+
+                                                    <!--Content-->
+
+                                                    <div class="modal-content">
+
+                                                        <!--Body-->
+                                                     
+                                                        <div class="modal-body mb-0 p-0">
+
+                                                            <div
+                                                                class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+
+                                                                <iframe
+                                                                    style="object-fit: contain; width: 100%; height: 500px;"
+                                                                    class="embed-responsive-item"
+                                                                    src="{{asset(Storage::url($contenido['documentod']))}}"
+                                                                    allowfullscreen></iframe>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="modal-footer justify-content-center">
+                                                            <span class="mr-4">{{$contenido['nombre']}}</span>
+
+                                                            <button type="button"
+                                                                class="btn btn-outline-primary btn-rounded btn-md ml-4"
+                                                                data-dismiss="modal">Close</button>
+
+                                                        </div>
+                                                       
+                                                    </div>
+                                                    <!--/.Content-->
+
+                                                </div>
+                                                <!-- espacio -->
+                                                <!-- espacio para que no salga opciones de pdf  -->
+
+                                            </div>
+                                            <!--fin del modal -->
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -167,45 +211,6 @@
                 </div>
 
 
-                <div class="modal fade" id="modalYT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-
-                        <!--Content-->
-
-                        <div class="modal-content">
-
-                            <!--Body-->
-
-                            <div class="modal-body mb-0 p-0">
-
-                                <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-
-                                    <iframe class="embed-responsive-item" width="1000" height="1000"
-                                        @if(!Storage::exists($contenido))
-                                        src="{{asset(Storage::url($contenido['documentod']))}}" @endif
-                                        allowfullscreen></iframe>
-
-                                </div>
-
-                            </div>
-
-                            <div class="modal-footer justify-content-center">
-                                <span class="mr-4">{{ $contenido['nombre']}}</span>
-
-                                <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4"
-                                    data-dismiss="modal">Close</button>
-
-                            </div>
-
-                        </div>
-                        <!--/.Content-->
-
-                    </div>
-                    <!-- espacio -->
-                    <!-- espacio para que no salga opciones de pdf  -->
-                </div>
-                <!--Modal: Name-->
                 <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
             </div>
         </div>
