@@ -46,7 +46,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-
+                              
                                 <div class="form-group">
                                     <label>Seleccione Materias</label>
                                     <select class="select2" multiple="multiple" name="materia[]"

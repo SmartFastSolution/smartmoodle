@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="card-body">
 
-                                <label for="name"> Lista de Menu</label>
+                                    <label for="name"> Lista de Menu</label>
                                     @foreach($permissions as $permission)
 
                                     <div class="custom-control custom-checkbox">

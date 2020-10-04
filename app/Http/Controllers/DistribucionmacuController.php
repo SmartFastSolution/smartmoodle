@@ -74,11 +74,7 @@ class DistribucionmacuController extends Controller
      */
     public function show(Distribucionmacu $distribucionmacu)
     {
-        $distribucionmacu_materia=[]; //creo una variable array para almacenar los datos relacionados de la tabla pivote entre materia y distribucion
-      
-        foreach($distribucionmacu->materias as $materia){   //realizo el recorrido
-        $distribucionmacu_materia[]=$materia->id;
-       }
+        $distribucionmacu_materia= $distribucionmacu->materias->pluck('id')->toArray();
         
         $materias= Materia::all();
         $cursos = Curso::get(); //todos los datos de la bd de cursos

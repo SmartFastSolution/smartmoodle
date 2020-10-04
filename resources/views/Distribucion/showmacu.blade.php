@@ -47,21 +47,16 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Seleccione Materias</label>
-                                    <select class="select2" multiple="multiple" name="materia[]"
+                                    <label> Materias Asignadas</label>
+                                    <select class="select2" multiple="true" name="materia[]"
                                         data-placeholder="Select a State" style="width: 100%;" disabled>
-
+                                        @if(! empty($materias))
                                         @foreach($materias as $materia)
-                                        <option value="{{$materia->id}}" 
-                                            @isset( $distribucionmacu->materias[0]->nombre)
-                                            @if($materia->nombre == $distribucionmacu->materias[0]->nombre)
-                                            selected
-                                            @endif
-                                            @endisset
-
-                                            >{{$materia->nombre}}</option>
-
+                                        <option {{in_array($materia->id, $distribucionmacu_materia) ? 'selected':''}}>
+                                            {{$materia->nombre}}
+                                        </option>
                                         @endforeach
+                                        @endif   
                                     </select>
                                 </div>
 
