@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTallerAbreviaturasTable extends Migration
+class CreateTallerContabilidadOpsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateTallerAbreviaturasTable extends Migration
      */
     public function up()
     {
-        Schema::create('taller_abreviaturas', function (Blueprint $table) {
+        Schema::create('taller_contabilidad_ops', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
+            $table->unsignedbigInteger('taller_contabilidad_id');
+            $table->string('enunciado')->nullable();
             $table->timestamps();
             
-            $table->foreign('taller_id')
+            $table->foreign('taller_contabilidad_id')
             ->references('id')
-            ->on('tallers')
+            ->on('taller_contabilidads')
             ->onDelete('cascade');
         });
     }
@@ -33,6 +33,6 @@ class CreateTallerAbreviaturasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taller_abreviaturas');
+        Schema::dropIfExists('taller_contabilidad_ops');
     }
 }

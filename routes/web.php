@@ -122,6 +122,7 @@ route::post('/taller27', 'AdminController@taller27')->name('admin.taller27');
 route::post('/taller28', 'AdminController@taller28')->name('admin.taller28');
 route::post('/taller29', 'AdminController@taller29')->name('admin.taller29');
 route::post('/taller34', 'AdminController@taller34')->name('admin.taller34');
+route::post('/taller57', 'AdminController@taller57')->name('admin.taller57');
 	});
 
 route::get('/sistema/taller/{plant}/{id}', 'TallersController@taller')->name('taller');
@@ -183,6 +184,7 @@ route::post('/sistema/admin/taller29/{idtaller}', 'TallersController@store29')->
 route::post('/sistema/admin/taller30/{idtaller}', 'TallersController@store30')->name('taller30');
 route::post('/sistema/admin/taller31/{idtaller}', 'TallersController@store31')->name('taller31');
 route::post('/sistema/admin/taller34/{idtaller}', 'TallersController@store34')->name('taller_34');
+route::post('/sistema/admin/taller57/{idtaller}', 'TallersController@store57')->name('taller_57');
 
 
 route::get('/sistema/taller32', 'TallersController@taller32')->name('taller32');
@@ -210,6 +212,7 @@ route::get('/sistema/taller53', 'TallersController@taller53')->name('taller53');
 route::get('/sistema/taller54', 'TallersController@taller54')->name('taller54');
 route::get('/sistema/taller55', 'TallersController@taller55')->name('taller55');
 route::get('/sistema/taller56', 'TallersController@taller56')->name('taller56');
+route::get('/sistema/taller57', 'TallersController@taller57')->name('taller57');
 
 /*
 */

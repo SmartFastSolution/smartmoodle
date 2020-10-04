@@ -12,6 +12,8 @@ use App\Admin\TallerChequeEndoso;
 use App\Admin\TallerCirculo;
 use App\Admin\TallerClasificar;
 use App\Admin\TallerCollage;
+use App\Admin\TallerContabilidad;
+use App\Admin\TallerContabilidadOp;
 use App\Admin\TallerCompletar;
 use App\Admin\TallerCompletarEnunciado;
 use App\Admin\TallerConvertirCheque;
@@ -1079,6 +1081,41 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');  
          
 
+      }
+
+   public function taller57(Request $request)
+      {
+         $i                      = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller57               = new Taller;
+         $taller57->nombre       = 'Taller '.++$i;
+         $taller57->plantilla_id = $request->input('id_plantilla');
+         $taller57->materia_id   = $request->input('materia_id');
+         $taller57->estado       = 1;
+         $taller57->save();
+
+          if ($taller57 = true) {
+            $a                    = Taller::get()->last();
+            $taller_57            = new TallerContabilidad;
+            $taller_57->taller_id = $a->id;
+            $taller_57->enunciado = $request->input('enunciado');
+            $taller_57->save();
+         }
+
+           if ($taller_57 = true) {
+
+               $o = TallerContabilidad::get()->last();              
+               foreach ($request->enun as $key=>$v) {
+                  $datos=array(
+                     'taller_contabilidad_id'=> $o->id,
+                     'enunciado'=> $request->enun[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  TallerContabilidadOp::insert($datos);
+               }
+
+                 return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');
+             }
       }
 
 

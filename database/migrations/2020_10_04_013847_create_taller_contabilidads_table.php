@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTallerAbreviaturasTable extends Migration
+class CreateTallerContabilidadsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTallerAbreviaturasTable extends Migration
      */
     public function up()
     {
-        Schema::create('taller_abreviaturas', function (Blueprint $table) {
+        Schema::create('taller_contabilidads', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->string('enunciado');
@@ -33,6 +33,6 @@ class CreateTallerAbreviaturasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taller_abreviaturas');
+        Schema::dropIfExists('taller_contabilidads');
     }
 }

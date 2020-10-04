@@ -1975,3 +1975,54 @@
         </div>
     </div>
 </div>
+
+<!-- FORMULARIO PARA PLANTILLA 57 -->
+<div class="modal fade" id="taller57" tabindex="-1" role="dialog" aria-labelledby="taller57Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="taller57Label">TALLERES DE CONTABILIDAD</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller57') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="57" name="id_plantilla">
+                                <input type="text"  name="enunciado" value="Crear Enunciados de Contabilidad" class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Materia:</label>
+                                <select name="materia_id" class="custom-select">
+                                    @foreach ($materias = App\Materia::where('slug', '=', 'contabilidad')->get() as $materia)
+                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        <div class="tall_57">
+                            <div class="form-group">
+                                <label for="" class="col-form-label">Enunciado 1 <a href="#" class="btn btn-danger re_tall57"><span class="glyphicon glyphicon-remove">X</span></a></label>
+                                <textarea required="" class="form-control" name="enun[]"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                                  <a href="#" class="addTaller57 btn btn-outline-danger">Agregar Fila</a>
+                        </div>
+
+                            <div class="row justify-content-center">
+                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

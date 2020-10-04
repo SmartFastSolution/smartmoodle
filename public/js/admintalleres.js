@@ -43,6 +43,10 @@ $(function(document, window, index ) {
         evt.preventDefault();
         addTaller13()();
     });
+      $('.addTaller57').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller57()();
+    });
     $('.addRow').on('click', function(evt) {
         evt.preventDefault();
         addRow();
@@ -318,6 +322,55 @@ function addTaller11() {
             $(this).parent().parent().remove();
         }
     });
+
+          function addTaller57() {
+        var tall57 = $('.tall_57 .form-group').length;
+        console.log(tall57)
+        var a = 1;
+        var e = 1;
+        var t57 = 
+        '<div class="form-group">'+
+            '<label for="" class="col-form-label">Enunciado '+(tall57 + 1)+' <a href="#" class="btn btn-danger re_tall57"><span class="glyphicon glyphicon-remove">X</span></a></label>'+
+            '<textarea required="" class="form-control" name="enun[]"></textarea>'+
+        '</div>';
+        $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
+        if (tall57 == 10) {
+        function alert57(){
+            toastr.error("Limite de enunciados creados", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }
+        } else {
+        $('.tall_57').append(t57);
+        function alert57(){
+        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+            "timeOut": "1000"
+        });
+        }
+
+        //console.log(enun)
+           
+        }
+       return alert57;
+    }
+     $('.re_tall57').live('click', function() {
+        num = $('.tall_57 .form-group').toArray();
+        //console.log(num);
+        if ($('.tall_57 .form-group').length == 2) 
+        {
+            $.each(num, function( index, value ) {
+            $(value).remove();
+            });
+            addTaller57();
+        }else if($('.tall_57 .form-group').length == 1){
+             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }else {
+            $(this).parent().parent().remove();
+        }
+    });
+
 
 
      function addEnun() {
