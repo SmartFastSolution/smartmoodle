@@ -11,7 +11,7 @@ class Distribucionmacu extends Model
 
     protected $fillable = [
         
-        'descripcion', 'estado',
+         'estado',
     ];
 
  public function materias(){

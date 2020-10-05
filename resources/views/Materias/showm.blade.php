@@ -29,9 +29,20 @@
                         <form method="POST" action="{{route('materias.update', $materia->id)}} ">
 
                             <div class="card-body">
+                                <div class="form-group">
+                                    <label>Instituto</label>
+                                    <select class="form-control select" name="instituto" style="width: 99%;" disabled>
+                                        @foreach($institutomate as $instumate)
+                                        <option selected disabled value="{{ $instumate->id }}">
+                                            {{ $instumate->nombre }}
+                                        </option>
+                                        @endforeach
+                                       
+                                    </select>
+                                </div>
 
                                 <div class="form-group">
-                                    <label for="nombre">Nombre</label>
+                                    <label for="nombre">Materia</label>
                                     <input type="text" class="form-control" name="nombre" id="nombre"
                                         value="{{$materia->nombre}}" placeholder="Edición de Materia" readonly>
                                 </div>
@@ -166,7 +177,7 @@
                                                     <div class="modal-content">
 
                                                         <!--Body-->
-                                                     
+
                                                         <div class="modal-body mb-0 p-0">
 
                                                             <div
@@ -190,7 +201,7 @@
                                                                 data-dismiss="modal">Close</button>
 
                                                         </div>
-                                                       
+
                                                     </div>
                                                     <!--/.Content-->
 

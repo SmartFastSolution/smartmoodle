@@ -16,10 +16,9 @@ class CreateDistribucionmacusTable extends Migration
         Schema::create('distribucionmacus', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('curso_id');
-            $table->string('descripcion'); 
             $table->enum('estado',['on','off'])->nullable();
             $table->timestamps();
-            $table->foreign('curso_id')->references('id')->on('cursos');
+            $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade');
         });
     }
 

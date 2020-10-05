@@ -2,6 +2,7 @@
 
 namespace App;
 use App\User;
+use App\Materia;
 use Illuminate\Database\Eloquent\Model;
 
 class Instituto extends Model
@@ -22,6 +23,11 @@ class Instituto extends Model
           
         return $this->hasMany('App\User');
 
+    }
+
+    public function materias(){
+
+        return $this->hasMany('App\Materia');
     }
 
 }

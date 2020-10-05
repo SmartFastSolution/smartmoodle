@@ -33,6 +33,21 @@
                             @csrf
                             <div class=" card-body">
                                 <div class="form-group">
+                                    <label>Instituto</label>
+                                    <select class="form-control select" name="instituto" style="width: 99%;">
+                                        @foreach($institutomate as $instumate)
+                                        <option selected disabled value="{{ $instumate->id }}">
+                                            {{ $instumate->nombre }}
+                                        </option>
+                                        @endforeach
+                                        @foreach($institutos as $instituto)
+                                        <option value="{{$instituto->id}}">{{$instituto->nombre}}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="nombre">Nombre</label>
                                     <input type="text" class="form-control" name="nombre" id="nombre"
                                         value="{{$materias->nombre}}" placeholder="Edición de Materia">

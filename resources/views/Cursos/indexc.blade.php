@@ -26,7 +26,7 @@
                 <h1>Paralelos</h1>
                 <div class="card card-secondary">
                     <div class="card-header">
-                        
+
                         <div class="card-tools">
                         </div>
                     </div>
@@ -36,9 +36,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Paralelo</th>
-                                    <th scope="col">Modulo</th>
                                     <th scope="col">Curso</th>
+                                    <th scope="col">Paralelo</th>
                                     <th scope="col">Estado</th>
                                     <th></th>
                                     <th></th>
@@ -49,11 +48,10 @@
                                 <tr>
                                     @foreach ($cursos as $curso)
                                     <th scope="row">{{ $curso['id']}}</th>
-                                    <td>{{ $curso['nombre']}}</td>
-                                    <td>{{ $curso['paralelo']}}</td>
                                     <td>{{ $curso->nivel->nombre}}</td>
+                                    <td>{{ $curso['nombre']}}</td>
                                     <td>{{ $curso['estado']}}</td>
-                                   <td></td>
+                                    <td></td>
                                     <td class="table-button ">
                                         <a class="btn btn-info " href="{{route('cursos.show', $curso->id)}}"><i
                                                 class="fas fa-eye"></i></a>

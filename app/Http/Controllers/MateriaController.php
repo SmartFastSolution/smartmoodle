@@ -6,6 +6,7 @@ use App\Contenido;
 use App\Taller;
 use App\Materia;
 use App\Plantilla;
+use App\Instituto;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -36,8 +37,8 @@ class MateriaController extends Controller
      */
     public function create()
     { 
-         
-        return \view('Materias.createm');
+        $institutos=Instituto::get();
+        return \view('Materias.createm',compact('institutos'));
     }
 
     /**
@@ -56,8 +57,15 @@ class MateriaController extends Controller
             'estado'      => 'required|in:on,off',
         ]);
 
-        $materia = Materia::create($request->all());
-   
+        //$materia = Materia::create($request->all());
+       $materia = new Materia;
+       $materia->instituto_id = $request->instituto;
+       $materia->nombre = $request->nombre;
+       $materia->slug = $request->slug;
+       $materia->descripcion = $request->descripcion;
+       $materia->estado = $request->estado;
+        
+       $materia->save();
         
         return \redirect('sistema/materias');
     }
@@ -70,15 +78,16 @@ class MateriaController extends Controller
      */
     public function show ($id)
     {
-       
+        // todos los datos de la bd
+         $institutomate = Materia::find($id)->instituto()->get();
          $contenido=Contenido::get();
           
-        $materia =Materia::where('id', $id)->firstOrfail();
+         $materia =Materia::where('id', $id)->firstOrfail();
        
-        $tallers=Taller::get();
+         $tallers=Taller::get();
       
        
-         return view ('Materias.showm',['materia'=>$materia,'tallers'=>$tallers,'contenidos'=>$contenido]);
+         return view ('Materias.showm',['materia'=>$materia,'tallers'=>$tallers,'contenidos'=>$contenido,'institutomate'=>$institutomate]);
     }
 
     /**
@@ -89,8 +98,9 @@ class MateriaController extends Controller
      */
     public function edit(Materia $materia)
     {
-       
-        return view('Materias.editm',['materias'=>$materia]);
+        $institutos = Instituto::get(); // todos los datos de la bd
+        $institutomate = Materia::find($materia->id)->instituto()->get();
+        return view('Materias.editm',['materias'=>$materia,'institutos'=>$institutos,'institutomate'=>$institutomate]);
 
 
     }
@@ -114,7 +124,12 @@ class MateriaController extends Controller
         ]);
 
         $materia->update($request->all());
-   
+        if($request->get('instituto')){
+          
+            $materia->instituto_id = $request->instituto;
+          }
+    
+          $materia->save();
         return \redirect('sistema/materias');
     }
 

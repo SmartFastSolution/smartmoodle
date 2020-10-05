@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Materia;
 use App\Curso;
+use App\Instituto;
 use App\Distribucionmacu;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -21,18 +22,17 @@ class DistribucionmacuController extends Controller
         return \view('Distribucion.indexmc',['distribucionmacus'=>$distribucionmacus,]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
+          
+
+        $institutos = Instituto::get();
         $materias=Materia::get();
        
         $cursos=Curso::get();
       
-        return \view('Distribucion.createmc',compact('materias','cursos'));
+        return \view('Distribucion.createmc',compact('materias','cursos','institutos'));
     }
 
     /**
@@ -47,12 +47,12 @@ class DistribucionmacuController extends Controller
 
         $request->validate([
 
-            'descripcion' => [ 'string', 'max:150'],
+            
             'estado' => ['required' ,'in:on,off'],
         ]);
 
         $distribucionmacu =new  Distribucionmacu;
-        $distribucionmacu ->descripcion = $request->descripcion;
+        
         $distribucionmacu ->estado = $request->estado;
         $distribucionmacu->curso_id=$request->cursos;
           
@@ -118,7 +118,7 @@ class DistribucionmacuController extends Controller
         $request->validate([
 
            
-            'descripcion'      => 'required|string|max:150',
+            
             'estado'      => 'required|in:on,off',
         ]);
 

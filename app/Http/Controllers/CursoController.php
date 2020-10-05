@@ -52,7 +52,7 @@ class CursoController extends Controller
         $request->validate([
 
             'nombre'      => 'required|string|max:60',
-            'paralelo'      => 'required|string|max:1',
+          
             'estado'      => 'required|in:on,off',
         ]);
        
@@ -60,7 +60,6 @@ class CursoController extends Controller
         $curso = new Curso ;
         $curso->nivel_id = $request->nivel;
         $curso->nombre = $request->nombre;
-        $curso->paralelo = $request->paralelo;
         $curso->estado = $request->estado;
         
        
@@ -120,7 +119,6 @@ class CursoController extends Controller
         $request->validate([
 
             'nombre'      => 'required|string|max:60',
-            'paralelo'      => 'required|string|max:1',
             'estado'      => 'required|in:on,off',
         ]);
 

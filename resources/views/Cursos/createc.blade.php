@@ -27,18 +27,6 @@
 
                             <div class=" card-body">
                                 <div class="form-group">
-                                    <label for="nombre">Paralelo</label>
-                                    <input type="text" class="form-control" name="nombre" id="nombre"
-                                        value="{{ old('nombre') }}" placeholder="Añadir Curso">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="paralelo">Modulo</label>
-                                    <input type="text" class="form-control" name="paralelo" id="paralelo"
-                                        value="{{ old('paralelo') }}" placeholder="Añadir Paralelo">
-                                </div>
-
-                                <div class="form-group">
                                     <label>Añadir Curso</label>
                                     <select class="form-control select" name="nivel" style="width: 99%;">
                                         <option selected disabled>Elija el Curso...</option>
@@ -49,13 +37,18 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
+                                    <label for="nombre">Paralelo</label>
+                                    <input type="text" class="form-control" name="nombre" id="nombre"
+                                        value="{{ old('nombre') }}" placeholder="Añadir Curso">
+                                </div>
+
+                                <div class="form-group">
                                     <label for="nombre">Estado </label>
                                     <br>
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" id="estadoon" name="estado" class="custom-control-input"
                                             value="on" @if(old('estado')=="on" ) checked @endif
-                                            @if(old('estado')===null) checked @endif
-                                            >
+                                            @if(old('estado')===null) checked @endif>
                                         <label class="custom-control-label" for="estadoon">Activo</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">

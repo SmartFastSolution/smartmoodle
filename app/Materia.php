@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Instituto;
 use App\Distribucionmacu;
 use App\Contenido;
 
@@ -33,6 +34,12 @@ class Materia extends Model
 
     }
 
+
+    public function instituto(){
+          
+        return $this->belongsTo('App\Instituto');
+
+    }
 
     
 

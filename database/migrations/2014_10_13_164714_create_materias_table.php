@@ -15,11 +15,13 @@ class CreateMateriasTable extends Migration
     {
         Schema::create('materias', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('instituto_id')->nullable();
             $table->string('nombre');
             $table->string('slug');
             $table->string('descripcion');
             $table->enum('estado',['on','off'])->nullable();
             $table->timestamps();
+            $table->foreign('instituto_id')->references('id')->on('institutos')->onDelete('cascade');
         });
     }
 

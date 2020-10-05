@@ -30,7 +30,18 @@
 
                             <div class=" card-body">
                                 <div class="form-group">
-                                    <label for="nombre">Nombre</label>
+                                    <label>Instituto</label>
+                                    <select class="form-control select" name="instituto" style="width: 99%;">
+                                        <option selected disabled>Elija una Unidad educativa...</option>
+                                        @foreach($institutos as $instituto)
+                                        <option value="{{$instituto->id}}">{{$instituto->nombre}}
+                                        </option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nombre">Nombre Materia</label>
                                     <input type="text" class="form-control" name="nombre" id="nombre"
                                         value="{{ old('nombre') }}" placeholder="Añadir Materia">
                                 </div>
@@ -44,6 +55,7 @@
                                     <input type="text" class="form-control" name="descripcion" id="descripcion"
                                         value="{{ old('descripcion') }}" placeholder="Añadir Descripcion">
                                 </div>
+
 
 
                                 <div class="form-group">

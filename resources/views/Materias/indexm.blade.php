@@ -29,8 +29,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Slug</th>
+                                    <th scope="col">Instituto</th>
+                                    <th scope="col">Materia</th>
                                     <th scope="col">Descripción</th>
                                     <th scope="col">Estado</th>
                                     <th></th>
@@ -41,8 +41,8 @@
                                 <tr>
                                     @foreach ($materias as $materia)
                                     <th scope="row">{{ $materia['id']}}</th>
+                                    <td>{{ $materia->instituto->nombre}}</td>
                                     <td>{{ $materia['nombre']}}</td>
-                                    <td>{{ $materia['slug']}}</td>
                                     <td>{{ $materia['descripcion']}}</td>
                                     <td>{{ $materia['estado']}}</td>
                                     <td> </td>

@@ -160,7 +160,7 @@ class UsersController extends Controller
             'titulo'          =>  'required|string|max:255',
             'name'            =>  'required|string|max:20',
             'email'           => [ 'string', 'email', 'max:255,'.$user->id,],
-            'password'        =>  '|string|min:8|',
+         
          
 //agregados estudiantes y docente sen la misma tabla de persona 
           
@@ -173,12 +173,7 @@ class UsersController extends Controller
         
      //validacion de passowrd
         $password = $request->get('password');
-        if($password !=null){
-          $user->password = Hash::make($request->password);
-           
-        } else{
-           unset($user->password); 
-        }
+      
       
         //omitir hecho de actualizar materia y que se mantenga la misma 
          if($request->get('instituto')){

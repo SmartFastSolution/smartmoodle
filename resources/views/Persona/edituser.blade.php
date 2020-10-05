@@ -101,11 +101,7 @@
                                         <input class="form-control" name="email" id="email" placeholder="Email"
                                             value="{{$user->email}}">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="password">Contraseña</label>
-                                        <input type="password" class="form-control" name="password" id="password"
-                                            placeholder="Password" value="{{$user->password}}" minlength="8">
-                                    </div>
+                                   
 
 
 

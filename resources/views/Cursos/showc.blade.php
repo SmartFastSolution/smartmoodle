@@ -19,7 +19,7 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <h1 class="font-weight-light">Show Paralelo</h1>
+                <h1 class="font-weight-light">Vista Paralelo</h1>
                 <div class="row">
                     <div class="col-md-10">
 
@@ -27,18 +27,8 @@
                             @method('PUT')
                             @csrf
                             <div class=" card-body">
-                                <div class="form-group">
-                                    <label for="nombre">Paralelo</label>
-                                    <input type="text" class="form-control" name="nombre" id="nombre"
-                                        value="{{$curso->nombre}}" placeholder="Edición del Curso" readonly>
-                                </div>
-                                <div class="form-group">
-                                    <label for="paralelo">Modulo</label>
-                                    <input type="text" class="form-control" name="paralelo" id="paralelo"
-                                        value="{{$curso->paralelo}}" placeholder="Edición del Paralelo" readonly >
-                                </div>
 
-                                <div class="form-group">
+                            <div class="form-group">
                                     <label>Curso</label>
                                     <select class="form-control select" name="nivel" style="width: 99%;" disabled>
                                         @foreach($nivelcurso as $nivelc)
@@ -52,6 +42,12 @@
 
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label for="nombre">Paralelo</label>
+                                    <input type="text" class="form-control" name="nombre" id="nombre"
+                                        value="{{$curso->nombre}}" placeholder="Edición del Curso" readonly>
+                                </div>                         
+                               
                                 <br>
                                 <label>Estado del Curso</label>
                                 <br>

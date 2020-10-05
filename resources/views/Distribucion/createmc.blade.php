@@ -27,11 +27,7 @@
                             @csrf
                             <div class=" card-body">
 
-                                <div class="form-group">
-                                    <label for="descripcion">Descripción</label>
-                                    <input type="text" class="form-control" name="descripcion" id="descripcion"
-                                        value="{{ old('descripcion') }}" placeholder="Añadir Descripcion">
-                                </div>
+
 
                                 <div class="form-group">
                                     <label>Seleccionar Curso</label>
@@ -39,21 +35,31 @@
                                         <option selected disabled>Elija el Curso...</option>
                                         @foreach($cursos as $curso)
                                         <option value="{{$curso->id}}">
-                                            {{$curso->nombre}}
+                                            {{$curso->nivel->nombre}}
                                             -
-                                            {{$curso->paralelo}}
+                                            {{$curso->nombre}}
                                         </option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Materias</label>
-                                    <select class="select2" multiple="multiple" name="materia[]"
-                                        data-placeholder="Select a State" style="width: 100%;">
-                                        @foreach($materias as $materia)
-                                        <option value="{{$materia->id}}">{{$materia->nombre}}
+                                    <label>Instituto</label>
+                                    <select class="form-control select" id="instituto-select" name="instituto" style="width: 99%;">
+                                        <option selected disabled>Elija una Unidad educativa...</option>
+                                        @foreach($institutos as $instituto)
+                                        <option value="{{$instituto->id}}">{{$instituto->nombre}}
                                         </option>
                                         @endforeach
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Materias</label>
+                                    <select class="select2" multiple="multiple" id="materia" name="materia[]"
+                                        data-placeholder="Select a State" style="width: 100%;">
+                                       
+                                        <option value=""> </option>
+                                       
 
                                     </select>
                                 </div>
@@ -106,5 +112,55 @@ $(function() {
 
 })
 </script>
+
+<!-- script para select dinamico prueba 1  -->
+
+<!-- <script>
+ 
+ $/(document).ready(function(){
+  
+     $('#instituto').on('change', function(){
+        var instituto = $(this).val();
+
+        if($.trim(instituto) != ''){
+            $.get('materias',{instituto: instituto}, function(materia){
+              
+                $('#materia').empty();
+                $('#materia').append("<option value=''>Seleccione las Materias </option>");
+                $.each(materia, function(id, nombre){
+                    $('#materia').append("<option value='"+ id +"'> "+ nombre +" </option>");
+                });
+            });
+        }
+     });
+
+ });
+
+</script> -->
+
+<!-- script para select dinamico prueba 2  -->
+
+<script>
+
+    $(function(){
+
+        //alert('Scriptasas'); solo para prueba
+         $('instituto-select').on('change', seleccion)
+
+    });
+
+    function seleccion(){
+        var instituto_id = $(this).val();
+        alert(instituto_id);
+        //AJAX
+
+
+    }
+
+
+</script>
+
+
+
 
 @stop
