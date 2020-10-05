@@ -21,40 +21,43 @@
 
                             <div class=" card-body">
 
-                                <div class="form-group">
-                                    <label for="descripcion">Descripción</label>
-                                    <input type="text" class="form-control" name="descripcion" id="descripcion"
-                                        value="{{$distribucionmacu->descripcion}}" placeholder="Descripción">
-                                </div>
+
 
                                 <div class="form-group">
                                     <label>Curso</label>
                                     <select class="form-control select" name="curso" style="width: 99%;">
                                         @foreach($distcursos as $distcurso)
                                         <option selected disabled value="{{ $distcurso->id }}">
-                                            {{ $distcurso->nombre }}
-                                            -
-                                            {{$distcurso->paralelo}}
+                                            {{ $distcurso->nivel->nombre }}
+
                                         </option>
                                         @endforeach
                                         @foreach($cursos as $curso)
                                         <option value="{{$curso->id}}">
-                                            {{$curso->nombre}}
-                                            -
-                                            {{$curso->paralelo}}
+                                            {{$curso->nivel->nombre}}
+
+
                                         </option>
                                         @endforeach
                                     </select>
                                 </div>
-                              
+                                <div class="form-group">
+                                    <label>Unidad Educativa</label>
+                                    <select class="form-control select" name="instituto" style="width: 99%;">
+                                        @foreach($institutos as $instituto)
+                                        <option value="{{$instituto->id}}">{{$instituto->nombre}}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+
                                 <div class="form-group">
                                     <label>Seleccione Materias</label>
                                     <select class="select2" multiple="multiple" name="materia[]"
                                         data-placeholder="Select a State" style="width: 100%;">
 
                                         @foreach($materias as $materia)
-                                        <option value="{{$materia->id}}" 
-                                            @isset( $distribucionmacu->materias[0]->nombre)
+                                        <option value="{{$materia->id}}" @isset( $distribucionmacu->materias[0]->nombre)
                                             @if($materia->nombre == $distribucionmacu->materias[0]->nombre)
                                             selected
                                             @endif

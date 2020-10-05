@@ -75,12 +75,14 @@ class DistribucionmacuController extends Controller
     public function show(Distribucionmacu $distribucionmacu)
     {
         $distribucionmacu_materia= $distribucionmacu->materias->pluck('id')->toArray();
-        
+      
         $materias= Materia::all();
+      
+        $institutos =Instituto::get();
         $cursos = Curso::get(); //todos los datos de la bd de cursos
         $distcursos=Distribucionmacu::find($distribucionmacu->id)->curso()->get(); //llama al curso que esta relacionado a esta distribucion
 
-        return view('Distribucion.showmacu',compact('distribucionmacu','materias','cursos','distcursos','distribucionmacu_materia'));
+        return view('Distribucion.showmacu',compact('distribucionmacu','materias','cursos','distcursos','distribucionmacu_materia','institutomate','instituto'));
        
     }
 
@@ -97,12 +99,14 @@ class DistribucionmacuController extends Controller
         foreach($distribucionmacu->materias as $materia){   //realizo el recorrido
         $distribucionmacu_materia[]=$materia->id;
        }
-        
+
+     
         $materias= Materia::all();
+        $institutos=Instituto::get(); 
         $cursos = Curso::get(); //todos los datos de la bd de cursos
         $distcursos=Distribucionmacu::find($distribucionmacu->id)->curso()->get(); //llama al curso que esta relacionado a esta distribucion
 
-        return view('Distribucion.editmacu',compact('distribucionmacu','materias','cursos','distcursos','distribucionmacu_materia'));
+        return view('Distribucion.editmacu',compact('distribucionmacu','materias','cursos','distcursos','distribucionmacu_materia','institutos'));
     }
 
     /**

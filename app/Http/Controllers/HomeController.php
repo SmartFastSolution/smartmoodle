@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use App\Materia;
+
 
 class HomeController extends Controller
 {
@@ -24,5 +25,16 @@ class HomeController extends Controller
     public function index()
     {
         return view('sistema');
+    }
+
+
+
+
+    public function buscarMateria(Request $request){
+
+        $materias= Materia::where('instituto_id', $request->id)->get();
+
+        return $materias;
+        
     }
 }

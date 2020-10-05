@@ -32,10 +32,9 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Paralelo</th>
                                     <th scope="col">Curso</th>
+                                    <th scope="col">Paralelo</th>                
                                     <th scope="col">Materia(s)</th>
-                                    <th scope="col">Descripción</th>
                                     <th scope="col">Estado</th>
                                     <th></th>
                                     <th scope="col">Tools</th>
@@ -45,17 +44,19 @@
                                 <tr>
                                     @foreach ($distribucionmacus as $distribucionmacu)
                                     <th scope="row">{{$distribucionmacu['id']}}</th>
-                                    <td>{{$distribucionmacu->curso->nombre}}
-                                        -
-                                        {{$distribucionmacu->curso->paralelo}}
-                                    </td>
+                                    
                                     <td>{{$distribucionmacu->curso->nivel->nombre}} </td>
+                                    <td>{{$distribucionmacu->curso->nombre}}
+                                       
+                                    </td>
+                                   
                                     <td>
                                         @if($distribucionmacu->materias != null)
                                         @foreach($distribucionmacu->materias as $dismacu)
                                         <span class="badge badge-success">
                                             {{$dismacu->nombre}}
                                         </span>
+                                        
                                         @endforeach
                                         @endif
                                     </td>

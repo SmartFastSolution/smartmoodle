@@ -33,7 +33,7 @@
                             @csrf
                             <div class=" card-body">
                                 <div class="form-group">
-                                    <label>Instituto</label>
+                                    <label>Unidad Educativa</label>
                                     <select class="form-control select" name="instituto" style="width: 99%;">
                                         @foreach($institutomate as $instumate)
                                         <option selected disabled value="{{ $instumate->id }}">

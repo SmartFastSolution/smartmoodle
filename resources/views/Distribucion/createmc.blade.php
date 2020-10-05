@@ -15,7 +15,7 @@
     </ul>
 </div>
 @endif
-<section class="content">
+<section class="content" id="materias">
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
@@ -43,8 +43,9 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Instituto</label>
-                                    <select class="form-control select" id="instituto-select" name="instituto" style="width: 99%;">
+                                    <label>Unidad Educativa</label>
+                                    <select class="form-control select" v-model="instituto" @change="onMateria()" name="instituto"
+                                        style="width: 99%;">
                                         <option selected disabled>Elija una Unidad educativa...</option>
                                         @foreach($institutos as $instituto)
                                         <option value="{{$instituto->id}}">{{$instituto->nombre}}
@@ -55,12 +56,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Materias</label>
-                                    <select class="select2" multiple="multiple" id="materia" name="materia[]"
-                                        data-placeholder="Select a State" style="width: 100%;">
-                                       
-                                        <option value=""> </option>
-                                       
-
+                                    <select class="select2"  multiple="multiple" name="materia[]"
+                                        data-placeholder="Select a State" style="width: 100%;">                                      
+                                        <option v-for="mater in materias" :value="mater.id">@{{ mater.nombre}}</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -112,51 +110,31 @@ $(function() {
 
 })
 </script>
-
-<!-- script para select dinamico prueba 1  -->
-
-<!-- <script>
- 
- $/(document).ready(function(){
-  
-     $('#instituto').on('change', function(){
-        var instituto = $(this).val();
-
-        if($.trim(instituto) != ''){
-            $.get('materias',{instituto: instituto}, function(materia){
-              
-                $('#materia').empty();
-                $('#materia').append("<option value=''>Seleccione las Materias </option>");
-                $.each(materia, function(id, nombre){
-                    $('#materia').append("<option value='"+ id +"'> "+ nombre +" </option>");
-                });
-            });
-        }
-     });
-
- });
-
-</script> -->
-
 <!-- script para select dinamico prueba 2  -->
 
 <script>
 
-    $(function(){
 
-        //alert('Scriptasas'); solo para prueba
-         $('instituto-select').on('change', seleccion)
-
-    });
-
-    function seleccion(){
-        var instituto_id = $(this).val();
-        alert(instituto_id);
-        //AJAX
-
-
+const inst = new Vue({
+    el: '#materias',
+    data:{
+        instituto:'',
+        materias: [], 
+    },
+    methods:{
+        onMateria(){
+            var set = this;
+        axios.post('/sistema/materiainst', {
+            id: set.instituto  
+        }).then(response => {
+            set.materias = response.data;
+            console.log(set.materias);
+        }).catch(e => {
+            console.log(e);
+        });
+        }
     }
-
+});
 
 </script>
 

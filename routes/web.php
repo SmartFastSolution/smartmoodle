@@ -43,14 +43,18 @@ Auth::routes();
  // Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
    
  route::get('home','Controller@index')->name('administrador'); //ruta administracion
-
+//ruta del menu general de administracion 
 
  route::get('homedoc','DocenteController@index')->name('docente'); //ruta docente
 
 
  route::get('homees','EstudianteController@index')->name('estudiante'); //ruta estudiante
 
-//ruta del menu general de administracion 
+
+
+ Route::post('materiainst','HomeController@buscarMateria')->name('materiainst');
+
+ 
 
 
 
