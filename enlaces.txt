@@ -1,0 +1,22 @@
+https://pastepvp.org/?v=216
+
+Comandos de Git
+https://rogerdudler.github.io/git-guide/index.es.html
+https://styde.net/urls-en-laravel/
+
+Comando para descargar una unica rama
+git clone -b jeanmedina --single-branch https://github.com/SmartFastSolution/smartmoodle
+php composer dump-autoload
+
+Arry en Vue
+
+https://www.nigmacode.com/vuejs/Arrays-en-vuejs
+
+remover elementos en Vue
+https://styde.net/eliminar-registros-de-un-listado-con-vue-js-2/
+
+Generador de tablas
+https://www.tablesgenerator.com/html_tables#
+
+
+https://odobagg-my.sharepoint.com/personal/harolc19_od_obagg_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fharolc19%5Fod%5Fobagg%5Fcom%2FDocuments%2FNuevo%2FNuevo%2FWIN10PPRO20H12004MAY2020%2DPVP%2Erar&parent=%2Fpersonal%2Fharolc19%5Fod%5Fobagg%5Fcom%2FDocuments%2FNuevo%2FNuevo&originalPath=aHR0cHM6Ly9vZG9iYWdnLW15LnNoYXJlcG9pbnQuY29tLzp1Oi9nL3BlcnNvbmFsL2hhcm9sYzE5X29kX29iYWdnX2NvbS9FZkdwWXdVY3lMWkVpUlVYMU9XZlozUUJFbkg2Ulozc0M5d0docm1fbUhDX1NBP3J0aW1lPVRMSzhIOHdKMkVn

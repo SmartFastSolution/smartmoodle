@@ -43,3 +43,7 @@ if(document.getElementById('cruc')){
            require('./crucigrama');  
                 }
 
+
+
+
+
