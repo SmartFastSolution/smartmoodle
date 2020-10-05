@@ -37,7 +37,7 @@
                         <label for="" class="col-form-label">Leyenda(Usar cuando no hay imagen):</label>
                         <textarea  class="form-control" name="leyenda" ></textarea>
                       </div>
-                            <div class="row justify-content-center">
+                    <div class="row justify-content-center">
                         <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                       </div>
                     </form>
@@ -1675,9 +1675,6 @@
                                 <div class="row">
                                     <a href="#" class="addFac btn btn-outline-danger">Agregar Columna</a>
                                 </div>
-
-
-
                             </div>
                             <div class="row justify-content-center">
                                 <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">

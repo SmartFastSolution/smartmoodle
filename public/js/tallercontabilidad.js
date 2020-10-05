@@ -4,7 +4,8 @@ const conta = new Vue({
    		 	diarios:[],
    		 	diario:{
    		 		fecha:'',
-        		nom_cuenta:'',
+            nom_cuenta:'',
+        		gloza:'',
         		debe:'',
         		haber:''
    		 	},
@@ -22,9 +23,7 @@ const conta = new Vue({
           sum_haber:'',
           sal_debe:'',
           sal_haber:''
-        }
-        	
-    
+        }    
   },
    methods:{
     Agregar(){
@@ -45,7 +44,7 @@ const conta = new Vue({
                 "timeOut": "3000"
             });
     }else{
-      var diario = {fecha:this.diario.fecha, nom_cuenta:this.diario.nom_cuenta, debe:this.diario.debe, haber:this.diario.haber};
+      var diario = {fecha:this.diario.fecha, nom_cuenta:this.diario.nom_cuenta, gloza:this.diario.gloza, debe:this.diario.debe, haber:this.diario.haber};
       this.diarios.push(diario);//añadimos el la variable persona al array
       //Limpiamos los campos
       toastr.success("Registro agregado correctamente", "Smarmoddle", {
@@ -53,6 +52,7 @@ const conta = new Vue({
             });
       this.diario.fecha =''
       this.diario.nom_cuenta =''
+      this.diario.gloza =''
       this.diario.debe =''
       this.diario.haber =''
     }
