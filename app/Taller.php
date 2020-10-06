@@ -217,6 +217,23 @@ class Taller extends Model
     {
         return $this->belongsTo('App\TallerCollageRe');
     }
+    public function tallerIdenAbreRe()
+    {
+        return $this->belongsTo('App\TallerIdentAbreRe');
+    }
+    public function tallerUtilizaeAbreRe()
+    {
+        return $this->belongsTo('App\TallerUtilizarAbreRe');
+    }
+    public function tallerLocalizarRe()
+    {
+        return $this->belongsTo('App\TalleLocalizarAbreRe');
+    }
+     public function tallerContabilidad()
+    {
+        return $this->belongsTo('App\Admin\TallerContabilidad');
+    }
 }
+
 
 

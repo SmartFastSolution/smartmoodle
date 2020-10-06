@@ -16,18 +16,6 @@ class CreateTallerSubrayarsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->string('enunciado')->nullable();
-            $table->string('concepto1')->nullable();
-            $table->string('alternativas1')->nullable();
-            $table->string('concepto2')->nullable();
-            $table->string('alternativas2')->nullable();
-            $table->string('concepto3')->nullable();
-            $table->string('alternativas3')->nullable();
-            $table->string('concepto4')->nullable();
-            $table->string('alternativas4')->nullable();
-            $table->string('concepto5')->nullable();
-            $table->string('alternativas5')->nullable();
-            $table->string('concepto6')->nullable();
-            $table->string('alternativas6')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

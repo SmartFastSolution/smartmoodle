@@ -14,7 +14,7 @@ class CreateTallerAbreviaturasTable extends Migration
     public function up()
     {
         Schema::create('taller_abreviaturas', function (Blueprint $table) {
-             $table->bigIncrements('id');
+            $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->string('enunciado');
             $table->timestamps();
