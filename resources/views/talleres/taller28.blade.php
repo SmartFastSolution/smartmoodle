@@ -1,7 +1,7 @@
 @extends('layouts.nav')
 
 @section('title', 'Taller 29')
-@section('contenido')
+@section('content')
 
 	<h1 class="text-center  mt-5 text-danger"> Taller #29</h1>
     <h3 class="text-center mt-5 mb-3 text-info">RELACIONE LOS ENUNCIADOS ESCRIBIENDO EN EL CUADRO EL LITERAL CORRESPONDIENTE</h3>

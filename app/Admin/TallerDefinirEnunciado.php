@@ -10,4 +10,8 @@ class TallerDefinirEnunciado extends Model
 
         return $this->belongsTo('App\Taller');
     }
+    public function TallerDefinirEnunOp(){
+
+        return $this->hasMany('App\Admin\TallerDefinirEnunOp');
+    }
 }

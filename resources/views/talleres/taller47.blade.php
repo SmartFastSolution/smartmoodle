@@ -1,40 +1,36 @@
 @extends('layouts.nav')
+@section('css')
 
+<link rel="stylesheet" href="{{ asset('css/crucigrama.css') }}">
+@endsection
 @section('title', 'Taller 48')
-@section('contenido')
+@section('content')
 
 <h1 class="text-center  mt-5 text-danger"> Taller #48</h1>
 <h3 class="text-center mt-5 mb-3 text-info">DESARROLLE  EL  CRUCIGRAMA  REFERENTE  A  LAS  CLASES  DE  CHEQUES, 
 CON  AGILIDAD.</h3>
 	
 	
-  <div id="cruc" class="container" @keyup.escape="selected = undefined">
-  <div class="table-container" style="display:none;" v-show="true">
-   
-    <div class="mensaje" v-if="mensaje !== undefined">
-      <div class="content">@{{mensaje}}</div>
-      <button @click="mensaje = undefined" class="btn btn-primary">OK</button>
-    </div> 
-    <table>
-      <tr v-for="(row, y) in matrix" :key="y">
-        <td v-for="(cell, x) in row" :class="{empty: cell.empty, start: !!cell.start, selected: cell.words.includes(selected)}" @click="selectWord(cell.start)">
-          <label v-if="!!cell.start">@{{cell.start}}</label>
-          @{{cell.words.some(i => completed[i]) ? cell.letter : ' '}}
-        </td>
-      </tr>
+ <div id="puzzle_container">
+    <table id="puzzle">
     </table>
-    <div v-if="selected !== undefined" style="text-align: center;">
-      <p class="pista" v-if="pista">
-        @{{pista}}
-      </p>
-      <input v-model="answer" ref="input" @keyup.enter="corregir"/>
-      <button @click="corregir" class="btn btn-primary">Colocar</button>
-      <button @click="solucion" class="btn btn-danger">Pista</button>
-    </div>
-    <hr>
-    <button class="btn btn-block btn-primary" @click="finalizar">Finalizar</button>
-  </div>  
-  <h3 v-show="false">Cargando....</h3>
 </div>
 
+<div id="hints_container">
+    <h3>Vertical</h3>
+        <div id="vertical_hints_container"></div>
+    <h3>Horizontal</h3>
+        <div id="horizontal_hints_container"></div>
+</div>
+
+<div id="buttons_container">
+    <button id="clear_all">Clear All</button>
+    <button id="check">Check</button>
+    <button id="solve">Solve</button>
+    <button id="clue">Clue</button>
+</div>
+@section('js')
+<script type="text/javascript" src="{{ asset('js/crucigrama.js') }}"></script>
 @endsection
+@endsection
+

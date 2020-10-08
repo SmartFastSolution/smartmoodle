@@ -37,4 +37,7 @@ mix.styles([
     'resources/vendor/sweetalert2/sweetalert2.min.js'
 
 
-], 'public/js/plugins.js');
+], 'public/js/plugins.js').sourceMaps();;
+
+
+

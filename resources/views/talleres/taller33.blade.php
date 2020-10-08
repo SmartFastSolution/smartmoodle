@@ -1,7 +1,7 @@
 @extends('layouts.nav')
 
 @section('title', 'Taller 34')
-@section('contenido')
+@section('content')
 
 	<h1 class="text-center  mt-5 text-danger"> Taller #34</h1>
     <h3 class="text-center mt-5 mb-3 text-info">ESCRIBA  LAS  CUENTAS  QUE  IDENTIFICAN  LAS  FIGURAS,  CON  AGILIDAD.</h3>

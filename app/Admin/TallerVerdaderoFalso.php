@@ -10,4 +10,8 @@ class TallerVerdaderoFalso extends Model
 
         return $this->belongsTo('App\Taller');
     }
+    public function tallerVerFalOp(){
+
+        return $this->hasMany('App\Admin\TallerVerdaFalsoOp');
+    }
 }

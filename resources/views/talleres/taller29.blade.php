@@ -1,14 +1,14 @@
 @extends('layouts.nav')
 
-@section('title', 'Taller 30')
-@section('contenido')
+@section('title', $datos->nombre)
+@section('content')
 
-	<h1 class="text-center  mt-5 text-danger"> Taller #30</h1>
-    <h3 class="text-center mt-5 mb-3 text-info">EN  EL  PRESENTE  TEXTO  IDENTIFIQUE  LAS  ABREVIATURAS  COMERCIALES  Y 
-ESCRÍBALAS  EN  LA  SIGUIENTE  CARTA,  EFICAZMENTE</h3>
+	<h1 class="text-center  mt-5 text-danger"> {{ $datos->nombre }}</h1>
+    <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
-<form action="">
-	<div class="container">
+   <form action="{{ route('taller29', ['idtaller' => $d]) }}" method="POST">
+           @csrf
+	<div class="container mb-3">
 		<div class="row justify-content-center">
 			<div class="col-8 border border-danger p-3">
 				<div class="row justify-content-end">
@@ -62,8 +62,8 @@ ESCRÍBALAS  EN  LA  SIGUIENTE  CARTA,  EFICAZMENTE</h3>
 				</div>
 				<div class="row">
 					<div class="col-12 form-inline">
-						<p class="text-justify" style="font-size: 16px;">La  presente  tiene  por  objeto  saludarlo  y  a  la  vez  solicitarle  me envíe  la  <input type="text" class="form-control m-1" size="5" name="">  de  los  pedidos  según  <input type="text" class="form-control m-1" size="5" name="">   1830 correspondiente  al <input type="text" class="form-control m-1" size="5" name="">    mes,  con  el  detalle  de  cada  uno  de los <input type="text" class="form-control m-1" size="5" name=""> artículos  entregados.  La  <input type="text" class="form-control m-1" size="5" name="">   contiene  15  cocinas,  con las  características  ya  señaladas.    El  valor  de  la <input type="text" class="form-control m-1" size="5" name="">    asciende  a  la  cantidad  de  $ 4.800  dicho  valor  será  depositado en  su <input type="text" class="form-control m-1" size="5" name=""> </p>
-						<p class="text-justify" style="font-size: 16px;">Nos  despedimos  de <input type="text" class="form-control m-1" size="5" name=""> no  sin  antes  reiterarle  nuestra consideración  y  estima</p>
+						<p class="text-justify" style="font-size: 16px;">La  presente  tiene  por  objeto  saludarlo  y  a  la  vez  solicitarle  me envíe  la  <input type="text" class="form-control m-1" size="5" name="abreviatura1">  de  los  pedidos  según  <input type="text" class="form-control m-1" size="5" name="abreviatura2">   1830 correspondiente  al <input type="text" class="form-control m-1" size="5" name="abreviatura3">    mes,  con  el  detalle  de  cada  uno  de los <input type="text" class="form-control m-1" size="5" name="abreviatura4"> artículos  entregados.  La  <input type="text" class="form-control m-1" size="5" name="abreviatura5">   contiene  15  cocinas,  con las  características  ya  señaladas.    El  valor  de  la <input type="text" class="form-control m-1" size="5" name="abreviatura6">    asciende  a  la  cantidad  de  $ 4.800  dicho  valor  será  depositado en  su <input type="text" class="form-control m-1" size="5" name="abreviatura7"> </p>
+						<p class="text-justify" style="font-size: 16px;">Nos  despedimos  de <input type="text" class="form-control m-1" size="5" name="abreviatura8"> no  sin  antes  reiterarle  nuestra consideración  y  estima</p>
 					</div>
 
 				</div>
@@ -76,7 +76,9 @@ ESCRÍBALAS  EN  LA  SIGUIENTE  CARTA,  EFICAZMENTE</h3>
 				</div>
 			</div>
 		</div>
-
+		 <div class="row justify-content-center">
+        	<input type="submit" value="Guardar Datos" class="btn p-2 mt-3 btn-danger">
+    	</div>
 	</div>
 </form>
 

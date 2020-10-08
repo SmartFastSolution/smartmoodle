@@ -1,64 +1,29 @@
 @extends('layouts.nav')
 
-@section('title', $datos->taller->nombre)
+@section('title', 'Taller'.$consul->id)
 @section('content')
-
-<h1 class="text-center  mt-5 text-danger">{{ $datos->taller->nombre }}</h1>
-     <h3 class="text-center mt-5 text-info">{{ $datos->enunciado }}</h3>
+<h1 class="text-center  mt-5 text-danger">Taller {{ $consul->id }}</h1>
+     <h3 class="text-center mt-5 text-info">{{ $consul->nombre }}</h3>
      <form action="{{ route('taller3', ['idtaller' => $d]) }}" method="POST">
            @csrf
-     	<div class="container">
+     	<div class="container mb-4">
      		<div class="row justify-content-center">
      			<div class="col-7">
+                         @foreach ($datos as $dato)
+                              {{-- expr --}}
+                        
      				<div class="row mt-4 p-2">
-     					<div class="col-6 ">
-     						<label class="col-form-label " for="">{{ $datos->enunciado1 }}</label>
-     						
+     					<div class="col-6 align-self-center">
+     						<label class="col-form-label " for="">{{ $dato->enunciado1 }}</label>   						
      					</div>
      					<div class="col-6">
-     						<input type="text"  name="respuesta1" class="form-control inputcurrent">
+                                   <textarea name="respuesta1" class="form-control inputcurrent" id="" cols="30" rows="5"></textarea>
+     			
      					</div>
      				</div>
                          <br>
-     				<div class="row mt-4 p-2">
-     					<div class="col-6">
-     						<label class="col-form-label" for="">{{ $datos->enunciado2 }}:</label>
- 
-     					</div>
-     					<div class="col-6">
-     						<input type="text"  name="respuesta2" class="form-control inputcurrent">
-     					</div>
-     				</div>
-
-     				<div class="row mt-4 p-2">
-     					<div class="col-6">
-     						<label class="col-form-label" for="">{{ $datos->enunciado3 }}</label>
- 
-     					</div>
-     					<div class="col-6">
-     						<input type="text" name="respuesta3" class="form-control inputcurrent">
-     					</div>
-     				</div>
-<br>
-     				<div class="row mt-4 p-2">
-     					<div class="col-6">
-     						<label class="col-form-label" for="">{{ $datos->enunciado4 }}</label>
- 
-     					</div>
-     					<div class="col-6">
-     						<input type="text" name="respuesta4" class="form-control inputcurrent">
-     					</div>
-     				</div>
-<br>
-     				<div class="row p-2">
-     					<div class="col-6">
-     						<label class="col-form-label" for="">{{ $datos->enunciado5 }}</label>
- 
-     					</div>
-     					<div class="col-6">
-     						<input type="text" name="respuesta5" class="form-control inputcurrent">
-     					</div>
-     				</div>
+                          @endforeach
+     				
      			</div>
      		</div>
      		<div class="row justify-content-center">
