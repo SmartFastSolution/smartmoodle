@@ -16,4 +16,9 @@ class Contenido extends Model
         return $this->belongsTo('App\Materia');
 
     }
+
+    public function tallers(){
+          
+        return $this->hasMany('App\Taller');
+    }
 }

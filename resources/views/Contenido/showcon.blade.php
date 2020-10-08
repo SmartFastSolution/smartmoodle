@@ -58,12 +58,6 @@
                                 <!-- subir imagen en laravel prueba 1 -->
                                 <div class="form-group">
                                     <label for="documentod">
-                                        <!-- <br>
-                                    {{$contenido->documentod}}
-                                    <br> -->
-                                        <!-- <a target="_blank"
-                                        href="{{Storage::url($contenido['documentod'])}}">{{ $contenido['nombre']}}</a>
-                                    <br> -->
                                         Vizualizar Documento
                                         <br>
                                         <button type="button" class="btn btn-secondary" data-toggle="modal"
@@ -89,14 +83,79 @@
                                             @elseif(old('estado')=="off" ) checked @endif disabled>
                                         <label class="custom-control-label" for="estadooff">No Activo</label>
                                     </div>
-                                    <br><br><br>
-                                    <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                                
+                                
                                 </div>
                         </form>
                     </div>
                 </div>
+
+
+                <div class="col-md-10">
+
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                                aria-controls="nav-home" aria-selected="true">Talleres</a>
+
+
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                            aria-labelledby="nav-home-tab">
+                            <br>
+
+                            <!-- Inicio de Talleres -->
+                            <div class="card card-gray-dark">
+                                <div class="card-header">
+                                    <h3 class="card-title">Talleres</h3>
+                                </div>
+                                <div class="card-body">
+                                    <table id="dataTable" class="table table-hover">
+
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Unidad</th>
+                                                <th scope="col"> Taller </th>
+                                                <th scope="col">Plantilla </th>
+                                                <th scope="col">Estado</th>
+                                                <th></th>
+                                                <th scope="col">Vista Taller</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                @foreach($tallers->where('contenido_id', $contenido->id) as $taller)
+                                                <th scope="row">{{$taller->materia['id']}}</th>
+                                                <td>{{$taller->contenido->nombre}}</td>
+                                                <td>{{$taller['nombre']}}</td>
+                                                <td>{{$taller->Plantilla->nombre}}</td>
+                                                <td>{{$taller['estado']}}</td>
+                                                <td> </td>
+                                                <td class="table-button ">
+                                                    <a class="btn btn-info"
+                                                        href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
+                                                            class="fas fa-eye"></i></a>
+
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- fin de talleres -->
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
+            <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
         </div>
+    </div>
 </section>
 
 

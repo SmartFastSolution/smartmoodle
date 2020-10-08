@@ -22,8 +22,8 @@
             <!-- left column -->
             <div class="col-md-13">
                 <a class="btn btn-info float-right " href="{{route('cursos.create')}}"><i class="fas fa-plus"></i>
-                    PARALELO</a>
-                <h1>Paralelos</h1>
+                    CURSO</a>
+                <h1>Cursos</h1>
                 <div class="card card-secondary">
                     <div class="card-header">
 
@@ -36,8 +36,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Curso</th>
-                                    <th scope="col">Paralelo</th>
+                                    <th scope="col">Curso</th> 
                                     <th scope="col">Estado</th>
                                     <th></th>
                                     <th></th>
@@ -48,7 +47,6 @@
                                 <tr>
                                     @foreach ($cursos as $curso)
                                     <th scope="row">{{ $curso['id']}}</th>
-                                    <td>{{ $curso->nivel->nombre}}</td>
                                     <td>{{ $curso['nombre']}}</td>
                                     <td>{{ $curso['estado']}}</td>
                                     <td></td>

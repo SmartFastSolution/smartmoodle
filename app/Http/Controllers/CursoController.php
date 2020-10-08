@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Curso;
-use App\Nivel;
+
 use App\Materia;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -33,10 +33,9 @@ class CursoController extends Controller
     public function create()
     {
         Gate::authorize('haveaccess', 'curso.create');
-        $nivels=Nivel::get();
-         $materias=Materia::get();
-
-        return \view('Cursos.createc',compact('nivels','materias'));
+       
+         
+        return \view('Cursos.createc');
 
     }
 
@@ -58,7 +57,7 @@ class CursoController extends Controller
        
 //    $curso=Curso::create($request->all());
         $curso = new Curso ;
-        $curso->nivel_id = $request->nivel;
+      
         $curso->nombre = $request->nombre;
         $curso->estado = $request->estado;
         
@@ -80,10 +79,10 @@ class CursoController extends Controller
     public function show(Curso $curso)
     {
         Gate::authorize('haveaccess', 'curso.show');
-        $nivels=Nivel::get();
-        $nivelcurso= Curso::find($curso->id)->nivel()->get(); //llama al nivel que esta relacionado con el modelo curso
+      
+         //llama al nivel que esta relacionado con el modelo curso
      
-       return \view('Cursos.showc',['curso'=>$curso,'nivels'=>$nivels,'nivelcurso'=>$nivelcurso]);
+       return \view('Cursos.showc',['curso'=>$curso,]);
      
     }
 
@@ -98,10 +97,9 @@ class CursoController extends Controller
         Gate::authorize('haveaccess', 'curso.edit');
 
 
-       $nivels=Nivel::get();
-       $nivelcurso= Curso::find($curso->id)->nivel()->get(); //llama al nivel que esta relacionado con el modelo curso
+       //llama al nivel que esta relacionado con el modelo curso
     
-      return \view('Cursos.editc',['curso'=>$curso,'nivels'=>$nivels,'nivelcurso'=>$nivelcurso]);
+      return \view('Cursos.editc',['curso'=>$curso]);
     
     }
 
@@ -124,10 +122,7 @@ class CursoController extends Controller
 
         $curso->update($request->all());
 
-        if($request->get('nivel')){
-         
-            $curso->nivel_id = $request->nivel;
-         }
+      
           
      
         return redirect('sistema/cursos')->with('success','Haz Actualizado un Paralelo con exito');

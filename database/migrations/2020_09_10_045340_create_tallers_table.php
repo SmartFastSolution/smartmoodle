@@ -17,7 +17,7 @@ class CreateTallersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('plantilla_id');
             $table->string('nombre');
-            $table->unsignedbigInteger('materia_id');
+            $table->unsignedbigInteger('contenido_id');
             $table->boolean('estado');
             $table->timestamps();
 
@@ -26,9 +26,9 @@ class CreateTallersTable extends Migration
             ->on('plantillas')
             ->onDelete('cascade');
 
-            $table->foreign('materia_id')
+            $table->foreign('contenido_id')
             ->references('id')
-            ->on('materias')
+            ->on('contenidos')
             ->onDelete('cascade');
 
 

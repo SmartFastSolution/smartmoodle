@@ -18,7 +18,7 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <h1 class="font-weight-light">Añadir Paralelo</h1>
+                <h1 class="font-weight-light">Añadir Curso</h1>
                 <div class="row">
                     <div class="col-md-10">
 
@@ -26,18 +26,9 @@
                             @csrf
 
                             <div class=" card-body">
-                                <div class="form-group">
-                                    <label>Añadir Curso</label>
-                                    <select class="form-control select" name="nivel" style="width: 99%;">
-                                        <option selected disabled>Elija el Curso...</option>
-                                        @foreach($nivels as $nivel)
-                                        <option value="{{$nivel->id}}">{{$nivel->nombre}}</option>
-                                        @endforeach
 
-                                    </select>
-                                </div>
                                 <div class="form-group">
-                                    <label for="nombre">Paralelo</label>
+                                    <label for="nombre">Curso</label>
                                     <input type="text" class="form-control" name="nombre" id="nombre"
                                         value="{{ old('nombre') }}" placeholder="Añadir Curso">
                                 </div>
@@ -58,8 +49,9 @@
                                     </div>
                                 </div>
 
-                                <input type="submit" class="btn btn-dark " value="Guardar">
+                             
                                 <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                                <input type="submit" class="btn btn-dark " value="Guardar">
                             </div>
                         </form>
 

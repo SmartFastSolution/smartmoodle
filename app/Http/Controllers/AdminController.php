@@ -61,12 +61,12 @@ class AdminController extends Controller
    }
    public function taller1(Request $request)
    {
-   	$i = Taller::where('materia_id', $request->input('materia_id'))->count();
+   	$i = Taller::where('contenido_id', $request->input('contenido_id'))->count();//cambios
    	//return $request->all();
    	$taller1 = new Taller;
    	$taller1->nombre = 'Taller '.++$i;
    	$taller1->plantilla_id = $request->input('id_plantilla');
-   	$taller1->materia_id = $request->input('materia_id');
+   	$taller1->contenido_id = $request->input('contenido_id'); //cambios 
    	$taller1->estado = 1;
    	$taller1->save();
 

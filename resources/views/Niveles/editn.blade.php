@@ -23,7 +23,7 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <h1 class="font-weight-light">Editar Curso</h1>
+                <h1 class="font-weight-light">Editar Paralelo</h1>
                 <div class="row">
                     <div class="col-md-6">
 
@@ -51,8 +51,9 @@
                                     <label class="custom-control-label" for="estadooff">No Activo</label>
                                 </div>
                                 <br><br><br>
-                                <input type="submit" class="btn btn-dark " value="Guardar">
+                          
                                 <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                                <input type="submit" class="btn btn-dark " value="Guardar">
                             </div>
                         </form>
                     </div>

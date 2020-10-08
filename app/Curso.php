@@ -19,11 +19,6 @@ class Curso extends Model
 
       
 
-    public function nivel(){
-          
-        return $this->belongsTo('App\Nivel');
-
-    }
 
     public function distribucionmacus(){
           

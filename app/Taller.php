@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Taller extends Model
 {   
-    public function materia(){
-        return $this->belongsTo('App\Materia');
+    public function contenido(){
+        return $this->belongsTo('App\Contenido');
     }
+    // public function materia(){
+    //     return $this->belongsTo('App\Materia');
+    // }
 
     public function Users(){
         return $this->belongsToMany('App\User');

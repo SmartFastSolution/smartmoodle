@@ -18,7 +18,7 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <h1 class="font-weight-light">Editar Paralelo</h1>
+                <h1 class="font-weight-light">Editar Curso</h1>
                 <div class="row">
                     <div class="col-md-10">
 
@@ -26,22 +26,9 @@
                             @method('PUT')
                             @csrf
                             <div class=" card-body">
-                            <div class="form-group">
-                                    <label>Curso</label>
-                                    <select class="form-control select" name="nivel" style="width: 99%;">
-                                        @foreach($nivelcurso as $nivelc)
-                                        <option selected disabled value="{{ $nivelc->id }}">
-                                            {{ $nivelc->nombre }}
-                                        </option>
-                                        @endforeach
-                                        @foreach($nivels as $nivel)
-                                        <option value="{{$nivel->id}}">{{$nivel->nombre}}</option>
-                                        @endforeach
-
-                                    </select>
-                                </div>
+                          
                                 <div class="form-group">
-                                    <label for="nombre">Paralelo</label>
+                                    <label for="nombre">Curso</label>
                                     <input type="text" class="form-control" name="nombre" id="nombre"
                                         value="{{$curso->nombre}}" placeholder="Edición del Curso">
                                 </div>                                          
@@ -61,8 +48,9 @@
                                     <label class="custom-control-label" for="estadooff">No Activo</label>
                                 </div>
                                 <br><br><br>
-                                <input type="submit" class="btn btn-dark " value="Guardar">
+                               
                                 <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                                <input type="submit" class="btn btn-dark " value="Guardar">
                             </div>
                         </form>
                     </div>

@@ -21,10 +21,10 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-6">
-                                    <label for="recipient-name" class="col-form-label">Materia:</label>
-                                    <select name="materia_id" class="custom-select">
-                                        @foreach ($materias = App\Materia::get() as $materia)
-                                        <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        @foreach ($contenidos = App\Contenido::get() as $contenido)
+                                        <option value="{{ $contenido->id }}">{{ $contenido->nombre }}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -17,9 +17,9 @@
         @endif
         <div class="row justify-content-center">
             <div class="col-md-13">
-                <a class="btn btn-info float-right" href="{{route('distribucionmacus.create')}}"><i
-                        class="fas fa-plus"></i> CREAR ASIGNACION</a>
-                <h1>Asignación de Materia/Paralelo</h1>
+                <a class="btn btn-info float-right" href="{{route('distrimas.create')}}"><i class="fas fa-plus"></i>
+                    CREAR ASIGNACION</a>
+                <h1>Asignación de Alumno/Curso</h1>
                 <div class="card card-secondary">
                     <div class="card-header">
 
@@ -32,9 +32,10 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
+                                    <th scope="col">Unidad Educativa</th>
                                     <th scope="col">Curso</th>
                                     <th scope="col">Paralelo</th>
-                                    <th scope="col">Materia(s)</th>
+                                    <th scope="col">Alumno</th>
                                     <th scope="col">Estado</th>
                                     <th></th>
                                     <th scope="col">Tools</th>
@@ -42,42 +43,49 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    @foreach ($distribucionmacus as $distribucionmacu)
-                                    <th scope="row">{{$distribucionmacu['id']}}</th>
-                                    <td>{{$distribucionmacu->curso->nombre}} </td>
-                                
-                                    <td>{{$distribucionmacu->nivel->nombre}} </td>
-                                    <td>
-                                        @if($distribucionmacu->materias != null)
-                                        @foreach($distribucionmacu->materias as $dismacu)
-                                        <span class="badge badge-success">
-                                            {{$dismacu->nombre}}
-                                        </span>
+                                    @foreach ($distrimas as $distrima)
+                                    <th scope="row">{{$distrima['id']}}</th>
+                                    <td>{{$distrima->instituto->nombre}} </td>
+                                    <td>@foreach($distrima->distribumacus as $dis)
 
+
+                                        <span class="badge badge-success">
+                                            {{$dis->id}}
+                                        </span>
+                                        <span class="badge badge-success">
+                                            {{$dis->curso->nombre}}
+                                        </span>
+                                        <span class="badge badge-success">
+                                            @if($dis->materias != null)
+                                            @foreach($dis->materias as $dismacu)
+                                            <span class="badge badge-success">
+                                                {{$dismacu->nombre}}
+                                            </span>
+
+                                            @endforeach
+                                            @endif
+                                        </span>
                                         @endforeach
-                                        @endif
                                     </td>
-                                    <td>{{ $distribucionmacu['descripcion']}}</td>
-                                    <td>{{ $distribucionmacu['estado']}}</td>
+                                    <td>{{$distrima->user->name}}</td>
+                                    <td>{{ $distrima['estado']}}</td>
 
                                     <td> </td>
 
 
                                     <td class="table-button ">
-                                        <a class="btn btn-info "
-                                            href="{{route('distribucionmacus.show',$distribucionmacu->id)}}"><i
+                                        <a class="btn btn-info " href="{{route('distrimas.show',$distrima->id)}}"><i
                                                 class="fas fa-eye"></i></a>
 
                                     </td>
                                     <td class="table-button ">
                                         <a class="btn btn-success btn"
-                                            href="{{route('distribucionmacus.edit', $distribucionmacu->id)}}"><i
+                                            href="{{route('distrimas.edit', $distrima->id)}}"><i
                                                 class=" fas fa-pencil-alt"></i></a>
                                     </td>
                                     <td class="table-button ">
                                         <!--metodo delete funciona pero hay que almacenar la variable array en una variable temporal-->
-                                        <form method="POST"
-                                            action="{{route('distribucionmacus.destroy', $distribucionmacu->id)}}}">
+                                        <form method="POST" action="{{route('distrimas.destroy', $distrima->id)}}}">
                                             @method('DELETE')
                                             @csrf
                                             <button type="submit" class="btn btn-danger "><i
@@ -90,16 +98,13 @@
                             <!--Table body-->
 
                         </table>
-                        {{$distribucionmacus->links()}}
+                        {{$distrimas->links()}}
                         <!--Table-->
                     </div>
                 </div>
             </div>
         </div>
 </section>
-
-
-
 
 
 @stop

@@ -5,6 +5,7 @@ use App\Materia;
 use App\Curso;
 use App\Instituto;
 use App\Distribucionmacu;
+use App\Nivel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -26,13 +27,12 @@ class DistribucionmacuController extends Controller
     public function create()
     {
           
-
         $institutos = Instituto::get();
         $materias=Materia::get();
-       
+        $nivels=Nivel::get();
         $cursos=Curso::get();
       
-        return \view('Distribucion.createmc',compact('materias','cursos','institutos'));
+        return \view('Distribucion.createmc',compact('materias','cursos','institutos','nivels'));
     }
 
     /**
@@ -47,18 +47,21 @@ class DistribucionmacuController extends Controller
 
         $request->validate([
 
-            
+           
             'estado' => ['required' ,'in:on,off'],
         ]);
 
         $distribucionmacu =new  Distribucionmacu;
-        
+        $distribucionmacu ->instituto_id = $request->instituto;
+        $distribucionmacu ->nivel_id = $request->nivel;
         $distribucionmacu ->estado = $request->estado;
         $distribucionmacu->curso_id=$request->cursos;
           
       
 
        $distribucionmacu->save();
+
+     
        if($request->get('materia')){
         $distribucionmacu->materias()->sync($request->get('materia'));
       }
@@ -77,12 +80,13 @@ class DistribucionmacuController extends Controller
         $distribucionmacu_materia= $distribucionmacu->materias->pluck('id')->toArray();
       
         $materias= Materia::all();
-      
+        $nivels=Nivel::get();
         $institutos =Instituto::get();
         $cursos = Curso::get(); //todos los datos de la bd de cursos
-        $distcursos=Distribucionmacu::find($distribucionmacu->id)->curso()->get(); //llama al curso que esta relacionado a esta distribucion
+        $distcursos=Distribucionmacu::find($distribucionmacu->id)->curso()->get();
+        $distnivel=Distribucionmacu::find($distribucionmacu->id)->nivel()->get(); //llama al curso que esta relacionado a esta distribucion
 
-        return view('Distribucion.showmacu',compact('distribucionmacu','materias','cursos','distcursos','distribucionmacu_materia','institutomate','instituto'));
+        return view('Distribucion.showmacu',compact('distribucionmacu','materias','cursos','distcursos','distribucionmacu_materia','institutomate','instituto','nivels'));
        
     }
 
@@ -94,19 +98,18 @@ class DistribucionmacuController extends Controller
      */
     public function edit(Distribucionmacu $distribucionmacu)
     {
-        $distribucionmacu_materia=[]; //creo una variable array para almacenar los datos relacionados de la tabla pivote entre materia y distribucion
       
-        foreach($distribucionmacu->materias as $materia){   //realizo el recorrido
-        $distribucionmacu_materia[]=$materia->id;
-       }
+        $distcursos=Distribucionmacu::find($distribucionmacu->id);
+        $materias= $distcursos->materias()->get();
+       
 
-     
-        $materias= Materia::all();
-        $institutos=Instituto::get(); 
-        $cursos = Curso::get(); //todos los datos de la bd de cursos
-        $distcursos=Distribucionmacu::find($distribucionmacu->id)->curso()->get(); //llama al curso que esta relacionado a esta distribucion
+        $instituto=Distribucionmacu::find($distribucionmacu->id)->instituto()->first();
+        $materia_all = Materia::where('instituto_id', $instituto->id)->get();
+        $cursos =  $distcursos->curso()->first();//todos los datos de la bd de cursos
+         //llama al curso que esta relacionado a esta distribucion
+         $nivels= $distcursos->nivel()->first();
 
-        return view('Distribucion.editmacu',compact('distribucionmacu','materias','cursos','distcursos','distribucionmacu_materia','institutos'));
+        return view('Distribucion.editmacu',compact('distribucionmacu','materias', 'materia_all','cursos','distcursos','instituto','nivels'));
     }
 
     /**

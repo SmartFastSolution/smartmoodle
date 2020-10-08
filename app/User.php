@@ -62,24 +62,16 @@ class User extends Authenticatable
 
 
     
- 
-    
-
-
-    
     //relacion de muchos a 1 es decir muchos usuarios 
     //tomaran 1 dato de instituto
     public function instituto(){
           
         return $this->belongsTo('App\Instituto');
-
     }
 
- 
-
-    public function adminlte_image()
-    {
-        return 'https://picsum.photos/300/300';
+    public function distmas(){
+          
+        return $this->hasMany('App\Distrima');
     }
 
 

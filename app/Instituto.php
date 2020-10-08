@@ -25,9 +25,23 @@ class Instituto extends Model
 
     }
 
+
     public function materias(){
 
         return $this->hasMany('App\Materia');
     }
 
+
+    
+    public function distribumacus(){
+          
+        return $this->hasMany('App\Distribumacu');
+
+    }
+
+    public function distmas(){
+          
+        return $this->hasMany('App\Distrima');
+
+    }
 }

@@ -19,39 +19,19 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <h1 class="font-weight-light">Añadir Asignación Materia/Curso</h1>
+                <h1 class="font-weight-light">Crear Asignación de Alumno</h1>
                 <div class="row">
                     <div class="col-md-10">
 
-                        <form method="POST" action="{{route('distribucionmacus.index')}} ">
+                        <form method="POST" action="{{route('distrimas.index')}} ">
                             @csrf
                             <div class=" card-body">
 
 
 
                                 <div class="form-group">
-                                    <label>Seleccionar Curso</label>
-                                    <select class="form-control select" name="cursos" style="width: 99%;">
-                                        <option selected disabled>Elija el Curso...</option>
-                                        @foreach($cursos as $curso)
-                                        <option value="{{$curso->id}}">
-                                            {{$curso->nombre}}
-
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Paralelos</label>
-                                    <select class="form-control select" name="nivel" style="width: 99%;">
-                                        @foreach($nivels as $nivel)
-                                        <option value="{{$nivel->id}}">{{$nivel->nombre}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
                                     <label>Unidad Educativa</label>
-                                    <select class="form-control select" v-model="instituto" @change="onMateria()"
+                                    <select class="form-control select" v-model="instituto" @change="onAsignacion()"
                                         name="instituto" style="width: 99%;">
                                         <option selected disabled>Elija una Unidad educativa...</option>
                                         @foreach($institutos as $instituto)
@@ -62,12 +42,40 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Materias</label>
+                                    <label>Estudiante</label>
+                                    <select class="form-control select" name="estudiante" style="width: 99%;">
+                                        <option selected disabled>Elija al Estudiante...</option>
+                                        <option v-for="estuden in users" :value="estuden.id">@{{estuden.apellido}}
+                                        </option>
+
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Asignación Curso</label>
+                                    <select class="form-control select" name="asignacion" style="width: 99%;">
+                                        <option selected disabled>Elija el Curso...</option>
+
+                                        <option v-for="dist in distribucion" :value="dist.id">@{{dist.nombre}} </option>
+
+
+                                    </select>
+                                </div>
+                                <!-- <div class="form-group">
+                                    <label>Estudiantes</label>
                                     <select class="select2" multiple="multiple" name="materia[]"
                                         data-placeholder="Select a State" style="width: 100%;">
                                         <option v-for="mater in materias" :value="mater.id">@{{ mater.nombre}}</option>
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label>Asignación Curso</label>
+                                    <select class="select2" multiple="multiple" name="materia[]"
+                                        data-placeholder="Select a State" style="width: 100%;">
+                                        <option v-for="mater in materias" :value="mater.id">@{{ mater.nombre}}</option>
+                                    </select>
+                                </div> -->
+
                                 <div class="form-group">
                                     <label for="nombre">Estado </label>
                                     <br>
@@ -108,15 +116,7 @@
 
 @section('js')
 
-<script>
-$(function() {
-    //Initialize Select2 Elements
-    $(".select2").select2({
 
-    });
-
-})
-</script>
 <!-- script para select dinamico prueba 2  -->
 
 <script>
@@ -124,21 +124,34 @@ const inst = new Vue({
     el: '#materias',
     data: {
         instituto: '',
-        materias: [],
+        distribucion: [],
+        users:[]
     },
     methods: {
-        onMateria() {
+        onAsignacion() {
 
             var set = this;
-            set.materias = [];
-            axios.post('/sistema/materiainst', {
+            set.users = [];
+            axios.post('/sistema/userinst', {
                 id: set.instituto
             }).then(response => {
-                set.materias = response.data;
-                console.log(set.materias);
+                set.users = response.data;
+                console.log(set.users); //no es necesario
             }).catch(e => {
                 console.log(e);
             });
+
+            set.distribucion = [];
+            axios.post('/sistema/distinst', {
+                id: set.instituto
+            }).then(response => {
+                set.distribucion = response.data;
+                console.log(set.distribucion); //no es necesario
+            }).catch(e => {
+                console.log(e);
+            });
+
+
         }
     }
 });

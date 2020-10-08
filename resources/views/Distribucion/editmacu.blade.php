@@ -8,7 +8,7 @@
 
 
 
-<section class="content">
+<section class="content" id="mate">
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
@@ -26,45 +26,44 @@
                                 <div class="form-group">
                                     <label>Curso</label>
                                     <select class="form-control select" name="curso" style="width: 99%;">
-                                        @foreach($distcursos as $distcurso)
-                                        <option selected disabled value="{{ $distcurso->id }}">
-                                            {{ $distcurso->nivel->nombre }}
 
+                                        <option selected disabled value="{{ $cursos->id }}">
+                                            {{ $cursos->nombre }}
                                         </option>
-                                        @endforeach
-                                        @foreach($cursos as $curso)
-                                        <option value="{{$curso->id}}">
-                                            {{$curso->nivel->nombre}}
 
 
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Paralelo</label>
+                                    <select class="form-control select" name="curso" style="width: 99%;">
+
+                                        <option selected disabled value="{{ $nivels->id }}">
+                                            {{ $nivels->nombre }}
                                         </option>
-                                        @endforeach
+
+
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Unidad Educativa</label>
-                                    <select class="form-control select" name="instituto" style="width: 99%;">
-                                        @foreach($institutos as $instituto)
+                                    <select class="form-control select" name="instituto" disabled style="width: 99%;">
+
                                         <option value="{{$instituto->id}}">{{$instituto->nombre}}</option>
-                                        @endforeach
+
 
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Seleccione Materias</label>
-                                    <select class="select2" multiple="multiple" name="materia[]"
+                                    <select class="select2" :materias="2" multiple="multiple" name="materia[]"
                                         data-placeholder="Select a State" style="width: 100%;">
-
                                         @foreach($materias as $materia)
-                                        <option value="{{$materia->id}}" @isset( $distribucionmacu->materias[0]->nombre)
-                                            @if($materia->nombre == $distribucionmacu->materias[0]->nombre)
-                                            selected
-                                            @endif
-                                            @endisset
-                                            >{{$materia->nombre}}</option>
-
+                                        <option selected value="{{$materia->id}}">{{$materia->nombre}}</option>
                                         @endforeach
+                                        <option v-for="mate in newMateria" :value="mate.id">@{{mate.nombre}}</option>
+
                                     </select>
                                 </div>
 
@@ -94,13 +93,6 @@
     </div>
 </section>
 
-
-
-
-
-
-
-
 @stop
 
 @section('css')
@@ -116,4 +108,36 @@ $(function() {
 
 })
 </script>
+<script>
+var materias = @json($materias);
+var materias_all = @json($materia_all);
+const materi = new Vue({
+    el: '#mate',
+    data: {
+        materia: materias,
+        all_materia: materias_all,
+        newMateria: [],
+    },
+    mounted() {
+        this.onMateria();
+    },
+    methods: {
+        onMateria() {
+            let mate = this.all_materia;
+            let mat = this.materia;
+            let arr = [];
+            const results = mate.filter(({
+                id: id1
+            }) => !mat.some(({
+                id: id2
+            }) => id2 === id1));
+            this.newMateria = results;
+
+        }
+    }
+});
+</script>
+
+
+
 @stop

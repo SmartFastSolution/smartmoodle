@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contenido;
 use App\Materia;
+use App\Taller;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -77,12 +78,15 @@ class ContenidoController extends Controller
      * @param  \App\Contenido  $contenido
      * @return \Illuminate\Http\Response
      */
-    public function show(Contenido $contenido)
+    public function show($id)
     {
 
         $materias=Materia::get();
+        $contenido =Contenido::where('id', $id)->firstOrfail();
         $materiacontenido=Contenido::find($contenido->id)->materia()->get();
-        return \view('Contenido.showcon',['contenido'=>$contenido,'materias'=>$materias,'materiacontenido'=> $materiacontenido]);
+        $tallers=Taller::get();
+      
+        return \view('Contenido.showcon',['contenido'=>$contenido,'materias'=>$materias,'materiacontenido'=> $materiacontenido,'tallers'=>$tallers]);
     
         
     }

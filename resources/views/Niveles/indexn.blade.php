@@ -25,8 +25,8 @@
             <div class="col-md-13">
 
                 <a class="btn btn-info float-right " href="{{route('nivels.create')}}"><i
-                        class="fas fa-plus"></i> CURSOS</a>                 
-                <h1>Cursos</h1>
+                        class="fas fa-plus"></i> PARALELO</a>                 
+                <h1>Paralelos</h1>
                 <div class="card card-secondary">
                     <div class="card-header">
                         

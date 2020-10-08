@@ -9,6 +9,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use RealRashid\SweetAlert\Facades\Alert;
 
 use Illuminate\Support\facades\Hash;
 
@@ -96,7 +97,7 @@ class UsersController extends Controller
             $user->roles()->sync($request->get('role'));
         }
 
-        return redirect('sistema/users');
+        return redirect('sistema/users')->with('success','Usuario Creado Exitosamente!');
         //return redirect('sistema/admin');
 
     }
