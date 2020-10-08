@@ -73,21 +73,18 @@
 </div> 
 </div>
 
-<<<<<<< HEAD
-
-=======
  <ul class="list-group m-3">
     @foreach ($sub = App\Taller::paginate(10) as $taller)
     <li class="list-group-item "><a class="nav-link"
             href="{{ route('taller', ['plant' => $taller->plantilla_id, 'id' => $taller->id]) }}">{{ $taller->nombre }}
-            - {{ $taller->materia->nombre }} {{ $taller->enunciado }}</a></li>
+            - {{ $taller->contenido->nombre }} {{ $taller->enunciado }}</a></li>
     @endforeach
 
     <div class="row justify-content-center mt-3"> {{ $sub->links() }}</div>
 
 </ul> 
 
->>>>>>> 7ae4f7003b7e1a558dd1a980d151dcc5d25236b1
+
 @include('layouts.modal')
 
 @section('js')

@@ -61,20 +61,7 @@
 
                                     </select>
                                 </div>
-                                <!-- <div class="form-group">
-                                    <label>Estudiantes</label>
-                                    <select class="select2" multiple="multiple" name="materia[]"
-                                        data-placeholder="Select a State" style="width: 100%;">
-                                        <option v-for="mater in materias" :value="mater.id">@{{ mater.nombre}}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>Asignación Curso</label>
-                                    <select class="select2" multiple="multiple" name="materia[]"
-                                        data-placeholder="Select a State" style="width: 100%;">
-                                        <option v-for="mater in materias" :value="mater.id">@{{ mater.nombre}}</option>
-                                    </select>
-                                </div> -->
+                               
 
                                 <div class="form-group">
                                     <label for="nombre">Estado </label>

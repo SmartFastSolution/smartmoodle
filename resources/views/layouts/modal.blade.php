@@ -17,7 +17,7 @@
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-<<<<<<< HEAD
+
                             <div class="form-row">
                                 <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
@@ -25,7 +25,7 @@
                                         @foreach ($contenidos = App\Contenido::get() as $contenido)
                                         <option value="{{ $contenido->id }}">{{ $contenido->nombre }}</option>
                                         @endforeach
-=======
+
                                 <div class="form-row">
                                   <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Materia:</label>
@@ -33,7 +33,7 @@
                                       @foreach ($materias = App\Materia::get() as $materia)
                                       <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                       @endforeach
->>>>>>> 7ae4f7003b7e1a558dd1a980d151dcc5d25236b1
+
                                     </select>
                                   </div>
                                    <div class="form-group col-6">

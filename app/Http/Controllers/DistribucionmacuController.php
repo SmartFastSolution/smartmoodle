@@ -101,8 +101,7 @@ class DistribucionmacuController extends Controller
       
         $distcursos=Distribucionmacu::find($distribucionmacu->id);
         $materias= $distcursos->materias()->get();
-       
-
+        
         $instituto=Distribucionmacu::find($distribucionmacu->id)->instituto()->first();
         $materia_all = Materia::where('instituto_id', $instituto->id)->get();
         $cursos =  $distcursos->curso()->first();//todos los datos de la bd de cursos
@@ -131,10 +130,10 @@ class DistribucionmacuController extends Controller
 
         $distribucionmacu->update($request->all());
    
-        if($request->get('curso')){
+        // if($request->get('curso')){
           
-            $distribucionmacu->curso_id = $request->curso;
-          }
+        //     $distribucionmacu->curso_id = $request->curso;
+        //   }
 
           if($request->get('materia')){
             $distribucionmacu->materias()->sync($request->get('materia'));

@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Paralelo</label>
-                                    <select class="form-control select" name="curso" style="width: 99%;">
+                                    <select class="form-control select" name="nivel" style="width: 99%;">
 
                                         <option selected disabled value="{{ $nivels->id }}">
                                             {{ $nivels->nombre }}
@@ -82,8 +82,9 @@
                                     <label class="custom-control-label" for="estadooff">No Activo</label>
                                 </div>
                                 <br><br><br>
-                                <input type="submit" class="btn btn-dark " value="Guardar">
+                               
                                 <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                                <input type="submit" class="btn btn-dark " value="Guardar">
 
                         </form>
                     </div>

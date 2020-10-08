@@ -33,9 +33,9 @@ return array(
     'ed962a97bd972bc82007176b647d4e36' => $vendorDir . '/facade/ignition/src/helpers.php',
     '6124b4c8570aa390c21fafd04a26c69f' => $vendorDir . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
     'b6b991a57620e2fb6b2f66f03fe9ddc2' => $vendorDir . '/symfony/string/Resources/functions.php',
-<<<<<<< HEAD
+
     '6b34c85f7b1ad6faa15aa12109e030f2' => $vendorDir . '/realrashid/sweet-alert/src/functions.php',
-=======
+
     '6292c1671f9440c89e0af20a0f78754a' => $vendorDir . '/laracasts/utilities/src/helpers.php',
->>>>>>> 7ae4f7003b7e1a558dd1a980d151dcc5d25236b1
+
 );

@@ -17,14 +17,13 @@ class CreateTallersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('plantilla_id');
             $table->string('nombre');
-<<<<<<< HEAD
+
             $table->unsignedbigInteger('contenido_id');
             $table->boolean('estado');
-=======
             $table->string('enunciado')->nullable();
             $table->unsignedbigInteger('materia_id');
             $table->enum('estado',['on','off'])->nullable();  
->>>>>>> 7ae4f7003b7e1a558dd1a980d151dcc5d25236b1
+
             $table->timestamps();
 
              $table->foreign('plantilla_id')

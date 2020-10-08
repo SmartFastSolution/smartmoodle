@@ -88,7 +88,16 @@ class DistrimaController extends Controller
      */
     public function edit(Distrima $distrima)
     {
-        //
+
+        $distma=Distrima::find($distrima->id);
+        $user=$distma->user()->first();
+
+        $instituto=Distrima::find($distrima->id)->instituto()->first();
+
+        $distribumacu_all=Distribucionmacu::where('instituto_id', $instituto->id)->get();
+        $distribucion= $distma->distribumacus()->first();
+
+        return \view('DistribucionAlumno.editdisma',compact('distrima','distma','instituto','distribumacu_all','user','distribucion'));
     }
 
     /**
@@ -111,6 +120,9 @@ class DistrimaController extends Controller
      */
     public function destroy(Distrima $distrima)
     {
-        //
+       $distrima= Distribucionmacu::find($distrima->id);
+       $distrima->delete();
+
+        return redirect('sistema/distrimas')->with('success','Haz eliminado una Asignación con exito');
     }
 }
