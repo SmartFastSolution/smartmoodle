@@ -68,5 +68,13 @@ class HomeController extends Controller
         
     }
 
+    public function buscarDocente(Request $request){
+        $usrol = Role::where('descripcion','docente')->first();
+        $users = $usrol->users()->where('instituto_id', $request->id)->get();
+        //$users= User::where('instituto_id', $request->id, 'and', '')->get();
+        return $users;
+        
+    }
+
     
 }

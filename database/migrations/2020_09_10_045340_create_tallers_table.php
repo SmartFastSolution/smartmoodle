@@ -21,20 +21,13 @@ class CreateTallersTable extends Migration
             $table->unsignedbigInteger('contenido_id');
             $table->boolean('estado');
             $table->string('enunciado')->nullable();
-            $table->unsignedbigInteger('materia_id');
-            $table->enum('estado',['on','off'])->nullable();  
+          
 
             $table->timestamps();
 
-             $table->foreign('plantilla_id')
-            ->references('id')
-            ->on('plantillas')
-            ->onDelete('cascade');
+             $table->foreign('plantilla_id')->references('id')->on('plantillas')->onDelete('cascade');
 
-            $table->foreign('contenido_id')
-            ->references('id')
-            ->on('contenidos')
-            ->onDelete('cascade');
+            $table->foreign('contenido_id')->references('id')->on('contenidos')->onDelete('cascade');
 
 
         });       

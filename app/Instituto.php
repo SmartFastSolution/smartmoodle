@@ -44,4 +44,9 @@ class Instituto extends Model
         return $this->hasMany('App\Distrima');
 
     }
+
+    public function distribuciondos(){
+          
+        return $this->hasMany('App\Distribuciondo');
+    }
 }

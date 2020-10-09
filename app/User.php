@@ -75,6 +75,10 @@ class User extends Authenticatable
     }
 
 
+    public function distribuciondos(){
+          
+        return $this->hasMany('App\Distribuciondo');
+    }
 
     
 }

@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Materia;
+use App\User;
+use App\Instituto;
 use App\Distribuciondo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -15,7 +17,10 @@ class DistribuciondoController extends Controller
      */
     public function index()
     {
-        //
+        
+        $distribucions=Distribuciondo::orderBy('id','Asc')->paginate(5);
+       
+        return \view('DistribucionDocente.indexdocente',['distribucions'=>$distribucions,]);
     }
 
     /**
@@ -25,7 +30,13 @@ class DistribuciondoController extends Controller
      */
     public function create()
     {
-        //
+        
+        $institutos = Instituto::get();
+        $materias=Materia::get();
+        $user=User::get();
+      
+      
+        return \view('DistribucionDocente.createdocente',compact('materias','user','institutos'));
     }
 
     /**
@@ -36,7 +47,27 @@ class DistribuciondoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([         
+            'estado' => ['required' ,'in:on,off'],
+        ]);
+
+        $distribuciondo =new  Distribuciondo;
+        $distribuciondo ->instituto_id = $request->instituto;
+        $distribuciondo ->user_id = $request->docente;
+        $distribuciondo ->estado = $request->estado;
+       
+          
+      
+
+       $distribuciondo->save();
+
+     
+       if($request->get('materia')){
+        $distribuciondo->materias()->sync($request->get('materia'));
+      }
+        return redirect('sistema/distribuciondos ');
+
+
     }
 
     /**
@@ -58,7 +89,16 @@ class DistribuciondoController extends Controller
      */
     public function edit(Distribuciondo $distribuciondo)
     {
-        //
+        $distd=Distribuciondo::find($distribuciondo->id);
+        $user=  $distd->user()->first();
+        $instituto=Distribuciondo::find($distribuciondo->id)->instituto()->first();
+        $materias=  $distd->materias()->get();
+
+        $materia_all = Materia::where('instituto_id', $instituto->id)->get();
+       
+      
+
+        return \view('DistribucionDocente.editdocente', compact('distribuciondo','user','instituto','distd','materias','materia_all'));
     }
 
     /**
@@ -70,7 +110,23 @@ class DistribuciondoController extends Controller
      */
     public function update(Request $request, Distribuciondo $distribuciondo)
     {
-        //
+        $request->validate([
+
+           
+            
+            'estado'      => 'required|in:on,off',
+        ]);
+
+        $distribuciondo->update($request->all());
+
+        if($request->get('materia')){
+            $distribuciondo->materias()->sync($request->get('materia'));
+          }
+
+          $distribuciondo->save();
+
+          return redirect('sistema/distribuciondos ');
+
     }
 
     /**
@@ -81,6 +137,10 @@ class DistribuciondoController extends Controller
      */
     public function destroy(Distribuciondo $distribuciondo)
     {
-        //
+       $distribuciondo= Distribuciondo::find($distribuciondo->id);
+       $distribuciondo->delete();
+
+        return redirect('sistema/distribuciondos ')->with('success','Haz eliminado una Asignación con exito');
+    
     }
 }

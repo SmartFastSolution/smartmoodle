@@ -5,6 +5,7 @@ namespace App;
 use App\Instituto;
 use App\Distribucionmacu;
 use App\Contenido;
+use App\Distribuciondo;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -41,6 +42,12 @@ class Materia extends Model
 
     }
 
+    
+    public function distribuciondos(){
+
+        return $this->belongsToMany(Distribuciondo::class)->withPivot('materia_id')->withTimestamps();
+
+    }
     
 
 }

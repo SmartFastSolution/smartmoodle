@@ -1,10 +1,11 @@
 @extends('layouts.nav')
 
 
-@section('title', 'Crear Asignación')
+@section('title', 'Dashboard | SmartMoodle')
+
+
 
 @section('content')
-
 @if ($errors->any())
 <div class="alert alert-danger">
     <strong>Whoops!</strong> Parece que hay porblemas o Malas decisiones <br><br>
@@ -19,11 +20,11 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <h1 class="font-weight-light">Crear Asignación de Alumno</h1>
+                <h1 class="font-weight-light">Añadir Asignación Docente/Materia</h1>
                 <div class="row">
                     <div class="col-md-10">
 
-                        <form method="POST" action="{{route('distrimas.index')}} ">
+                        <form method="POST" action="{{route('distribuciondos.index')}} ">
                             @csrf
                             <div class=" card-body">
 
@@ -31,8 +32,8 @@
 
                                 <div class="form-group">
                                     <label>Unidad Educativa</label>
-                                    <select class="form-control select" v-model="instituto" @change="onAsignacion()"
-                                        name="instituto" style="width: 99%;">
+                                    <select class="form-control select" v-model="instituto" @change="onMateria()"
+                                        name="instituto" required style="width: 99%;">
                                         <option selected disabled>Elija una Unidad educativa...</option>
                                         @foreach($institutos as $instituto)
                                         <option value="{{$instituto->id}}">{{$instituto->nombre}}
@@ -42,29 +43,26 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Estudiante</label>
-                                    <select class="form-control select" name="estudiante" style="width: 99%;">
-                                        <option selected disabled>Elija al Estudiante...</option>
-                                        <option v-for="estuden in users" :value="estuden.id">@{{estuden.name}} @{{estuden.apellido}}
+                                    <label>Docente</label>
+                                    <select class="form-control select" name="docente" style="width: 99%;">
+                                        <option selected disabled>Elija al Docente...</option>
+                                        <option v-for="doce in users" :value="doce.id">@{{doce.name}} @{{doce.apellido}}
                                         </option>
 
 
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Asignación Curso</label>
-                                    <select class="form-control select" name="asignacion" style="width: 99%;">
-                                        <option selected disabled>Elija el Curso...</option>
-
-                                        <option v-for="dist in distribucion" :value="dist.id">@{{dist.nombre}} </option>
-
-
+                                    <label>Materias</label>
+                                    <select class="select2" multiple="multiple" name="materia[]"
+                                        data-placeholder="Select a State" style="width: 100%;">
+                                        <option v-for="mater in materias" :value="mater.id">@{{ mater.nombre}}</option>
                                     </select>
                                 </div>
                                
-
+                             
                                 <div class="form-group">
-                                    <label for="nombre">Estado </label>
+                                    <label for="nombre">Estado</label>
                                     <br>
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" id="estadoon" name="estado" class="custom-control-input"
@@ -79,8 +77,8 @@
                                     </div>
                                 </div>
                                 <br>
-                                <input type="submit" class="btn btn-dark " value="Guardar">
-                                <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                              <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                              <input type="submit" class="btn btn-dark " value="Guardar">
                             </div>
 
                         </form>
@@ -93,17 +91,23 @@
 </section>
 
 
-
-
 @stop
-
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
 @stop
-
 @section('js')
 
+<script>
+$(function() {
+    //Initialize Select2 Elements
+    $(".select2").select2({
 
+    });
+
+})
+</script>
+
+
+</script>
 <!-- script para select dinamico prueba 2  -->
 
 <script>
@@ -111,15 +115,16 @@ const inst = new Vue({
     el: '#materias',
     data: {
         instituto: '',
-        distribucion: [],
+        materias: [],
         users:[]
     },
     methods: {
-        onAsignacion() {
+        onMateria() {
 
             var set = this;
+
             set.users = [];
-            axios.post('/sistema/userinst', {
+            axios.post('/sistema/docinst', {
                 id: set.instituto
             }).then(response => {
                 set.users = response.data;
@@ -128,23 +133,19 @@ const inst = new Vue({
                 console.log(e);
             });
 
-            set.distribucion = [];
-            axios.post('/sistema/distinst', {
+            set.materias = [];
+            axios.post('/sistema/materiainst', {
                 id: set.instituto
             }).then(response => {
-                set.distribucion = response.data;
-                console.log(set.distribucion); //no es necesario
+                set.materias = response.data;
+                console.log(set.materias);
             }).catch(e => {
                 console.log(e);
             });
-
 
         }
     }
 });
 </script>
-
-
-
 
 @stop

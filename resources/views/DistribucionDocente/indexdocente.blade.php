@@ -1,12 +1,11 @@
 @extends('layouts.nav')
 
 
-@section('title', 'Asignación')
+@section('title', ' SmartMoodle')
 
 
 
 @section('content')
-
 
 <section class="content">
     <div class="container">
@@ -17,9 +16,9 @@
         @endif
         <div class="row justify-content-center">
             <div class="col-md-13">
-                <a class="btn btn-info float-right" href="{{route('distribucionmacus.create')}}"><i
+                <a class="btn btn-info float-right" href="{{route('distribuciondos.create')}}"><i
                         class="fas fa-plus"></i> CREAR ASIGNACION</a>
-                <h1>Asignación de Materia/Paralelo</h1>
+                <h1>Asignación de Materia/Docente</h1>
                 <div class="card card-secondary">
                     <div class="card-header">
 
@@ -32,8 +31,8 @@
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Curso</th>
-                                    <th scope="col">Paralelo</th>
+                                    <th scope="col">Unidad Educativa</th>
+                                    <th scope="col">Docente</th>
                                     <th scope="col">Materia(s)</th>
                                     <th scope="col">Estado</th>
                                     <th></th>
@@ -42,14 +41,16 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    @foreach ($distribucionmacus as $distribucionmacu)
-                                    <th scope="row">{{$distribucionmacu['id']}}</th>
-                                    <td>{{$distribucionmacu->curso->nombre}} </td>
-                                
-                                    <td>{{$distribucionmacu->nivel->nombre}} </td>
+                                    @foreach ($distribucions as $dis)
+                                    <th scope="row">{{$dis['id']}}</th>
+                                    <td>{{$dis->instituto->nombre}} </td>
+
+                                    <td>{{$dis->user->name}}
+                                        {{$dis->user->apellido}}
+                                    </td>
                                     <td>
-                                        @if($distribucionmacu->materias != null)
-                                        @foreach($distribucionmacu->materias as $dismacu)
+                                        @if($dis->materias != null)
+                                        @foreach($dis->materias as $dismacu)
                                         <span class="badge badge-success">
                                             {{$dismacu->nombre}}
                                         </span>
@@ -57,27 +58,25 @@
                                         @endforeach
                                         @endif
                                     </td>
-                                  
-                                    <td>{{ $distribucionmacu['estado']}}</td>
+
+                                    <td>{{ $dis['estado']}}</td>
 
                                     <td> </td>
 
 
                                     <td class="table-button ">
-                                        <a class="btn btn-info "
-                                            href="{{route('distribucionmacus.show',$distribucionmacu->id)}}"><i
+                                        <a class="btn btn-info " href="{{route('distribuciondos.show', $dis->id)}}"><i
                                                 class="fas fa-eye"></i></a>
 
                                     </td>
                                     <td class="table-button ">
                                         <a class="btn btn-success btn"
-                                            href="{{route('distribucionmacus.edit', $distribucionmacu->id)}}"><i
+                                            href="{{route('distribuciondos.edit',  $dis->id)}}"><i
                                                 class=" fas fa-pencil-alt"></i></a>
                                     </td>
                                     <td class="table-button ">
                                         <!--metodo delete funciona pero hay que almacenar la variable array en una variable temporal-->
-                                        <form method="POST"
-                                            action="{{route('distribucionmacus.destroy', $distribucionmacu->id)}}}">
+                                        <form method="POST" action="{{route('distribuciondos.destroy', $dis->id)}}}">
                                             @method('DELETE')
                                             @csrf
                                             <button type="submit" class="btn btn-danger "><i
@@ -90,7 +89,7 @@
                             <!--Table body-->
 
                         </table>
-                        {{$distribucionmacus->links()}}
+                        {{$distribucions->links()}}
                         <!--Table-->
                     </div>
                 </div>
@@ -103,11 +102,8 @@
 
 
 @stop
-
 @section('css')
-
 @stop
-
 @section('js')
 
 @stop

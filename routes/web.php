@@ -51,9 +51,10 @@ Auth::routes();
  route::get('homees','EstudianteController@index')->name('estudiante'); //ruta estudiante
 
 
-//rutas vue asignaciones
+//rutas vue asignaciones////
  Route::post('materiainst','HomeController@buscarMateria')->name('materiainst');
  Route::post('userinst','HomeController@buscarAlumno')->name('userinst');
+ Route::post('docinst','HomeController@buscarDocente')->name('docinst');
  Route::post('distinst','HomeController@buscarAsignacion')->name('distinst');
 
 //////fin
@@ -101,7 +102,7 @@ route::resource('pcuentas','PcuentaController');
 route::resource('distrimas','DistrimaController');
 
 //Ruta Resource para distribucion alumno docente/materia
-route::resource('distrimas','DistrimaController');
+route::resource('distribuciondos','DistribuciondoController');
 });
 
 
