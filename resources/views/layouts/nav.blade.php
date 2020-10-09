@@ -288,6 +288,25 @@
                             </ul>
                         </li>
                         @endcan
+                        @can('haveaccess', 'asignacionma.index')
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-user-cog"></i>
+                                <p>
+                                    Asignación Docente
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('distrimas.index')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lista de Asignaciones</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endcan
                         @can('haveaccess', 'talleres.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">

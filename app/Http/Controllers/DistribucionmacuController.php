@@ -77,16 +77,18 @@ class DistribucionmacuController extends Controller
      */
     public function show(Distribucionmacu $distribucionmacu)
     {
-        $distribucionmacu_materia= $distribucionmacu->materias->pluck('id')->toArray();
-      
-        $materias= Materia::all();
-        $nivels=Nivel::get();
-        $institutos =Instituto::get();
-        $cursos = Curso::get(); //todos los datos de la bd de cursos
-        $distcursos=Distribucionmacu::find($distribucionmacu->id)->curso()->get();
-        $distnivel=Distribucionmacu::find($distribucionmacu->id)->nivel()->get(); //llama al curso que esta relacionado a esta distribucion
+        $distcursos=Distribucionmacu::find($distribucionmacu->id);
+        $materias= $distcursos->materias()->get();
+        
+        $instituto=Distribucionmacu::find($distribucionmacu->id)->instituto()->first();
+        $materia_all = Materia::where('instituto_id', $instituto->id)->get();
+        $cursos =  $distcursos->curso()->first();//todos los datos de la bd de cursos
+         //llama al curso que esta relacionado a esta distribucion
+         $nivels= $distcursos->nivel()->first();
 
-        return view('Distribucion.showmacu',compact('distribucionmacu','materias','cursos','distcursos','distribucionmacu_materia','institutomate','instituto','nivels'));
+         return view('Distribucion.showmacu',compact('distribucionmacu','materias', 'materia_all','cursos','distcursos','instituto','nivels'));
+  
+      
        
     }
 

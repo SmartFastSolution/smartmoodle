@@ -59,6 +59,7 @@ class HomeController extends Controller
             $cursos[$key] =[
                 'id'=> $value->curso_id,
                 'nombre' => $value->curso->nombre
+                
             ];
         }
        // $dis = $dist->id;

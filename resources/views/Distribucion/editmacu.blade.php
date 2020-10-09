@@ -82,7 +82,7 @@
                                     <label class="custom-control-label" for="estadooff">No Activo</label>
                                 </div>
                                 <br><br><br>
-                               
+
                                 <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
                                 <input type="submit" class="btn btn-dark " value="Guardar">
 
@@ -109,6 +109,7 @@ $(function() {
 
 })
 </script>
+
 <script>
 var materias = @json($materias);
 var materias_all = @json($materia_all);

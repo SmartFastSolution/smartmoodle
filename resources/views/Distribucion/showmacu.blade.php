@@ -3,15 +3,16 @@
 @section('title', 'Editar')
 
 
+
 @section('content')
 
 
 
-<section class="content">
+<section class="content" id="mate">
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <h1 class="font-weight-light">Show Asignación Materia/Paralelo</h1>
+                <h1 class="font-weight-light">Vista Asignación Materia/Paralelo</h1>
                 <div class="row">
                     <div class="col-md-10">
                         <form method="POST" action="{{route('distribucionmacus.update', $distribucionmacu->id)}} ">
@@ -20,43 +21,49 @@
 
                             <div class=" card-body">
 
-                                <div class="form-group">
-                                    <label for="descripcion">Descripción</label>
-                                    <input type="text" class="form-control" name="descripcion" id="descripcion"
-                                        value="{{$distribucionmacu->descripcion}}" placeholder="Descripción" readonly>
-                                </div>
+
 
                                 <div class="form-group">
                                     <label>Curso</label>
-                                    <select class="form-control select" name="curso" style="width: 99%;" disabled>
-                                        @foreach($distcursos as $distcurso)
-                                        <option selected disabled value="{{ $distcurso->id }}">
-                                            {{ $distcurso->nombre }}
-                                            -
-                                            {{$distcurso->paralelo}}
+                                    <select class="form-control select" name="curso"  disabled style="width: 99%;">
+
+                                        <option selected disabled value="{{ $cursos->id }}">
+                                            {{ $cursos->nombre }}
                                         </option>
-                                        @endforeach
-                                        @foreach($cursos as $curso)
-                                        <option value="{{$curso->id}}">
-                                            {{$curso->nombre}}
-                                            -
-                                            {{$curso->paralelo}}
+
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Paralelo</label>
+                                    <select class="form-control select" name="nivel" disabled style="width: 99%;">
+
+                                        <option selected disabled value="{{ $nivels->id }}">
+                                            {{ $nivels->nombre }}
                                         </option>
-                                        @endforeach
+
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Unidad Educativa</label>
+                                    <select class="form-control select" name="instituto" disabled style="width: 99%;">
+
+                                        <option value="{{$instituto->id}}">{{$instituto->nombre}}</option>
+
+
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <label> Materias Asignadas</label>
-                                    <select class="select2" multiple="true" name="materia[]"
-                                        data-placeholder="Select a State" style="width: 100%;" disabled>
-                                        @if(! empty($materias))
+                                    <label>Seleccione Materias</label>
+                                    <select class="select2" :materias="2" multiple="multiple" name="materia[]"
+                                        data-placeholder="Select a State" disabled style="width: 100%;">
                                         @foreach($materias as $materia)
-                                        <option {{in_array($materia->id, $distribucionmacu_materia) ? 'selected':''}}>
-                                            {{$materia->nombre}}
-                                        </option>
+                                        <option selected value="{{$materia->id}}">{{$materia->nombre}}</option>
                                         @endforeach
-                                        @endif   
+                                        <option v-for="mate in newMateria" :value="mate.id">@{{mate.nombre}}</option>
+
                                     </select>
                                 </div>
 
@@ -75,8 +82,9 @@
                                     <label class="custom-control-label" for="estadooff">No Activo</label>
                                 </div>
                                 <br><br><br>
-                               
+
                                 <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                               
 
                         </form>
                     </div>
@@ -85,13 +93,6 @@
         </div>
     </div>
 </section>
-
-
-
-
-
-
-
 
 @stop
 
@@ -108,4 +109,37 @@ $(function() {
 
 })
 </script>
+
+<script>
+var materias = @json($materias);
+var materias_all = @json($materia_all);
+const materi = new Vue({
+    el: '#mate',
+    data: {
+        materia: materias,
+        all_materia: materias_all,
+        newMateria: [],
+    },
+    mounted() {
+        this.onMateria();
+    },
+    methods: {
+        onMateria() {
+            let mate = this.all_materia;
+            let mat = this.materia;
+            let arr = [];
+            const results = mate.filter(({
+                id: id1
+            }) => !mat.some(({
+                id: id2
+            }) => id2 === id1));
+            this.newMateria = results;
+
+        }
+    }
+});
+</script>
+
+
+
 @stop

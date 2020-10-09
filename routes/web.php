@@ -99,6 +99,9 @@ route::resource('pcuentas','PcuentaController');
 
 //Ruta Resource para distribucion alumno curso/materia
 route::resource('distrimas','DistrimaController');
+
+//Ruta Resource para distribucion alumno docente/materia
+route::resource('distrimas','DistrimaController');
 });
 
 
