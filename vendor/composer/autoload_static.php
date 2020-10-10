@@ -549,6 +549,8 @@ class ComposerStaticInitf465d02aeb57874bfc63154a02b1ff56
         'App\\Admin\\TallerVerdaderoFalso' => __DIR__ . '/../..' . '/app/Admin/TallerVerdaderoFalso.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Contabilidad\\BIActivo' => __DIR__ . '/../..' . '/app/Contabilidad/BIActivo.php',
+        'App\\Contabilidad\\BIPasivo' => __DIR__ . '/../..' . '/app/Contabilidad/BIPasivo.php',
+        'App\\Contabilidad\\BIPatrimonio' => __DIR__ . '/../..' . '/app/Contabilidad/BIPatrimonio.php',
         'App\\Contabilidad\\BalanceInicial' => __DIR__ . '/../..' . '/app/Contabilidad/BalanceInicial.php',
         'App\\Contenido' => __DIR__ . '/../..' . '/app/Contenido.php',
         'App\\Curso' => __DIR__ . '/../..' . '/app/Curso.php',

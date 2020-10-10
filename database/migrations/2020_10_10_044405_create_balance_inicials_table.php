@@ -20,6 +20,7 @@ class CreateBalanceInicialsTable extends Migration
             $table->string('enunciado');
             $table->string('nombre');
             $table->string('fecha');
+            $table->string('total_pasivo_patrimonio');
             $table->timestamps();
 
             $table->foreign('taller_id')

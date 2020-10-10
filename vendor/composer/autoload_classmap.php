@@ -48,6 +48,8 @@ return array(
     'App\\Admin\\TallerVerdaderoFalso' => $baseDir . '/app/Admin/TallerVerdaderoFalso.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Contabilidad\\BIActivo' => $baseDir . '/app/Contabilidad/BIActivo.php',
+    'App\\Contabilidad\\BIPasivo' => $baseDir . '/app/Contabilidad/BIPasivo.php',
+    'App\\Contabilidad\\BIPatrimonio' => $baseDir . '/app/Contabilidad/BIPatrimonio.php',
     'App\\Contabilidad\\BalanceInicial' => $baseDir . '/app/Contabilidad/BalanceInicial.php',
     'App\\Contenido' => $baseDir . '/app/Contenido.php',
     'App\\Curso' => $baseDir . '/app/Curso.php',

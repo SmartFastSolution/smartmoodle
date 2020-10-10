@@ -6,15 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class BalanceInicial extends Model
 {
-         public function Tallers(){
-
-        return $this->hasMany('App\Taller');
+    public function taller(){
+       return $this->belongsTo('App\Taller');
     }
-    public function Users(){
-
-        return $this->belongsToMany('App\User');
+    public function user(){
+       return $this->belongsTo('App\User');
     }
-      public function bActivos(){
-        return $this->hasMany('App\Contabilidad\BIActivos');
+    public function bActivos(){
+       return $this->hasMany('App\Contabilidad\BIActivo');
+    }
+      public function bPasivos(){
+       return $this->hasMany('App\Contabilidad\BIPasivo');
+    }
+       public function bPatrimonios(){
+       return $this->hasMany('App\Contabilidad\BIPatrimonio');
     }
 }

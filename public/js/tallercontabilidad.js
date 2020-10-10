@@ -514,8 +514,24 @@ const b_hori = new Vue({
                     a_nocorriente: _this.a_nocorrientes,
                     p_corriente: _this.p_corrientes,
                     p_nocorriente: _this.p_nocorrientes,
+                    patrimonio: _this.patrimonios,
                     t_patrimonio: _this.total_balance_inicial.t_patrimonio_pasivo
                 }).then(response => {
+                  toastr.success(response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+                    _this.a_corrientes = [];
+                    _this.a_nocorrientes = [];
+                    _this.p_corrientes = [];
+                    _this.p_nocorrientes = [];
+                    _this.patrimonios = [];
+                    _this.total_balance_inicial.t_patrimonio_pasivo = '';
+                    _this.cambioActivo();
+                    _this.cambioActivoNo();
+                    _this.cambioPasivo();
+                    _this.cambioPasivoNo();
+                    _this.cambioPatrimonio();
+                    diario.obtenerBalanceInicial();
                     console.log(response.data);
                 }).catch(function(error){
                   console.log(error)
@@ -596,7 +612,10 @@ const b_ver = new Vue({
             debe:'',
             haber:''
         },
-        pasan:{ debe:'', haber:''},
+        pasan:{ 
+          debe:'', 
+          haber:''
+        },
         balances:[],
         balance:{
           cuenta:'',
@@ -1009,10 +1028,100 @@ const b_ver = new Vue({
                     fecha: _this.balance_inicial.fecha,
                     a_corriente: _this.a_corrientes
                 }).then(response => {
+
                     console.log(response.data); 
                 }).catch(function(error){
 
                 });
             },
   }        
+});
+
+
+const diario = new Vue({
+ el: '#diario',
+    data:{
+      id_taller: taller,
+
+      balanceInicial:{
+        debe:[],
+        haber:[]
+       },
+        diarios:[],
+        diario:{
+          fecha:'',
+            nom_cuenta:'',
+            gloza:'',
+            debe:'',
+            haber:''
+        },
+        pasan:{ 
+          debe:'', 
+          haber:''
+        },
+    },
+      mounted: function(){
+    this.obtenerBalanceInicial();
+
+ 
+  },
+    methods:{
+  Agregar(){
+    if(this.diario.nom_cuenta.trim() === ''){
+      toastr.error("El campo Nombre de cuenta es obligatorio", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+    }else if(this.diario.debe.trim() === '' && this.diario.haber.trim() === ''){
+      toastr.warning("Rellena el cambio de Debe o Haber, no puedes dejar ambos vacios", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+    }else if(this.diario.debe.trim() != '' && this.diario.haber.trim() != ''){
+      toastr.warning("No pueden estar ambos campos llenos a mismo tiempo", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+    }else{
+      var diario = {fecha:this.diario.fecha, nom_cuenta:this.diario.nom_cuenta, gloza:this.diario.gloza, debe:this.diario.debe, haber:this.diario.haber};
+      this.diarios.push(diario);//añadimos el la variable persona al array
+      //Limpiamos los campos
+      toastr.success("Registro agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      this.diario.fecha =''
+      this.diario.nom_cuenta =''
+      this.diario.gloza =''
+      this.diario.debe =''
+      this.diario.haber =''
+    }
+    },
+  deleteDiario(index){
+      this.diarios.splice(index, 1);
+    },
+  obtenerBalanceInicial: function(){
+      var _this = this;
+      var url = '/sistema/admin/taller/b_inicial_diario';
+        axios.post(url,{
+          id: _this.id_taller,
+        }).then(response => {
+          _this.balanceInicial.debe = response.data.pasivos;
+          _this.balanceInicial.haber = response.data.activos;
+            console.log(response.data);           
+        }).catch(function(error){
+
+        });
+
+    },
+  guardarDiario: function(){
+        var _this = this;
+        var url = '/sistema/admin/taller/diario';
+            axios.post(url,{
+              id: _this.id_taller,
+            datos: _this.diarios
+        }).then(response => {
+            console.log(response.data);           
+        }).catch(function(error){
+
+        });
+    },
+
+    }
 });

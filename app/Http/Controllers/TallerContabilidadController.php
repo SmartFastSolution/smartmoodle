@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Admin\TallerContabilidad;
 use App\Contabilidad\BIActivo;
+use App\Contabilidad\BIPatrimonio;
+use App\Contabilidad\BIPasivo;
 use App\Contabilidad\BalanceInicial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,15 +20,31 @@ class TallerContabilidadController extends Controller
 		$a_nocorriente = $request->a_nocorriente;
 		$p_corriente   = $request->p_corriente;
 		$p_nocorriente = $request->p_nocorriente;
-		$debe          = [];
+        $patrimonios = $request->patrimonio;
+		$haber          = [];
+        $debe = [];
+        $patrimonio = [];
+
 		foreach ($a_corriente as $value) {
-    		$debe[]= $value;
+    		$haber[]= $value;
     			
     	}
     	foreach ($a_nocorriente as $value) {
-    		$debe[]= $value;
+    		$haber[]= $value;
     			
     	}
+        foreach ($p_corriente as $values) {
+            $debe[]= $value;
+                
+        }
+        foreach ($p_nocorriente as $values) {
+            $debe[]= $value;
+                
+        }
+         foreach ($patrimonios as $valu) {
+            $patrimonio[]= $valu;
+                
+        }
 		$contenido           = TallerContabilidad::select('enunciado')->where('taller_id', $taller_id)->firstOrFail();
 		$binicial            = new BalanceInicial; 
 		$binicial->taller_id = $taller_id;
@@ -38,13 +56,12 @@ class TallerContabilidadController extends Controller
 		if ($binicial == true) {
 			   $o = BalanceInicial::get()->last(); 
 
-               foreach ($debe as $key => $activos) {
-    //            	$data            = new BIActivo; 
+               foreach ($haber as $key => $activos) {
+               	//$data            = new BIActivo; 
 				// $data->balance_inicial_id = $o->id;
 				// $data->nom_cuenta   = $activos['nom_cuenta'];
 				// $data->saldo = $activos['saldo'];
-			
-				// $data->save();
+			 // $data->save();
                   $datos=array(
                      'balance_inicial_id'=> $o->id,
                      'nom_cuenta'=> $activos['nom_cuenta'],
@@ -54,20 +71,55 @@ class TallerContabilidadController extends Controller
                   );
                   BIActivo::insert($datos);
                }
+                foreach ($debe as $key => $pasivos) {
+                  $datos=array(
+                     'balance_inicial_id'=> $o->id,
+                     'nom_cuenta'=> $pasivos['nom_cuenta'],
+                     'saldo'=> $pasivos['saldo'],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  BIPasivo::insert($datos);
+               }
+                 foreach ($patrimonio as $key => $patri) {
+                  $datos=array(
+                     'balance_inicial_id'=> $o->id,
+                     'nom_cuenta'=> $patri['nom_cuenta'],
+                     'saldo'=> $patri['saldo'],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  BIPatrimonio::insert($datos);
+               }
 
-            return $id;
+             return response(array(
+                'success' => true,
+                'message' => 'Balance Inicial creado correctamente'
+            ),200,[]);
 			
-		}
-    	// foreach ($a_corriente as $value) {
-    	// 	$debe[]= $value;
-    			
-    	// }
-    	// foreach ($a_nocorriente as $value) {
-    	// 	$debe[]= $value;
-    			
-    	// }
-
-    	
-    
+		} 
 }
+    public function b_inicial_diario(Request $request)
+    {
+        $id = 1;
+        $taller_id = $request->id;
+        
+        $balanceInicial = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->get()->last();
+        $activos = $balanceInicial->bActivos;
+        $pasivo = $balanceInicial->bPasivos;
+        $patrimonios = $balanceInicial->bPatrimonios;
+
+        $pasivo_patrimonio= [];
+        foreach ($pasivo as $valu) {
+            $pasivo_patrimonio[]= $valu;       
+        }
+        foreach ($patrimonios as $valu) {
+            $pasivo_patrimonio[]= $valu;       
+        }
+        // BIActivo::where('balance_inicial_id', $balanceInicial->id)->get();
+         return response(array(
+                'activos' => $activos,
+                'pasivos' => $pasivo_patrimonio
+            ),200,[]);
+    }
 }
