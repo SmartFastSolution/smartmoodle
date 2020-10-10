@@ -233,6 +233,10 @@ class Taller extends Model
     {
         return $this->belongsTo('App\Admin\TallerContabilidad');
     }
+       public function balanceInicial()
+    {
+        return $this->belongsTo('App\Contabilidad\BalanceInicial');
+    }
 }
 
 

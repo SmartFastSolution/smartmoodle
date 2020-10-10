@@ -28,7 +28,7 @@
                                   </div>
                                    <div class="form-group col-6">
                                     <label for="" class="col-form-label">Imagen(Opcional):</label>
-                                        <input type="file" class="inputfile inputfile-1" id="file-1">
+                                        <input type="file" class="inputfile inputfile-1" name="imagen" id="file-1">
                                         <label for="file-1"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>
                                    
                                   </div>
@@ -189,14 +189,14 @@
                                 <div class="form-group col-md-5">
                                     <label for="" class="col-form-label ">Imagen 1:</label>
                                     
-                                       <input type="file" class="inputfile inputfile-1" id="ta4-1">
+                                       <input type="file" class="inputfile inputfile-1" name="img1" id="ta4-1">
                                         <label for="ta4-1"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>
                                   
                                 </div>
                                 <div class="form-group col-md-5">
                                     <label for="" class="col-form-label ">Imagen 2:</label>
                                     
-                                       <input type="file" class="inputfile inputfile-1" id="ta4-2">
+                                       <input type="file" class="inputfile inputfile-1" name="img2" id="ta4-2">
                                         <label for="ta4-2"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>
                                     
                                 </div>
@@ -440,7 +440,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Imagen Central: </label>                          
-                                 <input type="file" class="inputfile inputfile-1" id="ta8-1">
+                                 <input type="file" class="inputfile inputfile-1" name="img" id="ta8-1">
                                 <label for="ta8-1"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>                           
                             </div>
                                <div class="form-group">
@@ -1674,8 +1674,8 @@
                                 </table>
                                 <div class="row">
                                     <a href="#" class="addFac btn btn-outline-danger">Agregar Columna</a>
-                                </div>
-                            </div>
+                                </div
+>                            </div>
                             <div class="row justify-content-center">
                                 <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>

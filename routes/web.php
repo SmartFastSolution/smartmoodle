@@ -185,6 +185,8 @@ route::post('/sistema/admin/taller30/{idtaller}', 'TallersController@store30')->
 route::post('/sistema/admin/taller31/{idtaller}', 'TallersController@store31')->name('taller31');
 route::post('/sistema/admin/taller34/{idtaller}', 'TallersController@store34')->name('taller_34');
 route::post('/sistema/admin/taller57/{idtaller}', 'TallersController@store57')->name('taller_57');
+route::post('/sistema/admin/taller/balance_inicial', 'TallerContabilidadController@balance_inicial')->name('balance_inicial');
+route::post('/sistema/admin/taller/diario', 'TallersController@diario')->name('diario');
 
 
 route::get('/sistema/taller32', 'TallersController@taller32')->name('taller32');

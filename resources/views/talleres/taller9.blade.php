@@ -7,7 +7,7 @@
 <h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>
      <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
-<form action="{{ route('taller10') }}" method="POST">
+<form action="{{ route('taller9', ['idtaller' => $d]) }}" method="POST">
     @csrf
      	<div class="container">
      		<div class="row mb-4 justify-content-center ">
@@ -15,7 +15,7 @@
      				<span class="badge-danger badge-pill">1.</span>
      				<label class="form-control-label">{{ $datos->concepto1 }}</label>
      				<div class="row">
-                              @foreach ($info = explode(',', $datos->alternativas1); as $e)            
+                              @foreach ($info = explode(',', $datos->alternativas); as $e)            
      						<div class="col-4"><input type="radio" name="item1" value="niño"> <label>{{ $e }}</label></div>
                               @endforeach
      				</div>	

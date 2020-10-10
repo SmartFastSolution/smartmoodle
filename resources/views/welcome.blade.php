@@ -65,7 +65,7 @@
     <div class="form-group">
         <label>Multiple</label>
         <select class="select2" multiple="multiple" data-placeholder="Select a State" style="width: 100%;">
-            <option>Alabama</option>
+            <option selected>Alabama</option>
             <option>Alaska</option>
             <option>California</option>
             <option>Delaware</option>

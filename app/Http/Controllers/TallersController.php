@@ -357,6 +357,9 @@ class TallersController extends Controller
             return view('talleres.taller55', compact('datos', 'd'));
         
         }elseif ($plant == 57) {
+             JavaScript::put([
+            'taller' => $d,
+            ]);
             $consul = Taller::findorfail($id);
              $datos = TallerContabilidad::where('taller_id', $consul->id)->firstOrFail();
             return view('talleres.taller57', compact('datos', 'd'));
@@ -944,9 +947,14 @@ class TallersController extends Controller
         $taller34->save();
 
       }
+        public function diario(Request $request)
+      {
+        $dato1 = $request->datos
+        ;      
+        return $dato1; 
+      }
 
-
-    public function taller5(){
+      public function taller5(){
             $dato = TallerSeñalar::where('id', 1)->firstOrFail();
             foreach ($dato as $value) { 
                 $info = explode('/', $value->item_1);
@@ -1174,5 +1182,5 @@ class TallersController extends Controller
 
         return view('talleres.taller57');
     }
-
+   
 }
