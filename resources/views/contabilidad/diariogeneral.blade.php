@@ -19,12 +19,34 @@
 					  	</tr>
 					  	<tr v-for="(diar, index) in balanceInicial.haber" align="end">
 					  		<td align="center" width="50">12/03/2019</td>
-					  		<td >@{{ diar.nom_cuenta}}</td>
+					  		<td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
 					  		<td align="center" width="125"></td>
 					  		<td align="center" width="125">@{{ diar.saldo }}</td>
                       		{{-- <td align="center" width="50"><a @click="deleteDiario(index)" class="btn btn-danger re_diario"><i class="fas fa-trash-alt"></i></a></td> --}}
 					  	</tr>
+
 					  	
+					  </tbody>
+					  {{--  <draggable :list="diarios" tag="tbody">
+					  	<tr v-for="(diar, index) in diarios">
+					  		<td align="center" width="50">12/03/2019</td>
+					  		<td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
+					  		<td align="center" width="125">@{{ diar.haber }}</td>
+					  		<td align="center" width="125">@{{ diar.debe }}</td>
+                      		 <td align="center" width="50"><a @click="deleteDiario(index)" class="btn btn-danger re_diario"><i class="fas fa-trash-alt"></i></a></td>
+					  	</tr>
+					  </draggable> 
+					    <tbody is="draggable" group="people" :list="diarios" tag="tbody">
+			                <tr v-for="(diar, index) in diarios">
+					  		<td align="center" width="50">12/03/2019</td>
+					  		<td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
+					  		<td align="center" width="125">@{{ diar.haber }}</td>
+					  		<td align="center" width="125">@{{ diar.debe }}</td>
+                      		<td align="center" width="50"><a @click="deleteDiario(index)" class="btn btn-danger re_diario"><i class="fas fa-trash-alt"></i></a></td>
+					  	</tr>
+			            </tbody>
+ --}}
+ 							
 
 					  	<tr>
 					  		<td width="50" > <input type="date" name="fecha" v-model="diario.fecha" class="form-control" required></td>
@@ -47,7 +69,6 @@
 					  		<td><input type="text" name="p_debe" class="form-control" v-model="pasan.debe" required></td>
 					  		<td><input type="text" name="p_haber" class="form-control" v-model="pasan.haber" required></td>
 					  	</tr>
-					  </tbody>
 					</table>
 					<form action="">
 						@csrf

@@ -517,6 +517,12 @@ const b_hori = new Vue({
                     patrimonio: _this.patrimonios,
                     t_patrimonio: _this.total_balance_inicial.t_patrimonio_pasivo
                 }).then(response => {
+                  if (response.data.success == false) {
+                    toastr.error(response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+                  }else{
+              
                   toastr.success(response.data.message, "Smarmoddle", {
                     "timeOut": "3000"
                    });
@@ -532,9 +538,13 @@ const b_hori = new Vue({
                     _this.cambioPasivoNo();
                     _this.cambioPatrimonio();
                     diario.obtenerBalanceInicial();
+                    $('#list-tab a:nth-child(3)').tab('show');
                     console.log(response.data);
+                  }
                 }).catch(function(error){
-                  console.log(error)
+                  toastr.error(error.response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
                 });
               }
             },
@@ -1037,12 +1047,14 @@ const b_ver = new Vue({
   }        
 });
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////DIARIO GENERAL//////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const diario = new Vue({
  el: '#diario',
     data:{
       id_taller: taller,
-
       balanceInicial:{
         debe:[],
         haber:[]
@@ -1102,9 +1114,14 @@ const diario = new Vue({
         axios.post(url,{
           id: _this.id_taller,
         }).then(response => {
-          _this.balanceInicial.debe = response.data.pasivos;
+          if (response.data.datos == true) {
+            _this.balanceInicial.debe = response.data.pasivos;
           _this.balanceInicial.haber = response.data.activos;
-            console.log(response.data);           
+          $('#list-tab a:nth-child(3)').tab('show');
+
+            console.log(response.data); 
+          }
+                    
         }).catch(function(error){
 
         });
