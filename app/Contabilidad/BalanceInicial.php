@@ -12,6 +12,9 @@ class BalanceInicial extends Model
     public function user(){
        return $this->belongsTo('App\User');
     }
+    public function dGeneral(){
+       return $this->hasOne('App\Contabilidad○\DiarioGeneral');
+    }
     public function bActivos(){
        return $this->hasMany('App\Contabilidad\BIActivo');
     }

@@ -1059,18 +1059,29 @@ const diario = new Vue({
         debe:[],
         haber:[]
        },
-        diarios:[],
+       registros:[
+       ],
+        diarios:{
+           debe:[],
+          haber:[]
+        },
         diario:{
-          fecha:'',
+          debe:{
+            fecha:'',
             nom_cuenta:'',
-            gloza:'',
-            debe:'',
-            haber:''
+            saldo:'',
+          },
+          haber:{
+            fecha:'',
+            nom_cuenta:'',
+            saldo:''
+          }
         },
         pasan:{ 
           debe:'', 
           haber:''
         },
+        dato:[]
     },
       mounted: function(){
     this.obtenerBalanceInicial();
@@ -1078,6 +1089,66 @@ const diario = new Vue({
  
   },
     methods:{
+    obtenerBalanceInicial: function(){
+      var _this = this;
+      var url = '/sistema/admin/taller/b_inicial_diario';
+        axios.post(url,{
+          id: _this.id_taller,
+        }).then(response => {
+          if (response.data.datos == true) {
+            _this.balanceInicial.debe = response.data.pasivos;
+          _this.balanceInicial.haber = response.data.activos;
+          $('#list-tab a:nth-child(3)').tab('show');
+
+            console.log(response.data); 
+          }
+                    
+        }).catch(function(error){
+
+        });
+
+    },
+    agregarHaber(){
+                var haber = {fecha:this.diario.haber.fecha, nom_cuenta:this.diario.haber.nom_cuenta, saldo:this.diario.haber.saldo};
+                this.diarios.haber.push(haber);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.diario.haber.fecha =''
+                this.diario.haber.nom_cuenta =''
+                this.diario.haber.saldo =''
+    },
+     agregarDebe(){
+      if (this.diarios.debe.length == 0) {
+        if (this.diario.debe.fecha.trim() === '') {
+          toastr.error("La fecha es obligatoria en la primera cuenta del registro", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+        }else{
+         var debe = {fecha:this.diario.debe.fecha, nom_cuenta:this.diario.debe.nom_cuenta, saldo:this.diario.debe.saldo};
+                this.diarios.debe.push(debe);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.diario.debe.fecha =''
+                this.diario.debe.nom_cuenta =''
+                this.diario.debe.saldo =''
+        }
+      } else {
+         var debe = {fecha:'', nom_cuenta:this.diario.debe.nom_cuenta, saldo:this.diario.debe.saldo};
+                this.diarios.debe.push(debe);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.diario.debe.fecha =''
+                this.diario.debe.nom_cuenta =''
+                this.diario.debe.saldo =''
+      }
+               
+    },
   Agregar(){
     if(this.diario.nom_cuenta.trim() === ''){
       toastr.error("El campo Nombre de cuenta es obligatorio", "Smarmoddle", {
@@ -1105,26 +1176,22 @@ const diario = new Vue({
       this.diario.haber =''
     }
     },
-  deleteDiario(index){
-      this.diarios.splice(index, 1);
+  deleteHaber(index){
+      this.diarios.haber.splice(index, 1);
     },
-  obtenerBalanceInicial: function(){
-      var _this = this;
-      var url = '/sistema/admin/taller/b_inicial_diario';
-        axios.post(url,{
-          id: _this.id_taller,
-        }).then(response => {
-          if (response.data.datos == true) {
-            _this.balanceInicial.debe = response.data.pasivos;
-          _this.balanceInicial.haber = response.data.activos;
-          $('#list-tab a:nth-child(3)').tab('show');
-
-            console.log(response.data); 
-          }
-                    
-        }).catch(function(error){
-
-        });
+  deleteDebe(index){
+      this.diarios.debe.splice(index, 1);
+    },
+    guardarRegistro(){
+      var registro = {debe:this.diarios.debe, haber:this.diarios.haber};
+                this.registros.push(registro);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Registro agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.diarios.debe =[];
+                this.diarios.haber =[];
+                console.log(this.registros)
 
     },
   guardarDiario: function(){
@@ -1132,9 +1199,11 @@ const diario = new Vue({
         var url = '/sistema/admin/taller/diario';
             axios.post(url,{
               id: _this.id_taller,
-            datos: _this.diarios
+              debe: _this.diarios.debe,
+              haber: _this.diarios.haber
         }).then(response => {
-            console.log(response.data);           
+          _this.dato = response.data;
+            console.log( _this.dato);           
         }).catch(function(error){
 
         });

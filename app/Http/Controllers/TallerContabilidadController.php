@@ -7,6 +7,7 @@ use App\Contabilidad\BIActivo;
 use App\Contabilidad\BIPatrimonio;
 use App\Contabilidad\BIPasivo;
 use App\Contabilidad\BalanceInicial;
+use App\Contabilidad\DiarioGeneral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,8 +60,19 @@ class TallerContabilidadController extends Controller
         $binicial->nombre                  = $request->nombre;
         $binicial->fecha                   = $request->fecha;
         $binicial->total_pasivo_patrimonio = $request->t_patrimonio;
-
 		$binicial->save();
+
+        $a = BalanceInicial::get()->last(); 
+
+        $diariogeneral                     = new DiarioGeneral;
+        $diariogeneral->taller_id          = $taller_id;
+        $diariogeneral->user_id            = $id;
+        $diariogeneral->balance_inicial_id = $a->id;
+        $diariogeneral->enunciado          = $contenido->enunciado;
+        $diariogeneral->nombre             = $request->nombre;
+        $diariogeneral->completado         = false;
+        $diariogeneral->save();
+        
 		if ($binicial == true) {
 			   $o = BalanceInicial::get()->last(); 
                foreach ($haber as $key => $activos) {
@@ -141,5 +153,48 @@ class TallerContabilidadController extends Controller
             ),200,[]);
         }
      
+    }
+    public function registerDiario(Request $request)
+    {
+         $id                = Auth::id();
+        $taller_id         = $request->id;
+        $balanceInicial    = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->first();
+         if ($balanceInicial->count()  == 1) {
+            
+
+         }else{
+             return response(array(
+                'datos' => false,
+            ),200,[]);
+
+         }
+
+
+
+    }
+    public function diario(Request $request)
+    {
+        $productos = array( 
+    
+            'Bolígrafo Azul' => array(
+                'marca'      => array(
+                    'Nombre' => "Precio",
+                    'Precio' => "1000"
+                ),
+                'marca'      => array(
+                    'Nombre' => "Precio",
+                    'Precio' => "1000"
+                ),
+                'precio'     => "0.75€",
+                'referencia' => "552BIC12"
+    ),
+    
+            'Pegamento'      => array(
+                'marca'      => "Pritt",
+                'precio'     => "1.75€",
+                'referencia' => "567PRI13"
+    )
+    );
+        return $productos;
     }
 }
