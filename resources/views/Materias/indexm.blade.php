@@ -41,7 +41,11 @@
                                 <tr>
                                     @foreach ($materias as $materia)
                                     <th scope="row">{{ $materia['id']}}</th>
-                                    <td>{{ $materia->instituto->nombre}}</td>
+                                    <td>
+                                    @if($materia->instituto != null)
+                                     {{$materia->instituto->nombre}}
+                                     @endif
+                                    </td>
                                     <td>{{ $materia['nombre']}}</td>
                                     <td>{{ $materia['descripcion']}}</td>
                                     <td>{{ $materia['estado']}}</td>

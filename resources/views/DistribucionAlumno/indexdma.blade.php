@@ -35,6 +35,7 @@
                                     <th scope="col">Unidad Educativa</th>
                                     <th scope="col">Curso</th>
                                     <th scope="col">Paralelo</th>
+                                    <th scope="col">Materias</th>
                                     <th scope="col">Alumno</th>
                                     <th scope="col">Estado</th>
                                     <th></th>
@@ -46,28 +47,41 @@
                                     @foreach ($distrimas as $distrima)
                                     <th scope="row">{{$distrima['id']}}</th>
                                     <td>{{$distrima->instituto->nombre}} </td>
-                                    <td>@foreach($distrima->distribumacus as $dis)
 
-
-                                        <span class="badge badge-success">
-                                            {{$dis->id}}
-                                        </span>
+                                    @foreach($distrima->distribumacus as $dis)
+                                    <td>
                                         <span class="badge badge-success">
                                             {{$dis->curso->nombre}}
                                         </span>
+                                    </td>
+                                    <td>
                                         <span class="badge badge-success">
+                                            {{$dis->nivel->nombre}}
+                                        </span>
+                                    </td>
+                                    <td>
+                                      
                                             @if($dis->materias != null)
                                             @foreach($dis->materias as $dismacu)
                                             <span class="badge badge-success">
                                                 {{$dismacu->nombre}}
-                                            </span>
+                                                </span>
 
                                             @endforeach
                                             @endif
-                                        </span>
-                                        @endforeach
+                                     
                                     </td>
-                                    <td>{{$distrima->user->name}}</td>
+                                    @endforeach
+
+                                    <td>
+                                        @if($distrima->user != null)
+
+                                        {{$distrima->user->name}}  
+                                     
+                                        @endif
+                                    </td>
+ 
+                                     
                                     <td>{{ $distrima['estado']}}</td>
 
                                     <td> </td>

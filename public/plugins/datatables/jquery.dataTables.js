@@ -1,28 +1,15 @@
-<<<<<<< HEAD
-/*! DataTables 1.10.22
- * ©2008-2020 SpryMedia Ltd - datatables.net/license
-=======
 /*! DataTables 1.10.20
  * ©2008-2019 SpryMedia Ltd - datatables.net/license
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  */
 
 /**
  * @summary     DataTables
  * @description Paginate, search and order HTML tables
-<<<<<<< HEAD
- * @version     1.10.22
- * @file        jquery.dataTables.js
- * @author      SpryMedia Ltd
- * @contact     www.datatables.net
- * @copyright   Copyright 2008-2020 SpryMedia Ltd.
-=======
  * @version     1.10.20
  * @file        jquery.dataTables.js
  * @author      SpryMedia Ltd
  * @contact     www.datatables.net
  * @copyright   Copyright 2008-2019 SpryMedia Ltd.
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  *
  * This source file is free software, available under the following license:
  *   MIT license - http://datatables.net/license
@@ -264,11 +251,7 @@
 			var api = this.api( true );
 		
 			/* Check if we want to add multiple rows or not */
-<<<<<<< HEAD
-			var rows = Array.isArray(data) && ( Array.isArray(data[0]) || $.isPlainObject(data[0]) ) ?
-=======
 			var rows = $.isArray(data) && ( $.isArray(data[0]) || $.isPlainObject(data[0]) ) ?
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				api.rows.add( data ) :
 				api.row.add( data );
 		
@@ -992,11 +975,7 @@
 			// If the length menu is given, but the init display length is not, use the length menu
 			if ( oInit.aLengthMenu && ! oInit.iDisplayLength )
 			{
-<<<<<<< HEAD
-				oInit.iDisplayLength = Array.isArray( oInit.aLengthMenu[0] ) ?
-=======
 				oInit.iDisplayLength = $.isArray( oInit.aLengthMenu[0] ) ?
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 					oInit.aLengthMenu[0][0] : oInit.aLengthMenu[0];
 			}
 			
@@ -1087,11 +1066,7 @@
 			if ( oInit.iDeferLoading !== null )
 			{
 				oSettings.bDeferLoading = true;
-<<<<<<< HEAD
-				var tmp = Array.isArray( oInit.iDeferLoading );
-=======
 				var tmp = $.isArray( oInit.iDeferLoading );
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				oSettings._iRecordsDisplay = tmp ? oInit.iDeferLoading[0] : oInit.iDeferLoading;
 				oSettings._iRecordsTotal = tmp ? oInit.iDeferLoading[1] : oInit.iDeferLoading;
 			}
@@ -1381,11 +1356,7 @@
 	// - Ƀ - Bitcoin
 	// - Ξ - Ethereum
 	//   standards as thousands separators.
-<<<<<<< HEAD
-	var _re_formatted_numeric = /['\u00A0,$£€¥%\u2009\u202F\u20BD\u20a9\u20BArfkɃΞ]/gi;
-=======
 	var _re_formatted_numeric = /[',$£€¥%\u2009\u202F\u20BD\u20a9\u20BArfkɃΞ]/gi;
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	
 	
 	var _empty = function ( d ) {
@@ -1613,39 +1584,6 @@
 		return out;
 	};
 	
-<<<<<<< HEAD
-	// Surprisingly this is faster than [].concat.apply
-	// https://jsperf.com/flatten-an-array-loop-vs-reduce/2
-	var _flatten = function (out, val) {
-		if (Array.isArray(val)) {
-			for (var i=0 ; i<val.length ; i++) {
-				_flatten(out, val[i]);
-			}
-		}
-		else {
-			out.push(val);
-		}
-	  
-		return out;
-	}
-	
-	// Array.isArray polyfill.
-	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray
-	if (! Array.isArray) {
-	    Array.isArray = function(arg) {
-	        return Object.prototype.toString.call(arg) === '[object Array]';
-	    };
-	}
-	
-	// .trim() polyfill
-	// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim
-	if (!String.prototype.trim) {
-	  String.prototype.trim = function () {
-	    return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
-	  };
-	}
-=======
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	
 	/**
 	 * DataTables utility methods
@@ -1903,11 +1841,7 @@
 	
 		// orderData can be given as an integer
 		var dataSort = init.aDataSort;
-<<<<<<< HEAD
-		if ( typeof dataSort === 'number' && ! Array.isArray( dataSort ) ) {
-=======
 		if ( typeof dataSort === 'number' && ! $.isArray( dataSort ) ) {
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			init.aDataSort = [ dataSort ];
 		}
 	}
@@ -2391,11 +2325,7 @@
 					def.targets :
 					def.aTargets;
 	
-<<<<<<< HEAD
-				if ( ! Array.isArray( aTargets ) )
-=======
 				if ( ! $.isArray( aTargets ) )
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				{
 					aTargets = [ aTargets ];
 				}
@@ -2714,11 +2644,7 @@
 							innerSrc = a.join('.');
 	
 							// Traverse each entry in the array getting the properties requested
-<<<<<<< HEAD
-							if ( Array.isArray( data ) ) {
-=======
 							if ( $.isArray( data ) ) {
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 								for ( var j=0, jLen=data.length ; j<jLen ; j++ ) {
 									out.push( fetchData( data[j], type, innerSrc ) );
 								}
@@ -2806,14 +2732,6 @@
 	
 				for ( var i=0, iLen=a.length-1 ; i<iLen ; i++ )
 				{
-<<<<<<< HEAD
-					// Protect against prototype pollution
-					if (a[i] === '__proto__') {
-						throw new Error('Cannot set prototype values');
-					}
-	
-=======
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 					// Check if we are dealing with an array notation request
 					arrayNotation = a[i].match(__reArray);
 					funcNotation = a[i].match(__reFn);
@@ -2829,11 +2747,7 @@
 						innerSrc = b.join('.');
 	
 						// Traverse each entry in the array setting the properties requested
-<<<<<<< HEAD
-						if ( Array.isArray( val ) )
-=======
 						if ( $.isArray( val ) )
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 						{
 							for ( var j=0, jLen=val.length ; j<jLen ; j++ )
 							{
@@ -3080,11 +2994,7 @@
 		var cellProcess = function ( cell ) {
 			if ( colIdx === undefined || colIdx === i ) {
 				col = columns[i];
-<<<<<<< HEAD
-				contents = (cell.innerHTML).trim();
-=======
 				contents = $.trim(cell.innerHTML);
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	
 				if ( col && col._bAttrSrc ) {
 					var setter = _fnSetObjectDataFn( col.mData._ );
@@ -3334,19 +3244,11 @@
 		}
 		
 		/* ARIA role for the rows */
-<<<<<<< HEAD
-		$(thead).children('tr').attr('role', 'row');
-	
-		/* Deal with the footer - add classes if required */
-		$(thead).children('tr').children('th, td').addClass( classes.sHeaderTH );
-		$(tfoot).children('tr').children('th, td').addClass( classes.sFooterTH );
-=======
 	 	$(thead).find('>tr').attr('role', 'row');
 	
 		/* Deal with the footer - add classes if required */
 		$(thead).find('>tr>th, >tr>td').addClass( classes.sHeaderTH );
 		$(tfoot).find('>tr>th, >tr>td').addClass( classes.sFooterTH );
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	
 		// Cache the footer cells. Note that we only take the cells from the first
 		// row in the footer. If there is more than one row the user wants to
@@ -3932,11 +3834,7 @@
 	
 		// Convert to object based for 1.10+ if using the old array scheme which can
 		// come from server-side processing or serverParams
-<<<<<<< HEAD
-		if ( data && Array.isArray(data) ) {
-=======
 		if ( data && $.isArray(data) ) {
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			var tmp = {};
 			var rbracket = /(.*?)\[\]$/;
 	
@@ -4214,11 +4112,7 @@
 		var recordsTotal    = compat( 'iTotalRecords',        'recordsTotal' );
 		var recordsFiltered = compat( 'iTotalDisplayRecords', 'recordsFiltered' );
 	
-<<<<<<< HEAD
-		if ( draw !== undefined ) {
-=======
 		if ( draw ) {
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			// Protect against out of sequence returns
 			if ( draw*1 < settings.iDraw ) {
 				return;
@@ -4333,17 +4227,6 @@
 					_fnThrottle( searchFn, searchDelay ) :
 					searchFn
 			)
-<<<<<<< HEAD
-			.on( 'mouseup', function(e) {
-				// Edge fix! Edge 17 does not trigger anything other than mouse events when clicking
-				// on the clear icon (Edge bug 17584515). This is safe in other browsers as `searchFn`
-				// checks the value to see if it has changed. In other browsers it won't have.
-				setTimeout( function () {
-					searchFn.call(jqFilter[0]);
-				}, 10);
-			} )
-=======
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			.on( 'keypress.DT', function(e) {
 				/* Prevent form submission */
 				if ( e.keyCode == 13 ) {
@@ -4928,11 +4811,7 @@
 			classes  = settings.oClasses,
 			tableId  = settings.sTableId,
 			menu     = settings.aLengthMenu,
-<<<<<<< HEAD
-			d2       = Array.isArray( menu[0] ),
-=======
 			d2       = $.isArray( menu[0] ),
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			lengths  = d2 ? menu[0] : menu,
 			language = d2 ? menu[1] : menu;
 	
@@ -5282,17 +5161,10 @@
 			} );
 		}
 	
-<<<<<<< HEAD
-		$(scrollBody).css('max-height', scrollY);
-		if (! scroll.bCollapse) {
-			$(scrollBody).css('height', scrollY);
-		}
-=======
 		$(scrollBody).css(
 			scrollY && scroll.bCollapse ? 'max-height' : 'height', 
 			scrollY
 		);
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	
 		settings.nScrollHead = scrollHead;
 		settings.nScrollBody = scrollBody;
@@ -5985,11 +5857,7 @@
 			fixedObj = $.isPlainObject( fixed ),
 			nestedSort = [],
 			add = function ( a ) {
-<<<<<<< HEAD
-				if ( a.length && ! Array.isArray( a[0] ) ) {
-=======
 				if ( a.length && ! $.isArray( a[0] ) ) {
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 					// 1D array
 					nestedSort.push( a );
 				}
@@ -6001,11 +5869,7 @@
 	
 		// Build the sort array, with pre-fix and post-fix options if they have been
 		// specified
-<<<<<<< HEAD
-		if ( Array.isArray( fixed ) ) {
-=======
 		if ( $.isArray( fixed ) ) {
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			add( fixed );
 		}
 	
@@ -6634,15 +6498,9 @@
 	 */
 	function _fnMap( ret, src, name, mappedName )
 	{
-<<<<<<< HEAD
-		if ( Array.isArray( name ) ) {
-			$.each( name, function (i, val) {
-				if ( Array.isArray( val ) ) {
-=======
 		if ( $.isArray( name ) ) {
 			$.each( name, function (i, val) {
 				if ( $.isArray( val ) ) {
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 					_fnMap( ret, src, val[0], val[1] );
 				}
 				else {
@@ -6694,11 +6552,7 @@
 					}
 					$.extend( true, out[prop], val );
 				}
-<<<<<<< HEAD
-				else if ( breakRefs && prop !== 'data' && prop !== 'aaData' && Array.isArray(val) ) {
-=======
 				else if ( breakRefs && prop !== 'data' && prop !== 'aaData' && $.isArray(val) ) {
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 					out[prop] = val.slice();
 				}
 				else {
@@ -6724,11 +6578,7 @@
 	{
 		$(n)
 			.on( 'click.DT', oData, function (e) {
-<<<<<<< HEAD
-					$(n).trigger('blur'); // Remove focus outline for mouse users
-=======
 					$(n).blur(); // Remove focus outline for mouse users
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 					fn(e);
 				} )
 			.on( 'keypress.DT', oData, function (e){
@@ -7046,11 +6896,7 @@
 			}
 		};
 	
-<<<<<<< HEAD
-		if ( Array.isArray( context ) ) {
-=======
 		if ( $.isArray( context ) ) {
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			for ( var i=0, ien=context.length ; i<ien ; i++ ) {
 				ctxSettings( context[i] );
 			}
@@ -7408,11 +7254,7 @@
 	
 	_Api.register = _api_register = function ( name, val )
 	{
-<<<<<<< HEAD
-		if ( Array.isArray( name ) ) {
-=======
 		if ( $.isArray( name ) ) {
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			for ( var j=0, jen=name.length ; j<jen ; j++ ) {
 				_Api.register( name[j], val );
 			}
@@ -7482,11 +7324,7 @@
 				// New API instance returned, want the value from the first item
 				// in the returned array for the singular result.
 				return ret.length ?
-<<<<<<< HEAD
-					Array.isArray( ret[0] ) ?
-=======
 					$.isArray( ret[0] ) ?
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 						new _Api( ret.context, ret[0] ) : // Array results are 'enhanced'
 						ret[0] :
 					undefined;
@@ -7509,15 +7347,6 @@
 	 */
 	var __table_selector = function ( selector, a )
 	{
-<<<<<<< HEAD
-		if ( Array.isArray(selector) ) {
-			return $.map( selector, function (item) {
-				return __table_selector(item, a);
-			} );
-		}
-	
-=======
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		// Integer is used to pick out a table by index
 		if ( typeof selector === 'number' ) {
 			return [ a[ selector ] ];
@@ -7553,11 +7382,7 @@
 	 */
 	_api_register( 'tables()', function ( selector ) {
 		// A new instance is created if there was a selector specified
-<<<<<<< HEAD
-		return selector !== undefined && selector !== null ?
-=======
 		return selector ?
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			new _Api( __table_selector( selector, this.context ) ) :
 			this;
 	} );
@@ -7905,11 +7730,7 @@
 				[ selector[i] ];
 	
 			for ( j=0, jen=a.length ; j<jen ; j++ ) {
-<<<<<<< HEAD
-				res = selectFn( typeof a[j] === 'string' ? (a[j]).trim() : a[j] );
-=======
 				res = selectFn( typeof a[j] === 'string' ? $.trim(a[j]) : a[j] );
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	
 				if ( res && res.length ) {
 					out = out.concat( res );
@@ -8335,11 +8156,7 @@
 		row._aData = data;
 	
 		// If the DOM has an id, and the data source is an array
-<<<<<<< HEAD
-		if ( Array.isArray( data ) && row.nTr && row.nTr.id ) {
-=======
 		if ( $.isArray( data ) && row.nTr.id ) {
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			_fnSetObjectDataFn( ctx[0].rowId )( data, row.nTr.id );
 		}
 	
@@ -8385,11 +8202,7 @@
 		var rows = [];
 		var addRow = function ( r, k ) {
 			// Recursion to allow for arrays of jQuery objects
-<<<<<<< HEAD
-			if ( Array.isArray( r ) || r instanceof $ ) {
-=======
 			if ( $.isArray( r ) || r instanceof $ ) {
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				for ( var i=0, ien=r.length ; i<ien ; i++ ) {
 					addRow( r[i], k );
 				}
@@ -8403,11 +8216,7 @@
 			}
 			else {
 				// Otherwise create a row with a wrapper
-<<<<<<< HEAD
-				var created = $('<tr><td></td></tr>').addClass( k );
-=======
 				var created = $('<tr><td/></tr>').addClass( k );
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				$('td', created)
 					.addClass( k )
 					.html( r )
@@ -8903,21 +8712,14 @@
 		return _selector_first( this.columns( selector, opts ) );
 	} );
 	
-<<<<<<< HEAD
-=======
 	
 	
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	var __cell_selector = function ( settings, selector, opts )
 	{
 		var data = settings.aoData;
 		var rows = _selector_row_indexes( settings, opts );
 		var cells = _removeEmpty( _pluck_order( data, rows, 'anCells' ) );
-<<<<<<< HEAD
-		var allCells = $(_flatten( [], cells ));
-=======
 		var allCells = $( [].concat.apply([], cells) );
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		var row;
 		var columns = settings.aoColumns.length;
 		var a, i, ien, j, o, host;
@@ -9189,11 +8991,7 @@
 			// Simple column / direction passed in
 			order = [ [ order, dir ] ];
 		}
-<<<<<<< HEAD
-		else if ( order.length && ! Array.isArray( order[0] ) ) {
-=======
 		else if ( order.length && ! $.isArray( order[0] ) ) {
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			// Arguments passed in (list of 1D arrays)
 			order = Array.prototype.slice.call( arguments );
 		}
@@ -9229,11 +9027,7 @@
 				ctx[0].aaSortingFixed :
 				undefined;
 	
-<<<<<<< HEAD
-			return Array.isArray( fixed ) ?
-=======
 			return $.isArray( fixed ) ?
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				{ pre: fixed } :
 				fixed;
 		}
@@ -9693,11 +9487,7 @@
 	 *  @type string
 	 *  @default Version number
 	 */
-<<<<<<< HEAD
-	DataTable.version = "1.10.22";
-=======
 	DataTable.version = "1.10.20";
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 	/**
 	 * Private data store, containing all of the settings objects that are
@@ -10115,13 +9905,8 @@
 	 * version is still, internally the primary interface, but is is not documented
 	 * - hence the @name tags in each doc comment. This allows a Javascript function
 	 * to create a map from Hungarian notation to camel case (going the other direction
-<<<<<<< HEAD
-	 * would require each property to be listed, which would add around 3K to the size
-	 * of DataTables, while this method is about a 0.5K hit).
-=======
 	 * would require each property to be listed, which would at around 3K to the size
 	 * of DataTables, while this method is about a 0.5K hit.
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 	 *
 	 * Ultimately this does pave the way for Hungarian notation to be dropped
 	 * completely, but that is a massive amount of work and will break current
@@ -11220,13 +11005,7 @@
 						'DataTables_'+settings.sInstance+'_'+location.pathname
 					)
 				);
-<<<<<<< HEAD
-			} catch (e) {
-				return {};
-			}
-=======
 			} catch (e) {}
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		},
 	
 	
@@ -14780,11 +14559,7 @@
 					for ( i=0, ien=buttons.length ; i<ien ; i++ ) {
 						button = buttons[i];
 	
-<<<<<<< HEAD
-						if ( Array.isArray( button ) ) {
-=======
 						if ( $.isArray( button ) ) {
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 							var inner = $( '<'+(button.DT_el || 'div')+'/>' )
 								.appendTo( container );
 							attach( inner, button );
@@ -14820,11 +14595,7 @@
 								case 'next':
 									btnDisplay = lang.sNext;
 	
-<<<<<<< HEAD
-									if ( pages === 0 || page === pages-1 ) {
-=======
 									if ( page === pages-1 ) {
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 										tabIndex = -1;
 										btnClass += ' ' + disabledClass;
 									}
@@ -14833,22 +14604,14 @@
 								case 'last':
 									btnDisplay = lang.sLast;
 	
-<<<<<<< HEAD
-									if ( pages === 0 || page === pages-1 ) {
-=======
 									if ( page === pages-1 ) {
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 										tabIndex = -1;
 										btnClass += ' ' + disabledClass;
 									}
 									break;
 	
 								default:
-<<<<<<< HEAD
-									btnDisplay = settings.fnFormatNumber( button + 1 );
-=======
 									btnDisplay = button + 1;
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 									btnClass = page === button ?
 										classes.sPageButtonActive : '';
 									break;
@@ -14895,11 +14658,7 @@
 				attach( $(host).empty(), buttons );
 	
 				if ( activeEl !== undefined ) {
-<<<<<<< HEAD
-					$(host).find( '[data-dt-idx='+activeEl+']' ).trigger('focus');
-=======
 					$(host).find( '[data-dt-idx='+activeEl+']' ).focus();
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				}
 			}
 		}
@@ -15185,15 +14944,7 @@
 	
 	var __htmlEscapeEntities = function ( d ) {
 		return typeof d === 'string' ?
-<<<<<<< HEAD
-			d
-				.replace(/&/g, '&amp;')
-				.replace(/</g, '&lt;')
-				.replace(/>/g, '&gt;')
-				.replace(/"/g, '&quot;') :
-=======
 			d.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') :
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			d;
 	};
 	

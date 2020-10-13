@@ -18,13 +18,13 @@
                     <h1>Permisos de Acceso </h1>
                     <div class="card card-secondary">
                         <div class="card-header">
-                            
+
                             <div class="card-tools">
                             </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-hover">
+                            <table id="myTable" class="table table-border">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
@@ -32,8 +32,12 @@
                                         <th scope="col">Slug</th>
                                         <th scope="col">Detalle</th>
                                         <th scope="col">Estado</th>
+                                        <th></th>          
                                         <th></th>
-                                        <th scope="col">Tools</th>
+                                    
+                                        <th width="80px">&nbsp;</th>
+
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -43,8 +47,10 @@
                                         <td>{{ $permiso['namep']}}</td>
                                         <td>{{ $permiso['slug']}}</td>
                                         <td>{{ $permiso['descripcionp']}}</td>
+                                        
                                         <td>{{ $permiso['estado']}}</td>
-                                        <td> </td>
+                                      
+
                                         <td class="table-button ">
                                             <a class="btn btn-info"
                                                 href="{{route('permissions.show', $permiso->id)}}"><i
@@ -66,13 +72,15 @@
                                                         class="fas fa-trash"></i></button>
                                             </form>
                                         </td>
+                                      
+
                                     </tr>
                                     @endforeach
                                 </tbody>
                                 <!--Table body-->
 
                             </table>
-                            {{$permissions->links()}}
+
                             <!--Table-->
                         </div>
                     </div>
@@ -85,26 +93,30 @@
 
 @section('css')
 
+
+
 @stop
 
 @section('js')
 
-
 <script>
 $(function() {
-    $("#example1").DataTable({
-        "responsive": true,
-        "autoWidth": false,
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+                "info": true,
+                "autoWidth": true,
+               
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                }
+            }
+
+        );
     });
-    $('#example2').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-    });
+
 });
+
 </script>
+
+
 @stop

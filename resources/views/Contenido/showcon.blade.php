@@ -20,6 +20,8 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
+            <a class="btn btn-info float-right" href="{{route('admin.create')}}"><i class="fas fa-plus"> Crear
+                        Talleres</i></a>
                 <h1 class="font-weight-light">Show Unidad</h1>
                 <div class="row">
                     <div class="col-md-10">

@@ -8,32 +8,12 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > th.child:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr > td.dataTables_empty:before {
   display: none !important;
 }
-<<<<<<< HEAD
-table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td.dtr-control,
-table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > th.dtr-control {
-=======
 table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td:first-child,
 table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > th:first-child {
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
   position: relative;
   padding-left: 30px;
   cursor: pointer;
 }
-<<<<<<< HEAD
-table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td.dtr-control:before,
-table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > th.dtr-control:before {
-  top: 50%;
-  left: 5px;
-  height: 1em;
-  width: 1em;
-  margin-top: -9px;
-  display: block;
-  position: absolute;
-  color: white;
-  border: 0.15em solid white;
-  border-radius: 1em;
-  box-shadow: 0 0 0.2em #444;
-=======
 table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td:first-child:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > th:first-child:before {
   top: 12px;
@@ -46,28 +26,10 @@ table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > th:first-child:b
   border: 2px solid white;
   border-radius: 14px;
   box-shadow: 0 0 3px #444;
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
   box-sizing: content-box;
   text-align: center;
   text-indent: 0 !important;
   font-family: 'Courier New', Courier, monospace;
-<<<<<<< HEAD
-  line-height: 1em;
-  content: '+';
-  background-color: #0275d8;
-}
-table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td.dtr-control:before,
-table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th.dtr-control:before {
-  content: '-';
-  background-color: #d33333;
-}
-table.dataTable.dtr-inline.collapsed.compact > tbody > tr > td.dtr-control,
-table.dataTable.dtr-inline.collapsed.compact > tbody > tr > th.dtr-control {
-  padding-left: 27px;
-}
-table.dataTable.dtr-inline.collapsed.compact > tbody > tr > td.dtr-control:before,
-table.dataTable.dtr-inline.collapsed.compact > tbody > tr > th.dtr-control:before {
-=======
   line-height: 14px;
   content: '+';
   background-color: #0275d8;
@@ -84,7 +46,6 @@ table.dataTable.dtr-inline.collapsed.compact > tbody > tr > th:first-child {
 table.dataTable.dtr-inline.collapsed.compact > tbody > tr > td:first-child:before,
 table.dataTable.dtr-inline.collapsed.compact > tbody > tr > th:first-child:before {
   top: 5px;
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
   left: 4px;
   height: 14px;
   width: 14px;
@@ -92,37 +53,15 @@ table.dataTable.dtr-inline.collapsed.compact > tbody > tr > th:first-child:befor
   line-height: 14px;
   text-indent: 3px;
 }
-<<<<<<< HEAD
-table.dataTable.dtr-column > tbody > tr > td.dtr-control,
-table.dataTable.dtr-column > tbody > tr > th.dtr-control,
-=======
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 table.dataTable.dtr-column > tbody > tr > td.control,
 table.dataTable.dtr-column > tbody > tr > th.control {
   position: relative;
   cursor: pointer;
 }
-<<<<<<< HEAD
-table.dataTable.dtr-column > tbody > tr > td.dtr-control:before,
-table.dataTable.dtr-column > tbody > tr > th.dtr-control:before,
-=======
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 table.dataTable.dtr-column > tbody > tr > td.control:before,
 table.dataTable.dtr-column > tbody > tr > th.control:before {
   top: 50%;
   left: 50%;
-<<<<<<< HEAD
-  height: 0.8em;
-  width: 0.8em;
-  margin-top: -0.5em;
-  margin-left: -0.5em;
-  display: block;
-  position: absolute;
-  color: white;
-  border: 0.15em solid white;
-  border-radius: 1em;
-  box-shadow: 0 0 0.2em #444;
-=======
   height: 16px;
   width: 16px;
   margin-top: -10px;
@@ -133,24 +72,14 @@ table.dataTable.dtr-column > tbody > tr > th.control:before {
   border: 2px solid white;
   border-radius: 14px;
   box-shadow: 0 0 3px #444;
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
   box-sizing: content-box;
   text-align: center;
   text-indent: 0 !important;
   font-family: 'Courier New', Courier, monospace;
-<<<<<<< HEAD
-  line-height: 1em;
-  content: '+';
-  background-color: #0275d8;
-}
-table.dataTable.dtr-column > tbody > tr.parent td.dtr-control:before,
-table.dataTable.dtr-column > tbody > tr.parent th.dtr-control:before,
-=======
   line-height: 14px;
   content: '+';
   background-color: #0275d8;
 }
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 table.dataTable.dtr-column > tbody > tr.parent td.control:before,
 table.dataTable.dtr-column > tbody > tr.parent th.control:before {
   content: '-';
@@ -249,11 +178,3 @@ div.dtr-modal div.dtr-modal-background {
 div.dtr-bs-modal table.table tr:first-child td {
   border-top: none;
 }
-<<<<<<< HEAD
-
-table.dataTable.dtr-inline.collapsed.table-sm > tbody > tr > td:first-child:before,
-table.dataTable.dtr-inline.collapsed.table-sm > tbody > tr > th:first-child:before {
-  top: 5px;
-}
-=======
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116

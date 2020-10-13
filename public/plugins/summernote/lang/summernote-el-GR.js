@@ -1,21 +1,13 @@
 /*!
  * 
-<<<<<<< HEAD
- * Super simple wysiwyg editor v0.8.18
-=======
  * Super simple wysiwyg editor v0.8.16
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  * https://summernote.org
  * 
  * 
  * Copyright 2013- Alan Hong. and other contributors
  * summernote may be freely distributed under the MIT license.
  * 
-<<<<<<< HEAD
- * Date: 2020-05-20T16:47Z
-=======
  * Date: 2020-02-19T09:12Z
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  * 
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -132,36 +124,20 @@ return /******/ (function(modules) { // webpackBootstrap
         strikethrough: 'Διεγραμμένα',
         subscript: 'Δείκτης',
         superscript: 'Εκθέτης',
-<<<<<<< HEAD
-        size: 'Μέγεθος',
-        sizeunit: 'Μονάδα μεγέθους'
-      },
-      image: {
-        image: 'Εικόνα',
-=======
         size: 'Μέγεθος'
       },
       image: {
         image: 'εικόνα',
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
         insert: 'Εισαγωγή',
         resizeFull: 'Πλήρες μέγεθος',
         resizeHalf: 'Μισό μέγεθος',
         resizeQuarter: '1/4 μέγεθος',
-<<<<<<< HEAD
-        resizeNone: 'Αρχικό μέγεθος',
-=======
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
         floatLeft: 'Μετατόπιση αριστερά',
         floatRight: 'Μετατόπιση δεξιά',
         floatNone: 'Χωρίς μετατόπιση',
         shapeRounded: 'Σχήμα: Στρογγυλεμένο',
         shapeCircle: 'Σχήμα: Κύκλος',
-<<<<<<< HEAD
-        shapeThumbnail: 'Σχήμα: Μικρογραφία',
-=======
         shapeThumbnail: 'Σχήμα: Thumbnail',
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
         shapeNone: 'Σχήμα: Κανένα',
         dragImageHere: 'Σύρτε την εικόνα εδώ',
         dropImage: 'Αφήστε την εικόνα',
@@ -170,11 +146,7 @@ return /******/ (function(modules) { // webpackBootstrap
         maximumFileSizeError: 'Το μέγεθος είναι μεγαλύτερο από το μέγιστο επιτρεπτό.',
         url: 'URL',
         remove: 'Αφαίρεση',
-<<<<<<< HEAD
-        original: 'Αρχικό'
-=======
         original: 'Original'
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       },
       link: {
         link: 'Σύνδεσμος',
@@ -182,33 +154,14 @@ return /******/ (function(modules) { // webpackBootstrap
         unlink: 'Αφαίρεση συνδέσμου',
         edit: 'Επεξεργασία συνδέσμου',
         textToDisplay: 'Κείμενο συνδέσμου',
-<<<<<<< HEAD
-        url: 'Σε ποιo URL πρέπει να πηγαίνει αυτός ο σύνδεσμος;',
-        openInNewWindow: 'Άνοιγμα σε νέο παράθυρο',
-        useProtocol: 'Χρήση προεπιλεγμένου πρωτοκόλλου'
-=======
         url: 'URL',
         openInNewWindow: 'Άνοιγμα σε νέο παράθυρο'
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       },
       video: {
         video: 'Βίντεο',
         videoLink: 'Σύνδεσμος Βίντεο',
         insert: 'Εισαγωγή',
         url: 'URL',
-<<<<<<< HEAD
-        providers: '(YouTube, Vimeo, Vine, Instagram, DailyMotion ή Youku)'
-      },
-      table: {
-        table: 'Πίνακας',
-        addRowAbove: 'Προσθήκη γραμμής πάνω',
-        addRowBelow: 'Προσθήκη γραμμής κάτω',
-        addColLeft: 'Προσθήκη στήλης αριστερά',
-        addColRight: 'Προσθήκη στήλης δεξία',
-        delRow: 'Διαγραφή γραμμής',
-        delCol: 'Διαγραφή στήλης',
-        delTable: 'Διαγραφή πίνακα'
-=======
         providers: '(YouTube, Vimeo, Vine, Instagram, DailyMotion or Youku)'
       },
       table: {
@@ -220,7 +173,6 @@ return /******/ (function(modules) { // webpackBootstrap
         delRow: 'Delete row',
         delCol: 'Delete column',
         delTable: 'Delete table'
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       },
       hr: {
         insert: 'Εισαγωγή οριζόντιας γραμμής'
@@ -231,19 +183,11 @@ return /******/ (function(modules) { // webpackBootstrap
         blockquote: 'Παράθεση',
         pre: 'Ως έχει',
         h1: 'Κεφαλίδα 1',
-<<<<<<< HEAD
-        h2: 'Κεφαλίδα 2',
-        h3: 'Κεφαλίδα 3',
-        h4: 'Κεφαλίδα 4',
-        h5: 'Κεφαλίδα 5',
-        h6: 'Κεφαλίδα 6'
-=======
         h2: 'συνδέσμου 2',
         h3: 'συνδέσμου 3',
         h4: 'συνδέσμου 4',
         h5: 'συνδέσμου 5',
         h6: 'συνδέσμου 6'
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       },
       lists: {
         unordered: 'Αταξινόμητη λίστα',
@@ -271,12 +215,7 @@ return /******/ (function(modules) { // webpackBootstrap
         transparent: 'Διαφανές',
         setTransparent: 'Επιλογή διαφάνειας',
         reset: 'Επαναφορά',
-<<<<<<< HEAD
-        resetToDefault: 'Επαναφορά στις προκαθορισμένες τιμές',
-        cpSelect: 'Επιλογή'
-=======
         resetToDefault: 'Επαναφορά στις προκαθορισμένες τιμές'
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       },
       shortcut: {
         shortcuts: 'Συντομεύσεις',
@@ -288,10 +227,6 @@ return /******/ (function(modules) { // webpackBootstrap
         extraKeys: 'Επιπλέον συντομεύσεις'
       },
       help: {
-<<<<<<< HEAD
-        'escape': 'Έξοδος',
-=======
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
         'insertParagraph': 'Εισαγωγή παραγράφου',
         'undo': 'Αναιρεί την προηγούμενη εντολή',
         'redo': 'Επαναλαμβάνει την προηγούμενη εντολή',
@@ -325,16 +260,8 @@ return /******/ (function(modules) { // webpackBootstrap
         redo: 'Επαναληψη'
       },
       specialChar: {
-<<<<<<< HEAD
-        specialChar: 'ΕΙΔΙΚΟΙ ΧΑΡΑΚΤΗΡΕΣ',
-        select: 'Επιλέξτε ειδικούς χαρακτήρες'
-      },
-      output: {
-        noSelection: 'Δεν έγινε επιλογή!'
-=======
         specialChar: 'SPECIAL CHARACTERS',
         select: 'Επιλέξτε ειδικούς χαρακτήρες'
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       }
     }
   });

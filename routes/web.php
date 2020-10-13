@@ -57,6 +57,11 @@ Auth::routes();
  Route::post('docinst','HomeController@buscarDocente')->name('docinst');
  Route::post('distinst','HomeController@buscarAsignacion')->name('distinst');
 
+
+ //rutas para datatables en laravel 
+ //permisoss
+ 
+
 //////fin
 
 //rutas usuario

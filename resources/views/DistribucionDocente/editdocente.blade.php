@@ -33,7 +33,7 @@
                                 <select class="form-control select" name="user" disabled style="width: 99%;">
 
                                     <option selected disabled value="{{ $user->id }}">
-                                        {{ $user->name }}
+                                    {{ $user->name }} {{ $user->apellido }}
                                     </option>
 
 

@@ -8,7 +8,7 @@
 @endsection
 @section('content')
 
-<a class="btn btn-info " href="{{route('materias.index')}}"> <i class="fas fa-eye"> Materias</i></a>
+<a class="btn btn-info " href="{{route('contenidos.index')}}"> <i class="fas fa-eye"> Unidad</i></a>
 <h1 class="text-center  mt-5 text-danger">Administrador de Talleres</h1>
 
 <div id="tallerlist">

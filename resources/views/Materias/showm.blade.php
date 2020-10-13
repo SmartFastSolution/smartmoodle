@@ -20,8 +20,7 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <a class="btn btn-info float-right" href="{{route('admin.create')}}"><i class="fas fa-plus"> Crear
-                        Talleres</i></a>
+              
                 <h1 class="font-weight-light">Show Materias</h1>
                 <div class="row">
                     <div class="col-md-8">
@@ -76,9 +75,8 @@
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                                aria-controls="nav-home" aria-selected="true">Talleres</a>
-                            <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-                                aria-controls="nav-profile" aria-selected="false">Unidades</a>
+                                aria-controls="nav-home" aria-selected="true">Unidades</a>
+
 
                         </div>
                     </nav>
@@ -87,51 +85,6 @@
                             aria-labelledby="nav-home-tab">
                             <br>
 
-                            <!-- Inicio de Talleres -->
-                            <div class="card card-gray-dark">
-                                <div class="card-header">
-                                    <h3 class="card-title">Talleres</h3>
-                                </div>
-                                <div class="card-body">
-                                    <table id="dataTable" class="table table-hover">
-
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Materia</th>
-                                                <th scope="col"> Taller </th>
-                                                <th scope="col">Plantilla </th>
-                                                <th scope="col">Estado</th>
-                                                <th></th>
-                                                <th scope="col">Vista Taller</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                @foreach($tallers->where('materia_id', $materia->id) as $taller)
-                                                <th scope="row">{{$taller->materia['id']}}</th>
-                                                <td>{{$taller->materia->nombre}}</td>
-                                                <td>{{$taller['nombre']}}</td>
-                                                <td>{{$taller->Plantilla->nombre}}</td>
-                                                <td>{{$taller['estado']}}</td>
-                                                <td> </td>
-                                                <td class="table-button ">
-                                                    <a class="btn btn-info"
-                                                        href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
-                                                            class="fas fa-eye"></i></a>
-
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <!-- fin de talleres -->
-                        </div>
-                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                            <br>
-                            <!-- Inicio de Contenidos -->
                             <div class="card card-gray-dark">
                                 <div class="card-header">
                                     <h3 class="card-title">Unidades</h3>
@@ -218,10 +171,9 @@
                             </div>
                             <!-- fin de Contenidos -->
                         </div>
+                        
                     </div>
                 </div>
-
-
                 <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
             </div>
         </div>

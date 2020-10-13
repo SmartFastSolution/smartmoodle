@@ -27,9 +27,4 @@ export default class StyledFilterItem extends StyledFilterizrElement {
     setZIndex(zIndex: number): void;
     removeZIndex(): void;
     removeWidth(): void;
-<<<<<<< HEAD
-    setHidden(): void;
-    setVisible(): void;
-=======
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 }

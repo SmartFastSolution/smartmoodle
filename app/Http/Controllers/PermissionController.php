@@ -6,6 +6,9 @@ use App\Permission;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Yajra\DataTables\DataTables;
+
+
 
 class PermissionController extends Controller
 {
@@ -17,10 +20,12 @@ class PermissionController extends Controller
     public function index()
     {
         Gate::authorize('haveaccess', 'menu.index');
-        $permission= Permission::orderBy('id','Asc')->paginate(7);
+        $permission= Permission::all();
+       
     
         return view('Permissions.indexper',['permissions'=>$permission]);
     }
+   
 
     /**
      * Show the form for creating a new resource.
@@ -114,9 +119,10 @@ class PermissionController extends Controller
     public function destroy($id)
     {
         Gate::authorize('haveaccess', 'menu.destroy');
-        $permission= Permission::find($id);
-        $permission->delete();
+         $permission= Permission::find($id);
+         $permission->delete();
 
+       // Permission::destroy($id);
         return redirect('sistema/permissions')->with('success','Haz eliminado un permiso con exito');
     }
 }
