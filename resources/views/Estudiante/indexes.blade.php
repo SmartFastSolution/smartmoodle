@@ -1,17 +1,24 @@
 @extends('layouts.estapp')
 
-
 @section('title', 'Dashboard | SmartMoodle')
+
+@section('encabezado')
+
+
+@stop
 
 @section('content')
 
-<!-- Main content -->
+<h1>
+    Estudiante
+</h1>
 <section class="content">
+
     <div class="container">
         <!-- Small boxes (Stat box) -->
         <h1>Cursos</h1>
         <div class="row">
-         
+
             <!-- ./col -->
             <div class="col-lg-3 col-6">
                 <!-- small box -->
@@ -79,25 +86,18 @@
                     </a>
                 </div>
             </div>
-            <!-- ./col -->
-           
-            <!-- ./col -->
+
         </div>
-        <!-- /.row -->
+    </div>
+</section>
 
 
 
 
 
-        @stop
+@stop
+@section('css')
+@stop
+@section('js')
 
-
-
-
-        @section('css')
-
-        @stop
-
-        @section('js')
-
-        @stop
+@stop

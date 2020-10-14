@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table class="table table-hover">
+                        <table id="myTable" class="table table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -77,7 +77,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{$users->links()}}
+                      
                     </div>
                 </div>
             </div>
@@ -92,7 +92,24 @@
 @stop
 
 @section('js')
+
 <script>
-console.log('Hi!');
+$(function() {
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+                "info": true,
+                "autoWidth": true,
+               
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                }
+            }
+
+        );
+    });
+
+});
+
 </script>
+
 @stop

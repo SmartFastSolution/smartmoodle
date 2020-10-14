@@ -87,8 +87,6 @@ class DistribucionmacuController extends Controller
          $nivels= $distcursos->nivel()->first();
 
          return view('Distribucion.showmacu',compact('distribucionmacu','materias', 'materia_all','cursos','distcursos','instituto','nivels'));
-  
-      
        
     }
 

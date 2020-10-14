@@ -23,8 +23,7 @@
 <body class="hold-transition sidebar-mini  layout-fixed">
     <div class="wrapper">
         <!-- Navbar -->
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <nav class="navbar  navbar-dark bg-dark">
             <!-- SEARCH FORM -->
             <a href="{{ url('/sistema/homedoc')}}" class="brand-link">
                 <img src=" {{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
@@ -32,18 +31,7 @@
                 <span class="brand-text font-weight-light">SmartMoodle</span>
             </a>
             <form class="form-inline ml-3">
-
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
             </form>
-
             <ul class="navbar-nav ml-auto">
                 @guest
                 <li class="nav-item">
@@ -64,35 +52,31 @@
                     </div>
                 </li>
                 @endguest
+
             </ul>
+        </nav>
     </div>
-    </nav>
-    <!-- /.navbar -->
 
-    <!-- Main Sidebar Container -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-6">
+                <div class="col-sm-12">
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-6">
-                    <div class="col-sm-12">
-
-                        @yield('encabezado')
-
-                    </div>
+                    @yield('encabezado')
 
                 </div>
-            </div><!-- /.container-fluid -->
-        </section>
-        <section class="content">
 
-            @yield('contenido')
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+
+        @yield('contenido')
 
 
 
-        </section>
-    </div>
+    </section>
+
 
 
 

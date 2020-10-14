@@ -16,15 +16,11 @@
                     <a class="btn btn-info float-right" href="{{route('permissions.create')}}"><i
                             class="fas fa-plus"></i> MENÚ</a>
                     <h1>Permisos de Acceso </h1>
-                    <div class="card card-secondary">
-                        <div class="card-header">
-
-                            <div class="card-tools">
-                            </div>
-                        </div>
+                  
+                       
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="myTable" class="table table-border">
+                            <table id="myTable" class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th scope="col">ID</th>
@@ -83,7 +79,7 @@
 
                             <!--Table-->
                         </div>
-                    </div>
+                
                 </div>
             </div>
         </div>

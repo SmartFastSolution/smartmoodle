@@ -25,8 +25,8 @@ class UsersController extends Controller
         Gate::authorize('haveaccess', 'user.index');
       //  $users= User::where('Titulo','Administrador')->orderBy('id','Asc')->paginate(5);
 
-       $users= User::orderBy('id','Asc')->paginate(5);
-    
+      //$users= User::orderBy('id','Asc')->paginate(5);
+         $users= User::all();
          return view('Persona.inicio',['users'=>$users]);
        
     }
