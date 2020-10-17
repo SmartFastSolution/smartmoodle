@@ -139,9 +139,8 @@
                         </div>
                     </div>
                         <div class="row">
-                                    <a href="#" class="addEnun btn btn-outline-danger">Agregar Columna</a>
-                                </div>
-
+                            <a href="#" class="addEnun btn btn-outline-danger">Agregar Columna</a>
+                        </div>
                             <div class="row justify-content-center">
                                 <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>

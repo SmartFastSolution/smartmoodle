@@ -819,8 +819,8 @@ function addTaller11() {
                     });
                    _this.registros =[];
                     _this.ejercicio.debe.nom_cuenta = '';
-                    _this.ejercicio.debe.saldo      = '';
-                    
+                    _this.ejercicio.debe.saldo      = '';  
+                     $('#taller34').modal('hide');  
                 }).catch(function(error){
 
                 }); 

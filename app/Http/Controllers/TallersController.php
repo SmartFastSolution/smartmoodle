@@ -278,6 +278,12 @@ class TallersController extends Controller
              $datos = TallerPregunta::where('taller_id', $consul->id)->firstOrFail();
             return view('talleres.taller33', compact('datos', 'd'));
         }elseif ($plant == 34) {
+            $datos = Taller::findorfail($id);
+            if ($datos->plantilla_id == $plant && $datos->id = $id) {
+            return view('talleres.taller34', compact('datos', 'd'));  
+             }else {
+            return abort(404);   
+             }
 
             // $consul = Taller::findorfail($id);
             //  $datos = TallerCollage::where('taller_id', $consul->id)->firstOrFail();
