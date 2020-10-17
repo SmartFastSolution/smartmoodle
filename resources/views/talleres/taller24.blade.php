@@ -12,23 +12,23 @@
           @csrf
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-7">
+			<div class="col-8">
 				<h3 class="text-center">Datos</h3>
 				<table class="table table-borderless">
 				  <tbody>
 				    <tr>
-				      <td><label>Nombre del beneficiario :</label></td>
-				      <td><label>Lugar y fecha :</label></td>
-				      <td><label>Tipo y Numero de comprobante :</label></td>
-				      <td><label>Cantidad :</label></td>
-						<td><label>Firmas :</label></td>
+				      <td><label>Nombre del beneficiario:</label></td>
+				      <td><label>Lugar y fecha:</label></td>
+				      <td><label>Tipo y Numero de comprobante:</label></td>
+				      <td><label>Cantidad:</label></td>
+						<td><label>Firmas:</label></td>
 				    </tr>
 
 				    <tr>
 				      <td>{{ $datos->beneficiario }}</td>
 				      <td>{{ $datos->lugar }}, {{ $datos->fecha }}</td>
 				      <td>{{ $datos->comprobante }}</td>
-				      <td>${{ $datos->detalle }}</td>
+				      <td>${{ $datos->cantidad }}</td>
 				      <td>{{ $datos->firmas }}</td>
 				    </tr>
 				  </tbody>

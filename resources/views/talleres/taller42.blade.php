@@ -1,7 +1,7 @@
 @extends('layouts.nav')
 
 @section('title', 'Taller 43')
-@section('contenido')
+@section('content')
 
 <h1 class="text-center  mt-5 text-danger"> Taller #43</h1>
 <h3 class="text-center mt-5 mb-3 text-info">IDENTIFIQUE  LA  TRANSACCIÓN  QUE  DEBE  SER  REGISTRADA EN  LOS  LIBROS  DE  CONTABILIDAD,  CON  CERTEZA.</h3>

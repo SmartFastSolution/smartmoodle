@@ -15,10 +15,10 @@
 					<h3 class="text-center">Datos</h3>
 					<div class="row">				
 						<div class="col-6">
-							<label>Valor :</label> ${{ $datos->valor }}<br>
-							<label>Deudor :</label> {{ $datos->deudor }}<br>
-							<label>Detalle :</label> {{ $datos->detalle }}<br>
-							<label>Lugar y fecha :</label> {{ $datos->lugar }}, {{ $datos->fecha }}<br>
+							<label>Valor :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->valor }}')" ondragend="this.classList.add('text-muted');">${{ $datos->valor }}</span><br>
+							<label>Deudor :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->deudor }}')" ondragend="this.classList.add('text-muted');">{{ $datos->deudor }}	</span> <br>
+							<label>Detalle :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->detalle }}')" ondragend="this.classList.add('text-muted');">{{ $datos->detalle }}</span> <br>
+							<label>Lugar y fecha :</label><span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->lugar }}')" ondragend="this.classList.add('text-muted');">{{ $datos->lugar }}</span> , <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->fecha }}')" ondragend="this.classList.add('text-muted');">{{ $datos->fecha }}</span><br>
 						</div>
 					</div>
 			</div>

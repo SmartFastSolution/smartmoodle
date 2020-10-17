@@ -12,10 +12,10 @@ use App\Admin\TallerChequeEndoso;
 use App\Admin\TallerCirculo;
 use App\Admin\TallerClasificar;
 use App\Admin\TallerCollage;
-use App\Admin\TallerContabilidad;
-use App\Admin\TallerContabilidadOp;
 use App\Admin\TallerCompletar;
 use App\Admin\TallerCompletarEnunciado;
+use App\Admin\TallerContabilidad;
+use App\Admin\TallerContabilidadOp;
 use App\Admin\TallerConvertirCheque;
 use App\Admin\TallerDefinirEnunOp;
 use App\Admin\TallerDefinirEnunciado;
@@ -32,6 +32,7 @@ use App\Admin\TallerNotaVenta;
 use App\Admin\TallerNotaVentaDato;
 use App\Admin\TallerOrdenPago;
 use App\Admin\TallerPagare;
+use App\Admin\TallerPregunta;
 use App\Admin\TallerRecibo;
 use App\Admin\TallerRelacionar;
 use App\Admin\TallerRelacionarOpcion;
@@ -39,9 +40,12 @@ use App\Admin\TallerSenalar;
 use App\Admin\TallerSenalarOpcion;
 use App\Admin\TallerSubrayar;
 use App\Admin\TallerSubrayarOp;
+use App\Admin\TallerTipoSaldo;
 use App\Admin\TallerValeCaja;
 use App\Admin\TallerVerdaFalsoOp;
 use App\Admin\TallerVerdaderoFalso;
+use App\Admin\TipoSaldoDebe;
+use App\Admin\TipoSaldoHaber;
 use App\Http\Controllers\Controller;
 use App\Plantilla;
 use App\Taller;
@@ -57,10 +61,11 @@ class AdminController extends Controller
    public function plantilla(Request $request)
    {
 
-   	$i = Plantilla::get()->count();
+   	$i = Plantilla::where('plantilla', 'si')->get()->count();
    	  $plantilla = new Plantilla;
-   	  $plantilla->nombre = 'TALLER '.++$i.' - '.$request->input('nombre');
-   	  $plantilla->descripcion = $request->input('descripcion');
+   	  $plantilla->nombre = 'PLANTILLA '.++$i.' - '.$request->input('nombre');
+        $plantilla->descripcion = $request->input('descripcion');
+   	  $plantilla->plantilla = $request->input('plantilla');
    	  $plantilla->save();
 
    	   return redirect()->route('admin.create')->with('datos', 'Plantilla creada correctamente!'); 
@@ -371,121 +376,47 @@ class AdminController extends Controller
       public function taller10(Request $request)
       {
 if ($request->input('id_plantilla') == 10 ) {
+
          $i = Taller::where('materia_id', $request->input('materia_id'))->count();
          $taller10 = new Taller;
          $taller10->nombre = 'Taller '.++$i;
          $taller10->plantilla_id = $request->input('id_plantilla');
-         $taller10->materia_id = $request->input('materia_id');
+         $taller10->materia_id   = $request->input('materia_id');
          $taller10->estado = 1;
          $taller10->save();
 
-         if ($taller10 = true) {
-             $a = Taller::get()->last();
+      if ($taller10 == true) {
+         $a = Taller::get()->last();
          $taller_10 = new TallerRelacionar;
          $taller_10->taller_id = $a->id;
          $taller_10->enunciado = $request->input('enunciado');
          $taller_10->save();
 
+         if ($taller_10 == true) {
          $o = TallerRelacionar::get()->last();
          $q= 0;
-
-         $opcion1 = new TallerRelacionarOpcion;
-         $opcion1->taller_relacionar_id = $o->id;
-         $opcion1->orden = ++$q;
-         $opcion1->enunciado = $request->input('enunciado1');
-         $opcion1->definicion = $request->input('definicion1');
-         if ($request->hasFile('img1')) {
-            $imagen1 = $request->file('img1');
-            $nombre1 = time().'_'.$imagen1->getClientOriginalName();
-            $ruta1 = public_path().'/img/talleres';
-            $imagen1->move($ruta1, $nombre1);
-            $urlimagen1 = '/img/talleres/'.$nombre1;
-            $opcion1->img = $urlimagen1;
-         }
-            $opcion1->save();
-
-
-         $opcion2 = new TallerRelacionarOpcion;
-         $opcion2->taller_relacionar_id = $o->id;
-         $opcion2->orden = ++$q;
-         $opcion2->enunciado = $request->input('enunciado2');
-         $opcion2->definicion = $request->input('definicion2');
-         if($request->hasFile('img2')) {
-            $imagen2 = $request->file('img2');
-            $nombre2 = time().'_'.$imagen2->getClientOriginalName();
-            $ruta2 = public_path().'/img/talleres';
-            $imagen2->move($ruta2, $nombre2);
-            $urlimagen2 = '/img/talleres/'.$nombre2;
-            $opcion2->img = $urlimagen2;
-         }
-         $opcion2->save();
-
-
+         $files_a = $request->file('img');
+         $urlimagen = [];
         
-         $opcion3 = new TallerRelacionarOpcion;
-         $opcion3->taller_relacionar_id = $o->id;
-         $opcion3->orden = ++$q;
-         $opcion3->enunciado = $request->input('enunciado3');
-         $opcion3->definicion = $request->input('definicion3');
-          if($request->hasFile('img3')) {
-            $imagen3 = $request->file('img3');
-            $nombre3 = time().'_'.$imagen3->getClientOriginalName();
-            $ruta3 = public_path().'/img/talleres';
-            $imagen3->move($ruta3, $nombre3);
-            $urlimagen3 = '/img/talleres/'.$nombre3;
-            $opcion3->img = $urlimagen3;
-
+         foreach ($files_a as $file_a) {
+            $nombre       = time().'_'.$file_a->getClientOriginalName();
+            $ruta         = public_path().'/img/talleres';
+            $file_a->move($ruta, $nombre);
+            $urlimagen[] = '/img/talleres/'.$nombre;           
          }
-            $opcion3->save();
-      
-         $opcion4 = new TallerRelacionarOpcion;
-         $opcion4->taller_relacionar_id = $o->id;
-         $opcion4->orden = ++$q;
-         $opcion4->enunciado = $request->input('enunciado4');
-         $opcion4->definicion = $request->input('definicion4');
-         if($request->hasFile('img4')) {
-            $imagen4 = $request->file('img4');
-            $nombre4 = time().'_'.$imagen4->getClientOriginalName();
-            $ruta4 = public_path().'/img/talleres';
-            $imagen4->move($ruta4, $nombre4);
-            $urlimagen4 = '/img/talleres/'.$nombre4;
-            $opcion4->img = $urlimagen4;
-         }
-            $opcion4->save();
-
-
-     
-         $opcion5 = new TallerRelacionarOpcion;
-         $opcion5->taller_relacionar_id = $o->id;
-         $opcion5->orden = ++$q;
-         $opcion5->enunciado = $request->input('enunciado5');
-         $opcion5->definicion = $request->input('definicion5');
-          if($request->hasFile('img5')) {
-            $imagen5 = $request->file('img5');
-            $nombre5 = time().'_'.$imagen5->getClientOriginalName();
-            $ruta5 = public_path().'/img/talleres';
-            $imagen5->move($ruta5, $nombre5);
-            $urlimagen5 = '/img/talleres/'.$nombre5;
-            $opcion5->img = $urlimagen5;
-
-         }
-            $opcion5->save();
-
-     
-         $opcion6 = new TallerRelacionarOpcion;
-         $opcion6->taller_relacionar_id = $o->id;
-         $opcion6->orden = ++$q;
-         $opcion6->enunciado = $request->input('enunciado6');
-         $opcion6->definicion = $request->input('definicion6');
-          if($request->hasFile('img6')) {
-            $imagen6 = $request->file('img6');
-            $nombre6 = time().'_'.$imagen6->getClientOriginalName();
-            $ruta6 = public_path().'/img/talleres';
-            $imagen6->move($ruta6, $nombre6);
-            $urlimagen6 = '/img/talleres/'.$nombre6;
-            $opcion6->img = $urlimagen6;
-         }
-            $opcion6->save(); 
+         foreach ($urlimagen as $key=>$v) {
+                  $datos=array(
+                     'taller_relacionar_id' => $o->id,
+                     'orden'                => ++$q,
+                     'enunciado'            => $request->enunciados[$key],
+                     'definicion'           => $request->definicion[$key],
+                     'img'                  => $urlimagen[$key],
+                     'created_at'           => now(),
+                     'updated_at'           => now(),
+                     );
+                  TallerRelacionarOpcion::insert($datos);
+               }
+            }
 return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
 
       
@@ -501,14 +432,13 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller11->save();
 
       if ($taller11 = true) {
-
             $a = Taller::get()->last();
             $taller_11 = new Taller2Relacionar;
             $taller_11->taller_id = $a->id;
             $taller_11->enunciado = $request->input('enunciado');
             $taller_11->enunciado1 = $request->input('enunciado1');
 
-             if($request->hasFile('img1')) {
+         if($request->hasFile('img1')) {
             $imagen1 = $request->file('img1');
             $nombre1 = time().'_'.$imagen1->getClientOriginalName();
             $ruta1 = public_path().'/img/talleres';
@@ -517,7 +447,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          }
             $taller_11->img1 = $urlimagen1;
             $taller_11->enunciado2 = $request->input('enunciado2');
-               if($request->hasFile('img2')) {
+            if($request->hasFile('img2')) {
             $imagen2 = $request->file('img2');
             $nombre2 = time().'_'.$imagen2->getClientOriginalName();
             $ruta2 = public_path().'/img/talleres';
@@ -526,45 +456,19 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          }
             $taller_11->img2 = $urlimagen2;
             $taller_11->save();
-
          if ($taller_11 = true) {
             $o = Taller2Relacionar::get()->last();
             $q = 0;
-               $opcion_1 = new Taller2RelacionarOpcion;
-               $opcion_1->taller2_relacionar_id = $o->id;
-               $opcion_1->orden = ++$q;
-               $opcion_1->definicion = $request->input('definicion1');
-               $opcion_1->save();
-
-               $opcion_2 = new Taller2RelacionarOpcion;
-               $opcion_2->taller2_relacionar_id = $o->id;
-               $opcion_2->orden = ++$q;
-               $opcion_2->definicion = $request->input('definicion2');
-               $opcion_2->save();
-
-               $opcion_3 = new Taller2RelacionarOpcion;
-               $opcion_3->taller2_relacionar_id = $o->id;
-               $opcion_3->orden = ++$q;
-               $opcion_3->definicion = $request->input('definicion3');
-               $opcion_3->save();
-
-               $opcion_4 = new Taller2RelacionarOpcion;
-               $opcion_4->taller2_relacionar_id = $o->id;
-               $opcion_4->orden = ++$q;
-               $opcion_4->definicion = $request->input('definicion4');
-               $opcion_4->save();
-
-               $opcion_5 = new Taller2RelacionarOpcion;
-               $opcion_5->taller2_relacionar_id = $o->id;
-               $opcion_5->orden = ++$q;
-               $opcion_5->definicion = $request->input('definicion5');
-               $opcion_5->save();
-
-               $opcion_6 = new Taller2RelacionarOpcion;
-               $opcion_6->taller2_relacionar_id = $o->id;
-               $opcion_6->orden = ++$q;
-               $opcion_6->definicion = $request->input('definicion6');
-               $opcion_6->save();
+            foreach ($request->definicion as $key=>$v) {
+                  $datos=array(
+                     'taller2_relacionar_id' => $o->id,
+                     'orden'                 => ++$q,
+                     'definicion'            => $v,
+                     'created_at'            => now(),
+                     'updated_at'            => now(),
+                     );
+                  Taller2RelacionarOpcion::insert($datos);
+               }
 return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
       
 }
@@ -594,7 +498,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
             foreach ($request->descripcion as $key=>$v) {
                $datos=array(
                   'taller_verdadero_falso_id'=> $o->id,
-                  'descripcion'=> $request->descripcion[$key],
+                  'descripcion'=> $v,
                   'created_at'=> now(),
                   'updated_at'=> now(),
                );
@@ -862,6 +766,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
             $taller_22->enunciado            = $request->input('enunciado');
             $taller_22->pedido               = $request->input('pedido');
             $taller_22->cantidad             = $request->input('cantidad');
+            $taller_22->precio_unit          = $request->input('precio_unit');
             $taller_22->codigo               = $request->input('codigo');
             $taller_22->detalle              = $request->input('detalle');
             $taller_22->lugar                = $request->input('lugar');
@@ -953,6 +858,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
                foreach ($request->cant as $key=>$v) {
                   $datos=array(
                      'taller_factura_id'=> $o->id,
+                     'codigo'=> $request->cod[$key],
                      'cod_auxiliar'=> $request->cod_aux[$key],
                      'cantidad'=> $request->cant[$key],
                      'descripcion'=> $request->desc[$key],
@@ -1062,25 +968,105 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 }
 }
 
-   public function taller34(Request $request)
+   public function taller31(Request $request)
       {
           $i = Taller::where('materia_id', $request->input('materia_id'))->count();
-         $taller34 = new Taller;
-         $taller34->nombre = 'Taller '.++$i;
-         $taller34->plantilla_id = $request->input('id_plantilla');
-         $taller34->materia_id = $request->input('materia_id');
-         $taller34->estado = 1;
-         $taller34->save();
-          if ($taller34 = true) {
+         $taller31 = new Taller;
+         $taller31->nombre = 'Taller '.++$i;
+         $taller31->plantilla_id = $request->input('id_plantilla');
+         $taller31->materia_id = $request->input('materia_id');
+         $taller31->estado = 1;
+         $taller31->save();
+          if ($taller31 = true) {
             $a                               = Taller::get()->last();
-            $taller_34                       = new TallerCollage;
-            $taller_34->taller_id            = $a->id;
-            $taller_34->enunciado            = $request->input('enunciado');
-            $taller_34->save();
+            $taller_31                       = new TallerCollage;
+            $taller_31->taller_id            = $a->id;
+            $taller_31->enunciado            = $request->input('enunciado');
+            $taller_31->save();
          }
       return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');  
          
 
+      }
+
+      public function taller33(Request $request)
+      {
+         $i                      = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller33               = new Taller;
+         $taller33->nombre       = 'Taller '.++$i;
+         $taller33->plantilla_id = $request->input('id_plantilla');
+         $taller33->enunciado    = $request->input('enunciado');
+         $taller33->materia_id   = $request->input('materia_id');
+         $taller33->estado       = 1;
+         $taller33->save();
+          if ($taller33 = true) {
+            $a                     = Taller::get()->last();
+            $taller_33             = new TallerPregunta;
+            $taller_33->taller_id  = $a->id;
+            $taller_33->enunciado  = $request->input('enunciado');
+            $taller_33->pregunta1  = $request->input('pregunta1');
+            $taller_33->pregunta1  = $request->input('pregunta1');
+            $taller_33->pregunta2  = $request->input('pregunta2');
+            $taller_33->save();
+         }
+      return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');  
+      }
+
+   public function taller34(Request $request)
+      {
+         $registro               = $request->registro;
+         $materia                = $request->materia;
+         $plantilla              = $request->plantilla;
+         $i                      = Taller::where('materia_id', $materia)->count();
+         $taller34               = new Taller;
+         $taller34->nombre       = 'Taller '.++$i;
+         $taller34->plantilla_id = $plantilla;
+         $taller34->enunciado    = $request->enunciado;
+         $taller34->materia_id   = $materia;
+         $taller34->estado       = 1;
+         $taller34->save();
+
+          if ($taller34 = true) {
+         $a  = Taller::get()->last();
+         $debe =[];
+         $haber =[];
+        foreach ($registro as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
+            $regis=array(
+                     'taller_id'  => $a->id,
+                     'enunciado'  => $key + 1,
+                     'created_at' => now(),
+                     'updated_at' => now(),
+                  );
+            TallerTipoSaldo::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
+        }
+        $register = $a->tallerTipoSaldo;
+        foreach ($registro as $key => $value) {                         ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
+            foreach ($value['debe'] as $key1 => $value1) {              ////RECORRER TODOS LAS CUENTAS DE DEBE QUE PERTENECEN A UN REGISTRO
+                $regis1=array(
+                     'taller_tipo_saldo_id'  => $register[$key]->id,
+                     'nom_cuenta'        => $value1['nom_cuenta'],
+                     'saldo'              => $value1['saldo'],
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                  );
+                  TipoSaldoDebe::insert($regis1);                             //GURDAR ESAS CUENTAS EN LA TABLA DEBE CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
+            }
+              foreach ($value['haber'] as $key2 => $value2) {           ////RECORRER TODOS LAS CUENTAS DE HABER QUE PERTENECEN A UN REGISTRO
+                $regis2=array(
+                     'taller_tipo_saldo_id'  => $register[$key]->id,
+                     'nom_cuenta'        => $value2['nom_cuenta'],
+                     'saldo'              => $value2['saldo'],
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                  );
+                  TipoSaldoHaber::insert($regis2);                            //GURDAR ESAS CUENTAS EN LA TABLA HABER CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
+            }
+        }
+         return response(array(                                         //ENVIO DE RESPUESTA
+                'success' => true,
+                'message' => 'Diario General creado correctamente'
+            ),200,[]);
+         }
       }
 
    public function taller57(Request $request)

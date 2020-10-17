@@ -237,6 +237,14 @@ class Taller extends Model
     {
         return $this->belongsTo('App\Contabilidad\BalanceInicial');
     }
+      public function tallerPregunta()
+    {
+        return $this->belongsTo('App\Admin\TallerPregunta');
+    }
+      public function tallerTipoSaldo()
+    {
+        return $this->hasMany('App\Admin\TallerTipoSaldo');
+    }
 }
 
 

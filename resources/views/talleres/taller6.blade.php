@@ -10,26 +10,41 @@
     @csrf	
     <div class="container">
 		<div class="row justify-content-center">
-			<div class="col-6">
+			@foreach ($datos->tallerimg as $element)
+				<div class="col-6">
 				<div class="row justify-content-center">
 					<div class="col-4">
-						<img src="{{ asset($datos->img1) }}" width="100" alt="Imagen 1">
+						<img src="{{ asset($element->col_a) }}" width="100" alt="Imagen 1">
 					</div>
 					<div class="col-4 align-self-center" >
-						<input type="checkbox" name="foto{{++$i}}" value="{{ $datos->img1 }}" n class="form-control">
+						<input type="checkbox" name="foto{{++$i}}" value="{{ $element->col_a }}" n class="form-control">
 					</div>
 				</div>
 
 				<div class="row justify-content-center">
 					<div class="col-4">
-						<img src="{{ asset($datos->img2) }}" width="100" alt="Imagen 1">
+						<img src="{{ asset($element->col_b) }}" width="100" alt="Imagen 1">
 					</div>
 					<div class="col-4 align-self-center" >
-						<input type="checkbox" name="foto{{++$i}}" value="{{ $datos->img2 }}" class="form-control">
+						<input type="checkbox" name="foto{{++$i}}" value="{{ $element->col_b }}" class="form-control">
 					</div>
 				</div>
 			</div>
-			<div class="col-6">
+			@endforeach
+		
+
+
+
+
+
+
+
+
+
+
+
+
+	{{-- 		<div class="col-6">
 				<div class="row justify-content-center">
 					<div class="col-4">
 						<img src="{{ asset($datos->img3) }}" width="100" alt="Imagen 1">
@@ -111,11 +126,11 @@
 				</div>
 
 				@endif
-			</div>
+			</div> --}}
 		</div>
 		 <div class="row justify-content-center">
-        <input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
-     </div>
+        	<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
+     	</div>
 	</div>
 
 

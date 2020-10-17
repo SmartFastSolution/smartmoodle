@@ -66,10 +66,10 @@
 							</div>
 							<div class="row">
 								<div class="col-6">
-									<label for="">Ciudad</label><input name="resp19" type="text">
+									<label for="">Ciudad</label><input class="form-control" name="resp19" type="text">
 								</div>
 								<div class="col-6">
-									<label for="">Fecha Vencimiento</label><input name="resp20" type="text">
+									<label for="">Fecha Vencimiento</label><input class="form-control" name="resp20" type="text">
 									
 								</div>
 							

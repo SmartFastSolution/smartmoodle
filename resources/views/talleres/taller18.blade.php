@@ -15,17 +15,17 @@
 			<div class="col-2">
 				 <h2>Datos</h2>				 
 				  <label for="">Valor</label><br>
-                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->valor }}')">{{ $datos->valor }}</p>
+                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->valor }}')" ondragend="this.classList.add('text-muted');">{{ $datos->valor }}</p>
                 <label for="">Acreedor</label><br>
-                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->acreedor }}')">{{ $datos->acreedor }}</p>
+                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->acreedor }}')" ondragend="this.classList.add('text-muted');">{{ $datos->acreedor }}</p>
                 <label for="">Deudor</label><br>
-                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->deudor }}')">{{ $datos->deudor }}</p>
+                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->deudor }}')" ondragend="this.classList.add('text-muted');"> {{ $datos->deudor }}</p>
                 <label for="">Tasa de interes</label><br>
-                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->tasa_de_interes }}')">{{ $datos->tasa_de_interes }}</p>
+                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->tasa_de_interes }}')" ondragend="this.classList.add('text-muted');">{{ $datos->tasa_de_interes }}</p>
                     <label for="">Fecha de Vencimiento</label><br>
-                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->fecha_de_vencimiento }}')">{{ $datos->fecha_de_vencimiento }}</p>
+                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->fecha_de_vencimiento }}')" ondragend="this.classList.add('text-muted');">{{ $datos->fecha_de_vencimiento }}</p>
                 <label for="">Lugar y Fecha de emision</label>  <br>
-                <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->lugar }}')">{{ $datos->lugar }}</p>
+                <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->lugar }}')" ondragend="this.classList.add('text-muted');"> {{ $datos->lugar }}</p>
                 <p>{{ $datos->fecha_de_emision }}</p>
 			</div>
 			<div class="col-9 border border-info p-3">

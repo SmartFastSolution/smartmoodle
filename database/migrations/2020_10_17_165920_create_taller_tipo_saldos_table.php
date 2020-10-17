@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTallerNotaPedidosTable extends Migration
+class CreateTallerTipoSaldosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,12 @@ class CreateTallerNotaPedidosTable extends Migration
      */
     public function up()
     {
-        Schema::create('taller_nota_pedidos', function (Blueprint $table) {
+        Schema::create('taller_tipo_saldos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->string('enunciado');
-            $table->string('pedido');
-            $table->string('cantidad');
-            $table->string('precio_unit');
-            $table->string('codigo');
-            $table->string('detalle');
-            $table->string('lugar');
-            $table->string('fecha');
-            $table->string('firma');
-            $table->string('plazo_entrega');
             $table->timestamps();
-            
+
             $table->foreign('taller_id')
             ->references('id')
             ->on('tallers')
@@ -42,6 +33,6 @@ class CreateTallerNotaPedidosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taller_nota_pedidos');
+        Schema::dropIfExists('taller_tipo_saldos');
     }
 }

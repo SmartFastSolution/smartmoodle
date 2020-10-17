@@ -5,7 +5,8 @@ const b_hori = new Vue({
         el: '#b_horizontal',
         data:{
         id_taller: taller,
-   		 	diarios:[],
+        tipo: 'horizontal',
+   		 	//diarios:[],
         update:0,
         balance_inicial:{ //Nombre y fecha del balance inicial
           nombre:'',
@@ -15,7 +16,7 @@ const b_hori = new Vue({
           nom_cuenta:'',
           saldo:'',
         },
-        diarios2:[],
+        //diarios2:[],
         total_balance_inicial:{ //Totales de activo, pasivo y patrimonio
           t_activo:'',
           t_pasivo:'',
@@ -32,14 +33,14 @@ const b_hori = new Vue({
         a_nocorrientes:[], //Array de activos no corrientes
         p_corrientes:[], //Array de pasivos corrientes
         p_nocorrientes:[], //Array de pasivos no corrientes
-         patrimonios:[], //Array de patrimonios
+        patrimonios:[], //Array de patrimonios
         activo:{
           a_corriente:
             { //Agregar un nuevo activo corriente al array
                 nom_cuenta:'',
                 saldo:'',              
               },
-               a_nocorriente:
+          a_nocorriente:
             { //Agregar un nuevo activo no corriente al array
                 nom_cuenta:'',
                 saldo:'',
@@ -59,28 +60,20 @@ const b_hori = new Vue({
                 total:''
               }
         },
-   		 	diario:{
-   		 		fecha:'',
-            nom_cuenta:'',
-        		gloza:'',
-        		debe:'',
-        		haber:''
-   		 	},
-        pasan:{ debe:'', haber:''},
-        balances:[],
-        balance:{
-          cuenta:'',
-          suma_debe:'',
-          suma_haber:'',
-          saldo_debe:'',
-          saldo_haber:''
-        },
-        suman:{
-          sum_debe:'',
-          sum_haber:'',
-          sal_debe:'',
-          sal_haber:''
-        }    
+        // balances:[],
+        // balance:{
+        //   cuenta:'',
+        //   suma_debe:'',
+        //   suma_haber:'',
+        //   saldo_debe:'',
+        //   saldo_haber:''
+        // },
+        // suman:{
+        //   sum_debe:'',
+        //   sum_haber:'',
+        //   sal_debe:'',
+        //   sal_haber:''
+        // }    
   },
   mounted: function(){
     this.cambioActivo();
@@ -90,6 +83,7 @@ const b_hori = new Vue({
     this.cambioPatrimonio();
     this.TotalActivo();
     this.TotalPasivo();
+    this.obtenerBalance();
   },
    methods:{
     Agregar(){
@@ -169,7 +163,7 @@ const b_hori = new Vue({
       this.balances.splice(index, 1);
     },
 //ELIMINAR ELEMENTOS DE UN ARRAY /////////
-       deleteAcCooriente(index){
+    deleteAcCooriente(index){
       this.a_corrientes.splice(index, 1);   //ELIMINAR UN ELEMENTO DEL ARRAY COMENZANDO DESDE SU INDEX
       this.cambioActivo();                  //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
       this.TotalActivo();                   //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
@@ -218,7 +212,7 @@ const b_hori = new Vue({
       $('#a_corriente_e').modal('hide');                                      //OCULTAR EL MODAL
       this.limpiar();
       this.cambioActivo();
-      this.TotalActivo();
+  
     },
     editANocorriente(index){
       this.update = index;
@@ -315,8 +309,8 @@ const b_hori = new Vue({
                 this.activo.a_corriente.nom_cuenta = '';
                 this.activo.a_corriente.saldo = '';
                 //SUMAR TOTALES
+                
                 this.cambioActivo();  
-                this.TotalActivo();
               }
             },
              agregarActivoNoCorriente(){
@@ -333,8 +327,7 @@ const b_hori = new Vue({
                 });
                 this.activo.a_nocorriente.nom_cuenta = '';
                 this.activo.a_nocorriente.saldo = '';
-                this.cambioActivoNo();
-                this.TotalActivo();
+                this.cambioActivoNo();          
               }
              },
                agregarPasivoCorriente(){
@@ -351,8 +344,7 @@ const b_hori = new Vue({
                 });
                 this.pasivo.p_corriente.nom_cuenta = '';
                 this.pasivo.p_corriente.saldo = '';
-                this.cambioPasivo();
-                this.TotalPasivo();
+                this.cambioPasivo();          
               }
             },
              agregarPasivoNoCorriente(){
@@ -370,7 +362,6 @@ const b_hori = new Vue({
                 this.pasivo.p_nocorriente.nom_cuenta = '';
                 this.pasivo.p_nocorriente.saldo = '';
                 this.cambioPasivoNo();
-                this.TotalPasivo();  
                 }   
              }, 
              agregarPatrimonio(){
@@ -507,9 +498,10 @@ const b_hori = new Vue({
                 var _this = this;
                 var url = '/sistema/admin/taller/balance_inicial';
                     axios.post(url,{
-                      id: _this.id_taller,
+                    id: _this.id_taller,
                     nombre: _this.balance_inicial.nombre,
                     fecha: _this.balance_inicial.fecha,
+                    tipo: _this.tipo,
                     a_corriente: _this.a_corrientes,
                     a_nocorriente: _this.a_nocorrientes,
                     p_corriente: _this.p_corrientes,
@@ -517,21 +509,10 @@ const b_hori = new Vue({
                     patrimonio: _this.patrimonios,
                     t_patrimonio: _this.total_balance_inicial.t_patrimonio_pasivo
                 }).then(response => {
-                  if (response.data.success == false) {
-                    toastr.error(response.data.message, "Smarmoddle", {
+                  if (response.data.success == true) {
+                     toastr.success(response.data.message, "Smarmoddle", {
                     "timeOut": "3000"
                    });
-                  }else{
-              
-                  toastr.success(response.data.message, "Smarmoddle", {
-                    "timeOut": "3000"
-                   });
-                    _this.a_corrientes = [];
-                    _this.a_nocorrientes = [];
-                    _this.p_corrientes = [];
-                    _this.p_nocorrientes = [];
-                    _this.patrimonios = [];
-                    _this.total_balance_inicial.t_patrimonio_pasivo = '';
                     _this.cambioActivo();
                     _this.cambioActivoNo();
                     _this.cambioPasivo();
@@ -539,8 +520,18 @@ const b_hori = new Vue({
                     _this.cambioPatrimonio();
                     diario.obtenerBalanceInicial();
                     $('#list-tab a:nth-child(3)').tab('show');
-                    console.log(response.data);
-                  }
+                    console.log(response.data); 
+                  } else {
+                      toastr.success(response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+                    _this.cambioActivo();
+                    _this.cambioActivoNo();
+                    _this.cambioPasivo();
+                    _this.cambioPasivoNo();
+                    _this.cambioPatrimonio();
+                    diario.obtenerBalanceInicial();
+                  }                     
                 }).catch(function(error){
                   toastr.error(error.response.data.message, "Smarmoddle", {
                     "timeOut": "3000"
@@ -548,6 +539,40 @@ const b_hori = new Vue({
                 });
               }
             },
+            obtenerBalance:function(){
+              var _this = this;
+                var url = '/sistema/admin/taller/obtenerbalance';
+                    axios.post(url,{
+                    id: _this.id_taller,
+                    tipo: _this.tipo
+                }).then(response => {
+                  if (response.data.tipo == _this.tipo || response.data.datos == true ) {
+                      toastr.success(response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+                    _this.balance_inicial.nombre = response.data.nombre
+                    _this.balance_inicial.fecha = response.data.fecha
+                    _this.a_corrientes = response.data.a_corriente;
+                    _this.a_nocorrientes = response.data.a_nocorriente;
+                    _this.p_corrientes = response.data.p_corriente;
+                    _this.p_nocorrientes = response.data.p_nocorriente;
+                    _this.patrimonios = response.data.patrimonios;
+                    _this.total_balance_inicial.t_patrimonio_pasivo = response.data.total_pasivo_patrimonio;
+                    _this.cambioActivo();
+                    _this.cambioActivoNo();
+                    _this.cambioPasivo();
+                    _this.cambioPasivoNo();
+                    _this.cambioPatrimonio();
+                    diario.obtenerBalanceInicial();
+                    console.log(response.data);                 
+                  } else {
+
+                  }
+                }).catch(function(error){
+                
+                });
+
+            }
   }   
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -555,91 +580,77 @@ const b_hori = new Vue({
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const b_ver = new Vue({
         el: '#b_vertical',
-        data:{
+     data:{
         id_taller: taller,
-        diarios:[],
+        tipo: 'vertical',
+        //diarios:[],
         update:0,
-        balance_inicial:{
+        balance_inicial:{ //Nombre y fecha del balance inicial
           nombre:'',
           fecha:''
         },
-        patrimonio:{
+        patrimonio:{ //Asignar Patrimonio
           nom_cuenta:'',
           saldo:'',
-          total:''
         },
-        diarios2:[],
-        total_balance_inicial:{
+        //diarios2:[],
+        total_balance_inicial:{ //Totales de activo, pasivo y patrimonio
           t_activo:'',
           t_pasivo:'',
           t_patrimonio_pasivo:''
         },
         b_initotal:{
-            t_a_corriente:'',
-            t_a_nocorriente:'',
-            t_p_corriente:'',
-            t_p_no_corriente:'',
-            t_patrimonio:''
+            t_a_corriente:'', //Total de activo corriente
+            t_a_nocorriente:'', //Total de activo no corriente
+            t_p_corriente:'', //Total de pasivo corriente
+            t_p_no_corriente:'', //Total de pasivo no corriente
+            t_patrimonio:'' //Total de patrimonio
         },
-        a_corrientes:[],
-        a_nocorrientes:[],
-        p_corrientes:[],
-        p_nocorrientes:[],
-         patrimonios:[],
+        a_corrientes:[], //Array de activos corrientes
+        a_nocorrientes:[], //Array de activos no corrientes
+        p_corrientes:[], //Array de pasivos corrientes
+        p_nocorrientes:[], //Array de pasivos no corrientes
+        patrimonios:[], //Array de patrimonios
         activo:{
           a_corriente:
-            {
+            { //Agregar un nuevo activo corriente al array
+                nom_cuenta:'',
+                saldo:'',              
+              },
+          a_nocorriente:
+            { //Agregar un nuevo activo no corriente al array
                 nom_cuenta:'',
                 saldo:'',
-                total:''
               },
-               a_nocorriente:
-            {
-                nom_cuenta:'',
-                saldo:'',
-                total:''
-              },
-
         },
         pasivo:{
           p_corriente:
-            {
+            { //Agregar un nuevo pasivo corriente al array
                 nom_cuenta:'',
                 saldo:'',
                 total:''
               },
           p_nocorriente:
-            {
+            { //Agregar un nuevo pasivo no corriente al array
                 nom_cuenta:'',
                 saldo:'',
                 total:''
               }
         },
-        diario:{
-          fecha:'',
-            nom_cuenta:'',
-            gloza:'',
-            debe:'',
-            haber:''
-        },
-        pasan:{ 
-          debe:'', 
-          haber:''
-        },
-        balances:[],
-        balance:{
-          cuenta:'',
-          suma_debe:'',
-          suma_haber:'',
-          saldo_debe:'',
-          saldo_haber:''
-        },
-        suman:{
-          sum_debe:'',
-          sum_haber:'',
-          sal_debe:'',
-          sal_haber:''
-        }    
+        // balances:[],
+        // balance:{
+        //   cuenta:'',
+        //   suma_debe:'',
+        //   suma_haber:'',
+        //   saldo_debe:'',
+        //   saldo_haber:''
+        // },
+        // suman:{
+        //   sum_debe:'',
+        //   sum_haber:'',
+        //   sal_debe:'',
+        //   sal_haber:''
+        // }    
   },
   mounted: function(){
     this.cambioActivo();
@@ -649,6 +660,7 @@ const b_ver = new Vue({
     this.cambioPatrimonio();
     this.TotalActivo();
     this.TotalPasivo();
+    this.obtenerBalance();
   },
    methods:{
     Agregar(){
@@ -688,7 +700,7 @@ const b_ver = new Vue({
               id: _this.id_taller,
             datos: _this.diarios
         }).then(response => {
-            console.log(response.data);           
+            console.log(response.data); 
         }).catch(function(error){
 
         });
@@ -728,7 +740,7 @@ const b_ver = new Vue({
       this.balances.splice(index, 1);
     },
 //ELIMINAR ELEMENTOS DE UN ARRAY /////////
-       deleteAcCooriente(index){
+    deleteAcCooriente(index){
       this.a_corrientes.splice(index, 1);   //ELIMINAR UN ELEMENTO DEL ARRAY COMENZANDO DESDE SU INDEX
       this.cambioActivo();                  //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
       this.TotalActivo();                   //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
@@ -777,7 +789,7 @@ const b_ver = new Vue({
       $('#a_corriente_e2').modal('hide');                                      //OCULTAR EL MODAL
       this.limpiar();
       this.cambioActivo();
-      this.TotalActivo();
+  
     },
     editANocorriente(index){
       this.update = index;
@@ -817,7 +829,6 @@ const b_ver = new Vue({
       this.pasivo.p_nocorriente.nom_cuenta = this.p_nocorrientes[index].nom_cuenta;
       $('#p_nocorriente_e2').modal('show');
       //var activo = this.a_corrientes[index];
-      
     },
     updatePNoCorriente(){
       var i = this.update;
@@ -868,7 +879,6 @@ const b_ver = new Vue({
              }else{
                 var a_corr = {nom_cuenta:this.activo.a_corriente.nom_cuenta, saldo:this.activo.a_corriente.saldo};
                 this.a_corrientes.push(a_corr);                               //añadimos el la variable persona al array
-                  
                   toastr.success("Registro agregado correctamente", "Smarmoddle", {
                     "timeOut": "3000"
                 });
@@ -876,8 +886,8 @@ const b_ver = new Vue({
                 this.activo.a_corriente.nom_cuenta = '';
                 this.activo.a_corriente.saldo = '';
                 //SUMAR TOTALES
+                
                 this.cambioActivo();  
-                this.TotalActivo();
               }
             },
              agregarActivoNoCorriente(){
@@ -894,8 +904,7 @@ const b_ver = new Vue({
                 });
                 this.activo.a_nocorriente.nom_cuenta = '';
                 this.activo.a_nocorriente.saldo = '';
-                this.cambioActivoNo();
-                this.TotalActivo();
+                this.cambioActivoNo();          
               }
              },
                agregarPasivoCorriente(){
@@ -912,8 +921,7 @@ const b_ver = new Vue({
                 });
                 this.pasivo.p_corriente.nom_cuenta = '';
                 this.pasivo.p_corriente.saldo = '';
-                this.cambioPasivo();
-                this.TotalPasivo();
+                this.cambioPasivo();          
               }
             },
              agregarPasivoNoCorriente(){
@@ -931,7 +939,6 @@ const b_ver = new Vue({
                 this.pasivo.p_nocorriente.nom_cuenta = '';
                 this.pasivo.p_nocorriente.saldo = '';
                 this.cambioPasivoNo();
-                this.TotalPasivo();  
                 }   
              }, 
              agregarPatrimonio(){
@@ -975,6 +982,7 @@ const b_ver = new Vue({
               //console.log(total);  
               this.b_initotal.t_a_nocorriente = total;
             this.TotalActivo();
+
              },
                 cambioPasivo(){
               this.b_initotal.t_p_corriente = 0;
@@ -1011,6 +1019,7 @@ const b_ver = new Vue({
               //console.log(total);
               this.b_initotal.t_patrimonio = total;
              },
+
              //TOTAL GENERAL DE ACTIVO, PASIVO Y PATRIMONIO       
              TotalActivo(){
               var activo = this.b_initotal.t_a_corriente + this.b_initotal.t_a_nocorriente;
@@ -1023,28 +1032,125 @@ const b_ver = new Vue({
               this.total_balance_inicial.t_pasivo = pasivo;
              },
                totalPasivoPatrimonio(){
-                  $('#pasivo_patrimonio2').modal('hide');
+                  $('#pasivo_patrimonio').modal('hide');
                 toastr.success("Total Agregado Correctamente", "Smarmoddle", {
                     "timeOut": "3000"
                    });
             },
             //GUARDAR BALANCE INICIAL
                 guardarBalanceInicial: function(){
+                if (this.balance_inicial.nombre.trim() === '') {
+                  toastr.error("Campo Nombre es obligatorio", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else if (this.balance_inicial.fecha.trim() === '') {
+                  toastr.error("Campo Fecha es obligatorio", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else if(this.a_corrientes.length == 0){
+                  toastr.error("Debe haber al menos un Activo Corriente", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else if(this.a_nocorrientes.length == 0){
+                  toastr.error("Debe haber al menos un Activo No Corriente", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else if(this.p_corrientes.length == 0){
+                  toastr.error("Debe haber al menos un Pasivo Corriente", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else if(this.p_nocorrientes.length == 0){
+                  toastr.error("Debe haber al menos un Pasivo No Corriente", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else if(this.patrimonios.length == 0){
+                  toastr.error("Debe haber al menos un Patrimonio", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else if(this.total_balance_inicial.t_patrimonio_pasivo.trim() === ''){
+                  toastr.error("Debes calcular el Total del Pasivo + Patrimonio", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else{
                 var _this = this;
                 var url = '/sistema/admin/taller/balance_inicial';
                     axios.post(url,{
-                      id: _this.id_taller,
+                    id: _this.id_taller,
                     nombre: _this.balance_inicial.nombre,
                     fecha: _this.balance_inicial.fecha,
-                    a_corriente: _this.a_corrientes
+                    tipo: _this.tipo,
+                    a_corriente: _this.a_corrientes,
+                    a_nocorriente: _this.a_nocorrientes,
+                    p_corriente: _this.p_corrientes,
+                    p_nocorriente: _this.p_nocorrientes,
+                    patrimonio: _this.patrimonios,
+                    t_patrimonio: _this.total_balance_inicial.t_patrimonio_pasivo
                 }).then(response => {
-
+                  if (response.data.success == true) {
+                     toastr.success(response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+                    _this.cambioActivo();
+                    _this.cambioActivoNo();
+                    _this.cambioPasivo();
+                    _this.cambioPasivoNo();
+                    _this.cambioPatrimonio();
+                    diario.obtenerBalanceInicial();
+                    $('#list-tab a:nth-child(3)').tab('show');
                     console.log(response.data); 
+                  } else {
+                      toastr.success(response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+                    _this.cambioActivo();
+                    _this.cambioActivoNo();
+                    _this.cambioPasivo();
+                    _this.cambioPasivoNo();
+                    _this.cambioPatrimonio();
+                    diario.obtenerBalanceInicial();
+                  }                     
                 }).catch(function(error){
-
+                  toastr.error(error.response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
                 });
+              }
             },
-  }        
+            obtenerBalance:function(){
+              var _this = this;
+                var url = '/sistema/admin/taller/obtenerbalance';
+                    axios.post(url,{
+                    id: _this.id_taller,
+                    tipo: _this.tipo
+                }).then(response => {
+                  if (response.data.tipo == _this.tipo || response.data.datos == true ) {
+                      toastr.success(response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+                    _this.balance_inicial.nombre = response.data.nombre
+                    _this.balance_inicial.fecha = response.data.fecha
+                    _this.a_corrientes = response.data.a_corriente;
+                    _this.a_nocorrientes = response.data.a_nocorriente;
+                    _this.p_corrientes = response.data.p_corriente;
+                    _this.p_nocorrientes = response.data.p_nocorriente;
+                    _this.patrimonios = response.data.patrimonios;
+                    _this.total_balance_inicial.t_patrimonio_pasivo = response.data.total_pasivo_patrimonio;
+                    _this.cambioActivo();
+                    _this.cambioActivoNo();
+                    _this.cambioPasivo();
+                    _this.cambioPasivoNo();
+                    _this.cambioPatrimonio();
+                    //diario.obtenerBalanceInicial();
+                    console.log(response.data);                 
+                  } else {
+
+                  }
+                }).catch(function(error){
+                
+                });
+
+            }
+  }   
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1055,15 +1161,28 @@ const diario = new Vue({
  el: '#diario',
     data:{
       id_taller: taller,
+      nombre:'',
+      fechabalance:'',
+      complete:false,
       balanceInicial:{
         debe:[],
-        haber:[]
+        haber:[],
+        totaldebe:0,
+        totalhaber:0
        },
        registros:[
        ],
+       registerindex: 0,
+       cuentaindex: 0,
         diarios:{
            debe:[],
-          haber:[]
+          haber:[],
+          comentario:''
+        },
+         edit:{
+           debe:[],
+          haber:[],
+          comentario:''
         },
         diario:{
           debe:{
@@ -1075,16 +1194,18 @@ const diario = new Vue({
             fecha:'',
             nom_cuenta:'',
             saldo:''
-          }
+          },
+          comentario:''
         },
         pasan:{ 
-          debe:'', 
-          haber:''
+          debe:0, 
+          haber:0
         },
         dato:[]
     },
       mounted: function(){
     this.obtenerBalanceInicial();
+    
 
  
   },
@@ -1098,9 +1219,13 @@ const diario = new Vue({
           if (response.data.datos == true) {
             _this.balanceInicial.debe = response.data.pasivos;
           _this.balanceInicial.haber = response.data.activos;
+          _this.nombre = response.data.nombre;
+          _this.fechabalance = response.data.fecha;
           $('#list-tab a:nth-child(3)').tab('show');
-
             console.log(response.data); 
+            this.totalDebeBi();
+            this.totalHaberBi();
+            this.obtenerDiarioGeneral();
           }
                     
         }).catch(function(error){
@@ -1149,32 +1274,9 @@ const diario = new Vue({
       }
                
     },
-  Agregar(){
-    if(this.diario.nom_cuenta.trim() === ''){
-      toastr.error("El campo Nombre de cuenta es obligatorio", "Smarmoddle", {
-                "timeOut": "3000"
-            });
-    }else if(this.diario.debe.trim() === '' && this.diario.haber.trim() === ''){
-      toastr.warning("Rellena el cambio de Debe o Haber, no puedes dejar ambos vacios", "Smarmoddle", {
-                "timeOut": "3000"
-            });
-    }else if(this.diario.debe.trim() != '' && this.diario.haber.trim() != ''){
-      toastr.warning("No pueden estar ambos campos llenos a mismo tiempo", "Smarmoddle", {
-                "timeOut": "3000"
-            });
-    }else{
-      var diario = {fecha:this.diario.fecha, nom_cuenta:this.diario.nom_cuenta, gloza:this.diario.gloza, debe:this.diario.debe, haber:this.diario.haber};
-      this.diarios.push(diario);//añadimos el la variable persona al array
-      //Limpiamos los campos
-      toastr.success("Registro agregado correctamente", "Smarmoddle", {
-                "timeOut": "3000"
-            });
-      this.diario.fecha =''
-      this.diario.nom_cuenta =''
-      this.diario.gloza =''
-      this.diario.debe =''
-      this.diario.haber =''
-    }
+    agregarComentario(){
+      this.diarios.comentario = this.diario.comentario;
+      this.diario.comentario = '';
     },
   deleteHaber(index){
       this.diarios.haber.splice(index, 1);
@@ -1183,7 +1285,12 @@ const diario = new Vue({
       this.diarios.debe.splice(index, 1);
     },
     guardarRegistro(){
-      var registro = {debe:this.diarios.debe, haber:this.diarios.haber};
+      if (this.diarios.debe == 0) {
+         toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else{
+           var registro = {debe:this.diarios.debe, haber:this.diarios.haber, comentario:this.diarios.comentario};
                 this.registros.push(registro);//añadimos el la variable persona al array
                 //Limpiamos los campos
                 toastr.success("Registro agregado correctamente", "Smarmoddle", {
@@ -1191,23 +1298,248 @@ const diario = new Vue({
                 });
                 this.diarios.debe =[];
                 this.diarios.haber =[];
-                console.log(this.registros)
+                this.diarios.comentario = '';
+                // console.log(this.registros);
+                this.totalDebe();
+           this.totalHaber();
+                
+      }
+    },
+    debeEditRegister(id){
+      var register = this.registros;
+      this.registerindex = id;
+      this.edit.debe =[];
+      this.edit.haber =[];
+      this.edit.debe = register[id].debe;
+      this.edit.haber = register[id].haber;
+      this.edit.comentario = register[id].comentario;
+      console.log(this.registros[id]);
 
     },
+    deleteRegistro(id){
+      this.registros.splice(id, 1);
+      this.totalDebe();
+      this.totalHaber();
+    },
+    updaterRegister(){
+     var  id = this.registerindex;
+     this.registros[id].debe = this.edit.debe;
+     this.registros[id].haber = this.edit.haber;
+     this.registros[id].comentario = this.edit.comentario;
+     this.edit.debe =   [];
+    this.edit.haber = [];
+    this.edit.comentario = '';
+    this.totalDebe();
+           this.totalHaber();
+    },
+  //   habereditRegister(id, index){
+  //     console.log(id);
+  //   console.log(index);
+  // },
+  agregarEdit(){
+     var haber = {fecha:this.diario.haber.fecha, nom_cuenta:this.diario.haber.nom_cuenta, saldo:this.diario.haber.saldo};
+              this.edit.haber.push(haber);//añadimos el la variable persona al array
+                //Limpiamos los campos
+            toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+                this.diario.haber.fecha =''
+                this.diario.haber.nom_cuenta =''
+                this.diario.haber.saldo =''
+   },
+   agregarEditPasivo(){
+         var debe = {fecha:'', nom_cuenta:this.diario.debe.nom_cuenta, saldo:this.diario.debe.saldo};
+                this.edit.debe.push(debe);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.diario.debe.fecha =''
+                this.diario.debe.nom_cuenta =''
+                this.diario.debe.saldo =''
+             
+   },
+    haberEdit(index){
+      var edit = this.edit;
+      this.cuentaindex  = index;
+      this.diario.haber.nom_cuenta  = edit.haber[index].nom_cuenta;
+      this.diario.haber.saldo       = edit.haber[index].saldo;
+      $('#haber_a').modal('show'); 
+    },
+    updateHaber(){
+      var id                         = this.cuentaindex;
+      this.edit.haber[id].nom_cuenta = this.diario.haber.nom_cuenta;
+      this.edit.haber[id].saldo      = this.diario.haber.saldo;
+      $('#haber_a').modal('hide'); 
+        this.diario.haber.nom_cuenta = '';
+        this.diario.haber.saldo = '';
+    },
+    habediarioEdit(index){
+      this.cuentaindex  = index;
+      this.diario.haber.nom_cuenta  = this.diarios.haber[index].nom_cuenta;
+      this.diario.haber.saldo       = this.diarios.haber[index].saldo;
+      $('#haber_d').modal('show'); 
+    },
+      updateHaber1(){
+      var id = this.cuentaindex;
+      this.diarios.haber[id].nom_cuenta  = this.diario.haber.nom_cuenta;
+      this.diarios.haber[id].saldo       = this.diario.haber.saldo;
+      $('#haber_d').modal('hide'); 
+        this.diario.haber.nom_cuenta = '';
+        this.diario.haber.saldo = '';
+    },
+    haberDelete(index){
+      this.edit.haber.splice(index, 1);
+    },
+    comentarioEdit(){
+     this.diario.comentario = this.edit.comentario;
+     $('#comentario').modal('show'); 
+
+    },
+    comentarioUpdate(){
+      this.edit.comentario = this.diario.comentario;
+      $('#comentario').modal('hide'); 
+      this.diario.comentario = '';
+    },
+    debeEdit(index){
+      this.cuentaindex        = index;
+      if (index == 0) {
+      this.diario.debe.fecha  = this.edit.debe[index].fecha;  
+      }
+      this.diario.debe.nom_cuenta  = this.edit.debe[index].nom_cuenta;
+      this.diario.debe.saldo       = this.edit.debe[index].saldo;
+      $('#debe_a').modal('show'); 
+    },
+    updateDebe(){
+      var id                         = this.cuentaindex;
+       if (id == 0) {
+      this.edit.debe[id].fecha = this.diario.debe.fecha; 
+      }
+      this.edit.debe[id].nom_cuenta = this.diario.debe.nom_cuenta;
+      this.edit.debe[id].saldo      = this.diario.debe.saldo;
+      $('#debe_a').modal('hide'); 
+        this.diario.debe.nom_cuenta = '';
+        this.diario.debe.saldo = '';
+    },
+     debediairoEdit(index){
+      this.cuentaindex     = index;
+      if (index == 0) {
+      this.diario.debe.fecha  = this.diarios.debe[index].fecha;  
+      }
+      this.diario.debe.nom_cuenta  = this.diarios.debe[index].nom_cuenta;
+      this.diario.debe.saldo       = this.diarios.debe[index].saldo;
+      $('#debe_d').modal('show'); 
+    },
+    updateDebe1(){
+      var id  = this.cuentaindex;
+       if (id == 0) {
+      this.diarios.debe[id].fecha = this.diario.debe.fecha; 
+      }
+      this.diarios.debe[id].nom_cuenta = this.diario.debe.nom_cuenta;
+      this.diarios.debe[id].saldo      = this.diario.debe.saldo;
+      $('#debe_d').modal('hide');
+      if (id == 0) {
+        this.diario.debe.fecha = '';
+      } 
+        this.diario.debe.nom_cuenta = '';
+        this.diario.debe.saldo = '';
+    },
+    debeDelete(index){
+      this.edit.debe.splice(index, 1);
+    },
+     totalDebeBi: function(){
+            var balan = this.balanceInicial;
+            var total = 0; 
+            balan.debe.forEach(function(obj, index){
+                total += Number(obj.saldo);
+            });
+            // console.log(total);        
+            this.balanceInicial.totaldebe = total;
+            
+
+          },
+    totalHaberBi: function(){
+            var balan = this.balanceInicial;
+            var total = 0; 
+            balan.haber.forEach(function(obj, index){
+                total += Number(obj.saldo);
+            });
+            // console.log(total);        
+            this.balanceInicial.totalhaber = total;
+            
+          },
+    totalDebe: function(){
+            this.pasan.debe = 0;
+            var regis = this.registros;
+            var total = 0;        
+            regis.forEach(function(obj, index){
+              obj.debe.forEach(function(sal, id){
+                total += Number(sal.saldo);
+              })
+            });
+            // console.log(total);
+            this.pasan.debe = this.balanceInicial.totaldebe + total;
+          },
+        totalHaber: function(){
+            this.pasan.haber = 0;
+            var regis = this.registros;
+            var total = 0;
+            
+            regis.forEach(function(obj, index){
+              obj.haber.forEach(function(sal, id){
+                total += Number(sal.saldo);
+              })
+            });
+            // console.log(total);  
+            this.pasan.haber =  this.balanceInicial.totalhaber +  total;
+          }, 
   guardarDiario: function(){
         var _this = this;
         var url = '/sistema/admin/taller/diario';
             axios.post(url,{
               id: _this.id_taller,
-              debe: _this.diarios.debe,
-              haber: _this.diarios.haber
+              registro: _this.registros
+              // debe: _this.diarios.debe,
+              // haber: _this.diarios.haber
         }).then(response => {
-          _this.dato = response.data;
-            console.log( _this.dato);           
+          if (response.data.success == false) {
+                    toastr.error(response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+          }else if(response.data.success == 'act'){
+            toastr.success("Diario General Actualizado Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+            this.obtenerDiarioGeneral();
+          }else{
+           toastr.success("Diairo General Creado Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+          _this.complete = response.data.success
+          _this.dato     = response.data;
+          this.obtenerDiarioGeneral();
+            //console.log( _this.dato); 
+            }          
+        }).catch(function(error){
+        });  
+      },
+
+    obtenerDiarioGeneral: function(){
+              var _this = this;
+        var url = '/sistema/admin/taller/diariogeneral';
+            axios.post(url,{
+              id: _this.id_taller,
+        }).then(response => {
+          if (response.data.datos == true) {
+          _this.registros = response.data.dgeneral;
+          _this.complete = true;
+           this.totalDebe();
+           this.totalHaber();
+            }          
         }).catch(function(error){
 
-        });
-    },
+        }); 
+    }
 
     }
 });

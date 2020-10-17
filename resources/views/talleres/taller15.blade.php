@@ -13,13 +13,13 @@
 			<div class="col-2">
 				<h2>Datos</h2>
 				<label for="">Girador</label><br>
-					<p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->girador }}')">{{ $datos->girador }}</p>
+					<p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->girador }}')" ondragend="this.classList.add('text-muted');">{{ $datos->girador }}</p>
 				<label for="">Girado</label><br>
-					<p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->girado }}')">{{ $datos->girado }}</p>
+					<p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->girado }}')" ondragend="this.classList.add('text-muted');">{{ $datos->girado }}</p>
 				<label for="">Cantidad</label><br>
-					<p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->cantidad }}')">{{ $datos->cantidad }}</p>
+					<p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->cantidad }}')" ondragend="this.classList.add('text-muted');">{{ $datos->cantidad }}</p>
 				<label for="">Lugar y Fecha</label>	<br>
-				<p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->lugar }}')">{{ $datos->lugar }}</p>
+				<p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->lugar }}')" ondragend="this.classList.add('text-muted');">{{ $datos->lugar }}</p>
 				<p>{{ $datos->fecha }}</p>
 			</div>
 			<div class="col-9 border">

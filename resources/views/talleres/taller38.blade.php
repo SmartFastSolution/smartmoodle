@@ -1,7 +1,7 @@
 @extends('layouts.nav')
 
 @section('title', 'Taller 38')
-@section('contenido')
+@section('content')
 
 <h1 class="text-center  mt-5 text-danger"> Taller #38</h1>
 <h3 class="text-center mt-5 mb-3 text-info">DESARROLLE  FÓRMULAS  DE  LA  ECUACIÓN  CONTABLE,  CON  EXACTITUD.</h3>

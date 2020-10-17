@@ -1,7 +1,7 @@
 @extends('layouts.nav')
 
 @section('title', 'Taller 46')
-@section('contenido')
+@section('content')
 
 <h1 class="text-center  mt-5 text-danger"> Taller #46</h1>
 <h3 class="text-center mt-5 mb-3 text-info">COMPLETA  EL  SIGUIENTE  MAPA  CONCEPTUAL  CORRECTAMENTE.</h3>

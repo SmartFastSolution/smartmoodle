@@ -1,7 +1,7 @@
 @extends('layouts.nav')
 
 @section('title', 'Taller 42')
-@section('contenido')
+@section('content')
 
 <h1 class="text-center  mt-5 text-danger"> Taller #42</h1>
 <h3 class="text-center mt-5 mb-3 text-info">RMA  UNA  PALABRA  DE  9  LETRAS  REFERENTE  A 

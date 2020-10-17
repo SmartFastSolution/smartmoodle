@@ -46,7 +46,7 @@ class Usuario extends Seeder
            'celular'         => '044549611',
            'titulo'          => 'Tecnologo',
            'email'           => 'thony918@outlook.com',
-           'password'        => Hash::make('tony98ms'),
+           'password'        => Hash::make('smartmoodle'),
            'estado'          => 'on',
            'fcontrato'       => '12/11/1998',
            'cirepre'         => '0989500440',

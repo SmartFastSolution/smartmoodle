@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBIPasivosTable extends Migration
+class CreateTipoSaldoHabersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,17 @@ class CreateBIPasivosTable extends Migration
      */
     public function up()
     {
-        Schema::create('b_i_pasivos', function (Blueprint $table) {
+        Schema::create('tipo_saldo_habers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedbigInteger('balance_inicial_id');
+            $table->unsignedbigInteger('taller_tipo_saldo_id');
             $table->string('nom_cuenta');
             $table->string('saldo');
-            $table->string('tipo');
             $table->timestamps();
 
 
-            $table->foreign('balance_inicial_id')
+            $table->foreign('taller_tipo_saldo_id')
             ->references('id')
-            ->on('balance_inicials')
+            ->on('taller_tipo_saldos')
             ->onDelete('cascade');
         });
     }
@@ -36,6 +35,6 @@ class CreateBIPasivosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('b_i_pasivos');
+        Schema::dropIfExists('tipo_saldo_habers');
     }
 }

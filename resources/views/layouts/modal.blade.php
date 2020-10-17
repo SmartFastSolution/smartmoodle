@@ -80,7 +80,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Imagen:</label>
-                                    <input type="file" class="inputfile inputfile-1" id="ta2-1">
+                                    <input type="file" class="inputfile inputfile-1" id="ta2-1" name="imagen">
                                     <label for="ta2-1"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>
                                
                             </div>
@@ -566,14 +566,14 @@
                             <div class="form-group bg-light p-2">
                                 <div class="form-inline">
                                     <label for="enunciado1" class="col-form-label pr-2">Enunciado 1 </label>
-                                    <input required="" type="text" name="enunciado[]" class="form-control m-2">
+                                    <input required="" type="text" name="enunciados[]" class="form-control m-2">
                                     <a href="#" class="btn btn-danger re_tall10">
-                                      <span class="glyphicon glyphicon-remove">X</span></a>                                </div>
+                                      <span class="glyphicon glyphicon-remove">X</span></a> </div>
                                 <div class="form-inline">
                                     <label for="img1" class="col-form-label">Imagen 1:</label>
                                 </div>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="img[]" lang="es">
+                                    <input type="file" class="custom-file-input" name="img[]">
                                     <label class="custom-file-label" for="customFile">Seleciona un archivo</label>
                                 </div>
                                 <label for="concepto6" class="col-form-label">Definicion 1:</label>
@@ -1372,13 +1372,17 @@
                             </div>
 
                             <div class="form-row">
-                                <div class="form-group col-6">
+                                <div class="form-group col-4">
                                     <label for="" class="col-form-label">Pedido :</label>
                                     <input required="" type="text" name="pedido" class="form-control">
                                 </div>
-                                <div class="form-group col-6">
+                                <div class="form-group col-4">
                                     <label for="" class="col-form-label">Cantidad :</label>
                                     <input required="" type="text" name="cantidad" class="form-control">
+                                </div>
+                                 <div class="form-group col-4">
+                                    <label for="" class="col-form-label">Precio Unitario :</label>
+                                    <input required="" type="text" name="precio_unit" class="form-control">
                                 </div>
                             </div>
 
@@ -1558,11 +1562,11 @@
                                     <input required="" type="text" name="cantidad" class="form-control">
                                 </div>
                                 <div class="form-group col-4">
-                                    <label for="" class="col-form-label">Lugar :</label>
+                                    <label for="" class="col-form-label">fecha de la Orden:</label>
                                     <input required="" type="text" name="lugar" class="form-control">
                                 </div>
                                 <div class="form-group col-4">
-                                    <label for="" class="col-form-label">Fecha :</label>
+                                    <label for="" class="col-form-label">Fecha del comprobante de pago:</label>
                                     <input required="" type="date" name="fecha" class="form-control">
                                 </div>
                             </div>
@@ -1932,12 +1936,12 @@
 </div>
 
 
-<!-- FORMULARIO PARA PLANTILLA 34 -->
-<div class="modal fade" id="taller34" tabindex="-1" role="dialog" aria-labelledby="taller34Label" aria-hidden="true">
+<!-- FORMULARIO PARA PLANTILLA 31 -->
+<div class="modal fade" id="taller31" tabindex="-1" role="dialog" aria-labelledby="taller31Label" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="taller34Label">COLLAGE</h2>
+                <h2 class="modal-title" id="taller31Label">COLLAGE</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -1949,7 +1953,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
-                                <input required="" type="hidden" value="34" name="id_plantilla">
+                                <input required="" type="hidden" value="31" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
                             <div class="form-group">
@@ -1968,6 +1972,199 @@
                 </div>
             </div>
             <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FORMULARIO PARA PLANTILLA 33 -->
+<div class="modal fade" id="taller33" tabindex="-1" role="dialog" aria-labelledby="taller33Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="taller33Label">ESCRIBIR PREGUNTAS</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller33') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="33" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Materia:</label>
+                                <select name="materia_id" class="custom-select">
+                                    @foreach ($materias = App\Materia::get() as $materia)
+                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                             <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label for="" class="col-form-label">Pregunta 1 :</label>
+                                    <input required="" type="text" name="pregunta1" class="form-control">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="" class="col-form-label">Pregunta 2 :</label>
+                                    <input required="" type="text" name="pregunta2" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FORMULARIO PARA PLANTILLA 34 -->
+<div class="modal fade" id="taller34" tabindex="-1" role="dialog" aria-labelledby="taller34Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" id="ejercicios">
+            <div class="modal-header">
+                <h2 class="modal-title" id="taller34Label">TIPOS DE SALDOS</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" >
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="34" name="id_plantilla">
+                                <textarea required v-model="taller.enunciado" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Materia:</label>
+                                <select v-model="taller.materia_id" class="custom-select">
+                                    <option value="" selected disabled>ELIJA UNA MATERIA</option>
+                                    @foreach ($materias = App\Materia::get() as $materia)
+                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                             <div class="form-row">
+                                    <table class="table table-bordered table-sm">
+                                      <thead class="thead-dark">
+                                        <tr align="center">                        
+                                          <th scope="col">NOMBRE DE CUENTAS</th>
+                                          <th width="125" scope="col">DEBE</th>
+                                          <th  width="125" scope="col">HABER</th>
+                                          <th width="25" colspan="2" v-if="registros.length > 0 || ejercicios.debe.length > 0">ACCION</th>
+                                        </tr>
+                                      </thead>
+                                          <tbody v-for="(registro, id) in registros" @change="totalDebe()">
+                                            <tr v-for="(diar, index) in registro.debe">
+                                                <td align="rigth">@{{ diar.nom_cuenta}}</td>
+                                                <td align="center" width="125">@{{ diar.saldo }}</td>
+                                                <td align="center" width="125"></td>
+                                                <td v-if="index == 0" align="center" width="25"><a @click="debeEditRegister(id)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i></a></td>
+                                                <td v-if="index == 0" align="center" width="25"><a @click="deleteRegistro(id)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></td>
+                                            </tr>
+                                            <tr v-for="(diar, index) in registro.haber">
+                                                <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
+                                                <td align="center" width="125"></td>
+                                                <td align="center" width="125">@{{ diar.saldo }}</td>
+                                            </tr>
+                                          </tbody>
+                                        <tbody>
+                                            <tr v-for="(diar, index) in ejercicios.debe" class="table-info">
+                                                <td >@{{ diar.nom_cuenta}}</td>
+                                                <td align="center" width="125">@{{ diar.saldo }}</td>
+                                                <td align="center" width="125"></td>
+                                                <td align="center" width="25">
+                                                    <a @click="debediairoEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i></a>
+                                                </td>
+                                                <td align="center" width="25">
+                                                    <a @click="deleteDebe(index)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr v-for="(diar, index) in ejercicios.haber" class="table-info">
+                                                <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
+                                                <td align="center" width="125"></td>
+                                                <td align="center" width="125">@{{ diar.saldo }}</td>
+                                                <td>
+                                                    <a @click="habediarioEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i></a>
+                                                </td>
+                                                <td align="center" width="25"><a @click="deleteHaber(index)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody>
+                                            <tr v-for="(diar, index) in edit.debe" class="table-danger">
+                                                <td >@{{ diar.nom_cuenta}}</td>
+                                                <td align="center" width="125">@{{ diar.saldo }}</td>
+                                                <td align="center" width="125"></td>
+                                                <td align="center" width="25">
+                                                    <a @click="debeEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i></a>
+                                                </td>
+                                                <td align="center" width="25">
+                                                    <a @click="debeDelete(index)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr v-for="(diar, index) in edit.haber" class="table-danger">
+                                                <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
+                                                <td align="center" width="125"></td>
+                                                <td align="center" width="125">@{{ diar.saldo }}</td>
+                                                <td>
+                                                    <a @click="haberEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i></a>
+                                                </td>
+                                                <td align="center" width="25"><a @click="haberDelete(index)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></td>
+                                            </tr>
+                                        </tbody>                        
+                                </table>
+
+         
+                            </div>
+                            <div v-if="edit.debe.length >= 1" class="form-row justify-content-center">
+                                <div class="form-inline col-6">
+                                    <input required="" v-model="ejercicio.debe.nom_cuenta"  type="text" placeholder="Actualizar Cuenta " class="form-control-sm mr-1">
+                                    <input required="" v-model="ejercicio.debe.saldo" type="text" placeholder="Actualizar saldo" class="form-control-sm">
+                                    <a class="btn ml-2 btn-outline-info btn-sm text-center mt-1" href="#" @click.prevent="updateDebe">Actualizar Debe</a>
+                                </div>
+                                <div class="form-inline col-6">
+                                    <input required="" type="text" v-model="ejercicio.haber.nom_cuenta" class="form-control-sm mr-1" placeholder="Actualizar Cuenta ">
+                                    <input required="" type="text" v-model="ejercicio.haber.saldo" class="form-control-sm" placeholder="Actualizar saldo">
+                                    <a class="btn ml-2 btn-outline-info btn-sm mt-1" href="#" @click.prevent="updateHaber()"> Actualizar Haber</a>
+                            </div>
+                            <div class="text-center">
+                                 <a class="btn ml-2 btn-outline-primary btn-sm mt-1" href="#" @click.prevent="updaterRegister()"> Actualizar Registro</a>
+                            </div>
+                            </div>
+
+                            <div v-else class="form-row justify-content-center">
+                                <div class="form-inline col-6">
+                                    <input required="" v-model="ejercicio.debe.nom_cuenta"  type="text" placeholder="Agregar Cuenta " class="form-control-sm mr-1">
+                                    <input required="" v-model="ejercicio.debe.saldo" type="text" placeholder="Agregar saldo" class="form-control-sm">
+                                    <a class="btn ml-2 btn-outline-info btn-sm text-center mt-1" href="#" @click.prevent="agregarDebe">Agregar Debe</a>
+                                </div>
+                                <div class="form-inline col-6">
+                                    <input required="" type="text" v-model="ejercicio.haber.nom_cuenta" class="form-control-sm mr-1" placeholder="Agregar Cuenta ">
+                                    <input required="" type="text" v-model="ejercicio.haber.saldo" class="form-control-sm" placeholder="Agregar saldo">
+                                    <a class="btn ml-2 btn-outline-info btn-sm mt-1" href="#" @click.prevent="agregarHaber()"> Agregar Haber</a>
+                            </div>
+                             <div class="mt-2">
+                                 <a class="btn ml-2 btn-outline-success btn-sm mt-1" href="#" @click.prevent="guardarRegistro()"> Agregar Registro</a>
+                            </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer row justify-content-center">
+                 <div class="row">
+                    <a class="btn p-2 mt-3 btn-danger" @click.prevent="guardarTaller34()">Crear Taller </a>
+                </div>
             </div>
         </div>
     </div>

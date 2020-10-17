@@ -18,6 +18,7 @@ class CreateBIActivosTable extends Migration
             $table->unsignedbigInteger('balance_inicial_id');
             $table->string('nom_cuenta');
             $table->string('saldo');
+            $table->string('tipo');
             $table->timestamps();
 
 

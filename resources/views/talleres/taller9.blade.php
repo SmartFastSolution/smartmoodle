@@ -10,73 +10,19 @@
 <form action="{{ route('taller9', ['idtaller' => $d]) }}" method="POST">
     @csrf
      	<div class="container">
+               @foreach ($datos->TallerSubraOps as $key => $element)          
      		<div class="row mb-4 justify-content-center ">
      			<div class="col-10">
      				<span class="badge-danger badge-pill">1.</span>
-     				<label class="form-control-label">{{ $datos->concepto1 }}</label>
+     				<label class="form-control-label">{{ $element->concepto }}</label>
      				<div class="row">
-                              @foreach ($info = explode(',', $datos->alternativas); as $e)            
-     						<div class="col-4"><input type="radio" name="item1" value="niño"> <label>{{ $e }}</label></div>
+                              @foreach ($info = explode(',', $element->alternativas); as $e)            
+     						<div class="col-4"><input type="radio" name="respuesta{{ $key }}" value=""> <label>{{ $e }}</label></div>
                               @endforeach
      				</div>	
      			</div>
      		</div>
-
-     		<div class="row mb-4  justify-content-center   ">
-     			<div class="col-10">
-     				<span class="badge-danger badge-pill">2.</span>
-     				<label class="form-control-label">{{ $datos->concepto2 }}</label>
-     				<div class="row">
-     					@foreach ($info = explode(',', $datos->alternativas2); as $e)            
-                              <div class="col-4"><input type="radio" name="item2" value="niño"> <label>{{ $e }}</label></div>
-                              @endforeach
-     				</div>	
-     			</div>
-     		</div>
-     		<div class="row mb-4 justify-content-center  ">
-     			<div class="col-10">
-     				<span class="badge-danger badge-pill">3.</span>
-     				<label class="form-control-label">{{ $datos->concepto3 }}</label>
-     				<div class="row">
-     					@foreach ($info = explode(',', $datos->alternativas3); as $e)            
-                                   <div class="col-4"><input type="radio" name="item3" value="niño"> <label>{{ $e }}</label></div>
-                              @endforeach	
-     				</div>	
-     			</div>
-     		</div>
-               <div class="row mb-4 justify-content-center  ">
-                    <div class="col-10">
-                         <span class="badge-danger badge-pill">4.</span>
-                         <label class="form-control-label">{{ $datos->concepto4 }}</label>
-                         <div class="row">
-                                 @foreach ($info = explode(',', $datos->alternativas4); as $e)            
-                                   <div class="col-4"><input type="radio" name="item4" value="niño"> <label>{{ $e }}</label></div>
-                              @endforeach
-                         </div>    
-                    </div>
-               </div>
-               <div class="row mb-4 justify-content-center  ">
-                    <div class="col-10">
-                         <span class="badge-danger badge-pill">5.</span>
-                         <label class="form-control-label">{{ $datos->concepto5 }}</label>
-                         <div class="row">
-                                @foreach ($info = explode(',', $datos->alternativas5); as $e)            
-                                   <div class="col-4"><input type="radio" name="item5" value="niño"> <label>{{ $e }}</label></div>
-                              @endforeach   
-                         </div>    
-                    </div>
-               </div>
-               <div class="row mb-4 justify-content-center  ">
-                    <div class="col-10">
-                         <span class="badge-danger badge-pill">6.</span>
-                         <label class="form-control-label">{{ $datos->concepto6 }}</label>
-                         <div class="row">
-                                 @foreach ($info = explode(',', $datos->alternativas6); as $e)            
-                                   <div class="col-4"><input type="radio" name="item6" value="niño"> <label>{{ $e }}</label></div>
-                              @endforeach  
-                         </div>    
-                    </div>
-               </div>
+                @endforeach
      	</div>
                <div class="row justify-content-center">
                   <input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">

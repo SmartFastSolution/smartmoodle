@@ -16,14 +16,14 @@ ADECUADAMENTE. -->
 						<h3 class="text-center">Datos</h3>
 							<div class="row">				
 								<div class="col-6">
-									<label>Pedido :</label> {{ $datos->pedido }}<br>
-									<label>Cantidad :</label> {{ $datos->cantidad }}<br>
-									<label>Codigo :</label> {{ $datos->codigo }}<br>
-									<label>Detalle :</label> {{ $datos->detalle }}<br>
-									<label>Lugar y fecha :</label> {{ $datos->lugar }}, {{ $datos->fecha }}<br>
+									<label>Pedido :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->pedido  }}')" ondragend="this.classList.add('text-muted');">${{ $datos->pedido  }}</span> <br>
+									<label>Cantidad :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->cantidad  }}')" ondragend="this.classList.add('text-muted');">${{ $datos->cantidad  }}</span><br>
+									<label>Codigo :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->codigo  }}')" ondragend="this.classList.add('text-muted');">${{ $datos->codigo  }}</span> <br>
+									<label>Detalle :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->detalle  }}')" ondragend="this.classList.add('text-muted');">${{ $datos->detalle  }}</span> {<br>
+									<label>Lugar y fecha :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->lugar  }}')" ondragend="this.classList.add('text-muted');">${{ $datos->lugar  }}</span> , <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->fecha }}')" ondragend="this.classList.add('text-muted');"></span> <br>
 
-									<label>Firma de Bodeguero :</label> {{ $datos->firma }}<br>
-									<label>Plazo de entrega :</label> {{ $datos->plazo_entrega }}<br>
+									<label>Firma de Bodeguero :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->firma  }}')" ondragend="this.classList.add('text-muted');">${{ $datos->firma }}</span> <br>
+									<label>Plazo de entrega :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->plazo_entrega }}')" ondragend="this.classList.add('text-muted');">${{ $datos->plazo_entrega  }}</span><br>
 								</div>
 							</div>
 			</div>

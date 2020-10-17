@@ -12,7 +12,7 @@ class TallerSubrayar extends Model
     }
      public function TallerSubraOps(){
 
-        return $this->hasMany('App\Admin\TallerSubrayarOp');
+        return $this->hasMany('App\Admin\TallerSubrayarOp', 'taller_subrayars_id');
     }
    
 }

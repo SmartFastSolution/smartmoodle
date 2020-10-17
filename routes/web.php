@@ -121,6 +121,7 @@ route::post('/taller26', 'AdminController@taller26')->name('admin.taller26');
 route::post('/taller27', 'AdminController@taller27')->name('admin.taller27');
 route::post('/taller28', 'AdminController@taller28')->name('admin.taller28');
 route::post('/taller29', 'AdminController@taller29')->name('admin.taller29');
+route::post('/taller33', 'AdminController@taller33')->name('admin.taller33');
 route::post('/taller34', 'AdminController@taller34')->name('admin.taller34');
 route::post('/taller57', 'AdminController@taller57')->name('admin.taller57');
 	});
@@ -180,21 +181,19 @@ route::post('/sistema/admin/taller24/{idtaller}', 'TallersController@store24')->
 route::post('/sistema/admin/taller25/{idtaller}', 'TallersController@store25')->name('taller25');
 route::post('/sistema/admin/taller26/{idtaller}', 'TallersController@store26')->name('taller26');
 route::post('/sistema/admin/taller27/{idtaller}', 'TallersController@store27')->name('taller27');
+route::post('/sistema/admin/taller28/{idtaller}', 'TallersController@store28')->name('taller28');
 route::post('/sistema/admin/taller29/{idtaller}', 'TallersController@store29')->name('taller29');
 route::post('/sistema/admin/taller30/{idtaller}', 'TallersController@store30')->name('taller30');
-route::post('/sistema/admin/taller31/{idtaller}', 'TallersController@store31')->name('taller31');
-route::post('/sistema/admin/taller34/{idtaller}', 'TallersController@store34')->name('taller_34');
+route::post('/sistema/admin/taller3/{idtaller}', 'TallersController@store31')->name('taller_31');
 route::post('/sistema/admin/taller57/{idtaller}', 'TallersController@store57')->name('taller_57');
 route::post('/sistema/admin/taller/balance_inicial', 'TallerContabilidadController@balance_inicial')->name('balance_inicial');
 route::post('/sistema/admin/taller/b_inicial_diario', 'TallerContabilidadController@b_inicial_diario')->name('b_inicial_diario');
 route::post('/sistema/admin/taller/diario', 'TallerContabilidadController@diario')->name('diario');
+route::post('/sistema/admin/taller/diariogeneral', 'TallerContabilidadController@obtenerdiario')->name('obtenerdiario');
+route::post('/sistema/admin/taller/obtenerbalance', 'TallerContabilidadController@obtenerbalance')->name('obtenerbalance');
 
 
-route::get('/sistema/taller32', 'TallersController@taller32')->name('taller32');
-route::get('/sistema/taller33', 'TallersController@taller33')->name('taller33');
-
-route::get('/sistema/taller35', 'TallersController@taller35')->name('taller35');
-route::get('/sistema/taller36', 'TallersController@taller36')->name('taller36');
+route::get('/sistema/taller34', 'TallersController@taller34')->name('taller34');
 route::get('/sistema/taller37', 'TallersController@taller37')->name('taller37');
 route::get('/sistema/taller38', 'TallersController@taller38')->name('taller38');
 route::get('/sistema/taller39', 'TallersController@taller39')->name('taller39');

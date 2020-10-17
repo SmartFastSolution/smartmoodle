@@ -14,7 +14,7 @@
 <div id="tallerlist">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-6" >
                 <div class="card text-center">
                     <div class="card-header bg-primary">
                         <h1>Elija la plantilla a utilizar</h1>
@@ -23,7 +23,7 @@
                         <h5 class="card-title">Seleccione:</h5>
                         <select class="custom-select" v-model="numbreTaller" name="taller" id="">
                             <option disabled value="">SELECCIONE UN TALLER</option>
-                            @foreach ($plantillas = App\Plantilla::get() as $plantilla)
+                            @foreach ($plantillas = App\Plantilla::where('plantilla', 'si')->get() as $plantilla)
                             <option class="text-uppercase" value="#taller{{ $plantilla->id }}">{{ $plantilla->nombre }}</option>
                             @endforeach
                         </select>
@@ -49,13 +49,12 @@
                             <h3 class="card-title">Completa el formulario para registrar una nueva plantilla</h3>
                             <div class="form-group">
                                 <label for="message-text" class="col-form-label">Nombre del taller</label>
+                                <input type="hidden" value="si" name="plantilla">
                                 <input class="form-control" name="nombre"></input>
                             </div>
                             <div class="form-group">
                                 <label for="message-text" class="col-form-label">Descripcion</label>
-
                                 <textarea class="form-control" name="descripcion" required=""></textarea>
-
                             </div>
                         </div>
                         <div class="card-footer text-muted">

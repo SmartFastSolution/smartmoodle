@@ -42,7 +42,7 @@
                   	@foreach ($datos->facturaDatos as $dato)
                     <tr class="text-center">
                       <th scope="row">{{ ++$i }}</th>
-                      <td>{{ $dato->cod }}</td>
+                      <td>{{ $dato->codigo }}</td>
                       <td>{{ $dato->cod_auxiliar }}</td>
                       <td>{{ $dato->cantidad }}</td>
                       <td>{{ $dato->descripcion }}</td>
