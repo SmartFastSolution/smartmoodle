@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TallerContabilidad extends Model
 {
-     public function Taller(){
+     public function taller(){
 
         return $this->belongsTo('App\Taller');
     }

@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(Plantilla::class);
         $this->call(Materia::class);
         $this->call(Usuario::class);
+        $this->call(Taller::class);
     }
 }

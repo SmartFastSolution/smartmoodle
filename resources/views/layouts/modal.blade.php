@@ -2169,12 +2169,12 @@
     </div>
 </div>
 
-<!-- FORMULARIO PARA PLANTILLA 57 -->
-<div class="modal fade" id="taller57" tabindex="-1" role="dialog" aria-labelledby="taller57Label" aria-hidden="true">
+<!-- FORMULARIO PARA PLANTILLA 36 -->
+<div class="modal fade" id="taller36" tabindex="-1" role="dialog" aria-labelledby="taller36Label" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="taller57Label">TALLERES DE CONTABILIDAD</h2>
+                <h5 class="modal-title" id="taller36Label">ANALIZAR  ENUNCIADOS</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -2182,11 +2182,62 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col-12">
-                        <form action="{{ route('admin.taller57') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.taller36') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
-                                <input required="" type="hidden" value="57" name="id_plantilla">
+                                <input required="" type="hidden" value="36" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Materia:</label>
+                                <select name="materia_id" class="custom-select">
+                                    @foreach ($materias = App\Materia::get() as $materia)
+                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                           <div class="tall_36">
+                            <div class="form-group">
+                                <label for="" class="col-form-label">Enunciado 1 <a href="#" class="btn btn-danger re_tall36"><span class="glyphicon glyphicon-remove">X</span></a></label>
+                                <textarea required="" class="form-control" name="enun[]"></textarea>
+                            </div>
+                          </div>
+                          <div class="row">
+                                  <a href="#" class="addTaller36 btn btn-outline-danger">Agregar Fila</a>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- FORMULARIO PARA PLANTILLA 37 -->
+<div class="modal fade" id="taller37" tabindex="-1" role="dialog" aria-labelledby="taller37Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="taller37Label">TALLERES DE CONTABILIDAD</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller37') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="37" name="id_plantilla">
                                 <input type="text"  name="enunciado" value="Crear Enunciados de Contabilidad" class="form-control" readonly>
                             </div>
                             <div class="form-group">
@@ -2197,14 +2248,69 @@
                                     @endforeach
                                 </select>
                             </div>
-                        <div class="tall_57">
+                        <div class="tall_37">
                             <div class="form-group">
-                                <label for="" class="col-form-label">Enunciado 1 <a href="#" class="btn btn-danger re_tall57"><span class="glyphicon glyphicon-remove">X</span></a></label>
+                                <label for="" class="col-form-label">Enunciado 1 <a href="#" class="btn btn-danger re_tall37"><span class="glyphicon glyphicon-remove">X</span></a></label>
                                 <textarea required="" class="form-control" name="enun[]"></textarea>
                             </div>
                         </div>
                         <div class="row">
-                                  <a href="#" class="addTaller57 btn btn-outline-danger">Agregar Fila</a>
+                                  <a href="#" class="addTaller37 btn btn-outline-danger">Agregar Fila</a>
+                        </div>
+
+                            <div class="row justify-content-center">
+                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FORMULARIO PARA PLANTILLA 38 -->
+<div class="modal fade" id="taller38" tabindex="-1" role="dialog" aria-labelledby="taller38Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="taller38Label">TALLERES DE CONTABILIDAD</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller38') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="38" name="id_plantilla">
+                                <input type="text"  name="enunciado" value="Crear Enunciados de Contabilidad" class="form-control" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Materia:</label>
+                                <select name="materia_id" class="custom-select">
+                                    @foreach ($materias = App\Materia::get() as $materia)
+                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                             <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Lectura:</label>
+                                 <textarea class="form-control ckeditor" name="lectura" required=""></textarea>
+                            </div>
+                        <div class="tall_38">
+                            <div class="form-group">
+                                <label for="" class="col-form-label">Enunciado 1 <a href="#" class="btn btn-danger re_tall38"><span class="glyphicon glyphicon-remove">X</span></a></label>
+                                <textarea required="" class="form-control" name="enun[]"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                                  <a href="#" class="addTaller38 btn btn-outline-danger">Agregar Fila</a>
                         </div>
 
                             <div class="row justify-content-center">

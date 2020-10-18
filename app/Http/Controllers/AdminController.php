@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Admin\TallerAnalizar;
+use App\Admin\TallerAnalizarOp;
 use App\Admin\Taller2Relacionar;
 use App\Admin\Taller2RelacionarOpcion;
 use App\Admin\TallerAbreviatura;
@@ -1068,26 +1069,59 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
             ),200,[]);
          }
       }
-
-   public function taller57(Request $request)
+       public function taller36(Request $request)
       {
          $i                      = Taller::where('materia_id', $request->input('materia_id'))->count();
-         $taller57               = new Taller;
-         $taller57->nombre       = 'Taller '.++$i;
-         $taller57->plantilla_id = $request->input('id_plantilla');
-         $taller57->materia_id   = $request->input('materia_id');
-         $taller57->estado       = 1;
-         $taller57->save();
+         $taller36               = new Taller;
+         $taller36->nombre       = 'Taller '.++$i;
+         $taller36->enunciado    = $request->input('enunciado');
+         $taller36->plantilla_id = $request->input('id_plantilla');
+         $taller36->materia_id   = $request->input('materia_id');
+         $taller36->estado       = 1;
+         $taller36->save();
 
-          if ($taller57 = true) {
+          if ($taller36 = true) {
             $a                    = Taller::get()->last();
-            $taller_57            = new TallerContabilidad;
-            $taller_57->taller_id = $a->id;
-            $taller_57->enunciado = $request->input('enunciado');
-            $taller_57->save();
+            $taller_36            = new TallerAnalizar;
+            $taller_36->taller_id = $a->id;
+            $taller_36->enunciado = $request->input('enunciado');
+            $taller_36->save();
          }
 
-           if ($taller_57 = true) {
+           if ($taller_36 = true) {
+               $o = TallerAnalizar::get()->last();              
+               foreach ($request->enun as $key=>$v) {
+                  $datos=array(
+                     'taller_analizar_id'=> $o->id,
+                     'enunciado'=> $request->enun[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  TallerAnalizarOp::insert($datos);
+               }
+                 return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');
+             }
+      }
+
+   public function taller37(Request $request)
+      {
+         $i                      = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller37               = new Taller;
+         $taller37->nombre       = 'Taller '.++$i;
+         $taller37->plantilla_id = $request->input('id_plantilla');
+         $taller37->materia_id   = $request->input('materia_id');
+         $taller37->estado       = 1;
+         $taller37->save();
+
+          if ($taller37 = true) {
+            $a                    = Taller::get()->last();
+            $taller_37            = new TallerContabilidad;
+            $taller_37->taller_id = $a->id;
+            $taller_37->enunciado = $request->input('enunciado');
+            $taller_37->save();
+         }
+
+           if ($taller_37 = true) {
 
                $o = TallerContabilidad::get()->last();              
                foreach ($request->enun as $key=>$v) {

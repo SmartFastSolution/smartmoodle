@@ -4,7 +4,7 @@
 @section('content')
 
 <h1 class="text-center  mt-5 text-danger"> Taller #41</h1>
-<h3 class="text-center mt-5 mb-3 text-info">ANALICE  LAS  SIGUIENTES  TRANSACCIONES,  CON  COHERENCIA</h3>
+<h3 class="text-center mt-5 mb-3 text-info">ANALICE LA LECTURA Y RESPONDA EL CUESTIONARIO DE PREGUNTAS, CON ORIGINALIDAD.</h3>
 
 <form action="">
 	<div class="container">

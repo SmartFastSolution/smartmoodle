@@ -7,7 +7,6 @@
 <script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
 @endsection
 @section('content')
-
 <a class="btn btn-info " href="{{route('materias.index')}}"> <i class="fas fa-eye"> Materias</i></a>
 <h1 class="text-center  mt-5 text-danger">Administrador de Talleres</h1>
 
@@ -54,7 +53,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="message-text" class="col-form-label">Descripcion</label>
-                                <textarea class="form-control" name="descripcion" required=""></textarea>
+                                <textarea class="form-control ckeditor" name="descripcion" required=""></textarea>
                             </div>
                         </div>
                         <div class="card-footer text-muted">
@@ -87,6 +86,7 @@
 
 @section('js')
 
+<script src="{{ asset('plugins/ckeditor/build/ckeditor.js') }}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 
 <script type="text/javascript" src="{{ asset('js/admintalleres.js') }}"></script>
@@ -94,6 +94,7 @@
 <div id="js">
 <script async = true src="{{asset('js/bootstrap-tagsinput.js')}}"></script>
 </div>
+
 @endsection
 
 @endsection

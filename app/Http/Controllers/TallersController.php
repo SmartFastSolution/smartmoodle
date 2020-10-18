@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Admin\TallerAnalizar;
 use App\Admin\Taller2Relacionar;
 use App\Admin\TallerAbreviatura;
 use App\Admin\TallerCertificadoDeposito;
@@ -284,23 +285,27 @@ class TallersController extends Controller
              }else {
             return abort(404);   
              }
-
-            // $consul = Taller::findorfail($id);
-            //  $datos = TallerCollage::where('taller_id', $consul->id)->firstOrFail();
-            // return view('talleres.taller34', compact('datos', 'd'));
-            // 
         }elseif ($plant == 35) {
-            $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
-            return view('talleres.taller35', compact('datos', 'd'));
+            $datos = Taller::findorfail($id);
+            if ($datos->plantilla_id == $plant && $datos->id = $id) {
+            return view('talleres.taller35', compact('datos', 'd'));  
+             }else {
+            return abort(404);   
+             }
         }elseif ($plant == 36) {
+            $a = 0;
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
-            return view('talleres.taller36', compact('datos', 'd'));
+            $datos = TallerAnalizar::where('taller_id', $consul->id)->firstOrFail();
+            return view('talleres.taller36', compact('datos', 'd', 'a'));
+
         }elseif ($plant == 37) {
+                JavaScript::put([
+                 'taller' => $d,
+                ]);
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
+             $datos = TallerContabilidad::where('taller_id', $consul->id)->firstOrFail();
             return view('talleres.taller37', compact('datos', 'd'));
+
         }elseif ($plant == 38) {
             $consul = Taller::findorfail($id);
              $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
@@ -375,12 +380,7 @@ class TallersController extends Controller
             return view('talleres.taller55', compact('datos', 'd'));
         
         }elseif ($plant == 57) {
-             JavaScript::put([
-            'taller' => $d,
-            ]);
-            $consul = Taller::findorfail($id);
-             $datos = TallerContabilidad::where('taller_id', $consul->id)->firstOrFail();
-            return view('talleres.taller57', compact('datos', 'd'));
+            
         
         }
 

@@ -53,5 +53,15 @@ class Taller extends Seeder
          'created_at' => now(),
          'updated_at' => now(),
          ]);
+         DB::table('tallers')->insert([
+         'id' => 5,
+         'plantilla_id' => 35,
+         'nombre' => 'Taller 5',
+         'enunciado' => 'DESARROLLE FÓRMULAS DE LA ECUACIÓN CONTABLE, CON EXACTITUD.',
+         'materia_id' => 2,
+         'estado' => 'on',
+         'created_at' => now(),
+         'updated_at' => now(),
+         ]);
     }
 }
