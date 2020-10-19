@@ -270,7 +270,7 @@ class Plantilla extends Seeder
                           ]);
                            DB::table('plantillas')->insert([
                           'id' => 33,
-                          'nombre' => 'Plantilla 33 - COLLAGE',
+                          'nombre' => 'Plantilla 29 - COLLAGE',
                           'descripcion' => 'Plantilla designado para completar un resultado',
                           'plantilla' => 'si',
                           'created_at' => now(),
@@ -278,7 +278,7 @@ class Plantilla extends Seeder
                           ]);
                           DB::table('plantillas')->insert([
                           'id' => 34,
-                          'nombre' => 'Plantilla 34 - TIPO DE SALDO',
+                          'nombre' => 'Plantilla 30 - TIPO DE SALDO',
                           'descripcion' => 'Talleres para completar ejercios',
                           'plantilla' => 'si',
                           'created_at' => now(),
@@ -294,7 +294,7 @@ class Plantilla extends Seeder
                           ]);
                           DB::table('plantillas')->insert([
                           'id' => 36,
-                          'nombre' => 'Plantilla 36 - ANALIZAR  ENUNCIADOS',
+                          'nombre' => 'Plantilla 31 - ANALIZAR  ENUNCIADOS',
                           'descripcion' => 'Talleres para Analizar Enunciados',
                           'plantilla' => 'si',
                           'created_at' => now(),
@@ -302,7 +302,7 @@ class Plantilla extends Seeder
                           ]);
                           DB::table('plantillas')->insert([
                           'id' => 37,
-                          'nombre' => 'Plantilla 37 - TALLER CONTABILIDAD',
+                          'nombre' => 'Plantilla 32 - TALLER CONTABILIDAD',
                           'descripcion' => 'Plantilla designado para completar un resultado',
                           'plantilla' => 'si',
                           'created_at' => now(),
@@ -310,7 +310,7 @@ class Plantilla extends Seeder
                           ]);
                           DB::table('plantillas')->insert([
                           'id' => 38,
-                          'nombre' => 'PLANTILLA 38 - ANALIZAR LECTURA',
+                          'nombre' => 'PLANTILLA 33 - ANALIZAR LECTURA',
                           'descripcion' => 'Plnatilla para analizar lecturas y llenar respuestas',
                           'plantilla' => 'si',
                           'created_at' => now(),
@@ -334,15 +334,44 @@ class Plantilla extends Seeder
                           ]);
                           DB::table('plantillas')->insert([
                           'id' => 41,
-                          'nombre' => 'PLANTILLA 41 - MAPA CONCEPTUAL',
+                          'nombre' => 'PLANTILLA QUEMADA 6',
                           'descripcion' => 'Plantilla Quemada #6',
                           'plantilla' => 'no',
                           'created_at' => now(),
                           'updated_at' => now(),
                           ]);
-
-
-         
-
+                           DB::table('plantillas')->insert([
+                          'id' => 42,
+                          'nombre' => 'PLANTILLA 36 - ORDENAR IDEAS',
+                          'descripcion' => 'Plantilla designada para crear talleres que se ordenaran',
+                          'plantilla' => 'si',
+                          'created_at' => now(),
+                          'updated_at' => now(),
+                          ]);
+                           DB::table('plantillas')->insert([
+                          'id' => 43,
+                          'nombre' => 'PLANTILLA 37 - COMPLETAR MAPA CONCEPTUAL',
+                          'descripcion' => 'Plantilla designada para completar el mapa concecptual',
+                          'plantilla' => 'si',
+                          'created_at' => now(),
+                          'updated_at' => now(),
+                          ]);
+                           DB::table('plantillas')->insert([
+                          'id' => 44,
+                          'nombre' => 'PLANTILLA 38 - ESCRIBIR CUENTAS',
+                          'descripcion' => 'Plantilla designada para crear talleres',
+                          'plantilla' => 'si',
+                          'created_at' => now(),
+                          'updated_at' => now(),
+                          ]);
+                           DB::table('plantillas')->insert([
+                          'id' => 45,
+                          'nombre' => 'PLANTILLA 39 - SOPA DE LETRAS',
+                          'descripcion' => 'Plantilla para crear talleres de sopas de letras con diferentes palabras',
+                          'plantilla' => 'si',
+                          'created_at' => now(),
+                          'updated_at' => now(),
+                          ]);
+  
     }
 }
