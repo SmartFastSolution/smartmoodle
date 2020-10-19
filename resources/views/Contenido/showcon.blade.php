@@ -1,6 +1,6 @@
 @extends('layouts.nav')
 
-@section('title', 'Dashboard')
+@section('title', 'Contenido | SmartMoodle')
 
 @section('content')
 
