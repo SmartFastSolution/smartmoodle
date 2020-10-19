@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Admin\TallerAnalizar;
 use App\Admin\TallerAnalizarOp;
+use App\Admin\TallerALectura;
+use App\Admin\TallerALecturaOp;
 use App\Admin\Taller2Relacionar;
 use App\Admin\Taller2RelacionarOpcion;
 use App\Admin\TallerAbreviatura;
@@ -21,17 +23,23 @@ use App\Admin\TallerConvertirCheque;
 use App\Admin\TallerDefinirEnunOp;
 use App\Admin\TallerDefinirEnunciado;
 use App\Admin\TallerDiferencia;
+use App\Admin\TallerEscribirCuenta;
 use App\Admin\TallerFactura;
 use App\Admin\TallerFacturaDato;
 use App\Admin\TallerGusanillo;
 use App\Admin\TallerIdentificarImagen;
 use App\Admin\TallerIdentificarImagenOpcion;
 use App\Admin\TallerIdentificarPersona;
+use App\Admin\TallerIdenTransa;
+use App\Admin\TallerIdenTransaOp;
 use App\Admin\TallerLetraCambio;
+use App\Admin\TallerMConceptual;
+use App\Admin\TallerPalabra;
 use App\Admin\TallerNotaPedido;
 use App\Admin\TallerNotaVenta;
 use App\Admin\TallerNotaVentaDato;
 use App\Admin\TallerOrdenPago;
+use App\Admin\TallerOrdenIdea;
 use App\Admin\TallerPagare;
 use App\Admin\TallerPregunta;
 use App\Admin\TallerRecibo;
@@ -39,6 +47,7 @@ use App\Admin\TallerRelacionar;
 use App\Admin\TallerRelacionarOpcion;
 use App\Admin\TallerSenalar;
 use App\Admin\TallerSenalarOpcion;
+use App\Admin\TallerSopaLetra;
 use App\Admin\TallerSubrayar;
 use App\Admin\TallerSubrayarOp;
 use App\Admin\TallerTipoSaldo;
@@ -1134,6 +1143,190 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
                   TallerContabilidadOp::insert($datos);
                }
 
+                 return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');
+             }
+      }
+       public function taller38(Request $request)
+      {
+         $i                      = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller38               = new Taller;
+         $taller38->nombre       = 'Taller '.++$i;
+         $taller38->enunciado    = $request->input('enunciado');
+         $taller38->plantilla_id = $request->input('id_plantilla');
+         $taller38->materia_id   = $request->input('materia_id');
+         $taller38->estado       = 1;
+         $taller38->save();
+
+          if ($taller38 = true) {
+            $a                    = Taller::get()->last();
+            $taller_38            = new TallerALectura;
+            $taller_38->taller_id = $a->id;
+            $taller_38->enunciado = $request->input('enunciado');
+            $taller_38->lectura = $request->input('lectura');
+            $taller_38->save();
+         }
+           if ($taller_38 = true) {
+               $o = TallerALectura::get()->last();              
+               foreach ($request->enun as $key=>$v) {
+                  $datos=array(
+                     'taller_a_lectura_id'=> $o->id,
+                     'enunciado'=> $request->enun[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  TallerALecturaOp::insert($datos);
+               }
+
+                 return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');
+             }
+      }
+       public function taller39(Request $request)
+      {
+         $i                      = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller39               = new Taller;
+         $taller39->nombre       = 'Taller '.++$i;
+         $taller39->enunciado    = $request->input('enunciado');
+         $taller39->plantilla_id = $request->input('id_plantilla');
+         $taller39->materia_id   = $request->input('materia_id');
+         $taller39->estado       = 1;
+         $taller39->save();
+
+          if ($taller39 = true) {
+            $a                    = Taller::get()->last();
+            $taller_39            = new TallerPalabra;
+            $taller_39->taller_id = $a->id;
+            $taller_39->enunciado = $request->input('enunciado');
+            $taller_39->letra = $request->input('palabra');
+            $taller_39->save();
+         }
+
+         return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');
+
+      }
+         public function taller40(Request $request)
+      {
+         $i                      = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller40               = new Taller;
+         $taller40->nombre       = 'Taller '.++$i;
+         $taller40->enunciado    = $request->input('enunciado');
+         $taller40->plantilla_id = $request->input('id_plantilla');
+         $taller40->materia_id   = $request->input('materia_id');
+         $taller40->estado       = 1;
+         $taller40->save();
+
+          if ($taller40 = true) {
+            $a                    = Taller::get()->last();
+            $taller_40            = new TallerIdenTransa;
+            $taller_40->taller_id = $a->id;
+            $taller_40->enunciado = $request->input('enunciado');
+            $taller_40->save();
+         }
+
+           if ($taller_40 = true) {
+               $o = TallerIdenTransa::get()->last();              
+               foreach ($request->enun as $key=>$v) {
+                  $datos=array(
+                     'taller_iden_transa_id'=> $o->id,
+                     'enunciado'=> $request->enun[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  TallerIdenTransaOp::insert($datos);
+               }
+                 return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');
+             }
+      }
+      public function taller42(Request $request)
+      {
+         $i                      = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller42               = new Taller;
+         $taller42->nombre       = 'Taller '.++$i;
+         $taller42->enunciado    = $request->input('enunciado');
+         $taller42->plantilla_id = $request->input('id_plantilla');
+         $taller42->materia_id   = $request->input('materia_id');
+         $taller42->estado       = 1;
+         $taller42->save();
+
+           if ($taller42 = true) {
+               $o = Taller::get()->last();              
+               foreach ($request->enun as $key=>$v) {
+                  $datos=array(
+                     'taller_id'=> $o->id,
+                     'idea'=> $request->enun[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  TallerOrdenIdea::insert($datos);
+               }
+                 return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');
+             }
+      }
+
+       public function taller43(Request $request)
+      {
+         $i                      = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller43               = new Taller;
+         $taller43->nombre       = 'Taller '.++$i;
+         $taller43->enunciado    = $request->input('enunciado');
+         $taller43->plantilla_id = $request->input('id_plantilla');
+         $taller43->materia_id   = $request->input('materia_id');
+         $taller43->estado       = 1;
+         $taller43->save();
+
+           if ($taller43 = true) {
+               $o = Taller::get()->last(); 
+                $taller_43            = new TallerMConceptual;
+                $taller_43->taller_id = $o->id;
+                $taller_43->enunciado = $request->input('enunciado');
+                $taller_43->concepto  = $request->input('concepto');
+                $taller_43->cantidad  = $request->input('cantidad');
+                $taller_43->save();             
+   
+                 return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');
+             }
+      }
+
+        public function taller44(Request $request)
+      {
+         $i                      = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller44               = new Taller;
+         $taller44->nombre       = 'Taller '.++$i;
+         $taller44->enunciado    = $request->input('enunciado');
+         $taller44->plantilla_id = $request->input('id_plantilla');
+         $taller44->materia_id   = $request->input('materia_id');
+         $taller44->estado       = 1;
+         $taller44->save();
+
+           if ($taller44 = true) {
+                $o                    = Taller::get()->last(); 
+                $taller_44            = new TallerEscribirCuenta;
+                $taller_44->taller_id = $o->id;
+                $taller_44->enunciado = $request->input('enunciado');
+                $taller_44->cuenta    = $request->input('cuenta');
+                $taller_44->save();             
+   
+                 return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');
+             }
+      }
+          public function taller45(Request $request)
+      {
+         $i                      = Taller::where('materia_id', $request->input('materia_id'))->count();
+         $taller45               = new Taller;
+         $taller45->nombre       = 'Taller '.++$i;
+         $taller45->enunciado    = $request->input('enunciado');
+         $taller45->plantilla_id = $request->input('id_plantilla');
+         $taller45->materia_id   = $request->input('materia_id');
+         $taller45->estado       = 1;
+         $taller45->save();
+
+           if ($taller45 = true) {
+                $o                    = Taller::get()->last(); 
+                $taller_45            = new TallerSopaLetra;
+                $taller_45->taller_id = $o->id;
+                $taller_45->enunciado = $request->input('enunciado');
+                $taller_45->palabras    = $request->input('palabras');
+                $taller_45->save();             
+   
                  return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');
              }
       }

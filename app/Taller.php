@@ -245,6 +245,34 @@ class Taller extends Model
     {
         return $this->hasMany('App\Admin\TallerTipoSaldo');
     }
+     public function tallerAnalizar()
+    {
+        return $this->belongsTo('App\Admin\TallerAnalizar');
+    }
+     public function tallerALectura()
+    {
+        return $this->belongsTo('App\Admin\TallerALectura');
+    }
+     public function tallerPalabra()
+    {
+        return $this->belongsTo('App\Admin\TallerPalabra');
+    }
+     public function tallerOrdenIdea()
+    {
+        return $this->hasMany('App\Admin\TallerOrdenIdea');
+    }
+        public function tallerMConceptual()
+    {
+        return $this->belongsTo('App\Admin\TallerMConceptual');
+    }
+      public function tallerCuenta()
+    {
+        return $this->belongsTo('App\Admin\TallerEscribirCuenta');
+    }
+       public function tallerSopa()
+    {
+        return $this->belongsTo('App\Admin\TallerSopaLetra');
+    }
 }
 
 

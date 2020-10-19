@@ -53,7 +53,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="message-text" class="col-form-label">Descripcion</label>
-                                <textarea class="form-control ckeditor" name="descripcion" required=""></textarea>
+                                <textarea class="form-control" name="descripcion" required=""></textarea>
                             </div>
                         </div>
                         <div class="card-footer text-muted">
@@ -86,7 +86,7 @@
 
 @section('js')
 
-<script src="{{ asset('plugins/ckeditor/build/ckeditor.js') }}"></script>
+<script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 
 <script type="text/javascript" src="{{ asset('js/admintalleres.js') }}"></script>

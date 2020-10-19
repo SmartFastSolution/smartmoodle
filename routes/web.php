@@ -126,6 +126,12 @@ route::post('/taller34', 'AdminController@taller34')->name('admin.taller34');
 route::post('/taller36', 'AdminController@taller36')->name('admin.taller36');
 route::post('/taller37', 'AdminController@taller37')->name('admin.taller37');
 route::post('/taller38', 'AdminController@taller38')->name('admin.taller38');
+route::post('/taller39', 'AdminController@taller39')->name('admin.taller39');
+route::post('/taller40', 'AdminController@taller40')->name('admin.taller40');
+route::post('/taller42', 'AdminController@taller42')->name('admin.taller42');
+route::post('/taller43', 'AdminController@taller43')->name('admin.taller43');
+route::post('/taller44', 'AdminController@taller44')->name('admin.taller44');
+route::post('/taller45', 'AdminController@taller45')->name('admin.taller45');
 // route::post('/taller57', 'AdminController@taller57')->name('admin.taller57');
 	});
 
@@ -196,16 +202,7 @@ route::post('/sistema/admin/taller/diariogeneral', 'TallerContabilidadController
 route::post('/sistema/admin/taller/obtenerbalance', 'TallerContabilidadController@obtenerbalance')->name('obtenerbalance');
 
 
-route::get('/sistema/taller36', 'TallersController@taller36')->name('taller36');
-route::get('/sistema/taller37', 'TallersController@taller37')->name('taller37');
-route::get('/sistema/taller38', 'TallersController@taller38')->name('taller38');
-route::get('/sistema/taller39', 'TallersController@taller39')->name('taller39');
-route::get('/sistema/taller40', 'TallersController@taller40')->name('taller40');
-route::get('/sistema/taller41', 'TallersController@taller41')->name('taller41');
-route::get('/sistema/taller42', 'TallersController@taller42')->name('taller42');
-route::get('/sistema/taller43', 'TallersController@taller43')->name('taller43');
-route::get('/sistema/taller44', 'TallersController@taller44')->name('taller44');
-route::get('/sistema/taller45', 'TallersController@taller45')->name('taller45');
+
 route::get('/sistema/taller46', 'TallersController@taller46')->name('taller46');
 route::get('/sistema/taller47', 'TallersController@taller47')->name('taller47');
 route::get('/sistema/taller48', 'TallersController@taller48')->name('taller48');

@@ -2276,7 +2276,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="taller38Label">TALLERES DE CONTABILIDAD</h2>
+                <h2 class="modal-title" id="taller38Label">ANALIZAR LECTURA</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -2289,7 +2289,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="38" name="id_plantilla">
-                                <input type="text"  name="enunciado" value="Crear Enunciados de Contabilidad" class="form-control" readonly>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
@@ -2325,3 +2325,305 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="taller39" tabindex="-1" role="dialog" aria-labelledby="taller39Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="taller39Label">ARMAR LA PALABRA</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller39') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="39" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Materia:</label>
+                                <select name="materia_id" class="custom-select">
+                                    @foreach ($materias = App\Materia::get() as $materia)
+                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Palabra:</label>
+                                <input required="" type="text" class="form-control" name="palabra" placeholder="Escriba la palabra en mayusculas">
+                            </div>
+                            <div class="row justify-content-center">
+                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FORMULARIO PARA PLANTILLA 40 -->
+<div class="modal fade" id="taller40" tabindex="-1" role="dialog" aria-labelledby="taller40Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="taller40Label">IDENTIFICAR TRANSACCIONES</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller40') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="40" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Materia:</label>
+                                <select name="materia_id" class="custom-select">
+                                    @foreach ($materias = App\Materia::get() as $materia)
+                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        <div class="tall_40">
+                            <div class="form-group">
+                                <label for="" class="col-form-label">Enunciado 1 <a href="#" class="btn btn-danger re_tall40"><span class="glyphicon glyphicon-remove">X</span></a></label>
+                                <textarea required="" class="form-control" name="enun[]"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                                  <a href="#" class="addTaller40 btn btn-outline-danger">Agregar Fila</a>
+                        </div>
+
+                            <div class="row justify-content-center">
+                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FORMULARIO PARA PLANTILLA 42 -->
+<div class="modal fade" id="taller42" tabindex="-1" role="dialog" aria-labelledby="taller42Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="taller42Label">ORDENAR IDEAS</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller42') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="42" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Materia:</label>
+                                <select name="materia_id" class="custom-select">
+                                    @foreach ($materias = App\Materia::get() as $materia)
+                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        <div class="tall_42">
+                            <div class="form-group">
+                                <label for="" class="col-form-label">Enunciado 1 <a href="#" class="btn btn-danger re_tall42"><span class="glyphicon glyphicon-remove">X</span></a></label>
+                                <input required="" class="form-control" name="enun[]" type="text">
+                                {{-- <textarea required="" class="form-control" name="enun[]"></textarea> --}}
+                            </div>
+                        </div>
+                        <div class="row">
+                                  <a href="#" class="addTaller42 btn btn-outline-danger">Agregar Fila</a>
+                        </div>
+
+                            <div class="row justify-content-center">
+                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FORMULARIO PARA PLANTILLA 43 -->
+
+<div class="modal fade" id="taller43" tabindex="-1" role="dialog" aria-labelledby="taller43Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h5 class="modal-title row justify-content-center" id="taller43Label">COMPLETAR MAPA CONCEPTUAL</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller43') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="43" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Materia:</label>
+                                <select name="materia_id" class="custom-select">
+                                    @foreach ($materias = App\Materia::get() as $materia)
+                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Concepto:</label>
+                                <input type="text" name="concepto" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Cantidad de clasificacion:</label>
+                                <select name="cantidad" class="custom-select">               
+                                    <option value="3">3</option>           
+                                    <option value="4">4</option>           
+                                    <option value="5">5</option>           
+                                    <option value="6">6</option>           
+                                </select>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- FORMULARIO PARA PLANTILLA 44 -->
+
+<div class="modal fade" id="taller44" tabindex="-1" role="dialog" aria-labelledby="taller44Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h5 class="modal-title row justify-content-center" id="taller44Label">ESCRIBIR CUENTAS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller44') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="44" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Materia:</label>
+                                <select name="materia_id" class="custom-select">
+                                    @foreach ($materias = App\Materia::get() as $materia)
+                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Tipo de cuenta:</label>
+                                <select name="cuenta" class="custom-select">               
+                                    <option value="activo">ACTIVO</option>           
+                                    <option value="pasivo">PASIVO</option>           
+                                    <option value="patrimonio">PATRIMONIO</option>           
+                                </select>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- FORMULARIO PARA PLANTILLA 45 -->
+
+<div class="modal fade" id="taller45" tabindex="-1" role="dialog" aria-labelledby="taller45Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h5 class="modal-title row justify-content-center" id="taller45Label">ESCRIBIR CUENTAS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller45') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="45" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Materia:</label>
+                                <select name="materia_id" class="custom-select">
+                                    @foreach ($materias = App\Materia::get() as $materia)
+                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Palabras( Separadas por ","):</label>
+                                <input required="" type="text" data-role="tagsinput" name="palabras" class="form-control">
+                            </div>
+                            <div class="row justify-content-center">
+                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+

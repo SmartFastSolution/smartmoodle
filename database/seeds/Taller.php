@@ -63,5 +63,15 @@ class Taller extends Seeder
          'created_at' => now(),
          'updated_at' => now(),
          ]);
+         DB::table('tallers')->insert([
+         'id' => 6,
+         'plantilla_id' => 41,
+         'nombre' => 'Taller 6',
+         'enunciado' => 'DESARROLLE EL MAPA CONCEPTUAL, CON AGILIDAD.',
+         'materia_id' => 2,
+         'estado' => 'on',
+         'created_at' => now(),
+         'updated_at' => now(),
+         ]);
     }
 }

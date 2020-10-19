@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Admin\TallerAnalizar;
 use App\Admin\Taller2Relacionar;
+use App\Admin\TallerALectura;
+use App\Admin\TallerALecturaOp;
 use App\Admin\TallerAbreviatura;
 use App\Admin\TallerCertificadoDeposito;
 use App\Admin\TallerCheque;
@@ -16,20 +18,27 @@ use App\Admin\TallerContabilidad;
 use App\Admin\TallerConvertirCheque;
 use App\Admin\TallerDefinirEnunciado;
 use App\Admin\TallerDiferencia;
+use App\Admin\TallerEscribirCuenta;
 use App\Admin\TallerFactura;
 use App\Admin\TallerGusanillo;
 use App\Admin\TallerIdentificarImagen;
 use App\Admin\TallerIdentificarPersona;
 use App\Admin\TallerLetraCambio;
+use App\Admin\TallerIdenTransa;
+use App\Admin\TallerIdenTransaOp;
+use App\Admin\TallerMConceptual;
 use App\Admin\TallerNotaPedido;
 use App\Admin\TallerNotaVenta;
 use App\Admin\TallerOrdenPago;
+use App\Admin\TallerOrdenIdea;
 use App\Admin\TallerPagare;
 use App\Admin\TallerPregunta;
+use App\Admin\TallerPalabra;
 use App\Admin\TallerRecibo;
 use App\Admin\TallerRelacionar;
 use App\Admin\TallerSenalar;
 use App\Admin\TallerSenalarOpcion;
+use App\Admin\TallerSopaLetra;
 use App\Admin\TallerSubrayar;
 use App\Admin\TallerValeCaja;
 use App\Admin\TallerVerdaderoFalso;
@@ -308,31 +317,56 @@ class TallersController extends Controller
 
         }elseif ($plant == 38) {
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
+             $datos = TallerALectura::where('taller_id', $consul->id)->firstOrFail();
             return view('talleres.taller38', compact('datos', 'd'));
+
         }elseif ($plant == 39) {
+
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
-            return view('talleres.taller39', compact('datos', 'd'));
+             $datos = TallerPalabra::where('taller_id', $consul->id)->firstOrFail();
+             $str = "VUEDRAGGABLES";
+
+            $arr1 = str_split($datos->letra);
+            $claves = array_keys($arr1);
+            $letra= [];
+            shuffle($arr1);
+            foreach($claves as $contenido){
+                $letra[$contenido] = $arr1[$contenido];
+            }
+            return view('talleres.taller39', compact('datos', 'd', 'letra'));
         }elseif ($plant == 40) {
+            $a = 0;
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
-            return view('talleres.taller40', compact('datos', 'd'));
+             $datos = TallerIdenTransa::where('taller_id', $consul->id)->firstOrFail();
+            return view('talleres.taller40', compact('datos', 'd', 'a'));
+
         }elseif ($plant == 41) {
-            $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
-            return view('talleres.taller41', compact('datos', 'd'));
+            $datos = Taller::findorfail($id);
+            if ($datos->plantilla_id == $plant && $datos->id = $id) {
+                return view('talleres.taller41', compact('datos', 'd'));  
+             }else {
+            return abort(404);   
+             }
+
         }elseif ($plant == 42) {
-            $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
-            return view('talleres.taller42', compact('datos', 'd'));
+
+            $datos = Taller::findorfail($id);
+            $ideas = TallerOrdenIdea::select('id','idea')->where('taller_id',$id)->get();
+            // $ideas = $datos->tallerOrdenIdea;
+
+            if ($datos->plantilla_id == $plant && $datos->id = $id) {
+            return view('talleres.taller42', compact('datos', 'd', 'ideas'));  
+             }else {
+            return abort(404);   
+             }
         }elseif ($plant == 43) {
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
+             $datos = TallerMConceptual::where('taller_id', $consul->id)->firstOrFail();
             return view('talleres.taller43', compact('datos', 'd'));
         }elseif ($plant == 44) {
+
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
+             $datos = TallerEscribirCuenta::where('taller_id', $consul->id)->firstOrFail();
             return view('talleres.taller44', compact('datos', 'd'));
         }elseif ($plant == 45) {
             $consul = Taller::findorfail($id);
@@ -1126,10 +1160,19 @@ class TallersController extends Controller
 
         return view('talleres.taller40');
     }
-    public function taller41(){
+//     public function taller41(){
+//         $str = "VUEDRAGGABLES";
 
-        return view('talleres.taller41');
-    }
+//         $arr1 = str_split($str);
+//         $claves = array_keys($arr1);
+//         $datos= [];
+//         shuffle($arr1);
+//         foreach($claves as $contenido){
+//         $datos[$contenido] = $arr1[$contenido];
+// }
+   
+//         return view('talleres.taller41', compact('datos'));
+//     }
     public function taller42(){
 
         return view('talleres.taller42');

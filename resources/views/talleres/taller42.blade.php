@@ -1,53 +1,54 @@
 @extends('layouts.nav')
 
-@section('title', 'Taller 43')
+@section('title', $datos->nombre)
 @section('content')
-
-<h1 class="text-center  mt-5 text-danger"> Taller #43</h1>
-<h3 class="text-center mt-5 mb-3 text-info">IDENTIFIQUE  LA  TRANSACCIÓN  QUE  DEBE  SER  REGISTRADA EN  LOS  LIBROS  DE  CONTABILIDAD,  CON  CERTEZA.</h3>
-
-<form action="">
-	<div class="container">
-		<div class="row justify-content-center ">
-			<div class="col-8">
-				<div class="row mb-2">
-					<div class="col-10">
-						<p><span class="badge badge-danger p-1" >1.</span > El  empresario  compra   juguetes   para   la   venta  en   $ 4.670</p>
-					</div>
-					<div class="col-2">
-						<input type="text" class="form-control">
-					</div>
-				</div>
-
-				<div class="row mb-2">
-					<div class="col-10">
-						<p><span class="badge badge-danger p-1" >2.</span > El  empresario  hace  un  préstamo  al  Bco. del Pacífico  para  cubrir  deuda  de  la  empresa.</p>
-					</div>
-					<div class="col-2">
-						<input type="text" class="form-control">
-					</div>
-				</div>
-
-				<div class="row mb-2">
-					<div class="col-10">
-						<p><span class="badge badge-danger p-1" >3.</span > El  empresario  compra  un   automóvil  a  su  hijo  en $ 29.800 </p>
-					</div>
-					<div class="col-2">
-						<input type="text" class="form-control">
-					</div>
-				</div>
-				<div class="row mb-2">
-					<div class="col-10">
-						<p><span class="badge badge-danger p-1" >4.</span > l  empresario  compra  cuatro  computadoras  para 
-la  empresa  en  $ 740 c/u.</p>
-					</div>
-					<div class="col-2">
-						<input type="text" class="form-control">
+{{-- ORDENE  LAS  IDEAS  Y  ANÓTALAS  ADECUADAMENTE. --}}
+<h1 class="text-center  mt-5 text-danger"> {{ $datos->nombre }}</h1>
+<h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
+		<div class="container" id="taller42">
+			<div class="row justify-content-center ">
+				<div class="col-10">
+					<div class="row">
+						<div class="col-8 border border-danger p-3">
+							<draggable class="row justify-content-around p-2" :list="ideas" group="people">
+							     <div
+							       style="cursor: move;" 
+							         class="col-3 drag align-items-center text-center p-2 border border-danger m-2"
+							         v-for="(element, index) in ideas"
+							        :key="element.id">
+							          <p class="m-2"> @{{ element.idea }}</p>
+							        </div>
+							      </draggable>
+						</div>
+						<div class="col-4">
+							<draggable class="list-group" :list="orden" group="people" >
+								<h6 class="text-muted text-center" v-if="orden.length == 0">Arrastre aqui...</h6>
+						        <div v-else
+						        	style="cursor: move;"
+						          class="list-group-item list-group-item-info"
+						          v-for="(element, index) in orden"
+						          :key="element.name">
+						          @{{ element.idea }}
+						        </div>
+						      </draggable>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</form>
+
+@endsection
+@section('js')
+<script type="text/javascript">
+	var idea = @json($ideas);
+	var taller42 = new Vue({
+	  el: "#taller42",
+	  data:{
+	  	ideas: idea,
+	  	orden:[]
+	  }
+	})
+
+</script>
 
 @endsection

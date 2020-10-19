@@ -6,11 +6,11 @@ $(function(document, window, index ) {
         });
     var i = 1;
 
-    var objetivo = document.getElementById('num');
-    objetivo.innerHTML = 1;
+    // var objetivo = document.getElementById('num');
+    // objetivo.innerHTML = 1;
 
-    var objetivo1 = document.getElementById('num1');
-    objetivo1.innerHTML = 1;
+    // var objetivo1 = document.getElementById('num1');
+    // objetivo1.innerHTML = 1;
     $('.addEnun').on('click', function(evt) {
         evt.preventDefault();
         addEnun()();
@@ -51,6 +51,20 @@ $(function(document, window, index ) {
         evt.preventDefault();
         addTaller37()();
     });
+    $('.addTaller38').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller38()();
+    });
+     $('.addTaller40').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller40()();
+    });
+      $('.addTaller42').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller42()();
+    });
+
+
     $('.addRow').on('click', function(evt) {
         evt.preventDefault();
         addRow();
@@ -421,6 +435,150 @@ function addTaller11() {
             });
             addTaller37();
         }else if($('.tall_37 .form-group').length == 1){
+             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }else {
+            $(this).parent().parent().remove();
+        }
+    });
+
+function addTaller38() {
+        var tall38 = $('.tall_38 .form-group').length;
+        console.log(tall38)
+        var a = 1;
+        var e = 1;
+        var t38 = 
+        '<div class="form-group">'+
+            '<label for="" class="col-form-label">Enunciado '+(tall38 + 1)+' <a href="#" class="btn btn-danger re_tall38"><span class="glyphicon glyphicon-remove">X</span></a></label>'+
+            '<textarea required="" class="form-control" name="enun[]"></textarea>'+
+        '</div>';
+        $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
+        if (tall38 == 10) {
+        function alert38(){
+            toastr.error("Limite de enunciados creados", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }
+        } else {
+        $('.tall_38').append(t38);
+        function alert38(){
+        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+            "timeOut": "1000"
+        });
+        }
+
+        //console.log(enun)
+           
+        }
+       return alert38;
+    }
+     $('.re_tall38').live('click', function() {
+        num = $('.tall_38 .form-group').toArray();
+        //console.log(num);
+        if ($('.tall_38 .form-group').length == 2) 
+        {
+            $.each(num, function( index, value ) {
+            $(value).remove();
+            });
+            addTaller38();
+        }else if($('.tall_38 .form-group').length == 1){
+             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }else {
+            $(this).parent().parent().remove();
+        }
+    });
+
+     function addTaller40() {
+        var tall40 = $('.tall_40 .form-group').length;
+        console.log(tall40)
+        var a = 1;
+        var e = 1;
+        var t40 = 
+        '<div class="form-group">'+
+            '<label for="" class="col-form-label">Enunciado '+(tall40 + 1)+' <a href="#" class="btn btn-danger re_tall40"><span class="glyphicon glyphicon-remove">X</span></a></label>'+
+            '<textarea required="" class="form-control" name="enun[]"></textarea>'+
+        '</div>';
+        if (tall40 == 10) {
+        function alert40(){
+            toastr.error("Limite de enunciados creados", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }
+        } else {
+        $('.tall_40').append(t40);
+        function alert40(){
+        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+            "timeOut": "1000"
+        });
+        }
+
+        //console.log(enun)
+           
+        }
+       return alert40;
+    }
+     $('.re_tall40').live('click', function() {
+        num = $('.tall_40 .form-group').toArray();
+        //console.log(num);
+        if ($('.tall_40 .form-group').length == 2) 
+        {
+            $.each(num, function( index, value ) {
+            $(value).remove();
+            });
+            addTaller40();
+        }else if($('.tall_40 .form-group').length == 1){
+             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }else {
+            $(this).parent().parent().remove();
+        }
+    });
+
+
+     function addTaller42() {
+        var tall42 = $('.tall_42 .form-group').length;
+        console.log(tall42)
+        var a = 1;
+        var e = 1;
+        var t42 = 
+        '<div class="form-group">'+
+            '<label for="" class="col-form-label">Enunciado '+(tall42 + 1)+' <a href="#" class="btn btn-danger re_tall42"><span class="glyphicon glyphicon-remove">X</span></a></label>'+
+                              '  <input required="" class="form-control" name="enun[]" type="text">'+
+            // '<textarea required="" class="form-control" name="enun[]"></textarea>'+
+        '</div>';
+        if (tall42 == 10) {
+        function alert42(){
+            toastr.error("Limite de enunciados creados", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }
+        } else {
+        $('.tall_42').append(t42);
+        function alert42(){
+        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+            "timeOut": "1000"
+        });
+        }
+
+        //console.log(enun)
+           
+        }
+       return alert42;
+    }
+     $('.re_tall42').live('click', function() {
+        num = $('.tall_42 .form-group').toArray();
+        //console.log(num);
+        if ($('.tall_42 .form-group').length == 2) 
+        {
+            $.each(num, function( index, value ) {
+            $(value).remove();
+            });
+            addTaller42();
+        }else if($('.tall_42 .form-group').length == 1){
              toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
                 "timeOut": "1000"
             });

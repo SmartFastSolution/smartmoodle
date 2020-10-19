@@ -308,6 +308,38 @@ class Plantilla extends Seeder
                           'created_at' => now(),
                           'updated_at' => now(),
                           ]);
+                          DB::table('plantillas')->insert([
+                          'id' => 38,
+                          'nombre' => 'PLANTILLA 38 - ANALIZAR LECTURA',
+                          'descripcion' => 'Plnatilla para analizar lecturas y llenar respuestas',
+                          'plantilla' => 'si',
+                          'created_at' => now(),
+                          'updated_at' => now(),
+                          ]);
+                          DB::table('plantillas')->insert([
+                          'id' => 39,
+                          'nombre' => 'PLANTILLA 34 - ARMAR PALABRA',
+                          'descripcion' => 'Plantilla para crear talleres que puedan armar un aplabra en orden',
+                          'plantilla' => 'si',
+                          'created_at' => now(),
+                          'updated_at' => now(),
+                          ]);
+                          DB::table('plantillas')->insert([
+                          'id' => 40,
+                          'nombre' => 'PLANTILLA 35 - IDENTIFICAR TRANSACCIONES',
+                          'descripcion' => 'Plantilla para crear talleres que se usan para  identificar las transacciones',
+                          'plantilla' => 'si',
+                          'created_at' => now(),
+                          'updated_at' => now(),
+                          ]);
+                          DB::table('plantillas')->insert([
+                          'id' => 41,
+                          'nombre' => 'PLANTILLA 41 - MAPA CONCEPTUAL',
+                          'descripcion' => 'Plantilla Quemada #6',
+                          'plantilla' => 'no',
+                          'created_at' => now(),
+                          'updated_at' => now(),
+                          ]);
 
 
          
