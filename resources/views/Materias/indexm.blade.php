@@ -25,7 +25,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="dataTable" class="table table-hover">
+                        <table id="myTable" class="table table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
@@ -34,8 +34,9 @@
                                     <th scope="col">Descripción</th>
                                     <th scope="col">Estado</th>
                                     <th></th>
+                                    <th></th>
                                     <th scope="col">Tools</th>
-                                </tr>
+                                    <th></th>
                             </thead>
                             <tbody>
                                 <tr>
@@ -49,8 +50,7 @@
                                     <td>{{ $materia['nombre']}}</td>
                                     <td>{{ $materia['descripcion']}}</td>
                                     <td>{{ $materia['estado']}}</td>
-                                    <td> </td>
-
+                                    <th></th>
 
                                     <td class="table-button ">
                                         <a class="btn btn-info " href="{{route('materias.show', $materia->id)}}"><i
@@ -77,7 +77,7 @@
                             <!--Table body-->
 
                         </table>
-                        {{$materias->links()}}
+                    
                         <!--Table-->
                     </div>
                 </div>
@@ -93,6 +93,27 @@
 @stop
 
 @section('js')
+
+<script>
+$(function() {
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+                "info": true,
+                "autoWidth": true,
+               
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                }
+            }
+
+        );
+    });
+
+});
+
+</script>
+
+
 <script>
 console.log('Hi!');
 </script>

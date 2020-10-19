@@ -64,8 +64,6 @@ class ContenidoController extends Controller
          
             $contenido->materia_id = $request->materia;
          }
-        
-
          $contenido->save();
 
         return redirect('sistema/contenidos');
@@ -127,7 +125,7 @@ class ContenidoController extends Controller
       //sino que se mantenga alli mismo y solo actualizar el documento requerido 
         if($request->hasFile('documentod')){
 
-        Storage::delete('public'.$contenido->documentod);
+         Storage::delete('public'.$contenido->documentod);
          $contenido['documentod']= $request->file('documentod')->store('public');
         
         }else{ 
@@ -156,6 +154,7 @@ class ContenidoController extends Controller
         $contenido= Contenido::find($contenido->id);
     
            $contenido->delete();
+          
            if(Storage::delete('public/',$contenido->documentod)){
 
            $contenido->delete($contenido->documentod);

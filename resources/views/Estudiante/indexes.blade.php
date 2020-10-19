@@ -1,95 +1,60 @@
 @extends('layouts.estapp')
 
-@section('title', 'Dashboard | SmartMoodle')
-
-@section('encabezado')
+@section('title', 'Perfil | SmartMoodle')
 
 
-@stop
 
 @section('content')
 
-<h1>
-    Estudiante
-</h1>
 <section class="content">
-
     <div class="container">
-        <!-- Small boxes (Stat box) -->
-        <h1>Cursos</h1>
-        <div class="row">
+        <div class="card border-0 shadow my-4">
 
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-gradient-warning">
-                    <div class="inner">
-                        <h3> <i class="far fa-bookmark"></i></h3>
-                        <p>Fisica</p>
-                    </div>
-                    <div class="icon">
-                        <i class="far fa-bookmark"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">
-                        Acceder <i class="fas fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-            <!-- ./col -->
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-gradient-danger">
-                    <div class="inner">
-                        <h3> <i class="far fa-bookmark"></i></h3>
-                        <p>Matematica</p>
-                    </div>
-                    <div class="icon">
-                        <i class="far fa-bookmark"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">
-                        Acceder <i class="fas fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-            <!-- ./col -->
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-gradient-primary">
-                    <div class="inner">
-                        <h3> <i class="far fa-bookmark"></i></h3>
-                        <p>Ciencias Naturales</p>
-                    </div>
-                    <div class="icon">
-                        <i class="far fa-bookmark"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">
-                        Acceder <i class="fas fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
-            <!-- ./col -->
-            <!-- ./col -->
-            <div class="col-lg-3 col-6">
-                <!-- small box -->
-                <div class="small-box bg-gradient-success">
-                    <div class="inner">
-                        <h3> <i class="far fa-bookmark"></i></h3>
-                        <p>Calculo</p>
-                    </div>
-                    <div class="icon">
-                        <i class="far fa-bookmark"></i>
-                    </div>
-                    <a href="#" class="small-box-footer">
-                        Acceder <i class="fas fa-arrow-circle-right"></i>
-                    </a>
-                </div>
-            </div>
+            <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
+            @foreach(auth()->user()->distrimas as $distrimas)
+            @foreach($distrimas->distribumacus as $dis1)
 
+            <h2 class="font-weight-light"> <strong> {{$dis1->curso->nombre}} {{$dis1->nivel->nombre}}</strong></h2>
+            @endforeach
+            @endforeach
+
+            <div class="card card-info card-outline">
+                <div class="card-header">
+                    <h3 class="font-weight-light"> <strong> Materias</strong></h3>
+                </div>
+
+                <div class="row">
+                    @foreach(auth()->user()->distrimas as $distrimas)
+                    @foreach($distrimas->distribumacus as $dis1)
+                    @foreach($dis1->materias as $materia)
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-5">
+                        <!-- small box -->
+                        <div class="small-box bg-gradient-info">
+                            <div class="inner">
+                                <h3> <i class="far fa-bookmark"></i></h3>
+                                <p> {{$materia->nombre}}</p>
+                            </div>
+                            <div class="icon">
+                                <i class="far fa-bookmark"></i>
+                            </div>
+                            <a   href="{{route('Unidades', $materia->id)}}" class="small-box-footer">
+                                Acceder <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    @endforeach
+                    @endforeach
+                    @endforeach
+
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
+
 
 
 

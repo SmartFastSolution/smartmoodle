@@ -22,14 +22,7 @@ use Illuminate\Support\Facades\Gate;
 
 
  
-   //prueba gate rol all
-//    Route::get('/test', function () {
-//        $user=User::find(3);
-//       // $user->roles()->sync([3]);
-//      Gate::authorize('haveaccess', 'rol.index');
-//       return $user;
-//    //  return $user->havePermission('rol.create');
-// });
+ 
 
 Auth::routes();
 // Auth::routes(["register" => false]);
@@ -58,7 +51,10 @@ Auth::routes();
  Route::post('distinst','HomeController@buscarAsignacion')->name('distinst');
 
 
- //rutas para datatables en laravel 
+ //rutas menu estudiante
+route::get('perfil','EstudianteController@show')->name('perfile');
+route::get('unidad/{id}','EstudianteController@unidades')->name('Unidades');
+
  //permisoss
  
 

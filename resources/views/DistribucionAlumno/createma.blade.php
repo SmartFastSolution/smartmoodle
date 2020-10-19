@@ -56,7 +56,7 @@
                                     <select class="form-control select" name="asignacion" style="width: 99%;">
                                         <option selected disabled>Elija el Curso...</option>
 
-                                        <option v-for="dist in distribucion" :value="dist.id">@{{dist.nombre}} </option>
+                                        <option v-for="dist in distribucion" :value="dist.id">@{{dist.nombre}}-@{{dist.nivel}} </option>
 
 
                                     </select>

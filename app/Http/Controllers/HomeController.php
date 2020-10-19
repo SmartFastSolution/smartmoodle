@@ -31,6 +31,10 @@ class HomeController extends Controller
         return view('sistema');
     }
 
+    
+
+    
+
 
 
 
@@ -58,7 +62,8 @@ class HomeController extends Controller
         foreach($dist as $key => $value){
             $cursos[$key] =[
                 'id'=> $value->curso_id,
-                'nombre' => $value->curso->nombre
+                'nombre' => $value->curso->nombre,
+                'nivel' => $value->nivel->nombre
                 
             ];
         }

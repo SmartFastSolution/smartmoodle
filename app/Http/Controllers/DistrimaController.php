@@ -93,21 +93,31 @@ class DistrimaController extends Controller
 
         $distma=Distrima::find($distrima->id);
         $user=$distma->user()->first();
-        $distribucion= $distma->distribumacus()->get();
- 
+        //$distribucion= $distma->distribumacus()->get();
+        $distribucion= $distma->distribumacus()->first();
+        $curs[] =array(
+            'id' => $distribucion->id,
+            'curso_id' => $distribucion->curso_id,
+            'nombre' => $distribucion->curso->nombre,
+            'nivel' => $distribucion->nivel->nombre,
+        );
         $instituto=Distrima::find($distrima->id)->instituto()->first();
         $distribucion_all=Distribucionmacu::where('instituto_id', $instituto->id)->get();
-        
-        $cursos = [];
-        foreach($distribucion_all as $key => $value){
-            $cursos[$key] =[
-                'id'=> $value->curso_id,
-                'nombre' => $value->curso->nombre
-                
-            ];
-        }
 
-        return \view('DistribucionAlumno.editdisma',compact('distrima','distma','instituto','distribucion_all','user','distribucion'));
+        $cursos =[];
+        foreach($distribucion_all as $value)
+        {
+            $curso =array(
+                'id' =>$value->id,
+                'curso_id' => $value->curso_id,
+                'nombre' => $value->curso->nombre,
+                'nivel' => $value->nivel->nombre,
+            );
+            $cursos[] = $curso;
+        }
+       
+
+        return \view('DistribucionAlumno.editdisma',compact('distrima','distma','cursos','curs','instituto','distribucion_all','user','distribucion'));
     }
 
     /**
@@ -119,7 +129,23 @@ class DistrimaController extends Controller
      */
     public function update(Request $request, Distrima $distrima)
     {
-        //
+        $request->validate([
+
+           
+            
+            'estado'      => 'required|in:on,off',
+        ]);
+
+        $distrima->update($request->all());
+
+        if($request->get('asignacion')){
+            $distrima->distribumacus()->sync($request->get('asignacion'));
+          }
+
+          $distrima->save();
+
+          return redirect('sistema/distrimas');
+
     }
 
     /**

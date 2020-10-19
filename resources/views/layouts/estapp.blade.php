@@ -21,7 +21,7 @@
 <body class="  layout-fixed">
     <div class="wrapper">
         <!-- Navbar -->
-        <nav class=" navbar navbar-expand navbar-dark bg-dark fixed-top">
+        <nav class=" navbar navbar-expand navbar-light bg-light fixed-top">
 
             <!-- SEARCH FORM -->
             <a href="{{ url('/sistema/homees') }}" class="brand-link">
@@ -34,8 +34,12 @@
                     <a href="{{ url('/sistema/home') }}" class="nav-link">Administracion</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{{ url('/sistema/perfil') }}" class="nav-link">Perfil</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Actividades</a>
                 </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -74,24 +78,14 @@
         </nav>
     </div>
 
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-6">
-                <div class="col-sm-12">
 
-                    @yield('encabezado')
-
-                </div>
-
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
+    <br><br><br>
     <section class="content">
+      
+            @yield('content')
 
-        @yield('content')
 
-
-
+       
     </section>
 
 

@@ -1,7 +1,7 @@
 @extends('layouts.nav')
 
 
-@section('title', 'Crear Asignación')
+@section('title', 'Editar Asignación')
 
 @section('content')
 
@@ -40,12 +40,10 @@
                                 <div class="form-group">
                                     <label>Actualización de Asignacion</label>
                                     <select class="form-control select" name="asignacion" style="width: 99%;">
-
-                                        @foreach( $distribucion as  $dis)
-                                        <option selected value="{{$dis->id}}">{{$dis->curso->nombre}}</option>
-                                        @endforeach
-
-                                        <option v-for="asig in newAsignacion" :value="asig.id">@{{asig.nombre}}</option>
+                                        <option selected value="{{$distribucion->id}}">{{$distribucion->curso->nombre}}
+                                            - {{$distribucion->nivel->nombre}}</option>
+                                        <option v-for="asig in newAsignacion" :value="asig.id">@{{asig.nombre}} -
+                                            @{{asig.nivel}}</option>
 
                                     </select>
                                 </div>
@@ -89,6 +87,8 @@
 <script>
 var distribucion = @json($distribucion);
 var distribucion_all = @json($distribucion_all);
+var cursos = @json($cursos);
+var curso = @json($curs);
 
 const asignaciones = new Vue({
 
@@ -96,6 +96,8 @@ const asignaciones = new Vue({
     data: {
         distri: distribucion,
         all_distribucion: distribucion_all,
+        curso: cursos,
+        curs: curso,
         newAsignacion: [],
     },
     mounted() {
@@ -103,16 +105,14 @@ const asignaciones = new Vue({
     },
     methods: {
         onAsignacion() {
-
-            let asig = this.all_distribucion;
-            let asi = this.distri;
-            let arr = [];
-
+            let asig = this.curso;
+            let asi = this.curs;
+            //let arr = [];
             const results = asig.filter(({
-                    id: id1
-                }) => !asi.some(({
-                    id: id2
-                }) => id2 === id1));
+                id: id1
+            }) => !asi.some(({
+                id: id2
+            }) => id2 === id1));
             this.newAsignacion = results;
         }
     }

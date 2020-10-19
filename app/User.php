@@ -69,7 +69,7 @@ class User extends Authenticatable
         return $this->belongsTo('App\Instituto');
     }
 
-    public function distmas(){
+    public function distrimas(){
           
         return $this->hasMany('App\Distrima');
     }

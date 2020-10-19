@@ -24,7 +24,7 @@ class MateriaController extends Controller
     {
       
 
-        $materias= Materia::orderBy('id','Asc')->paginate(5);
+        $materias= Materia::all();
     
         return view('Materias.indexm',['materias'=>$materias]);
         
