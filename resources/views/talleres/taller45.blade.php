@@ -1,14 +1,14 @@
 @extends('layouts.nav')
 
-@section('title', 'Taller 49')
+@section('title', $datos->taller->nombre)
 @section('content')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/letras.css') }}">
 @endsection
-
-<h1 class="text-center  mt-5 text-danger"> Taller #49</h1>
-<h3 class="text-center mt-5 mb-3 text-info">ENCUENTRE  EN  LA  SOPA  DE  LETRAS  LAS  PALABRAS  RELACIONADAS  AL COMERCIO Y  ENCIÉRRELAS  EN  UN  CÍRCULO,  CON  EFICACIA. </h3>
+{{-- ENCUENTRE  EN  LA  SOPA  DE  LETRAS  LAS  PALABRAS  RELACIONADAS  AL COMERCIO Y  ENCIÉRRELAS  EN  UN  CÍRCULO,  CON  EFICACIA. --}}
+<h1 class="text-center  mt-5 text-danger">{{ $datos->taller->nombre }}</h1>
+<h3 class="text-center mt-5 mb-3 text-info"> {{ $datos->enunciado }}</h3>
 		<div class="container" id="letra">
 			<div class="row justify-content-center">
 				<div class="col-12">
@@ -32,21 +32,22 @@
         	
     	</div>	
 		</div>
-@include ('layouts.footer')
+{{-- @include ('layouts.footer') --}}
 @section('js')
     <script src="{{ asset('js/wordfind.js') }}"></script>
     <script src="{{ asset('js/wordfindgame.js') }}"></script>
 <script>
+	var palabras = @json($palabras);
 	 const letra = new Vue({
     		el: '#letra',
     		data:{
-    			words: materias,
+    			words: palabras,
     		},
     		mounted() {
   			var gamePuzzle = wordfindgame.create(this.words, '#puzzle', '#words');
   			var puzzle = wordfind.newPuzzle(
     			this.words, 
-    		{height: 30, width:30, fillBlanks: false}
+    		{height: 40, width:40, fillBlanks: false}
   				);
   				wordfind.print(puzzle);    
   		}        

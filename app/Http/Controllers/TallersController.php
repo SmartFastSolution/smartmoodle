@@ -369,9 +369,12 @@ class TallersController extends Controller
              $datos = TallerEscribirCuenta::where('taller_id', $consul->id)->firstOrFail();
             return view('talleres.taller44', compact('datos', 'd'));
         }elseif ($plant == 45) {
+
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
-            return view('talleres.taller45', compact('datos', 'd'));
+             $datos = TallerSopaLetra::where('taller_id', $consul->id)->firstOrFail();
+            $palabras = explode(',', $datos->palabras);
+                
+            return view('talleres.taller45', compact('datos', 'd', 'palabras'));
         }elseif ($plant == 46) {
             $consul = Taller::findorfail($id);
              $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();

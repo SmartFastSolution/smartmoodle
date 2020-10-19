@@ -20,7 +20,7 @@
                                 <div class="form-row">
                                   <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Materia:</label>
-                                    <select name="materia_id" class="custom-select" >
+                                    <select required="" name="materia_id" class="custom-select" >
                                       @foreach ($materias = App\Materia::get() as $materia)
                                       <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                       @endforeach
@@ -72,7 +72,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -85,7 +85,7 @@
                                
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -119,8 +119,8 @@
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <label  for="recipient-name" class="col-form-label">Materia:</label>
+                                <select required=""  name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -142,7 +142,7 @@
                             <a href="#" class="addEnun btn btn-outline-danger">Agregar Columna</a>
                         </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input  type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -178,7 +178,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -236,7 +236,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -301,13 +301,11 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="6" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -389,7 +387,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -431,7 +429,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -444,7 +442,7 @@
                             </div>
                                <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Cantidad de circulos:</label>
-                                <select name="cantidad" class="custom-select">               
+                                <select required="" name="cantidad" class="custom-select">               
                                     <option value="3">3</option>           
                                     <option value="4">4</option>           
                                     <option value="5">5</option>           
@@ -488,7 +486,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -502,7 +500,7 @@
                                       <label for="concepto6" class="col-form-label">Concepto 1 : </label>
                                     </div>
                                     <div class="col-9">
-                                      <textarea name="concep[]" class="form-control" rows="3"></textarea>
+                                      <textarea required="" name="concep[]" class="form-control" rows="3"></textarea>
                                     </div>
                                     <div class="col-1">
                                       <a href="#" class="btn btn-danger re_tall9"><span class="glyphicon glyphicon-remove">X</span></a>
@@ -555,7 +553,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -620,7 +618,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -650,7 +648,7 @@
                                     <label for="img2" class="col-form-label">Imagen 2:</label>
                                 </div>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="img2" lang="es">
+                                    <input required="" type="file" class="custom-file-input" name="img2" lang="es">
                                     <label class="custom-file-label" for="customFile">Seleciona un archivo</label>
                                 </div>
                             </div>
@@ -666,7 +664,7 @@
                             </div>
 
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -702,7 +700,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -719,7 +717,7 @@
                                   <a href="#" class="addTaller12 btn btn-outline-danger">Agregar Fila</a>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input  type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -755,7 +753,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -808,7 +806,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -857,7 +855,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -889,7 +887,7 @@
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -927,7 +925,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -938,7 +936,7 @@
                                 <input required="" type="text" name="endoso" class="form-control">
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -972,7 +970,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -1005,7 +1003,7 @@
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input  type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -1035,13 +1033,11 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="18" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -1084,7 +1080,7 @@
                             </div>
 
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -1114,13 +1110,11 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="19" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -1136,7 +1130,6 @@
                                     <label for="" class="col-form-label">Valor :</label>
                                     <input required="" type="text" name="valor" class="form-control">
                                 </div>
-
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Interes Anual:</label>
                                     <input required="" type="text" name="interes_anual" class="form-control">
@@ -1146,7 +1139,6 @@
                                     <input required="" type="text" name="lugar" class="form-control">
                                 </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Fecha de emision :</label>
@@ -1161,15 +1153,13 @@
                                     <input required="" type="date" name="fecha_de_vencimiento" class="form-control">
                                 </div>
                             </div>
-
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
             <div class="modal-footer">
 
             </div>
@@ -1196,19 +1186,16 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="20" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Beneficiario :</label>
@@ -1251,17 +1238,14 @@
                                     <input required="" type="date" name="fecha_de_vencimiento" class="form-control">
                                 </div>
                             </div>
-
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
             <div class="modal-footer">
-
             </div>
         </div>
     </div>
@@ -1289,7 +1273,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -1305,7 +1289,6 @@
                                     <input required="" type="text" name="detalle" class="form-control">
                                 </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Valor :</label>
@@ -1320,9 +1303,8 @@
                                     <input required="" type="date" name="fecha" class="form-control">
                                 </div>
                             </div>
-
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -1357,19 +1339,16 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="22" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Pedido :</label>
@@ -1384,12 +1363,10 @@
                                     <input required="" type="text" name="precio_unit" class="form-control">
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <label for="" class="col-form-label">Detalle :</label>
                                 <input required="" type="text" name="detalle" class="form-control">
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Codigo :</label>
@@ -1415,13 +1392,12 @@
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
             <div class="modal-footer">
 
             </div>
@@ -1447,19 +1423,16 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="23" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-6">
                                     <label for="" class="col-form-label">Acreedor :</label>
@@ -1470,7 +1443,6 @@
                                     <input required="" type="text" name="deudor" class="form-control">
                                 </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-9">
                                     <label for="" class="col-form-label">Descripcion :</label>
@@ -1481,13 +1453,11 @@
                                     <input required="" type="text" name="valor" class="form-control">
                                 </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-6">
                                     <label for="" class="col-form-label">Direccion :</label>
                                     <input required="" type="text" name="direccion" class="form-control">
                                 </div>
-
                                 <div class="form-group col-3">
                                     <label for="" class="col-form-label">Lugar :</label>
                                     <input required="" type="text" name="lugar" class="form-control">
@@ -1497,9 +1467,8 @@
                                     <input required="" type="date" name="fecha" class="form-control">
                                 </div>
                             </div>
-
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -1530,20 +1499,16 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="24" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>
-
-
                             <div class="form-row">
                                 <div class="form-group col-6">
                                     <label for="" class="col-form-label">Beneficiario :</label>
@@ -1554,7 +1519,6 @@
                                     <input required="" type="text" name="comprobante" class="form-control">
                                 </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Cantidad :</label>
@@ -1573,16 +1537,13 @@
                                 <label for="" class="col-form-label">Firmas :</label>
                                 <input required="" type="text" name="firmas" class="form-control">
                             </div>
-
-
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
             <div class="modal-footer">
 
             </div>
@@ -1616,7 +1577,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -1670,8 +1631,7 @@
                                             <td><input type="text" class="form-control" name="cant[]"></td>
                                             <td><input type="text" class="form-control" name="desc[]"></td>
                                             <td><input type="text" class="form-control" name="precio[]"></td>
-                                            <td><a href="#" class="btn btn-danger remove"><span
-                                                        class="glyphicon glyphicon-remove">X</span></a></td>
+                                            <td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1680,13 +1640,12 @@
                                 </div
 >                            </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
             <div class="modal-footer">
 
             </div>
@@ -1712,13 +1671,11 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="26" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -1726,10 +1683,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Nombre :</label>
-
                                 <input required="" type="text" name="nombre" class="form-control">
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-6">
                                     <label for="" class="col-form-label">RUC :</label>
@@ -1740,7 +1695,6 @@
                                     <input required="" type="date" name="fecha" class="form-control">
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <table class="table table-borderless">
                                     <thead>
@@ -1767,13 +1721,12 @@
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
             <div class="modal-footer">
 
             </div>
@@ -1799,13 +1752,11 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="27" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -1819,7 +1770,6 @@
                                             <th scope="col">Fila B</th>
                                         </tr>
                                     </thead>
-
                                     <tbody class="prin">
                                         <tr>
                                             <td scope="row">
@@ -1842,14 +1792,13 @@
                                                         class="glyphicon glyphicon-remove">X</span></a></td>
                                         </tr>
                                     </tbody>
-
                                 </table>
                                 <div class="row">
                                     <a href="#" class="addRow btn btn-outline-danger">Agregar Columna</a>
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -1880,13 +1829,11 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="28" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -1957,14 +1904,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -1998,7 +1945,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -2015,7 +1962,7 @@
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -2047,7 +1994,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select v-model="taller.materia_id" class="custom-select">
+                                <select required="" v-model="taller.materia_id" class="custom-select">
                                     <option value="" selected disabled>ELIJA UNA MATERIA</option>
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
@@ -2191,7 +2138,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -2207,7 +2154,7 @@
                                   <a href="#" class="addTaller36 btn btn-outline-danger">Agregar Fila</a>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input  type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -2242,7 +2189,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::where('slug', '=', 'contabilidad')->get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -2257,9 +2204,8 @@
                         <div class="row">
                                   <a href="#" class="addTaller37 btn btn-outline-danger">Agregar Fila</a>
                         </div>
-
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -2293,7 +2239,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -2312,9 +2258,8 @@
                         <div class="row">
                                   <a href="#" class="addTaller38 btn btn-outline-danger">Agregar Fila</a>
                         </div>
-
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -2347,7 +2292,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -2358,7 +2303,7 @@
                                 <input required="" type="text" class="form-control" name="palabra" placeholder="Escriba la palabra en mayusculas">
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -2392,7 +2337,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -2407,9 +2352,8 @@
                         <div class="row">
                                   <a href="#" class="addTaller40 btn btn-outline-danger">Agregar Fila</a>
                         </div>
-
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -2443,7 +2387,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -2459,9 +2403,8 @@
                         <div class="row">
                                   <a href="#" class="addTaller42 btn btn-outline-danger">Agregar Fila</a>
                         </div>
-
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -2496,7 +2439,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -2508,7 +2451,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Cantidad de clasificacion:</label>
-                                <select name="cantidad" class="custom-select">               
+                                <select required="" name="cantidad" class="custom-select">               
                                     <option value="3">3</option>           
                                     <option value="4">4</option>           
                                     <option value="5">5</option>           
@@ -2516,7 +2459,7 @@
                                 </select>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -2552,7 +2495,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -2560,14 +2503,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Tipo de cuenta:</label>
-                                <select name="cuenta" class="custom-select">               
+                                <select required="" name="cuenta" class="custom-select">               
                                     <option value="activo">ACTIVO</option>           
                                     <option value="pasivo">PASIVO</option>           
                                     <option value="patrimonio">PATRIMONIO</option>           
                                 </select>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -2603,7 +2546,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
+                                <select required="" name="materia_id" class="custom-select">
                                     @foreach ($materias = App\Materia::get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
@@ -2614,7 +2557,7 @@
                                 <input required="" type="text" data-role="tagsinput" name="palabras" class="form-control">
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
