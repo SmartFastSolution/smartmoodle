@@ -8,7 +8,7 @@
 
 <section class="content">
     <div class="container">
-        <div class="card border-0 shadow my-4">
+       
 
             <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
             @foreach(auth()->user()->distrimas as $distrimas)
@@ -50,7 +50,7 @@
 
                 </div>
             </div>
-        </div>
+   
     </div>
 </section>
 

@@ -8,7 +8,7 @@ use App\Distribucionmacu;
 use App\Nivel;
 use APp\User;
 use App\Materia;
-
+use App\Taller;
 use App\Instituto;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -41,13 +41,13 @@ class EstudianteController extends Controller
               // todos los datos de la bd
          $institutomate = Materia::find($id)->instituto()->get();
          $contenido=Contenido::get();
-          
+         $tallers=Taller::get();
          $materia =Materia::where('id', $id)->firstOrfail();
        
         
       
        
-         return view ('Estudiante.contenido',['materia'=>$materia,'contenidos'=>$contenido,'institutomate'=>$institutomate]);
+         return view ('Estudiante.contenido',['materia'=>$materia,'contenidos'=>$contenido,'institutomate'=>$institutomate,'tallers'=>$tallers]);
         
        
 

@@ -47,8 +47,11 @@ class DistribuciondoController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([         
-            'estado' => ['required' ,'in:on,off'],
+        $request->validate([ 
+            'instituto' =>['required'],
+            'docente' => ['required','unique:distribuciondos,user_id'],
+            'materia' =>    ['required'],
+            'estado' =>   ['required' ,'in:on,off'],
         ]);
 
         $distribuciondo =new  Distribuciondo;

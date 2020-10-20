@@ -47,7 +47,10 @@ class DistribucionmacuController extends Controller
 
         $request->validate([
 
-           
+            'cursos' =>  'required',
+            'nivel' =>    ['required'],
+            'instituto' =>['required'],
+            'materia' =>  ['required'],
             'estado' => ['required' ,'in:on,off'],
         ]);
 

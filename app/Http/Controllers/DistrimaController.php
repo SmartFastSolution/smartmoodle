@@ -51,8 +51,9 @@ class DistrimaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-
-           
+            'estudiante' => ['required','unique:distrimas,user_id'],
+            'asignacion' =>    ['required'],
+            'instituto' =>['required'],
             'estado' => ['required' ,'in:on,off'],
         ]);
 
