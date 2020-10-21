@@ -10,7 +10,7 @@ trait UserTrait {
 
     public function roles(){
         
-        return $this->belongsToMany('App\Modelos\Role');
+        return $this->belongsToMany('App\Modelos\Role')->withTimestamps();
 
     }
 

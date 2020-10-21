@@ -7,7 +7,8 @@
 <h1 class="text-center  mt-5 text-danger"> {{ $datos->nombre }}</h1>
 <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
-<form action="">
+ <form action="{{ route('taller35', ['idtaller' => $d]) }}" method="POST">
+           @csrf
 	<div class="container">
 		<div class="row justify-content-center ">
 			<div class="col-8">
@@ -38,7 +39,7 @@
 						</table>
 					</div>
 					<div class="col-7 text-center  align-items-center">
-						<input type="text" class="form-control">
+						<input type="text" name="formula1" required=""  class="form-control">
 					</div>
 				</div>
 
@@ -69,7 +70,7 @@
 						</table>
 					</div>
 					<div class="col-7 text-center">
-						<input type="text" class="form-control">
+						<input type="text" name="formula2" required=""  class="form-control">
 					</div>
 				</div>
 
@@ -99,7 +100,7 @@
 						</table>
 					</div>
 					<div class="col-7 text-center">
-						<input type="text" class="form-control">
+						<input type="text" name="formula3" required=""  class="form-control">
 					</div>
 				</div>
 
@@ -129,7 +130,7 @@
 						</table>
 					</div>
 					<div class="col-7 text-center">
-						<input type="text" class="form-control">
+						<input type="text" name="formula4" required=""  class="form-control">
 					</div>
 				</div>
 
@@ -159,7 +160,7 @@
 						</table>
 					</div>
 					<div class="col-7 text-center">
-						<input type="text" class="form-control">
+						<input type="text"  name="formula5" required="" class="form-control">
 					</div>
 				</div>
 
@@ -189,7 +190,7 @@
 						</table>
 					</div>
 					<div class="col-7 text-center">
-						<input type="text" class="form-control">
+						<input type="text" name="formula6" required=""  class="form-control">
 					</div>
 				</div>
 				<div class="row">
@@ -218,7 +219,7 @@
 						</table>
 					</div>
 					<div class="col-7 text-center align-content-center">
-						<input type="text" class="form-control">
+						<input type="text" name="formula7" required=""  class="form-control">
 					</div>
 				</div>
 
@@ -249,7 +250,7 @@
 						</table>
 					</div>
 					<div class="col-7 text-center align-content-center">
-						<input type="text" class="form-control">
+						<input type="text" name="formula8" required=""  class="form-control">
 					</div>
 				</div>
 
@@ -280,13 +281,16 @@
 						</table>
 					</div>
 					<div class="col-7 text-center align-content-center">
-						<input type="text" class="form-control">
+						<input type="text" name="formula9" required=""  class="form-control">
 					</div>
 				</div>
 
 			</div>
 
 		</div>
+		 <div class="row justify-content-center">
+        	<input type="submit" value="Guardar Datos" class="btn p-2 mt-3 btn-danger">
+    	</div>
 	</div>
 </form>
 @endsection

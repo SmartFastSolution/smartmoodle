@@ -8,6 +8,8 @@
 @endsection
 @section('content')
 <a class="btn btn-info " href="{{route('materias.index')}}"> <i class="fas fa-eye"> Materias</i></a>
+<a class="btn btn-info " href="{{route('contenidos.index')}}"> <i class="fas fa-eye"> Unidad</i></a>
+
 <h1 class="text-center  mt-5 text-danger">Administrador de Talleres</h1>
 
 <div id="tallerlist">
@@ -73,16 +75,23 @@
 
  <ul class="list-group m-3">
     @foreach ($sub = App\Taller::paginate(10) as $taller)
-    <li class="list-group-item "><a class="nav-link"
-            href="{{ route('taller', ['plant' => $taller->plantilla_id, 'id' => $taller->id]) }}">{{ $taller->nombre }}
-            - {{ $taller->materia->nombre }} {{ $taller->enunciado }}</a></li>
+    <li class="list-group-item ">
+        <a class="nav-link"
+        href="{{ route('taller', ['plant' => $taller->plantilla_id, 'id' => $taller->id]) }}"
+        >
+            {{ $taller->nombre }}
+            - {{ $taller->contenido->nombre }} - - {{ $taller->enunciado }}
+        </a>
+    </li>
     @endforeach
 
     <div class="row justify-content-center mt-3"> {{ $sub->links() }}</div>
 
 </ul> 
 
-@include('layouts.modal')
+<div id="ejercicios">
+    @include('layouts.modal')
+</div>
 
 @section('js')
 
@@ -93,6 +102,7 @@
 <script type="text/javascript" src="{{asset('plugins/customfileinputs/js/custom-file-input.js')}}"></script>
 <div id="js">
 <script async = true src="{{asset('js/bootstrap-tagsinput.js')}}"></script>
+
 </div>
 
 @endsection

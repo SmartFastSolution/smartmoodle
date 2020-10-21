@@ -9,10 +9,6 @@
 }
 .swal2-popup.swal2-toast .swal2-header {
   flex-direction: row;
-<<<<<<< HEAD
-  padding: 0;
-=======
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 }
 .swal2-popup.swal2-toast .swal2-title {
   flex-grow: 1;
@@ -33,10 +29,6 @@
 }
 .swal2-popup.swal2-toast .swal2-content {
   justify-content: flex-start;
-<<<<<<< HEAD
-  padding: 0;
-=======
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
   font-size: 1em;
 }
 .swal2-popup.swal2-toast .swal2-icon {
@@ -274,10 +266,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-<<<<<<< HEAD
-  padding: 0 1.8em;
-=======
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 }
 
 .swal2-title {
@@ -323,11 +311,7 @@
   border-radius: 100%;
   border-color: transparent;
   background-color: transparent !important;
-<<<<<<< HEAD
-  color: transparent !important;
-=======
   color: transparent;
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
   cursor: default;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -450,11 +434,7 @@
   z-index: 1;
   justify-content: center;
   margin: 0;
-<<<<<<< HEAD
-  padding: 0 1.6em;
-=======
   padding: 0;
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
   color: #545454;
   font-size: 1.125em;
   font-weight: normal;
@@ -498,12 +478,9 @@
   outline: none;
   box-shadow: 0 0 3px #c4e6f5;
 }
-<<<<<<< HEAD
-=======
 .swal2-input::-webkit-input-placeholder, .swal2-file::-webkit-input-placeholder, .swal2-textarea::-webkit-input-placeholder {
   color: #cccccc;
 }
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 .swal2-input::-moz-placeholder, .swal2-file::-moz-placeholder, .swal2-textarea::-moz-placeholder {
   color: #cccccc;
 }

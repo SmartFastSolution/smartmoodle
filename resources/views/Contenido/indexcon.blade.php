@@ -4,38 +4,34 @@
 
 
 @section('encabezado')
-<h1>Contenido</h1>
-<br>
-<div class="card-tools">
-    <!-- la referencia que hace este boton es al Rolecontroller en el 
+
+
+
+<!-- la referencia que hace este boton es al Rolecontroller en el 
                        cual esta llamando al metodo create y nos redirecciona al crud Roles.createroler...-->
-    <a class="btn btn-info float-right " href="{{route('contenidos.create')}}"><i class="fas fa-user-plus"></i>
-        Contenido</a>
-</div>
-<br><br>
+
+
+
 @stop
 
 @section('content')
 
-
-
-
-
-
 <section class="content">
-    <div class="container-fluid">
+    <div class="container">
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
         @endif
-        <div class="row">
-            <!-- left column -->
+        <div class="row justify-content-center">
+
             <div class="col-md-13">
-                <!-- general form elements -->
-                <div class="card card-dark">
+                <a class="btn btn-info float-right " href="{{route('contenidos.create')}}"><i class="fas fa-plus"></i>
+                    UNIDAD</a>
+                <h1>Unidades</h1>
+                <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title">Información de Contenido </h3>
+                    
                         <div class="card-tools">
                         </div>
                     </div>
@@ -84,7 +80,7 @@
                                             enctype="multipart/form-data">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" onclick="return confirm('¿Borrar?');"
+                                            <button type="submit" onclick="return confirm('¿Desea Borrar?');"
                                                 class="btn btn-danger "><i class="fas fa-trash"></i></button>
                                         </form>
                                     </td>
@@ -110,9 +106,9 @@
 @stop
 
 @section('css')
-    
+
 @stop
 
 @section('js')
-    
+
 @stop

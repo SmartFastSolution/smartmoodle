@@ -52,11 +52,7 @@ DataTable.Buttons.pdfMake = function (_) {
 	if ( ! _ ) {
 		return _pdfMake();
 	}
-<<<<<<< HEAD
-	pdfmake = _;
-=======
 	pdfmake = m_ake;
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 }
 
 DataTable.Buttons.jszip = function (_) {
@@ -390,11 +386,7 @@ function _addToZip( zip, obj ) {
 		// drop attributes
 		_ieExcel = _serialiser
 			.serializeToString(
-<<<<<<< HEAD
-				( new window.DOMParser() ).parseFromString( excelStrings['xl/worksheets/sheet1.xml'], 'text/xml' )
-=======
 				$.parseXML( excelStrings['xl/worksheets/sheet1.xml'] )
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			)
 			.indexOf( 'xmlns:r' ) === -1;
 	}
@@ -683,11 +675,7 @@ var excelStrings = {
 			'<cellStyleXfs count="1">'+
 				'<xf numFmtId="0" fontId="0" fillId="0" borderId="0" />'+
 			'</cellStyleXfs>'+
-<<<<<<< HEAD
-			'<cellXfs count="68">'+
-=======
 			'<cellXfs count="67">'+
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 				'<xf numFmtId="0" fontId="0" fillId="0" borderId="0" applyFont="1" applyFill="1" applyBorder="1"/>'+
 				'<xf numFmtId="0" fontId="1" fillId="0" borderId="0" applyFont="1" applyFill="1" applyBorder="1"/>'+
 				'<xf numFmtId="0" fontId="2" fillId="0" borderId="0" applyFont="1" applyFill="1" applyBorder="1"/>'+
@@ -767,10 +755,6 @@ var excelStrings = {
 				'<xf numFmtId="4" fontId="0" fillId="0" borderId="0" applyFont="1" applyFill="1" applyBorder="1" xfId="0" applyNumberFormat="1"/>'+
 				'<xf numFmtId="1" fontId="0" fillId="0" borderId="0" applyFont="1" applyFill="1" applyBorder="1" xfId="0" applyNumberFormat="1"/>'+
 				'<xf numFmtId="2" fontId="0" fillId="0" borderId="0" applyFont="1" applyFill="1" applyBorder="1" xfId="0" applyNumberFormat="1"/>'+
-<<<<<<< HEAD
-				'<xf numFmtId="14" fontId="0" fillId="0" borderId="0" applyFont="1" applyFill="1" applyBorder="1" xfId="0" applyNumberFormat="1"/>'+
-=======
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			'</cellXfs>'+
 			'<cellStyles count="1">'+
 				'<cellStyle name="Normal" xfId="0" builtinId="0" />'+
@@ -787,20 +771,6 @@ var excelStrings = {
 // Ref: section 3.8.30 - built in formatters in open spreadsheet
 //   https://www.ecma-international.org/news/TC45_current_work/Office%20Open%20XML%20Part%204%20-%20Markup%20Language%20Reference.pdf
 var _excelSpecials = [
-<<<<<<< HEAD
-	{ match: /^\-?\d+\.\d%$/,               style: 60, fmt: function (d) { return d/100; } }, // Precent with d.p.
-	{ match: /^\-?\d+\.?\d*%$/,             style: 56, fmt: function (d) { return d/100; } }, // Percent
-	{ match: /^\-?\$[\d,]+.?\d*$/,          style: 57 }, // Dollars
-	{ match: /^\-?£[\d,]+.?\d*$/,           style: 58 }, // Pounds
-	{ match: /^\-?€[\d,]+.?\d*$/,           style: 59 }, // Euros
-	{ match: /^\-?\d+$/,                    style: 65 }, // Numbers without thousand separators
-	{ match: /^\-?\d+\.\d{2}$/,             style: 66 }, // Numbers 2 d.p. without thousands separators
-	{ match: /^\([\d,]+\)$/,                style: 61, fmt: function (d) { return -1 * d.replace(/[\(\)]/g, ''); } },  // Negative numbers indicated by brackets
-	{ match: /^\([\d,]+\.\d{2}\)$/,         style: 62, fmt: function (d) { return -1 * d.replace(/[\(\)]/g, ''); } },  // Negative numbers indicated by brackets - 2d.p.
-	{ match: /^\-?[\d,]+$/,                 style: 63 }, // Numbers with thousand separators
-	{ match: /^\-?[\d,]+\.\d{2}$/,          style: 64 },
-	{ match: /^[\d]{4}\-[\d]{2}\-[\d]{2}$/, style: 67, fmt: function (d) {return Math.round(25569 + (Date.parse(d) / (86400 * 1000)));}} //Date yyyy-mm-dd
-=======
 	{ match: /^\-?\d+\.\d%$/,       style: 60, fmt: function (d) { return d/100; } }, // Precent with d.p.
 	{ match: /^\-?\d+\.?\d*%$/,     style: 56, fmt: function (d) { return d/100; } }, // Percent
 	{ match: /^\-?\$[\d,]+.?\d*$/,  style: 57 }, // Dollars
@@ -812,7 +782,6 @@ var _excelSpecials = [
 	{ match: /^\([\d,]+\.\d{2}\)$/, style: 62, fmt: function (d) { return -1 * d.replace(/[\(\)]/g, ''); } },  // Negative numbers indicated by brackets - 2d.p.
 	{ match: /^\-?[\d,]+$/,         style: 63 }, // Numbers with thousand separators
 	{ match: /^\-?[\d,]+\.\d{2}$/,  style: 64 }  // Numbers with 2 d.p. and thousands separators
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 ];
 
 
@@ -1092,11 +1061,7 @@ DataTable.ext.buttons.excelHtml5 = {
 				}
 
 				var originalContent = row[i];
-<<<<<<< HEAD
-				row[i] = row[i].trim();
-=======
 				row[i] = $.trim( row[i] );
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 				// Special number formatting options
 				for ( var j=0, jen=_excelSpecials.length ; j<jen ; j++ ) {

@@ -21,11 +21,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'cedula','fechanacimiento','name','sname',
-        'apellido','sapellido','domicilio','telefono',
-        'celular','titulo', 'email','estado', 'password',
-        'fcontrato','cirepre','namerepre',
-         'namema','namepa','telefonorep','fregistro',
+        'cedula','name',
+        'apellido','domicilio','telefono',
+        'celular','titulo', 'email', 'password',
+        
 
     ];
 
@@ -61,29 +60,28 @@ class User extends Authenticatable
         return $this->belongsToMany('App\TallerCirculoRe');
     }
 
-
-    
- 
-    
-
-
-    
     //relacion de muchos a 1 es decir muchos usuarios 
     //tomaran 1 dato de instituto
     public function instituto(){
           
         return $this->belongsTo('App\Instituto');
-
     }
 
- 
-
-    public function adminlte_image()
-    {
-        return 'https://picsum.photos/300/300';
+    public function distrimas(){
+          
+        return $this->hasMany('App\Distrima');
     }
 
 
+    public function distribuciondos(){
+          
+        return $this->hasMany('App\Distribuciondo');
+    }
+    public function tallers(){
+        
+        return $this->belongsToMany('App\Taller','taller_user')
+            ->withPivot('status','calificacion');
+    }
 
     
 }

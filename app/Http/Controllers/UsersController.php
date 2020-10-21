@@ -9,6 +9,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use RealRashid\SweetAlert\Facades\Alert;
 
 use Illuminate\Support\facades\Hash;
 
@@ -24,8 +25,8 @@ class UsersController extends Controller
         Gate::authorize('haveaccess', 'user.index');
       //  $users= User::where('Titulo','Administrador')->orderBy('id','Asc')->paginate(5);
 
-       $users= User::orderBy('id','Asc')->paginate(5);
-    
+      //$users= User::orderBy('id','Asc')->paginate(5);
+         $users= User::all();
          return view('Persona.inicio',['users'=>$users]);
        
     }
@@ -57,55 +58,34 @@ class UsersController extends Controller
         //validacion de datos 
          $request->validate([
             'cedula'          =>  'required|string|max:10',
-            'fechanacimiento' =>  'required|string|max:10',
-            'sname'           =>  'required|string|max:20',
+            'name'            =>  'required|string|max:20',
             'apellido'        =>  'required|string|max:20',
-            'sapellido'       =>  'required|string|max:20',
             'domicilio'       =>  'required|string|max:255',
             'telefono'        =>  'required|string|max:13',
             'celular'         =>  'required|string|max:13',
-            'titulo'          =>  'required|string|max:255',
-            'name'            =>  'required|string|max:20',
+            'titulo'          =>  '|string|max:255',
             'email'           => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password'        =>  'required|string|min:8|confirmed',
-            'estado'          =>  'required|in:on,off',
-//agregados estudiantes y docente sen la misma tabla de persona 
-            'fcontrato'       =>  'required|string|max:13',
-            'cirepre'         =>  'required|string|max:10',
-            'namerepre'       =>  'required|string|max:250',
-            'namema'          =>  'required|string|max:250',
-            'namepa'          =>  'required|string|max:250',
-            'telefonorep'     =>  'required|string|max:13',
-            'fregistro'       =>  'required|string|max:10',
+            'password'        =>  'required|string|min:8',
+          
 
+            
 
             
         ]);
 
         $user = new User;
-        $user->instituto_id = $request->instituto;  //relacion con el instituto y usuario
-       
+        $user->instituto_id = $request->instituto;  //relacion con el instituto y usuario    
         $user->cedula = $request->cedula;
-        $user->fechanacimiento = $request->fechanacimiento;
         $user->name = $request->name;
-        $user->sname = $request->sname;
-        $user->apellido = $request->apellido;
-        $user->sapellido = $request->sapellido;
+        $user->apellido = $request->apellido;  
         $user->domicilio = $request->domicilio;
         $user->telefono = $request->telefono;
         $user->celular = $request->celular;
         $user->titulo = $request->titulo;
         $user->email = $request->email;
-        $user->estado = $request->estado;
         $user->password = Hash::make($request->password);
 //agregados estudiantes y docente sen la misma tabla de persona 
-        $user->fcontrato = $request->fcontrato;
-        $user->cirepre = $request->cirepre;
-        $user->namerepre = $request->namerepre;
-        $user->namema = $request->namema;
-        $user->namepa = $request->namepa;
-        $user->telefonorep = $request->telefonorep;
-        $user->fregistro = $request->fregistro;
+       
          
         $user->save();
                
@@ -117,7 +97,7 @@ class UsersController extends Controller
             $user->roles()->sync($request->get('role'));
         }
 
-        return redirect('sistema/users');
+        return redirect('sistema/users')->with('success','Usuario Creado Exitosamente!');
         //return redirect('sistema/admin');
 
     }
@@ -131,7 +111,16 @@ class UsersController extends Controller
     public function show(User $user)
     {
         Gate::authorize('haveaccess', 'user.show');
-        return view ('Persona.showu',['user'=>$user]);
+       
+        $roles= Role::orderBy('name')->get();
+        // $roles = Role::all();
+        
+        $institutos = Instituto::get(); // todos los datos de la bd
+        $institutouser = User::find($user->id)->instituto()->get(); //llama al instituto que este relacionado a un usuario 
+      
+        return view('Persona.showu',['user'=>$user, 'roles'=>$roles,'institutos'=>$institutos,'institutouser'=>$institutouser]);
+    
+        
     }
 
     /**
@@ -164,27 +153,18 @@ class UsersController extends Controller
         Gate::authorize('haveaccess', 'user.update');
         $request->validate([
 
-            'cedula'          =>  'required|string|max:10',
-            'fechanacimiento' =>  'required|string|max:10',
-            'sname'           =>  'required|string|max:20',
-            'apellido'        =>  'required|string|max:20',
-            'sapellido'       =>  'required|string|max:20',
+            'cedula'          =>  'required|string|max:10',        
+            'apellido'        =>  'required|string|max:20',         
             'domicilio'       =>  'required|string|max:255',
             'telefono'        =>  'required|string|max:13',
             'celular'         =>  'required|string|max:13',
             'titulo'          =>  'required|string|max:255',
             'name'            =>  'required|string|max:20',
             'email'           => [ 'string', 'email', 'max:255,'.$user->id,],
-            'password'        =>  '|string|min:8|confirmed',
-            'estado'          =>  'required|in:on,off',
+         
+         
 //agregados estudiantes y docente sen la misma tabla de persona 
-            'fcontrato'       =>  'required|string|max:13',
-            'cirepre'         =>  'required|string|max:10',
-            'namerepre'       =>  'required|string|max:250',
-            'namema'          =>  'required|string|max:250',
-            'namepa'          =>  'required|string|max:250',
-            'telefonorep'     =>  'required|string|max:13',
-            'fregistro'       =>  'required|string|max:10',
+          
 
 
         ]);
@@ -194,12 +174,7 @@ class UsersController extends Controller
         
      //validacion de passowrd
         $password = $request->get('password');
-        if($password !=null){
-          $user->password = Hash::make($request->password);
-           
-        } else{
-           unset($user->password); 
-        }
+      
       
         //omitir hecho de actualizar materia y que se mantenga la misma 
          if($request->get('instituto')){

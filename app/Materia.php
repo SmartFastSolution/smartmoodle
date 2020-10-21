@@ -2,8 +2,10 @@
 
 namespace App;
 
+use App\Instituto;
 use App\Distribucionmacu;
 use App\Contenido;
+use App\Distribuciondo;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,10 +17,10 @@ class Materia extends Model
     ];
 
 
-    public function tallers(){
+    // public function tallers(){
           
-        return $this->hasMany('App\Taller');
-    }
+    //     return $this->hasMany('App\Taller');
+    // }
 
 
     public function contenidos(){
@@ -29,11 +31,23 @@ class Materia extends Model
 
     public function distribucionmacus(){
 
-        return $this->belongsToMany(Distribucionmacu::class)->withTimestamps();
+        return $this->belongsToMany(Distribucionmacu::class)->withPivot('materia_id')->withTimestamps();
 
     }
 
 
+    public function instituto(){
+          
+        return $this->belongsTo('App\Instituto');
+
+    }
+
+    
+    public function distribuciondos(){
+
+        return $this->belongsToMany(Distribuciondo::class)->withPivot('materia_id')->withTimestamps();
+
+    }
     
 
 }

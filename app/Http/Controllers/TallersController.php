@@ -79,6 +79,7 @@ use App\TallerValeCajaRe;
 use App\TallerVerdaderoFalsoRe;
 use Illuminate\Http\Request;
 use JavaScript;
+use Auth;
 
 class TallersController extends Controller
 {
@@ -423,7 +424,7 @@ class TallersController extends Controller
 
    
     }
-    public function store1(Request $request, $idtaller){
+     public function store1(Request $request, $idtaller){
     $taller1            = new TallerCompletarRes; 
     $taller1->taller_id = $idtaller;
     $taller1->user_id   =    '1';           
@@ -432,7 +433,6 @@ class TallersController extends Controller
     $taller1->save();
 
     return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    //return response($content = 'Taller completado correctamente', $status = 200);
     }
 
       public function store2(Request $request, $idtaller){

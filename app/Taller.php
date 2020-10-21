@@ -6,19 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Taller extends Model
 {   
-    public function materia(){
-        return $this->belongsTo('App\Materia');
+    public function contenido(){
+        return $this->belongsTo('App\Contenido');
     }
+    // public function materia(){
+    //     return $this->belongsTo('App\Materia');
+    // }
 
-    public function Users(){
-        return $this->belongsToMany('App\User');
+  public function users(){
+        return $this->belongsToMany('App\User','taller_user')
+            ->withPivot('status','calificacion');
     }
-
     public function Plantilla()
     {
     	return $this->belongsTo('App\Plantilla');
     }
-
       public function tallerCompletar()
     {
     	return $this->belongsTo('App\Admin\TallerCompletar');
@@ -51,27 +53,15 @@ class Taller extends Model
     {
         return $this->belongsTo('App\Admin\TallerGusanillo');
     }
-      public function tallerGusanilloRe()
-    {
-        return $this->belongsTo('App\TallerGusanilloRe');
-    }
-
          public function tallerCirculo()
     {
         return $this->belongsTo('App\Admin\TallerCirculo');
-    }
-      public function tallerCirculoRe()
-    {
-        return $this->belongsTo('App\TallerCirculoRe');
     }
         public function tallerSubrayar()
     {
         return $this->belongsTo('App\Admin\tallerSubrayar');
     }
-      public function tallerSubrayarRe()
-    {
-        return $this->belongsTo('App\tallerSubrayarRe');
-    }
+
      public function tallerRelacionar()
     {
         return $this->belongsTo('App\Admin\TallerRelacionar');
@@ -84,26 +74,14 @@ class Taller extends Model
     {
         return $this->belongsTo('App\Admin\TallerVerdaderoFalso');
     }
-     public function tallerVerdaderofalsoRe()
-    {
-        return $this->belongsTo('App\TallerVerdaderoFalsoRe');
-    }
+   
      public function tallerIdentificarpersona()
     {
         return $this->belongsTo('App\Admin\TallerIdentificarPersona');
     }
-      public function tallerIdentificarpersonaRe()
-    {
-        return $this->belongsTo('App\Admin\TallerIdentificarPersonaRe');
-    }
-
        public function tallerdefinirEnunciado()
     {
         return $this->belongsTo('App\Admin\TallerDefinirEnunciado');
-    }
-       public function tallerdefinirEnunciadoRe()
-    {
-        return $this->belongsTo('App\TallerDefinirEnunciadoRe');
     }
           public function tallerCheque()
     {
@@ -205,10 +183,6 @@ class Taller extends Model
     {
         return $this->belongsTo('App\Admin\TallerAbreviatura');
     }
-     public function tallerAbreRe()
-    {
-        return $this->belongsTo('App\TallerAbreviaturaRe');
-    }
      public function tallerCollage()
     {
         return $this->belongsTo('App\Admin\TallerCollage');
@@ -216,18 +190,6 @@ class Taller extends Model
      public function tallerCollageRe()
     {
         return $this->belongsTo('App\TallerCollageRe');
-    }
-    public function tallerIdenAbreRe()
-    {
-        return $this->belongsTo('App\TallerIdentAbreRe');
-    }
-    public function tallerUtilizaeAbreRe()
-    {
-        return $this->belongsTo('App\TallerUtilizarAbreRe');
-    }
-    public function tallerLocalizarRe()
-    {
-        return $this->belongsTo('App\TalleLocalizarAbreRe');
     }
      public function tallerContabilidad()
     {
@@ -273,6 +235,35 @@ class Taller extends Model
     {
         return $this->belongsTo('App\Admin\TallerSopaLetra');
     }
+        public function identificarAbreviatura(){
+
+        return $this->hasMany('App\Admin\Respuesta\IdentificarAbreviatura');
+    }
+        public function abreviaturaCarta(){
+
+        return $this->hasMany('App\Admin\Respuesta\AbreviaturaCarta');
+    }
+        public function abreviaturaEditorial(){
+
+        return $this->hasMany('App\Admin\Respuesta\AbreviaturaEditorial');
+    }
+         public function abreviaturaEconomica(){
+
+        return $this->hasMany('App\Admin\Respuesta\AbreviaturaEconomica');
+    }
+       public function formulaContable(){
+
+        return $this->hasMany('App\Admin\Respuesta\FormulasContable');
+    }
+       public function mapaConceptual(){
+
+        return $this->hasMany('App\Admin\Respuesta\MapaConceptual');
+    }
+      public function completar(){
+
+        return $this->hasMany('App\Admin\Respuesta\Completar');
+    }
+    
 }
 
 

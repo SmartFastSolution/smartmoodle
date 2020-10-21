@@ -6,14 +6,13 @@
     <title>@yield('title', 'SmartMoodle')</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('css/plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/preloader.css') }}">
 
-
     <!-- datatabes -->
-   
+    <link rel="stylesheet" href=" {{ asset('css/jquery.dataTables.min.css')}}">
     @yield('css')
 
 </head>
@@ -31,13 +30,6 @@
                 </li>
 
             </ul>
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.create') }}">Talleres</a>
-                </li>
-
-            </ul>
-
 
             <!-- SEARCH FORM -->
             <form class="form-inline ml-3">
@@ -79,7 +71,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-light-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="{{ url('/sistema') }}" class="brand-link">
+            <a href="{{ url('/sistema/home') }}" class="brand-link">
                 <img src=" {{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-4" style="opacity: .8">
                 <span class="brand-text font-weight-light">SmartMoodle</span>
@@ -96,10 +88,10 @@
                         data-accordion="true">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-
+                        @can('haveaccess', 'rol.index')
                         <li class="nav-header">ADMINISTRACIÓN</li>
                         <li class="nav-item">
-                            @can('haveaccess', 'rol.index')
+
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-lock"></i>
@@ -144,7 +136,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
                                 <p>
-                                    Menú
+                                    Permisos de Acceso
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -163,7 +155,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
                                 <p>
-                                    Instituto
+                                    U. Educativa
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -171,7 +163,7 @@
                                 <li class="nav-item">
                                     <a href="{{route('institutos.index')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Lista de Institutos</p>
+                                        <p>Lista de Unidades</p>
                                     </a>
                                 </li>
                             </ul>
@@ -201,7 +193,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
                                 <p>
-                                    Niveles
+                                    Paralelos
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -209,7 +201,7 @@
                                 <li class="nav-item">
                                     <a href="{{route('nivels.index')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Lista de Niveles</p>
+                                        <p>Lista de Paralelos</p>
                                     </a>
                                 </li>
                             </ul>
@@ -239,7 +231,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
                                 <p>
-                                    Contenido
+                                    Unidades
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -247,7 +239,7 @@
                                 <li class="nav-item">
                                     <a href="{{route('contenidos.index')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Lista de Conteidos</p>
+                                        <p>Lista de Unidades</p>
                                     </a>
                                 </li>
                             </ul>
@@ -272,12 +264,51 @@
                             </ul>
                         </li>
                         @endcan
+                        @can('haveaccess', 'asignacionma.index')
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-user-cog"></i>
+                                <p>
+                                    Asignación Alumno
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('distrimas.index')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lista de Asignaciones</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endcan
+                        <li class="nav-header">DOCENTE</li>
+                        @can('haveaccess', 'asignacionma.index')
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-user-cog"></i>
+                                <p>
+                                    Asignación Docente
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('distribuciondos.index')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lista de Asignaciones</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endcan
                         @can('haveaccess', 'talleres.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
                                 <p>
-                                   Talleres
+                                    Talleres
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -291,9 +322,45 @@
                             </ul>
                         </li>
                         @endcan
-
+                        @can('haveaccess', 'cuentas.index')
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-user-cog"></i>
+                                <p>
+                                    Plan de Cuentas
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('pcuentas.index')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lista Plan de Cuentas</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endcan
+                        @can('haveaccess', 'docente')
                         <li class="nav-header">DOCENTE</li>
 
+                        <li class="nav-item">
+                            <a href="{{route('docente')}}" class="nav-link">
+                                <i class="nav-icon fas fa-file"></i>
+                                <p>Acceso Menú Docente</p>
+                            </a>
+                        </li>
+
+                        @endcan
+                        @can('haveaccess', 'estudiante')
+                        <li class="nav-header">ESTUDIANTE</li>
+                        <li class="nav-item">
+                            <a href="{{route('estudiante')}}" class="nav-link">
+                                <i class="fas fa-circle nav-icon"></i>
+                                <p>Acceso Menú Estudiante</p>
+                            </a>
+                        </li>
+                        @endcan
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -301,17 +368,16 @@
             <!-- /.sidebar -->
         </aside>
             <div id="preloader">
-        <div class="yummy-load">
-            <img src="{{ asset('dist/img/AdminLTELogo.png') }}"  alt="">
-        </div>
-    </div>
+                <div class="yummy-load">
+                    <img src="{{ asset('dist/img/AdminLTELogo.png') }}"  alt="">
+                </div>
+            </div>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-6">
                         <div class="col-sm-12">
-
                             @yield('encabezado')
 
                         </div>
@@ -332,15 +398,13 @@
 
 
     <script src="{{ asset('js/app.js') }}"></script>
-    
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="{{ asset('js/preloader.js') }}"></script>
 
-   
+    <!-- datatables script -->
+    <script src="{{ asset('js/jquery.dataTables.min.js')}}"></script>
     @yield('js')
-
+  {{--   @include('sweetalert::alert') --}}
 </body>
 
 </html>
-
-

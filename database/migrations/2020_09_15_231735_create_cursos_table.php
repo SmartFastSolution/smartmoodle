@@ -15,12 +15,11 @@ class CreateCursosTable extends Migration
     {
         Schema::create('cursos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('nivel_id');
+         
             $table->string('nombre');
-             $table->string('paralelo'); 
             $table->enum('estado',['on','off'])->nullable();
             $table->timestamps();
-            $table->foreign('nivel_id')->references('id')->on('nivels')->onDelete('cascade');
+            
         });
     }
 

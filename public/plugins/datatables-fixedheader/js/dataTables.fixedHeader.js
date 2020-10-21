@@ -1,29 +1,16 @@
-<<<<<<< HEAD
-/*! FixedHeader 3.1.7
- * ©2009-2020 SpryMedia Ltd - datatables.net/license
-=======
 /*! FixedHeader 3.1.6-dev
  * ©2009-2018 SpryMedia Ltd - datatables.net/license
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  */
 
 /**
  * @summary     FixedHeader
  * @description Fix a table's header or footer, so it is always visible while
  *              scrolling
-<<<<<<< HEAD
- * @version     3.1.7
- * @file        dataTables.fixedHeader.js
- * @author      SpryMedia Ltd (www.sprymedia.co.uk)
- * @contact     www.sprymedia.co.uk/contact
- * @copyright   Copyright 2009-2020 SpryMedia Ltd.
-=======
  * @version     3.1.6-dev
  * @file        dataTables.fixedHeader.js
  * @author      SpryMedia Ltd (www.sprymedia.co.uk)
  * @contact     www.sprymedia.co.uk/contact
  * @copyright   Copyright 2009-2018 SpryMedia Ltd.
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  *
  * This source file is free software, available under the following license:
  *   MIT license - http://datatables.net/license/mit
@@ -438,16 +425,6 @@ $.extend( FixedHeader.prototype, {
 		var itemDom = this.dom[ item ];
 		var position = this.s.position;
 
-<<<<<<< HEAD
-		// It isn't trivial to add a !important css attribute...
-		var importantWidth = function (w) {
-			itemDom.floating.attr('style', function(i,s) {
-				return (s || '') + 'width: '+w+'px !important;';
-			});
-		};
-
-=======
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		// Record focus. Browser's will cause input elements to loose focus if
 		// they are inserted else where in the doc
 		var tablePart = this.dom[ item==='footer' ? 'tfoot' : 'thead' ];
@@ -488,14 +465,8 @@ $.extend( FixedHeader.prototype, {
 			itemDom.floating
 				.addClass( 'fixedHeader-floating' )
 				.css( item === 'header' ? 'top' : 'bottom', this.c[item+'Offset'] )
-<<<<<<< HEAD
-				.css( 'left', position.left+'px' );
-
-			importantWidth(position.width);
-=======
 				.css( 'left', position.left+'px' )
 				.css( 'width', position.width+'px' );
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 			if ( item === 'footer' ) {
 				itemDom.floating.css( 'top', '' );
@@ -508,14 +479,8 @@ $.extend( FixedHeader.prototype, {
 			itemDom.floating
 				.addClass( 'fixedHeader-locked' )
 				.css( 'top', position.tfootTop - position.theadHeight )
-<<<<<<< HEAD
-				.css( 'left', position.left+'px' );
-
-			importantWidth(position.width);
-=======
 				.css( 'left', position.left+'px' )
 				.css( 'width', position.width+'px' );
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		}
 		else if ( mode === 'above' ) { // only used for the footer
 			// Fix the position of the floating footer at top of the table body
@@ -524,14 +489,8 @@ $.extend( FixedHeader.prototype, {
 			itemDom.floating
 				.addClass( 'fixedHeader-locked' )
 				.css( 'top', position.tbodyTop )
-<<<<<<< HEAD
-				.css( 'left', position.left+'px' );
-
-			importantWidth(position.width);
-=======
 				.css( 'left', position.left+'px' )
 				.css( 'width', position.width+'px' );
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 		}
 
 		// Restore focus if it was lost
@@ -626,11 +585,7 @@ $.extend( FixedHeader.prototype, {
 
 		if ( this.c.footer && this.dom.tfoot.length ) {
 			if ( ! this.s.enable ) {
-<<<<<<< HEAD
-				footerMode = 'in-place';
-=======
 				headerMode = 'in-place';
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 			}
 			else if ( ! position.visible || windowTop + position.windowHeight >= position.tfootBottom + this.c.footerOffset ) {
 				footerMode = 'in-place';
@@ -657,11 +612,7 @@ $.extend( FixedHeader.prototype, {
  * @type {String}
  * @static
  */
-<<<<<<< HEAD
-FixedHeader.version = "3.1.7";
-=======
 FixedHeader.version = "3.1.6-dev";
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 /**
  * Defaults
@@ -730,11 +681,7 @@ DataTable.Api.register( 'fixedHeader.enable()', function ( flag ) {
 
 DataTable.Api.register( 'fixedHeader.enabled()', function () {
 	if ( this.context.length ) {
-<<<<<<< HEAD
-		var fh = this.content[0]._fixedHeader;
-=======
 		var fx = this.content[0]._fixedHeader;
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
 
 		if ( fh ) {
 			return fh.enabled();

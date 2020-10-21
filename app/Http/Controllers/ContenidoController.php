@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contenido;
 use App\Materia;
+use App\Taller;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -63,8 +64,6 @@ class ContenidoController extends Controller
          
             $contenido->materia_id = $request->materia;
          }
-        
-
          $contenido->save();
 
         return redirect('sistema/contenidos');
@@ -77,12 +76,15 @@ class ContenidoController extends Controller
      * @param  \App\Contenido  $contenido
      * @return \Illuminate\Http\Response
      */
-    public function show(Contenido $contenido)
+    public function show($id)
     {
 
         $materias=Materia::get();
+        $contenido =Contenido::where('id', $id)->firstOrfail();
         $materiacontenido=Contenido::find($contenido->id)->materia()->get();
-        return \view('Contenido.showcon',['contenido'=>$contenido,'materias'=>$materias,'materiacontenido'=> $materiacontenido]);
+        $tallers=Taller::get();
+      
+        return \view('Contenido.showcon',['contenido'=>$contenido,'materias'=>$materias,'materiacontenido'=> $materiacontenido,'tallers'=>$tallers]);
     
         
     }
@@ -123,7 +125,7 @@ class ContenidoController extends Controller
       //sino que se mantenga alli mismo y solo actualizar el documento requerido 
         if($request->hasFile('documentod')){
 
-        Storage::delete('public'.$contenido->documentod);
+         Storage::delete('public'.$contenido->documentod);
          $contenido['documentod']= $request->file('documentod')->store('public');
         
         }else{ 
@@ -152,6 +154,7 @@ class ContenidoController extends Controller
         $contenido= Contenido::find($contenido->id);
     
            $contenido->delete();
+          
            if(Storage::delete('public/',$contenido->documentod)){
 
            $contenido->delete($contenido->documentod);

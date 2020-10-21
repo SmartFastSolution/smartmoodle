@@ -15,24 +15,41 @@
                             <div class="form-group">
                                 <input required="" type="hidden" value="1" name="id_plantilla">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
-                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5" cols="20"></textarea>
                             </div>
-                                <div class="form-row">
-                                  <div class="form-group col-6">
-                                    <label for="recipient-name" class="col-form-label">Materia:</label>
-                                    <select required="" name="materia_id" class="custom-select" >
-                                      @foreach ($materias = App\Materia::get() as $materia)
-                                      <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                      @endforeach
+
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
                                     </select>
-                                  </div>
-                                   <div class="form-group col-6">
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
+                            </div>
+                      <div class="form-group col-4">
                                     <label for="" class="col-form-label">Imagen(Opcional):</label>
                                         <input type="file" class="inputfile inputfile-1" name="imagen" id="file-1">
                                         <label for="file-1"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>
                                    
                                   </div>
-                    </div>
                       <div class="form-group">
                         <label for="" class="col-form-label">Leyenda(Usar cuando no hay imagen):</label>
                         <textarea  class="form-control" name="leyenda" ></textarea>
@@ -70,13 +87,31 @@
 
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                              <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Imagen:</label>
@@ -118,13 +153,31 @@
                                 <input required="" type="hidden" value="3" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label  for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required=""  name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                              <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                     <div class="enun">
                         <div class="form-row">
@@ -176,13 +229,31 @@
                                 <textarea required="" required="" type="text" name="enunciado"
                                     class="form-control"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                        <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-row justify-content-center">
                                 <div class="form-group col-md-5">
@@ -234,13 +305,31 @@
                                 <input required="" type="hidden" value="5" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                           <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                               <div class="taller5">
                                   <div class="form-group row mb-3 p-3">
@@ -303,13 +392,31 @@
                                 <input required="" type="hidden" value="6" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                               <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                                  <div class="form-group">
                                 <table class="table table-borderless">
@@ -381,17 +488,33 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="7" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                           <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="row justify-content-center">
                                 <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
@@ -427,13 +550,31 @@
                                 <input required="" type="hidden" value="8" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Imagen Central: </label>                          
@@ -484,13 +625,31 @@
                                 <input required="" type="hidden" value="9" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                           <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                           <div class="enc_9">
                             <div class="form-row bg-light p-2 mb-2">
@@ -551,13 +710,31 @@
                                 <input required="" type="hidden" value="10" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                           <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                           <div class="tall_10">
                             <div class="form-group bg-light p-2">
@@ -616,13 +793,31 @@
                                 <input required="" type="hidden" value="11" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                              <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group bg-light p-2">
                                 <div class="form-inline">
@@ -694,17 +889,33 @@
                             <div class="form-group">
                                 <input required="" type="hidden" value="12" name="id_plantilla">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                   <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                         <div class="tall_12">
                             <div class="form-group">
@@ -751,13 +962,31 @@
                                 <input required="" type="hidden" value="13" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                   <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                            <div class="tall_13">
                             <div class="form-group">
@@ -800,17 +1029,33 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="14" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                    <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Descripcion :</label>
@@ -849,17 +1094,33 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="15" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-6">
@@ -919,17 +1180,33 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="16" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                     <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Endoso a :</label>
@@ -968,13 +1245,31 @@
                                 <input required="" type="hidden" value="17" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                    <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="form-row">
@@ -1035,13 +1330,31 @@
                                 <input required="" type="hidden" value="18" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="form-row">
@@ -1112,13 +1425,31 @@
                                 <input required="" type="hidden" value="19" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Beneficiario :</label>
@@ -1188,13 +1519,31 @@
                                 <input required="" type="hidden" value="20" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                    <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-4">
@@ -1271,13 +1620,31 @@
                                 <input required="" type="hidden" value="21" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-4">
@@ -1341,13 +1708,31 @@
                                 <input required="" type="hidden" value="22" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-4">
@@ -1425,13 +1810,31 @@
                                 <input required="" type="hidden" value="23" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                   <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-6">
@@ -1501,13 +1904,31 @@
                                 <input required="" type="hidden" value="24" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-6">
@@ -1575,13 +1996,31 @@
                                 <textarea required="" required="" name="enunciado" class="form-control" id=""
                                     rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                 <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -1673,13 +2112,31 @@
                                 <input required="" type="hidden" value="26" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                 <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Nombre :</label>
@@ -1754,13 +2211,31 @@
                                 <input required="" type="hidden" value="27" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                   <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <table class="table table-borderless">
@@ -1831,13 +2306,31 @@
                                 <input required="" type="hidden" value="28" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                   <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Nombre :</label>
@@ -1902,13 +2395,31 @@
                                 <input required="" type="hidden" value="31" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                    <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="row justify-content-center">
                                 <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
@@ -1943,13 +2454,31 @@
                                 <input required="" type="hidden" value="33" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                   <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                              <div class="form-row">
                                 <div class="form-group col-6">
@@ -1977,7 +2506,7 @@
 <!-- FORMULARIO PARA PLANTILLA 34 -->
 <div class="modal fade" id="taller34" tabindex="-1" role="dialog" aria-labelledby="taller34Label" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content" id="ejercicios">
+        <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title" id="taller34Label">TIPOS DE SALDOS</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -1992,14 +2521,31 @@
                                 <input required="" type="hidden" value="34" name="id_plantilla">
                                 <textarea required v-model="taller.enunciado" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" v-model="taller.materia_id" class="custom-select">
-                                    <option value="" selected disabled>ELIJA UNA MATERIA</option>
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                              <div class="form-row">
                                     <table class="table table-bordered table-sm">
@@ -2136,13 +2682,31 @@
                                 <input required="" type="hidden" value="36" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                     <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                            <div class="tall_36">
                             <div class="form-group">
@@ -2188,9 +2752,9 @@
                                 <input type="text"  name="enunciado" value="Crear Enunciados de Contabilidad" class="form-control" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::where('slug', '=', 'contabilidad')->get() as $materia)
+                                <label for="recipient-name" class="col-form-label">Contenido:</label>
+                                <select required="" name="contenido_id" class="custom-select">
+                                    @foreach ($materias = App\Contenido::where('materia_id', 1)->get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
                                 </select>
@@ -2237,13 +2801,31 @@
                                 <input required="" type="hidden" value="38" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                 <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                              <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Lectura:</label>
@@ -2290,13 +2872,31 @@
                                 <input required="" type="hidden" value="39" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                               <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Palabra:</label>
@@ -2335,13 +2935,31 @@
                                 <input required="" type="hidden" value="40" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                         <div class="tall_40">
                             <div class="form-group">
@@ -2385,13 +3003,31 @@
                                 <input required="" type="hidden" value="42" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                         <div class="tall_42">
                             <div class="form-group">
@@ -2437,13 +3073,31 @@
                                 <input required="" type="hidden" value="43" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Concepto:</label>
@@ -2493,13 +3147,31 @@
                                 <input required="" type="hidden" value="44" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                   <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Tipo de cuenta:</label>
@@ -2544,13 +3216,31 @@
                                 <input required="" type="hidden" value="45" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select required="" name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                    <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        <option selected>ELEGIR LA UNIDAD</option>
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Palabras( Separadas por ","):</label>

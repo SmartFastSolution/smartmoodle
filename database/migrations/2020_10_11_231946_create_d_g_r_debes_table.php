@@ -18,7 +18,7 @@ class CreateDGRDebesTable extends Migration
             $table->unsignedbigInteger('d_g_registro_id');
             $table->string('nom_cuenta');
             $table->string('saldo');
-            $table->date('fecha');
+            $table->date('fecha')->nullable();
             $table->timestamps();
 
 

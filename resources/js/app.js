@@ -21,6 +21,8 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 import draggable from "vuedraggable";
 Vue.component('draggable', draggable);
+// import select2 from 'v-select2-component';
+// Vue.component('select2', select2);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('drag-component', require('./components/DragComponent.vue').default);

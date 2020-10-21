@@ -19,6 +19,7 @@ class CreateBalanceInicialsTable extends Migration
             $table->unsignedbigInteger('user_id');
             $table->string('enunciado');
             $table->string('nombre');
+            $table->string('tipo');
             $table->string('fecha');
             $table->string('total_pasivo_patrimonio');
             $table->timestamps();

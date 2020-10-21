@@ -11,6 +11,19 @@ class Plantilla extends Seeder
      */
     public function run()
     {
+                          DB::table('institutos')->insert([
+                             'nombre'      => 'Instituto Superior Tecnologico Vicente Rocafuerte',
+                             'descripcion' => 'El Mejor Colegio Del Ecuador',
+                             'provincia'   => 'Guayas',
+                             'canton'      => 'Guayaquil',
+                             'direccion'   => 'La  20 y domingo sabio',
+                             'telefono'    => '09452514524',
+                             'email'       => 'itsvr@itsvr.com',
+                             'estado'      => 'on',
+                             'created_at'  => now(),
+                             'updated_at'  => now()
+                          ]);
+                          
                           DB::table('plantillas')->insert([
                           'id' => 1,
                           'nombre' => 'Plantilla 1 - COMPLETE EL ENUNCIADO CORRECTAMENTE',

@@ -63,7 +63,8 @@ class NivelController extends Controller
      */
     public function show(Nivel $nivel)
     {
-        return view ('Niveles.shown',['nivels'=>$nivel]);
+        Gate::authorize('haveaccess', 'nivel.show');
+        return view ('Niveles.shown',['nivel'=>$nivel]);
     }
 
     /**

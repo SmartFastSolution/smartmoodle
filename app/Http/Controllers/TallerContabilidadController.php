@@ -218,8 +218,11 @@ public function obtenerbalance(Request $request)
     $tipo          = $request->tipo;
     $balanceInicial = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->count();
 
-    if ($balanceInicial >= 1) { 
-        if ($tipo == 'horizontal') {
+    if ($balanceInicial >= 1 ) { 
+        $datos1 = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', 'horizontal')->count();
+        $datos2 = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', 'vertical')->count();
+
+        if ($tipo == 'horizontal' && $datos1 == 1) {
                 $datos = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', $tipo)->first();
     $a_corrientes      = BIActivo::select('nom_cuenta', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'corriente')->get();
     $a_nocorrientes    = BIActivo::select('nom_cuenta', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'nocorriente')->get();
@@ -238,7 +241,7 @@ public function obtenerbalance(Request $request)
                 'p_nocorriente' => $p_nocorriente,
                 'patrimonios' => $patrimonios,
             ),200,[]);
-        }elseif ($tipo == 'vertical') {
+        }elseif ($tipo == 'vertical' && $datos2 == 1) {
     $datos = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', $tipo)->first();
     $a_corrientes      = BIActivo::select('nom_cuenta', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'corriente')->get();
     $a_nocorrientes    = BIActivo::select('nom_cuenta', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'nocorriente')->get();

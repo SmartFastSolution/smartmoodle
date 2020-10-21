@@ -1188,12 +1188,12 @@ const diario = new Vue({
           debe:{
             fecha:'',
             nom_cuenta:'',
-            saldo:'',
+            saldo:'0.00',
           },
           haber:{
             fecha:'',
             nom_cuenta:'',
-            saldo:''
+            saldo:'0.00'
           },
           comentario:''
         },
@@ -1217,8 +1217,8 @@ const diario = new Vue({
           id: _this.id_taller,
         }).then(response => {
           if (response.data.datos == true) {
-            _this.balanceInicial.debe = response.data.pasivos;
-          _this.balanceInicial.haber = response.data.activos;
+            _this.balanceInicial.debe = response.data.activos;
+          _this.balanceInicial.haber = response.data.pasivos;
           _this.nombre = response.data.nombre;
           _this.fechabalance = response.data.fecha;
           $('#list-tab a:nth-child(3)').tab('show');
@@ -1287,6 +1287,10 @@ const diario = new Vue({
     guardarRegistro(){
       if (this.diarios.debe == 0) {
          toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else  if (this.diarios.comentario.trim() === '') {
+         toastr.error("Debes agregar un comentario", "Smarmoddle", {
                 "timeOut": "3000"
             });
       }else{

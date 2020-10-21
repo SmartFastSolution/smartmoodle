@@ -1,9 +1,9 @@
-{{-- ACTIVOS --}}
+{{-- PASIVOS --}}
 <div class="modal fade" id="haber" tabindex="-1"  role="dialog" aria-labelledby="haberLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
         <div class="modal-content bg-primary">
             <div class="modal-header">
-                <h5 class="modal-title" id="haberLabel">AGREGAR ACTIVOS</h5>
+                <h5 class="modal-title" id="haberLabel">AGREGAR PASIVOS</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -43,11 +43,11 @@
                       </tbody>
                     </table>
                     <div v-if="edit.debe.length >= 1" class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="agregarEdit()">Agregar Activo</a>
+                            <a href="#" class="btn btn-light" @click.prevent="agregarEdit()">Agregar Pasivo</a>
                       </div>
 
                        <div v-else class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="agregarHaber()">Agregar Activo</a>
+                            <a href="#" class="btn btn-light" @click.prevent="agregarHaber()">Agregar Pasivo</a>
                       </div>
                   </div>
                 </div>
@@ -63,7 +63,7 @@
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
         <div class="modal-content bg-primary">
             <div class="modal-header">
-                <h5 class="modal-title" id="debeLabel">AGREGAR PASIVOS</h5>
+                <h5 class="modal-title" id="debeLabel">AGREGAR ACTIVOS</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -104,10 +104,10 @@
                       </tbody>
                     </table>
                     <div v-if="edit.debe.length >= 1" class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="agregarEditPasivo()">Agregar Pasivo</a>
+                            <a href="#" class="btn btn-light" @click.prevent="agregarEditPasivo()">Agregar Activos</a>
                       </div>
                        <div v-else class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="agregarDebe()">Agregar Pasivo</a>
+                            <a href="#" class="btn btn-light" @click.prevent="agregarDebe()">Agregar Activos</a>
                       </div>
                   </div>
                 </div>
@@ -166,7 +166,7 @@
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
         <div class="modal-content bg-primary">
             <div class="modal-header">
-                <h5 class="modal-title" id="haberLabel">ACTUALIZAR ACTIVO</h5>
+                <h5 class="modal-title" id="haberLabel">ACTUALIZAR PASIVO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -206,7 +206,7 @@
                     </table>
 
                        <div class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="updateHaber()">Actualizar Activo</a>
+                            <a href="#" class="btn btn-light" @click.prevent="updateHaber()">Actualizar Pasivo</a>
                       </div>
                   </div>
                 </div>
@@ -217,12 +217,12 @@
     </div>
 </div>
 
-{{-- Pasivos --}}
+{{-- Activo --}}
 <div class="modal fade" id="debe_a" tabindex="-1"  role="dialog" aria-labelledby="debeLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
         <div class="modal-content bg-primary">
             <div class="modal-header">
-                <h5 class="modal-title" id="debeLabel">ACTUALIZAR PASIVO</h5>
+                <h5 class="modal-title" id="debeLabel">ACTUALIZAR ACTIVO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -263,7 +263,7 @@
                       </tbody>
                     </table>
                        <div class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="updateDebe()">Actualizar Pasivo</a>
+                            <a href="#" class="btn btn-light" @click.prevent="updateDebe()">Actualizar Activo</a>
                       </div>
                   </div>
                 </div>
@@ -283,7 +283,7 @@
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
         <div class="modal-content bg-primary">
             <div class="modal-header">
-                <h5 class="modal-title" id="haberLabel">ACTUALIZAR ACTIVO</h5>
+                <h5 class="modal-title" id="haberLabel">ACTUALIZAR PASIVO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -323,7 +323,7 @@
                     </table>
                     
                        <div class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="updateHaber1()">Actualizar Activo</a>
+                            <a href="#" class="btn btn-light" @click.prevent="updateHaber1()">Actualizar Pasivo</a>
                       </div>
                   </div>
                 </div>
@@ -339,7 +339,7 @@
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
         <div class="modal-content bg-primary">
             <div class="modal-header">
-                <h5 class="modal-title" id="debeLabel">ACTUALIZAR PASIVO</h5>
+                <h5 class="modal-title" id="debeLabel">ACTUALIZAR ACTIVO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -380,7 +380,7 @@
                       </tbody>
                     </table>
                        <div class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="updateDebe1()">Actualizar Pasivo</a>
+                            <a href="#" class="btn btn-light" @click.prevent="updateDebe1()">Actualizar Activo</a>
                       </div>
                   </div>
                 </div>

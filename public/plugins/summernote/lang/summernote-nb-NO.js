@@ -1,21 +1,13 @@
 /*!
  * 
-<<<<<<< HEAD
- * Super simple wysiwyg editor v0.8.18
-=======
  * Super simple wysiwyg editor v0.8.16
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  * https://summernote.org
  * 
  * 
  * Copyright 2013- Alan Hong. and other contributors
  * summernote may be freely distributed under the MIT license.
  * 
-<<<<<<< HEAD
- * Date: 2020-05-20T16:47Z
-=======
  * Date: 2020-02-19T09:12Z
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
  * 
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -143,17 +135,6 @@ return /******/ (function(modules) { // webpackBootstrap
         floatLeft: 'Flyt til venstre',
         floatRight: 'Flyt til høyre',
         floatNone: 'Fjern flyt',
-<<<<<<< HEAD
-        shapeRounded: 'Form: Rundet',
-        shapeCircle: 'Form: Sirkel',
-        shapeThumbnail: 'Form: Miniatyr',
-        shapeNone: 'Form: Ingen',
-        dragImageHere: 'Dra et bilde hit',
-        dropImage: 'Drop image or Text',
-        selectFromFiles: 'Velg fra filer',
-        maximumFileSize: 'Max filstørrelse',
-        maximumFileSizeError: 'Maks filstørrelse overskredet.',
-=======
         shapeRounded: 'Shape: Rounded',
         shapeCircle: 'Shape: Circle',
         shapeThumbnail: 'Shape: Thumbnail',
@@ -163,7 +144,6 @@ return /******/ (function(modules) { // webpackBootstrap
         selectFromFiles: 'Velg fra filer',
         maximumFileSize: 'Maximum file size',
         maximumFileSizeError: 'Maximum file size exceeded.',
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
         url: 'Bilde-URL',
         remove: 'Fjern bilde',
         original: 'Original'
@@ -186,15 +166,6 @@ return /******/ (function(modules) { // webpackBootstrap
       },
       table: {
         table: 'Tabell',
-<<<<<<< HEAD
-        addRowAbove: 'Legg til rad over',
-        addRowBelow: 'Legg til rad under',
-        addColLeft: 'Legg til kolonne på venstre side',
-        addColRight: 'Legg til kolonne på høyre side',
-        delRow: 'Slett rad',
-        delCol: 'Slett kolonne',
-        delTable: 'Slett tabell'
-=======
         addRowAbove: 'Add row above',
         addRowBelow: 'Add row below',
         addColLeft: 'Add column left',
@@ -202,18 +173,13 @@ return /******/ (function(modules) { // webpackBootstrap
         delRow: 'Delete row',
         delCol: 'Delete column',
         delTable: 'Delete table'
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       },
       hr: {
         insert: 'Sett inn horisontal linje'
       },
       style: {
         style: 'Stil',
-<<<<<<< HEAD
-        p: 'Paragraf',
-=======
         p: 'p',
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
         blockquote: 'Sitat',
         pre: 'Kode',
         h1: 'Overskrift 1',
@@ -260,35 +226,6 @@ return /******/ (function(modules) { // webpackBootstrap
         documentStyle: 'Dokumentstil'
       },
       help: {
-<<<<<<< HEAD
-        'insertParagraph': 'Sett inn avsnitt',
-        'undo': 'Angre siste handling',
-        'redo': 'Gjør om siste handling',
-        'tab': 'Tab',
-        'untab': 'Untab',
-        'bold': 'Angi en fet stil',
-        'italic': 'Angi en kursiv stil',
-        'underline': 'Sett en understreket stil',
-        'strikethrough': 'Sett en gjennomgående sti',
-        'removeFormat': 'Tøm formattering',
-        'justifyLeft': 'Angi venstrejustering',
-        'justifyCenter': 'Angi sentrert justering',
-        'justifyRight': 'Angi høyre justering',
-        'justifyFull': 'Angi full justering',
-        'insertUnorderedList': 'Bytt uordnet liste',
-        'insertOrderedList': 'Bytt sortert liste',
-        'outdent': 'Utrykk på valgt avsnitt',
-        'indent': 'Innrykk på valgt avsnitt',
-        'formatPara': 'Endre gjeldende blokkformat til et avsnitt (P-kode)',
-        'formatH1': 'Endre gjeldende blokkformat til H1',
-        'formatH2': 'Endre gjeldende blokkformat til H2',
-        'formatH3': 'Endre gjeldende blokkformat til H3',
-        'formatH4': 'Endre gjeldende blokkformat til H4',
-        'formatH5': 'Endre gjeldende blokkformat til H5',
-        'formatH6': 'Endre gjeldende blokkformat til H6',
-        'insertHorizontalRule': 'Sett inn horisontal deler',
-        'linkDialog.show': 'Vis koblingsdialog'
-=======
         'insertParagraph': 'Insert Paragraph',
         'undo': 'Undoes the last command',
         'redo': 'Redoes the last command',
@@ -316,20 +253,14 @@ return /******/ (function(modules) { // webpackBootstrap
         'formatH6': 'Change current block\'s format as H6',
         'insertHorizontalRule': 'Insert horizontal rule',
         'linkDialog.show': 'Show Link Dialog'
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       },
       history: {
         undo: 'Angre',
         redo: 'Gjør om'
       },
       specialChar: {
-<<<<<<< HEAD
-        specialChar: 'SPESIELLE TEGN',
-        select: 'Velg spesielle tegn'
-=======
         specialChar: 'SPECIAL CHARACTERS',
         select: 'Select Special characters'
->>>>>>> 8f5c732cef116f66c323290d19c8e4eb8fd04116
       }
     }
   });

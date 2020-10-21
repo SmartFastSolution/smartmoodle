@@ -1,11 +1,219 @@
-
 $(function(document, window, index ) {
+        const ejercicio = new Vue({
+        el: '#ejercicios',
+        data:{
+            instituto: 'Seleccionar el Instituto',
+            materia:'Seleccionar una materia',
+            materias: [],
+            contenido:[],
+    registerindex:'',
+    cuentaindex:'',
+    taller:{
+        plantilla_id: 34,
+        enunciado:'',
+        materia_id:'',
+    },
+    registros:[],
+       ejercicios:{
+           debe:[],
+          haber:[],
+      },
+       edit:{
+           debe:[],
+          haber:[]
+        },
+       ejercicio:{
+          debe:{
+            nom_cuenta:'',
+            saldo:'',
+          },
+          haber:{
+            fecha:'',
+            nom_cuenta:'',
+            saldo:''
+          },
+        },
+    },
+        methods:{
+        onMateria() {
+            let set = this;
+            set.materias = [];
+            axios.post('/sistema/materiainst', {
+                id: set.instituto
+            }).then(response => {
+                set.materias = response.data;
+                //console.log(set.materias);
+            }).catch(e => {
+                console.log(e);
+            });
+        },
+        onContenido(){
+            let set = this;
+            set.contenido = [];
+            axios.post('/sistema/contmateria', {
+                id: set.materia
+            }).then(response => {
+                set.contenido = response.data;
+                if (set.contenido == 0) {
+                     toastr.error("Esta Materia no tiene contenidos", "Smarmoddle", {
+                    "timeOut": "3000"
+                });
+                    set.materia = 'Seleccionar una materia';
+                } 
+                //console.log(set.contenido);
+            }).catch(e => {
+                console.log(e);
+            });
+        },
+            agregarDebe(){
+                var debe = {nom_cuenta:this.ejercicio.debe.nom_cuenta, saldo:this.ejercicio.debe.saldo};
+                this.ejercicios.debe.push(debe);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.ejercicio.debe.nom_cuenta ='';
+                this.ejercicio.debe.saldo      ='';
+                },
+            agregarHaber(){
+                var haber = {nom_cuenta:this.ejercicio.haber.nom_cuenta, saldo:this.ejercicio.haber.saldo};
+                this.ejercicios.haber.push(haber);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.ejercicio.haber.nom_cuenta ='';
+                this.ejercicio.haber.saldo      ='';
+            },
+             deleteDebe(index){
+                this.ejercicios.debe.splice(index, 1);
+            },
+            deleteHaber(index){
+                this.ejercicios.haber.splice(index, 1);
+            },
+            guardarRegistro(){
+              if (this.ejercicios.debe == 0) {
+                 toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
+                        "timeOut": "3000"
+                    });
+              }else{
+            var registro = {debe:this.ejercicios.debe, haber:this.ejercicios.haber};
+                this.registros.push(registro);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Registro agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.ejercicios.debe            =[];
+                this.ejercicios.haber           =[]; 
+                this.ejercicio.haber.nom_cuenta = '';
+                this.ejercicio.haber.saldo      = '';         
+          }
+        },
+        debeEditRegister(id){
+              var register          = this.registros;
+              this.registerindex    = id;
+              this.edit.debe        =[];
+              this.edit.haber       =[];
+              this.ejercicios.debe  =[];
+              this.ejercicios.haber =[];
+              this.edit.debe        = register[id].debe;
+              this.edit.haber       = register[id].haber;
+            },
+        updaterRegister(){
+             var  id                  = this.registerindex;
+             this.registros[id].debe  = this.edit.debe;
+             this.registros[id].haber = this.edit.haber;
+             this.edit.debe           =   [];
+             this.edit.haber          = [];
+            },
+         deleteRegistro(id){
+              this.registros.splice(id, 1);
+            },
+            haberEdit(index){
+              var edit                        = this.edit;
+              this.cuentaindex                = index;
+              this.ejercicio.haber.nom_cuenta = edit.haber[index].nom_cuenta;
+              this.ejercicio.haber.saldo      = edit.haber[index].saldo;
+            },
+            updateHaber(){
+            if (this.ejercicio.haber.nom_cuenta.trim() === '' || this.ejercicio.haber.saldo.trim() === '') {
+                toastr.error("No tienes datos para actualizar", "Smarmoddle", {
+                        "timeOut": "3000"
+                    });
+                }else{
+                    var id                          = this.cuentaindex;
+            this.edit.haber[id].nom_cuenta  = this.ejercicio.haber.nom_cuenta;
+            this.edit.haber[id].saldo       = this.ejercicio.haber.saldo;
+            this.ejercicio.haber.nom_cuenta = '';
+            this.ejercicio.haber.saldo      = '';
+                }        
+            },
+            haberDelete(index){
+              this.edit.haber.splice(index, 1);
+            },
+            debeEdit(index){
+              this.cuentaindex               = index;
+              this.ejercicio.debe.nom_cuenta = this.edit.debe[index].nom_cuenta;
+              this.ejercicio.debe.saldo      = this.edit.debe[index].saldo;
+            },
+            updateDebe(){
+            if (this.ejercicio.debe.nom_cuenta.trim() === '' || this.ejercicio.debe.saldo.trim() === '') {
+                toastr.error("No tienes datos para actualizar", "Smarmoddle", {
+                        "timeOut": "3000"
+                    });
+                }else{
+                    var id                         = this.cuentaindex;
+                    this.edit.debe[id].nom_cuenta  = this.ejercicio.debe.nom_cuenta;
+                    this.edit.debe[id].saldo       = this.ejercicio.debe.saldo;
+                    this.ejercicio.debe.nom_cuenta = '';
+                    this.ejercicio.debe.saldo      = '';
+                } 
+            },
+             debeDelete(index){
+              this.edit.debe.splice(index, 1);
+            },
+            guardarTaller34: function() {
+                var _this = this;
+                var url = '/sistema/admin/taller34';
+                if (_this.registros.length == 0 ) {
+                     toastr.error("No tienes registros para guardar el taller", "Smarmoddle", {
+                        "timeOut": "3000"
+                    });
+                } else if (_this.taller.enunciado.trim() === '' || _this.taller.materia_id.trim() === ''){
+                    toastr.error("No puedes dejar campos en blanco", "Smarmoddle", {
+                        "timeOut": "3000"
+                    });
+                }else {
+                axios.post(url,{
+                registro: _this.registros,
+                materia: _this.taller.materia_id,
+                enunciado: _this.taller.enunciado,
+                plantilla: _this.taller.plantilla_id,
+                }).then(response => {
+                   toastr.success("Taller Creado Correctamente", "Smarmoddle", {
+                        "timeOut": "3000"
+                    });
+                   _this.registros =[];
+                    _this.ejercicio.debe.nom_cuenta = '';
+                    _this.ejercicio.debe.saldo      = '';  
+                     $('#taller34').modal('hide');  
+                }).catch(function(error){
+
+                }); 
+
+
+                } 
+            }
+
+        }
+
+    });
    $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
     var i = 1;
-
+        //Initialize Select2 Elements
     // var objetivo = document.getElementById('num');
     // objetivo.innerHTML = 1;
 
@@ -867,180 +1075,3 @@ function addTaller38() {
 
 
 }( document, window, 0 ));
-
-
-    const ejercicio = new Vue({
-        el: '#ejercicios',
-        data:{
-    registerindex:'',
-    cuentaindex:'',
-    taller:{
-        plantilla_id: 34,
-        enunciado:'',
-        materia_id:'',
-    },
-    registros:[],
-       ejercicios:{
-           debe:[],
-          haber:[],
-      },
-       edit:{
-           debe:[],
-          haber:[]
-        },
-       ejercicio:{
-          debe:{
-            nom_cuenta:'',
-            saldo:'',
-          },
-          haber:{
-            fecha:'',
-            nom_cuenta:'',
-            saldo:''
-          },
-        },
-    },
-        methods:{
-            agregarDebe(){
-                var debe = {nom_cuenta:this.ejercicio.debe.nom_cuenta, saldo:this.ejercicio.debe.saldo};
-                this.ejercicios.debe.push(debe);//añadimos el la variable persona al array
-                //Limpiamos los campos
-                toastr.success("Activo agregado correctamente", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-                this.ejercicio.debe.nom_cuenta ='';
-                this.ejercicio.debe.saldo      ='';
-                },
-            agregarHaber(){
-                var haber = {nom_cuenta:this.ejercicio.haber.nom_cuenta, saldo:this.ejercicio.haber.saldo};
-                this.ejercicios.haber.push(haber);//añadimos el la variable persona al array
-                //Limpiamos los campos
-                toastr.success("Activo agregado correctamente", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-                this.ejercicio.haber.nom_cuenta ='';
-                this.ejercicio.haber.saldo      ='';
-            },
-             deleteDebe(index){
-                this.ejercicios.debe.splice(index, 1);
-            },
-            deleteHaber(index){
-                this.ejercicios.haber.splice(index, 1);
-            },
-            guardarRegistro(){
-              if (this.ejercicios.debe == 0) {
-                 toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
-                        "timeOut": "3000"
-                    });
-              }else{
-            var registro = {debe:this.ejercicios.debe, haber:this.ejercicios.haber};
-                this.registros.push(registro);//añadimos el la variable persona al array
-                //Limpiamos los campos
-                toastr.success("Registro agregado correctamente", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-                this.ejercicios.debe            =[];
-                this.ejercicios.haber           =[]; 
-                this.ejercicio.haber.nom_cuenta = '';
-                this.ejercicio.haber.saldo      = '';         
-          }
-        },
-        debeEditRegister(id){
-              var register          = this.registros;
-              this.registerindex    = id;
-              this.edit.debe        =[];
-              this.edit.haber       =[];
-              this.ejercicios.debe  =[];
-              this.ejercicios.haber =[];
-              this.edit.debe        = register[id].debe;
-              this.edit.haber       = register[id].haber;
-            },
-        updaterRegister(){
-             var  id                  = this.registerindex;
-             this.registros[id].debe  = this.edit.debe;
-             this.registros[id].haber = this.edit.haber;
-             this.edit.debe           =   [];
-             this.edit.haber          = [];
-            },
-         deleteRegistro(id){
-              this.registros.splice(id, 1);
-            },
-            haberEdit(index){
-              var edit                        = this.edit;
-              this.cuentaindex                = index;
-              this.ejercicio.haber.nom_cuenta = edit.haber[index].nom_cuenta;
-              this.ejercicio.haber.saldo      = edit.haber[index].saldo;
-            },
-            updateHaber(){
-            if (this.ejercicio.haber.nom_cuenta.trim() === '' || this.ejercicio.haber.saldo.trim() === '') {
-                toastr.error("No tienes datos para actualizar", "Smarmoddle", {
-                        "timeOut": "3000"
-                    });
-                }else{
-                    var id                          = this.cuentaindex;
-            this.edit.haber[id].nom_cuenta  = this.ejercicio.haber.nom_cuenta;
-            this.edit.haber[id].saldo       = this.ejercicio.haber.saldo;
-            this.ejercicio.haber.nom_cuenta = '';
-            this.ejercicio.haber.saldo      = '';
-                }        
-            },
-            haberDelete(index){
-              this.edit.haber.splice(index, 1);
-            },
-            debeEdit(index){
-              this.cuentaindex               = index;
-              this.ejercicio.debe.nom_cuenta = this.edit.debe[index].nom_cuenta;
-              this.ejercicio.debe.saldo      = this.edit.debe[index].saldo;
-            },
-            updateDebe(){
-            if (this.ejercicio.debe.nom_cuenta.trim() === '' || this.ejercicio.debe.saldo.trim() === '') {
-                toastr.error("No tienes datos para actualizar", "Smarmoddle", {
-                        "timeOut": "3000"
-                    });
-                }else{
-                    var id                         = this.cuentaindex;
-                    this.edit.debe[id].nom_cuenta  = this.ejercicio.debe.nom_cuenta;
-                    this.edit.debe[id].saldo       = this.ejercicio.debe.saldo;
-                    this.ejercicio.debe.nom_cuenta = '';
-                    this.ejercicio.debe.saldo      = '';
-                } 
-            },
-             debeDelete(index){
-              this.edit.debe.splice(index, 1);
-            },
-            guardarTaller34: function() {
-                var _this = this;
-                var url = '/sistema/admin/taller34';
-                if (_this.registros.length == 0 ) {
-                     toastr.error("No tienes registros para guardar el taller", "Smarmoddle", {
-                        "timeOut": "3000"
-                    });
-                } else if (_this.taller.enunciado.trim() === '' || _this.taller.materia_id.trim() === ''){
-                    toastr.error("No puedes dejar campos en blanco", "Smarmoddle", {
-                        "timeOut": "3000"
-                    });
-                }else {
-                axios.post(url,{
-                registro: _this.registros,
-                materia: _this.taller.materia_id,
-                enunciado: _this.taller.enunciado,
-                plantilla: _this.taller.plantilla_id,
-                }).then(response => {
-                   toastr.success("Taller Creado Correctamente", "Smarmoddle", {
-                        "timeOut": "3000"
-                    });
-                   _this.registros =[];
-                    _this.ejercicio.debe.nom_cuenta = '';
-                    _this.ejercicio.debe.saldo      = '';  
-                     $('#taller34').modal('hide');  
-                }).catch(function(error){
-
-                }); 
-
-
-                } 
-            }
-
-        }
-
-    });

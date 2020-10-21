@@ -2,6 +2,7 @@
 
 namespace App;
 use App\Curso;
+use App\Distribucionmacu;
 use Illuminate\Database\Eloquent\Model;
 
 class Nivel extends Model
@@ -14,6 +15,11 @@ class Nivel extends Model
     public function cursos(){
           
         return $this->hasMany('App\Curso');
+
+    }
+    public function distribucionmacus(){
+        
+        return $this->hasMany('App\Distribucionmacu');
 
     }
 

@@ -2,36 +2,28 @@
 
 @section('title', 'Unidad Educativa')
 
-@section('encabezado')
-<h1>Unidad Educativa</h1>
-<br>
-<a class="btn btn-info float-right " href="{{route('institutos.create')}}"><i class="fas fa-plus"></i></i> Instituto</a>
-<br>
-<br>
-@stop
+
 
 @section('content')
 
 
-<!-- Content Header (Page header) -->
-
-
 <section class="content">
-    <div class="container-fluid">
-
+    <div class="container">
 
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
         @endif
-        <div class="row">
-            <!-- left column -->
+
+        <div class="row justify-content-center">
             <div class="col-md-13">
-                <!-- general form elements -->
+                <a class="btn btn-info float-right " href="{{route('institutos.create')}}"><i
+                        class="fas fa-plus"></i></i> UND EDUCATIVA</a>
+                <h1>Unidad Educativa</h1>
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title">Informacion Unidad Educativa</h3>
+
                         <div class="card-tools">
                         </div>
                     </div>
@@ -105,7 +97,6 @@
                         <!--Table-->
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -117,9 +108,9 @@
 @stop
 
 @section('css')
-    
+
 @stop
 
 @section('js')
-    
+
 @stop

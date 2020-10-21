@@ -15,11 +15,15 @@ class CreateDistribucionmacusTable extends Migration
     {
         Schema::create('distribucionmacus', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('curso_id');
-            $table->string('descripcion'); 
+            $table->unsignedBigInteger('curso_id');  
+            $table->unsignedBigInteger('nivel_id');     
+            $table->unsignedBigInteger('instituto_id');
             $table->enum('estado',['on','off'])->nullable();
             $table->timestamps();
-            $table->foreign('curso_id')->references('id')->on('cursos');
+            $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade');
+            $table->foreign('nivel_id')->references('id')->on('nivels')->onDelete('cascade');
+            $table->foreign('instituto_id')->references('id')->on('institutos')->onDelete('cascade');
+            
         });
     }
 

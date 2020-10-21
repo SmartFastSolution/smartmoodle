@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use App\Materia;
 use App\Curso;
+use App\Instituto;
 use App\Distribucionmacu;
+use App\Nivel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -21,18 +23,16 @@ class DistribucionmacuController extends Controller
         return \view('Distribucion.indexmc',['distribucionmacus'=>$distribucionmacus,]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
+          
+        $institutos = Instituto::get();
         $materias=Materia::get();
-       
+        $nivels=Nivel::get();
         $cursos=Curso::get();
       
-        return \view('Distribucion.createmc',compact('materias','cursos'));
+        return \view('Distribucion.createmc',compact('materias','cursos','institutos','nivels'));
     }
 
     /**
@@ -47,18 +47,21 @@ class DistribucionmacuController extends Controller
 
         $request->validate([
 
-            'descripcion' => [ 'string', 'max:150'],
+           
             'estado' => ['required' ,'in:on,off'],
         ]);
 
         $distribucionmacu =new  Distribucionmacu;
-        $distribucionmacu ->descripcion = $request->descripcion;
+        $distribucionmacu ->instituto_id = $request->instituto;
+        $distribucionmacu ->nivel_id = $request->nivel;
         $distribucionmacu ->estado = $request->estado;
         $distribucionmacu->curso_id=$request->cursos;
           
       
 
        $distribucionmacu->save();
+
+     
        if($request->get('materia')){
         $distribucionmacu->materias()->sync($request->get('materia'));
       }
@@ -74,7 +77,17 @@ class DistribucionmacuController extends Controller
      */
     public function show(Distribucionmacu $distribucionmacu)
     {
-        return \view('Distribucion.showmacu');
+        $distcursos=Distribucionmacu::find($distribucionmacu->id);
+        $materias= $distcursos->materias()->get();
+        
+        $instituto=Distribucionmacu::find($distribucionmacu->id)->instituto()->first();
+        $materia_all = Materia::where('instituto_id', $instituto->id)->get();
+        $cursos =  $distcursos->curso()->first();//todos los datos de la bd de cursos
+         //llama al curso que esta relacionado a esta distribucion
+         $nivels= $distcursos->nivel()->first();
+
+         return view('Distribucion.showmacu',compact('distribucionmacu','materias', 'materia_all','cursos','distcursos','instituto','nivels'));
+       
     }
 
     /**
@@ -85,17 +98,17 @@ class DistribucionmacuController extends Controller
      */
     public function edit(Distribucionmacu $distribucionmacu)
     {
-        $distribucionmacu_materia=[]; //creo una variable array para almacenar los datos relacionados de la tabla pivote entre materia y distribucion
       
-        foreach($distribucionmacu->materias as $materia){   //realizo el recorrido
-        $distribucionmacu_materia[]=$materia->id;
-       }
+        $distcursos=Distribucionmacu::find($distribucionmacu->id);
+        $materias= $distcursos->materias()->get();
         
-        $materias= Materia::all();
-        $cursos = Curso::get(); //todos los datos de la bd de cursos
-        $distcursos=Distribucionmacu::find($distribucionmacu->id)->curso()->get(); //llama al curso que esta relacionado a esta distribucion
+        $instituto=Distribucionmacu::find($distribucionmacu->id)->instituto()->first();
+        $materia_all = Materia::where('instituto_id', $instituto->id)->get();
+        $cursos =  $distcursos->curso()->first();//todos los datos de la bd de cursos
+         //llama al curso que esta relacionado a esta distribucion
+         $nivels= $distcursos->nivel()->first();
 
-        return view('Distribucion.editmacu',compact('distribucionmacu','materias','cursos','distcursos','distribucionmacu_materia'));
+        return view('Distribucion.editmacu',compact('distribucionmacu','materias', 'materia_all','cursos','distcursos','instituto','nivels'));
     }
 
     /**
@@ -111,16 +124,16 @@ class DistribucionmacuController extends Controller
         $request->validate([
 
            
-            'descripcion'      => 'required|string|max:150',
+            
             'estado'      => 'required|in:on,off',
         ]);
 
         $distribucionmacu->update($request->all());
    
-        if($request->get('curso')){
+        // if($request->get('curso')){
           
-            $distribucionmacu->curso_id = $request->curso;
-          }
+        //     $distribucionmacu->curso_id = $request->curso;
+        //   }
 
           if($request->get('materia')){
             $distribucionmacu->materias()->sync($request->get('materia'));

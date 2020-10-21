@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Curso;
-use App\Nivel;
+
 use App\Materia;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -33,10 +33,9 @@ class CursoController extends Controller
     public function create()
     {
         Gate::authorize('haveaccess', 'curso.create');
-        $nivels=Nivel::get();
-         $materias=Materia::get();
-
-        return \view('Cursos.createc',compact('nivels','materias'));
+       
+         
+        return \view('Cursos.createc');
 
     }
 
@@ -52,15 +51,14 @@ class CursoController extends Controller
         $request->validate([
 
             'nombre'      => 'required|string|max:60',
-            'paralelo'      => 'required|string|max:1',
+          
             'estado'      => 'required|in:on,off',
         ]);
        
 //    $curso=Curso::create($request->all());
         $curso = new Curso ;
-        $curso->nivel_id = $request->nivel;
+      
         $curso->nombre = $request->nombre;
-        $curso->paralelo = $request->paralelo;
         $curso->estado = $request->estado;
         
        
@@ -68,7 +66,7 @@ class CursoController extends Controller
         $curso->save();
   
         
-        return redirect('sistema/cursos');
+        return redirect('sistema/cursos')->with('success','Haz Creado un Paralelo con exito');
        
     }
 
@@ -81,7 +79,11 @@ class CursoController extends Controller
     public function show(Curso $curso)
     {
         Gate::authorize('haveaccess', 'curso.show');
-        return view ('Cursos.showc',['curso'=>$curso]);
+      
+         //llama al nivel que esta relacionado con el modelo curso
+     
+       return \view('Cursos.showc',['curso'=>$curso,]);
+     
     }
 
     /**
@@ -95,10 +97,9 @@ class CursoController extends Controller
         Gate::authorize('haveaccess', 'curso.edit');
 
 
-       $nivels=Nivel::get();
-       $nivelcurso= Curso::find($curso->id)->nivel()->get(); //llama al nivel que esta relacionado con el modelo curso
+       //llama al nivel que esta relacionado con el modelo curso
     
-      return \view('Cursos.editc',['curso'=>$curso,'nivels'=>$nivels,'nivelcurso'=>$nivelcurso]);
+      return \view('Cursos.editc',['curso'=>$curso]);
     
     }
 
@@ -116,19 +117,15 @@ class CursoController extends Controller
         $request->validate([
 
             'nombre'      => 'required|string|max:60',
-            'paralelo'      => 'required|string|max:1',
             'estado'      => 'required|in:on,off',
         ]);
 
         $curso->update($request->all());
 
-        if($request->get('nivel')){
-         
-            $curso->nivel_id = $request->nivel;
-         }
+      
           
      
-        return redirect('sistema/cursos');
+        return redirect('sistema/cursos')->with('success','Haz Actualizado un Paralelo con exito');
     }
 
     /**
@@ -143,7 +140,7 @@ class CursoController extends Controller
         $curso= Curso::find($curso->id);
         $curso->delete();
 
-        return redirect('sistema/cursos')->with('success','Haz eliminado un Curso con exito');
+        return redirect('sistema/cursos')->with('success','Haz eliminado un Paralelo con exito');
    
     }
 }

@@ -1,10 +1,6 @@
 @extends('layouts.nav')
 
-@section('title', 'Dashboard')
-
-@section('encabezado')
-<h1>Editar Contenidos</h1>
-@stop
+@section('title', 'Contenido | SmartMoodle')
 
 @section('content')
 
@@ -19,85 +15,149 @@
     </ul>
 </div>
 @endif
-<div class="row">
-    <div class="col-md-6">
-        <div class="card card-info">
-            <div class="card-header">
-                <h3 class="card-title">Formulario Contenidos</h3>
-            </div>
-            <div class="card-body">
 
-                <form method="POST" action="{{route('contenidos.update', $contenido->id)}} "
-                    enctype="multipart/form-data">
-                    @method('PUT')
-                    @csrf
-                    <div class=" card-body">
-                        <div class="form-group">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" name="nombre" id="nombre"
-                                value="{{$contenido->nombre}}" placeholder="Añadir nombre del contenido" readonly>
+<section class="content">
+    <div class="container">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
+            <a class="btn btn-info float-right" href="{{route('admin.create')}}"><i class="fas fa-plus"> Crear
+                        Talleres</i></a>
+                <h1 class="font-weight-light">Show Unidad</h1>
+                <div class="row">
+                    <div class="col-md-10">
+
+                        <form method="POST" action="{{route('contenidos.update', $contenido->id)}} "
+                            enctype="multipart/form-data">
+                            @method('PUT')
+                            @csrf
+                            <div class=" card-body">
+                                <div class="form-group">
+                                    <label for="nombre">Nombre</label>
+                                    <input type="text" class="form-control" name="nombre" id="nombre"
+                                        value="{{$contenido->nombre}}" placeholder="Añadir nombre del contenido"
+                                        readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="descripcion">Descripción</label>
+                                    <input type="text" class="form-control" name="descripcion" id="descripcion"
+                                        value="{{$contenido->descripcion}}" placeholder="Añadir una Descripción"
+                                        readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Editar Materia</label>
+                                    <select class="form-control select" name="materia" style="width: 99%;" disabled>
+                                        @foreach($materiacontenido as $materiac)
+                                        <option selected disabled value="{{ $materiac->id }}">{{ $materiac->nombre }}
+                                        </option>
+                                        @endforeach
+                                        @foreach($materias as $materia)
+                                        <option value="{{$materia->id}}">{{$materia->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <!-- subir imagen en laravel prueba 1 -->
+                                <div class="form-group">
+                                    <label for="documentod">
+                                        Vizualizar Documento
+                                        <br>
+                                        <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                            data-target="#modalYT">{{ $contenido['nombre']}}</button>
+                                    </label>
+                                </div>
+
+
+                                <!-- fin de la prueba imagen en laravel  -->
+
+                                <div class="form-group">
+                                    <label for="nombre">Estado </label>
+                                    <br>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="estadoon" name="estado" class="custom-control-input"
+                                            value="on" @if($contenido['estado']=="on" ) checked
+                                            @elseif(old('estado')=="on" ) checked @endif disabled>
+                                        <label class="custom-control-label" for="estadoon">Activo</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="estadooff" name="estado" class="custom-control-input"
+                                            value="off" @if($contenido['estado']=="off" ) checked
+                                            @elseif(old('estado')=="off" ) checked @endif disabled>
+                                        <label class="custom-control-label" for="estadooff">No Activo</label>
+                                    </div>
+                                
+                                
+                                </div>
+                        </form>
+                    </div>
+                </div>
+
+
+                <div class="col-md-10">
+
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                                aria-controls="nav-home" aria-selected="true">Talleres</a>
+
+
                         </div>
-                        <div class="form-group">
-                            <label for="descripcion">Descripción</label>
-                            <input type="text" class="form-control" name="descripcion" id="descripcion"
-                                value="{{$contenido->descripcion}}" placeholder="Añadir una Descripción" readonly>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Editar Materia</label>
-                            <select class="form-control select" name="materia" style="width: 99%;" disabled>
-                                @foreach($materiacontenido as $materiac)
-                                <option selected disabled value="{{ $materiac->id }}">{{ $materiac->nombre }}
-                                </option>
-                                @endforeach
-                                @foreach($materias as $materia)
-                                <option value="{{$materia->id}}">{{$materia->nombre}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <!-- subir imagen en laravel prueba 1 -->
-                        <div class="form-group">
-                            <label for="documentod">
-                                <!-- <br>
-                                    {{$contenido->documentod}}
-                                    <br> -->
-                                <!-- <a target="_blank"
-                                        href="{{Storage::url($contenido['documentod'])}}">{{ $contenido['nombre']}}</a>
-                                    <br> -->
-                                Vizualizar Documento
-                                <br>
-                                <button type="button"  class="btn btn-secondary" data-toggle="modal"
-                                    data-target="#modalYT">{{ $contenido['nombre']}}</button>
-                            </label>
-                        </div>
-
-
-                        <!-- fin de la prueba imagen en laravel  -->
-
-                        <div class="form-group">
-                            <label for="nombre">Estado </label>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                            aria-labelledby="nav-home-tab">
                             <br>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="estadoon" name="estado" class="custom-control-input" value="on"
-                                    @if($contenido['estado']=="on" ) checked @elseif(old('estado')=="on" ) checked
-                                    @endif disabled>
-                                <label class="custom-control-label" for="estadoon">Activo</label>
-                            </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="estadooff" name="estado" class="custom-control-input"
-                                    value="off" @if($contenido['estado']=="off" ) checked @elseif(old('estado')=="off" )
-                                    checked @endif disabled>
-                                <label class="custom-control-label" for="estadooff">No Activo</label>
-                            </div>
-                            <br><br><br>
 
+                            <!-- Inicio de Talleres -->
+                            <div class="card card-gray-dark">
+                                <div class="card-header">
+                                    <h3 class="card-title">Talleres</h3>
+                                </div>
+                                <div class="card-body">
+                                    <table id="dataTable" class="table table-hover">
+
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Unidad</th>
+                                                <th scope="col"> Taller </th>
+                                                <th scope="col">Plantilla </th>
+                                                <th scope="col">Estado</th>
+                                                <th></th>
+                                                <th scope="col">Vista Taller</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                @foreach($tallers->where('contenido_id', $contenido->id) as $taller)
+                                                <th scope="row">{{$taller->materia['id']}}</th>
+                                                <td>{{$taller->contenido->nombre}}</td>
+                                                <td>{{$taller['nombre']}}</td>
+                                                <td>{{$taller->Plantilla->nombre}}</td>
+                                                <td>{{$taller['estado']}}</td>
+                                                <td> </td>
+                                                <td class="table-button ">
+                                                    <a class="btn btn-info"
+                                                        href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
+                                                            class="fas fa-eye"></i></a>
+
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- fin de talleres -->
                         </div>
-                </form>
+
+                    </div>
+                </div>
+
             </div>
+            <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
         </div>
     </div>
-</div>
 </section>
 
 
@@ -113,19 +173,20 @@
             <div class="modal-body mb-0 p-0">
 
                 <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-                    <iframe class="embed-responsive-item" width="1000" height="1000" src="{{Storage::url($contenido['documentod'])}}"
-                        allowfullscreen></iframe>
+                    <iframe class="embed-responsive-item" width="1000" height="1000"
+                        src="{{Storage::url($contenido['documentod'])}}" allowfullscreen></iframe>
                 </div>
 
             </div>
 
             <div class="modal-footer justify-content-center">
                 <span class="mr-4">{{ $contenido['nombre']}}</span>
-                
+
                 <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4"
                     data-dismiss="modal">Close</button>
 
             </div>
+
         </div>
         <!--/.Content-->
 
