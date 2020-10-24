@@ -1,8 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Routes;
 use Illuminate\Support\Facades\Route;
-use App\User;
-use Illuminate\Support\Facades\Gate;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,32 +15,36 @@ use Illuminate\Support\Facades\Gate;
 */
 
 
- Route::get('/', function () {
-       return view('principal');
-   })->name('welcome');
+
 
 
  
  
+  Auth::routes();
 
-Auth::routes();
+   //Auth::routes(['verify' => true]);
+
 // Auth::routes(["register" => false]);
 // Auth::routes(["login" => false]);
 // Auth::routes(["logout" => false]);
-
+Route::get('/', function () {
+    return view('principal');
+})->name('welcome');
 
 ///rutas protegidas On 
 
  Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
  // Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
    
- route::get('home','Controller@index')->name('administrador'); //ruta administracion
+ 
+
+ route::get('/home','Controller@index')->name('administrador'); //ruta administracion
 //ruta del menu general de administracion 
 
- route::get('homedoc','DocenteController@index')->name('docente'); //ruta docente
+ route::get('/homedoc','DocenteController@index')->name('docente'); //ruta docente
 
 
- route::get('homees','EstudianteController@index')->name('estudiante'); //ruta estudiante
+ route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta estudiante
 
 
 //rutas vue asignaciones////

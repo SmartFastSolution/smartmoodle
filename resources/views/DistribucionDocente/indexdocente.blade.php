@@ -16,8 +16,8 @@
         @endif
         <div class="row justify-content-center">
             <div class="col-md-13">
-                <a class="btn btn-info float-right" href="{{route('distribuciondos.create')}}"><i
-                        class="fas fa-plus"></i> CREAR ASIGNACION</a>
+                <!-- <a class="btn btn-info float-right" href="{{route('distribuciondos.create')}}"><i
+                        class="fas fa-plus"></i> CREAR ASIGNACION</a> -->
                 <h1>Asignación de Materia/Docente</h1>
                 <div class="card card-secondary">
                     <div class="card-header">
@@ -45,8 +45,12 @@
                                     <th scope="row">{{$dis['id']}}</th>
                                     <td>{{$dis->instituto->nombre}} </td>
 
-                                    <td>{{$dis->user->name}}
+                                    <td>
+                                      
+                                        {{$dis->user->name}}
                                         {{$dis->user->apellido}}
+                                   
+
                                     </td>
                                     <td>
                                         @if($dis->materias != null)

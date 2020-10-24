@@ -19,7 +19,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        Gate::authorize('haveaccess', 'menu.index');
+       // Gate::authorize('haveaccess', 'menu.index');
         $permission= Permission::all();
        
     
@@ -34,7 +34,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        Gate::authorize('haveaccess', 'menu.create');
+      //  Gate::authorize('haveaccess', 'menu.create');
         return \view('Permissions.createper');
     }
 
@@ -46,7 +46,7 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        Gate::authorize('haveaccess', 'menu.store');
+        //Gate::authorize('haveaccess', 'menu.store');
         $request->validate([
 
             'namep'      => 'required|string|max:150',
@@ -70,7 +70,7 @@ class PermissionController extends Controller
      */
     public function show(Permission $permission)
     {
-        Gate::authorize('haveaccess', 'menu.show');
+       // Gate::authorize('haveaccess', 'menu.show');
         return \view ('Permissions.showper',['permission' =>$permission]);
     }
 
@@ -82,7 +82,7 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
-        Gate::authorize('haveaccess', 'menu.edit');
+       // Gate::authorize('haveaccess', 'menu.edit');
         return \view('Permissions.editper',['permission'=>$permission]);
     }
 
@@ -95,7 +95,7 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
-        Gate::authorize('haveaccess', 'menu.update');
+      //  Gate::authorize('haveaccess', 'menu.update');
         $request->validate([
 
             'namep'      => 'required|string|max:150',
@@ -118,7 +118,7 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        Gate::authorize('haveaccess', 'menu.destroy');
+      //  Gate::authorize('haveaccess', 'menu.destroy');
          $permission= Permission::find($id);
          $permission->delete();
 

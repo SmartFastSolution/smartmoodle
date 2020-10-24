@@ -16,7 +16,7 @@ class NivelController extends Controller
      */
     public function index()
     {
-        Gate::authorize('haveaccess', 'nivel.index');
+        //Gate::authorize('haveaccess', 'nivel.index');
 
         $nivels= Nivel::orderBy('id','Asc')->paginate(5);
     
@@ -30,7 +30,7 @@ class NivelController extends Controller
      */
     public function create()
     {
-        Gate::authorize('haveaccess', 'nivel.create');
+       // Gate::authorize('haveaccess', 'nivel.create');
         return \view('Niveles.createn');
     }
 
@@ -42,7 +42,7 @@ class NivelController extends Controller
      */
     public function store(Request $request)
     {
-        Gate::authorize('haveaccess', 'nivel.store');
+        //Gate::authorize('haveaccess', 'nivel.store');
         
         $request->validate([
 
@@ -63,7 +63,7 @@ class NivelController extends Controller
      */
     public function show(Nivel $nivel)
     {
-        Gate::authorize('haveaccess', 'nivel.show');
+       // Gate::authorize('haveaccess', 'nivel.show');
         return view ('Niveles.shown',['nivel'=>$nivel]);
     }
 
@@ -75,7 +75,7 @@ class NivelController extends Controller
      */
     public function edit(Nivel $nivel)
     {
-        Gate::authorize('haveaccess', 'nivel.edit');
+        //Gate::authorize('haveaccess', 'nivel.edit');
         return view('Niveles.editn',['nivel'=>$nivel]);
 
     }
@@ -89,7 +89,7 @@ class NivelController extends Controller
      */
     public function update(Request $request, Nivel $nivel)
     {
-        Gate::authorize('haveaccess', 'nivel.update');
+      //  Gate::authorize('haveaccess', 'nivel.update');
         $request->validate([
 
             'nombre'      => 'required|string|max:150',
@@ -109,7 +109,7 @@ class NivelController extends Controller
      */
     public function destroy($id)
     {
-        Gate::authorize('haveaccess', 'nivel.destroy');
+       // Gate::authorize('haveaccess', 'nivel.destroy');
         $nivel= Nivel::find($id);
         $nivel->delete();
 

@@ -62,6 +62,7 @@ class DistrimaController extends Controller
         $distrima ->estado = $request->estado;
         
         $distrima ->user_id = $request->estudiante;
+        
         $distrima->save();
         if($request->get('asignacion')){
             $distrima->distribumacus()->sync($request->get('asignacion'));

@@ -31,7 +31,7 @@
 
                                 <div class="form-group">
                                     <label>Seleccionar Curso</label>
-                                    <select class="form-control select" name="cursos" style="width: 99%;" >
+                                    <select class="form-control select2" name="cursos" style="width: 99%;" >
                                         <option selected disabled>Elija el Curso...</option >
                                         @foreach($cursos as $curso)
                                         <option value="{{$curso->id}}">
@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Paralelos</label>
-                                    <select class="form-control select" name="nivel" style="width: 99%;" >
+                                    <select class="form-control select2" name="nivel" style="width: 99%;" >
                                         @foreach($nivels as $nivel)
                                         <option value="{{$nivel->id}}">{{$nivel->nombre}}</option>
                                         @endforeach
@@ -103,7 +103,7 @@
 @stop
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
+
 @stop
 
 @section('js')

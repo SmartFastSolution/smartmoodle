@@ -349,26 +349,7 @@
                             </ul>
                         </li>
                         @endcan
-                        @can('haveaccess', 'docente')
-                        <li class="nav-header">DOCENTE</li>
-
-                        <li class="nav-item">
-                            <a href="{{route('docente')}}" class="nav-link">
-                                <i class="nav-icon fas fa-file"></i>
-                                <p>Acceso Menú Docente</p>
-                            </a>
-                        </li>
-
-                        @endcan
-                        @can('haveaccess', 'estudiante')
-                        <li class="nav-header">ESTUDIANTE</li>
-                        <li class="nav-item">
-                            <a href="{{route('estudiante')}}" class="nav-link">
-                                <i class="fas fa-circle nav-icon"></i>
-                                <p>Acceso Menú Estudiante</p>
-                            </a>
-                        </li>
-                        @endcan
+                      
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

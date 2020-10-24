@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use  Illuminate\Support\Facades\Auth;
 
 
 class LoginController extends Controller
@@ -25,11 +26,21 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
 
-    protected $redirectTo = RouteServiceProvider::HOME;
+   //protected $redirectTo = RouteServiceProvider::HOME;
 
-    
+   ////////////////  
+
+//////////////////
+   
+   
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
+    }
+
 
     public function authenticated($request , $user){
+
 
         if($user->roles[0]->descripcion=='administrador'){
            return redirect()->route('administrador') ;
@@ -41,18 +52,9 @@ class LoginController extends Controller
        elseif($user->roles[0]->descripcion=='estudiante'){
            return redirect()->route('estudiante') ;
        }
+
+       return redirect()->route('administrador');
    }
-   
-
- 
-
-   
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
-
-
    
 
 }

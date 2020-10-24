@@ -5,11 +5,20 @@
 @section('content')
 
 <section class="content">
-    <div class="container"> 
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-13">
-                <a class="btn btn-info float-right btn" href="{{route('users.create')}}"><i
-                        class="fas fa-user-plus"></i>USUARIO</a>
+
+
+                <div class="btn-group float-right" role="group" aria-label="Basic example">
+                
+                    <a class="btn btn-info float-right btn" href="{{route('users.create')}}"><i
+                            class="fas fa-user-plus"></i>Añadir Usuario</a>
+                  
+
+                   
+                </div>
+
                 <h1>Usuarios</h1>
                 <div class="card card-secondary">
                     <div class="card-header">
@@ -22,7 +31,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Cedula</th>
+
                                     <th scope="col">Nombres</th>
                                     <th scope="col">Apellidos</th>
                                     <th scope="col">Email</th>
@@ -39,12 +48,13 @@
                                 <tr>
                                     @foreach ($users as $user)
                                     <th scope="row">{{$user->id}}</th>
-                                    <td>{{$user->cedula}}</td>
+
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->apellido}}</td>
                                     <td>{{$user->email}}</td>
+                                         
                                     <td>{{$user->instituto->nombre}}</td>
-                                 
+
                                     <td>
                                         @foreach($user->roles as $role)
                                         <span class="badge badge-danger"> {{$role->name}}
@@ -77,7 +87,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                      
+
                     </div>
                 </div>
             </div>
@@ -99,7 +109,7 @@ $(function() {
         $('#myTable').DataTable({
                 "info": true,
                 "autoWidth": true,
-               
+
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
                 }
@@ -109,7 +119,6 @@ $(function() {
     });
 
 });
-
 </script>
 
 @stop

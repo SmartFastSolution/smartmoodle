@@ -11,7 +11,7 @@ use App\Traits\UserTrait;
 
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, UserTrait;
 
@@ -23,7 +23,7 @@ class User extends Authenticatable
     protected $fillable = [
         'cedula','name',
         'apellido','domicilio','telefono',
-        'celular','titulo', 'email', 'password',
+        'celular', 'email', 'password',
         
 
     ];
@@ -60,7 +60,6 @@ class User extends Authenticatable
         return $this->belongsToMany('App\TallerCirculoRe');
     }
 
-
     
     //relacion de muchos a 1 es decir muchos usuarios 
     //tomaran 1 dato de instituto
@@ -80,5 +79,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Distribuciondo');
     }
 
+    
     
 }

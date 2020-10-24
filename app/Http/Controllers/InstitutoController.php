@@ -16,7 +16,7 @@ class InstitutoController extends Controller
      */
     public function index()
     {
-        Gate::authorize('haveaccess', 'instituto.index');
+        //Gate::authorize('haveaccess', 'instituto.index');
         $instituto= Instituto::orderBy('id','Asc')->paginate(5);
     
         return view('Instituto.indexins',['institutos'=>$instituto]);
@@ -29,7 +29,7 @@ class InstitutoController extends Controller
      */
     public function create()
     {
-        Gate::authorize('haveaccess', 'instituto.create');
+        //Gate::authorize('haveaccess', 'instituto.create');
         return \view('Instituto.createins');
     }
 
@@ -41,7 +41,7 @@ class InstitutoController extends Controller
      */
     public function store(Request $request)
     {
-        Gate::authorize('haveaccess', 'instituto.store');
+       // Gate::authorize('haveaccess', 'instituto.store');
         $request->validate([
 
             'nombre'      => 'required|string|max:150',
@@ -69,7 +69,7 @@ class InstitutoController extends Controller
      */
     public function show(Instituto $instituto)
     {
-        Gate::authorize('haveaccess', 'instituto.show');
+        //Gate::authorize('haveaccess', 'instituto.show');
         return view ('instituto.showins',['instituto'=>$instituto]);
     }
 
@@ -81,7 +81,7 @@ class InstitutoController extends Controller
      */
     public function edit(Instituto $instituto)
     {
-        Gate::authorize('haveaccess', 'instituto.edit');
+        //Gate::authorize('haveaccess', 'instituto.edit');
       return \view('instituto.editins',['instituto'=>$instituto]);
     }
 
@@ -94,7 +94,7 @@ class InstitutoController extends Controller
      */
     public function update(Request $request, Instituto $instituto)
     {
-        Gate::authorize('haveaccess', 'instituto.update');
+       // Gate::authorize('haveaccess', 'instituto.update');
         $request->validate([
 
             'nombre'      => 'required|string|max:150',
@@ -123,7 +123,7 @@ class InstitutoController extends Controller
      */
     public function destroy($id)
     {
-        Gate::authorize('haveaccess', 'instituto.destroy');
+       // Gate::authorize('haveaccess', 'instituto.destroy');
         $instituto= Instituto::find($id);
         $instituto->delete();
 

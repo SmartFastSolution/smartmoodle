@@ -46,5 +46,6 @@ class Distribucionmacu extends Model
 
     }
   
+  
 
 }

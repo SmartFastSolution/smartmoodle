@@ -43,9 +43,10 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Estudiante</label>
-                                    <select class="form-control select" name="estudiante" style="width: 99%;">
+                                    <select class="form-control select2" name="estudiante" style="width: 99%;">
                                         <option selected disabled>Elija al Estudiante...</option>
-                                        <option v-for="estuden in users" :value="estuden.id">@{{estuden.name}} @{{estuden.apellido}}
+                                        <option v-for="estuden in users" :value="estuden.id">@{{estuden.name}}
+                                            @{{estuden.apellido}}
                                         </option>
 
 
@@ -53,15 +54,16 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Asignación Curso</label>
-                                    <select class="form-control select" name="asignacion" style="width: 99%;">
+                                    <select class="form-control select2" name="asignacion" style="width: 99%;">
                                         <option selected disabled>Elija el Curso...</option>
 
-                                        <option v-for="dist in distribucion" :value="dist.id">@{{dist.nombre}}-@{{dist.nivel}} </option>
+                                        <option v-for="dist in distribucion" :value="dist.id">
+                                            @{{dist.nombre}}-@{{dist.nivel}} </option>
 
 
                                     </select>
                                 </div>
-                               
+
 
                                 <div class="form-group">
                                     <label for="nombre">Estado </label>
@@ -98,11 +100,20 @@
 @stop
 
 @section('css')
-<link rel="stylesheet" href="/css/admin_custom.css">
+
 @stop
 
 @section('js')
 
+<script>
+$(function() {
+    //Initialize Select2 Elements
+    $(".select2").select2({
+
+    });
+
+})
+</script>
 
 <!-- script para select dinamico prueba 2  -->
 
@@ -112,7 +123,7 @@ const inst = new Vue({
     data: {
         instituto: '',
         distribucion: [],
-        users:[]
+        users: []
     },
     methods: {
         onAsignacion() {

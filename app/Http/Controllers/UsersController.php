@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Modelos\Role;
 use App\Instituto;
+use App\Distribucionmacu;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        Gate::authorize('haveaccess', 'user.index');
+        //Gate::authorize('haveaccess', 'user.index');
       //  $users= User::where('Titulo','Administrador')->orderBy('id','Asc')->paginate(5);
 
       //$users= User::orderBy('id','Asc')->paginate(5);
@@ -38,10 +39,11 @@ class UsersController extends Controller
      */
     public function create()
     {
-        Gate::authorize('haveaccess', 'user.create');
+       // Gate::authorize('haveaccess', 'user.create');
           // $institutos=Instituto::get();
            $roles=Role::get();
            $institutos=Instituto::get();
+        
 
        return \view('Persona.createuser',compact('roles','institutos'));
     }
@@ -54,42 +56,36 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        Gate::authorize('haveaccess', 'user.store');
+       // Gate::authorize('haveaccess', 'user.store');
         //validacion de datos 
          $request->validate([
             'cedula'          =>  'required|string|max:10',
             'name'            =>  'required|string|max:20',
             'apellido'        =>  'required|string|max:20',
             'domicilio'       =>  'required|string|max:255',
+            'instituto'       =>  'required',
+            'role'            =>  'required',
             'telefono'        =>  'required|string|max:13',
             'celular'         =>  'required|string|max:13',
-            'titulo'          =>  '|string|max:255',
             'email'           => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'        =>  'required|string|min:8',
           
-
-            
-
-            
         ]);
 
         $user = new User;
-        $user->instituto_id = $request->instituto;  //relacion con el instituto y usuario    
+        $user->instituto_id = $request->instituto;  //relacion con el instituto y usuario     
         $user->cedula = $request->cedula;
         $user->name = $request->name;
         $user->apellido = $request->apellido;  
         $user->domicilio = $request->domicilio;
         $user->telefono = $request->telefono;
         $user->celular = $request->celular;
-        $user->titulo = $request->titulo;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-//agregados estudiantes y docente sen la misma tabla de persona 
-       
+       //agregados estudiantes y docente sen la misma tabla de persona 
          
         $user->save();
                
-           
         
         if ($request->get('role')) {
            
@@ -110,7 +106,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        Gate::authorize('haveaccess', 'user.show');
+       // Gate::authorize('haveaccess', 'user.show');
        
         $roles= Role::orderBy('name')->get();
         // $roles = Role::all();
@@ -131,13 +127,16 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        Gate::authorize('haveaccess', 'user.edit');
-        $roles= Role::orderBy('name')->get();
+       // Gate::authorize('haveaccess', 'user.edit');
+      
+       $roles= Role::orderBy('name')->get();
         // $roles = Role::all();
         
         $institutos = Instituto::get(); // todos los datos de la bd
         $institutouser = User::find($user->id)->instituto()->get(); //llama al instituto que este relacionado a un usuario 
        return view('Persona.edituser',['user'=>$user, 'roles'=>$roles,'institutos'=>$institutos,'institutouser'=>$institutouser]);
+
+    
     
     }
 
@@ -150,7 +149,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        Gate::authorize('haveaccess', 'user.update');
+       // Gate::authorize('haveaccess', 'user.update');
         $request->validate([
 
             'cedula'          =>  'required|string|max:10',        
@@ -158,7 +157,6 @@ class UsersController extends Controller
             'domicilio'       =>  'required|string|max:255',
             'telefono'        =>  'required|string|max:13',
             'celular'         =>  'required|string|max:13',
-            'titulo'          =>  'required|string|max:255',
             'name'            =>  'required|string|max:20',
             'email'           => [ 'string', 'email', 'max:255,'.$user->id,],
          
@@ -166,14 +164,13 @@ class UsersController extends Controller
 //agregados estudiantes y docente sen la misma tabla de persona 
           
 
-
         ]);
 
         $user->update($request->all());
 
-        
+  
      //validacion de passowrd
-        $password = $request->get('password');
+        
       
       
         //omitir hecho de actualizar materia y que se mantenga la misma 
