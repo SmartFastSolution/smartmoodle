@@ -143,7 +143,7 @@ class TallersController extends Controller
             return view('talleres.taller9', compact('datos', 'd'));
 
         }elseif ($plant == 10) {
-            $d= 0;
+            $k= 0;
             $i= 0;
 
             $consul = Taller::findorfail($id);
@@ -152,7 +152,7 @@ class TallersController extends Controller
 
 
         }elseif ($plant == 11) {
-            $d= 0;
+            $K= 0;
             $i= 0;
             $consul = Taller::findorfail($id);
              $datos = Taller2Relacionar::where('taller_id', $consul->id)->firstOrFail();
@@ -325,7 +325,7 @@ class TallersController extends Controller
 
             $consul = Taller::findorfail($id);
              $datos = TallerPalabra::where('taller_id', $consul->id)->firstOrFail();
-             $str = "VUEDRAGGABLES";
+             // $str = "VUEDRAGGABLES";
 
             $arr1 = str_split($datos->letra);
             $claves = array_keys($arr1);

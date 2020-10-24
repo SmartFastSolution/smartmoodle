@@ -126,6 +126,59 @@
             </div>
         </div>
 
+        <div class="card">
+            <div class="card-header">
+                <h3 class="font-weight-light"> <strong>Talleres Completados</strong></h3>
+
+            </div>
+
+            <div class="row">
+                <div class="card-body">
+
+                    @foreach($contenidos->where('materia_id', $materia->id) as $contenido)
+                    <!-- Inicio de Talleres -->
+                    <div class="card card-gray-dark">
+                        <div>
+                            <h3 class="card-title"> {{$contenido->nombre}}</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Unidad</th>
+                                        <th scope="col"> Taller </th>
+                                        <th scope="col">Plantilla </th>
+                                        <th scope="col">Estado </th>
+                                        <th scope="col">Vista Taller</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        @foreach(auth()->user()->tallers->where('contenido_id', $contenido->id) as $taller)
+                                        <th scope="row">{{$taller->materia['id']}}</th>
+                                        <td>{{$taller->contenido->nombre}}</td>
+                                        <td>{{$taller['nombre']}}</td>
+                                        <td>{{$taller->Plantilla->nombre}}</td>
+                                        <td>{{$taller->pivot->status}}</td>
+                                        <td class="table-button ">
+                                            <a class="btn btn-info"
+                                                href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
+                                                class="fas fa-eye"></i></a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- fin de talleres -->
+                    @endforeach
+
+                </div>
+            </div>
+        </div>
+
 
     </div>
 </section>

@@ -11,11 +11,11 @@
 
 
 
-      <form action="{{ route('taller5') }}" method="POST">
+      <form action="{{ route('taller5', ['idtaller' => $d]) }}" method="POST">
       	@csrf
 	<div class="container">
 		<div class="row">
-			@foreach ($datos->options as $info)
+			@foreach ($datos->options as $key => $info)
 			<div class="col-12">
 				<div class="row bg-info border border-danger p-2">
 					<div class="col-4 align-self-center">
@@ -25,13 +25,13 @@
 						<div class="row">
 							<div class="col-11">
 								<label for="resp" class="form-check-label mb-4">{{ $info->alternativa1 }} 
-								</label>				
+								</label> <br>				
 								<label for="resp2" class="form-check-label">{{ $info->alternativa2 }}
 								</label>
 							</div>
 							<div class="col-1 form-check">
-								<input type="radio" id="resp1" value="Es  una  actividad  económica  que  consiste  en intercambiar  bienes,  valores  y  servicios producidos  para  el  consumo. " name="{{$info->concepto }}" class="form-control mb-4">
-								<input type="radio" id="resp2" value="Es  una  actividad  económica  que  consiste  en intercambiar  fuentes  de inversión producidas  para  la  venta." name="{{$info->concepto }}" class="form-control">
+								<input type="radio" id="resp1" value="{{$info->alternativa1 }}" name="respuesta[{{ $key }}]" class="form-control mb-4">
+								<input type="radio" id="resp2" value="{{$info->alternativa2 }}" name="respuesta[{{ $key }}]" class="form-control">
 							</div>
 						</div>
 					</div>

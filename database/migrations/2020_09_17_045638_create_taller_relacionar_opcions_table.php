@@ -19,6 +19,7 @@ class CreateTallerRelacionarOpcionsTable extends Migration
             $table->integer('orden')->nullable();
             $table->string('enunciado')->nullable();
             $table->string('definicion')->nullable();
+            $table->string('definicion_aleatoria')->nullable();
             $table->string('img')->nullable();
             $table->timestamps();
 

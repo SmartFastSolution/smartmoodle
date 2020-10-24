@@ -25,11 +25,11 @@
 				    </tr>
 
 				    <tr>
-				      <td>{{ $datos->beneficiario }}</td>
+				      <td><span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->beneficiario }}')" ondragend="this.classList.add('text-muted');">{{ $datos->beneficiario }}</span></td>
 				      <td>{{ $datos->lugar }}, {{ $datos->fecha }}</td>
-				      <td>{{ $datos->comprobante }}</td>
-				      <td>${{ $datos->cantidad }}</td>
-				      <td>{{ $datos->firmas }}</td>
+				      <td><span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->comprobante }}')" ondragend="this.classList.add('text-muted');">{{ $datos->comprobante }}</span></td>
+				      <td><span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->cantidad }}')" ondragend="this.classList.add('text-muted');">${{ $datos->cantidad }}</span></td>
+				      <td><span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->firmas }}')" ondragend="this.classList.add('text-muted');">{{ $datos->firmas }}</span></td>
 				    </tr>
 				  </tbody>
 				</table>				

@@ -12,6 +12,7 @@ use App\Materia;
 use App\Nivel;
 use App\Taller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EstudianteController extends Controller
 {
@@ -43,14 +44,23 @@ class EstudianteController extends Controller
     
     public function unidades($id){
               // todos los datos de la bd
+              $user =  User::findorfail( Auth::id());
          $institutomate = Materia::find($id)->instituto()->get();
          $contenido=Contenido::get();
-          $tallers = Taller::get();
+         $completados = $user->tallers;
+         
+         $ids = [];
+          foreach($completados as $act){
+                $ids[]=$act->id;
+            }
+
+
+        $tallers = Taller::whereNotIn('id', $ids)->get();
          $materia =Materia::where('id', $id)->firstOrfail();
        
         
       
-       
+       // return $tallers;
          return view ('Estudiante.contenido',['materia'=>$materia,'contenidos'=>$contenido,'institutomate'=>$institutomate, 'tallers' =>$tallers]);
         
        

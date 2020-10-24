@@ -7,7 +7,7 @@
 <h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>
 <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
-	<div class="container" id="taller39">
+	<div class="container" id="taller39" class="mb-5">
 		<div class="row justify-content-center ">
 			<div class="col-9">
 				<div class="row justify-content-between">
@@ -43,18 +43,45 @@
 			</div>
 			</div>
 		</div>
+		<div class="row justify-content-center">
+        	<input type="submit" value="Enviar Respuesta" @click.prevent="enviarTaller" class="btn p-2 mt-3 btn-danger">
+    	</div>
 	</div>
 @endsection
 @section('js')
 <script type="text/javascript">
-	var palabra = @json($letra);
-	var taller39 = new Vue({
+	let palabra = @json($letra);
+	let taller_id = @json($d);
+	const taller39 = new Vue({
 	  el: "#taller39",
 	  data:{
 	  	letras: palabra,
 	  	orden:[]
+	  },
+	  methods:{
+	  	enviarTaller: function() {
+	  	let _this = this;
+        let url = '/sistema/admin/taller39/'+taller_id;
+
+        if (_this.letras.length !== 0) {
+        	toastr.error("No has completado toda la palabra", "Smarmoddle", {
+                 "timeOut": "3000"
+              });
+        } else {
+        axios.post(url,{
+              id: taller_id,
+              respuesta: _this.orden
+        }).then(response => {
+        	// console.log(response.data)
+        	window.location = "/sistema";   
+        }).catch(function(error){
+
+        }); 
+        }
+     
+	  	}
 	  }
-	})
+	});
 
 </script>
 

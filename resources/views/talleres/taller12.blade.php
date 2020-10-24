@@ -20,7 +20,7 @@ FALSO,  CON  CERTEZA. -->
                                    
                               </div>
                               <div class="col-2">
-                                   <select name="enunciado1" id="" class="inputcurrent p-2">
+                                   <select name="respuestas[]" id="" class="inputcurrent p-2">
                                         <option value="V" class="p-2">V</option>
                                         <option value="F" class="p-2">F</option>
                                    </select>

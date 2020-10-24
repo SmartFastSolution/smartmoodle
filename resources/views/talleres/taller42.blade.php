@@ -13,12 +13,12 @@
 							<draggable class="row justify-content-around p-2" :list="ideas" group="people">
 							     <div
 							       style="cursor: move;" 
-							         class="col-3 drag align-items-center text-center p-2 border border-danger m-2"
+							         class="card bg-primary text-white text-center p-3"
 							         v-for="(element, index) in ideas"
 							        :key="element.id">
-							          <p class="m-2"> @{{ element.idea }}</p>
-							        </div>
-							      </draggable>
+								      <p class="m-2"> @{{ element.idea }}</p>
+								  </div>
+							</draggable>
 						</div>
 						<div class="col-4">
 							<draggable class="list-group" :list="orden" group="people" >
@@ -35,17 +35,45 @@
 					</div>
 				</div>
 			</div>
+			<div class="row justify-content-center">
+        		<input type="submit" value="Enviar Respuesta" @click.prevent="enviarTaller" class="btn p-2 mt-3 btn-danger">
+    		</div>
 		</div>
 
 @endsection
 @section('js')
 <script type="text/javascript">
-	var idea = @json($ideas);
+	let idea = @json($ideas);
+	let taller_id = @json($d);
+
 	var taller42 = new Vue({
 	  el: "#taller42",
 	  data:{
 	  	ideas: idea,
 	  	orden:[]
+	  },
+	  	 methods:{
+	  	enviarTaller: function() {
+	  	let _this = this;
+        let url = '/sistema/admin/taller42/'+taller_id;
+
+        if (_this.ideas.length !== 0) {
+        	toastr.error("No has ordenado todas las ideas", "Smarmoddle", {
+                "timeOut": "3000"
+              });
+        } else {
+        axios.post(url,{
+              id: taller_id,
+              respuesta: _this.orden
+        }).then(response => {
+        	// console.log(response.data)
+        	window.location = "/sistema";   
+        }).catch(function(error){
+
+        }); 
+        }
+     
+	  	}
 	  }
 	})
 

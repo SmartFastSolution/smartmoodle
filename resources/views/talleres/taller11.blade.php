@@ -8,7 +8,8 @@
      <h3 class="text-center mt-5 mb-3 text-info">RELACIONE  LOS  ENUNCIADOS  ESCRIBIENDO  EN  EL  CÍRCULO  EL  LITERAL 
 QUE  CORRESPONDA</h3>
 
-<form action="">
+<form action="{{ route('taller11', ['idtaller' => $d]) }}" method="POST">
+    @csrf
 	<div class="container">
 		<div class="row justify-content-center">
 
@@ -32,12 +33,15 @@ QUE  CORRESPONDA</h3>
 						<li class="list-inline mb-4">{{ $element->definicion }}</li>
 					</div>
 					<div class="col-2">
-						<input type="text" class="text-center" size="2">
+						<input type="text" class="text-center" size="2" name="letra[]">
 					</div>
 				</div>
 			@endforeach
 			</div>
 		</div>
+		 <div class="row justify-content-center">
+              <input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
+          </div>
 
 	</div>
 

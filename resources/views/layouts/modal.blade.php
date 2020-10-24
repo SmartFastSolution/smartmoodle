@@ -37,8 +37,8 @@
                                 </div>
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
-                                    <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                    <select name="contenido_id" class="custom-select" required>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -67,7 +67,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="taller2" tabindex="-1" role="dialog" aria-labelledby="taller2Label" aria-hidden="true">
+{{-- <div class="modal fade" id="taller2" tabindex="-1" role="dialog" aria-labelledby="taller2Label" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -107,7 +107,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -131,7 +131,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 <div class="modal fade" id="taller3" tabindex="-1" role="dialog" aria-labelledby="taller3Label" aria-hidden="true">
@@ -173,7 +173,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -249,7 +249,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -325,7 +325,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -412,7 +412,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -510,7 +510,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -570,7 +570,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -645,7 +645,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -730,7 +730,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -813,7 +813,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -911,7 +911,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -982,7 +982,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -1051,7 +1051,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -1116,7 +1116,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -1202,7 +1202,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -1265,7 +1265,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -1350,7 +1350,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -1445,7 +1445,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -1539,7 +1539,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -1640,7 +1640,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -1728,7 +1728,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -1740,24 +1740,6 @@
                                     <input required="" type="text" name="pedido" class="form-control">
                                 </div>
                                 <div class="form-group col-4">
-                                    <label for="" class="col-form-label">Cantidad :</label>
-                                    <input required="" type="text" name="cantidad" class="form-control">
-                                </div>
-                                 <div class="form-group col-4">
-                                    <label for="" class="col-form-label">Precio Unitario :</label>
-                                    <input required="" type="text" name="precio_unit" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="col-form-label">Detalle :</label>
-                                <input required="" type="text" name="detalle" class="form-control">
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-4">
-                                    <label for="" class="col-form-label">Codigo :</label>
-                                    <input required="" type="text" name="codigo" class="form-control">
-                                </div>
-                                <div class="form-group col-4">
                                     <label for="" class="col-form-label">Lugar :</label>
                                     <input required="" type="text" name="lugar" class="form-control">
                                 </div>
@@ -1766,6 +1748,31 @@
                                     <input required="" type="date" name="fecha" class="form-control">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <table class="table table-bordered">
+                                  <thead>
+                                    <tr class="text-center">
+                                      <th scope="col">CANTIDAD</th>
+                                      <th scope="col">CODIGO</th>
+                                      <th scope="col">DESCRIPCION</th>
+                                      <th scope="col">PRECIO UNIT.</th>
+                                      <th scope="col">ACCION</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody class="taller22">
+                                    <tr>
+                                      <td><input name="cantidad[]" type="text" class="form-control" ></td>
+                                      <td><input name="codigo[]" type="text" class="form-control" ></td>
+                                      <td><input type="text" name="descripcion[]" class="form-control" ></td>
+                                      <td><input type="text" name="precio_unit[]" class="form-control" ></td>
+                                      <td><a href="#" class="btn btn-danger removeTaller22"><span class="glyphicon glyphicon-remove">X</span></a></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                            </div>
+                              <div class="row">
+                                <a href="#" class="addTaller22 btn btn-outline-danger">Agregar Columna</a>
+                            </div>   
                             <div class="form-row">
                                 <div class="form-group col-8">
                                     <label for="" class="col-form-label">Firma de Bodeguero :</label>
@@ -1830,7 +1837,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -1924,7 +1931,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -2016,7 +2023,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -2076,8 +2083,8 @@
                                 </table>
                                 <div class="row">
                                     <a href="#" class="addFac btn btn-outline-danger">Agregar Columna</a>
-                                </div
->                            </div>
+                                </div>     
+                            </div>
                             <div class="row justify-content-center">
                                 <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
@@ -2132,7 +2139,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -2231,7 +2238,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -2326,7 +2333,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -2388,7 +2395,7 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col-12">
-                        <form action="{{ route('admin.taller34') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.taller31') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
@@ -2415,7 +2422,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -2474,7 +2481,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -2505,7 +2512,7 @@
 
 <!-- FORMULARIO PARA PLANTILLA 34 -->
 <div class="modal fade" id="taller34" tabindex="-1" role="dialog" aria-labelledby="taller34Label" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title" id="taller34Label">TIPOS DE SALDOS</h2>
@@ -2540,8 +2547,7 @@
                                 </div>
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
-                                    <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                    <select name="contenido_id" v-model="taller.unidad_id" class="custom-select">
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -2621,31 +2627,46 @@
                             </div>
                             <div v-if="edit.debe.length >= 1" class="form-row justify-content-center">
                                 <div class="form-inline col-6">
-                                    <input required="" v-model="ejercicio.debe.nom_cuenta"  type="text" placeholder="Actualizar Cuenta " class="form-control-sm mr-1">
-                                    <input required="" v-model="ejercicio.debe.saldo" type="text" placeholder="Actualizar saldo" class="form-control-sm">
+                                    <input required="" v-model="ejercicio.debe.nom_cuenta"  type="text" placeholder="Actualizar Cuenta " class="form-control form-control-sm mr-1">
+                                    <input required="" v-model="ejercicio.debe.saldo" type="text" placeholder="Actualizar saldo" class="form-control form-control-sm">
                                     <a class="btn ml-2 btn-outline-info btn-sm text-center mt-1" href="#" @click.prevent="updateDebe">Actualizar Debe</a>
                                 </div>
                                 <div class="form-inline col-6">
-                                    <input required="" type="text" v-model="ejercicio.haber.nom_cuenta" class="form-control-sm mr-1" placeholder="Actualizar Cuenta ">
-                                    <input required="" type="text" v-model="ejercicio.haber.saldo" class="form-control-sm" placeholder="Actualizar saldo">
+                                    <input required="" type="text" v-model="ejercicio.haber.nom_cuenta" class="form-control form-control-sm mr-1" placeholder="Actualizar Cuenta ">
+                                    <input required="" type="text" v-model="ejercicio.haber.saldo" class="form-control form-control-sm" placeholder="Actualizar saldo">
                                     <a class="btn ml-2 btn-outline-info btn-sm mt-1" href="#" @click.prevent="updateHaber()"> Actualizar Haber</a>
                             </div>
                             <div class="text-center">
                                  <a class="btn ml-2 btn-outline-primary btn-sm mt-1" href="#" @click.prevent="updaterRegister()"> Actualizar Registro</a>
                             </div>
                             </div>
-
-                            <div v-else class="form-row justify-content-center">
+                            <div v-else class="">
+                                <div v-if="ejercicioedit == 100" class="form-row">
                                 <div class="form-inline col-6">
-                                    <input required="" v-model="ejercicio.debe.nom_cuenta"  type="text" placeholder="Agregar Cuenta " class="form-control-sm mr-1">
-                                    <input required="" v-model="ejercicio.debe.saldo" type="text" placeholder="Agregar saldo" class="form-control-sm">
+                                    <input required="" v-model="ejercicio.debe.nom_cuenta"  type="text" placeholder="Agregar Cuenta " class="form-control form-control-sm mr-1">
+                                    <input required="" v-model="ejercicio.debe.saldo" type="text" placeholder="Agregar saldo" class="form-control form-control-sm">
+                                    <a class="btn ml-2 btn-outline-info btn-sm text-center mt-1" href="#" @click.prevent="updateEjeDebe">Actualizar Debe</a>
+                                </div>
+                                <div class="form-inline col-6">
+                                    <input required="" type="text" v-model="ejercicio.haber.nom_cuenta" class="form-control form-control-sm mr-1" placeholder="Agregar Cuenta ">
+                                    <input required="" type="text" v-model="ejercicio.haber.saldo" class="form-control form-control-sm" placeholder="Agregar saldo">
+                                    <a class="btn ml-2 btn-outline-info btn-sm mt-1" href="#" @click.prevent="updateeEjeHaber()"> Actualizar Haber</a>
+                                </div>
+
+                                </div>
+                                <div v-else class="form-row">
+                                    <div class="form-inline col-6">
+                                    <input required="" v-model="ejercicio.debe.nom_cuenta"  type="text" placeholder="Agregar Cuenta " class="form-control form-control-sm mr-1">
+                                    <input required="" v-model="ejercicio.debe.saldo" type="text" placeholder="Agregar saldo" class="form-control form-control-sm">
                                     <a class="btn ml-2 btn-outline-info btn-sm text-center mt-1" href="#" @click.prevent="agregarDebe">Agregar Debe</a>
                                 </div>
                                 <div class="form-inline col-6">
-                                    <input required="" type="text" v-model="ejercicio.haber.nom_cuenta" class="form-control-sm mr-1" placeholder="Agregar Cuenta ">
-                                    <input required="" type="text" v-model="ejercicio.haber.saldo" class="form-control-sm" placeholder="Agregar saldo">
+                                    <input required="" type="text" v-model="ejercicio.haber.nom_cuenta" class="form-control form-control-sm mr-1" placeholder="Agregar Cuenta ">
+                                    <input required="" type="text" v-model="ejercicio.haber.saldo" class="form-control form-control-sm" placeholder="Agregar saldo">
                                     <a class="btn ml-2 btn-outline-info btn-sm mt-1" href="#" @click.prevent="agregarHaber()"> Agregar Haber</a>
-                            </div>
+                                </div>
+                                </div>
+                          
                              <div class="mt-2">
                                  <a class="btn ml-2 btn-outline-success btn-sm mt-1" href="#" @click.prevent="guardarRegistro()"> Agregar Registro</a>
                             </div>
@@ -2702,7 +2723,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -2821,7 +2842,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -2892,7 +2913,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -2955,7 +2976,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -3023,7 +3044,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -3093,7 +3114,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -3167,7 +3188,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>
@@ -3236,7 +3257,7 @@
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
-                                        <option selected>ELEGIR LA UNIDAD</option>
+                                        
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 
                                     </select>

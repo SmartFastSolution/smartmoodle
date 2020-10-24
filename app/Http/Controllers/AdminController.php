@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Admin\TallerAnalizar;
-use App\Admin\TallerAnalizarOp;
-use App\Admin\TallerALectura;
-use App\Admin\TallerALecturaOp;
 use App\Admin\Taller2Relacionar;
 use App\Admin\Taller2RelacionarOpcion;
+use App\Admin\TallerALectura;
+use App\Admin\TallerALecturaOp;
 use App\Admin\TallerAbreviatura;
 use App\Admin\TallerAbreviaturaImg;
+use App\Admin\TallerAnalizar;
+use App\Admin\TallerAnalizarOp;
 use App\Admin\TallerCertificadoDeposito;
 use App\Admin\TallerCheque;
 use App\Admin\TallerChequeEndoso;
@@ -27,20 +27,21 @@ use App\Admin\TallerEscribirCuenta;
 use App\Admin\TallerFactura;
 use App\Admin\TallerFacturaDato;
 use App\Admin\TallerGusanillo;
+use App\Admin\TallerIdenTransa;
+use App\Admin\TallerIdenTransaOp;
 use App\Admin\TallerIdentificarImagen;
 use App\Admin\TallerIdentificarImagenOpcion;
 use App\Admin\TallerIdentificarPersona;
-use App\Admin\TallerIdenTransa;
-use App\Admin\TallerIdenTransaOp;
 use App\Admin\TallerLetraCambio;
 use App\Admin\TallerMConceptual;
-use App\Admin\TallerPalabra;
+use App\Admin\TallerNPedidoDatos;
 use App\Admin\TallerNotaPedido;
 use App\Admin\TallerNotaVenta;
 use App\Admin\TallerNotaVentaDato;
-use App\Admin\TallerOrdenPago;
 use App\Admin\TallerOrdenIdea;
+use App\Admin\TallerOrdenPago;
 use App\Admin\TallerPagare;
+use App\Admin\TallerPalabra;
 use App\Admin\TallerPregunta;
 use App\Admin\TallerRecibo;
 use App\Admin\TallerRelacionar;
@@ -415,6 +416,11 @@ if ($request->input('id_plantilla') == 10 ) {
          $q= 0;
          $files_a = $request->file('img');
          $urlimagen = [];
+         $arr1 = $request->definicion;
+            shuffle($arr1);
+            // foreach($claves as $contenido){
+            //     $letra[$contenido] = $arr1[$contenido];
+            // }
         
          foreach ($files_a as $file_a) {
             $nombre       = time().'_'.$file_a->getClientOriginalName();
@@ -428,6 +434,7 @@ if ($request->input('id_plantilla') == 10 ) {
                      'orden'                => ++$q,
                      'enunciado'            => $request->enunciados[$key],
                      'definicion'           => $request->definicion[$key],
+                     'definicion_aleatoria' => $arr1[$key],
                      'img'                  => $urlimagen[$key],
                      'created_at'           => now(),
                      'updated_at'           => now(),
@@ -795,16 +802,30 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
             $taller_22->taller_id            = $a->id;
             $taller_22->enunciado            = $request->input('enunciado');
             $taller_22->pedido               = $request->input('pedido');
-            $taller_22->cantidad             = $request->input('cantidad');
-            $taller_22->precio_unit          = $request->input('precio_unit');
-            $taller_22->codigo               = $request->input('codigo');
-            $taller_22->detalle              = $request->input('detalle');
             $taller_22->lugar                = $request->input('lugar');
             $taller_22->fecha                = $request->input('fecha');
             $taller_22->firma                = $request->input('firma');
             $taller_22->plazo_entrega        = $request->input('plazo_entrega');
-
             $taller_22->save();
+
+
+             if ($taller_22 = true) {
+               $o = TallerNotaPedido::get()->last();              
+               foreach ($request->cantidad as $key=>$v) {
+                  $datos=array(
+                     'taller_nota_pedido_id'=> $o->id,
+                     'cantidad'=> $request->cantidad[$key],
+                     'codigo'=> $request->codigo[$key],
+                     'descripcion'=> $request->descripcion[$key],
+                     'precio_unit'=> $request->precio_unit[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  TallerNPedidoDatos::insert($datos);
+               }
+             }
+
+            
       return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
       }
       }
@@ -841,7 +862,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();
          $taller24               = new Taller;
          $taller24->nombre       = 'Taller '.++$i;
-         $taller_24->enunciado   = $request->input('enunciado');
+         $taller24->enunciado   = $request->input('enunciado');
          $taller24->plantilla_id = $request->input('id_plantilla');
          $taller24->contenido_id = $request->input('contenido_id');
          $taller24->estado       = 1;
@@ -1051,14 +1072,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
    public function taller34(Request $request)
       {
          $registro               = $request->registro;
-         $materia                = $request->materia;
+         $contenido              = $request->unidad;
          $plantilla              = $request->plantilla;
-         $i                      = Taller::where('contenido_id', $materia)->count();
+         $i                      = Taller::where('contenido_id', $contenido)->count();
          $taller34               = new Taller;
          $taller34->nombre       = 'Taller '.++$i;
          $taller34->plantilla_id = $plantilla;
          $taller34->enunciado    = $request->enunciado;
-         $taller34->contenido_id   = $materia;
+         $taller34->contenido_id = $contenido;
          $taller34->estado       = 1;
          $taller34->save();
 

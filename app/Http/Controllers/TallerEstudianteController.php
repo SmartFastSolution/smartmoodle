@@ -2,14 +2,99 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin\Respuesta\Abreviatura;
 use App\Admin\Respuesta\AbreviaturaCarta;
 use App\Admin\Respuesta\AbreviaturaEconomica;
 use App\Admin\Respuesta\AbreviaturaEditorial;
+use App\Admin\Respuesta\AbreviaturaRe;
+use App\Admin\Respuesta\AlternativaCorrecta;
+use App\Admin\Respuesta\AlternativaCorrectaRes;
+use App\Admin\Respuesta\AnalizarPregunta;
+use App\Admin\Respuesta\AnalizarPreguntaDato;
+use App\Admin\Respuesta\CertificadoDeposito;
+use App\Admin\Respuesta\Cheque;
+use App\Admin\Respuesta\ChequeEndoso;
+use App\Admin\Respuesta\Circulo;
+use App\Admin\Respuesta\Collage;
+use App\Admin\Respuesta\CollageImg;
 use App\Admin\Respuesta\Completar;
+use App\Admin\Respuesta\CompletarEnunciado;
+use App\Admin\Respuesta\CompletarEnunciadoRes;
+use App\Admin\Respuesta\ConvertirCheque;
+use App\Admin\Respuesta\DefinirEnunciado;
+use App\Admin\Respuesta\DefinirEnunciadoRe;
+use App\Admin\Respuesta\Diferencia;
+use App\Admin\Respuesta\Factura;
+use App\Admin\Respuesta\FacturaDato;
 use App\Admin\Respuesta\FormulasContable;
+use App\Admin\Respuesta\Gusanillo;
+use App\Admin\Respuesta\IdenTrasa;
+use App\Admin\Respuesta\IdenTrasaDato;
+use App\Admin\Respuesta\Identificar;
 use App\Admin\Respuesta\IdentificarAbreviatura;
+use App\Admin\Respuesta\IdentificarImgRes;
+use App\Admin\Respuesta\IdentificarPersona;
+use App\Admin\Respuesta\Lectura;
+use App\Admin\Respuesta\LecturaDato;
+use App\Admin\Respuesta\LetraCambio;
+use App\Admin\Respuesta\MapaConceptual2;
 use App\Admin\Respuesta\MapaConceptual;
+use App\Admin\Respuesta\NotaPedido;
+use App\Admin\Respuesta\NotaPedidoRe;
+use App\Admin\Respuesta\NotaVenta;
+use App\Admin\Respuesta\NotaVentaDato;
+use App\Admin\Respuesta\OrdenIdea;
+use App\Admin\Respuesta\OrdenIdeasDato;
+use App\Admin\Respuesta\OrdenPago;
+use App\Admin\Respuesta\Pagare;
+use App\Admin\Respuesta\Palabra;
+use App\Admin\Respuesta\Pregunta;
+use App\Admin\Respuesta\Recibo;
+use App\Admin\Respuesta\Relacionar2;
+use App\Admin\Respuesta\Relacionar2Re;
+use App\Admin\Respuesta\Relacionar;
+use App\Admin\Respuesta\RelacionarRe;
+use App\Admin\Respuesta\Subrayar;
+use App\Admin\Respuesta\SubrayarRes;
+use App\Admin\Respuesta\TipoSaldo;
+use App\Admin\Respuesta\TipoSaldoDato;
+use App\Admin\Respuesta\ValeCaja;
+use App\Admin\Respuesta\VerdaderoFalso;
+use App\Admin\Respuesta\VerdaderoFalsoRe;
+use App\Admin\Taller2Relacionar;
+use App\Admin\TallerALectura;
+use App\Admin\TallerAbreviatura;
+use App\Admin\TallerAnalizar;
+use App\Admin\TallerCertificadoDeposito;
+use App\Admin\TallerCheque;
+use App\Admin\TallerChequeEndoso;
+use App\Admin\TallerCirculo;
+use App\Admin\TallerCollage;
+use App\Admin\TallerConvertirCheque;
+use App\Admin\TallerDefinirEnunciado;
+use App\Admin\TallerFactura;
+use App\Admin\TallerGusanillo;
+use App\Admin\TallerIdenTransa;
+use App\Admin\TallerIdentificarPersona;
+use App\Admin\TallerLetraCambio;
+use App\Admin\TallerMConceptual;
+use App\Admin\TallerNotaPedido;
+use App\Admin\TallerNotaVenta;
+use App\Admin\TallerOrdenIdea;
+use App\Admin\TallerOrdenPago;
+use App\Admin\TallerPagare;
+use App\Admin\TallerPalabra;
+use App\Admin\TallerPregunta;
+use App\Admin\TallerRecibo;
+use App\Admin\TallerRelacionar;
+use App\Admin\TallerRelacionarOpcion;
+use App\Admin\TallerSenalar;
+use App\Admin\TallerSubrayar;
+use App\Admin\TallerTipoSaldo;
+use App\Admin\TallerValeCaja;
+use App\Admin\TallerVerdaderoFalso;
 use App\Taller;
+use App\TallerChequeRe;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -280,9 +365,7 @@ class TallerEstudianteController extends Controller
              }else {
             return abort(404);   
              }
-
         }elseif ($plant == 42) {
-
             $datos = Taller::findorfail($id);
             $ideas = TallerOrdenIdea::select('id','idea')->where('taller_id',$id)->get();
             // $ideas = $datos->tallerOrdenIdea;
@@ -356,7 +439,7 @@ class TallerEstudianteController extends Controller
     }
     public function store1(Request $request, $idtaller){
     $id                 =   Auth::id();
-    $taller             =   Taller::where('id', $id)->firstOrfail();
+    $taller             =   Taller::where('id', $idtaller)->firstOrfail();
     $taller1            =   new Completar; 
     $taller1->taller_id =   $idtaller;
     $taller1->user_id   =   $id;           
@@ -368,7 +451,679 @@ class TallerEstudianteController extends Controller
         $user->tallers()->attach($idtaller,['status'=> 'completado']);
     return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamente');
     }
+
+     public function store3(Request $request, $idtaller){
+    $id                 =   Auth::id();
+    $taller             =   Taller::where('id', $idtaller)->firstOrfail();
+    $taller3 = new CompletarEnunciado; 
+    $taller3->taller_id  = $idtaller;
+    $taller3->user_id    =    $id;           
+    $taller3->enunciado =   $taller->enunciado;                       
+    $taller3->save();
+
+    $com = CompletarEnunciado::where('user_id', $id)->get()->last();
+           foreach ($request->respuesta as $key=>$v) {
+                  $datos=array(
+                     'completar_enunciado_id'=> $com->id,
+                     'respuesta' => $request->respuesta[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  CompletarEnunciadoRes::insert($datos);
+               }
+        $user= User::find($id);
+        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    //return response($content = 'Taller completado correctamente', $status = 200);
+    }
+
+    public function store4(Request $request, $idtaller){
+    $id                     =   Auth::id();
+    $taller                 =   Taller::where('id', $idtaller)->firstOrfail();
+    $taller4                = new Diferencia; 
+    $taller4->taller_id     = $idtaller;
+    $taller4->user_id       =    $id;           
+    $taller4->enunciado     =  $taller->enunciado; 
+    $taller4->diferencia_1a =   $request->input('diferencia_1a');   
+    $taller4->diferencia_2a =   $request->input('diferencia_2a');   
+    $taller4->diferencia_3a =   $request->input('diferencia_3a');   
+    $taller4->diferencia_1b =   $request->input('diferencia_1b');   
+    $taller4->diferencia_2b =   $request->input('diferencia_2b');   
+    $taller4->diferencia_3b =   $request->input('diferencia_3b');   
+    $taller4->save();
+
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    //return response($content = 'Taller completado correctamente', $status = 200);
+    }
+    public function store5(Request $request, $idtaller)
+    {
+    $id                 =   Auth::id();
+    $taller             =   Taller::where('id', $idtaller)->firstOrfail();
+    $taller5            = new AlternativaCorrecta; 
+    $taller5->taller_id = $idtaller;
+    $taller5->user_id   =    $id;           
+    $taller5->enunciado =   $taller->enunciado;                       
+    $taller5->save();
+
+    $alter =TallerSenalar::where('taller_id', $idtaller)->firstOrfail();
+    $com = AlternativaCorrecta::where('user_id', $id)->get()->last();
+    $enun = $alter->options;
+    $datos = [];
+
+        foreach ($enun as $key => $value) {
+                    $datos= array(
+                        'alternativa_correcta_id' => $com->id,
+                        'concepto' => $value->concepto,
+                        'respuesta' => $request->respuesta[$key],
+                        'created_at'=> now(),
+                        'updated_at'=> now(),
+                    );
+                    AlternativaCorrectaRes::insert($datos);
+                   }    
+        $user= User::find($id);
+        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+
+        public function store6(Request $request, $idtaller)
+    {
+    $id                 =   Auth::id();
+    $taller             =   Taller::where('id', $idtaller)->firstOrfail();
+    $taller6            = new Identificar; 
+    $taller6->taller_id = $idtaller;
+    $taller6->user_id   =    $id;           
+    $taller6->enunciado =   $taller->enunciado;                       
+    $taller6->save();
     
+    $com   = Identificar::where('user_id', $id)->get()->last();
+
+        foreach ($request->imgs as $key => $value) {
+                    $datos= array(
+                        'identificar_id' => $com->id,
+                        'img' => $request->imgs[$key],
+                        'created_at'=> now(),
+                        'updated_at'=> now(),
+                    );
+                    IdentificarImgRes::insert($datos);
+                   }    
+        $user= User::find($id);
+        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+
+    public function store7(Request $request, $idtaller)
+    {
+    $id                  = Auth::id();
+    $contenido           = TallerGusanillo::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+    $taller7             = new Gusanillo; 
+    $taller7->taller_id  = $idtaller;
+    $taller7->user_id    =    $id;           
+    $taller7->enunciado  =  $contenido->enunciado;                       
+    $taller7->respuesta1 =   $request->input('respuesta1');   
+    $taller7->respuesta2 =   $request->input('respuesta2');   
+    $taller7->respuesta3 =   $request->input('respuesta3');    
+    $taller7->save();
+
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+
+    }
+
+    public function store8(Request $request, $idtaller)
+    {
+    $id                  = Auth::id();
+    $contenido           = TallerCirculo::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+    $taller8             = new Circulo; 
+    $taller8->taller_id  = $idtaller;
+    $taller8->user_id    =   $id;           
+    $taller8->enunciado  =  $contenido->enunciado;                       
+    $taller8->respuesta1 =   $request->input('respuesta1');   
+    $taller8->respuesta2 =   $request->input('respuesta2');   
+    $taller8->respuesta3 =   $request->input('respuesta3');    
+    $taller8->respuesta4 =   $request->input('respuesta4');    
+    $taller8->respuesta5 =   $request->input('respuesta5');    
+    $taller8->respuesta6 =   $request->input('respuesta6');    
+    $taller8->save();
+
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+
+    public function store9(Request $request, $idtaller)
+    {
+    $id                 =   Auth::id();
+    $taller             =   Taller::where('id', $idtaller)->firstOrfail();
+    $taller5            = new Subrayar; 
+    $taller5->taller_id = $idtaller;
+    $taller5->user_id   =    $id;           
+    $taller5->enunciado =   $taller->enunciado;                       
+    $taller5->save();
+
+    $alter =TallerSubrayar::where('taller_id', $idtaller)->firstOrfail();
+    $com = Subrayar::where('user_id', $id)->get()->last();
+    $enun = $alter->TallerSubraOps;
+    $datos = [];
+
+        foreach ($enun as $key => $value) {
+                    $datos= array(
+                        'subrayar_id' => $com->id,
+                        'concepto' => $value->concepto,
+                        'respuesta' => $request->respuesta[$key],
+                        'created_at'=> now(),
+                        'updated_at'=> now(),
+                    );
+                    SubrayarRes::insert($datos);
+                   }    
+
+        $user= User::find($id);
+        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+        public function store10(Request $request, $idtaller)
+    {
+    $id                  =   Auth::id();
+    $taller              =   Taller::where('id', $idtaller)->firstOrfail();
+    $taller10            = new Relacionar; 
+    $taller10->taller_id = $idtaller;
+    $taller10->user_id   =    $id;           
+    $taller10->enunciado =   $taller->enunciado;                       
+    $taller10->save();
+    $alter =TallerRelacionar::where('taller_id', $idtaller)->firstOrfail();
+    $com = Relacionar::where('user_id', $id)->get()->last();
+    $enun = $alter->relacionarOptions;
+    $alter2 = TallerRelacionarOpcion::select('definicion_aleatoria')->where('taller_relacionar_id', $alter->id)->get();
+    // $datos = [];
+        foreach ($request->order as $key => $value) {
+                    $datos= array(
+                        'relacionar_id' => $com->id,
+                        'enunciado' => $enun[$key]->enunciado,
+                        'definicion' => $enun[$key]->definicion,
+                        'img' => $enun[$key]->img,
+                        'definicion_aleatoria' => $alter2[$value - 1]->definicion_aleatoria,
+                        'created_at'=> now(),
+                        'updated_at'=> now(),
+                    );
+                    RelacionarRe::insert($datos);
+                   }    
+                   
+        $user= User::find($id);
+        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+   }
+
+public function store11(Request $request, $idtaller)
+    {
+    $id                  =   Auth::id();
+    $taller              =   Taller::where('id', $idtaller)->firstOrfail();
+    $taller11            = new Relacionar2; 
+    $taller11->taller_id = $idtaller;
+    $taller11->user_id   =    $id;           
+    $taller11->enunciado =   $taller->enunciado;                       
+    $taller11->save();
+    $alter =Taller2Relacionar::where('taller_id', $idtaller)->firstOrfail();
+    $com = Relacionar2::where('user_id', $id)->get()->last();
+    $enun = $alter->relacionar2Options;
+        foreach ($request->letra as $key => $value) {
+                        $datos           = array(
+                        'relacionar2_id' => $com->id,
+                        'letra'          => $value,
+                        'definicion'     => $enun[$key]->definicion,
+                        'created_at'     => now(),
+                        'updated_at'     => now(),
+                    );
+                    Relacionar2Re::insert($datos);
+                   }    
+                   
+        $user= User::find($id);
+        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+   }
+
+   public function store12(Request $request, $idtaller)
+    {
+
+    $id                  =   Auth::id();
+    $taller              =   Taller::where('id', $idtaller)->firstOrfail();
+    $taller12            = new VerdaderoFalso; 
+    $taller12->taller_id = $idtaller;
+    $taller12->user_id   =    $id;           
+    $taller12->enunciado =   $taller->enunciado;                       
+    $taller12->save();
+    $alter =TallerVerdaderoFalso::where('taller_id', $idtaller)->firstOrfail();
+    $com = VerdaderoFalso::where('user_id', $id)->get()->last();
+    $enun = $alter->tallerVerFalOp;
+        foreach ($request->respuestas as $key => $value) {
+                        $datos               = array(
+                        'verdadero_falso_id' => $com->id,
+                        'enunciado'          => $enun[$key]->descripcion,
+                        'respuesta'          => $value,
+                        'created_at'         => now(),
+                        'updated_at'         => now(),
+                    );
+                    VerdaderoFalsoRe::insert($datos);
+                   }    
+                   
+        $user= User::find($id);
+        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+   }
+    public function store13(Request $request, $idtaller)
+    {
+
+    $id                  =   Auth::id();
+    $taller              =   Taller::where('id', $idtaller)->firstOrfail();
+    $taller13            = new DefinirEnunciado; 
+    $taller13->taller_id = $idtaller;
+    $taller13->user_id   =    $id;           
+    $taller13->enunciado =   $taller->enunciado;                       
+    $taller13->save();
+    $alter =TallerDefinirEnunciado::where('taller_id', $idtaller)->firstOrfail();
+    $com = DefinirEnunciado::where('user_id', $id)->get()->last();
+    $enun = $alter->tallerDefinirEnunOp;
+        foreach ($request->respuestas as $key => $value) {
+                        $datos               = array(
+                        'definir_enunciado_id' => $com->id,
+                        'concepto'          => $enun[$key]->concepto,
+                        'respuesta'          => $value,
+                        'created_at'         => now(),
+                        'updated_at'         => now(),
+                    );
+                    DefinirEnunciadoRe::insert($datos);
+                   }    
+                   
+        $user= User::find($id);
+        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+   }
+
+      public function store14(Request $request, $idtaller)
+    {
+    $id                     = Auth::id();
+    $contenido              = TallerIdentificarPersona::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+    $taller14               = new IdentificarPersona; 
+    $taller14->taller_id    = $idtaller;
+    $taller14->user_id      =   $id;           
+    $taller14->enunciado    =  $contenido->enunciado;                       
+    $taller14->girador      =   $request->input('girador');   
+    $taller14->girado       =   $request->input('girado');   
+    $taller14->beneficiario =   $request->input('beneficiario');    
+    $taller14->save();
+
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+
+       public function store15(Request $request, $idtaller)
+    {
+    $id                  = Auth::id();
+    $contenido           = TallerCheque::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+    $taller15            = new Cheque; 
+    $taller15->taller_id = $idtaller;
+    $taller15->user_id   =   $id;           
+    $taller15->enunciado =  $contenido->enunciado;                       
+    $taller15->girador   =   $request->input('girador');
+    $taller15->girado    =   $request->input('girado');
+    $taller15->cantidad  =   $request->input('cantidad');
+    $taller15->lugar     =   $request->input('lugar');
+    $taller15->fecha     =   $request->input('fecha'); 
+    $taller15->save();
+
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+         public function store16(Request $request, $idtaller)
+    {
+        $id                  = Auth::id();
+        $contenido           = TallerChequeEndoso::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+        $taller16            = new ChequeEndoso; 
+        $taller16->taller_id = $idtaller;
+        $taller16->user_id   =   $id;           
+        $taller16->enunciado =  $contenido->enunciado;                       
+        $taller16->endoso        =   $request->input('endoso');
+        $taller16->firma        =   $request->input('firma');
+        $taller16->save();
+
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+         public function store17(Request $request, $idtaller)
+    {
+        $id                  = Auth::id();
+        $contenido           = TallerConvertirCheque::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+        $taller17            = new ConvertirCheque; 
+        $taller17->taller_id = $idtaller;
+        $taller17->user_id   =   $id;           
+        $taller17->enunciado =  $contenido->enunciado;                       
+        $taller17->endoso    =   $request->input('endoso');
+        $taller17->firma     =   $request->input('firma');
+        $taller17->save();
+
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+          public function store18(Request $request, $idtaller)
+    {
+         $id                    = Auth::id();
+         $contenido             = TallerLetraCambio::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+         $taller18              = new LetraCambio; 
+         $taller18->taller_id   = $idtaller;
+         $taller18->user_id     =   $id;           
+         $taller18->enunciado   =  $contenido->enunciado;                       
+         $taller18->vencimiento =   $request->input('vencimiento');
+         $taller18->numero      =   $request->input('numero');
+         $taller18->por         =   $request->input('por');
+         $taller18->ciudad      =   $request->input('ciudad');
+         $taller18->fecha       =   $request->input('fecha');
+         $taller18->orden_de    =   $request->input('orden_de');
+         $taller18->cantidad    =   $request->input('cantidad');
+         $taller18->direccion   =   $request->input('direccion');
+         $taller18->ciudad2     =   $request->input('ciudad2');
+         $taller18->atentamente =   $request->input('atentamente');
+        $taller18->save();
+
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+     public function store19(Request $request, $idtaller)
+    {
+         $id                             = Auth::id();
+         $contenido                      = TallerCertificadoDeposito::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+         $taller19                       = new CertificadoDeposito; 
+         $taller19->taller_id            = $idtaller;
+         $taller19->user_id              =   $id;           
+         $taller19->enunciado            =   $contenido->enunciado;                       
+         $taller19->valor_inicial        =   $request->input('valor_inicial');
+         $taller19->caracter             =   $request->input('caracter');
+         $taller19->beneficiario         =   $request->input('beneficiario');
+         $taller19->cantidad             =   $request->input('cantidad');
+         $taller19->plazo                =   $request->input('plazo');
+         $taller19->fecha_de_emision     =   $request->input('fecha_de_emision');
+         $taller19->fecha_de_vencimiento =   $request->input('fecha_de_vencimiento');
+         $taller19->interes_anual        =   $request->input('interes_anual');
+         $taller19->plazo_de_vencimiento =   $request->input('plazo_de_vencimiento');
+         $taller19->lugar_fecha_emision  =   $request->input('lugar_fecha_emision');
+         $taller19->save();
+
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+
+      public function store20(Request $request, $idtaller)
+    {
+         $id                  = Auth::id();
+         $contenido           = TallerPagare::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+         $taller20            = new Pagare; 
+         $taller20->taller_id = $idtaller;
+         $taller20->user_id   =   $id;           
+         $taller20->enunciado =   $contenido->enunciado; 
+         $taller20->cantidad        =   $request->input('cantidad');                      
+         $taller20->resp1     =   $request->input('resp1');
+         $taller20->resp2     =   $request->input('resp2');
+         $taller20->resp3     =   $request->input('resp3');
+         $taller20->resp4     =   $request->input('resp4');
+         $taller20->resp5     =   $request->input('resp5');
+         $taller20->resp6     =   $request->input('resp6');
+         $taller20->resp7     =   $request->input('resp7');
+         $taller20->resp8     =   $request->input('resp8');
+         $taller20->resp9     =   $request->input('resp9');
+         $taller20->resp10    =   $request->input('resp10');
+         $taller20->resp11    =   $request->input('resp11');
+         $taller20->resp12    =   $request->input('resp12');
+         $taller20->resp13    =   $request->input('resp13');
+         $taller20->resp14    =   $request->input('resp14');
+         $taller20->resp15    =   $request->input('resp15');
+         $taller20->resp16    =   $request->input('resp16');
+         $taller20->resp17    =   $request->input('resp17');
+         $taller20->resp18    =   $request->input('resp18');
+         $taller20->resp19    =   $request->input('resp19');  
+         $taller20->resp20    =   $request->input('resp20');  
+         $taller20->save();
+
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+
+       public function store21(Request $request, $idtaller)
+    {
+         $id                  = Auth::id();
+         $contenido           = TallerValeCaja::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+         $taller21            = new ValeCaja; 
+         $taller21->taller_id = $idtaller;
+         $taller21->user_id   =   $id;           
+         $taller21->enunciado =   $contenido->enunciado; 
+         $taller21->por       =   $request->input('por');
+         $taller21->deudor    =   $request->input('deudor');
+         $taller21->cantidad  =   $request->input('cantidad');
+         $taller21->concepto  =   $request->input('concepto');
+         $taller21->fecha     =   $request->input('fecha');
+         $taller21->vto_bueno =   $request->input('vto_bueno');
+         $taller21->conforme  =   $request->input('conforme');
+         $taller21->save();
+
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+
+    public function store22(Request $request, $idtaller)
+    {
+    $id                      =   Auth::id();
+    $taller                  =   Taller::where('id', $idtaller)->firstOrfail();
+    $taller22                = new NotaPedido; 
+    $taller22->taller_id     = $idtaller;
+    $taller22->user_id       =    $id;           
+    $taller22->enunciado     =   $taller->enunciado;                       
+    $taller22->pedido        =   $request->pedido;                       
+    $taller22->fecha         =   $request->fecha;                       
+    $taller22->dependencia   =   $request->dependencia;                       
+    $taller22->destino       =   $request->destino;                       
+    $taller22->plazo_entrega =   $request->plazo_entrega;                       
+    $taller22->observaciones =   $request->observaciones;                       
+    $taller22->fabrica       =   $request->fabrica;                       
+    $taller22->recibido      =   $request->recibido;                       
+    $taller22->save();
+            $com = NotaPedido::where('user_id', $id)->get()->last();              
+               foreach ($request->cantidad as $key=>$v) {
+                  $datos=array(
+                     'nota_pedido_id' => $com->id,
+                     'cantidad'       => $request->cantidad[$key],
+                     'codigo'         => $request->codigo[$key],
+                     'descripcion'    => $request->descripcion[$key],
+                     'precio_unit'    => $request->precio_unit[$key],
+                     'total'          => $request->total[$key],
+                     'created_at'     => now(),
+                     'updated_at'     => now(),
+                  );
+                  NotaPedidoRe::insert($datos);
+               }        
+
+        $user= User::find($id);
+        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+   }
+    public function store23(Request $request, $idtaller)
+          {
+          $id                  = Auth::id();
+          $contenido           = TallerRecibo::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+          $taller23            = new Recibo; 
+          $taller23->taller_id = $idtaller;
+          $taller23->user_id   =   $id;           
+          $taller23->enunciado =   $contenido->enunciado; 
+          $taller23->no        =   $request->input('no');
+          $taller23->por       =   $request->input('por');
+          $taller23->recibi    =   $request->input('recibi');
+          $taller23->cantidad  =   $request->input('cantidad');
+          $taller23->arriendo  =   $request->input('arriendo');
+          $taller23->propiedad =   $request->input('propiedad');
+          $taller23->situado   =   $request->input('situado');
+          $taller23->hasta     =   $request->input('hasta');
+          $taller23->firma     =   $request->input('firma');
+            $taller23->save();
+
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+
+     public function store24(Request $request, $idtaller)
+          {
+            $id                   = Auth::id();
+            $contenido            = TallerOrdenPago::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+            $taller24             = new OrdenPago; 
+            $taller24->taller_id  = $idtaller;
+            $taller24->user_id    =   $id;           
+            $taller24->enunciado  =   $contenido->enunciado; 
+            $taller24->señor      =  $request->input('señor');
+            $taller24->fecha      =  $request->input('fecha');
+            $taller24->fecha_c    =  $request->input('fecha_c');
+            $taller24->numero     =  $request->input('numero');
+            $taller24->tipo       =  $request->input('tipo');
+            $taller24->debe       =  $request->input('debe');
+            $taller24->haber      =  $request->input('haber');
+            $taller24->saldo      =  $request->input('saldo');
+            $taller24->revisado   =  $request->input('revisado');
+            $taller24->autorizado =  $request->input('autorizado');
+            $taller24->vto_bueno  =  $request->input('vto_bueno');
+            $taller24->save();
+
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+       public function store25(Request $request, $idtaller)
+          {
+               $id                         = Auth::id();
+               $contenido                  = TallerFactura::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+               $taller25                   = new Factura; 
+               $taller25->taller_id        = $idtaller;
+               $taller25->user_id          =   $id;           
+               $taller25->enunciado        =   $contenido->enunciado; 
+               $taller25->nombre           =  $request->input('nombre');
+               $taller25->fecha_emision    =  $request->input('fecha_emision');
+               $taller25->ruc              =  $request->input('ruc');
+               $taller25->direccion        =  $request->input('direccion');
+               $taller25->telefono         =  $request->input('telefono');
+               $taller25->email            =  $request->input('email');
+               $taller25->subtotal_12      =  $request->input('subtotal_12');
+               $taller25->subtotal_0       =  $request->input('subtotal_0');
+               $taller25->subtotal_iva     =  $request->input('subtotal_iva');
+               $taller25->subtotal_siniva  =  $request->input('subtotal_siniva');
+               $taller25->subtotal_sin_imp =  $request->input('subtotal_sin_imp');
+               $taller25->descuento_total  =  $request->input('descuento_total');
+               $taller25->ice              =  $request->input('ice');
+               $taller25->iva12            =  $request->input('iva12');
+               $taller25->irbpnr           =  $request->input('irbpnr');
+               $taller25->propina          =  $request->input('propina');
+               $taller25->valor_total      =  $request->input('valor_total');
+               $taller25->save();
+
+               if ($taller25 = true) {
+
+               $o = Factura::where('user_id', $id)->get()->last();              
+              foreach ($request->codigo as $key=>$v) {
+                     $datos                 =array(
+                     'factura_id' => $o->id,
+                     'codigo'               => $request->codigo[$key],
+                     'cod_aux'              => $request->cod_aux[$key],
+                     'cantidad'             => $request->cantidad[$key],
+                     'precio'               => $request->precio[$key],
+                     'descuento'            => $request->descuento[$key],
+                     'valor'                => $request->valor[$key],
+                     'created_at'           => now(),
+                     'updated_at'           => now(),
+                     );
+                  FacturaDato::insert($datos);
+               }
+        }
+
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+
+        public function store26(Request $request, $idtaller)
+          {
+                   $id                  = Auth::id();
+                   $contenido           = TallerNotaVenta::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+                   $taller26            = new NotaVenta; 
+                   $taller26->taller_id = $idtaller;
+                   $taller26->user_id   =   $id;           
+                   $taller26->enunciado =   $contenido->enunciado; 
+                   $taller26->nombre    =  $request->input('nombre');
+                   $taller26->ruc       =  $request->input('ruc');
+                   $taller26->fecha     =  $request->input('fecha');
+                   $taller26->total     =  $request->input('total');
+                   $taller26->valido    =  $request->input('valido');
+                    $taller26->save();
+
+
+
+               if ($taller26 = true) {
+
+               $o = NotaVenta::where('user_id', $id)->get()->last();              
+              foreach ($request->cantidad as $key=>$v) {
+                     $datos                 =array(
+                     'nota_venta_id'=> $o->id,
+                     'cantidad' => $request->cantidad[$key],
+                     'descripcion' => $request->descripcion[$key],
+                     'precio' => $request->precio[$key],
+                     'valor_venta' => $request->valor_venta[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                     );
+                  NotaVentaDato::insert($datos);
+               }
+        }
+
+
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+
+     public function store27(Request $request, $idtaller)
+          {
+                   $id                  = Auth::id();
+                   $contenido           = TallerAbreviatura::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+                   $taller27            = new Abreviatura; 
+                   $taller27->taller_id = $idtaller;
+                   $taller27->user_id   =   $id;           
+                   $taller27->enunciado =   $contenido->enunciado; 
+                    $taller27->save();
+                $alter =TallerAbreviatura::where('taller_id', $idtaller)->firstOrfail();
+                $enun = $alter->abreviaturaImg;
+               if ($taller27 = true) {
+               $o = Abreviatura::where('user_id', $id)->get()->last();              
+              foreach ($enun as $key=>$v) {
+                     $datos                 =array(
+                     'abreviatura_id' => $o->id,
+                     'col_a'                    => $v->col_a,
+                     'col_a_res'                => $request->col_a[$key],
+                     'col_b'                    => $v->col_b,
+                     'col_b_res'                => $request->col_b[$key],
+                     'created_at'               => now(),
+                     'updated_at'               => now(),
+                     );
+                  AbreviaturaRe::insert($datos);
+               }
+        }
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+
+
     public function store28(Request $request, $idtaller){
     $id                     =   Auth::id();
     $taller28               =   new IdentificarAbreviatura; 
@@ -444,6 +1199,47 @@ class TallerEstudianteController extends Controller
     return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamnete');
     }
 
+        public function store31(Request $request, $idtaller)
+          {
+            $id                   = Auth::id();
+            $contenido            = TallerCollage::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+            $count = Collage::where('user_id', $id)->count(); 
+            if ($count == 0) {
+                $taller31                                    = new Collage; 
+                $taller31->taller_id                         = $idtaller;
+                $taller31->user_id                           = $id;           
+                $taller31->enunciado                         = $contenido->enunciado; 
+                $taller31->save();
+                $user                                        = User::find($id);
+                $user->tallers()->attach($idtaller,['status' => 'completado']);
+
+                $id                                          = Collage::where('user_id', $id)->first();
+                $imagen = $request->file('file');
+                $nombre                                      = time().'_'.$imagen->getClientOriginalName();
+                $ruta                                        = public_path().'/img/talleres';
+                $imagen->move($ruta, $nombre);
+                $urlimagen                                   = '/img/talleres/'.$nombre;
+                $taller_31                                   = new CollageImg; 
+                $taller_31->collage_id                       =  $id->id;
+                $taller_31->url_img                          =  $urlimagen; 
+                $taller_31->save();
+                return $taller_31;
+            }else {
+                $id                                          = Collage::where('user_id', $id)->first();
+                $imagen = $request->file('file');
+                $nombre                                      = time().'_'.$imagen->getClientOriginalName();
+                $ruta                                        = public_path().'/img/talleres';
+                $imagen->move($ruta, $nombre);
+                $urlimagen                                   = '/img/talleres/'.$nombre;
+
+                $taller_31                                   = new CollageImg; 
+                $taller_31->collage_id                       =  $id->id;
+                $taller_31->url_img                          =  $urlimagen; 
+                $taller_31->save();
+                return $taller_31;
+            }
+    }
+
      public function store32(Request $request, $idtaller){
     $id                      = Auth::id();
     $taller32                =   new AbreviaturaEconomica; 
@@ -497,7 +1293,156 @@ class TallerEstudianteController extends Controller
 
     return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamnete');
     }
-        public function store41(Request $request, $idtaller){
+        public function store33(Request $request, $idtaller)
+          {
+            $id                   = Auth::id();
+            $contenido            = TallerPregunta::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+            $taller33             = new Pregunta; 
+            $taller33->taller_id  = $idtaller;
+            $taller33->user_id    =   $id;           
+            $taller33->enunciado  =   $contenido->enunciado; 
+            $taller33->respuesta1      =  $request->input('respuesta1');
+            $taller33->respuesta2      =  $request->input('respuesta2');
+            $taller33->save();
+
+        $user= User::find($id);
+        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+        public function store34(Request $request, $idtaller)
+          {
+        $id                  = Auth::id();
+        $taller              = Taller::where('id', $idtaller)->firstOrfail();
+        $contenido           = TallerTipoSaldo::where('taller_id', $idtaller)->get();
+        $taller33            = new TipoSaldo;
+        $taller33->taller_id = $idtaller;
+        $taller33->user_id   =   $id;           
+        $taller33->enunciado =   $taller->enunciado;
+        $taller33->save(); 
+        $a = TipoSaldo::where('user_id', $id)->get()->last();              
+
+        foreach ($contenido as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
+            $regis=array(
+                     'tipo_saldo_id' => $a->id,
+                     'enunciado'     => $contenido[$key]->id,
+                     'respuesta'     => $request->saldo[$key],
+                     'created_at'    => now(),
+                     'updated_at'    => now(),
+                  );
+            TipoSaldoDato::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
+        }
+        $user= User::find($id);
+        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+     public function store36(Request $request, $idtaller)
+          {
+               $id                  = Auth::id();
+               $contenido           = TallerAnalizar::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+               $taller36            = new AnalizarPregunta; 
+               $taller36->taller_id = $idtaller;
+               $taller36->user_id   =   $id;           
+               $taller36->enunciado =   $contenido->enunciado; 
+                $taller36->save();
+                $alter =TallerAnalizar::where('taller_id', $idtaller)->firstOrfail();
+                $enun = $alter->tallerAnalizarOp;
+               if ($taller36 = true) {
+               $o = AnalizarPregunta::where('user_id', $id)->get()->last();              
+              foreach ($enun as $key=>$v) {
+                     $datos                 =array(
+                     'analizar_pregunta_id' => $o->id,
+                     'enunciado'             => $v->enunciado,
+                     'respuesta'            => $request->analisis[$key],
+                     'created_at'           => now(),
+                     'updated_at'           => now(),
+                     );
+                  AnalizarPreguntaDato::insert($datos);
+               }
+        }
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+
+        public function store38(Request $request, $idtaller)
+          {
+               $id                  = Auth::id();
+               $contenido           = TallerALectura::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+               $taller38            = new Lectura; 
+               $taller38->taller_id = $idtaller;
+               $taller38->user_id   =   $id;           
+               $taller38->enunciado =   $contenido->enunciado; 
+                $taller38->save();
+                $alter =TallerALectura::where('taller_id', $idtaller)->firstOrfail();
+                $enun = $alter->tallerLecturaOp;
+               if ($taller38 = true) {
+               $o = Lectura::where('user_id', $id)->get()->last();              
+              foreach ($enun as $key=>$v) {
+                     $datos                 =array(
+                     'lectura_id' => $o->id,
+                     'pregunta'   => $v->enunciado,
+                     'respuesta'  => $request->respuestas[$key],
+                     'created_at' => now(),
+                     'updated_at' => now(),
+                     );
+                  LecturaDato::insert($datos);
+               }
+        }
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+    public function store39(Request $request)
+        {
+            $array               =  $request->respuesta;
+            $idtaller = $request->id;
+            $palabra             = implode($array);
+            $id                  = Auth::id();
+            $contenido           = TallerPalabra::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+            $taller39            = new Palabra; 
+            $taller39->taller_id = $idtaller;
+            $taller39->user_id   =   $id;           
+            $taller39->enunciado =   $contenido->enunciado;
+            $taller39->palabra   =   $palabra;
+            $taller39->save();
+
+            $user= User::find($id);
+            $user->tallers()->attach($idtaller,['status'=> 'completado']);
+
+            return $taller39;
+        }
+            public function store40(Request $request, $idtaller)
+          {
+               $id                  = Auth::id();
+               $contenido           = TallerIdenTransa::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+               $taller40            = new IdenTrasa; 
+               $taller40->taller_id = $idtaller;
+               $taller40->user_id   =   $id;           
+               $taller40->enunciado =   $contenido->enunciado; 
+                $taller40->save();
+                $alter =TallerIdenTransa::where('taller_id', $idtaller)->firstOrfail();
+                $enun = $alter->tallerIdenTranOp;
+               if ($taller40 = true) {
+               $o = IdenTrasa::where('user_id', $id)->get()->last();              
+              foreach ($enun as $key=>$v) {
+                     $datos                 =array(
+                     'iden_trasa_id' => $o->id,
+                     'pregunta'   => $v->enunciado,
+                     'respuesta'  => $request->respuestas[$key],
+                     'created_at' => now(),
+                     'updated_at' => now(),
+                     );
+                  IdenTrasaDato::insert($datos);
+               }
+        }
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+
+
+    public function store41(Request $request, $idtaller)
+    {
     $id                  = Auth::id();
     $taller41            =   new MapaConceptual; 
     $taller41->taller_id =   $idtaller;
@@ -519,4 +1464,60 @@ class TallerEstudianteController extends Controller
 
     return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamnete');
     }
+        public function store42(Request $request)
+        {
+            $ideas               =  $request->respuesta;
+            $idtaller = $request->id;
+            $id                  = Auth::id();
+            $contenido           = Taller::select('enunciado')->where('id', $idtaller)->firstOrFail(); 
+            $taller42            = new OrdenIdea; 
+            $taller42->taller_id = $idtaller;
+            $taller42->user_id   =   $id;           
+            $taller42->enunciado =   $contenido->enunciado;
+            $taller42->save();
+            $o = OrdenIdea::where('user_id', $id)->get()->last();              
+            foreach ($ideas as $key=>$v) {
+                     $datos          =array(
+                     'orden_idea_id' => $o->id,
+                     'ideas'         => $v['idea'],
+                     'created_at'    => now(),
+                     'updated_at'    => now(),
+                     );
+                  OrdenIdeasDato::insert($datos);
+               }
+
+            $user= User::find($id);
+            $user->tallers()->attach($idtaller,['status'=> 'completado']);
+
+            return $taller42;
+        }
+
+             public function store43(Request $request, $idtaller)
+          {
+            $id                   = Auth::id();
+            $contenido            = TallerMConceptual::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+            $taller43             = new MapaConceptual2; 
+            $taller43->taller_id  = $idtaller;
+            $taller43->user_id    =   $id;           
+            $taller43->enunciado  =   $contenido->enunciado; 
+            $taller43->enunciado1 =  $request->input('enunciado1');
+            $taller43->enunciado2 =  $request->input('enunciado2');
+            $taller43->enunciado3 =  $request->input('enunciado3');
+            $taller43->enunciado4 =  $request->input('enunciado4');
+            $taller43->enunciado5 =  $request->input('enunciado5');
+            $taller43->enunciado6 =  $request->input('enunciado6');
+            $taller43->respuesta1 =  $request->input('respuesta1');
+            $taller43->respuesta2 =  $request->input('respuesta2');
+            $taller43->respuesta3 =  $request->input('respuesta3');
+            $taller43->respuesta4 =  $request->input('respuesta4');
+            $taller43->respuesta5 =  $request->input('respuesta5');
+            $taller43->respuesta6 =  $request->input('respuesta6');
+            $taller43->save();
+
+    $user= User::find($id);
+    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+
+
 }

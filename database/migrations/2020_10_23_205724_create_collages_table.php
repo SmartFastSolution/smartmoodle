@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTallerChequeEndosoResTable extends Migration
+class CreateCollagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateTallerChequeEndosoResTable extends Migration
      */
     public function up()
     {
-        Schema::create('taller_cheque_endoso_res', function (Blueprint $table) {
+        Schema::create('collages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->string('enunciado');
-            $table->string('endoso');
-            $table->string('firma');
+           
             $table->timestamps();
-
+            
             $table->foreign('taller_id')
             ->references('id')
             ->on('tallers')
@@ -41,6 +40,6 @@ class CreateTallerChequeEndosoResTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taller_cheque_endoso_res');
+        Schema::dropIfExists('collages');
     }
 }

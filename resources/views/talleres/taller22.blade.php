@@ -12,23 +12,43 @@ ADECUADAMENTE. -->
           @csrf
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-4">
+			<div class="col-8">
 						<h3 class="text-center">Datos</h3>
 							<div class="row">				
 								<div class="col-6">
-									<label>Pedido :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->pedido  }}')" ondragend="this.classList.add('text-muted');">${{ $datos->pedido  }}</span> <br>
-									<label>Cantidad :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->cantidad  }}')" ondragend="this.classList.add('text-muted');">${{ $datos->cantidad  }}</span><br>
-									<label>Codigo :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->codigo  }}')" ondragend="this.classList.add('text-muted');">${{ $datos->codigo  }}</span> <br>
-									<label>Detalle :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->detalle  }}')" ondragend="this.classList.add('text-muted');">${{ $datos->detalle  }}</span> {<br>
-									<label>Lugar y fecha :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->lugar  }}')" ondragend="this.classList.add('text-muted');">${{ $datos->lugar  }}</span> , <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->fecha }}')" ondragend="this.classList.add('text-muted');"></span> <br>
+									<label>Pedido :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->pedido  }}')" ondragend="this.classList.add('text-muted');">{{ $datos->pedido  }}</span> <br>
+									<label>Lugar y fecha :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->lugar  }}')" ondragend="this.classList.add('text-muted');">{{ $datos->lugar }}</span> , <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->fecha }}')" ondragend="this.classList.add('text-muted');">{{ $datos->fecha }}</span> <br>
 
-									<label>Firma de Bodeguero :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->firma  }}')" ondragend="this.classList.add('text-muted');">${{ $datos->firma }}</span> <br>
-									<label>Plazo de entrega :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->plazo_entrega }}')" ondragend="this.classList.add('text-muted');">${{ $datos->plazo_entrega  }}</span><br>
+									<label>Firma de Bodeguero :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->firma  }}')" ondragend="this.classList.add('text-muted');">{{ $datos->firma }}</span> <br>
+									<label>Plazo de entrega :</label> <span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->plazo_entrega }}')" ondragend="this.classList.add('text-muted');">{{ $datos->plazo_entrega  }}</span><br>
 								</div>
 							</div>
+							<table class="table table-borderless">
+			                  <thead>
+			                    <tr class="text-center">
+			                      <th scope="col">#</th>
+			                      <th scope="col">Codigo</th>
+			                      <th scope="col">Cantidad</th>
+			                      <th scope="col">Descripcion</th>
+			                      <th scope="col">Precio Unitario</th>
+			                    </tr>
+			                  </thead>
+			                  <tbody>
+			                  	@foreach ($datos->pedidoDatos as $dato)
+			                    <tr class="text-center">
+			                      <th scope="row"></th>
+			                      <td>{{ $dato->codigo }}</td>
+			                      <td>{{ $dato->cantidad }}</td>
+			                      <td>{{ $dato->descripcion }}</td>
+			                      <td>{{ $dato->precio_unit }}</td>
+			                    </tr>
+			                    @endforeach
+
+			                  </tbody>
+			                </table>
 			</div>
 
-			<div class="col-8 border border-warning">
+			<div class="col-9 border border-warning">
 				<div class="row">
 					<div class="col-6 text-center p-3">
 						<h1>COMERCIAL "PLAZA"</h1>
@@ -38,7 +58,7 @@ ADECUADAMENTE. -->
 					</div>
 					<div class="col-6 text-center p-3">
 						<h1>NOTA DE PEDIDA</h1>
-						<h4>No. <input type="text" name="no" class="" size="5"></h4>
+						<h4>No. <input type="text" name="pedido" class="" size="5"></h4>
 						<div class="row mb-2">			
 							<div class="col-4 text-left">
 								<label class="col-form-label" for="">Fecha:</label>
@@ -83,33 +103,21 @@ ADECUADAMENTE. -->
 					      <th scope="col">DESCRIPCION</th>
 					      <th scope="col">PRECIO UNIT.</th>
 					      <th scope="col">TOTAL</th>
+					      <th scope="col">ACCION</th>
 					    </tr>
 					  </thead>
-					  <tbody>
+					  <tbody class="prin">
 					    <tr>
-					      <th><input name="cantidad" type="text" class="form-control" ></th>
-					      <td><input name="codigo" type="text" class="form-control" ></td>
-					      <td><input type="text" name="descripcion" class="form-control" ></td>
-					      <td><input type="text" name="precio_unit" class="form-control" ></td>
-					      <td><input name="total" type="text" class="form-control" ></td>
-					    </tr>
-					    <tr>
-					      <th><input type="text" class="form-control" name=""></th>
-					      <td><input type="text" class="form-control" name=""></td>
-					      <td><input type="text" class="form-control" name=""></td>
-					      <td><input type="text" class="form-control" name=""></td>
-					      <td><input type="text" class="form-control" name=""></td>
-					    </tr>
-					    <tr>
-					      <th><input type="text" class="form-control" name=""></th>
-					      <td><input type="text" class="form-control" name=""></td>
-					      <td><input type="text" class="form-control" name=""></td>
-					      <td><input type="text" class="form-control" name=""></td>
-					      <td><input type="text" class="form-control" name=""></td>
+					      <td><input name="cantidad[]" type="text" class="form-control" ></td>
+					      <td><input name="codigo[]" type="text" class="form-control" ></td>
+					      <td><input type="text" name="descripcion[]" class="form-control" ></td>
+					      <td><input type="text" name="precio_unit[]" class="form-control" ></td>
+					      <td><input name="total[]" type="text" class="form-control" ></td>
+					      <td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>
 					    </tr>
 					  </tbody>
 					</table>
-
+				<a href="#" class="addRow btn btn-outline-danger">Agregar Columna</a>
 				</div>
 				<div class="row mb-3">
 					<div class="col-4 align-self-center">
@@ -137,3 +145,41 @@ ADECUADAMENTE. -->
 	</div>
 </form>
 @endsection
+@section('js')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script src="{{ asset('vendor/toastr/toastr.min.js') }}"></script>
+	<script type="text/javascript">
+		$('.addRow').on('click', function(evt) {
+			evt.preventDefault();
+			addRow();
+		});
+		function addRow(){	
+		var tr='<tr>'+
+			'<td><input name="cantidad[]" type="text" class="form-control" ></td>'+
+			'<td><input name="codigo[]" type="text" class="form-control" ></td>'+
+			'<td><input type="text" name="descripcion[]" class="form-control" ></td>'+
+			'<td><input type="text" name="precio_unit[]" class="form-control" ></td>'+
+			'<td><input name="total[]" type="text" class="form-control" ></td>'+
+			'<td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>'+
+			'</tr>';
+			$('.prin').append(tr);
+		  toastr.success("Columna agregada correctamente", "Smarmoddle",{
+		  	 "timeOut": "1000"
+		  });
+
+		}
+		$('.remove').live('click', function(evt){
+	evt.preventDefault();
+      var last=$('.prin tr').length;
+      if (last == 1) {
+        toastr.error("Esta columna no se puede eliminar", "Smarmoddle",{
+         "timeOut": "1000"
+      });
+      }else{
+      $(this).parent().parent().remove();
+       i = last;
+}
+    });
+
+	</script>
+	@endsection

@@ -15,7 +15,7 @@
      						<label class="col-form-label " for="">{{ $dato->enunciado1 }}</label>   						
      					</div>
      					<div class="col-6">
-                            <textarea name="respuesta1" class="form-control inputcurrent" id="" cols="30" rows="5"></textarea>
+                            <textarea name="respuesta[]" class="form-control inputcurrent" id="" cols="30" rows="5"></textarea>
      					</div>
      				</div>
                          <br>

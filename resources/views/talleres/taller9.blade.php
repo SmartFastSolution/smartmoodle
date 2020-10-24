@@ -10,19 +10,19 @@
 <form action="{{ route('taller9', ['idtaller' => $d]) }}" method="POST">
     @csrf
      	<div class="container">
-               @foreach ($datos->TallerSubraOps as $key => $element)          
+      @foreach ($datos->TallerSubraOps as $key => $element)          
      		<div class="row mb-4 justify-content-center ">
      			<div class="col-10">
-     				<span class="badge-danger badge-pill">1.</span>
+     				<span class="badge-danger badge-pill">{{ $key + 1 }}.</span>
      				<label class="form-control-label">{{ $element->concepto }}</label>
      				<div class="row">
-                              @foreach ($info = explode(',', $element->alternativas); as $e)            
-     						<div class="col-4"><input type="radio" name="respuesta{{ $key }}" value=""> <label>{{ $e }}</label></div>
-                              @endforeach
+              @foreach ($info = explode(',', $element->alternativas); as $e)            
+     						<div class="col-4"><input type="radio" name="respuesta[{{ $key }}]" value="{{ $e }}"> <label>{{ $e }}</label></div>
+              @endforeach
      				</div>	
      			</div>
      		</div>
-                @endforeach
+      @endforeach
      	</div>
                <div class="row justify-content-center">
                   <input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">

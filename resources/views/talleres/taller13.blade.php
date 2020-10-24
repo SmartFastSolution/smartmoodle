@@ -16,7 +16,7 @@
 				@foreach ($datos->tallerDefinirEnunOp as $element)
 					<div class="col-5 border-danger border mb-4">
 						<h2 class="text-center mt-1 mb-3"> {{ $element->concepto }} </h2>
-						<textarea name="respuesta1" class="form-control mb-2" id="" cols="30" rows="8"></textarea>
+						<textarea name="respuestas[]" class="form-control mb-2" id="" cols="30" rows="8"></textarea>
 					</div>
 				@endforeach
 			</div>

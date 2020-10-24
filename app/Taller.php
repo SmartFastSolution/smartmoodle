@@ -61,7 +61,6 @@ class Taller extends Model
     {
         return $this->belongsTo('App\Admin\tallerSubrayar');
     }
-
      public function tallerRelacionar()
     {
         return $this->belongsTo('App\Admin\TallerRelacionar');
@@ -83,61 +82,61 @@ class Taller extends Model
     {
         return $this->belongsTo('App\Admin\TallerDefinirEnunciado');
     }
-          public function tallerCheque()
+        public function tallerCheque()
     {
         return $this->belongsTo('App\Admin\TallerCheque');
     }
-           public function tallerChequeRe()
+        public function cheque()
     {
-        return $this->belongsTo('App\TallerChequeRe');
+        return $this->hasMany('App\Admin\Respuesta\Cheque');
     }
-          public function tallerChequeEndoso()
+        public function tallerChequeEndoso()
     {
         return $this->belongsTo('App\Admin\TallerChequeEndoso');
     }
-          public function tallerChequeEndosoRe()
+        public function chequeEndoso()
     {
-        return $this->belongsTo('App\TallerChequeEndosoRe');
+        return $this->hasMany('App\Admin\Respuesta\ChequeEndoso');
+    }
+        public function convertirCheque()
+    {
+        return $this->hasMany('App\Admin\Respuesta\ConvertirCheque');
     }
         public function tallerConvertirCheque()
     {
         return $this->belongsTo('App\Admin\TallerConvertirCheque');
     }
-         public function tallerConvertirChequeRe()
-    {
-        return $this->belongsTo('App\TallerConvertirChequeRe');
-    }
          public function tallerLetraCambio()
     {
         return $this->belongsTo('App\Admin\TallerLetraCambio');
     }
-         public function tallerLetraCambioRe()
+         public function letraCambio()
     {
-        return $this->belongsTo('App\TallerLetraCambioRe');
+        return $this->hasMany('App\Admin\Respuesta\LetraCambio');
     }
          public function tallerCertificadoDeposito()
     {
         return $this->belongsTo('App\Admin\TallerCertificadoDeposito');
     }
-         public function tallerCertificadoDepositoRe()
+         public function certificadoDeposito()
     {
-        return $this->belongsTo('App\TallerCertificadoDepositoRe');
+        return $this->hasMany('App\Admin\Respuesta\CertificadoDeposito');
     }
          public function tallerPagare()
     {
         return $this->belongsTo('App\Admin\TallerPagare');
     }
-       public function tallerPagareRe()
+         public function pagare()
     {
-        return $this->belongsTo('App\TallerPagareRe');
+        return $this->hasMany('App\Admin\Respuesta\Pagare');
     }
      public function tallerValeCaja()
     {
         return $this->belongsTo('App\Admin\TallerValeCaja');
     }
-    public function tallerValeCajaRe()
+    public function valeCaja()
     {
-        return $this->belongsTo('App\TallerValeCajaRe');
+        return $this->hasMany('App\Admin\Respuesta\ValeCaja');
     }
      public function tallerNotaPedido()
     {
@@ -235,33 +234,120 @@ class Taller extends Model
     {
         return $this->belongsTo('App\Admin\TallerSopaLetra');
     }
-        public function identificarAbreviatura(){
+        public function identificarAbreviaturas(){
 
         return $this->hasMany('App\Admin\Respuesta\IdentificarAbreviatura');
     }
-        public function abreviaturaCarta(){
+        public function abreviaturaCartas(){
 
         return $this->hasMany('App\Admin\Respuesta\AbreviaturaCarta');
     }
-        public function abreviaturaEditorial(){
+        public function abreviaturaEditorials(){
 
         return $this->hasMany('App\Admin\Respuesta\AbreviaturaEditorial');
     }
-         public function abreviaturaEconomica(){
+         public function abreviaturaEconomicas(){
 
         return $this->hasMany('App\Admin\Respuesta\AbreviaturaEconomica');
     }
-       public function formulaContable(){
+       public function formulaContables(){
 
         return $this->hasMany('App\Admin\Respuesta\FormulasContable');
     }
-       public function mapaConceptual(){
+       public function mapaConceptuals(){
 
         return $this->hasMany('App\Admin\Respuesta\MapaConceptual');
     }
-      public function completar(){
+      public function completars(){
 
         return $this->hasMany('App\Admin\Respuesta\Completar');
+    }
+      public function completarEnunciados(){
+
+        return $this->hasMany('App\Admin\Respuesta\CompletarEnunciado');
+    }
+      public function diferencias(){
+
+        return $this->hasMany('App\Admin\Respuesta\Diferencia');
+    }
+     public function identificarImg(){
+
+        return $this->hasMany('App\Admin\Respuesta\Identificar');
+    }
+     public function gusanillo(){
+
+        return $this->hasMany('App\Admin\Respuesta\Gusanillo');
+    }
+     public function circulos(){
+
+        return $this->hasMany('App\Admin\Respuesta\Circulo');
+    } public function subrayars(){
+
+        return $this->hasMany('App\Admin\Respuesta\Subrayar');
+    }
+    public function verdaderoFalso(){
+
+        return $this->hasMany('App\Admin\Respuesta\VerdaderoFalso');
+    }
+     public function definirEnuncuiado(){
+
+        return $this->hasMany('App\Admin\Respuesta\DefinirEnunciado');
+    }
+      public function identificarPersona(){
+
+        return $this->hasMany('App\Admin\Respuesta\IdentificarPersona');
+    }
+     public function recibo(){
+
+        return $this->hasMany('App\Admin\Respuesta\Recibo');
+    }
+    public function ordenPago(){
+
+        return $this->hasMany('App\Admin\Respuesta\OrdenPago');
+    }
+     public function abreviatura(){
+
+        return $this->hasMany('App\Admin\Respuesta\Abreviatura');
+    }
+     public function notaVenta(){
+
+        return $this->hasMany('App\Admin\Respuesta\NotaVenta');
+    }
+      public function collage(){
+
+        return $this->hasMany('App\Admin\Respuesta\Collage');
+    }
+       public function pregunta(){
+
+        return $this->hasMany('App\Admin\Respuesta\Pregunta');
+    }
+     public function tipoSaldo(){
+
+        return $this->hasMany('App\Admin\Respuesta\TipoSaldo');
+    }
+     public function lectura(){
+
+        return $this->hasMany('App\Admin\Respuesta\Lectura');
+    }
+     public function analizar(){
+
+        return $this->hasMany('App\Admin\Respuesta\AnalizarPregunta');
+    }
+      public function palabras(){
+
+        return $this->hasMany('App\Admin\Respuesta\Palabra');
+    }
+       public function idenTrasa(){
+
+        return $this->hasMany('App\Admin\Respuesta\IdenTrasa');
+    }
+    public function ordenIdea(){
+
+        return $this->hasMany('App\Admin\Respuesta\OrdenIdea');
+    }
+     public function mapaConceptual(){
+
+        return $this->hasMany('App\Admin\Respuesta\MapaConceptual2');
     }
     
 }

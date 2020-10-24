@@ -379,28 +379,18 @@
                     <div class="row mb-6">
                         <div class="col-sm-12">
                             @yield('encabezado')
-
                         </div>
-
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
             <section class="content">
-
                 @yield('content')
-
-
-
             </section>
         </div>
-
     </div>
-
-
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="{{ asset('js/preloader.js') }}"></script>
-
     <!-- datatables script -->
     <script src="{{ asset('js/jquery.dataTables.min.js')}}"></script>
     @yield('js')

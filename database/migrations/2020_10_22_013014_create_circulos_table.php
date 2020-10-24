@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTallerValeCajaResTable extends Migration
+class CreateCirculosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,19 @@ class CreateTallerValeCajaResTable extends Migration
      */
     public function up()
     {
-        Schema::create('taller_vale_caja_res', function (Blueprint $table) {
+        Schema::create('circulos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->string('enunciado');
-            $table->string('por');
-            $table->string('deudor');
-            $table->string('cantidad');
-            $table->string('concepto');
-            $table->string('fecha');
-            $table->string('vto_bueno');
-            $table->string('conforme');
+            $table->string('respuesta1')->nullable();
+            $table->string('respuesta2')->nullable();
+            $table->string('respuesta3')->nullable();
+            $table->string('respuesta4')->nullable();
+            $table->string('respuesta5')->nullable();
+            $table->string('respuesta6')->nullable();
             $table->timestamps();
-            
+
             $table->foreign('taller_id')
             ->references('id')
             ->on('tallers')
@@ -46,6 +45,6 @@ class CreateTallerValeCajaResTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('taller_vale_caja_res');
+        Schema::dropIfExists('circulos');
     }
 }
