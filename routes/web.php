@@ -20,9 +20,9 @@ use Illuminate\Support\Facades\Gate;
        return view('principal');
    })->name('welcome');
 
- Route::get('/sistema', function () {
-       return view('welcome');
-   })->name('sistema');
+ // Route::get('/sistema', function () {
+ //       return view('welcome');
+ //   })->name('sistema');
 
  
  
@@ -38,7 +38,7 @@ Auth::routes();
  Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
  // Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
    
- route::get('home','Controller@index')->name('administrador'); //ruta administracion
+ route::get('home','AdminController@index')->name('administrador'); //ruta administracion
 //ruta del menu general de administracion 
 
  route::get('homedoc','DocenteController@index')->name('docente'); //ruta docente
@@ -162,7 +162,7 @@ route::post('/taller45', 'AdminController@taller45')->name('admin.taller45');
 
 route::get('/sistema/taller/{plant}/{id}', 'TallersController@taller')->name('taller');
 
-route::get('/sistema/homees/taller/{plant}/{id}', 'TallersEstudianteController@taller')->name('taller.estudiante');
+route::get('/sistema/homees/taller/{plant}/{id}', 'TallerEstudianteController@taller')->name('taller.estudiante');
 
 
 // route::post('/sistema/taller2', 'TallersController@store2')->name('taller2');
@@ -208,6 +208,8 @@ route::post('/sistema/admin/taller40/{idtaller}', 'TallerEstudianteController@st
 route::post('/sistema/admin/taller41/{idtaller}', 'TallerEstudianteController@store41')->name('taller41');
 route::post('/sistema/admin/taller42/{idtaller}', 'TallerEstudianteController@store42')->name('taller42');
 route::post('/sistema/admin/taller43/{idtaller}', 'TallerEstudianteController@store43')->name('taller43');
+route::post('/sistema/admin/taller44/{idtaller}', 'TallerEstudianteController@store44')->name('taller44');
+route::post('/sistema/admin/taller45/{idtaller}', 'TallerEstudianteController@store45')->name('taller45');
 route::post('/sistema/admin/taller37/{idtaller}', 'TallerEstudianteController@store37')->name('taller_37');
 route::post('/sistema/admin/taller/balance_inicial', 'TallerContabilidadController@balance_inicial')->name('balance_inicial');
 route::post('/sistema/admin/taller/b_inicial_diario', 'TallerContabilidadController@b_inicial_diario')->name('b_inicial_diario');

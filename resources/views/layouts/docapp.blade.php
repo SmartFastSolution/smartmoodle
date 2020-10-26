@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html>
 
 
@@ -10,26 +10,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="{{ asset('css/plugins.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
 
 
     <!-- datatabes -->
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+{{--     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     @yield('css')
 
 </head>
 
-<body class="hold-transition sidebar-mini  layout-fixed">
+<body class="hold-transition sidebar-mini  layout-fixed"> --}}
     <div class="wrapper">
         <!-- Navbar -->
-        <nav class="navbar  navbar-dark bg-dark">
+        <nav class="navbar navbar-expand navbar-dark bg-dark fixed-top">
             <!-- SEARCH FORM -->
             <a href="{{ url('/sistema/homedoc')}}" class="brand-link">
                 <img src=" {{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-4" style="opacity: .8">
                 <span class="brand-text font-weight-light">SmartMoodle</span>
             </a>
+               <ul class="navbar-nav">
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{{ url('/sistema/home') }}" class="nav-link">Administracion</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{{ url('/sistema/perfil') }}" class="nav-link">Perfil</a>
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="#" class="nav-link">Cursos</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Cursos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">FAQ</a>
+                        <a class="dropdown-item" href="#">Support</a>
+                        <a class="dropdown-item" href="#">Contact</a>
+                    </div>
+                </li>
+            </ul>
+
             <form class="form-inline ml-3">
             </form>
             <ul class="navbar-nav ml-auto">
@@ -52,39 +76,26 @@
                     </div>
                 </li>
                 @endguest
-
             </ul>
         </nav>
     </div>
-
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-6">
                 <div class="col-sm-12">
-
-                    @yield('encabezado')
-
+                   @yield('encabezado')
                 </div>
-
             </div>
         </div><!-- /.container-fluid -->
     </section>
     <section class="content">
-
-        @yield('contenido')
-
-
-
+        @yield('content')
     </section>
-
-
-
-
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/plugins.js') }}"></script>
+  {{--   <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/plugins.js') }}"></script> --}}
 
     <!-- datatables script -->
-    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    {{-- <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
     <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
@@ -93,4 +104,4 @@
 
 </body>
 
-</html>
+</html> --}}

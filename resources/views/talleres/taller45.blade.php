@@ -16,8 +16,8 @@
 						<div class="col-7">
 							<div id='puzzle'></div>
 						</div>
-						<div class="col-5">
-							<h4 class="text-info text-center">Palabras relacionadas al comercio </h4>
+						<div class="col-5 align-self-start">
+							<h4 class="text-info">Palabras relacionadas al comercio </h4>
 							<div id='words'></div>
 						</div>
 					</div>
@@ -26,8 +26,9 @@
 				</div>
 			</div>
 			<div class="row justify-content-center">
-				<form action="">
-					<input type="submit" id="activar" disabled="" value="Enviar Respuestas" class=" btn p-2 mt-3 btn-danger ">
+				<form action="{{ route('taller45', ['idtaller' => $d]) }}" method="POST">
+    				@csrf
+					<input type="submit" id="activar" disabled="" value="Enviar Respuesta" class=" btn p-2 mt-3 btn-danger ">
 				</form>
         	
     	</div>	
@@ -47,10 +48,16 @@
   			var gamePuzzle = wordfindgame.create(this.words, '#puzzle', '#words');
   			var puzzle = wordfind.newPuzzle(
     			this.words, 
-    		{height: 40, width:40, fillBlanks: false}
+    		{height: 60, width:60, fillBlanks: true}
   				);
   				wordfind.print(puzzle);    
-  		}        
+  		} ,
+  		methods:{
+  			sendTaller: function(){
+
+  			}
+
+  		}       
 		});
 
   // create just a puzzle, without filling in the blanks and print to console

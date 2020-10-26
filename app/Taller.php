@@ -349,6 +349,10 @@ class Taller extends Model
 
         return $this->hasMany('App\Admin\Respuesta\MapaConceptual2');
     }
+     public function escribirCuentas(){
+
+        return $this->hasMany('App\Admin\Respuesta\EscribirCuenta');
+    }
     
 }
 

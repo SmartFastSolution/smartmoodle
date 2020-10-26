@@ -1,4 +1,6 @@
-@extends('layouts.estapp')
+{{-- @extends('layouts.estapp') --}}
+@extends('layouts.nav')
+
 
 @section('title', 'Perfil | SmartMoodle')
 

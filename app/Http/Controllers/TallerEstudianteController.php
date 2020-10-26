@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Admin\Respuesta\Abreviatura;
+use App\Admin\Respuesta\Activo4;
+use App\Admin\Respuesta\Pasivo4;
+use App\Admin\Respuesta\Patrimonio4;
 use App\Admin\Respuesta\AbreviaturaCarta;
 use App\Admin\Respuesta\AbreviaturaEconomica;
 use App\Admin\Respuesta\AbreviaturaEditorial;
@@ -24,6 +27,7 @@ use App\Admin\Respuesta\ConvertirCheque;
 use App\Admin\Respuesta\DefinirEnunciado;
 use App\Admin\Respuesta\DefinirEnunciadoRe;
 use App\Admin\Respuesta\Diferencia;
+use App\Admin\Respuesta\EscribirCuenta;
 use App\Admin\Respuesta\Factura;
 use App\Admin\Respuesta\FacturaDato;
 use App\Admin\Respuesta\FormulasContable;
@@ -80,6 +84,7 @@ use App\Admin\TallerLetraCambio;
 use App\Admin\TallerMConceptual;
 use App\Admin\TallerNotaPedido;
 use App\Admin\TallerNotaVenta;
+use App\Admin\TallerEscribirCuenta;
 use App\Admin\TallerOrdenIdea;
 use App\Admin\TallerOrdenPago;
 use App\Admin\TallerPagare;
@@ -103,12 +108,16 @@ class TallerEstudianteController extends Controller
 {
      public function taller($plant, $id){
         $d = $id;
+        $resp= auth()->user()->tallers->where('id', $id)->count();
+     if ($resp >= 1) {
+        return abort(404); 
+     }else{
         if ($plant == 1) {
             $consul = Taller::findorfail($id);    
             $datos = TallerCompletar::where('taller_id', $consul->id)->firstOrfail();
             return view('talleres.taller1', compact('datos', 'd'));
-         
         }elseif ($plant == 2) {
+
             $consul = Taller::findorfail($id);
              $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrfail();
             return view('talleres.taller2', compact('datos', 'd'));
@@ -266,13 +275,19 @@ class TallerEstudianteController extends Controller
             return view('talleres.taller27', compact('datos', 'd'));
 
         }elseif ($plant == 28) {
+
+            if ($resp >= 1) {
+                return abort(404); 
+            }else{
               $datos = Taller::findorfail($id);
+            
             if ($datos->plantilla_id == $plant && $datos->id = $id) {
                 return view('talleres.taller28', compact('datos', 'd'));  
              }else {
                 
             return abort(404);   
              }
+         }
         }elseif ($plant == 29) {
             $datos = Taller::findorfail($id);
             if ($datos->plantilla_id == $plant && $datos->id = $id) {
@@ -295,12 +310,16 @@ class TallerEstudianteController extends Controller
             return view('talleres.taller31', compact('datos', 'd'));
 
         }elseif ($plant == 32) {
+        if ($resp >= 1) {
+                return abort(404); 
+        }else{
           $datos = Taller::findorfail($id);
             if ($datos->plantilla_id == $plant && $datos->id = $id) {
             return view('talleres.taller32', compact('datos', 'd'));  
              }else {
             return abort(404);   
              }
+         }
         }elseif ($plant == 33) {
             $consul = Taller::findorfail($id);
              $datos = TallerPregunta::where('taller_id', $consul->id)->firstOrFail();
@@ -435,6 +454,7 @@ class TallerEstudianteController extends Controller
         }elseif ($plant == 57) {
             
      
+        }
         }
     }
     public function store1(Request $request, $idtaller){
@@ -1514,10 +1534,66 @@ public function store11(Request $request, $idtaller)
             $taller43->respuesta6 =  $request->input('respuesta6');
             $taller43->save();
 
-    $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+            $user= User::find($id);
+            $user->tallers()->attach($idtaller,['status'=> 'completado']);
+            return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
+         public function store44(Request $request, $idtaller)
+           {
+            $id                   = Auth::id();
+            $contenido            = TallerEscribirCuenta::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+            $taller44             = new EscribirCuenta; 
+            $taller44->taller_id  = $idtaller;
+            $taller44->user_id    = $id;           
+            $taller44->enunciado  = $contenido->enunciado; 
+            $taller44->save();
+            $o = EscribirCuenta::where('user_id', $id)->get()->last();              
+
+            if ($request->cuenta == 'activo') {
+                foreach ($request->activos as $key=>$v) {
+                     $datos               =array(
+                     'escribir_cuenta_id' => $o->id,
+                     'cuenta'             => $v,
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                     );
+                  Activo4::insert($datos);
+               }
+            }elseif ($request->cuenta == 'pasivo') {
+                foreach ($request->pasivos as $key=>$v) {
+                     $datos               =array(
+                     'escribir_cuenta_id' => $o->id,
+                     'cuenta'             => $v,
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                     );
+                  Pasivo4::insert($datos);
+               }
+
+            }elseif ($request->cuenta == 'patrimonio') {
+                foreach ($request->patrimonio as $key=>$v) {
+                     $datos          =array(
+                     'escribir_cuenta_id' => $o->id,
+                     'cuenta'             => $v,
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                     );
+                  Patrimonio4::insert($datos);
+               }
+            }
+
+            $user= User::find($id);
+            $user->tallers()->attach($idtaller,['status'=> 'completado']);
+            return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    }
+
+    public function store45(Request $request, $idtaller)
+        {
+            $id   = Auth::id();
+            $user = User::find($id);
+            $user->tallers()->attach($idtaller,['status'=> 'completado']);
+            return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+        }
 
 
 }

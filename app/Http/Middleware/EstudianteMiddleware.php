@@ -19,9 +19,9 @@ class EstudianteMiddleware
         $rol =$role->descripcion;
         }
         if($rol == 'docente'){
-            return redirect('/sistema/homees');
-        }else{
-            return $next($request);
-          }
+            return redirect('/sistema/homedoc');
+        }
+           return $next($request);
+          
     }
 }

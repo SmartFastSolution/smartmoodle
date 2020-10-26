@@ -1,9 +1,9 @@
-@extends('layouts.docapp')
+@extends('layouts.nav')
 
 
-@section('title', 'Dashboard | SmartMoodle')
+@section('title', 'Administracion - Docente')
 
-@section('contenido')
+@section('content')
 <h1>Docente Perfil</h1>
 
 

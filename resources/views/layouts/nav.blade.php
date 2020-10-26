@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/preloader.css') }}">
-
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <!-- datatabes -->
     <link rel="stylesheet" href=" {{ asset('css/jquery.dataTables.min.css')}}">
     @yield('css')
@@ -18,6 +18,12 @@
 </head>
 
 <body class="hold-transition sidebar-mini  layout-fixed">
+     <li class="d-none">
+        @foreach (auth()->user()->roles as $role)
+            {{ $rol = $role->descripcion}}
+        @endforeach
+    </li>
+@if ($rol === 'administrador')
         <!-- Preloader Start -->
  <div class="wrapper">
         <!-- Navbar -->
@@ -28,7 +34,6 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-
             </ul>
 
             <!-- SEARCH FORM -->
@@ -67,6 +72,9 @@
             </ul>
         </nav>
         <!-- /.navbar -->
+
+       
+
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-light-primary elevation-4">
@@ -153,7 +161,7 @@
                         @can('haveaccess', 'instituto.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-cog"></i>
+                                <i class="fas fa-school"></i>
                                 <p>
                                     U. Educativa
                                     <i class="fas fa-angle-left right"></i>
@@ -367,6 +375,9 @@
             </div>
             <!-- /.sidebar -->
         </aside>
+    
+
+
             <div id="preloader">
                 <div class="yummy-load">
                     <img src="{{ asset('dist/img/AdminLTELogo.png') }}"  alt="">
@@ -387,6 +398,11 @@
                 @yield('content')
             </section>
         </div>
+@elseif($rol ==='estudiante')
+    @include('layouts.estapp')
+@elseif($rol ==='docente')
+    @include('layouts.docapp')
+@endif
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>

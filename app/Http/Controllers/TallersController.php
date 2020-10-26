@@ -103,8 +103,6 @@ class TallersController extends Controller
              }else {
             return abort(404);   
              }
-
-
         }elseif ($plant == 4) {
             $consul = Taller::findorfail($id);
              $datos = TallerDiferencia::where('taller_id', $consul->id)->firstOrfail();

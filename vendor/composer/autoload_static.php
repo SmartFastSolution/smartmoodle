@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit442f17221ccff4b0382a3eb70bce751b
+class ComposerStaticInit5941d17238fcb021a4db7e5496fe7b5a
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -639,6 +639,7 @@ class ComposerStaticInit442f17221ccff4b0382a3eb70bce751b
         'App\\Admin\\Respuesta\\AbreviaturaEconomica' => __DIR__ . '/../..' . '/app/Admin/Respuesta/AbreviaturaEconomica.php',
         'App\\Admin\\Respuesta\\AbreviaturaEditorial' => __DIR__ . '/../..' . '/app/Admin/Respuesta/AbreviaturaEditorial.php',
         'App\\Admin\\Respuesta\\AbreviaturaRe' => __DIR__ . '/../..' . '/app/Admin/Respuesta/AbreviaturaRe.php',
+        'App\\Admin\\Respuesta\\Activo4' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Activo4.php',
         'App\\Admin\\Respuesta\\AlternativaCorrecta' => __DIR__ . '/../..' . '/app/Admin/Respuesta/AlternativaCorrecta.php',
         'App\\Admin\\Respuesta\\AlternativaCorrectaRes' => __DIR__ . '/../..' . '/app/Admin/Respuesta/AlternativaCorrectaRes.php',
         'App\\Admin\\Respuesta\\AnalizarPregunta' => __DIR__ . '/../..' . '/app/Admin/Respuesta/AnalizarPregunta.php',
@@ -656,6 +657,7 @@ class ComposerStaticInit442f17221ccff4b0382a3eb70bce751b
         'App\\Admin\\Respuesta\\DefinirEnunciado' => __DIR__ . '/../..' . '/app/Admin/Respuesta/DefinirEnunciado.php',
         'App\\Admin\\Respuesta\\DefinirEnunciadoRe' => __DIR__ . '/../..' . '/app/Admin/Respuesta/DefinirEnunciadoRe.php',
         'App\\Admin\\Respuesta\\Diferencia' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Diferencia.php',
+        'App\\Admin\\Respuesta\\EscribirCuenta' => __DIR__ . '/../..' . '/app/Admin/Respuesta/EscribirCuenta.php',
         'App\\Admin\\Respuesta\\Factura' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Factura.php',
         'App\\Admin\\Respuesta\\FacturaDato' => __DIR__ . '/../..' . '/app/Admin/Respuesta/FacturaDato.php',
         'App\\Admin\\Respuesta\\FormulasContable' => __DIR__ . '/../..' . '/app/Admin/Respuesta/FormulasContable.php',
@@ -680,6 +682,8 @@ class ComposerStaticInit442f17221ccff4b0382a3eb70bce751b
         'App\\Admin\\Respuesta\\OrdenPago' => __DIR__ . '/../..' . '/app/Admin/Respuesta/OrdenPago.php',
         'App\\Admin\\Respuesta\\Pagare' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Pagare.php',
         'App\\Admin\\Respuesta\\Palabra' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Palabra.php',
+        'App\\Admin\\Respuesta\\Pasivo4' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Pasivo4.php',
+        'App\\Admin\\Respuesta\\Patrimonio4' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Patrimonio4.php',
         'App\\Admin\\Respuesta\\Pregunta' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Pregunta.php',
         'App\\Admin\\Respuesta\\Recibo' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Recibo.php',
         'App\\Admin\\Respuesta\\Relacionar' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Relacionar.php',
@@ -5846,10 +5850,10 @@ class ComposerStaticInit442f17221ccff4b0382a3eb70bce751b
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit442f17221ccff4b0382a3eb70bce751b::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit442f17221ccff4b0382a3eb70bce751b::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit442f17221ccff4b0382a3eb70bce751b::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit442f17221ccff4b0382a3eb70bce751b::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5941d17238fcb021a4db7e5496fe7b5a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5941d17238fcb021a4db7e5496fe7b5a::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit5941d17238fcb021a4db7e5496fe7b5a::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit5941d17238fcb021a4db7e5496fe7b5a::$classMap;
 
         }, null, ClassLoader::class);
     }

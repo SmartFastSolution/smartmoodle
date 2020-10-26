@@ -1,4 +1,7 @@
-@extends('layouts.estapp')
+{{-- @extends('layouts.estapp') --}}
+
+@extends('layouts.nav')
+
 
 @section('title', 'Perfil | SmartMoodle')
 
@@ -94,23 +97,23 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Unidad</th>
-                                        <th scope="col"> Taller </th>
-                                        <th scope="col">Plantilla </th>
+                                        <th scope="col" width="50">#</th>
+                                        <th scope="col" width="125">Unidad</th>
+                                        <th scope="col" width="100"> Taller </th>
+                                        <th scope="col">Enunciado </th>
                                         <th scope="col">Vista Taller</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         @foreach($tallers->where('contenido_id', $contenido->id) as $taller)
-                                        <th scope="row">{{$taller->materia['id']}}</th>
+                                        <th scope="row">{{-- {{$taller->materia['id']}} --}}</th>
                                         <td>{{$taller->contenido->nombre}}</td>
                                         <td>{{$taller['nombre']}}</td>
-                                        <td>{{$taller->Plantilla->nombre}}</td>
+                                        <td>{{$taller->enunciado}}</td>
                                         <td class="table-button ">
                                             <a class="btn btn-info"
-                                                href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
+                                                href="{{route('taller.estudiante',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
                                                 class="fas fa-eye"></i></a>
                                         </td>
                                     </tr>
@@ -131,7 +134,7 @@
                 <h3 class="font-weight-light"> <strong>Talleres Completados</strong></h3>
 
             </div>
-
+            
             <div class="row">
                 <div class="card-body">
 
@@ -145,27 +148,29 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Unidad</th>
-                                        <th scope="col"> Taller </th>
-                                        <th scope="col">Plantilla </th>
+                                        <th scope="col" width="50">#</th>
+                                        <th scope="col"  width="100">Unidad</th>
+                                        <th scope="col"  width="80"> Taller </th>
+                                        <th scope="col">Enunciado </th>
                                         <th scope="col">Estado </th>
-                                        <th scope="col">Vista Taller</th>
+                                        <th scope="col">Calificacion </th>
+                                        {{-- <th scope="col">Vista Taller</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         @foreach(auth()->user()->tallers->where('contenido_id', $contenido->id) as $taller)
-                                        <th scope="row">{{$taller->materia['id']}}</th>
+                                        <th scope="row">{{-- {{$taller->materia['id']}} --}}</th>
                                         <td>{{$taller->contenido->nombre}}</td>
                                         <td>{{$taller['nombre']}}</td>
-                                        <td>{{$taller->Plantilla->nombre}}</td>
-                                        <td>{{$taller->pivot->status}}</td>
-                                        <td class="table-button ">
+                                        <td>{{$taller->enunciado}}</td>
+                                        <td> <span class="badge badge-success">{{$taller->pivot->status}}</span></td>
+                                        <td> <span class="badge badge-danger">pendiente</span></td>
+                                       {{--  <td class="table-button ">
                                             <a class="btn btn-info"
                                                 href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
                                                 class="fas fa-eye"></i></a>
-                                        </td>
+                                        </td> --}}
                                     </tr>
                                     @endforeach
                                 </tbody>

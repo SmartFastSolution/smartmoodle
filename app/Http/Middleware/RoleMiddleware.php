@@ -20,10 +20,10 @@ class RoleMiddleware
             $rol =$role->descripcion;
         }
         if($rol == 'estudiante'){
-        return redirect('/sistema/homees');
-          }else{
-            return $next($request);
+        	return redirect('/sistema/homees');
           }
+            return $next($request);
+          
           
     }
 }

@@ -64,11 +64,20 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('estudiante');
+        $this->middleware('docente');
+    }
    public function admin()
    {
          $g = 0;
    	  return view('admin.admin', compact('g'));
    }
+   public function index (){
+
+        return view('welcome');
+    }
    public function plantilla(Request $request)
    {
 
