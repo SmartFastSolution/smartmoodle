@@ -8,6 +8,6 @@ class TallerSubrayarOp extends Model
 {
     public function tallerSubrayar(){
 
-        return $this->belongsTo('App\Admin\TallerSubrayar');
+        return $this->belongsTo('App\Admin\TallerSubrayar', 'taller_subrayars_id');
     }
 }

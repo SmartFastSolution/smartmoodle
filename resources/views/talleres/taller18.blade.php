@@ -15,17 +15,17 @@
 			<div class="col-2">
 				 <h2>Datos</h2>				 
 				  <label for="">Valor</label><br>
-                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->valor }}')">{{ $datos->valor }}</p>
+                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->valor }}')" ondragend="this.classList.add('text-muted');">{{ $datos->valor }}</p>
                 <label for="">Acreedor</label><br>
-                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->acreedor }}')">{{ $datos->acreedor }}</p>
+                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->acreedor }}')" ondragend="this.classList.add('text-muted');">{{ $datos->acreedor }}</p>
                 <label for="">Deudor</label><br>
-                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->deudor }}')">{{ $datos->deudor }}</p>
+                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->deudor }}')" ondragend="this.classList.add('text-muted');"> {{ $datos->deudor }}</p>
                 <label for="">Tasa de interes</label><br>
-                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->tasa_de_interes }}')">{{ $datos->tasa_de_interes }}</p>
+                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->tasa_de_interes }}')" ondragend="this.classList.add('text-muted');">{{ $datos->tasa_de_interes }}</p>
                     <label for="">Fecha de Vencimiento</label><br>
-                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->fecha_de_vencimiento }}')">{{ $datos->fecha_de_vencimiento }}</p>
+                    <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->fecha_de_vencimiento }}')" ondragend="this.classList.add('text-muted');">{{ $datos->fecha_de_vencimiento }}</p>
                 <label for="">Lugar y Fecha de emision</label>  <br>
-                <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->lugar }}')">{{ $datos->lugar }}</p>
+                <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->lugar }}')" ondragend="this.classList.add('text-muted');"> {{ $datos->lugar }}</p>
                 <p>{{ $datos->fecha_de_emision }}</p>
 			</div>
 			<div class="col-9 border border-info p-3">
@@ -37,7 +37,7 @@
 						<div class="row mb-2">
 							<div class="col-3 text-right"><label for="" class="col-form-label">Vence el:</label></div>
 							<div class="col-8">
-								<input type="date" name="vencimiento" class="form-control text-center">
+								<input type="date" name="vencimiento" class="form-control text-center" required>
 							</div>
 						</div>
 						<div class="row">
@@ -45,7 +45,7 @@
 								<label for="" class="col-form-label">No:</label>
 							</div>
 							<div class="col-3">
-								<input type="text" name="numero" class="form-control">
+								<input type="text" name="numero" class="form-control" required>
 							</div>
 							<div class="col-5 border border-info p-2">
 								<div class="row">
@@ -53,7 +53,7 @@
 										<label class="col-form-label" for="">POR:</label>
 									</div>
 									<div class="col-8">
-										<input type="text" name="por" class="form-control">
+										<input type="text" name="por" class="form-control" required>
 									</div>
 								</div>
 							</div>
@@ -64,36 +64,36 @@
 					<div class="col-12 text-center ">
 						<div class="row mb-1">
 							<div class="col-6">
-								<input type="text" name="ciudad" class="form-control">
+								<input type="text" name="ciudad" class="form-control" required>
 							</div>
 							<div class="col-6">
-								<input type="date" name="fecha" class="form-control">
+								<input type="date" name="fecha" class="form-control" required>
 							</div>
 						</div>				
 						<h6>Ciudad y fecha</h6>
 					</div>
 					<div class="col-12 ">						
-							<input type="text" name="orden_de" class="form-control">								
+							<input type="text" name="orden_de" class="form-control" required>								
 						<h6>A la orden de</h6>
 					</div>
 					<div class="col-12 ">						
-							<input type="text" name="de" class="form-control">								
+							<input type="text" name="de" class="form-control" required>								
 						<h6>De</h6>
 					</div>
 					<div class="col-12 ">						
-							<input type="text" name="cantidad" class="form-control">								
+							<input type="text" name="cantidad" class="form-control" required>								
 						<h6>La Cantidad de</h6>
 					</div>
 					<div class="col-12 form-inline">						
-							<p class="col-form-label">Con  el  interés  del <input type="text" name="interes" class="form-control"> por  ciento  anual,   desde <input name="desde" type="text" class="form-control"> Sin protesto.   Exímese  de presentación  para  aceptación  y  pago  así  como  de  avisos  por  falta  de  estos  hechos.</p>
+							<p class="col-form-label">Con  el  interés  del <input type="text" name="interes" class="form-control" required> por  ciento  anual,   desde <input name="desde" type="text" class="form-control" required> Sin protesto.   Exímese  de presentación  para  aceptación  y  pago  así  como  de  avisos  por  falta  de  estos  hechos.</p>
 					</div>
 					<div class="col-12 ">						
 							<div class="row mb-1">
 								<div class="col-6">
-									<input type="text" name="direccion" class="form-control">
+									<input type="text" name="direccion" class="form-control" required>
 								</div>
 								<div class="col-6">
-									<input type="text" name="ciudad2" class="form-control">
+									<input type="text" name="ciudad2" class="form-control" required>
 								</div>
 							</div>	
 							<div class="row mb-1">
@@ -104,7 +104,7 @@
 				</div>
 				<div class="row justify-content-center">
 					<div class="col-5 text-center">
-						<input type="text" name="atentamente" class="form-control">
+						<input type="text" name="atentamente" class="form-control" required>
 						<h1>Atentamente</h1>
 					</div>
 				</div>

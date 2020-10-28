@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html>
-
-
+<html class="@yield('class')">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,23 +7,25 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
     <link rel="stylesheet" href="{{ asset('css/plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-
-
+    <link rel="stylesheet" href="{{ asset('css/preloader.css') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <!-- datatabes -->
-    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
-    
-    <!-- <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}"> -->
+    <link rel="stylesheet" href=" {{ asset('css/jquery.dataTables.min.css')}}">
     @yield('css')
 
 </head>
 
 <body class="hold-transition sidebar-mini  layout-fixed">
-    <div class="wrapper">
+     <li class="d-none">
+        @foreach (auth()->user()->roles as $role)
+            {{ $rol = $role->descripcion}}
+        @endforeach
+    </li>
+@if ($rol === 'administrador')
+        <!-- Preloader Start -->
+ <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- layout-navbar-fixed -->
@@ -34,7 +34,6 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-
             </ul>
 
             <!-- SEARCH FORM -->
@@ -74,6 +73,9 @@
         </nav>
         <!-- /.navbar -->
 
+       
+
+
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-light-primary elevation-4">
             <!-- Brand Logo -->
@@ -94,9 +96,6 @@
                         data-accordion="true">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-
-
-
                         @can('haveaccess', 'rol.index')
                         <li class="nav-header">ADMINISTRACIÓN</li>
                         <li class="nav-item">
@@ -162,7 +161,7 @@
                         @can('haveaccess', 'instituto.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-cog"></i>
+                                <i class="fas fa-school"></i>
                                 <p>
                                     U. Educativa
                                     <i class="fas fa-angle-left right"></i>
@@ -292,6 +291,7 @@
                             </ul>
                         </li>
                         @endcan
+                        <li class="nav-header">DOCENTE</li>
                         @can('haveaccess', 'asignacionma.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
@@ -356,45 +356,42 @@
             </div>
             <!-- /.sidebar -->
         </aside>
+    
+
+
+            <div id="preloader">
+                <div class="yummy-load">
+                    <img src="{{ asset('dist/img/AdminLTELogo.png') }}"  alt="">
+                </div>
+            </div>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-6">
                         <div class="col-sm-12">
-
                             @yield('encabezado')
-
                         </div>
-
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
             <section class="content">
-
                 @yield('content')
-
-
-
             </section>
         </div>
-
+@elseif($rol ==='estudiante')
+    @include('layouts.estapp')
+@elseif($rol ==='docente')
+    @include('layouts.docapp')
+@endif
     </div>
-
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>
-
+    <script src="{{ asset('js/preloader.js') }}"></script>
     <!-- datatables script -->
-    <script src="http://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-   
-    <!-- <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script> -->
-
+    <script src="{{ asset('js/jquery.dataTables.min.js')}}"></script>
     @yield('js')
-    @include('sweetalert::alert')
+  {{--   @include('sweetalert::alert') --}}
 </body>
 
 </html>

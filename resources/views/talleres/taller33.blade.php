@@ -1,37 +1,35 @@
 @extends('layouts.nav')
 
-@section('title', 'Taller 34')
+@section('title', $datos->nombre)
 @section('content')
 
-	<h1 class="text-center  mt-5 text-danger"> Taller #34</h1>
-    <h3 class="text-center mt-5 mb-3 text-info">ESCRIBA  LAS  CUENTAS  QUE  IDENTIFICAN  LAS  FIGURAS,  CON  AGILIDAD.</h3>
+<h1 class="text-center  mt-5 text-danger"> {{ $datos->nombre }}</h1>
+<h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
-<form action="">
-	<div class="container ">
-		<div class="row justify-content-center">
-			<div class="col-6">
-				<div class="row">
-				<div class="col-5 align-self-center">
-					<img class="img-fluid" src="{{ asset('img/talleres/imagen-31.jpg') }}" alt="">
+<form action="{{ route('taller33', ['idtaller' => $d]) }}" method="POST">
+           @csrf
+	<div class="container">
+		<div class="row justify-content-center ">
+			<div class="col-6 text-center">
+				<h1>{{ $datos->pregunta1 }}</h1>
+				<div class=" p-3 text-center border border-danger rounded-circle">
+					<textarea name="respuesta1" class="form-group" id="" cols="30" rows="10"></textarea>
 				</div>
-				<div class="col-7 align-self-center">
+			</div>
+			<div class="col-6 text-center">
 				
-					<input type="text" class="form-control">
-				</div>
-			</div>
-			</div>
-			<div class="col-6">
-				<div class="row">
-					<div class="col-5 align-self-center">
-					<img class="img-fluid" src="{{ asset('img/talleres/imagen-31.jpg') }}" alt="">
-				</div>
-				<div class="col-7 align-self-center">
-					
-					<input type="text" class="form-control">
-				</div>
+				
+					<h1>{{ $datos->pregunta2 }}</h1>
+					<div class=" p-3 text-center border border-danger rounded-circle">
+					<textarea name="respuesta2" class="form-group" id="" cols="30" rows="10"></textarea>
+				
 				</div>
 			</div>
 		</div>
+		<div class="row justify-content-center">
+        	<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
+    	</div>
 	</div>
 </form>
- @endsection
+
+@endsection

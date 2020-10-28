@@ -18,13 +18,13 @@
 
 </head>
 
-<body class="  layout-fixed">
+<body class="  layout-fixed"> --}}
     <div class="wrapper">
         <!-- Navbar -->
         <nav class=" navbar navbar-expand navbar-light bg-light fixed-top">
 
             <!-- SEARCH FORM -->
-            <a href="{{ url('/sistema/homedoc')}}" class="brand-link">
+            <a href="{{ url('/sistema/homedoc') }}" class="brand-link">
                 <img src=" {{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-4" style="opacity: .8">
                 <span class="brand-text font-weight-light">SmartMoodle</span>
@@ -34,7 +34,7 @@
                     <a href="{{ url('/sistema/home') }}" class="nav-link">Administracion</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="" class="nav-link">Perfil</a>
+                    <a href="{{ url('/sistema/perfil') }}" class="nav-link">Perfil</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Actividades</a>
@@ -81,23 +81,19 @@
 
     <br><br><br>
     <section class="content">
-      
             @yield('content')
-
-
-       
     </section>
 
 
 
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/plugins.js') }}"></script>
+{{--     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/plugins.js') }}"></script> --}}
 
 
     <!-- datatables script -->
 
-    @yield('js')
+{{--     @yield('js')
 
 </body>
 
-</html>
+</html> --}}

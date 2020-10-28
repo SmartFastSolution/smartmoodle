@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html>
 
 
@@ -18,7 +18,7 @@
 
 </head>
 
-<body class="  layout-fixed">
+<body class="  layout-fixed"> --}}
     <div class="wrapper">
         <!-- Navbar -->
         <nav class=" navbar navbar-expand navbar-light bg-light fixed-top">
@@ -81,23 +81,19 @@
 
     <br><br><br>
     <section class="content">
-      
             @yield('content')
-
-
-       
     </section>
 
 
 
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/plugins.js') }}"></script>
+{{--     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/plugins.js') }}"></script> --}}
 
 
     <!-- datatables script -->
 
-    @yield('js')
+{{--     @yield('js')
 
 </body>
 
-</html>
+</html> --}}

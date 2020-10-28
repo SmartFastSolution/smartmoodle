@@ -1,73 +1,96 @@
 @extends('layouts.nav')
 
-@section('title', 'Taller 38')
-@section('contenido')
+@section('css')
+<style>
+::-webkit-scrollbar {
+    width: 25px;     /* Tamaño del scroll en vertical */
+    height: 8px;    /* Tamaño del scroll en horizontal */
+ 
+}
+/* Ponemos un color de fondo y redondeamos las esquinas del thumb */
+::-webkit-scrollbar-thumb {
+    background: #0FECDA;
+    border-radius: 25px;
+}
+/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #2E09E9;
 
-<h1 class="text-center  mt-5 text-danger"> Taller #38</h1>
-<h3 class="text-center mt-5 mb-3 text-info">UEGO  DE  REALIZAR  LOS  EJERCICIOS,  DETERMINE  EL  TIPO  DE  SALDO 
-CON  EXACTITUD.</h3>
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+/* Cambiamos el fondo cuando esté en active */
+::-webkit-scrollbar-thumb:active {
+    background-color: #0CCBDC;
+}
+/* Ponemos un color de fondo y redondeamos las esquinas del track */
+::-webkit-scrollbar-track {
+    background: #e1e1e1;
+    border-radius: 4px;
+}
+/* Cambiamos el fondo cuando esté en active o hover */
+::-webkit-scrollbar-track:hover,
+::-webkit-scrollbar-track:active {
+  background: #d4d4d4;
+}
+</style>
+@endsection
+@section('title', 'Talleres de contabilidad')
+@section('content')
+	 <div class="container mb-3" >
+        
+	 	<h1 class="text-center  mt-5">{{ $datos->taller->nombre }}</h1>
+     <h3 class="text-center mt-3">{{ $datos->enunciado }}</h3>
 
-<form action="">
-	<div class="container">
-		<div class="row justify-content-center ">
-			
-				<div class="col-12">
-					<div class="row">
-						<div class="col-8">
-							<table class="table">
-							  <thead>
-							    <tr>
-							     
-							      <th colspan="10" scope="col">DEBE</th>
-							      <th colspan="10" class="text-right"  scope="col">HABER</th>
-							    
-							    </tr>
-							  </thead>
-							  <tbody>
-							 <tr>
-							 	<td class="border-left-0 border-bottom-0 border-top-0 border" colspan="10">
-							 		<div class="row">
-							 			<div class="col-6">
-							 				<h6>Compra  de Bienes</h6>
-							 				<h6>Caja</h6>
-							 				<h4>TOTAL</h4>
-							 			</div>
-							 			<div class="col-6 ">
-							 				<h6 class="mb-4">$ 2.100</h6>
-							 				<h6 class="border-left-0 border-right-0 border-top-0 border border-danger">$ 900</h6>
-							 			</div>
-							 		</div>
-							 	</td>
-							 	<td colspan="10">
-							 		<div class="row">
-							 			<div class="col-6">
-							 				<h6>Compra  de Bienes</h6>
-							 				<h6>Banco</h6>
-							 				<h4>TOTAL</h4>
-							 			</div>
-							 			<div class="col-6">
-							 				<h6 class="mb-4">$ 2.100</h6>
-							 				<h6 class="border-left-0 border-right-0 border-top-0 border border-danger">$ 900</h6>
-							 			</div>
-							 		</div>
-							 	</td>
-							 </tr>
-							  </tbody>
-							</table>
+  <div class="row justify-content-md-center">
+    <div class="col-12 col-sm-12 col-md-2 mb-3">
+        <div class="list-group" id="list-tab" role="tablist">
+          <a class="list-group-item list-group-item-action active" id="list-diario-list" data-toggle="list" href="#list-diario" role="tab" aria-controls="home">Balance Inicial</a>
+          <a class="list-group-item list-group-item-action" id="list-balance_comp-list" data-toggle="list" href="#list-balance_comp" role="tab" aria-controls="profile">Balance de Comprobacion</a>
+          <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Diario General</a>
+          <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+        </div>
+  </div>
+  <div class="col-12 col-sm-12 col-md-10">
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active border border-danger p-4" id="list-diario" role="tabpanel" aria-labelledby="list-diario-list">
 
-						</div>
-						<div class="col-4 text-center align-self-center">
-							<div class="border bg-light p-2">
-								<h5>SALDO :</h5>
-								<input type="text" class="form-control">
-							</div>
+        <ul class="nav nav-tabs" id="bInicial" role="tablist">
+          <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#b_horizontal" role="tab" aria-controls="b_horizontal" aria-selected="true">Balance Inicial Horizontal</a>
+          </li>
+          <li class="nav-item" role="presentation">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#b_vertical" role="tab" aria-controls="b_vertical" aria-selected="false">Balance Inicial Vertical</a>
+          </li>
+        </ul>
+          <div class="tab-content" id="bInicialContent">
+             @include('contabilidad.balanceinicial')
+          </div> 
+      </div>
+      <div class="tab-pane fade" id="list-balance_comp" role="tabpanel" aria-labelledby="list-balance_comp-list">
+  			@include('contabilidad.balancecomprobacion')
+      </div>
+   <div class="tab-pane fade border border-danger " id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+  			@include('contabilidad.diariogeneral') 	
+   </div>
+      <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
+      	<form>
+      		<input type="text">
+      	</form>
+      </div>
+    </div>
+  </div>
 
-						</div>
-					</div>
-				</div>
-			
-		</div>
-	</div>
-</form>
+     </div>
 
+   {{--   <div class="row justify-content-center">
+        <input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
+     </div> --}}
+    {{--  @include ('layouts.modacontabilidad') --}}
+ </div>
+
+@include ('layouts.footer')
+@section('js')
+<script type="text/javascript" src="{{ asset('js/tallercontabilidad.js') }}"></script>
+
+@endsection
 @endsection

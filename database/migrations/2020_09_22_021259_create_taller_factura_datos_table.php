@@ -16,6 +16,8 @@ class CreateTallerFacturaDatosTable extends Migration
         Schema::create('taller_factura_datos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_factura_id');
+            $table->text('codigo')->nullable();
+            $table->string('cod_auxiliar')->nullable();
             $table->string('cantidad')->nullable();
             $table->string('descripcion')->nullable();
             $table->string('precio')->nullable();

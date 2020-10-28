@@ -15,34 +15,41 @@
                             <div class="form-group">
                                 <input required="" type="hidden" value="1" name="id_plantilla">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
-                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5" cols="20"></textarea>
                             </div>
 
                             <div class="form-row">
-                                <div class="form-group col-6">
-                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
-                                    <select name="contenido_id" class="custom-select">
-                                        @foreach ($contenidos = App\Contenido::get() as $contenido)
-                                        <option value="{{ $contenido->id }}">{{ $contenido->nombre }}</option>
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
                                         @endforeach
-
-                                <div class="form-row">
-                                  <div class="form-group col-6">
-                                    <label for="recipient-name" class="col-form-label">Materia:</label>
-                                    <select name="materia_id" class="custom-select" >
-                                      @foreach ($materias = App\Materia::get() as $materia)
-                                      <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                      @endforeach
-
                                     </select>
-                                  </div>
-                                   <div class="form-group col-6">
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select" required>
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
+                            </div>
+                      <div class="form-group col-4">
                                     <label for="" class="col-form-label">Imagen(Opcional):</label>
-                                        <input type="file" class="inputfile inputfile-1" id="file-1">
+                                        <input type="file" class="inputfile inputfile-1" name="imagen" id="file-1">
                                         <label for="file-1"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>
                                    
                                   </div>
-                    </div>
                       <div class="form-group">
                         <label for="" class="col-form-label">Leyenda(Usar cuando no hay imagen):</label>
                         <textarea  class="form-control" name="leyenda" ></textarea>
@@ -60,7 +67,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="taller2" tabindex="-1" role="dialog" aria-labelledby="taller2Label" aria-hidden="true">
+{{-- <div class="modal fade" id="taller2" tabindex="-1" role="dialog" aria-labelledby="taller2Label" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -80,22 +87,40 @@
 
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                              <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Imagen:</label>
-                                    <input type="file" class="inputfile inputfile-1" id="ta2-1">
+                                    <input type="file" class="inputfile inputfile-1" id="ta2-1" name="imagen">
                                     <label for="ta2-1"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>
                                
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -106,7 +131,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 <div class="modal fade" id="taller3" tabindex="-1" role="dialog" aria-labelledby="taller3Label" aria-hidden="true">
@@ -128,13 +153,31 @@
                                 <input required="" type="hidden" value="3" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                              <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                     <div class="enun">
                         <div class="form-row">
@@ -149,11 +192,10 @@
                         </div>
                     </div>
                         <div class="row">
-                                    <a href="#" class="addEnun btn btn-outline-danger">Agregar Columna</a>
-                                </div>
-
+                            <a href="#" class="addEnun btn btn-outline-danger">Agregar Columna</a>
+                        </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input  type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -187,26 +229,44 @@
                                 <textarea required="" required="" type="text" name="enunciado"
                                     class="form-control"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                        <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-row justify-content-center">
                                 <div class="form-group col-md-5">
                                     <label for="" class="col-form-label ">Imagen 1:</label>
                                     
-                                       <input type="file" class="inputfile inputfile-1" id="ta4-1">
+                                       <input type="file" class="inputfile inputfile-1" name="img1" id="ta4-1">
                                         <label for="ta4-1"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>
                                   
                                 </div>
                                 <div class="form-group col-md-5">
                                     <label for="" class="col-form-label ">Imagen 2:</label>
                                     
-                                       <input type="file" class="inputfile inputfile-1" id="ta4-2">
+                                       <input type="file" class="inputfile inputfile-1" name="img2" id="ta4-2">
                                         <label for="ta4-2"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>
                                     
                                 </div>
@@ -245,13 +305,31 @@
                                 <input required="" type="hidden" value="5" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                           <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                               <div class="taller5">
                                   <div class="form-group row mb-3 p-3">
@@ -312,17 +390,33 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="6" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                               <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                                  <div class="form-group">
                                 <table class="table table-borderless">
@@ -394,17 +488,33 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="7" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                           <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="row justify-content-center">
                                 <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
@@ -440,22 +550,40 @@
                                 <input required="" type="hidden" value="8" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Imagen Central: </label>                          
-                                 <input type="file" class="inputfile inputfile-1" id="ta8-1">
+                                 <input type="file" class="inputfile inputfile-1" name="img" id="ta8-1">
                                 <label for="ta8-1"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>                           
                             </div>
                                <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Cantidad de circulos:</label>
-                                <select name="cantidad" class="custom-select">               
+                                <select required="" name="cantidad" class="custom-select">               
                                     <option value="3">3</option>           
                                     <option value="4">4</option>           
                                     <option value="5">5</option>           
@@ -497,13 +625,31 @@
                                 <input required="" type="hidden" value="9" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                           <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                           <div class="enc_9">
                             <div class="form-row bg-light p-2 mb-2">
@@ -513,7 +659,7 @@
                                       <label for="concepto6" class="col-form-label">Concepto 1 : </label>
                                     </div>
                                     <div class="col-9">
-                                      <textarea name="concep[]" class="form-control" rows="3"></textarea>
+                                      <textarea required="" name="concep[]" class="form-control" rows="3"></textarea>
                                     </div>
                                     <div class="col-1">
                                       <a href="#" class="btn btn-danger re_tall9"><span class="glyphicon glyphicon-remove">X</span></a>
@@ -564,26 +710,44 @@
                                 <input required="" type="hidden" value="10" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                           <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                           <div class="tall_10">
                             <div class="form-group bg-light p-2">
                                 <div class="form-inline">
                                     <label for="enunciado1" class="col-form-label pr-2">Enunciado 1 </label>
-                                    <input required="" type="text" name="enunciado[]" class="form-control m-2">
+                                    <input required="" type="text" name="enunciados[]" class="form-control m-2">
                                     <a href="#" class="btn btn-danger re_tall10">
-                                      <span class="glyphicon glyphicon-remove">X</span></a>                                </div>
+                                      <span class="glyphicon glyphicon-remove">X</span></a> </div>
                                 <div class="form-inline">
                                     <label for="img1" class="col-form-label">Imagen 1:</label>
                                 </div>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="img[]" lang="es">
+                                    <input type="file" class="custom-file-input" name="img[]">
                                     <label class="custom-file-label" for="customFile">Seleciona un archivo</label>
                                 </div>
                                 <label for="concepto6" class="col-form-label">Definicion 1:</label>
@@ -629,13 +793,31 @@
                                 <input required="" type="hidden" value="11" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                              <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group bg-light p-2">
                                 <div class="form-inline">
@@ -661,7 +843,7 @@
                                     <label for="img2" class="col-form-label">Imagen 2:</label>
                                 </div>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" name="img2" lang="es">
+                                    <input required="" type="file" class="custom-file-input" name="img2" lang="es">
                                     <label class="custom-file-label" for="customFile">Seleciona un archivo</label>
                                 </div>
                             </div>
@@ -677,7 +859,7 @@
                             </div>
 
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -707,17 +889,33 @@
                             <div class="form-group">
                                 <input required="" type="hidden" value="12" name="id_plantilla">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                   <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                         <div class="tall_12">
                             <div class="form-group">
@@ -730,7 +928,7 @@
                                   <a href="#" class="addTaller12 btn btn-outline-danger">Agregar Fila</a>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input  type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -764,13 +962,31 @@
                                 <input required="" type="hidden" value="13" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                   <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                            <div class="tall_13">
                             <div class="form-group">
@@ -813,17 +1029,33 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="14" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                    <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Descripcion :</label>
@@ -862,17 +1094,33 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="15" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-6">
@@ -900,7 +1148,7 @@
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -932,24 +1180,40 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="16" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                     <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Endoso a :</label>
                                 <input required="" type="text" name="endoso" class="form-control">
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -981,13 +1245,31 @@
                                 <input required="" type="hidden" value="17" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                    <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="form-row">
@@ -1016,7 +1298,7 @@
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input  type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -1046,17 +1328,33 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="18" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
 
                             <div class="form-row">
@@ -1095,7 +1393,7 @@
                             </div>
 
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -1125,17 +1423,33 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="19" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Beneficiario :</label>
@@ -1147,7 +1461,6 @@
                                     <label for="" class="col-form-label">Valor :</label>
                                     <input required="" type="text" name="valor" class="form-control">
                                 </div>
-
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Interes Anual:</label>
                                     <input required="" type="text" name="interes_anual" class="form-control">
@@ -1157,7 +1470,6 @@
                                     <input required="" type="text" name="lugar" class="form-control">
                                 </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Fecha de emision :</label>
@@ -1172,15 +1484,13 @@
                                     <input required="" type="date" name="fecha_de_vencimiento" class="form-control">
                                 </div>
                             </div>
-
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
             <div class="modal-footer">
 
             </div>
@@ -1207,19 +1517,34 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="20" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                    <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Beneficiario :</label>
@@ -1262,17 +1587,14 @@
                                     <input required="" type="date" name="fecha_de_vencimiento" class="form-control">
                                 </div>
                             </div>
-
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
             <div class="modal-footer">
-
             </div>
         </div>
     </div>
@@ -1298,13 +1620,31 @@
                                 <input required="" type="hidden" value="21" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-4">
@@ -1316,7 +1656,6 @@
                                     <input required="" type="text" name="detalle" class="form-control">
                                 </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Valor :</label>
@@ -1331,9 +1670,8 @@
                                     <input required="" type="date" name="fecha" class="form-control">
                                 </div>
                             </div>
-
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -1368,39 +1706,38 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="22" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-6">
-                                    <label for="" class="col-form-label">Pedido :</label>
-                                    <input required="" type="text" name="pedido" class="form-control">
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="form-group col-6">
-                                    <label for="" class="col-form-label">Cantidad :</label>
-                                    <input required="" type="text" name="cantidad" class="form-control">
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <label for="" class="col-form-label">Detalle :</label>
-                                <input required="" type="text" name="detalle" class="form-control">
-                            </div>
-
                             <div class="form-row">
                                 <div class="form-group col-4">
-                                    <label for="" class="col-form-label">Codigo :</label>
-                                    <input required="" type="text" name="codigo" class="form-control">
+                                    <label for="" class="col-form-label">Pedido :</label>
+                                    <input required="" type="text" name="pedido" class="form-control">
                                 </div>
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Lugar :</label>
@@ -1411,6 +1748,31 @@
                                     <input required="" type="date" name="fecha" class="form-control">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <table class="table table-bordered">
+                                  <thead>
+                                    <tr class="text-center">
+                                      <th scope="col">CANTIDAD</th>
+                                      <th scope="col">CODIGO</th>
+                                      <th scope="col">DESCRIPCION</th>
+                                      <th scope="col">PRECIO UNIT.</th>
+                                      <th scope="col">ACCION</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody class="taller22">
+                                    <tr>
+                                      <td><input name="cantidad[]" type="text" class="form-control" ></td>
+                                      <td><input name="codigo[]" type="text" class="form-control" ></td>
+                                      <td><input type="text" name="descripcion[]" class="form-control" ></td>
+                                      <td><input type="text" name="precio_unit[]" class="form-control" ></td>
+                                      <td><a href="#" class="btn btn-danger removeTaller22"><span class="glyphicon glyphicon-remove">X</span></a></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                            </div>
+                              <div class="row">
+                                <a href="#" class="addTaller22 btn btn-outline-danger">Agregar Columna</a>
+                            </div>   
                             <div class="form-row">
                                 <div class="form-group col-8">
                                     <label for="" class="col-form-label">Firma de Bodeguero :</label>
@@ -1422,13 +1784,12 @@
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
             <div class="modal-footer">
 
             </div>
@@ -1454,19 +1815,34 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="23" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                   <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-6">
                                     <label for="" class="col-form-label">Acreedor :</label>
@@ -1477,7 +1853,6 @@
                                     <input required="" type="text" name="deudor" class="form-control">
                                 </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-9">
                                     <label for="" class="col-form-label">Descripcion :</label>
@@ -1488,13 +1863,11 @@
                                     <input required="" type="text" name="valor" class="form-control">
                                 </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-6">
                                     <label for="" class="col-form-label">Direccion :</label>
                                     <input required="" type="text" name="direccion" class="form-control">
                                 </div>
-
                                 <div class="form-group col-3">
                                     <label for="" class="col-form-label">Lugar :</label>
                                     <input required="" type="text" name="lugar" class="form-control">
@@ -1504,9 +1877,8 @@
                                     <input required="" type="date" name="fecha" class="form-control">
                                 </div>
                             </div>
-
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -1537,20 +1909,34 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="24" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
-
-
                             <div class="form-row">
                                 <div class="form-group col-6">
                                     <label for="" class="col-form-label">Beneficiario :</label>
@@ -1561,18 +1947,17 @@
                                     <input required="" type="text" name="comprobante" class="form-control">
                                 </div>
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Cantidad :</label>
                                     <input required="" type="text" name="cantidad" class="form-control">
                                 </div>
                                 <div class="form-group col-4">
-                                    <label for="" class="col-form-label">Lugar :</label>
+                                    <label for="" class="col-form-label">fecha de la Orden:</label>
                                     <input required="" type="text" name="lugar" class="form-control">
                                 </div>
                                 <div class="form-group col-4">
-                                    <label for="" class="col-form-label">Fecha :</label>
+                                    <label for="" class="col-form-label">Fecha del comprobante de pago:</label>
                                     <input required="" type="date" name="fecha" class="form-control">
                                 </div>
                             </div>
@@ -1580,16 +1965,13 @@
                                 <label for="" class="col-form-label">Firmas :</label>
                                 <input required="" type="text" name="firmas" class="form-control">
                             </div>
-
-
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
             <div class="modal-footer">
 
             </div>
@@ -1621,13 +2003,31 @@
                                 <textarea required="" required="" name="enunciado" class="form-control" id=""
                                     rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                 <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -1677,23 +2077,21 @@
                                             <td><input type="text" class="form-control" name="cant[]"></td>
                                             <td><input type="text" class="form-control" name="desc[]"></td>
                                             <td><input type="text" class="form-control" name="precio[]"></td>
-                                            <td><a href="#" class="btn btn-danger remove"><span
-                                                        class="glyphicon glyphicon-remove">X</span></a></td>
+                                            <td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <div class="row">
                                     <a href="#" class="addFac btn btn-outline-danger">Agregar Columna</a>
-                                </div>
+                                </div>     
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
             <div class="modal-footer">
 
             </div>
@@ -1719,24 +2117,38 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="26" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                 <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Nombre :</label>
-
                                 <input required="" type="text" name="nombre" class="form-control">
                             </div>
-
                             <div class="form-row">
                                 <div class="form-group col-6">
                                     <label for="" class="col-form-label">RUC :</label>
@@ -1747,7 +2159,6 @@
                                     <input required="" type="date" name="fecha" class="form-control">
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <table class="table table-borderless">
                                     <thead>
@@ -1774,13 +2185,12 @@
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
             <div class="modal-footer">
 
             </div>
@@ -1806,17 +2216,33 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="27" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                   <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <table class="table table-borderless">
@@ -1826,7 +2252,6 @@
                                             <th scope="col">Fila B</th>
                                         </tr>
                                     </thead>
-
                                     <tbody class="prin">
                                         <tr>
                                             <td scope="row">
@@ -1849,14 +2274,13 @@
                                                         class="glyphicon glyphicon-remove">X</span></a></td>
                                         </tr>
                                     </tbody>
-
                                 </table>
                                 <div class="row">
                                     <a href="#" class="addRow btn btn-outline-danger">Agregar Columna</a>
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -1887,17 +2311,33 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
                                 <input required="" type="hidden" value="28" name="id_plantilla">
-                                <textarea required="" name="enunciado" class="form-control" rows="5">
-
-</textarea>
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                   <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Nombre :</label>
@@ -1942,12 +2382,12 @@
 </div>
 
 
-<!-- FORMULARIO PARA PLANTILLA 34 -->
-<div class="modal fade" id="taller34" tabindex="-1" role="dialog" aria-labelledby="taller34Label" aria-hidden="true">
+<!-- FORMULARIO PARA PLANTILLA 31 -->
+<div class="modal fade" id="taller31" tabindex="-1" role="dialog" aria-labelledby="taller31Label" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="taller34Label">COLLAGE</h2>
+                <h2 class="modal-title" id="taller31Label">COLLAGE</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -1955,23 +2395,41 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col-12">
-                        <form action="{{ route('admin.taller34') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.taller31') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
-                                <input required="" type="hidden" value="34" name="id_plantilla">
+                                <input required="" type="hidden" value="31" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                                    <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -1983,12 +2441,12 @@
     </div>
 </div>
 
-<!-- FORMULARIO PARA PLANTILLA 57 -->
-<div class="modal fade" id="taller57" tabindex="-1" role="dialog" aria-labelledby="taller57Label" aria-hidden="true">
+<!-- FORMULARIO PARA PLANTILLA 33 -->
+<div class="modal fade" id="taller33" tabindex="-1" role="dialog" aria-labelledby="taller33Label" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="taller57Label">TALLERES DE CONTABILIDAD</h2>
+                <h2 class="modal-title" id="taller33Label">ESCRIBIR PREGUNTAS</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -1996,33 +2454,343 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col-12">
-                        <form action="{{ route('admin.taller57') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('admin.taller33') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Enunciado:</label>
-                                <input required="" type="hidden" value="57" name="id_plantilla">
+                                <input required="" type="hidden" value="33" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                                   <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label for="" class="col-form-label">Pregunta 1 :</label>
+                                    <input required="" type="text" name="pregunta1" class="form-control">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="" class="col-form-label">Pregunta 2 :</label>
+                                    <input required="" type="text" name="pregunta2" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FORMULARIO PARA PLANTILLA 34 -->
+<div class="modal fade" id="taller34" tabindex="-1" role="dialog" aria-labelledby="taller34Label" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="taller34Label">TIPOS DE SALDOS</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" >
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="34" name="id_plantilla">
+                                <textarea required v-model="taller.enunciado" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" v-model="taller.unidad_id" class="custom-select">
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="form-row">
+                                    <table class="table table-bordered table-sm">
+                                      <thead class="thead-dark">
+                                        <tr align="center">                        
+                                          <th scope="col">NOMBRE DE CUENTAS</th>
+                                          <th width="125" scope="col">DEBE</th>
+                                          <th  width="125" scope="col">HABER</th>
+                                          <th width="25" colspan="2" v-if="registros.length > 0 || ejercicios.debe.length > 0">ACCION</th>
+                                        </tr>
+                                      </thead>
+                                          <tbody v-for="(registro, id) in registros" @change="totalDebe()">
+                                            <tr v-for="(diar, index) in registro.debe">
+                                                <td align="rigth">@{{ diar.nom_cuenta}}</td>
+                                                <td align="center" width="125">@{{ diar.saldo }}</td>
+                                                <td align="center" width="125"></td>
+                                                <td v-if="index == 0" align="center" width="25"><a @click="debeEditRegister(id)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i></a></td>
+                                                <td v-if="index == 0" align="center" width="25"><a @click="deleteRegistro(id)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></td>
+                                            </tr>
+                                            <tr v-for="(diar, index) in registro.haber">
+                                                <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
+                                                <td align="center" width="125"></td>
+                                                <td align="center" width="125">@{{ diar.saldo }}</td>
+                                            </tr>
+                                          </tbody>
+                                        <tbody>
+                                            <tr v-for="(diar, index) in ejercicios.debe" class="table-info">
+                                                <td >@{{ diar.nom_cuenta}}</td>
+                                                <td align="center" width="125">@{{ diar.saldo }}</td>
+                                                <td align="center" width="125"></td>
+                                                <td align="center" width="25">
+                                                    <a @click="debediairoEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i></a>
+                                                </td>
+                                                <td align="center" width="25">
+                                                    <a @click="deleteDebe(index)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr v-for="(diar, index) in ejercicios.haber" class="table-info">
+                                                <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
+                                                <td align="center" width="125"></td>
+                                                <td align="center" width="125">@{{ diar.saldo }}</td>
+                                                <td>
+                                                    <a @click="habediarioEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i></a>
+                                                </td>
+                                                <td align="center" width="25"><a @click="deleteHaber(index)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                        <tbody>
+                                            <tr v-for="(diar, index) in edit.debe" class="table-danger">
+                                                <td >@{{ diar.nom_cuenta}}</td>
+                                                <td align="center" width="125">@{{ diar.saldo }}</td>
+                                                <td align="center" width="125"></td>
+                                                <td align="center" width="25">
+                                                    <a @click="debeEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i></a>
+                                                </td>
+                                                <td align="center" width="25">
+                                                    <a @click="debeDelete(index)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+                                                </td>
+                                            </tr>
+                                            <tr v-for="(diar, index) in edit.haber" class="table-danger">
+                                                <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
+                                                <td align="center" width="125"></td>
+                                                <td align="center" width="125">@{{ diar.saldo }}</td>
+                                                <td>
+                                                    <a @click="haberEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i></a>
+                                                </td>
+                                                <td align="center" width="25"><a @click="haberDelete(index)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></td>
+                                            </tr>
+                                        </tbody>                        
+                                </table>
+
+         
+                            </div>
+                            <div v-if="edit.debe.length >= 1" class="form-row justify-content-center">
+                                <div class="form-inline col-6">
+                                    <input required="" v-model="ejercicio.debe.nom_cuenta"  type="text" placeholder="Actualizar Cuenta " class="form-control form-control-sm mr-1">
+                                    <input required="" v-model="ejercicio.debe.saldo" type="text" placeholder="Actualizar saldo" class="form-control form-control-sm">
+                                    <a class="btn ml-2 btn-outline-info btn-sm text-center mt-1" href="#" @click.prevent="updateDebe">Actualizar Debe</a>
+                                </div>
+                                <div class="form-inline col-6">
+                                    <input required="" type="text" v-model="ejercicio.haber.nom_cuenta" class="form-control form-control-sm mr-1" placeholder="Actualizar Cuenta ">
+                                    <input required="" type="text" v-model="ejercicio.haber.saldo" class="form-control form-control-sm" placeholder="Actualizar saldo">
+                                    <a class="btn ml-2 btn-outline-info btn-sm mt-1" href="#" @click.prevent="updateHaber()"> Actualizar Haber</a>
+                            </div>
+                            <div class="text-center">
+                                 <a class="btn ml-2 btn-outline-primary btn-sm mt-1" href="#" @click.prevent="updaterRegister()"> Actualizar Registro</a>
+                            </div>
+                            </div>
+                            <div v-else class="">
+                                <div v-if="ejercicioedit == 100" class="form-row">
+                                <div class="form-inline col-6">
+                                    <input required="" v-model="ejercicio.debe.nom_cuenta"  type="text" placeholder="Agregar Cuenta " class="form-control form-control-sm mr-1">
+                                    <input required="" v-model="ejercicio.debe.saldo" type="text" placeholder="Agregar saldo" class="form-control form-control-sm">
+                                    <a class="btn ml-2 btn-outline-info btn-sm text-center mt-1" href="#" @click.prevent="updateEjeDebe">Actualizar Debe</a>
+                                </div>
+                                <div class="form-inline col-6">
+                                    <input required="" type="text" v-model="ejercicio.haber.nom_cuenta" class="form-control form-control-sm mr-1" placeholder="Agregar Cuenta ">
+                                    <input required="" type="text" v-model="ejercicio.haber.saldo" class="form-control form-control-sm" placeholder="Agregar saldo">
+                                    <a class="btn ml-2 btn-outline-info btn-sm mt-1" href="#" @click.prevent="updateeEjeHaber()"> Actualizar Haber</a>
+                                </div>
+
+                                </div>
+                                <div v-else class="form-row">
+                                    <div class="form-inline col-6">
+                                    <input required="" v-model="ejercicio.debe.nom_cuenta"  type="text" placeholder="Agregar Cuenta " class="form-control form-control-sm mr-1">
+                                    <input required="" v-model="ejercicio.debe.saldo" type="text" placeholder="Agregar saldo" class="form-control form-control-sm">
+                                    <a class="btn ml-2 btn-outline-info btn-sm text-center mt-1" href="#" @click.prevent="agregarDebe">Agregar Debe</a>
+                                </div>
+                                <div class="form-inline col-6">
+                                    <input required="" type="text" v-model="ejercicio.haber.nom_cuenta" class="form-control form-control-sm mr-1" placeholder="Agregar Cuenta ">
+                                    <input required="" type="text" v-model="ejercicio.haber.saldo" class="form-control form-control-sm" placeholder="Agregar saldo">
+                                    <a class="btn ml-2 btn-outline-info btn-sm mt-1" href="#" @click.prevent="agregarHaber()"> Agregar Haber</a>
+                                </div>
+                                </div>
+                          
+                             <div class="mt-2">
+                                 <a class="btn ml-2 btn-outline-success btn-sm mt-1" href="#" @click.prevent="guardarRegistro()"> Agregar Registro</a>
+                            </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer row justify-content-center">
+                 <div class="row">
+                    <a class="btn p-2 mt-3 btn-danger" @click.prevent="guardarTaller34()">Crear Taller </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FORMULARIO PARA PLANTILLA 36 -->
+<div class="modal fade" id="taller36" tabindex="-1" role="dialog" aria-labelledby="taller36Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="taller36Label">ANALIZAR  ENUNCIADOS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller36') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="36" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                                     <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
+                            </div>
+                           <div class="tall_36">
+                            <div class="form-group">
+                                <label for="" class="col-form-label">Enunciado 1 <a href="#" class="btn btn-danger re_tall36"><span class="glyphicon glyphicon-remove">X</span></a></label>
+                                <textarea required="" class="form-control" name="enun[]"></textarea>
+                            </div>
+                          </div>
+                          <div class="row">
+                                  <a href="#" class="addTaller36 btn btn-outline-danger">Agregar Fila</a>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input  type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- FORMULARIO PARA PLANTILLA 37 -->
+<div class="modal fade" id="taller37" tabindex="-1" role="dialog" aria-labelledby="taller37Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="taller37Label">TALLERES DE CONTABILIDAD</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller37') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="37" name="id_plantilla">
                                 <input type="text"  name="enunciado" value="Crear Enunciados de Contabilidad" class="form-control" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Materia:</label>
-                                <select name="materia_id" class="custom-select">
-                                    @foreach ($materias = App\Materia::where('slug', '=', 'contabilidad')->get() as $materia)
+                                <label for="recipient-name" class="col-form-label">Contenido:</label>
+                                <select required="" name="contenido_id" class="custom-select">
+                                    @foreach ($materias = App\Contenido::where('materia_id', 1)->get() as $materia)
                                     <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        <div class="tall_57">
+                        <div class="tall_37">
                             <div class="form-group">
-                                <label for="" class="col-form-label">Enunciado 1 <a href="#" class="btn btn-danger re_tall57"><span class="glyphicon glyphicon-remove">X</span></a></label>
+                                <label for="" class="col-form-label">Enunciado 1 <a href="#" class="btn btn-danger re_tall37"><span class="glyphicon glyphicon-remove">X</span></a></label>
                                 <textarea required="" class="form-control" name="enun[]"></textarea>
                             </div>
                         </div>
                         <div class="row">
-                                  <a href="#" class="addTaller57 btn btn-outline-danger">Agregar Fila</a>
+                                  <a href="#" class="addTaller37 btn btn-outline-danger">Agregar Fila</a>
                         </div>
-
                             <div class="row justify-content-center">
-                                <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
                         </form>
                     </div>
@@ -2033,3 +2801,483 @@
         </div>
     </div>
 </div>
+
+<!-- FORMULARIO PARA PLANTILLA 38 -->
+<div class="modal fade" id="taller38" tabindex="-1" role="dialog" aria-labelledby="taller38Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="taller38Label">ANALIZAR LECTURA</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller38') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="38" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                                 <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Lectura:</label>
+                                 <textarea class="form-control ckeditor" name="lectura" required=""></textarea>
+                            </div>
+                        <div class="tall_38">
+                            <div class="form-group">
+                                <label for="" class="col-form-label">Enunciado 1 <a href="#" class="btn btn-danger re_tall38"><span class="glyphicon glyphicon-remove">X</span></a></label>
+                                <textarea required="" class="form-control" name="enun[]"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                                  <a href="#" class="addTaller38 btn btn-outline-danger">Agregar Fila</a>
+                        </div>
+                            <div class="row justify-content-center">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="taller39" tabindex="-1" role="dialog" aria-labelledby="taller39Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="taller39Label">ARMAR LA PALABRA</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller39') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="39" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                                <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
+                            </div>
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Palabra:</label>
+                                <input required="" type="text" class="form-control" name="palabra" placeholder="Escriba la palabra en mayusculas">
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FORMULARIO PARA PLANTILLA 40 -->
+<div class="modal fade" id="taller40" tabindex="-1" role="dialog" aria-labelledby="taller40Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="taller40Label">IDENTIFICAR TRANSACCIONES</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller40') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="40" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                                <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
+                            </div>
+                        <div class="tall_40">
+                            <div class="form-group">
+                                <label for="" class="col-form-label">Enunciado 1 <a href="#" class="btn btn-danger re_tall40"><span class="glyphicon glyphicon-remove">X</span></a></label>
+                                <textarea required="" class="form-control" name="enun[]"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                                  <a href="#" class="addTaller40 btn btn-outline-danger">Agregar Fila</a>
+                        </div>
+                            <div class="row justify-content-center">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FORMULARIO PARA PLANTILLA 42 -->
+<div class="modal fade" id="taller42" tabindex="-1" role="dialog" aria-labelledby="taller42Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="taller42Label">ORDENAR IDEAS</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller42') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="42" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
+                            </div>
+                        <div class="tall_42">
+                            <div class="form-group">
+                                <label for="" class="col-form-label">Enunciado 1 <a href="#" class="btn btn-danger re_tall42"><span class="glyphicon glyphicon-remove">X</span></a></label>
+                                <input required="" class="form-control" name="enun[]" type="text">
+                                {{-- <textarea required="" class="form-control" name="enun[]"></textarea> --}}
+                            </div>
+                        </div>
+                        <div class="row">
+                                  <a href="#" class="addTaller42 btn btn-outline-danger">Agregar Fila</a>
+                        </div>
+                            <div class="row justify-content-center">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FORMULARIO PARA PLANTILLA 43 -->
+
+<div class="modal fade" id="taller43" tabindex="-1" role="dialog" aria-labelledby="taller43Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h5 class="modal-title row justify-content-center" id="taller43Label">COMPLETAR MAPA CONCEPTUAL</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller43') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="43" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Concepto:</label>
+                                <input type="text" name="concepto" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Cantidad de clasificacion:</label>
+                                <select required="" name="cantidad" class="custom-select">               
+                                    <option value="3">3</option>           
+                                    <option value="4">4</option>           
+                                    <option value="5">5</option>           
+                                    <option value="6">6</option>           
+                                </select>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- FORMULARIO PARA PLANTILLA 44 -->
+
+<div class="modal fade" id="taller44" tabindex="-1" role="dialog" aria-labelledby="taller44Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h5 class="modal-title row justify-content-center" id="taller44Label">ESCRIBIR CUENTAS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller44') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="44" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                                   <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Tipo de cuenta:</label>
+                                <select required="" name="cuenta" class="custom-select">               
+                                    <option value="activo">ACTIVO</option>           
+                                    <option value="pasivo">PASIVO</option>           
+                                    <option value="patrimonio">PATRIMONIO</option>           
+                                </select>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- FORMULARIO PARA PLANTILLA 45 -->
+
+<div class="modal fade" id="taller45" tabindex="-1" role="dialog" aria-labelledby="taller45Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <h5 class="modal-title row justify-content-center" id="taller45Label">ESCRIBIR CUENTAS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller45') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="45" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                                    <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Palabras( Separadas por ","):</label>
+                                <input required="" type="text" data-role="tagsinput" name="palabras" class="form-control">
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+

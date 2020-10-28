@@ -104,7 +104,7 @@ class ClassMirror
                 continue;
             }
 
-            $this->reflectMethodToNode($method, $node, $class);
+            $this->reflectMethodToNode($method, $node);
         }
 
         foreach ($class->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
@@ -118,7 +118,7 @@ class ClassMirror
                 continue;
             }
 
-            $this->reflectMethodToNode($method, $node, $class);
+            $this->reflectMethodToNode($method, $node);
         }
     }
 

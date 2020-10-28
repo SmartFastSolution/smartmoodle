@@ -10,9 +10,9 @@ class TallerIdentificarImagen extends Model
 
         return $this->belongsTo('App\Taller');
     }
-     public function tallerImgOps(){
+     public function tallerimg(){
 
-        return $this->hasMany('App\Admin\TallerIdentificarImagenOpcion');
+        return $this->hasMany('App\Admin\TallerIdentificarImagenOpcion', 'taller_img_id');
     }
 
 }

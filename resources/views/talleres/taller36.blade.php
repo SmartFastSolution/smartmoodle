@@ -1,32 +1,27 @@
 @extends('layouts.nav')
 
-@section('title', 'Taller 37')
-@section('contenido')
+@section('title', $datos->taller->nombre)
+@section('content')
 
-<h1 class="text-center  mt-5 text-danger"> Taller #37</h1>
-<h3 class="text-center mt-5 mb-3 text-info">ESCRIBA  LAS  PREGUNTAS  QUE  UTILIZARÁ  PARA  EL  RECONOCIMIENTO  DE 
-CUENTAS,  CON  EFICACIA</h3>
+<h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>
+<h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
-<form action="">
+<form action="{{ route('taller36', ['idtaller' => $d]) }}" method="POST">
+           @csrf
 	<div class="container">
 		<div class="row justify-content-center ">
-			<div class="col-6 text-center">
-				<h1>Para el Deudor</h1>
-				<div class=" p-3 text-center border border-danger rounded-circle">
-					<textarea name="" class="form-group" id="" cols="30" rows="10"></textarea>
+			@foreach ($datos->tallerAnalizarOp as $enunciados)
+				<div class="col-10">
+					<h2> <strong>{{ ++$a }} </strong> {{ $enunciados->enunciado }} </h2>
+					<textarea name="analisis[]" cols="30" rows="10" class="form-control"></textarea>
 				</div>
-			</div>
-			<div class="col-6 text-center">
-				
-				
-					<h1>Para el Acreedor</h1>
-					<div class=" p-3 text-center border border-danger rounded-circle">
-					<textarea name="" class="form-group" id="" cols="30" rows="10"></textarea>
-				
-				</div>
-			</div>
+			@endforeach
 		</div>
+		 <div class="row justify-content-center">
+        	<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
+    	</div>
 	</div>
 </form>
+
 
 @endsection

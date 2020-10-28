@@ -19,7 +19,15 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect(RouteServiceProvider::HOME);
+            foreach(auth()->user()->roles as $role){
+                $rol =$role->descripcion;
+            }
+            if($rol == 'estudiante'){
+                return redirect('/sistema/homees');
+            }elseif ($rol == 'docente') {
+                return redirect('/sistema/homedoc');
+            }
+            // return redirect(RouteServiceProvider::HOME);
         }
 
         return $next($request);

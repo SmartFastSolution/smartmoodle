@@ -1,16 +1,272 @@
-
 $(function(document, window, index ) {
+        const ejercicio = new Vue({
+        el: '#ejercicios',
+        data:{
+            instituto: 'Seleccionar el Instituto',
+            materia:'Seleccionar una materia',
+            materias: [],
+            contenido:[],
+    registerindex:'',
+    cuentaindex:'',
+    taller:{
+        plantilla_id: 34,
+        enunciado:'',
+        unidad_id:'',
+    },
+    registros:[],
+       ejercicios:{
+           debe:[],
+          haber:[],
+      },
+       edit:{
+           debe:[],
+          haber:[]
+        },
+        ejercicioedit:0,
+       ejercicio:{
+          debe:{
+            nom_cuenta:'',
+            saldo:'',
+          },
+          haber:{
+            fecha:'',
+            nom_cuenta:'',
+            saldo:''
+          },
+        },
+    },
+        methods:{
+        onMateria() {
+            let set = this;
+            set.materias = [];
+            axios.post('/sistema/materiainst', {
+                id: set.instituto
+            }).then(response => {
+                set.materias = response.data;
+                //console.log(set.materias);
+            }).catch(e => {
+                console.log(e);
+            });
+        },
+        onContenido(){
+            let set = this;
+            set.contenido = [];
+            axios.post('/sistema/contmateria', {
+                id: set.materia
+            }).then(response => {
+                set.contenido = response.data;
+                if (set.contenido == 0) {
+                     toastr.error("Esta Materia no tiene contenidos", "Smarmoddle", {
+                    "timeOut": "3000"
+                });
+                    set.materia = 'Seleccionar una materia';
+                } 
+                //console.log(set.contenido);
+            }).catch(e => {
+                console.log(e);
+            });
+        },
+            agregarDebe(){
+                var debe = {nom_cuenta:this.ejercicio.debe.nom_cuenta, saldo:this.ejercicio.debe.saldo};
+                this.ejercicios.debe.push(debe);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.ejercicio.debe.nom_cuenta ='';
+                this.ejercicio.debe.saldo      ='';
+                },
+            agregarHaber(){
+                var haber = {nom_cuenta:this.ejercicio.haber.nom_cuenta, saldo:this.ejercicio.haber.saldo};
+                this.ejercicios.haber.push(haber);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.ejercicio.haber.nom_cuenta ='';
+                this.ejercicio.haber.saldo      ='';
+            },
+             deleteDebe(index){
+                this.ejercicios.debe.splice(index, 1);
+            },
+            deleteHaber(index){
+                this.ejercicios.haber.splice(index, 1);
+            },
+             habediarioEdit(index){
+              var ejercicios                        = this.ejercicios;
+              this.ejercicioedit =100;
+              this.cuentaindex                = index;
+              this.ejercicio.haber.nom_cuenta = ejercicios.haber[index].nom_cuenta;
+              this.ejercicio.haber.saldo      = ejercicios.haber[index].saldo;
+            },
+            updateeEjeHaber(){
+            if (this.ejercicio.haber.nom_cuenta.trim() === '' || this.ejercicio.haber.saldo.trim() === '') {
+                toastr.error("No tienes datos para actualizar", "Smarmoddle", {
+                        "timeOut": "3000"
+                    });
+                }else{
+            var id                          = this.cuentaindex;
+            this.ejercicios.haber[id].nom_cuenta  = this.ejercicio.haber.nom_cuenta;
+            this.ejercicios.haber[id].saldo       = this.ejercicio.haber.saldo;
+            this.ejercicio.haber.nom_cuenta = '';
+            this.ejercicio.haber.saldo      = '';
+            this.ejercicioedit =0;
+
+                }        
+            },
+            debediairoEdit(index){
+              this.cuentaindex               = index;
+              this.ejercicioedit =100;
+              this.ejercicio.debe.nom_cuenta = this.ejercicios.debe[index].nom_cuenta;
+              this.ejercicio.debe.saldo      = this.ejercicios.debe[index].saldo;
+            },
+            updateEjeDebe(){
+            if (this.ejercicio.debe.nom_cuenta.trim() === '' || this.ejercicio.debe.saldo.trim() === '') {
+                toastr.error("No tienes datos para actualizar", "Smarmoddle", {
+                        "timeOut": "3000"
+                    });
+                }else{
+                    var id                         = this.cuentaindex;
+                    this.ejercicios.debe[id].nom_cuenta  = this.ejercicio.debe.nom_cuenta;
+                    this.ejercicios.debe[id].saldo       = this.ejercicio.debe.saldo;
+                    this.ejercicio.debe.nom_cuenta = '';
+                    this.ejercicio.debe.saldo      = '';
+                    this.ejercicioedit =0;
+
+                } 
+            },
+
+            guardarRegistro(){
+              if (this.ejercicios.debe == 0) {
+                 toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
+                        "timeOut": "3000"
+                    });
+              }else{
+            var registro = {debe:this.ejercicios.debe, haber:this.ejercicios.haber};
+                this.registros.push(registro);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Registro agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.ejercicios.debe            =[];
+                this.ejercicios.haber           =[]; 
+                this.ejercicio.haber.nom_cuenta = '';
+                this.ejercicio.haber.saldo      = '';         
+          }
+        },
+        debeEditRegister(id){
+              var register          = this.registros;
+              this.registerindex    = id;
+              this.edit.debe        =[];
+              this.edit.haber       =[];
+              this.ejercicios.debe  =[];
+              this.ejercicios.haber =[];
+              this.edit.debe        = register[id].debe;
+              this.edit.haber       = register[id].haber;
+            },
+        updaterRegister(){
+             var  id                  = this.registerindex;
+             this.registros[id].debe  = this.edit.debe;
+             this.registros[id].haber = this.edit.haber;
+             this.edit.debe           =   [];
+             this.edit.haber          = [];
+            },
+         deleteRegistro(id){
+              this.registros.splice(id, 1);
+            },
+            haberEdit(index){
+              var edit                        = this.edit;
+              this.cuentaindex                = index;
+              this.ejercicio.haber.nom_cuenta = edit.haber[index].nom_cuenta;
+              this.ejercicio.haber.saldo      = edit.haber[index].saldo;
+            },
+            updateHaber(){
+            if (this.ejercicio.haber.nom_cuenta.trim() === '' || this.ejercicio.haber.saldo.trim() === '') {
+                toastr.error("No tienes datos para actualizar", "Smarmoddle", {
+                        "timeOut": "3000"
+                    });
+                }else{
+            var id                          = this.cuentaindex;
+            this.edit.haber[id].nom_cuenta  = this.ejercicio.haber.nom_cuenta;
+            this.edit.haber[id].saldo       = this.ejercicio.haber.saldo;
+            this.ejercicio.haber.nom_cuenta = '';
+            this.ejercicio.haber.saldo      = '';
+                }        
+            },
+            haberDelete(index){
+              this.edit.haber.splice(index, 1);
+            },
+            debeEdit(index){
+              this.cuentaindex               = index;
+              this.ejercicio.debe.nom_cuenta = this.edit.debe[index].nom_cuenta;
+              this.ejercicio.debe.saldo      = this.edit.debe[index].saldo;
+            },
+            updateDebe(){
+            if (this.ejercicio.debe.nom_cuenta.trim() === '' || this.ejercicio.debe.saldo.trim() === '') {
+                toastr.error("No tienes datos para actualizar", "Smarmoddle", {
+                        "timeOut": "3000"
+                    });
+                }else{
+                    var id                         = this.cuentaindex;
+                    this.edit.debe[id].nom_cuenta  = this.ejercicio.debe.nom_cuenta;
+                    this.edit.debe[id].saldo       = this.ejercicio.debe.saldo;
+                    this.ejercicio.debe.nom_cuenta = '';
+                    this.ejercicio.debe.saldo      = '';
+                } 
+            },
+             debeDelete(index){
+              this.edit.debe.splice(index, 1);
+            },
+            guardarTaller34: function() {
+                let _this = this;
+                let url = '/sistema/admin/taller34';
+                if (_this.registros.length == 0 ) {
+                     toastr.error("No tienes registros para guardar el taller", "Smarmoddle", {
+                        "timeOut": "3000"
+                    });
+                } else if (_this.taller.enunciado.trim() === ''){
+                    toastr.error("No puedes dejar campos en blanco", "Smarmoddle", {
+                        "timeOut": "3000"
+                    });
+                }else {
+                axios.post(url,{
+                registro: _this.registros,
+                unidad: _this.taller.unidad_id,
+                enunciado: _this.taller.enunciado,
+                plantilla: _this.taller.plantilla_id,
+                }).then(response => {
+                   toastr.success("Taller Creado Correctamente", "Smarmoddle", {
+                        "timeOut": "3000"
+                    });
+                window.location = "/sistema";
+                   // _this.registros =[];
+                   //  _this.ejercicio.debe.nom_cuenta = '';
+                   //  _this.ejercicio.debe.saldo      = '';  
+                   //  _this.taller.enunciado = '';
+                   //  _this.taller.unidad_id = '';
+                     $('#taller34').modal('hide');  
+                }).catch(function(error){
+
+                }); 
+
+
+                } 
+            }
+
+        }
+
+    });
    $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
     var i = 1;
+        //Initialize Select2 Elements
+    // var objetivo = document.getElementById('num');
+    // objetivo.innerHTML = 1;
 
-    var objetivo = document.getElementById('num');
-    objetivo.innerHTML = 1;
-
-    var objetivo1 = document.getElementById('num1');
-    objetivo1.innerHTML = 1;
+    // var objetivo1 = document.getElementById('num1');
+    // objetivo1.innerHTML = 1;
     $('.addEnun').on('click', function(evt) {
         evt.preventDefault();
         addEnun()();
@@ -43,9 +299,29 @@ $(function(document, window, index ) {
         evt.preventDefault();
         addTaller13()();
     });
-      $('.addTaller57').on('click', function(evt) {
+     $('.addTaller36').on('click', function(evt) {
         evt.preventDefault();
-        addTaller57()();
+        addTaller36()();
+    });
+      $('.addTaller22').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller22();
+    });
+      $('.addTaller37').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller37()();
+    });
+    $('.addTaller38').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller38()();
+    });
+     $('.addTaller40').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller40()();
+    });
+      $('.addTaller42').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller42()();
     });
     $('.addRow').on('click', function(evt) {
         evt.preventDefault();
@@ -132,24 +408,24 @@ function addTaller10() {
         var a = 1;
         var e = 1;
         var t10 = 
-             '<div class="form-group bg-light p-2">'+
-                '<div class="form-inline">'+
-                     '<label for="enunciado1" class="col-form-label pr-2">Enunciado '+(tall10 + 1)+' </label>'+
-                    '<input required="" type="text" name="enunciado1" class="form-control m-2">'+
-                     '<a href="#" class="btn btn-danger re_tall10">'+
-                         '<span class="glyphicon glyphicon-remove">X</span></a></label>'+
-                '</div>'+
-               ' <div class="form-inline">'+
-                    '<label for="img1" class="col-form-label">Imagen :</label>'+
-                '</div>'+
-               ' <div class="custom-file">'+
-                    '<input type="file" class="custom-file-input" name="img1">'+
-                   ' <label class="custom-file-label" for="customFile">Seleciona un archivo</label>'+
-                '</div>'+
-                '<label for="concepto6" class="col-form-label">Definicion :</label>'+
-                '<textarea required="" name="definicion1" class="form-control" rows="5"></textarea>'+
-            '</div>';
+                '<div class="form-group bg-light p-2">'+
+                    '<div class="form-inline">'+
+                        '<label for="enunciado1" class="col-form-label pr-2">Enunciado '+(tall10 + 1)+' </label>'+
+                            '<input required="" type="text" name="enunciados[]" class="form-control m-2">'+
+                                    '<a href="#" class="btn btn-danger re_tall10">'+
+                                      '<span class="glyphicon glyphicon-remove">X</span></a> </div>'+
+                            '<div class="form-inline">'+
+                                    '<label for="img1" class="col-form-label">Imagen :</label>'+
+                            '</div>'+
+                            '<div class="custom-file">'+
+                                '<input type="file" class="custom-file-input" name="img[]">'+
+                                '<label class="custom-file-label" for="customFile">Seleciona un archivo</label>'+
+                            '</div>'+
+                                '<label for="concepto6" class="col-form-label">Definicion 1:</label>'+
+                            '<textarea required="" name="definicion[]" class="form-control" rows="5"></textarea>'+
+                '</div>';
 
+           
         if (tall10 == 10) {
         function alert10(){
             toastr.error("Limite de enunciados creados", "Smarmoddle", {
@@ -158,6 +434,10 @@ function addTaller10() {
         }
         } else {
         $('.tall_10').append(t10);
+         $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
         function alert10(){
         toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
             "timeOut": "1000"
@@ -322,27 +602,66 @@ function addTaller11() {
             $(this).parent().parent().remove();
         }
     });
+        function addTaller22() {
 
-          function addTaller57() {
-        var tall57 = $('.tall_57 .form-group').length;
-        console.log(tall57)
+        var max = $('.taller22 tr').length;
+        var tr = '<tr>' +
+            '<td><input name="cantidad[]" type="text" class="form-control" ></td>' +
+            '<td><input name="codigo[]" type="text" class="form-control" ></td>' +
+            '<td><input type="text" name="descripcion[]" class="form-control" ></td>' +
+            '<td><input type="text" name="precio_unit[]" class="form-control" ></td>' +
+            '<td><a href="#" class="btn btn-danger removeTaller22"><span class="glyphicon glyphicon-remove">X</span>' +
+            '</tr>';
+        if (max == 10) {
+            toastr.error("Limite de columnas creadas", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+
+
+        } else {
+            $('.taller22').append(tr);
+         
+
+            toastr.success("Columna agregada correctamente", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+            console.log(max)
+        }
+    }
+
+    $('.removeTaller22').live('click', function() {
+        var last = $('.taller22 tr').length;
+        if (last == 1) {
+            i = 1;
+            toastr.error("Esta columna no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        } else {
+            $(this).parent().parent().remove();
+            i = last;
+        }
+    });
+
+    function addTaller36() {
+        var tall36 = $('.tall_36 .form-group').length;
+        console.log(tall36)
         var a = 1;
         var e = 1;
-        var t57 = 
+        var t36 = 
         '<div class="form-group">'+
-            '<label for="" class="col-form-label">Enunciado '+(tall57 + 1)+' <a href="#" class="btn btn-danger re_tall57"><span class="glyphicon glyphicon-remove">X</span></a></label>'+
+            '<label for="" class="col-form-label">Enunciado '+(tall36 + 1)+' <a href="#" class="btn btn-danger re_tall36"><span class="glyphicon glyphicon-remove">X</span></a></label>'+
             '<textarea required="" class="form-control" name="enun[]"></textarea>'+
         '</div>';
         $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
-        if (tall57 == 10) {
-        function alert57(){
+        if (tall36 == 10) {
+        function alert36(){
             toastr.error("Limite de enunciados creados", "Smarmoddle", {
                 "timeOut": "1000"
             });
         }
         } else {
-        $('.tall_57').append(t57);
-        function alert57(){
+        $('.tall_36').append(t36);
+        function alert36(){
         toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
             "timeOut": "1000"
         });
@@ -351,18 +670,212 @@ function addTaller11() {
         //console.log(enun)
            
         }
-       return alert57;
+       return alert36;
     }
-     $('.re_tall57').live('click', function() {
-        num = $('.tall_57 .form-group').toArray();
+     $('.re_tall36').live('click', function() {
+        num = $('.tall_36 .form-group').toArray();
         //console.log(num);
-        if ($('.tall_57 .form-group').length == 2) 
+        if ($('.tall_36 .form-group').length == 2) 
         {
             $.each(num, function( index, value ) {
             $(value).remove();
             });
-            addTaller57();
-        }else if($('.tall_57 .form-group').length == 1){
+            addTaller36();
+        }else if($('.tall_36 .form-group').length == 1){
+             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }else {
+            $(this).parent().parent().remove();
+        }
+    });
+
+
+
+    function addTaller37() {
+        var tall37 = $('.tall_37 .form-group').length;
+        console.log(tall37)
+        var a = 1;
+        var e = 1;
+        var t37 = 
+        '<div class="form-group">'+
+            '<label for="" class="col-form-label">Enunciado '+(tall37 + 1)+' <a href="#" class="btn btn-danger re_tall37"><span class="glyphicon glyphicon-remove">X</span></a></label>'+
+            '<textarea required="" class="form-control" name="enun[]"></textarea>'+
+        '</div>';
+        $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
+        if (tall37 == 10) {
+        function alert37(){
+            toastr.error("Limite de enunciados creados", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }
+        } else {
+        $('.tall_37').append(t37);
+        function alert37(){
+        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+            "timeOut": "1000"
+        });
+        }
+
+        //console.log(enun)
+           
+        }
+       return alert37;
+    }
+     $('.re_tall37').live('click', function() {
+        num = $('.tall_37 .form-group').toArray();
+        //console.log(num);
+        if ($('.tall_37 .form-group').length == 2) 
+        {
+            $.each(num, function( index, value ) {
+            $(value).remove();
+            });
+            addTaller37();
+        }else if($('.tall_37 .form-group').length == 1){
+             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }else {
+            $(this).parent().parent().remove();
+        }
+    });
+
+function addTaller38() {
+        var tall38 = $('.tall_38 .form-group').length;
+        console.log(tall38)
+        var a = 1;
+        var e = 1;
+        var t38 = 
+        '<div class="form-group">'+
+            '<label for="" class="col-form-label">Enunciado '+(tall38 + 1)+' <a href="#" class="btn btn-danger re_tall38"><span class="glyphicon glyphicon-remove">X</span></a></label>'+
+            '<textarea required="" class="form-control" name="enun[]"></textarea>'+
+        '</div>';
+        $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
+        if (tall38 == 10) {
+        function alert38(){
+            toastr.error("Limite de enunciados creados", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }
+        } else {
+        $('.tall_38').append(t38);
+        function alert38(){
+        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+            "timeOut": "1000"
+        });
+        }
+
+        //console.log(enun)
+           
+        }
+       return alert38;
+    }
+     $('.re_tall38').live('click', function() {
+        num = $('.tall_38 .form-group').toArray();
+        //console.log(num);
+        if ($('.tall_38 .form-group').length == 2) 
+        {
+            $.each(num, function( index, value ) {
+            $(value).remove();
+            });
+            addTaller38();
+        }else if($('.tall_38 .form-group').length == 1){
+             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }else {
+            $(this).parent().parent().remove();
+        }
+    });
+
+     function addTaller40() {
+        var tall40 = $('.tall_40 .form-group').length;
+        console.log(tall40)
+        var a = 1;
+        var e = 1;
+        var t40 = 
+        '<div class="form-group">'+
+            '<label for="" class="col-form-label">Enunciado '+(tall40 + 1)+' <a href="#" class="btn btn-danger re_tall40"><span class="glyphicon glyphicon-remove">X</span></a></label>'+
+            '<textarea required="" class="form-control" name="enun[]"></textarea>'+
+        '</div>';
+        if (tall40 == 10) {
+        function alert40(){
+            toastr.error("Limite de enunciados creados", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }
+        } else {
+        $('.tall_40').append(t40);
+        function alert40(){
+        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+            "timeOut": "1000"
+        });
+        }
+
+        //console.log(enun)
+           
+        }
+       return alert40;
+    }
+     $('.re_tall40').live('click', function() {
+        num = $('.tall_40 .form-group').toArray();
+        //console.log(num);
+        if ($('.tall_40 .form-group').length == 2) 
+        {
+            $.each(num, function( index, value ) {
+            $(value).remove();
+            });
+            addTaller40();
+        }else if($('.tall_40 .form-group').length == 1){
+             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }else {
+            $(this).parent().parent().remove();
+        }
+    });
+
+
+     function addTaller42() {
+        var tall42 = $('.tall_42 .form-group').length;
+        console.log(tall42)
+        var a = 1;
+        var e = 1;
+        var t42 = 
+        '<div class="form-group">'+
+            '<label for="" class="col-form-label">Enunciado '+(tall42 + 1)+' <a href="#" class="btn btn-danger re_tall42"><span class="glyphicon glyphicon-remove">X</span></a></label>'+
+                              '  <input required="" class="form-control" name="enun[]" type="text">'+
+            // '<textarea required="" class="form-control" name="enun[]"></textarea>'+
+        '</div>';
+        if (tall42 == 10) {
+        function alert42(){
+            toastr.error("Limite de enunciados creados", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }
+        } else {
+        $('.tall_42').append(t42);
+        function alert42(){
+        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+            "timeOut": "1000"
+        });
+        }
+
+        //console.log(enun)
+           
+        }
+       return alert42;
+    }
+     $('.re_tall42').live('click', function() {
+        num = $('.tall_42 .form-group').toArray();
+        //console.log(num);
+        if ($('.tall_42 .form-group').length == 2) 
+        {
+            $.each(num, function( index, value ) {
+            $(value).remove();
+            });
+            addTaller42();
+        }else if($('.tall_42 .form-group').length == 1){
              toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
                 "timeOut": "1000"
             });
@@ -557,6 +1070,10 @@ function addTaller11() {
             '<td><a href="#" class="btn btn-danger remover"><span class="glyphicon glyphicon-remove">X</span></a></td>'
         '</tr>';
         $('.prin').append(tr);
+           $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
         toastr.success("Columna agregada correctamente", "Smarmoddle", {
             "timeOut": "1000"
         });
@@ -594,6 +1111,7 @@ function addTaller11() {
 
         } else {
             $('.fac').append(tr);
+         
 
             toastr.success("Columna agregada correctamente", "Smarmoddle", {
                 "timeOut": "1000"
@@ -643,5 +1161,6 @@ function addTaller11() {
             i = not;
         }
     });
+
 
 }( document, window, 0 ));

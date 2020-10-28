@@ -17,6 +17,7 @@ class CreateTallerCollagesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->string('enunciado');
+            $table->string('img_num');
             $table->timestamps();
             
             $table->foreign('taller_id')

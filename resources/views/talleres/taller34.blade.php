@@ -1,62 +1,87 @@
 @extends('layouts.nav')
 
- @section('css')
- <link rel="stylesheet" href="{{ asset('css/dropzone.min.css') }}">
- @endsection
-@section('title', $datos->taller->nombre)
+@section('title', 'Taller 38')
 @section('content')
 
-<h1 class="text-center  mt-5 text-danger">{{$datos->taller->nombre }} </h1>
-<h3 class="text-center mt-5 mb-3 text-info">EN  EL  S IGUIENTE  COLLAGE  APLIQUE  FIGURAS  QUE  SE  RELACIONEN  CON CONTABILIDAD  HOTELERA,  CON  EFICACIA</h3>
+{{-- LUEGO  DE  REALIZAR  LOS  EJERCICIOS,  DETERMINE  EL  TIPO  DE  SALDO CON  EXACTITUD.  --}}
+<h1 class="text-center  mt-5 text-danger"> {{ $datos->nombre }}</h1>
+<h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
+
+<form action="{{ route('taller34', ['idtaller' => $d]) }}" method="POST">
+           @csrf
 	<div class="container">
-	<form action="{{ route('taller_34', ['idtaller' => $d]) }}"
-      class="dropzone"
-      id="my-awesome-dropzone"
-     enctype="multipart/form-data">
-     @csrf
-     
+		<div class="row justify-content-center ">
+			
+				<div class="col-12">
+				@foreach ($datos->tallerTipoSaldo as $tipos)
+					<div class="row">
+						<div class="col-8">
+							<table class="table">
+							  <thead>
+							    <tr>
+							      <th colspan="10" scope="col">DEBE</th>
+							      <th colspan="10" class="text-right"  scope="col">HABER</th>
+							    </tr>
+							  </thead>
+							  <tbody>
+							 <tr>
+							 	<td class="border-left-0 border-bottom-0 border-top-0 border" colspan="10">
+							 		<div class="row">
+							 			<div class="col-6">
+							 			@foreach ($tipos->saldoDebe as $debe)
+							 				<h6>{{ $debe->nom_cuenta }}</h6>
+							 			@endforeach
 
-		{{--<div class="row justify-content-center">
-							<div class="col-7 border border danger bg-light p-3">
-								<textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+							 				<h4>TOTAL</h4>
+							 			</div>
+							 			<div class="col-6 ">
+							 			@foreach ($tipos->saldoDebe as $debesaldo)
+							 				<h6 >{{ $debesaldo->saldo }}</h6>
+							 			@endforeach
+							 				{{-- <h6 >$ 2.100</h6>
+							 				<h6 class="border-left-0 border-right-0 border-top-0 border border-danger">$ 900</h6> --}}
+
+							 			</div>
+							 		</div>
+							 	</td>
+							 	<td colspan="10">
+							 		<div class="row">
+							 			<div class="col-6">
+							 			@foreach ($tipos->saldoHaber as $haber)
+							 				<h6>{{ $haber->nom_cuenta }}</h6>
+							 			@endforeach
+							 				<h4>TOTAL</h4>
+							 			</div>
+							 			<div class="col-6">
+							 			@foreach ($tipos->saldoHaber as $saldo)
+							 				<h6>{{ $saldo->saldo }}</h6>
+							 			@endforeach
+							 				{{-- <h6 class="mb-4">$ 2.100</h6>
+							 				<h6 class="border-left-0 border-right-0 border-top-0 border border-danger">$ 900</h6> --}}
+							 			</div>
+							 		</div>
+							 	</td>
+							 </tr>
+							  </tbody>
+							</table>
+
+						</div>
+						<div class="col-4 text-center align-self-center">
+							<div class="border bg-light p-2">
+								<h5>SALDO :</h5>
+								<input type="text" name="saldo[]" class="form-control">
 							</div>
-						</div>--}}
-		</form>
-		<div class="row justify-content-center">
-     <button class="btn btn-outline-danger mt-5 text-center" id="sendAll">Enviar Imagenes</button>
+
+						</div>
+					</div>
+					@endforeach
+				</div>
+			
 		</div>
-
+		 <div class="row justify-content-center">
+        	<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
+    	</div>
 	</div>
+</form>
 
- @endsection
- @section('js')
-<script type="text/javascript" src="{{ asset('js/dropzone.min.js') }}"></script>
-<script type="text/javascript">
-	Dropzone.options.myAwesomeDropzone = {
-		autoProcessQueue: false,
-		dictDefaultMessage: "Agregue las imagenes en el recuadro",
-  		maxFilesize: 2, // MB
-  		acceptedFiles: "image/*",
-  		maxFiles: 4,
-  		init:function () {
-  			var submitButon = document.querySelector("#sendAll");
-  		myDropzone = this;
-  		submitButon.addEventListener('click', function(){
-			myDropzone.processQueue();
-  				});
-  		this.on("complete", function(){
-  			if (this.getQueuedFiles().length == 0 && this. getUploadingFiles().length == 0) {
-  				var _this = this;
-  				_this.removeAllFiles();
-          Swal.fire({
-            title: 'Smarmoddle',
-            text: 'Datos enviados correctamente',
-          }).then(function() {
-                window.location = "/sistema";
-            });
-  			}
-  		});
-  			}
-  		};
-</script>
- @endsection
+@endsection

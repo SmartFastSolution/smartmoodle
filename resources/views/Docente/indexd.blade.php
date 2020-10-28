@@ -1,10 +1,16 @@
-@extends('layouts.docapp')
+@extends('layouts.nav')
 
 @section('title', 'Perfil | SmartMoodle')
 
 
 
+
+@section('title', 'Administracion - Docente')
+
 @section('content')
+<h1>Docente Perfil</h1>
+
+
 
 <section class="content">
     <div class="container">

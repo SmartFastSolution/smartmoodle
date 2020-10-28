@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Contenido;
 use App\Curso;
-use Illuminate\Http\Request;
-use App\Materia;
-use App\User;
 use App\Distribucionmacu;
+use App\Materia;
 use App\Modelos\Role;
+use App\User;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -41,8 +42,14 @@ class HomeController extends Controller
     public function buscarMateria(Request $request){
 
         $materias= Materia::where('instituto_id', $request->id)->get();
-
-        return $materias;
+        $materia = [];
+           foreach($materias as $key => $value){
+            $materia[$key] =[
+                'id'=> $value->id,
+                'nombre' => $value->nombre
+            ];
+        }
+        return $materia;
         
     }
 
@@ -68,8 +75,20 @@ class HomeController extends Controller
             ];
         }
        // $dis = $dist->id;
-        return $cursos;
-       
+        return $cursos;   
+    }
+    public function buscarContenido(Request $request)
+    {
+        $cont = Contenido::where('materia_id', $request->id)->get();
+        $contenidos = [];
+        foreach($cont as $key => $value){
+            $contenidos[$key] =[
+                'id'=> $value->id,
+                'nombre' => $value->nombre,
+            ];
+        }
+        return $contenidos;   
+
         
     }
 

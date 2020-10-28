@@ -60,7 +60,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany('App\TallerCirculoRe');
     }
 
+
     
+
+
     //relacion de muchos a 1 es decir muchos usuarios 
     //tomaran 1 dato de instituto
     public function instituto(){
@@ -77,6 +80,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function distribuciondos(){
           
         return $this->hasMany('App\Distribuciondo');
+    }
+    public function tallers(){
+        
+        return $this->belongsToMany('App\Taller','taller_user')
+            ->withPivot('status','calificacion');
     }
 
     

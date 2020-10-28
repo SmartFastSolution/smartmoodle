@@ -12,7 +12,26 @@
 <form action="{{ route('taller8', ['idtaller' => $d]) }}" method="POST">
     @csrf
     <div class="container">
-    @if ($datos->cantidad == 4)
+    @if ($datos->cantidad == 3)
+        <div class="row justify-content-center">
+            <div class="col-4 mt-5">
+                <input class="form-control inputdesign" name="respuesta1" id="">
+            </div>
+        </div>
+    <div class="row row justify-content-md-center">
+        <div class="col-4 mt-5">
+            <input class="form-control inputdesign" name="respuesta2" id="">
+        </div>
+            <div class="col-3 text-center mt-3 mb-3 ">
+                <img class="img-fluid" src="{{ asset($datos->img) }}" alt="">
+            </div>
+        <div class="col-4 mt-5">
+            <input class="form-control inputdesign" name="respuesta3" id="">
+        </div>
+    </div>
+   
+
+    @elseif ($datos->cantidad == 4)
         <div class="row justify-content-center">
             <div class="col-4 mt-5">
                 <input class="form-control inputdesign" name="respuesta1" id="">
@@ -57,7 +76,7 @@
                 <input class="form-control inputdesign" name="respuesta4" id="">
             </div>
             <div class="col-4 m-2">
-                <input class="form-control inputdesign" name="respuesta4" id="">
+                <input class="form-control inputdesign" name="respuesta5" id="">
             </div>
     </div>
     @elseif($datos->cantidad == 6)
@@ -66,26 +85,26 @@
                 <input class="form-control inputdesign" name="respuesta1" id="">
             </div>
             <div class="col-4 mt-5">
-                <input class="form-control inputdesign" name="respuesta1" id="">
+                <input class="form-control inputdesign" name="respuesta2" id="">
             </div>
         </div>
     <div class="row row justify-content-md-center">
         <div class="col-4 mt-5">
-            <input class="form-control inputdesign" name="respuesta2" id="">
+            <input class="form-control inputdesign" name="respuesta3" id="">
         </div>
             <div class="col-3 text-center mt-3 mb-3 ">
                 <img class="img-fluid" src="{{ asset($datos->img) }}" alt="">
             </div>
         <div class="col-4 mt-5">
-            <input class="form-control inputdesign" name="respuesta3" id="">
+            <input class="form-control inputdesign" name="respuesta4" id="">
         </div>
     </div>
     <div class="row justify-content-center">
             <div class="col-4 m-2">
-                <input class="form-control inputdesign" name="respuesta4" id="">
+                <input class="form-control inputdesign" name="respuesta5" id="">
             </div>
             <div class="col-4 m-2">
-                <input class="form-control inputdesign" name="respuesta4" id="">
+                <input class="form-control inputdesign" name="respuesta6" id="">
             </div>
     </div>
         @endif

@@ -10,5 +10,9 @@ class TallerNotaPedido extends Model
 
         return $this->belongsTo('App\Taller');
     }
+       public function pedidoDatos(){
+
+        return $this->hasMany('App\Admin\TallerNPedidoDatos');
+    }
 
 }

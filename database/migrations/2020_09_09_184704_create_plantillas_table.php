@@ -17,6 +17,7 @@ class CreatePlantillasTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('descripcion');
+            $table->text('plantilla');
             $table->timestamps();
         });
     }

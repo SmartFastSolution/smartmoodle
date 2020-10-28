@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 
 
+ // Route::get('/sistema', function () {
+ //       return view('welcome');
+ //   })->name('sistema');
 
  
  
@@ -33,12 +36,16 @@ Route::get('/', function () {
 
 ///rutas protegidas On 
 
- Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
- // Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
+ //Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
+  Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
    
+
  
 
  route::get('/home','Controller@index')->name('administrador'); //ruta administracion
+
+ route::get('home','AdminController@index')->name('administrador'); //ruta administracion
+
 //ruta del menu general de administracion 
 
  route::get('/homedoc','DocenteController@index')->name('docente'); //ruta docente
@@ -52,6 +59,7 @@ Route::get('/', function () {
  Route::post('userinst','HomeController@buscarAlumno')->name('userinst');
  Route::post('docinst','HomeController@buscarDocente')->name('docinst');
  Route::post('distinst','HomeController@buscarAsignacion')->name('distinst');
+ Route::post('contmateria','HomeController@buscarContenido')->name('contmateria');
 
 
  //rutas menu estudiante
@@ -144,86 +152,80 @@ route::post('/taller26', 'AdminController@taller26')->name('admin.taller26');
 route::post('/taller27', 'AdminController@taller27')->name('admin.taller27');
 route::post('/taller28', 'AdminController@taller28')->name('admin.taller28');
 route::post('/taller29', 'AdminController@taller29')->name('admin.taller29');
+route::post('/taller31', 'AdminController@taller31')->name('admin.taller31');
+route::post('/taller33', 'AdminController@taller33')->name('admin.taller33');
 route::post('/taller34', 'AdminController@taller34')->name('admin.taller34');
-route::post('/taller57', 'AdminController@taller57')->name('admin.taller57');
+route::post('/taller36', 'AdminController@taller36')->name('admin.taller36');
+route::post('/taller37', 'AdminController@taller37')->name('admin.taller37');
+route::post('/taller38', 'AdminController@taller38')->name('admin.taller38');
+route::post('/taller39', 'AdminController@taller39')->name('admin.taller39');
+route::post('/taller40', 'AdminController@taller40')->name('admin.taller40');
+route::post('/taller42', 'AdminController@taller42')->name('admin.taller42');
+route::post('/taller43', 'AdminController@taller43')->name('admin.taller43');
+route::post('/taller44', 'AdminController@taller44')->name('admin.taller44');
+route::post('/taller45', 'AdminController@taller45')->name('admin.taller45');
+// route::post('/taller57', 'AdminController@taller57')->name('admin.taller57');
 	});
 
 route::get('/sistema/taller/{plant}/{id}', 'TallersController@taller')->name('taller');
-route::post('/sistema/admin/taller1/{idtaller}', 'TallersController@store1')->name('taller1');
+
+route::get('/sistema/homees/taller/{plant}/{id}', 'TallerEstudianteController@taller')->name('taller.estudiante');
 
 
-route::get('/sistema/taller2', 'TallersController@taller2')->name('taller2');
-route::post('/sistema/taller2', 'TallersController@store2')->name('taller2');
-
-route::get('/sistema/taller3', 'TallersController@taller3')->name('taller3');
-route::post('/sistema/taller3', 'TallersController@store3')->name('taller3');
-
-route::post('/sistema/admin/taller4/{idtaller}', 'TallersController@store4')->name('taller4');
-
-route::get('/sistema/taller5', 'TallersController@taller5')->name('taller5');
-route::post('/sistema/taller5', 'TallersController@store5')->name('taller5');
-
-route::get('/sistema/taller6', 'TallersController@taller6')->name('taller6');
-route::post('/sistema/admin/taller6/{idtaller}', 'TallersController@store6')->name('taller6');
-
-
-route::get('/sistema/taller7', 'TallersController@taller7')->name('taller7');
-route::post('/sistema/admin/taller7/{idtaller}', 'TallersController@store7')->name('taller7');
-
-route::get('/sistema/taller8', 'TallersController@taller8')->name('taller8');
-route::post('/sistema/admin/taller8/{idtaller}', 'TallersController@store8')->name('taller8');
-
-
-route::get('/sistema/taller9', 'TallersController@taller9')->name('taller9');
-route::post('/sistema/admin/taller9/{idtaller}', 'TallersController@store9')->name('taller9');
-
-route::get('/sistema/taller10', 'TallersController@taller10')->name('taller10');
-route::post('/sistema/admin/taller10/{idtaller}', 'TallersController@store10')->name('taller10');
-
-
-route::get('/sistema/taller11', 'TallersController@taller11')->name('taller11');
-
-route::post('/sistema/admin/taller12/{idtaller}', 'TallersController@store12')->name('taller12');
-
-route::post('/sistema/admin/taller13/{idtaller}', 'TallersController@store13')->name('taller13');
-
-route::post('/sistema/admin/taller14/{idtaller}', 'TallersController@store14')->name('taller14');
-
-route::post('/sistema/admin/taller15/{idtaller}', 'TallersController@store15')->name('taller15');
-route::post('/sistema/admin/taller16/{idtaller}', 'TallersController@store16')->name('taller16');
-
-route::post('/sistema/admin/taller17/{idtaller}', 'TallersController@store17')->name('taller17');
-route::post('/sistema/admin/taller18/{idtaller}', 'TallersController@store18')->name('taller18');
-route::post('/sistema/admin/taller19/{idtaller}', 'TallersController@store19')->name('taller19');
-route::post('/sistema/admin/taller20/{idtaller}', 'TallersController@store20')->name('taller20');
-route::post('/sistema/admin/taller21/{idtaller}', 'TallersController@store21')->name('taller21');
-route::post('/sistema/admin/taller22/{idtaller}', 'TallersController@store22')->name('taller22');
-route::post('/sistema/admin/taller23/{idtaller}', 'TallersController@store23')->name('taller23');
-route::post('/sistema/admin/taller24/{idtaller}', 'TallersController@store24')->name('taller24');
-route::post('/sistema/admin/taller25/{idtaller}', 'TallersController@store25')->name('taller25');
-route::post('/sistema/admin/taller26/{idtaller}', 'TallersController@store26')->name('taller26');
-route::post('/sistema/admin/taller27/{idtaller}', 'TallersController@store27')->name('taller27');
-route::post('/sistema/admin/taller29/{idtaller}', 'TallersController@store29')->name('taller29');
-route::post('/sistema/admin/taller30/{idtaller}', 'TallersController@store30')->name('taller30');
-route::post('/sistema/admin/taller31/{idtaller}', 'TallersController@store31')->name('taller31');
-route::post('/sistema/admin/taller34/{idtaller}', 'TallersController@store34')->name('taller_34');
-route::post('/sistema/admin/taller57/{idtaller}', 'TallersController@store57')->name('taller_57');
+// route::post('/sistema/taller2', 'TallersController@store2')->name('taller2');
+// route::post('/sistema/taller3', 'TallersController@store3')->name('taller3');
+route::post('/sistema/admin/taller1/{idtaller}', 'TallerEstudianteController@store1')->name('taller1');
+route::post('/sistema/admin/taller3/{idtaller}', 'TallerEstudianteController@store3')->name('taller3');
+route::post('/sistema/admin/taller4/{idtaller}', 'TallerEstudianteController@store4')->name('taller4');
+route::post('/sistema//admin/taller5/{idtaller}', 'TallerEstudianteController@store5')->name('taller5');
+route::post('/sistema/admin/taller6/{idtaller}', 'TallerEstudianteController@store6')->name('taller6');
+route::post('/sistema/admin/taller7/{idtaller}', 'TallerEstudianteController@store7')->name('taller7');
+route::post('/sistema/admin/taller8/{idtaller}', 'TallerEstudianteController@store8')->name('taller8');
+route::post('/sistema/admin/taller9/{idtaller}', 'TallerEstudianteController@store9')->name('taller9');
+route::post('/sistema/admin/taller10/{idtaller}', 'TallerEstudianteController@store10')->name('taller10');
+route::post('/sistema/admin/taller11/{idtaller}', 'TallerEstudianteController@store11')->name('taller11');
+route::post('/sistema/admin/taller12/{idtaller}', 'TallerEstudianteController@store12')->name('taller12');
+route::post('/sistema/admin/taller13/{idtaller}', 'TallerEstudianteController@store13')->name('taller13');
+route::post('/sistema/admin/taller14/{idtaller}', 'TallerEstudianteController@store14')->name('taller14');
+route::post('/sistema/admin/taller15/{idtaller}', 'TallerEstudianteController@store15')->name('taller15');
+route::post('/sistema/admin/taller16/{idtaller}', 'TallerEstudianteController@store16')->name('taller16');
+route::post('/sistema/admin/taller17/{idtaller}', 'TallerEstudianteController@store17')->name('taller17');
+route::post('/sistema/admin/taller18/{idtaller}', 'TallerEstudianteController@store18')->name('taller18');
+route::post('/sistema/admin/taller19/{idtaller}', 'TallerEstudianteController@store19')->name('taller19');
+route::post('/sistema/admin/taller20/{idtaller}', 'TallerEstudianteController@store20')->name('taller20');
+route::post('/sistema/admin/taller21/{idtaller}', 'TallerEstudianteController@store21')->name('taller21');
+route::post('/sistema/admin/taller22/{idtaller}', 'TallerEstudianteController@store22')->name('taller22');
+route::post('/sistema/admin/taller23/{idtaller}', 'TallerEstudianteController@store23')->name('taller23');
+route::post('/sistema/admin/taller24/{idtaller}', 'TallerEstudianteController@store24')->name('taller24');
+route::post('/sistema/admin/taller25/{idtaller}', 'TallerEstudianteController@store25')->name('taller25');
+route::post('/sistema/admin/taller26/{idtaller}', 'TallerEstudianteController@store26')->name('taller26');
+route::post('/sistema/admin/taller27/{idtaller}', 'TallerEstudianteController@store27')->name('taller27');
+route::post('/sistema/admin/taller28/{idtaller}', 'TallerEstudianteController@store28')->name('taller28');
+route::post('/sistema/admin/taller29/{idtaller}', 'TallerEstudianteController@store29')->name('taller29');
+route::post('/sistema/admin/taller30/{idtaller}', 'TallerEstudianteController@store30')->name('taller30');
+route::post('/sistema/admin/taller31/{idtaller}', 'TallerEstudianteController@store31')->name('taller31');
+route::post('/sistema/admin/taller32/{idtaller}', 'TallerEstudianteController@store32')->name('taller32');
+route::post('/sistema/admin/taller33/{idtaller}', 'TallerEstudianteController@store33')->name('taller33');
+route::post('/sistema/admin/taller34/{idtaller}', 'TallerEstudianteController@store34')->name('taller34');
+route::post('/sistema/admin/taller35/{idtaller}', 'TallerEstudianteController@store35')->name('taller35');
+route::post('/sistema/admin/taller36/{idtaller}', 'TallerEstudianteController@store36')->name('taller36');
+route::post('/sistema/admin/taller38/{idtaller}', 'TallerEstudianteController@store38')->name('taller38');
+route::post('/sistema/admin/taller39/{idtaller}', 'TallerEstudianteController@store39')->name('taller39');
+route::post('/sistema/admin/taller40/{idtaller}', 'TallerEstudianteController@store40')->name('taller40');
+route::post('/sistema/admin/taller41/{idtaller}', 'TallerEstudianteController@store41')->name('taller41');
+route::post('/sistema/admin/taller42/{idtaller}', 'TallerEstudianteController@store42')->name('taller42');
+route::post('/sistema/admin/taller43/{idtaller}', 'TallerEstudianteController@store43')->name('taller43');
+route::post('/sistema/admin/taller44/{idtaller}', 'TallerEstudianteController@store44')->name('taller44');
+route::post('/sistema/admin/taller45/{idtaller}', 'TallerEstudianteController@store45')->name('taller45');
+route::post('/sistema/admin/taller37/{idtaller}', 'TallerEstudianteController@store37')->name('taller_37');
+route::post('/sistema/admin/taller/balance_inicial', 'TallerContabilidadController@balance_inicial')->name('balance_inicial');
+route::post('/sistema/admin/taller/b_inicial_diario', 'TallerContabilidadController@b_inicial_diario')->name('b_inicial_diario');
+route::post('/sistema/admin/taller/diario', 'TallerContabilidadController@diario')->name('diario');
+route::post('/sistema/admin/taller/diariogeneral', 'TallerContabilidadController@obtenerdiario')->name('obtenerdiario');
+route::post('/sistema/admin/taller/obtenerbalance', 'TallerContabilidadController@obtenerbalance')->name('obtenerbalance');
 
 
-route::get('/sistema/taller32', 'TallersController@taller32')->name('taller32');
-route::get('/sistema/taller33', 'TallersController@taller33')->name('taller33');
 
-route::get('/sistema/taller35', 'TallersController@taller35')->name('taller35');
-route::get('/sistema/taller36', 'TallersController@taller36')->name('taller36');
-route::get('/sistema/taller37', 'TallersController@taller37')->name('taller37');
-route::get('/sistema/taller38', 'TallersController@taller38')->name('taller38');
-route::get('/sistema/taller39', 'TallersController@taller39')->name('taller39');
-route::get('/sistema/taller40', 'TallersController@taller40')->name('taller40');
-route::get('/sistema/taller41', 'TallersController@taller41')->name('taller41');
-route::get('/sistema/taller42', 'TallersController@taller42')->name('taller42');
-route::get('/sistema/taller43', 'TallersController@taller43')->name('taller43');
-route::get('/sistema/taller44', 'TallersController@taller44')->name('taller44');
-route::get('/sistema/taller45', 'TallersController@taller45')->name('taller45');
 route::get('/sistema/taller46', 'TallersController@taller46')->name('taller46');
 route::get('/sistema/taller47', 'TallersController@taller47')->name('taller47');
 route::get('/sistema/taller48', 'TallersController@taller48')->name('taller48');

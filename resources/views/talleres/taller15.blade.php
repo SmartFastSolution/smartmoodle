@@ -13,19 +13,19 @@
 			<div class="col-2">
 				<h2>Datos</h2>
 				<label for="">Girador</label><br>
-					<p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->girador }}')">{{ $datos->girador }}</p>
+					<p style="cursor: move;" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->girador }}')" ondragend="this.classList.add('text-muted');">{{ $datos->girador }}</p>
 				<label for="">Girado</label><br>
-					<p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->girado }}')">{{ $datos->girado }}</p>
+					<p style="cursor: move;" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->girado }}')" ondragend="this.classList.add('text-muted');">{{ $datos->girado }}</p>
 				<label for="">Cantidad</label><br>
-					<p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->cantidad }}')">{{ $datos->cantidad }}</p>
+					<p style="cursor: move;" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->cantidad }}')" ondragend="this.classList.add('text-muted');">{{ $datos->cantidad }}</p>
 				<label for="">Lugar y Fecha</label>	<br>
-				<p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->lugar }}')">{{ $datos->lugar }}</p>
+				<p style="cursor: move;" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->lugar }}')" ondragend="this.classList.add('text-muted');">{{ $datos->lugar }}</p>
 				<p>{{ $datos->fecha }}</p>
 			</div>
 			<div class="col-9 border">
 				<div class="row ">
 					<div class="col-6">
-						<input type="text" name="girado" class="form-control mt-2">
+						<input type="text" name="girador" class="form-control mt-2" required>
 					</div>	
 					<div class="col-2 align-self-center">
 						<p>16457 <br>
@@ -39,7 +39,7 @@
 						
 					</div>
 					<div class="col-8">
-						<input type="text" name="girador" class="form-control">
+						<input type="text" name="girado" class="form-control" required>
 					</div>
 					<div class="col-2">
 						<label for="">
@@ -49,7 +49,7 @@
 							<div class="col-2"><label for="">
 							US
 						</label></div>
-							<div class="col-8"><input type="numeric" name="cantidad" class="form-control" size="2"></div>
+							<div class="col-8"><input type="numeric" name="cantidad" class="form-control" size="2" required></div>
 						</div>
 						
 					</div>
@@ -60,7 +60,7 @@
 						<label for="">LA SUMA DE</label>
 					</div>
 					<div class="col-8">
-						<input type="text" name="girado" class="form-control"> 
+						<input type="text" name="suma" class="form-control" required> 
 					</div>
 					<div class="col-2">
 						DOLARES
@@ -69,8 +69,8 @@
 				<div class="row">
 					<div class="col-6 align-self-start pb-5">
 						<div class="row">
-							<div class="col-6"><input name="lugar" class="form-control" type="text"></div>
-							<div class="col-6"><input name="fecha" class="form-control" type="date"></div>
+							<div class="col-6"><input name="lugar" class="form-control" type="text" required></div>
+							<div class="col-6"><input name="fecha" class="form-control" type="date" required></div>
 						</div>
 							<div class="row">
 							<div class="col-6"> <label for="">CIUDAD</label> </div>
@@ -78,7 +78,7 @@
 						</div>
 					</div>
 					<div class="col-6 col align-self-end text-center">
-						<input disabled="" class="form-control" value="Sra. Dana Lopez" type="text">
+						<input disabled="" class="form-control" value="Sra. Dana Lopez" type="text" >
 						<label class="" for="">FIRMA</label>
 					</div>
 				</div>

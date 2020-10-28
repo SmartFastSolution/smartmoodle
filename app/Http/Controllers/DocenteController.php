@@ -17,11 +17,15 @@ use Illuminate\Http\Request;
 
 class DocenteController extends Controller
 {
-    public function __construct()
-{
-    $this->middleware('auth');
-}
-   
+
+  
+
+       public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('docente');
+    }
+
     public function index(){
 
         return view('Docente.indexd'); //ruta docente

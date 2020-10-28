@@ -19,6 +19,7 @@ class CreateTallerFacturasTable extends Migration
             $table->string('enunciado');
             $table->string('cliente');
             $table->string('ruc');
+            $table->string('iva');
             $table->string('descuento');
             $table->string('remision');
             $table->string('fecha_emision');

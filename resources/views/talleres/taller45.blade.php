@@ -1,44 +1,68 @@
 @extends('layouts.nav')
 
-@section('title', 'Taller 46')
-@section('contenido')
+@section('title', $datos->taller->nombre)
+@section('content')
 
-<h1 class="text-center  mt-5 text-danger"> Taller #46</h1>
-<h3 class="text-center mt-5 mb-3 text-info">COMPLETA  EL  SIGUIENTE  MAPA  CONCEPTUAL  CORRECTAMENTE.</h3>
-	<form action="">
-		<div class="container">
-			<div class="row justify-content-center ">
-				<div class="col-5 text-center">
-					<label class="text-center">CUENTAS PATRIMONIALES</label>
-					<div class="border border-info">
-						<textarea name="" id="" class="form-control text-justify"  cols="20" rows="5">Representa..
-						</textarea>
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/letras.css') }}">
+@endsection
+{{-- ENCUENTRE  EN  LA  SOPA  DE  LETRAS  LAS  PALABRAS  RELACIONADAS  AL COMERCIO Y  ENCIÉRRELAS  EN  UN  CÍRCULO,  CON  EFICACIA. --}}
+<h1 class="text-center  mt-5 text-danger">{{ $datos->taller->nombre }}</h1>
+<h3 class="text-center mt-5 mb-3 text-info"> {{ $datos->enunciado }}</h3>
+		<div class="container" id="letra">
+			<div class="row justify-content-center">
+				<div class="col-12">
+					<div class="row" >
+						<div class="col-7">
+							<div id='puzzle'></div>
+						</div>
+						<div class="col-5 align-self-start">
+							<h4 class="text-info">Palabras relacionadas al comercio </h4>
+							<div id='words'></div>
+						</div>
 					</div>
-				</div>
-			</div>
-
-			<div class="row justify-content-center mb-2">
-				<div class="col-12 text-center">
-					<label class="text-center">Clasificación</label>
-					<div class="row">
-						<div class="col-4"><input type="text" class="form-control" name=""></div>
-						<div class="col-4"><input type="text" class="form-control" name=""></div>
-						<div class="col-4"><input type="text" class="form-control" name=""></div>
-					</div>
-				</div>
-			</div>
-			<div class="row justify-content-center ">
-				<div class="col-12 text-center">
 					
-					<div class="row">
-						<div class="col-4"><textarea class="form-control" cols="20" rows="5">Representa</textarea></div>
-						<div class="col-4"><textarea class="form-control" cols="20" rows="5"></textarea></div>
-						<div class="col-4"><textarea class="form-control" cols="20" rows="5"></textarea></div>
-					</div>
+					
 				</div>
 			</div>
-
+			<div class="row justify-content-center">
+				<form action="{{ route('taller45', ['idtaller' => $d]) }}" method="POST">
+    				@csrf
+					<input type="submit" id="activar" disabled="" value="Enviar Respuesta" class=" btn p-2 mt-3 btn-danger ">
+				</form>
+        	
+    	</div>	
 		</div>
-	</form>
+{{-- @include ('layouts.footer') --}}
+@section('js')
+    <script src="{{ asset('js/wordfind.js') }}"></script>
+    <script src="{{ asset('js/wordfindgame.js') }}"></script>
+<script>
+	var palabras = @json($palabras);
+	 const letra = new Vue({
+    		el: '#letra',
+    		data:{
+    			words: palabras,
+    		},
+    		mounted() {
+  			var gamePuzzle = wordfindgame.create(this.words, '#puzzle', '#words');
+  			var puzzle = wordfind.newPuzzle(
+    			this.words, 
+    		{height: 60, width:60, fillBlanks: true}
+  				);
+  				wordfind.print(puzzle);    
+  		} ,
+  		methods:{
+  			sendTaller: function(){
 
+  			}
+
+  		}       
+		});
+
+  // create just a puzzle, without filling in the blanks and print to console
+ 
+
+</script>
+@endsection
 @endsection

@@ -17,7 +17,6 @@ class CreateTallerVerdaderoFalsosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->string('enunciado');
-            $table->string('descripcion');
             $table->timestamps();
             
             $table->foreign('taller_id')

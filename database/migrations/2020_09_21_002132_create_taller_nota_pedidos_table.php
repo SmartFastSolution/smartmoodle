@@ -18,9 +18,6 @@ class CreateTallerNotaPedidosTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->string('enunciado');
             $table->string('pedido');
-            $table->string('cantidad');
-            $table->string('codigo');
-            $table->string('detalle');
             $table->string('lugar');
             $table->string('fecha');
             $table->string('firma');

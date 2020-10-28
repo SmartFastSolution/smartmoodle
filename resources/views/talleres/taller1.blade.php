@@ -12,10 +12,12 @@
      <h3 class="text-center mt-3">{{ $datos->enunciado }}</h3>
 
      <div class="row justify-content-md-center">
-        <div class="col-2 ">
-            <img src="{{ $datos->img }}" width="170" alt="">
-        </div>
-         <div class="col-6 ">
+            @if ($datos->img == true)
+                <div class="col-2 ">
+                        <img src="{{ $datos->img }}" width="170" alt="">
+                    </div>
+            @endif
+         <div class="col ">
             <textarea class="form-control inputdesign" name="respuesta" id="" cols="40" rows="10">{{ $datos->leyenda }}
 
             </textarea>

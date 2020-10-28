@@ -17,16 +17,11 @@ class CreateTallersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('plantilla_id');
             $table->string('nombre');
-
+            $table->text('enunciado')->nullable();
             $table->unsignedbigInteger('contenido_id');
             $table->boolean('estado');
-            $table->string('enunciado')->nullable();
-          
-
             $table->timestamps();
-
-             $table->foreign('plantilla_id')->references('id')->on('plantillas')->onDelete('cascade');
-
+            $table->foreign('plantilla_id')->references('id')->on('plantillas')->onDelete('cascade');
             $table->foreign('contenido_id')->references('id')->on('contenidos')->onDelete('cascade');
 
 

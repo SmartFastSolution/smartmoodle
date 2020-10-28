@@ -1,5 +1,6 @@
-@extends('layouts.estapp')
+{{-- @extends('layouts.estapp') --}}
 
+@extends('layouts.nav')
 @section('title', 'Perfil | SmartMoodle')
 
 
@@ -23,19 +24,20 @@
                 <h3 class="font-weight-light"> <strong>{{$materia->nombre}}</strong></h3>
 
             </div>
-
             <div class="row">
                 <div class="card-body">
 
+
                     <h4>Unidades</h4>
-
-
                     @foreach($contenidos->where('materia_id', $materia->id) as $contenido)
                     <!-- ./col -->
 
                     <p><a type="button" data-toggle="modal" data-target="#modalYT" class="text-primary"> <i
                                 class="fas fa-file-pdf"></i>
-                              {{$contenido->nombre}}</a></p>
+                            {{$contenido->nombre}}</a></p>
+
+
+
 
 
 
@@ -59,6 +61,7 @@
                                             src="{{asset(Storage::url($contenido['documentod']))}}"
                                             allowfullscreen></iframe>
 
+
                                     </div>
 
                                 </div>
@@ -67,97 +70,199 @@
                                     <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4"
                                         data-dismiss="modal">Close</button>
 
+
                                 </div>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4"
+                                    data-dismiss="modal">Close</button>
 
                             </div>
-                            <!--/.Content-->
 
                         </div>
-                        <!-- espacio -->
-                        <!-- espacio para que no salga opciones de pdf  -->
+                        <!--/.Content-->
 
                     </div>
-                    <!--fin del modal -->
+                    <!-- espacio -->
+                    <!-- espacio para que no salga opciones de pdf  -->
 
-                    <!-- ./col -->
-
-                    @endforeach
-                    <a class="btn btn-primary btn" href=""><i class="far fa-clipboard"></i> Calificaciones</i></a>
-                    <a class="btn btn-success btn" href=""><i class="fas fa-users"></i> Participantes</i></a>
                 </div>
+                <!--fin del modal -->
+
+                <!-- ./col -->
+
+                @endforeach
+                <a class="btn btn-primary btn" href=""><i class="far fa-clipboard"></i> Calificaciones</i></a>
+                <a class="btn btn-success btn" href=""><i class="fas fa-users"></i> Participantes</i></a>
+
+            </div>
 
 
+
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="font-weight-light"> <strong>Talleres</strong></h3>
+
+        </div>
+
+        <div class="row">
+            <div class="card-body">
+
+                @foreach($contenidos->where('materia_id', $materia->id) as $contenido)
+                <!-- Inicio de Talleres -->
+                <div class="card card-gray-dark">
+                    <div>
+                        <h3 class="card-title"> {{$contenido->nombre}}</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Unidad</th>
+                                    <th scope="col"> Taller </th>
+                                    <th scope="col">Plantilla </th>
+                                    <th scope="col">Vista Taller</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @foreach($tallers->where('contenido_id', $contenido->id) as $taller)
+                                    <th scope="row">{{$taller->materia['id']}}</th>
+                                    <td>{{$taller->contenido->nombre}}</td>
+                                    <td>{{$taller['nombre']}}</td>
+                                    <td>{{$taller->Plantilla->nombre}}</td>
+                                    <td class="table-button ">
+                                        <a class="btn btn-info"
+                                            href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
+                                                class="fas fa-eye"></i></a>
+
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- fin de talleres -->
+                @endforeach
 
             </div>
         </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="font-weight-light"> <strong>Talleres</strong></h3>
+
+        </div>
 
 
-        <div class="card">
-            <div class="card-header">
-                <h3 class="font-weight-light"> <strong>Talleres</strong></h3>
+        <div class="row">
+            <div class="card-body">
+
+                @foreach($contenidos->where('materia_id', $materia->id) as $contenido)
+                <!-- Inicio de Talleres -->
+                <div class="card card-gray-dark">
+                    <div>
+                        <h3 class="card-title"> {{$contenido->nombre}}</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col" width="50">#</th>
+                                    <th scope="col" width="125">Unidad</th>
+                                    <th scope="col" width="100"> Taller </th>
+                                    <th scope="col">Enunciado </th>
+                                    <th scope="col">Vista Taller</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @foreach($tallers->where('contenido_id', $contenido->id) as $taller)
+                                    <th scope="row">{{-- {{$taller->materia['id']}} --}}</th>
+                                    <td>{{$taller->contenido->nombre}}</td>
+                                    <td>{{$taller['nombre']}}</td>
+                                    <td>{{$taller->enunciado}}</td>
+                                    <td class="table-button ">
+                                        <a class="btn btn-info"
+                                            href="{{route('taller.estudiante',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
+                                                class="fas fa-eye"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- fin de talleres -->
+                @endforeach
 
             </div>
+        </div>
+    </div>
 
-            <div class="row">
-                <div class="card-body">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="font-weight-light"> <strong>Talleres Completados</strong></h3>
 
-                    @foreach($contenidos->where('materia_id', $materia->id) as $contenido)
-                    <!-- Inicio de Talleres -->
-                    <div class="card card-gray-dark">
-                        <div>
-                            <h3 class="card-title"> {{$contenido->nombre}}</h3>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-hover">
+        </div>
 
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Unidad</th>
-                                        <th scope="col"> Taller </th>
-                                        <th scope="col">Plantilla </th>
-                                        <th scope="col">Vista Taller</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        @foreach($tallers->where('contenido_id', $contenido->id) as $taller)
-                                        <th scope="row">{{$taller->materia['id']}}</th>
-                                        <td>{{$taller->contenido->nombre}}</td>
-                                        <td>{{$taller['nombre']}}</td>
-                                        <td>{{$taller->Plantilla->nombre}}</td>
-                                        <td class="table-button ">
+        <div class="row">
+            <div class="card-body">
+
+                @foreach($contenidos->where('materia_id', $materia->id) as $contenido)
+                <!-- Inicio de Talleres -->
+                <div class="card card-gray-dark">
+                    <div>
+                        <h3 class="card-title"> {{$contenido->nombre}}</h3>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col" width="50">#</th>
+                                    <th scope="col" width="100">Unidad</th>
+                                    <th scope="col" width="80"> Taller </th>
+                                    <th scope="col">Enunciado </th>
+                                    <th scope="col">Estado </th>
+                                    <th scope="col">Calificacion </th>
+                                    {{-- <th scope="col">Vista Taller</th> --}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @foreach(auth()->user()->tallers->where('contenido_id', $contenido->id) as $taller)
+                                    <th scope="row">{{-- {{$taller->materia['id']}} --}}</th>
+                                    <td>{{$taller->contenido->nombre}}</td>
+                                    <td>{{$taller['nombre']}}</td>
+                                    <td>{{$taller->enunciado}}</td>
+                                    <td> <span class="badge badge-success">{{$taller->pivot->status}}</span></td>
+                                    <td> <span class="badge badge-danger">pendiente</span></td>
+                                    {{--  <td class="table-button ">
                                             <a class="btn btn-info"
                                                 href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
-                                                    class="fas fa-eye"></i></a>
-
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                        class="fas fa-eye"></i></a>
+                                    </td> --}}
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
-                    <!-- fin de talleres -->
-                    @endforeach
-
                 </div>
+                <!-- fin de talleres -->
+                @endforeach
+
             </div>
         </div>
-
-
     </div>
 </section>
-
-
-
-
-
-
-
-
-
-
 
 
 @stop
