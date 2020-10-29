@@ -3,10 +3,7 @@
 
 @section('title', 'Administracion - Inicio')
 
-@section('encabezado')
 
-
-@stop
 
 
 @section('content')

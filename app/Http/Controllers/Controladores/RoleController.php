@@ -17,7 +17,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        Gate::authorize('haveaccess', 'rol.index');
+       // Gate::authorize('haveaccess', 'rol.index');
 
         $roles= Role::orderBy('id','Asc')->paginate(5);
     
@@ -32,7 +32,7 @@ class RoleController extends Controller
     public function create()
     {
         
-       Gate::authorize('haveaccess', 'rol.create');
+      // Gate::authorize('haveaccess', 'rol.create');
         /// añadido la linea de permision y el compact
      $permissions =Permission::get();
 
@@ -47,7 +47,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        Gate::authorize('haveaccess', 'rol.store');
+       // Gate::authorize('haveaccess', 'rol.store');
         
         $request->validate([
         
@@ -77,7 +77,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        Gate::authorize('haveaccess', 'rol.show');
+      //  Gate::authorize('haveaccess', 'rol.show');
         $permission_role=[];
     
         foreach($role->permissions as $permission){
@@ -100,7 +100,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        Gate::authorize('haveaccess', 'rol.edit');
+       // Gate::authorize('haveaccess', 'rol.edit');
      $permission_role=[];
     
      foreach($role->permissions as $permission){
@@ -121,7 +121,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        Gate::authorize('haveaccess', 'rol.update');
+        //Gate::authorize('haveaccess', 'rol.update');
         $request->validate([
         
             'name' => [ 'string', 'max:50','unique:roles,name,' .$role->id,],
@@ -149,7 +149,7 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        Gate::authorize('haveaccess', 'rol.destroy');
+       // Gate::authorize('haveaccess', 'rol.destroy');
         $user= Role::find($id);
         $user->delete();
 

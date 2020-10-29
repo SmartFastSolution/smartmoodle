@@ -52,7 +52,7 @@
                             <!-- subir imagen en laravel prueba 1 -->
                             <div class="form-group">
                                 <label for="documentod">Añadir Documento(s)</label>
-                                <input type="file" class="form-control-file" name="documentod" id="documentod">
+                                <input  type="file" class="form-control-file" name="documentod" id="documentod">
                                 {!! $errors->first('documento','<span style="color:red">:message</span>')!!}
 
                                 <div class="descripcion">

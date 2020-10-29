@@ -8,8 +8,8 @@ use App\Taller;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\UploadedFile;
-use League\CommonMark\Context;
+
+
 
 class ContenidoController extends Controller
 {
@@ -99,6 +99,7 @@ class ContenidoController extends Controller
     {
         $materias=Materia::get();
         $materiacontenido=Contenido::find($contenido->id)->materia()->get();
+        
         return \view('Contenido.editcon',['contenido'=>$contenido,'materias'=>$materias,'materiacontenido'=> $materiacontenido]);
     }
 
@@ -121,26 +122,22 @@ class ContenidoController extends Controller
        
         $contenido->update($request->all());
 
-      //validacion y que al momento de actualizar el documento no sea obligatorio subir el documento 
-      //sino que se mantenga alli mismo y solo actualizar el documento requerido 
+        //validacion y que al momento de actualizar el documento no sea obligatorio subir el documento 
+        //sino que se mantenga alli mismo y solo actualizar el documento requerido 
         if($request->hasFile('documentod')){
-
-         Storage::delete('public'.$contenido->documentod);
-         $contenido['documentod']= $request->file('documentod')->store('public');
-        
-        }else{ 
-                unset($contenido->documentod); 
-        }
-      //al actualizar el contenido no sea necesario que materia tenga que ir requerido y se pueda mantener 
-      //la que estuvo almacenada anteriormente
-        if($request->get('materia')){
+            Storage::delete('app/public' .$contenido->documentod);
+            $contenido['documentod']=$request->file('documentod')->store('public');
+           }
+        //al actualizar el contenido no sea necesario que materia tenga que ir requerido y se pueda mantener 
+        //la que estuvo almacenada anteriormente
+          if($request->get('materia')){
+           
+              $contenido->materia_id = $request->materia;
+           }
+          // hasta aqui 
          
-            $contenido->materia_id = $request->materia;
-         }
-        // hasta aqui 
-       
-
-        return redirect('sistema/contenidos');
+  
+          return redirect('sistema/contenidos');
     }
 
     /**
