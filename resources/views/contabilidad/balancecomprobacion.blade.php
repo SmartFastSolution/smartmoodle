@@ -1,4 +1,5 @@
-<table class="table table-bordered table-sm">
+<div id="balance_comp">
+<table class="table table-bordered table-sm" >
     <thead>
         <tr>
             <th rowspan="2" align="center" class="text-center">Cuentas</th>
@@ -53,3 +54,4 @@
     </tbody>
 </table>
 <a href="#" class="addDiario btn btn-outline-danger" @click="agregarBalance()">Agregar Registro</a>
+</div>

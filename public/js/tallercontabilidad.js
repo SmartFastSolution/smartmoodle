@@ -1548,3 +1548,55 @@ const diario = new Vue({
     }
 });
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////BALANCE DE COMPROBACION/////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const balance_comp = new Vue({
+  el: '#balance_comp',
+  data:{
+    balances:[],
+    balance:{
+      cuenta:'',
+      suma_debe:'',
+      suma_haber:'',
+      saldo_debe:'',
+      saldo_haber:'',
+    },
+    suman:{
+      sum_debe:'',
+      sum_haber:'',
+      sal_debe:'',
+      sal_haber:'',
+    }
+
+  },
+  methods:{
+    agregarBalance(){
+      if (this.balances.debe == 0) {
+         toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else  if (this.diarios.comentario.trim() === '') {
+         toastr.error("Debes agregar un comentario", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else{
+           var registro = {debe:this.diarios.debe, haber:this.diarios.haber, comentario:this.diarios.comentario};
+                this.registros.push(registro);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Registro agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.diarios.debe =[];
+                this.diarios.haber =[];
+                this.diarios.comentario = '';
+                // console.log(this.registros);
+                this.totalDebe(id);
+           this.totalHaber();
+                
+      }    
+  }
+  }
+});
+
