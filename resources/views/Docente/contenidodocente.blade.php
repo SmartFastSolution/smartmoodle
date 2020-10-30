@@ -29,12 +29,8 @@
                         <!-- ./col -->
 
                         <a type="button" data-toggle="modal" data-target="#modalYT" class="text-primary"> <i
-                                class="fas fa-file-pdf"></i> 
+                                class="fas fa-file-pdf"></i>
                             {{$contenido->nombre}}</a>
-
-
-                    </ul>
-
                         <!-- inicio del modal para visualizacion del archivo de contenido -->
                         <div class="modal fade" id="modalYT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                             aria-hidden="true">
@@ -76,8 +72,12 @@
                         <!-- espacio -->
                         <!-- espacio para que no salga opciones de pdf  -->
 
-               
-                    <!--fin del modal -->
+
+                        <!--fin del modal -->
+
+                    </ul>
+
+
                     @endforeach
                 </div>
 
