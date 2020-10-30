@@ -48,7 +48,7 @@ class EstudianteController extends Controller
     
     public function unidades($id){
               // todos los datos de la bd
-              $user =  User::findorfail( Auth::id());
+         $user =  User::findorfail( Auth::id());
          $institutomate = Materia::find($id)->instituto()->get();
          $contenido=Contenido::get();
 
@@ -72,7 +72,7 @@ class EstudianteController extends Controller
          return view ('Estudiante.contenido',['materia'=>$materia,'contenidos'=>$contenido,'institutomate'=>$institutomate,'tallers'=>$tallers]);
 
        // return $tallers;
-         return view ('Estudiante.contenido',['materia'=>$materia,'contenidos'=>$contenido,'institutomate'=>$institutomate, 'tallers' =>$tallers]);
+      
 
         
        

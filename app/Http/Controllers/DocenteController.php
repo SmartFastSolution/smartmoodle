@@ -14,6 +14,7 @@ use App\Instituto;
 use App\Distribuciondo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DocenteController extends Controller
 {
@@ -31,6 +32,18 @@ class DocenteController extends Controller
         return view('Docente.indexd'); //ruta docente
     }
     
+
+    public function contenidos($id){
+        // todos los datos de la bd
+        $user =  User::findorfail( Auth::id());
+        $institutomate = Materia::find($id)->instituto()->get();
+      
+        $materia =Materia::where('id', $id)->firstOrfail();
+        $contenidos=Contenido::get();
+      
+   return view ('Docente.contenidodocente',compact('user','institutomate','materia','contenidos'));
+
+}
 
 
 }

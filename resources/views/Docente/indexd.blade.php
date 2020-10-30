@@ -8,16 +8,14 @@
 @section('title', 'Administracion - Docente')
 
 @section('content')
-<h1>Docente Perfil</h1>
-
-
 
 <section class="content">
     <div class="container">
 
 
         <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
-        <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}</h2>
+        <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}
+        </h2>
         <h2 class="font-weight-light">
             @foreach(auth()->user()->roles as $role)
             {{$role->name}}
@@ -45,7 +43,7 @@
                         <div class="icon">
                             <i class="far fa-bookmark"></i>
                         </div>
-                        <a href="{{route('Unidades', $materia->id)}}" class="small-box-footer">
+                        <a href="{{route('Contenidos', $materia->id)}}" class="small-box-footer">
                             Acceder <i class="fas fa-arrow-circle-right"></i>
                         </a>
                     </div>

@@ -12,7 +12,7 @@ class Materia extends Seeder
     public function run()
     {
          DB::table('materias')->insert([
-          'nombre'       => 'Contabilidad',
+          'nombre'       => 'Matematica',
           'instituto_id' => 1,
           'slug'         => 'matematicas',
           'descripcion'  => 'Materia de matematicas',
