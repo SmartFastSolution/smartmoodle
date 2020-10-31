@@ -18,7 +18,7 @@
 			<div class="col-5">
 				<div class="row align-items-center">
 					<div class="col-6 text-center">
-						<img src="{{ asset($opciones->img) }}">
+						<img width="100" src="{{ asset($opciones->img) }}">
 					</div>
 					<div class="col-6 text-center ">
 						<label for="">{{ $opciones->enunciado }}</label><br>

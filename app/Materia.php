@@ -2,20 +2,26 @@
 
 namespace App;
 
-use App\Instituto;
-use App\Distribucionmacu;
 use App\Contenido;
 use App\Distribuciondo;
-
+use App\Distribucionmacu;
+use App\Instituto;
 use Illuminate\Database\Eloquent\Model;
+use Neurony\Duplicate\Options\DuplicateOptions;
+use Neurony\Duplicate\Traits\HasDuplicates;
 
 class Materia extends Model
 {
+    use HasDuplicates;
     protected $fillable = [
         'nombre','slug','descripcion','estado'
 
     ];
-
+     public function getDuplicateOptions(): DuplicateOptions
+    {
+        return DuplicateOptions::instance()
+        ->excludeRelations('distribucionmacus', 'instituto', 'distribuciondos');
+    }
 
     // public function tallers(){
           

@@ -9,10 +9,10 @@
      	<div class="container mb-4">
      		<div class="row justify-content-center">
      			<div class="col-7">
-                @foreach ($datos as $dato)                      
+                @foreach ($datos->completarEnlist as $dato)                      
      				<div class="row mt-4 p-2">
      					<div class="col-6 align-self-center">
-     						<label class="col-form-label " for="">{{ $dato->enunciado1 }}</label>   						
+     						<label class="col-form-label " for="">{{ $dato->enunciados }}</label>   						
      					</div>
      					<div class="col-6">
                             <textarea name="respuesta[]" class="form-control inputcurrent" id="" cols="30" rows="5"></textarea>

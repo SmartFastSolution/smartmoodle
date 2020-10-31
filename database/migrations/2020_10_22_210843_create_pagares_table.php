@@ -39,6 +39,7 @@ class CreatePagaresTable extends Migration
             $table->string('resp18');
             $table->string('resp19');
             $table->string('resp20');
+            $table->string('fecha_vencimiento');
             $table->timestamps();
             
             $table->foreign('taller_id')

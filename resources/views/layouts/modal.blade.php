@@ -347,6 +347,8 @@
                                           </div>
                                         </div>
                                       </div>
+                                      <label for="" class="col-form-label">Respuesta Correcta:</label>
+                                        <textarea required="" required="" name="respuesta[]" class="form-control"rows="5" placeholder="La respuesta correcta debe ser igual a una de las alternativas"></textarea>
                                       <label for="" class="col-form-label">Alternativa 1:</label>
                                         <textarea required="" required="" name="alternativa1[]" class="form-control"rows="5"></textarea>
                                       <label for="" class="col-form-label">Alternativa 2:</label>
@@ -666,6 +668,10 @@
                                     </div>
                                   </div>
                               </div>
+                                <div class="form-group col-12">
+                                <label for="concepto" class="col-form-label">Respuesta Correcta</label>
+                              <input required="" name="respuesta[]" class="form-control" rows="3">
+                          </div>
                               <div class="form-group col-12">
                                 <label for="concepto6" class="col-form-label">Alternativas:</label>
                                 <input required="" type="text" data-role="tagsinput" name="alter[]"
@@ -920,7 +926,17 @@
                         <div class="tall_12">
                             <div class="form-group">
                                 <label for="" class="col-form-label">Descripcion 1 <a href="#" class="btn btn-danger re_tall12"><span class="glyphicon glyphicon-remove">X</span></a></label>
-                                <textarea required="" class="form-control" name="descripcion[]"></textarea>
+                                <textarea required="" class="form-control mb-2" name="descripcion[]"></textarea>
+                                <label for="" class="col-form-label">RESPUESTA CORRECTA</label>
+                                    <div class="form-row">
+                                        <div class="col-3">
+                                            <select name="respuesta[]" id="" class=" custom-select custom-select-sm">
+                                        <option value="V" class="p-2">V</option>
+                                        <option value="F" class="p-2">F</option>
+                                   </select>
+                                        </div>
+                                    </div>
+                                    
                             </div>
                         </div>
         

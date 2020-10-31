@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Instituto;
+use App\Contenido;
+use App\Distribuciondo;
+use App\Distribucionmacu;
+use App\Distrima;
 use App\Http\Controllers\Controller;
+use App\Instituto;
+use App\Materia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -27,6 +32,30 @@ class InstitutoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function clone(Request $request, $id)
+    {
+        $model              = Instituto::find($id);
+        // $model->nombre      = $request->nombre;
+        // $model->descripcion = $request->descripcion;
+        // $model->provincia   = $request->provincia;
+        // $model->canton      = $request->canton;
+        // $model->direccion   = $request->direccion;
+        // $model->telefono    = $request->telefono;
+        $model->email       = 'itsvr2gmail.com';
+        // $model->estado      = $request->estado;
+        $duplicatedModel    = $model->saveAsDuplicate();
+        return $duplicatedModel;
+    
+    }
+    public function hola($id)
+    {
+         $model = Instituto::find($id);
+         $materias = $model->materias;
+          foreach ($materias as $key => $value) {
+            $materia[$key]        = $value;
+            $duplicaMateria[$key] =$materia[$key]->saveAsDuplicate();
+        }
+    }
     public function create()
     {
         Gate::authorize('haveaccess', 'instituto.create');

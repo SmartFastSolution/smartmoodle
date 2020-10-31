@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Admin\Respuesta\Abreviatura;
-use App\Admin\Respuesta\Activo4;
-use App\Admin\Respuesta\Pasivo4;
-use App\Admin\Respuesta\Patrimonio4;
 use App\Admin\Respuesta\AbreviaturaCarta;
 use App\Admin\Respuesta\AbreviaturaEconomica;
 use App\Admin\Respuesta\AbreviaturaEditorial;
 use App\Admin\Respuesta\AbreviaturaRe;
+use App\Admin\Respuesta\Activo4;
 use App\Admin\Respuesta\AlternativaCorrecta;
 use App\Admin\Respuesta\AlternativaCorrectaRes;
 use App\Admin\Respuesta\AnalizarPregunta;
@@ -52,6 +50,8 @@ use App\Admin\Respuesta\OrdenIdeasDato;
 use App\Admin\Respuesta\OrdenPago;
 use App\Admin\Respuesta\Pagare;
 use App\Admin\Respuesta\Palabra;
+use App\Admin\Respuesta\Pasivo4;
+use App\Admin\Respuesta\Patrimonio4;
 use App\Admin\Respuesta\Pregunta;
 use App\Admin\Respuesta\Recibo;
 use App\Admin\Respuesta\Relacionar2;
@@ -74,17 +74,21 @@ use App\Admin\TallerCheque;
 use App\Admin\TallerChequeEndoso;
 use App\Admin\TallerCirculo;
 use App\Admin\TallerCollage;
+use App\Admin\TallerCompletar;
+use App\Admin\TallerCompletarEnunciado;
 use App\Admin\TallerConvertirCheque;
 use App\Admin\TallerDefinirEnunciado;
+use App\Admin\TallerDiferencia;
+use App\Admin\TallerEscribirCuenta;
 use App\Admin\TallerFactura;
 use App\Admin\TallerGusanillo;
 use App\Admin\TallerIdenTransa;
+use App\Admin\TallerIdentificarImagen;
 use App\Admin\TallerIdentificarPersona;
 use App\Admin\TallerLetraCambio;
 use App\Admin\TallerMConceptual;
 use App\Admin\TallerNotaPedido;
 use App\Admin\TallerNotaVenta;
-use App\Admin\TallerEscribirCuenta;
 use App\Admin\TallerOrdenIdea;
 use App\Admin\TallerOrdenPago;
 use App\Admin\TallerPagare;
@@ -114,7 +118,7 @@ class TallerEstudianteController extends Controller
      }else{
         if ($plant == 1) {
             $consul = Taller::findorfail($id);    
-            $datos = TallerCompletar::where('taller_id', $consul->id)->firstOrfail();
+            $datos = ompletar::where('taller_id', $consul->id)->firstOrfail();
             return view('talleres.taller1', compact('datos', 'd'));
         }elseif ($plant == 2) {
 
@@ -124,8 +128,9 @@ class TallerEstudianteController extends Controller
 
         }elseif ($plant == 3) {
             $consul = Taller::findorfail($id);
-             $datos = TallerCompletarEnunciado::where('taller_id', $consul->id)->get();  
+             $datos = TallerCompletarEnunciado::where('taller_id', $consul->id)->firstOrfail();  
                if ($consul->plantilla_id == $plant && $consul->id == $id) {
+                // return $datos->completarEnlist;
                  return view('talleres.taller3', compact('datos', 'd', 'consul'));
              }else {
             return abort(404);   
@@ -169,7 +174,7 @@ class TallerEstudianteController extends Controller
             return view('talleres.taller9', compact('datos', 'd'));
 
         }elseif ($plant == 10) {
-            $d= 0;
+            // $d= 0;
             $i= 0;
 
             $consul = Taller::findorfail($id);
@@ -178,7 +183,7 @@ class TallerEstudianteController extends Controller
 
 
         }elseif ($plant == 11) {
-            $d= 0;
+            // $d= 0;
             $i= 0;
             $consul = Taller::findorfail($id);
              $datos = Taller2Relacionar::where('taller_id', $consul->id)->firstOrFail();
@@ -789,6 +794,7 @@ public function store11(Request $request, $idtaller)
     $taller15->girador   =   $request->input('girador');
     $taller15->girado    =   $request->input('girado');
     $taller15->cantidad  =   $request->input('cantidad');
+    $taller15->suma  =   $request->input('suma');
     $taller15->lugar     =   $request->input('lugar');
     $taller15->fecha     =   $request->input('fecha'); 
     $taller15->save();

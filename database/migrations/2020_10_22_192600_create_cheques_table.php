@@ -21,6 +21,7 @@ class CreateChequesTable extends Migration
             $table->string('girador');
             $table->string('girado');
             $table->string('cantidad');
+            $table->text('suma');
             $table->string('lugar');
             $table->string('fecha');
             $table->timestamps();

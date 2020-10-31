@@ -48,7 +48,7 @@ class EstudianteController extends Controller
          $institutomate = Materia::find($id)->instituto()->get();
          $contenido=Contenido::get();
          $completados = $user->tallers;
-         
+         $con =Contenido::where('materia_id', $id)->first();
          $ids = [];
           foreach($completados as $act){
                 $ids[]=$act->id;

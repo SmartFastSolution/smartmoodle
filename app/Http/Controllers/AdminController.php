@@ -60,6 +60,7 @@ use App\Admin\TipoSaldoHaber;
 use App\Http\Controllers\Controller;
 use App\Plantilla;
 use App\Taller;
+use App\TallerCompletarEnunRe;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -68,6 +69,28 @@ class AdminController extends Controller
     {
         $this->middleware('estudiante');
         $this->middleware('docente');
+    }
+    public function status(Request $request)
+    {
+       $taller = Taller::find($request->id);
+       $estado = $taller->estado;
+       // return $estado;
+       if ($estado === 1) {
+         $taller->estado = 0; 
+         $taller->save(); 
+          return response(array(
+                'success' => true,
+                'message' => 'Taller desactivado correctamente'
+            ),200,[]);  
+       }elseif ($estado == 0) {
+          $taller->estado = 1; 
+         $taller->save();  
+          return response(array(
+                'success' => true,
+                'message' => 'Taller activado correctamente'
+            ),200,[]);   
+       }
+
     }
    public function admin()
    {
@@ -169,16 +192,20 @@ class AdminController extends Controller
 
    	if ($taller3 = true) {
       $a = Taller::get()->last();
+      $taller_3 = new TallerCompletarEnunciado;
+      $taller_3->taller_id = $a->id;
+      $taller_3->enunciado = $request->input('enunciado');
+      $taller_3->save();
+      $o = TallerCompletarEnunciado::get()->last();
 
          foreach ($request->enun as $key=>$v) {
                   $datos=array(
-                     'taller_id'=> $a->id,
-                     'enunciado'=> $request->enunciado,
-                     'enunciado1' => $request->enun[$key],
+                     'taller_completar_enunciado_id'=> $o->id,
+                     'enunciados' => $request->enun[$key],
                      'created_at'=> now(),
                      'updated_at'=> now(),
                   );
-                  TallerCompletarEnunciado::insert($datos);
+                  TallerCompletarEnunRe::insert($datos);
                }
    	}
     return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
@@ -250,6 +277,7 @@ class AdminController extends Controller
                   $datos=array(
                      'taller_senalar_id'=> $a->id,
                      'concepto'=> $request->concepto[$key],
+                     'respuesta'=> $request->respuesta[$key],
                      'alternativa1'=> $request->alternativa1[$key],
                      'alternativa2' => $request->alternativa2[$key],
                      'created_at'=> now(),
@@ -388,6 +416,7 @@ class AdminController extends Controller
                $datos=array(
                   'taller_subrayars_id'=> $o->id,
                   'concepto'=> $request->concep[$key],
+                  'respuesta'=> $request->respuesta[$key],
                   'alternativas'=> $request->alter[$key],
                   'created_at'=> now(),
                   'updated_at'=> now(),
@@ -535,6 +564,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
                $datos=array(
                   'taller_verdadero_falso_id'=> $o->id,
                   'descripcion'=> $v,
+                  'respuesta'=> $request->respuesta[$key],
                   'created_at'=> now(),
                   'updated_at'=> now(),
                );

@@ -56,6 +56,7 @@ Auth::routes();
 
 
  //rutas menu estudiante
+route::post('admin/cambiarestado','AdminController@status')->name('taller.status');
 route::get('perfil','EstudianteController@show')->name('perfile');
 route::get('unidad/{id}','EstudianteController@unidades')->name('Unidades');
 
@@ -69,6 +70,8 @@ route::resource('users','UsersController');
 
 // rutas instituto
 route::resource('institutos','InstitutoController');// FUNCIONA AL 100%
+route::get('institutos/clone/{id}','InstitutoController@clone')->name('institutos.clone');// FUNCIONA AL 100%
+route::get('contenido/clone/{id}','InstitutoController@hola')->name('contenido.clone');// FUNCIONA AL 100%
 
 
 /// rutas roles
@@ -163,6 +166,7 @@ route::post('/taller45', 'AdminController@taller45')->name('admin.taller45');
 route::get('/sistema/taller/{plant}/{id}', 'TallersController@taller')->name('taller');
 
 route::get('/sistema/homees/taller/{plant}/{id}', 'TallerEstudianteController@taller')->name('taller.estudiante');
+route::get('/sistema/homedoc/taller/{plant}/{id}/{user}', 'TallerDocenteController@taller')->name('taller.docente');
 
 
 // route::post('/sistema/taller2', 'TallersController@store2')->name('taller2');
@@ -211,6 +215,7 @@ route::post('/sistema/admin/taller43/{idtaller}', 'TallerEstudianteController@st
 route::post('/sistema/admin/taller44/{idtaller}', 'TallerEstudianteController@store44')->name('taller44');
 route::post('/sistema/admin/taller45/{idtaller}', 'TallerEstudianteController@store45')->name('taller45');
 route::post('/sistema/admin/taller37/{idtaller}', 'TallerEstudianteController@store37')->name('taller_37');
+
 route::post('/sistema/admin/taller/balance_inicial', 'TallerContabilidadController@balance_inicial')->name('balance_inicial');
 route::post('/sistema/admin/taller/b_inicial_diario', 'TallerContabilidadController@b_inicial_diario')->name('b_inicial_diario');
 route::post('/sistema/admin/taller/diario', 'TallerContabilidadController@diario')->name('diario');
@@ -218,19 +223,49 @@ route::post('/sistema/admin/taller/diariogeneral', 'TallerContabilidadController
 route::post('/sistema/admin/taller/obtenerbalance', 'TallerContabilidadController@obtenerbalance')->name('obtenerbalance');
 
 
-
-route::get('/sistema/taller46', 'TallersController@taller46')->name('taller46');
-route::get('/sistema/taller47', 'TallersController@taller47')->name('taller47');
-route::get('/sistema/taller48', 'TallersController@taller48')->name('taller48');
-route::get('/sistema/taller49', 'TallersController@taller49')->name('taller49');
-route::get('/sistema/taller50', 'TallersController@taller50')->name('taller50');
-route::get('/sistema/taller51', 'TallersController@taller51')->name('taller51');
-route::get('/sistema/taller52', 'TallersController@taller52')->name('taller52');
-route::get('/sistema/taller53', 'TallersController@taller53')->name('taller53');
-route::get('/sistema/taller54', 'TallersController@taller54')->name('taller54');
-route::get('/sistema/taller55', 'TallersController@taller55')->name('taller55');
-route::get('/sistema/taller56', 'TallersController@taller56')->name('taller56');
-route::get('/sistema/taller57', 'TallersController@taller57')->name('taller57');
+route::post('/sistema/homedoc/respuesta/taller1/{idtaller}', 'TallerDocenteController@store1')->name('taller1.docente');
+// route::post('/sistema/admin/taller3/{idtaller}', 'TallerDocenteController@store3')->name('taller3.docente');
+// route::post('/sistema/admin/taller4/{idtaller}', 'TallerDocenteController@store4')->name('taller4.docente');
+// route::post('/sistema//admin/taller5/{idtaller}', 'TallerDocenteController@store5')->name('taller5.docente');
+// route::post('/sistema/admin/taller6/{idtaller}', 'TallerDocenteController@store6')->name('taller6.docente');
+// route::post('/sistema/admin/taller7/{idtaller}', 'TallerDocenteController@store7')->name('taller7.docente');
+// route::post('/sistema/admin/taller8/{idtaller}', 'TallerDocenteController@store8')->name('taller8.docente');
+// route::post('/sistema/admin/taller9/{idtaller}', 'TallerDocenteController@store9')->name('taller9.docente');
+// route::post('/sistema/admin/taller10/{idtaller}', 'TallerDocenteController@store10')->name('taller10.docente');
+// route::post('/sistema/admin/taller11/{idtaller}', 'TallerDocenteController@store11')->name('taller11.docente');
+// route::post('/sistema/admin/taller12/{idtaller}', 'TallerDocenteController@store12')->name('taller12.docente');
+// route::post('/sistema/admin/taller13/{idtaller}', 'TallerDocenteController@store13')->name('taller13.docente');
+// route::post('/sistema/admin/taller14/{idtaller}', 'TallerDocenteController@store14')->name('taller14.docente');
+// route::post('/sistema/admin/taller15/{idtaller}', 'TallerDocenteController@store15')->name('taller15.docente');
+// route::post('/sistema/admin/taller16/{idtaller}', 'TallerDocenteController@store16')->name('taller16.docente');
+// route::post('/sistema/admin/taller17/{idtaller}', 'TallerDocenteController@store17')->name('taller17.docente');
+// route::post('/sistema/admin/taller18/{idtaller}', 'TallerDocenteController@store18')->name('taller18.docente');
+// route::post('/sistema/admin/taller19/{idtaller}', 'TallerDocenteController@store19')->name('taller19.docente');
+// route::post('/sistema/admin/taller20/{idtaller}', 'TallerDocenteController@store20')->name('taller20.docente');
+// route::post('/sistema/admin/taller21/{idtaller}', 'TallerDocenteController@store21')->name('taller21.docente');
+// route::post('/sistema/admin/taller22/{idtaller}', 'TallerDocenteController@store22')->name('taller22.docente');
+// route::post('/sistema/admin/taller23/{idtaller}', 'TallerDocenteController@store23')->name('taller23.docente');
+// route::post('/sistema/admin/taller24/{idtaller}', 'TallerDocenteController@store24')->name('taller24.docente');
+// route::post('/sistema/admin/taller25/{idtaller}', 'TallerDocenteController@store25')->name('taller25.docente');
+// route::post('/sistema/admin/taller26/{idtaller}', 'TallerDocenteController@store26')->name('taller26.docente');
+// route::post('/sistema/admin/taller27/{idtaller}', 'TallerDocenteController@store27')->name('taller27.docente');
+// route::post('/sistema/admin/taller28/{idtaller}', 'TallerDocenteController@store28')->name('taller28.docente');
+// route::post('/sistema/admin/taller29/{idtaller}', 'TallerDocenteController@store29')->name('taller29.docente');
+// route::post('/sistema/admin/taller30/{idtaller}', 'TallerDocenteController@store30')->name('taller30.docente');
+// route::post('/sistema/admin/taller31/{idtaller}', 'TallerDocenteController@store31')->name('taller31.docente');
+// route::post('/sistema/admin/taller32/{idtaller}', 'TallerDocenteController@store32')->name('taller32.docente');
+// route::post('/sistema/admin/taller33/{idtaller}', 'TallerDocenteController@store33')->name('taller33.docente');
+// route::post('/sistema/admin/taller34/{idtaller}', 'TallerDocenteController@store34')->name('taller34.docente');
+// route::post('/sistema/admin/taller35/{idtaller}', 'TallerDocenteController@store35')->name('taller35.docente');
+// route::post('/sistema/admin/taller36/{idtaller}', 'TallerDocenteController@store36')->name('taller36.docente');
+// route::post('/sistema/admin/taller38/{idtaller}', 'TallerDocenteController@store38')->name('taller38.docente');
+// route::post('/sistema/admin/taller39/{idtaller}', 'TallerDocenteController@store39')->name('taller39.docente');
+// route::post('/sistema/admin/taller40/{idtaller}', 'TallerDocenteController@store40')->name('taller40.docente');
+// route::post('/sistema/admin/taller41/{idtaller}', 'TallerDocenteController@store41')->name('taller41.docente');
+// route::post('/sistema/admin/taller42/{idtaller}', 'TallerDocenteController@store42')->name('taller42.docente');
+// route::post('/sistema/admin/taller43/{idtaller}', 'TallerDocenteController@store43')->name('taller43.docente');
+// route::post('/sistema/admin/taller44/{idtaller}', 'TallerDocenteController@store44')->name('taller44.docente');
+// route::post('/sistema/admin/taller45/{idtaller}', 'TallerDocenteController@store45')->name('taller45.docente');
 
 /*
 */

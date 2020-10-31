@@ -80,7 +80,7 @@ class User extends Authenticatable
     public function tallers(){
         
         return $this->belongsToMany('App\Taller','taller_user')
-            ->withPivot('status','calificacion');
+            ->withPivot('status','calificacion', 'retroalimentacion');
     }
 
     

@@ -12,13 +12,20 @@ class Materia extends Seeder
     public function run()
     {
          DB::table('materias')->insert([
-          'nombre'       => 'Contabilidad',
+          'nombre'       => 'Matematicas',
           'instituto_id' => 1,
           'slug'         => 'matematicas',
           'descripcion'  => 'Materia de matematicas',
           'estado'       => 'on',
         ]);
         DB::table('materias')->insert([
+          'nombre'       => 'Contabilidad',
+          'instituto_id' => 1,
+          'slug'         => 'contabilidad',
+          'descripcion'  => 'Materia de contabilidad',
+          'estado'       => 'on',
+        ]);
+         DB::table('materias')->insert([
           'nombre'       => 'Contabilidad',
           'instituto_id' => 1,
           'slug'         => 'contabilidad',
@@ -38,5 +45,6 @@ class Materia extends Seeder
           'descripcion' => 'Unidad # 1',
           'estado'      => 'on',
         ]);
+
     }
 }

@@ -2467,6 +2467,62 @@
         ]
     },
     {
+        "name": "neurony/laravel-duplicate",
+        "version": "4.0.0",
+        "version_normalized": "4.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Neurony/laravel-duplicate.git",
+            "reference": "447636d47d46e9e62c76af43acb163ae06206992"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Neurony/laravel-duplicate/zipball/447636d47d46e9e62c76af43acb163ae06206992",
+            "reference": "447636d47d46e9e62c76af43acb163ae06206992",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/contracts": "^7.0",
+            "illuminate/database": "^7.0",
+            "illuminate/support": "^7.0",
+            "php": "^7.2.5"
+        },
+        "require-dev": {
+            "orchestra/testbench": "^5.0",
+            "phpunit/phpunit": "^8.5"
+        },
+        "time": "2020-06-09T07:39:21+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Neurony\\Duplicate\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Andrei Badea",
+                "email": "zbiller@gmail.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "Duplicate any Eloquent model along with its underlying relationships",
+        "keywords": [
+            "copy",
+            "duplicate",
+            "eloquent",
+            "laravel",
+            "model",
+            "relations",
+            "replicate"
+        ],
+        "abandoned": "varbox/varbox"
+    },
+    {
         "name": "nikic/php-parser",
         "version": "v4.10.2",
         "version_normalized": "4.10.2.0",

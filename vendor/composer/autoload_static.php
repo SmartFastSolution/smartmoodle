@@ -186,6 +186,7 @@ class ComposerStaticInit5941d17238fcb021a4db7e5496fe7b5a
         'N' => 
         array (
             'NunoMaduro\\Collision\\' => 21,
+            'Neurony\\Duplicate\\' => 18,
         ),
         'M' => 
         array (
@@ -469,6 +470,10 @@ class ComposerStaticInit5941d17238fcb021a4db7e5496fe7b5a
         'NunoMaduro\\Collision\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/collision/src',
+        ),
+        'Neurony\\Duplicate\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/neurony/laravel-duplicate/src',
         ),
         'MyCLabs\\Enum\\' => 
         array (
@@ -793,6 +798,7 @@ class ComposerStaticInit5941d17238fcb021a4db7e5496fe7b5a
         'App\\Http\\Controllers\\PcuentaController' => __DIR__ . '/../..' . '/app/Http/Controllers/PcuentaController.php',
         'App\\Http\\Controllers\\PermissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/PermissionController.php',
         'App\\Http\\Controllers\\TallerContabilidadController' => __DIR__ . '/../..' . '/app/Http/Controllers/TallerContabilidadController.php',
+        'App\\Http\\Controllers\\TallerDocenteController' => __DIR__ . '/../..' . '/app/Http/Controllers/TallerDocenteController.php',
         'App\\Http\\Controllers\\TallerEstudianteController' => __DIR__ . '/../..' . '/app/Http/Controllers/TallerEstudianteController.php',
         'App\\Http\\Controllers\\TallersController' => __DIR__ . '/../..' . '/app/Http/Controllers/TallersController.php',
         'App\\Http\\Controllers\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsersController.php',
@@ -824,6 +830,7 @@ class ComposerStaticInit5941d17238fcb021a4db7e5496fe7b5a
         'App\\TallerChequeEndosoRe' => __DIR__ . '/../..' . '/app/TallerChequeEndosoRe.php',
         'App\\TallerChequeRe' => __DIR__ . '/../..' . '/app/TallerChequeRe.php',
         'App\\TallerCollageRe' => __DIR__ . '/../..' . '/app/TallerCollageRe.php',
+        'App\\TallerCompletarEnunRe' => __DIR__ . '/../..' . '/app/TallerCompletarEnunRe.php',
         'App\\TallerConvertirChequeRe' => __DIR__ . '/../..' . '/app/TallerConvertirChequeRe.php',
         'App\\TallerDiferenciasRes' => __DIR__ . '/../..' . '/app/TallerDiferenciasRespaldo.php',
         'App\\TallerFacturaDatosRe' => __DIR__ . '/../..' . '/app/TallerFacturaDatosRe.php',
@@ -948,6 +955,7 @@ class ComposerStaticInit5941d17238fcb021a4db7e5496fe7b5a
         'Cron\\HoursField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/HoursField.php',
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
+        'Curso' => __DIR__ . '/../..' . '/database/seeds/Curso.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'DeepCopy\\DeepCopy' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
         'DeepCopy\\Exception\\CloneException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
@@ -3399,6 +3407,9 @@ class ComposerStaticInit5941d17238fcb021a4db7e5496fe7b5a
         'Monolog\\Utils' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Utils.php',
         'MyCLabs\\Enum\\Enum' => __DIR__ . '/..' . '/myclabs/php-enum/src/Enum.php',
         'MyCLabs\\Enum\\PHPUnit\\Comparator' => __DIR__ . '/..' . '/myclabs/php-enum/src/PHPUnit/Comparator.php',
+        'Neurony\\Duplicate\\Helpers\\RelationHelper' => __DIR__ . '/..' . '/neurony/laravel-duplicate/src/Helpers/RelationHelper.php',
+        'Neurony\\Duplicate\\Options\\DuplicateOptions' => __DIR__ . '/..' . '/neurony/laravel-duplicate/src/Options/DuplicateOptions.php',
+        'Neurony\\Duplicate\\Traits\\HasDuplicates' => __DIR__ . '/..' . '/neurony/laravel-duplicate/src/Traits/HasDuplicates.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Laravel/CollisionServiceProvider.php',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\Commands\\TestCommand' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Laravel/Commands/TestCommand.php',

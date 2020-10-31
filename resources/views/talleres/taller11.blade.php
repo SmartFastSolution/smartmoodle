@@ -4,9 +4,8 @@
 @section('title', 'Taller 12')
 @section('content')
 
-<h1 class="text-center  mt-5 text-danger"> Taller #12</h1>
-     <h3 class="text-center mt-5 mb-3 text-info">RELACIONE  LOS  ENUNCIADOS  ESCRIBIENDO  EN  EL  CÍRCULO  EL  LITERAL 
-QUE  CORRESPONDA</h3>
+<h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>
+     <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
 <form action="{{ route('taller11', ['idtaller' => $d]) }}" method="POST">
     @csrf

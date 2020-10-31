@@ -87,7 +87,7 @@
             <div class="row">
                 <div class="card-body">
 
-                    @foreach($contenidos->where('materia_id', $materia->id) as $contenido)
+                    @forelse($contenidos->where('materia_id', $materia->id) as $contenido)
                     <!-- Inicio de Talleres -->
                     <div class="card card-gray-dark">
                         <div>
@@ -106,7 +106,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        @foreach($tallers->where('contenido_id', $contenido->id) as $taller)
+                                        @forelse($tallers->where('contenido_id', $contenido->id) as $taller)
                                         <th scope="row">{{-- {{$taller->materia['id']}} --}}</th>
                                         <td>{{$taller->contenido->nombre}}</td>
                                         <td>{{$taller['nombre']}}</td>
@@ -117,7 +117,12 @@
                                                 class="fas fa-eye"></i></a>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    @empty
+                                    <tr>
+                                    <td colspan="5">No hay talleres disponibles</td>
+                                        
+                                    </tr>
+                            @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -158,14 +163,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        @foreach(auth()->user()->tallers->where('contenido_id', $contenido->id) as $taller)
+                                    @foreach(auth()->user()->tallers->where('contenido_id', $contenido->id) as $taller)
+                                    <tr >
+                                        
                                         <th scope="row">{{-- {{$taller->materia['id']}} --}}</th>
                                         <td>{{$taller->contenido->nombre}}</td>
                                         <td>{{$taller['nombre']}}</td>
                                         <td>{{$taller->enunciado}}</td>
-                                        <td> <span class="badge badge-success">{{$taller->pivot->status}}</span></td>
-                                        <td> <span class="badge badge-danger">pendiente</span></td>
+                                        <td align="center"> <span class="badge @if ($taller->pivot->status == 'completado') badge-warning @elseif($taller->pivot->status == 'calificado') badge-success @endif ">{{$taller->pivot->status}}</span></td>
+                                        <td class="text-center"> <span class="badge @isset ($taller->pivot->calificacion) badge-primary @else badge-danger  @endisset">@isset ($taller->pivot->calificacion)
+                                           {{ $taller->pivot->calificacion}} @else pendiente
+                                        @endisset</span></td>
                                        {{--  <td class="table-button ">
                                             <a class="btn btn-info"
                                                 href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i

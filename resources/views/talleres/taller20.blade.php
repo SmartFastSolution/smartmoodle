@@ -79,26 +79,26 @@
 							<div class="row">
 								<div class="col-12">
 									<p class="form-inline text-justify">
-										Deb <input required   name="resp1" type="text" class="form-control m-1" size="1"> y pagar <input required   name="resp2" type="text" class="form-control m-1" size="2"> de la fecha en <input required   name="resp3" type="text" class="form-control m-1" size="5"> fijos en esta ciudad o en el lugar en que<input required   name="resp4" type="text" class="form-control m-1" size="5"> reconvenga a la orden de <input required   name="resp5" type="text" class="form-control m-1" size="60"> la cantidad de <input required   name="resp6" type="text" class="form-control m-1" size="60"> por igual valor que ten <input required   type="text" name="resp7" class="form-control m-1" size="1"> recibido, en calidad de préstamo y en dinero efectivo para destinarlo a negocios de comercio; esta cantidad  <input required   type="text" name="resp8" class="form-control m-1" size="1"> obli <input required   type="text" name="resp8" class="form-control m-1" size="1">a devolveria al vencimiento del plazo expresado, enmonedas de este curso legal.
+										Deb <input required   name="resp1" type="text" class="form-control m-1" size="1"> y pagar <input required   name="resp2" type="text" class="form-control m-1" size="2"> de la fecha en <input required   name="resp3" type="text" class="form-control m-1" size="5"> fijos en esta ciudad o en el lugar en que<input required   name="resp4" type="text" class="form-control m-1" size="5"> reconvenga a la orden de <input required   name="resp5" type="text" class="form-control m-1" size="60"> la cantidad de <input required   name="resp6" type="text" class="form-control m-1" size="60"> por igual valor que ten <input required   type="text" name="resp7" class="form-control m-1" size="1"> recibido, en calidad de préstamo y en dinero efectivo para destinarlo a negocios de comercio; esta cantidad  <input required   type="text" name="resp8" class="form-control m-1" size="1"> obli <input required   type="text" name="resp9" class="form-control m-1" size="1">a devolveria al vencimiento del plazo expresado, enmonedas de este curso legal.
 									</p>
 									<p class="form-inline text-justify">
-										Tambien <input required   type="text" name="resp9" class="form-control m-1" size="1"> oblig <input required   type="text" name="resp10" class="form-control m-1" size="1"> a pagar el interes del <input required   type="text" name="resp11" class="form-control m-1" size="1"> por ciento anual desde el vencimiento hasta la completa cancelacion y en el caso de mora, a pagar todos los gastos judiciales y extrajudiciales que ocasione el cobro, bastando para terminar el montode tales gastos la sola afirmacion del agreedor.</p>
+										Tambien <input required   type="text" name="resp10" class="form-control m-1" size="1"> oblig <input required   type="text" name="resp11" class="form-control m-1" size="1"> a pagar el interes del <input required   type="text" name="resp12" class="form-control m-1" size="1"> por ciento anual desde el vencimiento hasta la completa cancelacion y en el caso de mora, a pagar todos los gastos judiciales y extrajudiciales que ocasione el cobro, bastando para terminar el montode tales gastos la sola afirmacion del agreedor.</p>
 									<p class="form-inline text-justify">
 
-										Al fiel cumplimiento de lo acordado <input required   type="text" name="resp12" class="form-control m-1" size="1"> oblig <input required   type="text" name="resp13" class="form-control m-1" size="1"> con todos v bienes presentes y futuros, y ademas, renunci<input required   type="text" name="resp14" class="form-control m-1" size="1"> domicilio y toda ley o excepcion que pudiera favorecer <input required   type="text" name="resp15" class="form-control m-1" size="1"> en jucio o fuera de el.
+										Al fiel cumplimiento de lo acordado <input required   type="text" name="resp13" class="form-control m-1" size="1"> oblig <input required   type="text" name="resp14" class="form-control m-1" size="1"> con todos v bienes presentes y futuros, y ademas, renunci<input required   type="text" name="resp15" class="form-control m-1" size="1"> domicilio y toda ley o excepcion que pudiera favorecer <input required   type="text" name="resp16" class="form-control m-1" size="1"> en jucio o fuera de el.
 									</p>
 									<p class="form-inline text-justify">
 
-										Renuncia <input required   type="text" name="resp16" class="form-control m-1" size="1"> tambien al derecho de interponer el recurso de apelacion y el de hecho de las providencias que se expidieron en el juicio a que diere lugar, estipul <input required   type="text" name="resp17" class="form-control m-1" size="1"> expresamente que el tenedor no podra ser obligado a recibir el pago por partes ni aun por <input required   type="text" name="resp18" class="form-control m-1" size="1"> herederos o sucesores, sin protesto
+										Renuncia <input required   type="text" name="resp17" class="form-control m-1" size="1"> tambien al derecho de interponer el recurso de apelacion y el de hecho de las providencias que se expidieron en el juicio a que diere lugar, estipul <input required   type="text" name="resp18" class="form-control m-1" size="1"> expresamente que el tenedor no podra ser obligado a recibir el pago por partes ni aun por <input required   type="text" name="resp19" class="form-control m-1" size="1"> herederos o sucesores, sin protesto
 									</p>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-6">
-									<label for="">Ciudad</label><input required   class="form-control" name="resp19" type="text">
+									<label for="">Ciudad</label><input required   class="form-control" name="resp20" type="text">
 								</div>
 								<div class="col-6">
-									<label for="">Fecha Vencimiento</label><input required   class="form-control" name="resp20" type="text">
+									<label for="">Fecha Vencimiento</label><input required   class="form-control" name="fecha_vencimiento" type="text">
 									
 								</div>
 							

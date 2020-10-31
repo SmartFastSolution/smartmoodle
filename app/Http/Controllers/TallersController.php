@@ -96,10 +96,12 @@ class TallersController extends Controller
             return view('talleres.taller2', compact('datos', 'd'));
 
         }elseif ($plant == 3) {
+
             $consul = Taller::findorfail($id);
-             $datos = TallerCompletarEnunciado::where('taller_id', $consul->id)->get();  
+             $datos = TallerCompletarEnunciado::where('taller_id', $consul->id)->firstOrfail();  
                if ($consul->plantilla_id == $plant && $consul->id == $id) {
                  return view('talleres.taller3', compact('datos', 'd', 'consul'));
+                 
              }else {
             return abort(404);   
              }

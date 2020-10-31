@@ -34,7 +34,9 @@ mix.styles([
 
 
     'resources/vendor/select2/js/select2.min.js',
-    'resources/vendor/sweetalert2/sweetalert2.min.js'
+    'resources/vendor/sweetalert2/sweetalert2.min.js',
+    'resources/vendor/bootstrap-switch/js/bootstrap-switch.min.js'
+
 
 
 ], 'public/js/plugins.js').sourceMaps();;
