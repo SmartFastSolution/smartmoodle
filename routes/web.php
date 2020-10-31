@@ -53,6 +53,8 @@ Auth::routes();
  Route::post('docinst','HomeController@buscarDocente')->name('docinst');
  Route::post('distinst','HomeController@buscarAsignacion')->name('distinst');
  Route::post('contmateria','HomeController@buscarContenido')->name('contmateria');
+ ///rutas menu docente
+ route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
 
 
  //rutas menu estudiante
