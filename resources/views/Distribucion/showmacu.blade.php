@@ -34,17 +34,7 @@
 
                                     </select>
                                 </div>
-                                <div class="form-group">
-                                    <label>Paralelo</label>
-                                    <select class="form-control select" name="nivel" disabled style="width: 99%;">
-
-                                        <option selected disabled value="{{ $nivels->id }}">
-                                            {{ $nivels->nombre }}
-                                        </option>
-
-
-                                    </select>
-                                </div>
+                               
                                 <div class="form-group">
                                     <label>Unidad Educativa</label>
                                     <select class="form-control select" name="instituto" disabled style="width: 99%;">

@@ -33,7 +33,6 @@
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Curso</th>
-                                    <th scope="col">Paralelo</th>
                                     <th scope="col">Materia(s)</th>
                                     <th scope="col">Estado</th>
                                     <th></th>
@@ -46,7 +45,7 @@
                                     <th scope="row">{{$distribucionmacu['id']}}</th>
                                     <td>{{$distribucionmacu->curso->nombre}} </td>
                                 
-                                    <td>{{$distribucionmacu->nivel->nombre}} </td>
+                                
                                     <td>
                                         @if($distribucionmacu->materias != null)
                                         @foreach($distribucionmacu->materias as $dismacu)

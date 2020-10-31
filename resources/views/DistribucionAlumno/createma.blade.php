@@ -58,7 +58,7 @@
                                         <option selected disabled>Elija el Curso...</option>
 
                                         <option v-for="dist in distribucion" :value="dist.id">
-                                            @{{dist.nombre}}-@{{dist.nivel}} </option>
+                                            @{{dist.nombre}}</option>
 
 
                                     </select>

@@ -15,7 +15,7 @@
         @foreach(auth()->user()->distrimas as $distrimas)
         @foreach($distrimas->distribumacus as $dis1)
 
-        <h2 class="font-weight-light"> <strong> {{$dis1->curso->nombre}} {{$dis1->nivel->nombre}}</strong></h2>
+        <h2 class="font-weight-light"> <strong> {{$dis1->curso->nombre}}</strong></h2>
         @endforeach
         @endforeach
 

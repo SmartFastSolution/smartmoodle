@@ -101,7 +101,7 @@ class DistrimaController extends Controller
             'id' => $distribucion->id,
             'curso_id' => $distribucion->curso_id,
             'nombre' => $distribucion->curso->nombre,
-            'nivel' => $distribucion->nivel->nombre,
+          
         );
         $instituto=Distrima::find($distrima->id)->instituto()->first();
         $distribucion_all=Distribucionmacu::where('instituto_id', $instituto->id)->get();
@@ -113,7 +113,7 @@ class DistrimaController extends Controller
                 'id' =>$value->id,
                 'curso_id' => $value->curso_id,
                 'nombre' => $value->curso->nombre,
-                'nivel' => $value->nivel->nombre,
+              
             );
             $cursos[] = $curso;
         }

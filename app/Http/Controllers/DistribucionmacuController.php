@@ -48,7 +48,7 @@ class DistribucionmacuController extends Controller
         $request->validate([
 
             'cursos' =>  'required',
-            'nivel' =>    ['required'],
+          
             'instituto' =>['required'],
             'materia' =>  ['required'],
             'estado' => ['required' ,'in:on,off'],
@@ -56,7 +56,7 @@ class DistribucionmacuController extends Controller
 
         $distribucionmacu =new  Distribucionmacu;
         $distribucionmacu ->instituto_id = $request->instituto;
-        $distribucionmacu ->nivel_id = $request->nivel;
+        // $distribucionmacu ->nivel_id = $request->nivel;
         $distribucionmacu ->estado = $request->estado;
         $distribucionmacu->curso_id=$request->cursos;
           
@@ -126,8 +126,7 @@ class DistribucionmacuController extends Controller
 
         $request->validate([
 
-           
-            
+                       
             'estado'      => 'required|in:on,off',
         ]);
 

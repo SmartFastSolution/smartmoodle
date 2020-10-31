@@ -38,9 +38,9 @@
                                     <label>Actualización de Asignacion</label>
                                     <select class="form-control select" name="asignacion" style="width: 99%;">
                                         <option selected value="{{$distribucion->id}}">{{$distribucion->curso->nombre}}
-                                            - {{$distribucion->nivel->nombre}}</option>
-                                        <option v-for="asig in newAsignacion" :value="asig.id">@{{asig.nombre}} -
-                                            @{{asig.nivel}}</option>
+                                        </option>
+                                        <option v-for="asig in newAsignacion" :value="asig.id">@{{asig.nombre}}
+                                        </option>
 
                                     </select>
                                 </div>

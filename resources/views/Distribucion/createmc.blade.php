@@ -41,14 +41,14 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label>Paralelos</label>
                                     <select class="form-control select2" name="nivel" style="width: 99%;" >
                                         @foreach($nivels as $nivel)
                                         <option value="{{$nivel->id}}">{{$nivel->nombre}}</option>
                                         @endforeach
                                     </select>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <label>Unidad Educativa</label>
                                     <select class="form-control select" v-model="instituto" @change="onMateria()"

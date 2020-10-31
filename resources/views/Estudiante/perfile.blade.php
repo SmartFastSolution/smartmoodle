@@ -26,7 +26,7 @@
     @foreach($distrimas->distribumacus as $dis1)
 
     <h2>Curso {{$dis1->curso->nombre}}</h2>
-    <h3>Paralelo {{$dis1->nivel->nombre}} </h3>
+    
     <br>
     <h3>Materias</h3>
     @foreach($dis1->materias as $materia)

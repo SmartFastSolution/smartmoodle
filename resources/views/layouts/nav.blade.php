@@ -197,7 +197,7 @@
                             </ul>
                         </li>
                         @endcan
-                        @can('haveaccess', 'nivel.index')
+                        <!-- @can('haveaccess', 'nivel.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
@@ -215,7 +215,7 @@
                                 </li>
                             </ul>
                         </li>
-                        @endcan
+                        @endcan -->
                         @can('haveaccess', 'materia.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">

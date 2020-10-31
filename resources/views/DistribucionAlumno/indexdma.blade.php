@@ -17,7 +17,7 @@
         @endif
         <div class="row justify-content-center">
             <div class="col-md-13">
-                
+
                 <a class="btn btn-info float-right" href="{{route('distrimas.create')}}"><i class="fas fa-plus"></i>
                     CREAR ASIGNACION</a>
                 <h1>Asignación de Alumno/Curso</h1>
@@ -35,7 +35,7 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">Unidad Educativa</th>
                                     <th scope="col">Curso</th>
-                                    <th scope="col">Paralelo</th>
+
                                     <th scope="col">Materias</th>
                                     <th scope="col">Alumno</th>
                                     <th scope="col">Estado</th>
@@ -56,33 +56,28 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <span class="badge badge-success">
-                                            {{$dis->nivel->nombre}}
-                                        </span>
-                                    </td>
-                                    <td>
-                                      
-                                            @if($dis->materias != null)
-                                            @foreach($dis->materias as $dismacu)
-                                            <span class="badge badge-success">
-                                                {{$dismacu->nombre}}
-                                                </span>
 
-                                            @endforeach
-                                            @endif
-                                     
+                                        @if($dis->materias != null)
+                                        @foreach($dis->materias as $dismacu)
+                                        <span class="badge badge-success">
+                                            {{$dismacu->nombre}}
+                                        </span>
+
+                                        @endforeach
+                                        @endif
+
                                     </td>
                                     @endforeach
 
                                     <td>
                                         @if($distrima->user != null)
 
-                                        {{$distrima->user->name}}  
-                                     
+                                        {{$distrima->user->name}}
+
                                         @endif
                                     </td>
- 
-                                     
+
+
                                     <td>{{ $distrima['estado']}}</td>
 
                                     <td> </td>
