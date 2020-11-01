@@ -58,13 +58,13 @@ ADECUADAMENTE. -->
 					</div>
 					<div class="col-6 text-center p-3">
 						<h1>NOTA DE PEDIDA</h1>
-						<h4>No. <input type="text" name="pedido" class="" size="5"></h4>
+						<h4>No. <input required type="text" name="pedido" class="" size="5"></h4>
 						<div class="row mb-2">			
 							<div class="col-4 text-left">
 								<label class="col-form-label" for="">Fecha:</label>
 							</div>
 							<div class="col-8">
-								<input type="text" name="fecha" class="form-control">
+								<input required type="text" name="fecha" class="form-control">
 							</div>
 						</div>
 						<div class="row mb-2">			
@@ -72,7 +72,7 @@ ADECUADAMENTE. -->
 								<label class="col-form-label" for="">Dependencia</label>
 							</div>
 							<div class="col-8">
-								<input type="text" name="dependencia" class="form-control">
+								<input required type="text" name="dependencia" class="form-control">
 							</div>
 						</div>
 						<div class="row mb-2">			
@@ -80,7 +80,7 @@ ADECUADAMENTE. -->
 								<label class="col-form-label" for="">Destino</label>
 							</div>
 							<div class="col-8">
-								<input type="text" name="destino" class="form-control">
+								<input required type="text" name="destino" class="form-control">
 							</div>
 						</div>
 						<div class="row mb-2">			
@@ -88,7 +88,7 @@ ADECUADAMENTE. -->
 								<label class="col-form-label" for="">Plazo de entrega</label>
 							</div>
 							<div class="col-8">
-								<input type="text" name="plazo_entrega" class="form-control">
+								<input required type="text" name="plazo_entrega" class="form-control">
 							</div>
 						</div>
 					</div>
@@ -108,11 +108,11 @@ ADECUADAMENTE. -->
 					  </thead>
 					  <tbody class="prin">
 					    <tr>
-					      <td><input name="cantidad[]" type="text" class="form-control" ></td>
-					      <td><input name="codigo[]" type="text" class="form-control" ></td>
-					      <td><input type="text" name="descripcion[]" class="form-control" ></td>
-					      <td><input type="text" name="precio_unit[]" class="form-control" ></td>
-					      <td><input name="total[]" type="text" class="form-control" ></td>
+					      <td><input required name="cantidad[]" type="text" class="form-control" ></td>
+					      <td><input required name="codigo[]" type="text" class="form-control" ></td>
+					      <td><input required type="text" name="descripcion[]" class="form-control" ></td>
+					      <td><input required type="text" name="precio_unit[]" class="form-control" ></td>
+					      <td><input required name="total[]" type="text" class="form-control" ></td>
 					      <td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>
 					    </tr>
 					  </tbody>
@@ -124,16 +124,16 @@ ADECUADAMENTE. -->
 						<h4 class="">OBSERVACIONES</h4>
 					</div>
 					<div class="col-8">
-						<input name="observaciones" type="text" class="form-control">
+						<input required name="observaciones" type="text" class="form-control">
 					</div>
 				</div>
 				<div class="row justify-content-around">
 					<div class="col-4 text-center">
-						<input name="fabrica" type="text" name="" class="form-control">
+						<input required name="fabrica" type="text" name="" class="form-control">
 						<label >Ing. Fabrica</label>
 					</div>
 					<div class="col-4 text-center">
-						<input name="recibido" type="text" name="" class="form-control">
+						<input required name="recibido" type="text" name="" class="form-control">
 						<label >Recibido</label>
 					</div>
 				</div>
@@ -155,11 +155,11 @@ ADECUADAMENTE. -->
 		});
 		function addRow(){	
 		var tr='<tr>'+
-			'<td><input name="cantidad[]" type="text" class="form-control" ></td>'+
-			'<td><input name="codigo[]" type="text" class="form-control" ></td>'+
-			'<td><input type="text" name="descripcion[]" class="form-control" ></td>'+
-			'<td><input type="text" name="precio_unit[]" class="form-control" ></td>'+
-			'<td><input name="total[]" type="text" class="form-control" ></td>'+
+			'<td><input required name="cantidad[]" type="text" class="form-control" ></td>'+
+			'<td><input required name="codigo[]" type="text" class="form-control" ></td>'+
+			'<td><input required  type="text" name="descripcion[]" class="form-control" ></td>'+
+			'<td><input required type="text" name="precio_unit[]" class="form-control" ></td>'+
+			'<td><input required name="total[]" type="text" class="form-control" ></td>'+
 			'<td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>'+
 			'</tr>';
 			$('.prin').append(tr);
