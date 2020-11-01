@@ -13,7 +13,7 @@
 			@foreach ($datos->tallerAnalizarOp as $enunciados)
 				<div class="col-10">
 					<h2> <strong>{{ ++$a }} </strong> {{ $enunciados->enunciado }} </h2>
-					<textarea name="analisis[]" cols="30" rows="10" class="form-control"></textarea>
+					<textarea required name="analisis[]" cols="30" rows="10" class="form-control"></textarea>
 				</div>
 			@endforeach
 		</div>
