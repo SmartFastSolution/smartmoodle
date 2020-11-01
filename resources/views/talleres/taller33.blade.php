@@ -13,7 +13,7 @@
 			<div class="col-6 text-center">
 				<h1>{{ $datos->pregunta1 }}</h1>
 				<div class=" p-3 text-center border border-danger rounded-circle">
-					<textarea name="respuesta1" class="form-group" id="" cols="30" rows="10"></textarea>
+					<textarea required name="respuesta1" class="form-group" id="" cols="30" rows="10"></textarea>
 				</div>
 			</div>
 			<div class="col-6 text-center">
@@ -21,7 +21,7 @@
 				
 					<h1>{{ $datos->pregunta2 }}</h1>
 					<div class=" p-3 text-center border border-danger rounded-circle">
-					<textarea name="respuesta2" class="form-group" id="" cols="30" rows="10"></textarea>
+					<textarea required name="respuesta2" class="form-group" id="" cols="30" rows="10"></textarea>
 				
 				</div>
 			</div>
