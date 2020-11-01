@@ -22,7 +22,7 @@
 					</div>
 					<div class="col-6 text-center ">
 						<label for="">{{ $opciones->enunciado }}</label><br>
-						<input type="text" size="2" name="order[]" class="border-0 bg-info">
+						<input type="text" required size="2" name="order[]" class="border-0 bg-info">
 					</div>
 				</div>
 			</div>
