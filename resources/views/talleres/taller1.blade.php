@@ -18,7 +18,7 @@
                     </div>
             @endif
          <div class="col ">
-            <textarea class="form-control inputdesign" name="respuesta" id="" cols="40" rows="10">{{ $datos->leyenda }}
+            <textarea required class="form-control inputdesign" name="respuesta" id="" cols="40" rows="10">{{ $datos->leyenda }}
 
             </textarea>
         </div>
