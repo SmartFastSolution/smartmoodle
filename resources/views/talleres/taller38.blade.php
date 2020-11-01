@@ -17,7 +17,7 @@
 				@foreach ($datos->tallerLecturaOp as $enunciados)
 				<strong>
 					<h4>{{ $enunciados->enunciado }}</h4>
-					<textarea class="form-control" name="respuestas[]"></textarea>
+					<textarea required class="form-control" name="respuestas[]"></textarea>
 				</strong>
 				@endforeach
 			</div>
