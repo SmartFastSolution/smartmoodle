@@ -69,7 +69,7 @@
 						<div class="col-4 text-center align-self-center">
 							<div class="border bg-light p-2">
 								<h5>SALDO :</h5>
-								<input type="text" name="saldo[]" class="form-control">
+								<input required type="text" name="saldo[]" class="form-control">
 							</div>
 
 						</div>
