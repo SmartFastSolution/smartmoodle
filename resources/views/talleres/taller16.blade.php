@@ -28,11 +28,11 @@
      			<div class="col-5 border border-success">
      				<div class="row justify-content-center mt-3 mb-2">
      					<div class="col-8 text-center">
-     						<input type="text" name="endoso" class="form-control">
+     						<input type="text" name="endoso" class="form-control" required>
      						<label for="">Nombre</label>
      					</div>
      					<div class="col-8 text-center">
-     						<input type="text" name="firma" class="form-control">
+     						<input type="text" name="firma" class="form-control" required>
      						<label for="">Firma del endosante</label>
      						<h6>(1 beneficiario)</h6>
      					</div>
