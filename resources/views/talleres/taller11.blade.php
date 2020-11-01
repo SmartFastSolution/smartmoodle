@@ -32,7 +32,7 @@
 						<li class="list-inline mb-4">{{ $element->definicion }}</li>
 					</div>
 					<div class="col-2">
-						<input type="text" class="text-center" size="2" name="letra[]">
+						<input type="text" required class="text-center" size="2" name="letra[]">
 					</div>
 				</div>
 			@endforeach
