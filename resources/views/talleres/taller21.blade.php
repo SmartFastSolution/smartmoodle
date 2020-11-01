@@ -35,7 +35,7 @@
 					<div class="col-12">
 						<div class="row justify-content-start">
 							<div class="col-3"><label for="">A favor de </label> </div>
-							<div class="col-9"><input type="text" name="deudor" class="form-control"></div>
+							<div class="col-9"><input type="text" name="deudor" required class="form-control"></div>
 						</div>
 						
 					</div>
