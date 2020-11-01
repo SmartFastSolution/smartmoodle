@@ -25,9 +25,9 @@
 					<label class="mb-4 form-control-label" for="">Beneficiario</label>
 				</div>
 				<div class="col-8">
-					<input type="text" name="girador" class="form-control mb-2 border-left-0 border-right-0 border-top-0 border-bottom border-success">
-					<input type="text" name="girado" class="form-control mb-2 border-left-0 border-right-0 border-top-0 border-bottom border-success">
-					<input type="text" name="beneficiario" class="form-control mb-2 border-left-0 border-right-0 border-top-0 border-bottom border-success">
+					<input required type="text" name="girador" class="form-control mb-2 border-left-0 border-right-0 border-top-0 border-bottom border-success">
+					<input required type="text" name="girado" class="form-control mb-2 border-left-0 border-right-0 border-top-0 border-bottom border-success">
+					<input required type="text" name="beneficiario" class="form-control mb-2 border-left-0 border-right-0 border-top-0 border-bottom border-success">
 				</div>
 			</div>
 		
