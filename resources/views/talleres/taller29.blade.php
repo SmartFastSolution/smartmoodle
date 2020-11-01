@@ -62,26 +62,26 @@
 						</p>
 					</div>
 					<div class="col-12 form-inline">
-						<p>Estimada <input type="text" name="abreviatura1" class="form-control"></p>
+						<p>Estimada <input required type="text" name="abreviatura1" class="form-control"></p>
 						
 					</div>
 					<div class="col-12 form-inline">
-						<p class="text-justify">Es grato enviarle la <input type="text" name="abreviatura2"  class="form-control" name="abreviatura1"> o. 124 correspondiente  a cuatro  bultos  de mercaderías  que  hemos  enviado  por  vía terrestre, utilizando transportes ECUADOR, el 3 de Mayo del <input type="text" name="abreviatura3"  class="form-control" size="5"> año</p>
+						<p class="text-justify">Es grato enviarle la <input required type="text" name="abreviatura2"  class="form-control"> o. 124 correspondiente  a cuatro  bultos  de mercaderías  que  hemos  enviado  por  vía terrestre, utilizando transportes ECUADOR, el 3 de Mayo del <input required type="text" name="abreviatura3"  class="form-control" size="5"> año</p>
 					</div>
 
 					<div class="col-12 form-inline">
 						<p class="text-justify">
-							Esta <input type="text" name="abreviatura4"  class="form-control"> contiene <input type="text" name="abreviatura5"  class="form-control m-1" size="7"> con  las  características señaladas  por <input type="text" name="abreviatura6"  class="form-control m-1" size="7"> a  nuestra <input type="text" name="abreviatura7"  class="form-control m-1" size="7">
+							Esta <input required type="text" name="abreviatura4"  class="form-control"> contiene <input required type="text" name="abreviatura5"  class="form-control m-1" size="7"> con  las  características señaladas  por <input required type="text" name="abreviatura6"  class="form-control m-1" size="7"> a  nuestra <input required type="text" name="abreviatura7"  class="form-control m-1" size="7">
 						</p>
 					</div>
 					<div class="col-12 form-inline">
 						<p class="text-justify">
-							El  valor  de  la <input type="text" name="abreviatura8"  class="form-control m-1" size="7"> asciende  a  la  cantidad  de $ 8.500; la hemos cargado a su <input type="text" name="abreviatura9"  class="form-control m-1" size="7"> ogando nos envíe  un <input type="text" name="abreviatura10"  class="form-control m-1" size="4"> certificado  por  dicho  valor.
+							El  valor  de  la <input required type="text" name="abreviatura8"  class="form-control m-1" size="7"> asciende  a  la  cantidad  de $ 8.500; la hemos cargado a su <input required type="text" name="abreviatura9"  class="form-control m-1" size="7"> ogando nos envíe  un <input required type="text" name="abreviatura10"  class="form-control m-1" size="4"> certificado  por  dicho  valor.
 						</p>
 					</div>
 					<div class="col-12 form-inline">
 						<p class="text-justify">
-							De  no  ser  posible  esperamos  que  el  valor  de  la <input type="text" name="abreviatura11"  class="form-control m-1" size="7"> lo  deposite  en  nuestra <input type="text" name="abreviatura12"  class="form-control m-1" size="7"> del <input type="text" name="abreviatura13"  class="form-control m-1" size="7"> Produbanco  No. 40035873.
+							De  no  ser  posible  esperamos  que  el  valor  de  la <input required type="text" name="abreviatura11"  class="form-control m-1" size="7"> lo  deposite  en  nuestra <input required type="text" name="abreviatura12"  class="form-control m-1" size="7"> del <input required type="text" name="abreviatura13"  class="form-control m-1" size="7"> Produbanco  No. 40035873.
 						</p>
 					</div>
 					<div class="col-12">
