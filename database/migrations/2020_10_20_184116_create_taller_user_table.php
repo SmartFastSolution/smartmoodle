@@ -17,6 +17,7 @@ class CreateTallerUserTable extends Migration
             $table->bigIncrements('id');
             $table->string('status')->nullable();
             $table->string('calificacion')->nullable();
+            $table->string('retroalimentacion')->nullable();
             
             $table->unsignedbigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

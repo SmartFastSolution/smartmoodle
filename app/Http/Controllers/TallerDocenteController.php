@@ -275,7 +275,7 @@ class TallerDocenteController extends Controller
         }elseif ($plant == 22) {
             
              $datos = TallerNotaPedido::where('taller_id', $consul->id)->firstOrFail();
-            return view('docente.talleres.taller22', compact('datos', 'd'));
+            return view('docentes.talleres.taller22', compact('datos', 'd'));
 
 
         }elseif ($plant == 23) {
