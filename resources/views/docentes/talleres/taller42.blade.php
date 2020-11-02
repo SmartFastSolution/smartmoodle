@@ -3,80 +3,45 @@
 @section('title', $datos->nombre)
 @section('content')
 {{-- ORDENE  LAS  IDEAS  Y  ANÓTALAS  ADECUADAMENTE. --}}
-<h1 class="text-center  mt-5 text-danger"> {{ $datos->nombre }}</h1>
-<h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
-		<div class="container" id="taller42">
-			<div class="row justify-content-center ">
-				<div class="col-10">
-					<div class="row">
-						<div class="col-8 border border-danger p-3">
-							<draggable class="row justify-content-around p-2" :list="ideas" group="people">
-							     <div
-							       style="cursor: move;" 
-							         class="card bg-primary text-white text-center p-3"
-							         v-for="(element, index) in ideas"
-							        :key="element.id">
-								      <p class="m-2"> @{{ element.idea }}</p>
-								  </div>
-							</draggable>
-						</div>
-						<div class="col-4">
-							<draggable class="list-group" :list="orden" group="people" >
-								<h6 class="text-muted text-center" v-if="orden.length == 0">Arrastre aqui...</h6>
-						        <div v-else
-						        	style="cursor: move;"
-						          class="list-group-item list-group-item-info"
-						          v-for="(element, index) in orden"
-						          :key="element.name">
-						          @{{ element.idea }}
-						        </div>
-						      </draggable>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row justify-content-center">
-        		<input type="submit" value="Enviar Respuesta" @click.prevent="enviarTaller" class="btn p-2 mt-3 btn-danger">
-    		</div>
-		</div>
-
-@endsection
-@section('js')
-<script type="text/javascript">
-	let idea = @json($ideas);
-	let taller_id = @json($d);
-
-	var taller42 = new Vue({
-	  el: "#taller42",
-	  data:{
-	  	ideas: idea,
-	  	orden:[]
-	  },
-	  	 methods:{
-	  	enviarTaller: function() {
-	  	let _this = this;
-        let url = '/sistema/admin/taller42/'+taller_id;
-
-        if (_this.ideas.length !== 0) {
-        	toastr.error("No has ordenado todas las ideas", "Smarmoddle", {
-                "timeOut": "3000"
-              });
-        } else {
-        axios.post(url,{
-              id: taller_id,
-              respuesta: _this.orden
-        }).then(response => {
-        	// console.log(response.data)
-        	window.location = "/sistema";   
-        }).catch(function(error){
-
-        }); 
-        }
-     
-	  	}
-	  }
-	})
-
-</script>
+<form action="{{ route('taller1.docente', ['idtaller' => $d]) }}" method="POST">
+    @csrf
+	 <div class="container-md">
+	 	<h1 class="text-center text-danger mt-5 display-1">{{ $datos->taller->nombre }}</h1>
+        <div class="card border border-danger mb-3" >
+          <div class="card-header font-weight-bold" style="font-size: 25px;"> <h1 class="display-3">{{ $user->name }} Salazar</h1></div>
+          <div class="card-body">
+            <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{{ $datos->enunciado }}</h2>
+            <div class="jumbotron jumbotron-fluid">
+            	<div class="row justify-content-center">
+            		<div class="col-6">
+            			<ul class="list-group">
+            				@foreach ($datos->ordenIdeas as $ideas)
+						  	<li class="list-group-item">{{ $ideas->ideas }}</li>
+            				@endforeach
+						</ul>
+            		</div>
+            	</div>
+              
+            </div>
+          </div>
+            <div class="row justify-content-center">
+            <div class="col-5">
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Calificacion</label>
+                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                <input type="text" class="form-control" name="calificacion" placeholder="Añada una nota al estudiante">
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Retroalimentacion</label>
+                <textarea class="form-control" name="retroalimentacion" rows="3" placeholder="Agregue una retroalimentacion"></textarea>
+              </div>   
+               <div class="row justify-content-center mb-5">
+                <input type="submit" value="Calificar" class="btn p-2 mt-3 btn-danger">
+             </div>
+            </div>
+        </div>
+        </div>
+ </div>
+</form>
 
 @endsection

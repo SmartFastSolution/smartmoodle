@@ -16,6 +16,7 @@
 @section('content')
 <form action="{{ route('taller1.docente', ['idtaller' => $d]) }}" method="POST">
 @csrf
+<div class="container">
 	 	<h1 class="text-center text-danger mt-5 display-1">{{ $datos->taller->nombre }}</h1>
 
 
@@ -37,32 +38,10 @@
 		<div class="col-8 form-inline border border-danger p-3">
 			<h2 class="text-center"><strong>EDITORIAL</strong></h2>
 			<p class="text-justify " style="font-size: 16px;">
-				El <span class="@if ($datos->abreviatura1 == 'Servicio de rentas interna')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura1 }}</span> dejó  claro  que  serán  clausurados  todos  los  negocios  que no  entreguen  sus  respectivos  comprobantes  de  ventas destacando  lo siguiente  con  respecto  a  la <span class="@if ($datos->abreviatura2 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura2 }}</span> ,  que  en  ella deberá  constar  el <span class="@if ($datos->abreviatura3 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura3 }}</span>   de  la  empresa,  la  determinación  de <span class="@if ($datos->abreviatura4 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura4 }}</span>  de los <span class="@if ($datos->abreviatura5 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura5 }}</span>   y se  debe  desglosar  el <span class="@if ($datos->abreviatura6 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura6 }}</span>   y su  respectivo <span class="@if ($datos->abreviatura7 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura7 }}</span>   
+				El <span class="badge badge-success badge badge-success">{{ $datos->abreviatura1 }}</span> dejó  claro  que  serán  clausurados  todos  los  negocios  que no  entreguen  sus  respectivos  comprobantes  de  ventas destacando  lo siguiente  con  respecto  a  la <span class="badge badge-success ">{{ $datos->abreviatura2 }}</span> ,  que  en  ella deberá  constar  el <span class="badge badge-success ">{{ $datos->abreviatura3 }}</span>   de  la  empresa,  la  determinación  de <span class="badge badge-success ">{{ $datos->abreviatura4 }}</span>  de los <span class="badge badge-success ">{{ $datos->abreviatura5 }}</span>   y se  debe  desglosar  el <span class="badge badge-success ">{{ $datos->abreviatura6 }}</span>   y su  respectivo <span class="badge badge-success ">{{ $datos->abreviatura7 }}</span>   
 			</p>
 			<p class="text-justify" style="font-size: 16px;">
-				La <span class="@if ($datos->abreviatura8 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura8 }}</span>   felicitó  por  su  buen  desempeño  al <span class="@if ($datos->abreviatura9 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura9 }}</span> , por  administrar sus  fondos  de  una  manera  eficaz  a  las  distintas  entidades públicas  tales  como:  el <span class="@if ($datos->abreviatura10 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura10 }}</span>   por  la  implementación  de  sus equipos  quirúrgicos,  al <span class="@if ($datos->abreviatura11 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura11 }}</span>   por  ofrecer  a  las  personas  de bajos  recursos  un  hogar  digno,  entre  otros.
+				La <span class="badge badge-success ">{{ $datos->abreviatura8 }}</span>   felicitó  por  su  buen  desempeño  al <span class="badge badge-success ">{{ $datos->abreviatura9 }}</span> , por  administrar sus  fondos  de  una  manera  eficaz  a  las  distintas  entidades públicas  tales  como:  el <span class="badge badge-success ">{{ $datos->abreviatura10 }}</span>   por  la  implementación  de  sus equipos  quirúrgicos,  al <span class="badge badge-success ">{{ $datos->abreviatura11 }}</span>   por  ofrecer  a  las  personas  de bajos  recursos  un  hogar  digno,  entre  otros.
 			</p>
 		</div>
 	</div>
@@ -83,6 +62,7 @@
                 <input type="submit" value="Calificar" class="btn p-2 mt-3 btn-danger">
              </div>
             </div>
+        </div>
         </div>
         </div>
 </form>

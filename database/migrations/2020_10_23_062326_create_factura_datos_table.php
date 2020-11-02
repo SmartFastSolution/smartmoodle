@@ -19,6 +19,7 @@ class CreateFacturaDatosTable extends Migration
             $table->string('codigo')->nullable();
             $table->string('cod_aux')->nullable();
             $table->string('cantidad')->nullable();
+            $table->string('descripcion')->nullable();
             $table->string('precio')->nullable();
             $table->string('descuento')->nullable();
             $table->string('valor')->nullable();

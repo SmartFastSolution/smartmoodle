@@ -32,13 +32,13 @@
 <script type="text/javascript" src="{{ asset('js/dropzone.min.js') }}"></script>
 <script type="text/javascript">
 
-  var numero = @json($datos->img_num);
+  let numero = @json($datos->img_num);
   Dropzone.options.myAwesomeDropzone = {
     autoProcessQueue: false,
     dictDefaultMessage: "Agregue las imagenes en el recuadro",
       maxFilesize: 5, // MB
       acceptedFiles: "image/*",
-      maxFiles: 5,
+      maxFiles: numero,
       parallelUploads:5,
       addRemoveLinks: true,
       dictRemoveFile: 'Eliminar',
@@ -75,7 +75,7 @@
             title: 'Smarmoddle',
             text: 'Datos enviados correctamente',
           }).then(function() {
-                window.location = "/sistema";
+                window.location = "/sistema/homees";
             });
         }
       });

@@ -17,6 +17,6 @@ class AnalizarPregunta extends Model
     }
      public function analizarPreguntaDatos(){
 
-        return $this->hasMany('App\Admin\Respuesta\AnalizarPreguntaDatos');
+        return $this->hasMany('App\Admin\Respuesta\AnalizarPreguntaDato');
     }
 }

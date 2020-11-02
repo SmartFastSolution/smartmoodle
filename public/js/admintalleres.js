@@ -238,7 +238,7 @@ $(function(document, window, index ) {
                    toastr.success("Taller Creado Correctamente", "Smarmoddle", {
                         "timeOut": "3000"
                     });
-                window.location = "/sistema";
+                window.location = "/sistema/home";
                    // _this.registros =[];
                    //  _this.ejercicio.debe.nom_cuenta = '';
                    //  _this.ejercicio.debe.saldo      = '';  

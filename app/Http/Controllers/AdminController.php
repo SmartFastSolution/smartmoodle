@@ -1078,6 +1078,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
             $taller_31                       = new TallerCollage;
             $taller_31->taller_id            = $a->id;
             $taller_31->enunciado            = $request->input('enunciado');
+            $taller_31->img_num            = $request->input('img_num');
             $taller_31->save();
          }
       return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');  

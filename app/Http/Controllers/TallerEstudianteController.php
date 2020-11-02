@@ -66,6 +66,8 @@ use App\Admin\Respuesta\ValeCaja;
 use App\Admin\Respuesta\VerdaderoFalso;
 use App\Admin\Respuesta\VerdaderoFalsoRe;
 use App\Admin\Taller2Relacionar;
+use App\Admin\TallerContabilidad;
+use App\Admin\TallerContabilidadOp;
 use App\Admin\TallerALectura;
 use App\Admin\TallerAbreviatura;
 use App\Admin\TallerAnalizar;
@@ -102,9 +104,11 @@ use App\Admin\TallerSubrayar;
 use App\Admin\TallerTipoSaldo;
 use App\Admin\TallerValeCaja;
 use App\Admin\TallerVerdaderoFalso;
+use App\Admin\TallerSopaLetra;
 use App\Taller;
 use App\TallerChequeRe;
 use App\User;
+use JavaScript;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -1064,6 +1068,7 @@ public function store11(Request $request, $idtaller)
                      'cod_aux'              => $request->cod_aux[$key],
                      'cantidad'             => $request->cantidad[$key],
                      'precio'               => $request->precio[$key],
+                     'descripcion'           => $request->descripcion[$key],
                      'descuento'            => $request->descuento[$key],
                      'valor'                => $request->valor[$key],
                      'created_at'           => now(),
@@ -1350,7 +1355,7 @@ public function store11(Request $request, $idtaller)
         foreach ($contenido as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
             $regis=array(
                      'tipo_saldo_id' => $a->id,
-                     'enunciado'     => $contenido[$key]->id,
+                     'pregunta'     => $contenido[$key]->id,
                      'respuesta'     => $request->saldo[$key],
                      'created_at'    => now(),
                      'updated_at'    => now(),
@@ -1526,6 +1531,7 @@ public function store11(Request $request, $idtaller)
             $taller43->taller_id  = $idtaller;
             $taller43->user_id    =   $id;           
             $taller43->enunciado  =   $contenido->enunciado; 
+            $taller43->respuesta =  $request->input('respuesta');
             $taller43->enunciado1 =  $request->input('enunciado1');
             $taller43->enunciado2 =  $request->input('enunciado2');
             $taller43->enunciado3 =  $request->input('enunciado3');
@@ -1597,7 +1603,7 @@ public function store11(Request $request, $idtaller)
         {
             $id   = Auth::id();
             $user = User::find($id);
-            $user->tallers()->attach($idtaller,['status'=> 'completado']);
+            $user->tallers()->attach($idtaller,['status'=> 'calificado', 'calificacion' => 10, 'retroalimentacion' => 'Bien Hecho']);
             return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
         }
 

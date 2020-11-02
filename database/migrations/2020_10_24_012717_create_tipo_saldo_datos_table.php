@@ -16,7 +16,7 @@ class CreateTipoSaldoDatosTable extends Migration
         Schema::create('tipo_saldo_datos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('tipo_saldo_id');
-            $table->string('enunciado')->nullable();
+            $table->string('pregunta')->nullable();
             $table->string('respuesta')->nullable();
             $table->timestamps();
 

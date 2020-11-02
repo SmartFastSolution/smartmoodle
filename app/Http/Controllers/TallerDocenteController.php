@@ -103,6 +103,7 @@ use App\Admin\TallerescribirCuenta;
 use App\Taller;
 use App\TallerChequeRe;
 use App\User;
+USE Javascript;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -273,50 +274,51 @@ class TallerDocenteController extends Controller
 
 
         }elseif ($plant == 22) {
-            
-             $datos = TallerNotaPedido::where('taller_id', $consul->id)->firstOrFail();
-            return view('docentes.talleres.taller22', compact('datos', 'd'));
+             $taller = TallerNotaPedido::where('taller_id', $consul->id)->firstOrFail();
+             $datos = NotaPedido::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+            return view('docentes.talleres.taller22', compact('datos', 'd', 'user', 'taller'));
 
 
         }elseif ($plant == 23) {
-            
-             $datos = TallerRecibo::where('taller_id', $consul->id)->firstOrFail();
-            return view('docente.talleres.taller23', compact('datos', 'd'));
+             $taller = TallerRecibo::where('taller_id', $consul->id)->firstOrFail();
+             $datos = Recibo::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+            return view('docentes.talleres.taller23', compact('datos', 'd', 'user', 'taller'));
 
         }elseif ($plant == 24) {
 
+             $taller = TallerOrdenPago::where('taller_id', $consul->id)->firstOrFail();
             
-             $datos = TallerOrdenPago::where('taller_id', $consul->id)->firstOrFail();
-            return view('docente.talleres.taller24', compact('datos', 'd'));
+             $datos = OrdenPago::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+            return view('docentes.talleres.taller24', compact('datos', 'd', 'user', 'taller'));
 
         }elseif ($plant == 25) {
             $i= 0;
-            
-             $datos = TallerFactura::where('taller_id', $consul->id)->firstOrfail();
-            return view('docente.talleres.taller25', compact('datos', 'd', 'i'));
+             $taller = TallerFactura::where('taller_id', $consul->id)->firstOrFail();
+             $datos = Factura::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+            return view('docentes.talleres.taller25', compact('datos', 'd', 'i', 'user', 'taller'));
 
         }elseif ($plant == 26) {
              $i= 0;
-            
-             $datos = TallerNotaVenta::where('taller_id', $consul->id)->firstOrfail();
-            return view('docente.talleres.taller26', compact('datos', 'd', 'i'));
+
+             $taller = TallerNotaVenta::where('taller_id', $consul->id)->firstOrFail();
+             $datos = NotaVenta::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+            return view('docentes.talleres.taller26', compact('datos', 'd', 'i', 'user', 'taller'));
 
         }elseif ($plant == 27) {
 
-            
-            $datos = TallerAbreviatura::where('taller_id', $consul->id)->firstOrFail();
-            return view('docente.talleres.taller27', compact('datos', 'd'));
+            $taller = TallerAbreviatura::where('taller_id', $consul->id)->firstOrFail();
+            $datos = Abreatura::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+            return view('docentes.talleres.taller27', compact('datos', 'd', 'user', 'taller'));
 
         }elseif ($plant == 28) {
         	
-            
-            $datos = IdentificarAbreviatura::where('user_id', $user->id)->firstOrfail();
+             $datos = IdentificarAbreviatura::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
                 return view('docentes.talleres.taller28', compact('datos', 'd', 'user'));  
          
         }elseif ($plant == 29) {
         	
             
-            $datos = AbreviaturaCarta::where('user_id', $user->id)->firstOrfail();
+            $datos = AbreviaturaCarta::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
             if ($consul->plantilla_id == $plant && $consul->id = $id) {
                 return view('docentes.talleres.taller29', compact('datos', 'd', 'user'));  
              }else { 
@@ -324,10 +326,7 @@ class TallerDocenteController extends Controller
              }
 
         }elseif ($plant == 30){
-
-        	
-            
-            $datos = AbreviaturaEditorial::where('user_id', $user->id)->firstOrfail();
+            $datos = AbreviaturaEditorial::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
             if ($consul->plantilla_id == $plant && $consul->id = $id) {
             return view('docentes.talleres.taller30', compact('datos', 'd', 'user'));  
              }else {
@@ -335,14 +334,14 @@ class TallerDocenteController extends Controller
              }
             }elseif ($plant == 31) {
 
-            
-             $datos = TallerCollage::where('taller_id', $consul->id)->firstOrFail();
-            return view('docente.talleres.taller31', compact('datos', 'd'));
+            $taller = TallerCollage::where('taller_id', $consul->id)->firstOrFail();
+             $datos = Collage::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+            return view('docentes.talleres.taller31', compact('datos', 'd', 'user', 'taller'));
 
         }elseif ($plant == 32) {
         	
           	
-          	$datos = AbreviaturaEconomica::where('taller_id', $consul->id)->firstOrFail();
+          	$datos = AbreviaturaEconomica::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
             if ($consul->plantilla_id == $plant && $consul->id = $id) {
             return view('docentes.talleres.taller32', compact('datos', 'd', 'user'));  
              }else {
@@ -351,19 +350,19 @@ class TallerDocenteController extends Controller
         
         }elseif ($plant == 33) {
             
-             $datos = TallerPregunta::where('taller_id', $consul->id)->firstOrFail();
+             $datos = TallerPregunta::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
             return view('docente.talleres.taller33', compact('datos', 'd'));
         }elseif ($plant == 34) {
-            $datos = Taller::findorfail($id);
-            if ($datos->plantilla_id == $plant && $datos->id = $id) {
-            return view('docente.talleres.taller34', compact('datos', 'd'));  
-             }else {
-            return abort(404);   
-             }
+
+            $datos = TipoSaldo::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+
+            $taller = Taller::findorfail($id);
+            return view('docentes.talleres.taller34', compact('datos', 'd', 'user', 'taller')); 
+
         }elseif ($plant == 35) {
         	
             
-            $datos = FormulasContable::where('taller_id', $consul->id)->firstOrFail();
+            $datos = FormulasContable::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
             if ($consul->plantilla_id == $plant && $consul->id = $id) {
             return view('docentes.talleres.taller35', compact('datos', 'd', 'user'));  
              }else {
@@ -371,9 +370,9 @@ class TallerDocenteController extends Controller
              }
         }elseif ($plant == 36) {
             $a = 0;
-            
-            $datos = TallerAnalizar::where('taller_id', $consul->id)->firstOrFail();
-            return view('docentes.talleres.taller36', compact('datos', 'd', 'a'));
+            $taller = TallerAnalizar::where('taller_id', $consul->id)->firstOrFail();
+            $datos = AnalizarPregunta::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+            return view('docentes.talleres.taller36', compact('datos', 'd', 'a', 'user', 'taller'));
 
         }elseif ($plant == 37) {
                 JavaScript::put([
@@ -381,32 +380,26 @@ class TallerDocenteController extends Controller
                 ]);
             
              $datos = TallerContabilidad::where('taller_id', $consul->id)->firstOrFail();
-            return view('docente.talleres.taller37', compact('datos', 'd'));
+            return view('docentes.talleres.taller37', compact('datos', 'd'));
 
         }elseif ($plant == 38) {
+            $taller = TallerALectura::where('taller_id', $consul->id)->firstOrFail();
             
-             $datos = TallerALectura::where('taller_id', $consul->id)->firstOrFail();
-            return view('docente.talleres.taller38', compact('datos', 'd'));
+             $datos = Lectura::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+            return view('docentes.talleres.taller38', compact('datos', 'd', 'user','taller'));
 
         }elseif ($plant == 39) {
 
+            $taller = TallerPalabra::where('taller_id', $consul->id)->firstOrFail();
             
-             $datos = TallerPalabra::where('taller_id', $consul->id)->firstOrFail();
-             $str = "VUEDRAGGABLES";
-
-            $arr1 = str_split($datos->letra);
-            $claves = array_keys($arr1);
-            $letra= [];
-            shuffle($arr1);
-            foreach($claves as $contenido){
-                $letra[$contenido] = $arr1[$contenido];
-            }
-            return view('docente.talleres.taller39', compact('datos', 'd', 'letra'));
+             $datos = Palabra::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+             
+            return view('docentes.talleres.taller39', compact('datos', 'd', 'user', 'taller'));
         }elseif ($plant == 40) {
             $a = 0;
-            
-            $datos = TallerIdenTransa::where('taller_id', $consul->id)->firstOrFail();
-            return view('docente.talleres.taller40', compact('datos', 'd', 'a'));
+            $taller = TallerIdenTransa::where('taller_id', $consul->id)->firstOrFail();
+            $datos = IdenTrasa::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+            return view('docentes.talleres.taller40', compact('datos', 'd', 'a', 'user', 'taller'));
 
         }elseif ($plant == 41) {
         		$user   = User::findorfail($us);
@@ -414,27 +407,26 @@ class TallerDocenteController extends Controller
 				$datos  = MapaConceptual::where('taller_id', $id)->firstOrFail();
                 return view('docentes.talleres.taller41', compact('datos', 'd', 'user'));  
         }elseif ($plant == 42) {
-            $datos = Taller::findorfail($id);
-            $ideas = TallerOrdenIdea::select('id','idea')->where('taller_id',$id)->get();
-            // $ideas = $datos->tallerOrdenIdea;
-
-            if ($datos->plantilla_id == $plant && $datos->id = $id) {
-            return view('docente.talleres.taller42', compact('datos', 'd', 'ideas'));  
-             }else {
-            return abort(404);   
-             }
-        }elseif ($plant == 43) {
             
-             $datos = TallerMConceptual::where('taller_id', $consul->id)->firstOrFail();
-            return view('docente.talleres.taller43', compact('datos', 'd'));
+
+            $datos = OrdenIdea::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+            return view('docentes.talleres.taller42', compact('datos', 'd', 'user'));  
+           
+        }elseif ($plant == 43) {
+
+            $taller = TallerMConceptual::where('taller_id', $consul->id)->firstOrFail();
+             $datos = MapaConceptual2::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+            return view('docentes.talleres.taller43', compact('datos', 'd', 'user', 'taller'));
+
         }elseif ($plant == 44) {
 
-            
-             $datos = docente.tallerescribirCuenta::where('taller_id', $consul->id)->firstOrFail();
-            return view('docente.talleres.taller44', compact('datos', 'd'));
-        }elseif ($plant == 45) {
+            $taller = TallerEscribirCuenta::where('taller_id', $consul->id)->firstOrFail();
+            $datos = EscribirCuenta::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+            return view('docentes.talleres.taller44', compact('datos', 'd', 'user', 'taller'));
 
             
+        }elseif ($plant == 45) {
+
              $datos = TallerSopaLetra::where('taller_id', $consul->id)->firstOrFail();
             $palabras = explode(',', $datos->palabras);
                 

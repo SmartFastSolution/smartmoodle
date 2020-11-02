@@ -6,27 +6,40 @@
 @section('title', $datos->taller->nombre)
 @section('content')
 
-	<h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>
-    <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
-
-	<form action="{{ route('taller25', ['idtaller' => $d]) }}" method="POST">
+	<form action="{{ route('taller1.docente', ['idtaller' => $d]) }}" method="POST">
           @csrf
 		<div class="container">
-		<div class="row justify-content-center">
+				<h1 class="text-center text-danger mt-5 display-1">{{ $datos->taller->nombre }}</h1>
+        <div class="card border border-danger mb-3" >
+          <div class="card-header font-weight-bold" style="font-size: 25px;"> <h1 class="display-3">{{ $user->name }} Salazar</h1></div>
+          <div class="card-body">
+            <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{{ $datos->enunciado }}</h2>
+           	<div class="row justify-content-center">
 			<div class="col-6">
-					<h5 class="text-center">Datos</h5>
-				<div class="row">
-					<div class="col-6">
-						<h6><strong>Cliente</strong> {{ $datos->cliente }}</h6>
-						<h6><strong>RUC</strong> {{ $datos->ruc }}</h6>
-						<h6><strong>Fecha de emision </strong> {{ $datos->fecha_emision }}</h6>
-					</div>
-					<div class="col-6">
-						<h6><strong>Descuento</strong> {{ $datos->descuento }}</h6>
-						<h6><strong>Guia de Remision</strong> {{ $datos->remision }}</h6>
-						
-					</div>
-				</div>
+				
+				<table class="table table-borderless">
+                  <thead>
+                    <tr class="text-center">
+                      <th scope="col">Cliente</th>
+                      <th scope="col">RUC</th>
+                      <th scope="col">Fecha de emision</th>
+                      <th scope="col">Descuento</th>
+                      <th scope="col">Guia de Remision</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+               
+                    <tr class="text-center">
+                      <td>{{ $taller->cliente }}</td>
+                      <td>{{ $taller->ruc }}</td>
+                      <td>{{ $taller->fecha_emision }}</td>
+                      <td>{{ $taller->descuento }}</td>
+                      <td>{{ $taller->remision }}</td>
+                    </tr>
+               
+                  </tbody>
+                </table>
+
 				<table class="table table-borderless">
                   <thead>
                     <tr class="text-center">
@@ -39,7 +52,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                  	@foreach ($datos->facturaDatos as $dato)
+                  	@foreach ($taller->facturaDatos as $dato)
                     <tr class="text-center">
                       <th scope="row">{{ ++$i }}</th>
                       <td>{{ $dato->codigo }}</td>
@@ -49,7 +62,6 @@
                       <td>{{ $dato->precio }}</td>
                     </tr>
                     @endforeach
-
                   </tbody>
                 </table>
 								 
@@ -86,21 +98,21 @@
 					<div class="col-7">
 						<div class="row">
 							<div class="col-6"><h6>RAZÓN SOCIAL/NOMBRES Y APELLIDOS</h6></div>
-							<div class="col-6"><input name="nombre" type="text " class="form-control"></div>
+							<div class="col-6"><input disabled value="{{ $datos->nombre }}" name="nombre" type="text " class="form-control"></div>
 						</div>
 						<div class="row">
 							<div class="col-6"><label class="col-form-label" for="">FECHA EMISIÓN :</label></div>
-							<div class="col-6"><input name="fecha_emision" type="text " class="form-control"></div>
+							<div class="col-6"><input disabled value="{{ $datos->fecha_emision }}" name="fecha_emision" type="text " class="form-control"></div>
 						</div>
 					</div>
 					<div class="col-5">
 						<div class="row mb-3">
 							<div class="col-5"><label class="col-form-label">R.U.C/C.I. :</label></div>
-							<div class="col-7"><input name="ruc" type="text " class="form-control"></div>
+							<div class="col-7"><input disabled value="{{ $datos->ruc }}" name="ruc" type="text " class="form-control"></div>
 						</div>
 						<div class="row">
 							<div class="col-5"><label class="col-form-label" for="">GUÍA DE REMISIÓN :</label></div>
-							<div class="col-7"><input name="emision" type="text " class="form-control"></div>
+							<div class="col-7"><input disabled value="{{ $datos->emision }}" name="emision" type="text " class="form-control"></div>
 						</div>
 					</div>
 				</div>
@@ -120,36 +132,37 @@
 					    </tr>
 					  </thead>
 					  <tbody class="prin">
+                  	@foreach ($datos->facturaDato as $dato)
+
 					  	<tr>
-					  		<td width="100"> <input type="text" name="codigo[]" class="form-control" required></td>
-					  		<td width="100"><input type="text" name="cod_aux[]" class="form-control" required></td>
-					  		<td width="50"><input type="text" name="cantidad[]" class="form-control" required></td>
-					  		<td ><textarea  name="descripcion[]" class="form-control" required></textarea> </td>
-					  		<td width="50"><input type="text" name="precio[]" class="form-control" required></td>
-					  		<td width="50"><input type="text" name="descuento[]" class="form-control" required></td>
-					  		<td width="75"><input type="text" name="valor[]" class="form-control" required></td>
-                      		<td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>
+					  		<td width="100"> <input disabled value="{{ $dato->codigo }}" type="text" name="codigo[]" class="form-control" required></td>
+					  		<td width="100"><input disabled value="{{ $dato->cod_aux }}" type="text" name="cod_aux[]" class="form-control" required></td>
+					  		<td width="50"><input disabled value="{{ $dato->cantidad }}" type="text" name="cantidad[]" class="form-control" required></td>
+					  		<td ><textarea disabled name="descripcion[]" class="form-control" required>{{ $dato->descripcion }}</textarea> </td>
+					  		<td width="50"><input disabled value="{{ $dato->precio }}" type="text" name="precio[]" class="form-control" required></td>
+					  		<td width="50"><input disabled value="{{ $dato->descuento }}" type="text" name="descuento[]" class="form-control" required></td>
+					  		<td width="75"><input disabled value="{{ $dato->valor }}" type="text" name="valor[]" class="form-control" required></td>
 
 					  	</tr>
+					  	@endforeach
 								  
 					  </tbody>
 					</table>
-					<a href="#" class="addRow btn btn-outline-danger">Agregar Columna</a>
 				</div>	
 					<div class="row p-3  mb-2">
 				<div class="col-6 border-danger border align-self-end">
 					<h2 class="text-center">Informacion Adicional</h2>
 					<div class="row mb-2">
 						<div class="col-4"><label class="col-form-label" for="">Direccion</label></div>
-						<div class="col-8"><input type="text" class="form-control" name="direccion"></div>
+						<div class="col-8"><input disabled value="{{ $datos->direccion }}" type="text" class="form-control" name="direccion"></div>
 					</div>
 					<div class="row mb-2">
 						<div class="col-4"><label class="col-form-label" for="">Telefono</label></div>
-						<div class="col-8"><input type="text" class="form-control" name="telefono"></div>
+						<div class="col-8"><input disabled value="{{ $datos->telefono }}" type="text" class="form-control" name="telefono"></div>
 					</div>
 					<div class="row mb-2">
 						<div class="col-4"><label class="col-form-label" for="">Email</label></div>
-						<div class="col-8"><input type="text" class="form-control" name="email"></div>
+						<div class="col-8"><input disabled value="{{ $datos->email }}" type="text" class="form-control" name="email"></div>
 					</div>
 				</div>
 				<div class="col-6">
@@ -158,48 +171,48 @@
 					  <tbody>
 					    <tr>
 					      <th scope="row">SUBTOTAL {{ $datos->iva }}%</th>
-					      <td><input type="text" name="subtotal_12" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->subtotal_12 }}" type="text" name="subtotal_12" class="form-control"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">SUBTOTAL 0%</th>
-					      <td><input type="text" name="subtotal_0" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->subtotal_0 }}" type="text" name="subtotal_0" class="form-control"></td>
 					      
 					    </tr>
 					    <tr>
 					      <th scope="row">SUBTOTAL No objeto de IVA</th>
-					      <td><input type="text" name="subtotal_iva" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->subtotal_iva }}" type="text" name="subtotal_iva" class="form-control"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">SUBTOTAL Exento de IVA</th>
-					      <td><input type="text" name="subtotal_siniva" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->subtotal_siniva }}" type="text" name="subtotal_siniva" class="form-control"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">SUBTOTAL SIN IMPUESTOS</th>
-					      <td><input type="text" name="subtotal_sin_imp" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->subtotal_sin_imp }}" type="text" name="subtotal_sin_imp" class="form-control"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">TOTAL DESCUENTO</th>
-					      <td><input type="text" name="descuento_total" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->descuento_total }}" type="text" name="descuento_total" class="form-control"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">ICE</th>
-					      <td><input type="text" name="ice" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->ice }}" type="text" name="ice" class="form-control"></td>
 					    </tr>
 					    <tr>
-					      <th scope="row">IVA {{ $datos->iva }}%</th>
-					      <td><input type="text" name="iva12" class="form-control"></td>
+					      <th scope="row">IVA {{ $taller->iva }}%</th>
+					      <td><input disabled value="{{ $datos->iva12 }}" type="text" name="iva12" class="form-control"></td>
 					    </tr>
 					     <tr>
 					      <th scope="row">IRBPNR</th>
-					      <td><input type="text" name="irbpnr" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->irbpnr }}" type="text" name="irbpnr" class="form-control"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">PROPINA</th>
-					      <td><input type="text" name="propina" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->propina }}" type="text" name="propina" class="form-control"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">VALOR TOTAL</th>
-					      <td><input type="text" name="valor_total" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->valor_total }}" type="text" name="valor_total" class="form-control"></td>
 					    </tr>
 
 					  </tbody>
@@ -207,58 +220,30 @@
 
 				</div>
 			</div>
-
 			</div>
-		
-
 		</div>
+          </div>
+            <div class="row justify-content-center">
+            <div class="col-5">
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Calificacion</label>
+                <input type="hidden" name="user_id" value="{{ $user->id }}">
+                <input type="text" class="form-control" name="calificacion" placeholder="Añada una nota al estudiante">
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Retroalimentacion</label>
+                <textarea class="form-control" name="retroalimentacion" rows="3" placeholder="Agregue una retroalimentacion"></textarea>
+              </div>   
+               <div class="row justify-content-center mb-5">
+                <input type="submit" value="Calificar" class="btn p-2 mt-3 btn-danger">
+             </div>
+            </div>
+        </div>
+        </div>
+
 		
-		<div class="row justify-content-center">
-        		<input type="submit" value="Guardar Datos" class="btn p-2 mt-3 mb-5 btn-danger">
-    		 </div>
-	</div>
 	</form>
 
 @section('js')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-<script src="{{ asset('vendor/toastr/toastr.min.js') }}"></script>
-	<script type="text/javascript">
-		$('.addRow').on('click', function(evt) {
-			evt.preventDefault();
-			addRow();
-		});
-
-		function addRow(){
-			
-			var tr='<tr>'+
-			'<td><input type="text" name="codigo[]" class="form-control" required></td>'+
-			'<td><input type="text" name="cod_aux[]" class="form-control" required></td>'+
-			'<td><input type="text" name="cantidad[]" class="form-control" required></td>'+
-			'<td><textarea  name="descripcion[]" class="form-control" required></textarea></td>'+
-			'<td><input type="text" name="precio[]" class="form-control" required></td>'+
-			'<td><input type="text" name="descuento[]" class="form-control" required></td>'+
-			'<td><input type="text" name="valor[]" class="form-control" required></td>'+
-            '<td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>'
-			'</tr>';
-			$('.prin').append(tr);
-		  toastr.success("Columna agregada correctamente", "Smarmoddle",{
-		  	 "timeOut": "1000"
-		  });
-
-		}
-		$('.remove').live('click', function(evt){
-	evt.preventDefault();
-      var last=$('.prin tr').length;
-      if (last == 1) {
-        toastr.error("Esta columna no se puede eliminar", "Smarmoddle",{
-         "timeOut": "1000"
-      });
-      }else{
-      $(this).parent().parent().remove();
-       i = last;
-}
-    });
-
-	</script>
-	@endsection
+@endsection
 @endsection

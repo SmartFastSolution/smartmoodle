@@ -73,7 +73,7 @@
               respuesta: _this.orden
         }).then(response => {
         	// console.log(response.data)
-        	window.location = "/sistema";   
+        	window.location = "/sistema/homees";   
         }).catch(function(error){
 
         }); 

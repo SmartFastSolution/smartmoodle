@@ -13,7 +13,7 @@
 				<div class="col-6 text-center">
 					<label class="text-center">{{ $datos->concepto }}</label>
 					<div class="border border-info">
-						<textarea required name="" id="" class="form-control text-justify"  cols="20" rows="5">
+						<textarea required name="respuesta" id="" class="form-control text-justify"  cols="20" rows="5">
 						</textarea>
 					</div>
 				</div>
