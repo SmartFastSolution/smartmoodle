@@ -107,19 +107,18 @@
                                             value="{{ old('email') }}" placeholder="Email">
                                     </div>
 
-                                    <div class="col">
+                                    <div class="col" id="random">
                                         <!-- <a id="pass" class="btn btn-success ">Generar
                                             Passoword</a> -->
                                         <label for="password">Contraseña</label>
-                                        <input type="password" id="result" class="form-control" name="password"
+                                        <input type="password" v-model="password" id="result" class="form-control" name="password"
                                             id="password" value="{{ old('password') }}" placeholder="Password"
-                                            minlength="8">
-
+                                            minlength="8"> 
+                                            <a href="" class="btn btn-sm btn-primary mt-2" @click.prevent="generarPass">Generar Aleatoria</a>
                                     </div>
+                                   
                                     <div class="cold">
                                         <br>
-
-
                                     </div>
                                 </div>
                                 <br><br>
@@ -174,7 +173,35 @@ function getNumero(min, max) {
 }
 </script> -->
 
+<script type="text/javascript">
+    var random = new Vue({
+        el: "#random",
+        data:{
+            password:''
+        },
 
+        methods:{
+            generarPass: function() {
+                var _this = this;
+                var url = '/sistema/admin/ramdom';
+                    axios.post(url,{
+                        
+                }).then(response => {
+                     toastr.success("Clave Generada Satisfactoriamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                     _this.password = response.data;
+                }).catch(function(error){
+
+                });
+
+            }
+
+        }
+    
+        
+    })
+</script>
 
 
 <script>

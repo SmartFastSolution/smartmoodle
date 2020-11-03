@@ -31,7 +31,13 @@ class DocenteController extends Controller
 
     public function index(){
         // $materi = auth()->user()->distribuciondos->pivot->materia_id;
+        // 
+        
             $au = User::find(Auth::id())->distribuciondos;
+            if ($au == null) {
+            return redirect()->route('welcome'); 
+               
+            }
             $ids =[];
             foreach ($au->materias as $value) {
                 foreach ($value->contenidos as $conte) {

@@ -26,7 +26,10 @@ class EstudianteController extends Controller
 
     public function index(){
      
-
+        $au =  auth()->user()->distrima;
+         if ($au == null) {
+            return redirect()->route('welcome');    
+        }
         return view('Estudiante.indexes'); //ruta estudiante       
     }
 

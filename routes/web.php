@@ -13,20 +13,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
-
-
  // Route::get('/sistema', function () {
  //       return view('welcome');
  //   })->name('sistema');
-
- 
- 
-  Auth::routes();
-
-   //Auth::routes(['verify' => true]);
-
+Auth::routes();
+//Auth::routes(['verify' => true]);
 // Auth::routes(["register" => false]);
 // Auth::routes(["login" => false]);
 // Auth::routes(["logout" => false]);
@@ -37,34 +28,28 @@ Route::get('/', function () {
 ///rutas protegidas On 
 
  //Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
-  Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
+Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
    
+route::get('/home','Controller@index')->name('administrador'); //ruta administracion
 
- 
-
- route::get('/home','Controller@index')->name('administrador'); //ruta administracion
-
- route::get('home','AdminController@index')->name('administrador'); //ruta administracion
+route::get('home','AdminController@index')->name('administrador'); //ruta administracion
 
 //ruta del menu general de administracion 
 
- route::get('/homedoc','DocenteController@index')->name('docente'); //ruta docente
+route::get('/homedoc','DocenteController@index')->name('docente'); //ruta docente
 
-
- route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta estudiante
-
+route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta estudiante
 
 //rutas vue asignaciones////
- Route::post('materiainst','HomeController@buscarMateria')->name('materiainst');
- Route::post('userinst','HomeController@buscarAlumno')->name('userinst');
- Route::post('docinst','HomeController@buscarDocente')->name('docinst');
- Route::post('distinst','HomeController@buscarAsignacion')->name('distinst');
- Route::post('contmateria','HomeController@buscarContenido')->name('contmateria');
- ///rutas menu docente
- route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
+Route::post('materiainst','HomeController@buscarMateria')->name('materiainst');
+Route::post('userinst','HomeController@buscarAlumno')->name('userinst');
+Route::post('docinst','HomeController@buscarDocente')->name('docinst');
+Route::post('distinst','HomeController@buscarAsignacion')->name('distinst');
+Route::post('contmateria','HomeController@buscarContenido')->name('contmateria');
+///rutas menu docente
+route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
 
-
- //rutas menu estudiante
+//rutas menu estudiante
 route::post('admin/cambiarestado','AdminController@status')->name('taller.status');
 route::get('perfil','EstudianteController@show')->name('perfile');
 route::get('unidad/{id}','EstudianteController@unidades')->name('Unidades');
@@ -76,7 +61,6 @@ route::get('alumnos/{id}', 'DocenteController@cursos')->name('Alumnos');
 
  //permisoss
  
-
 //////fin
 
 //rutas usuario
@@ -87,16 +71,13 @@ route::resource('institutos','InstitutoController');// FUNCIONA AL 100%
 route::get('institutos/clone/{id}','InstitutoController@clone')->name('institutos.clone');// FUNCIONA AL 100%
 route::get('contenido/clone/{id}','InstitutoController@hola')->name('contenido.clone');// FUNCIONA AL 100%
 
-
 /// rutas roles
 route::resource('roles','Controladores\RoleController');// FUNCIONA AL 100%
 route::get('iniciorole','Controladores\RoleController@index')->name('roles.inicio');
 route::PUT('/roles/roles/{role}','Controladores\RoleController@update')->name('role.update');
 
-
 //MENU o permisos donde tendra acceso el usuario
 route::resource('permissions','PermissionController');// FUNCIONA AL 50%
-
 
 //Ruta Resource de Niveles que va aliada con el curso
 route::resource('nivels','NivelController'); //ojo en este caso le cambie niveles -> nivels como esta en la tabla 
@@ -108,11 +89,8 @@ route::resource('cursos','CursoController');
 //Ruta Resource de Materias que va aliada con el curso
 route::resource('materias','MateriaController');
 
-
 //Ruta Resource de Materias que va aliada con el curso
 route::resource('contenidos','ContenidoController');
-
-
 
 //Ruta Resource par asignacion de cursos y materias prueba 2 
 route::resource('distribucionmacus','DistribucionmacuController');
@@ -126,9 +104,6 @@ route::resource('distrimas','DistrimaController');
 //Ruta Resource para distribucion alumno docente/materia
 route::resource('distribuciondos','DistribuciondoController');
 });
-
-
-
 
 Route::group(['prefix' => 'sistema/admin'], function() {
 
@@ -242,4 +217,5 @@ route::post('/sistema/homedoc/respuesta/taller1/{idtaller}', 'TallerDocenteContr
 route::get('/sistema/admin/create', 'AdminController@admin')->name('admin.create');
 route::post('/sistema/admin', 'AdminController@store')->name('admin');
 route::post('/sistema/delete', 'AdminController@delete')->name('delete');
+Route::post('/sistema/admin/ramdom','HomeController@ramdom')->name('ramdom');
 // route::get('/sistema/taller46','TallersController@taller46')->name('taller46');

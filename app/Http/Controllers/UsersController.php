@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use App\Modelos\Role;
-use App\Instituto;
 use App\Distribucionmacu;
-use App\User;
+use App\Events\NewUserRegistered;
 use App\Http\Controllers\Controller;
+use App\Instituto;
+use App\Modelos\Role;
+use App\User;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
-use RealRashid\SweetAlert\Facades\Alert;
-
 use Illuminate\Support\facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UsersController extends Controller
 {
@@ -71,7 +71,7 @@ class UsersController extends Controller
             'password'        =>  'required|string|min:8',
           
         ]);
-
+        $users = $request->all();
         $user = new User;
         $user->instituto_id = $request->instituto;  //relacion con el instituto y usuario     
         $user->cedula = $request->cedula;
@@ -86,7 +86,8 @@ class UsersController extends Controller
          
         $user->save();
                
-        
+        event(new NewUserRegistered($users));
+
         if ($request->get('role')) {
            
 
