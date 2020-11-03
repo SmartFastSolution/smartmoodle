@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Instituto;
 use App\Clinstituto;
 use Illuminate\Http\Request;
 
@@ -24,7 +24,8 @@ class ClinstitutoController extends Controller
      */
     public function create()
     {
-        //
+        $institutos=Instituto::get();
+        return \view('Clonacion.clonacionc', compact('institutos'));
     }
 
     /**
@@ -35,7 +36,18 @@ class ClinstitutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+           
+            'instituto'       =>  'required',
+            'institutoclon'       =>  'required',
+            
+          
+        ]);
+
+        $clinstituto = new Clinstituto;
+        $clinstituto->instituto_id = $request->instituto;
+        $clinstituto->institutoclon = $request->institutoclon;
+        $clinstituto->save();
     }
 
     /**

@@ -120,6 +120,11 @@ route::resource('distrimas','DistrimaController');
 
 //Ruta Resource para distribucion alumno docente/materia
 route::resource('distribuciondos','DistribuciondoController');
+
+//Ruta Resource para clonacion de unidad educativa
+route::resource('clinstitutos','ClinstitutoController');
+
+
 });
 
 
