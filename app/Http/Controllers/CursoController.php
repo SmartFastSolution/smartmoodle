@@ -18,7 +18,7 @@ class CursoController extends Controller
      */
     public function index()
     {
-        Gate::authorize('haveaccess', 'curso.index');
+        //Gate::authorize('haveaccess', 'curso.index');
                
         $cursos= Curso::orderBy('id','Asc')->paginate(5);
        
@@ -32,7 +32,7 @@ class CursoController extends Controller
      */
     public function create()
     {
-        Gate::authorize('haveaccess', 'curso.create');
+       // Gate::authorize('haveaccess', 'curso.create');
        
          
         return \view('Cursos.createc');
@@ -47,7 +47,7 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        Gate::authorize('haveaccess', 'curso.store');
+        //Gate::authorize('haveaccess', 'curso.store');
         $request->validate([
 
             'nombre'      => 'required|string|max:60',
@@ -78,7 +78,7 @@ class CursoController extends Controller
      */
     public function show(Curso $curso)
     {
-        Gate::authorize('haveaccess', 'curso.show');
+       // Gate::authorize('haveaccess', 'curso.show');
       
          //llama al nivel que esta relacionado con el modelo curso
      
@@ -94,7 +94,7 @@ class CursoController extends Controller
      */
     public function edit(Curso $curso)
     {
-        Gate::authorize('haveaccess', 'curso.edit');
+        //Gate::authorize('haveaccess', 'curso.edit');
 
 
        //llama al nivel que esta relacionado con el modelo curso
@@ -112,7 +112,7 @@ class CursoController extends Controller
      */
     public function update(Request $request, Curso $curso)
     {
-        Gate::authorize('haveaccess', 'curso.update');
+      //  Gate::authorize('haveaccess', 'curso.update');
         
         $request->validate([
 
@@ -136,7 +136,7 @@ class CursoController extends Controller
      */
     public function destroy(Curso $curso)
     {
-        Gate::authorize('haveaccess', 'curso.destroy');
+        //Gate::authorize('haveaccess', 'curso.destroy');
         $curso= Curso::find($curso->id);
         $curso->delete();
 

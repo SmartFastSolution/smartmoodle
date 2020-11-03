@@ -1,3 +1,5 @@
+{{-- @extends('layouts.docapp') --}}
+
 @extends('layouts.nav')
 @section('title', 'Unidades | SmartMoodle')
 
@@ -10,7 +12,13 @@
         </h2>
 
         <a class="btn btn-primary btn" href=""><i class="far fa-clipboard"></i> Calificaciones</i></a>
-        <a class="btn btn-success btn" href=""><i class="fas fa-users"></i> Participantes</i></a>
+       
+
+        <a class="btn btn-success btn" href="{{route('Alumnos', $materia->id)}}"><i class="fas fa-users"></i>
+            Participantes</i></a>
+       
+
+
         <br>
         <br>
         <div class="card card-info card-outline">
@@ -29,63 +37,6 @@
                         <a type="button" data-toggle="modal" data-target="#modalYT" class="text-primary"> <i
                                 class="fas fa-file-pdf"></i>
                             {{$contenido->nombre}}</a>
-
-        <div class="card">
-            <div class="card-header">
-                <h3 class="font-weight-light"> <strong>Talleres</strong></h3>
-
-            </div>
-
-            <div class="row">
-                <div class="card-body">
-
-                    @forelse($contenidos->where('materia_id', $materia->id) as $contenido)
-                    <!-- Inicio de Talleres -->
-                    <div class="card card-gray-dark">
-                        <div>
-                            <h3 class="card-title"> {{$contenido->nombre}}</h3>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" width="50">#</th>
-                                        <th scope="col" width="125">Unidad</th>
-                                        <th scope="col" width="100"> Taller </th>
-                                        <th scope="col">Enunciado </th>
-                                        <th scope="col">Vista Taller</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        @forelse($talleres->where('contenido_id', $contenido->id) as $taller)
-                                        <th scope="row">{{-- {{$taller->materia['id']}} --}}</th>
-                                        <td>{{$taller->contenido->nombre}}</td>
-                                        <td>{{$taller['nombre']}}</td>
-                                        <td>{{$taller->enunciado}}</td>
-                                        <td class="table-button ">
-                                            <a class="btn btn-info"
-                                                href="{{route('taller.estudiante',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
-                                                class="fas fa-eye"></i></a>
-                                        </td>
-                                    </tr>
-                                    @empty
-                                    <tr>
-                                    <td colspan="5">No hay talleres disponibles</td>
-                                        
-                                    </tr>
-                            @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <!-- fin de talleres -->
-                    @endforeach
-
-                </div>
-            </div>
-        </div>
-
                         <!-- inicio del modal para visualizacion del archivo de contenido -->
                         <div class="modal fade" id="modalYT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                             aria-hidden="true">

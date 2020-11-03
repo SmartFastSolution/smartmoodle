@@ -25,7 +25,7 @@ class Distribuciondo extends Model
 
      public function materias(){
          
-        return $this->belongsToMany(Materia::class)->withPivot('distribuciondo_id')->withTimestamps();
+        return $this->belongsToMany(Materia::class)->withPivot('distribuciondo_id', 'materia_id')->withTimestamps();
     }
     
 

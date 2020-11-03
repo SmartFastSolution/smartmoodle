@@ -1,11 +1,19 @@
+
 @extends('layouts.nav')
+
+@section('title', 'Perfil | SmartMoodle')
+
+
 
 
 @section('title', 'Administracion - Docente')
 
 @section('content')
-<section class="content mt-5">
+
+<section class="content">
     <div class="container">
+
+
         <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
         <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}
         </h2>
@@ -21,10 +29,10 @@
             </div>
 
             <div class="row">
-                @foreach(auth()->user()->distribuciondos as $dis1)
+             
 
 
-                @foreach($dis1->materias as $materia)
+                @foreach($au->materias as $materia)
                 <!-- ./col -->
                 <div class="col-lg-3 col-5">
                     <!-- small box -->
@@ -44,61 +52,58 @@
                 <!-- ./col -->
                 @endforeach
 
-                @endforeach
+        
 
 
             </div>
         </div>
+                  <div class="card-body">
+                        <table class="table table-hover">
+
+                            <thead>
+                                <tr>
+                                    <th scope="col">Unidad</th>
+                                    <th scope="col"> Taller </th>
+                                    <th scope="col">Alumno </th>
+                                    <th scope="col">Enunciado </th>
+                                    <th scope="col">Vista Taller</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @foreach($users as $taller)
+                                    <td>{{$taller->conte_name}}</td>
+                                    <td>{{$taller->nombre}}</td>
+                                    <td>{{$taller->alumno}}</td>
+                                    <td>{{$taller->enunciado}}</td>
+                                    <td class="table-button ">
+                                        <a class="btn btn-info"
+                                            href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
+                                                class="fas fa-eye"></i></a>
+
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{ $users }}
+                    </div>
 
 
 
 
     </div>
 </section>
-{{-- <h1>Docente Perfil</h1>
+
+ {{ $users }}
 
 
-
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-            aria-selected="true">Home</a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-            aria-selected="false">Profile</a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link" id="messages-tab" data-toggle="tab" href="#messages" role="tab" aria-controls="messages"
-            aria-selected="false">Messages</a>
-    </li>
-    <li class="nav-item" role="presentation">
-        <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings"
-            aria-selected="false">Settings</a>
-    </li>
-</ul>
-
-<div class="tab-content">
-    <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-    <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-    <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">...</div>
-    <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">...</div>
-</div>
- --}}
 
 
 
 @stop
-
-
-
-
 @section('css')
-
 @stop
-
 @section('js')
-
-
 
 @stop

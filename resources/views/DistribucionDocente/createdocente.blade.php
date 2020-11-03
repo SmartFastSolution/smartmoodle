@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Docente</label>
-                                    <select class="form-control select" name="docente" style="width: 99%;">
+                                    <select class="form-control select2" name="docente" style="width: 99%;">
                                         <option selected disabled>Elija al Docente...</option>
                                         <option v-for="doce in users" :value="doce.id">@{{doce.name}} @{{doce.apellido}}
                                         </option>

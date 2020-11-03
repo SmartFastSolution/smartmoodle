@@ -45,7 +45,6 @@ class Usuario extends Seeder
            'domicilio'       => 'La 20 y domingo sabio',
            'telefono'        => '0980727393',
            'celular'         => '044549611',
-           'titulo'          => 'Tecnologo',
            'email'           => 'user1@smartmoodle.com',
            'password'        => Hash::make('smartmoodle'),
            'estado'          => 'on',
@@ -62,7 +61,6 @@ class Usuario extends Seeder
            'domicilio'       => '11 y 4 de noviembre',
            'telefono'        => '0654789512',
            'celular'         => '0248759658',
-           'titulo'          => 'Estudiante',
            'email'           => 'user2@smartmoodle.com',
            'password'        => Hash::make('12345678'),
            'estado'          => 'on',
@@ -78,13 +76,26 @@ class Usuario extends Seeder
            'domicilio'       => '20 y domingo sabio',
            'telefono'        => '0985474512',
            'celular'         => '0425698452',
-           'titulo'          => 'Docente',
            'email'           => 'user3@smartmoodle.com',
            'password'        => Hash::make('12345678'),
            'estado'          => 'on',
            'created_at'      => now(),
            'updated_at'      => now()
            ]);
+           DB::table('users')->insert([
+            'instituto_id'    => 2,
+            'cedula'          => '0958784521',
+            'name'            =>'Esteban',
+            'apellido'        => 'Gaspar',
+            'domicilio'       => '20 y domingo sabio',
+            'telefono'        => '0985474512',
+            'celular'         => '0425698452',
+            'email'           => 'user4@smartmoodle.com',
+            'password'        => Hash::make('12345678'),
+            'estado'          => 'on',
+            'created_at'      => now(),
+            'updated_at'      => now()
+            ]);
 
             DB::table('role_user')->insert([
            'role_id'    => 1,
@@ -106,5 +117,11 @@ class Usuario extends Seeder
            'created_at' => now(),
            'updated_at' => now()
         ]);
+        DB::table('role_user')->insert([
+            'role_id'    => 3,
+            'user_id'    => 4,
+            'created_at' => now(),
+            'updated_at' => now()
+         ]);
     }
 }

@@ -18,11 +18,13 @@ class CreateDistrimasTable extends Migration
          
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('instituto_id');
+            $table->unsignedBigInteger('distribucionmacu_id');
             $table->enum('estado',['on','off'])->nullable();
             $table->timestamps();
            
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('instituto_id')->references('id')->on('institutos')->onDelete('cascade');
+            $table->foreign('distribucionmacu_id')->references('id')->on('distribucionmacus')->onDelete('cascade'); 
        
         });
     }

@@ -23,6 +23,18 @@ class Plantilla extends Seeder
                              'created_at'  => now(),
                              'updated_at'  => now()
                           ]);
+                          DB::table('institutos')->insert([
+                            'nombre'      => 'Instituto Superior Guayaquil',
+                            'descripcion' => 'El Mejor Colegio Del Ecuador',
+                            'provincia'   => 'Guayas',
+                            'canton'      => 'Guayaquil',
+                            'direccion'   => 'La  20 y domingo sabio',
+                            'telefono'    => '09452514524',
+                            'email'       => 'itgyq@itgyq.com',
+                            'estado'      => 'on',
+                            'created_at'  => now(),
+                            'updated_at'  => now()
+                         ]);
                           
                           DB::table('plantillas')->insert([
                           'id' => 1,

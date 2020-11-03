@@ -20,8 +20,18 @@
 <section class="content">
     <div class="container">
         <div class="card border-0 shadow my-5">
+
             <div class="card-body p-5">
+                <div class="btn-group float-right" role="group" aria-label="Basic example">
+
+                    <a class="btn btn-primary float-right" href="{{route('distribuciondos.create')}}"><i
+                            class="fas fa-plus"></i> Asignar Docente</a>
+                    <a class="btn btn-success float-right" href="{{route('distrimas.create')}}"><i
+                            class="fas fa-plus"></i>
+                        Asignar Estudiante</a>
+                </div>
                 <h1 class="font-weight-light">Añadir Usuarios</h1>
+
                 <div class="row">
                     <div class="col-md-10">
 
@@ -77,7 +87,6 @@
                                         <option value="{{$instituto->id}}">{{$instituto->nombre}}
                                         </option>
                                         @endforeach
-
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -99,20 +108,19 @@
                                     </div>
 
                                     <div class="col">
+                                        <!-- <a id="pass" class="btn btn-success ">Generar
+                                            Passoword</a> -->
                                         <label for="password">Contraseña</label>
-                                        <input type="password" class="form-control" name="password" id="password"
-                                            value="{{ old('password') }}" placeholder="Password" minlength="8">
+                                        <input type="password" id="result" class="form-control" name="password"
+                                            id="password" value="{{ old('password') }}" placeholder="Password"
+                                            minlength="8">
+
                                     </div>
-                                </div>
+                                    <div class="cold">
+                                        <br>
 
 
-                                <div class="form-row">
-                                    <div class="col">
-                                        <label for="titulo">Profesión</label>
-                                        <input type="text" class="form-control" name="titulo" id="titulo"
-                                            value="{{ old('titulo') }}" placeholder="Profesión" nullable>
                                     </div>
-                                  
                                 </div>
                                 <br><br>
                                 <input type="submit" class="btn btn-dark " value="Guardar">
@@ -123,18 +131,55 @@
                     </div>
                 </div>
             </div>
-
         </div>
+    </div>
+</section>
+
+
+@stop
+
+@section('css')
+
+@stop
+
+@section('js')
+<!-- <script>
+document.querySelector("#pass").addEventListener("click", function() {
+
+    $longitud = 16; //numeros de caracter para password
+
+    $clave = generarClave($longitud);
+    document.querySelector("#result").innerHTML = $clave;
+});
+
+function generarClave(long) {
+
+    /* Caracteres Permitidos */
+    let caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz',
+        clave = '',
+        numero;
+
+    /* creacion de clave */
+    for (let i = 0; i < long; i++) {
+        numero = getNumero(0, caracteres.length);
+        clave += caracteres.substring(numero, numero + 1);
+    }
+    return clave;
+}
+
+/* Generar Numeros Aleatorios*/
+function getNumero(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+
+}
+</script> -->
 
 
 
 
-        @stop
+<script>
 
-        @section('css')
 
-        @stop
+</script>
 
-        @section('js')
-
-        @stop
+@stop

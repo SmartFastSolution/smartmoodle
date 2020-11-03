@@ -17,6 +17,7 @@
         @endif
         <div class="row justify-content-center">
             <div class="col-md-13">
+
                 <a class="btn btn-info float-right" href="{{route('distrimas.create')}}"><i class="fas fa-plus"></i>
                     CREAR ASIGNACION</a>
                 <h1>Asignación de Alumno/Curso</h1>
@@ -34,7 +35,7 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">Unidad Educativa</th>
                                     <th scope="col">Curso</th>
-                                    <th scope="col">Paralelo</th>
+
                                     <th scope="col">Materias</th>
                                     <th scope="col">Alumno</th>
                                     <th scope="col">Estado</th>
@@ -43,45 +44,43 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($distrimas as $distrima)
                                 <tr>
-                                    @foreach ($distrimas as $distrima)
+
                                     <th scope="row">{{$distrima['id']}}</th>
                                     <td>{{$distrima->instituto->nombre}} </td>
 
-                                    @foreach($distrima->distribumacus as $dis)
-                                    <td>
-                                        <span class="badge badge-success">
-                                            {{$dis->curso->nombre}}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-success">
-                                            {{$dis->nivel->nombre}}
-                                        </span>
-                                    </td>
-                                    <td>
-                                      
-                                            @if($dis->materias != null)
-                                            @foreach($dis->materias as $dismacu)
-                                            <span class="badge badge-success">
-                                                {{$dismacu->nombre}}
-                                                </span>
 
-                                            @endforeach
-                                            @endif
-                                     
+                                    <td>
+                                        @if($distrima->distribucionmacu->curso->nombre != null)
+                                        <span class="badge badge-success">
+                                            {{$distrima->distribucionmacu->curso->nombre}}
+                                        </span>
+                                        @endif
                                     </td>
-                                    @endforeach
+
+
+                                    <td>
+                                  
+                                        @foreach($distrima->distribucionmacu->materias as $mat)
+                                        <span class="badge badge-success">
+                                            {{ $mat->nombre}}
+                                        </span>
+                                        @endforeach
+                                 
+                                      
+                                    </td>
+                                 
 
                                     <td>
                                         @if($distrima->user != null)
 
-                                        {{$distrima->user->name}}  
-                                     
+                                        {{$distrima->user->name}}
+
                                         @endif
                                     </td>
- 
-                                     
+
+
                                     <td>{{ $distrima['estado']}}</td>
 
                                     <td> </td>
@@ -120,6 +119,11 @@
         </div>
 </section>
 
+
+
+@foreach ($user as $element)
+ <li>{{ $element->user->name}}</li>
+@endforeach
 
 @stop
 

@@ -65,7 +65,10 @@
                                         <br>
                                         <button type="button" class="btn btn-secondary" data-toggle="modal"
                                             data-target="#modalYT">{{ $contenido['nombre']}}</button>
+                                        <!-- <input type="file" name="documentod" value="{{old('documentod')}}">
+                                        {!! $errors->first('documento','<span style="color:red">:message</span>')!!} -->
                                     </label>
+
                                 </div>
 
 

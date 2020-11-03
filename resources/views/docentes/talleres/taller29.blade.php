@@ -42,45 +42,21 @@
 						
 					</div>
 					<div class="col-12 form-inline">
-						<p class="text-justify">Es grato enviarle la <span class="@if ($datos->abreviatura2 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura2 }}</span> o. 124 correspondiente  a cuatro  bultos  de mercaderías  que  hemos  enviado  por  vía terrestre, utilizando transportes ECUADOR, el 3 de Mayo del <span class="@if ($datos->abreviatura3 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura3 }}</span> año</p>
+						<p class="text-justify">Es grato enviarle la <span class="badge badge-success">{{ $datos->abreviatura2 }}</span> o. 124 correspondiente  a cuatro  bultos  de mercaderías  que  hemos  enviado  por  vía terrestre, utilizando transportes ECUADOR, el 3 de Mayo del <span class="badge badge-success">{{ $datos->abreviatura3 }}</span> año</p>
 					</div>
 					<div class="col-12 form-inline">
 						<p class="text-justify">
-							Esta <span class="@if ($datos->abreviatura4 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura4 }}</span> contiene <span class="@if ($datos->abreviatura5 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura5 }}</span> con  las  características señaladas  por <span class="@if ($datos->abreviatura6 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura6 }}</span> a  nuestra <span class="@if ($datos->abreviatura7 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura7 }}</span>
+							Esta <span class="badge badge-success">{{ $datos->abreviatura4 }}</span> contiene <span class="badge badge-success">{{ $datos->abreviatura5 }}</span> con  las  características señaladas  por <span class="badge badge-success">{{ $datos->abreviatura6 }}</span> a  nuestra <span class="badge badge-success">{{ $datos->abreviatura7 }}</span>
 						</p>
 					</div>
 					<div class="col-12 form-inline">
 						<p class="text-justify">
-							El  valor  de  la <span class="@if ($datos->abreviatura8 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura8 }}</span> asciende  a  la  cantidad  de $ 8.500; la hemos cargado a su <span class="@if ($datos->abreviatura9 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura9 }}</span> ogando nos envíe  un <span class="@if ($datos->abreviatura10 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura10 }}</span> certificado  por  dicho  valor.
+							El  valor  de  la <span class="badge badge-success">{{ $datos->abreviatura8 }}</span> asciende  a  la  cantidad  de $ 8.500; la hemos cargado a su <span class="badge badge-success">{{ $datos->abreviatura9 }}</span> ogando nos envíe  un <span class="badge badge-success">{{ $datos->abreviatura10 }}</span> certificado  por  dicho  valor.
 						</p>
 					</div>
 					<div class="col-12 form-inline">
 						<p class="text-justify">
-							De  no  ser  posible  esperamos  que  el  valor  de  la <span class="@if ($datos->abreviatura1 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura11 }}</span> lo  deposite  en  nuestra <span class="@if ($datos->abreviatura11 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura12 }}</span> del <span class="@if ($datos->abreviatura12 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura13 }}</span> Produbanco  No. 40035873.
+							De  no  ser  posible  esperamos  que  el  valor  de  la <span class="badge badge-success">{{ $datos->abreviatura11 }}</span> lo  deposite  en  nuestra <span class="badge badge-success">{{ $datos->abreviatura12 }}</span> del <span class="badge badge-success">{{ $datos->abreviatura13 }}</span> Produbanco  No. 40035873.
 						</p>
 					</div>
 					<div class="col-12">

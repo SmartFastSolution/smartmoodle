@@ -20,10 +20,10 @@ class CreateTallerUserTable extends Migration
             $table->string('retroalimentacion')->nullable();
             
             $table->unsignedbigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
 
             $table->unsignedbigInteger('taller_id');
-            $table->foreign('taller_id')->references('id')->on('tallers');
+            $table->foreign('taller_id')->references('id')->on('tallers')->onDelete('cascade');;
             $table->timestamps();
         });
     }

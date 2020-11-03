@@ -41,17 +41,18 @@
 
                             <div class="form-group">
                                 <label>Añadir Materia</label>
-                                <select class="form-control select" name="materia" style="width: 99%;">
+                                <select class="form-control select2" name="materia" style="width: 99%;">
                                     <option selected disabled>Elija la Materia...</option>
                                     @foreach($materias as $materia)
-                                    <option value="{{$materia->id}}">{{$materia->nombre}}</option>
+                                    <option value="{{$materia->id}}">
+                                    {{$materia->instituto->nombre}}-{{$materia->nombre}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <!-- subir imagen en laravel prueba 1 -->
                             <div class="form-group">
                                 <label for="documentod">Añadir Documento(s)</label>
-                                <input type="file" class="form-control-file" name="documentod" id="documentod">
+                                <input  type="file" class="form-control-file" name="documentod" id="documentod">
                                 {!! $errors->first('documento','<span style="color:red">:message</span>')!!}
 
                                 <div class="descripcion">
@@ -96,4 +97,13 @@
 
 @section('js')
 
+<script>
+$(function() {
+    //Initialize Select2 Elements
+    $(".select2").select2({
+
+    });
+
+})
+</script>
 @stop

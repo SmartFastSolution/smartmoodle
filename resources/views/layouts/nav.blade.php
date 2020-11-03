@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html class="@yield('class')">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,14 +19,14 @@
 </head>
 
 <body class="hold-transition sidebar-mini  layout-fixed">
-     <li class="d-none">
+    <li class="d-none">
         @foreach (auth()->user()->roles as $role)
-            {{ $rol = $role->descripcion}}
+        {{ $rol = $role->descripcion}}
         @endforeach
     </li>
-@if ($rol === 'administrador')
-        <!-- Preloader Start -->
- <div class="wrapper">
+    @if ($rol === 'administrador')
+    <!-- Preloader Start -->
+    <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
             <!-- layout-navbar-fixed -->
@@ -73,7 +74,7 @@
         </nav>
         <!-- /.navbar -->
 
-       
+
 
 
         <!-- Main Sidebar Container -->
@@ -196,7 +197,7 @@
                             </ul>
                         </li>
                         @endcan
-                        @can('haveaccess', 'nivel.index')
+                        <!-- @can('haveaccess', 'nivel.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
@@ -214,7 +215,7 @@
                                 </li>
                             </ul>
                         </li>
-                        @endcan
+                        @endcan -->
                         @can('haveaccess', 'materia.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
@@ -349,40 +350,21 @@
                             </ul>
                         </li>
                         @endcan
-                        @can('haveaccess', 'docente')
-                        <li class="nav-header">DOCENTE</li>
 
-                        <li class="nav-item">
-                            <a href="{{route('docente')}}" class="nav-link">
-                                <i class="nav-icon fas fa-file"></i>
-                                <p>Acceso Menú Docente</p>
-                            </a>
-                        </li>
-
-                        @endcan
-                        @can('haveaccess', 'estudiante')
-                        <li class="nav-header">ESTUDIANTE</li>
-                        <li class="nav-item">
-                            <a href="{{route('estudiante')}}" class="nav-link">
-                                <i class="fas fa-circle nav-icon"></i>
-                                <p>Acceso Menú Estudiante</p>
-                            </a>
-                        </li>
-                        @endcan
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
         </aside>
-    
 
 
-            <div id="preloader">
-                <div class="yummy-load">
-                    <img src="{{ asset('dist/img/AdminLTELogo.png') }}"  alt="">
-                </div>
+
+        <div id="preloader">
+            <div class="yummy-load">
+                <img src="{{ asset('dist/img/AdminLTELogo.png') }}" alt="">
             </div>
+        </div>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <section class="content-header">
@@ -398,11 +380,11 @@
                 @yield('content')
             </section>
         </div>
-@elseif($rol ==='estudiante')
-    @include('layouts.estapp')
-@elseif($rol ==='docente')
-    @include('layouts.docapp')
-@endif
+        @elseif($rol ==='estudiante')
+        @include('layouts.estapp')
+        @elseif($rol ==='docente')
+        @include('layouts.docapp')
+        @endif
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>
@@ -410,7 +392,7 @@
     <!-- datatables script -->
     <script src="{{ asset('js/jquery.dataTables.min.js')}}"></script>
     @yield('js')
-  {{--   @include('sweetalert::alert') --}}
+    {{--   @include('sweetalert::alert') --}}
 </body>
 
 </html>

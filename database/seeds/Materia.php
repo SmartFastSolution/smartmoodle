@@ -11,6 +11,7 @@ class Materia extends Seeder
      */
     public function run()
     {
+
           DB::table('materias')->insert([
           'nombre'       => 'Contabilidad',
           'instituto_id' => 1,

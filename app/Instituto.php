@@ -60,4 +60,12 @@ class Instituto extends Model
           
         return $this->hasMany('App\Distribuciondo');
     }
+
+
+    
+    public function clinsitutos(){
+          
+        return $this->hasMany('App\User');
+
+    }
 }

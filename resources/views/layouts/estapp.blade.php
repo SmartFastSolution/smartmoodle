@@ -1,4 +1,4 @@
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 
@@ -30,12 +30,12 @@
                 <span class="brand-text font-weight-light">SmartMoodle</span>
             </a>
             <ul class="navbar-nav">
-                <li class="nav-item d-none d-sm-inline-block">
+                <!-- <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ url('/sistema/home') }}" class="nav-link">Administracion</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
+                </li> -->
+                <!-- <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ url('/sistema/perfil') }}" class="nav-link">Perfil</a>
-                </li>
+                </li> -->
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Actividades</a>
                 </li>

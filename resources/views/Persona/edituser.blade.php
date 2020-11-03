@@ -101,16 +101,6 @@
                                         <input class="form-control" name="email" id="email" placeholder="Email"
                                             value="{{$user->email}}">
                                     </div>
-                                   
-
-
-
-
-                                    <div class="form-group">
-                                        <label for="titulo">Profesión</label>
-                                        <input class="form-control" name="titulo" id="titulo" placeholder="Profesión"
-                                            value="{{$user->titulo}}" required>
-                                    </div>
 
                                 </div>
                                 <input type="submit" class="btn btn-dark " value="Actualizar">

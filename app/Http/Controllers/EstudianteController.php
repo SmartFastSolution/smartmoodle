@@ -16,10 +16,14 @@ use Illuminate\Support\Facades\Auth;
 
 class EstudianteController extends Controller
 {
+
       public function __construct()
     {
+        
+    $this->middleware('auth');
         $this->middleware('estudiante');
     }
+
     public function index(){
      
 
@@ -44,9 +48,11 @@ class EstudianteController extends Controller
     
     public function unidades($id){
               // todos los datos de la bd
-              $user =  User::findorfail( Auth::id());
+         $user =  User::findorfail( Auth::id());
          $institutomate = Materia::find($id)->instituto()->get();
          $contenido=Contenido::get();
+
+         $tallers=Taller::get();
          $completados = $user->tallers;
          $con =Contenido::where('materia_id', $id)->first();
          $ids = [];
@@ -56,12 +62,18 @@ class EstudianteController extends Controller
 
 
         $tallers = Taller::whereNotIn('id', $ids)->get();
+
          $materia =Materia::where('id', $id)->firstOrfail();
        
         
       
+
+       
+         return view ('Estudiante.contenido',['materia'=>$materia,'contenidos'=>$contenido,'institutomate'=>$institutomate,'tallers'=>$tallers]);
+
        // return $tallers;
-         return view ('Estudiante.contenido',['materia'=>$materia,'contenidos'=>$contenido,'institutomate'=>$institutomate, 'tallers' =>$tallers]);
+      
+
         
        
 

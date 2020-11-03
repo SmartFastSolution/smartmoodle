@@ -108,6 +108,16 @@ class AdminController extends Controller
 
         return view('welcome');
     }
+    public function delete(Request $request)
+    {
+      $taller = Taller::find($request->id);
+      $taller->delete();
+
+      return response(array(
+                'success' => true,
+                'message' => 'Taller elimimnado exitosamente'
+            ),200,[]);  
+    }
    public function plantilla(Request $request)
    {
 

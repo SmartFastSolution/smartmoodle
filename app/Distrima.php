@@ -25,13 +25,10 @@ class Distrima extends Model
 
     }
 
-      
-    public function distribumacus(){
+    public function distribucionmacu(){
           
-        return $this->belongsToMany(Distribucionmacu::class)->withPivot('distrima_id')->withTimestamps();
+        return $this->belongsTo('App\Distribucionmacu');
 
     }
-
-  
   
 }

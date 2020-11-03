@@ -101,18 +101,6 @@
                                         <input class="form-control" name="email" id="email" placeholder="Email"
                                             value="{{$user->email}}" readonly>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="password">Contraseña</label>
-                                        <input type="password" class="form-control" name="password" id="password"
-                                            placeholder="Password" value="{{$user->password}}" minlength="8" readonly>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="titulo">Profesión</label>
-                                        <input class="form-control" name="titulo" id="titulo" placeholder="Profesión"
-                                            value="{{$user->titulo}}" readonly>
-                                    </div>
-
                                 </div>
                              
                                 <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>

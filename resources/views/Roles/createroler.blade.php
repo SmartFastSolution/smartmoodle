@@ -117,13 +117,6 @@
 @stop
 
 @section('js')
-
-
-<script>
-console.log('Hi!');
-</script>
-
-
 <script>
 $(document).ready(function() {
 

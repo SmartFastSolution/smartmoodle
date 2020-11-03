@@ -68,9 +68,9 @@ class HomeController extends Controller
         $cursos = [];
         foreach($dist as $key => $value){
             $cursos[$key] =[
-                'id'=> $value->curso_id,
+                'id'=> $value->id,
                 'nombre' => $value->curso->nombre,
-                'nivel' => $value->nivel->nombre
+                // 'nivel' => $value->nivel->nombre
                 
             ];
         }

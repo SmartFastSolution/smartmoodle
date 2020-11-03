@@ -1,8 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Routes;
 use Illuminate\Support\Facades\Route;
-use App\User;
-use Illuminate\Support\Facades\Gate;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +15,7 @@ use Illuminate\Support\Facades\Gate;
 */
 
 
- Route::get('/', function () {
-       return view('principal');
-   })->name('welcome');
+
 
  // Route::get('/sistema', function () {
  //       return view('welcome');
@@ -26,25 +23,35 @@ use Illuminate\Support\Facades\Gate;
 
  
  
+  Auth::routes();
 
-Auth::routes();
+   //Auth::routes(['verify' => true]);
+
 // Auth::routes(["register" => false]);
 // Auth::routes(["login" => false]);
 // Auth::routes(["logout" => false]);
-
+Route::get('/', function () {
+    return view('principal');
+})->name('welcome');
 
 ///rutas protegidas On 
 
- Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
- // Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
+ //Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
+  Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
    
+
+ 
+
+ route::get('/home','Controller@index')->name('administrador'); //ruta administracion
+
  route::get('home','AdminController@index')->name('administrador'); //ruta administracion
+
 //ruta del menu general de administracion 
 
- route::get('homedoc','DocenteController@index')->name('docente'); //ruta docente
+ route::get('/homedoc','DocenteController@index')->name('docente'); //ruta docente
 
 
- route::get('homees','EstudianteController@index')->name('estudiante'); //ruta estudiante
+ route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta estudiante
 
 
 //rutas vue asignaciones////
@@ -61,6 +68,11 @@ Auth::routes();
 route::post('admin/cambiarestado','AdminController@status')->name('taller.status');
 route::get('perfil','EstudianteController@show')->name('perfile');
 route::get('unidad/{id}','EstudianteController@unidades')->name('Unidades');
+
+///rutas menu docente
+
+route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
+route::get('alumnos/{id}', 'DocenteController@cursos')->name('Alumnos');
 
  //permisoss
  
@@ -229,4 +241,5 @@ route::post('/sistema/admin/taller/obtenerbalance', 'TallerContabilidadControlle
 route::post('/sistema/homedoc/respuesta/taller1/{idtaller}', 'TallerDocenteController@store1')->name('taller1.docente');
 route::get('/sistema/admin/create', 'AdminController@admin')->name('admin.create');
 route::post('/sistema/admin', 'AdminController@store')->name('admin');
+route::post('/sistema/delete', 'AdminController@delete')->name('delete');
 // route::get('/sistema/taller46','TallersController@taller46')->name('taller46');

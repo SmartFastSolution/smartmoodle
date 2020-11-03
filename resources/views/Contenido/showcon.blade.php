@@ -167,6 +167,10 @@
                                                     <a class="btn btn-info"
                                                         href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
                                                             class="fas fa-eye"></i></a>
+                                                     <a class="btn btn-danger" @click="Eliminar({{ $taller->id }})"><i class="fas fa-trash">    
+                                                     
+                                                     </i>
+                                                 </a>
 
                                                 </td>
                                             </tr>
@@ -256,6 +260,23 @@
                      toastr.success(response.data.message, "Smarmoddle", {
                 "timeOut": "3000"
                 });
+                }).catch(function(error){
+
+                });
+
+            },
+            Eliminar: function (id) {
+                let taller = id;
+                var _this = this;
+                var url = '/sistema/delete';
+                    axios.post(url,{
+                      id: taller,
+                }).then(response => {
+                     toastr.success(response.data.message, "Smarmoddle", {
+                "timeOut": "3000"
+
+                });
+                location.reload();
                 }).catch(function(error){
 
                 });
