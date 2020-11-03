@@ -20,9 +20,11 @@ class DistrimaController extends Controller
     public function index()
     {
         $distrimas= Distrima::orderBy('id','Asc')->paginate(5);
+       $dist = Distribucionmacu::find(2);
+       $user = Distrima::where('distribucionmacu_id', 2)->get();
        
         //dd($distrimas);
-        return \view('DistribucionAlumno.indexdma',['distrimas'=>$distrimas,]);
+        return \view('DistribucionAlumno.indexdma',['distrimas'=>$distrimas, 'user' => $user]);
 
     }
 
@@ -60,13 +62,11 @@ class DistrimaController extends Controller
         $distrima =new  Distrima;
         $distrima ->instituto_id = $request->instituto;
         $distrima ->estado = $request->estado;
-        
+        $distrima->distribucionmacu_id =$request->asignacion;
         $distrima ->user_id = $request->estudiante;
         
         $distrima->save();
-        if($request->get('asignacion')){
-            $distrima->distribumacus()->sync($request->get('asignacion'));
-          }
+       
         return redirect('sistema/distrimas ');
 
     }
@@ -96,7 +96,7 @@ class DistrimaController extends Controller
         $distma=Distrima::find($distrima->id);
         $user=$distma->user()->first();
         //$distribucion= $distma->distribumacus()->get();
-        $distribucion= $distma->distribumacus()->first();
+        $distribucion= $distma->distribucionmacu()->first();
         $curs[] =array(
             'id' => $distribucion->id,
             'curso_id' => $distribucion->curso_id,
@@ -139,12 +139,7 @@ class DistrimaController extends Controller
         ]);
 
         $distrima->update($request->all());
-
-        if($request->get('asignacion')){
-            $distrima->distribumacus()->sync($request->get('asignacion'));
-          }
-
-          $distrima->save();
+        $distrima->save();
 
           return redirect('sistema/distrimas');
 

@@ -69,6 +69,7 @@ route::get('unidad/{id}','EstudianteController@unidades')->name('Unidades');
 ///rutas menu docente
 
 route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
+route::get('alumnos/{id}', 'DocenteController@cursos')->name('Alumnos');
 
  //permisoss
  

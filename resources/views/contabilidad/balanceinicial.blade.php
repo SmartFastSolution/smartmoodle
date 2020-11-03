@@ -55,6 +55,7 @@
                    <div v-for="(element, index) in a_corrientes" :key="element.name">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
               @{{ element.nom_cuenta }}
+              <!-- este boton es para editar y eliminar los datos -->
               <span class="badge-pill">@{{ element.saldo }} <a @click="editAcorriente(index)" class="btn btn-warning btn-sm mr-1"><i class="fas fa-edit"></i></a><a @click="deleteAcCooriente(index)" class="btn btn-danger btn-sm re_diario"><i class="fas fa-trash-alt"></i></a></span>
           </li> 
                 </div>   

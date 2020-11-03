@@ -18,7 +18,7 @@ class Distribucionmacu extends Model
 
  public function materias(){
          
-        return $this->belongsToMany(Materia::class)->withPivot('distribucionmacu_id')->withTimestamps();
+        return $this->belongsToMany(Materia::class)->withPivot('distribucionmacu_id', 'materia_id')->withTimestamps();
     }
     
 
@@ -33,11 +33,9 @@ class Distribucionmacu extends Model
         return $this->belongsTo('App\Instituto');
 
     }
-    
-    public function distrimas(){
-          
-        return $this->belongsToMany(Distrima::class)->withPivot('distribucionmacu_id')->withTimestamps();
-
+    public function users()
+    {
+        return $this->hasManyThrough('App\User', 'App\Distrima');
     }
 
     public function nivel(){
@@ -46,6 +44,11 @@ class Distribucionmacu extends Model
 
     }
   
+    public function distrimas(){
+          
+        return $this->hasMany('App\Distrima');
+
+    }
   
 
 }

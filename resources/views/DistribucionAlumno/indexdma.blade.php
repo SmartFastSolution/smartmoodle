@@ -44,30 +44,33 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($distrimas as $distrima)
                                 <tr>
-                                    @foreach ($distrimas as $distrima)
+
                                     <th scope="row">{{$distrima['id']}}</th>
                                     <td>{{$distrima->instituto->nombre}} </td>
 
-                                    @foreach($distrima->distribumacus as $dis)
-                                    <td>
-                                        <span class="badge badge-success">
-                                            {{$dis->curso->nombre}}
-                                        </span>
-                                    </td>
-                                    <td>
 
-                                        @if($dis->materias != null)
-                                        @foreach($dis->materias as $dismacu)
+                                    <td>
+                                        @if($distrima->distribucionmacu->curso->nombre != null)
                                         <span class="badge badge-success">
-                                            {{$dismacu->nombre}}
+                                            {{$distrima->distribucionmacu->curso->nombre}}
                                         </span>
-
-                                        @endforeach
                                         @endif
-
                                     </td>
-                                    @endforeach
+
+
+                                    <td>
+                                  
+                                        @foreach($distrima->distribucionmacu->materias as $mat)
+                                        <span class="badge badge-success">
+                                            {{ $mat->nombre}}
+                                        </span>
+                                        @endforeach
+                                 
+                                      
+                                    </td>
+                                 
 
                                     <td>
                                         @if($distrima->user != null)
@@ -116,6 +119,11 @@
         </div>
 </section>
 
+
+
+@foreach ($user as $element)
+ <li>{{ $element->user->name}}</li>
+@endforeach
 
 @stop
 

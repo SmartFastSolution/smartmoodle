@@ -12,7 +12,13 @@
         </h2>
 
         <a class="btn btn-primary btn" href=""><i class="far fa-clipboard"></i> Calificaciones</i></a>
-        <a class="btn btn-success btn" href=""><i class="fas fa-users"></i> Participantes</i></a>
+       
+
+        <a class="btn btn-success btn" href="{{route('Alumnos', $materia->id)}}"><i class="fas fa-users"></i>
+            Participantes</i></a>
+       
+
+
         <br>
         <br>
         <div class="card card-info card-outline">

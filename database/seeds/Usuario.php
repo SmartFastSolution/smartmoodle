@@ -82,6 +82,20 @@ class Usuario extends Seeder
            'created_at'      => now(),
            'updated_at'      => now()
            ]);
+           DB::table('users')->insert([
+            'instituto_id'    => 2,
+            'cedula'          => '0958784521',
+            'name'            =>'Esteban',
+            'apellido'        => 'Gaspar',
+            'domicilio'       => '20 y domingo sabio',
+            'telefono'        => '0985474512',
+            'celular'         => '0425698452',
+            'email'           => 'user4@smartmoodle.com',
+            'password'        => Hash::make('12345678'),
+            'estado'          => 'on',
+            'created_at'      => now(),
+            'updated_at'      => now()
+            ]);
 
             DB::table('role_user')->insert([
            'role_id'    => 1,
@@ -103,5 +117,11 @@ class Usuario extends Seeder
            'created_at' => now(),
            'updated_at' => now()
         ]);
+        DB::table('role_user')->insert([
+            'role_id'    => 3,
+            'user_id'    => 4,
+            'created_at' => now(),
+            'updated_at' => now()
+         ]);
     }
 }

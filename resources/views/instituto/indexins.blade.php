@@ -55,8 +55,9 @@
 
                             <!--Table body-->
                             <tbody>
+                                @foreach ($institutos as $instituto)
                                 <tr>
-                                    @foreach ($institutos as $instituto)
+
                                     <th scope="row">{{$instituto->id}}</th>
                                     <td>{{$instituto->nombre}}</td>
                                     <td>{{$instituto->descripcion}}</td>

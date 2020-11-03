@@ -46,5 +46,16 @@ class DocenteController extends Controller
 
 }
 
+    public function cursos($id){
+        $materia =Materia::where('id', $id)->firstOrfail();
+        $distribucion = Distribucionmacu::get();
+        $curso = Curso::get();
+        $distrima =Distrima::get();
+        $mate = $materia->distribucionmacus;
+        
+     return view('Docente.cursos',compact('materia','distribucion','curso','distrima', 'mate'));
+
+    }
+
 
 }

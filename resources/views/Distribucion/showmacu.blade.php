@@ -38,10 +38,7 @@
                                 <div class="form-group">
                                     <label>Unidad Educativa</label>
                                     <select class="form-control select" name="instituto" disabled style="width: 99%;">
-
                                         <option value="{{$instituto->id}}">{{$instituto->nombre}}</option>
-
-
                                     </select>
                                 </div>
 

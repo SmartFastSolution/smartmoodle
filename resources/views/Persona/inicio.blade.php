@@ -10,12 +10,12 @@
 
 
                 <div class="btn-group float-right" role="group" aria-label="Basic example">
-                
+
                     <a class="btn btn-info float-right btn" href="{{route('users.create')}}"><i
                             class="fas fa-user-plus"></i>Añadir Usuario</a>
-                  
 
-                   
+
+
                 </div>
 
                 <h1>Usuarios</h1>
@@ -44,14 +44,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($users as $user)
                                 <tr>
-                                    @foreach ($users as $user)
                                     <th scope="row">{{$user->id}}</th>
-
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->apellido}}</td>
                                     <td>{{$user->email}}</td>
-                                         
+
                                     <td>{{$user->instituto->nombre}}</td>
 
                                     <td>

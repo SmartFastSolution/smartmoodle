@@ -1555,15 +1555,15 @@ const diario = new Vue({
 const balance_comp = new Vue({
   el: '#balance_comp',
   data:{
-    balances:[],
-    balance:{
+    balances:[], //array del balance de COMPROBACION
+    balance:{ //variables a utilizar para el balance de COMPROBACION
       cuenta:'',
       suma_debe:'',
       suma_haber:'',
       saldo_debe:'',
       saldo_haber:'',
     },
-    suman:{
+    suman:{ //suma total del balance COMPROBACION
       sum_debe:'',
       sum_haber:'',
       sal_debe:'',
@@ -1572,31 +1572,45 @@ const balance_comp = new Vue({
 
   },
   methods:{
-    agregarBalance(){
-      if (this.balances.debe == 0) {
-         toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
-                "timeOut": "3000"
-            });
-      }else  if (this.diarios.comentario.trim() === '') {
-         toastr.error("Debes agregar un comentario", "Smarmoddle", {
-                "timeOut": "3000"
-            });
-      }else{
-           var registro = {debe:this.diarios.debe, haber:this.diarios.haber, comentario:this.diarios.comentario};
-                this.registros.push(registro);//añadimos el la variable persona al array
-                //Limpiamos los campos
-                toastr.success("Registro agregado correctamente", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-                this.diarios.debe =[];
-                this.diarios.haber =[];
-                this.diarios.comentario = '';
-                // console.log(this.registros);
-                this.totalDebe(id);
-           this.totalHaber();
-                
-      }    
+    agregarRegistro(){
+
+     if(this.balance.cuenta.trim() ===''){
+      toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+
+     }else {
+      var balance ={ cuenta:this.balance.cuenta, suma_debe:this.balance.suma_debe, suma_haber:this.balance.suma_haber, saldo_debe:this.balance.saldo_debe, saldo_haber:this.balance.saldo_haber}
+      this.balances.push(balance);
+      toastr.success("Registro agregado correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+
+     this.balance.cuenta =''
+     this.balance.suma_debe=''
+     this.balance.suma_haber=''
+     this.balance.saldo_debe=''
+     this.balance.saldo_haber=''
+
+     }                
+      }, //fin metodo agregar registro   
+      deleteBalance(index){
+        this.balances.splice(index, 1);
+      },//fin metodo delete cuenta 
+      
+
+      editBalance(index){
+       this.update = index;
+       this.balance.cuenta     = this.balances[index].cuenta;
+       this.balance.suma_debe  = this.balances[index].suma_debe;
+       this.balance.suma_haber = this.balances[index].suma_haber;
+       this.balance.saldo_debe = this.balances[index].saldo_debe
+       this.balance.saldo_haber = this.balances[index].saldo_haber
+       $('#balance_comp');           
+
+      },
+    
   }
-  }
+  
 });
 

@@ -126,6 +126,7 @@ return array(
     'App\\Admin\\TipoSRegistro' => $baseDir . '/app/Admin/TipoSRegistro.php',
     'App\\Admin\\TipoSaldoDebe' => $baseDir . '/app/Admin/TipoSaldoDebe.php',
     'App\\Admin\\TipoSaldoHaber' => $baseDir . '/app/Admin/TipoSaldoHaber.php',
+    'App\\Clinstituto' => $baseDir . '/app/Clinstituto.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Contabilidad\\BIActivo' => $baseDir . '/app/Contabilidad/BIActivo.php',
     'App\\Contabilidad\\BIPasivo' => $baseDir . '/app/Contabilidad/BIPasivo.php',

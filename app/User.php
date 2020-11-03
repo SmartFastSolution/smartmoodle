@@ -71,9 +71,9 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo('App\Instituto');
     }
 
-    public function distrimas(){
+    public function distrima(){
           
-        return $this->hasMany('App\Distrima');
+        return $this->hasOne('App\Distrima');
     }
 
 
