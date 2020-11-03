@@ -33,6 +33,11 @@ class Distribucionmacu extends Model
         return $this->belongsTo('App\Instituto');
 
     }
+    public function users()
+    {
+            return $this->hasManyThrough('App\User', 'App\Distrima');
+    }
+
     
     public function distrimas(){
           

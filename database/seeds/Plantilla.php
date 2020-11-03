@@ -385,6 +385,14 @@ class Plantilla extends Seeder
                           'created_at' => now(),
                           'updated_at' => now(),
                           ]);
+                          DB::table('plantillas')->insert([
+                          'id' => 46,
+                          'nombre' => 'PLANTILLA QUEMADA 7',
+                          'descripcion' => 'Plantilla Quemada #7',
+                          'plantilla' => 'no',
+                          'created_at' => now(),
+                          'updated_at' => now(),
+                          ]);
   
     }
 }

@@ -58,6 +58,7 @@ use App\Admin\Respuesta\Relacionar2;
 use App\Admin\Respuesta\Relacionar2Re;
 use App\Admin\Respuesta\Relacionar;
 use App\Admin\Respuesta\RelacionarRe;
+use App\Admin\Respuesta\RuedaLogica;
 use App\Admin\Respuesta\Subrayar;
 use App\Admin\Respuesta\SubrayarRes;
 use App\Admin\Respuesta\TipoSaldo;
@@ -66,8 +67,6 @@ use App\Admin\Respuesta\ValeCaja;
 use App\Admin\Respuesta\VerdaderoFalso;
 use App\Admin\Respuesta\VerdaderoFalsoRe;
 use App\Admin\Taller2Relacionar;
-use App\Admin\TallerContabilidad;
-use App\Admin\TallerContabilidadOp;
 use App\Admin\TallerALectura;
 use App\Admin\TallerAbreviatura;
 use App\Admin\TallerAnalizar;
@@ -78,6 +77,8 @@ use App\Admin\TallerCirculo;
 use App\Admin\TallerCollage;
 use App\Admin\TallerCompletar;
 use App\Admin\TallerCompletarEnunciado;
+use App\Admin\TallerContabilidad;
+use App\Admin\TallerContabilidadOp;
 use App\Admin\TallerConvertirCheque;
 use App\Admin\TallerDefinirEnunciado;
 use App\Admin\TallerDiferencia;
@@ -100,17 +101,17 @@ use App\Admin\TallerRecibo;
 use App\Admin\TallerRelacionar;
 use App\Admin\TallerRelacionarOpcion;
 use App\Admin\TallerSenalar;
+use App\Admin\TallerSopaLetra;
 use App\Admin\TallerSubrayar;
 use App\Admin\TallerTipoSaldo;
 use App\Admin\TallerValeCaja;
 use App\Admin\TallerVerdaderoFalso;
-use App\Admin\TallerSopaLetra;
 use App\Taller;
 use App\TallerChequeRe;
 use App\User;
-use JavaScript;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use JavaScript;
 
 class TallerEstudianteController extends Controller
 {
@@ -420,9 +421,13 @@ class TallerEstudianteController extends Controller
                 
             return view('talleres.taller45', compact('datos', 'd', 'palabras'));
         }elseif ($plant == 46) {
-            $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
-            return view('talleres.taller46', compact('datos', 'd'));
+              $datos = Taller::findorfail($id);
+             // $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
+             if ($datos->plantilla_id == $plant && $datos->id = $id) {
+                return view('talleres.taller46', compact('datos', 'd'));  
+             }else {
+            return abort(404);   
+             }
         }elseif ($plant == 47) {
             $consul = Taller::findorfail($id);
              $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
@@ -1605,6 +1610,24 @@ public function store11(Request $request, $idtaller)
             $user = User::find($id);
             $user->tallers()->attach($idtaller,['status'=> 'calificado', 'calificacion' => 10, 'retroalimentacion' => 'Bien Hecho']);
             return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+        }
+        public function store46(Request $request, $idtaller)
+        {
+            $id                         = Auth::id();
+            $taller46                   =   new RuedaLogica; 
+            $taller46->taller_id        =   $idtaller;
+            $taller46->user_id          =   $id;           
+            $taller46->enunciado        =  'ESCRIBA EN EL GUSANILLO ABREVIATURAS ECONÓMICAS SEGÚN EL ORDEN QUE SE INDICA EN FORMA CORRECTA.'; 
+            $taller46->persona_juridica =   $request->input('persona_juridica');   
+            $taller46->objetivo         =   $request->input('objetivo');   
+            $taller46->importancia      =   $request->input('importancia');   
+            $taller46->persona_natural  =   $request->input('persona_natural');   
+            $taller46->save();
+            $user= User::find($id);
+            $user->tallers()->attach($idtaller,['status'=> 'completado']);
+            return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+
+
         }
 
 

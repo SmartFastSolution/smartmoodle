@@ -62,6 +62,7 @@ return array(
     'App\\Admin\\Respuesta\\Relacionar2' => $baseDir . '/app/Admin/Respuesta/Relacionar2.php',
     'App\\Admin\\Respuesta\\Relacionar2Re' => $baseDir . '/app/Admin/Respuesta/Relacionar2Re.php',
     'App\\Admin\\Respuesta\\RelacionarRe' => $baseDir . '/app/Admin/Respuesta/RelacionarRe.php',
+    'App\\Admin\\Respuesta\\RuedaLogica' => $baseDir . '/app/Admin/Respuesta/RuedaLogica.php',
     'App\\Admin\\Respuesta\\Subrayar' => $baseDir . '/app/Admin/Respuesta/Subrayar.php',
     'App\\Admin\\Respuesta\\SubrayarRes' => $baseDir . '/app/Admin/Respuesta/SubrayarRes.php',
     'App\\Admin\\Respuesta\\TipoSaldo' => $baseDir . '/app/Admin/Respuesta/TipoSaldo.php',

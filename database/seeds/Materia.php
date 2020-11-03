@@ -11,27 +11,21 @@ class Materia extends Seeder
      */
     public function run()
     {
-         DB::table('materias')->insert([
-          'nombre'       => 'Matematicas',
+          DB::table('materias')->insert([
+          'nombre'       => 'Contabilidad',
           'instituto_id' => 1,
-          'slug'         => 'matematicas',
+          'slug'         => 'contabilidad',
+          'descripcion'  => 'Materia de contabilidad',
+          'estado'       => 'on',
+        ]);
+         DB::table('materias')->insert([
+          'nombre'       => 'Matematica',
+          'instituto_id' => 1,
+          'slug'         => 'matematica',
           'descripcion'  => 'Materia de matematicas',
           'estado'       => 'on',
         ]);
-        DB::table('materias')->insert([
-          'nombre'       => 'Contabilidad',
-          'instituto_id' => 1,
-          'slug'         => 'contabilidad',
-          'descripcion'  => 'Materia de contabilidad',
-          'estado'       => 'on',
-        ]);
-         DB::table('materias')->insert([
-          'nombre'       => 'Contabilidad',
-          'instituto_id' => 1,
-          'slug'         => 'contabilidad',
-          'descripcion'  => 'Materia de contabilidad',
-          'estado'       => 'on',
-        ]);
+       
         DB::table('materias')->insert([
           'nombre'       => 'Lenguaje',
           'instituto_id' => 1,

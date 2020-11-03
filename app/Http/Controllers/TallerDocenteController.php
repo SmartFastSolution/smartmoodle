@@ -58,6 +58,7 @@ use App\Admin\Respuesta\Relacionar2;
 use App\Admin\Respuesta\Relacionar2Re;
 use App\Admin\Respuesta\Relacionar;
 use App\Admin\Respuesta\RelacionarRe;
+use App\Admin\Respuesta\RuedaLogica;
 use App\Admin\Respuesta\Subrayar;
 use App\Admin\Respuesta\SubrayarRes;
 use App\Admin\Respuesta\TipoSaldo;
@@ -103,7 +104,6 @@ use App\Admin\TallerescribirCuenta;
 use App\Taller;
 use App\TallerChequeRe;
 use App\User;
-USE Javascript;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -402,9 +402,8 @@ class TallerDocenteController extends Controller
             return view('docentes.talleres.taller40', compact('datos', 'd', 'a', 'user', 'taller'));
 
         }elseif ($plant == 41) {
-        		$user   = User::findorfail($us);
-				
-				$datos  = MapaConceptual::where('taller_id', $id)->firstOrFail();
+    
+				$datos  = MapaConceptual::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
                 return view('docentes.talleres.taller41', compact('datos', 'd', 'user'));  
         }elseif ($plant == 42) {
             
@@ -430,11 +429,12 @@ class TallerDocenteController extends Controller
              $datos = TallerSopaLetra::where('taller_id', $consul->id)->firstOrFail();
             $palabras = explode(',', $datos->palabras);
                 
-            return view('docente.talleres.taller45', compact('datos', 'd', 'palabras'));
+            return view('docentes.talleres.taller45', compact('datos', 'd', 'palabras'));
         }elseif ($plant == 46) {
-            
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
-            return view('docente.talleres.taller46', compact('datos', 'd'));
+
+             $datos = RuedaLogica::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+                return view('docentes.talleres.taller46', compact('datos', 'd', 'user'));  
+           
         }elseif ($plant == 47) {
             
              $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();

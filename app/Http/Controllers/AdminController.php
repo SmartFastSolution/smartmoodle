@@ -62,6 +62,7 @@ use App\Plantilla;
 use App\Taller;
 use App\TallerCompletarEnunRe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -95,7 +96,13 @@ class AdminController extends Controller
    public function admin()
    {
          $g = 0;
-   	  return view('admin.admin', compact('g'));
+         // $users = DB::table('tallers')->select('enunciado','nombre', 'status as taller_user')->get();
+         $users = DB::table('tallers')
+            ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
+            ->join('users', 'users.id', '=', 'taller_user.user_id')
+            ->where('taller_user.status', 'completado')
+            ->paginate(10);
+   	  return view('admin.admin', compact('g', 'users'));
    }
    public function index (){
 
