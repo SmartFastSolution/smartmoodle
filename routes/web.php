@@ -65,11 +65,14 @@ Route::get('/', function () {
  //rutas menu estudiante
 route::get('perfil','EstudianteController@show')->name('perfile');
 route::get('unidad/{id}','EstudianteController@unidades')->name('Unidades');
+route::get('estudiante/password', 'EstudianteController@password')->name('AlumnoPass'); //para metodo get del password 
+route::post('estudiante/password','EstudianteController@updatep')->name('Estudiantes.updatep'); // para guardar el nuevo password
 
 ///rutas menu docente
 
 route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
 route::get('alumnos/{id}', 'DocenteController@cursos')->name('Alumnos');
+
 
  //permisoss
  

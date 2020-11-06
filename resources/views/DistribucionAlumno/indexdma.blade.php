@@ -35,7 +35,7 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">Unidad Educativa</th>
                                     <th scope="col">Curso</th>
-
+                                    <th scope="col">Paralelo</th>
                                     <th scope="col">Materias</th>
                                     <th scope="col">Alumno</th>
                                     <th scope="col">Estado</th>
@@ -58,19 +58,25 @@
                                         </span>
                                         @endif
                                     </td>
-
+                                    <td>
+                                    @if($distrima->nivel->nombre != null)
+                                        <span class="badge badge-success">
+                                            {{$distrima->nivel->nombre}}
+                                        </span>
+                                        @endif
+                                    </td>
 
                                     <td>
-                                  
+
                                         @foreach($distrima->distribucionmacu->materias as $mat)
                                         <span class="badge badge-success">
                                             {{ $mat->nombre}}
                                         </span>
                                         @endforeach
-                                 
-                                      
+
+
                                     </td>
-                                 
+
 
                                     <td>
                                         @if($distrima->user != null)
@@ -121,9 +127,7 @@
 
 
 
-@foreach ($user as $element)
- <li>{{ $element->user->name}}</li>
-@endforeach
+
 
 @stop
 

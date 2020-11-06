@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Instituto;
 use App\Clinstituto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClinstitutoController extends Controller
 {
@@ -36,6 +37,18 @@ class ClinstitutoController extends Controller
      */
     public function store(Request $request)
     {
+
+
+
+
+        
+        // DB::select(DB::raw("exec clonacion :psource, :ptarget"),[
+        //     ':psource' => $request->intituto,
+        //     ':ptarget' => $request->institutoclon,
+        // ]);
+         
+
+
         $request->validate([
            
             'instituto'       =>  'required',
@@ -43,6 +56,8 @@ class ClinstitutoController extends Controller
             
           
         ]);
+
+       
 
         $clinstituto = new Clinstituto;
         $clinstituto->instituto_id = $request->instituto;
