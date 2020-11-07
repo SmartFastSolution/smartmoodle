@@ -67,11 +67,11 @@
     </div>
 </div>
 
-{{-- <div class="modal fade" id="taller2" tabindex="-1" role="dialog" aria-labelledby="taller2Label" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="taller2" tabindex="-1" role="dialog" aria-labelledby="taller2Label" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="taller2Label">CLASIFICAR CON ORIGINALIDAD</h5>
+                <h5 class="modal-title" id="taller2Label">APLICAR PARTIDA DOBLE</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -113,11 +113,14 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class=" tall_2">
                             <div class="form-group">
-                                <label for="" class="col-form-label">Imagen:</label>
-                                    <input type="file" class="inputfile inputfile-1" id="ta2-1" name="imagen">
-                                    <label for="ta2-1"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>
-                               
+                                <label for="" class="col-form-label">Enunciado 1 <a href="#" class="btn btn-danger re_tall2"><span class="glyphicon glyphicon-remove">X</span></a></label>
+                                <textarea required="" class="form-control" name="enun[]"></textarea>
+                            </div>
+                            </div>
+                            <div class="row">
+                                  <a href="#" class="addTaller2 btn btn-outline-danger">Agregar Fila</a>
                             </div>
                             <div class="row justify-content-center">
                                 <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
@@ -131,7 +134,7 @@
             </div>
         </div>
     </div>
-</div> --}}
+</div>
 
 
 <div class="modal fade" id="taller3" tabindex="-1" role="dialog" aria-labelledby="taller3Label" aria-hidden="true">
@@ -2467,7 +2470,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="taller33Label">ESCRIBIR PREGUNTAS</h2>
+                <h2 class="modal-title" id="taller33Label">SELECCIONAR EN CELDAS</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -2508,14 +2511,36 @@
                                     </select>
                                 </div>
                             </div>
-                             <div class="form-row">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Contenido a clasificar:</label>
+                                <input required name="palabra_clasificar" type="text" class="form-control">
+                            </div>
+                             <div class="form-row" id="taller33">
                                 <div class="form-group col-6">
-                                    <label for="" class="col-form-label">Pregunta 1 :</label>
-                                    <input required="" type="text" name="pregunta1" class="form-control">
+                                    <label for="" class="col-form-label"> Lista de clasificacion :</label>
+                                    <input v-model="clasificacion.item" type="text" name="pregunta1" class="form-control">
+                                    <a class="text-center btn btn-success mb-2 mt-2" @click.prevent="agregarClasificacion" href="">Agregar Columna</a>
+                                    <table>
+                                        <tbody>
+                                            <tr v-for="(clasi, index) in clasificaciones">
+                                                <td><input type="text" required="" :value="clasi.item" name="clasificaciones[]" class="form-control"></td>
+                                                <td><a href="" @click.prevent="eliminarClasificacion(index)" class="btn btn-sm btn-danger">X</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="form-group col-6">
-                                    <label for="" class="col-form-label">Pregunta 2 :</label>
-                                    <input required="" type="text" name="pregunta2" class="form-control">
+                                    <label for="" class="col-form-label">Lista a clasificar :</label>
+                                    <input type="text" v-model="clasificado.item" name="pregunta2" class="form-control">
+                                    <a class="text-center btn btn-success mb-2 mt-2" @click.prevent="agregarClasificado" href="">Agregar Fila</a>
+                                       <table>
+                                        <tbody>
+                                            <tr v-for="(clasi, index) in clasificados">
+                                                <td><input type="text" required="" :value="clasi.item" name="clasificados[]" class="form-control"></td>
+                                                <td><a href="" @click.prevent="eliminarClasificado(index)" class="btn btn-sm btn-warning">X</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                             <div class="row justify-content-center">

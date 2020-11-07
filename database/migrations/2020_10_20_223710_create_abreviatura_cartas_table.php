@@ -31,6 +31,7 @@ class CreateAbreviaturaCartasTable extends Migration
             $table->string('abreviatura11');
             $table->string('abreviatura12');
             $table->string('abreviatura13');
+            $table->string('abreviatura14');
             $table->timestamps();
             
             $table->foreign('taller_id')

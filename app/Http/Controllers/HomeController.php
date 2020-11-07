@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contenido;
 use App\Curso;
 use App\Distribucionmacu;
+use App\Distrima;
 use App\Materia;
 use App\Modelos\Role;
 use App\User;
@@ -50,7 +51,9 @@ class HomeController extends Controller
     
     public function buscarAlumno(Request $request){
         $usrol = Role::where('descripcion','estudiante')->first();
-        $users = $usrol->users()->where('instituto_id', $request->id)->get();
+        $distrima = Distrima::select('user_id')->get();
+
+        $users = $usrol->users()->whereNotIn('users.id',$distrima)->where('instituto_id', $request->id)->get();
         //$users= User::where('instituto_id', $request->id, 'and', '')->get();
         return $users;
         

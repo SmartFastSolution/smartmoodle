@@ -28,7 +28,8 @@ class EstudianteController extends Controller
      
         $au =  auth()->user()->distrima;
          if ($au == null) {
-            return redirect()->route('welcome');    
+         return view('errors.error'); //ruta estudiante //ruta estudiante       
+             
         }
         return view('Estudiante.indexes'); //ruta estudiante       
     }

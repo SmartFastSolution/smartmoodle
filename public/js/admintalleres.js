@@ -13,6 +13,14 @@ $(function(document, window, index ) {
         enunciado:'',
         unidad_id:'',
     },
+    clasificaciones:[],
+    clasificados:[],
+    clasificado:{
+      item:''
+    },
+    clasificacion:{
+      item:''
+    },
     registros:[],
        ejercicios:{
            debe:[],
@@ -251,7 +259,34 @@ $(function(document, window, index ) {
 
 
                 } 
-            }
+            },
+               agregarClasificacion(){
+                var clasifica = {item:this.clasificacion.item};
+                this.clasificaciones.push(clasifica);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.clasificacion.item='';
+                
+                },
+
+                  agregarClasificado(){
+                var clasificadou = {item:this.clasificado.item};
+                this.clasificados.push(clasificadou);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.clasificado.item ='';
+                
+                },
+                eliminarClasificacion(id){
+                  this.clasificaciones.splice(id, 1);
+                },
+                eliminarClasificado(id){
+                  this.clasificados.splice(id, 1);
+                }
 
         }
 
@@ -311,6 +346,10 @@ $(function(document, window, index ) {
         evt.preventDefault();
         addTaller37()();
     });
+          $('.addTaller2').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller2()();
+    });
     $('.addTaller38').on('click', function(evt) {
         evt.preventDefault();
         addTaller38()();
@@ -336,6 +375,54 @@ $(function(document, window, index ) {
         evt.preventDefault();
         addNot();
     });
+        function addTaller2() {
+        let tall2 = $('.tall_2 .form-group').length;
+        console.log(tall2)
+        let a = 1;
+        let e = 1;
+        let t2 = 
+        '<div class="form-group">'+
+            '<label for="" class="col-form-label">Enunciado '+(tall2 + 1)+' <a href="#" class="btn btn-danger re_tall2"><span class="glyphicon glyphicon-remove">X</span></a></label>'+
+            '<textarea required="" class="form-control" name="enun[]"></textarea>'+
+        '</div>';
+        $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
+        if (tall2 == 10) {
+        function alert2(){
+            toastr.error("Limite de enunciados creados", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }
+        } else {
+        $('.tall_2').append(t2);
+        function alert2(){
+        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+            "timeOut": "1000"
+        });
+        }
+
+        //console.log(enun)
+           
+        }
+       return alert2;
+    }
+     $('.re_tall2').live('click', function() {
+        num = $('.tall_2 .form-group').toArray();
+        //console.log(num);
+        if ($('.tall_2 .form-group').length == 2) 
+        {
+            $.each(num, function( index, value ) {
+            $(value).remove();
+            });
+            addTaller2();
+        }else if($('.tall_2 .form-group').length == 1){
+             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }else {
+            $(this).parent().parent().remove();
+        }
+    });
+
      function addTaller9() {
         var tall9 = $('.enc_9 .form-row').length;
         console.log(tall9)

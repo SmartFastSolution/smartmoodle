@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Admin\TallerAnalizar;
 use App\Admin\Taller2Relacionar;
 use App\Admin\TallerALectura;
 use App\Admin\TallerALecturaOp;
 use App\Admin\TallerAbreviatura;
+use App\Admin\TallerAnalizar;
+use App\Admin\TallerCelda;
+use App\Admin\TallerCeldaClasificacion;
+use App\Admin\TallerCeldaClasificar;
 use App\Admin\TallerCertificadoDeposito;
 use App\Admin\TallerCheque;
 use App\Admin\TallerChequeEndoso;
@@ -21,19 +24,20 @@ use App\Admin\TallerDiferencia;
 use App\Admin\TallerEscribirCuenta;
 use App\Admin\TallerFactura;
 use App\Admin\TallerGusanillo;
+use App\Admin\TallerIdenTransa;
+use App\Admin\TallerIdenTransaOp;
 use App\Admin\TallerIdentificarImagen;
 use App\Admin\TallerIdentificarPersona;
 use App\Admin\TallerLetraCambio;
-use App\Admin\TallerIdenTransa;
-use App\Admin\TallerIdenTransaOp;
 use App\Admin\TallerMConceptual;
 use App\Admin\TallerNotaPedido;
 use App\Admin\TallerNotaVenta;
-use App\Admin\TallerOrdenPago;
 use App\Admin\TallerOrdenIdea;
+use App\Admin\TallerOrdenPago;
 use App\Admin\TallerPagare;
-use App\Admin\TallerPregunta;
 use App\Admin\TallerPalabra;
+use App\Admin\TallerPartidaDoble;
+use App\Admin\TallerPregunta;
 use App\Admin\TallerRecibo;
 use App\Admin\TallerRelacionar;
 use App\Admin\TallerSenalar;
@@ -77,9 +81,9 @@ use App\TallerSubrayarRe;
 use App\TallerUtilizarAbreRe;
 use App\TallerValeCajaRe;
 use App\TallerVerdaderoFalsoRe;
+use Auth;
 use Illuminate\Http\Request;
 use JavaScript;
-use Auth;
 
 class TallersController extends Controller
 {
@@ -92,8 +96,27 @@ class TallersController extends Controller
          
         }elseif ($plant == 2) {
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrfail();
-            return view('talleres.taller2', compact('datos', 'd'));
+             $datos = TallerPartidaDoble::where('taller_id', $consul->id)->firstOrfail();
+             $doble = $datos->partidaDobleEnn;
+             $array =[];
+             $recorrido = [];
+             foreach ($doble as $key => $value) {
+                 $array[$key] = [
+                    'cuenta' =>'',
+                    'debe' => array(),
+                    'haber' => array(),
+                    'total_debe' =>'',
+                    'total_haber' =>'',
+
+                 ];
+             }
+              foreach ($doble as $key => $value) {
+                 $recorrido[$key] = [
+                    'debe' => '',
+                    'haber' => ''
+                 ];
+             }
+            return view('talleres.taller2', compact('datos', 'd', 'array', 'recorrido'));
 
         }elseif ($plant == 3) {
 
@@ -285,9 +308,14 @@ class TallersController extends Controller
             return abort(404);   
              }
         }elseif ($plant == 33) {
+
             $consul = Taller::findorfail($id);
-             $datos = TallerPregunta::where('taller_id', $consul->id)->firstOrFail();
-            return view('talleres.taller33', compact('datos', 'd'));
+             $datos = TallerCelda::where('taller_id', $consul->id)->firstOrFail();
+             $clasificados = TallerCeldaClasificar::where('taller_celda_id', $datos->id)->get();
+             $clasificaciones = TallerCeldaClasificacion::where('taller_celda_id', $datos->id)->get();
+
+             // return $clasificaciones;
+            return view('talleres.taller33', compact('datos', 'd', 'clasificados', 'clasificaciones'));
         }elseif ($plant == 34) {
             $datos = Taller::findorfail($id);
             if ($datos->plantilla_id == $plant && $datos->id = $id) {
@@ -422,600 +450,11 @@ class TallersController extends Controller
             return view('talleres.taller55', compact('datos', 'd'));
         
         }elseif ($plant == 57) {
-            
-        
         }
-
-   
     }
-     public function store1(Request $request, $idtaller){
-    $taller1            = new TallerCompletarRes; 
-    $taller1->taller_id = $idtaller;
-    $taller1->user_id   =    '1';           
-    $taller1->enunciado =  'COMPLETE EL ENUNCIADO CORRECTAMENTE.';           
-    $taller1->respuesta =   $request->input('respuesta');   
-    $taller1->save();
-
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-
-      public function store2(Request $request, $idtaller){
-    $taller1            = new TallerClasificarRes; 
-    $taller1->taller_id = $idtaller;
-    $taller1->user_id   =    '1';           
-    $taller1->enunciado =  'CLASIFIQUE  EL  COMERCIO,  CON  ORIGINALIDAD.';           
-    $taller1->resp1     =   $request->input('resp1');   
-    $taller1->resp2     =   $request->input('resp2');   
-    $taller1->resp3     =   $request->input('resp3');   
-    $taller1->resp4     =   $request->input('resp4');   
-    $taller1->save();
-
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    //return response($content = 'Taller completado correctamente', $status = 200);
-    }
-
-        public function store3(Request $request, $idtaller){
-    $taller1 = new TallerCompleteEnRes; 
-    $taller1->taller_id  = $idtaller;
-    $taller1->user_id    =    '1';           
-    $taller1->enunciado  =  'COMPLETE LOS ENUNCIADOS CORRECTAMENTE';           
-    $taller1->respuesta1 =   $request->input('respuesta1');   
-    $taller1->respuesta2 =   $request->input('respuesta2');   
-    $taller1->respuesta3 =   $request->input('respuesta3');   
-    $taller1->respuesta4 =   $request->input('respuesta4');   
-    $taller1->respuesta5 =   $request->input('respuesta5');   
-    $taller1->save();
-
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    //return response($content = 'Taller completado correctamente', $status = 200);
-    }
-     public function store4(Request $request, $idtaller){
-       $contenido = TallerDiferencia::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
-    $taller1 = new TallerDiferenciaRes; 
-    $taller1->taller_id  = $idtaller;
-    $taller1->user_id =    '1';           
-    $taller1->enunciado =  $contenido;
-    //$taller1->item_a =          'Personas Capaces';   
-    //$taller1->item_b =          'personas incapaces';             
-    $taller1->diferencia_1a =   $request->input('diferencia_1a');   
-    $taller1->diferencia_2a =   $request->input('diferencia_2a');   
-    $taller1->diferencia_3a =   $request->input('diferencia_3a');   
-    $taller1->diferencia_1b =   $request->input('diferencia_1b');   
-    $taller1->diferencia_2b =   $request->input('diferencia_2b');   
-    $taller1->diferencia_3b =   $request->input('diferencia_3b');   
-    $taller1->save();
-
-    return redirect()->route('welcome')->with('datos', 'Taller completado correctamente!');
-    //return response($content = 'Taller completado correctamente', $status = 200);
-    }
-
-    public function store5(Request $request){
-
+    public function taller33(){
     
- 
-    }
-    public function store6(Request $request, $idtaller)
-    {
-       $contenido = TallerIdentificarImagen::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
-       $taller6 = new TallerIdentificarImagenRe; 
-       $taller6->taller_id  = $idtaller;
-       $taller6->user_id =    '1';           
-       $taller6->enunciado =  $contenido->enunciado;  
-       if ($request->input('foto1')) {
-       $taller6->foto1 =   $request->input('foto1'); 
-       }elseif ($request->input('foto2')) {
-       $taller6->foto2 =   $request->input('foto2');
-       }elseif ($request->input('foto3')) {
-       $taller6->foto3 =   $request->input('foto3'); 
-       }elseif ($request->input('foto4')) {
-       $taller6->foto4 =   $request->input('foto4');   
-       }elseif ($request->input('foto5')) {
-       $taller6->foto5 =   $request->input('foto5');          
-       }elseif ($request->input('foto6')) {
-       $taller6->foto6 =   $request->input('foto6');      
-       }elseif ($request->input('foto7')) {
-       $taller6->foto7 =   $request->input('foto7');     
-       } elseif ($request->input('foto8')) {
-       $taller6->foto8 =   $request->input('foto8');   
-       } elseif ($request->input('foto9')) {
-       $taller6->foto9 =   $request->input('foto9');  
-       } elseif ($request->input('foto10')) {
-       $taller6->foto10 =   $request->input('foto10');    
-       }      
-       $taller6->save();
-
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-    public function store7(Request $request, $idtaller)
-    {
-    $contenido           = TallerGusanillo::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
-    $taller7             = new TallerGusanilloRe; 
-    $taller7->taller_id  = $idtaller;
-    $taller7->user_id    =    '1';           
-    $taller7->enunciado  =  $contenido->enunciado;                       
-    $taller7->respuesta1 =   $request->input('respuesta1');   
-    $taller7->respuesta2 =   $request->input('respuesta2');   
-    $taller7->respuesta3 =   $request->input('respuesta3');    
-    $taller7->save();
-
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-
-        public function store8(Request $request, $idtaller)
-    {
-    $contenido = TallerCirculo::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
-    $taller8 = new TallerCirculoRe; 
-    $taller8->taller_id  = $idtaller;
-    $taller8->user_id    =    '1';           
-    $taller8->enunciado  =  $contenido->enunciado;                       
-    $taller8->respuesta1 =   $request->input('respuesta1');   
-    $taller8->respuesta2 =   $request->input('respuesta2');   
-    $taller8->respuesta3 =   $request->input('respuesta3');    
-    $taller8->respuesta4 =   $request->input('respuesta4');    
-    $taller8->save();
-
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-
-    public function store10(Request $request)
-    {
-
-     $encoitem1 = 'Persona incapaz de ejercer el comercio/'.$request->input('item');   
-     $encoitem2 = 'Adquirir un bien/'.$request->input('item1');  
-     $encoitem3 = 'Persona capaz de ejercer el comercio/'.$request->input('item2');  
-    $taller10 = new TallerSubrayarRe; 
-    $taller10->taller_id  = '1';
-    $taller10->user_id =    '1';           
-    $taller10->enunciado =  'SUBRAYE LA ALTERNATIVA CORRECTA.';           
-    $taller10->item =   $encoitem1;   
-    $taller10->item1 =   $encoitem2;  
-    $taller10->item2 =   $encoitem3;       
-    $taller10->save();
-
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-    public function store12(Request $request,  $idtaller)
-    {
-        $contenido = TallerVerdaderoFalso::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
-
-        $taller12 = new TallerVerdaderoFalsoRe; 
-        $taller12->taller_id    =     $idtaller;
-        $taller12->user_id      =     '1'; 
-        $taller12->enunciado    =      $contenido->enunciado; 
-         $taller12->enunciado1  =   $request->input('enunciado1');
-         $taller12->enunciado2  =    $request->input('enunciado2');
-         $taller12->enunciado3  =    $request->input('enunciado3');
-         $taller12->enunciado4  =    $request->input('enunciado4');
-         $taller12->enunciado5  =    $request->input('enunciado5');
-         $taller12->save();
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-
-
-    }
-    public function store13(Request $request,  $idtaller)
-    {
-        $contenido = TallerDefinirEnunciado::select('enunciado')->where('taller_id', $idtaller)->firstOrFail();
-        $taller13 = new TallerDefinirEnunciadoRe; 
-        $taller13->taller_id    =   $idtaller;
-        $taller13->user_id      =   '1'; 
-        $taller13->enunciado    =   $contenido->enunciado; 
-        $taller13->respuesta1   =   $request->input('respuesta1');
-        $taller13->respuesta2   =   $request->input('respuesta2');
-        $taller13->respuesta3   =   $request->input('respuesta3');
-        $taller13->respuesta4   =   $request->input('respuesta4');
-        $taller13->save();
-
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-
-    public function store14(Request $request,  $idtaller)
-    {
-        $contenido = TallerIdentificarPersona::select('enunciado')->where('taller_id', $idtaller)->firstOrFail();
-        $taller14 = new TallerIdentificarPersonaRe; 
-        $taller14->taller_id      =   $idtaller;
-        $taller14->user_id        =   '1'; 
-        $taller14->enunciado      =   $contenido->enunciado; 
-        $taller14->girador        =   $request->input('girador');
-        $taller14->girado         =   $request->input('girado');
-        $taller14->beneficiario   =   $request->input('beneficiario');
-        $taller14->save();
-
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-      public function store15(Request $request,  $idtaller)
-    {
-        $contenido = TallerCheque::select('enunciado')->where('taller_id', $idtaller)->firstOrFail();
-        $taller15 = new TallerChequeRe; 
-        $taller15->taller_id      =   $idtaller;
-        $taller15->user_id        =   '1'; 
-        $taller15->enunciado      =   $contenido->enunciado; 
-        $taller15->girador        =   $request->input('girador');
-        $taller15->girado         =   $request->input('girado');
-        $taller15->cantidad       =   $request->input('cantidad');
-        $taller15->lugar          =   $request->input('lugar');
-        $taller15->fecha          =   $request->input('fecha');
-        $taller15->save();
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-        
-
-    }
-     public function store16(Request $request,  $idtaller)
-    {
-        $contenido = TallerChequeEndoso::select('enunciado')->where('taller_id', $idtaller)->firstOrFail();
-        $taller16 = new TallerChequeEndosoRe; 
-        $taller16->taller_id      =   $idtaller;
-        $taller16->user_id        =   '1'; 
-        $taller16->enunciado      =   $contenido->enunciado; 
-        $taller16->endoso        =   $request->input('endoso');
-        $taller16->firma        =   $request->input('firma');
-        $taller16->save();
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-      public function store17(Request $request,  $idtaller)
-    {
-        $contenido = TallerConvertirCheque::select('enunciado')->where('taller_id', $idtaller)->firstOrFail();
-        $taller17 = new TallerConvertirChequeRe; 
-        $taller17->taller_id      =   $idtaller;
-        $taller17->user_id        =   '1'; 
-        $taller17->enunciado      =   $contenido->enunciado; 
-        $taller17->endoso        =   $request->input('endoso');
-        $taller17->firma        =   $request->input('firma');
-        $taller17->save();
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-      public function store18(Request $request,  $idtaller)
-    {
-        $contenido = TallerLetraCambio::select('enunciado')->where('taller_id', $idtaller)->firstOrFail();
-        $taller18 = new TallerLetraCambioRe; 
-        $taller18->taller_id      =   $idtaller;
-        $taller18->user_id        =   '1'; 
-        $taller18->enunciado      =   $contenido->enunciado; 
-        $taller18->vencimiento        =   $request->input('vencimiento');
-        $taller18->numero        =   $request->input('numero');
-        $taller18->por        =   $request->input('por');
-        $taller18->ciudad        =   $request->input('ciudad');
-        $taller18->fecha        =   $request->input('fecha');
-        $taller18->orden_de        =   $request->input('orden_de');
-        $taller18->cantidad        =   $request->input('cantidad');
-        $taller18->direccion        =   $request->input('direccion');
-        $taller18->ciudad2        =   $request->input('ciudad2');
-        $taller18->atentamente        =   $request->input('atentamente');
-        $taller18->save();
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-       public function store19(Request $request,  $idtaller)
-    {
-        $contenido = TallerCertificadoDeposito::select('enunciado')->where('taller_id', $idtaller)->firstOrFail();
-        $taller19 = new TallerCertificadoDepositoRe; 
-        $taller19->taller_id      =   $idtaller;
-        $taller19->user_id        =   '1'; 
-        $taller19->enunciado      =   $contenido->enunciado; 
-        $taller19->valor_inicial        =   $request->input('valor_inicial');
-        $taller19->caracter        =   $request->input('caracter');
-        $taller19->beneficiario        =   $request->input('beneficiario');
-        $taller19->cantidad        =   $request->input('cantidad');
-        $taller19->plazo        =   $request->input('plazo');
-        $taller19->interes_anual        =   $request->input('interes_anual');
-        $taller19->fecha_emision        =   $request->input('fecha_emision');
-        $taller19->plazo_de_vencimiento        =   $request->input('plazo_de_vencimiento');
-        $taller19->fecha_de_vencimiento        =   $request->input('fecha_de_vencimiento');
-        $taller19->atentamente        =   $request->input('atentamente');
-        $taller19->save();
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-
-      public function store20(Request $request,  $idtaller)
-    {
-        $contenido = TallerPagare::select('enunciado')->where('taller_id', $idtaller)->firstOrFail();
-        $taller20 = new TallerPagareRe; 
-        $taller20->taller_id      =   $idtaller;
-        $taller20->user_id        =   '1'; 
-        $taller20->enunciado      =   $contenido->enunciado; 
-        $taller20->cantidad        =   $request->input('cantidad');
-        $taller20->resp1        =   $request->input('resp1');
-        $taller20->resp2        =   $request->input('resp2');
-        $taller20->resp3        =   $request->input('resp3');
-        $taller20->resp4        =   $request->input('resp4');
-        $taller20->resp5        =   $request->input('resp5');
-        $taller20->resp6        =   $request->input('resp6');
-        $taller20->resp7        =   $request->input('resp7');
-        $taller20->resp8        =   $request->input('resp8');
-        $taller20->resp9        =   $request->input('resp9');
-        $taller20->resp10        =   $request->input('resp10');
-        $taller20->resp11        =   $request->input('resp11');
-        $taller20->resp12        =   $request->input('resp12');
-        $taller20->resp13        =   $request->input('resp13');
-        $taller20->resp14        =   $request->input('resp14');
-        $taller20->resp15        =   $request->input('resp15');
-        $taller20->resp16        =   $request->input('resp16');
-        $taller20->resp17        =   $request->input('resp17');
-        $taller20->resp18        =   $request->input('resp18');
-        $taller20->resp19        =   $request->input('resp19');  
-        $taller20->save();
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-     public function store21(Request $request,  $idtaller)
-    {
-        $contenido = TallerValeCaja::select('enunciado')->where('taller_id', $idtaller)->firstOrFail();
-        $taller21 = new TallerValeCajaRe; 
-        $taller21->taller_id      =   $idtaller;
-        $taller21->user_id        =   '1'; 
-        $taller21->enunciado      =   $contenido->enunciado; 
-        $taller21->por        =   $request->input('por');
-        $taller21->deudor        =   $request->input('deudor');
-        $taller21->cantidad        =   $request->input('cantidad');
-        $taller21->concepto        =   $request->input('concepto');
-        $taller21->fecha        =   $request->input('fecha');
-        $taller21->vto_bueno        =   $request->input('vto_bueno');
-        $taller21->conforme        =   $request->input('conforme');
-        $taller21->save();
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-
-     public function store22(Request $request,  $idtaller)
-    {
-        $contenido = TallerNotaPedido::select('enunciado')->where('taller_id', $idtaller)->firstOrFail();
-        $taller22 = new TallerNotaPedidoRe; 
-        $taller22->taller_id      =   $idtaller;
-        $taller22->user_id        =   '1'; 
-        $taller22->enunciado      =   $contenido->enunciado; 
-        $taller22->no             =   $request->input('no');
-        $taller22->fecha          =   $request->input('fecha');
-        $taller22->dependencia    =   $request->input('dependencia');
-        $taller22->destino        =   $request->input('destino');
-        $taller22->plazo_entrega  =   $request->input('plazo_entrega');
-        $taller22->cantidad       =   $request->input('cantidad');
-        $taller22->codigo         =   $request->input('codigo');
-        $taller22->descripcion    =   $request->input('descripcion');
-        $taller22->precio_unit    =   $request->input('precio_unit');
-        $taller22->total          =   $request->input('total');
-        $taller22->observaciones  =   $request->input('observaciones');
-        $taller22->fabrica        =   $request->input('fabrica');
-        $taller22->recibido       =   $request->input('recibido');
-        $taller22->save();
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-    public function store23(Request $request,  $idtaller)
-    {
-        $contenido = TallerRecibo::select('enunciado')->where('taller_id', $idtaller)->firstOrFail();
-        $taller23 = new TallerReciboRe; 
-        $taller23->taller_id  =   $idtaller;
-        $taller23->user_id    =   '1'; 
-        $taller23->enunciado  =   $contenido->enunciado; 
-        $taller23->no         =   $request->input('no');
-        $taller23->por        =   $request->input('por');
-        $taller23->recibi     =   $request->input('recibi');
-        $taller23->cantidad   =   $request->input('cantidad');
-        $taller23->arriendo   =   $request->input('arriendo');
-        $taller23->propiedad  =   $request->input('propiedad');
-        $taller23->situado    =   $request->input('situado');
-        $taller23->hasta      =   $request->input('hasta');
-        $taller23->firma      =   $request->input('firma');
-        $taller23->save();
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-     public function store24(Request $request,  $idtaller)
-    {
-        $contenido = TallerOrdenPago::select('enunciado')->where('taller_id', $idtaller)->firstOrFail();
-        $taller24 = new TallerOrdenPagoRe; 
-        $taller24->taller_id =  $idtaller;
-        $taller24->user_id   =  '1'; 
-        $taller24->enunciado =  $contenido->enunciado; 
-        $taller24->señor        =  $request->input('señor');
-        $taller24->fecha       =  $request->input('fecha');
-        $taller24->fecha_c    =  $request->input('fecha_c');
-        $taller24->numero  =  $request->input('numero');
-        $taller24->tipo  =  $request->input('tipo');
-        $taller24->debe =  $request->input('debe');
-        $taller24->haber   =  $request->input('haber');
-        $taller24->saldo     =  $request->input('saldo');
-        $taller24->save();
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-    public function store25(Request $request,  $idtaller)
-    {
-        $contenido = TallerFactura::select('enunciado')->where('taller_id', $idtaller)->firstOrFail();
-        $taller25 = new TallerFacturaRe; 
-        $taller25->taller_id        =  $idtaller;
-        $taller25->user_id          =  '1'; 
-        $taller25->enunciado        =  $contenido->enunciado; 
-        $taller25->nombre           =  $request->input('nombre');
-        $taller25->fecha_emision    =  $request->input('fecha_emision');
-        $taller25->ruc              =  $request->input('ruc');
-        $taller25->direccion              =  $request->input('direccion');
-        $taller25->telefono              =  $request->input('telefono');
-        $taller25->email              =  $request->input('email');
-        $taller25->subtotal_12          =  $request->input('subtotal_12');
-        $taller25->subtotal_0          =  $request->input('subtotal_0');
-        $taller25->subtotal_iva          =  $request->input('subtotal_iva');
-        $taller25->subtotal_siniva          =  $request->input('subtotal_siniva');
-        $taller25->subtotal_sin_imp          =  $request->input('subtotal_sin_imp');
-        $taller25->descuento_total          =  $request->input('descuento_total');
-        $taller25->ice          =  $request->input('ice');
-        $taller25->iva12          =  $request->input('iva12');
-        $taller25->irbpnr          =  $request->input('irbpnr');
-        $taller25->propina          =  $request->input('propina');
-        $taller25->valor_total          =  $request->input('valor_total');
-        $taller25->save();
-
-        if ($taller25 = true) {
-
-               $o = TallerFacturaRe::where('user_id', 1)->last();              
-              foreach ($request->codigo as $key=>$v) {
-                  $datos=array(
-                     'taller_factura_re_id'=> $o->id,
-                     'codigo'=> $request->codigo[$key],
-                     'cod_aux'=> $request->cod_aux[$key],
-                     'cantidad' => $request->cantidad[$key],
-                     'precio' => $request->precio[$key],
-                     'descuento' => $request->descuento[$key],
-                     'valor' => $request->valor[$key],
-                     'created_at'=> now(),
-                     'updated_at'=> now(),
-                  );
-                  TallerFacturaDatosRe::insert($datos);
-               }
-        }
-
-
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-     public function store26(Request $request,  $idtaller)
-    {
-        $contenido = TallerNotaVenta::select('enunciado')->where('taller_id', $idtaller)->firstOrFail();
-        $taller26 = new TallerNotaVentaRe; 
-        $taller26->taller_id        =  $idtaller;
-        $taller26->user_id          =  '1'; 
-        $taller26->enunciado        =  $contenido->enunciado; 
-        $taller26->nombre           =  $request->input('nombre');
-        $taller26->ruc              =  $request->input('ruc');
-        $taller26->fecha            =  $request->input('fecha');
-        $taller26->total            =  $request->input('total');
-        $taller26->valido           =  $request->input('valido');
-        $taller26->save();
-
-        if ($taller26 = true) {
-
-               $o = TallerNotaVentaRe::firstOrFail()->last(); 
-                            
-              foreach ($request->cantidad as $key=>$v) {
-                  $datos=array(
-                     'taller_nota_venta_re_id'=> $o->id,
-                     'cantidad' => $request->cantidad[$key],
-                     'descripcion' => $request->descripcion[$key],
-                     'precio' => $request->precio[$key],
-                     'valor_venta' => $request->valor_venta[$key],
-                     'created_at'=> now(),
-                     'updated_at'=> now(),
-                  );
-                  TallerNotaVentaDatosRe::insert($datos);
-               }
-        }
-
-        
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-     public function store27(Request $request,  $idtaller)
-    {
-        $contenido = TallerAbreviatura::select('enunciado')->where('taller_id', $idtaller)->firstOrFail();
-        $taller27 = new TallerAbreviaturaRe; 
-        $taller27->taller_id        =  $idtaller;
-        $taller27->user_id          =  '1'; 
-        $taller27->enunciado        =  $contenido->enunciado; 
-        $taller27->save();
-
-        if ($taller27 = true) {
-
-               $o = TallerAbreviaturaRe::firstOrFail()->last(); 
-                            
-              foreach ($request->col_a as $key=>$v) {
-                  $datos=array(
-                     'taller_abreviatura_re_id'=> $o->id,
-                     'col_a_res' => $request->col_a[$key],
-                     'col_b_res' => $request->col_b[$key],
-                     'created_at'=> now(),
-                     'updated_at'=> now(),
-                  );
-                  TallerAbreviaturaDatoRe::insert($datos);
-               }
-        }
-
-   
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-     public function store29(Request $request,  $idtaller)
-    {
-        $contenido = Taller::select('enunciado')->where('id', $idtaller)->firstOrFail();
-        $taller29 = new TallerIdentAbreRe; 
-        $taller29->taller_id           =  $idtaller;
-        $taller29->user_id             =  '1'; 
-        $taller29->enunciado           =  $contenido->enunciado; 
-        $taller29->abreviatura1        =  $request->abreviatura1; 
-        $taller29->abreviatura2        =  $request->abreviatura2; 
-        $taller29->abreviatura3        =  $request->abreviatura3; 
-        $taller29->abreviatura4        =  $request->abreviatura4; 
-        $taller29->abreviatura5        =  $request->abreviatura5; 
-        $taller29->abreviatura6        =  $request->abreviatura6; 
-        $taller29->abreviatura7        =  $request->abreviatura7; 
-        $taller29->abreviatura8        =  $request->abreviatura8; 
-        $taller29->save();
-
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-    public function store30(Request $request,  $idtaller)
-    {
-        $contenido               = Taller::select('enunciado')->where('id', $idtaller)->firstOrFail();
-        $taller30                = new TallerUtilizarAbreRe; 
-        $taller30->taller_id     =  $idtaller;
-        $taller30->user_id       =  '1'; 
-        $taller30->enunciado     =  $contenido->enunciado; 
-        $taller30->abreviatura1  =  $request->abreviatura1; 
-        $taller30->abreviatura2  =  $request->abreviatura2; 
-        $taller30->abreviatura3  =  $request->abreviatura3; 
-        $taller30->abreviatura4  =  $request->abreviatura4; 
-        $taller30->abreviatura5  =  $request->abreviatura5; 
-        $taller30->abreviatura6  =  $request->abreviatura6; 
-        $taller30->abreviatura7  =  $request->abreviatura7; 
-        $taller30->abreviatura8  =  $request->abreviatura8; 
-        $taller30->abreviatura9  =  $request->abreviatura9; 
-        $taller30->abreviatura10 =  $request->abreviatura10; 
-        $taller30->abreviatura11 =  $request->abreviatura11;
-        $taller30->abreviatura12 =  $request->abreviatura12; 
-        $taller30->abreviatura13 =  $request->abreviatura13;
-        $taller30->save();
-
-    return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    }
-    // public function store31(Request $request,  $idtaller)
-    // {
-    //     $contenido               = Taller::select('enunciado')->where('id', $idtaller)->firstOrFail();
-    //     $taller31                = new TalleLocalizarAbreRe; 
-    //     $taller31->taller_id     =  $idtaller;
-    //     $taller31->user_id       =  '1'; 
-    //     $taller31->enunciado     =  $contenido->enunciado; 
-    //     $taller31->abreviatura1  =  $request->abreviatura1; 
-    //     $taller31->abreviatura2  =  $request->abreviatura2; 
-    //     $taller31->abreviatura3  =  $request->abreviatura3; 
-    //     $taller31->abreviatura4  =  $request->abreviatura4; 
-    //     $taller31->abreviatura5  =  $request->abreviatura5; 
-    //     $taller31->abreviatura6  =  $request->abreviatura6; 
-    //     $taller31->abreviatura7  =  $request->abreviatura7; 
-    //     $taller31->abreviatura8  =  $request->abreviatura8; 
-    //     $taller31->abreviatura9  =  $request->abreviatura9; 
-    //     $taller31->abreviatura10 =  $request->abreviatura10; 
-    //     $taller31->abreviatura11 =  $request->abreviatura11;
-    //     $taller31->save();
-
-    // return redirect()->route('welcome')->with('datos', 'Programa creado correctamente!');
-    // }
-     public function store31(Request $request,  $idtaller)
-      {
-         $imagen = $request->file('file');
-            $nombre = time().'_'.$imagen->getClientOriginalName();
-            $ruta = public_path().'/img/talleres';
-            $imagen->move($ruta, $nombre);
-
-            $urlimagen = '/img/talleres/'.$nombre;
-        
-        $contenido = TallerCollage::select('enunciado')->where('taller_id', $idtaller)->firstOrFail();
-        $taller34 = new TallerCollageRe; 
-        $taller34->taller_id        =  $idtaller;
-        $taller34->user_id          =  '1'; 
-        $taller34->enunciado        =  $contenido->enunciado; 
-        $taller34->url_img        =  $urlimagen; 
-        $taller34->save();
-
-      }
-        public function diario(Request $request)
-      {
-        $dato1 = $request->datos
-        ;      
-        return $dato1; 
-      }
-
-    public function taller46(){
-    
-    return view('talleres.taller46');
+    return view('talleres.taller33');
     }
 
   

@@ -9,6 +9,9 @@ use App\Admin\TallerAbreviatura;
 use App\Admin\TallerAbreviaturaImg;
 use App\Admin\TallerAnalizar;
 use App\Admin\TallerAnalizarOp;
+use App\Admin\TallerCelda;
+use App\Admin\TallerCeldaClasificacion;
+use App\Admin\TallerCeldaClasificar;
 use App\Admin\TallerCertificadoDeposito;
 use App\Admin\TallerCheque;
 use App\Admin\TallerChequeEndoso;
@@ -42,6 +45,8 @@ use App\Admin\TallerOrdenIdea;
 use App\Admin\TallerOrdenPago;
 use App\Admin\TallerPagare;
 use App\Admin\TallerPalabra;
+use App\Admin\TallerPartidaDoble;
+use App\Admin\TallerPartidaDobleEnun;
 use App\Admin\TallerPregunta;
 use App\Admin\TallerRecibo;
 use App\Admin\TallerRelacionar;
@@ -68,6 +73,7 @@ class AdminController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth');
         $this->middleware('estudiante');
         $this->middleware('docente');
     }
@@ -176,22 +182,24 @@ class AdminController extends Controller
       $taller2->save();
 
 
-   	if ($taller2 = true) {
-   		if ($request->hasFile('imagen')) {
-            $imagen    = $request->file('imagen');
-            $nombre    = time().'_'.$imagen->getClientOriginalName();
-            $ruta      = public_path().'/img/talleres';
-            $imagen->move($ruta, $nombre);
-            $urlimagen = '/img/talleres/'.$nombre;
-   	   		}
+   if ($taller2 = true) {
       $a = Taller::get()->last();
-   		$taller_2 = new TallerClasificar;
-   		$taller_2->taller_id = $a->id;
-   		$taller_2->enunciado = $request->input('enunciado');
-   		$taller_2->img = $urlimagen;
-   		$taller_2->save();
+      $taller_2 = new TallerPartidaDoble;
+      $taller_2->taller_id = $a->id;
+      $taller_2->enunciado = $request->input('enunciado');
+      $taller_2->save();
+      $o = TallerPartidaDoble::get()->last();
 
-   	}
+         foreach ($request->enun as $key=>$v) {
+                  $datos=array(
+                     'taller_partida_doble_id'=> $o->id,
+                     'enunciados' => $request->enun[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  TallerPartidaDobleEnun::insert($datos);
+               }
+    }
     return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
    }
 
@@ -1105,6 +1113,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
       public function taller33(Request $request)
       {
+
          $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();
          $taller33               = new Taller;
          $taller33->nombre       = 'Taller '.++$i;
@@ -1113,18 +1122,39 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller33->contenido_id   = $request->input('contenido_id');
          $taller33->estado       = 1;
          $taller33->save();
+
           if ($taller33 = true) {
             $a                     = Taller::get()->last();
-            $taller_33             = new TallerPregunta;
+            $taller_33             = new TallerCelda;
             $taller_33->taller_id  = $a->id;
             $taller_33->enunciado  = $request->input('enunciado');
-            $taller_33->pregunta1  = $request->input('pregunta1');
-            $taller_33->pregunta1  = $request->input('pregunta1');
-            $taller_33->pregunta2  = $request->input('pregunta2');
+            $taller_33->palabra_clasificar  = $request->input('palabra_clasificar');
             $taller_33->save();
          }
+          if ($taller_33 = true) {
+            $c = TallerCelda::get()->last();
+               foreach ($request->clasificaciones as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
+                   $regis=array(
+                     'taller_celda_id'  => $c->id,
+                     'clasificaciones'  => $request->clasificaciones[$key],
+                     'created_at' => now(),
+                     'updated_at' => now(),
+                    );
+            TallerCeldaClasificacion::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
+        }
+              foreach ($request->clasificados as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
+                   $regis=array(
+                     'taller_celda_id'  => $c->id,
+                     'clasificados'  => $request->clasificados[$key],
+                     'created_at' => now(),
+                     'updated_at' => now(),
+                    );
+            TallerCeldaClasificar::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
+        }
+          }
       return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');  
       }
+
 
    public function taller34(Request $request)
       {

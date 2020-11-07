@@ -156,6 +156,7 @@
                                     <th scope="col">Enunciado </th>
                                     <th scope="col">Estado </th>
                                     <th scope="col">Calificacion </th>
+
                                     {{-- <th scope="col">Vista Taller</th> --}}
                                 </tr>
                             </thead>
@@ -167,14 +168,14 @@
                                         <td>{{$taller['nombre']}}</td>
                                         <td>{{$taller->enunciado}}</td>
                                         <td align="center"> <span class="badge @if ($taller->pivot->status == 'completado') badge-warning @elseif($taller->pivot->status == 'calificado') badge-success @endif ">{{$taller->pivot->status}}</span></td>
-                                        <td class="text-center"> <span class="badge @isset ($taller->pivot->calificacion) badge-primary @else badge-danger  @endisset">@isset ($taller->pivot->calificacion)
-                                           {{ $taller->pivot->calificacion}} @else pendiente
-                                        @endisset</span></td>
-                                       {{--  <td class="table-button ">
-                                            <a class="btn btn-info"
-                                                href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
-                                                class="fas fa-eye"></i></a>
-                                        </td> --}}
+
+                                        <td class="text-center"> <span class="badge @isset ($taller->pivot->calificacion) @else badge-danger  @endisset">@isset ($taller->pivot->calificacion)
+                                          <a class="btn btn-info"
+                                                href="{{route('vista.taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
+                                                class="fas fa-eye"></i></a> @else pendiente
+                                        @endisset</span>
+                                    </td>
+                                    
                                     </tr>
                                     @endforeach
                             </tbody>

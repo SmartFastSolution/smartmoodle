@@ -32,7 +32,7 @@ Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta qu
    
 route::get('/home','Controller@index')->name('administrador'); //ruta administracion
 
-route::get('home','AdminController@index')->name('administrador'); //ruta administracion
+// route::get('home','AdminController@index')->name('administrador'); //ruta administracion
 
 //ruta del menu general de administracion 
 
@@ -155,12 +155,14 @@ route::post('/taller45', 'AdminController@taller45')->name('admin.taller45');
 route::get('/sistema/taller/{plant}/{id}', 'TallersController@taller')->name('taller');
 
 route::get('/sistema/homees/taller/{plant}/{id}', 'TallerEstudianteController@taller')->name('taller.estudiante');
+route::get('/sistema/homees/taller/vista/{plant}/{id}', 'VistaEstudianteController@taller')->name('vista.taller');
 route::get('/sistema/homedoc/taller/{plant}/{id}/{user}', 'TallerDocenteController@taller')->name('taller.docente');
 
 
 // route::post('/sistema/taller2', 'TallersController@store2')->name('taller2');
 // route::post('/sistema/taller3', 'TallersController@store3')->name('taller3');
 route::post('/sistema/admin/taller1/{idtaller}', 'TallerEstudianteController@store1')->name('taller1');
+route::post('/sistema/admin/taller2/{idtaller}', 'TallerEstudianteController@store2')->name('taller2');
 route::post('/sistema/admin/taller3/{idtaller}', 'TallerEstudianteController@store3')->name('taller3');
 route::post('/sistema/admin/taller4/{idtaller}', 'TallerEstudianteController@store4')->name('taller4');
 route::post('/sistema//admin/taller5/{idtaller}', 'TallerEstudianteController@store5')->name('taller5');
@@ -218,4 +220,4 @@ route::get('/sistema/admin/create', 'AdminController@admin')->name('admin.create
 route::post('/sistema/admin', 'AdminController@store')->name('admin');
 route::post('/sistema/delete', 'AdminController@delete')->name('delete');
 Route::post('/sistema/admin/ramdom','HomeController@ramdom')->name('ramdom');
-// route::get('/sistema/taller46','TallersController@taller46')->name('taller46');
+// route::get('/sistema/taller33','TallersController@taller33')->name('taller33');

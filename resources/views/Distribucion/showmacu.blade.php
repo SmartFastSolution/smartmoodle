@@ -12,8 +12,8 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <h1 class="font-weight-light">Vista Asignación Materia/Paralelo</h1>
-                <div class="row">
+                <h1 class="font-weight-light text-center">Vista Asignación Materia/Paralelo</h1>
+                <div class="row justify-content-center">
                     <div class="col-md-10">
                         <form method="POST" action="{{route('distribucionmacus.update', $distribucionmacu->id)}} ">
                             @method('PUT')
