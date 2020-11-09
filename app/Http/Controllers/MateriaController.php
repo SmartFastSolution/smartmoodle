@@ -98,9 +98,11 @@ class MateriaController extends Controller
      */
     public function edit(Materia $materia)
     {
+        $contenido=Contenido::get();
         $institutos = Instituto::get(); // todos los datos de la bd
         $institutomate = Materia::find($materia->id)->instituto()->get();
-        return view('Materias.editm',['materias'=>$materia,'institutos'=>$institutos,'institutomate'=>$institutomate]);
+    
+        return view('Materias.editm',['materias'=>$materia,'institutos'=>$institutos,'institutomate'=>$institutomate, 'contenidos'=>$contenido]);
 
 
     }

@@ -7,7 +7,7 @@ use App\Materia;
 use App\Taller;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+
 
 
 
@@ -20,7 +20,7 @@ class ContenidoController extends Controller
      */
     public function index()
     {
-        $contenido= Contenido::orderBy('id','Asc')->paginate(5);
+        $contenido= Contenido::all();
     
         return view('Contenido.indexcon',['contenidos'=>$contenido]);
     }
@@ -50,23 +50,40 @@ class ContenidoController extends Controller
 
             'nombre'      => 'required|string|max:150',
             'descripcion' => 'required|string|max:250',
-            'documentod'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:8000',
+            'materia'     =>'required',
+            'archivo'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:8000',
             'estado'      => 'required|in:on,off',
         ]);
      
-        $contenido=(new Contenido)->fill($request->all());
-       
-        if($request->hasFile('documentod')){
-         $contenido['documentod']= $request->file('documentod')->store('public');
-        }
-      
-        if($request->get('materia')){
+    
+         
+        if($request->hasFile('archivo')){
+
+            $archivo=$request->file('archivo');
+            $nombre=time().$archivo->getClientOriginalName();
+            $ruta= public_path().'/archivos';
+            $archivo->move($ruta,$nombre);
+            $urlarchivo['url']='/archivos/'.$nombre;
+         }
+
+
+         $contenido = New Contenido;
+         $contenido->nombre = $request->nombre;
+         $contenido->descripcion =$request->descripcion;
+         $contenido->estado = $request->estado;
+
+         if($request->get('materia')){
          
             $contenido->materia_id = $request->materia;
          }
-         $contenido->save();
 
-        return redirect('sistema/contenidos');
+         $contenido->save();
+              
+         
+         $contenido->archivo()->create($urlarchivo);
+     
+
+        return redirect('sistema/contenidos')->with('success','Contenido Creado Exitosamente!');
   
     }
 
@@ -116,20 +133,33 @@ class ContenidoController extends Controller
 
             'nombre'      => 'required|string|max:150',
             'descripcion' => 'required|string|max:250',
-            'documentod'  => 'mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:8000',
+        
+            'archivo'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:8000',
             'estado'      => 'required|in:on,off',
         ]);
-       
-        $contenido->update($request->all());
+      
+        if($request->hasFile('archivo')){
 
-        //validacion y que al momento de actualizar el documento no sea obligatorio subir el documento 
-        //sino que se mantenga alli mismo y solo actualizar el documento requerido 
-        if($request->hasFile('documentod')){
-            Storage::delete('app/public' .$contenido->documentod);
-            $contenido['documentod']=$request->file('documentod')->store('public');
-           }
-        //al actualizar el contenido no sea necesario que materia tenga que ir requerido y se pueda mantener 
-        //la que estuvo almacenada anteriormente
+            $archivo=$request->file('archivo');
+            $nombre=time().$archivo->getClientOriginalName();
+            $ruta= public_path().'/archivos';
+            $archivo->move($ruta,$nombre);
+            $urlarchivo['url']='/archivos/'.$nombre;
+         }
+
+        $contenido->update($request->all());
+      
+
+        if ($request->hasFile('archivo')){
+            $contenido->archivo()->delete();
+        }
+
+        $contenido->save();
+
+        if ($request->hasFile('archivo')){
+            $contenido->archivo()->create($urlarchivo);
+        }
+     
           if($request->get('materia')){
            
               $contenido->materia_id = $request->materia;

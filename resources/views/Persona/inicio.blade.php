@@ -50,9 +50,7 @@
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->apellido}}</td>
                                     <td>{{$user->email}}</td>
-
                                     <td>{{$user->instituto->nombre}}</td>
-
                                     <td>
                                         @foreach($user->roles as $role)
                                         <span class="badge badge-danger"> {{$role->name}}
@@ -62,16 +60,16 @@
 
                                     <td> </td>
                                     <td> </td>
-                                    <td class="table-button ">
+                                    <td  width="10px" >
                                         <a class="btn btn-info " href="users/{{ $user['id']}}"><i
                                                 class="fas fa-eye"></i></a>
 
                                     </td>
-                                    <td class="table-button ">
+                                    <td  width="10px" >
                                         <a class="btn btn-success" href="users/{{ $user['id']}}/edit"><i
                                                 class=" fas fa-pencil-alt"></i></a>
                                     </td>
-                                    <td class="table-button ">
+                                    <td  width="10px" >
                                         <form method="POST" action="{{route('users.destroy', $user->id)}}}">
                                             @csrf
                                             @method('DELETE')
@@ -105,7 +103,7 @@
 $(function() {
     $(document).ready(function() {
         $('#myTable').DataTable({
-                "info": true,
+                "info": false,
                 "autoWidth": true,
 
                 "language": {

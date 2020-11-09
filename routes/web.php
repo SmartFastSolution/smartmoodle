@@ -125,9 +125,18 @@ route::resource('distrimas','DistrimaController');
 route::resource('distribuciondos','DistribuciondoController');
 
 //Ruta Resource para clonacion de unidad educativa
-route::resource('clinstitutos','ClinstitutoController');
+route::get('/clinstitutos/create','ClinstitutoController@create')->name('clinstitutos.create');
+route::post('/clinstitutos/store','ClinstitutoController@store')->name('clinstitutos.store');
 
+//Ruta Resource para Post
+route::resource('posts','PostController');
 
+//rutas para comentarios del post
+route::post('/comment/store','CommentController@store')->name('comment.add');
+route::post('/reply/store','CommentController@replyStore')->name('reply.add');
+route::delete('/reply/destroy/{comment}','CommentController@destroy')->name('comment.destroy');
+route::get('/reply/{comment}/edit','CommentController@edit')->name('comment.edit');
+route::put('/reply/{comment}','CommentController@update')->name('comment.update');
 });
 
 

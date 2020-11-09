@@ -93,7 +93,7 @@ class UsersController extends Controller
             $user->roles()->sync($request->get('role'));
         }
 
-        return redirect('sistema/users')->with('success','Usuario Creado Exitosamente!');
+        return redirect('sistema/users/create ')->with('success','Usuario Creado Exitosamente!');
         //return redirect('sistema/admin');
 
     }

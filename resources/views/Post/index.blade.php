@@ -1,0 +1,107 @@
+@extends('layouts.nav')
+
+@section('title', 'Unidad Educativa')
+
+
+
+@section('content')
+
+<section class="content">
+    <div class="container">
+        @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+        @endif
+        <a class="btn btn-info float-right" href="{{route('posts.create')}}"><i class="fas fa-plus"></i>
+            Crear</a>
+        <h1>Gestión de Publicaciones</h1>
+
+        <div class="row justify-content-center">
+            <div class="col-md-15">
+
+                <div class="card-body">
+                    <table id="myTable" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Resumen</th>
+                                <th></th>
+                                <th></th>
+                                <th scope="col">Tools</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach($posts as $post)
+                            <tr>
+                                <th scope="row">{{$post['id']}}</th>
+                                <td>{{$post->nombre}} </td>
+                                <td>{{$post->abstract}} </td>
+
+                                <td class="table-button ">
+                                    <a class="btn btn-info " href="{{route('posts.show',$post->id)}}"><i
+                                            class="fas fa-eye"></i></a>
+
+                                </td>
+                                <td class="table-button ">
+                                    <a class="btn btn-success btn" href="{{route('posts.edit', $post->id)}}"><i
+                                            class=" fas fa-pencil-alt"></i></a>
+                                </td>
+                                <td class="table-button ">
+                                    <!--metodo delete funciona pero hay que almacenar la variable array en una variable temporal-->
+                                    <form method="POST" action="{{route('posts.destroy', $post->id)}}}">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger "><i
+                                                class="fas fa-trash"></i></button>
+                                    </form>
+                                </td>
+
+                                @endforeach
+                                </th>
+                        </tbody>
+                        <!--Table body-->
+                    </table>             
+                    <!--Table-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+@stop
+
+@section('css')
+
+@stop
+
+@section('js')
+
+
+
+<script>
+$(function() {
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+                "info": false,
+                "autoWidth": true,
+
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                }
+            }
+
+        );
+    });
+
+});
+</script>
+
+
+@stop

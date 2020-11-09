@@ -65,12 +65,17 @@
                                         <br>
                                         <button type="button" class="btn btn-secondary" data-toggle="modal"
                                             data-target="#modalYT">{{ $contenido['nombre']}}</button>
-                                        <!-- <input type="file" name="documentod" value="{{old('documentod')}}">
-                                        {!! $errors->first('documento','<span style="color:red">:message</span>')!!} -->
+                                        <input type="file" class="form-control-file" name="archivo" id="archivo">
+                                        {!! $errors->first('documento','<span style="color:red">:message</span>')!!}
+
+                                        <small class="form-text text-muted">
+                                            Limite de 8MB por Documento
+                                        </small>
                                     </label>
 
                                 </div>
 
+                
 
                                 <!-- fin de la prueba imagen en laravel  -->
 
@@ -113,7 +118,7 @@
 
                 <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
                     <iframe class="embed-responsive-item" width="1000" height="1000"
-                        src="{{Storage::url($contenido['documentod'])}}" allowfullscreen></iframe>
+                    src="{{$contenido->archivo->url}}" allowfullscreen></iframe>
                 </div>
 
             </div>

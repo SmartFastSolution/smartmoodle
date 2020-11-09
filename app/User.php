@@ -87,6 +87,16 @@ class User extends Authenticatable implements MustVerifyEmail
             ->withPivot('status','calificacion');
     }
 
+    public function posts(){
+          
+        return $this->hasMany('App\Post');
+    }
+
+
+    public function comments(){
+          
+        return $this->hasMany('App\Comment');
+    }
     
     
 }

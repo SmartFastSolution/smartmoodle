@@ -411,6 +411,7 @@
     <script src="{{ asset('js/preloader.js') }}"></script>
     <!-- datatables script -->
     <script src="{{ asset('js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('vendor/ckeditor/ckeditor.js')}}"></script>
     @yield('js')
     {{--   @include('sweetalert::alert') --}}
 </body>

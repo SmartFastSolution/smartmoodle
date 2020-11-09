@@ -88,7 +88,7 @@ class EstudianteController extends Controller
       //metodo funcional 1 pero no verifica el password anterior
 
       $request->validate([
-        'password' => ['required'],
+        // 'password' => ['required'],
         'newpassword' => ['required', 'string', 'min:8', 'confirmed'],
         'newpassword_confirmation'=>['required']
       ]);

@@ -18,7 +18,6 @@ class CreateContenidosTable extends Migration
             $table->unsignedBigInteger('materia_id');
             $table->string('nombre');
             $table->string('descripcion');
-            $table->string('documentod')->nullable();
             $table->enum('estado',['on','off'])->nullable();
             $table->timestamps();
 
