@@ -19,7 +19,7 @@
             <div class="col-md-13">
                 <a class="btn btn-info float-right" href="{{route('distribucionmacus.create')}}"><i
                         class="fas fa-plus"></i> CREAR ASIGNACION</a>
-                <h1>Asignación de Materia/Curso</h1>
+                <h1>Asignación de Curso</h1>
                 <div class="card card-secondary">
                     <div class="card-header">
 

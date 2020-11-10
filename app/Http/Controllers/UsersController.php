@@ -7,6 +7,8 @@ use App\Modelos\Role;
 use App\Instituto;
 use App\Distribucionmacu;
 use App\User;
+use App\Curso;
+use App\Nivel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -41,11 +43,13 @@ class UsersController extends Controller
     {
        // Gate::authorize('haveaccess', 'user.create');
           // $institutos=Instituto::get();
-           $roles=Role::get();
-           $institutos=Instituto::get();
+         $cursos= Curso::get();
+         $nivels= Nivel::get();
+         $roles=Role::get();
+         $institutos=Instituto::get();
         
 
-       return \view('Persona.createuser',compact('roles','institutos'));
+       return \view('Persona.createuser',compact('roles','institutos','cursos','nivels'));
     }
 
     /**
@@ -69,11 +73,14 @@ class UsersController extends Controller
             'celular'         =>  'required|string|max:13',
             'email'           => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'        =>  'required|string|min:8',
+            'estado'      => 'required|in:on,off',
           
         ]);
 
         $user = new User;
         $user->instituto_id = $request->instituto;  //relacion con el instituto y usuario     
+        $user->curso_id = $request->curso;
+        $user->nivel_id = $request->paralelo;
         $user->cedula = $request->cedula;
         $user->name = $request->name;
         $user->apellido = $request->apellido;  
@@ -81,6 +88,7 @@ class UsersController extends Controller
         $user->telefono = $request->telefono;
         $user->celular = $request->celular;
         $user->email = $request->email;
+        $user->estado = $request->estado;
         $user->password = Hash::make($request->password);
        //agregados estudiantes y docente sen la misma tabla de persona 
          
@@ -128,16 +136,20 @@ class UsersController extends Controller
     public function edit(User $user)
     {
        // Gate::authorize('haveaccess', 'user.edit');
-      
+       $us=User::find($user->id);
        $roles= Role::orderBy('name')->get();
         // $roles = Role::all();
-        
+        $cursos= Curso::get();
+        $nivels= Nivel::get();
         $institutos = Instituto::get(); // todos los datos de la bd
         $institutouser = User::find($user->id)->instituto()->get(); //llama al instituto que este relacionado a un usuario 
-       return view('Persona.edituser',['user'=>$user, 'roles'=>$roles,'institutos'=>$institutos,'institutouser'=>$institutouser]);
+        $cursouser=User::find($user->id)->curso()->get();
+        $niveluser = User::find($user->id)->nivel()->get();
+        $roluser=  $us->roles()->get();
+     
+       return view('Persona.edituser',compact('roles','institutos','cursos','nivels','institutouser','cursouser','niveluser','user','roluser'));
 
-    
-    
+        
     }
 
     /**
@@ -158,7 +170,9 @@ class UsersController extends Controller
             'telefono'        =>  'required|string|max:13',
             'celular'         =>  'required|string|max:13',
             'name'            =>  'required|string|max:20',
+            'estado'          =>  'required|in:on,off',
             'email'           => [ 'string', 'email', 'max:255,'.$user->id,],
+            
          
          
 //agregados estudiantes y docente sen la misma tabla de persona 
@@ -177,6 +191,14 @@ class UsersController extends Controller
          if($request->get('instituto')){
           
             $user->instituto_id = $request->instituto;
+          }
+          if($request->get('curso')){
+          
+            $user->curso_id = $request->curso;
+          }
+          if($request->get('paralelo')){
+          
+            $user->nivel_id = $request->paralelo;
           }
 
           $user->roles()->sync($request->get('roles'));

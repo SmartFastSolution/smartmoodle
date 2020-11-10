@@ -5,6 +5,17 @@
 @section('content')
 
 
+@if ($errors->any())
+<div class="alert alert-danger">
+    <strong>Whoops!</strong> Parece que hay porblemas o Malas decisiones <br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 <section class="content">
     <div class="container">
         <div class="card border-0 shadow my-5">
@@ -13,12 +24,12 @@
                 <div class="row">
                     <div class="col-md-10">
 
-                        <form method="POST" action="{{route('users.store')}} ">
+                        <form method="POST" action="{{route('clinstitutos.p_clonainstituto')}} ">
                             @csrf
 
                             <div class="form-group">
                                 <label>Unidad Educativa a Clonar</label>
-                                <select class="form-control select" name="instituto" style="width: 99%;">
+                                <select class="form-control select" name="p_source" style="width: 99%;">
                                     <option selected disabled>Elija una Unidad educativa...</option>
                                     @foreach($institutos as $instituto)
                                     <option value="{{$instituto->id}}">{{$instituto->nombre}}
@@ -29,7 +40,7 @@
 
                             <div class="form-group">
                                 <label>Nueva Unidad Educativa </label>
-                                <select class="form-control select" name="institutoclon" style="width: 99%;">
+                                <select class="form-control select" name="p_target" style="width: 99%;">
                                     <option selected disabled>Elija una Unidad educativa...</option>
                                     @foreach($institutos as $instituto)
                                     <option value="{{$instituto->id}}">{{$instituto->nombre}}

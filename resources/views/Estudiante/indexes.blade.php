@@ -22,7 +22,7 @@
 
 
         <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
-        <h2 class="font-weight-light"> <strong> {{auth()->user()->distrima->distribucionmacu->curso->nombre}} </strong>
+        <h2 class="font-weight-light"> <strong> {{auth()->user()->curso->nombre}} </strong>
         </h2>
 
 
@@ -34,7 +34,7 @@
 
             <div class="row">
 
-                @foreach(auth()->user()->distrima->distribucionmacu->materias as $materia)
+                <!-- @foreach(auth()->user()->distrima->distribucionmacu->materias as $materia)
 
                 <div class="col-lg-3 col-5">
 
@@ -52,7 +52,7 @@
                     </div>
                 </div>
 
-                @endforeach
+                @endforeach -->
 
 
             </div>

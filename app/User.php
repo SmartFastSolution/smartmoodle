@@ -21,9 +21,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'cedula','name',
-        'apellido','domicilio','telefono',
-        'celular', 'email', 'password',
+       'nombre', 'apellido','domicilio','telefono',
+        'celular', 'email', 'password','estado',
         
 
     ];
@@ -96,6 +95,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function comments(){
           
         return $this->hasMany('App\Comment');
+    }
+
+    public function curso(){
+          
+        return $this->belongsTo('App\Curso');
+    }
+
+    public function nivel(){
+          
+        return $this->belongsTo('App\Nivel');
     }
     
     

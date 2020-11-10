@@ -56,7 +56,9 @@
                                     <label>Materias</label>
                                     <select class="select2" multiple="multiple" name="materia[]"
                                         data-placeholder="Select a State" style="width: 100%;">
-                                        <option v-for="mater in materias" :value="mater.id">@{{ mater.nombre}}</option>
+                                        <optgroup v-for="(curso, index) in materias" :label="curso.nombre">
+                                            <option v-for="mater in materias[index].materias" :value="mater.id">@{{ mater.nombre}}</option>
+                                        </optgroup>
                                     </select>
                                 </div>
                                

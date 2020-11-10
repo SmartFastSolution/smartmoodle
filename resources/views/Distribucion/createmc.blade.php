@@ -131,7 +131,7 @@ const inst = new Vue({
 
             var set = this;
             set.materias = [];
-            axios.post('/sistema/materiainst', {
+            axios.post('/sistema/materiasasig', {
                 id: set.instituto
             }).then(response => {
                 set.materias = response.data;

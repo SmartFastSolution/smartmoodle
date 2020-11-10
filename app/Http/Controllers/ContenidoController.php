@@ -182,10 +182,7 @@ class ContenidoController extends Controller
     
            $contenido->delete();
           
-           if(Storage::delete('public/',$contenido->documentod)){
-
-           $contenido->delete($contenido->documentod);
-            }
+         
 
             
             return redirect('sistema/contenidos')->with('success','Haz eliminado un Contenido con exito');     

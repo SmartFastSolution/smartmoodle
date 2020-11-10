@@ -56,6 +56,7 @@ Route::get('/', function () {
 
 //rutas vue asignaciones////
  Route::post('materiainst','HomeController@buscarMateria')->name('materiainst');
+ Route::post('materiasasig','HomeController@materia')->name('materiassig');
  Route::post('userinst','HomeController@buscarAlumno')->name('userinst');
  Route::post('docinst','HomeController@buscarDocente')->name('docinst');
  Route::post('distinst','HomeController@buscarAsignacion')->name('distinst');
@@ -126,7 +127,7 @@ route::resource('distribuciondos','DistribuciondoController');
 
 //Ruta Resource para clonacion de unidad educativa
 route::get('/clinstitutos/create','ClinstitutoController@create')->name('clinstitutos.create');
-route::post('/clinstitutos/store','ClinstitutoController@store')->name('clinstitutos.store');
+route::post('/clinstitutos/store','ClinstitutoController@p_clonainstituto')->name('clinstitutos.p_clonainstituto');
 
 //Ruta Resource para Post
 route::resource('posts','PostController');
