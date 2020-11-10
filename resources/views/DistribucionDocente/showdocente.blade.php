@@ -66,10 +66,7 @@
                                     <label class="custom-control-label" for="estadooff">No Activo</label>
                                 </div>
                                 <br><br><br>
-
-                                <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
-                              
-
+                                <a href="{{route('distribuciondos.index')}}" class="btn btn-primary">Regesar</a>
                         </form>
                     </div>
                 </div>
