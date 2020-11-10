@@ -78,12 +78,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function distribuciondos(){
           
-        return $this->hasMany('App\Distribuciondo');
+        return $this->hasOne('App\Distribuciondo');
     }
     public function tallers(){
         
         return $this->belongsToMany('App\Taller','taller_user')
-            ->withPivot('status','calificacion');
+            ->withPivot('status','calificacion', 'retroalimentacion');
     }
 
     public function posts(){

@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Distrima;
-use App\Curso;
-use App\Contenido;
-use App\Distribucionmacu;
-use App\Nivel;
 use APp\User;
-use App\Materia;
-use App\Taller;
-use App\Instituto;
+use App\Contenido;
+use App\Curso;
 use App\Distribuciondo;
+use App\Distribucionmacu;
+use App\Distrima;
 use App\Http\Controllers\Controller;
+use App\Instituto;
+use App\Materia;
+use App\Nivel;
+use App\Taller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class DocenteController extends Controller
@@ -29,8 +30,47 @@ class DocenteController extends Controller
     }
 
     public function index(){
+        // $materi = auth()->user()->distribuciondos->pivot->materia_id;
+        // 
+        
+            $au = User::find(Auth::id())->distribuciondos;
+            if ($au == null) {
+            return redirect()->route('welcome'); 
+               
+            }
+            $ids =[];
+            foreach ($au->materias as $value) {
+                foreach ($value->contenidos as $conte) {
+                $ids[] = $conte->id;
+                    
+                }
+            }
+            // $materias = $au->materias;
+        $users = DB::table('tallers')
+            ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
+            ->join('users', 'users.id', '=', 'taller_user.user_id')
+            ->join('contenidos', 'contenidos.id', '=', 'tallers.contenido_id')
+            ->join('materias', 'materias.id', '=', 'contenidos.materia_id')
+            ->whereIn('tallers.contenido_id', $ids)
+            // ->wherein('tallers.contenido_id','==', 1)
+            ->where('taller_user.status', 'completado')
+            ->select('tallers.*','taller_user.*', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
+            ->paginate(10);
 
-        return view('Docente.indexd'); //ruta docente
+              $calificado = DB::table('tallers')
+            ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
+            ->join('users', 'users.id', '=', 'taller_user.user_id')
+            ->join('contenidos', 'contenidos.id', '=', 'tallers.contenido_id')
+            ->join('materias', 'materias.id', '=', 'contenidos.materia_id')
+            ->whereIn('tallers.contenido_id', $ids)
+            // ->wherein('tallers.contenido_id','==', 1)
+            ->where('taller_user.status', 'calificado')
+            ->select('tallers.*','taller_user.*', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
+            ->paginate(10);
+
+
+            // return $users;
+        return view('Docente.indexd', compact('users','au', 'calificado')); //ruta docente
     }
     
 
@@ -41,8 +81,31 @@ class DocenteController extends Controller
       
         $materia =Materia::where('id', $id)->firstOrfail();
         $contenidos=Contenido::get();
-      
-   return view ('Docente.contenidodocente',compact('user','institutomate','materia','contenidos'));
+
+        $users = DB::table('tallers')
+            ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
+            ->join('users', 'users.id', '=', 'taller_user.user_id')
+            ->join('contenidos', 'contenidos.id', '=', 'tallers.contenido_id')
+            ->join('materias', 'materias.id', '=', 'contenidos.materia_id')
+            ->where('contenidos.materia_id', $id)
+            // ->wherein('tallers.contenido_id','==', 1)
+            ->where('taller_user.status', 'completado')
+            ->select('tallers.*','taller_user.*', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
+            ->paginate(10);
+
+            $calificado = DB::table('tallers')
+            ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
+            ->join('users', 'users.id', '=', 'taller_user.user_id')
+            ->join('contenidos', 'contenidos.id', '=', 'tallers.contenido_id')
+            ->join('materias', 'materias.id', '=', 'contenidos.materia_id')
+            ->where('contenidos.materia_id', $id)
+            // ->wherein('tallers.contenido_id','==', 1)
+            ->where('taller_user.status', 'calificado')
+            ->select('tallers.*','taller_user.*', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
+            ->paginate(10);
+
+      // return $calificado;
+   return view ('Docente.contenidodocente',compact('user','institutomate','materia','contenidos', 'users', 'calificado'));
 
 }
 

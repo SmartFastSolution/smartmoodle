@@ -83,16 +83,16 @@
 				</div>
 				<div class="row">
 					<div class="col-2 text-right"> <label>Sr (es):</label> </div>
-					<div class="col-4"> <input type="text" class="form-control" name="nombre"></div>
+					<div class="col-4"> <input required type="text" class="form-control" name="nombre"></div>
 					<div class="col-2 text-right"> <label>R.U.C/C.I. :</label> </div>
-					<div class="col-4"> <input type="text" class="form-control" name="ruc"></div>
+					<div class="col-4"> <input required type="text" class="form-control" name="ruc"></div>
 				</div>
 				<div class="row justify-content-start mt-2">
 					<div class="col-2 text-right">
 						<label for="">FECHA :</label>
 					</div>
 					<div class="col-5">
-						<input name="fecha" type="text" class="form-control">
+						<input required name="fecha" type="text" class="form-control">
 					</div>
 				</div>
 				<div class="row mt-4">
@@ -103,15 +103,18 @@
 					      <th scope="col">DESCRIPCIÓN</th>
 					      <th scope="col">P. UNITARIO </th>
 					      <th scope="col">VALOR VENTA</th>
+					      <th scope="col">ACCION</th>
 
 					    </tr>
 					  </thead>
 					  <tbody class="prin">
 					    <tr>
-					      <th><input type="text" class="form-control" name="cantidad[]"></th>
-					      <td><input type="text" class="form-control" name="descripcion[]"></td>
-					      <td><input type="text" class="form-control" name="precio[]"></td>
-					      <td><input type="text" class="form-control" name="valor_venta[]"></td>
+					      <th><input required type="text" class="form-control" name="cantidad[]"></th>
+					      <td><input required type="text" class="form-control" name="descripcion[]"></td>
+					      <td><input required type="text" class="form-control" name="precio[]"></td>
+					      <td><input required type="text" class="form-control" name="valor_venta[]"></td>
+                      	<td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>
+
 					    </tr>
 					  </tbody>
 					</table>
@@ -119,10 +122,10 @@
 				</div>
 				<div class="row justify-content-end mb-2">
 					<div class="col-3 text-right"><label for="">VALOR TOTAL</label></div>
-					<div class="col-3"><input type="text" name="total" class="form-control"> </div>
+					<div class="col-3"><input required type="text" name="total" class="form-control"> </div>
 				</div>
 				<div class="row mb-2 justify-content-end">
-					<input type="text" name="valido" class="form-control">
+					<input required type="text" name="valido" class="form-control">
 					<label for="">VÁLIDO PARA SU EMISIÓN HASTA FEBRERO/2021</label>
 				</div>
 				<div class="row mb-2 justify-content-start">
@@ -141,6 +144,7 @@
 </form>
 
 @section('js')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script src="{{ asset('vendor/toastr/toastr.min.js') }}"></script>
 	<script type="text/javascript">
 		$('.addRow').on('click', function(evt) {
@@ -151,16 +155,29 @@
 		function addRow(){
 			
 			var tr='<tr>'+
-					'<th><input type="text" class="form-control" name="cantidad[]"></th>'+
-					'<td><input type="text" class="form-control" name="descripcion[]"></td>'+
-					'<td><input type="text" class="form-control" name="precio[]"></td>'+
-					'<td><input type="text" class="form-control" name="valor_venta[]"></td>'+
+					'<th><input required type="text" class="form-control" name="cantidad[]"></th>'+
+					'<td><input required type="text" class="form-control" name="descripcion[]"></td>'+
+					'<td><input required type="text" class="form-control" name="precio[]"></td>'+
+					'<td><input required type="text" class="form-control" name="valor_venta[]"></td>'+
+					'<td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>'+
 				'</tr>';
 			$('.prin').append(tr);
 		  toastr.success("Columna agregada correctamente", "Smarmoddle",{
 		  	 "timeOut": "1000"
 		  });
 		}
+				$('.remove').live('click', function(evt){
+	evt.preventDefault();
+      var last=$('.prin tr').length;
+      if (last == 1) {
+        toastr.error("Esta columna no se puede eliminar", "Smarmoddle",{
+         "timeOut": "1000"
+      });
+      }else{
+      $(this).parent().parent().remove();
+       i = last;
+}
+    });
 	</script>
 	@endsection
 @endsection

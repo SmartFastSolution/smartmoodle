@@ -73,5 +73,15 @@ class Taller extends Seeder
          'created_at'   => now(),
          'updated_at'   => now(),
          ]);
+            DB::table('tallers')->insert([
+         'id'           => 7,
+         'plantilla_id' => 46,
+         'nombre'       => 'Taller 1',
+         'enunciado'    => 'RELATA  LOS  ENUNCIADOS  EN  LA  SIGUIENTE  RUEDA  LÓGICA, ADECUADAMENTE.',
+         'contenido_id' => 1,
+         'estado'       => 1,
+         'created_at'   => now(),
+         'updated_at'   => now(),
+         ]);
     }
 }

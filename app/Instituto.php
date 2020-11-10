@@ -1,12 +1,15 @@
 <?php
 
 namespace App;
-use App\User;
 use App\Materia;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Neurony\Duplicate\Options\DuplicateOptions;
+use Neurony\Duplicate\Traits\HasDuplicates;
 
 class Instituto extends Model
 {
+   use HasDuplicates;
 
     protected $fillable = [
         'nombre','descripcion','provincia','canton',
@@ -14,7 +17,11 @@ class Instituto extends Model
         'estado',
     ];
 
-
+    public function getDuplicateOptions(): DuplicateOptions
+    {
+        return DuplicateOptions::instance()
+        ->excludeRelations('users');
+    }
 
     //relacion de uno a muchos en este caso el muchos usuarios tomaran 1 dato de instituto
     // haciendo referencia de 1 a muchos
@@ -29,13 +36,17 @@ class Instituto extends Model
     public function materias(){
 
         return $this->hasMany('App\Materia');
+        
     }
-
+    public function contenidos()
+    {
+            return $this->hasManyThrough('App\Contenido', 'App\Materia');
+    }
 
     
     public function distribumacus(){
           
-        return $this->hasMany('App\Distribumacu');
+        return $this->hasMany('App\Distribucionmacu');
 
     }
 

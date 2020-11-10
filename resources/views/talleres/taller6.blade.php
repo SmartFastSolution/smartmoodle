@@ -36,9 +36,5 @@
         	<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
      	</div>
 	</div>
-
-
 </form>
-
-
 @endsection

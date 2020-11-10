@@ -46,8 +46,8 @@ class Plantilla extends Seeder
                           ]);
                           DB::table('plantillas')->insert([
                           'id' => 2,
-                          'nombre' => 'Plantilla 2 - CLASIFICAR CON ORIGINALIDAD',
-                          'descripcion' => 'Plantilla designado para clasificar',
+                          'nombre' => 'Plantilla 2 - PARTIDA DOBLE',
+                          'descripcion' => 'Plantilla de partida doble',
                           'plantilla' => 'si',
                           'created_at' => now(),
                           'updated_at' => now(),
@@ -295,8 +295,8 @@ class Plantilla extends Seeder
                           ]);
                            DB::table('plantillas')->insert([
                           'id' => 33,
-                          'nombre' => 'Plantilla 29 - ESCRIBIR PREGUNTAS',
-                          'descripcion' => 'Plantilla designado para completar un resultado',
+                          'nombre' => 'Plantilla 29 - SELECCIONAR EN CELDAS',
+                          'descripcion' => 'Plantilla designada para seleccionar en celdas',
                           'plantilla' => 'si',
                           'created_at' => now(),
                           'updated_at' => now(),
@@ -394,6 +394,14 @@ class Plantilla extends Seeder
                           'nombre' => 'PLANTILLA 39 - SOPA DE LETRAS',
                           'descripcion' => 'Plantilla para crear talleres de sopas de letras con diferentes palabras',
                           'plantilla' => 'si',
+                          'created_at' => now(),
+                          'updated_at' => now(),
+                          ]);
+                          DB::table('plantillas')->insert([
+                          'id' => 46,
+                          'nombre' => 'PLANTILLA QUEMADA 7',
+                          'descripcion' => 'Plantilla Quemada #7',
+                          'plantilla' => 'no',
                           'created_at' => now(),
                           'updated_at' => now(),
                           ]);

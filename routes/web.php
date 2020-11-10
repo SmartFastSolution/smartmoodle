@@ -13,20 +13,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
-
-
  // Route::get('/sistema', function () {
  //       return view('welcome');
  //   })->name('sistema');
-
- 
- 
-  Auth::routes();
-
-   //Auth::routes(['verify' => true]);
-
+Auth::routes();
+//Auth::routes(['verify' => true]);
 // Auth::routes(["register" => false]);
 // Auth::routes(["login" => false]);
 // Auth::routes(["logout" => false]);
@@ -36,25 +27,21 @@ Route::get('/', function () {
 
 ///rutas protegidas On 
 
- //Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
-  Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
+// Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
+Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
    
+route::get('/home','Controller@index')->name('administrador'); //ruta administracion
 
- 
-
- route::get('/home','Controller@index')->name('administrador'); //ruta administracion
-
- route::get('home','AdminController@index')->name('administrador'); //ruta administracion
+// route::get('home','AdminController@index')->name('administrador'); //ruta administracion
 
 //ruta del menu general de administracion 
 
- route::get('/homedoc','DocenteController@index')->name('docente'); //ruta docente
+route::get('/homedoc','DocenteController@index')->name('docente'); //ruta docente
 
-
- route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta estudiante
-
+route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta estudiante
 
 //rutas vue asignaciones////
+
  Route::post('materiainst','HomeController@buscarMateria')->name('materiainst');
  Route::post('materiasasig','HomeController@materia')->name('materiassig');
  Route::post('userinst','HomeController@buscarAlumno')->name('userinst');
@@ -63,7 +50,13 @@ Route::get('/', function () {
  Route::post('contmateria','HomeController@buscarContenido')->name('contmateria');
 
 
- //rutas menu estudiante
+
+///rutas menu docente
+route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
+
+
+//rutas menu estudiante
+route::post('admin/cambiarestado','AdminController@status')->name('taller.status');
 route::get('perfil','EstudianteController@show')->name('perfile');
 route::get('unidad/{id}','EstudianteController@unidades')->name('Unidades');
 route::get('estudiante/password', 'EstudianteController@password')->name('AlumnoPass'); //para metodo get del password 
@@ -77,7 +70,6 @@ route::get('alumnos/{id}', 'DocenteController@cursos')->name('Alumnos');
 
  //permisoss
  
-
 //////fin
 
 //rutas usuario
@@ -85,17 +77,16 @@ route::resource('users','UsersController');
 
 // rutas instituto
 route::resource('institutos','InstitutoController');// FUNCIONA AL 100%
-
+route::get('institutos/clone/{id}','InstitutoController@clone')->name('institutos.clone');// FUNCIONA AL 100%
+route::get('contenido/clone/{id}','InstitutoController@hola')->name('contenido.clone');// FUNCIONA AL 100%
 
 /// rutas roles
 route::resource('roles','Controladores\RoleController');// FUNCIONA AL 100%
 route::get('iniciorole','Controladores\RoleController@index')->name('roles.inicio');
 route::PUT('/roles/roles/{role}','Controladores\RoleController@update')->name('role.update');
 
-
 //MENU o permisos donde tendra acceso el usuario
 route::resource('permissions','PermissionController');// FUNCIONA AL 50%
-
 
 //Ruta Resource de Niveles que va aliada con el curso
 route::resource('nivels','NivelController'); //ojo en este caso le cambie niveles -> nivels como esta en la tabla 
@@ -107,11 +98,8 @@ route::resource('cursos','CursoController');
 //Ruta Resource de Materias que va aliada con el curso
 route::resource('materias','MateriaController');
 
-
 //Ruta Resource de Materias que va aliada con el curso
 route::resource('contenidos','ContenidoController');
-
-
 
 //Ruta Resource par asignacion de cursos y materias prueba 2 
 route::resource('distribucionmacus','DistribucionmacuController');
@@ -139,9 +127,6 @@ route::delete('/reply/destroy/{comment}','CommentController@destroy')->name('com
 route::get('/reply/{comment}/edit','CommentController@edit')->name('comment.edit');
 route::put('/reply/{comment}','CommentController@update')->name('comment.update');
 });
-
-
-
 
 Route::group(['prefix' => 'sistema/admin'], function() {
 
@@ -193,11 +178,14 @@ route::post('/taller45', 'AdminController@taller45')->name('admin.taller45');
 route::get('/sistema/taller/{plant}/{id}', 'TallersController@taller')->name('taller');
 
 route::get('/sistema/homees/taller/{plant}/{id}', 'TallerEstudianteController@taller')->name('taller.estudiante');
+route::get('/sistema/homees/taller/vista/{plant}/{id}', 'VistaEstudianteController@taller')->name('vista.taller');
+route::get('/sistema/homedoc/taller/{plant}/{id}/{user}', 'TallerDocenteController@taller')->name('taller.docente');
 
 
 // route::post('/sistema/taller2', 'TallersController@store2')->name('taller2');
 // route::post('/sistema/taller3', 'TallersController@store3')->name('taller3');
 route::post('/sistema/admin/taller1/{idtaller}', 'TallerEstudianteController@store1')->name('taller1');
+route::post('/sistema/admin/taller2/{idtaller}', 'TallerEstudianteController@store2')->name('taller2');
 route::post('/sistema/admin/taller3/{idtaller}', 'TallerEstudianteController@store3')->name('taller3');
 route::post('/sistema/admin/taller4/{idtaller}', 'TallerEstudianteController@store4')->name('taller4');
 route::post('/sistema//admin/taller5/{idtaller}', 'TallerEstudianteController@store5')->name('taller5');
@@ -240,7 +228,9 @@ route::post('/sistema/admin/taller42/{idtaller}', 'TallerEstudianteController@st
 route::post('/sistema/admin/taller43/{idtaller}', 'TallerEstudianteController@store43')->name('taller43');
 route::post('/sistema/admin/taller44/{idtaller}', 'TallerEstudianteController@store44')->name('taller44');
 route::post('/sistema/admin/taller45/{idtaller}', 'TallerEstudianteController@store45')->name('taller45');
+route::post('/sistema/admin/taller46/{idtaller}', 'TallerEstudianteController@store46')->name('taller46');
 route::post('/sistema/admin/taller37/{idtaller}', 'TallerEstudianteController@store37')->name('taller_37');
+
 route::post('/sistema/admin/taller/balance_inicial', 'TallerContabilidadController@balance_inicial')->name('balance_inicial');
 route::post('/sistema/admin/taller/b_inicial_diario', 'TallerContabilidadController@b_inicial_diario')->name('b_inicial_diario');
 route::post('/sistema/admin/taller/diario', 'TallerContabilidadController@diario')->name('diario');
@@ -248,21 +238,9 @@ route::post('/sistema/admin/taller/diariogeneral', 'TallerContabilidadController
 route::post('/sistema/admin/taller/obtenerbalance', 'TallerContabilidadController@obtenerbalance')->name('obtenerbalance');
 
 
-
-route::get('/sistema/taller46', 'TallersController@taller46')->name('taller46');
-route::get('/sistema/taller47', 'TallersController@taller47')->name('taller47');
-route::get('/sistema/taller48', 'TallersController@taller48')->name('taller48');
-route::get('/sistema/taller49', 'TallersController@taller49')->name('taller49');
-route::get('/sistema/taller50', 'TallersController@taller50')->name('taller50');
-route::get('/sistema/taller51', 'TallersController@taller51')->name('taller51');
-route::get('/sistema/taller52', 'TallersController@taller52')->name('taller52');
-route::get('/sistema/taller53', 'TallersController@taller53')->name('taller53');
-route::get('/sistema/taller54', 'TallersController@taller54')->name('taller54');
-route::get('/sistema/taller55', 'TallersController@taller55')->name('taller55');
-route::get('/sistema/taller56', 'TallersController@taller56')->name('taller56');
-route::get('/sistema/taller57', 'TallersController@taller57')->name('taller57');
-
-/*
-*/
+route::post('/sistema/homedoc/respuesta/taller1/{idtaller}', 'TallerDocenteController@store1')->name('taller1.docente');
 route::get('/sistema/admin/create', 'AdminController@admin')->name('admin.create');
 route::post('/sistema/admin', 'AdminController@store')->name('admin');
+route::post('/sistema/delete', 'AdminController@delete')->name('delete');
+Route::post('/sistema/admin/ramdom','HomeController@ramdom')->name('ramdom');
+// route::get('/sistema/taller33','TallersController@taller33')->name('taller33');

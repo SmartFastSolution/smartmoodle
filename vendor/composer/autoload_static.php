@@ -4,27 +4,44 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
+class ComposerStaticInit9af447a4a4d98e0b10ed57e5137fd181
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
-        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '0d59ee240a4cd96ddbb4ff164fccea4d' => __DIR__ . '/..' . '/symfony/polyfill-php73/bootstrap.php',
+        '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
+        'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
-        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
-        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
-        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
+        'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
+        'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         '0b47d6d4a00ca9112ba3953b49e7c9a4' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/helper.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
-        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
+        '9d8e013a5160a09477beb8e44f8ae97b' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/adjoint.php',
+        '6e78d1bdea6248d6aa117229efae50f2' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/antidiagonal.php',
+        '4623d87924d94f5412fe5afbf1cef31d' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/cofactors.php',
+        '901fd1f6950a637ca85f66b701a45e13' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/determinant.php',
+        '83057abc0e4acc99ba80154ee5d02a49' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/diagonal.php',
+        '07b7fd7a434451149b4fd477fca0ce06' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/identity.php',
+        'c8d43b340583e07ae89f2a3baef2cf89' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/inverse.php',
+        '499bb10ed7a3aee2ba4c09a31a85e8d1' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/minors.php',
+        '1cad2e6414d652e8b1c64e8967f6f37d' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/trace.php',
+        '95a7f134ac17161d07def442b3b737e8' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/transpose.php',
+        'b3a6bc628377118d4b4b8ba08d1eb949' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/add.php',
+        '5fef6d0e407f3f8887266dfa4a6c534c' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/directsum.php',
+        '684ba247e1385946e3babdaa054119de' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/subtract.php',
+        'aa53dcba601214d17ad405b7c291b7e8' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/multiply.php',
+        '75c79eb1b25749b05a47976f32b0d8a2' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideby.php',
+        '6ab8ad87a734f276a6bcd5a0fe1289be' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideinto.php',
         'abede361264e2ae69ec1eee813a101af' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/abs.php',
         '21a5860fbef5be28db5ddfbc3cca67c4' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/acos.php',
         '1546e3f9d127f2a9bb2d1b6c31c26ef1' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/acosh.php',
@@ -67,32 +84,15 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
         '883af48563631547925fa4c3b48ead07' => __DIR__ . '/..' . '/markbaker/complex/classes/src/operations/multiply.php',
         'f190e3308e6ca23234a2875edc985c03' => __DIR__ . '/..' . '/markbaker/complex/classes/src/operations/divideby.php',
         'ac9e33ce6841aa5bf5d16d465a2f03a7' => __DIR__ . '/..' . '/markbaker/complex/classes/src/operations/divideinto.php',
-        '9d8e013a5160a09477beb8e44f8ae97b' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/adjoint.php',
-        '6e78d1bdea6248d6aa117229efae50f2' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/antidiagonal.php',
-        '4623d87924d94f5412fe5afbf1cef31d' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/cofactors.php',
-        '901fd1f6950a637ca85f66b701a45e13' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/determinant.php',
-        '83057abc0e4acc99ba80154ee5d02a49' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/diagonal.php',
-        '07b7fd7a434451149b4fd477fca0ce06' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/identity.php',
-        'c8d43b340583e07ae89f2a3baef2cf89' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/inverse.php',
-        '499bb10ed7a3aee2ba4c09a31a85e8d1' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/minors.php',
-        '1cad2e6414d652e8b1c64e8967f6f37d' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/trace.php',
-        '95a7f134ac17161d07def442b3b737e8' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/functions/transpose.php',
-        'b3a6bc628377118d4b4b8ba08d1eb949' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/add.php',
-        '5fef6d0e407f3f8887266dfa4a6c534c' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/directsum.php',
-        '684ba247e1385946e3babdaa054119de' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/subtract.php',
-        'aa53dcba601214d17ad405b7c291b7e8' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/multiply.php',
-        '75c79eb1b25749b05a47976f32b0d8a2' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideby.php',
-        '6ab8ad87a734f276a6bcd5a0fe1289be' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideinto.php',
-        '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
+        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
         'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
+        '538ca81a9a966a6716601ecf48f4eaef' => __DIR__ . '/..' . '/opis/closure/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
-        '9cdd7b9056abc3081735233ba9dd9c7f' => __DIR__ . '/..' . '/facade/flare-client-php/src/helpers.php',
         'b6ec61354e97f32c0ae683041c78392a' => __DIR__ . '/..' . '/scrivo/highlight.php/HighlightUtilities/functions.php',
-        '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
+        '9cdd7b9056abc3081735233ba9dd9c7f' => __DIR__ . '/..' . '/facade/flare-client-php/src/helpers.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-        'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '6292c1671f9440c89e0af20a0f78754a' => __DIR__ . '/..' . '/laracasts/utilities/src/helpers.php',
         '6b34c85f7b1ad6faa15aa12109e030f2' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/functions.php',
     );
@@ -184,6 +184,7 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
         'N' => 
         array (
             'NunoMaduro\\Collision\\' => 21,
+            'Neurony\\Duplicate\\' => 18,
         ),
         'M' => 
         array (
@@ -260,8 +261,8 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
         ),
         'ZipStream\\' => 
         array (
@@ -269,11 +270,11 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
         ),
         'Yajra\\DataTables\\' => 
         array (
-            0 => __DIR__ . '/..' . '/yajra/laravel-datatables-buttons/src',
-            1 => __DIR__ . '/..' . '/yajra/laravel-datatables-editor/src',
+            0 => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src',
+            1 => __DIR__ . '/..' . '/yajra/laravel-datatables-html/src',
             2 => __DIR__ . '/..' . '/yajra/laravel-datatables-fractal/src',
-            3 => __DIR__ . '/..' . '/yajra/laravel-datatables-html/src',
-            4 => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src',
+            3 => __DIR__ . '/..' . '/yajra/laravel-datatables-buttons/src',
+            4 => __DIR__ . '/..' . '/yajra/laravel-datatables-editor/src',
         ),
         'XdgBaseDir\\' => 
         array (
@@ -425,8 +426,8 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -463,6 +464,10 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
         'NunoMaduro\\Collision\\' => 
         array (
             0 => __DIR__ . '/..' . '/nunomaduro/collision/src',
+        ),
+        'Neurony\\Duplicate\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/neurony/laravel-duplicate/src',
         ),
         'MyCLabs\\Enum\\' => 
         array (
@@ -638,6 +643,8 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
         'App\\Admin\\Respuesta\\AlternativaCorrectaRes' => __DIR__ . '/../..' . '/app/Admin/Respuesta/AlternativaCorrectaRes.php',
         'App\\Admin\\Respuesta\\AnalizarPregunta' => __DIR__ . '/../..' . '/app/Admin/Respuesta/AnalizarPregunta.php',
         'App\\Admin\\Respuesta\\AnalizarPreguntaDato' => __DIR__ . '/../..' . '/app/Admin/Respuesta/AnalizarPreguntaDato.php',
+        'App\\Admin\\Respuesta\\Celda' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Celda.php',
+        'App\\Admin\\Respuesta\\CeldaClasificado' => __DIR__ . '/../..' . '/app/Admin/Respuesta/CeldaClasificado.php',
         'App\\Admin\\Respuesta\\CertificadoDeposito' => __DIR__ . '/../..' . '/app/Admin/Respuesta/CertificadoDeposito.php',
         'App\\Admin\\Respuesta\\Cheque' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Cheque.php',
         'App\\Admin\\Respuesta\\ChequeEndoso' => __DIR__ . '/../..' . '/app/Admin/Respuesta/ChequeEndoso.php',
@@ -674,8 +681,12 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
         'App\\Admin\\Respuesta\\OrdenIdea' => __DIR__ . '/../..' . '/app/Admin/Respuesta/OrdenIdea.php',
         'App\\Admin\\Respuesta\\OrdenIdeasDato' => __DIR__ . '/../..' . '/app/Admin/Respuesta/OrdenIdeasDato.php',
         'App\\Admin\\Respuesta\\OrdenPago' => __DIR__ . '/../..' . '/app/Admin/Respuesta/OrdenPago.php',
+        'App\\Admin\\Respuesta\\PDDebe' => __DIR__ . '/../..' . '/app/Admin/Respuesta/PDDebe.php',
+        'App\\Admin\\Respuesta\\PDHaber' => __DIR__ . '/../..' . '/app/Admin/Respuesta/PDHaber.php',
         'App\\Admin\\Respuesta\\Pagare' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Pagare.php',
         'App\\Admin\\Respuesta\\Palabra' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Palabra.php',
+        'App\\Admin\\Respuesta\\PartidaDoble' => __DIR__ . '/../..' . '/app/Admin/Respuesta/PartidaDoble.php',
+        'App\\Admin\\Respuesta\\PartidaDobleRegis' => __DIR__ . '/../..' . '/app/Admin/Respuesta/PartidaDobleRegis.php',
         'App\\Admin\\Respuesta\\Pasivo4' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Pasivo4.php',
         'App\\Admin\\Respuesta\\Patrimonio4' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Patrimonio4.php',
         'App\\Admin\\Respuesta\\Pregunta' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Pregunta.php',
@@ -684,6 +695,7 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
         'App\\Admin\\Respuesta\\Relacionar2' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Relacionar2.php',
         'App\\Admin\\Respuesta\\Relacionar2Re' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Relacionar2Re.php',
         'App\\Admin\\Respuesta\\RelacionarRe' => __DIR__ . '/../..' . '/app/Admin/Respuesta/RelacionarRe.php',
+        'App\\Admin\\Respuesta\\RuedaLogica' => __DIR__ . '/../..' . '/app/Admin/Respuesta/RuedaLogica.php',
         'App\\Admin\\Respuesta\\Subrayar' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Subrayar.php',
         'App\\Admin\\Respuesta\\SubrayarRes' => __DIR__ . '/../..' . '/app/Admin/Respuesta/SubrayarRes.php',
         'App\\Admin\\Respuesta\\TipoSaldo' => __DIR__ . '/../..' . '/app/Admin/Respuesta/TipoSaldo.php',
@@ -699,6 +711,9 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
         'App\\Admin\\TallerAbreviaturaImg' => __DIR__ . '/../..' . '/app/Admin/TallerAbreviaturaImg.php',
         'App\\Admin\\TallerAnalizar' => __DIR__ . '/../..' . '/app/Admin/TallerAnalizar.php',
         'App\\Admin\\TallerAnalizarOp' => __DIR__ . '/../..' . '/app/Admin/TallerAnalizarOp.php',
+        'App\\Admin\\TallerCelda' => __DIR__ . '/../..' . '/app/Admin/TallerCelda.php',
+        'App\\Admin\\TallerCeldaClasificacion' => __DIR__ . '/../..' . '/app/Admin/TallerCeldaClasificacion.php',
+        'App\\Admin\\TallerCeldaClasificar' => __DIR__ . '/../..' . '/app/Admin/TallerCeldaClasificar.php',
         'App\\Admin\\TallerCertificadoDeposito' => __DIR__ . '/../..' . '/app/Admin/TallerCertificadoDeposito.php',
         'App\\Admin\\TallerCheque' => __DIR__ . '/../..' . '/app/Admin/TallerCheque.php',
         'App\\Admin\\TallerChequeEndoso' => __DIR__ . '/../..' . '/app/Admin/TallerChequeEndoso.php',
@@ -732,6 +747,8 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
         'App\\Admin\\TallerOrdenPago' => __DIR__ . '/../..' . '/app/Admin/TallerOrdenPago.php',
         'App\\Admin\\TallerPagare' => __DIR__ . '/../..' . '/app/Admin/TallerPagare.php',
         'App\\Admin\\TallerPalabra' => __DIR__ . '/../..' . '/app/Admin/TallerPalabra.php',
+        'App\\Admin\\TallerPartidaDoble' => __DIR__ . '/../..' . '/app/Admin/TallerPartidaDoble.php',
+        'App\\Admin\\TallerPartidaDobleEnun' => __DIR__ . '/../..' . '/app/Admin/TallerPartidaDobleEnun.php',
         'App\\Admin\\TallerPregunta' => __DIR__ . '/../..' . '/app/Admin/TallerPregunta.php',
         'App\\Admin\\TallerRecibo' => __DIR__ . '/../..' . '/app/Admin/TallerRecibo.php',
         'App\\Admin\\TallerRelacionar' => __DIR__ . '/../..' . '/app/Admin/TallerRelacionar.php',
@@ -766,6 +783,7 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
         'App\\Distribuciondo' => __DIR__ . '/../..' . '/app/Distribuciondo.php',
         'App\\Distribucionmacu' => __DIR__ . '/../..' . '/app/Distribucionmacu.php',
         'App\\Distrima' => __DIR__ . '/../..' . '/app/Distrima.php',
+        'App\\Events\\NewUserRegistered' => __DIR__ . '/../..' . '/app/Events/NewUserRegistered.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
@@ -793,9 +811,11 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
         'App\\Http\\Controllers\\PermissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/PermissionController.php',
         'App\\Http\\Controllers\\PostController' => __DIR__ . '/../..' . '/app/Http/Controllers/PostController.php',
         'App\\Http\\Controllers\\TallerContabilidadController' => __DIR__ . '/../..' . '/app/Http/Controllers/TallerContabilidadController.php',
+        'App\\Http\\Controllers\\TallerDocenteController' => __DIR__ . '/../..' . '/app/Http/Controllers/TallerDocenteController.php',
         'App\\Http\\Controllers\\TallerEstudianteController' => __DIR__ . '/../..' . '/app/Http/Controllers/TallerEstudianteController.php',
         'App\\Http\\Controllers\\TallersController' => __DIR__ . '/../..' . '/app/Http/Controllers/TallersController.php',
         'App\\Http\\Controllers\\UsersController' => __DIR__ . '/../..' . '/app/Http/Controllers/UsersController.php',
+        'App\\Http\\Controllers\\VistaEstudianteController' => __DIR__ . '/../..' . '/app/Http/Controllers/VistaEstudianteController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
@@ -809,6 +829,8 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Image' => __DIR__ . '/../..' . '/app/Image.php',
         'App\\Instituto' => __DIR__ . '/../..' . '/app/Instituto.php',
+        'App\\Listeners\\SendWelcomeEmail' => __DIR__ . '/../..' . '/app/Listeners/SendWelcomeEmail.php',
+        'App\\Mail\\UserRegister' => __DIR__ . '/../..' . '/app/Mail/UserRegister.php',
         'App\\Materia' => __DIR__ . '/../..' . '/app/Materia.php',
         'App\\Modelos\\Role' => __DIR__ . '/../..' . '/app/Modelos/Role.php',
         'App\\Nivel' => __DIR__ . '/../..' . '/app/Nivel.php',
@@ -826,6 +848,7 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
         'App\\TallerChequeEndosoRe' => __DIR__ . '/../..' . '/app/TallerChequeEndosoRe.php',
         'App\\TallerChequeRe' => __DIR__ . '/../..' . '/app/TallerChequeRe.php',
         'App\\TallerCollageRe' => __DIR__ . '/../..' . '/app/TallerCollageRe.php',
+        'App\\TallerCompletarEnunRe' => __DIR__ . '/../..' . '/app/TallerCompletarEnunRe.php',
         'App\\TallerConvertirChequeRe' => __DIR__ . '/../..' . '/app/TallerConvertirChequeRe.php',
         'App\\TallerDiferenciasRes' => __DIR__ . '/../..' . '/app/TallerDiferenciasRespaldo.php',
         'App\\TallerFacturaDatosRe' => __DIR__ . '/../..' . '/app/TallerFacturaDatosRe.php',
@@ -949,6 +972,7 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
         'Cron\\HoursField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/HoursField.php',
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
+        'Curso' => __DIR__ . '/../..' . '/database/seeds/Curso.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'DeepCopy\\DeepCopy' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/DeepCopy.php',
         'DeepCopy\\Exception\\CloneException' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/Exception/CloneException.php',
@@ -3394,6 +3418,9 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
         'Monolog\\Utils' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Utils.php',
         'MyCLabs\\Enum\\Enum' => __DIR__ . '/..' . '/myclabs/php-enum/src/Enum.php',
         'MyCLabs\\Enum\\PHPUnit\\Comparator' => __DIR__ . '/..' . '/myclabs/php-enum/src/PHPUnit/Comparator.php',
+        'Neurony\\Duplicate\\Helpers\\RelationHelper' => __DIR__ . '/..' . '/neurony/laravel-duplicate/src/Helpers/RelationHelper.php',
+        'Neurony\\Duplicate\\Options\\DuplicateOptions' => __DIR__ . '/..' . '/neurony/laravel-duplicate/src/Options/DuplicateOptions.php',
+        'Neurony\\Duplicate\\Traits\\HasDuplicates' => __DIR__ . '/..' . '/neurony/laravel-duplicate/src/Traits/HasDuplicates.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Laravel/CollisionServiceProvider.php',
         'NunoMaduro\\Collision\\Adapters\\Laravel\\Commands\\TestCommand' => __DIR__ . '/..' . '/nunomaduro/collision/src/Adapters/Laravel/Commands/TestCommand.php',
@@ -5841,10 +5868,10 @@ class ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitc74cf1518df6b32d3eedc8c42a989dd6::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit9af447a4a4d98e0b10ed57e5137fd181::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit9af447a4a4d98e0b10ed57e5137fd181::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit9af447a4a4d98e0b10ed57e5137fd181::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit9af447a4a4d98e0b10ed57e5137fd181::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -74,18 +74,19 @@
 </div>
 
  <ul class="list-group m-3">
-    @foreach ($sub = App\Taller::paginate(10) as $taller)
+    @foreach ($users  as $taller)
     <li class="list-group-item ">
         <a class="nav-link"
-        href="{{ route('taller', ['plant' => $taller->plantilla_id, 'id' => $taller->id]) }}"
+        href="{{ route('taller', ['plant' => $taller->plantilla_id, 'id' => $taller->taller_id]) }}"
         >
             {{ $taller->nombre }}
-            - {{ $taller->contenido->nombre }} - - {{ $taller->enunciado }}
+            {{-- - {{ $taller->contenido->nombre }} - --}} - {{ $taller->enunciado }}
         </a>
     </li>
     @endforeach
+  
 
-    <div class="row justify-content-center mt-3"> {{ $sub->links() }}</div>
+    <div class="row justify-content-center mt-3"> {{ $users->links() }}</div>
 
 </ul> 
 

@@ -1,6 +1,24 @@
-@extends('layouts.nav')
+<!DOCTYPE html>
+<html>
 
-@section('content')
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sistema Educativo Virtual | Login</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Font Awesome -->
+    
+    <link rel="stylesheet" href="css/app.css">
+
+</head>
+
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <b>Sistema</b>MOOb
+        </div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -62,4 +80,9 @@
         </div>
     </div>
 </div>
-@endsection
+ <script src="js/app.js"></script>
+
+</body>
+
+</html>
+

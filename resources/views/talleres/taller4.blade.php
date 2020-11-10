@@ -18,9 +18,9 @@
 				</div>
 				<div class="row">
 					<div class="col">
-						<input class="form-control mb-3 mt-3" name="diferencia_1a" type="text">
-				       <input class="form-control mb-3" name="diferencia_2a" type="text">
-				      <input class="form-control mb-3" name="diferencia_3a" type="text">
+						<input required class="form-control mb-3 mt-3" name="diferencia_1a" type="text">
+				       <input required class="form-control mb-3" name="diferencia_2a" type="text">
+				      <input required class="form-control mb-3" name="diferencia_3a" type="text">
 
 					</div>
 				</div>
@@ -31,9 +31,9 @@
 				</div>
 				<div class="row">
 					<div class="col">
-						<input class="form-control mb-3 mt-3" name="diferencia_1b" type="text">
-				       <input class="form-control mb-3" name="diferencia_2b" type="text">
-				      <input class="form-control mb-3" name="diferencia_3b" type="text">
+						<input required class="form-control mb-3 mt-3" name="diferencia_1b" type="text">
+				       <input required class="form-control mb-3" name="diferencia_2b" type="text">
+				      <input required class="form-control mb-3" name="diferencia_3b" type="text">
 
 					</div>
 				</div>

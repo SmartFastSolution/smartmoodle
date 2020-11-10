@@ -33,7 +33,7 @@ class ClinstitutoController extends Controller
          $value=[$request->p_source, $request->p_target];
          DB::select('call p_clonainstituto (?,?)', $value);
         
-         return redirect('sistema/clinstitutos/create')->with('info','Clonación Realizada Exitosamente!');
+         return redirect('sistema/clinstitutos/create')->with('success','Clonación Realizada Exitosamente!');
            
       
         

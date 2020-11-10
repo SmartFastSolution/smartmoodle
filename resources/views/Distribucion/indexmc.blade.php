@@ -16,7 +16,7 @@
         </div>
         @endif
         <div class="row justify-content-center">
-            <div class="col-md-13">
+            <div class="col-md-12">
                 <a class="btn btn-info float-right" href="{{route('distribucionmacus.create')}}"><i
                         class="fas fa-plus"></i> CREAR ASIGNACION</a>
                 <h1>Asignación de Curso</h1>

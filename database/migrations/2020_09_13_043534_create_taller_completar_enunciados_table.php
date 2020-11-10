@@ -17,7 +17,6 @@ class CreateTallerCompletarEnunciadosTable extends Migration
              $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->string('enunciado');
-            $table->string('enunciado1');
             $table->timestamps();
 
             $table->foreign('taller_id')

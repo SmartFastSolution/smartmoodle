@@ -17,6 +17,7 @@ class CreateTallerSenalarOpcionsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_senalar_id');
             $table->string('concepto');
+            $table->string('respuesta');
             $table->string('alternativa1');
             $table->string('alternativa2');
             $table->timestamps();

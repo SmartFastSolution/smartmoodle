@@ -9,6 +9,9 @@ use App\Admin\TallerAbreviatura;
 use App\Admin\TallerAbreviaturaImg;
 use App\Admin\TallerAnalizar;
 use App\Admin\TallerAnalizarOp;
+use App\Admin\TallerCelda;
+use App\Admin\TallerCeldaClasificacion;
+use App\Admin\TallerCeldaClasificar;
 use App\Admin\TallerCertificadoDeposito;
 use App\Admin\TallerCheque;
 use App\Admin\TallerChequeEndoso;
@@ -42,6 +45,8 @@ use App\Admin\TallerOrdenIdea;
 use App\Admin\TallerOrdenPago;
 use App\Admin\TallerPagare;
 use App\Admin\TallerPalabra;
+use App\Admin\TallerPartidaDoble;
+use App\Admin\TallerPartidaDobleEnun;
 use App\Admin\TallerPregunta;
 use App\Admin\TallerRecibo;
 use App\Admin\TallerRelacionar;
@@ -60,23 +65,64 @@ use App\Admin\TipoSaldoHaber;
 use App\Http\Controllers\Controller;
 use App\Plantilla;
 use App\Taller;
+use App\TallerCompletarEnunRe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('auth');
         $this->middleware('estudiante');
         $this->middleware('docente');
+    }
+    public function status(Request $request)
+    {
+       $taller = Taller::find($request->id);
+       $estado = $taller->estado;
+       // return $estado;
+       if ($estado === 1) {
+         $taller->estado = 0; 
+         $taller->save(); 
+          return response(array(
+                'success' => true,
+                'message' => 'Taller desactivado correctamente'
+            ),200,[]);  
+       }elseif ($estado == 0) {
+          $taller->estado = 1; 
+         $taller->save();  
+          return response(array(
+                'success' => true,
+                'message' => 'Taller activado correctamente'
+            ),200,[]);   
+       }
+
     }
    public function admin()
    {
          $g = 0;
-   	  return view('admin.admin', compact('g'));
+         // $users = DB::table('tallers')->select('enunciado','nombre', 'status as taller_user')->get();
+         $users = DB::table('tallers')
+            ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
+            ->join('users', 'users.id', '=', 'taller_user.user_id')
+            ->where('taller_user.status', 'completado')
+            ->paginate(10);
+   	  return view('admin.admin', compact('g', 'users'));
    }
    public function index (){
 
         return view('welcome');
+    }
+    public function delete(Request $request)
+    {
+      $taller = Taller::find($request->id);
+      $taller->delete();
+
+      return response(array(
+                'success' => true,
+                'message' => 'Taller elimimnado exitosamente'
+            ),200,[]);  
     }
    public function plantilla(Request $request)
    {
@@ -136,22 +182,24 @@ class AdminController extends Controller
       $taller2->save();
 
 
-   	if ($taller2 = true) {
-   		if ($request->hasFile('imagen')) {
-            $imagen    = $request->file('imagen');
-            $nombre    = time().'_'.$imagen->getClientOriginalName();
-            $ruta      = public_path().'/img/talleres';
-            $imagen->move($ruta, $nombre);
-            $urlimagen = '/img/talleres/'.$nombre;
-   	   		}
+   if ($taller2 = true) {
       $a = Taller::get()->last();
-   		$taller_2 = new TallerClasificar;
-   		$taller_2->taller_id = $a->id;
-   		$taller_2->enunciado = $request->input('enunciado');
-   		$taller_2->img = $urlimagen;
-   		$taller_2->save();
+      $taller_2 = new TallerPartidaDoble;
+      $taller_2->taller_id = $a->id;
+      $taller_2->enunciado = $request->input('enunciado');
+      $taller_2->save();
+      $o = TallerPartidaDoble::get()->last();
 
-   	}
+         foreach ($request->enun as $key=>$v) {
+                  $datos=array(
+                     'taller_partida_doble_id'=> $o->id,
+                     'enunciados' => $request->enun[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  TallerPartidaDobleEnun::insert($datos);
+               }
+    }
     return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
    }
 
@@ -169,16 +217,20 @@ class AdminController extends Controller
 
    	if ($taller3 = true) {
       $a = Taller::get()->last();
+      $taller_3 = new TallerCompletarEnunciado;
+      $taller_3->taller_id = $a->id;
+      $taller_3->enunciado = $request->input('enunciado');
+      $taller_3->save();
+      $o = TallerCompletarEnunciado::get()->last();
 
          foreach ($request->enun as $key=>$v) {
                   $datos=array(
-                     'taller_id'=> $a->id,
-                     'enunciado'=> $request->enunciado,
-                     'enunciado1' => $request->enun[$key],
+                     'taller_completar_enunciado_id'=> $o->id,
+                     'enunciados' => $request->enun[$key],
                      'created_at'=> now(),
                      'updated_at'=> now(),
                   );
-                  TallerCompletarEnunciado::insert($datos);
+                  TallerCompletarEnunRe::insert($datos);
                }
    	}
     return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
@@ -250,6 +302,7 @@ class AdminController extends Controller
                   $datos=array(
                      'taller_senalar_id'=> $a->id,
                      'concepto'=> $request->concepto[$key],
+                     'respuesta'=> $request->respuesta[$key],
                      'alternativa1'=> $request->alternativa1[$key],
                      'alternativa2' => $request->alternativa2[$key],
                      'created_at'=> now(),
@@ -388,6 +441,7 @@ class AdminController extends Controller
                $datos=array(
                   'taller_subrayars_id'=> $o->id,
                   'concepto'=> $request->concep[$key],
+                  'respuesta'=> $request->respuesta[$key],
                   'alternativas'=> $request->alter[$key],
                   'created_at'=> now(),
                   'updated_at'=> now(),
@@ -535,6 +589,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
                $datos=array(
                   'taller_verdadero_falso_id'=> $o->id,
                   'descripcion'=> $v,
+                  'respuesta'=> $request->respuesta[$key],
                   'created_at'=> now(),
                   'updated_at'=> now(),
                );
@@ -1048,6 +1103,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
             $taller_31                       = new TallerCollage;
             $taller_31->taller_id            = $a->id;
             $taller_31->enunciado            = $request->input('enunciado');
+            $taller_31->img_num            = $request->input('img_num');
             $taller_31->save();
          }
       return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');  
@@ -1057,6 +1113,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
       public function taller33(Request $request)
       {
+
          $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();
          $taller33               = new Taller;
          $taller33->nombre       = 'Taller '.++$i;
@@ -1065,18 +1122,39 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller33->contenido_id   = $request->input('contenido_id');
          $taller33->estado       = 1;
          $taller33->save();
+
           if ($taller33 = true) {
             $a                     = Taller::get()->last();
-            $taller_33             = new TallerPregunta;
+            $taller_33             = new TallerCelda;
             $taller_33->taller_id  = $a->id;
             $taller_33->enunciado  = $request->input('enunciado');
-            $taller_33->pregunta1  = $request->input('pregunta1');
-            $taller_33->pregunta1  = $request->input('pregunta1');
-            $taller_33->pregunta2  = $request->input('pregunta2');
+            $taller_33->palabra_clasificar  = $request->input('palabra_clasificar');
             $taller_33->save();
          }
+          if ($taller_33 = true) {
+            $c = TallerCelda::get()->last();
+               foreach ($request->clasificaciones as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
+                   $regis=array(
+                     'taller_celda_id'  => $c->id,
+                     'clasificaciones'  => $request->clasificaciones[$key],
+                     'created_at' => now(),
+                     'updated_at' => now(),
+                    );
+            TallerCeldaClasificacion::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
+        }
+              foreach ($request->clasificados as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
+                   $regis=array(
+                     'taller_celda_id'  => $c->id,
+                     'clasificados'  => $request->clasificados[$key],
+                     'created_at' => now(),
+                     'updated_at' => now(),
+                    );
+            TallerCeldaClasificar::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
+        }
+          }
       return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');  
       }
+
 
    public function taller34(Request $request)
       {

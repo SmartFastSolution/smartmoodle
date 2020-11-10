@@ -353,6 +353,18 @@ class Taller extends Model
 
         return $this->hasMany('App\Admin\Respuesta\EscribirCuenta');
     }
+    public function ruedaLogica(){
+
+        return $this->hasMany('App\Admin\Respuesta\RuedaLogica');
+    }
+      public function celda(){
+
+        return $this->hasMany('App\Admin\Respuesta\Celda');
+    }
+      public function partidaDoble(){
+
+        return $this->hasMany('App\Admin\Respuesta\PartidaDoble');
+    }
     
 }
 

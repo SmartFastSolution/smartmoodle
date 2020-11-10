@@ -1,45 +1,7 @@
 @extends('layouts.nav')
 
 @section('css')
-<style>
-::-webkit-scrollbar {
-    width: 25px;
-    /* Tamaño del scroll en vertical */
-    height: 8px;
-    /* Tamaño del scroll en horizontal */
 
-}
-
-/* Ponemos un color de fondo y redondeamos las esquinas del thumb */
-::-webkit-scrollbar-thumb {
-    background: #0FECDA;
-    border-radius: 25px;
-}
-
-/* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #2E09E9;
-
-    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-}
-
-/* Cambiamos el fondo cuando esté en active */
-::-webkit-scrollbar-thumb:active {
-    background-color: #0CCBDC;
-}
-
-/* Ponemos un color de fondo y redondeamos las esquinas del track */
-::-webkit-scrollbar-track {
-    background: #e1e1e1;
-    border-radius: 4px;
-}
-
-/* Cambiamos el fondo cuando esté en active o hover */
-::-webkit-scrollbar-track:hover,
-::-webkit-scrollbar-track:active {
-    background: #d4d4d4;
-}
-</style>
 @endsection
 @section('title', 'Talleres de contabilidad')
 @section('content')

@@ -67,11 +67,11 @@
     </div>
 </div>
 
-{{-- <div class="modal fade" id="taller2" tabindex="-1" role="dialog" aria-labelledby="taller2Label" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+<div class="modal fade" id="taller2" tabindex="-1" role="dialog" aria-labelledby="taller2Label" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="taller2Label">CLASIFICAR CON ORIGINALIDAD</h5>
+                <h5 class="modal-title" id="taller2Label">APLICAR PARTIDA DOBLE</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -113,11 +113,14 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class=" tall_2">
                             <div class="form-group">
-                                <label for="" class="col-form-label">Imagen:</label>
-                                    <input type="file" class="inputfile inputfile-1" id="ta2-1" name="imagen">
-                                    <label for="ta2-1"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>
-                               
+                                <label for="" class="col-form-label">Enunciado 1 <a href="#" class="btn btn-danger re_tall2"><span class="glyphicon glyphicon-remove">X</span></a></label>
+                                <textarea required="" class="form-control" name="enun[]"></textarea>
+                            </div>
+                            </div>
+                            <div class="row">
+                                  <a href="#" class="addTaller2 btn btn-outline-danger">Agregar Fila</a>
                             </div>
                             <div class="row justify-content-center">
                                 <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
@@ -131,7 +134,7 @@
             </div>
         </div>
     </div>
-</div> --}}
+</div>
 
 
 <div class="modal fade" id="taller3" tabindex="-1" role="dialog" aria-labelledby="taller3Label" aria-hidden="true">
@@ -347,6 +350,8 @@
                                           </div>
                                         </div>
                                       </div>
+                                      <label for="" class="col-form-label">Respuesta Correcta:</label>
+                                        <textarea required="" required="" name="respuesta[]" class="form-control"rows="5" placeholder="La respuesta correcta debe ser igual a una de las alternativas"></textarea>
                                       <label for="" class="col-form-label">Alternativa 1:</label>
                                         <textarea required="" required="" name="alternativa1[]" class="form-control"rows="5"></textarea>
                                       <label for="" class="col-form-label">Alternativa 2:</label>
@@ -666,6 +671,10 @@
                                     </div>
                                   </div>
                               </div>
+                                <div class="form-group col-12">
+                                <label for="concepto" class="col-form-label">Respuesta Correcta</label>
+                              <input required="" name="respuesta[]" class="form-control" rows="3">
+                          </div>
                               <div class="form-group col-12">
                                 <label for="concepto6" class="col-form-label">Alternativas:</label>
                                 <input required="" type="text" data-role="tagsinput" name="alter[]"
@@ -920,7 +929,17 @@
                         <div class="tall_12">
                             <div class="form-group">
                                 <label for="" class="col-form-label">Descripcion 1 <a href="#" class="btn btn-danger re_tall12"><span class="glyphicon glyphicon-remove">X</span></a></label>
-                                <textarea required="" class="form-control" name="descripcion[]"></textarea>
+                                <textarea required="" class="form-control mb-2" name="descripcion[]"></textarea>
+                                <label for="" class="col-form-label">RESPUESTA CORRECTA</label>
+                                    <div class="form-row">
+                                        <div class="col-3">
+                                            <select name="respuesta[]" id="" class=" custom-select custom-select-sm">
+                                        <option value="V" class="p-2">V</option>
+                                        <option value="F" class="p-2">F</option>
+                                   </select>
+                                        </div>
+                                    </div>
+                                    
                             </div>
                         </div>
         
@@ -2402,7 +2421,7 @@
                                 <input required="" type="hidden" value="31" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                                    <div class="form-row">
+                            <div class="form-row">
                                 <div class="form-group col-12">
                                     <label for="recipient-name" class="col-form-label">Institucion:</label>
                                     <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
@@ -2412,14 +2431,14 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                 <div class="form-group col-6">
+                                 <div class="form-group col-4">
                                     <label for="recipient-name" class="col-form-label">Materia:</label>
                                     <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
                                         <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
                                         <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
                                     </select>
                                 </div>
-                                 <div class="form-group col-6">
+                                 <div class="form-group col-4">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
                                     <select name="contenido_id" class="custom-select">
                                         
@@ -2427,7 +2446,12 @@
                                         </option> 
                                     </select>
                                 </div>
+                                <div class="form-group col-4">
+                                   <label for="recipient-name" class="col-form-label">Numero de imagenes:</label>
+                                <input required="" type="text" class="form-control"  name="img_num">
+                                </div>
                             </div>
+                            
                             <div class="row justify-content-center">
                                 <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>
@@ -2446,7 +2470,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" id="taller33Label">ESCRIBIR PREGUNTAS</h2>
+                <h2 class="modal-title" id="taller33Label">SELECCIONAR EN CELDAS</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -2487,14 +2511,36 @@
                                     </select>
                                 </div>
                             </div>
-                             <div class="form-row">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Contenido a clasificar:</label>
+                                <input required name="palabra_clasificar" type="text" class="form-control">
+                            </div>
+                             <div class="form-row" id="taller33">
                                 <div class="form-group col-6">
-                                    <label for="" class="col-form-label">Pregunta 1 :</label>
-                                    <input required="" type="text" name="pregunta1" class="form-control">
+                                    <label for="" class="col-form-label"> Lista de clasificacion :</label>
+                                    <input v-model="clasificacion.item" type="text" name="pregunta1" class="form-control">
+                                    <a class="text-center btn btn-success mb-2 mt-2" @click.prevent="agregarClasificacion" href="">Agregar Columna</a>
+                                    <table>
+                                        <tbody>
+                                            <tr v-for="(clasi, index) in clasificaciones">
+                                                <td><input type="text" required="" :value="clasi.item" name="clasificaciones[]" class="form-control"></td>
+                                                <td><a href="" @click.prevent="eliminarClasificacion(index)" class="btn btn-sm btn-danger">X</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <div class="form-group col-6">
-                                    <label for="" class="col-form-label">Pregunta 2 :</label>
-                                    <input required="" type="text" name="pregunta2" class="form-control">
+                                    <label for="" class="col-form-label">Lista a clasificar :</label>
+                                    <input type="text" v-model="clasificado.item" name="pregunta2" class="form-control">
+                                    <a class="text-center btn btn-success mb-2 mt-2" @click.prevent="agregarClasificado" href="">Agregar Fila</a>
+                                       <table>
+                                        <tbody>
+                                            <tr v-for="(clasi, index) in clasificados">
+                                                <td><input type="text" required="" :value="clasi.item" name="clasificados[]" class="form-control"></td>
+                                                <td><a href="" @click.prevent="eliminarClasificado(index)" class="btn btn-sm btn-warning">X</a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                             <div class="row justify-content-center">
@@ -2703,7 +2749,7 @@
                                 <input required="" type="hidden" value="36" name="id_plantilla">
                                 <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
                             </div>
-                                     <div class="form-row">
+                            <div class="form-row">
                                 <div class="form-group col-12">
                                     <label for="recipient-name" class="col-form-label">Institucion:</label>
                                     <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
@@ -2772,13 +2818,31 @@
                                 <input required="" type="hidden" value="37" name="id_plantilla">
                                 <input type="text"  name="enunciado" value="Crear Enunciados de Contabilidad" class="form-control" readonly>
                             </div>
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Contenido:</label>
-                                <select required="" name="contenido_id" class="custom-select">
-                                    @foreach ($materias = App\Contenido::where('materia_id', 1)->get() as $materia)
-                                    <option value="{{ $materia->id }}">{{ $materia->nombre }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
                             </div>
                         <div class="tall_37">
                             <div class="form-group">

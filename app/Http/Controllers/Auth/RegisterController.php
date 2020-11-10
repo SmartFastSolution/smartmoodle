@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\NewUserRegistered;
 use App\Http\Controllers\Controller;
+use App\Mail\UserRegister;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -84,7 +86,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $clave = $data['password'];
+        $user = User::create([
            
             'cedula' => $data['cedula'],
             'fechanacimiento' => $data['fechanacimiento'],
@@ -98,6 +101,7 @@ class RegisterController extends Controller
             'titulo' => $data['titulo'],
             'email' => $data['email'],
             'email' => $data['email'],
+            'clave' => $data['password'],
             'password' => Hash::make($data['password']),
 
             'estado' => $data['estado'],
@@ -111,5 +115,8 @@ class RegisterController extends Controller
 
             
         ]);
+        
+
+        return $user;
     }
 }

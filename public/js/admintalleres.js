@@ -13,6 +13,14 @@ $(function(document, window, index ) {
         enunciado:'',
         unidad_id:'',
     },
+    clasificaciones:[],
+    clasificados:[],
+    clasificado:{
+      item:''
+    },
+    clasificacion:{
+      item:''
+    },
     registros:[],
        ejercicios:{
            debe:[],
@@ -238,7 +246,7 @@ $(function(document, window, index ) {
                    toastr.success("Taller Creado Correctamente", "Smarmoddle", {
                         "timeOut": "3000"
                     });
-                window.location = "/sistema";
+                window.location = "/sistema/home";
                    // _this.registros =[];
                    //  _this.ejercicio.debe.nom_cuenta = '';
                    //  _this.ejercicio.debe.saldo      = '';  
@@ -251,7 +259,34 @@ $(function(document, window, index ) {
 
 
                 } 
-            }
+            },
+               agregarClasificacion(){
+                var clasifica = {item:this.clasificacion.item};
+                this.clasificaciones.push(clasifica);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.clasificacion.item='';
+                
+                },
+
+                  agregarClasificado(){
+                var clasificadou = {item:this.clasificado.item};
+                this.clasificados.push(clasificadou);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.clasificado.item ='';
+                
+                },
+                eliminarClasificacion(id){
+                  this.clasificaciones.splice(id, 1);
+                },
+                eliminarClasificado(id){
+                  this.clasificados.splice(id, 1);
+                }
 
         }
 
@@ -311,6 +346,10 @@ $(function(document, window, index ) {
         evt.preventDefault();
         addTaller37()();
     });
+          $('.addTaller2').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller2()();
+    });
     $('.addTaller38').on('click', function(evt) {
         evt.preventDefault();
         addTaller38()();
@@ -336,6 +375,54 @@ $(function(document, window, index ) {
         evt.preventDefault();
         addNot();
     });
+        function addTaller2() {
+        let tall2 = $('.tall_2 .form-group').length;
+        console.log(tall2)
+        let a = 1;
+        let e = 1;
+        let t2 = 
+        '<div class="form-group">'+
+            '<label for="" class="col-form-label">Enunciado '+(tall2 + 1)+' <a href="#" class="btn btn-danger re_tall2"><span class="glyphicon glyphicon-remove">X</span></a></label>'+
+            '<textarea required="" class="form-control" name="enun[]"></textarea>'+
+        '</div>';
+        $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
+        if (tall2 == 10) {
+        function alert2(){
+            toastr.error("Limite de enunciados creados", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }
+        } else {
+        $('.tall_2').append(t2);
+        function alert2(){
+        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+            "timeOut": "1000"
+        });
+        }
+
+        //console.log(enun)
+           
+        }
+       return alert2;
+    }
+     $('.re_tall2').live('click', function() {
+        num = $('.tall_2 .form-group').toArray();
+        //console.log(num);
+        if ($('.tall_2 .form-group').length == 2) 
+        {
+            $.each(num, function( index, value ) {
+            $(value).remove();
+            });
+            addTaller2();
+        }else if($('.tall_2 .form-group').length == 1){
+             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }else {
+            $(this).parent().parent().remove();
+        }
+    });
+
      function addTaller9() {
         var tall9 = $('.enc_9 .form-row').length;
         console.log(tall9)
@@ -355,6 +442,10 @@ $(function(document, window, index ) {
                                     '</div>'+
                                   '</div>'+
                               '</div>'+
+                              '<div class="form-group col-12">'+
+                                '<label for="concepto" class="col-form-label">Respuesta Correcta</label>'+
+                              '<input required="" name="respuesta[]" class="form-control" rows="3">'+
+                          '</div>'+
                               '<div class="form-group col-12">'+
                                 '<label for="concepto6" class="col-form-label">Alternativas:</label>'+
                                 '<input required="" type="text" data-role="tagsinput" name="alter[]"'+
@@ -517,6 +608,15 @@ function addTaller11() {
         '<div class="form-group">'+
             '<label for="" class="col-form-label">Descripcion '+(tall12 + 1)+' <a href="#" class="btn btn-danger re_tall12"><span class="glyphicon glyphicon-remove">X</span></a></label>'+
             '<textarea required="" class="form-control" name="descripcion[]"></textarea>'+
+            ' <label for="" class="col-form-label">RESPUESTA CORRECTA</label>'+
+                '<div class="form-row">'+
+                    '<div class="col-3">'+
+                        '<select name="respuesta[]" id="" class=" custom-select custom-select-sm">'+
+                   '<option value="V" class="p-2">V</option>'+
+                    '<option value="F" class="p-2">F</option>'+
+              ' </select>'+
+                    '</div>'+
+                '</div>'+
         '</div>';
         $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
         if (tall12 == 10) {
@@ -955,6 +1055,8 @@ function addTaller38() {
                 '</div>'+
                 ' </div>'+
                 '</div>'+
+               ' <label for="" class="col-form-label">Respuesta Correcta:</label>'+
+               ' <textarea required="" required="" name="respuesta[]" class="form-control"rows="5" placeholder="La respuesta correcta debe ser igual a una de las alternativas"></textarea>'+
                 '<label for="" class="col-form-label">Alternativa 1:</label>'+
                 '<textarea required="" required="" name="alternativa1[]" class="form-control"rows="5"></textarea>'+
                  '<label for="" class="col-form-label">Alternativa 2:</label>'+

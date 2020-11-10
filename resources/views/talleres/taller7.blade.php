@@ -3,10 +3,8 @@
 
 @section('title', $datos->taller->nombre)
 @section('content')
-
 <h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>
      <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}
-
 <form action="{{ route('taller7', ['idtaller' => $d]) }}" method="POST">
     @csrf
 	<div class="container">
@@ -15,13 +13,13 @@
 				<img class="text-center" src="{{ asset('img/talleres/imagen-8.jpg') }}" alt="">
 			</div>
 			<div class="col-3 mt-5 rounded-circle bg-danger p-5">
-				<textarea name="respuesta1" class="form-control border-0" id="" cols="5" rows="5"></textarea>
+				<textarea required name="respuesta1" class="form-control border-0" id="" cols="5" rows="5"></textarea>
 			</div>
 			<div class="col-3 mt-3 rounded-circle bg-info p-5">
-				<textarea name="respuesta2" class="form-control border-0" id="" cols="5" rows="5"></textarea>
+				<textarea required name="respuesta2" class="form-control border-0" id="" cols="5" rows="5"></textarea>
 			</div>
 			<div class="col-3 rounded-circle bg-success p-5">
-				<textarea name="respuesta3" class="form-control border-0" id="" cols="5" rows="5"></textarea>
+				<textarea required name="respuesta3" class="form-control border-0" id="" cols="5" rows="5"></textarea>
 			</div>
 		</div>
 		<div class="row justify-content-center">

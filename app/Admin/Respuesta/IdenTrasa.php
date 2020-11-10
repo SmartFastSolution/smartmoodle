@@ -13,6 +13,6 @@ class IdenTrasa extends Model
         return $this->belongsTo('App\User');
     }
      public function idenTransaDatos(){
-        return $this->hasMany('App\Admin\Respuesta\IndeTrasaDato');
+        return $this->hasMany('App\Admin\Respuesta\IdenTrasaDato');
     }
 }

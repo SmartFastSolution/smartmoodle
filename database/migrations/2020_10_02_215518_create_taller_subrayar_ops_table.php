@@ -17,6 +17,7 @@ class CreateTallerSubrayarOpsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_subrayars_id');
             $table->string('concepto')->nullable();
+            $table->string('respuesta')->nullable();
             $table->string('alternativas')->nullable();
             $table->timestamps();
             

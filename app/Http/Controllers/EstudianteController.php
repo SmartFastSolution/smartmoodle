@@ -29,7 +29,11 @@ class EstudianteController extends Controller
 
     public function index(){
      
-
+        $au =  auth()->user()->distrima;
+         if ($au == null) {
+         return view('errors.error'); //ruta estudiante //ruta estudiante       
+             
+        }
         return view('Estudiante.indexes'); //ruta estudiante       
     }
 
@@ -56,7 +60,7 @@ class EstudianteController extends Controller
 
          $tallers=Taller::get();
          $completados = $user->tallers;
-         
+         $con =Contenido::where('materia_id', $id)->first();
          $ids = [];
           foreach($completados as $act){
                 $ids[]=$act->id;

@@ -10,7 +10,7 @@ class TallerSubrayar extends Model
 
         return $this->belongsTo('App\Taller');
     }
-     public function TallerSubraOps(){
+     public function tallerSubraOps(){
 
         return $this->hasMany('App\Admin\TallerSubrayarOp', 'taller_subrayars_id');
     }

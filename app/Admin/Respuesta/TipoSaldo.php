@@ -15,8 +15,7 @@ class TipoSaldo extends Model
 
         return $this->belongsTo('App\User');
     }
-      public function tiposaldoDatos(){
-
-        return $this->hasMany('App\Admin\Respuesta\TipoSaldo');
+      public function saldoDato(){
+        return $this->hasMany('App\Admin\Respuesta\TipoSaldoDato');
     }
 }

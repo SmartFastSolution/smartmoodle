@@ -21,18 +21,14 @@
             </div>
             <div class="row">
                 <div class="card-body">
-
-
                     <h4>Unidades</h4>
+                    <a class="btn btn-primary btn" href=""><i class="far fa-clipboard"></i> Calificaciones</i></a>
+                <a class="btn btn-success btn" href=""><i class="fas fa-users"></i> Participantes</i></a>
                     @foreach($contenidos->where('materia_id', $materia->id) as $contenido)
                     <!-- ./col -->
-
                     <p><a type="button" data-toggle="modal" data-target="#modalYT" class="text-primary"> <i
                                 class="fas fa-file-pdf"></i>
                             {{$contenido->nombre}}</a></p>
-
-
-
                     <!-- inicio del modal para visualizacion del archivo de contenido -->
                     <div class="modal fade" id="modalYT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                         aria-hidden="true">
@@ -55,14 +51,10 @@
 
 
                                     </div>
-
                                 </div>
-
                                 <div class="modal-footer justify-content-center">
                                     <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4"
                                         data-dismiss="modal">Close</button>
-
-
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-center">
@@ -77,24 +69,13 @@
                     </div>
                     <!-- espacio -->
                     <!-- espacio para que no salga opciones de pdf  -->
-
+                @endforeach
                 </div>
                 <!--fin del modal -->
 
                 <!-- ./col -->
-
-                @endforeach
-                <a class="btn btn-primary btn" href=""><i class="far fa-clipboard"></i> Calificaciones</i></a>
-                <a class="btn btn-success btn" href=""><i class="fas fa-users"></i> Participantes</i></a>
-
-            </div>
-
-
-
-        </div>
-    </div>
-
-
+                </div>
+                
     <div class="card">
         <div class="card-header">
             <h3 class="font-weight-light"> <strong>Talleres</strong></h3>
@@ -175,25 +156,28 @@
                                     <th scope="col">Enunciado </th>
                                     <th scope="col">Estado </th>
                                     <th scope="col">Calificacion </th>
+
                                     {{-- <th scope="col">Vista Taller</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    @foreach(auth()->user()->tallers->where('contenido_id', $contenido->id) as $taller)
-                                    <th scope="row">{{-- {{$taller->materia['id']}} --}}</th>
-                                    <td>{{$taller->contenido->nombre}}</td>
-                                    <td>{{$taller['nombre']}}</td>
-                                    <td>{{$taller->enunciado}}</td>
-                                    <td> <span class="badge badge-success">{{$taller->pivot->status}}</span></td>
-                                    <td> <span class="badge badge-danger">pendiente</span></td>
-                                    {{--  <td class="table-button ">
-                                            <a class="btn btn-info"
-                                                href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
-                                        class="fas fa-eye"></i></a>
-                                    </td> --}}
-                                </tr>
-                                @endforeach
+                                @foreach(auth()->user()->tallers->where('contenido_id', $contenido->id) as $taller)
+                                    <tr>
+                                        <th scope="row">{{-- {{$taller->materia['id']}} --}}</th>
+                                        <td>{{$taller->contenido->nombre}}</td>
+                                        <td>{{$taller['nombre']}}</td>
+                                        <td>{{$taller->enunciado}}</td>
+                                        <td align="center"> <span class="badge @if ($taller->pivot->status == 'completado') badge-warning @elseif($taller->pivot->status == 'calificado') badge-success @endif ">{{$taller->pivot->status}}</span></td>
+
+                                        <td class="text-center"> <span class="badge @isset ($taller->pivot->calificacion) @else badge-danger  @endisset">@isset ($taller->pivot->calificacion)
+                                          <a class="btn btn-info"
+                                                href="{{route('vista.taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
+                                                class="fas fa-eye"></i></a> @else pendiente
+                                        @endisset</span>
+                                    </td>
+                                    
+                                    </tr>
+                                    @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -204,6 +188,7 @@
             </div>
         </div>
     </div>
+
 </section>
 
 
@@ -217,15 +202,12 @@ $(function() {
         $('#myTable').DataTable({
                 "info": true,
                 "autoWidth": true,
-
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
                 }
             }
-
         );
     });
-
 });
 </script>
 

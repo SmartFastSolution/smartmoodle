@@ -19,7 +19,7 @@
 						<p><span class="badge badge-danger p-1" >{{ ++$a }}</span > {{ $enunciados->enunciado }}</p>
 					</div>
 					<div class="col-2">
-						<input type="text" name="respuestas[]" class="form-control">
+						<input required type="text" name="respuestas[]" class="form-control">
 					</div>
 				</div>
 			@endforeach

@@ -14,7 +14,7 @@
 			<div class="row">
 				@foreach ($datos->abreviaturaImg as $dato)
 					<div class="col-6"><img class="img-fluid" src="{{ asset($dato->col_a) }}" alt=""></div>
-					<div class="col-6 align-self-center"><input type="text" name="col_a[]" class="form-control"></div>
+					<div class="col-6 align-self-center"><input required type="text" name="col_a[]" class="form-control"></div>
 				@endforeach
 			</div>
 		</div>
@@ -22,7 +22,7 @@
 			<div class="row">
 				@foreach ($datos->abreviaturaImg as $dato)
 					<div class="col-6"><img class="img-fluid" src="{{ asset($dato->col_b) }}" alt=""></div>
-					<div class="col-6 align-self-center"><input type="text" name="col_b[]" class="form-control"></div>
+					<div class="col-6 align-self-center"><input required type="text" name="col_b[]" class="form-control"></div>
 				@endforeach
 			</div>
 		</div>
