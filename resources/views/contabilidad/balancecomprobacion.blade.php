@@ -21,9 +21,9 @@
                 <td align="center" width="125">@{{ balan.suma_haber }}</td>
                 <td align="center" width="125">@{{ balan.saldo_debe }}</td>
                 <td align="center" width="125">@{{ balan.saldo_haber }}</td>
-                <td align="center" width="50"><a @click="deleteBalance(index)" class="btn btn-danger"><i
+                <td align="center" width="50"><a @click="deleteBalance(index)"  class="btn btn-danger"><i
                             class="fas fa-trash-alt"></i></a></td>
-                <td align="center" width="50"><a @click="editBalance(index)" class="btn btn-warning"><i
+                <td align="center"   v-if="balan.length>0" width="50"><a @click="editBalance(index)" class="btn btn-warning"><i
                             class="fas fa-edit"></i></a></td>
 
             </tr>

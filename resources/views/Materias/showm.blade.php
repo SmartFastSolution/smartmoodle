@@ -20,7 +20,7 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-              
+
                 <h1 class="font-weight-light">Show Materias</h1>
                 <div class="row">
                     <div class="col-md-8">
@@ -76,8 +76,6 @@
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
                                 aria-controls="nav-home" aria-selected="true">Unidades</a>
-
-
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
@@ -117,53 +115,59 @@
                                                     <button type="button" class="btn btn-info" data-toggle="modal"
                                                         data-target="#modalYT"><i class="fas fa-eye"></i></button>
 
+
+                                                    <!-- inicio del modal para visualizacion del archivo de contenido -->
+                                                    <div class="modal fade" id="modalYT" tabindex="-1" role="dialog"
+                                                        aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+
+                                                            <!--Content-->
+
+                                                            <div class="modal-content">
+
+                                                                <!--Body-->
+
+                                                                <div class="modal-body mb-0 p-0">
+
+                                                                    <div
+                                                                        class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+
+                                                                        <iframe
+                                                                            style="object-fit: contain; width: 100%; height: 500px;"
+                                                                            class="embed-responsive-item"
+                                                                            src="{{$contenido->archivo->url}}"
+                                                                            allowfullscreen></iframe>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="modal-footer justify-content-center">
+                                                                    <span class="mr-4">{{$contenido['nombre']}}</span>
+
+                                                                    <button type="button"
+                                                                        class="btn btn-outline-primary btn-rounded btn-md ml-4"
+                                                                        data-dismiss="modal">Close</button>
+
+                                                                </div>
+
+                                                            </div>
+                                                            <!--/.Content-->
+
+                                                        </div>
+                                                        <!-- espacio -->
+                                                        <!-- espacio para que no salga opciones de pdf  -->
+
+                                                    </div>
+                                                    <!--fin del modal -->
+
+
+
+
                                                 </td>
 
                                             </tr>
-                                            <!-- inicio del modal para visualizacion del archivo de contenido -->
-                                            <div class="modal fade" id="modalYT" tabindex="-1" role="dialog"
-                                                aria-labelledby="myModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg" role="document">
 
-                                                    <!--Content-->
-
-                                                    <div class="modal-content">
-
-                                                        <!--Body-->
-
-                                                        <div class="modal-body mb-0 p-0">
-
-                                                            <div
-                                                                class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-
-                                                                <iframe
-                                                                    style="object-fit: contain; width: 100%; height: 500px;"
-                                                                    class="embed-responsive-item"
-                                                                    src="{{asset(Storage::url($contenido['documentod']))}}"
-                                                                    allowfullscreen></iframe>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                        <div class="modal-footer justify-content-center">
-                                                            <span class="mr-4">{{$contenido['nombre']}}</span>
-
-                                                            <button type="button"
-                                                                class="btn btn-outline-primary btn-rounded btn-md ml-4"
-                                                                data-dismiss="modal">Close</button>
-
-                                                        </div>
-
-                                                    </div>
-                                                    <!--/.Content-->
-
-                                                </div>
-                                                <!-- espacio -->
-                                                <!-- espacio para que no salga opciones de pdf  -->
-
-                                            </div>
-                                            <!--fin del modal -->
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -171,10 +175,10 @@
                             </div>
                             <!-- fin de Contenidos -->
                         </div>
-                        
+
                     </div>
                 </div>
-                <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                <a href="{{route('materias.index')}}" class="btn btn-primary">Atras</a>
             </div>
         </div>
 </section>

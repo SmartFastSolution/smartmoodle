@@ -6,6 +6,17 @@
 
 @section('content')
 
+
+@if ($errors->any())
+<div class="alert alert-danger">
+    <strong>Whoops!</strong> Parece que hay porblemas  <br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <section class="content">
     <div class="container">
         <div class="card border-0 shadow my-5">
@@ -54,9 +65,9 @@
                                         <label class="custom-control-label" for="estadooff">No Activo</label>
                                     </div>
                                 </div>
-
+                                <a href="{{route('pcuentas.index')}}" class="btn btn-primary">Atras</a>
                                 <input type="submit" class="btn btn-dark " value="Guardar">
-                                <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                                
                             </div>
 
                         </form>

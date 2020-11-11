@@ -52,7 +52,7 @@
                                 </div>
                                 <br><br><br>
                           
-                                <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                                <a href="{{route('nivels.index')}}" class="btn btn-primary">Atras</a>
                                 <input type="submit" class="btn btn-dark " value="Guardar">
                             </div>
                         </form>

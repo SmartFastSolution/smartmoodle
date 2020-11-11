@@ -102,8 +102,9 @@
                                     </div>
                                     @endforeach
                                 </div>
+                                <a href="{{route('roles.index')}}"  class="btn btn-primary">Atras</a>
                                 <input type="submit" class="btn btn-dark " value="Guardar">
-                                <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                                
                         </form>
 
                     </div>

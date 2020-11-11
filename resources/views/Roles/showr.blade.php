@@ -109,7 +109,7 @@
                                     @endforeach
                                 </div>
                                 <div class="card-footer">
-                                    <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                                <a href="{{route('roles.index')}}"  class="btn btn-primary">Atras</a>
                                 </div>
                         </form>
                     </div>

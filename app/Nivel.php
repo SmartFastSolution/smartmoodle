@@ -23,4 +23,16 @@ class Nivel extends Model
 
     }
 
+    public function distrimas(){
+        
+        return $this->hasMany('App\Distrima');
+
+    }
+
+    public function users(){
+        
+        return $this->hasMany('App\User');
+
+    }
+
 }

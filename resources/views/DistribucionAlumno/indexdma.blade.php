@@ -6,21 +6,21 @@
 
 
 @section('content')
-
+@if ($message = Session::get('success'))
+<div class="alert alert-success">
+    <p>{{ $message }}</p>
+</div>
+@endif
 
 <section class="content">
     <div class="container">
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-        @endif
+
         <div class="row justify-content-center">
             <div class="col-md-12">
 
                 <a class="btn btn-info float-right" href="{{route('distrimas.create')}}"><i class="fas fa-plus"></i>
                     CREAR ASIGNACION</a>
-                <h1>Asignación de Alumno/Curso</h1>
+                    <h1 class="font-weight-light">Asignación de Alumno/Curso</h1>
                 <div class="card card-secondary">
                     <div class="card-header">
 
@@ -35,7 +35,7 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">Unidad Educativa</th>
                                     <th scope="col">Curso</th>
-
+                                    <th scope="col">Paralelo</th>
                                     <th scope="col">Materias</th>
                                     <th scope="col">Alumno</th>
                                     <th scope="col">Estado</th>
@@ -58,19 +58,25 @@
                                         </span>
                                         @endif
                                     </td>
-
+                                    <td>
+                                        @if($distrima->nivel->nombre != null)
+                                        <span class="badge badge-success">
+                                            {{$distrima->nivel->nombre}}
+                                        </span>
+                                        @endif
+                                    </td>
 
                                     <td>
-                                  
+
                                         @foreach($distrima->distribucionmacu->materias as $mat)
                                         <span class="badge badge-success">
                                             {{ $mat->nombre}}
                                         </span>
                                         @endforeach
-                                 
-                                      
+
+
                                     </td>
-                                 
+
 
                                     <td>
                                         @if($distrima->user != null)
@@ -121,9 +127,7 @@
 
 
 
-@foreach ($user as $element)
- <li>{{ $element->user->name}}</li>
-@endforeach
+
 
 @stop
 

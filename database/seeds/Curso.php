@@ -118,6 +118,36 @@ class Curso extends Seeder
 			'estado'      => 'on',
 			'created_at'  => now(),
 			'updated_at'  => now()
+		]);
+		DB::table('nivels')->insert([
+			'nombre'      => 'F',
+			'estado'      => 'on',
+			'created_at'  => now(),
+			'updated_at'  => now()
+		]);
+		DB::table('nivels')->insert([
+			'nombre'      => 'G',
+			'estado'      => 'on',
+			'created_at'  => now(),
+			'updated_at'  => now()
+		]);
+		DB::table('nivels')->insert([
+			'nombre'      => 'H',
+			'estado'      => 'on',
+			'created_at'  => now(),
+			'updated_at'  => now()
+		]);
+		DB::table('nivels')->insert([
+			'nombre'      => 'I',
+			'estado'      => 'on',
+			'created_at'  => now(),
+			'updated_at'  => now()
+		]);
+		DB::table('nivels')->insert([
+			'nombre'      => 'J',
+			'estado'      => 'on',
+			'created_at'  => now(),
+			'updated_at'  => now()
         ]);
 
         

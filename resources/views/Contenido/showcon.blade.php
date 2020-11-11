@@ -189,7 +189,7 @@
                 </div>
 
             </div>
-            <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+            <a href="{{route('contenidos.index')}}" class="btn btn-primary">Atras</a>
         </div>
     </div>
 </section>
@@ -208,7 +208,7 @@
 
                 <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
                     <iframe class="embed-responsive-item" width="1000" height="1000"
-                        src="{{Storage::url($contenido['documentod'])}}" allowfullscreen></iframe>
+                    src="{{$contenido->archivo->url}}" allowfullscreen></iframe>
                 </div>
 
             </div>

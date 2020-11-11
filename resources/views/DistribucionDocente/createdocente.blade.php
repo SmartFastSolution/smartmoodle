@@ -56,7 +56,9 @@
                                     <label>Materias</label>
                                     <select class="select2" multiple="multiple" name="materia[]"
                                         data-placeholder="Select a State" style="width: 100%;">
-                                        <option v-for="mater in materias" :value="mater.id">@{{ mater.nombre}}</option>
+                                        <optgroup v-for="(curso, index) in materias" :label="curso.nombre">
+                                            <option v-for="mater in materias[index].materias" :value="mater.id">@{{ mater.nombre}}</option>
+                                        </optgroup>
                                     </select>
                                 </div>
                                
@@ -77,7 +79,7 @@
                                     </div>
                                 </div>
                                 <br>
-                              <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                              <a href="{{route('distribuciondos.index')}}" class="btn btn-primary">Atras</a>
                               <input type="submit" class="btn btn-dark " value="Guardar">
                             </div>
 

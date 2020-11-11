@@ -34,16 +34,41 @@ class HomeController extends Controller
         return view('sistema');
     }
 
-    public function buscarMateria(Request $request){
+
+    public function materia(Request $request){
 
         $materias= Materia::where('instituto_id', $request->id)->get();
         $materia = [];
+   
            foreach($materias as $key => $value){
             $materia[$key] =[
                 'id'=> $value->id,
                 'nombre' => $value->nombre
             ];
         }
+        return $materia;
+        
+    }
+
+    
+    public function buscarMateria(Request $request){
+
+        $materias= Materia::where('instituto_id', $request->id)->get();
+        $materia = [];
+        $distribucion = Distribucionmacu::where('instituto_id', $request->id)->get();
+        foreach($distribucion as $key => $value){
+            $materia[$key] =[
+                'id'=> $value->id,
+                'nombre' => $value->curso->nombre,
+                'materias' => $value->materias,
+            ];
+        }
+        //    foreach($materias as $key => $value){
+        //     $materia[$key] =[
+        //         'id'=> $value->id,
+        //         'nombre' => $value->nombre
+        //     ];
+        // }
         return $materia;
         
     }
@@ -58,7 +83,7 @@ class HomeController extends Controller
         return $users;
         
     }
- 
+  
     public function buscarAsignacion(Request $request){
 
         $dist= Distribucionmacu::where('instituto_id', $request->id)->get();

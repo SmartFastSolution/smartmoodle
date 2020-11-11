@@ -54,6 +54,12 @@ class Materia extends Model
         return $this->belongsToMany(Distribuciondo::class)->withPivot('materia_id')->withTimestamps();
 
     }
+
+    public function assignments(){
+
+        return $this->belongsToMany(Assignment::class)->withPivot('materia_id')->withTimestamps();
+
+    }
     
 
 }

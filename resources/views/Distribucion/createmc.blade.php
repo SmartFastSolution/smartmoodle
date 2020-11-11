@@ -84,8 +84,9 @@
                                     </div>
                                 </div>
                                 <br>
+                                <a href="{{route('distribucionmacus.index')}}" class="btn btn-primary">Atras</a>
                                 <input type="submit" class="btn btn-dark " value="Guardar">
-                                <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                               
                             </div>
 
                         </form>
@@ -131,7 +132,7 @@ const inst = new Vue({
 
             var set = this;
             set.materias = [];
-            axios.post('/sistema/materiainst', {
+            axios.post('/sistema/materiasasig', {
                 id: set.instituto
             }).then(response => {
                 set.materias = response.data;

@@ -64,6 +64,16 @@
                                     </select>
                                 </div>
 
+                                <div class="form-group">
+                                    <label>Paralelo</label>
+                                    <select class="form-control select" name="paralelo" style="width: 99%;">
+                                        <option selected disabled>Seleccione el Paralelo...</option>
+                                        @foreach($nivels as $nivel)
+                                        <option value="{{$nivel->id}}">{{$nivel->nombre}}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
                                 <div class="form-group">
                                     <label for="nombre">Estado </label>

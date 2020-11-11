@@ -25,6 +25,13 @@ class Curso extends Model
         return $this->hasMany('App\Distribucionmacu');
 
     }
+
+    
+    public function users(){
+        
+        return $this->hasMany('App\User');
+
+    }
   
    
 }

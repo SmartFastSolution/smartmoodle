@@ -30,5 +30,11 @@ class Distrima extends Model
         return $this->belongsTo('App\Distribucionmacu');
 
     }
+
+    public function nivel(){
+          
+        return $this->belongsTo('App\Nivel');
+
+    }
   
 }

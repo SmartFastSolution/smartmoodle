@@ -6,12 +6,23 @@
 
 @section('content')
 
+@if ($errors->any())
+<div class="alert alert-danger">
+    <strong>Whoops!</strong> Parece que hay porblemas o Malas decisiones <br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 <section class="content">
     <div class="container">
 
 
         <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
-        <h2 class="font-weight-light"> <strong> {{auth()->user()->distrima->distribucionmacu->curso->nombre}} </strong>
+        <h2 class="font-weight-light"> <strong> {{auth()->user()->curso->nombre}} </strong>
         </h2>
 
 
@@ -23,8 +34,8 @@
 
             <div class="row">
 
-                @foreach(auth()->user()->distrima->distribucionmacu->materias as $materia)
-
+                @foreach(auth()->user()->assignmets as $as)
+                 @foreach($as->materias as $materia)
                 <div class="col-lg-3 col-5">
 
                     <div class="small-box bg-gradient-info">
@@ -40,7 +51,7 @@
                         </a>
                     </div>
                 </div>
-
+                @endforeach
                 @endforeach
 
 

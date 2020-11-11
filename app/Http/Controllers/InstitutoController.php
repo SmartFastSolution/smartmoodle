@@ -26,7 +26,7 @@ class InstitutoController extends Controller
     public function index()
     {
         //Gate::authorize('haveaccess', 'instituto.index');
-        $instituto= Instituto::orderBy('id','Asc')->paginate(5);
+        $instituto= Instituto::all();
     
         return view('Instituto.indexins',['institutos'=>$instituto]);
     }

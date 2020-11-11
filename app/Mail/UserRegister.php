@@ -13,11 +13,8 @@ class UserRegister extends Mailable
     use Queueable, SerializesModels;
     public $user;
     public $clave;
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
+   
+    
     public function __construct(User $user)
     {
         $this->user = $user;

@@ -22,14 +22,7 @@
         <div class="card border-0 shadow my-5">
 
             <div class="card-body p-5">
-                <div class="btn-group float-right" role="group" aria-label="Basic example">
-
-                    <a class="btn btn-primary float-right" href="{{route('distribuciondos.create')}}"><i
-                            class="fas fa-plus"></i> Asignar Docente</a>
-                    <a class="btn btn-success float-right" href="{{route('distrimas.create')}}"><i
-                            class="fas fa-plus"></i>
-                        Asignar Estudiante</a>
-                </div>
+               
                 <h1 class="font-weight-light">Añadir Usuarios</h1>
 
                 <div class="row">
@@ -121,9 +114,51 @@
                                         <br>
                                     </div>
                                 </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="name"> Estado</label>
+                                    <br>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="estadoon" name="estado" class="custom-control-input"
+                                            value="on" @if(old('estado')=="on" ) checked @endif
+                                            @if(old('estado')===null) checked @endif>
+                                        <label class="custom-control-label" for="estadoon">Activo</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="estadooff" name="estado" class="custom-control-input"
+                                            value="off" @if(old('estado')=="off" ) checked @endif>
+                                        <label class="custom-control-label" for="estadooff">No Activo</label>
+                                    </div>
+                                </div>
                                 <br><br>
+                                <hr>
+                                <h3 class="font-weight-light">Sección Estudiante</h3>
+                                <div class="form-group">
+                                  
+                                    <label>Curso</label>
+                                    <select class="form-control select" name="curso" style="width: 99%;">
+                                        <option selected disabled>Elija el Curso...</option>
+                                        @foreach($cursos as $curso)
+                                        <option value="{{$curso->id}}">{{$curso->nombre}}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Paralelo</label>
+                                    <select class="form-control select" name="paralelo" style="width: 99%;">
+                                        <option selected disabled>Elija el Paralelo...</option>
+                                        @foreach($nivels as $nivel)
+                                        <option value="{{$nivel->id}}">{{$nivel->nombre}}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <br>
+                                <br>
+                              
+                                <a href="{{route('users.index')}}" class="btn btn-primary">Atras</a>
                                 <input type="submit" class="btn btn-dark " value="Guardar">
-                                <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
 
                             </div>
                         </form>

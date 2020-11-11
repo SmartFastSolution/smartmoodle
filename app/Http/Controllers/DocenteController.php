@@ -34,10 +34,11 @@ class DocenteController extends Controller
         // 
         
             $au = User::find(Auth::id())->distribuciondos;
-            if ($au == null) {
-            return redirect()->route('welcome'); 
+            // if ($au == null) {
+            // return redirect()->route('welcome'); 
                
-            }
+            // }
+       if (isset($au->materias)) {
             $ids =[];
             foreach ($au->materias as $value) {
                 foreach ($value->contenidos as $conte) {
@@ -71,6 +72,12 @@ class DocenteController extends Controller
 
             // return $users;
         return view('Docente.indexd', compact('users','au', 'calificado')); //ruta docente
+       }else{
+
+
+        return view('Docente.indexd'); //ruta docente
+          } 
+
     }
     
 

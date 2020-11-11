@@ -27,8 +27,8 @@ Route::get('/', function () {
 
 ///rutas protegidas On 
 
- //Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
-Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
+ Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
+//Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
    
 route::get('/home','Controller@index')->name('administrador'); //ruta administracion
 
@@ -41,23 +41,32 @@ route::get('/homedoc','DocenteController@index')->name('docente'); //ruta docent
 route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta estudiante
 
 //rutas vue asignaciones////
-Route::post('materiainst','HomeController@buscarMateria')->name('materiainst');
-Route::post('userinst','HomeController@buscarAlumno')->name('userinst');
-Route::post('docinst','HomeController@buscarDocente')->name('docinst');
-Route::post('distinst','HomeController@buscarAsignacion')->name('distinst');
-Route::post('contmateria','HomeController@buscarContenido')->name('contmateria');
+
+ Route::post('materiainst','HomeController@buscarMateria')->name('materiainst');
+ Route::post('materiasasig','HomeController@materia')->name('materiassig');
+ Route::post('userinst','HomeController@buscarAlumno')->name('userinst');
+ Route::post('docinst','HomeController@buscarDocente')->name('docinst');
+ Route::post('distinst','HomeController@buscarAsignacion')->name('distinst');
+ Route::post('contmateria','HomeController@buscarContenido')->name('contmateria');
+
+
+
 ///rutas menu docente
 route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
+
 
 //rutas menu estudiante
 route::post('admin/cambiarestado','AdminController@status')->name('taller.status');
 route::get('perfil','EstudianteController@show')->name('perfile');
 route::get('unidad/{id}','EstudianteController@unidades')->name('Unidades');
+route::get('estudiante/password', 'EstudianteController@password')->name('AlumnoPass'); //para metodo get del password 
+route::post('estudiante/password','EstudianteController@updatep')->name('Estudiantes.updatep'); // para guardar el nuevo password
 
 ///rutas menu docente
 
 route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
 route::get('alumnos/{id}', 'DocenteController@cursos')->name('Alumnos');
+
 
  //permisoss
  
@@ -103,6 +112,25 @@ route::resource('distrimas','DistrimaController');
 
 //Ruta Resource para distribucion alumno docente/materia
 route::resource('distribuciondos','DistribuciondoController');
+
+//Ruta Resource para clonacion de unidad educativa
+route::get('/clinstitutos/create','ClinstitutoController@create')->name('clinstitutos.create');
+route::post('/clinstitutos/store','ClinstitutoController@p_clonainstituto')->name('clinstitutos.p_clonainstituto');
+
+//Ruta Resource para Post
+route::resource('posts','PostController');
+
+//rutas para comentarios del post
+route::post('/comment/store','CommentController@store')->name('comment.add');
+route::post('/reply/store','CommentController@replyStore')->name('reply.add');
+route::delete('/reply/destroy/{comment}','CommentController@destroy')->name('comment.destroy');
+route::get('/reply/{comment}/edit','CommentController@edit')->name('comment.edit');
+route::put('/reply/{comment}','CommentController@update')->name('comment.update');
+
+
+
+//rutas de nueva asignacion estudiante a materias 
+route::resource('assignments','AssignmentController');
 });
 
 Route::group(['prefix' => 'sistema/admin'], function() {

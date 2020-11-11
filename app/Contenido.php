@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Contenido extends Model
 {
     protected $fillable = [
-        'nombre','descripcion','estado','documentod'
+        'nombre','descripcion','estado'
 
     ];
 
@@ -20,5 +20,11 @@ class Contenido extends Model
     public function tallers(){
           
         return $this->hasMany('App\Taller');
+    }
+
+
+    public function archivo(){
+
+        return $this->morphOne('App\Archivo','archivoable');
     }
 }

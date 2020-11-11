@@ -44,6 +44,20 @@
 
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                        <label>Actualizar Paralelo</label>
+                                        <select class="form-control select" name="paralelo" style="width: 99%;">
+                                            @foreach($niveldis as $niveld)
+                                            <option selected disabled value="{{ $niveld->id }}">
+                                                {{ $niveld->nombre }}
+                                            </option>
+                                            @endforeach
+                                            @foreach($nivels as $nivel)
+                                            <option value="{{$nivel->id}}">{{$nivel->nombre}}</option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
                             </div>
                             <label for="nombre">Estado</label><br>
                             <div class="custom-control custom-radio custom-control-inline">

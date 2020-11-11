@@ -6,6 +6,16 @@
 
 @section('content')
 
+@if ($errors->any())
+<div class="alert alert-danger">
+    <strong>Whoops!</strong> Parece que hay porblemas  <br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 <section class="content">
     <div class="container">
         <div class="card border-0 shadow my-5">
@@ -57,7 +67,7 @@
                                 </div>
                                 </div>
                                
-                                <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                                <a href="{{route('pcuentas.index')}}" class="btn btn-primary">Atras</a>
                             </div>
                         </form>
                     </div>

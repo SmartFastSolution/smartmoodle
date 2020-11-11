@@ -7,6 +7,7 @@ use App\Instituto;
 use App\Distribucionmacu;
 use App\Distrima;
 use App\User;
+use App\Nivel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class DistrimaController extends Controller
     public function index()
     {
         $distrimas= Distrima::orderBy('id','Asc')->paginate(5);
-       $dist = Distribucionmacu::find(2);
+        $dist = Distribucionmacu::find(2);
        $user = Distrima::where('distribucionmacu_id', 2)->get();
        
         //dd($distrimas);
@@ -35,13 +36,13 @@ class DistrimaController extends Controller
      */
     public function create()
     {
-
+        $nivels= Nivel::get();
         $institutos = Instituto::get();
         $materias=Materia::get();  
         $cursos=Curso::get();
         $users=User::get();
         $distribucion=Distribucionmacu::get();
-        return \view('DistribucionAlumno.createma',compact('materias','cursos','institutos','users'));
+        return \view('DistribucionAlumno.createma',compact('materias','cursos','institutos','users','nivels'));
     }
 
     /**
@@ -56,11 +57,13 @@ class DistrimaController extends Controller
             'estudiante' => ['required','unique:distrimas,user_id'],
             'asignacion' =>    ['required'],
             'instituto' =>['required'],
+            'paralelo' =>['required'],
             'estado' => ['required' ,'in:on,off'],
         ]);
 
         $distrima =new  Distrima;
         $distrima ->instituto_id = $request->instituto;
+        $distrima ->nivel_id = $request->paralelo;
         $distrima ->estado = $request->estado;
         $distrima->distribucionmacu_id =$request->asignacion;
         $distrima ->user_id = $request->estudiante;
@@ -91,7 +94,7 @@ class DistrimaController extends Controller
     public function edit(Distrima $distrima)
     {
 
-      
+       
 
         $distma=Distrima::find($distrima->id);
         $user=$distma->user()->first();
@@ -119,7 +122,10 @@ class DistrimaController extends Controller
         }
        
 
-        return \view('DistribucionAlumno.editdisma',compact('distrima','distma','cursos','curs','instituto','distribucion_all','user','distribucion'));
+        $nivels = Nivel::get(); // todos los datos de la bd
+        $niveldis = Distrima::find($distrima->id)->nivel()->get(); //llama al instituto que este relacionado a un usuario 
+
+        return \view('DistribucionAlumno.editdisma',compact('distrima','distma','cursos','curs','instituto','distribucion_all','user','distribucion','nivels','niveldis'));
     }
 
     /**
@@ -139,6 +145,17 @@ class DistrimaController extends Controller
         ]);
 
         $distrima->update($request->all());
+
+        if($request->get('asignacion')){
+          
+            $distrima->distribucionmacu_id = $request->asignacion;
+          }
+
+        if($request->get('paralelo')){
+          
+            $distrima->nivel_id = $request->paralelo;
+          }
+
         $distrima->save();
 
           return redirect('sistema/distrimas');

@@ -103,8 +103,69 @@
                                     </div>
 
                                 </div>
+                                <br>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estadoon" name="estado" class="custom-control-input"
+                                        value="on" @if($user['estado']=="on" ) checked @elseif(old('estado')=="on" )
+                                        checked @endif>
+                                    <label class="custom-control-label" for="estadoon">Activo</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estadooff" name="estado" class="custom-control-input"
+                                        value="off" @if($user['estado']=="off" ) checked @elseif(old('estado')=="off" )
+                                        checked @endif>
+                                    <label class="custom-control-label" for="estadooff">No Activo</label>
+                                </div>
+                                <br><br>
+
+
+                                @foreach($roluser as $role)
+                                @if($role['descripcion']=='estudiante')
+
+                                <hr>
+                                <h3 class="font-weight-light">Sección Estudiante</h3>
+                                <div class="form-group">
+                                    <label>Actualizar Curso</label>
+                                    <select class="form-control select" name="curso" style="width: 99%;">
+
+                                        @foreach($cursouser as $cuser)
+
+                                        <option selected disabled value="{{ $cuser->id }}">
+                                            {{ $cuser->nombre }}
+                                        </option>
+
+                                        @endforeach
+                                        @foreach($cursos as $curso)
+                                        <option value="{{$curso->id}}">{{$curso->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Actualizar Paralelo</label>
+                                    <select class="form-control select" name="paralelo" style="width: 99%;">
+
+                                        @foreach($niveluser as $nvuser)
+
+                                        <option selected disabled value="{{ $nvuser->id }}">
+                                            {{ $nvuser->nombre }}
+                                        </option>
+
+                                        @endforeach
+
+                                        @foreach($nivels as $nivel)
+                                        <option value="{{$nivel->id}}">{{$nivel->nombre}}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+
+                                @endif
+                                @endforeach
+
+                                <br><br>
+                                <a href="{{route('users.index')}}" class="btn btn-primary">Atras</a>
                                 <input type="submit" class="btn btn-dark " value="Actualizar">
-                                <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
                             </div>
 
                         </form>

@@ -181,7 +181,7 @@
                             </ul>
                         </li>
                         @endcan
-                        @can('haveaccess', 'curso.index')
+                        <!-- @can('haveaccess', 'curso.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
@@ -199,7 +199,8 @@
                                 </li>
                             </ul>
                         </li>
-                        @endcan
+                        @endcan -->
+
                         <!-- @can('haveaccess', 'nivel.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
@@ -219,6 +220,25 @@
                             </ul>
                         </li>
                         @endcan -->
+                        @can('haveaccess', 'nivel.clonacion')
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-user-cog"></i>
+                                <p>
+                                   Clonacion
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('clinstitutos.create')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Clonacion de Un. Educativa</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endcan
                         @can('haveaccess', 'materia.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
@@ -262,7 +282,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
                                 <p>
-                                    Asignación M/C
+                                    Cursos
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -270,13 +290,13 @@
                                 <li class="nav-item">
                                     <a href="{{route('distribucionmacus.index')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Lista de Asignaciones</p>
+                                        <p>Lista de Cursos</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
                         @endcan
-                        @can('haveaccess', 'asignacionma.index')
+                        <!-- @can('haveaccess', 'asignacionma.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
@@ -290,6 +310,44 @@
                                     <a href="{{route('distrimas.index')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Lista de Asignaciones</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endcan -->
+                        @can('haveaccess', 'asignacionma.index')
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-user-cog"></i>
+                                <p>
+                                    Asignación Alumno
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('assignments.index')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Lista de Asignaciones</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endcan
+                        @can('haveaccess', 'asignacionma.index')
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-user-cog"></i>
+                                <p>
+                                   Publicaciones
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('posts.index')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Sección Post</p>
                                     </a>
                                 </li>
                             </ul>
@@ -353,7 +411,6 @@
                             </ul>
                         </li>
                         @endcan
-
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -395,6 +452,7 @@
     <script src="{{ asset('js/preloader.js') }}"></script>
     <!-- datatables script -->
     <script src="{{ asset('js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{ asset('vendor/ckeditor/ckeditor.js')}}"></script>
     @yield('js')
     {{--   @include('sweetalert::alert') --}}
 </body>
