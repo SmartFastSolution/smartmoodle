@@ -27,8 +27,8 @@ Route::get('/', function () {
 
 ///rutas protegidas On 
 
-// Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
-Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
+ Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
+//Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
    
 route::get('/home','Controller@index')->name('administrador'); //ruta administracion
 
@@ -126,6 +126,11 @@ route::post('/reply/store','CommentController@replyStore')->name('reply.add');
 route::delete('/reply/destroy/{comment}','CommentController@destroy')->name('comment.destroy');
 route::get('/reply/{comment}/edit','CommentController@edit')->name('comment.edit');
 route::put('/reply/{comment}','CommentController@update')->name('comment.update');
+
+
+
+//rutas de nueva asignacion estudiante a materias 
+route::resource('assignments','AssignmentController');
 });
 
 Route::group(['prefix' => 'sistema/admin'], function() {

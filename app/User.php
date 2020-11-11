@@ -107,5 +107,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo('App\Nivel');
     }
     
+
+    
+    public function assignmets(){
+          
+        return $this->hasMany('App\Assignment');
+    }
     
 }

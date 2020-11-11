@@ -1,23 +1,25 @@
 @extends('layouts.nav')
 
-@section('title', 'Unidad Educativa')
+
+@section('title', 'Smartmoodle')
+
 
 
 
 @section('content')
+
+
 
 @if ($message = Session::get('success'))
 <div class="alert alert-success">
     <p>{{ $message }}</p>
 </div>
 @endif
-
 <section class="content">
     <div class="container">
-
-        <a class="btn btn-info float-right" href="{{route('posts.create')}}"><i class="fas fa-plus"></i>
+        <a class="btn btn-info float-right" href="{{route('assignments.create')}}"><i class="fas fa-plus"></i>
             Crear</a>
-        <h1 class="font-weight-light">Gestión de Publicaciones</h1>
+        <h1 class="font-weight-light">Gestión de Asignación de Estudiantes</h1>
 
         <div class="row justify-content-center">
             <div class="col-md-15">
@@ -27,35 +29,51 @@
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Resumen</th>
+                                <th scope="col">Unidad Educativa</th>
+                                <th scope="col">Estudiante</th>
+                                <th scope="col">Materia(s)</th>
+                                <th scope="col">Estado</th>
                                 <th scope="col">Tools</th>
                             </tr>
                         </thead>
                         <tbody>
 
-                            @foreach($posts as $post)
+                            @foreach($as as $a)
                             <tr>
-                                <th scope="row">{{$post['id']}}</th>
-                                <td>{{$post->nombre}} </td>
-                                <td>{{$post->abstract}} </td>
+                                <th scope="row">{{$a['id']}}</th>
+                                <td>{{$a->instituto->nombre}} </td>
+                                <td>
+                                    {{$a->user->name}}
+                                    {{$a->user->apellido}}
+                                </td>
+                                <td>
+                                    @if($a->materias != null)
+                                    @foreach($a->materias as $e)
+                                    <span class="badge badge-success">
+                                        {{$e->nombre}}
+                                    </span>
+                                    @endforeach
+                                    @endif
+                                </td>
+                                <td>{{ $a['estado']}}</td>
                                 <td class="table-button ">
                                     <!--metodo delete funciona pero hay que almacenar la variable array en una variable temporal-->
-                                    <form method="POST" action="{{route('posts.destroy', $post->id)}}}">
+                                    <form method="POST" action="{{route('assignments.destroy', $a->id)}}}">
                                         @method('DELETE')
                                         @csrf
 
-                                        <a class="btn btn-info " href="{{route('posts.show',$post->id)}}"><i
+                                        <a class="btn btn-info " href="{{route('assignments.show',$a->id)}}"><i
                                                 class="fas fa-eye"></i></a>
-                                        <a class="btn btn-success btn" href="{{route('posts.edit', $post->id)}}"><i
+                                        <a class="btn btn-success btn" href="{{route('assignments.edit', $a->id)}}"><i
                                                 class=" fas fa-pencil-alt"></i></a>
 
                                         <button type="submit" class="btn btn-danger "><i
                                                 class="fas fa-trash"></i></button>
+
                                     </form>
                                 </td>
-                                </th>
                                 @endforeach
+
 
                         </tbody>
                         <!--Table body-->
@@ -71,13 +89,20 @@
 
 
 
-@stop
 
+
+@stop
 @section('css')
-
 @stop
-
 @section('js')
+
+<script type="text/javascript">
+$(function() {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+})
+</script>
+
 
 
 
@@ -98,6 +123,4 @@ $(function() {
 
 });
 </script>
-
-
 @stop

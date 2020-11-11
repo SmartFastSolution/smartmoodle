@@ -1,13 +1,12 @@
 @extends('layouts.nav')
-
-
-@section('title', 'Crear Asignación')
-
+@section('title', 'Smartmoodle')
 @section('content')
+
+
 
 @if ($errors->any())
 <div class="alert alert-danger">
-    <strong>Whoops!</strong> Parece que hay porblemas  <br><br>
+    <strong>Whoops!</strong> Parece que hay porblemas o Malas decisiones <br><br>
     <ul>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -19,40 +18,20 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <h1 class="font-weight-light">Añadir Asignación Materia/Curso</h1>
+                <h1 class="font-weight-light">Asignación Estudiante</h1>
                 <div class="row">
                     <div class="col-md-10">
 
-                        <form method="POST" action="{{route('distribucionmacus.index')}} ">
+                        <form method="POST" action="{{route('assignments.index')}} ">
                             @csrf
                             <div class=" card-body">
 
 
 
                                 <div class="form-group">
-                                    <label>Seleccionar Curso</label>
-                                    <select class="form-control select2" name="cursos" style="width: 99%;" >
-                                        <option selected disabled>Elija el Curso...</option >
-                                        @foreach($cursos as $curso)
-                                        <option value="{{$curso->id}}">
-                                            {{$curso->nombre}}
-
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <!-- <div class="form-group">
-                                    <label>Paralelos</label>
-                                    <select class="form-control select2" name="nivel" style="width: 99%;" >
-                                        @foreach($nivels as $nivel)
-                                        <option value="{{$nivel->id}}">{{$nivel->nombre}}</option>
-                                        @endforeach
-                                    </select>
-                                </div> -->
-                                <div class="form-group">
                                     <label>Unidad Educativa</label>
                                     <select class="form-control select" v-model="instituto" @change="onMateria()"
-                                        name="instituto" style="width: 99%;" >
+                                        name="instituto" required style="width: 99%;">
                                         <option selected disabled>Elija una Unidad educativa...</option>
                                         @foreach($institutos as $instituto)
                                         <option value="{{$instituto->id}}">{{$instituto->nombre}}
@@ -62,14 +41,28 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label>Materias</label>
-                                    <select class="select2" multiple="multiple" name="materia[]"
-                                        data-placeholder="Select a State" style="width: 100%;" >
-                                        <option v-for="mater in materias" :value="mater.id">@{{ mater.nombre}}</option>
+                                    <label>Seleccione el Estudiante</label>
+                                    <select class="form-control select2" name="estudiante" style="width: 99%;">
+                                        <option selected disabled>Elija al Estudiante...</option>
+                                        <option v-for="doce in users" :value="doce.id">@{{doce.name}} @{{doce.apellido}}
+                                        </option>
+
+
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="nombre">Estado </label>
+                                    <label>Seleccione las Materias</label>
+                                    <select class="select2" multiple="multiple" name="materia[]"
+                                        data-placeholder="Seleccione las Materias" style="width: 100%;">
+                                        <optgroup v-for="(curso, index) in materias" :label="curso.nombre">
+                                            <option v-for="mater in materias[index].materias" :value="mater.id">@{{ mater.nombre}}</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                               
+                             
+                                <div class="form-group">
+                                    <label for="nombre">Estado</label>
                                     <br>
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" id="estadoon" name="estado" class="custom-control-input"
@@ -84,9 +77,8 @@
                                     </div>
                                 </div>
                                 <br>
-                                <a href="{{route('distribucionmacus.index')}}" class="btn btn-primary">Atras</a>
-                                <input type="submit" class="btn btn-dark " value="Guardar">
-                               
+                              <a href="{{route('distribuciondos.index')}}" class="btn btn-primary">Atras</a>
+                              <input type="submit" class="btn btn-dark " value="Guardar">
                             </div>
 
                         </form>
@@ -99,14 +91,9 @@
 </section>
 
 
-
-
 @stop
-
 @section('css')
-
 @stop
-
 @section('js')
 
 <script>
@@ -118,6 +105,9 @@ $(function() {
 
 })
 </script>
+
+
+</script>
 <!-- script para select dinamico prueba 2  -->
 
 <script>
@@ -126,13 +116,25 @@ const inst = new Vue({
     data: {
         instituto: '',
         materias: [],
+        users:[]
     },
     methods: {
         onMateria() {
 
             var set = this;
+
+            set.users = [];
+            axios.post('/sistema/userinst', {
+                id: set.instituto
+            }).then(response => {
+                set.users = response.data;
+                console.log(set.users); //no es necesario
+            }).catch(e => {
+                console.log(e);
+            });
+
             set.materias = [];
-            axios.post('/sistema/materiasasig', {
+            axios.post('/sistema/materiainst', {
                 id: set.instituto
             }).then(response => {
                 set.materias = response.data;
@@ -140,12 +142,10 @@ const inst = new Vue({
             }).catch(e => {
                 console.log(e);
             });
+
         }
     }
 });
 </script>
-
-
-
 
 @stop

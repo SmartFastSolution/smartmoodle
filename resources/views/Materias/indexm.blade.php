@@ -3,26 +3,23 @@
 @section('title', 'Materias')
 
 @section('content')
+
+@if ($message = Session::get('success'))
+<div class="alert alert-success">
+    <p>{{ $message }}</p>
+</div>
+@endif
+
+
 <section class="content">
     <div class="container">
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-        @endif
-
+        <a class="btn btn-info float-right" href="{{route('materias.create')}}"><i class="fas fa-plus"></i>
+            Crear</a>
+        <h1 class="font-weight-light">Gestión de Materia</h1>
         <div class="row justify-content-center">
             <!-- left column -->
-            <div class="col-md-13">
-                <a class="btn btn-info float-right" href="{{route('materias.create')}}"><i class="fas fa-plus"></i>
-                    MATERIAS</a>
-                <h1>Materia</h1>
-                <div class="card card-secondary">
-                    <div class="card-header">
-                        
-                        <div class="card-tools">
-                        </div>
-                    </div>
+            <div class="col-md-12">
+            
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="myTable" class="table table-hover">
@@ -33,40 +30,33 @@
                                     <th scope="col">Materia</th>
                                     <th scope="col">Descripción</th>
                                     <th scope="col">Estado</th>
-                                    <th></th>
-                                    <th></th>
+                                  
                                     <th scope="col">Tools</th>
-                                    <th></th>
+                                  
                             </thead>
                             <tbody>
                                 <tr>
                                     @foreach ($materias as $materia)
                                     <th scope="row">{{ $materia['id']}}</th>
                                     <td>
-                                    @if($materia->instituto != null)
-                                     {{$materia->instituto->nombre}}
-                                     @endif
+                                        @if($materia->instituto != null)
+                                        {{$materia->instituto->nombre}}
+                                        @endif
                                     </td>
                                     <td>{{ $materia['nombre']}}</td>
                                     <td>{{ $materia['descripcion']}}</td>
                                     <td>{{ $materia['estado']}}</td>
-                                    <th></th>
-
-                                    <td class="table-button ">
-                                        <a class="btn btn-info " href="{{route('materias.show', $materia->id)}}"><i
-                                                class="fas fa-eye"></i></a>
-
-                                    </td>
-                                    <td class="table-button ">
-                                        <a class="btn btn-success btn"
-                                            href="{{route('materias.edit', $materia->id)}}"><i
-                                                class=" fas fa-pencil-alt"></i></a>
-                                    </td>
                                     <td class="table-button ">
                                         <!--metodo delete funciona pero hay que almacenar la variable array en una variable temporal-->
                                         <form method="POST" action="{{route('materias.destroy', $materia->id)}}}">
                                             @method('DELETE')
                                             @csrf
+
+                                            <a class="btn btn-info " href="{{route('materias.show', $materia->id)}}"><i
+                                                class="fas fa-eye"></i></a>
+                                                <a class="btn btn-success btn"
+                                            href="{{route('materias.edit', $materia->id)}}"><i
+                                                class=" fas fa-pencil-alt"></i></a>
                                             <button type="submit" class="btn btn-danger "><i
                                                     class="fas fa-trash"></i></button>
                                         </form>
@@ -77,12 +67,11 @@
                             <!--Table body-->
 
                         </table>
-                    
+
                         <!--Table-->
                     </div>
                 </div>
-            </div>
-        </div>
+           
 </section>
 
 
@@ -100,7 +89,7 @@ $(function() {
         $('#myTable').DataTable({
                 "info": true,
                 "autoWidth": true,
-               
+
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
                 }
@@ -110,7 +99,6 @@ $(function() {
     });
 
 });
-
 </script>
 
 

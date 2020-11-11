@@ -1,39 +1,34 @@
 @extends('layouts.nav')
-
-@section('title', 'Editar')
-
-
-
+@section('title', 'Smartmoodle')
 @section('content')
+
+
 
 
 <section class="content" id="mate">
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <h1 class="font-weight-light">Vista Asignación Docente/Materia</h1>
+                <h1 class="font-weight-light">Editar Asignación Estudiante</h1>
                 <div class="row">
                     <div class="col-md-10">
-                        <form method="POST" action="{{route('distribuciondos.update', $distribuciondo->id)}} ">
+                        <form method="POST" action="{{route('assignments.update', $assignment->id)}} ">
                             @method('PUT')
                             @csrf
 
                             <div class="form-group">
                                 <label>Unidad Educativa</label>
                                 <select class="form-control select" name="instituto" disabled style="width: 99%;">
-
                                     <option value="{{$instituto->id}}">{{$instituto->nombre}}</option>
-
-
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label>Docente</label>
-                                <select class="form-control select" name="user" disabled style="width: 99%;">
+                                <label>Estudiante</label>
+                                <select class="form-control select" name="estudiante" disabled style="width: 99%;">
 
                                     <option selected disabled value="{{ $user->id }}">
-                                        {{ $user->name }} {{ $user->apellido }}
+                                    {{ $user->name }} {{ $user->apellido }}
                                     </option>
 
 
@@ -41,13 +36,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Seleccione Materias</label>
+                                <label>Actualización Materias</label>
                                 <select class="select2" :materias="2" multiple="multiple" name="materia[]"
-                                    data-placeholder="Select a State" disabled style="width: 100%;">
+                                    data-placeholder="Select a State" style="width: 100%;">
                                     @foreach($materias as $materia)
                                     <option selected value="{{$materia->id}}">{{$materia->nombre}}</option>
                                     @endforeach
-                                  
+                                    <option v-for="mate in newMateria" :value="mate.id">@{{mate.nombre}}</option>
 
                                 </select>
                             </div>
@@ -55,18 +50,21 @@
                             <label for="nombre">Estado</label><br>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="estadoon" name="estado" class="custom-control-input"
-                                        value="on" @if($distribuciondo['estado']=="on" ) checked
-                                        @elseif(old('estado')=="on" ) checked @endif disabled>
+                                        value="on" @if($assignment['estado']=="on" ) checked
+                                        @elseif(old('estado')=="on" ) checked @endif>
                                     <label class="custom-control-label" for="estadoon">Activo</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="estadooff" name="estado" class="custom-control-input"
-                                        value="off" @if($distribuciondo['estado']=="off" ) checked
-                                        @elseif(old('estado')=="off" ) checked @endif disabled>
+                                        value="off" @if($assignment['estado']=="off" ) checked
+                                        @elseif(old('estado')=="off" ) checked @endif>
                                     <label class="custom-control-label" for="estadooff">No Activo</label>
                                 </div>
                                 <br><br><br>
-                                <a href="{{route('distribuciondos.index')}}" class="btn btn-primary">Atras</a>
+
+                                <a href="{{route('assignments.index')}}" class="btn btn-primary">Atras</a>
+                                <input type="submit" class="btn btn-dark " value="Guardar">
+
                         </form>
                     </div>
                 </div>

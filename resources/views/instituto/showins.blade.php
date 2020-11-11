@@ -95,7 +95,7 @@
                                 </div>
                                 <br>
                              
-                                <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                                <a href="{{route('institutos.index')}}" class="btn btn-primary">Atras</a>
                             </div>
 
 

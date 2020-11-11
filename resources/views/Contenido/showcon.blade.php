@@ -189,7 +189,7 @@
                 </div>
 
             </div>
-            <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+            <a href="{{route('contenidos.index')}}" class="btn btn-primary">Atras</a>
         </div>
     </div>
 </section>

@@ -94,8 +94,10 @@
                                     </div>
                                 </div>
                                 <br>
+                                <a href="{{route('institutos.index')}}" class="btn btn-primary">Atras</a>
                                 <input type="submit" class="btn btn-dark " value="Guardar">
-                                <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                             
+                            
                             </div>
 
 

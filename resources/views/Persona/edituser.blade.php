@@ -164,7 +164,7 @@
                                 @endforeach
 
                                 <br><br>
-                                <a href="{{route('users.index')}}" class="btn btn-primary">Regesar</a>
+                                <a href="{{route('users.index')}}" class="btn btn-primary">Atras</a>
                                 <input type="submit" class="btn btn-dark " value="Actualizar">
                             </div>
 

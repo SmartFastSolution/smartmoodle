@@ -10,15 +10,11 @@ use Illuminate\Http\Request;
 
 class DistribuciondoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
         
-        $distribucions=Distribuciondo::orderBy('id','Asc')->paginate(5);
+        $distribucions=Distribuciondo::all();
        
         return \view('DistribucionDocente.indexdocente',['distribucions'=>$distribucions,]);
     }

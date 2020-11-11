@@ -22,14 +22,7 @@
         <div class="card border-0 shadow my-5">
 
             <div class="card-body p-5">
-                <div class="btn-group float-right" role="group" aria-label="Basic example">
-
-                    <a class="btn btn-primary float-right" href="{{route('distribuciondos.create')}}"><i
-                            class="fas fa-plus"></i> Asignar Docente</a>
-                    <a class="btn btn-success float-right" href="{{route('distrimas.create')}}"><i
-                            class="fas fa-plus"></i>
-                        Asignar Estudiante</a>
-                </div>
+               
                 <h1 class="font-weight-light">Añadir Usuarios</h1>
 
                 <div class="row">
@@ -164,7 +157,7 @@
                                 <br>
                                 <br>
                               
-                                <a href="{{route('users.index')}}" class="btn btn-primary">Regesar</a>
+                                <a href="{{route('users.index')}}" class="btn btn-primary">Atras</a>
                                 <input type="submit" class="btn btn-dark " value="Guardar">
 
                             </div>

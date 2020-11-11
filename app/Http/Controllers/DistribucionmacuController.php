@@ -18,7 +18,7 @@ class DistribucionmacuController extends Controller
      */
     public function index()
     {
-        $distribucionmacus= Distribucionmacu::orderBy('id','Asc')->paginate(5);
+        $distribucionmacus= Distribucionmacu::all();
        
         return \view('Distribucion.indexmc',['distribucionmacus'=>$distribucionmacus,]);
     }
@@ -68,7 +68,7 @@ class DistribucionmacuController extends Controller
        if($request->get('materia')){
         $distribucionmacu->materias()->sync($request->get('materia'));
       }
-        return redirect('sistema/distribucionmacus ');
+        return redirect('sistema/distribucionmacus ')->with('success','Haz Creado una Asignación con exito');
 
     }
 

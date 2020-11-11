@@ -63,7 +63,7 @@
                                     <label class="custom-control-label" for="estadooff">No Activo</label>
                                 </div>
                                 <br><br>
-                                <a href="{{url()->previous()}}" class="btn btn-primary">Regesar</a>
+                                <a href="{{route('permissions.index')}}"  class="btn btn-primary">Atras</a>
                             </div>
                         </form>
                     </div>

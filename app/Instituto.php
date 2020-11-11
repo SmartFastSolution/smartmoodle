@@ -68,4 +68,9 @@ class Instituto extends Model
         return $this->hasMany('App\User');
 
     }
+
+    public function assignmets(){
+          
+        return $this->hasMany('App\Assignment');
+    }
 }
