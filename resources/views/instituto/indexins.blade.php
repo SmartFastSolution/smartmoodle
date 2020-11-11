@@ -16,10 +16,10 @@
         <div class="btn-group float-right" role="group" aria-label="Basic example">
 
             
-            <a class="btn btn-success float-right " href="{{route('institutos.clone', 1)}}"><i class="fas fa-plus"></i></i>
+            <!-- <a class="btn btn-success float-right " href="{{route('institutos.clone', 1)}}"><i class="fas fa-plus"></i></i>
                 CLONAR UND EDUCATIVA</a>
             <a class="btn btn-danger float-right " href="{{route('contenido.clone', 1)}}"><i class="fas fa-plus"></i></i>
-                CLONAR CONTENIDO</a>
+                CLONAR CONTENIDO</a> -->
                 <a class="btn btn-info float-right " href="{{route('institutos.create')}}"><i class="fas fa-plus"></i></i>
                 UND
                 EDUCATIVA</a>

@@ -34,8 +34,8 @@
 
             <div class="row">
 
-                <!-- @foreach(auth()->user()->distrima->distribucionmacu->materias as $materia)
-
+                @foreach(auth()->user()->assignmets as $as)
+                 @foreach($as->materias as $materia)
                 <div class="col-lg-3 col-5">
 
                     <div class="small-box bg-gradient-info">
@@ -51,8 +51,8 @@
                         </a>
                     </div>
                 </div>
-
-                @endforeach -->
+                @endforeach
+                @endforeach
 
 
             </div>

@@ -6,6 +6,7 @@ use App\Contenido;
 use App\Curso;
 use App\Distribucionmacu;
 use App\Distrima;
+use App\Assignment;
 use App\Http\Controllers\Controller;
 use App\Instituto;
 use App\Materia;
@@ -29,7 +30,7 @@ class EstudianteController extends Controller
 
     public function index(){
      
-        $au =  auth()->user()->distrima;
+        $au =  auth()->user()->distrimas;
          if ($au == null) {
          return view('errors.error'); //ruta estudiante //ruta estudiante       
              
@@ -43,11 +44,12 @@ class EstudianteController extends Controller
         $user= User::find($user->id);
         $distrima= Distrima::get();
         $instituto = Instituto::get();
+        $assignment=Assignment::get();
         $materia=Materia::get();  
         $curso=Curso::get();
         $contenidos=Contenido::get();
         
-        return view('Estudiante.perfile',compact('instituto','materia','contenidos','curso','user','distrima')); //ruta estudiante
+        return view('Estudiante.perfile',compact('instituto','materia','contenidos','curso','user','distrima','assignment')); //ruta estudiante
 
     }
 

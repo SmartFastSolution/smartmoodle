@@ -12,7 +12,7 @@
 
 
         <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
-        <h2 class="font-weight-light"> <strong> {{auth()->user()->distrima->distribucionmacu->curso->nombre}} </strong></h2>
+        <h2 class="font-weight-light"> <strong> {{auth()->user()->curso->nombre}} </strong></h2>
 
         <div class="card card-info card-outline">
             <div class="card-header">
@@ -46,7 +46,7 @@
 
                                         <iframe style="object-fit: contain; width: 100%; height: 500px;"
                                             class="embed-responsive-item"
-                                            src="{{asset(Storage::url($contenido['documentod']))}}"
+                                             src="{{$contenido->archivo->url}}"
                                             allowfullscreen></iframe>
 
 
