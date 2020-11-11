@@ -20,6 +20,9 @@
 
 <body class="hold-transition sidebar-mini  layout-fixed">
     <li class="d-none">
+    @if (Auth::check())
+       
+   
         @foreach (auth()->user()->roles as $role)
         {{ $rol = $role->descripcion}}
         @endforeach
@@ -385,6 +388,7 @@
         @elseif($rol ==='docente')
         @include('layouts.docapp')
         @endif
+     @endif
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>

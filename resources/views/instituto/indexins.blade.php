@@ -20,10 +20,6 @@
             <div class="col-md-13">
                 <a class="btn btn-info float-right " href="{{route('institutos.create')}}"><i
                         class="fas fa-plus"></i></i> UND EDUCATIVA</a>
-                 <a class="btn btn-info float-right " href="{{route('institutos.clone', 1)}}"><i
-                        class="fas fa-plus"></i></i> CLONAR UND EDUCATIVA</a>
-                        <a class="btn btn-info float-right " href="{{route('contenido.clone', 1)}}"><i
-                        class="fas fa-plus"></i></i> CLONAR CONTENIDO</a>
                 <h1>Unidad Educativa</h1>
                 <div class="card card-secondary">
                     <div class="card-header">
