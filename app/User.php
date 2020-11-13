@@ -83,7 +83,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function tallers(){
         
         return $this->belongsToMany('App\Taller','taller_user')
-            ->withPivot('status','calificacion', 'retroalimentacion');
+            ->withPivot('status','calificacion', 'retroalimentacion', 'fecha_entregado');
     }
 
     public function posts(){

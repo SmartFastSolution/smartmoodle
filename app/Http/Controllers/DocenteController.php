@@ -126,6 +126,71 @@ class DocenteController extends Controller
      return view('Docente.cursos',compact('materia','distribucion','curso','distrima', 'mate'));
 
     }
+    public function talleres($id)
+    {
+        $contenidos=Contenido::where('materia_id', $id)->get();
+
+        $tallers=Taller::paginate(10);
+        $talleres =[];
+        foreach ($contenidos as $key => $value) {
+            $talleres[$key] = array(
+            'nombre' => $value->nombre,
+            'talleres' =>$value->tallers
+        );
+        }
+       
+     return view('Docente.talleres',compact('tallers', 'contenidos', 'talleres', 'id'));
+
+    }
+    public function registro(Request $request)
+    {
+    $contenidos=Contenido::where('materia_id', $request->materia)->get();
+    $talleres =[];
+      
+
+    $taller = Taller::find($request->taller_id);
+    $estado = $request->estado;
+       // return $estado;
+    if ($estado == true) {
+        $taller->estado = 1; 
+        $taller->fecha_entrega = $request->fecha; 
+        $taller->save(); 
+
+        foreach ($contenidos as $key => $value) {
+            $talleres[$key] = array(
+            'nombre' => $value->nombre,
+            'talleres' =>$value->tallers
+        );
+
+        }
+
+        return response(array(
+                'success' => true,
+                'message' => 'Taller activado correctamente',
+                'talleres' => $talleres
+
+            ),200,[]);  
+
+    }elseif ($estado == false) {
+
+        $taller->estado = 0; 
+        $taller->fecha_entrega = $request->fecha; 
+        $taller->save();  
+          foreach ($contenidos as $key => $value) {
+            $talleres[$key] = array(
+            'nombre' => $value->nombre,
+            'talleres' =>$value->tallers
+        );
+    }
+          return response(array(
+                'success' => true,
+                'message' => 'Taller desactivado correctamente',
+                'talleres' => $talleres
+                
+            ),200,[]);   
+       }
+
+    }
 
 
 }

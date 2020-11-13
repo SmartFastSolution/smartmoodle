@@ -16,6 +16,8 @@
 
         <a class="btn btn-success btn" href="{{route('Alumnos', $materia->id)}}"><i class="fas fa-users"></i>
             Participantes</i></a>
+        <a class="btn btn-info btn" href="{{ route('contenido.talleres', $materia->id) }}"><i class="fas fa-book-open"></i>
+            Talleres</i></a>
        
         <br>
         <br>

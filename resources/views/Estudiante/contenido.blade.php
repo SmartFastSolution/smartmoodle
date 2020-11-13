@@ -98,20 +98,20 @@
 
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Unidad</th>
-                                    <th scope="col"> Taller </th>
-                                    <th scope="col">Plantilla </th>
+                                    <th scope="col" width="100">Unidad</th>
+                                    <th scope="col" width="100">Taller </th>
+                                    <th scope="col">Enunciado </th>
+                                    <th scope="col">Fecha Entrega </th>
                                     <th scope="col">Vista Taller</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($tallers->where('contenido_id', $contenido->id)->where('estado', 1) as $taller)
                                 <tr>
-                                    @foreach($tallers->where('contenido_id', $contenido->id) as $taller)
-                                    <th scope="row">{{$taller->materia['id']}}</th>
                                     <td>{{$taller->contenido->nombre}}</td>
                                     <td>{{$taller['nombre']}}</td>
-                                    <td>{{$taller->Plantilla->nombre}}</td>
+                                    <td>{{$taller->enunciado}}</td>
+                                    <td class="text-center">{{Carbon\Carbon::parse($taller->fecha_entrega)->formatLocalized('%d, %B %Y ') }}</td>
                                     <td class="table-button ">
                                         <a class="btn btn-info"
                                             href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i

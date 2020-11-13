@@ -15,7 +15,7 @@ class Taller extends Model
 
   public function users(){
         return $this->belongsToMany('App\User','taller_user')
-            ->withPivot('status','calificacion');
+            ->withPivot('status','calificacion', 'fecha_entregado');
     }
     public function Plantilla()
     {

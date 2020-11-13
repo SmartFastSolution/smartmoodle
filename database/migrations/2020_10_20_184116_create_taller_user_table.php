@@ -18,6 +18,7 @@ class CreateTallerUserTable extends Migration
             $table->string('status')->nullable();
             $table->string('calificacion')->nullable();
             $table->string('retroalimentacion')->nullable();
+            $table->date('fecha_entregado')->nullable();
             
             $table->unsignedbigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;

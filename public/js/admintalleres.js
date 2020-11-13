@@ -47,7 +47,7 @@ $(function(document, window, index ) {
         onMateria() {
             let set = this;
             set.materias = [];
-            axios.post('/sistema/materiainst', {
+            axios.post('/sistema/materiasasig', {
                 id: set.instituto
             }).then(response => {
                 set.materias = response.data;

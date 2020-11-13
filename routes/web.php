@@ -57,6 +57,7 @@ route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos')
 
 //rutas menu estudiante
 route::post('admin/cambiarestado','AdminController@status')->name('taller.status');
+route::post('admin/registro','DocenteController@registro')->name('taller.registro');
 route::get('perfil','EstudianteController@show')->name('perfile');
 route::get('unidad/{id}','EstudianteController@unidades')->name('Unidades');
 route::get('estudiante/password', 'EstudianteController@password')->name('AlumnoPass'); //para metodo get del password 
@@ -65,6 +66,7 @@ route::post('estudiante/password','EstudianteController@updatep')->name('Estudia
 ///rutas menu docente
 
 route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
+route::get('contenido/{id}/talleres','DocenteController@talleres')->name('contenido.talleres');
 route::get('alumnos/{id}', 'DocenteController@cursos')->name('Alumnos');
 
 
@@ -237,8 +239,19 @@ route::post('/sistema/admin/taller46/{idtaller}', 'TallerEstudianteController@st
 route::post('/sistema/admin/taller37/{idtaller}', 'TallerEstudianteController@store37')->name('taller_37');
 
 route::post('/sistema/admin/taller/balance_inicial', 'TallerContabilidadController@balance_inicial')->name('balance_inicial');
+
+route::post('/sistema/admin/taller/balance-obtener-comprobacion', 'TallerContabilidadController@obtenerBalanceCompro')->name('balance.obtenercomprobacion');
+
+route::post('/sistema/admin/taller/balance-obtener-ajustado', 'TallerContabilidadController@obtenerBalanceAjustado')->name('balance.obtenerajustado');
+
+route::post('/sistema/admin/taller/balance-ajustado', 'TallerContabilidadController@balanceAjustado')->name('balance.balance-ajustado');
+
+route::post('/sistema/admin/taller/balance-comprobacion', 'TallerContabilidadController@balanceComprobacion')->name('balance.comprobacion');
+
 route::post('/sistema/admin/taller/b_inicial_diario', 'TallerContabilidadController@b_inicial_diario')->name('b_inicial_diario');
+
 route::post('/sistema/admin/taller/diario', 'TallerContabilidadController@diario')->name('diario');
+
 route::post('/sistema/admin/taller/diariogeneral', 'TallerContabilidadController@obtenerdiario')->name('obtenerdiario');
 route::post('/sistema/admin/taller/obtenerbalance', 'TallerContabilidadController@obtenerbalance')->name('obtenerbalance');
 

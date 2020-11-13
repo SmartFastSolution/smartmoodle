@@ -90,7 +90,7 @@ class AdminController extends Controller
                 'message' => 'Taller desactivado correctamente'
             ),200,[]);  
        }elseif ($estado == 0) {
-          $taller->estado = 0; 
+          $taller->estado = 1; 
          $taller->save();  
           return response(array(
                 'success' => true,

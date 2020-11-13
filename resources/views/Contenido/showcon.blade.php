@@ -207,8 +207,12 @@
             <div class="modal-body mb-0 p-0">
 
                 <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-                    <iframe class="embed-responsive-item" width="1000" height="1000"
+                    @isset ($contenido->archivo->url)
+                        <iframe class="embed-responsive-item" width="1000" height="1000"
                     src="{{$contenido->archivo->url}}" allowfullscreen></iframe>
+                    @endisset
+                    
+
                 </div>
 
             </div>

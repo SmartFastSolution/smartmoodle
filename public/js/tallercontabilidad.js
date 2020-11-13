@@ -1529,7 +1529,7 @@ const diario = new Vue({
       },
 
     obtenerDiarioGeneral: function(){
-              var _this = this;
+        var _this = this;
         var url = '/sistema/admin/taller/diariogeneral';
             axios.post(url,{
               id: _this.id_taller,
@@ -1555,6 +1555,7 @@ const diario = new Vue({
 const balance_comp = new Vue({
   el: '#balance_comp',
   data:{
+    id_taller: taller,
     balances:[], //array del balance de COMPROBACION
     balance:{ //variables a utilizar para el balance de COMPROBACION
       cuenta:'',
@@ -1564,14 +1565,62 @@ const balance_comp = new Vue({
       saldo_haber:'',
     },
     suman:{ //suma total del balance COMPROBACION
-      sum_debe:'',
-      sum_haber:'',
-      sal_debe:'',
-      sal_haber:'',
-    }
+      sum_debe:0,
+      sum_haber:0,
+      sal_debe:0,
+      sal_haber:0,
+    },
+    update: false,
+    registro_id:0
 
   },
+  mounted: function(){
+    this.obtenerBalanceCom();
+  },
   methods:{
+    sumas(){
+      let debe = Number(this.balance.suma_debe);
+      let haber = Number(this.balance.suma_haber);
+      if (debe > haber) {
+        this.balance.saldo_debe = Number(debe - haber).toFixed(2);
+        this.balance.saldo_haber = '';
+      }else{
+        this.balance.saldo_haber = Number(haber - debe).toFixed(2);
+        this.balance.saldo_debe = '';
+
+      }
+    },
+    totales: function(){
+            this.suman.sum_debe  = 0;
+            this.suman.sum_haber = 0;
+            this.suman.sal_debe  = 0;
+            this.suman.sal_haber = 0;
+            let regis = this.balances;
+            let total1 = 0;
+            let total2 = 0;
+            let total3 = 0;
+            let total4 = 0;
+            
+            regis.forEach(function(obj, index){
+                total1 += Number(obj.suma_debe );
+            });
+
+             regis.forEach(function(obj, index){
+                total2 += Number(obj.suma_haber );
+            }); 
+             regis.forEach(function(obj, index){
+                total3 += Number(obj.saldo_debe );
+            }); 
+             regis.forEach(function(obj, index){
+                total4 += Number(obj.saldo_haber );
+            });  
+            this.suman.sum_debe =   total1.toFixed(2);
+            this.suman.sum_haber =   total2.toFixed(2);
+            this.suman.sal_debe =   total3.toFixed(2);
+            this.suman.sal_haber =   total4.toFixed(2);
+
+          }, 
+
     agregarRegistro(){
 
      if(this.balance.cuenta.trim() ===''){
@@ -1579,7 +1628,14 @@ const balance_comp = new Vue({
         "timeOut": "3000"
     });
 
+     } else if(this.balance.suma_debe.trim() ==='' && this.balance.suma_haber.trim() ===''){
+      toastr.error("No puedes dejar los campos de haber y debe vacios", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+
      }else {
+      this.sumas()
+
       var balance ={ cuenta:this.balance.cuenta, suma_debe:this.balance.suma_debe, suma_haber:this.balance.suma_haber, saldo_debe:this.balance.saldo_debe, saldo_haber:this.balance.saldo_haber}
       this.balances.push(balance);
       toastr.success("Registro agregado correctamente", "Smarmoddle", {
@@ -1589,28 +1645,282 @@ const balance_comp = new Vue({
      this.balance.cuenta =''
      this.balance.suma_debe=''
      this.balance.suma_haber=''
-     this.balance.saldo_debe=''
-     this.balance.saldo_haber=''
+     this.totales();
 
      }                
       }, //fin metodo agregar registro   
       deleteBalance(index){
         this.balances.splice(index, 1);
+        this.totales();
       },//fin metodo delete cuenta 
       
 
       editBalance(index){
-       this.update = index;
+       this.update = true;
+       this.registro_id = index;
        this.balance.cuenta     = this.balances[index].cuenta;
        this.balance.suma_debe  = this.balances[index].suma_debe;
        this.balance.suma_haber = this.balances[index].suma_haber;
-       this.balance.saldo_debe = this.balances[index].saldo_debe
-       this.balance.saldo_haber = this.balances[index].saldo_haber
-       $('#balance_comp');           
-
+              
       },
-    
+    actualizarBalance(){
+      if(this.balance.cuenta.trim() ===''){
+      toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+
+     } else if(this.balance.suma_debe.trim() ==='' && this.balance.suma_haber.trim() ===''){
+      toastr.error("No puedes dejar los campos de haber y debe vacios", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+
+     }else {
+        this.sumas();
+        let id = this.registro_id;
+        this.balances[id].cuenta     = this.balance.cuenta;
+        this.balances[id].suma_debe  = this.balance.suma_debe;
+        this.balances[id].suma_haber = this.balance.suma_haber;
+        this.balances[id].saldo_debe = this.balance.saldo_debe;
+        this.balances[id].saldo_haber = this.balance.saldo_haber;
+
+        this.balance.cuenta =''
+        this.balance.suma_debe=''
+        this.balance.suma_haber=''
+        this.balance.saldo_haber=''
+        this.balance.saldo_haber=''
+        this.update = false;
+        this.totales();
+
+      }
+    },
+    guardarBalance: function() {
+        if(this.balances.length == 0){
+          toastr.error("Debe haber al menos un registro en el Balance", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+
+     }else{
+        let _this = this;
+        let url = '/sistema/admin/taller/balance-comprobacion';
+            axios.post(url,{
+              id: _this.id_taller,
+              balances: _this.balances,
+              sum_debe: _this.suman.sum_debe,
+              sum_haber: _this.suman.sum_haber,
+              sal_debe: _this.suman.sal_debe,
+              sal_haber: _this.suman.sal_haber,
+
+        }).then(response => {
+          if (response.data.estado == 'guardado') {
+              toastr.success("Balance creado correctamente", "Smarmoddle", {
+            "timeOut": "3000"
+            });
+            }else if (response.data.estado == 'actualizado') {
+              toastr.warning("Balance actualizado correctamente", "Smarmoddle", {
+            "timeOut": "3000"
+            });
+            }        
+        }).catch(function(error){
+
+        }); 
+
+     } 
+     
+     },
+        obtenerBalanceCom: function() {
+        let _this = this;
+        let url = '/sistema/admin/taller/balance-obtener-comprobacion';
+            axios.post(url,{
+              id: _this.id_taller,
+        }).then(response => {
+          if (response.data.datos == true) {
+              toastr.info("Balance de Comprobacion cargado correctamente", "Smarmoddle", {
+            "timeOut": "3000"
+            });
+              this.balances = response.data.bcomprobacion;
+              this.totales();
+            }          
+        }).catch(function(error){
+
+        }); 
+     } 
+     
   }
   
 });
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////BALANCE DE COMPROBACIO AJUSTADO /////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+var balance_ajustado = new Vue({
+  el: "#balance_ajustado",
+  data:{
+        id_taller: taller,
+    balances_ajustados:[], //array del balance de COMPROBACION
+    balance:{ //variables a utilizar para el balance de COMPROBACION
+      cuenta:'',
+      debe:'',
+      haber:'',
+    },
+    suman:{ //suma total del balance COMPROBACION
+      debe:0,
+      haber:0,
+    },
+    update: false,
+    registro_id:0
+  },
+   mounted: function(){
+    this.obtenerBalanceAjus();
+  },
+  methods:{
+     totales: function(){
+            this.suman.debe  = 0;
+            this.suman.haber = 0;
+            let regis = this.balances_ajustados;
+            let total1 = 0;
+            let total2 = 0;
+            
+            regis.forEach(function(obj, index){
+                total1 += Number(obj.debe );
+            });
+
+             regis.forEach(function(obj, index){
+                total2 += Number(obj.haber );
+            }); 
+            this.suman.debe =   total1.toFixed(2);
+            this.suman.haber =   total2.toFixed(2);
+
+          }, 
+
+    agregarRegistro(){
+     if(this.balance.cuenta.trim() ===''){
+      toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+
+     } else if(this.balance.debe.trim() !='' && this.balance.haber.trim() !=''){
+      toastr.error("No puedes llenar ambos campos de debe y haber", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+
+     }else if(this.balance.debe.trim() ==='' && this.balance.haber.trim() ===''){
+      toastr.error("No puedes dejar ambos campos de debe y haber en blanco", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+
+     }else {
+      // this.sumas()
+
+      var balance ={ cuenta:this.balance.cuenta, debe:this.balance.debe, haber:this.balance.haber}
+      this.balances_ajustados.push(balance);
+      toastr.success("Registro agregado correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+
+     this.balance.cuenta =''
+     this.balance.debe=''
+     this.balance.haber=''
+     this.totales();
+
+     }                
+      }, //fin metodo agregar registro  
+      deleteBalance(index){
+        this.balances_ajustados.splice(index, 1);
+        this.totales();
+      },//fin metodo delete cuenta 
+      
+
+      editBalance(index){
+       this.update = true;
+       this.registro_id = index;
+       this.balance.cuenta     = this.balances_ajustados[index].cuenta;
+       this.balance.debe  = this.balances_ajustados[index].debe;
+       this.balance.haber = this.balances_ajustados[index].haber;
+              
+      },
+      actualizarBalance(){
+          if(this.balance.cuenta.trim() ===''){
+          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+
+         } else if(this.balance.debe.trim() !='' && this.balance.haber.trim() !=''){
+          toastr.error("No puedes llenar ambos campos de debe y haber", "Smarmoddle", {
+        "timeOut": "3000"
+        });
+
+        }else if(this.balance.debe.trim() ==='' && this.balance.haber.trim() ===''){
+          toastr.error("No puedes dejar ambos campos de debe y haber en blanco", "Smarmoddle", {
+          "timeOut": "3000"
+        });
+
+        }else {
+            // this.sumas();
+            let id                             = this.registro_id;
+            this.balances_ajustados[id].cuenta = this.balance.cuenta;
+            this.balances_ajustados[id].debe   = this.balance.debe;
+            this.balances_ajustados[id].haber  = this.balance.haber;
+            
+            this.balance.cuenta =''
+            this.balance.debe   =''
+            this.balance.haber  =''
+            this.update         = false;
+            this.totales();
+
+      }
+    },
+     guardarBalance: function() {
+        if(this.balances_ajustados.length == 0){
+          toastr.error("Debe haber al menos un registro en el Balance", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+
+     }else{
+        let _this = this;
+        let url = '/sistema/admin/taller/balance-ajustado';
+            axios.post(url,{
+              id: _this.id_taller,
+              balances: _this.balances_ajustados,
+              total_debe: _this.suman.debe,
+              total_haber: _this.suman.haber,
+
+        }).then(response => {
+          if (response.data.estado == 'guardado') {
+              toastr.success("Balance creado correctamente", "Smarmoddle", {
+            "timeOut": "3000"
+            });
+            }else if (response.data.estado == 'actualizado') {
+              toastr.warning("Balance actualizado correctamente", "Smarmoddle", {
+            "timeOut": "3000"
+            });
+            }        
+        }).catch(function(error){
+
+        }); 
+
+     } 
+     
+     },
+      obtenerBalanceAjus: function() {
+        let _this = this;
+        let url = '/sistema/admin/taller/balance-obtener-ajustado';
+            axios.post(url,{
+              id: _this.id_taller,
+        }).then(response => {
+          if (response.data.datos == true) {
+              toastr.info("Balance de Comprobacion Ajustado cargado correctamente", "Smarmoddle", {
+            "timeOut": "3000"
+            });
+              this.balances_ajustados = response.data.bcomprobacionAjustado;
+              this.totales();
+            }          
+        }).catch(function(error){
+
+        }); 
+     } 
+
+  }
+
+  
+});
