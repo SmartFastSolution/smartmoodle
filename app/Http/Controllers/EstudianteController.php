@@ -30,7 +30,7 @@ class EstudianteController extends Controller
 
     public function index(){
      
-        $au =  auth()->user()->distrimas;
+        $au =  auth()->user()->assignmets;
          if ($au == null) {
          return view('errors.error'); //ruta estudiante //ruta estudiante       
              

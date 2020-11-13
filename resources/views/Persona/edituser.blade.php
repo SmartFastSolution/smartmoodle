@@ -67,42 +67,65 @@
                                             value="{{$user->celular}}" required>
                                     </div>
                                 </div>
+
+                                <br>
+                                @foreach($roluser as $role)
+                                @if($role['descripcion']=='estudiante')
                                 <div class="form-group">
+                                    <label>Instituto</label>
+                                    <select class="form-control select" name="instituto" style="width: 99%;">
+                                        @foreach($institutouser as $instuser)
+                                        <option selected disabled value="{{ $instuser->id }}">
+                                            {{ $instuser->nombre }}
+                                        </option>
+                                        @endforeach
+                                        @foreach($institutos as $instituto)
+                                        <option value="{{$instituto->id}}">{{$instituto->nombre}}</option>
+                                        @endforeach
 
-                                    <div class="form-group">
-                                        <label>Instituto</label>
-                                        <select class="form-control select" name="instituto" style="width: 99%;">
-                                            @foreach($institutouser as $instuser)
-                                            <option selected disabled value="{{ $instuser->id }}">
-                                                {{ $instuser->nombre }}
-                                            </option>
-                                            @endforeach
-                                            @foreach($institutos as $instituto)
-                                            <option value="{{$instituto->id}}">{{$instituto->nombre}}</option>
-                                            @endforeach
-
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <select class="form-control" name="roles" id="roles">
-                                            @foreach($roles as $role)
-                                            <option value="{{ $role->id }}" @isset($user->roles[0]->name)
-                                                @if($role->name == $user->roles[0]->name)
-                                                selected
-                                                @endif
-                                                @endisset
-                                                >{{ $role->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-                                        <input class="form-control" name="email" id="email" placeholder="Email"
-                                            value="{{$user->email}}">
-                                    </div>
-
+                                    </select>
                                 </div>
+                                @elseif($role['descripcion']=='docente')
+                                <div class="form-group">
+                                    <label>Instituto</label>
+                                    <select class="form-control s
+                                    
+                                    elect" name="instituto" style="width: 99%;">
+                                        @foreach($institutouser as $instuser)
+                                        <option selected disabled value="{{ $instuser->id }}">
+                                            {{ $instuser->nombre }}
+                                        </option>
+                                        @endforeach
+                                        @foreach($institutos as $instituto)
+                                        <option value="{{$instituto->id}}">{{$instituto->nombre}}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+                                @endif
+                                @endforeach
+
+                                <div class="form-group">
+                                    <label>Rol</label>
+                                    <select class="form-control" name="roles" id="roles">
+                                        @foreach($roles as $role)
+                                        <option value="{{ $role->id }}" @isset($user->roles[0]->name)
+                                            @if($role->name == $user->roles[0]->name)
+                                            selected
+                                            @endif
+                                            @endisset
+                                            >{{ $role->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input class="form-control" name="email" id="email" placeholder="Email"
+                                        value="{{$user->email}}">
+                                </div>
+
+
                                 <br>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="estadoon" name="estado" class="custom-control-input"

@@ -69,7 +69,6 @@ class UsersController extends Controller
             'name'            =>  'required|string|max:20',
             'apellido'        =>  'required|string|max:20',
             'domicilio'       =>  'required|string|max:255',
-            'instituto'       =>  'required',
             'role'            =>  'required',
             'telefono'        =>  'required|string|max:13',
             'celular'         =>  'required|string|max:13',

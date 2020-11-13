@@ -8,13 +8,13 @@
 
         <div class="btn-group float-right" role="group" aria-label="Basic example">
 
-            <a class="btn btn-info float-right btn" href="{{route('users.create')}}"><i
-                    class="fas fa-user-plus"></i> Añadir Usuario</a>
+            <a class="btn btn-info float-right btn" href="{{route('users.create')}}"><i class="fas fa-user-plus"></i>
+                Añadir Usuario</a>
         </div>
         <h1 class="font-weight-light">Gestión de Usuarios</h1>
 
         <div class="row justify-content-center">
-            <div class="col-md-13">
+            <div class="col-md-15">
 
 
                 <div class="card-body">
@@ -39,7 +39,12 @@
 
                                 <td>{{$user->email}}</td>
 
-                                <td>{{$user->instituto->nombre}}</td>
+                                <td>
+                                    @isset($user->instituto->nombre)
+                                    {{$user->instituto->nombre}}
+                                    @endisset
+                                </td>
+
                                 <td>
                                     @foreach($user->roles as $role)
                                     <span class="badge badge-danger"> {{$role->name}}
@@ -85,6 +90,14 @@ $(function() {
         $('#myTable').DataTable({
                 "info": false,
                 "autoWidth": true,
+
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+             
+               
+                "responsive": true,
 
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"

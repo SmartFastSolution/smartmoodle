@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Assignment;
 use APp\User;
 use App\Contenido;
 use App\Curso;
@@ -110,13 +111,12 @@ class DocenteController extends Controller
 }
 
     public function cursos($id){
-        $materia =Materia::where('id', $id)->firstOrfail();
-        $distribucion = Distribucionmacu::get();
+        $materia =Materia::where('id', $id)->firstOrfail(); 
         $curso = Curso::get();
-        $distrima =Distrima::get();
-        $mate = $materia->distribucionmacus;
+        $assignment= Assignment::get();
+        $mate = $materia->assignments;
         
-     return view('Docente.cursos',compact('materia','distribucion','curso','distrima', 'mate'));
+     return view('Docente.cursos',compact('materia','curso', 'mate','assignment'));
 
     }
 

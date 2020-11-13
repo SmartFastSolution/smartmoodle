@@ -69,7 +69,7 @@
                                         {!! $errors->first('documento','<span style="color:red">:message</span>')!!}
 
                                         <small class="form-text text-muted">
-                                            Limite de 8MB por Documento
+                                            Limite de 50MB por Documento
                                         </small>
                                     </label>
 

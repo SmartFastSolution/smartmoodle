@@ -10,19 +10,9 @@
         <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
         <h1>Cursos</h1>
 
-       
-
-        <!-- @foreach($mate as $ma)
-        {{$ma->curso->nombre}}, {{ $materia->nombre}}
 
 
-        @foreach($ma->distrimas as $distri)
-        <li>{{ $distri->user->name }}</li>
 
-
-        @endforeach
-        @endforeach -->
-       
 
 
         <table id="myTable" class="table">
@@ -30,25 +20,24 @@
             <thead>
                 <tr>
                     <th scope="col">Curso</th>
-                    <th scope="col">Nombre/Apellido</th>
+                    <!-- <th scope="col">Nombre/Apellido</th>
                     <th scope="col">Correo</th>
-                    <th scope="col">Ultimo Acceso</th>
+                    <th scope="col">Ultimo Acceso</th> -->
 
                 </tr>
             </thead>
             <tbody>
-              
+                
+
                 <tr>
-                @foreach($mate as $ma)
-                @foreach($ma->distrimas as $distri)
-                    <th> {{$ma->curso->nombre}}</th>
-                    <td>{{ $distri->user->name }} {{ $distri->user->apellido }}</td>
-                    <td>{{$distri->user->email }}</td>
-                    <td>{{$distri->user->created_at->diffForHumans()}}</td>
-                   
+
+                    <td> {{$materia->nombre}}</td>
+
                 </tr>
-                @endforeach
-                @endforeach
+
+
+                
+
 
             </tbody>
         </table>
