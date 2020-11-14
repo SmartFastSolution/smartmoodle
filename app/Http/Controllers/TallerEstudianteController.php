@@ -60,6 +60,7 @@ use App\Admin\Respuesta\Pasivo4;
 use App\Admin\Respuesta\Patrimonio4;
 use App\Admin\Respuesta\Pregunta;
 use App\Admin\Respuesta\Recibo;
+use App\Admin\Respuesta\RAlternativa;
 use App\Admin\Respuesta\Relacionar2;
 use App\Admin\Respuesta\Relacionar2Re;
 use App\Admin\Respuesta\Relacionar;
@@ -104,6 +105,7 @@ use App\Admin\TallerOrdenPago;
 use App\Admin\TallerPagare;
 use App\Admin\TallerPalabra;
 use App\Admin\TallerPregunta;
+use App\Admin\TallerRAlternativa;
 use App\Admin\TallerRecibo;
 use App\Admin\TallerRelacionar;
 use App\Admin\TallerRelacionarOpcion;
@@ -1741,6 +1743,23 @@ public function store11(Request $request, $idtaller)
             $taller46->importancia      =   $request->input('importancia');   
             $taller46->persona_natural  =   $request->input('persona_natural');   
             $taller46->save();
+            $user= User::find($id);
+            $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
+            return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+
+
+        }
+             public function store47(Request $request, $idtaller)
+        {
+            $contenido            = TallerRAlternativa::select('enunciado', 'alternativa_correcta')->where('taller_id', $idtaller)->firstOrFail(); 
+            $id                         = Auth::id();
+            $taller47                   =   new RAlternativa; 
+            $taller47->taller_id        =   $idtaller;
+            $taller47->user_id          =   $id;           
+            $taller47->enunciado        =  $contenido->enunciado; 
+            $taller47->respuesta        =  $request->respuesta;
+            $taller47->alternativa_correcta  =  $contenido->alternativa_correcta;
+            $taller47->save();
             $user= User::find($id);
             $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
             return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');

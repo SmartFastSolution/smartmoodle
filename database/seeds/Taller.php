@@ -17,7 +17,7 @@ class Taller extends Seeder
          'nombre'       => 'Taller 1',
          'enunciado'    => 'EN EL PRESENTE TEXTO IDENTIFIQUE LAS ABREVIATURAS COMERCIALES Y ESCRÍBALAS EN LA SIGUIENTE CARTA,  EFICAZMENTE.',
          'contenido_id' => 1,
-         'estado'       => 1,
+         'estado'       => 0,
          'created_at'   => now(),
          'updated_at'   => now(),
          ]);
@@ -28,7 +28,7 @@ class Taller extends Seeder
          'nombre'       => 'Taller 2',
          'enunciado'    => 'UTILIZA LAS ABREVIATURAS COMERCIALES EN LA CARTA, CORRECTAMENTE..',
          'contenido_id' => 1,
-         'estado'       => 1,
+         'estado'       => 0,
          'created_at'   => now(),
          'updated_at'   => now(),
          ]);
@@ -39,7 +39,7 @@ class Taller extends Seeder
          'nombre'       => 'Taller 3',
          'enunciado'    => 'LOCALIZA LAS ABREVIATURAS EN EL EDITORIAL Y ESCRIBE EL SIGNIFICADO EN EL SIGUIENTE PÁRRAFO, CORRECTAMENTE.',
          'contenido_id' => 1,
-         'estado'       => 1,
+         'estado'       => 0,
          'created_at'   => now(),
          'updated_at'   => now(),
          ]);
@@ -49,7 +49,7 @@ class Taller extends Seeder
          'nombre'       => 'Taller 4',
          'enunciado'    => 'ESCRIBA EN EL GUSANILLO ABREVIATURAS ECONÓMICAS SEGÚN EL ORDEN QUE SE INDICA EN FORMA CORRECTA.',
          'contenido_id' => 1,
-         'estado'       => 1,
+         'estado'       => 0,
          'created_at'   => now(),
          'updated_at'   => now(),
          ]);
@@ -59,7 +59,7 @@ class Taller extends Seeder
          'nombre'       => 'Taller 5',
          'enunciado'    => 'DESARROLLE FÓRMULAS DE LA ECUACIÓN CONTABLE, CON EXACTITUD.',
          'contenido_id' => 1,
-         'estado'       => 1,
+         'estado'       => 0,
          'created_at'   => now(),
          'updated_at'   => now(),
          ]);
@@ -69,7 +69,7 @@ class Taller extends Seeder
          'nombre'       => 'Taller 6',
          'enunciado'    => 'DESARROLLE EL MAPA CONCEPTUAL, CON AGILIDAD.',
          'contenido_id' => 1,
-         'estado'       => 1,
+         'estado'       => 0,
          'created_at'   => now(),
          'updated_at'   => now(),
          ]);
@@ -79,7 +79,7 @@ class Taller extends Seeder
          'nombre'       => 'Taller 1',
          'enunciado'    => 'RELATA  LOS  ENUNCIADOS  EN  LA  SIGUIENTE  RUEDA  LÓGICA, ADECUADAMENTE.',
          'contenido_id' => 1,
-         'estado'       => 1,
+         'estado'       => 0,
          'created_at'   => now(),
          'updated_at'   => now(),
          ]);

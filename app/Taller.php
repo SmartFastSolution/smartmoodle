@@ -365,6 +365,14 @@ class Taller extends Model
 
         return $this->hasMany('App\Admin\Respuesta\PartidaDoble');
     }
+       public function rAlternativas(){
+
+        return $this->hasMany('App\Admin\TallerRAlternativa');
+    }
+       public function rAlternativares(){
+
+        return $this->hasMany('App\Admin\Respuesta\RAlternativa');
+    }
     
 }
 

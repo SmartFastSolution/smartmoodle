@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Admin\RAAlternativa;
+use App\Admin\RADefinicion;
+use App\Admin\RAEnunciado;
 use App\Admin\Taller2Relacionar;
 use App\Admin\Taller2RelacionarOpcion;
 use App\Admin\TallerALectura;
@@ -48,6 +51,7 @@ use App\Admin\TallerPalabra;
 use App\Admin\TallerPartidaDoble;
 use App\Admin\TallerPartidaDobleEnun;
 use App\Admin\TallerPregunta;
+use App\Admin\TallerRAlternativa;
 use App\Admin\TallerRecibo;
 use App\Admin\TallerRelacionar;
 use App\Admin\TallerRelacionarOpcion;
@@ -1465,6 +1469,57 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
                  return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');
              }
       }
+        public function taller47(Request $request)
+      {
+         $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $taller47               = new Taller;
+         $taller47->nombre       = 'Taller '.++$i;
+         $taller47->enunciado    = $request->input('enunciado');
+         $taller47->plantilla_id = $request->input('id_plantilla');
+         $taller47->contenido_id   = $request->input('contenido_id');
+         $taller47->estado       = 0;
+         $taller47->save();
 
+           if ($taller47 = true) {
+                $o                    = Taller::get()->last(); 
+                $taller_47            = new TallerRAlternativa;
+                $taller_47->taller_id = $o->id;
+                $taller_47->enunciado = $request->input('enunciado');
+                $taller_47->alternativa_correcta = $request->input('alternativa_correcta');
+                $taller_47->save(); 
+
+                $a    = TallerRAlternativa::get()->last(); 
+
+                  foreach ($request->enunciados as $key=>$v) {
+                  $datos=array(
+                     'taller_r_alternativa_id'=> $a->id,
+                     'enunciado'=> $request->enunciados[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  RAEnunciado::insert($datos);
+               }
+                  foreach ($request->definicion as $key=>$v) {
+                  $datos=array(
+                     'taller_r_alternativa_id'=> $a->id,
+                     'definicion'=> $request->definicion[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  RADefinicion::insert($datos);
+               }
+                foreach ($request->alternativas as $key=>$v) {
+                  $datos=array(
+                     'taller_r_alternativa_id'=> $a->id,
+                     'alternativa'=> $request->alternativas[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  RAAlternativa::insert($datos);
+               }
+
+                 return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');
+             }
+      }
 
 }

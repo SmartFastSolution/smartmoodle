@@ -6,6 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Admin\\RAAlternativa' => $baseDir . '/app/Admin/RAAlternativa.php',
+    'App\\Admin\\RADefinicion' => $baseDir . '/app/Admin/RADefinicion.php',
+    'App\\Admin\\RAEnunciado' => $baseDir . '/app/Admin/RAEnunciado.php',
     'App\\Admin\\Respuesta\\Abreviatura' => $baseDir . '/app/Admin/Respuesta/Abreviatura.php',
     'App\\Admin\\Respuesta\\AbreviaturaCarta' => $baseDir . '/app/Admin/Respuesta/AbreviaturaCarta.php',
     'App\\Admin\\Respuesta\\AbreviaturaEconomica' => $baseDir . '/app/Admin/Respuesta/AbreviaturaEconomica.php',
@@ -63,6 +66,7 @@ return array(
     'App\\Admin\\Respuesta\\Pasivo4' => $baseDir . '/app/Admin/Respuesta/Pasivo4.php',
     'App\\Admin\\Respuesta\\Patrimonio4' => $baseDir . '/app/Admin/Respuesta/Patrimonio4.php',
     'App\\Admin\\Respuesta\\Pregunta' => $baseDir . '/app/Admin/Respuesta/Pregunta.php',
+    'App\\Admin\\Respuesta\\RAlternativa' => $baseDir . '/app/Admin/Respuesta/RAlternativa.php',
     'App\\Admin\\Respuesta\\Recibo' => $baseDir . '/app/Admin/Respuesta/Recibo.php',
     'App\\Admin\\Respuesta\\Relacionar' => $baseDir . '/app/Admin/Respuesta/Relacionar.php',
     'App\\Admin\\Respuesta\\Relacionar2' => $baseDir . '/app/Admin/Respuesta/Relacionar2.php',
@@ -123,6 +127,7 @@ return array(
     'App\\Admin\\TallerPartidaDoble' => $baseDir . '/app/Admin/TallerPartidaDoble.php',
     'App\\Admin\\TallerPartidaDobleEnun' => $baseDir . '/app/Admin/TallerPartidaDobleEnun.php',
     'App\\Admin\\TallerPregunta' => $baseDir . '/app/Admin/TallerPregunta.php',
+    'App\\Admin\\TallerRAlternativa' => $baseDir . '/app/Admin/TallerRAlternativa.php',
     'App\\Admin\\TallerRecibo' => $baseDir . '/app/Admin/TallerRecibo.php',
     'App\\Admin\\TallerRelacionar' => $baseDir . '/app/Admin/TallerRelacionar.php',
     'App\\Admin\\TallerRelacionarOpcion' => $baseDir . '/app/Admin/TallerRelacionarOpcion.php',

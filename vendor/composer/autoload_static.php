@@ -633,6 +633,9 @@ class ComposerStaticInit125d0f3b9d5ef9f879142eac4e98f511
     );
 
     public static $classMap = array (
+        'App\\Admin\\RAAlternativa' => __DIR__ . '/../..' . '/app/Admin/RAAlternativa.php',
+        'App\\Admin\\RADefinicion' => __DIR__ . '/../..' . '/app/Admin/RADefinicion.php',
+        'App\\Admin\\RAEnunciado' => __DIR__ . '/../..' . '/app/Admin/RAEnunciado.php',
         'App\\Admin\\Respuesta\\Abreviatura' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Abreviatura.php',
         'App\\Admin\\Respuesta\\AbreviaturaCarta' => __DIR__ . '/../..' . '/app/Admin/Respuesta/AbreviaturaCarta.php',
         'App\\Admin\\Respuesta\\AbreviaturaEconomica' => __DIR__ . '/../..' . '/app/Admin/Respuesta/AbreviaturaEconomica.php',
@@ -690,6 +693,7 @@ class ComposerStaticInit125d0f3b9d5ef9f879142eac4e98f511
         'App\\Admin\\Respuesta\\Pasivo4' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Pasivo4.php',
         'App\\Admin\\Respuesta\\Patrimonio4' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Patrimonio4.php',
         'App\\Admin\\Respuesta\\Pregunta' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Pregunta.php',
+        'App\\Admin\\Respuesta\\RAlternativa' => __DIR__ . '/../..' . '/app/Admin/Respuesta/RAlternativa.php',
         'App\\Admin\\Respuesta\\Recibo' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Recibo.php',
         'App\\Admin\\Respuesta\\Relacionar' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Relacionar.php',
         'App\\Admin\\Respuesta\\Relacionar2' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Relacionar2.php',
@@ -750,6 +754,7 @@ class ComposerStaticInit125d0f3b9d5ef9f879142eac4e98f511
         'App\\Admin\\TallerPartidaDoble' => __DIR__ . '/../..' . '/app/Admin/TallerPartidaDoble.php',
         'App\\Admin\\TallerPartidaDobleEnun' => __DIR__ . '/../..' . '/app/Admin/TallerPartidaDobleEnun.php',
         'App\\Admin\\TallerPregunta' => __DIR__ . '/../..' . '/app/Admin/TallerPregunta.php',
+        'App\\Admin\\TallerRAlternativa' => __DIR__ . '/../..' . '/app/Admin/TallerRAlternativa.php',
         'App\\Admin\\TallerRecibo' => __DIR__ . '/../..' . '/app/Admin/TallerRecibo.php',
         'App\\Admin\\TallerRelacionar' => __DIR__ . '/../..' . '/app/Admin/TallerRelacionar.php',
         'App\\Admin\\TallerRelacionarOpcion' => __DIR__ . '/../..' . '/app/Admin/TallerRelacionarOpcion.php',

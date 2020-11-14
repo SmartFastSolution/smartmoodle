@@ -405,6 +405,14 @@ class Plantilla extends Seeder
                           'created_at' => now(),
                           'updated_at' => now(),
                           ]);
+                          DB::table('plantillas')->insert([
+                          'id' => 47,
+                          'nombre' => 'PLANTILLA 40 - RELACIONAR ALTERNATIVAS',
+                          'descripcion' => 'Plantilla para crear relacionar alternativa',
+                          'plantilla' => 'si',
+                          'created_at' => now(),
+                          'updated_at' => now(),
+                          ]);
   
     }
 }

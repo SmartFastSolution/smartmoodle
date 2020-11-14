@@ -362,6 +362,18 @@ $(function(document, window, index ) {
         evt.preventDefault();
         addTaller42()();
     });
+      $('.addTaller47_1').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller47_1()();
+    });
+      $('.addTaller47_2').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller47_2()();
+    });
+      $('.addTaller47_3').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller47_3()();
+    });
     $('.addRow').on('click', function(evt) {
         evt.preventDefault();
         addRow();
@@ -983,8 +995,111 @@ function addTaller38() {
             $(this).parent().parent().remove();
         }
     });
+     function addTaller47_1() {
+        var tall47_1 = $('.tall_47_1 .form-group').length;
+        console.log(tall47_1)
+        var a = 1;
+        var e = 1;
+        var t47_1 = 
+             '<div class="form-group  p-2">'+
+                '<label for="concepto6" class="col-form-label m-2">Enunciado  '+(tall47_1 + 1)+'  <a href="#" class="btn btn-danger re_tall47_1">'+
+                '<span class="glyphicon glyphicon-remove">X</span></a> </label>'+
+                ' <input required="" type="text" class="form-control" name="enunciados[]">'+
+            '</div>';
+     
+        $('.tall_47_1').append(t47_1);
+        function alert47_1(){
+        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+            "timeOut": "1100"
+        });
+        }
 
+        //console.log(enun)
+           
+      
+       return alert47_1;
+    }
+     $('.re_tall47_1').live('click', function() {
+        num = $('.tall_47_1 .form-group').toArray();
+        //console.log(num);
+       if($('.tall_47_1 .form-group').length == 1){
+             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1100"
+            });
+        }else {
+            $(this).parent().parent().remove();
+        }
+    });
 
+     function addTaller47_2() {
+        var tall47_2 = $('.tall_47_2 .form-group').length;
+        console.log(tall47_2)
+        var a = 1;
+        var e = 1;
+        var t47_2 = 
+             '<div class="form-group p-2">'+
+                '<label for="concepto6" class="col-form-label m-2">Definicion  '+(tall47_2 + 1)+'  <a href="#" class="btn btn-danger re_tall47_2">'+
+                '<span class="glyphicon glyphicon-remove">X</span></a> </label>'+
+                '<textarea required="" id="" cols="30" rows="5" name="definicion[]" class="form-control"></textarea>'+
+            '</div>';
+     
+        $('.tall_47_2').append(t47_2);
+        function alert47_2(){
+        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+            "timeOut": "1000"
+        });
+        }
+
+        //console.log(enun)
+          
+       return alert47_2;
+    }
+     $('.re_tall47_2').live('click', function() {
+        num = $('.tall_47_2 .form-group').toArray();
+        //console.log(num);
+       if($('.tall_47_2 .form-group').length == 1){
+             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+                "timeOut": "47_200"
+            });
+        }else {
+            $(this).parent().parent().remove();
+        }
+    });
+
+     function addTaller47_3() {
+        var tall47_3 = $('.tall_47_3 .form-group').length;
+        console.log(tall47_3)
+        var a = 1;
+        var e = 1;
+        var t47_3 = 
+             '<div class="form-group p-2">'+
+                '<label for="concepto6" class="col-form-label m-2">Alternativas  '+(tall47_3 + 1)+'  <a href="#" class="btn btn-danger re_tall47_3">'+
+                '<span class="glyphicon glyphicon-remove">X</span></a> </label>'+
+                '<input required="" type="text" class="form-control" name="alternativas[]">'+
+            '</div>';
+    
+        $('.tall_47_3').append(t47_3);
+        function alert47_3(){
+        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+            "timeOut": "1000"
+        });
+        }
+
+        //console.log(enun)
+           
+       return alert47_3;
+    }
+     $('.re_tall47_3').live('click', function() {
+        num = $('.tall_47_3 .form-group').toArray();
+        //console.log(num);
+       if($('.tall_47_3 .form-group').length == 1){
+             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        }else {
+            $(this).parent().parent().remove();
+        }
+    });
 
      function addEnun() {
         var enun = $('.enun .form-row').length;

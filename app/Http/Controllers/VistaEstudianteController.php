@@ -18,6 +18,8 @@ use App\Admin\Respuesta\Cheque;
 use App\Admin\Respuesta\ChequeEndoso;
 use App\Admin\Respuesta\Circulo;
 use App\Admin\Respuesta\Collage;
+use App\Admin\Respuesta\RAlternativa;
+use App\Admin\TallerRAlternativa;
 use App\Admin\Respuesta\CollageImg;
 use App\Admin\Respuesta\Completar;
 use App\Admin\Respuesta\CompletarEnunciado;
@@ -638,9 +640,19 @@ class VistaEstudianteController extends Controller
                 return view('estudiantes.talleres.taller46', compact('datos', 'd',  'relacion'));  
            
         }elseif ($plant == 47) {
-                
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
-            return view('docente.talleres.taller47', compact('datos', 'd'));
+            $relacion = DB::table('taller_user')
+            ->where('taller_user.user_id', $user)
+            ->where('taller_user.taller_id', $id)
+            ->select('taller_user.*')
+            ->get();
+
+                $taller = TallerRAlternativa::where('taller_id', $consul->id)->firstOrFail();
+                $letra     = 'a';
+                $miniscula = 'A';
+                $numero    = 0;
+                $numer     = 0;
+                $datos = RAlternativa::where('taller_id', $consul->id)->firstOrFail();
+                return view('estudiantes.talleres.taller47', compact('datos', 'd', 'relacion', 'taller', 'letra', 'miniscula', 'numero', 'numer'));
         }elseif ($plant == 48) {
             
              $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
