@@ -20,23 +20,29 @@
             <thead>
                 <tr>
                     <th scope="col">Curso</th>
-                    <!-- <th scope="col">Nombre/Apellido</th>
+                    <th scope="col">Nombre/Apellido</th>
                     <th scope="col">Correo</th>
-                    <th scope="col">Ultimo Acceso</th> -->
+                    <th scope="col">Ultimo Acceso</th>
 
                 </tr>
             </thead>
             <tbody>
-                
+            @foreach($materia->assignments as $ass)
 
                 <tr>
+                 
+                    <td> {{$ass->user->curso->nombre}}</td>
+                    <td> {{$ass->user->name}} {{$ass->user->apellido}}</td>
+                    <td>{{$ass->user->email}}</td>
+                    <td> {{$ass->user->created_at->diffForHumans()}}</td>
 
-                    <td> {{$materia->nombre}}</td>
+
+                 
 
                 </tr>
 
 
-                
+                @endforeach
 
 
             </tbody>

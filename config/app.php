@@ -161,6 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+      
     
 
 
@@ -169,7 +170,7 @@ return [
          */
 
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
-      
+       
 
         /*
          * Application Service Providers...
@@ -180,6 +181,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+        
 
        
       
@@ -238,6 +241,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Alert' => Illuminate\RealRashid\SweetAlert\Facades\Alert::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

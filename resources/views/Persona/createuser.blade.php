@@ -22,7 +22,7 @@
         <div class="card border-0 shadow my-5">
 
             <div class="card-body p-5">
-               
+
                 <h1 class="font-weight-light">Añadir Usuarios</h1>
 
                 <div class="row">
@@ -70,18 +70,6 @@
                                             value="{{ old('celular') }}" placeholder="Teléfono">
                                     </div>
                                 </div>
-
-
-                                <div class="form-group">
-                                    <label>Instituto</label>
-                                    <select class="form-control select" name="instituto" style="width: 99%;">
-                                        <option selected disabled>Elija una Unidad educativa...</option>
-                                        @foreach($institutos as $instituto)
-                                        <option value="{{$instituto->id}}">{{$instituto->nombre}}
-                                        </option>
-                                        @endforeach
-                                    </select>
-                                </div>
                                 <div class="form-group">
                                     <label>Rol</label>
                                     <select class="form-control select" name="role" style="width: 99%;">
@@ -93,6 +81,18 @@
 
                                     </select>
                                 </div>
+
+                                <div class="form-group">
+                                    <label>Instituto</label>
+                                    <select class="form-control select" name="instituto" style="width: 99%;">
+                                        <option selected disabled>Elija una Unidad educativa...</option>
+                                        @foreach($institutos as $instituto)
+                                        <option value="{{$instituto->id}}">{{$instituto->nombre}}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="email">Correo Electrónico</label>
@@ -104,12 +104,13 @@
                                         <!-- <a id="pass" class="btn btn-success ">Generar
                                             Passoword</a> -->
                                         <label for="password">Contraseña</label>
-                                        <input type="password" v-model="password" id="result" class="form-control" name="password"
-                                            id="password" value="{{ old('password') }}" placeholder="Password"
-                                            minlength="8"> 
-                                            <a href="" class="btn btn-sm btn-primary mt-2" @click.prevent="generarPass">Generar Aleatoria</a>
+                                        <input type="password" v-model="password" id="result" class="form-control"
+                                            name="password" id="password" value="{{ old('password') }}"
+                                            placeholder="Password" minlength="8">
+                                        <a href="" class="btn btn-sm btn-primary mt-2"
+                                            @click.prevent="generarPass">Generar Aleatoria</a>
                                     </div>
-                                   
+
                                     <div class="cold">
                                         <br>
                                     </div>
@@ -134,7 +135,7 @@
                                 <hr>
                                 <h3 class="font-weight-light">Sección Estudiante</h3>
                                 <div class="form-group">
-                                  
+
                                     <label>Curso</label>
                                     <select class="form-control select" name="curso" style="width: 99%;">
                                         <option selected disabled>Elija el Curso...</option>
@@ -156,7 +157,7 @@
                                 </div>
                                 <br>
                                 <br>
-                              
+
                                 <a href="{{route('users.index')}}" class="btn btn-primary">Atras</a>
                                 <input type="submit" class="btn btn-dark " value="Guardar">
 
@@ -209,33 +210,33 @@ function getNumero(min, max) {
 </script> -->
 
 <script type="text/javascript">
-    var random = new Vue({
-        el: "#random",
-        data:{
-            password:''
-        },
+var random = new Vue({
+    el: "#random",
+    data: {
+        password: ''
+    },
 
-        methods:{
-            generarPass: function() {
-                var _this = this;
-                var url = '/sistema/admin/ramdom';
-                    axios.post(url,{
-                        
-                }).then(response => {
-                     toastr.success("Clave Generada Satisfactoriamente", "Smarmoddle", {
-                "timeOut": "3000"
+    methods: {
+        generarPass: function() {
+            var _this = this;
+            var url = '/sistema/admin/ramdom';
+            axios.post(url, {
+
+            }).then(response => {
+                toastr.success("Clave Generada Satisfactoriamente", "Smarmoddle", {
+                    "timeOut": "3000"
                 });
-                     _this.password = response.data;
-                }).catch(function(error){
+                _this.password = response.data;
+            }).catch(function(error) {
 
-                });
-
-            }
+            });
 
         }
-    
-        
-    })
+
+    }
+
+
+})
 </script>
 
 

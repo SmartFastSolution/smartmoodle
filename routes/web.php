@@ -131,6 +131,14 @@ route::put('/reply/{comment}','CommentController@update')->name('comment.update'
 
 //rutas de nueva asignacion estudiante a materias 
 route::resource('assignments','AssignmentController');
+
+
+//rutas de reportes
+
+route::get('/pdf','PDFController@PDFUser')->name('descargarPDF');
+route::get('/pdfDocentes','PDFController@PDFDocentes')->name('descargarPDFDocentes');
+
+
 });
 
 Route::group(['prefix' => 'sistema/admin'], function() {

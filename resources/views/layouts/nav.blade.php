@@ -449,6 +449,9 @@
     <!-- datatables script -->
     <script src="{{ asset('js/jquery.dataTables.min.js')}}"></script>
     <script src="{{ asset('vendor/ckeditor/ckeditor.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+
     @yield('js')
     {{--   @include('sweetalert::alert') --}}
 </body>

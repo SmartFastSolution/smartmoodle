@@ -12,10 +12,23 @@
 </div>
 @endif
 
+
+
+
+
+
 <section class="content">
     <div class="container">
-        <a class="btn btn-info float-right" href="{{route('distribuciondos.create')}}"><i class="fas fa-plus"></i>
-            Asignar Docente</a>
+        <div class="btn-group float-right" role="group" aria-label="Basic example">
+
+            <a class="btn btn-info float-right" href="{{route('distribuciondos.create')}}"><i class="fas fa-plus"></i>
+                Asignar Docente</a>
+            <a class="btn btn-dark float-right btn" href="{{route('descargarPDFDocentes')}}" target="_blank"><i
+                    class="fas fa-pdf"></i>
+                Descargar Reporte</a>
+
+
+        </div>
         <h1 class="font-weight-light">Gestión de Asignación de Docentes</h1>
         <div class="row justify-content-center">
             <div class="col-md-13">
@@ -61,10 +74,10 @@
                                         @csrf
 
                                         <a class="btn btn-info " href="{{route('distribuciondos.show', $dis->id)}}"><i
-                                            class="fas fa-eye"></i></a>
-                                            <a class="btn btn-success btn"
-                                        href="{{route('distribuciondos.edit',  $dis->id)}}"><i
-                                            class=" fas fa-pencil-alt"></i></a>
+                                                class="fas fa-eye"></i></a>
+                                        <a class="btn btn-success btn"
+                                            href="{{route('distribuciondos.edit',  $dis->id)}}"><i
+                                                class=" fas fa-pencil-alt"></i></a>
                                         <button type="submit" class="btn btn-danger "><i
                                                 class="fas fa-trash"></i></button>
                                     </form>
@@ -75,7 +88,7 @@
                         <!--Table body-->
 
                     </table>
-                  
+
                     <!--Table-->
                 </div>
             </div>

@@ -10,6 +10,10 @@
 
             <a class="btn btn-info float-right btn" href="{{route('users.create')}}"><i class="fas fa-user-plus"></i>
                 Añadir Usuario</a>
+                <a class="btn btn-dark float-right btn" href="{{route('descargarPDF')}}" target="_blank"><i class="fas fa-pdf"></i>
+               Descargar Reporte</a>
+
+                
         </div>
         <h1 class="font-weight-light">Gestión de Usuarios</h1>
 
