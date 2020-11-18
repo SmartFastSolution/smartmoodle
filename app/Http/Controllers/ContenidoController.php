@@ -99,7 +99,7 @@ class ContenidoController extends Controller
         $materias=Materia::get();
         $contenido =Contenido::where('id', $id)->firstOrfail();
         $materiacontenido=Contenido::find($contenido->id)->materia()->get();
-        $tallers=Taller::where('contenido_id', $contenido->id)->paginate();
+        $tallers=Taller::where('contenido_id', $contenido->id)->paginate(10);
       
         return \view('Contenido.showcon',['contenido'=>$contenido,'materias'=>$materias,'materiacontenido'=> $materiacontenido,'tallers'=>$tallers]);
     

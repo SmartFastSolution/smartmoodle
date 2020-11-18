@@ -35,10 +35,11 @@ class DocenteController extends Controller
         // 
         
             $au = User::find(Auth::id())->distribuciondos;
-            if ($au == null) {
-            return redirect()->route('welcome'); 
+            // if ($au == null) {
+            // return redirect()->route('welcome'); 
                
-            }
+            // }
+       if (isset($au->materias)) {
             $ids =[];
             foreach ($au->materias as $value) {
                 foreach ($value->contenidos as $conte) {
@@ -72,6 +73,12 @@ class DocenteController extends Controller
 
             // return $users;
         return view('Docente.indexd', compact('users','au', 'calificado')); //ruta docente
+       }else{
+
+
+        return view('Docente.indexd'); //ruta docente
+          } 
+
     }
     
 
@@ -117,6 +124,71 @@ class DocenteController extends Controller
         $mate = $materia->assignments;
         
      return view('Docente.cursos',compact('materia','curso', 'mate','assignment'));
+
+    }
+    public function talleres($id)
+    {
+        $contenidos=Contenido::where('materia_id', $id)->get();
+
+        $tallers=Taller::paginate(10);
+        $talleres =[];
+        foreach ($contenidos as $key => $value) {
+            $talleres[$key] = array(
+            'nombre' => $value->nombre,
+            'talleres' =>$value->tallers
+        );
+        }
+       
+     return view('Docente.talleres',compact('tallers', 'contenidos', 'talleres', 'id'));
+
+    }
+    public function registro(Request $request)
+    {
+    $contenidos=Contenido::where('materia_id', $request->materia)->get();
+    $talleres =[];
+      
+
+    $taller = Taller::find($request->taller_id);
+    $estado = $request->estado;
+       // return $estado;
+    if ($estado == true) {
+        $taller->estado = 1; 
+        $taller->fecha_entrega = $request->fecha; 
+        $taller->save(); 
+
+        foreach ($contenidos as $key => $value) {
+            $talleres[$key] = array(
+            'nombre' => $value->nombre,
+            'talleres' =>$value->tallers
+        );
+
+        }
+
+        return response(array(
+                'success' => true,
+                'message' => 'Taller activado correctamente',
+                'talleres' => $talleres
+
+            ),200,[]);  
+
+    }elseif ($estado == false) {
+
+        $taller->estado = 0; 
+        $taller->fecha_entrega = $request->fecha; 
+        $taller->save();  
+          foreach ($contenidos as $key => $value) {
+            $talleres[$key] = array(
+            'nombre' => $value->nombre,
+            'talleres' =>$value->tallers
+        );
+    }
+          return response(array(
+                'success' => true,
+                'message' => 'Taller desactivado correctamente',
+                'talleres' => $talleres
+                
+            ),200,[]);   
+       }
 
     }
 

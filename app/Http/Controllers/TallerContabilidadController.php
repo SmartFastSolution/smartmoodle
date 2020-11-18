@@ -3,19 +3,219 @@
 namespace App\Http\Controllers;
 
 use App\Admin\TallerContabilidad;
+use App\Contabilidad\BCARegistro;
+use App\Contabilidad\BCRegistro;
 use App\Contabilidad\BIActivo;
-use App\Contabilidad\BIPatrimonio;
 use App\Contabilidad\BIPasivo;
+use App\Contabilidad\BIPatrimonio;
+use App\Contabilidad\BalanceAjustado;
+use App\Contabilidad\BalanceComprobacion;
 use App\Contabilidad\BalanceInicial;
-use App\Contabilidad\DiarioGeneral;
-use App\Contabilidad\DGRegistro;
 use App\Contabilidad\DGRDebe;
 use App\Contabilidad\DGRHaber;
+use App\Contabilidad\DGRegistro;
+use App\Contabilidad\DiarioGeneral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TallerContabilidadController extends Controller
 {
+    public function balanceAjustado(Request $request)
+    {
+        $id                 = Auth::id();
+        $taller_id          = $request->id;
+        $balances           = $request->balances;
+        $balanceCompro      = BalanceAjustado::where('user_id',$id)->where('taller_id', $taller_id)->count();
+        if ($balanceCompro  == 0) {
+        $contenido          = TallerContabilidad::select('enunciado')->where('taller_id', $taller_id)->firstOrFail();
+        $balance            = new BalanceAjustado;
+        $balance->taller_id = $taller_id ;
+        $balance->user_id   = $id;
+        $balance->enunciado = $contenido->enunciado;
+        $balance->total_debe  = $request->total_debe;
+        $balance->total_haber = $request->total_haber;
+        $balance->save();
+
+        $o = BalanceAjustado::where('user_id', $id)->get()->last(); 
+
+        foreach ($balances as $key => $balance) {
+                  $datos=array(
+                     'balance_ajustado_id' => $o->id,
+                     'cuenta'                  => $balance['cuenta'],
+                     'debe'                    => $balance['debe'],
+                     'haber'                   => $balance['haber'],
+                     'created_at'              => now(),
+                     'updated_at'              => now(),
+                  );
+                  BCARegistro::insert($datos);
+            }
+         return response(array(
+                'success' => true,
+                'estado'  => 'guardado',
+                'message' => 'Balance de Comprobacion Ajustado creado correctamente'
+            ),200,[]);
+        }elseif($balanceCompro  == 1){
+        $ids                       = [];
+        $balanceComprob            = BalanceAjustado::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        $balanceComprob->total_debe  = $request->total_debe;
+        $balanceComprob->total_haber = $request->total_haber;
+        $balanceComprob->save();
+
+
+        $registros= BCARegistro::where('balance_ajustado_id', $balanceComprob->id)->get();
+        
+        foreach($registros as $regis){
+                $ids[]=$regis->id;
+        }
+        $deleteRegistros = BCARegistro::destroy($ids);
+        $o = BalanceAjustado::where('user_id', $id)->get()->last(); 
+         foreach ($balances as $key => $balance) {
+                  $datos=array(
+                     'balance_ajustado_id' => $o->id,
+                     'cuenta'                  => $balance['cuenta'],
+                     'debe'                    => $balance['debe'],
+                     'haber'                   => $balance['haber'],
+                     'created_at'              => now(),
+                     'updated_at'              => now(),
+                  );
+                  BCARegistro::insert($datos);
+            }
+
+
+
+             return response(array(
+                'success' => true,
+                'estado' => 'actualizado',
+                'message' => 'Balance de Comprobacion Ajustado actualizado correctamente'
+            ),200,[]);
+
+        }
+    }
+    public function obtenerBalanceAjustado(Request $request)
+    {
+        $id         = Auth::id();
+        $taller_id  = $request->id;
+        $dioGeneral = BalanceAjustado::where('user_id',$id)->where('taller_id', $taller_id)->count();
+        // $registros  = [];
+        if ($dioGeneral  == 1) {
+            $balanceCompro = BalanceAjustado::where('user_id',$id)->where('taller_id', $taller_id)->first();
+            $obtener       = BCARegistro::select('cuenta','debe', 'haber')->where('balance_ajustado_id', $balanceCompro->id)->get();
+        
+            return response(array(
+                'datos' => true,
+                'bcomprobacionAjustado' => $obtener
+            ),200,[]);
+
+         }else{
+             return response(array(
+                'datos' => false,
+            ),200,[]);
+
+         }
+    }
+    public function balanceComprobacion(Request $request)
+    {
+        $id                 = Auth::id();
+        $taller_id          = $request->id;
+        $balances           = $request->balances;
+        $balanceCompro      = BalanceComprobacion::where('user_id',$id)->where('taller_id', $taller_id)->count();
+        if ($balanceCompro  == 0) {
+        $contenido          = TallerContabilidad::select('enunciado')->where('taller_id', $taller_id)->firstOrFail();
+        $balance            = new BalanceComprobacion;
+        $balance->taller_id = $taller_id ;
+        $balance->user_id   = $id;
+        $balance->enunciado = $contenido->enunciado;
+        $balance->sum_debe  = $request->sum_debe;
+        $balance->sum_haber = $request->sum_haber;
+        $balance->sal_debe  = $request->sal_debe;
+        $balance->sal_haber = $request->sal_haber;
+        $balance->save();
+
+        $o = BalanceComprobacion::where('user_id', $id)->get()->last(); 
+
+        foreach ($balances as $key => $balance) {
+                  $datos=array(
+                     'balance_comprobacion_id' => $o->id,
+                     'cuenta'                  => $balance['cuenta'],
+                     'suma_debe'               => $balance['suma_debe'],
+                     'suma_haber'              => $balance['suma_haber'],
+                     'saldo_debe'              => $balance['saldo_debe'],
+                     'saldo_haber'             => $balance['saldo_haber'],
+                     'created_at'              => now(),
+                     'updated_at'              => now(),
+                  );
+                  BCRegistro::insert($datos);
+            }
+         return response(array(
+                'success' => true,
+                'estado' => 'guardado',
+                'message' => 'Balance de Comprobacion creado correctamente'
+            ),200,[]);
+        }elseif($balanceCompro  == 1){
+        $ids = [];
+        $balanceComprob  = BalanceComprobacion::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        $balanceComprob->sum_debe  = $request->sum_debe;
+        $balanceComprob->sum_haber = $request->sum_haber;
+        $balanceComprob->sal_debe  = $request->sal_debe;
+        $balanceComprob->sal_haber = $request->sal_haber;
+        $balanceComprob->save();
+
+
+        $registros= BCRegistro::where('balance_comprobacion_id', $balanceComprob->id)->get();
+        
+        foreach($registros as $regis){
+                $ids[]=$regis->id;
+        }
+        $deleteRegistros = BCRegistro::destroy($ids);
+        $o = BalanceComprobacion::where('user_id', $id)->get()->last(); 
+         foreach ($balances as $key => $balance) {
+                  $datos=array(
+                     'balance_comprobacion_id' => $o->id,
+                     'cuenta'                  => $balance['cuenta'],
+                     'suma_debe'               => $balance['suma_debe'],
+                     'suma_haber'              => $balance['suma_haber'],
+                     'saldo_debe'              => $balance['saldo_debe'],
+                     'saldo_haber'             => $balance['saldo_haber'],
+                     'created_at'              => now(),
+                     'updated_at'              => now(),
+                  );
+                  BCRegistro::insert($datos);
+            }
+
+
+
+             return response(array(
+                'success' => true,
+                'estado' => 'actualizado',
+                'message' => 'Balance de Comprobacion actualizado correctamente'
+            ),200,[]);
+
+        }
+
+    }
+public function obtenerBalanceCompro(Request $request)
+    {
+        $id         = Auth::id();
+        $taller_id  = $request->id;
+        $dioGeneral = BalanceComprobacion::where('user_id',$id)->where('taller_id', $taller_id)->count();
+        // $registros  = [];
+        if ($dioGeneral  == 1) {
+            $balanceCompro = BalanceComprobacion::where('user_id',$id)->where('taller_id', $taller_id)->first();
+            $obtener       = BCRegistro::select('cuenta','suma_debe', 'suma_haber', 'saldo_debe', 'saldo_haber')->where('balance_comprobacion_id', $balanceCompro->id)->get();
+        
+            return response(array(
+                'datos' => true,
+                'bcomprobacion' => $obtener
+            ),200,[]);
+
+         }else{
+             return response(array(
+                'datos' => false,
+            ),200,[]);
+
+         }
+    }
+
     public function balance_inicial(Request $request)
     {
         $id            = Auth::id();

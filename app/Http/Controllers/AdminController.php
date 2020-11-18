@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Admin\RAAlternativa;
+use App\Admin\RADefinicion;
+use App\Admin\RAEnunciado;
 use App\Admin\Taller2Relacionar;
 use App\Admin\Taller2RelacionarOpcion;
 use App\Admin\TallerALectura;
@@ -48,6 +51,7 @@ use App\Admin\TallerPalabra;
 use App\Admin\TallerPartidaDoble;
 use App\Admin\TallerPartidaDobleEnun;
 use App\Admin\TallerPregunta;
+use App\Admin\TallerRAlternativa;
 use App\Admin\TallerRecibo;
 use App\Admin\TallerRelacionar;
 use App\Admin\TallerRelacionarOpcion;
@@ -145,7 +149,7 @@ class AdminController extends Controller
       $taller1->enunciado    = $request->input('enunciado');
       $taller1->plantilla_id = $request->input('id_plantilla');
       $taller1->contenido_id = $request->input('contenido_id'); //cambios 
-      $taller1->estado       = 1;
+      $taller1->estado       = 0;
       $taller1->save();
 
    	if ($taller1 = true) {
@@ -178,7 +182,7 @@ class AdminController extends Controller
       $taller2->enunciado    = $request->input('enunciado');
       $taller2->plantilla_id = $request->input('id_plantilla');
       $taller2->contenido_id = $request->input('contenido_id');
-      $taller2->estado       = 1;
+      $taller2->estado       = 0;
       $taller2->save();
 
 
@@ -212,7 +216,7 @@ class AdminController extends Controller
    	$taller3->enunciado = $request->input('enunciado');
    	$taller3->plantilla_id = $request->input('id_plantilla');
    	$taller3->contenido_id = $request->input('contenido_id');
-   	$taller3->estado = 1;
+   	$taller3->estado = 0;
    	$taller3->save();
 
    	if ($taller3 = true) {
@@ -244,7 +248,7 @@ class AdminController extends Controller
       $taller4->enunciado = $request->input('enunciado');
       $taller4->plantilla_id = $request->input('id_plantilla');
       $taller4->contenido_id = $request->input('contenido_id');
-      $taller4->estado = 1;
+      $taller4->estado = 0;
       $taller4->save();
 
       if ($taller4 = true) {
@@ -283,7 +287,7 @@ class AdminController extends Controller
       $taller5->enunciado   = $request->input('enunciado');
       $taller5->plantilla_id = $request->input('id_plantilla');
       $taller5->contenido_id   = $request->input('contenido_id');
-      $taller5->estado       = 1;
+      $taller5->estado       = 0;
       $taller5->save();
 
        if ($taller5 = true) {
@@ -324,7 +328,7 @@ class AdminController extends Controller
       $taller6->enunciado = $request->input('enunciado');
       $taller6->plantilla_id = $request->input('id_plantilla');
       $taller6->contenido_id = $request->input('contenido_id');
-      $taller6->estado = 1;
+      $taller6->estado = 0;
       $taller6->save();
       if ($taller6 = true) {
          $a = Taller::get()->last();
@@ -375,7 +379,7 @@ class AdminController extends Controller
       $taller7->enunciado = $request->input('enunciado');
       $taller7->plantilla_id = $request->input('id_plantilla');
       $taller7->contenido_id = $request->input('contenido_id');
-      $taller7->estado = 1;
+      $taller7->estado = 0;
       $taller7->save();
 
       if ($taller7 = true) {
@@ -395,7 +399,7 @@ class AdminController extends Controller
       $taller8->enunciado = $request->input('enunciado');
       $taller8->plantilla_id = $request->input('id_plantilla');
       $taller8->contenido_id = $request->input('contenido_id');
-      $taller8->estado = 1;
+      $taller8->estado = 0;
       $taller8->save();
 
       if ($taller8 = true) {
@@ -424,7 +428,7 @@ class AdminController extends Controller
       $taller9->enunciado = $request->input('enunciado');
       $taller9->plantilla_id = $request->input('id_plantilla');
       $taller9->contenido_id = $request->input('contenido_id');
-      $taller9->estado = 1;
+      $taller9->estado = 0;
       $taller9->save();
 
       if ($taller9 = true) {
@@ -464,7 +468,7 @@ if ($request->input('id_plantilla') == 10 ) {
          $taller10->enunciado = $request->input('enunciado');
          $taller10->plantilla_id = $request->input('id_plantilla');
          $taller10->contenido_id   = $request->input('contenido_id');
-         $taller10->estado = 1;
+         $taller10->estado = 0;
          $taller10->save();
 
       if ($taller10 == true) {
@@ -517,7 +521,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller11->enunciado = $request->input('enunciado');
          $taller11->plantilla_id = $request->input('id_plantilla');
          $taller11->contenido_id = $request->input('contenido_id');
-         $taller11->estado = 1;
+         $taller11->estado = 0;
          $taller11->save();
 
       if ($taller11 = true) {
@@ -572,7 +576,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller12->enunciado = $request->input('enunciado');
          $taller12->plantilla_id = $request->input('id_plantilla');
          $taller12->contenido_id = $request->input('contenido_id');
-         $taller12->estado = 1;
+         $taller12->estado = 0;
          $taller12->save();
 
            if ($taller12 = true) {
@@ -610,7 +614,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller13->enunciado = $request->input('enunciado');
          $taller13->plantilla_id = $request->input('id_plantilla');
          $taller13->contenido_id = $request->input('contenido_id');
-         $taller13->estado = 1;
+         $taller13->estado = 0;
          $taller13->save();
 
            if ($taller13 = true) {
@@ -646,7 +650,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller14->enunciado = $request->input('enunciado');
          $taller14->plantilla_id = $request->input('id_plantilla');
          $taller14->contenido_id = $request->input('contenido_id');
-         $taller14->estado = 1;
+         $taller14->estado = 0;
          $taller14->save();
 
            if ($taller14 = true) {
@@ -669,7 +673,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller15->enunciado = $request->input('enunciado');
          $taller15->plantilla_id = $request->input('id_plantilla');
          $taller15->contenido_id = $request->input('contenido_id');
-         $taller15->estado = 1;
+         $taller15->estado = 0;
          $taller15->save();
 
            if ($taller15 = true) {
@@ -695,7 +699,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller16->enunciado = $request->input('enunciado');
          $taller16->plantilla_id = $request->input('id_plantilla');
          $taller16->contenido_id = $request->input('contenido_id');
-         $taller16->estado = 1;
+         $taller16->estado = 0;
          $taller16->save();
 
            if ($taller16 = true) {
@@ -717,7 +721,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller17->enunciado = $request->input('enunciado');
          $taller17->plantilla_id = $request->input('id_plantilla');
          $taller17->contenido_id = $request->input('contenido_id');
-         $taller17->estado = 1;
+         $taller17->estado = 0;
          $taller17->save();
 
            if ($taller17 = true) {
@@ -744,7 +748,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller18->enunciado = $request->input('enunciado');
          $taller18->plantilla_id = $request->input('id_plantilla');
          $taller18->contenido_id = $request->input('contenido_id');
-         $taller18->estado = 1;
+         $taller18->estado = 0;
          $taller18->save();
 
            if ($taller18 = true) {
@@ -773,7 +777,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller19->enunciado = $request->input('enunciado');
          $taller19->plantilla_id = $request->input('id_plantilla');
          $taller19->contenido_id = $request->input('contenido_id');
-         $taller19->estado = 1;
+         $taller19->estado = 0;
          $taller19->save();
 
            if ($taller19 = true) {
@@ -801,7 +805,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller20->enunciado            = $request->input('enunciado');
          $taller20->plantilla_id = $request->input('id_plantilla');
          $taller20->contenido_id = $request->input('contenido_id');
-         $taller20->estado = 1;
+         $taller20->estado = 0;
          $taller20->save();
 
            if ($taller20 = true) {
@@ -831,7 +835,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller21->enunciado            = $request->input('enunciado');
          $taller21->plantilla_id = $request->input('id_plantilla');
          $taller21->contenido_id = $request->input('contenido_id');
-         $taller21->estado = 1;
+         $taller21->estado = 0;
          $taller21->save();
 
            if ($taller21 = true) {
@@ -857,7 +861,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller22->enunciado            = $request->input('enunciado');
          $taller22->plantilla_id = $request->input('id_plantilla');
          $taller22->contenido_id = $request->input('contenido_id');
-         $taller22->estado = 1;
+         $taller22->estado = 0;
          $taller22->save();
 
            if ($taller22 = true) {
@@ -901,7 +905,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller23->enunciado            = $request->input('enunciado');
          $taller23->plantilla_id = $request->input('id_plantilla');
          $taller23->contenido_id = $request->input('contenido_id');
-         $taller23->estado = 1;
+         $taller23->estado = 0;
          $taller23->save();
 
            if ($taller23 = true) {
@@ -929,7 +933,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller24->enunciado   = $request->input('enunciado');
          $taller24->plantilla_id = $request->input('id_plantilla');
          $taller24->contenido_id = $request->input('contenido_id');
-         $taller24->estado       = 1;
+         $taller24->estado       = 0;
          $taller24->save();
 
            if ($taller24 = true) {
@@ -955,7 +959,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller25->enunciado            = $request->input('enunciado');
          $taller25->plantilla_id = $request->input('id_plantilla');
          $taller25->contenido_id = $request->input('contenido_id');
-         $taller25->estado = 1;
+         $taller25->estado = 0;
          $taller25->save();
 
            if ($taller25 = true) {
@@ -1000,7 +1004,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller26->enunciado            = $request->input('enunciado');
          $taller26->plantilla_id = $request->input('id_plantilla');
          $taller26->contenido_id = $request->input('contenido_id');
-         $taller26->estado = 1;
+         $taller26->estado = 0;
          $taller26->save();
 
            if ($taller26 = true) {
@@ -1039,7 +1043,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller27->enunciado  = $request->input('enunciado');
          $taller27->plantilla_id = $request->input('id_plantilla');
          $taller27->contenido_id = $request->input('contenido_id');
-         $taller27->estado = 1;
+         $taller27->estado = 0;
          $taller27->save();
       if ($taller27 = true) {
            
@@ -1096,7 +1100,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller31->enunciado            = $request->input('enunciado');
          $taller31->plantilla_id = $request->input('id_plantilla');
          $taller31->contenido_id = $request->input('contenido_id');
-         $taller31->estado = 1;
+         $taller31->estado = 0;
          $taller31->save();
           if ($taller31 = true) {
             $a                               = Taller::get()->last();
@@ -1120,7 +1124,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller33->enunciado    = $request->input('enunciado');
          $taller33->plantilla_id = $request->input('id_plantilla');
          $taller33->contenido_id   = $request->input('contenido_id');
-         $taller33->estado       = 1;
+         $taller33->estado       = 0;
          $taller33->save();
 
           if ($taller33 = true) {
@@ -1167,7 +1171,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller34->plantilla_id = $plantilla;
          $taller34->enunciado    = $request->enunciado;
          $taller34->contenido_id = $contenido;
-         $taller34->estado       = 1;
+         $taller34->estado       = 0;
          $taller34->save();
 
           if ($taller34 = true) {
@@ -1220,7 +1224,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller36->enunciado    = $request->input('enunciado');
          $taller36->plantilla_id = $request->input('id_plantilla');
          $taller36->contenido_id   = $request->input('contenido_id');
-         $taller36->estado       = 1;
+         $taller36->estado       = 0;
          $taller36->save();
 
           if ($taller36 = true) {
@@ -1254,7 +1258,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller37->enunciado = $request->input('enunciado');
          $taller37->plantilla_id = $request->input('id_plantilla');
          $taller37->contenido_id   = $request->input('contenido_id');
-         $taller37->estado       = 1;
+         $taller37->estado       = 0;
          $taller37->save();
 
           if ($taller37 = true) {
@@ -1289,7 +1293,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller38->enunciado    = $request->input('enunciado');
          $taller38->plantilla_id = $request->input('id_plantilla');
          $taller38->contenido_id   = $request->input('contenido_id');
-         $taller38->estado       = 1;
+         $taller38->estado       = 0;
          $taller38->save();
 
           if ($taller38 = true) {
@@ -1323,7 +1327,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller39->enunciado    = $request->input('enunciado');
          $taller39->plantilla_id = $request->input('id_plantilla');
          $taller39->contenido_id   = $request->input('contenido_id');
-         $taller39->estado       = 1;
+         $taller39->estado       = 0;
          $taller39->save();
 
           if ($taller39 = true) {
@@ -1346,7 +1350,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller40->enunciado    = $request->input('enunciado');
          $taller40->plantilla_id = $request->input('id_plantilla');
          $taller40->contenido_id   = $request->input('contenido_id');
-         $taller40->estado       = 1;
+         $taller40->estado       = 0;
          $taller40->save();
 
           if ($taller40 = true) {
@@ -1379,7 +1383,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller42->enunciado    = $request->input('enunciado');
          $taller42->plantilla_id = $request->input('id_plantilla');
          $taller42->contenido_id   = $request->input('contenido_id');
-         $taller42->estado       = 1;
+         $taller42->estado       = 0;
          $taller42->save();
 
            if ($taller42 = true) {
@@ -1405,7 +1409,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller43->enunciado    = $request->input('enunciado');
          $taller43->plantilla_id = $request->input('id_plantilla');
          $taller43->contenido_id   = $request->input('contenido_id');
-         $taller43->estado       = 1;
+         $taller43->estado       = 0;
          $taller43->save();
 
            if ($taller43 = true) {
@@ -1429,7 +1433,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller44->enunciado    = $request->input('enunciado');
          $taller44->plantilla_id = $request->input('id_plantilla');
          $taller44->contenido_id   = $request->input('contenido_id');
-         $taller44->estado       = 1;
+         $taller44->estado       = 0;
          $taller44->save();
 
            if ($taller44 = true) {
@@ -1451,7 +1455,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $taller45->enunciado    = $request->input('enunciado');
          $taller45->plantilla_id = $request->input('id_plantilla');
          $taller45->contenido_id   = $request->input('contenido_id');
-         $taller45->estado       = 1;
+         $taller45->estado       = 0;
          $taller45->save();
 
            if ($taller45 = true) {
@@ -1465,6 +1469,57 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
                  return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');
              }
       }
+        public function taller47(Request $request)
+      {
+         $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $taller47               = new Taller;
+         $taller47->nombre       = 'Taller '.++$i;
+         $taller47->enunciado    = $request->input('enunciado');
+         $taller47->plantilla_id = $request->input('id_plantilla');
+         $taller47->contenido_id   = $request->input('contenido_id');
+         $taller47->estado       = 0;
+         $taller47->save();
 
+           if ($taller47 = true) {
+                $o                    = Taller::get()->last(); 
+                $taller_47            = new TallerRAlternativa;
+                $taller_47->taller_id = $o->id;
+                $taller_47->enunciado = $request->input('enunciado');
+                $taller_47->alternativa_correcta = $request->input('alternativa_correcta');
+                $taller_47->save(); 
+
+                $a    = TallerRAlternativa::get()->last(); 
+
+                  foreach ($request->enunciados as $key=>$v) {
+                  $datos=array(
+                     'taller_r_alternativa_id'=> $a->id,
+                     'enunciado'=> $request->enunciados[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  RAEnunciado::insert($datos);
+               }
+                  foreach ($request->definicion as $key=>$v) {
+                  $datos=array(
+                     'taller_r_alternativa_id'=> $a->id,
+                     'definicion'=> $request->definicion[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  RADefinicion::insert($datos);
+               }
+                foreach ($request->alternativas as $key=>$v) {
+                  $datos=array(
+                     'taller_r_alternativa_id'=> $a->id,
+                     'alternativa'=> $request->alternativas[$key],
+                     'created_at'=> now(),
+                     'updated_at'=> now(),
+                  );
+                  RAAlternativa::insert($datos);
+               }
+
+                 return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');
+             }
+      }
 
 }

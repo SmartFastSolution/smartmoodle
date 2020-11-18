@@ -60,6 +60,7 @@ use App\Admin\Respuesta\Pasivo4;
 use App\Admin\Respuesta\Patrimonio4;
 use App\Admin\Respuesta\Pregunta;
 use App\Admin\Respuesta\Recibo;
+use App\Admin\Respuesta\RAlternativa;
 use App\Admin\Respuesta\Relacionar2;
 use App\Admin\Respuesta\Relacionar2Re;
 use App\Admin\Respuesta\Relacionar;
@@ -104,6 +105,7 @@ use App\Admin\TallerOrdenPago;
 use App\Admin\TallerPagare;
 use App\Admin\TallerPalabra;
 use App\Admin\TallerPregunta;
+use App\Admin\TallerRAlternativa;
 use App\Admin\TallerRecibo;
 use App\Admin\TallerRelacionar;
 use App\Admin\TallerRelacionarOpcion;
@@ -493,7 +495,7 @@ class TallerEstudianteController extends Controller
     $taller1->save();
 
         $user= User::find($id);
-        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now(), 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamente');
     }
      public function store2(Request $request){
@@ -581,7 +583,7 @@ class TallerEstudianteController extends Controller
             } 
            
         $user= User::find($id);
-        $user->tallers()->attach($request->id,['status'=> 'completado']);
+        $user->tallers()->attach($request->id,['status'=> 'completado' , 'fecha_entregado' => now()]);
         // return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamente');
         return $request->caja['valor_debe'];
     }
@@ -607,7 +609,7 @@ class TallerEstudianteController extends Controller
                   CompletarEnunciadoRes::insert($datos);
                }
         $user= User::find($id);
-        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     //return response($content = 'Taller completado correctamente', $status = 200);
     }
@@ -628,7 +630,7 @@ class TallerEstudianteController extends Controller
     $taller4->save();
 
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     //return response($content = 'Taller completado correctamente', $status = 200);
     }
@@ -658,7 +660,7 @@ class TallerEstudianteController extends Controller
                     AlternativaCorrectaRes::insert($datos);
                    }    
         $user= User::find($id);
-        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
         return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
 
@@ -684,7 +686,7 @@ class TallerEstudianteController extends Controller
                     IdentificarImgRes::insert($datos);
                    }    
         $user= User::find($id);
-        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
         return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
 
@@ -702,7 +704,7 @@ class TallerEstudianteController extends Controller
     $taller7->save();
 
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
 
     }
@@ -724,7 +726,7 @@ class TallerEstudianteController extends Controller
     $taller8->save();
 
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
 
@@ -755,7 +757,7 @@ class TallerEstudianteController extends Controller
                    }    
 
         $user= User::find($id);
-        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
         return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
         public function store10(Request $request, $idtaller)
@@ -786,7 +788,7 @@ class TallerEstudianteController extends Controller
                    }    
                    
         $user= User::find($id);
-        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
         return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
    }
 
@@ -814,7 +816,7 @@ public function store11(Request $request, $idtaller)
                    }    
                    
         $user= User::find($id);
-        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
         return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
    }
 
@@ -843,7 +845,7 @@ public function store11(Request $request, $idtaller)
                    }    
                    
         $user= User::find($id);
-        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
         return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
    }
     public function store13(Request $request, $idtaller)
@@ -871,7 +873,7 @@ public function store11(Request $request, $idtaller)
                    }    
                    
         $user= User::find($id);
-        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
         return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
    }
 
@@ -889,7 +891,7 @@ public function store11(Request $request, $idtaller)
     $taller14->save();
 
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
 
@@ -910,7 +912,7 @@ public function store11(Request $request, $idtaller)
     $taller15->save();
 
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
          public function store16(Request $request, $idtaller)
@@ -926,7 +928,7 @@ public function store11(Request $request, $idtaller)
         $taller16->save();
 
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
          public function store17(Request $request, $idtaller)
@@ -942,7 +944,7 @@ public function store11(Request $request, $idtaller)
         $taller17->save();
 
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
           public function store18(Request $request, $idtaller)
@@ -966,7 +968,7 @@ public function store11(Request $request, $idtaller)
         $taller18->save();
 
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
      public function store19(Request $request, $idtaller)
@@ -990,7 +992,7 @@ public function store11(Request $request, $idtaller)
          $taller19->save();
 
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
 
@@ -1026,7 +1028,7 @@ public function store11(Request $request, $idtaller)
          $taller20->save();
 
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
 
@@ -1048,7 +1050,7 @@ public function store11(Request $request, $idtaller)
          $taller21->save();
 
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
 
@@ -1085,7 +1087,7 @@ public function store11(Request $request, $idtaller)
                }        
 
         $user= User::find($id);
-        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
         return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
    }
     public function store23(Request $request, $idtaller)
@@ -1108,7 +1110,7 @@ public function store11(Request $request, $idtaller)
             $taller23->save();
 
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
 
@@ -1134,7 +1136,7 @@ public function store11(Request $request, $idtaller)
             $taller24->save();
 
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
        public function store25(Request $request, $idtaller)
@@ -1185,7 +1187,7 @@ public function store11(Request $request, $idtaller)
         }
 
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
 
@@ -1225,7 +1227,7 @@ public function store11(Request $request, $idtaller)
 
 
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
 
@@ -1256,7 +1258,7 @@ public function store11(Request $request, $idtaller)
                }
         }
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
 
@@ -1278,7 +1280,7 @@ public function store11(Request $request, $idtaller)
     $taller28->save();
 
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
     return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamnete');
     }
@@ -1307,7 +1309,7 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
 
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
     return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamnete');
     }
@@ -1332,7 +1334,7 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
 
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
     return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamnete');
     }
@@ -1349,7 +1351,7 @@ public function store11(Request $request, $idtaller)
                 $taller31->enunciado                         = $contenido->enunciado; 
                 $taller31->save();
                 $user                                        = User::find($id);
-                $user->tallers()->attach($idtaller,['status' => 'completado']);
+                $user->tallers()->attach($idtaller,['status' => 'completado' , 'fecha_entregado' => now()]);
 
                 $id                                          = Collage::where('user_id', $id)->first();
                 $imagen = $request->file('file');
@@ -1403,7 +1405,7 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
 
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
     return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamnete');
     }
@@ -1427,7 +1429,7 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
 
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
     return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamnete');
     }
@@ -1460,7 +1462,7 @@ public function store11(Request $request, $idtaller)
 
             }
         $user= User::find($id);
-        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
         public function store34(Request $request, $idtaller)
@@ -1486,7 +1488,7 @@ public function store11(Request $request, $idtaller)
             TipoSaldoDato::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
         }
         $user= User::find($id);
-        $user->tallers()->attach($idtaller,['status'=> 'completado']);
+        $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
         return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
      public function store36(Request $request, $idtaller)
@@ -1514,7 +1516,7 @@ public function store11(Request $request, $idtaller)
                }
         }
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
 
@@ -1543,7 +1545,7 @@ public function store11(Request $request, $idtaller)
                }
         }
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
     public function store39(Request $request)
@@ -1561,7 +1563,7 @@ public function store11(Request $request, $idtaller)
             $taller39->save();
 
             $user= User::find($id);
-            $user->tallers()->attach($idtaller,['status'=> 'completado']);
+            $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
             return $taller39;
         }
@@ -1590,7 +1592,7 @@ public function store11(Request $request, $idtaller)
                }
         }
     $user= User::find($id);
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
 
@@ -1614,7 +1616,7 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
 
-    $user->tallers()->attach($idtaller,['status'=> 'completado']);
+    $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
     return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamnete');
     }
@@ -1641,7 +1643,7 @@ public function store11(Request $request, $idtaller)
                }
 
             $user= User::find($id);
-            $user->tallers()->attach($idtaller,['status'=> 'completado']);
+            $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
             return $taller42;
         }
@@ -1670,7 +1672,7 @@ public function store11(Request $request, $idtaller)
             $taller43->save();
 
             $user= User::find($id);
-            $user->tallers()->attach($idtaller,['status'=> 'completado']);
+            $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
             return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
          public function store44(Request $request, $idtaller)
@@ -1718,7 +1720,7 @@ public function store11(Request $request, $idtaller)
             }
 
             $user= User::find($id);
-            $user->tallers()->attach($idtaller,['status'=> 'completado']);
+            $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
             return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
 
@@ -1742,7 +1744,24 @@ public function store11(Request $request, $idtaller)
             $taller46->persona_natural  =   $request->input('persona_natural');   
             $taller46->save();
             $user= User::find($id);
-            $user->tallers()->attach($idtaller,['status'=> 'completado']);
+            $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
+            return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+
+
+        }
+             public function store47(Request $request, $idtaller)
+        {
+            $contenido            = TallerRAlternativa::select('enunciado', 'alternativa_correcta')->where('taller_id', $idtaller)->firstOrFail(); 
+            $id                         = Auth::id();
+            $taller47                   =   new RAlternativa; 
+            $taller47->taller_id        =   $idtaller;
+            $taller47->user_id          =   $id;           
+            $taller47->enunciado        =  $contenido->enunciado; 
+            $taller47->respuesta        =  $request->respuesta;
+            $taller47->alternativa_correcta  =  $contenido->alternativa_correcta;
+            $taller47->save();
+            $user= User::find($id);
+            $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
             return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
 
 

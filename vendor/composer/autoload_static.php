@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit9af447a4a4d98e0b10ed57e5137fd181
+class ComposerStaticInit125d0f3b9d5ef9f879142eac4e98f511
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -660,6 +660,9 @@ class ComposerStaticInit9af447a4a4d98e0b10ed57e5137fd181
     );
 
     public static $classMap = array (
+        'App\\Admin\\RAAlternativa' => __DIR__ . '/../..' . '/app/Admin/RAAlternativa.php',
+        'App\\Admin\\RADefinicion' => __DIR__ . '/../..' . '/app/Admin/RADefinicion.php',
+        'App\\Admin\\RAEnunciado' => __DIR__ . '/../..' . '/app/Admin/RAEnunciado.php',
         'App\\Admin\\Respuesta\\Abreviatura' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Abreviatura.php',
         'App\\Admin\\Respuesta\\AbreviaturaCarta' => __DIR__ . '/../..' . '/app/Admin/Respuesta/AbreviaturaCarta.php',
         'App\\Admin\\Respuesta\\AbreviaturaEconomica' => __DIR__ . '/../..' . '/app/Admin/Respuesta/AbreviaturaEconomica.php',
@@ -717,6 +720,7 @@ class ComposerStaticInit9af447a4a4d98e0b10ed57e5137fd181
         'App\\Admin\\Respuesta\\Pasivo4' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Pasivo4.php',
         'App\\Admin\\Respuesta\\Patrimonio4' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Patrimonio4.php',
         'App\\Admin\\Respuesta\\Pregunta' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Pregunta.php',
+        'App\\Admin\\Respuesta\\RAlternativa' => __DIR__ . '/../..' . '/app/Admin/Respuesta/RAlternativa.php',
         'App\\Admin\\Respuesta\\Recibo' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Recibo.php',
         'App\\Admin\\Respuesta\\Relacionar' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Relacionar.php',
         'App\\Admin\\Respuesta\\Relacionar2' => __DIR__ . '/../..' . '/app/Admin/Respuesta/Relacionar2.php',
@@ -777,6 +781,7 @@ class ComposerStaticInit9af447a4a4d98e0b10ed57e5137fd181
         'App\\Admin\\TallerPartidaDoble' => __DIR__ . '/../..' . '/app/Admin/TallerPartidaDoble.php',
         'App\\Admin\\TallerPartidaDobleEnun' => __DIR__ . '/../..' . '/app/Admin/TallerPartidaDobleEnun.php',
         'App\\Admin\\TallerPregunta' => __DIR__ . '/../..' . '/app/Admin/TallerPregunta.php',
+        'App\\Admin\\TallerRAlternativa' => __DIR__ . '/../..' . '/app/Admin/TallerRAlternativa.php',
         'App\\Admin\\TallerRecibo' => __DIR__ . '/../..' . '/app/Admin/TallerRecibo.php',
         'App\\Admin\\TallerRelacionar' => __DIR__ . '/../..' . '/app/Admin/TallerRelacionar.php',
         'App\\Admin\\TallerRelacionarOpcion' => __DIR__ . '/../..' . '/app/Admin/TallerRelacionarOpcion.php',
@@ -797,9 +802,13 @@ class ComposerStaticInit9af447a4a4d98e0b10ed57e5137fd181
         'App\\Clinstituto' => __DIR__ . '/../..' . '/app/Clinstituto.php',
         'App\\Comment' => __DIR__ . '/../..' . '/app/Comment.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Contabilidad\\BCARegistro' => __DIR__ . '/../..' . '/app/Contabilidad/BCARegistro.php',
+        'App\\Contabilidad\\BCRegistro' => __DIR__ . '/../..' . '/app/Contabilidad/BCRegistro.php',
         'App\\Contabilidad\\BIActivo' => __DIR__ . '/../..' . '/app/Contabilidad/BIActivo.php',
         'App\\Contabilidad\\BIPasivo' => __DIR__ . '/../..' . '/app/Contabilidad/BIPasivo.php',
         'App\\Contabilidad\\BIPatrimonio' => __DIR__ . '/../..' . '/app/Contabilidad/BIPatrimonio.php',
+        'App\\Contabilidad\\BalanceAjustado' => __DIR__ . '/../..' . '/app/Contabilidad/BalanceAjustado.php',
+        'App\\Contabilidad\\BalanceComprobacion' => __DIR__ . '/../..' . '/app/Contabilidad/BalanceComprobacion.php',
         'App\\Contabilidad\\BalanceInicial' => __DIR__ . '/../..' . '/app/Contabilidad/BalanceInicial.php',
         'App\\Contabilidad\\DGRDebe' => __DIR__ . '/../..' . '/app/Contabilidad/DGRDebe.php',
         'App\\Contabilidad\\DGRHaber' => __DIR__ . '/../..' . '/app/Contabilidad/DGRHaber.php',
@@ -6078,10 +6087,10 @@ class ComposerStaticInit9af447a4a4d98e0b10ed57e5137fd181
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit9af447a4a4d98e0b10ed57e5137fd181::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit9af447a4a4d98e0b10ed57e5137fd181::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit9af447a4a4d98e0b10ed57e5137fd181::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit9af447a4a4d98e0b10ed57e5137fd181::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit125d0f3b9d5ef9f879142eac4e98f511::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit125d0f3b9d5ef9f879142eac4e98f511::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit125d0f3b9d5ef9f879142eac4e98f511::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit125d0f3b9d5ef9f879142eac4e98f511::$classMap;
 
         }, null, ClassLoader::class);
     }

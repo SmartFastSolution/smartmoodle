@@ -38,6 +38,7 @@ use App\Admin\TallerPagare;
 use App\Admin\TallerPalabra;
 use App\Admin\TallerPartidaDoble;
 use App\Admin\TallerPregunta;
+use App\Admin\TallerRAlternativa;
 use App\Admin\TallerRecibo;
 use App\Admin\TallerRelacionar;
 use App\Admin\TallerSenalar;
@@ -413,9 +414,16 @@ class TallersController extends Controller
             return abort(404);   
              }
         }elseif ($plant == 47) {
+
+            $letra = 'a';
+            $miniscula = 'A';
+            $numero = 0;
+            $numer = 0;
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
-            return view('talleres.taller47', compact('datos', 'd'));
+            $datos = TallerRAlternativa::where('taller_id', $consul->id)->firstOrFail();
+
+
+            return view('talleres.taller47', compact('datos', 'd', 'letra', 'numero', 'miniscula', 'numer'));
         }elseif ($plant == 48) {
             $consul = Taller::findorfail($id);
              $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();

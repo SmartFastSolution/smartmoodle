@@ -19,6 +19,7 @@ class CreateTallersTable extends Migration
             $table->string('nombre');
             $table->text('enunciado')->nullable();
             $table->unsignedbigInteger('contenido_id');
+            $table->date('fecha_entrega')->nullable();
             $table->boolean('estado');
             $table->timestamps();
             $table->foreign('plantilla_id')->references('id')->on('plantillas')->onDelete('cascade');

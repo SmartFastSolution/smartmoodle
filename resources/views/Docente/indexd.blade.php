@@ -28,11 +28,11 @@
                 <h3 class="font-weight-light"> <strong> Materias</strong></h3>
             </div>
 
+                @isset ($au->materias)
             <div class="row">
              
 
-
-                @foreach($au->materias as $materia)
+                    @forelse($au->materias as $materia)
                 <!-- ./col -->
                 <div class="col-lg-3 col-5">
                     <!-- small box -->
@@ -50,13 +50,19 @@
                     </div>
                 </div>
                 <!-- ./col -->
-                @endforeach
-
-        
-
-
+                @empty 
+                    <h1>No tienes cursos asignados</h1>
+                
+                @endforelse
+             
             </div>
+              @endisset
+              @empty($au->materias)
+               <h1>No tienes cursos Asignados</h1> 
+            @endempty
         </div>
+
+@isset ($au->materias)
          <h2>Talleres Por Calificar</h2>
                   <div class="card-body">
                         <table class="table table-hover">
@@ -104,7 +110,7 @@
                     </div>
 
                         <h2>Talleres Calificados</h2>
-                     <div class="card-body">
+                     <div class="card-body mb-5">
                         <table class="table table-hover">
 
                             <thead>
@@ -140,10 +146,11 @@
                     </div>
 
 
-
+ @endisset
 
     </div>
 </section>
+
 @stop
 @section('css')
 @stop

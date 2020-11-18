@@ -28,6 +28,9 @@ use App\Admin\Respuesta\DefinirEnunciadoRe;
 use App\Admin\Respuesta\Diferencia;
 use App\Admin\Respuesta\EscribirCuenta;
 use App\Admin\Respuesta\Factura;
+use App\Admin\Respuesta\RAlternativa;
+use App\Admin\TallerRAlternativa;
+
 use App\Admin\Respuesta\FacturaDato;
 use App\Admin\Respuesta\FormulasContable;
 use App\Admin\Respuesta\Gusanillo;
@@ -445,9 +448,14 @@ class TallerDocenteController extends Controller
                 return view('docentes.talleres.taller46', compact('datos', 'd', 'update_imei', 'user'));  
            
         }elseif ($plant == 47) {
-            
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
-            return view('docente.talleres.taller47', compact('datos', 'd', 'update_imei'));
+             $letra = 'a';
+            $miniscula = 'A';
+            $numero = 0;
+            $numer = 0;
+            $taller = TallerRAlternativa::where('taller_id', $consul->id)->firstOrFail();
+            $datos = RAlternativa::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+                 return view('docentes.talleres.taller47', compact('datos', 'd', 'update_imei', 'user', 'taller', 'letra', 'miniscula', 'numero', 'numer'));  
+
         }elseif ($plant == 48) {
             
              $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();

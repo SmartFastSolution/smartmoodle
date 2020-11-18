@@ -215,7 +215,6 @@
 
 <script>
 $(document).ready(function() {
-
     $('#nombre').keyup(function(e) {
         var str = $('#nombre').val();
         str = str.replace(/\W+(?!$)/g, '-').toLowerCase(); // remplazamos el estdo de dashe

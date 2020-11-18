@@ -16,7 +16,7 @@
                 <a class="list-group-item list-group-item-action active" id="list-diario-list" data-toggle="list" href="#list-diario" role="tab" aria-controls="home">Balance Inicial</a>
                 <a class="list-group-item list-group-item-action" id="list-balance_comp-list" data-toggle="list" href="#list-balance_comp" role="tab" aria-controls="profile">Balance de Comprobacion</a>
                 <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Diario General</a>
-                <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+                <a class="list-group-item list-group-item-action" id="list-balance-ajustado-list" data-toggle="list" href="#list-balance-ajustado" role="tab" aria-controls="balance-ajustado">Balance Ajustado</a>
             </div>
         </div>
         <div class="col-12 col-sm-12 col-md-10">
@@ -46,10 +46,8 @@
                     aria-labelledby="list-messages-list">
                     @include('contabilidad.diariogeneral')
                 </div>
-                <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
-                    <form>
-                        <input type="text">
-                    </form>
+                <div class="tab-pane fade" id="list-balance-ajustado" role="tabpanel" aria-labelledby="list-balance-ajustado-list">
+                    @include('contabilidad.balanceajustado')
                 </div>
             </div>
         </div>
