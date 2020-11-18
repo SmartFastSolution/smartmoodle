@@ -45,7 +45,7 @@
 <body>
     <header>
         <br>
-        <p><strong>USUARIOS GENERALES</strong></p>
+        <p><strong>USUARIOS GENERALES</strong></p> 
     </header>
     <main>
         <div class="container">
@@ -90,9 +90,7 @@
             </table>
         </div>
     </main>
-    <!-- <footer>
-        <p><strong>PRUEBA PDF</strong></p>
-    </footer> -->
+  
 </body>
 
 </html>
