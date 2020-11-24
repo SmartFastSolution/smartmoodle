@@ -32,7 +32,7 @@
 
   </tr>
 </thead>
-<tbody>
+<tbody is="draggable" group="people" :list="balances_ajustados" tag="tbody">
 
     <tr v-for="(balan, index) in balances_ajustados">
       <td align="center">@{{ balan.cuenta}}</td>

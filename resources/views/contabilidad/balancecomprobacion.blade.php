@@ -38,8 +38,8 @@
                 <td align="center">Haber</td>
             </tr>
         </thead>
-        <tbody>
-            <tr v-for="(balan, index) in balances">
+        <tbody is="draggable" group="people" :list="balances" tag="tbody" @change="mover">
+            <tr v-for="(balan, index) in balances" >
                 <td align="center">@{{ balan.cuenta}}</td>
                 <td align="center">@{{ balan.suma_debe}}</td>
                 <td align="center" width="125">@{{ balan.suma_haber }}</td>
@@ -89,5 +89,5 @@
         
     </div>
 
-    @include ('contabilidad.modales.modalbalancecomprobacion')
+    {{-- @include ('contabilidad.modales.modalbalancecomprobacion') --}}
 </div>

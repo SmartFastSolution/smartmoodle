@@ -98,8 +98,10 @@
 
                             <thead>
                                 <tr>
+                                    <th scope="col">Curso</th>
+
                                     <th scope="col">Materia</th>
-                                    <th scope="col"> Taller </th>
+                                    <th scope="col" width="100"> Taller </th>
                                     <th scope="col">Alumno </th>
                                     <th scope="col">Enunciado </th>
                                     <th scope="col">Vista Taller</th>
@@ -108,6 +110,7 @@
                             <tbody>
                                 <tr>
                                     @foreach($users as $taller)
+                                    <td>{{$taller->cur_nombre}}</td>
                                     <td>{{$taller->mate_nombre}}</td>
                                     <td>{{$taller->nombre}}</td>
                                     <td>{{$taller->alumno}}</td>
@@ -133,8 +136,12 @@
 
                             <thead>
                                 <tr>
+                                    <th scope="col">Curso</th>
+
+                              
+
                                     <th scope="col">Materia</th>
-                                    <th scope="col"> Taller </th>
+                                    <th scope="col" width="100"> Taller </th>
                                     <th scope="col">Alumno </th>
                                     <th scope="col">Enunciado </th>
                                     <th scope="col">Vista Taller</th>
@@ -143,6 +150,10 @@
                             <tbody>
                                 <tr>
                                     @foreach($calificado as $taller)
+                                  
+
+                                    <td>{{$taller->cur_nombre}}</td>
+
                                     <td>{{$taller->mate_nombre}}</td>
                                     <td>{{$taller->nombre}}</td>
                                     <td>{{$taller->alumno}}</td>
