@@ -17,6 +17,11 @@
         <div class="card card-info card-outline">
             <div class="card-header">
                 <h3 class="font-weight-light"> <strong>{{$materia->nombre}}</strong></h3>
+               
+                @foreach($materia->distribuciondos as $doc) 
+               <h3 class="font-weight-light"> <strong>Docente: {{$doc->user->name}} {{$doc->user->apellido}}</strong></h3>  
+               @endforeach
+              
 
             </div>
             <div class="row">

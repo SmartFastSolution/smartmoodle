@@ -84,8 +84,8 @@ $(function() {
                 "autoWidth": true,
 
                 "paging": true,
-                "lengthChange": false,
-                "searching": false,
+                "lengthChange": true,
+                "searching": true,
                 "ordering": true,
 
 
