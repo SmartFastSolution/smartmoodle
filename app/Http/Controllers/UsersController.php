@@ -118,13 +118,19 @@ class UsersController extends Controller
     {
        // Gate::authorize('haveaccess', 'user.show');
        
-        $roles= Role::orderBy('name')->get();
+       $us=User::find($user->id);
+       $roles= Role::orderBy('name')->get();
         // $roles = Role::all();
-        
+        $cursos= Curso::get();
+        $nivels= Nivel::get();
         $institutos = Instituto::get(); // todos los datos de la bd
         $institutouser = User::find($user->id)->instituto()->get(); //llama al instituto que este relacionado a un usuario 
-      
-        return view('Persona.showu',['user'=>$user, 'roles'=>$roles,'institutos'=>$institutos,'institutouser'=>$institutouser]);
+        $cursouser=User::find($user->id)->curso()->get();
+        $niveluser = User::find($user->id)->nivel()->get();
+        $roluser=  $us->roles()->get();
+     
+       return view('Persona.showu',compact('roles','institutos','cursos','nivels','institutouser','cursouser','niveluser','user','roluser'));
+        
     
         
     }

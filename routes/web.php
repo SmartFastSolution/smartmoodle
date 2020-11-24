@@ -50,6 +50,14 @@ route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta e
  Route::post('contmateria','HomeController@buscarContenido')->name('contmateria');
 
 
+ //rutas vue para reporte
+
+Route::get('/reporte','PDFController@Reporte')->name('Reporte');
+Route::post('informes','PDFController@Instituto')->name('informes');
+Route::post('distinst1','PDFController@curso')->name('distinst1');  //filtro del select curso dependiente del select instituto
+Route::post('cursoall','PDFController@Filtrocurso')->name('cursoall'); //filtro de curso por el select curso vmodel de curso
+
+
 
 ///rutas menu docente
 route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
@@ -137,8 +145,7 @@ route::resource('assignments','AssignmentController');
 
 //rutas de reportes
 
-route::get('/pdf','PDFController@PDFUser')->name('descargarPDF');
-route::get('/pdfDocentes','PDFController@PDFDocentes')->name('descargarPDFDocentes');
+// route::get('/pdfDocentes','PDFController@PDFDocentes')->name('descargarPDFDocentes');
 
 
 });

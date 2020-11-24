@@ -3,82 +3,70 @@
 
 @section('content')
 
-<section class="content">
-    <div class="container">
 
-        <div class="btn-group float-right" role="group" aria-label="Basic example">
+<div class="container-fluid">
 
-            <a class="btn btn-info float-right btn" href="{{route('users.create')}}"><i class="fas fa-user-plus"></i>
-                Añadir Usuario</a>
-                <a class="btn btn-dark float-right btn" href="{{route('descargarPDF')}}" target="_blank"><i class="fas fa-pdf"></i>
-               Descargar Reporte</a>
+    <div class="btn-group float-right" role="group" aria-label="Basic example">
+        <a class="btn btn-info float-right btn" href="{{route('users.create')}}"><i class="fas fa-user-plus"></i>
+            Añadir Usuario</a>
+    </div>
+    <h1 class="font-weight-light">Gestión de Usuarios</h1>
+    <div class="row justify-content-center">
+        <div class="card-body">
+            <table id="myTable" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre y Apellido</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Unidad Educativa</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Tools</th>
 
-                
-        </div>
-        <h1 class="font-weight-light">Gestión de Usuarios</h1>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($users as $user)
+                    <tr>
+                        <th scope="row">{{$user->id}}</th>
+                        <td>{{$user->name}} {{$user->apellido}}</td>
 
-        <div class="row justify-content-center">
-            <div class="col-md-15">
+                        <td>{{$user->email}}</td>
 
+                        <td>
+                            @isset($user->instituto->nombre)
+                            {{$user->instituto->nombre}}
+                            @endisset
+                        </td>
 
-                <div class="card-body">
-                    <table id="myTable" class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nombre y Apellido</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Unidad Educativa</th>
-                                <th scope="col">Rol</th>
-                                <th scope="col">Estado</th>
-                                <th scope="col">Tools</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($users as $user)
-                            <tr>
-                                <th scope="row">{{$user->id}}</th>
-                                <td>{{$user->name}} {{$user->apellido}}</td>
-
-                                <td>{{$user->email}}</td>
-
-                                <td>
-                                    @isset($user->instituto->nombre)
-                                    {{$user->instituto->nombre}}
-                                    @endisset
-                                </td>
-
-                                <td>
-                                    @foreach($user->roles as $role)
-                                    <span class="badge badge-danger"> {{$role->name}}
-                                    </span>
-                                    @endforeach
-                                </td>
-                                <td>{{$user->estado}}</td>
-                                <td class="table-button ">
-                                    <form method="POST" action="{{route('users.destroy', $user->id)}}}">
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <a class="btn btn-info " href="users/{{ $user['id']}}"><i
-                                                class="fas fa-eye"></i></a>
-                                        <a class="btn btn-success" href="users/{{ $user['id']}}/edit"><i
-                                                class=" fas fa-pencil-alt"></i></a>
-                                        <button type="submit" class="btn btn-danger "><i
-                                                class="fas fa-trash"></i></button>
-
-
-                                    </form>
-                                </td>
-                            </tr>
+                        <td>
+                            @foreach($user->roles as $role)
+                            <span class="badge badge-danger"> {{$role->name}}
+                            </span>
                             @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+                        </td>
+                        <td>{{$user->estado}}</td>
+                        <td class="table-button ">
+                            <form method="POST" action="{{route('users.destroy', $user->id)}}}">
+                                @csrf
+                                @method('DELETE')
+
+                                <a class="btn btn-info btn-sm" href="users/{{ $user['id']}}"><i class="fas fa-eye"></i></a>
+                                <a class="btn btn-success btn-sm " href="users/{{ $user['id']}}/edit"><i
+                                        class=" fas fa-pencil-alt"></i></a>
+                                <button type="submit" class="btn btn-danger btn-sm "><i class="fas fa-trash"></i></button>
+
+
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-</section>
+    </div>
+</div>
 
 @stop
 
@@ -99,8 +87,8 @@ $(function() {
                 "lengthChange": false,
                 "searching": false,
                 "ordering": true,
-             
-               
+
+
                 "responsive": true,
 
                 "language": {

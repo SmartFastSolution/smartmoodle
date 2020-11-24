@@ -23,10 +23,7 @@
 
             <a class="btn btn-info float-right" href="{{route('distribuciondos.create')}}"><i class="fas fa-plus"></i>
                 Asignar Docente</a>
-            <a class="btn btn-dark float-right btn" href="{{route('descargarPDFDocentes')}}" target="_blank"><i
-                    class="fas fa-pdf"></i>
-                Descargar Reporte</a>
-
+           
 
         </div>
         <h1 class="font-weight-light">Gestión de Asignación de Docentes</h1>

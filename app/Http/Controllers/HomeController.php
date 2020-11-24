@@ -63,12 +63,7 @@ class HomeController extends Controller
                 'materias' => $value->materias,
             ];
         }
-        //    foreach($materias as $key => $value){
-        //     $materia[$key] =[
-        //         'id'=> $value->id,
-        //         'nombre' => $value->nombre
-        //     ];
-        // }
+     
         return $materia;
         
     }
@@ -92,13 +87,13 @@ class HomeController extends Controller
             $cursos[$key] =[
                 'id'=> $value->id,
                 'nombre' => $value->curso->nombre,
-                // 'nivel' => $value->nivel->nombre
-                
+               
             ];
         }
-       // $dis = $dist->id;
+     
         return $cursos;   
     }
+    
     public function buscarContenido(Request $request)
     {
         $cont = Contenido::where('materia_id', $request->id)->get();
@@ -127,5 +122,6 @@ class HomeController extends Controller
         return $clave;
     }
 
-    
+
+   
 }

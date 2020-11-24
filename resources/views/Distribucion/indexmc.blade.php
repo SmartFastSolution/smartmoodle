@@ -12,19 +12,20 @@
 </div>
 @endif
 
-<section class="content">
-    <div class="container">
+
+    <div class="container-fluid">
         <a class="btn btn-info float-right" href="{{route('distribucionmacus.create')}}"><i class="fas fa-plus"></i>
             Crear Curso</a>
         <h1 class="font-weight-light">Gestión de Curso</h1>
         <div class="row justify-content-center">
-            <div class="col-md-10">
+           
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table id="myTable" class="table table-hover">
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
+                                <th scope="col">Unidad E.</th>
                                 <th scope="col">Curso</th>
                                 <th scope="col">Materia(s)</th>
                                 <th scope="col">Estado</th>
@@ -36,14 +37,14 @@
                             <tr>
                                
                                 <th scope="row">{{$distribucionmacu['id']}}</th>
-                                <td>{{$distribucionmacu->curso->nombre}} </td>
+                                <td>{{$distribucionmacu->instituto->nombre}} </td>
+                                <td>{{$distribucionmacu->curso->nombre}} </td>                   
                                 <td>
                                     @if($distribucionmacu->materias != null)
                                     @foreach($distribucionmacu->materias as $dismacu)
                                     <span class="badge badge-success">
                                         {{$dismacu->nombre}}
                                     </span>
-
                                     @endforeach
                                     @endif
                                 </td>
@@ -54,7 +55,6 @@
                                         action="{{route('distribucionmacus.destroy', $distribucionmacu->id)}}}">
                                         @method('DELETE')
                                         @csrf
-
                                         <a class="btn btn-info "
                                             href="{{route('distribucionmacus.show',$distribucionmacu->id)}}"><i
                                                 class="fas fa-eye"></i></a>
@@ -72,12 +72,7 @@
                         <!--Table body-->
                     </table>
                 </div>
-
-            </div>
         </div>
-</section>
-
-
 
 
 

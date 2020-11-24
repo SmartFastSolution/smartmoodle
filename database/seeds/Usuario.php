@@ -38,7 +38,7 @@ class Usuario extends Seeder
            ]);
 
            DB::table('users')->insert([
-           'instituto_id'    => 1,
+         
            'cedula'          => '0943557611',
            'name'            =>'Juan',
            'apellido'        => 'Perez',
@@ -97,7 +97,14 @@ class Usuario extends Seeder
             'updated_at'      => now()
             ]);
 
-           DB::table('role_user')->insert([
+            DB::table('role_user')->insert([
+           'role_id'    => 1,
+           'user_id'    => 1,
+           'created_at' => now(),
+           'updated_at' => now()
+        ]);
+
+            DB::table('role_user')->insert([
            'role_id'    => 2,
            'user_id'    => 2,
            'created_at' => now(),
