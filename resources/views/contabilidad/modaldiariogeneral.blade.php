@@ -390,3 +390,66 @@
         </div>
     </div>
 </div>
+
+
+{{-- Porcentual --}}
+<div class="modal fade" id="porcentajes" tabindex="-1"  role="dialog" aria-labelledby="debeLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content bg-primary">
+            <div class="modal-header">
+                <h5 class="modal-title" id="debeLabel">Porcentajes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                      <table class="table table-bordered table-sm">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th v-if="diario.debe.fecha != ''" width="50" >Fecha</th>
+                              <th  align="center" class="text-center">Cuentas</th>
+                              <th  align="center" class="text-center">Tipo</th>    
+                              <th  align="center" class="text-center">Cantidad</th>    
+                            </tr>
+                       </thead>
+                        <tbody >  
+                          <tr>
+                            {{--   <td v-if="diario.debe.fecha != ''" width="50" > <input type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required>
+                              </td> --}}
+                              <td>
+                              <select name="n_cuenta" v-model="porcentajes.index_cuenta" class="custom-select">
+                                <option value="" disabled>ELIGE UNA CUENTA</option>
+                                <option value="10">RET. IVA 10%</option>
+                                <option value="20">RET. IVA 20%</option>
+                                <option value="30">RET. IVA 30%</option>
+                                <option value="70">RET. IVA 70%</option>
+                                <option value="100">RET. IVA 100%</option>
+                              </select>
+                              </td>
+                              <td>
+                              <select v-model="porcentajes.tipo" class="custom-select">
+                                <option value="" disabled>ELIGE UNA CUENTA</option>
+                                <option value="debe">DEBE</option>
+                                <option value="haber">HABER</option>
+                                
+                              </select>
+                              </td>
+                              <td width="125">
+                                <input type="numeric" v-model="porcentajes.cantidad" name="debe" class="form-control">
+                              </td>         
+                        </tr>
+                      </tbody>
+                    </table>
+                       <div class="row justify-content-center">
+                            <a href="#" class="btn btn-light" @click.prevent="">Agregar Porcentaje</a>
+                      </div>
+                  </div>
+                </div>
+            </div>
+           <div class="modal-footer">
+          </div>
+        </div>
+    </div>
+</div>

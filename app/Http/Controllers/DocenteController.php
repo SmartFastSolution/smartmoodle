@@ -50,23 +50,27 @@ class DocenteController extends Controller
         $users = DB::table('tallers')
             ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
             ->join('users', 'users.id', '=', 'taller_user.user_id')
+            ->join('cursos', 'users.curso_id', '=', 'cursos.id')
             ->join('contenidos', 'contenidos.id', '=', 'tallers.contenido_id')
             ->join('materias', 'materias.id', '=', 'contenidos.materia_id')
             ->whereIn('tallers.contenido_id', $ids)
             // ->wherein('tallers.contenido_id','==', 1)
             ->where('taller_user.status', 'completado')
-            ->select('tallers.*','taller_user.*', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
+            ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
             ->paginate(10);
+           
 
               $calificado = DB::table('tallers')
             ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
             ->join('users', 'users.id', '=', 'taller_user.user_id')
+            ->join('cursos', 'users.curso_id', '=', 'cursos.id')
+            
             ->join('contenidos', 'contenidos.id', '=', 'tallers.contenido_id')
             ->join('materias', 'materias.id', '=', 'contenidos.materia_id')
             ->whereIn('tallers.contenido_id', $ids)
             // ->wherein('tallers.contenido_id','==', 1)
             ->where('taller_user.status', 'calificado')
-            ->select('tallers.*','taller_user.*', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
+            ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre' ,  'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
             ->paginate(10);
 
 
@@ -92,23 +96,25 @@ class DocenteController extends Controller
         $users = DB::table('tallers')
             ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
             ->join('users', 'users.id', '=', 'taller_user.user_id')
+            ->join('cursos', 'users.curso_id', '=', 'cursos.id')
             ->join('contenidos', 'contenidos.id', '=', 'tallers.contenido_id')
             ->join('materias', 'materias.id', '=', 'contenidos.materia_id')
             ->where('contenidos.materia_id', $id)
             // ->wherein('tallers.contenido_id','==', 1)
             ->where('taller_user.status', 'completado')
-            ->select('tallers.*','taller_user.*', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
+            ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
             ->paginate(10);
 
             $calificado = DB::table('tallers')
             ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
             ->join('users', 'users.id', '=', 'taller_user.user_id')
+            ->join('cursos', 'users.curso_id', '=', 'cursos.id')
             ->join('contenidos', 'contenidos.id', '=', 'tallers.contenido_id')
             ->join('materias', 'materias.id', '=', 'contenidos.materia_id')
             ->where('contenidos.materia_id', $id)
             // ->wherein('tallers.contenido_id','==', 1)
             ->where('taller_user.status', 'calificado')
-            ->select('tallers.*','taller_user.*', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
+            ->select('tallers.*','taller_user.*' ,'cursos.nombre as cur_nombre', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
             ->paginate(10);
 
       // return $calificado;

@@ -6,9 +6,9 @@
              <table class="table table-bordered table-sm">
                  <thead class="thead-dark">
                      <tr align="center">
-                         <th scope="col">FECHA</th>
-                         <th scope="col">NOMBRE DE CUENTAS</th>
-                         <th scope="col">DEBE</th>
+                         <th scope="col" width="200">FECHA</th>
+                         <th scope="col" width="450">NOMBRE DE CUENTAS</th>
+                         <th scope="col " width="125">DEBE</th>
                          <th scope="col">HABER</th>
                          <th colspan="2" v-if="registros.length > 0">ACCION</th>
                      </tr>
@@ -27,6 +27,7 @@
                          <td align="center" width="125"></td>
                          <td align="center" width="125">@{{ diar.saldo }}</td>
                      </tr>
+
                  </tbody>
 
                  <tbody v-for="(registro, id) in registros" @change="totalDebe()">
@@ -137,14 +138,15 @@
              </table>
              <table class="table table-bordered table-sm">
                  <tbody>
-                     <tr>
-                         <td align="center" colspan="2" valign="middle">PASAN</td>
-                         <td align="center" width="125">
+                     <tr >
+                         <td class="bg-dark" align="center" colspan="2" width="450" valign="middle">PASAN</td>
+                         <td class="bg-dark" align="center" width="125">
                              @{{ pasan.debe }}
                          </td>
-                         <td align="center" width="125">
+                         <td class="bg-dark" align="center" width="125">
                              @{{ pasan.haber }}
                          </td>
+                         <td v-if="registros.length > 0" width="90" style="border: none;"></td>
 
                      </tr>
                  </tbody>
@@ -163,7 +165,7 @@
                          Transaccion</a>
                  </div>
                  <div v-else class="row justify-content-around mb-2">
-                     <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#debe">Agregar Porcentaje</a>
+                     <a href="#" v-if="diarios.debe.length > 0" class="btn btn-outline-primary" data-toggle="modal" data-target="#porcentajes">Agregar Porcentaje</a>
                      <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#debe">Agregar
                          Debe</a>
                      <a href="#" class=" btn btn-outline-primary" data-toggle="modal" data-target="#haber">Agregar

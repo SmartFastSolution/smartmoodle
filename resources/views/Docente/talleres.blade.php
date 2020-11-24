@@ -110,7 +110,7 @@
                                         </tbody>   
                                     </table>
 
-                                     <div class="row justify-content-center mt-3"> {{ $tallers->links() }}</div>
+                                    {{--  <div class="row justify-content-center mt-3"> {{ $tallers->links() }}</div> --}}
 
                                 </div>
                             </div>
