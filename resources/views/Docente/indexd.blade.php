@@ -65,7 +65,7 @@
 @isset ($au->materias)
          <h2>Talleres Por Calificar</h2>
                   <div class="card-body">
-                        <table class="table table-hover">
+                        <table id="myTable" class="table table-hover">
 
                             <thead>
                                 <tr>
@@ -80,7 +80,7 @@
                             <tbody>
                                 <tr>
                                 @forelse($users as $taller)
-                                    <td>{{$taller->cur_nombre}}</td>
+                                    <td>{{$taller->cur_nombre}} - {{ $taller->nivel_nombre }}</td>
                                     <td>{{$taller->mate_nombre}}</td>
                                     <td>{{$taller->nombre}}</td>
                                     <td>{{$taller->alumno}}</td>
@@ -113,7 +113,7 @@
 
                         <h2>Talleres Calificados</h2>
                      <div class="card-body mb-5">
-                        <table class="table table-hover">
+                        <table id="myTable2" class="table table-hover">
 
                             <thead>
                                 <tr>
@@ -128,7 +128,7 @@
                             <tbody>
                                 <tr>
                                     @foreach($calificado as $taller)
-                                    <td>{{$taller->cur_nombre}}</td>
+                                    <td>{{$taller->cur_nombre}} - {{ $taller->nivel_nombre }}</td>
                                     <td>{{$taller->mate_nombre}}</td>
                                     <td>{{$taller->nombre}}</td>
                                     <td>{{$taller->alumno}}</td>
@@ -159,5 +159,26 @@
 @section('css')
 @stop
 @section('js')
-
+<script>
+$(function() {
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+                "info": true,
+                "autoWidth": true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                }
+            }
+        );
+          $('#myTable2').DataTable({
+                "info": true,
+                "autoWidth": true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+                }
+            }
+        );
+    });
+});
+</script>
 @stop

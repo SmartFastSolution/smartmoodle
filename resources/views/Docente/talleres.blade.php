@@ -9,6 +9,7 @@
     <div class="container">
         <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
         <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}
+            <h3 class="  font-weight-bold text-success">{{ $materia->nombre }}</h3>
             <h2 class="text-center display-2 font-weight-bold text-primary">Administrador de Talleres</h2>
         </h2>  
         <br>
@@ -54,11 +55,8 @@
                                                 <td>@{{taller.nombre}}</td>
                                                 <td>@{{taller.enunciado}}</td>
                                                 <td>                        
-                                                        <span v-if="taller.estado == 1" class="badge-success badge">activo</span>
-
-                                                        <span v-else class="badge-danger badge">desactivado</span>
-                                        
-                                                  
+                                                    <span v-if="taller.estado == 1" class="badge-success badge">activo</span>
+                                                    <span v-else class="badge-danger badge">desactivado</span>                                                
                                                 </td>
                                                 <td>@{{ taller.fecha_entrega }}</td>
                                                 <td class="table-button ">
@@ -117,8 +115,8 @@
           </div>
       </div>
     </div>
-@endforeach
-  <div class="modal fade" id="fecha" tabindex="-1" aria-labelledby="fechaLabel" aria-hidden="true">
+                                    @endforeach
+                                      <div class="modal fade" id="fecha" tabindex="-1" aria-labelledby="fechaLabel" aria-hidden="true">
                                           <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                               <div class="modal-header">
@@ -155,9 +153,9 @@
                                             </div>
                                           </div>
                                         </div>
-</div>
+                                    </div>
 
-</section>
+                                    </section>
 
 
 
