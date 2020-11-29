@@ -1,25 +1,8 @@
 <div id="kardex" class="border border-danger p-4">
 	<h1 class="text-center font-weight-bold text-danger">KARDEX</h1>
-	<h5 class="text-center font-weight-bold text-info">Saldo Inicial</h5>
+	<h5 class="text-center font-weight-bold text-info">METODO FIFO</h5>
 
-	<div  class="form-row mb-2 justify-content-center">
-        <div class="col-3">
-          <input type="date" class="form-control" v-model="inicial.fecha" placeholder="Debe">
-        </div>
-        <div class="col-5">
-          <input type="text" class="form-control" v-model="inicial.movimiento" placeholder="Movimiento">
-        </div>
-         <div class="col">
-          <input type="text" class="form-control" v-model="inicial.cantidad"  placeholder="Cant.">
-        </div>
-         <div class="col">
-          <input type="text" class="form-control" v-model="inicial.precio"  placeholder="Prec.">
-        </div>
 
-        <a v-if="!update" href="#" class="addDiario btn btn-outline-danger " @click.prevent="agregarTran()">Agregar Registro</a>
-        <a v-if="update" href="#" class="addDiario btn btn-outline-danger " @click.prevent="">Actualizar Registro</a>
-
-  </div>
 	<table class="table table-bordered table-responsive table-sm">
 		<thead class="bg-warning"> 
 		  <tr class="text-center">
@@ -57,7 +40,7 @@
 				<td>@{{ exist.existencia_precio }}</td>
 				<td>@{{ exist.existencia_total }}</td>
 				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso' || transacciones[index][id].tipo == 'inicial' || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'ingreso_venta'"><a class="btn btn-sm btn-warning" href="" @click.prevent="editarTransaccion(index, id)"><i class="fas fa-edit"></i></a></td>
-				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso' || transacciones[index][id].tipo == 'inicial' || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'ingreso_venta'"><a class="btn btn-sm btn-danger" href="" @click.prevent="editarBorrar(index)"><i class="fas fa-trash"></i></a></td>
+				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso' || transacciones[index][id].tipo == 'inicial' || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'ingreso_venta'"><a class="btn btn-sm btn-danger" href="" @click.prevent="borrarTransaccion(index, id)"><i class="fas fa-trash"></i></a></td>
 				<td v-else colspan="2"></td>
 			</tr>
 		</tbody>
@@ -85,10 +68,11 @@
 
 <div class="row justify-content-center">
 	{{-- <a class="btn btn-sm btn-primary mr-2" href="">Agregar Inicial</a> --}}
-	<a class="btn btn-sm btn-secondary mr-2" @click.prevent="modalIngreso()" href="#" data-toggle="modal" data-target="#ingreso">Agregar Ingreso</a>
-	<a class="btn btn-sm btn-info mr-2" href="#" @click.prevent="modalEgreso()" data-toggle="modal" data-target="#egreso">Agregar Egreso</a>
-	<a class="btn btn-sm btn-success mr-2" href="#" @click.prevent="modalCompra()" data-toggle="modal" data-target="#devolucion_compra">Devolucion compra</a>
-	<a class="btn btn-sm btn-warning mr-2" href="#"@click.prevent="modalVenta()"  data-toggle="modal" data-target="#devolucion_venta">Devolucion Venta</a>
+	<a v-if="transacciones.length == 0" class="btn btn-sm btn-success mr-2" @click.prevent="modalInicial()">Saldo Inicial</a>
+	<a  class="btn btn-sm btn-secondary mr-2" @click.prevent="modalIngreso()" href="#" data-toggle="modal" data-target="#ingreso">INGRESO</a>
+	<a  class="btn btn-sm btn-info mr-2" href="#" @click.prevent="modalEgreso()" data-toggle="modal" data-target="#egreso">EGRESO</a>
+	{{-- <a class="btn btn-sm btn-success mr-2" href="#" @click.prevent="modalCompra()" data-toggle="modal" data-target="#devolucion_compra">Devolucion compra</a>
+	<a class="btn btn-sm btn-warning mr-2" href="#"@click.prevent="modalVenta()"  data-toggle="modal" data-target="#devolucion_venta">Devolucion Venta</a> --}}
 </div>
 
 <div v-if="ejercicio.length > 0">
