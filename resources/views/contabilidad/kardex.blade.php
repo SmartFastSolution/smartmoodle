@@ -191,3 +191,75 @@
 
 </div>
 </div>
+{{-- 
+<div id="aPPcalculador">
+      <div class="container">
+        <div class="calculator">
+          <div class="answer">@{{ answer }}</div>
+          <div class="display">@{{ logList + current }}</div>
+          <div @click="clear" id="clear" class="btn operator">C</div>
+          <div @click="sign" id="sign" class="btn operator">+/-</div>
+          <div @click="percent" id="percent" class="btn operator">
+            %
+          </div>
+          <div @click="divide" id="divide" class="btn operator">
+            /
+          </div>
+          <div @click="append('7')" id="n7" class="btn">7</div>
+          <div @click="append('8')" id="n8" class="btn">8</div>
+          <div @click="append('9')" id="n9" class="btn">9</div>
+          <div @click="times" id="times" class="btn operator">*</div>
+          <div @click="append('4')" id="n4" class="btn">4</div>
+          <div @click="append('5')" id="n5" class="btn">5</div>
+          <div @click="append('6')" id="n6" class="btn">6</div>
+          <div @click="minus" id="minus" class="btn operator">-</div>
+          <div @click="append('1')" id="n1" class="btn">1</div>
+          <div @click="append('2')" id="n2" class="btn">2</div>
+          <div @click="append('3')" id="n3" class="btn">3</div>
+          <div @click="plus" id="plus" class="btn operator">+</div>
+          <div @click="append('0')" id="n0" class="zero">0</div>
+          <div @click="dot" id="dot" class="btn">.</div>
+          <div @click="equal" id="equal" class="btn operator">=</div>
+        </div>
+      </div>
+    </div> --}}
+
+    <h1 class="cover-heading">Calculator</h1>
+
+
+		    <div id="calApp">
+<!--       <p>@{{ display }}:@{{ prevOps }}:@{{ decimalAdded }}:@{{ total }}</br>CurrentNum=> @{{ currentNum }}</p> -->
+      <div class="calculator">
+          <div class="display font-weight-bold">@{{ display }}</div> 
+          <div class="boton operator" @click="clear">C</div>
+          <div class="boton operator" @click="del">DEL</div>
+          <div class="boton operator" @click="enterOps(4)">÷</div>
+          <div class="boton operator" @click="enterOps(3)">*</div>
+       
+          <div class="boton" @click="enterNum(7)">7</div>
+          <div class="boton" @click="enterNum(8)">8</div>
+          <div class="boton" @click="enterNum(9)">9</div>
+          <div class="boton operator" @click="enterOps(2)">-</div>
+        
+          <div class="boton" @click="enterNum(4)">4</div>
+          <div class="boton" @click="enterNum(5)">5</div>
+          <div class="boton" @click="enterNum(6)">6</div>
+          <div class="boton operator" @click="enterOps(1)">+</div>
+        
+          <div class="boton" @click="enterNum(1)">1</div>
+          <div class="boton" @click="enterNum(2)">2</div>
+          <div class="boton" @click="enterNum(3)">3</div>
+       
+          <div class="zero" @click="enterNum(0)">0</div>
+          <div class="boton" @click="addDecimal">.</div>
+          <div class="boton operator" @click="sum">=</div>
+
+          {{-- <div class="btn ">&nbsp;</div> --}}
+        
+      </div>
+    </div>
+
+
+  {{-- <div class="container"> --}}
+
+  {{-- </div> --}}
