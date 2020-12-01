@@ -50,12 +50,35 @@ route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta e
  Route::post('contmateria','HomeController@buscarContenido')->name('contmateria');
 
 
+
+ ////////////////////////////////////////////////
+ ////////////////Reporte Vuejs///////////////////
+ ////////////////////////////////////////////////
+ ////////////////////////////////////////////////
  //rutas vue para reporte
 
-Route::get('/reporte','PDFController@Reporte')->name('Reporte');
-Route::post('informes','PDFController@Instituto')->name('informes');
-Route::post('distinst1','PDFController@curso')->name('distinst1');  //filtro del select curso dependiente del select instituto
-Route::post('cursoall','PDFController@Filtrocurso')->name('cursoall'); //filtro de curso por el select curso vmodel de curso
+// Route::get('/reporte','PDFController@Reporte')->name('Reporte');
+// Route::post('informes','PDFController@Instituto')->name('informes');
+// Route::post('distinst1','PDFController@curso')->name('distinst1');  //filtro del select curso dependiente del select instituto
+// Route::post('cursoall','PDFController@Filtrocurso')->name('cursoall'); //filtro de curso por el select curso vmodel de curso
+
+////////////////////////////////////////////////
+ ////////////////Fin Reporte Vuejs//////////////
+ ////////////////////////////////////////////////
+ ////////////////////////////////////////////////
+
+
+ 
+////////////////////////////////////////////////
+ //////////////// Reporte Eloquent//////////////
+
+ Route::get('/reportes','PDFController@Reporteindex')->name('Reportes');
+ 
+ 
+
+
+ ////////////////////////////////////////////////
+ ////////////////////////////////////////////////
 
 
 

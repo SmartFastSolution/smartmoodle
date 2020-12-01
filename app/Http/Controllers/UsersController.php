@@ -66,8 +66,8 @@ class UsersController extends Controller
         //validacion de datos 
          $request->validate([
             'cedula'          =>  'required|string|max:10|unique:users' ,
-            'name'            =>  'required|string|max:20|unique:users',
-            'apellido'        =>  'required|string|max:20|unique:users',
+            'name'            =>  'required|string|max:20',
+            'apellido'        =>  'required|string|max:20',
             'domicilio'       =>  'required|string|max:255',
             'role'            =>  'required',
             'telefono'        =>  'required|string|max:13',

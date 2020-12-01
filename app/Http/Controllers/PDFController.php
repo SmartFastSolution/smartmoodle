@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Assignment;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\User;
@@ -11,6 +12,7 @@ use App\Curso;
 use App\Modelos\Role;
 use App\Distribuciondo;
 use App\Distribucionmacu;
+
 
 class PDFController extends Controller
 {
@@ -37,70 +39,82 @@ class PDFController extends Controller
     //seccion reportes
 
 
-    public function Reporte(Instituto $instituto){
+//     public function Reporte(Instituto $instituto){
 
-        $institutos = Instituto::all();
-        $alldist= Distribucionmacu::all();
+//         $institutos = Instituto::all();
+//         $alldist= Distribucionmacu::all();
 
-        return view('Reportes.reporte',compact('institutos','alldist'));
-    }
+//         return view('Reportes.reporte',compact('institutos','alldist'));
+//     }
 
 
-    //traer todo de manera especifica
+//     //traer todo de manera especifica
 
-    public function Instituto(Request $request){
-    $instituto =Instituto::where('id', $request->id)->get();
-    $und= []; 
-    foreach($instituto as $key => $value){
-        $und[$key] =[
-            'id'=>$value->id,
-            'nombre'=>$value->nombre, 
-            'email'=>$value->email, 
+//     public function Instituto(Request $request){
+//     $instituto =Instituto::where('id', $request->id)->get();
+//     $und= []; 
+//     foreach($instituto as $key => $value){
+//         $und[$key] =[
+//             'id'=>$value->id,
+//             'nombre'=>$value->nombre, 
+//             'email'=>$value->email, 
                
-        ];
-    }
-      return $und;
+//         ];
+//     }
+//       return $und;
       
-   }
+//    }
 
 
-   public function curso(Request $request){
+//    public function curso(Request $request){
      
-   $cursos = Distribucionmacu::where('instituto_id', $request->id)->get();
-   $cur = [];
-   foreach($cursos as $key => $value){
-       $cur[$key] =[
-           'instituto' =>$value->instituto->nombre,
-           'id'=> $value->curso->id,
-           'nombre' => $value->curso->nombre,
-           'materia' =>$value->materias,
+//    $cursos = Distribucionmacu::where('instituto_id', $request->id)->get();
+//    $cur = [];
+//    foreach($cursos as $key => $value){
+//        $cur[$key] =[
+//            'instituto' =>$value->instituto->nombre,
+//            'id'=> $value->curso->id,
+//            'nombre' => $value->curso->nombre,
+//            'materia' =>$value->materias,
           
-       ];
-   }
-   return $cur;   
+//        ];
+//    }
+//    return $cur;   
 
-   }
+//    }
 
-   public function Filtrocurso(Request $request){
+//    public function Filtrocurso(Request $request){
       
-    $filtrocurso =Distribucionmacu::where('curso_id', $request->id)->get();
-    $filtro= []; 
-    foreach($filtrocurso as $key => $value){ 
+//     $filtrocurso =Distribucionmacu::where('curso_id', $request->id)->get();
+//     $filtro= []; 
+//     foreach($filtrocurso as $key => $value){ 
 
-        $filtro[$key] =[
-            'id'=>$value->id,
-            'instituto' =>$value->instituto->nombre,
-            'nombre' => $value->curso->nombre,
-            'materia' => $value->materias,
+//         $filtro[$key] =[
+//             'id'=>$value->id,
+//             'instituto' =>$value->instituto->nombre,
+//             'nombre' => $value->curso->nombre,
+//             'materia' => $value->materias,
                      
-        ];
+//         ];
+//     }
+//       return $filtro;
+//    }
+
+
+
+    public function Reporteindex(){
+
+        $dist = Distribucionmacu::all();
+      
+        $doc = Distribuciondo::all();
+        $est = Assignment::all();
+       /// $users= User::where('estado','off')->get();
+        $users= User::all();
+        return view('Reportes.reportedocente', compact('dist', 'doc','est','users'));
     }
-      return $filtro;
-   }
 
 
-
-
+  
  
 
 
