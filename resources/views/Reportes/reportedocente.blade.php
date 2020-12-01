@@ -17,6 +17,8 @@
                     aria-controls="nav-contact" aria-selected="false">Reporte Estudiantes</a>
                 <a class="nav-link" id="nav-users-tab" data-toggle="tab" href="#nav-users" role="tab"
                     aria-controls="nav-users" aria-selected="false">Reporte Usuarios</a>
+                <!-- <a class="nav-link" id="nav-vigencia-tab" data-toggle="tab" href="#nav-vigencia" role="tab"
+                    aria-controls="nav-vigencia" aria-selected="false">Vigencia Usuarios</a> -->
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -25,7 +27,7 @@
                 <br>
                 <div class="btn-group float-right" role="group" aria-label="Basic example">
 
-                    <a class="btn btn-dark float-right" href=""> <i class="fas fa-save"></i>
+                    <a class="btn btn-dark float-right" href="{{route('distribucion.excel')}}"> <i class="fas fa-save"></i>
                         Generar Reporte</a>
                 </div>
                 <br>
@@ -39,7 +41,6 @@
                             <th scope="col">Unidad</th>
                             <th scope="col">Taller</th>
                             <th scope="col">Promedio</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -57,7 +58,6 @@
                             <td>{{$contenido->nombre}}</td>
                             <td>{{$tl->nombre}}</td>
                             <td>promedio</td>
-
                         </tr>
                         @endforeach
                         @endif
@@ -66,19 +66,14 @@
                         @endforeach
                         @endif
                         @endforeach
-
                     </tbody>
                 </table>
             </div>
-
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-
-
                 <!--aqui esta la seccion del reporte de docente-->
                 <br>
                 <div class="btn-group float-right" role="group" aria-label="Basic example">
-
-                    <a class="btn btn-dark float-right" href=""> <i class="fas fa-save"></i>
+                    <a class="btn btn-dark float-right" href="{{route('docente.excel')}}"> <i class="fas fa-save"></i>
                         Generar Reporte</a>
                 </div>
                 <br>
@@ -96,7 +91,6 @@
                         @foreach ($doc as $do)
                         @if($do->materias != null)
                         @foreach($do->materias as $ma)
-
                         @if($ma->distribucionmacus != null)
                         @foreach($ma->distribucionmacus as $cur)
                         <tr>
@@ -115,11 +109,11 @@
             </div>
             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
 
-                <!--aqui esta la seccion del reporte de docente-->
+                <!--aqui esta la seccion del reporte de estudiante-->
                 <br>
                 <div class="btn-group float-right" role="group" aria-label="Basic example">
 
-                    <a class="btn btn-dark float-right" href=""> <i class="fas fa-save"></i>
+                    <a class="btn btn-dark float-right" href="{{route('asignacion.excel')}}"> <i class="fas fa-save"></i>
                         Generar Reporte</a>
                 </div>
                 <br>
@@ -137,8 +131,7 @@
                     <tbody>
                         @foreach ($est as $es)
                         @if($es->materias != null)
-                        @foreach($do->materias as $ma)
-
+                        @foreach($es->materias as $ma)
                         @if($ma->distribucionmacus != null)
                         @foreach($ma->distribucionmacus as $cur)
                         <tr>
@@ -158,11 +151,11 @@
             </div>
             <div class="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
 
-                <!--aqui esta la seccion del reporte de docente-->
+                <!--aqui esta la seccion del reporte de usuarios-->
                 <br>
                 <div class="btn-group float-right" role="group" aria-label="Basic example">
 
-                    <a class="btn btn-dark float-right" href=""> <i class="fas fa-save"></i>
+                    <a class="btn btn-dark float-right" href="{{route('users.excel')}}"> <i class="fas fa-save"></i>
                         Generar Reporte</a>
                 </div>
                 <br>
@@ -174,12 +167,10 @@
                             <th scope="col">Nombre/Apellido</th>
                             <th scope="col">Rol</th>
                             <th scope="col">Ultimo Acceso</th>
-
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
-
                         <tr>
                             <td>
                                 @isset($user->instituto->nombre)
@@ -195,18 +186,16 @@
                             </td>
                             <td> {{$user->created_at->diffForHumans()}}</td>
                         </tr>
-
                         @endforeach
                     </tbody>
                 </table>
-
             </div>
+            <div class="tab-pane fade" id="nav-vigencia" role="tabpanel" aria-labelledby="nav-vigencia-tab">
+            </div>
+            <!-- hasta aqui los tab -->
         </div>
     </div>
 </section>
-
-
-
 @stop
 @section('css')
 @stop

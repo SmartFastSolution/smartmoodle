@@ -361,6 +361,25 @@
                             </ul>
                         </li>
                         @endcan
+                        @can('haveaccess', 'reporte.index')
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-user-cog"></i>
+                                <p>
+                                    Reportes
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('Reportes')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Sección Reporte</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endcan
                         <li class="nav-header">DOCENTE</li>
                         @can('haveaccess', 'asignacionma.index')
                         <li class="nav-item has-treeview">

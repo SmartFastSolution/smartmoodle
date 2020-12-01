@@ -74,7 +74,14 @@ route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta e
 
  Route::get('/reportes','PDFController@Reporteindex')->name('Reportes');
  
+ ///////////////////////////////////////////////
+ ////////////////Descargar Excel////////////////
+////////////////////////////////////////////////
  
+Route::get('users-list-excel','PDFController@UserExport')->name('users.excel');
+Route::get('distribucion-list-excel','PDFController@DistribucionExport')->name('distribucion.excel');
+Route::get('asignaciones-list-excel','PDFController@AssigmentExport')->name('asignacion.excel');
+Route::get('docentes-list-excel','PDFController@DocenteExport')->name('docente.excel');
 
 
  ////////////////////////////////////////////////

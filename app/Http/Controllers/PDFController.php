@@ -12,7 +12,11 @@ use App\Curso;
 use App\Modelos\Role;
 use App\Distribuciondo;
 use App\Distribucionmacu;
-
+use App\Exports\AssigmentExport;
+use App\Exports\ReportExport;
+use App\Exports\DistribucionExport;
+use App\Exports\DocenteExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PDFController extends Controller
 {
@@ -113,6 +117,30 @@ class PDFController extends Controller
         return view('Reportes.reportedocente', compact('dist', 'doc','est','users'));
     }
 
+
+    //////////////////////////////////////////
+    ////Metodos para descargar reporte////////
+    //////////////////////////////////////////
+
+    public function UserExport(){
+
+        return Excel::download(new ReportExport, 'user-list.xlsx');
+    }
+
+    public function DistribucionExport(){
+
+        return Excel::download(new DistribucionExport , 'distribucion-list.xlsx');
+    }
+
+    public function AssigmentExport(){
+
+        return Excel::download(new AssigmentExport , 'asignaciones-list.xlsx');
+    }
+
+    public function DocenteExport(){
+
+        return Excel::download(new  DocenteExport , 'docentes-list.xlsx');
+    }
 
   
  
