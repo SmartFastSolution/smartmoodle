@@ -436,7 +436,7 @@
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="tablaegreso" role="tabpanel" aria-labelledby="tablaegreso-tab">
                     <div class="row">
-                  <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaVenta('mostrar')"><i class="fas fa-plus"></i> Existencia</a>
+                  <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaEgreso()"><i class="fas fa-plus"></i> Existencia</a>
                 </div>
 
         {{--        <div v-if="movimientos.length > 0">
@@ -523,8 +523,7 @@
                        <div  class="row justify-content-center">
                           <a href="#" class="btn btn-light" @click.prevent="agregarEgreso()">Agregar Egreso</a>
                       </div>
-
-                <div v-if="modales.modal_egreso.length > 0">
+<div v-if="modales.modal_egreso.length > 0">
 <table  class="table table-bordered table-responsive">
     <thead class="bg-warning"> 
       <tr class="text-center">
@@ -608,7 +607,10 @@
               </div>
 
               <div class="tab-pane fade" id="devolucioncompra" role="tabpanel" aria-labelledby="devolucioncompra-tab">
-                               <div v-if="movimientos.length > 0">
+                    <div class="row">
+                  <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaEgreso('compra')"><i class="fas fa-plus"></i> Existencia</a>
+                </div>
+{{--                 <div v-if="movimientos.length > 0">
                   <h2 class="text-center">Ultimas Existencias</h2>
                 <table  class="table table-bordered">
                     <thead class="bg-warning"> 
@@ -638,23 +640,113 @@
                           <td>@{{ transa.ingreso_cantidad }}</td>
                           <td>@{{ transa.ingreso_precio }} </td>
                           <td>@{{ transa.ingreso_total }}</td>
-                          {{-- <td><input type="text" v-if="transa.ingreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.ingreso_total"></td> --}}
                           <td>@{{ transa.egreso_cantidad }}</td>
                           <td>@{{ transa.egreso_precio }}</td>
-                          {{-- <td><input type="text" v-if="transa.egreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.egreso_total"></td> --}}
                           <td>@{{ transa.egreso_total }}</td>
                           <td>@{{ transa.existencia_cantidad }}</td>
                           <td>@{{ transa.existencia_precio }}</td>
-                          {{-- <td><input type="text" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
                           <td >@{{ transa.existencia_total }}</td>
                           
                         </tr>
                       </tbody>
                   </table>
 
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-12">
+                </div> --}}
+                <div class="row justify-content-center mt-3">
+                  <h2 class="font-weight-bold">DEVOLUCION</h2>
+                      <table class="table table-bordered table-sm">
+                          <thead class="thead-dark">
+                        <tr>
+                          <th width="125"  align="center" class="text-center">Fecha</th>
+                          <th  align="center" class="text-center">Movimiento</th>    
+                          <th width="75"  align="center" class="text-center">Cantidad</th>    
+                          <th width="125" align="center" class="text-center">Precio Unit</th>    
+                       {{--    <th width="75" align="center" class="text-center">Existencia Cantidad</th>    
+                          <th width="125" align="center" class="text-center">Existencia Precio Unit</th>  --}}   
+                        </tr>
+                       </thead>
+                        <tbody >  
+                          <tr>
+                            <td>
+                              <input type="date" v-model="transaccion.fecha"  name="fecha" class="form-control" required>
+                            </td>
+                              <td>
+                                <input type="text"  v-model="transaccion.movimiento"  name="movimiento" class="form-control" required>
+                              </td> 
+                              <td>
+                                <input type="numeric" v-model="transaccion.egreso.cantidad"   name="cantidad" class="form-control" required>
+                              </td>  
+                              <td>
+                                <input type="numeric"  v-model="transaccion.egreso.precio"  name="precio" class="form-control" required>
+                              </td>
+                              {{-- <td>
+                                <input type="numeric"  v-model="transaccion.existencia.cantidad"  name="precio" class="form-control" required>
+                              </td>  
+                              <td>
+                                <input type="numeric"  v-model="transaccion.existencia.precio"  name="precio" class="form-control" required>
+                              </td>     --}}        
+                            </tr>
+                      </tbody>
+                    </table>
+                       <div  class="row justify-content-center">
+                          <a href="#" class="btn btn-light" @click.prevent="agregarEgreso('compra')">Agregar Devolucion</a>
+                      </div>
+
+<div v-if="modales.modal_devolucion_compra.length > 0">
+<table  class="table table-bordered table-responsive">
+    <thead class="bg-warning"> 
+      <tr class="text-center">
+        <th style="vertical-align:middle" rowspan="2">FECHA</th>
+        <th style="vertical-align:middle" rowspan="2">MOVIMIENTOS</th>
+        <th colspan="3">INGRESOS</th>
+        <th colspan="3">EGRESOS</th>
+        <th colspan="3">EXISTENCIA</th>
+        <th style="vertical-align:middle" rowspan="2">ELIMINAR</th>
+      </tr>
+      <tr class="text-center">
+        <td>CANT.</td>
+        <td>PREC. UNIT</td>
+        <td>TOTAL</td>
+        <td>CANT.</td>
+        <td>PREC. UNIT</td>
+        <td>TOTAL</td>
+        <td>CANT</td>
+        <td>PREC. UNIT</td>
+        <td>TOTAL</td>
+      </tr>
+      </thead>
+      <tbody is="draggable" group="modales.modal_devolucion_compra" :list="modales.modal_devolucion_compra" tag="tbody">
+        <tr v-for="(transa, id) in modales.modal_devolucion_compra">
+          <td><input type="text"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
+          <td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"></td>
+          <td><input type="text"  v-if="transa.ingreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" ></td>
+          <td><input type="text" v-if="transa.ingreso_precio"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" > </td>
+          <td>@{{ transa.ingreso_total }}</td>
+          {{-- <td><input type="text" v-if="transa.ingreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.ingreso_total"></td> --}}
+          <td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.egreso_cantidad" @keyup.enter="actualEgre(id)"></td>
+          <td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.egreso_precio" @keyup.enter="actualEgre(id)"></td>
+          {{-- <td><input type="text" v-if="transa.egreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.egreso_total"></td> --}}
+          <td>@{{ transa.egreso_total }}</td>
+          <td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_cantidad"></td>
+          <td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_precio"></td>
+          {{-- <td><input type="text" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
+          <td v-if="!actuegreso.estado">@{{ transa.existencia_total }}</td>
+          <td v-if="actuegreso.estado"><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
+          <td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarEgreso(id)"> <i class="fas fa-trash"></i></a></td>
+        </tr>
+      </tbody>
+</table>
+
+<div class="row justify-content-center">
+<a class="btn btn-sm btn-primary mr-2" href="" @click.prevent="agregarDevolucionCompra()">Agregar Transaccion</a>
+
+
+
+</div>
+
+</div>
+
+  {{--                   <div class="col-12">
                       <div >
                        <h2>Agregar Existencias</h2>
                         <table  class="table table-bordered table-sm">
@@ -679,45 +771,9 @@
                           <a href="#" class="btn btn-light" @click.prevent="existenciaEgreso()">Agregar Existencia</a>
                       </div>
                     </div>
-                      <table class="table table-bordered table-sm">
-                          <thead class="thead-dark">
-                        <tr>
-                          <th width="125"  align="center" class="text-center">Fecha</th>
-                          <th  align="center" class="text-center">Movimiento</th>    
-                          <th width="75"  align="center" class="text-center">Cantidad</th>    
-                          <th width="125" align="center" class="text-center">Precio Unit</th>    
-                          <th width="75" align="center" class="text-center">Existencia Cantidad</th>    
-                          <th width="125" align="center" class="text-center">Existencia Precio Unit</th>    
-                        </tr>
-                       </thead>
-                        <tbody >  
-                          <tr>
-                            <td>
-                              <input type="date" v-model="transaccion.fecha"  name="fecha" class="form-control" required>
-                            </td>
-                              <td>
-                                <input type="text"  v-model="transaccion.movimiento"  name="movimiento" class="form-control" required>
-                              </td> 
-                              <td>
-                                <input type="numeric" v-model="transaccion.egreso.cantidad"   name="cantidad" class="form-control" required>
-                              </td>  
-                              <td>
-                                <input type="numeric"  v-model="transaccion.egreso.precio"  name="precio" class="form-control" required>
-                              </td>
-                              <td>
-                                <input type="numeric"  v-model="transaccion.existencia.cantidad"  name="precio" class="form-control" required>
-                              </td>  
-                              <td>
-                                <input type="numeric"  v-model="transaccion.existencia.precio"  name="precio" class="form-control" required>
-                              </td>            
-                            </tr>
-                      </tbody>
-                    </table>
-                       <div  class="row justify-content-center">
-                          <a href="#" class="btn btn-light" @click.prevent="agregarEgreso()">Agregar Egreso</a>
-                      </div>
+   
           
-                  </div>
+                  </div> --}}
                 </div>
               </div>
 
@@ -736,7 +792,7 @@
     <div class="modal-dialog  modal-dialog-centered modal-xl" role="document">
         <div class="modal-content bg-success">
             <div class="modal-header">
-                <h5 class="modal-title" id="saldo_inicialLabel">DEVOLUCION COMPRA</h5>
+                <h5 class="modal-title" id="saldo_inicialLabel">SALDO INICIAL</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

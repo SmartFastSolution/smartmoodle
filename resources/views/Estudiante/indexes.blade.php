@@ -22,8 +22,11 @@
 
 
         <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
-        <h2 class="font-weight-light"> <strong> {{auth()->user()->curso->nombre}} </strong>
+        @isset (auth()->user()->curso->nombre)
+             <h2 class="font-weight-light"> <strong> {{auth()->user()->curso->nombre}} </strong>
         </h2>
+        @endisset
+       
 
 
 

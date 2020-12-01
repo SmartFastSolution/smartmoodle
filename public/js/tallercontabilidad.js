@@ -2382,12 +2382,35 @@ const kardex = new Vue({
     this.actuingreso.index = '';
   },
 
-    agregarEgreso(){
+    agregarEgreso(tipo){
+
     if(this.transaccion.egreso.cantidad.trim() ==='' || this.transaccion.egreso.precio.trim() ==='' ){
       toastr.error("Todos lo campos son obligatorios", "Smarmoddle", {
         "timeOut": "3000"
     });
     }else {
+      if (tipo == 'compra') {
+          let id = this.transacciones.length + 1;
+        this.transaccion.egreso.total = Number(this.transaccion.egreso.cantidad) * Number(this.transaccion.egreso.precio);
+        let calculo = Number(this.totales.total) - Number(this.transaccion.egreso.total);
+        let array = {identificacion: id, tipo:'egreso_compra', fecha:this.transaccion.fecha, movimiento:this.transaccion.movimiento, egreso_cantidad:this.transaccion.egreso.cantidad, egreso_precio:this.transaccion.egreso.precio, egreso_total:this.transaccion.egreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total: calculo};
+        this.modales.modal_devolucion_compra.push(array)
+        // this.transacciones.push(registro) ;
+        toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+        this.exis.cantidad                   = '';
+        this.exis.precio                     = '';
+        this.transaccion.fecha               = '';
+        this.transaccion.movimiento          = '';
+        this.transaccion.egreso.cantidad     = '';
+        this.transaccion.egreso.precio       = '';
+        this.transaccion.egreso.total        = '';
+        this.transaccion.existencia.cantidad = '';
+        this.transaccion.existencia.precio   = '';
+
+        return
+      }
       let egreso = this.modales.modal_egreso.filter(x => x.tipo == 'egreso');
       let id = this.transacciones.length + 1;
       if (egreso.length == 0) {
@@ -2442,48 +2465,65 @@ const kardex = new Vue({
     }
 
     },
-    existenciaEgreso(){
-      if( this.exis.cantidad.trim() ==='' || this.exis.precio.trim() ==='' ){
-        toastr.error("Todos lo campos son obligatorios", "Smarmoddle", {
-          "timeOut": "3000"
-        });
-        }else{
+    existenciaEgreso(tipo){
 
-        if (this.egresos.length == 0) {
-           let id = this.transacciones.length + 1;
-          let existencia = {identificador: id, tipo:'existencia', existencia_cantidad:this.exis.cantidad, existencia_precio:this.exis.precio, existencia_total:''}
-          this.egresos.push(existencia);
-          toastr.success("Agregado", "Smarmoddle", {
-            "timeOut": "3000"
-            });
-          this.exis.cantidad               = '';
-          this.exis.precio                 = '';
-          this.transaccion.fecha           = '';
-          this.transaccion.movimiento      = '';
-          this.transaccion.egreso.cantidad = '';
-          this.transaccion.egreso.precio   = '';
-          this.transaccion.egreso.total    = '';
-        }else{
-          let id = this.transacciones.length + 1;
-          let ultimo = this.egresos.length - 1;
-          let total = this.egresos[ultimo].existencia_total;
-          let existencia ={identificador: id, tipo:'existencia', existencia_cantidad:this.exis.cantidad, existencia_precio:this.exis.precio, existencia_total:total}
-          this.egresos.push(existencia);
-          this.egresos[ultimo].existencia_total = '';
-          toastr.success("Agregado", "Smarmoddle", {
-            "timeOut": "3000"
-            });
-          this.exis.cantidad               = '';
-          this.exis.precio                 = '';
-          this.transaccion.fecha           = '';
-          this.transaccion.movimiento      = '';
-          this.transaccion.egreso.cantidad = '';
-          this.transaccion.egreso.precio   = '';
-          this.transaccion.egreso.total    = '';
-          }
-       }
+    let id = this.transacciones.length + 1;
+    var existencia ={identificador: id, tipo:'existencia', existencia_cantidad:this.exis.cantidad, existencia_precio:this.exis.precio,}
+    if (tipo == 'compra') {
+      this.modales.modal_devolucion_compra.unshift(existencia);
+    }else{
+      this.modales.modal_egreso.push(existencia);
+    }
+      
+      toastr.success("Agregado", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+      this.exis.cantidad = '';
+      this.exis.precio = '';
+      this.modales.existencia_ingreso = false;
+     // }
+      // if( this.exis.cantidad.trim() ==='' || this.exis.precio.trim() ==='' ){
+      //   toastr.error("Todos lo campos son obligatorios", "Smarmoddle", {
+      //     "timeOut": "3000"
+      //   });
+      //   }else{
+
+      //   if (this.egresos.length == 0) {
+      //      let id = this.transacciones.length + 1;
+      //     let existencia = {identificador: id, tipo:'existencia', existencia_cantidad:this.exis.cantidad, existencia_precio:this.exis.precio, existencia_total:''}
+      //     this.egresos.push(existencia);
+      //     toastr.success("Agregado", "Smarmoddle", {
+      //       "timeOut": "3000"
+      //       });
+      //     this.exis.cantidad               = '';
+      //     this.exis.precio                 = '';
+      //     this.transaccion.fecha           = '';
+      //     this.transaccion.movimiento      = '';
+      //     this.transaccion.egreso.cantidad = '';
+      //     this.transaccion.egreso.precio   = '';
+      //     this.transaccion.egreso.total    = '';
+      //   }else{
+      //     let id = this.transacciones.length + 1;
+      //     let ultimo = this.egresos.length - 1;
+      //     let total = this.egresos[ultimo].existencia_total;
+      //     let existencia ={identificador: id, tipo:'existencia', existencia_cantidad:this.exis.cantidad, existencia_precio:this.exis.precio, existencia_total:total}
+      //     this.egresos.push(existencia);
+      //     this.egresos[ultimo].existencia_total = '';
+      //     toastr.success("Agregado", "Smarmoddle", {
+      //       "timeOut": "3000"
+      //       });
+      //     this.exis.cantidad               = '';
+      //     this.exis.precio                 = '';
+      //     this.transaccion.fecha           = '';
+      //     this.transaccion.movimiento      = '';
+      //     this.transaccion.egreso.cantidad = '';
+      //     this.transaccion.egreso.precio   = '';
+      //     this.transaccion.egreso.total    = '';
+      //     }
+      //  }
     },
     agregarEgresos(){
+
       let egresos = this.modales.modal_egreso.filter(x => x.tipo == 'egreso');
       let u= egresos.length - 1;
       let existencia_total = JSON.parse(JSON.stringify(egresos[u].existencia_total));
@@ -2491,17 +2531,13 @@ const kardex = new Vue({
 
 
       let exis = this.modales.modal_egreso.filter(x => x.tipo == 'existencia');
+      let conteo = this.modales.modal_egreso.filter(x => x.tipo == 'existencia');
      
 
       // let ultimo         = this.modales.modal_egreso.length - 1;
       // let total          = this.modales.modal_egreso[ultimo].existencia_total;
       this.totales.total = existencia_total;
-      if (exis.length >=1 ) {
-        let e= exis.length - 1;
-          exis[e].existencia_total = existencia_total
-        egresos[u].existencia_total = '';
-         console.log( exis[e].existencia_total)
-      }
+    
    
 
       let existencias_egresos = this.modales.modal_egreso.filter(x => x.tipo == 'egreso' &&  x.existencia_cantidad > 0);
@@ -2511,13 +2547,63 @@ const kardex = new Vue({
             });
           // existencias.push(existencias);
        this.existencias = JSON.parse(JSON.stringify(exis));
-
+         if (conteo.length >=1 ) {
+        let e= exis.length - 1;
+          exis[e].existencia_total = existencia_total
+        egresos[u].existencia_total = '';
+         console.log( exis[e].existencia_total)
+      }
 
         
 
     
       this.transacciones.push(this.modales.modal_egreso);
       this.modales.modal_egreso = [];
+      
+      // this.totales.total = calculo;
+      this.transaccion.fecha      = '';
+      this.transaccion.movimiento = '';
+      this.transaccion.egreso.cantidad = '';
+      this.transaccion.egreso.precio   = '';
+      this.transaccion.egreso.total    = '';
+    },
+    agregarDevolucionCompra(){
+      
+      let egresos = this.modales.modal_devolucion_compra.filter(x => x.tipo == 'egreso_compra');
+      let u= egresos.length - 1;
+      let existencia_total = JSON.parse(JSON.stringify(egresos[u].existencia_total));
+      let iden = this.transacciones.length + 1;
+
+
+      let exis = this.modales.modal_devolucion_compra.filter(x => x.tipo == 'existencia');
+      let conteo = this.modales.modal_devolucion_compra.filter(x => x.tipo == 'existencia');
+     
+
+      // let ultimo         = this.modales.modal_egreso.length - 1;
+      // let total          = this.modales.modal_egreso[ultimo].existencia_total;
+      this.totales.total = existencia_total;
+    
+   
+
+      let existencias_egresos = this.modales.modal_devolucion_compra.filter(x => x.tipo == 'egreso_compra' &&  x.existencia_cantidad > 0);
+        existencias_egresos.forEach(function(existencia, id){
+          let agregar = {identificador: iden, tipo:'existencia', existencia_cantidad:existencia.existencia_cantidad, existencia_precio:existencia.existencia_precio, existencia_total:''}
+          exis.unshift(agregar);
+            });
+          // existencias.push(existencias);
+       this.existencias = JSON.parse(JSON.stringify(exis));
+         if (conteo.length >=1 ) {
+        let e= exis.length - 1;
+          exis[e].existencia_total = existencia_total
+        egresos[u].existencia_total = '';
+         console.log( exis[e].existencia_total)
+      }
+
+        
+
+    
+      this.transacciones.push(this.modales.modal_devolucion_compra);
+      this.modales.modal_devolucion_compra = [];
       
       // this.totales.total = calculo;
       this.transaccion.fecha      = '';
