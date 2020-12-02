@@ -2846,10 +2846,22 @@ const kardex = new Vue({
     this.actuegreso.estado = false;
     this.actuegreso.index = '';
     },
-    borrarEgreso(index){
+    borrarEgreso(index, tipo){
     let id = index;
     let ultimo = this.modales.modal_egreso.length - 1;
-      if ( this.modales.modal_egreso[id].tipo == 'existencia') {
+
+    if (tipo == 'egreso_compra') {
+        if ( this.modales.modal_devolucion_compra[id].tipo == 'existencia') {
+        this.modales.modal_devolucion_compra.splice(index, 1);
+
+      }else if (id == ultimo && this.modales.modal_devolucion_compra[id].tipo == 'egreso_compra') {
+        let total =  this.modales.modal_devolucion_compra[id].existencia_total;
+        this.modales.modal_devolucion_compra.splice(index, 1);
+
+      }
+        return
+    }
+           if ( this.modales.modal_egreso[id].tipo == 'existencia') {
         // let total =  this.modales.modal_egreso[id].existencia_total;
         // this.modales.modal_egreso[id - 1].existencia_total = total;
         this.modales.modal_egreso.splice(index, 1);
@@ -2859,6 +2871,9 @@ const kardex = new Vue({
         this.modales.modal_egreso.splice(index, 1);
 
       }
+
+    
+ 
       // if (this.modales.modal_egreso[id].tipo == 'egreso') {
       //   let existencia = this.totales.total;
       //   let newTotal =existencia + this.modales.modal_egreso[id].ingreso_total;
