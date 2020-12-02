@@ -1954,8 +1954,9 @@ const kardex = new Vue({
       total:''
     },
     totales:{
-       cantidad:'',
+      cantidad:'',
       precio:'',
+      subtotal:'',
       total:''
     },
     ejercicio:[],
@@ -2278,10 +2279,10 @@ const kardex = new Vue({
     let id = index;
 
     if (tipo == 'venta') {
-       if (this.modales.modal_devolucion_venta[id].tipo == 'ingreso' ) {
-      let existencia = this.totales.total;
-      let newTotal =existencia - this.modales.modal_devolucion_venta[id].ingreso_total;
-      this.totales.total = newTotal;
+       if (this.modales.modal_devolucion_venta[id].tipo == 'ingreso_venta' ) {
+      // let existencia = this.totales.total;
+      // let newTotal =existencia - this.modales.modal_devolucion_venta[id].ingreso_total;
+      // this.totales.total = newTotal;
 
       this.modales.modal_devolucion_venta.splice(index, 1);
     }else if(this.modales.modal_devolucion_venta[id].tipo == 'existencia' ){
@@ -2362,16 +2363,20 @@ const kardex = new Vue({
     else if(this.transacciones[index][id].tipo == 'ingreso'){
       this.actuingreso.index = index;
       this.actuingreso.estado = true;
-      
-      // var obj2 = [].concat( this.transacciones[index]);
       const second = JSON.parse(JSON.stringify(this.transacciones[index]));
-      // let datos =.slice()
       this.ejercicio = second;
     }
       else if(this.transacciones[index][id].tipo == 'egreso'){
       this.actuegreso.index = index;
       this.actuegreso.estado = true
-      this.egresos = this.transacciones[index];
+      const egre = JSON.parse(JSON.stringify(this.transacciones[index]));
+      this.egresos = egre;
+    }
+    else if(this.transacciones[index][id].tipo == 'egreso_compra'){
+      this.actuegreso.index = index;
+      this.actuegreso.estado = true
+      const comprea = JSON.parse(JSON.stringify(this.transacciones[index]));
+      this.egresos = comprea;
     }
   },
   actualizarIngreso(){
@@ -2614,7 +2619,12 @@ const kardex = new Vue({
     }, 
      actualEgre(id){
       let i              = id;
-      let exis           = this.totales.total
+      let egresos = this.modales.modal_egreso.filter(x => x.tipo == 'egreso');
+
+      let ul = egresos.length - 1;
+
+      let exis           =  Number(egresos[ul].existencia_total);
+      // let exis           = this.totales.total
       let cantidad       = Number(this.modales.modal_egreso[i].egreso_cantidad);
       let precio         = Number(this.modales.modal_egreso[i].egreso_precio);
       let total1         = this.modales.modal_egreso[i].egreso_total;
@@ -2624,102 +2634,20 @@ const kardex = new Vue({
       // this.modales.modal_egreso[i].existencia_precio = precio;
 
     this.modales.modal_egreso[i].egreso_total = multiplicacion;
-
-    if (!this.actuegreso.estado) {
-
       if (total1 > multiplicacion) {
         let dife = total1 - multiplicacion;
         let suma = exis - dife  
-        this.totales.total = suma
+        this.totales.subtotal = suma
       }else{
         let adi = multiplicacion - total1 ;
         let suma = adi + exis
-        this.totales.total = suma
+        this.totales.subtotal = suma
       }
-    this.modales.modal_egreso[i].existencia_total = this.totales.total;
+    this.modales.modal_egreso[ul].existencia_total = this.totales.subtotal;
         toastr.error("Datos Actualizado", "Smarmoddle", {
         "timeOut": "3000"
         });
-    }else if(this.actuegreso.estado){
-      let transacciones = this.transacciones;
-      let index = this.actuegreso.index;
-      // let num = transacciones[index][i].identificador;
-
-      let identificador = transacciones.length - 1;
-
-    if (index !== identificador) {
-      if (total1 > multiplicacion) {
-        let dife = total1 - multiplicacion;
-       transacciones.forEach(function(transaccion, i){
-              transaccion.forEach(function(total, id){
-                let temp = total.existencia_total;
-                if (temp != null && temp !=='' && total.tipo !== 'inicial' && i >= index) {
-                  total.existencia_total = temp + dife;
-
-                  // console.log(temp);
-                } 
-                
-              })
-            });
-      let ultimodato = transacciones[identificador];
-      let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso');
-          // console.log(egreso);
-           if (egreso[0].tipo == 'egreso' ) {
-            let last = transacciones[identificador];
-             let final = last.length - 1;
-            this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-        }else if(egreso[0].tipo == 'ingreso' ){
-
-           this.totales.total = Number(egreso[0].existencia_total);
-          }
-           // this.totales.total = Number(egreso[0].existencia_total);
-     }else{
-        let adi = multiplicacion - total1;
-              transacciones.forEach(function(transaccion, i){
-              transaccion.forEach(function(total, id){
-                let temp = total.existencia_total;
-                if (temp != null && temp !=='' && total.tipo !== 'inicial'  && i >= index) {
-                  total.existencia_total = temp - adi;
-                  // console.log(temp);
-                } 
-                
-              })
-            });
-          let ultimodato = transacciones[identificador];
-          let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso');
-          // console.log(egreso);
-           if (egreso[0].tipo == 'egreso' ) {
-
-            let last = transacciones[identificador];
-             let final = last.length - 1;
-            this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-        }else if(egreso[0].tipo == 'ingreso' ){
-
-           this.totales.total = Number(egreso[0].existencia_total);
-          }
-           // this.totales.total = Number(egreso[0].existencia_total);     
-      }
-    }else{
-        if (total1 > multiplicacion) {
-        let dife = total1 - multiplicacion;
-        let suma = exis + dife  
-        this.totales.total = suma
-      }else{
-        let adi = multiplicacion - total1 ;
-        let suma = exis - adi
-        this.totales.total = suma
-      }
-        let f = this.modales.modal_egreso.length - 1;
-
-       this.modales.modal_egreso[i].existencia_total = '';
-       this.modales.modal_egreso[f].existencia_total = this.totales.total;
-        toastr.error("Datos Actualizado", "Smarmoddle", {
-        "timeOut": "3000"
-        });
-    }
-      }
+    
 
     },
     totaEgre(id){
@@ -2848,20 +2776,19 @@ const kardex = new Vue({
     },
     borrarEgreso(index, tipo){
     let id = index;
-    let ultimo = this.modales.modal_egreso.length - 1;
+    let ultimo = this.modales.modal_devolucion_compra.length - 1;
 
     if (tipo == 'egreso_compra') {
-        if ( this.modales.modal_devolucion_compra[id].tipo == 'existencia') {
-        this.modales.modal_devolucion_compra.splice(index, 1);
 
+      if (this.modales.modal_devolucion_compra[id].tipo == 'existencia') {
+        this.modales.modal_devolucion_compra.splice(index, 1);
       }else if (id == ultimo && this.modales.modal_devolucion_compra[id].tipo == 'egreso_compra') {
         let total =  this.modales.modal_devolucion_compra[id].existencia_total;
         this.modales.modal_devolucion_compra.splice(index, 1);
-
       }
         return
     }
-           if ( this.modales.modal_egreso[id].tipo == 'existencia') {
+      if ( this.modales.modal_egreso[id].tipo == 'existencia') {
         // let total =  this.modales.modal_egreso[id].existencia_total;
         // this.modales.modal_egreso[id - 1].existencia_total = total;
         this.modales.modal_egreso.splice(index, 1);

@@ -732,7 +732,7 @@
           {{-- <td><input type="text" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
           <td v-if="!actuegreso.estado">@{{ transa.existencia_total }}</td>
           <td v-if="actuegreso.estado"><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
-          <td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarEgreso(id,  'egreso_compra')"> <i class="fas fa-trash"></i></a></td>
+          <td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarEgreso(id,'egreso_compra')"> <i class="fas fa-trash"></i></a></td>
         </tr>
       </tbody>
 </table>
