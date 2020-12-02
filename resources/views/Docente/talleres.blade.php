@@ -9,6 +9,7 @@
     <div class="container">
         <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
         <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}
+            <h3 class="  font-weight-bold text-success">{{ $materia->nombre }}</h3>
             <h2 class="text-center display-2 font-weight-bold text-primary">Administrador de Talleres</h2>
         </h2>
         <br>
@@ -59,10 +60,7 @@
                                             <td>
                                                 <span v-if="taller.estado == 1"
                                                     class="badge-success badge">activo</span>
-
                                                 <span v-else class="badge-danger badge">desactivado</span>
-
-
                                             </td>
                                             <td>@{{ taller.fecha_entrega }}</td>
                                             <td class="table-button ">
@@ -86,7 +84,6 @@
                                                 <span class="badge-success badge">activo</span>
                                                 @else
                                                 <span class="badge-danger badge">desactivado</span>
-
                                                 @endif
                                                 <div class="onoffswitch">
                                                     <input type="checkbox" name="onoffswitch"
@@ -220,16 +217,12 @@ const taller = new Vue({
             }).then(response => {
                 toastr.success(response.data.message, "Smarmoddle", {
                     "timeOut": "3000"
-
                 });
                 set.talleres = [];
                 set.talleres = response.data.talleres;
                 $('#fecha').modal('hide')
                 // location.reload();
-            }).catch(function(error) {
-
-            });
-
+            }).catch(function(error) {});
         }
     }
 });

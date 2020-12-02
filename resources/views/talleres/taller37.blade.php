@@ -1,13 +1,80 @@
 @extends('layouts.nav')
 
 @section('css')
+<style type="text/css">
+    #calApp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ /* height: 100vh;
+  width: 100vw;*/
+}
+.calculator {
+  display: grid;
+  grid-template-rows: repeat(7, minmax(60px, auto));
+  grid-template-columns: repeat(4, 60px);
+  grid-gap: 12px;
+  padding: 35px;
+  font-family: "Poppins";
+  font-weight: 300;
+  font-size: 18px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 3px 80px -30px rgba(13, 81, 134, 1);
+}
 
+.boton,
+.zero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #484848;
+  background-color: #f4faff;
+  border-radius: 5px;
+  border: 1px solid  #E42D2D;
+}
+
+.display,
+.answer {
+  grid-column: 1 / 5;
+  display: flex;
+  align-items: center;
+}
+
+.display {
+  color: #0B0202;
+  border-bottom: 1px solid #e1e1e1;
+  margin-bottom: 15px;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.answer {
+  font-weight: 500;
+  color: #146080;
+  font-size: 55px;
+  height: 65px;
+}
+
+.zero {
+  grid-column: 1 / 3;
+}
+
+.operator {
+  background-color: #d9efff;
+  color: #3fa9fc;
+}
+</style>
 @endsection
 @section('title', 'Talleres de contabilidad')
 @section('content')
 <div class="container mb-3">
 
-    <h1 class="text-center  mt-5">{{ $datos->taller->nombre }}</h1>
+    <h1 class="text-center m-2">{{ $datos->taller->nombre }}</h1>
     <h3 class="text-center mt-3">{{ $datos->enunciado }}</h3>
 
     <div class="row justify-content-md-center">
