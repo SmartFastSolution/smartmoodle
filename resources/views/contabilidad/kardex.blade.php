@@ -124,13 +124,14 @@
 					{{-- <td><input type="text" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
 					<td v-if="!actuingreso.estado">@{{ transa.existencia_total }}</td>
 					<td v-if="actuingreso.estado"><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
-					<td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarIngreso(id)"> <i class="fas fa-trash"></i></a></td>
+					<td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarIngreso(id, 'ingreso')"> <i class="fas fa-trash"></i></a></td>
 				</tr>
 			</tbody>
 </table>
 
+
 <div class="row justify-content-center">
-<a class="btn btn-sm btn-primary mr-2" v-if="!actuingreso.estado" href="" @click.prevent="agregarTransaccion()">Agregar Transaccion</a>
+<a class="btn btn-sm btn-primary mr-2 float-left"  href="" @click.prevent="actuExiIng()">Agregar Existencia</a>
 <a class="btn btn-sm btn-primary mr-2" v-if="actuingreso.estado" href="" @click.prevent="actualizarIngreso()">Actualizar Transaccion</a>
 </div>
 </div>
@@ -176,7 +177,7 @@
 								{{-- <td><input type="text" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
 								<td v-if="!actuegreso.estado">@{{ transa.existencia_total }}</td>
 								<td v-if="actuegreso.estado"><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
-								<td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarEgreso(id)"> <i class="fas fa-trash"></i></a></td>
+								<td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarEgresoAct(id, 'egreso')"> <i class="fas fa-trash"></i></a></td>
 							</tr>
 						</tbody>
 			</table>
