@@ -91,7 +91,7 @@ $(function() {
         var table = $('#myTable').DataTable({
             fixedHeader: true,
 
-            "info": false,
+            "info": true,
             "autoWidth": true,
             "paging": true,
             "searching": true,

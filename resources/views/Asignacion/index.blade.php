@@ -100,7 +100,7 @@ $(function() {
      var table= $('#myTable').DataTable({
             "fixedHeader": true,
             "orderCellsTop": true,
-            "info": false,
+            "info": true,
             "autoWidth": true,
             "searching": true,
             "responsive": true,
