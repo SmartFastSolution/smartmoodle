@@ -212,7 +212,8 @@
                             <th scope="col">Docente</th>
                             <th scope="col">Materia</th>
                             <th scope="col">Estudiante</th>
-                            <th scope="col">Curso/Paralelo</th>
+                            <th scope="col">Curso</th>
+                            <th scope="col">Paralelo</th>
                             <th scope="col">Ultimo Acceso</th>
 
                         </tr>
@@ -228,7 +229,8 @@
                             <td>{{$do->user->name}} {{$do->user->apellido}}</td>
                             <td>{{$ma->nombre}}</td>
                             <td>{{$asig->user->name}} {{$asig->user->apellido}}</td>
-                            <td>{{$asig->user->curso->nombre}}-{{$asig->user->nivel->nombre}}</td>
+                            <td>{{$asig->user->curso->nombre}}</td>
+                            <td>{{$asig->user->nivel->nombre}}</td>
                             <td> {{$asig->user->created_at->diffForHumans()}}</td>
                         </tr>
                         @endforeach
@@ -406,6 +408,7 @@ $(function() {
             "autoWidth": true,
             "searching": true,
             "responsive": true,
+            "scrollX": true,
            
 
             "language": {
