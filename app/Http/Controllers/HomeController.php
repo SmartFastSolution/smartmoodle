@@ -14,21 +14,12 @@ use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+   
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
         return view('sistema');
@@ -121,6 +112,35 @@ class HomeController extends Controller
         $clave = Str::random(8);
         return $clave;
     }
+
+
+    public function EstadoUser(Request $request){
+         
+        $us = User::find($request->id);
+        
+           $estado = $us->estado;
+           if($estado === "on"){
+               $us->estado = "on";
+               $us->save();
+               return response(array(
+                'success' => true,
+                'message' => 'Usuario activado correctamente',
+                'talleres' => $us
+            ),200,[]); 
+    
+            }elseif ($estado === "off"){
+                $us->estado = "off";
+                $us->save();
+                return response(array(
+                 'success' => true,
+                 'message' => 'Usuario desactivado correctamente',
+                 'talleres' => $us
+ 
+             ),200,[]); 
+            }         
+    }
+
+
 
 
    

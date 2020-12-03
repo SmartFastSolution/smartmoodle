@@ -40,7 +40,6 @@
                             </div>
                             <div class="card-body">
                                 <table class="table table-hover">
-
                                     <thead>
                                         <tr class="text-center">
                                             <th scope="col" width="100">Unidad</th>

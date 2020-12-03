@@ -82,6 +82,7 @@ Route::get('users-list-excel','PDFController@UserExport')->name('users.excel');
 Route::get('distribucion-list-excel','PDFController@DistribucionExport')->name('distribucion.excel');
 Route::get('asignaciones-list-excel','PDFController@AssigmentExport')->name('asignacion.excel');
 Route::get('docentes-list-excel','PDFController@DocenteExport')->name('docente.excel');
+Route::get('cursos-list-excel','PDFController@CursoExport')->name('curso.excel');
 
 
  ////////////////////////////////////////////////
@@ -114,6 +115,8 @@ route::get('alumnos/{id}', 'DocenteController@cursos')->name('Alumnos');
 
 //rutas usuario
 route::resource('users','UsersController');
+Route::post('estadouser','HomeController@EstadoUser')->name('Estado');
+
 
 // rutas instituto
 route::resource('institutos','InstitutoController');// FUNCIONA AL 100%

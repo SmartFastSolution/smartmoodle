@@ -159,7 +159,6 @@ class DocenteController extends Controller
     $contenidos=Contenido::where('materia_id', $request->materia)->get();
     $talleres =[];
       
-
     $taller = Taller::find($request->taller_id);
     $estado = $request->estado;
        // return $estado;

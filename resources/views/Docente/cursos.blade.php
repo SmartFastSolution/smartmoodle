@@ -12,7 +12,8 @@
         <table id="myTable" class="table">
             <thead>
                 <tr>
-                    <th scope="col">Curso/Paralelo</th>
+                    <th scope="col">Curso</th>
+                    <th scope="col">Paralelo</th>
                     <th scope="col">Materia</th>
                     <th scope="col">Nombre/Apellido</th>
                     <th scope="col">Correo</th>
@@ -20,10 +21,10 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach($materia->assignments as $ass)
+                @foreach($materia->assignments as $ass)
                 <tr>
-                    <td> {{$ass->user->curso->nombre}}-{{$ass->user->nivel->nombre}}</td>
-                   
+                    <td> {{$ass->user->curso->nombre}}</td>
+                    <td>{{$ass->user->nivel->nombre}}</td>
                     <td> {{$materia->nombre}}</td>
                     <td> {{$ass->user->name}} {{$ass->user->apellido}}</td>
                     <td>{{$ass->user->email}}</td>
@@ -41,14 +42,14 @@
 <script>
 $(function() {
     $(document).ready(function() {
-     var table= $('#myTable').DataTable({
+        var table = $('#myTable').DataTable({
             "fixedHeader": true,
             "orderCellsTop": true,
-            "info": false,
+            "info": true,
             "autoWidth": true,
             "searching": true,
             "responsive": true,
-          
+
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
             }

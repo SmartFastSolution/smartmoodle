@@ -3,22 +3,22 @@
 @section('content')
 
 
-<section class="content">
+<section class="content-fluid">
     <div class="container-fluid">
         <h1 class="font-weight-light" style="color:dark;"> Reportes Generales</h1>
 
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                    aria-controls="nav-home" aria-selected="true">Reporte Promedio Materia</a>
+                    aria-controls="nav-home" aria-selected="true">Reporte Unidad Educatva/Materia</a>
                 <a class="nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
                     aria-controls="nav-profile" aria-selected="false">Reporte Docente</a>
                 <a class="nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
                     aria-controls="nav-contact" aria-selected="false">Reporte Estudiantes</a>
                 <a class="nav-link" id="nav-users-tab" data-toggle="tab" href="#nav-users" role="tab"
                     aria-controls="nav-users" aria-selected="false">Reporte Usuarios</a>
-                <!-- <a class="nav-link" id="nav-vigencia-tab" data-toggle="tab" href="#nav-vigencia" role="tab"
-                    aria-controls="nav-vigencia" aria-selected="false">Vigencia Usuarios</a> -->
+                <a class="nav-link" id="nav-vigencia-tab" data-toggle="tab" href="#nav-vigencia" role="tab"
+                    aria-controls="nav-vigencia" aria-selected="false">Docente/Estudiante</a>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -27,7 +27,8 @@
                 <br>
                 <div class="btn-group float-right" role="group" aria-label="Basic example">
 
-                    <a class="btn btn-dark float-right" href="{{route('distribucion.excel')}}"> <i class="fas fa-save"></i>
+                    <a class="btn btn-dark float-right" href="{{route('distribucion.excel')}}"> <i
+                            class="fas fa-save"></i>
                         Generar Reporte</a>
                 </div>
                 <br>
@@ -40,7 +41,7 @@
                             <th scope="col">Materia</th>
                             <th scope="col">Unidad</th>
                             <th scope="col">Taller</th>
-                            <th scope="col">Promedio</th>
+
                         </tr>
                     </thead>
                     <tbody>
@@ -57,7 +58,7 @@
                             <td>{{$ma->nombre}}</td>
                             <td>{{$contenido->nombre}}</td>
                             <td>{{$tl->nombre}}</td>
-                            <td>promedio</td>
+
                         </tr>
                         @endforeach
                         @endif
@@ -85,6 +86,7 @@
                             <th scope="col">Docente</th>
                             <th scope="col">Curso</th>
                             <th scope="col">Materia</th>
+                            <th scope="col">Ultimo Acceso</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -98,6 +100,7 @@
                             <td>{{$do->user->name}} {{$do->user->apellido}}</td>
                             <td>{{$cur->curso->nombre}}</td>
                             <td>{{$ma->nombre}}</td>
+                            <td> {{$do->user->created_at->diffForHumans()}}</td>
                         </tr>
                         @endforeach
                         @endif
@@ -113,7 +116,8 @@
                 <br>
                 <div class="btn-group float-right" role="group" aria-label="Basic example">
 
-                    <a class="btn btn-dark float-right" href="{{route('asignacion.excel')}}"> <i class="fas fa-save"></i>
+                    <a class="btn btn-dark float-right" href="{{route('asignacion.excel')}}"> <i
+                            class="fas fa-save"></i>
                         Generar Reporte</a>
                 </div>
                 <br>
@@ -126,6 +130,7 @@
                             <th scope="col">Curso</th>
                             <th scope="col">Paralelo</th>
                             <th scope="col">Materia</th>
+                            <th scope="col">Ultimo Acceso</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -140,6 +145,7 @@
                             <td>{{$cur->curso->nombre}}</td>
                             <td>{{$es->user->nivel->nombre}}</td>
                             <td>{{$ma->nombre}}</td>
+                            <td> {{$es->user->created_at->diffForHumans()}}</td>
                         </tr>
                         @endforeach
                         @endif
@@ -191,6 +197,48 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="nav-vigencia" role="tabpanel" aria-labelledby="nav-vigencia-tab">
+                <!--aqui esta la seccion del reporte de docente-->
+                <br>
+                <div class="btn-group float-right" role="group" aria-label="Basic example">
+                    <a class="btn btn-dark float-right" href="{{route('curso.excel')}}"> <i class="fas fa-save"></i>
+                        Generar Reporte</a>
+                </div>
+                <br>
+                <br>
+                <table id="myTable4" class="table table-hover" >
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Unidad Educativa</th>
+                            <th scope="col">Docente</th>
+                            <th scope="col">Materia</th>
+                            <th scope="col">Estudiante</th>
+                            <th scope="col">Curso/Paralelo</th>
+                            <th scope="col">Ultimo Acceso</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($doc as $do)
+                        @if($do->materias != null)
+                        @foreach($do->materias as $ma)
+                        @if($ma->assignments != null)
+                        @foreach($ma->assignments as $asig)
+                        <tr>
+                            <td>{{$do->instituto->nombre}}</td>
+                            <td>{{$do->user->name}} {{$do->user->apellido}}</td>
+                            <td>{{$ma->nombre}}</td>
+                            <td>{{$asig->user->name}} {{$asig->user->apellido}}</td>
+                            <td>{{$asig->user->curso->nombre}}-{{$asig->user->nivel->nombre}}</td>
+                            <td> {{$asig->user->created_at->diffForHumans()}}</td>
+                        </tr>
+                        @endforeach
+                        @endif
+                        @endforeach
+                        @endif
+                        @endforeach
+                    </tbody>
+                </table>
+
             </div>
             <!-- hasta aqui los tab -->
         </div>
@@ -198,6 +246,7 @@
 </section>
 @stop
 @section('css')
+
 @stop
 @section('js')
 
@@ -207,7 +256,7 @@ $(function() {
         var table = $('#myTable').DataTable({
             "fixedHeader": true,
             "orderCellsTop": true,
-            "info": false,
+            "info": true,
             "autoWidth": true,
             "searching": true,
             "responsive": true,
@@ -242,7 +291,7 @@ $(function() {
         var table = $('#myTable1').DataTable({
             "fixedHeader": true,
             "orderCellsTop": true,
-            "info": false,
+            "info": true,
             "autoWidth": true,
             "searching": true,
             "responsive": true,
@@ -278,10 +327,11 @@ $(function() {
         var table = $('#myTable2').DataTable({
             "fixedHeader": true,
             "orderCellsTop": true,
-            "info": false,
+            "info": true,
             "autoWidth": true,
             "searching": true,
             "responsive": true,
+           
 
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
@@ -316,7 +366,7 @@ $(function() {
         var table = $('#myTable3').DataTable({
             "fixedHeader": true,
             "orderCellsTop": true,
-            "info": false,
+            "info": true,
             "autoWidth": true,
             "searching": true,
             "responsive": true,
@@ -328,6 +378,43 @@ $(function() {
 
         $('#myTable3 thead tr').clone(true).appendTo('#myTable3 thead');
         $('#myTable3 thead tr:eq(1) th').each(function(i) {
+
+            var title = $(this).text(); //es el nombre de la columna
+            $(this).html('<input type="text" placeholder="Buscar..." />');
+
+            $('input', this).on('keyup change', function() {
+                if (table.column(i).search() !== this.value) {
+                    table
+                        .column(i)
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+
+    });
+});
+</script>
+
+<script>
+$(function() {
+    $(document).ready(function() {
+        var table = $('#myTable4').DataTable({
+            "fixedHeader": true,
+            "orderCellsTop": true,
+            "info": true,
+            "autoWidth": true,
+            "searching": true,
+            "responsive": true,
+           
+
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            }
+        });
+
+        $('#myTable4 thead tr').clone(true).appendTo('#myTable4 thead');
+        $('#myTable4 thead tr:eq(1) th').each(function(i) {
 
             var title = $(this).text(); //es el nombre de la columna
             $(this).html('<input type="text" placeholder="Buscar..." />');

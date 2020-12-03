@@ -16,6 +16,7 @@ use App\Exports\AssigmentExport;
 use App\Exports\ReportExport;
 use App\Exports\DistribucionExport;
 use App\Exports\DocenteExport;
+use App\Exports\CursoExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class PDFController extends Controller
@@ -140,6 +141,11 @@ class PDFController extends Controller
     public function DocenteExport(){
 
         return Excel::download(new  DocenteExport , 'docentes-list.xlsx');
+    }
+    
+    public function CursoExport(){
+
+        return Excel::download(new  CursoExport , 'cursos-list.xlsx');
     }
 
   
