@@ -833,7 +833,7 @@
                     </div>
 
                     <a v-if="!update" href="#" class="addDiario btn btn-outline-danger " @click.prevent="agregarTran()">Agregar Registro</a>
-                    <a v-if="update" href="#" class="addDiario btn btn-outline-danger " @click.prevent="">Actualizar Registro</a>
+                    <a v-if="update" href="#" class="addDiario btn btn-outline-danger " @click.prevent="actualizarInicial()">Actualizar Registro</a>
 
               </div>
             </div>
@@ -842,3 +842,5 @@
         </div>
     </div>
 </div>
+
+
