@@ -40,7 +40,7 @@
 				<td>@{{ exist.existencia_precio }}</td>
 				<td>@{{ exist.existencia_total }}</td>
 				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso' || transacciones[index][id].tipo == 'inicial' || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'ingreso_venta' || transacciones[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-warning" href="" @click.prevent="editarTransaccion(index, id)"><i class="fas fa-edit"></i></a></td>
-				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso' || transacciones[index][id].tipo == 'inicial' || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'ingreso_venta' || transacciones[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-danger" href="" @click.prevent="borrarTransaccion(index, id)"><i class="fas fa-trash"></i></a></td>
+				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso'  || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'ingreso_venta' || transacciones[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-danger" href="" @click.prevent="borrarTransaccion(index, id)"><i class="fas fa-trash"></i></a></td>
 				<td v-else colspan="2"></td>
 			</tr>
 		</tbody>
@@ -49,12 +49,12 @@
 		  <tr class="bg-secondary">
 		    <td></td>
 		    <td class="font-weight-bold">SUMAN</td>
+		    <td>@{{ suman.ingreso_cantidad }}</td>
 		    <td></td>
+		    <td>@{{ suman.ingreso_total }}</td>
+		    <td>@{{ suman.egreso_cantidad }}</td>
 		    <td></td>
-		    <td></td>
-		    <td></td>
-		    <td></td>
-		    <td></td>
+		    <td>@{{ suman.egreso_total }}</td>
 		    <td></td>
 		    <td></td>
 		    <td></td>
@@ -66,13 +66,55 @@
  @include('contabilidad.modales.modalkardex')
 
 
-<div class="row justify-content-center">
+<div v-if="!actuingreso.estado && !actuegreso.estado" class="row justify-content-center">
+
+	<div class="col-4 align-self-center">
 	{{-- <a class="btn btn-sm btn-primary mr-2" href="">Agregar Inicial</a> --}}
 	<a v-if="transacciones.length == 0" class="btn btn-sm btn-success mr-2" @click.prevent="modalInicial()">Saldo Inicial</a>
 	<a  class="btn btn-sm btn-secondary mr-2" @click.prevent="modalIngreso()" href="#" data-toggle="modal" data-target="#ingreso">INGRESO</a>
 	<a  class="btn btn-sm btn-info mr-2" href="#" @click.prevent="modalEgreso()" data-toggle="modal" data-target="#egreso">EGRESO</a>
 	{{-- <a class="btn btn-sm btn-success mr-2" href="#" @click.prevent="modalCompra()" data-toggle="modal" data-target="#devolucion_compra">Devolucion compra</a>
 	<a class="btn btn-sm btn-warning mr-2" href="#"@click.prevent="modalVenta()"  data-toggle="modal" data-target="#devolucion_venta">Devolucion Venta</a> --}}
+
+	</div>
+	<div class="col-12 mt-3">
+		<div class="row justify-content-center">
+			<div class="col-6 border">
+				<table class="table table-sm">
+					<thead>
+						<tr>
+							<th width="200">PRUEBA</th>
+							<th class="text-center">CANTIDAD</th>
+							<th class="text-center">TOTAL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Inventario Mercaderia Inicial</td>
+							<td><input type="text" class="form-control form-control-sm"></td>
+							<td><input type="text" class="form-control form-control-sm"></td>
+						</tr>
+						<tr>
+							<td>Adquisiciones</td>
+							<td><input type="text" class="form-control form-control-sm"></td>
+							<td><input type="text" class="form-control form-control-sm"></td>
+						</tr>
+						<tr>
+							<td>(-) Ventas</td>
+							<td><input type="text" placeholder="-" class="form-control form-control-sm"></td>
+							<td><input type="text" placeholder="-" class="form-control form-control-sm"></td>
+						</tr>
+						<tr>
+							<td>Inv. Final Mercaderia Inicial</td>
+							<td><input type="text" class="form-control form-control-sm"></td>
+							<td><input type="text" class="form-control form-control-sm"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+	</div>
 </div>
 
 <div v-if="ejercicio.length > 0">

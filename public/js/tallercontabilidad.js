@@ -1953,6 +1953,12 @@ const kardex = new Vue({
       precio:'',
       total:''
     },
+    suman:{
+      ingreso_cantidad:0,
+      ingreso_total:0,
+      egreso_cantidad:0,
+      egreso_total:0,
+    },
     totales:{
       cantidad:'',
       precio:'',
@@ -2018,6 +2024,73 @@ const kardex = new Vue({
     }
   },
   methods:{
+    sumasTotales(){
+      let transacciones = this.transacciones;
+      let in_cantidad = 0;
+      let in_total    = 0;
+      let eg_cantidad = 0;
+      let eg_total    = 0;
+
+        //INGRESO CANTIDAD
+       transacciones.forEach(function(transaccion, i){
+              transaccion.forEach(function(ingreso_cantidad, id){
+                let temp = ingreso_cantidad.ingreso_cantidad;
+
+                if (temp != null && temp !=='') {
+                    in_cantidad += parseInt(temp)
+                  // console.log(temp);
+                } 
+              })
+            });
+       this.suman.ingreso_cantidad = in_cantidad;
+
+        //INGRESO TOTAL
+
+        transacciones.forEach(function(transaccion, i){
+              transaccion.forEach(function(ingreso_total, id){
+                let temp1 = ingreso_total.ingreso_total;
+
+                if (temp1 != null && temp1 !=='') {
+                    in_total += Number(temp1)
+                  // console.log(temp1);
+                } 
+              })
+            });
+       this.suman.ingreso_total = in_total;
+
+       console.log(in_total)
+
+
+        //EGRESO CANTIDAD
+       transacciones.forEach(function(transaccion, i){
+              transaccion.forEach(function(egreso_cantidad, id){
+                let temp = egreso_cantidad.egreso_cantidad;
+
+                if (temp != null && temp !=='') {
+                    eg_cantidad += parseInt(temp)
+                  // console.log(temp);
+                } 
+              })
+            });
+       this.suman.egreso_cantidad = eg_cantidad;
+
+        //EGRESO TOTAL
+
+        transacciones.forEach(function(transaccion, i){
+              transaccion.forEach(function(egreso_total, id){
+                let temp1 = egreso_total.egreso_total;
+
+                if (temp1 != null && temp1 !=='') {
+                    eg_total += Number(temp1)
+                  // console.log(temp1);
+                } 
+              })
+            });
+       this.suman.egreso_total = eg_total;
+
+       console.log(in_total)
+
+    },
     modalIngreso:function () {
       if (this.transacciones.length >= 1) {
       //    let i =  this.transacciones.length - 1;
@@ -2424,6 +2497,7 @@ const kardex = new Vue({
       this.inicial.precio     = '';
       $('#saldo_inicial').modal('hide');
     }
+    this.sumasTotales();
   },
   actualizarInicial(){
         if(this.inicial.fecha.trim() ==='' || this.inicial.movimiento.trim() ==='' || this.inicial.cantidad.trim() ==='' || this.inicial.precio.trim() ==='' ){
@@ -2431,6 +2505,7 @@ const kardex = new Vue({
         "timeOut": "3000"
     });
      }else {
+
       this.transacciones[0][0].existencia_cantidad = this.inicial.cantidad
       this.transacciones[0][0].existencia_precio = this.inicial.precio
 
@@ -2439,9 +2514,11 @@ const kardex = new Vue({
       let newTotal = Number(this.inicial.cantidad) * Number(this.inicial.precio);
       this.inicial.total = newTotal;
       this.transacciones[0][0].existencia_total = newTotal;
-      let transacciones = JSON.parse(JSON.stringify(this.transacciones));
+      let transacciones = (this.transacciones);
       let identificador = transacciones.length - 1;
            if(transacciones.length == 1){
+
+            console.log(newTotal)
               
               // this.totales.total = newTotal
       
@@ -2450,13 +2527,15 @@ const kardex = new Vue({
               });
           }else{
             if (newTotal > total  ) {
-            let dife = total - newTotal;
+            console.log('Mas de un array')
+
+            let dife = newTotal - total;
 
              transacciones.forEach(function(transaccion, i){
                     transaccion.forEach(function(total, id){
                       let temp = total.existencia_total;
-                      if (temp != null && temp !=='' && total.tipo !== 'inicial') {
-                        total.existencia_total = temp - dife;
+                      if (temp != null && temp !=='' && total.tipo !== 'inicial' && i >= 0) {
+                        total.existencia_total = temp + dife;
                       }           
                     });
                   });
@@ -2480,14 +2559,14 @@ const kardex = new Vue({
                  // 
            }else{
                 // let ingretotal = JSON.parse(JSON.stringify(this.egresos[i].existencia_total));
-              let adi = newTotal - total;
+              let adi =  total - newTotal;
             // this.egresos[i].existencia_total =ingretotal + adi
 
                     transacciones.forEach(function(transaccion, i){
                     transaccion.forEach(function(total, id){
                       let temp = total.existencia_total;
-                      if (temp != null && temp !=='' && total.tipo !== 'inicial' ) {
-                        total.existencia_total = temp + adi;
+                      if (temp != null && temp !=='' && total.tipo !== 'inicial'  && i >= 0) {
+                        total.existencia_total = temp - adi;
                         // console.log(temp);
                       } 
                       
@@ -2632,6 +2711,7 @@ const kardex = new Vue({
       
       this.transaccion.ingreso.total    = '';
       $('#ingreso').modal('hide');
+      this.sumasTotales()
 
      }else{
        let prueba = this.modales.modal_devolucion_venta.filter(x => x.tipo == 'ingreso_venta');
@@ -2662,7 +2742,7 @@ const kardex = new Vue({
         this.transaccion.ingreso.precio   = '';
         this.transaccion.ingreso.total    = '';
       $('#ingreso').modal('hide');
-
+      this.sumasTotales();
      }
   },
   editarTransaccion(index, id){
@@ -3029,8 +3109,8 @@ const kardex = new Vue({
             });
           // existencias.push(existencias);
        this.existencias = JSON.parse(JSON.stringify(exis));
-         if (conteo.length >=1 ) {
-        let e= exis.length - 1;
+      if (conteo.length >=1 ) {
+      let e= exis.length - 1;
           exis[e].existencia_total = existencia_total
         egresos[u].existencia_total = '';
          console.log( exis[e].existencia_total)
@@ -3038,9 +3118,10 @@ const kardex = new Vue({
 
         
 
-    
+      
       this.transacciones.push(this.modales.modal_egreso);
       this.modales.modal_egreso = [];
+      $('#egreso').modal('hide');
       
       // this.totales.total = calculo;
       this.transaccion.fecha      = '';
@@ -3048,6 +3129,8 @@ const kardex = new Vue({
       this.transaccion.egreso.cantidad = '';
       this.transaccion.egreso.precio   = '';
       this.transaccion.egreso.total    = '';
+      this.sumasTotales();
+
     },
     agregarDevolucionCompra(){
       
@@ -3086,6 +3169,7 @@ const kardex = new Vue({
     
       this.transacciones.push(this.modales.modal_devolucion_compra);
       this.modales.modal_devolucion_compra = [];
+      $('#egreso').modal('hide');
       
       // this.totales.total = calculo;
       this.transaccion.fecha      = '';
@@ -3093,6 +3177,8 @@ const kardex = new Vue({
       this.transaccion.egreso.cantidad = '';
       this.transaccion.egreso.precio   = '';
       this.transaccion.egreso.total    = '';
+      this.sumasTotales();
+
     }, 
      actualEgre(id, tipo){
 
@@ -3628,18 +3714,23 @@ const kardex = new Vue({
     borrarTransaccion(index, id){
       let ultimo = this.transacciones.length -1;
       let tipo = this.transacciones[index][id].tipo;
+       let  transacciones = this.transacciones;
+      let identificador = transacciones.length - 1;
+
+
 
       if (index == ultimo) {
         if (tipo == 'ingreso' || tipo == 'ingreso_venta') {
-        let total = this.totales.total;
-        let ingreso_total = Number(this.transacciones[index][id].ingreso_total);
-        let resta = total - ingreso_total;
-        this.totales.total = resta;
-        this.transacciones.splice(index, 1);
+          let total = this.totales.total;
+          let ingreso_total = Number(this.transacciones[index][id].ingreso_total);
+          let resta = total - ingreso_total;
+          this.totales.total = resta;
+          this.transacciones.splice(index, 1);
 
-        let ultimo = this.existencias.length - 1;
-        this.existencias.splice(ultimo, 1);
-        console.log(resta);
+          let ultimo = this.existencias.length - 1;
+          this.existencias.splice(ultimo, 1);
+          console.log(resta);
+            this.sumasTotales();
 
         }else if(tipo == 'egreso' || tipo == 'egreso_compra'){
            let total =  JSON.parse(JSON.stringify(this.totales.total));
@@ -3659,10 +3750,113 @@ const kardex = new Vue({
             let ultimo = this.existencias.length - 1;
             this.existencias.splice(ultimo, 1);
             console.log(suma);
-
+            this.sumasTotales();
+            
         }
+      }else{
+          if (tipo == 'ingreso' || tipo == 'ingreso_venta') {
+            // let total = this.totales.total;
+            let ingreso_total = Number(this.transacciones[index][id].ingreso_total);
+            // let resta = total - ingreso_total;
+            // this.totales.total = resta;
+                 
+            // let dife = newTotal - total;
 
-      }
+             transacciones.forEach(function(transaccion, i){
+                    transaccion.forEach(function(total, id){
+                      let temp = total.existencia_total;
+                      if (temp != null && temp !=='' && total.tipo !== 'inicial' && i >= index) {
+                        if (ingreso_total > temp) {
+                        total.existencia_total =  ingreso_total - temp;
+
+                      }else{
+                        total.existencia_total = temp - ingreso_total;
+
+                      }
+                      }           
+                    });
+                  });
+             
+            let ultimodato = transacciones[identificador];
+            let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso' || x.tipo == 'ingreso_venta');
+                // console.log(egreso);
+                 if (egreso[0].tipo == 'egreso' ) {
+                  let last = transacciones[identificador];
+                   let final = last.length - 1;
+                  this.totales.total = Number(transacciones[identificador][final].existencia_total);
+
+              }else if(egreso[0].tipo == 'ingreso' ){
+
+                 this.totales.total = Number(egreso[0].existencia_total);
+                }
+                 // this.totales.total = Number(egreso[0].existencia_total);
+                   
+            
+            this.transacciones.splice(index, 1);
+
+            this.sumasTotales();
+
+            // let ultimo = this.existencias.length - 1;
+            // this.existencias.splice(ultimo, 1);
+            // console.log(resta);
+          }else if(tipo == 'egreso' || tipo == 'egreso_compra'){
+            let total =  JSON.parse(JSON.stringify(this.totales.total));
+            let egresos = this.transacciones[index].filter(x => x.tipo == 'egreso' || x.tipo == 'egreso_compra');
+            let egreso_total = 0;
+           
+              egresos.forEach(function(total, id){
+                // total += Number(obj.saldo);           //SUMAR EL SALDO DE CADA CUENTA EN EL ARRAY UNA Y OTRA VEZ
+                egreso_total += Number(total.egreso_total);      
+              });
+
+            transacciones.forEach(function(transaccion, i){
+              transaccion.forEach(function(total, id){
+                let temp = total.existencia_total;
+                if (temp != null && temp !=='' && total.tipo !== 'inicial'  && i >= index) {
+                  total.existencia_total = temp + egreso_total;
+                  // console.log(temp);
+                } 
+                
+              })
+            });
+
+          let ultimodato = transacciones[identificador];
+          let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso' || x.tipo == 'ingreso_venta');
+          console.log(egreso);
+           if (egreso[0].tipo == 'egreso' ) {
+
+            let last = transacciones[identificador];
+             let final = last.length - 1;
+            this.totales.total = Number(transacciones[identificador][final].existencia_total);
+
+            }else if(egreso[0].tipo == 'ingreso' ){
+
+           this.totales.total = Number(egreso[0].existencia_total);
+
+            }else if(egreso[0].tipo == 'ingreso_venta' ){
+
+           let last = transacciones[identificador];
+          let final = last.length - 1;
+            this.totales.total = Number(transacciones[identificador][final].existencia_total);
+          }
+           // this.totales.total = Number(egreso[0].existencia_total);     
+          
+
+            // let egreso_total = Number(egreso[0].existencia_total);
+            // console.log(egreso_total)
+            // let suma = total + egreso_total;
+            // this.totales.total = suma;
+
+            this.transacciones.splice(index, 1);
+            this.sumasTotales();
+
+            // let ultimo = this.existencias.length - 1;
+            // this.existencias.splice(ultimo, 1);
+            // console.log(suma);
+          }
+        }
+    
+
 
     }
 }
