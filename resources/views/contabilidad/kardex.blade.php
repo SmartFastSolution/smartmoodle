@@ -1,7 +1,12 @@
 <div id="kardex" class="border border-danger p-4">
 	<h1 class="text-center font-weight-bold text-danger">KARDEX</h1>
 	<h5 class="text-center font-weight-bold text-info">METODO FIFO</h5>
-
+	<div class="row justify-content-center mb-2">
+		<div class="col-5">
+	<input type="" name="" placeholder="PRODUCTO" class="form-control text-center">
+			
+		</div>
+	</div>
 
 	<table class="table table-bordered table-responsive table-sm">
 		<thead class="bg-warning"> 
@@ -26,8 +31,8 @@
 		    <td>TOTAL</td>
 		  </tr>
 		</thead>
-		<tbody v-for="(transa, index) in transacciones">
-			<tr v-for="(exist, id) in transa">
+		<tbody v-for="(transa, index) in transacciones" style="border-bottom: solid 3px #0F0101;">
+			<tr v-for="(exist, id) in transa" >
 				<td>@{{ exist.fecha }}</td>
 				<td>@{{ exist.movimiento }}</td>
 				<td>@{{ exist.ingreso_cantidad }}</td>
@@ -48,7 +53,7 @@
 		<tbody>
 		  <tr class="bg-secondary">
 		    <td></td>
-		    <td class="font-weight-bold">SUMAN</td>
+		    <td class="font-weight-bold text-danger">SUMAN</td>
 		    <td>@{{ suman.ingreso_cantidad }}</td>
 		    <td></td>
 		    <td>@{{ suman.ingreso_total }}</td>
@@ -79,13 +84,13 @@
 	</div>
 	<div class="col-12 mt-3">
 		<div class="row justify-content-center">
-			<div class="col-6 border">
+			<div class="col-6 border rounded border-danger">
 				<table class="table table-sm">
 					<thead>
 						<tr>
 							<th width="200">PRUEBA</th>
-							<th class="text-center">CANTIDAD</th>
-							<th class="text-center">TOTAL</th>
+							<th class="text-center text-danger">CANTIDAD</th>
+							<th class="text-center text-danger">TOTAL</th>
 						</tr>
 					</thead>
 					<tbody>
