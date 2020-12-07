@@ -21,10 +21,7 @@
 
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active " id="tableingreso" role="tabpanel" aria-labelledby="tableingreso-tab">
-                  <div class="row">
-                  <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="bajarExis('mostrar')">+Existencia</a>
-                    
-                  </div>
+                
 
           {{--         <div v-if="movimientos.length > 0">
                   <h2 class="text-center">Ultimas Existencias</h2>
@@ -105,6 +102,7 @@
                           <th  align="center" class="text-center">Movimiento</th>    
                           <th width="75"  align="center" class="text-center">Cantidad</th>    
                           <th width="125" align="center" class="text-center">Precio Unit</th> 
+                          <th width="150" align="center" class="text-center">Enviar</th> 
                           {{-- <th width="75" align="center" class="text-center">Existencia Cantidad</th>    
                           <th width="125" align="center" class="text-center">Existencia Precio Unit</th>   --}}   
                         </tr>
@@ -123,6 +121,10 @@
                               <td>
                                 <input type="numeric"  v-model="transaccion.ingreso.precio"  name="precio" class="form-control" required>
                               </td>
+                              <td>
+                          <a href="#" class="btn btn-light" @click.prevent="agregarIngreso()">Agregar Ingreso</a>
+                                
+                              </td>
                              {{--   <td>
                                 <input type="numeric"  v-model="transaccion.existencia.cantidad"  name="precio" class="form-control" required>
                               </td>  
@@ -132,13 +134,17 @@
                             </tr>
                       </tbody>
                     </table>
+                      <div class="row">
+                      <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="bajarExis('mostrar')">Agregar Existencia</a>
+                  </div>
+
                        <div  class="row justify-content-center">
-                          <a href="#" class="btn btn-light" @click.prevent="agregarIngreso()">Agregar Ingreso</a>
                       </div>
                   </div>
                 </div>
+
                   <div v-if="modales.modal_ingreso.length > 0">
-                   <h2 class="text-center font-weight-bold">{{-- ACTUALIZAR --}} EXISTENCIAS</h2>
+                   <h2 class="text-center font-weight-bold">ACTUALIZAR EXISTENCIAS</h2>
 
                   <table  class="table table-bordered table-responsive">
                       <thead class="bg-warning"> 
@@ -171,8 +177,8 @@
                             <td v-if="transa.tipo == 'existencia'">@{{ transa.ingreso_cantidad }}</td>
                             <td v-if="transa.tipo == 'existencia'">@{{ transa.ingreso_precio }}</td>
 
-                            <td v-if="transa.tipo == 'ingreso'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" @keyup.enter="totalIng(id)"></td>
-                            <td v-if="transa.tipo == 'ingreso'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" @keyup.enter="totalIng(id)"> </td>
+                            <td v-if="transa.tipo == 'ingreso'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" @keyup.enter="actuaIng(id)"></td>
+                            <td v-if="transa.tipo == 'ingreso'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" @keyup.enter="actuaIng(id)"> </td>
 
                             <td v-if="transa.tipo == 'ingreso_venta'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" @keyup.enter="totalIng(id)"></td>
                             <td v-if="transa.tipo == 'ingreso_venta'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" @keyup.enter="totalIng(id)"> </td>
@@ -188,7 +194,7 @@
                             {{-- <td><input type="text" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
                             <td v-if="!actuingreso.estado">@{{ transa.existencia_total }}</td>
                             <td v-if="actuingreso.estado"><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
-                            <td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarIngreso(id, 'ingreso')"> <i class="fas fa-trash"></i></a></td>
+                            <td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarIngreso(id)"> <i class="fas fa-trash"></i></a></td>
                           </tr>
                         </tbody>
                   </table>
@@ -226,9 +232,7 @@
                 </div>
 
               <div class="tab-pane fade" id="devolucionventa" role="tabpanel" aria-labelledby="devolucionventa-tab">
-                <div class="row">
-                  <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaVenta('mostrar')"><i class="fas fa-plus"></i> Existencia</a>
-                </div>
+               
           {{--       <div v-if="movimientos.length > 0">
                   <h2 class="text-center">Ultimas Existencias</h2>
                 <table  class="table table-bordered">
@@ -281,6 +285,7 @@
                           <th  align="center" class="text-center">Movimiento</th>    
                           <th width="75"  align="center" class="text-center">Cantidad</th>    
                           <th width="125" align="center" class="text-center">Precio Unit</th>
+                          <th width="175" align="center" class="text-center">Enviar</th>
                      {{--      <th width="75" align="center" class="text-center">Existencia Cantidad</th>    
                           <th width="125" align="center" class="text-center">Existencia Precio Unit</th>  --}}    
                         </tr>
@@ -299,6 +304,9 @@
                               <td>
                                 <input type="numeric"  v-model="transaccion.ingreso.precio"  name="precio" class="form-control" required>
                               </td>
+                              <td>
+                                <a href="#" class="btn btn-light" @click.prevent="agregarDevolucion()">Agregar Devolucion</a>
+                              </td>
                               {{-- <td>
                                 <input type="numeric"  v-model="transaccion.existencia.cantidad"  name="exis_cantidad" class="form-control" required>
                               </td>  
@@ -308,14 +316,16 @@
                             </tr>
                       </tbody>
                     </table>
+                     <div class="row">
+                  <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaVenta('mostrar')"><i class="fas fa-plus"></i>Agregar Existencia</a>
+                </div>
                        <div  class="row justify-content-center">
-                          <a href="#" class="btn btn-light" @click.prevent="agregarDevolucion()">Agregar Devolucion</a>
                       </div>
                   </div>
                 </div>
 
                   <div v-if="modales.modal_devolucion_venta.length > 0">
-                   <h2 class="text-center font-weight-bold">{{-- ACTUALIZAR --}} EXISTENCIAS</h2>
+                   <h2 class="text-center font-weight-bold">ACTUALIZAR EXISTENCIAS</h2>
 
                   <table  class="table table-bordered table-responsive">
                       <thead class="bg-warning"> 
@@ -351,8 +361,8 @@
                             <td v-if="transa.tipo == 'ingreso'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" @keyup.enter="totalIng(id)"></td>
                             <td v-if="transa.tipo == 'ingreso'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" @keyup.enter="totalIng(id)"> </td>
 
-                            <td v-if="transa.tipo == 'ingreso_venta'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" @keyup.enter="totalIng(id)"></td>
-                            <td v-if="transa.tipo == 'ingreso_venta'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" @keyup.enter="totalIng(id)"> </td>
+                            <td v-if="transa.tipo == 'ingreso_venta'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" @keyup.enter="actuaVenta(id)"></td>
+                            <td v-if="transa.tipo == 'ingreso_venta'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" @keyup.enter="actuaVenta(id)"> </td>
 
                             <td>@{{ transa.ingreso_total }}</td>
                             {{-- <td><input type="text" v-if="transa.ingreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.ingreso_total"></td> --}}
@@ -435,9 +445,7 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="tablaegreso" role="tabpanel" aria-labelledby="tablaegreso-tab">
-                    <div class="row">
-                  <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaEgreso()"><i class="fas fa-plus"></i> Existencia</a>
-                </div>
+               
 
         {{--        <div v-if="movimientos.length > 0">
                   <h2 class="text-center">Ultimas Existencias</h2>
@@ -492,6 +500,7 @@
                           <th  align="center" class="text-center">Movimiento</th>    
                           <th width="75"  align="center" class="text-center">Cantidad</th>    
                           <th width="125" align="center" class="text-center">Precio Unit</th>    
+                          <th width="150" align="center" class="text-center">Enviar</th>    
                           {{-- <th width="75" align="center" class="text-center">Existencia Cantidad</th>     --}}
                           {{-- <th width="125" align="center" class="text-center">Existencia Precio Unit</th> --}}
 
@@ -511,6 +520,10 @@
                               <td>
                                 <input type="numeric"  v-model="transaccion.egreso.precio"  name="precio" class="form-control" required>
                               </td>
+                              <td>
+                          <a href="#" class="btn btn-light" @click.prevent="agregarEgreso()">Agregar Egreso</a>
+                                
+                              </td>
                              {{--  <td>
                                 <input type="numeric"  v-model="transaccion.existencia.cantidad"  name="precio" class="form-control" required>
                               </td>  
@@ -520,62 +533,66 @@
                             </tr>
                       </tbody>
                     </table>
-                       <div  class="row justify-content-center">
-                          <a href="#" class="btn btn-light" @click.prevent="agregarEgreso()">Agregar Egreso</a>
-                      </div>
-<div v-if="modales.modal_egreso.length > 0">
-<table  class="table table-bordered table-responsive">
-    <thead class="bg-warning"> 
-      <tr class="text-center">
-        <th style="vertical-align:middle" rowspan="2">FECHA</th>
-        <th style="vertical-align:middle" rowspan="2">MOVIMIENTOS</th>
-        <th colspan="3">INGRESOS</th>
-        <th colspan="3">EGRESOS</th>
-        <th colspan="3">EXISTENCIA</th>
-        <th style="vertical-align:middle" rowspan="2">ELIMINAR</th>
-      </tr>
-      <tr class="text-center">
-        <td>CANT.</td>
-        <td>PREC. UNIT</td>
-        <td>TOTAL</td>
-        <td>CANT.</td>
-        <td>PREC. UNIT</td>
-        <td>TOTAL</td>
-        <td>CANT</td>
-        <td>PREC. UNIT</td>
-        <td>TOTAL</td>
-      </tr>
-      </thead>
-      <tbody is="draggable" group="modales.modal_egreso" :list="modales.modal_egreso" tag="tbody">
-        <tr v-for="(transa, id) in modales.modal_egreso">
-          <td><input type="text"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
-          <td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"></td>
-          <td><input type="text"  v-if="transa.ingreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" ></td>
-          <td><input type="text" v-if="transa.ingreso_precio"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" > </td>
-          <td>@{{ transa.ingreso_total }}</td>
-          {{-- <td><input type="text" v-if="transa.ingreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.ingreso_total"></td> --}}
-          <td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.egreso_cantidad" @keyup.enter="actualEgre(id)"></td>
-          <td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.egreso_precio" @keyup.enter="actualEgre(id)"></td>
-          {{-- <td><input type="text" v-if="transa.egreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.egreso_total"></td> --}}
-          <td>@{{ transa.egreso_total }}</td>
-          <td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_cantidad"></td>
-          <td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_precio"></td>
-          {{-- <td><input type="text" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
-          <td v-if="!actuegreso.estado">@{{ transa.existencia_total }}</td>
-          <td v-if="actuegreso.estado"><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
-          <td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarEgreso(id)"> <i class="fas fa-trash"></i></a></td>
-        </tr>
-      </tbody>
-</table>
+                <div class="row">
+                  <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaEgreso()"><i class="fas fa-plus"></i> Existencia</a>
+                </div>
+                      
 
-<div class="row justify-content-center">
-<a class="btn btn-sm btn-primary mr-2" href="" @click.prevent="agregarEgresos()">Agregar Transaccion</a>
+                    <div v-if="modales.modal_egreso.length > 0">
+                                       <h2 class="text-center font-weight-bold">ACTUALIZAR EXISTENCIAS</h2>
+
+                    <table  class="table table-bordered table-responsive">
+                        <thead class="bg-warning"> 
+                          <tr class="text-center">
+                            <th style="vertical-align:middle" rowspan="2">FECHA</th>
+                            <th style="vertical-align:middle" rowspan="2">MOVIMIENTOS</th>
+                            <th colspan="3">INGRESOS</th>
+                            <th colspan="3">EGRESOS</th>
+                            <th colspan="3">EXISTENCIA</th>
+                            <th style="vertical-align:middle" rowspan="2">ELIMINAR</th>
+                          </tr>
+                          <tr class="text-center">
+                            <td>CANT.</td>
+                            <td>PREC. UNIT</td>
+                            <td>TOTAL</td>
+                            <td>CANT.</td>
+                            <td>PREC. UNIT</td>
+                            <td>TOTAL</td>
+                            <td>CANT</td>
+                            <td>PREC. UNIT</td>
+                            <td>TOTAL</td>
+                          </tr>
+                          </thead>
+                          <tbody is="draggable" group="modales.modal_egreso" :list="modales.modal_egreso" tag="tbody">
+                            <tr v-for="(transa, id) in modales.modal_egreso">
+                              <td><input type="text"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
+                              <td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"></td>
+                              <td><input type="text"  v-if="transa.ingreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" ></td>
+                              <td><input type="text" v-if="transa.ingreso_precio"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" > </td>
+                              <td>@{{ transa.ingreso_total }}</td>
+                              {{-- <td><input type="text" v-if="transa.ingreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.ingreso_total"></td> --}}
+                              <td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.egreso_cantidad" @keyup.enter="actualEgre(id)"></td>
+                              <td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.egreso_precio" @keyup.enter="actualEgre(id)"></td>
+                              {{-- <td><input type="text" v-if="transa.egreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.egreso_total"></td> --}}
+                              <td>@{{ transa.egreso_total }}</td>
+                              <td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_cantidad"></td>
+                              <td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_precio"></td>
+                              {{-- <td><input type="text" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
+                              <td v-if="!actuegreso.estado">@{{ transa.existencia_total }}</td>
+                              <td v-if="actuegreso.estado"><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
+                              <td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarEgreso(id)"> <i class="fas fa-trash"></i></a></td>
+                            </tr>
+                          </tbody>
+                    </table>
+
+                    <div class="row justify-content-center">
+                    <a class="btn btn-sm btn-primary mr-2" href="" @click.prevent="agregarEgresos()">Agregar Transaccion</a>
 
 
 
-</div>
+                    </div>
 
-</div>
+                    </div>
 
         {{--             <div v-if="egresos.length >= 1">
                        <h2>Agregar Existencias</h2>
@@ -607,9 +624,7 @@
               </div>
 
               <div class="tab-pane fade" id="devolucioncompra" role="tabpanel" aria-labelledby="devolucioncompra-tab">
-                    <div class="row">
-                  <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaEgreso('compra')"><i class="fas fa-plus"></i> Existencia</a>
-                </div>
+                
 {{--                 <div v-if="movimientos.length > 0">
                   <h2 class="text-center">Ultimas Existencias</h2>
                 <table  class="table table-bordered">
@@ -653,7 +668,8 @@
 
                 </div> --}}
                 <div class="row justify-content-center mt-3">
-                  <h2 class="font-weight-bold">DEVOLUCION</h2>
+                  <div class="col-12">
+                  <h2 class="font-weight-bold text-center">DEVOLUCION</h2>
                       <table class="table table-bordered table-sm">
                           <thead class="thead-dark">
                         <tr>
@@ -661,6 +677,7 @@
                           <th  align="center" class="text-center">Movimiento</th>    
                           <th width="75"  align="center" class="text-center">Cantidad</th>    
                           <th width="125" align="center" class="text-center">Precio Unit</th>    
+                          <th width="175" align="center" class="text-center">Enviar</th>    
                        {{--    <th width="75" align="center" class="text-center">Existencia Cantidad</th>    
                           <th width="125" align="center" class="text-center">Existencia Precio Unit</th>  --}}   
                         </tr>
@@ -679,6 +696,10 @@
                               <td>
                                 <input type="numeric"  v-model="transaccion.egreso.precio"  name="precio" class="form-control" required>
                               </td>
+                              <td>
+                              <a href="#" class="btn btn-light" @click.prevent="agregarEgreso('compra')">Agregar Devolucion</a>
+                                
+                              </td>
                               {{-- <td>
                                 <input type="numeric"  v-model="transaccion.existencia.cantidad"  name="precio" class="form-control" required>
                               </td>  
@@ -688,63 +709,63 @@
                             </tr>
                       </tbody>
                     </table>
-                       <div  class="row justify-content-center">
-                          <a href="#" class="btn btn-light" @click.prevent="agregarEgreso('compra')">Agregar Devolucion</a>
-                      </div>
 
-<div v-if="modales.modal_devolucion_compra.length > 0">
-<table  class="table table-bordered table-responsive">
-    <thead class="bg-warning"> 
-      <tr class="text-center">
-        <th style="vertical-align:middle" rowspan="2">FECHA</th>
-        <th style="vertical-align:middle" rowspan="2">MOVIMIENTOS</th>
-        <th colspan="3">INGRESOS</th>
-        <th colspan="3">EGRESOS</th>
-        <th colspan="3">EXISTENCIA</th>
-        <th style="vertical-align:middle" rowspan="2">ELIMINAR</th>
-      </tr>
-      <tr class="text-center">
-        <td>CANT.</td>
-        <td>PREC. UNIT</td>
-        <td>TOTAL</td>
-        <td>CANT.</td>
-        <td>PREC. UNIT</td>
-        <td>TOTAL</td>
-        <td>CANT</td>
-        <td>PREC. UNIT</td>
-        <td>TOTAL</td>
-      </tr>
-      </thead>
-      <tbody is="draggable" group="modales.modal_devolucion_compra" :list="modales.modal_devolucion_compra" tag="tbody">
-        <tr v-for="(transa, id) in modales.modal_devolucion_compra">
-          <td><input type="text"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
-          <td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"></td>
-          <td><input type="text"  v-if="transa.ingreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" ></td>
-          <td><input type="text" v-if="transa.ingreso_precio"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" > </td>
-          <td>@{{ transa.ingreso_total }}</td>
-          {{-- <td><input type="text" v-if="transa.ingreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.ingreso_total"></td> --}}
-          <td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.egreso_cantidad" @keyup.enter="actualEgre(id)"></td>
-          <td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.egreso_precio" @keyup.enter="actualEgre(id)"></td>
-          {{-- <td><input type="text" v-if="transa.egreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.egreso_total"></td> --}}
-          <td>@{{ transa.egreso_total }}</td>
-          <td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_cantidad"></td>
-          <td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_precio"></td>
-          {{-- <td><input type="text" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
-          <td v-if="!actuegreso.estado">@{{ transa.existencia_total }}</td>
-          <td v-if="actuegreso.estado"><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
-          <td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarEgreso(id)"> <i class="fas fa-trash"></i></a></td>
-        </tr>
-      </tbody>
-</table>
+                <div class="row">
+                  <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaEgreso('compra')">Agregar Existencia</a>
+                </div>
+              </div>
+                      
 
-<div class="row justify-content-center">
-<a class="btn btn-sm btn-primary mr-2" href="" @click.prevent="agregarDevolucionCompra()">Agregar Transaccion</a>
+              <div v-if="modales.modal_devolucion_compra.length > 0">
+                <h2 class="text-center font-weight-bold">ACTUALIZAR EXISTENCIAS</h2>
+              <table  class="table table-bordered table-responsive">
+                  <thead class="bg-warning"> 
+                    <tr class="text-center">
+                      <th style="vertical-align:middle" rowspan="2">FECHA</th>
+                      <th style="vertical-align:middle" rowspan="2">MOVIMIENTOS</th>
+                      <th colspan="3">INGRESOS</th>
+                      <th colspan="3">EGRESOS</th>
+                      <th colspan="3">EXISTENCIA</th>
+                      <th style="vertical-align:middle" rowspan="2">ELIMINAR</th>
+                    </tr>
+                    <tr class="text-center">
+                      <td>CANT.</td>
+                      <td>PREC. UNIT</td>
+                      <td>TOTAL</td>
+                      <td>CANT.</td>
+                      <td>PREC. UNIT</td>
+                      <td>TOTAL</td>
+                      <td>CANT</td>
+                      <td>PREC. UNIT</td>
+                      <td>TOTAL</td>
+                    </tr>
+                    </thead>
+                    <tbody is="draggable" group="modales.modal_devolucion_compra" :list="modales.modal_devolucion_compra" tag="tbody">
+                      <tr v-for="(transa, id) in modales.modal_devolucion_compra">
+                        <td><input type="text"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
+                        <td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"></td>
+                        <td><input type="text"  v-if="transa.ingreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" ></td>
+                        <td><input type="text" v-if="transa.ingreso_precio"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" > </td>
+                        <td>@{{ transa.ingreso_total }}</td>
+                        {{-- <td><input type="text" v-if="transa.ingreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.ingreso_total"></td> --}}
+                        <td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.egreso_cantidad" @keyup.enter="actualEgre(id, 'devolucion_compra')"></td>
+                        <td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.egreso_precio" @keyup.enter="actualEgre(id, 'devolucion_compra')"></td>
+                        {{-- <td><input type="text" v-if="transa.egreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.egreso_total"></td> --}}
+                        <td>@{{ transa.egreso_total }}</td>
+                        <td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_cantidad"></td>
+                        <td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_precio"></td>
+                        {{-- <td><input type="text" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
+                        <td v-if="!actuegreso.estado">@{{ transa.existencia_total }}</td>
+                        <td v-if="actuegreso.estado"><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
+                        <td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarEgreso(id,'egreso_compra')"> <i class="fas fa-trash"></i></a></td>
+                      </tr>
+                    </tbody>
+              </table>
 
-
-
-</div>
-
-</div>
+              <div class="row justify-content-center">
+              <a class="btn btn-sm btn-primary mr-2" href="" @click.prevent="agregarDevolucionCompra()">Agregar Transaccion</a>
+              </div>
+              </div>
 
   {{--                   <div class="col-12">
                       <div >
@@ -776,10 +797,9 @@
                   </div> --}}
                 </div>
               </div>
-
-
             </div>
             </div>
+
            <div class="modal-footer">
           </div>
         </div>
@@ -813,7 +833,7 @@
                     </div>
 
                     <a v-if="!update" href="#" class="addDiario btn btn-outline-danger " @click.prevent="agregarTran()">Agregar Registro</a>
-                    <a v-if="update" href="#" class="addDiario btn btn-outline-danger " @click.prevent="">Actualizar Registro</a>
+                    <a v-if="update" href="#" class="addDiario btn btn-outline-danger " @click.prevent="actualizarInicial()">Actualizar Registro</a>
 
               </div>
             </div>
@@ -822,3 +842,5 @@
         </div>
     </div>
 </div>
+
+

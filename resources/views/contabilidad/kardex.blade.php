@@ -1,7 +1,12 @@
 <div id="kardex" class="border border-danger p-4">
 	<h1 class="text-center font-weight-bold text-danger">KARDEX</h1>
 	<h5 class="text-center font-weight-bold text-info">METODO FIFO</h5>
-
+	<div class="row justify-content-center mb-2">
+		<div class="col-5">
+	<input type="" name="" placeholder="PRODUCTO" class="form-control text-center">
+			
+		</div>
+	</div>
 
 	<table class="table table-bordered table-responsive table-sm">
 		<thead class="bg-warning"> 
@@ -26,8 +31,8 @@
 		    <td>TOTAL</td>
 		  </tr>
 		</thead>
-		<tbody v-for="(transa, index) in transacciones">
-			<tr v-for="(exist, id) in transa">
+		<tbody v-for="(transa, index) in transacciones" style="border-bottom: solid 3px #0F0101;">
+			<tr v-for="(exist, id) in transa" >
 				<td>@{{ exist.fecha }}</td>
 				<td>@{{ exist.movimiento }}</td>
 				<td>@{{ exist.ingreso_cantidad }}</td>
@@ -39,8 +44,8 @@
 				<td>@{{ exist.existencia_cantidad }}</td>
 				<td>@{{ exist.existencia_precio }}</td>
 				<td>@{{ exist.existencia_total }}</td>
-				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso' || transacciones[index][id].tipo == 'inicial' || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'ingreso_venta'"><a class="btn btn-sm btn-warning" href="" @click.prevent="editarTransaccion(index, id)"><i class="fas fa-edit"></i></a></td>
-				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso' || transacciones[index][id].tipo == 'inicial' || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'ingreso_venta'"><a class="btn btn-sm btn-danger" href="" @click.prevent="borrarTransaccion(index, id)"><i class="fas fa-trash"></i></a></td>
+				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso' || transacciones[index][id].tipo == 'inicial' || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'ingreso_venta' || transacciones[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-warning" href="" @click.prevent="editarTransaccion(index, id)"><i class="fas fa-edit"></i></a></td>
+				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso'  || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'ingreso_venta' || transacciones[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-danger" href="" @click.prevent="borrarTransaccion(index, id)"><i class="fas fa-trash"></i></a></td>
 				<td v-else colspan="2"></td>
 			</tr>
 		</tbody>
@@ -48,13 +53,13 @@
 		<tbody>
 		  <tr class="bg-secondary">
 		    <td></td>
-		    <td class="font-weight-bold">SUMAN</td>
+		    <td class="font-weight-bold text-danger">SUMAN</td>
+		    <td>@{{ suman.ingreso_cantidad }}</td>
 		    <td></td>
+		    <td>@{{ suman.ingreso_total }}</td>
+		    <td>@{{ suman.egreso_cantidad }}</td>
 		    <td></td>
-		    <td></td>
-		    <td></td>
-		    <td></td>
-		    <td></td>
+		    <td>@{{ suman.egreso_total }}</td>
 		    <td></td>
 		    <td></td>
 		    <td></td>
@@ -66,13 +71,55 @@
  @include('contabilidad.modales.modalkardex')
 
 
-<div class="row justify-content-center">
+<div v-if="!actuingreso.estado && !actuegreso.estado" class="row justify-content-center">
+
+	<div class="col-4 align-self-center">
 	{{-- <a class="btn btn-sm btn-primary mr-2" href="">Agregar Inicial</a> --}}
 	<a v-if="transacciones.length == 0" class="btn btn-sm btn-success mr-2" @click.prevent="modalInicial()">Saldo Inicial</a>
 	<a  class="btn btn-sm btn-secondary mr-2" @click.prevent="modalIngreso()" href="#" data-toggle="modal" data-target="#ingreso">INGRESO</a>
 	<a  class="btn btn-sm btn-info mr-2" href="#" @click.prevent="modalEgreso()" data-toggle="modal" data-target="#egreso">EGRESO</a>
 	{{-- <a class="btn btn-sm btn-success mr-2" href="#" @click.prevent="modalCompra()" data-toggle="modal" data-target="#devolucion_compra">Devolucion compra</a>
 	<a class="btn btn-sm btn-warning mr-2" href="#"@click.prevent="modalVenta()"  data-toggle="modal" data-target="#devolucion_venta">Devolucion Venta</a> --}}
+
+	</div>
+	<div class="col-12 mt-3">
+		<div class="row justify-content-center">
+			<div class="col-6 border rounded border-danger">
+				<table class="table table-sm">
+					<thead>
+						<tr>
+							<th width="200">PRUEBA</th>
+							<th class="text-center text-danger">CANTIDAD</th>
+							<th class="text-center text-danger">TOTAL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Inventario Mercaderia Inicial</td>
+							<td><input type="text" class="form-control form-control-sm"></td>
+							<td><input type="text" class="form-control form-control-sm"></td>
+						</tr>
+						<tr>
+							<td>Adquisiciones</td>
+							<td><input type="text" class="form-control form-control-sm"></td>
+							<td><input type="text" class="form-control form-control-sm"></td>
+						</tr>
+						<tr>
+							<td>(-) Ventas</td>
+							<td><input type="text" placeholder="-" class="form-control form-control-sm"></td>
+							<td><input type="text" placeholder="-" class="form-control form-control-sm"></td>
+						</tr>
+						<tr>
+							<td>Inv. Final Mercaderia Inicial</td>
+							<td><input type="text" class="form-control form-control-sm"></td>
+							<td><input type="text" class="form-control form-control-sm"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+	</div>
 </div>
 
 <div v-if="ejercicio.length > 0">
@@ -110,8 +157,8 @@
 					<td v-if="transa.tipo == 'ingreso'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" @keyup.enter="totalIng(id)"></td>
 					<td v-if="transa.tipo == 'ingreso'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" @keyup.enter="totalIng(id)"> </td>
 
-					<td v-if="transa.tipo == 'ingreso_venta'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" @keyup.enter="totalIng(id)"></td>
-					<td v-if="transa.tipo == 'ingreso_venta'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" @keyup.enter="totalIng(id)"> </td>
+					<td v-if="transa.tipo == 'ingreso_venta'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" @keyup.enter="ventaIng(id)"></td>
+					<td v-if="transa.tipo == 'ingreso_venta'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" @keyup.enter="ventaIng(id)"> </td>
 
 					<td>@{{ transa.ingreso_total }}</td>
 					{{-- <td><input type="text" v-if="transa.ingreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.ingreso_total"></td> --}}
@@ -124,73 +171,80 @@
 					{{-- <td><input type="text" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
 					<td v-if="!actuingreso.estado">@{{ transa.existencia_total }}</td>
 					<td v-if="actuingreso.estado"><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
-					<td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarIngreso(id)"> <i class="fas fa-trash"></i></a></td>
+					<td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarIngreso(id, 'ingreso')"> <i class="fas fa-trash"></i></a></td>
 				</tr>
 			</tbody>
 </table>
 
+
 <div class="row justify-content-center">
-<a class="btn btn-sm btn-primary mr-2" v-if="!actuingreso.estado" href="" @click.prevent="agregarTransaccion()">Agregar Transaccion</a>
+<a class="btn btn-sm btn-primary mr-2 float-left"  href="" @click.prevent="actuExiIng()">Agregar Existencia</a>
 <a class="btn btn-sm btn-primary mr-2" v-if="actuingreso.estado" href="" @click.prevent="actualizarIngreso()">Actualizar Transaccion</a>
 </div>
-
 </div>
 
-<div v-if="egresos.length > 0">
-<table  class="table table-bordered table-responsive">
-		<thead class="bg-warning"> 
-		  <tr class="text-center">
-		    <th style="vertical-align:middle" rowspan="2">FECHA</th>
-		    <th style="vertical-align:middle" rowspan="2">MOVIMIENTOS</th>
-		    <th colspan="3">INGRESOS</th>
-		    <th colspan="3">EGRESOS</th>
-		    <th colspan="3">EXISTENCIA</th>
-		    <th style="vertical-align:middle" rowspan="2">ELIMINAR</th>
-		  </tr>
-		  <tr class="text-center">
-		    <td>CANT.</td>
-		    <td>PREC. UNIT</td>
-		    <td>TOTAL</td>
-		    <td>CANT.</td>
-		    <td>PREC. UNIT</td>
-		    <td>TOTAL</td>
-		    <td>CANT</td>
-		    <td>PREC. UNIT</td>
-		    <td>TOTAL</td>
-		  </tr>
-			</thead>
-			<tbody>
-				<tr v-for="(transa, id) in egresos">
-					<td><input type="text"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
-					<td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"></td>
-					<td><input type="text"  v-if="transa.ingreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" ></td>
-					<td><input type="text" v-if="transa.ingreso_precio"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" > </td>
-					<td>@{{ transa.ingreso_total }}</td>
-					{{-- <td><input type="text" v-if="transa.ingreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.ingreso_total"></td> --}}
-					<td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.egreso_cantidad" @keyup.enter="totaEgre(id)"></td>
-					<td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.egreso_precio" @keyup.enter="totaEgre(id)"></td>
-					{{-- <td><input type="text" v-if="transa.egreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.egreso_total"></td> --}}
-					<td>@{{ transa.egreso_total }}</td>
-					<td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_cantidad"></td>
-					<td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_precio"></td>
-					{{-- <td><input type="text" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
-					<td v-if="!actuegreso.estado">@{{ transa.existencia_total }}</td>
-					<td v-if="actuegreso.estado"><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
-					<td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarEgreso(id)"> <i class="fas fa-trash"></i></a></td>
-				</tr>
-			</tbody>
-</table>
 
-<div class="row justify-content-center">
-<a class="btn btn-sm btn-primary mr-2" v-if="!actuegreso.estado" href="" @click.prevent="agregarEgresos()">Agregar Transaccion</a>
-<a class="btn btn-sm btn-primary mr-2" v-if="actuegreso.estado" href="" @click.prevent="ActualizarEgresos()">Actualizar Transaccion</a>
+			<div v-if="egresos.length > 0">
+			<table  class="table table-bordered table-responsive">
+					<thead class="bg-warning"> 
+					  <tr class="text-center">
+					    <th style="vertical-align:middle" rowspan="2">FECHA</th>
+					    <th style="vertical-align:middle" rowspan="2">MOVIMIENTOS</th>
+					    <th colspan="3">INGRESOS</th>
+					    <th colspan="3">EGRESOS</th>
+					    <th colspan="3">EXISTENCIA</th>
+					    <th style="vertical-align:middle" rowspan="2">ELIMINAR</th>
+					  </tr>
+					  <tr class="text-center">
+					    <td>CANT.</td>
+					    <td>PREC. UNIT</td>
+					    <td>TOTAL</td>
+					    <td>CANT.</td>
+					    <td>PREC. UNIT</td>
+					    <td>TOTAL</td>
+					    <td>CANT</td>
+					    <td>PREC. UNIT</td>
+					    <td>TOTAL</td>
+					  </tr>
+						</thead>
+						<tbody>
+							<tr v-for="(transa, id) in egresos">
+								<td><input type="text"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
+								<td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"></td>
+								<td><input type="text"  v-if="transa.ingreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" ></td>
+								<td><input type="text" v-if="transa.ingreso_precio"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" > </td>
+								<td>@{{ transa.ingreso_total }}</td>
+								{{-- <td><input type="text" v-if="transa.ingreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.ingreso_total"></td> --}}
+								<td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.egreso_cantidad" @keyup.enter="totaEgre(id)"></td>
+								<td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.egreso_precio" @keyup.enter="totaEgre(id)"></td>
+								{{-- <td><input type="text" v-if="transa.egreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.egreso_total"></td> --}}
+								<td>@{{ transa.egreso_total }}</td>
+								<td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_cantidad"></td>
+								<td><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_precio"></td>
+								{{-- <td><input type="text" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
+								<td v-if="!actuegreso.estado">@{{ transa.existencia_total }}</td>
+								<td v-if="actuegreso.estado"><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
+								<td v-if="transa.tipo == 'existencia'"><a href="#"   class="btn btn-sm btn-danger" @click.prevent="borrarEgresoAct(id, 'existencia')"> <i class="fas fa-trash"></i></a></td>
+								<td v-if="transa.tipo == 'egreso_compra'"><a href="#"   class="btn btn-sm btn-danger" @click.prevent="borrarEgresoAct(id, 'egreso_compra')"> <i class="fas fa-trash"></i></a></td>
+								<td v-if="transa.tipo == 'egreso'"><a href="#"   class="btn btn-sm btn-danger" @click.prevent="borrarEgresoAct(id, 'egreso')"> <i class="fas fa-trash"></i></a></td>
+							</tr>
+						</tbody>
+			</table>
+			<div v-if="!transaccion.egreso.edit" class="row justify-content-center">
+			<a class="btn btn-sm btn-primary mr-2 float-left" v-if="actuegreso.estado && actuegreso.tipo" href="" @click.prevent="agregarNewEgreso('agregar')">Agregar Egreso</a>
+			<a class="btn btn-sm btn-primary mr-2 float-left"  href="" @click.prevent="exisEgresoAct('egreso')">Agregar Existencia</a>
+			<a class="btn btn-sm btn-primary mr-2" v-if="actuegreso.estado" href="" @click.prevent="ActualizarEgresos()">Actualizar Transaccion</a>
+			</div>
+			<div v-if="transaccion.egreso.edit" class="row justify-content-center">
+				<div class="col"><input type="text" v-model="transaccion.fecha" class="form-control"></div>
+				<div class="col-4"><input type="text" v-model="transaccion.movimiento" class="form-control"></div>
+				<div class="col"><input type="text" v-model="transaccion.egreso.cantidad" class="form-control"></div>
+				<div class="col"><input type="text" v-model="transaccion.egreso.precio" class="form-control"></div>
+				<div class="col"><a href="" @click.prevent="agregarEgresoNew()" class="btn btn-success">EGRESO</a> <a href="" @click.prevent="agregarNewEgreso('cerrar')" class="btn btn-danger"><i class="fas fa-window-close"></i></a> </div>
 
-
-
-</div>
-
-</div>
-</div>
+			</div>
+			</div>
+			</div>
 {{-- 
 <div id="aPPcalculador">
       <div class="container">
