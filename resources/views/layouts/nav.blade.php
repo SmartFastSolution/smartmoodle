@@ -481,10 +481,10 @@
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="{{ asset('js/preloader.js') }}"></script>
     <!-- datatables script -->
-    <!-- <script src="{{ asset('js/jquery.dataTables.min.js')}}"></script> -->
+
     <script src="{{ asset('vendor/ckeditor/ckeditor.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-    <script src="{{asset('https://code.jquery.com/jquery-3.5.1.js')}}"></script>
+    <!-- <script src="{{asset('https://code.jquery.com/jquery-3.5.1.js')}}"></script> -->
     <script src="{{asset('https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js')}}"></script>
     <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
 

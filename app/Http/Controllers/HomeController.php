@@ -116,26 +116,22 @@ class HomeController extends Controller
 
     public function EstadoUser(Request $request){
          
-        $us = User::find($request->id);
-        
-           $estado = $us->estado;
-           if($estado === "on"){
-               $us->estado = "on";
-               $us->save();
+        $user = User::find($request->id);
+         $estado = $user->estado;
+         
+           if($estado === 'off'){
+               $user->estado = 'on';
+               $user->save();
                return response(array(
                 'success' => true,
                 'message' => 'Usuario activado correctamente',
-                'talleres' => $us
             ),200,[]); 
-    
-            }elseif ($estado === "off"){
-                $us->estado = "off";
-                $us->save();
+            }elseif ($estado == 'on'){
+                $user->estado = 'off';
+                $user->save();
                 return response(array(
                  'success' => true,
                  'message' => 'Usuario desactivado correctamente',
-                 'talleres' => $us
- 
              ),200,[]); 
             }         
     }

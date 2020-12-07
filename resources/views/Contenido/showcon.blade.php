@@ -20,7 +20,7 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-            <a class="btn btn-info float-right" href="{{route('admin.create')}}"><i class="fas fa-plus"> Crear
+                <a class="btn btn-info float-right" href="{{route('admin.create')}}"><i class="fas fa-plus"> Crear
                         Talleres</i></a>
                 <h1 class="font-weight-light">Show Unidad</h1>
                 <div class="row">
@@ -85,8 +85,8 @@
                                             @elseif(old('estado')=="off" ) checked @endif disabled>
                                         <label class="custom-control-label" for="estadooff">No Activo</label>
                                     </div>
-                                
-                                
+
+
                                 </div>
                         </form>
                     </div>
@@ -128,38 +128,43 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                             @foreach($tallers as $taller)
+                                            @foreach($tallers as $taller)
                                             <tr>
-                                            {{-- <tr v-for="(taller, index) in tallers"> --}}
-                                          {{--       <th scope="row"></th>
+                                                {{-- <tr v-for="(taller, index) in tallers"> --}}
+                                                {{--       <th scope="row"></th>
                                                 <td>@{{taller.contenido.nombre}}</td>
                                                 <td>@{{taller.nombre}}</td>
                                                 <td>@{{taller.plantilla.nombre}}</td>
-                                                <td><input type="checkbox" name="toggle" v-bind:checked="taller.estado"></td> --}}
+                                                <td><input type="checkbox" name="toggle" v-bind:checked="taller.estado">
+                                                </td> --}}
                                                 {{-- <td>{{$taller['estado']}}</td> --}}
-                                            {{--     <td> </td>
+                                                {{--     <td> </td>
                                                 <td class="table-button ">
                                                     <a class="btn btn-info" :href="'/sistema/taller/' + taller.plantilla.id +'/'+ taller.id"><i class="fas fa-eye"></i></a>
                                                 </td>
-                                            </tr>--}}                                                
-                                           
+                                            </tr>--}}
+
                                                 <th scope="row"></th>
                                                 <td>{{$taller->contenido->nombre}}</td>
                                                 <td>{{$taller['nombre']}}</td>
                                                 <td>{{$taller->Plantilla->nombre}}</td>
                                                 <td>
                                                     <div class="onoffswitch">
-                                                        <input type="checkbox" name="onoffswitch" @change="Cambiar({{ $taller->id }})" class="onoffswitch-checkbox" id="myonoffswitch.{{ $taller->id }}" tabindex="0" @if ($taller['estado'] == 1)
-                                                             checked 
-                                                        @endif >
-                                                        <label class="onoffswitch-label" for="myonoffswitch.{{ $taller->id }}">
+                                                        <input type="checkbox" name="onoffswitch"
+                                                            @change="Cambiar({{ $taller->id }})"
+                                                            class="onoffswitch-checkbox"
+                                                            id="myonoffswitch.{{ $taller->id }}" tabindex="0"
+                                                            @if($taller['estado']==1) checked @endif>
+                                                        <label class="onoffswitch-label"
+                                                            for="myonoffswitch.{{ $taller->id }}">
                                                             <span class="onoffswitch-inner"></span>
                                                             <span class="onoffswitch-switch"></span>
                                                         </label>
                                                     </div>
-                                                    {{-- <input type="checkbox" name="toggle" value="{{ $taller->id }}" @if ($taller['estado'] == 1)
-                                                    checked 
-                                                @endif> --}}
+                                                    {{-- <input type="checkbox" name="toggle" value="{{ $taller->id }}"
+                                                    @if ($taller['estado'] == 1)
+                                                    checked
+                                                    @endif> --}}
                                                 </td>
                                                 {{-- <td>{{$taller['estado']}}</td> --}}
                                                 <td> </td>
@@ -167,18 +172,19 @@
                                                     <a class="btn btn-info"
                                                         href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
                                                             class="fas fa-eye"></i></a>
-                                                     <a class="btn btn-danger" @click="Eliminar({{ $taller->id }})"><i class="fas fa-trash">    
-                                                     
-                                                     </i>
-                                                 </a>
+                                                    <a class="btn btn-danger" @click="Eliminar({{ $taller->id }})"><i
+                                                            class="fas fa-trash">
+
+                                                        </i>
+                                                    </a>
 
                                                 </td>
                                             </tr>
                                             @endforeach
-                                        
+
                                         </tbody>
                                     </table>
-                                     <div class="row justify-content-center mt-3"> {{ $tallers->links() }}</div>
+                                    <div class="row justify-content-center mt-3"> {{ $tallers->links() }}</div>
 
                                 </div>
                             </div>
@@ -208,10 +214,10 @@
 
                 <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
                     @isset ($contenido->archivo->url)
-                        <iframe class="embed-responsive-item" width="1000" height="1000"
-                    src="{{$contenido->archivo->url}}" allowfullscreen></iframe>
+                    <iframe class="embed-responsive-item" width="1000" height="1000" src="{{$contenido->archivo->url}}"
+                        allowfullscreen></iframe>
                     @endisset
-                    
+
 
                 </div>
 
@@ -243,52 +249,52 @@
 
 @section('js')
 <script type="text/javascript">
-    let talleres = @json($tallers);
-    const taller = new Vue({
-        el: "#dataTable",
-        data:{
-            tallers: talleres
-        },
-        mounted: function (){
-           
-          
-        },
-        methods:{
-             Cambiar: function(id){
-                let taller = id;
-                var _this = this;
-                var url = '/sistema/admin/cambiarestado';
-                    axios.post(url,{
-                      id: taller,
-                }).then(response => {
-                     toastr.success(response.data.message, "Smarmoddle", {
-                "timeOut": "3000"
-                });
-                }).catch(function(error){
+let talleres = @json($tallers);
+const taller = new Vue({
+    el: "#dataTable",
+    data: {
+        tallers: talleres
+    },
+    mounted: function() {
 
-                });
 
-            },
-            Eliminar: function (id) {
-                let taller = id;
-                var _this = this;
-                var url = '/sistema/delete';
-                    axios.post(url,{
-                      id: taller,
-                }).then(response => {
-                     toastr.success(response.data.message, "Smarmoddle", {
-                "timeOut": "3000"
+    },
+    methods: {
+        Cambiar: function(id) {
+            let taller = id;
+            var _this = this;
+            var url = '/sistema/admin/cambiarestado';
+            axios.post(url, {
+                id: taller,
+            }).then(response => {
+                toastr.success(response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                });
+            }).catch(function(error) {
+
+            });
+
+        },
+        Eliminar: function(id) {
+            let taller = id;
+            var _this = this;
+            var url = '/sistema/delete';
+            axios.post(url, {
+                id: taller,
+            }).then(response => {
+                toastr.success(response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
 
                 });
                 location.reload();
-                }).catch(function(error){
+            }).catch(function(error) {
 
-                });
+            });
 
-            }
+        }
     }
-    
-        
-    });
+
+
+});
 </script>
 @stop

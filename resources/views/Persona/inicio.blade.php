@@ -13,19 +13,16 @@
         <table id="myTable" class="table table-hover" style="width:100%">
             <thead>
                 <tr>
-
                     <th>Nombre y Apellido</th>
                     <th>Email</th>
                     <th>Unidad Educativa</th>
                     <th>Rol</th>
-                   
+                    <th>Estado</th>
                     <th scope="3">Tools</th>
-                    
                 </tr>
             </thead>
             <tbody>
-                
-               @foreach ($users as $user)
+                @foreach ($users as $user)
                 <tr>
                     <td>{{$user->name}} {{$user->apellido}}</td>
                     <td>{{$user->email}}</td>
@@ -40,7 +37,17 @@
                         </span>
                         @endforeach
                     </td>
-                    
+                    <td>
+                        <div class="onoffswitch">
+                            <input type="checkbox" name="onoffswitch" @change="Cambiar({{ $user->id }})"
+                                class="onoffswitch-checkbox" id="myonoffswitch.{{ $user->id }}" tabindex="off"
+                                @if($user['estado']=="on") checked @endif>
+                            <label class="onoffswitch-label" for="myonoffswitch.{{ $user->id }}">
+                                <span class="onoffswitch-inner"></span>
+                                <span class="onoffswitch-switch"></span>
+                            </label>
+                        </div>
+                    </td>
                     <td class="table-button ">
                         <form method="POST" action="{{route('users.destroy', $user->id)}}}">
                             @csrf
@@ -48,7 +55,7 @@
                             <a class="btn btn-info btn-sm" href="users/{{ $user['id']}}"><i class="fas fa-eye"></i></a>
                             <a class="btn btn-success btn-sm " href="users/{{ $user['id']}}/edit"><i
                                     class=" fas fa-pencil-alt"></i></a>
-                        
+
                             <button type="submit" class="btn btn-danger btn-sm "><i class="fas fa-trash"></i></button>
 
                     </td>
@@ -57,7 +64,7 @@
 
                     </td>
                 </tr>
-                 @endforeach 
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -83,6 +90,8 @@ $(function() {
             "searching": true,
             "ordering": true,
             "responsive": true,
+            "scrollX": true,
+          
 
 
             "language": {
@@ -110,38 +119,29 @@ $(function() {
 });
 </script>
 <script>
-let users = @json($users);
-console.log(users)
+let useres = @json($users);
+console.log(useres)
 const User = new Vue({
     el: "#TabUser",
 
     data: {
-        users: users,
-        estado: '',
+        users: useres,
+
     },
     methods: {
-        Change(index, id) {
-            let user_id = id;
-            let estado = this.users[index].users[id].estado;
-            this.estado = estado;
-            $('#User').modal('show');
-        },
-
-        sent: function() {
-            var set = this;
+        Cambiar: function(id) {
+            let user = id;
+            var _this = this;
             var url = '/sistema/estadouser';
-
             axios.post(url, {
-                estado: set.estado,
+                id: user,
             }).then(response => {
                 toastr.success(response.data.message, "Smarmoddle", {
                     "timeOut": "3000"
                 });
+            }).catch(function(error) {
 
-                set.users = [];
-                set.users = response.data.users;
-                $('#User').modal('show');
-            }).catch(function(error) {});
+            });
         }
     }
 

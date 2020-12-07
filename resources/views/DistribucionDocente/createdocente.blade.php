@@ -3,8 +3,6 @@
 
 @section('title', 'Dashboard | SmartMoodle')
 
-
-
 @section('content')
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -107,7 +105,6 @@ $(function() {
 
 })
 </script>
-
 
 </script>
 <!-- script para select dinamico prueba 2  -->
