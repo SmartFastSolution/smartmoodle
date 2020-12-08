@@ -236,10 +236,10 @@
 			<a class="btn btn-sm btn-primary mr-2" v-if="actuegreso.estado" href="" @click.prevent="ActualizarEgresos()">Actualizar Transaccion</a>
 			</div>
 			<div v-if="transaccion.egreso.edit" class="row justify-content-center">
-				<div class="col"><input type="text" v-model="transaccion.fecha" class="form-control"></div>
-				<div class="col-4"><input type="text" v-model="transaccion.movimiento" class="form-control"></div>
-				<div class="col"><input type="text" v-model="transaccion.egreso.cantidad" class="form-control"></div>
-				<div class="col"><input type="text" v-model="transaccion.egreso.precio" class="form-control"></div>
+				<div class="col"><input type="text"  placeholder="fecha" v-model="transaccion.fecha" class="form-control"></div>
+				<div class="col-4"><input type="text" placeholder="movimiento" v-model="transaccion.movimiento" class="form-control"></div>
+				<div class="col"><input type="text" placeholder="cantidad" v-model="transaccion.egreso.cantidad" class="form-control"></div>
+				<div class="col"><input type="text" placeholder="precio" v-model="transaccion.egreso.precio" class="form-control"></div>
 				<div class="col"><a href="" @click.prevent="agregarEgresoNew()" class="btn btn-success">EGRESO</a> <a href="" @click.prevent="agregarNewEgreso('cerrar')" class="btn btn-danger"><i class="fas fa-window-close"></i></a> </div>
 
 			</div>
