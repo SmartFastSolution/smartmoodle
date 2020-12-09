@@ -4017,8 +4017,297 @@ const kardex = new Vue({
     
 
 
-    }
+    
 }
+});
+
+const kardex_promedio = new Vue({
+
+  el: "#kardex_promedio",
+  data:{
+    transacciones:[],
+    update:false,
+    inicial:{
+      fecha:'',
+      movimiento:'',
+      cantidad:'',
+      precio:''
+
+    },
+    ultima_existencia:[],
+    suman:{
+      ingreso_cantidad:0,
+      ingreso_total:0,
+      egreso_cantidad:0,
+      egreso_total:0,
+      muestra:0
+    },
+    transaccion:{
+      fecha:'',
+      movimiento:'',
+        ingreso:{
+          fecha:'',
+          movimiento:'',
+          cantidad:'',
+          precio:'',
+          total:'',
+          edit:false,
+          index:''
+
+        },
+        egreso:{
+          fecha:'',
+          movimiento:'',
+          cantidad:'',
+          precio:'',
+          total:'',
+          temp:'',
+          edit:false,
+          index:''
+        },
+        existencia:{
+          cantidad:'',
+          precio:'',
+          total:''
+        }
+    },
+      edicion:{
+        ingreso:{
+          fecha:'',
+          movimiento:'',
+          cantidad:'',
+          precio:'',
+          total:'',
+          edit:false,
+          index:''
+
+        },
+        egreso:{
+          fecha:'',
+          movimiento:'',
+          cantidad:'',
+          precio:'',
+          total:'',
+          temp:'',
+          edit:false,
+          index:''
+        },
+        existencia:{
+          cantidad:'',
+          precio:'',
+          total:''
+        }
+    }
+
+  },
+  methods:{
+     sumasTotales(){
+      let transacciones = this.transacciones;
+      let in_cantidad = 0;
+      let in_total    = 0;
+      let eg_cantidad = 0;
+      let eg_total    = 0;
+
+        //INGRESO CANTIDAD
+              transacciones.forEach(function(ingreso_cantidad, id){
+                let temp = ingreso_cantidad.ingreso_cantidad;
+
+                if (temp != null && temp !=='') {
+                    in_cantidad += parseInt(temp)
+                  // console.log(temp);
+                } 
+            });
+       this.suman.ingreso_cantidad = in_cantidad;
+
+        //INGRESO TOTAL
+
+              transacciones.forEach(function(ingreso_total, id){
+                let temp1 = ingreso_total.ingreso_total;
+
+                if (temp1 != null && temp1 !=='') {
+                    in_total += Number(temp1)
+                  // console.log(temp1);
+                } 
+            });
+       this.suman.ingreso_total = in_total;
+
+       console.log(in_total)
+
+
+        //EGRESO CANTIDAD
+              transacciones.forEach(function(egreso_cantidad, id){
+                let temp = egreso_cantidad.egreso_cantidad;
+
+                if (temp != null && temp !=='') {
+                    eg_cantidad += parseInt(temp)
+                  // console.log(temp);
+                } 
+            });
+       this.suman.egreso_cantidad = eg_cantidad;
+
+        //EGRESO TOTAL
+
+              transacciones.forEach(function(egreso_total, id){
+                let temp1 = egreso_total.egreso_total;
+
+                if (temp1 != null && temp1 !=='') {
+                    eg_total += Number(temp1)
+                  // console.log(temp1);
+                } 
+            });
+       this.suman.egreso_total = eg_total;
+
+       console.log(in_total)
+
+    },
+     modalInicial:function () {
+      if (this.transacciones.length >= 1) {
+        let i =  this.transacciones.length - 1;
+        console.log(this.transacciones[i]);
+        this.movimientos =  this.transacciones[i];
+        }
+      $('#inicial').modal('show');
+    },
+      modalTransacciones:function () {
+      $('#ingreso-kardex').modal('show');
+    },
+    calcularTotalIngreso(){
+    if(this.transaccion.ingreso.cantidad.trim() ==='' || this.transaccion.ingreso.precio.trim() ==='' ){
+      toastr.error("La Cantidad & Precio es Obligatoria", "Smarmoddle", {
+        "timeOut": "3000"
+      });
+    }else {
+      // Number(debe - haber).toFixed(2);
+      this.transaccion.ingreso.total = Number(this.transaccion.ingreso.cantidad * this.transaccion.ingreso.precio).toFixed(2);
+    
+     }
+    },
+    calcularTotalEgreso(){
+    if(this.transaccion.egreso.cantidad.trim() ==='' || this.transaccion.egreso.precio.trim() ==='' ){
+      toastr.error("La Cantidad & Precio es Obligatoria", "Smarmoddle", {
+        "timeOut": "3000"
+      });
+    }else {
+      this.transaccion.egreso.total = Number(this.transaccion.egreso.cantidad * this.transaccion.egreso.precio).toFixed(2);
+
+     }
+    },
+    agregarInicial(){
+      if(this.inicial.fecha.trim() ==='' || this.inicial.movimiento.trim() ==='' ||   this.inicial.cantidad.trim() ==='' || this.inicial.precio.trim() ==='' ){
+      toastr.error("Todos los campos son Obligatorios", "Smarmoddle", {
+        "timeOut": "3000"
+      });
+    }else {
+      let inicial = {tipo:'inicial', fecha: this.inicial.fecha, movimiento:this.inicial.movimiento,  existencia_cantidad:this.inicial.cantidad, existencia_precio: this.inicial.precio, existencia_total:this.inicial.total};
+      this.transacciones.push(inicial)
+        toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+          });
+          this.inicial.fecha               = '';
+          this.inicial.movimiento          = '';
+          this.inicial.cantidad            = '';
+          this.inicial.precio              = '';
+          this.inicial.total               = '';
+          $('#inicial').modal('hide');
+          let ultima = this.transacciones.length - 1;
+          this.ultima_existencia = [JSON.parse(JSON.stringify(this.transacciones[ultima]))];
+          this.sumasTotales();
+
+
+     }
+    },
+    agregarIngreso(){
+      if(this.transaccion.ingreso.fecha.trim() ==='' || this.transaccion.ingreso.movimiento.trim() ==='' ||   this.transaccion.ingreso.cantidad.trim() ==='' || this.transaccion.ingreso.precio.trim() ==='' ){
+      toastr.error("Todos los campos son Obligatorios", "Smarmoddle", {
+        "timeOut": "3000"
+      });
+    }else {
+      let ingreso = {tipo:'ingreso', fecha: this.transaccion.ingreso.fecha, movimiento:this.transaccion.ingreso.movimiento, ingreso_cantidad:this.transaccion.ingreso.cantidad, ingreso_precio:this.transaccion.ingreso.precio, ingreso_total:this.transaccion.ingreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total:this.transaccion.existencia.total};
+      
+      this.transacciones.push(ingreso)
+        toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+          });
+          this.transaccion.ingreso.fecha       = '';
+          this.transaccion.ingreso.movimiento  = '';
+          this.transaccion.ingreso.cantidad    = '';
+          this.transaccion.ingreso.precio      = '';
+          this.transaccion.ingreso.total       = '';
+          this.transaccion.existencia.cantidad = '';
+          this.transaccion.existencia.precio   = '';
+          this.transaccion.existencia.total    = '';
+          $('#ingreso-kardex').modal('hide');
+          let ultima = this.transacciones.length - 1;
+
+          this.ultima_existencia = [JSON.parse(JSON.stringify(this.transacciones[ultima]))];
+          this.sumasTotales();
+
+
+     }
+    },
+      agregarEgreso(){
+      if(this.transaccion.egreso.fecha.trim() ==='' || this.transaccion.egreso.movimiento.trim() ==='' ||   this.transaccion.egreso.cantidad.trim() ==='' || this.transaccion.egreso.precio.trim() ==='' ){
+        toastr.error("Todos los campos son Obligatorios", "Smarmoddle", {
+        "timeOut": "3000"
+        });
+    }else {
+      let egreso = {tipo:'egreso', fecha: this.transaccion.egreso.fecha, movimiento:this.transaccion.egreso.movimiento, egreso_cantidad:this.transaccion.egreso.cantidad, egreso_precio:this.transaccion.egreso.precio, egreso_total:this.transaccion.egreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total:this.transaccion.existencia.total};
+      
+      this.transacciones.push(egreso)
+        toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+          });
+          this.transaccion.egreso.fecha       = '';
+          this.transaccion.egreso.movimiento  = '';
+          this.transaccion.egreso.cantidad    = '';
+          this.transaccion.egreso.precio      = '';
+          this.transaccion.egreso.total       = '';
+          this.transaccion.existencia.cantidad = '';
+          this.transaccion.existencia.precio   = '';
+          this.transaccion.existencia.total    = '';
+          $('#ingreso-kardex').modal('hide');
+           let ultima = this.transacciones.length - 1;
+
+          this.ultima_existencia = [JSON.parse(JSON.stringify(this.transacciones[ultima]))];
+          this.sumasTotales();
+
+
+     }
+    },
+    editarTransaccion(id, tipo){
+      if (tipo == 'ingreso'){
+          this.edicion.ingreso.fecha       = this.transacciones[id].fecha;
+          this.edicion.ingreso.movimiento  = this.transacciones[id].movimiento;
+          this.edicion.ingreso.cantidad    = this.transacciones[id].ingreso_cantidad;
+          this.edicion.ingreso.precio      = this.transacciones[id].ingreso_precio;
+          this.edicion.ingreso.total       = this.transacciones[id].ingreso_total;
+          this.edicion.existencia.cantidad = this.transacciones[id].existencia_cantidad;
+          this.edicion.existencia.precio   = this.transacciones[id].existencia_precio;
+          this.edicion.existencia.total    = this.transacciones[id].existencias_total;
+          this.transaccion.ingreso.edit     = true;
+          this.transaccion.ingreso.index     = id;
+          $('#ingreso-kardex-edit').modal('show');
+          $('#kardex-promedio-ingreso-edit-tab').tab('show')
+
+      }else if(tipo == 'egreso'){
+
+
+      }else if(tipo == 'inicial'){
+
+
+      }
+
+    },
+    borrarTransaccion(index){
+      this.transacciones.splice(index, 1);
+       toastr.info("Transaccion eliminada correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+          });
+      this.sumasTotales();
+
+    }
+  }
+
 });
 
 const vm = new Vue({

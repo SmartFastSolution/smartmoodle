@@ -81,6 +81,7 @@
         <div class="col-12 col-sm-12 col-md-2 mb-3">
             <div class="list-group" id="list-tab" role="tablist">
                 <a class="list-group-item list-group-item-action active" id="list-kardex-list" data-toggle="list" href="#list-kardex" role="tab" aria-controls="kardex">Kardex</a>
+                <a class="list-group-item list-group-item-action " id="list-kardex-promedio-list" data-toggle="list" href="#list-kardex-promedio" role="tab" aria-controls="kardex-promedio">Kardex Promedio</a>
                 <a class="list-group-item list-group-item-action " id="list-diario-list" data-toggle="list" href="#list-diario" role="tab" aria-controls="home">Balance Inicial</a>
                 <a class="list-group-item list-group-item-action" id="list-balance_comp-list" data-toggle="list" href="#list-balance_comp" role="tab" aria-controls="profile">Balance de Comprobacion</a>
                 <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Diario General</a>
@@ -92,6 +93,9 @@
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane show active fade" id="list-kardex" role="tabpanel" aria-labelledby="list-kardex-list">
                     @include('contabilidad.kardex')
+                </div>
+                   <div class="tab-pane fade" id="list-kardex-promedio" role="tabpanel" aria-labelledby="list-kardex-promedio-list">
+                    @include('contabilidad.kardex_promedio')
                 </div>
                 <div class="tab-pane fade border border-danger p-4" id="list-diario" role="tabpanel"
                     aria-labelledby="list-diario-list">
