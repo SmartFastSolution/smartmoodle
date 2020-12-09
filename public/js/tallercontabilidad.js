@@ -2506,6 +2506,8 @@ const kardex = new Vue({
     });
      }else {
 
+      this.transacciones[0][0].fecha = this.inicial.fecha
+      this.transacciones[0][0].movimiento = this.inicial.movimiento
       this.transacciones[0][0].existencia_cantidad = this.inicial.cantidad
       this.transacciones[0][0].existencia_precio = this.inicial.precio
 
@@ -2703,7 +2705,7 @@ const kardex = new Vue({
 
       // let calculo = Number(this.transaccion.ingreso.total) +  Number(this.totales.total);
       // 
-      let existencia = {identificador: id, tipo:'existencia', existencia_cantidad:ingreso[0].existencia_cantidad, existencia_precio:ingreso[0].existencia_precio}
+      let existencia = {tipo:'existencia', existencia_cantidad:ingreso[0].existencia_cantidad, existencia_precio:ingreso[0].existencia_precio}
 
 
       filtro_existencias.push(existencia);
@@ -3873,9 +3875,49 @@ const kardex = new Vue({
       // let tipo = this.transacciones[index][id].tipo;
       //  let  transacciones = this.transacciones;
       // let identificador = transacciones.length - 1;
+      let last = this.transacciones.length - 1;
+      if (last == index) {
+        let ultima_transaccion = JSON.parse(JSON.stringify(this.transacciones[last]));
+        if (ultima_transaccion[id].tipo == 'ingreso') {
+            let ingreso = ultima_transaccion.filter(x => x.tipo == 'ingreso');
+            let filtro_existencias = ultima_transaccion.filter(x => x.tipo == 'existencia');
+            let existencia = {tipo:'existencia', existencia_cantidad:ingreso[0].existencia_cantidad, existencia_precio:ingreso[0].existencia_precio};
+            filtro_existencias.push(existencia);
+            this.existencias = JSON.parse(JSON.stringify(filtro_existencias));
 
-      this.transacciones.splice(index, 1);
-      this.sumasTotales();
+        }else if (ultima_transaccion[id].tipo == 'egreso') {
+
+              let exis = ultima_transaccion.filter(x => x.tipo == 'existencia');
+              let existencias_egresos = ultima_transaccion.filter(x => x.tipo == 'egreso' &&  x.existencia_cantidad > 0);
+              existencias_egresos.forEach(function(existencia, id){
+                let agregar = {tipo:'existencia', existencia_cantidad:existencia.existencia_cantidad, existencia_precio:existencia.existencia_precio, existencia_total:''}
+                exis.unshift(agregar);
+              });
+              this.existencias = JSON.parse(JSON.stringify(exis));
+
+        } else if (ultima_transaccion[id].tipo == 'egreso_compra') {
+              let egresos = this.ultima_transaccion.filter(x => x.tipo == 'egreso_compra');
+              let exis = this.ultima_transaccion.filter(x => x.tipo == 'existencia');
+              let existencias_egresos = this.ultima_transaccion.filter(x => x.tipo == 'egreso_compra' &&  x.existencia_cantidad > 0);
+              existencias_egresos.forEach(function(existencia, id){
+                let agregar = { tipo:'existencia', existencia_cantidad:existencia.existencia_cantidad, existencia_precio:existencia.existencia_precio, existencia_total:''}
+                exis.push(agregar);
+              });
+              this.existencias = JSON.parse(JSON.stringify(exis));
+
+        }else if (ultima_transaccion[id].tipo == 'ingreso_venta') {
+              let venta = this.ultima_transaccion.filter(x => x.tipo == 'ingreso_venta');
+              let filtro_existencias = this.ultima_transaccion.filter(x => x.tipo == 'existencia');
+              let existencia = { tipo:'existencia', existencia_cantidad:venta[0].existencia_cantidad, existencia_precio:venta[0].existencia_precio}
+              filtro_existencias.unshift(existencia);
+              this.existencias = JSON.parse(JSON.stringify(filtro_existencias));
+
+        }
+      }else{
+        this.transacciones.splice(index, 1);
+        this.sumasTotales();
+      }
+      
 
 
       // if (index == ultimo) {
@@ -4013,11 +4055,7 @@ const kardex = new Vue({
       //       // this.existencias.splice(ultimo, 1);
       //       // console.log(suma);
       //     }
-      //   }
-    
-
-
-    
+      //   }   
 }
 });
 

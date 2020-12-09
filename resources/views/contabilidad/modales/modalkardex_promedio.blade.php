@@ -126,7 +126,7 @@
                 </div>
                 <div class="row justify-content-center">
                   <a v-if="!transaccion.ingreso.edit" class="btn btn-primary" @click.prevent="agregarIngreso()">Agregar Ingreso</a>
-                  <a v-if="transaccion.ingreso.edit" class="btn btn-primary" @click.prevent="agregarIngreso()">Actualizar Ingreso</a>
+                  {{-- <a v-if="transaccion.ingreso.edit" class="btn btn-primary" @click.prevent="agregarIngreso()">Actualizar Ingreso</a> --}}
                 </div>
                {{--  <div class="row justify-content-center">
                     <div class="col-12">
@@ -238,7 +238,7 @@
                 </div>
                 <div class="row justify-content-center">
                   <a v-if="!transaccion.egreso.edit" class="btn btn-success" @click.prevent="agregarEgreso()">Agregar Egreso</a>
-                  <a v-if="!transaccion.egreso.edit" class="btn btn-success" @click.prevent="agregarEgreso()">Actualizar Egreso</a>
+                  {{-- <a v-if="!transaccion.egreso.edit" class="btn btn-success" @click.prevent="agregarEgreso()">Actualizar Egreso</a> --}}
                 </div>
             {{--     <div class="row justify-content-center">
                     <div class="col-12">
