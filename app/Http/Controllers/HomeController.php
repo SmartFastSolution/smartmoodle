@@ -138,6 +138,15 @@ class HomeController extends Controller
 
 
 
+    //seccion del contenido 
+
+    public function Verdocumento($id){
+
+        $contenido =Contenido::where('id', $id)->firstOrfail();
+         return \view('Materias.archivomateria',['contenido'=>$contenido]);
+
+    }
+
 
    
 }

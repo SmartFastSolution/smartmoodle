@@ -20,13 +20,10 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-
                 <h1 class="font-weight-light">Show Materias</h1>
                 <div class="row">
                     <div class="col-md-8">
-
                         <form method="POST" action="{{route('materias.update', $materia->id)}} ">
-
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>Instituto</label>
@@ -36,10 +33,8 @@
                                             {{ $instumate->nombre }}
                                         </option>
                                         @endforeach
-
                                     </select>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="nombre">Materia</label>
                                     <input type="text" class="form-control" name="nombre" id="nombre"
@@ -68,10 +63,7 @@
                         </form>
                     </div>
                 </div>
-
-
-                <div class="col-md-10">
-
+                <div class="col-md-12">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
@@ -97,77 +89,27 @@
                                                 <th scope="col">Unidad</th>
                                                 <th scope="col">Descripción </th>
                                                 <th scope="col">Estado</th>
-                                                <th></th>
                                                 <th scope="col">Vista Unidad</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($contenidos as $contenido)
                                             <tr>
-                                                @foreach($contenidos->where('materia_id', $materia->id) as $contenido)
                                                 <th scope="row">{{$contenido['id']}}</th>
                                                 <td>{{$contenido->materia->nombre}}</td>
                                                 <td>{{$contenido['nombre']}}</td>
                                                 <td>{{$contenido['descripcion']}}</td>
                                                 <td>{{$contenido['estado']}}</td>
-                                                <td> </td>
                                                 <td class="table-button ">
-                                                    <button type="button" class="btn btn-info" data-toggle="modal"
-                                                        data-target="#modalYT"><i class="fas fa-eye"></i></button>
-
-
-                                                    <!-- inicio del modal para visualizacion del archivo de contenido -->
-                                                    <div class="modal fade" id="modalYT" tabindex="-1" role="dialog"
-                                                        aria-labelledby="myModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg" role="document">
-
-                                                            <!--Content-->
-
-                                                            <div class="modal-content">
-
-                                                                <!--Body-->
-
-                                                                <div class="modal-body mb-0 p-0">
-
-                                                                    <div
-                                                                        class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-
-                                                                        <iframe
-                                                                            style="object-fit: contain; width: 100%; height: 500px;"
-                                                                            class="embed-responsive-item"
-                                                                            src="{{$contenido->archivo->url}}"
-                                                                            allowfullscreen></iframe>
-
-                                                                    </div>
-
-                                                                </div>
-
-                                                                <div class="modal-footer justify-content-center">
-                                                                    <span class="mr-4">{{$contenido['nombre']}}</span>
-
-                                                                    <button type="button"
-                                                                        class="btn btn-outline-primary btn-rounded btn-md ml-4"
-                                                                        data-dismiss="modal">Close</button>
-
-                                                                </div>
-
-                                                            </div>
-                                                            <!--/.Content-->
-
-                                                        </div>
-                                                        <!-- espacio -->
-                                                        <!-- espacio para que no salga opciones de pdf  -->
-
-                                                    </div>
-                                                    <!--fin del modal -->
-
-
-
-
+                                                    <a class="btn btn-info btn"
+                                                        href="{{route('Unidad.contenido', $contenido->id)}}"><i
+                                                            class="fas fa-eye"></i></a>
+                                                    <!-- @isset($contenido->archivo->url)
+                                                    <a href="{{$contenido->archivo->url}}" target="_blank">
+                                                        <i class="fa fa-eye" aria-hidden="true"></i> </a>
+                                                        @endisset -->
                                                 </td>
-
                                             </tr>
-
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -182,6 +124,12 @@
             </div>
         </div>
 </section>
+
+
+
+
+
+
 
 @stop
 

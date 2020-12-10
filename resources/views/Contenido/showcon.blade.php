@@ -92,9 +92,7 @@
                     </div>
                 </div>
 
-
                 <div class="col-md-12">
-
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
@@ -205,35 +203,25 @@
 <!--Modal: Name-->
 <div class="modal fade" id="modalYT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-
         <!--Content-->
         <div class="modal-content">
-
             <!--Body-->
             <div class="modal-body mb-0 p-0">
-
                 <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
                     @isset ($contenido->archivo->url)
                     <iframe class="embed-responsive-item" width="1000" height="1000" src="{{$contenido->archivo->url}}"
                         allowfullscreen></iframe>
                     @endisset
-
-
                 </div>
-
             </div>
-
             <div class="modal-footer justify-content-center">
                 <span class="mr-4">{{ $contenido['nombre']}}</span>
 
                 <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4"
                     data-dismiss="modal">Close</button>
-
             </div>
-
         </div>
         <!--/.Content-->
-
     </div>
 </div>
 <!--Modal: Name-->

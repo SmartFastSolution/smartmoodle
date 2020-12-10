@@ -73,8 +73,8 @@ class EstudianteController extends Controller
          $tallers = Taller::whereNotIn('id', $ids)->get();
  
          $materia =Materia::where('id', $id)->firstOrfail();
-              
-         return view ('Estudiante.contenido',['materia'=>$materia,'contenidos'=>$contenido,'institutomate'=>$institutomate,'tallers'=>$tallers]);
+         $cons =Contenido::where('materia_id',$materia->id)->paginate(6);
+         return view ('Estudiante.contenido',['materia'=>$materia,'contenidos'=>$contenido,'institutomate'=>$institutomate,'tallers'=>$tallers,'cons'=>$cons]);
 
        // return $tallers;
 
@@ -109,5 +109,14 @@ class EstudianteController extends Controller
           
 
      }
+
+
+
+     public function VisualizacionPDF($id){
+
+      $contenido =Contenido::where('id', $id)->firstOrfail();
+       return \view('Estudiante.archivopdf',['contenido'=>$contenido]);
+
+  }
 
 }

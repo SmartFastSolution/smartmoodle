@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Admin\TallerContabilidad;
+use App\Anexocaja;
+use App\Cajadatos;
 use App\Contabilidad\BCARegistro;
 use App\Contabilidad\BCRegistro;
 use App\Contabilidad\BIActivo;
@@ -193,7 +195,7 @@ class TallerContabilidadController extends Controller
         }
 
     }
-public function obtenerBalanceCompro(Request $request)
+  public function obtenerBalanceCompro(Request $request)
     {
         $id         = Auth::id();
         $taller_id  = $request->id;
@@ -410,9 +412,9 @@ public function obtenerBalanceCompro(Request $request)
             'message'   => 'Datos Actualizados Correctamente',             
             ),200,[]);
     }
-}
-public function obtenerbalance(Request $request)
-{
+  }
+ public function obtenerbalance(Request $request)
+   {
     $id            = Auth::id();
     $taller_id     = $request->id;
     $tipo          = $request->tipo;
@@ -467,7 +469,7 @@ public function obtenerbalance(Request $request)
             'datos' => false,
             ),200,[]);
     }
-}
+  }
     public function b_inicial_diario(Request $request)
     {
         $id                = Auth::id();
@@ -545,7 +547,7 @@ public function obtenerbalance(Request $request)
 
         $cuenta = DGRegistro::where('diario_general_id',$cu->id)->count();
                                              // SI YA ESTA CREADO EL REGISTRO DEL DIARIO GENERAL, PARA ESO PRIMERO DEBE TENER CONCLUIDO EL BALANCE INICIAL
-if ($cuenta == 0) {
+     if ($cuenta == 0) {
         $diariog = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
         
         $debe =[];
@@ -591,7 +593,7 @@ if ($cuenta == 0) {
                 'success' => true,
                 'message' => 'Diario General creado correctamente'
             ),200,[]);
-}elseif ($cuenta >= 1) {
+       }elseif ($cuenta >= 1) {
         $diariog = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
         $debe =[];
         $haber =[];
@@ -638,12 +640,12 @@ if ($cuenta == 0) {
                   );
                   DGRHaber::insert($regis2);                            //GURDAR ESAS CUENTAS EN LA TABLA HABER CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
             }      
-}
-   return response(array(
+          }
+          return response(array(
                 'success' => 'act',
                 'message' => 'Datos Actualizados Correctamente'
             ),200,[]);
-}
+         }
          } else { 
                                                                // SI NO TIENE CREADO EL BALANCE INICIAL ANTES DE GUARDAR, LE SALDRA UNA NOTIFICACION INDICANDO DICHO PUNTO
             return response(array(
@@ -652,5 +654,108 @@ if ($cuenta == 0) {
             ),200,[]);
         }
     }
-}
 
+    public function AnexoCaja(Request $request)
+    {
+       $user_id = Auth::id();
+       $taller_id            = $request->id;
+       $nombre               =$request->nombre;
+       $libros_cajas         =$request->libros_caja;
+       $anexocaja            = Anexocaja::where('user_id', $user_id)->where('taller_id',$taller_id)->count();
+       if($anexocaja == 0){
+          $mc   = new Anexocaja;
+          $mc->taller_id = $taller_id;
+          $mc->user_id   = $user_id;
+          $mc->nombre    = $nombre;
+          $mc->totaldebe      = $request->debe;
+          $mc->totalhaber     = $request->haber;    
+          $mc->save();
+
+          $a = Anexocaja::where('user_id', $user_id)->get()->last();
+
+          foreach($libros_cajas as $key=>$lc){
+
+            $datos = array(
+               'anexocaja_id'      => $a->id,
+               'fecha'             =>$lc['fecha'],
+               'detalle'           =>$lc['detalle'],
+               'debe'         =>$lc['debe'],
+               'haber'        =>$lc['haber'],
+               'saldo'             =>$lc['saldo'],
+               'created_at'              => now(),
+               'updated_at'              => now(),
+
+            );
+            Cajadatos::insert($datos);
+           }
+          return response(array(
+            'success' => true,
+            'estado'  => 'guardado',
+            'message' => 'Anexo Libro Caja creado correctamente'
+        ),200,[]);
+
+       } elseif($anexocaja == 1){
+        
+        $ids  =[];
+       $accanexo    = Anexocaja::where('user_id', $user_id)->where('taller_id', $taller_id)->first();
+       $accanexo->nombre =$request->nombre;
+       $accanexo->totaldebe = $request->debe;
+       $accanexo->totalhaber = $request->haber;
+       $accanexo->save();
+
+       $registros= Cajadatos::where('anexocaja_id', $accanexo->id)->get();
+
+       foreach($registros as $r){
+          $ids[]= $r->id;
+       }
+        $deleteregistros = Cajadatos::destroy($ids);
+        $a = Anexocaja::where('user_id', $user_id)->get()->last();
+
+        foreach($libros_cajas as $key=>$lc){
+
+          $datos = array(
+             'anexocaja_id' => $a->id,
+             'fecha'      =>$lc['fecha'],
+             'detalle'      =>$lc['detalle'],
+             'debe'         =>$lc['debe'],
+             'haber'        =>$lc['haber'],
+             'saldo'        =>$lc['saldo'],
+             'created_at'              => now(),
+             'updated_at'              => now(),
+
+          );
+          Cajadatos::insert($datos);
+         }
+        return response(array(
+          'success' => true,
+          'estado'  => 'actualizado',
+          'message' => 'Anexo Libro Caja Actualizado correctamente'
+      ),200,[]);
+       }
+    }
+
+    public function obtenerLibroCaja(Request $request){
+     
+        $user_id =Auth::id();        
+        $taller_id = $request->id;
+    
+        $obanexo = Anexocaja::where('user_id', $user_id)->where('taller_id', $taller_id)->count();
+            if($obanexo == 1){
+           $anexocaja = Anexocaja::where('user_id', $user_id)->where('taller_id', $taller_id)->first();
+           $obtenerc  = Cajadatos::select('fecha','detalle','debe','haber','saldo')->where('anexocaja_id',$anexocaja->id)->get();
+
+           return response(array(
+            'datos' => true,
+            'banexocaja' => $obtenerc,
+            'nombre' =>$anexocaja->nombre
+        ),200,[]);
+        }else{
+            return response(array(
+               'datos' => false,
+           ),200,[]);
+
+        }
+
+    }
+
+}

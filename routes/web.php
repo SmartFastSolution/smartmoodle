@@ -92,7 +92,7 @@ Route::get('cursos-list-excel','PDFController@CursoExport')->name('curso.excel')
 
 ///rutas menu docente
 route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
-
+route::get('Documento-pdf/{contenido}', 'DocenteController@VerPDF')->name('Contenido.docente'); //para visualizar el documento en el menu estudiante
 
 //rutas menu estudiante
 route::post('admin/cambiarestado','AdminController@status')->name('taller.status');
@@ -101,6 +101,7 @@ route::get('perfil','EstudianteController@show')->name('perfile');
 route::get('unidad/{id}','EstudianteController@unidades')->name('Unidades');
 route::get('estudiante/password', 'EstudianteController@password')->name('AlumnoPass'); //para metodo get del password 
 route::post('estudiante/password','EstudianteController@updatep')->name('Estudiantes.updatep'); // para guardar el nuevo password
+route::get('Contenido-pdf/{contenido}', 'EstudianteController@VisualizacionPDF')->name('Contenido.alumno'); //para visualizar el documento en el menu estudiante
 
 ///rutas menu docente
 
@@ -140,9 +141,13 @@ route::resource('cursos','CursoController');
 
 //Ruta Resource de Materias que va aliada con el curso
 route::resource('materias','MateriaController');
+//ver documento pdf en el archivo
+Route::get('Unidad-pdf/{contenido}','HomeController@Verdocumento')->name('Unidad.contenido');
+
 
 //Ruta Resource de Materias que va aliada con el curso
 route::resource('contenidos','ContenidoController');
+
 
 //Ruta Resource par asignacion de cursos y materias prueba 2 
 route::resource('distribucionmacus','DistribucionmacuController');
@@ -305,7 +310,10 @@ route::post('/sistema/admin/taller/diario', 'TallerContabilidadController@diario
 route::post('/sistema/admin/taller/diariogeneral', 'TallerContabilidadController@obtenerdiario')->name('obtenerdiario');
 route::post('/sistema/admin/taller/obtenerbalance', 'TallerContabilidadController@obtenerbalance')->name('obtenerbalance');
 
-
+//rutas anexos
+route::post('/sistema/admin/taller/anexo_caja', 'TallerContabilidadController@AnexoCaja')->name('anexo_caja');
+route::post('/sistema/admin/taller/anexo-obtener-caja', 'TallerContabilidadController@obtenerLibroCaja')->name('anexocaja.obtener');
+//
 route::post('/sistema/homedoc/respuesta/taller1/{idtaller}', 'TallerDocenteController@store1')->name('taller1.docente');
 route::get('/sistema/admin/create', 'AdminController@admin')->name('admin.create');
 route::post('/sistema/admin', 'AdminController@store')->name('admin');

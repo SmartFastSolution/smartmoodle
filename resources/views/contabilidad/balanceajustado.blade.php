@@ -18,8 +18,8 @@
           <input type="text" class="form-control" v-model="balance.haber"  placeholder="Haber">
         </div>
 
-        <a  v-if="!update" href="#" class="addDiario btn btn-outline-danger  " @click.prevent="agregarRegistro()">Agregar Registro</a>
-        <a  v-if="update" href="#" class="addDiario btn btn-outline-danger  " @click.prevent="actualizarBalance()">Actualizar Registro</a>
+        <a  v-if="!update" href="#" class=" addDiario btn btn-outline-danger  " @click.prevent="agregarRegistro()">Agregar Registro</a>
+        <a  v-if="update" href="#" class="  addDiario btn btn-outline-danger  " @click.prevent="actualizarBalance()">Actualizar Registro</a>
 
   </div>
   <table class="table table-bordered table-sm mb-2">

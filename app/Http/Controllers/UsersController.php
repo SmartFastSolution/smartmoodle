@@ -210,16 +210,7 @@ class UsersController extends Controller
 
           $user->roles()->sync($request->get('roles'));
          
-       //ejemplo para decision al guarda docente alumno
-        // if($request->input('rol') == 'estudiante'){
-        //     $user = User::get()->last();
-        //     $estudiante = new Estudiante;
-        //     $estudiante->user_id = $user->id;
-
-       // }elseif($request->input('rol') == 'docente'){
-        // }elseif($request->input('rol') == 'admin'){
-        // }
-
+      
 
         $user->save();
     

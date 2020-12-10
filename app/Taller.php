@@ -373,6 +373,12 @@ class Taller extends Model
 
         return $this->hasMany('App\Admin\Respuesta\RAlternativa');
     }
+
+     
+    public function anexocajas(){
+          
+        return $this->hasMany('App\Anexocaja');
+    }
     
 }
 

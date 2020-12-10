@@ -95,7 +95,7 @@ class ContenidoController extends Controller
      */
     public function show($id)
     {
-
+         
         $materias=Materia::get();
         $contenido =Contenido::where('id', $id)->firstOrfail();
         $materiacontenido=Contenido::find($contenido->id)->materia()->get();

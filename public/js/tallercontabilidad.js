@@ -4181,3 +4181,192 @@ const vm = new Vue({
     }
   }
 })
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////LIBRO CAJA ANEXO //////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const librocaja = new Vue({
+  el: "#librocaja",
+  data:{
+    id_taller: taller,
+    nombre:'',
+    libros_caja:[], //donde se almacenara todos los datos del libro CAJA
+    caja:{ // variables a utilizar para el libro CAJA
+      fecha:'',
+      detalle:'',
+      debe:'',
+      haber:'',
+      saldo:'',
+    },
+    suman:{ //suma total del libro CAJA
+      debe:0,
+      haber:0,
+    },
+    update: false,
+    registro_id:0
+  },
+  mounted: function() {
+    this.obtenerLibroCaja();
+  },
+  methods:{
+    totales: function(){
+       this.suman.debe  =0;
+       this.suman.haber =0;
+       let regis  = this.libros_caja;
+       let total1 = 0;
+       let total2 = 0;
+
+       regis.forEach(function(obj, index){
+         total1 += Number(obj.debe);
+       });
+       regis.forEach(function(obj, index){
+        total2 += Number(obj.haber);
+      });
+
+      this.suman.debe  = total1.toFixed(2);
+      this.suman.haber = total2.toFixed(2);
+    },
+
+    agregarRegistro(){
+         
+      if(this.caja.fecha.trim() === ''){
+        toastr.error("La fecha es obligatoria ", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+      }else if(this.caja.detalle.trim() === ''){
+          toastr.error("El campo Detalle es Obligatorio", "Smartmoodle", {
+            "timeOut": "3000"
+          });
+      }else if(this.caja.debe.trim() !='' && this.caja.haber.trim() !=''){
+          toastr.error("No puede llenar ambos campos de debe y haber", "Smartmoodle",{
+            "timeOut": "30000"
+          });
+      }else if(this.caja.saldo.trim()===''){
+        toastr.error("Ingrese el Saldo", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+      }else {
+
+        var caja = {fecha:this.caja.fecha, detalle:this.caja.detalle, debe:this.caja.debe, haber:this.caja.haber, saldo:this.caja.saldo  }
+        this.libros_caja.push(caja);
+        toastr.success("Registro agregado correctamente", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+      this.caja.fecha   =''
+      this.caja.detalle =''
+      this.caja.debe    =''
+      this.caja.haber   =''
+      this.caja.saldo   =''
+      this.totales();
+      }
+
+    }, // function agregarregistro
+ 
+    deleteLibroCaja(index){
+     this.libros_caja.splice(index, 1);
+     this.totales();
+    },
+
+    editLibroCaja(index){
+      this.update = true;
+      this.registro_id  = index;
+      this.caja.fecha   = this.libros_caja[index].fecha;
+      this.caja.detalle = this.libros_caja[index].detalle;
+      this.caja.debe    = this.libros_caja[index].debe;
+      this.caja.haber   = this.libros_caja[index].haber;
+      this.caja.saldo   = this.libros_caja[index].saldo;
+    },
+
+    actualizarLibroCaja(){
+
+      if(this.caja.fecha.trim() === ''){
+        toastr.error("La fecha es obligatoria ", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+      }else if(this.caja.detalle.trim() === ''){
+          toastr.error("El campo Detalle es Obligatorio", "Smartmoodle", {
+            "timeOut": "3000"
+          });
+      }else if(this.caja.debe.trim() !='' && this.caja.haber.trim() !=''){
+          toastr.error("No puede llenar ambos campos de debe y haber", "Smartmoodle",{
+            "timeOut": "30000"
+          });
+      }else if(this.caja.saldo.trim()===''){
+        toastr.error("Ingrese el Saldo", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+      }else {
+       let id                        = this.registro_id;
+       this.libros_caja[id].fecha    = this.caja.fecha;
+       this.libros_caja[id].detalle  = this.caja.detalle;
+       this.libros_caja[id].debe     = this.caja.debe;
+       this.libros_caja[id].haber    = this.caja.haber;
+       this.libros_caja[id].saldo    = this.caja.saldo;
+
+       this.caja.fecha   =''
+       this.caja.detalle =''
+       this.caja.debe    =''
+       this.caja.haber   =''
+       this.caja.saldo   =''
+       this.update       = false;
+       this.totales();
+       
+      }
+     
+    },//fin de actualizar libro de caja
+      guardarLibro : function(){
+
+        if(this.libros_caja.length == 0){
+          toastr.error("Debe haber al menos un registro en el Balance", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        } else {
+          let _this = this;
+          let url ='/sistema/admin/taller/anexo_caja';
+               axios.post(url,{
+
+                 id: _this.id_taller,
+                 libros_caja:  _this.libros_caja,
+                 nombre:       _this.nombre,
+                 debe:         _this.suman.debe,
+                 haber:        _this.suman.haber,
+               }).then(response=>{
+                if (response.data.estado == 'guardado') {
+                  toastr.success("Anexo creado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                }else if (response.data.estado == 'actualizado') {
+                  toastr.warning("Anexo actualizado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                }        
+            }).catch(function(error){
+               });
+
+        }
+          
+      }, //fin metodo guardar
+
+      obtenerLibroCaja: function(){
+        let _this = this;
+        let url ='/sistema/admin/taller/anexo-obtener-caja';
+              axios.post(url,{
+                id: _this.id_taller, 
+                }).then(response =>{
+                  if(response.data.datos == true){
+                    toastr.info("Anexo Caja cargado correctamente", "Smarmoddle", {
+                      "timeOut": "3000"
+                      });
+                      this.libros_caja = response.data.banexocaja;
+                      this.nombre = response.data.nombre;
+                      this.totales();
+                  }
+                }).catch(function(error){
+
+                });
+      }
+
+  },
+
+})
