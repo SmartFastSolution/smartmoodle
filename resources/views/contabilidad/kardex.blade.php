@@ -45,7 +45,7 @@
 				<td>@{{ exist.existencia_precio }}</td>
 				<td>@{{ exist.existencia_total }}</td>
 				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso' || transacciones[index][id].tipo == 'inicial' || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'ingreso_venta' || transacciones[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-warning" href="" @click.prevent="editarTransaccion(index, id)"><i class="fas fa-edit"></i></a></td>
-				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso'  || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'ingreso_venta' || transacciones[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-danger" href="" @click.prevent="borrarTransaccion(index, id)"><i class="fas fa-trash"></i></a></td>
+				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso'  || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'inicial'||  transacciones[index][id].tipo == 'ingreso_venta' || transacciones[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-danger" href="" @click.prevent="borrarTransaccion(index, id)"><i class="fas fa-trash"></i></a></td>
 				<td v-else colspan="2"></td>
 			</tr>
 		</tbody>
@@ -236,12 +236,11 @@
 			<a class="btn btn-sm btn-primary mr-2" v-if="actuegreso.estado" href="" @click.prevent="ActualizarEgresos()">Actualizar Transaccion</a>
 			</div>
 			<div v-if="transaccion.egreso.edit" class="row justify-content-center">
-				<div class="col"><input type="text"  placeholder="fecha" v-model="transaccion.fecha" class="form-control"></div>
-				<div class="col-4"><input type="text" placeholder="movimiento" v-model="transaccion.movimiento" class="form-control"></div>
+			{{-- 	<div class="col"><input type="text"  placeholder="fecha" v-model="transaccion.fecha" class="form-control"></div>
+				<div class="col-4"><input type="text" placeholder="movimiento" v-model="transaccion.movimiento" class="form-control"></div> --}}
 				<div class="col"><input type="text" placeholder="cantidad" v-model="transaccion.egreso.cantidad" class="form-control"></div>
 				<div class="col"><input type="text" placeholder="precio" v-model="transaccion.egreso.precio" class="form-control"></div>
 				<div class="col"><a href="" @click.prevent="agregarEgresoNew()" class="btn btn-success">EGRESO</a> <a href="" @click.prevent="agregarNewEgreso('cerrar')" class="btn btn-danger"><i class="fas fa-window-close"></i></a> </div>
-
 			</div>
 			</div>
 			</div>

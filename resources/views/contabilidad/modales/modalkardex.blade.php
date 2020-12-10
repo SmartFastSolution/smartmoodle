@@ -534,8 +534,14 @@
                       </tbody>
                     </table>
                 <div class="row">
-                  <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaEgreso()"><i class="fas fa-plus"></i> Existencia</a>
+              <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaEgreso()"><i class="fas fa-plus"></i> Existencia</a>
+          <a v-if="transaccion.egreso.active" class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="nuevoEgreso('agregar')"><i class="fas fa-plus"></i> Agregar Egreso</a>
                 </div>
+        <div v-if="transaccion.egreso.add" class="row justify-content-center mt-2">
+          <div class="col"><input type="text" placeholder="cantidad" v-model="edit.egreso.cantidad" class="form-control"></div>
+          <div class="col"><input type="text" placeholder="precio" v-model="edit.egreso.precio" class="form-control"></div>
+          <div class="col"><a href="" @click.prevent="nuevoEgreso('crear')" class="btn btn-success">EGRESO</a> <a href="" @click.prevent="nuevoEgreso('cerrar')" class="btn btn-danger"><i class="fas fa-window-close"></i></a> </div>
+        </div>
                       
 
                     <div v-if="modales.modal_egreso.length > 0">
