@@ -150,7 +150,7 @@
                       <thead class="bg-warning"> 
                         <tr class="text-center">
                           <th style="vertical-align:middle" rowspan="2">FECHA</th>
-                          <th style="vertical-align:middle" rowspan="2">MOVIMIENTOS</th>
+                          <th width="300" style="vertical-align:middle" rowspan="2">MOVIMIENTOS</th>
                           <th colspan="3">INGRESOS</th>
                           <th colspan="3">EGRESOS</th>
                           <th colspan="3">EXISTENCIA</th>
@@ -172,7 +172,12 @@
                         <tbody is="draggable" group="modales.modal_ingreso" :list="modales.modal_ingreso" tag="tbody">
                           <tr v-for="(transa, id) in modales.modal_ingreso">
                             <td><input type="text"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
-                            <td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"></td>
+                            <td>
+                              <textarea name="" id="" cols="30" rows="30" class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> 
+                                
+                              </textarea>
+                              {{-- <input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
+                            </td>
 
                             <td v-if="transa.tipo == 'existencia'">@{{ transa.ingreso_cantidad }}</td>
                             <td v-if="transa.tipo == 'existencia'">@{{ transa.ingreso_precio }}</td>
@@ -535,12 +540,12 @@
                     </table>
                 <div class="row">
               <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaEgreso()"><i class="fas fa-plus"></i> Existencia</a>
-          <a v-if="transaccion.egreso.active" class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="nuevoEgreso('agregar')"><i class="fas fa-plus"></i> Agregar Egreso</a>
+          <a v-if="transaccion.egreso.active" class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="nuevoEgreso('agregar')"><i class="fas fa-plus"></i> Nuevo Egreso</a>
                 </div>
         <div v-if="transaccion.egreso.add" class="row justify-content-center mt-2">
-          <div class="col"><input type="text" placeholder="cantidad" v-model="edit.egreso.cantidad" class="form-control"></div>
-          <div class="col"><input type="text" placeholder="precio" v-model="edit.egreso.precio" class="form-control"></div>
-          <div class="col"><a href="" @click.prevent="nuevoEgreso('crear')" class="btn btn-success">EGRESO</a> <a href="" @click.prevent="nuevoEgreso('cerrar')" class="btn btn-danger"><i class="fas fa-window-close"></i></a> </div>
+          <div class="col-2"><input type="text" placeholder="cantidad" v-model="edit.egreso.cantidad" class="form-control"></div>
+          <div class="col-2"><input type="text" placeholder="precio" v-model="edit.egreso.precio" class="form-control"></div>
+          <div class="col-2"><a href="" @click.prevent="nuevoEgreso('crear')" class="btn btn-success">EGRESO</a> <a href="" @click.prevent="nuevoEgreso('cerrar')" class="btn btn-danger"><i class="fas fa-window-close"></i></a> </div>
         </div>
                       
 

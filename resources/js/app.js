@@ -24,7 +24,7 @@ Vue.component('draggable', draggable);
 // import select2 from 'v-select2-component';
 // Vue.component('select2', select2);
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('drag-component', require('./components/DragComponent.vue').default);
 //Vue.component('letra-component', require('./components/LetraComponent.vue').default);
 
