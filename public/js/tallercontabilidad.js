@@ -4148,7 +4148,10 @@ const kardex_promedio = new Vue({
 
   el: "#kardex_promedio",
   data:{
+        id_taller: taller,
     kardex_id:'',
+    producto:'',
+    nombre:'',
     transacciones:[],
     update:false,
     inicial:{
@@ -4158,6 +4161,20 @@ const kardex_promedio = new Vue({
       precio:'',
       index:''
 
+    },
+    prueba:{
+      cantidad:{
+        inventario_inicial:'',
+        adquicisiones:'',
+        ventas:'',
+        inventario_final:''
+      },
+      precio:{
+        inventario_inicial:'',
+        adquicisiones:'',
+        ventas:'',
+        inventario_final:''
+      }
     },
     ultima_existencia:[],
     suman:{
@@ -4201,6 +4218,9 @@ const kardex_promedio = new Vue({
           total:''
         }
     }
+  },
+  mounted: function() {
+   this.obtenerKardexPromedio();
   },
   methods:{
     exitenciaFinal(){
@@ -4284,7 +4304,7 @@ const kardex_promedio = new Vue({
       });
     }else {
       this.transaccion.ingreso.total = Number(this.transaccion.ingreso.cantidad * this.transaccion.ingreso.precio).toFixed(2);
-      let array = {tipo:'ingreso', fecha: this.transaccion.ingreso.fecha, movimiento:this.transaccion.ingreso.movimiento, ingreso_cantidad:this.transaccion.ingreso.cantidad, ingreso_precio:this.transaccion.ingreso.precio, ingreso_total:this.transaccion.ingreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total:''};
+      let array = {tipo:'ingreso', fecha: this.transaccion.ingreso.fecha, movimiento:this.transaccion.ingreso.movimiento, ingreso_cantidad:this.transaccion.ingreso.cantidad, ingreso_precio:this.transaccion.ingreso.precio, ingreso_total:this.transaccion.ingreso.total, egreso_cantidad:'', egreso_precio:'', egreso_total:'',  existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total:''};
       this.modales.modal_ingreso.push(array);
       this.transaccion.ingreso.fecha       = '';
       this.transaccion.ingreso.movimiento  = '';
@@ -4304,7 +4324,7 @@ const kardex_promedio = new Vue({
       });
     }else {
       this.transaccion.egreso.total = Number(this.transaccion.egreso.cantidad * this.transaccion.egreso.precio).toFixed(2);
-      let array = {tipo:'egreso', fecha: this.transaccion.egreso.fecha, movimiento:this.transaccion.egreso.movimiento, egreso_cantidad:this.transaccion.egreso.cantidad, egreso_precio:this.transaccion.egreso.precio, egreso_total:this.transaccion.egreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total:''};
+      let array = {tipo:'egreso', fecha: this.transaccion.egreso.fecha, movimiento:this.transaccion.egreso.movimiento, ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:this.transaccion.egreso.cantidad, egreso_precio:this.transaccion.egreso.precio, egreso_total:this.transaccion.egreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total:''};
       this.modales.modal_egreso.push(array);
       this.transaccion.egreso.fecha       = '';
       this.transaccion.egreso.movimiento  = '';
@@ -4326,7 +4346,7 @@ const kardex_promedio = new Vue({
       let precio = this.inicial.precio;
       this.inicial.total = Number(cantidad * precio).toFixed(2);
 
-      let inicial = {tipo:'inicial', fecha: this.inicial.fecha, movimiento:this.inicial.movimiento,  existencia_cantidad:this.inicial.cantidad, existencia_precio: this.inicial.precio, existencia_total:this.inicial.total};
+      let inicial = {tipo:'inicial', fecha: this.inicial.fecha, movimiento:this.inicial.movimiento, ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:'', egreso_precio:'', egreso_total:'',  existencia_cantidad:this.inicial.cantidad, existencia_precio: this.inicial.precio, existencia_total:this.inicial.total};
       this.transacciones.push(inicial)
         toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
         "timeOut": "3000"
@@ -4374,6 +4394,8 @@ const kardex_promedio = new Vue({
     },
     editarTransaccion(id, tipo){
       if (tipo == 'ingreso'){
+        this.transaccion.ingreso.edit = true;
+
         this.ingresos = [JSON.parse(JSON.stringify(this.transacciones[id]))];
         this.transaccion.ingreso.index = id;
           // this.edicion.ingreso.fecha       = this.transacciones[id].fecha;
@@ -4390,6 +4412,7 @@ const kardex_promedio = new Vue({
           // $('#kardex-promedio-ingreso-edit-tab').tab('show')
 
       }else if(tipo == 'egreso'){
+        this.transaccion.egreso.edit = true;
         this.egresos = [JSON.parse(JSON.stringify(this.transacciones[id]))];
         this.transaccion.egreso.index = id;
 
@@ -4418,6 +4441,8 @@ const kardex_promedio = new Vue({
       this.ingresos = [];
       this.exitenciaFinal();
           this.sumasTotales();
+        this.transaccion.ingreso.edit = false;
+
 
     },
       actualizarEgreso(){
@@ -4434,6 +4459,8 @@ const kardex_promedio = new Vue({
       this.egresos = [];
       this.exitenciaFinal();
           this.sumasTotales();
+        this.transaccion.egreso.edit = false;
+
 
 
     },
@@ -4494,7 +4521,81 @@ const kardex_promedio = new Vue({
           });
       this.sumasTotales();
 
-    }
+    },
+      guardarKardex: function() {
+    if(this.transacciones.length == 0){
+          toastr.error("Debe haber al menos un registro en el Kardex", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+
+     }else if(this.nombre.trim() === ''  || this.producto.trim() === ''){
+          toastr.error("Nombre & Producto es Obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+
+     }else{
+        let _this = this;
+        let url = '/sistema/admin/taller/kardex-promedio';
+            axios.post(url,{
+              id: _this.id_taller,
+              nombre: _this.nombre,
+              producto: _this.producto,
+              kardex_promedio: _this.transacciones,
+              inv_inicial_cantidad: _this.prueba.cantidad.inventario_inicial,
+              adquisicion_cantidad: _this.prueba.cantidad.adquicisiones,
+              ventas_cantidad: _this.prueba.cantidad.ventas,
+              inv_final_cantidad: _this.prueba.cantidad.inventario_final,
+              inv_inicial_precio: _this.prueba.precio.inventario_inicial,
+              adquisicion_precio: _this.prueba.precio.adquicisiones,
+              ventas_precio: _this.prueba.precio.ventas,
+              inv_final_precio: _this.prueba.precio.inventario_final,
+
+        }).then(response => {
+          if (response.data.estado == 'guardado') {
+              toastr.success("Kardex creado correctamente", "Smarmoddle", {
+            "timeOut": "3000"
+            });
+            }else if (response.data.estado == 'actualizado') {
+              toastr.warning("kardex actualizado correctamente", "Smarmoddle", {
+            "timeOut": "3000"
+            });
+            }        
+        }).catch(function(error){
+
+        }); 
+
+     } 
+     
+     },
+        obtenerKardexPromedio: function() {
+        let _this = this;
+        let url = '/sistema/admin/taller/kardex-obtener-promedio';
+            axios.post(url,{
+              id: _this.id_taller,
+        }).then(response => {
+          if (response.data.datos == true) {
+              toastr.info("Kardex Promedio cargado correctamente", "Smarmoddle", {
+            "timeOut": "3000"
+            });
+              _this.transacciones = response.data.kardex_promedio;
+              _this.nombre =  response.data.informacion.nombre;
+              _this.producto = response.data.informacion.producto;
+               _this.prueba.cantidad.inventario_inicial = response.data.informacion.inv_inicial_cantidad;
+               _this.prueba.cantidad.adquicisiones      = response.data.informacion.adquisicion_cantidad;
+               _this.prueba.cantidad.ventas             = response.data.informacion.ventas_cantidad;
+               _this.prueba.cantidad.inventario_final   = response.data.informacion.inv_final_cantidad;
+               _this.prueba.precio.inventario_inicial = response.data.informacion.inv_inicial_precio;
+               _this.prueba.precio.adquicisiones      = response.data.informacion.adquisicion_precio;
+               _this.prueba.precio.ventas             = response.data.informacion.ventas_precio;
+               _this.prueba.precio.inventario_final   = response.data.informacion.inv_final_precio;
+
+              this.sumasTotales();
+              this.exitenciaFinal();
+            }          
+        }).catch(function(error){
+
+        }); 
+     } 
   }
 
 });

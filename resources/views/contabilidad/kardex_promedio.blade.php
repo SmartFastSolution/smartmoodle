@@ -3,8 +3,12 @@
 	<h5 class="text-center font-weight-bold text-info">METODO PROMEDIO</h5>
 	<div class="row justify-content-center mb-2">
 		<div class="col-5 mb-3">
-			<input type="" name="" placeholder="PRODUCTO" class="form-control text-center">
+
+			<input v-model="nombre" type="" name="" placeholder="Nombre" class="form-control form-control-sm text-center">
+			<input v-model="producto" type="" name="" placeholder="Producto" class="form-control text-center">
+
 		</div>
+		
 
 			<table class="table table-bordered table-responsive table-sm">
 		<thead class="bg-warning"> 
@@ -66,14 +70,14 @@
 </table>
  	@include('contabilidad.modales.modalkardex_promedio')
 
- <div class="col-4 align-self-center">
+ <div v-if="!transaccion.ingreso.edit && !transaccion.egreso.edit " class="col-4 align-self-center">
 
 	<a {{-- v-if="transacciones.length == 0" --}} class="btn btn-sm btn-success mr-2" @click.prevent="modalInicial()">Saldo Inicial</a>
 	<a  class="btn btn-sm btn-info mr-2" @click.prevent="modalTransacciones()">Agregar Ingreso / Egreso</a>
 	{{-- <a  class="btn btn-sm btn-info mr-2" href="#" @click.prevent="modalEgreso()" data-toggle="modal" data-target="#egreso">EGRESO</a> --}}
 	
 </div>
-	<div class="col-12 mt-3">
+	<div v-if="!transaccion.ingreso.edit && !transaccion.egreso.edit " class="col-12 mt-3">
 		<div class="row justify-content-center">
 			<div class="col-6 border rounded border-danger">
 				<table class="table table-sm">
@@ -87,27 +91,31 @@
 					<tbody>
 						<tr>
 							<td>Inventario Mercaderia Inicial</td>
-							<td><input type="text" class="form-control form-control-sm"></td>
-							<td><input type="text" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.cantidad.inventario_inicial" type="text" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.precio.inventario_inicial" type="text" class="form-control form-control-sm"></td>
 						</tr>
 						<tr>
 							<td>Adquisiciones</td>
-							<td><input type="text" placeholder="+" class="form-control form-control-sm"></td>
-							<td><input type="text" placeholder="+" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.cantidad.adquicisiones" type="text" placeholder="+" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.precio.adquicisiones" type="text" placeholder="+" class="form-control form-control-sm"></td>
 						</tr>
 						<tr>
 							<td>(-) Ventas</td>
-							<td><input type="text" placeholder="-" class="form-control form-control-sm"></td>
-							<td><input type="text" placeholder="-" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.cantidad.ventas" type="text" placeholder="-" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.precio.ventas" type="text" placeholder="-" class="form-control form-control-sm"></td>
 						</tr>
 						<tr>
 							<td>Inv. Final Mercaderia Inicial</td>
-							<td><input type="text" class="form-control form-control-sm"></td>
-							<td><input type="text" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.cantidad.inventario_final" type="text" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.precio.inventario_final" type="text" class="form-control form-control-sm"></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
+		</div>
+
+		<div v-if="!transaccion.ingreso.edit && !transaccion.egreso.edit " class="row justify-content-center mt-2">
+			<a href="" class="btn btn-primary" @click.prevent="guardarKardex()">GUARDAR KARDEX</a>
 		</div>
 		
 	</div>

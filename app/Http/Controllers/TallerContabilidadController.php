@@ -15,11 +15,146 @@ use App\Contabilidad\DGRDebe;
 use App\Contabilidad\DGRHaber;
 use App\Contabilidad\DGRegistro;
 use App\Contabilidad\DiarioGeneral;
+use App\Contabilidad\KPRegistro;
+use App\Contabilidad\KardexPromedio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TallerContabilidadController extends Controller
 {
+    public function kardexPromedio(Request $request)
+    {
+        $id                 = Auth::id();
+        $taller_id          = $request->id;
+        $kardex             = $request->kardex_promedio;
+        $kardexCompro       = KardexPromedio::where('user_id',$id)->where('taller_id', $taller_id)->count();
+        if ($kardexCompro  == 0) {
+        // $contenido          = TallerContabilidad::select('enunciado')->where('taller_id', $taller_id)->firstOrFail();
+        $kardex_promedio            = new KardexPromedio;
+        $kardex_promedio->taller_id            = $taller_id;
+        $kardex_promedio->user_id              = $id;
+        $kardex_promedio->nombre               = $request->nombre;
+        $kardex_promedio->producto             = $request->producto;
+        // $kardex_promedio->enunciado         = $contenido->enunciado;
+        $kardex_promedio->inv_inicial_cantidad = $request->inv_inicial_cantidad;
+        $kardex_promedio->adquisicion_cantidad = $request->adquisicion_cantidad;
+        $kardex_promedio->ventas_cantidad      = $request->ventas_cantidad;
+        $kardex_promedio->inv_final_cantidad   = $request->inv_final_cantidad;
+        $kardex_promedio->inv_inicial_precio   = $request->inv_inicial_precio;
+        $kardex_promedio->adquisicion_precio   = $request->adquisicion_precio;
+        $kardex_promedio->ventas_precio        = $request->ventas_precio;
+        $kardex_promedio->inv_final_precio     = $request->inv_final_precio;
+        $kardex_promedio->save();
+
+        $o = KardexPromedio::where('user_id', $id)->get()->last(); 
+
+        foreach ($kardex as $key => $kardex_promedio) {
+                  $datos=array(
+                     'kardex_promedio_id'  => $o->id,
+                     'fecha'               => $kardex_promedio['fecha'],
+                     'movimiento'          => $kardex_promedio['movimiento'],
+                     'tipo'                 => $kardex_promedio['tipo'],
+                     'ingreso_cantidad'    => $kardex_promedio['ingreso_cantidad'],
+                     'ingreso_precio'      => $kardex_promedio['ingreso_precio'],
+                     'ingreso_total'       => $kardex_promedio['ingreso_total'],
+                     'egreso_cantidad'     => $kardex_promedio['egreso_cantidad'],
+                     'egreso_precio'       => $kardex_promedio['egreso_precio'],
+                     'egreso_total'        => $kardex_promedio['egreso_total'],
+                     'existencia_cantidad' => $kardex_promedio['existencia_cantidad'],
+                     'existencia_precio'   => $kardex_promedio['existencia_precio'],
+                     'existencia_total'    => $kardex_promedio['existencia_total'],
+                     'created_at'          => now(),
+                     'updated_at'          => now(),
+                  );
+                  KPRegistro::insert($datos);
+            }
+         return response(array(
+                'success' => true,
+                'estado'  => 'guardado',
+                'message' => 'Kardex Promedio creado correctamente'
+            ),200,[]);
+        }elseif($kardexCompro  == 1){
+        $ids                                 = [];
+        $kardexComprob                       = KardexPromedio::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        $kardexComprob->nombre               = $request->nombre;
+        $kardexComprob->producto             = $request->producto;
+        // $kardexComprob->enunciado         = $contenido->enunciado;
+        $kardexComprob->inv_inicial_cantidad = $request->inv_inicial_cantidad;
+        $kardexComprob->adquisicion_cantidad = $request->adquisicion_cantidad;
+        $kardexComprob->ventas_cantidad      = $request->ventas_cantidad;
+        $kardexComprob->inv_final_cantidad   = $request->inv_final_cantidad;
+        $kardexComprob->inv_inicial_precio   = $request->inv_inicial_precio;
+        $kardexComprob->adquisicion_precio   = $request->adquisicion_precio;
+        $kardexComprob->ventas_precio        = $request->ventas_precio;
+        $kardexComprob->inv_final_precio     = $request->inv_final_precio;
+        $kardexComprob->save();
+
+
+        $registros= KPRegistro::where('kardex_promedio_id', $kardexComprob->id)->get();
+        
+        foreach($registros as $regis){
+                $ids[]=$regis->id;
+        }
+        $deleteRegistros = KPRegistro::destroy($ids);
+        $o = KardexPromedio::where('user_id', $id)->get()->last(); 
+         foreach ($kardex as $key => $kardex_promedio) {
+                    $datos=array(
+                    'kardex_promedio_id'  => $o->id,
+                     'fecha'               => $kardex_promedio['fecha'],
+                     'movimiento'          => $kardex_promedio['movimiento'],
+                     'tipo'                 => $kardex_promedio['tipo'],
+                     'ingreso_cantidad'    => $kardex_promedio['ingreso_cantidad'],
+                     'ingreso_precio'      => $kardex_promedio['ingreso_precio'],
+                     'ingreso_total'       => $kardex_promedio['ingreso_total'],
+                     'egreso_cantidad'     => $kardex_promedio['egreso_cantidad'],
+                     'egreso_precio'       => $kardex_promedio['egreso_precio'],
+                     'egreso_total'        => $kardex_promedio['egreso_total'],
+                     'existencia_cantidad' => $kardex_promedio['existencia_cantidad'],
+                     'existencia_precio'   => $kardex_promedio['existencia_precio'],
+                     'existencia_total'    => $kardex_promedio['existencia_total'],
+                     'created_at'          => now(),
+                     'updated_at'          => now(),
+                  );
+                  KPRegistro::insert($datos);
+            }
+
+
+
+             return response(array(
+                'success' => true,
+                'estado' => 'actualizado',
+                'message' => 'Balance de Comprobacion Ajustado actualizado correctamente'
+            ),200,[]);
+
+        }
+    }
+
+    public function obtenerKardexPromedio(Request $request)
+    {
+        $id         = Auth::id();
+        $taller_id  = $request->id;
+        $kardexpro = KardexPromedio::where('user_id',$id)->where('taller_id', $taller_id)->count();
+        // $registros  = [];
+        if ($kardexpro  == 1) {
+            $kardexPromedio = KardexPromedio::select('id', 'nombre', 'producto', 'inv_inicial_cantidad', 'adquisicion_cantidad', 'ventas_cantidad', 'inv_final_cantidad', 'inv_inicial_precio', 'adquisicion_precio', 'ventas_precio', 'inv_final_precio',)->where('user_id',$id)->where('taller_id', $taller_id)->first();
+
+            $obtener       = KPRegistro::select('fecha', 'movimiento', 'tipo', 'ingreso_cantidad', 'ingreso_precio', 'ingreso_total', 'egreso_cantidad', 'egreso_precio','egreso_total','existencia_cantidad','existencia_precio','existencia_total')->where('kardex_promedio_id', $kardexPromedio->id)->get();
+        
+            return response(array(
+                'datos' => true,
+                'informacion' => $kardexPromedio,
+                'kardex_promedio' => $obtener
+            ),200,[]);
+
+         }else{
+             return response(array(
+                'datos' => false,
+            ),200,[]);
+
+         }
+    }
+
+
     public function balanceAjustado(Request $request)
     {
         $id                 = Auth::id();
