@@ -4863,10 +4863,6 @@ const librocaja = new Vue({
           toastr.error("El campo Detalle es Obligatorio", "Smartmoodle", {
             "timeOut": "3000"
           });
-      }else if(this.caja.debe.trim() !='' && this.caja.haber.trim() !=''){
-          toastr.error("No puede llenar ambos campos de debe y haber", "Smartmoodle",{
-            "timeOut": "30000"
-          });
       }else if(this.caja.saldo.trim()===''){
         toastr.error("Ingrese el Saldo", "Smarmoddle", {
           "timeOut": "3000"
