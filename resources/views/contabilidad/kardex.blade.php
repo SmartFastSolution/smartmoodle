@@ -1,18 +1,19 @@
 <div id="kardex" class="border border-danger p-4">
-{{-- 	<div class="float-left">
-		<select class="custom-select" name="" id="">
-			<option value="">COCINAS</option>
-			<option value="">AIRE ACONDICIONADO</option>
-			<option value="">MESA</option>
+	<div class="float-left">
+		<select v-model="producto_id" class="custom-select" name="" id="" @change="obtenerKardexFifo()">
+			<option disabled selected value="">ELIGE UN PRODUCTO</option>
+			<option :value="1">COCINAS</option>
+			<option :value="2">AIRE ACONDICIONADO</option>
+			<option :value="3">MESA</option>
 		</select>
-	</div><br><br> --}}
+	</div><br><br>
 	<h1 class="text-center font-weight-bold text-danger">KARDEX</h1>
 	<h5 class="text-center font-weight-bold text-info">METODO FIFO</h5>
 	<div class="row justify-content-center mb-2">
 		<div class="col-5">
-	<input type="" name="" placeholder="NOMBRE" class="form-control text-center">
+	<input  v-model="nombre"  type="" name="" placeholder="NOMBRE" class="form-control text-center">
 
-	<input type="" name="" placeholder="PRODUCTO" class="form-control text-center">
+	<input v-model="producto"   type="" name="" placeholder="PRODUCTO" class="form-control text-center">
 			
 		</div>
 	</div>
@@ -96,7 +97,7 @@
 
 	</div>
 	<div class="col-12 mt-3">
-		<div class="row justify-content-center">
+<div class="row justify-content-center">
 			<div class="col-6 border rounded border-danger">
 				<table class="table table-sm">
 					<thead>
@@ -109,23 +110,23 @@
 					<tbody>
 						<tr>
 							<td>Inventario Mercaderia Inicial</td>
-							<td><input type="text" class="form-control form-control-sm"></td>
-							<td><input type="text" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.cantidad.inventario_inicial" type="text" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.precio.inventario_inicial" type="text" class="form-control form-control-sm"></td>
 						</tr>
 						<tr>
 							<td>Adquisiciones</td>
-							<td><input type="text" class="form-control form-control-sm"></td>
-							<td><input type="text" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.cantidad.adquicisiones" type="text" placeholder="+" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.precio.adquicisiones" type="text" placeholder="+" class="form-control form-control-sm"></td>
 						</tr>
 						<tr>
 							<td>(-) Ventas</td>
-							<td><input type="text" placeholder="-" class="form-control form-control-sm"></td>
-							<td><input type="text" placeholder="-" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.cantidad.ventas" type="text" placeholder="-" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.precio.ventas" type="text" placeholder="-" class="form-control form-control-sm"></td>
 						</tr>
 						<tr>
 							<td>Inv. Final Mercaderia Inicial</td>
-							<td><input type="text" class="form-control form-control-sm"></td>
-							<td><input type="text" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.cantidad.inventario_final" type="text" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.precio.inventario_final" type="text" class="form-control form-control-sm"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -133,6 +134,9 @@
 		</div>
 		
 	</div>
+		<div class="col-2 mt-2">
+			<a href="" class="btn btn-primary" @click.prevent="guardarKardex()">GUARDAR KARDEX</a>
+		</div>
 </div>
 
 <div v-if="ejercicio.length > 0">
