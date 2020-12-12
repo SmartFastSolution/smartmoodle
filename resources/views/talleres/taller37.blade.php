@@ -83,6 +83,8 @@
             <div class="list-group" id="list-tab" role="tablist">
                 <a class="list-group-item list-group-item-action active" id="list-kardex-list" data-toggle="list"
                     href="#list-kardex" role="tab" aria-controls="kardex">Kardex</a>
+                <a class="list-group-item list-group-item-action " id="list-kardex-promedio-list" data-toggle="list"
+                    href="#list-kardex-promedio" role="tab" aria-controls="kardex-promedio">Kardex Promedio</a>
                 <a class="list-group-item list-group-item-action " id="list-diario-list" data-toggle="list"
                     href="#list-diario" role="tab" aria-controls="home">Balance Inicial</a>
                 <a class="list-group-item list-group-item-action" id="list-balance_comp-list" data-toggle="list"
@@ -95,6 +97,7 @@
                     href="#list-libro-caja" role="tab" aria-controls="libro-caja">Libro Caja</a>
                 <a class="list-group-item list-group-item-action" id="list-arqueo-caja-list" data-toggle="list"
                     href="#list-arqueo-caja" role="tab" aria-controls="arqueo-caja">Arqueo Caja</a>
+
             </div>
         </div>
         <div class="col-12 col-sm-12 col-md-10">
@@ -102,6 +105,10 @@
                 <div class="tab-pane show active fade" id="list-kardex" role="tabpanel"
                     aria-labelledby="list-kardex-list">
                     @include('contabilidad.kardex')
+                </div>
+                <div class="tab-pane fade" id="list-kardex-promedio" role="tabpanel"
+                    aria-labelledby="list-kardex-promedio-list">
+                    @include('contabilidad.kardex_promedio')
                 </div>
                 <div class="tab-pane fade border border-danger p-4" id="list-diario" role="tabpanel"
                     aria-labelledby="list-diario-list">
@@ -132,12 +139,12 @@
                     aria-labelledby="list-balance-ajustado-list">
                     @include('contabilidad.balanceajustado')
                 </div>
-
                 <div class="tab-pane fade" id="list-libro-caja" role="tabpanel" aria-labelledby="list-libro-caja-list">
                     @include('contabilidad.librocaja')
 
                 </div>
-                <div class="tab-pane fade" id="list-arqueo-caja" role="tabpanel" aria-labelledby="list-arqueo-caja-list">
+                <div class="tab-pane fade" id="list-arqueo-caja" role="tabpanel"
+                    aria-labelledby="list-arqueo-caja-list">
                     @include('contabilidad.arqueocaja')
 
                 </div>

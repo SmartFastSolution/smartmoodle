@@ -296,12 +296,14 @@ route::post('/sistema/admin/taller37/{idtaller}', 'TallerEstudianteController@st
 route::post('/sistema/admin/taller/balance_inicial', 'TallerContabilidadController@balance_inicial')->name('balance_inicial');
 
 route::post('/sistema/admin/taller/balance-obtener-comprobacion', 'TallerContabilidadController@obtenerBalanceCompro')->name('balance.obtenercomprobacion');
+route::post('/sistema/admin/taller/kardex-obtener-promedio', 'TallerContabilidadController@obtenerKardexPromedio')->name('kardex.obtenerkardexpromedio');
 
 route::post('/sistema/admin/taller/balance-obtener-ajustado', 'TallerContabilidadController@obtenerBalanceAjustado')->name('balance.obtenerajustado');
 
 route::post('/sistema/admin/taller/balance-ajustado', 'TallerContabilidadController@balanceAjustado')->name('balance.balance-ajustado');
 
 route::post('/sistema/admin/taller/balance-comprobacion', 'TallerContabilidadController@balanceComprobacion')->name('balance.comprobacion');
+route::post('/sistema/admin/taller/kardex-promedio', 'TallerContabilidadController@kardexPromedio')->name('kardex.promedio');
 
 route::post('/sistema/admin/taller/b_inicial_diario', 'TallerContabilidadController@b_inicial_diario')->name('b_inicial_diario');
 

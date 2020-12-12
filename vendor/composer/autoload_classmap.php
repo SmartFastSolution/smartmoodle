@@ -163,6 +163,8 @@ return array(
     'App\\Contabilidad\\DGRegistro' => $baseDir . '/app/Contabilidad/DGRegistro.php',
     'App\\Contabilidad\\Diario' => $baseDir . '/app/Contabilidad/Diario.php',
     'App\\Contabilidad\\DiarioGeneral' => $baseDir . '/app/Contabilidad/DiarioGeneral.php',
+    'App\\Contabilidad\\KPRegistro' => $baseDir . '/app/Contabilidad/KPRegistro.php',
+    'App\\Contabilidad\\KardexPromedio' => $baseDir . '/app/Contabilidad/KardexPromedio.php',
     'App\\Contenido' => $baseDir . '/app/Contenido.php',
     'App\\Curso' => $baseDir . '/app/Curso.php',
     'App\\Distribuciondo' => $baseDir . '/app/Distribuciondo.php',

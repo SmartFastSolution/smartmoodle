@@ -1,13 +1,26 @@
 <div id="kardex" class="border border-danger p-4">
+{{-- 	<div class="float-left">
+		<select class="custom-select" name="" id="">
+			<option value="">COCINAS</option>
+			<option value="">AIRE ACONDICIONADO</option>
+			<option value="">MESA</option>
+		</select>
+	</div><br><br> --}}
 	<h1 class="text-center font-weight-bold text-danger">KARDEX</h1>
 	<h5 class="text-center font-weight-bold text-info">METODO FIFO</h5>
 	<div class="row justify-content-center mb-2">
 		<div class="col-5">
+	<input type="" name="" placeholder="NOMBRE" class="form-control text-center">
+
 	<input type="" name="" placeholder="PRODUCTO" class="form-control text-center">
 			
 		</div>
 	</div>
+{{-- 	<example-component :nombres="{{json_encode(Auth::user()->id)}}">
+	</example-component>
 
+	<example-component :nombres="'ANTHONY'">
+	</example-component> --}}
 	<table class="table table-bordered table-responsive table-sm">
 		<thead class="bg-warning"> 
 		  <tr class="text-center">
@@ -45,7 +58,7 @@
 				<td>@{{ exist.existencia_precio }}</td>
 				<td>@{{ exist.existencia_total }}</td>
 				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso' || transacciones[index][id].tipo == 'inicial' || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'ingreso_venta' || transacciones[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-warning" href="" @click.prevent="editarTransaccion(index, id)"><i class="fas fa-edit"></i></a></td>
-				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso'  || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'ingreso_venta' || transacciones[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-danger" href="" @click.prevent="borrarTransaccion(index, id)"><i class="fas fa-trash"></i></a></td>
+				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso'  || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'inicial'||  transacciones[index][id].tipo == 'ingreso_venta' || transacciones[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-danger" href="" @click.prevent="borrarTransaccion(index, id)"><i class="fas fa-trash"></i></a></td>
 				<td v-else colspan="2"></td>
 			</tr>
 		</tbody>
@@ -75,7 +88,7 @@
 
 	<div class="col-4 align-self-center">
 	{{-- <a class="btn btn-sm btn-primary mr-2" href="">Agregar Inicial</a> --}}
-	<a v-if="transacciones.length == 0" class="btn btn-sm btn-success mr-2" @click.prevent="modalInicial()">Saldo Inicial</a>
+	<a {{-- v-if="transacciones.length == 0" --}} class="btn btn-sm btn-success mr-2" @click.prevent="modalInicial()">Saldo Inicial</a>
 	<a  class="btn btn-sm btn-secondary mr-2" @click.prevent="modalIngreso()" href="#" data-toggle="modal" data-target="#ingreso">INGRESO</a>
 	<a  class="btn btn-sm btn-info mr-2" href="#" @click.prevent="modalEgreso()" data-toggle="modal" data-target="#egreso">EGRESO</a>
 	{{-- <a class="btn btn-sm btn-success mr-2" href="#" @click.prevent="modalCompra()" data-toggle="modal" data-target="#devolucion_compra">Devolucion compra</a>
@@ -236,12 +249,11 @@
 			<a class="btn btn-sm btn-primary mr-2" v-if="actuegreso.estado" href="" @click.prevent="ActualizarEgresos()">Actualizar Transaccion</a>
 			</div>
 			<div v-if="transaccion.egreso.edit" class="row justify-content-center">
-				<div class="col"><input type="text" v-model="transaccion.fecha" class="form-control"></div>
-				<div class="col-4"><input type="text" v-model="transaccion.movimiento" class="form-control"></div>
-				<div class="col"><input type="text" v-model="transaccion.egreso.cantidad" class="form-control"></div>
-				<div class="col"><input type="text" v-model="transaccion.egreso.precio" class="form-control"></div>
-				<div class="col"><a href="" @click.prevent="agregarEgresoNew()" class="btn btn-success">EGRESO</a> <a href="" @click.prevent="agregarNewEgreso('cerrar')" class="btn btn-danger"><i class="fas fa-window-close"></i></a> </div>
-
+			{{-- 	<div class="col"><input type="text"  placeholder="fecha" v-model="transaccion.fecha" class="form-control"></div>
+				<div class="col-4"><input type="text" placeholder="movimiento" v-model="transaccion.movimiento" class="form-control"></div> --}}
+				<div class="col-2"><input type="text" placeholder="cantidad" v-model="transaccion.egreso.cantidad" class="form-control"></div>
+				<div class="col-2"><input type="text" placeholder="precio" v-model="transaccion.egreso.precio" class="form-control"></div>
+				<div class="col-2"><a href="" @click.prevent="agregarEgresoNew()" class="btn btn-success">EGRESO</a> <a href="" @click.prevent="agregarNewEgreso('cerrar')" class="btn btn-danger"><i class="fas fa-window-close"></i></a> </div>
 			</div>
 			</div>
 			</div>
@@ -278,11 +290,11 @@
       </div>
     </div> --}}
 
-    <h1 class="cover-heading">Calculator</h1>
+{{--     <h1 class="cover-heading">Calculator</h1>
 
 
-		    <div id="calApp">
-<!--       <p>@{{ display }}:@{{ prevOps }}:@{{ decimalAdded }}:@{{ total }}</br>CurrentNum=> @{{ currentNum }}</p> -->
+	<div id="calApp">
+      <p>@{{ display }}:@{{ prevOps }}:@{{ decimalAdded }}:@{{ total }}</br>CurrentNum=> @{{ currentNum }}</p>
       <div class="calculator">
           <div class="display font-weight-bold">@{{ display }}</div> 
           <div class="boton operator" @click="clear">C</div>
@@ -307,11 +319,11 @@
           <div class="zero" @click="enterNum(0)">0</div>
           <div class="boton" @click="addDecimal">.</div>
           <div class="boton operator" @click="sum">=</div>
-
-          {{-- <div class="btn ">&nbsp;</div> --}}
-        
+          <div class="btn ">&nbsp;</div>
       </div>
-    </div>
+  </div>
+        
+  --}}
 
 
   {{-- <div class="container"> --}}
