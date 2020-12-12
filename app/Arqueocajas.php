@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Anexocaja extends Model
+class Arqueocajas extends Model
 {
-    public function cajadatos(){
+    public function movimientocajas(){
 
-        return $this->hasMany('App\Cajadatos');
+        return $this->hasMany('App\Movimientocajas');
     }
 
     public function taller(){

@@ -315,6 +315,9 @@ route::post('/sistema/admin/taller/obtenerbalance', 'TallerContabilidadControlle
 //rutas anexos
 route::post('/sistema/admin/taller/anexo_caja', 'TallerContabilidadController@AnexoCaja')->name('anexo_caja');
 route::post('/sistema/admin/taller/anexo-obtener-caja', 'TallerContabilidadController@obtenerLibroCaja')->name('anexocaja.obtener');
+
+route::post('/sistema/admin/taller/arqueo_caja', 'TallerContabilidadController@ArqueoCaja')->name('arqueo_caja');
+route::post('/sistema/admin/taller/arqueo-obtener-caja', 'TallerContabilidadController@obtenerArqueo')->name('arqueocaja.obtener');
 //
 route::post('/sistema/homedoc/respuesta/taller1/{idtaller}', 'TallerDocenteController@store1')->name('taller1.docente');
 route::get('/sistema/admin/create', 'AdminController@admin')->name('admin.create');

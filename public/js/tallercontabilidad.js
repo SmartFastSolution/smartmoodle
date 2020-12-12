@@ -4817,10 +4817,6 @@ const librocaja = new Vue({
           toastr.error("No puede llenar ambos campos de debe y haber", "Smartmoodle",{
             "timeOut": "30000"
           });
-      }else if(this.caja.saldo.trim()===''){
-        toastr.error("Ingrese el Saldo", "Smarmoddle", {
-          "timeOut": "3000"
-      });
       }else {
 
         var caja = {fecha:this.caja.fecha, detalle:this.caja.detalle, debe:this.caja.debe, haber:this.caja.haber, saldo:this.caja.saldo  }
@@ -4863,10 +4859,7 @@ const librocaja = new Vue({
           toastr.error("El campo Detalle es Obligatorio", "Smartmoodle", {
             "timeOut": "3000"
           });
-      }else if(this.caja.saldo.trim()===''){
-        toastr.error("Ingrese el Saldo", "Smarmoddle", {
-          "timeOut": "3000"
-      });
+     
       }else {
        let id                        = this.registro_id;
        this.libros_caja[id].fecha    = this.caja.fecha;
@@ -4925,7 +4918,7 @@ const librocaja = new Vue({
                 id: _this.id_taller, 
                 }).then(response =>{
                   if(response.data.datos == true){
-                    toastr.info("Anexo Caja cargado correctamente", "Smarmoddle", {
+                    toastr.info("Anexo Libro Caja cargado correctamente", "Smarmoddle", {
                       "timeOut": "3000"
                       });
                       this.libros_caja = response.data.banexocaja;
@@ -4939,4 +4932,296 @@ const librocaja = new Vue({
 
   },
 
+})
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////ARQUEO CAJA ANEXO /////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const arqueo_caja = new Vue ({
+  el: "#arqueo_caja",
+  data:{
+    id_taller: taller,  
+    arqueos_caja:[], // array de arqueos de caja
+    arqueo:{
+      cuenta:'',
+      comentario:'',
+      debe:'',
+      haber:'',
+   },
+   suman:{ //suma total del balance Arqueo de Caja
+    debe:0,
+    haber:0,
+  },
+  update: false,
+  registro_id:0
+  },
+  mounted: function() {
+    this.obtenerArqueo();
+  },
+  methods:{
+      totales: function(){
+     this.suman.debe =0;
+     this.suman.haber =0;
+     let regis  = this.arqueos_caja;
+     let total1 =0;
+     let total2  =0;
+
+     regis.forEach(function(obj, index){
+       total1 += Number(obj.debe);
+     });
+     regis.forEach(function(obj, index){
+      total2 += Number(obj.haber);
+    });
+    this.suman.debe  = total1.toFixed(2);
+    this.suman.haber = total2.toFixed(2);
+
+    },
+
+    agregarArqueo(){
+        if(this.arqueo.cuenta.trim()===''){
+          toastr.error("El Detalle es obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else if(this.arqueo.debe.trim() !='' && this.arqueo.haber.trim() !=''){
+          toastr.error("No puede llenar ambos campos de debe y haber", "Smartmoodle",{
+            "timeOut": "30000"
+          });
+        }else{
+           var arqueo ={cuenta:this.arqueo.cuenta, comentario:this.arqueo.comentario, debe:this.arqueo.debe, haber:this.arqueo.haber}
+          this.arqueos_caja.push(arqueo);
+          toastr.success("Registro agregado correctamente", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        this.arqueo.cuenta       =''
+        this.arqueo.comentario   =''
+        this.arqueo.debe         =''
+        this.arqueo.haber        =''
+        this.totales();
+        }
+    }, //fin agregar
+
+    deleteArqueo(index){
+      this.arqueos_caja.splice(index, 1);
+      this.totales();
+    }, //fin delete
+
+    editArqueo(index){
+      this.update = true;
+      this.registro_id         =index;
+      this.arqueo.cuenta       = this.arqueos_caja[index].cuenta;
+      this.arqueo.comentario   = this.arqueos_caja[index].comentario;
+      this.arqueo.debe         = this.arqueos_caja[index].debe;
+      this.arqueo.haber        = this.arqueos_caja[index].haber;
+    }, //fin editar arqueo
+
+    actualizarArqueo(){
+      if(this.arqueo.cuenta.trim() === ''){
+        toastr.error("El detalle es obligatoria ", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+    } else{
+      let id                            = this.registro_id;
+      this.arqueos_caja[id].cuenta      = this.arqueo.cuenta;
+      this.arqueos_caja[id].comentario  = this.arqueo.comentario;
+      this.arqueos_caja[id].debe        = this.arqueo.debe;
+      this.arqueos_caja[id].haber       = this.arqueo.haber;
+
+      this.arqueo.cuenta       =''
+      this.arqueo.comentario   =''
+      this.arqueo.debe         =''
+      this.arqueo.haber        =''
+      this.update              = false;
+      this.totales();
+    }
+    }, //fin de actualizacion arqueo
+     
+    guardarArqueo : function (){
+     
+      if(this.arqueos_caja.length ==0){
+        toastr.error("Debe haber al menos un registro en el Balance", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+      } else {
+        let _this = this;
+        let  url = '/sistema/admin/taller/arqueo_caja';
+             axios.post(url,{
+                         id: _this.id_taller,
+               arqueos_caja: _this.arqueos_caja,
+                       debe: _this.suman.debe,
+                       haber: _this.suman.haber,
+             }).then(response =>{
+              if (response.data.estado == 'guardado') {
+                toastr.success("Arqueo creado correctamente", "Smarmoddle", {
+              "timeOut": "3000"
+              });
+            }else if (response.data.estado == 'actualizado') {
+              toastr.warning("Arqueo actualizado correctamente", "Smarmoddle", {
+            "timeOut": "3000"
+            });
+            }  
+             }).catch(function(error){
+            });
+      }
+
+    },//fin metodo guardar
+
+     obtenerArqueo: function(){
+       let _this= this ;
+       let url ='/sistema/admin/taller/arqueo-obtener-caja';
+           axios.post(url, {
+             id: _this.id_taller,    
+           }).then(response =>{
+            if(response.data.datos == true){
+              toastr.info("Anexo Arqueo de Caja cargado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.arqueos_caja = response.data.arqueocaja;
+                this.totales();
+            }
+          }).catch(function(error){
+
+          });
+
+     } //fin de  ontenerarqueo
+  }
+
+});
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////LIBRO BANCO ANEXO /////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const librosbanco = new Vue({
+  el: "#librosbanco",
+
+  data:{
+    id_taller: taller,
+    nombre:'',
+     lb_banco:[],
+
+      banco:{
+      fecha:'',
+      detalle:'',
+      cheque:'',
+      debe:'',
+      haber:'',
+      saldo:'',
+    },
+    suman:{ //suma total del libro CAJA
+      debe:0,
+      haber:0,
+    },
+    update: false,
+    registro_id:0
+  },
+
+  methods:{
+    totales: function(){
+      this.suman.debe  =0;
+      this.suman.haber =0;
+      let regis  = this.lb_banco;
+      let total1 = 0;
+      let total2 = 0;
+
+      regis.forEach(function(obj, index){
+        total1 += Number(obj.debe);
+      });
+      regis.forEach(function(obj, index){
+       total2 += Number(obj.haber);
+     });
+    
+     this.suman.debe  = total1.toFixed(2);
+     this.suman.haber = total2.toFixed(2);
+   },
+
+   agregarBanco(){
+    if(this.banco.fecha.trim() === ''){
+      toastr.error("La fecha es obligatoria ", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+    }else if(this.banco.detalle.trim() === ''){
+        toastr.error("El campo Detalle es Obligatorio", "Smartmoodle", {
+          "timeOut": "3000"
+        });
+    }else if(this.banco.debe.trim() !='' && this.banco.haber.trim() !=''){
+        toastr.error("No puede llenar ambos campos de debe y haber", "Smartmoodle",{
+          "timeOut": "30000"
+        });
+    }else if(this.banco.saldo.trim()===''){
+      toastr.error("Ingrese el Saldo", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+    
+    }else {
+
+      var banco = {fecha:this.banco.fecha, detalle:this.banco.detalle,cheque:this.banco.cheque, debe:this.banco.debe, haber:this.banco.haber, saldo:this.banco.saldo  }
+      this.lb_banco.push(banco);
+      toastr.success("Registro agregado correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+    this.banco.fecha   =''
+    this.banco.detalle =''
+    this.banco.cheque  =''
+    this.banco.debe    =''
+    this.banco.haber   =''
+    this.banco.saldo   =''
+    this.totales();
+    }
+
+   },  // function agregarbanco end
+
+   deleteLibroBanco(index){
+    this.lb_banco.splice(index, 1);
+    this.totales();
+   },//finde delete
+
+   editLibroBanco(index){
+    this.update = true;
+    this.registro_id   = index;
+    this.banco.fecha   = this.lb_banco[index].fecha;
+    this.banco.detalle = this.lb_banco[index].detalle;
+    this.banco.cheque  = this.lb_banco[index].cheque;
+    this.banco.debe    = this.lb_banco[index].debe;
+    this.banco.haber   = this.lb_banco[index].haber;
+    this.banco.saldo   = this.lb_banco[index].saldo;
+  }, //end edit
+
+  actualizarLibroBanco(){
+
+    if(this.banco.fecha.trim() === ''){
+      toastr.error("La fecha es obligatoria ", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+    }else if(this.banco.detalle.trim() === ''){
+        toastr.error("El campo Detalle es Obligatorio", "Smartmoodle", {
+          "timeOut": "3000"
+        });
+    }else if(this.banco.saldo.trim()===''){
+      toastr.error("Ingrese el Saldo", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+    }else {
+     let id                        = this.registro_id;
+     this.lb_banco[id].fecha       = this.banco.fecha;
+     this.lb_banco[id].detalle     = this.banco.detalle;
+     this.lb_banco[id].cheque      = this.banco.cheque;
+     this.lb_banco[id].debe        = this.banco.debe;
+     this.lb_banco[id].haber       = this.banco.haber;
+     this.lb_banco[id].saldo       = this.banco.saldo;
+
+     this.banco.fecha     =''
+     this.banco.detalle   =''
+     this.banco.cheque    =''
+     this.banco.debe      =''
+     this.banco.haber     =''
+     this.banco.saldo     =''
+     this.update          = false;
+     this.totales();
+     
+    }
+   
+  },//fin de actualizar libro Banco
+
+
+  }
 })

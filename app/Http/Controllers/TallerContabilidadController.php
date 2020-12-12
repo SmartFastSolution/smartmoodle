@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Admin\TallerContabilidad;
 use App\Anexocaja;
+use App\Arqueocajas;
 use App\Cajadatos;
 use App\Contabilidad\BCARegistro;
 use App\Contabilidad\BCRegistro;
@@ -19,6 +20,7 @@ use App\Contabilidad\DGRegistro;
 use App\Contabilidad\DiarioGeneral;
 use App\Contabilidad\KPRegistro;
 use App\Contabilidad\KardexPromedio;
+use App\Movimientocajas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -892,5 +894,99 @@ class TallerContabilidadController extends Controller
         }
 
     }
+
+    public function ArqueoCaja(Request $request){
+        $uid           = Auth::id();
+        $taller_id     = $request->id;
+        $arqueos_cajas = $request->arqueos_caja;
+        $ar  = Arqueocajas::where('user_id', $uid)->where('taller_id',$taller_id)->count();      
+       if($ar == 0){
+          $a = new Arqueocajas;
+          $a->taller_id = $taller_id;
+          $a->user_id   = $uid;
+          $a->totaldebe = $request->debe;
+          $a->totalhaber= $request->haber;
+          $a->save();
+
+          $e= Arqueocajas::where('user_id', $uid)->get()->last();
+
+          foreach($arqueos_cajas as $key=>$i){
+
+            $datos = array(
+                'arqueocaja_id' =>$e->id,
+                'cuenta'        =>$i['cuenta'],
+                'comentario'    =>$i['comentario'],
+                'debe'          =>$i['debe'],
+                'haber'         =>$i['haber'],
+                'created_at'        => now(),
+                'updated_at'        => now(),
+ 
+            );
+            Movimientocajas::insert($datos);
+          }
+          return response(array(
+            'success' => true,
+            'estado'  => 'guardado',
+            'message' => 'Anexo Arqueo de Caja creado correctamente'
+        ),200,[]);
+
+        } elseif($ar == 1){
+            
+            $ids     =[];
+            $ar      = Arqueocajas::where('user_id', $uid)->where('taller_id',$taller_id)->first();
+            $ar->totaldebe      = $request->debe;
+            $ar->totalhaber      = $request->haber;
+            $ar->save();
+
+            $r = Movimientocajas::where('arqueocaja_id', $ar->id)->get();
+
+            foreach($r as $i){
+               $ids[]=$i->id;
+            }
+            $deteletearqueo = Movimientocajas::destroy($ids);
+            $e = Arqueocajas::where('user_id', $uid)->get()->last();
+
+            foreach($arqueos_cajas as $key=>$i){
+                $datos = array(
+                    'arqueocaja_id' =>$e->id,
+                    'cuenta'        =>$i['cuenta'],
+                    'comentario'    =>$i['comentario'],
+                    'debe'          =>$i['debe'],
+                    'haber'         =>$i['haber'],
+                    'created_at'        => now(),
+                    'updated_at'        => now(),
+                     );
+                     Movimientocajas::insert($datos); 
+            }
+            return response(array(
+                'success' => true,
+                'estado'  => 'actualizado',
+                'message' => 'Anexo Arqueo de Caja Actualizado correctamente'
+            ),200,[]);
+        }
+     }
+
+     public function obtenerArqueo (Request $request){
+         $user_id    = Auth::id();
+         $taller_id  = $request->id;
+
+         $ar  = Arqueocajas::where('user_id', $user_id)->where('taller_id',$taller_id)->count();
+
+          if($ar==1){
+            $a = Arqueocajas::where('user_id', $user_id)->where('taller_id',$taller_id)->first();
+            $e = Movimientocajas::select('cuenta','comentario','debe','haber')->where('arqueocaja_id', $a->id)->get();
+         
+            return response(array(
+                'datos' => true,
+                'arqueocaja' => $e,
+            ),200,[]);
+        }else{
+            return response(array(
+               'datos' => false,
+           ),200,[]);
+
+        }
+
+     }
 
 }

@@ -3,26 +3,27 @@
     <h2 class="text-center display-4 font-weight-bold text-danger">Libro Caja</h2>
     <div class="row p-3  mb-2 justify-content-center ">
         <div class="col-5">
-            <input class="form-control" type="text" v-model="nombre" placeholder="Nombre de la Empresa" name="">
+            <input class="form-control text-center" type="text" v-model="nombre" placeholder="Nombre de la Empresa" name="">
         </div>
     </div>
     <div class="form-row mb-3 justify-content-center">
-        <div class="col-xl col-sm-12 mb-sm-1">
-            <input type="date" name="fecha" v-model="caja.fecha" class="form-control" required>
+    <div class="col col-lg-3">
+            <input type="date" name="fecha" v-model="caja.fecha" class="form-control text-center" required>
         </div>
-        <div class="col-xl col-sm-12 mb-sm-1">
+        <div class="col col-lg-5">
             <input type="text" class="form-control" v-model="caja.detalle" placeholder="Detalle">
         </div>
-        <div class="col-xl col-sm-12 mb-sm-1">
+        <div class="col col-lg-1">
             <input type="text" class="form-control" v-model="caja.debe" placeholder="Debe">
         </div>
-        <div class="col-xl col-sm-12 mb-sm-1">
+        <div class="col col-lg-1">
             <input type="text" class="form-control" v-model="caja.haber" placeholder="Haber">
         </div>
-        <div class="col-xl col-sm-12 mb-sm-1">
+        <div class="col col-lg-1">
             <input type="text" class="form-control" v-model="caja.saldo" placeholder="Saldo">
+            <br>
         </div>
-
+     
         <a  v-if="!update" href="#" class="btn btn-outline-danger  " @click.prevent="agregarRegistro()">Agregar Registro</a>
         <a  v-if="update" href="#" class="btn btn-outline-danger  " @click.prevent="actualizarLibroCaja()">Actualizar Registro</a>
     </div>
@@ -40,7 +41,7 @@
         <tbody is="draggable" group="people" :list="libros_caja" tag="tbody">
             <tr v-for="(caja, index) in libros_caja">
                 <td align="left">@{{ caja.fecha}}</td>
-                <td align="left">@{{ caja.detalle}}</td>
+                <td  align="left">@{{ caja.detalle}}</td>
                 <td align="right">@{{ caja.debe}}</td>
                 <td align="right">@{{ caja.haber}}</td>
                 <td align="right">@{{ caja.saldo}}</td>

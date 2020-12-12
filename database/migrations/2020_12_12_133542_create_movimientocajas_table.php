@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCajadatosTable extends Migration
+class CreateMovimientocajasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,17 @@ class CreateCajadatosTable extends Migration
      */
     public function up()
     {
-        Schema::create('cajadatos', function (Blueprint $table) {
+        Schema::create('movimientocajas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedbigInteger('anexocaja_id');
-            $table->string('fecha');
-            $table->string('detalle');
+            $table->unsignedbigInteger('arqueocaja_id');
+            $table->string('cuenta');
+            $table->string('comentario')->nullable();
             $table->string('debe')->nullable();
             $table->string('haber')->nullable();
-            $table->string('saldo')->nullable();
             $table->timestamps();
-
-            $table->foreign('anexocaja_id')
+            $table->foreign('arqueocaja_id')
             ->references('id')
-            ->on('anexocajas')
+            ->on('arqueocajas')
             ->onDelete('cascade');
         });
     }
@@ -37,6 +35,6 @@ class CreateCajadatosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cajadatos');
+        Schema::dropIfExists('movimientocajas');
     }
 }

@@ -379,6 +379,11 @@ class Taller extends Model
           
         return $this->hasMany('App\Anexocaja');
     }
+
+    public function arqueocajas(){
+          
+        return $this->hasMany('App\Arqueocajas');
+    }
     
 }
 

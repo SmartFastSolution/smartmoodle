@@ -2,13 +2,13 @@
 
 @section('css')
 <style type="text/css">
-#calApp {
+/* #calApp {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* height: 100vh;
-  width: 100vw;*/
-}
+    height: 100vh;
+  width: 100vw;
+}*/
 
 .calculator {
     display: grid;
@@ -97,6 +97,9 @@
                     href="#list-libro-caja" role="tab" aria-controls="libro-caja">Libro Caja</a>
                 <a class="list-group-item list-group-item-action" id="list-arqueo-caja-list" data-toggle="list"
                     href="#list-arqueo-caja" role="tab" aria-controls="arqueo-caja">Arqueo Caja</a>
+                <a class="list-group-item list-group-item-action" id="list-libro-banco-list" data-toggle="list"
+                    href="#list-libro-banco" role="tab" aria-controls="libro-banco">Libro Banco</a>
+
 
             </div>
         </div>
@@ -146,6 +149,11 @@
                 <div class="tab-pane fade" id="list-arqueo-caja" role="tabpanel"
                     aria-labelledby="list-arqueo-caja-list">
                     @include('contabilidad.arqueocaja')
+
+                </div>
+                <div class="tab-pane fade" id="list-libro-banco" role="tabpanel"
+                    aria-labelledby="list-libro-banco-list">
+                    @include('contabilidad.librobanco')
 
                 </div>
             </div>
