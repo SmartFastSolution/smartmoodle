@@ -2086,7 +2086,7 @@ const kardex = new Vue({
                 } 
               })
             });
-       this.suman.ingreso_total = in_total;
+       this.suman.ingreso_total = in_total.toFixed(2);
 
        console.log(in_total)
 
@@ -2116,7 +2116,7 @@ const kardex = new Vue({
                 } 
               })
             });
-       this.suman.egreso_total = eg_total;
+       this.suman.egreso_total = eg_total.toFixed(2);
 
        console.log(in_total)
 
@@ -2186,7 +2186,7 @@ const kardex = new Vue({
       // this.ejercicio[i].existencia_cantidad = cantidad;
       // this.ejercicio[i].existencia_precio = precio;
 
-      this.ejercicio[i].ingreso_total = multiplicacion;
+      this.ejercicio[i].ingreso_total = multiplicacion.toFixed(2);
 
     // if (!this.actuingreso.estado) {
     //   if (total1 > multiplicacion) {
@@ -2303,7 +2303,7 @@ const kardex = new Vue({
       // this.ejercicio[i].existencia_cantidad = cantidad;
       // this.ejercicio[i].existencia_precio = precio;
 
-      this.ejercicio[i].ingreso_total = multiplicacion;
+      this.ejercicio[i].ingreso_total = multiplicacion.toFixed(2);
     // if (!this.actuingreso.estado) {
     //   if (total1 > multiplicacion) {
     //     let dife = total1 - multiplicacion;
@@ -2416,7 +2416,7 @@ const kardex = new Vue({
       let multiplicacion =  cantidad * precio;
       // this.modales.modal_ingreso[i].existencia_cantidad = cantidad;
       // this.modales.modal_ingreso[i].existencia_precio = precio;
-      this.modales.modal_ingreso[i].ingreso_total = multiplicacion;
+      this.modales.modal_ingreso[i].ingreso_total = multiplicacion.toFixed(2);
     
       // if (total1 > multiplicacion) {
       //   let dife = total1 - multiplicacion;
@@ -2442,7 +2442,7 @@ const kardex = new Vue({
       let multiplicacion =  cantidad * precio;
       // this.modales.modal_devolucion_venta[i].existencia_cantidad = cantidad;
       // this.modales.modal_devolucion_venta[i].existencia_precio = precio;
-      this.modales.modal_devolucion_venta[i].ingreso_total = multiplicacion;
+      this.modales.modal_devolucion_venta[i].ingreso_total = multiplicacion.toFixed(2);
     
       // if (total1 > multiplicacion) {
       //   let dife = total1 - multiplicacion;
@@ -2509,7 +2509,7 @@ const kardex = new Vue({
       // this.sumas()
       var array = {tipo:'inicial', fecha:this.inicial.fecha, movimiento:this.inicial.movimiento, ingreso_cantidad:'', ingreso_precio:'', egreso_total:'', egreso_cantidad:'', egreso_precio:'', ingreso_total:'', existencia_cantidad:this.inicial.cantidad, existencia_precio: this.inicial.precio, existencia_total:this.inicial.total};
       registro.push(array)
-      this.transacciones.push(registro) ;
+      this.transacciones.unshift(registro) ;
     //   var balance ={ cuenta:this.balance.cuenta, debe:this.balance.debe, haber:this.balance.haber}
     //   this.balances_ajustados.push(balance);
       toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
@@ -2525,6 +2525,25 @@ const kardex = new Vue({
       $('#saldo_inicial').modal('hide');
     }
     this.sumasTotales();
+    this.ultimaExistencia();
+  },
+  ultimaExistencia(){
+
+    let a = this.transacciones.length;
+    let u = this.transacciones.length - 1;
+    if (a >= 1) {
+      let ultima = this.transacciones[u];
+      let exis = [];
+         ultima.forEach(function(existencia, id){
+          let agregar = {tipo:'existencia', fecha:'', movimiento:'', tipo:'existencia', ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:'', egreso_precio:'', egreso_total:'',  existencia_cantidad:existencia.existencia_cantidad, existencia_precio:existencia.existencia_precio, existencia_total:''}
+            exis.push(agregar);
+            });
+         console.log(this.transacciones[u]);
+      this.existencias = JSON.parse(JSON.stringify(exis));
+    }else{
+       this.existencias = [];
+    }
+    
   },
   actualizarInicial(){
         if(this.inicial.fecha.trim() ==='' || this.inicial.movimiento.trim() ==='' || this.inicial.cantidad.trim() ==='' || this.inicial.precio.trim() ==='' ){
@@ -2542,7 +2561,7 @@ const kardex = new Vue({
       let total =  JSON.parse(JSON.stringify(this.inicial.total));
       let newTotal = Number(this.inicial.cantidad) * Number(this.inicial.precio);
       this.inicial.total = newTotal;
-      this.transacciones[0][0].existencia_total = newTotal;
+      this.transacciones[0][0].existencia_total = newTotal.toFixed(2);
       let transacciones = (this.transacciones);
       let identificador = transacciones.length - 1;
           //  if(transacciones.length == 1){
@@ -2634,6 +2653,7 @@ const kardex = new Vue({
       this.inicial.cantidad   = '';
       this.inicial.precio     = '';
       $('#saldo_inicial').modal('hide');
+      this.ultimaExistencia();
      }
 
   },
@@ -2649,8 +2669,8 @@ const kardex = new Vue({
       // let existencia = {id: id ,existencia_cantidad:this.transaccion.ingreso.cantidad, existencia_precio:this.transaccion.ingreso.precio}
       // this.existencias.push(existencia);
       // let registro = [];
-      this.transaccion.ingreso.total = Number(this.transaccion.ingreso.cantidad) * Number(this.transaccion.ingreso.precio);
-      let calculo = Number(this.transaccion.ingreso.total) +  Number(this.totales.total);
+      this.transaccion.ingreso.total = Number(this.transaccion.ingreso.cantidad * this.transaccion.ingreso.precio).toFixed(2);
+      let calculo = Number(this.transaccion.ingreso.total + this.totales.total);
 
       let array = {identificador: id, fecha:'', movimiento:'', tipo:'ingreso', fecha: this.transaccion.fecha, movimiento:this.transaccion.movimiento, ingreso_cantidad:this.transaccion.ingreso.cantidad, ingreso_precio:this.transaccion.ingreso.precio, ingreso_total:this.transaccion.ingreso.total, egreso_cantidad:'', egreso_precio:'', egreso_total:'', existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total:''};
       // this.transacciones.push(this.existencias);
@@ -2753,7 +2773,7 @@ const kardex = new Vue({
 
         let ultimo = this.modales.modal_ingreso.length - 1;
 
-        this.modales.modal_ingreso[ultimo].existencia_total = exi_total;
+        this.modales.modal_ingreso[ultimo].existencia_total = exi_total.toFixed(2);
 
 
 
@@ -2768,7 +2788,9 @@ const kardex = new Vue({
       
       this.transaccion.ingreso.total    = '';
       $('#ingreso').modal('hide');
-      this.sumasTotales()
+      this.sumasTotales();
+      this.ultimaExistencia();
+
 
      }else{
        let prueba = this.modales.modal_devolucion_venta.filter(x => x.tipo == 'ingreso_venta');
@@ -2802,7 +2824,7 @@ const kardex = new Vue({
 
         let ultimo = this.modales.modal_devolucion_venta.length - 1;
 
-        this.modales.modal_devolucion_venta[ultimo].existencia_total = exi_total;
+        this.modales.modal_devolucion_venta[ultimo].existencia_total = exi_total.toFixed(2);
          this.totales.total = exi_total;
         console.log(exi_total);
 
@@ -2820,6 +2842,8 @@ const kardex = new Vue({
         this.transaccion.ingreso.total    = '';
       $('#ingreso').modal('hide');
       this.sumasTotales();
+    this.ultimaExistencia();
+
      }
   },
   editarTransaccion(index, id){
@@ -2843,27 +2867,47 @@ const kardex = new Vue({
     else if(this.transacciones[index][id].tipo == 'ingreso'){
       this.actuingreso.index = index;
       this.actuingreso.estado = true;
+      this.actuegreso.estado = false;
+
       const second = JSON.parse(JSON.stringify(this.transacciones[index]));
       this.ejercicio = second;
     }
       else if(this.transacciones[index][id].tipo == 'egreso'){
       this.actuegreso.index = index;
-      this.actuegreso.estado = true
-      this.actuegreso.tipo = true
+      this.actuegreso.estado = true;
+      this.actuingreso.estado = false;
+      this.actuegreso.tipo = true;
 
       const egre = JSON.parse(JSON.stringify(this.transacciones[index]));
       this.egresos = egre;
     }else if(this.transacciones[index][id].tipo == 'ingreso_venta'){
       this.actuingreso.index = index;
-      this.actuingreso.estado = true
+      this.actuingreso.estado = true;
+      this.actuegreso.estado = false;
+
       const venta = JSON.parse(JSON.stringify(this.transacciones[index]));
       this.ejercicio = venta;
     }
     else if(this.transacciones[index][id].tipo == 'egreso_compra'){
       this.actuegreso.index = index;
-      this.actuegreso.estado = true
+      this.actuegreso.estado = true;
+      this.actuingreso.estado = false;
+
       const comprea = JSON.parse(JSON.stringify(this.transacciones[index]));
       this.egresos = comprea;
+    }
+
+  },
+  cancelarActualizacion(tipo){
+    if (tipo == 'egresos') {
+      this.actuegreso.index = '';
+      this.actuegreso.estado = false;
+      this.actuegreso.tipo = false;
+      this.egresos = [];
+    }else if(tipo == 'ingresos'){
+      this.actuingreso.index = '';
+      this.actuingreso.estado = false;
+      this.ejercicio = [];
     }
 
   },
@@ -2894,7 +2938,7 @@ const kardex = new Vue({
 
         let ultimo = this.ejercicio.length - 1;
 
-        this.ejercicio[ultimo].existencia_total = exi_total;
+        this.ejercicio[ultimo].existencia_total = exi_total.toFixed(2);
 
     let index = this.actuingreso.index;
     this.transacciones[index] = this.ejercicio;
@@ -2902,6 +2946,8 @@ const kardex = new Vue({
     this.actuingreso.estado = false;
     this.actuingreso.index = '';
     this.sumasTotales();
+    this.ultimaExistencia();
+
   },
     nuevoEgreso(metodo){
 
@@ -2942,7 +2988,7 @@ const kardex = new Vue({
     }else {
       if (tipo == 'compra') {
         let id = this.transacciones.length + 1;
-        this.transaccion.egreso.total = Number(this.transaccion.egreso.cantidad) * Number(this.transaccion.egreso.precio);
+        this.transaccion.egreso.total = Number(this.transaccion.egreso.cantidad * this.transaccion.egreso.precio).toFixed(2);
         let calculo = Number(this.totales.total) - Number(this.transaccion.egreso.total);
         let array = {identificacion: id, fecha:'', movimiento:'', tipo:'egreso_compra', fecha:this.transaccion.fecha, movimiento:this.transaccion.movimiento, ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:this.transaccion.egreso.cantidad, egreso_precio:this.transaccion.egreso.precio, egreso_total:this.transaccion.egreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total: ''};
         this.modales.modal_devolucion_compra.push(array)
@@ -2969,7 +3015,7 @@ const kardex = new Vue({
         //  let existencia = {id: id ,cantidad:this.transaccion.egreso.cantidad, precio:this.transaccion.egreso.precio}
         // this.existencias.push(existencia);
         // let registro = [];
-        this.transaccion.egreso.total = Number(this.transaccion.egreso.cantidad) * Number(this.transaccion.egreso.precio);
+        this.transaccion.egreso.total = Number(this.transaccion.egreso.cantidad * this.transaccion.egreso.precio).toFixed(2);
         let calculo = Number(this.totales.total) - Number(this.transaccion.egreso.total);
         let array = {identificacion: id, fecha:'', movimiento:'', tipo:'egreso', fecha:this.transaccion.fecha, movimiento:this.transaccion.movimiento, ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:this.transaccion.egreso.cantidad, egreso_precio:this.transaccion.egreso.precio, egreso_total:this.transaccion.egreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total: ''};
         this.modales.modal_egreso.unshift(array)
@@ -2993,7 +3039,7 @@ const kardex = new Vue({
         let ultimo = egresos.length - 1;
         // let nuevo = egresos.length - 1;
         let total = Number(this.modales.modal_egreso[ultimo].existencia_total);
-        this.transaccion.egreso.total = Number(this.transaccion.egreso.cantidad) * Number(this.transaccion.egreso.precio);
+        this.transaccion.egreso.total = Number(this.transaccion.egreso.cantidad * this.transaccion.egreso.precio).toFixed(2);
         let calculo =  total - Number(this.transaccion.egreso.total);
         let array = {identificacion: id, fecha:'', movimiento:'', tipo:'egreso', fecha:this.transaccion.fecha, movimiento:this.transaccion.movimiento, ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'',  egreso_cantidad:this.transaccion.egreso.cantidad, egreso_precio:this.transaccion.egreso.precio, egreso_total:this.transaccion.egreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total: ''};
         this.modales.modal_egreso.splice(ultimo + 1, 0, array);
@@ -3033,7 +3079,7 @@ const kardex = new Vue({
         let ultimo = this.egresos.length - 1;
         // let nuevo = egresos.length - 1;
         // let total = Number(this.egresos[ultimo].existencia_total);
-        this.transaccion.egreso.total = Number(this.transaccion.egreso.cantidad) * Number(this.transaccion.egreso.precio);
+        this.transaccion.egreso.total = Number(this.transaccion.egreso.cantidad * this.transaccion.egreso.precio).toFixed(2);
         // let calculo =  total - Number(this.transaccion.egreso.total);
         let array = {identificacion: index, fecha:'', movimiento:'', tipo:'egreso', fecha:this.transaccion.fecha, movimiento:this.transaccion.movimiento, ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:this.transaccion.egreso.cantidad, egreso_precio:this.transaccion.egreso.precio, egreso_total:this.transaccion.egreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total: ''};
         this.egresos.splice(ultimo + 1, 0, array);
@@ -3263,7 +3309,7 @@ const kardex = new Vue({
 
         let ultimo = this.modales.modal_egreso.length - 1;
 
-        this.modales.modal_egreso[ultimo].existencia_total = exi_total;
+        this.modales.modal_egreso[ultimo].existencia_total = exi_total.toFixed(2);
          this.totales.total = exi_total;
         console.log(exi_total);
 
@@ -3286,6 +3332,8 @@ const kardex = new Vue({
       this.transaccion.egreso.precio   = '';
       this.transaccion.egreso.total    = '';
       this.sumasTotales();
+    this.ultimaExistencia();
+
 
     },
     agregarDevolucionCompra(){
@@ -3328,7 +3376,7 @@ const kardex = new Vue({
 
         let ultimo = this.modales.modal_devolucion_compra.length - 1;
 
-        this.modales.modal_devolucion_compra[ultimo].existencia_total = exi_total;
+        this.modales.modal_devolucion_compra[ultimo].existencia_total = exi_total.toFixed(2);
          this.totales.total = exi_total;
         console.log(exi_total);
        this.existencias = JSON.parse(JSON.stringify(exis));
@@ -3353,6 +3401,8 @@ const kardex = new Vue({
       this.transaccion.egreso.precio   = '';
       this.transaccion.egreso.total    = '';
       this.sumasTotales();
+    this.ultimaExistencia();
+
 
     }, 
      actualEgre(id, tipo){
@@ -3372,7 +3422,7 @@ const kardex = new Vue({
       // this.modales.modal_devolucion_compra[i].existencia_cantidad = cantidad;
       // this.modales.modal_devolucion_compra[i].existencia_precio = precio;
 
-    this.modales.modal_devolucion_compra[i].egreso_total = multiplicacion;
+    this.modales.modal_devolucion_compra[i].egreso_total = multiplicacion.toFixed(2);
       if (total1 > multiplicacion) {
         let dife = total1 - multiplicacion;
         let suma = exis + dife  
@@ -3382,7 +3432,7 @@ const kardex = new Vue({
         let suma =exis - adi  
         this.totales.subtotal = suma
       }
-    this.modales.modal_devolucion_compra[i].existencia_total = this.totales.subtotal;
+    // this.modales.modal_devolucion_compra[i].existencia_total = this.totales.subtotal;
         toastr.error("Datos Actualizado", "Smarmoddle", {
         "timeOut": "3000"
         });
@@ -3404,7 +3454,7 @@ const kardex = new Vue({
       // this.modales.modal_egreso[i].existencia_cantidad = cantidad;
       // this.modales.modal_egreso[i].existencia_precio = precio;
 
-    this.modales.modal_egreso[i].egreso_total = multiplicacion;
+    this.modales.modal_egreso[i].egreso_total = multiplicacion.toFixed(2);
       if (total1 > multiplicacion) {
         let dife = total1 - multiplicacion;
         let suma = exis + dife  
@@ -3414,7 +3464,7 @@ const kardex = new Vue({
         let suma =exis - adi  
         this.totales.subtotal = suma
       }
-    this.modales.modal_egreso[ul].existencia_total = this.totales.subtotal;
+    // this.modales.modal_egreso[ul].existencia_total = this.totales.subtotal;
         toastr.error("Datos Actualizado", "Smarmoddle", {
         "timeOut": "3000"
         });
@@ -3432,7 +3482,7 @@ const kardex = new Vue({
       // this.egresos[i].existencia_cantidad = cantidad;
       // this.egresos[i].existencia_precio = precio;
 
-      this.egresos[i].egreso_total = multiplicacion;
+      this.egresos[i].egreso_total = multiplicacion.toFixed(2);
 
     // if (!this.actuegreso.estado) {
 
@@ -3582,7 +3632,7 @@ const kardex = new Vue({
             let cantidad = egreso.egreso_cantidad;
             let precio = egreso.egreso_precio;
             let total = Number(cantidad * precio);
-            existencias_egresos[id].egreso_total = total
+            existencias_egresos[id].egreso_total = total.toFixed(2);
         });
 
       // let existencia = {identificador: id, tipo:'existencia', existencia_cantidad:ingreso[0].existencia_cantidad, existencia_precio:ingreso[0].existencia_precio}
@@ -3611,7 +3661,7 @@ const kardex = new Vue({
 
         let ultimo = this.egresos.length - 1;
 
-        this.egresos[ultimo].existencia_total = exi_total;
+        this.egresos[ultimo].existencia_total = exi_total.toFixed(2);
 
         let index = this.actuegreso.index;
         this.transacciones[index] = this.egresos;
@@ -3620,6 +3670,8 @@ const kardex = new Vue({
         this.actuegreso.tipo = false;
         this.actuegreso.index = '';
         this.sumasTotales();
+       this.ultimaExistencia();
+
         },
     borrarEgresoAct(index, tipo){
       let transacciones = this.transacciones;
@@ -3884,7 +3936,7 @@ const kardex = new Vue({
       // let existencia = {id: id ,existencia_cantidad:this.transaccion.ingreso.cantidad, existencia_precio:this.transaccion.ingreso.precio}
       // this.existencias.push(existencia);
       // let registro = [];
-      this.transaccion.ingreso.total = Number(this.transaccion.ingreso.cantidad) * Number(this.transaccion.ingreso.precio);
+      this.transaccion.ingreso.total = Number(this.transaccion.ingreso.cantidad * this.transaccion.ingreso.precio).toFixed(2);
       let calculo = Number(this.transaccion.ingreso.total) +  Number(this.totales.total);
       let array = {identificador: id, fecha:'', movimiento:'',  tipo:'ingreso_venta', fecha: this.transaccion.fecha, movimiento:this.transaccion.movimiento, ingreso_cantidad:this.transaccion.ingreso.cantidad, ingreso_precio:this.transaccion.ingreso.precio, ingreso_total:this.transaccion.ingreso.total, egreso_cantidad:'', egreso_precio:'', egreso_total:'', existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total:''};
       // this.transacciones.push(this.existencias);
@@ -4012,7 +4064,8 @@ const kardex = new Vue({
                _this.prueba.precio.inventario_final   = response.data.informacion.inv_final_precio;
 
               this.sumasTotales();
-              this.exitenciaFinal();
+       this.ultimaExistencia();
+              
             }else{
                  _this.transacciones = [];
               _this.nombre =  '';
@@ -4026,7 +4079,8 @@ const kardex = new Vue({
                _this.prueba.precio.ventas             = '' ;
                _this.prueba.precio.inventario_final   = '' ;
                   this.sumasTotales();
-                this.exitenciaFinal();
+       this.ultimaExistencia();
+                
             }        
         }).catch(function(error){
 
@@ -4040,9 +4094,16 @@ const kardex = new Vue({
       let u = this.transacciones.length - 1;
 
       if (u == index) {
+
       this.transacciones.splice(index, 1);
+      if (this.transacciones.length == 0) {
+         this.sumasTotales();
+        this.ultimaExistencia();
+        return
+      }
+
       let last = this.transacciones.length - 1;
-        let ultima_transaccion = JSON.parse(JSON.stringify(this.transacciones[last]));
+      let ultima_transaccion = JSON.parse(JSON.stringify(this.transacciones[last]));
 
         let consulta1 = ultima_transaccion.filter(x => x.tipo == 'ingreso');
 
@@ -4052,6 +4113,9 @@ const kardex = new Vue({
             let existencia = {tipo:'existencia', existencia_cantidad:ingreso[0].existencia_cantidad, existencia_precio:ingreso[0].existencia_precio};
             filtro_existencias.push(existencia);
             this.existencias = JSON.parse(JSON.stringify(filtro_existencias));
+            this.sumasTotales();
+            this.ultimaExistencia();
+            
             return
         }
         let consulta2 = ultima_transaccion.filter(x => x.tipo == 'egreso');
@@ -4065,6 +4129,9 @@ const kardex = new Vue({
                 exis.unshift(agregar);
               });
               this.existencias = JSON.parse(JSON.stringify(exis));
+                 this.sumasTotales();
+              this.ultimaExistencia();
+              
               return
 
         }
@@ -4079,6 +4146,9 @@ const kardex = new Vue({
                 exis.push(agregar);
               });
               this.existencias = JSON.parse(JSON.stringify(exis));
+              this.sumasTotales();
+              this.ultimaExistencia();
+              
               return
 
         }
@@ -4090,6 +4160,9 @@ const kardex = new Vue({
               let existencia = { tipo:'existencia', existencia_cantidad:venta[0].existencia_cantidad, existencia_precio:venta[0].existencia_precio}
               filtro_existencias.unshift(existencia);
               this.existencias = JSON.parse(JSON.stringify(filtro_existencias));
+                 this.sumasTotales();
+       this.ultimaExistencia();
+              
               return
         }
         let consulta5 = ultima_transaccion.filter(x => x.tipo == 'inicial');
@@ -4101,6 +4174,9 @@ const kardex = new Vue({
               // let existencia = { tipo:'existencia', existencia_cantidad:filtro_existencias[0].existencia_cantidad, existencia_precio:filtro_existencias[0].existencia_precio}
               // existenciass.unshift(existencia);
               this.existencias = [];
+              this.sumasTotales();
+              this.ultimaExistencia();
+              
               // this.existencias = JSON.parse(JSON.stringify(existenciass));
               return
         }
@@ -4108,6 +4184,9 @@ const kardex = new Vue({
       }else{
         this.transacciones.splice(index, 1);
         this.sumasTotales();
+        this.ultimaExistencia();
+        
+
       }
       
 
@@ -4340,9 +4419,16 @@ const kardex_promedio = new Vue({
       let in_total    = 0;
       let eg_cantidad = 0;
       let eg_total    = 0;
-
+      let conteo = transacciones.length;
+      if (conteo == 0 ) {
+         this.suman.ingreso_cantidad = 0;
+         this.suman.ingreso_total = 0;
+        this.suman.egreso_cantidad = 0;
+         this.suman.egreso_total = 0;
+         return
+      }
         //INGRESO CANTIDAD
-              transacciones.forEach(function(ingreso_cantidad, id){
+            transacciones.forEach(function(ingreso_cantidad, id){
                 let temp = ingreso_cantidad.ingreso_cantidad;
 
                 if (temp != null && temp !=='') {

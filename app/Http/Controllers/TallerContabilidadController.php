@@ -112,7 +112,7 @@ class TallerContabilidadController extends Controller
         $kardexfifo->inv_final_precio     = $request->inv_final_precio;
         $kardexfifo->save();
 
-        $kardexF = KardexFifo::where('user_id', $id)->get()->last();
+        $kardexF = KardexFifo::where('user_id', $id)->where('producto_id', $producto_id)->get()->last();
             foreach ($transacciones as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
                 $regis=array(
                          'kardex_fifo_id'     => $kardexF->id,
@@ -161,7 +161,7 @@ class TallerContabilidadController extends Controller
     {
         $id         = Auth::id();
         $taller_id  = $request->id;
-        $producto_id  = $request->producto_id;
+        $producto_id = $request->producto_id;
         $kardexFifo = KardexFifo::where('user_id',$id)->where('taller_id', $taller_id)->where('producto_id', $producto_id)->count();
         $registros  = [];
         if ($kardexFifo  >= 1) {

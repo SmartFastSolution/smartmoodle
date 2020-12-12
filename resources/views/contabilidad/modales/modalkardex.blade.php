@@ -336,7 +336,8 @@
                       <thead class="bg-warning"> 
                         <tr class="text-center">
                           <th style="vertical-align:middle" rowspan="2">FECHA</th>
-                          <th style="vertical-align:middle" rowspan="2">MOVIMIENTOS</th>
+                          <th width="300" style="vertical-align:middle" rowspan="2">MOVIMIENTOS</th>
+                         
                           <th colspan="3">INGRESOS</th>
                           <th colspan="3">EGRESOS</th>
                           <th colspan="3">EXISTENCIA</th>
@@ -358,7 +359,13 @@
                         <tbody is="draggable" group="modales.modal_devolucion_venta" :list="modales.modal_devolucion_venta" tag="tbody">
                           <tr v-for="(transa, id) in modales.modal_devolucion_venta">
                             <td><input type="text"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
-                            <td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"></td>
+
+                            <td>
+                              <textarea name="" id="" cols="30" rows="30" class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> 
+                                
+                              </textarea>
+                              {{-- <input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
+                            </td>
 
                             <td v-if="transa.tipo == 'existencia'">@{{ transa.ingreso_cantidad }}</td>
                             <td v-if="transa.tipo == 'existencia'">@{{ transa.ingreso_precio }}</td>
@@ -556,7 +563,8 @@
                         <thead class="bg-warning"> 
                           <tr class="text-center">
                             <th style="vertical-align:middle" rowspan="2">FECHA</th>
-                            <th style="vertical-align:middle" rowspan="2">MOVIMIENTOS</th>
+                          <th width="300" style="vertical-align:middle" rowspan="2">MOVIMIENTOS</th>
+                            
                             <th colspan="3">INGRESOS</th>
                             <th colspan="3">EGRESOS</th>
                             <th colspan="3">EXISTENCIA</th>
@@ -577,7 +585,12 @@
                           <tbody is="draggable" group="modales.modal_egreso" :list="modales.modal_egreso" tag="tbody">
                             <tr v-for="(transa, id) in modales.modal_egreso">
                               <td><input type="text"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
-                              <td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"></td>
+                              <td>
+                                  <textarea name="" id="" cols="30" rows="30" class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> 
+                                
+                              </textarea>
+                                {{-- <input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
+                              </td>
                               <td><input type="text"  v-if="transa.ingreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" ></td>
                               <td><input type="text" v-if="transa.ingreso_precio"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" > </td>
                               <td>@{{ transa.ingreso_total }}</td>
@@ -733,7 +746,7 @@
                   <thead class="bg-warning"> 
                     <tr class="text-center">
                       <th style="vertical-align:middle" rowspan="2">FECHA</th>
-                      <th style="vertical-align:middle" rowspan="2">MOVIMIENTOS</th>
+                      <th width="300" style="vertical-align:middle" rowspan="2">MOVIMIENTOS</th>
                       <th colspan="3">INGRESOS</th>
                       <th colspan="3">EGRESOS</th>
                       <th colspan="3">EXISTENCIA</th>
@@ -754,7 +767,10 @@
                     <tbody is="draggable" group="modales.modal_devolucion_compra" :list="modales.modal_devolucion_compra" tag="tbody">
                       <tr v-for="(transa, id) in modales.modal_devolucion_compra">
                         <td><input type="text"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
-                        <td><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"></td>
+                        <td>
+                      <textarea name="" id="" cols="30" rows="30" class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> </textarea>
+                          {{-- <input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
+                        </td>
                         <td><input type="text"  v-if="transa.ingreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" ></td>
                         <td><input type="text" v-if="transa.ingreso_precio"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" > </td>
                         <td>@{{ transa.ingreso_total }}</td>
