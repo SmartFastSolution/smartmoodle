@@ -41,9 +41,9 @@
             <tr v-for="(caja, index) in libros_caja">
                 <td align="left">@{{ caja.fecha}}</td>
                 <td align="left">@{{ caja.detalle}}</td>
-                <td align="left">@{{ caja.debe}}</td>
-                <td align="left">@{{ caja.haber}}</td>
-                <td align="left">@{{ caja.saldo}}</td>
+                <td align="right">@{{ caja.debe}}</td>
+                <td align="right">@{{ caja.haber}}</td>
+                <td align="right">@{{ caja.saldo}}</td>
                 <td align="center" width="50">
                     <a @click.prevent="deleteLibroCaja(index)" class="btn btn-danger">
                         <i class="fas fa-trash-alt"></i>
