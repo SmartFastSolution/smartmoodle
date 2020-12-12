@@ -73,7 +73,7 @@ class TallerContabilidadController extends Controller
         $o = BalanceAjustado::where('user_id', $id)->get()->last(); 
          foreach ($balances as $key => $balance) {
                   $datos=array(
-                     'balance_ajustado_id' => $o->id,
+                     'balance_ajustado_id'     => $o->id,
                      'cuenta'                  => $balance['cuenta'],
                      'debe'                    => $balance['debe'],
                      'haber'                   => $balance['haber'],
@@ -679,11 +679,11 @@ class TallerContabilidadController extends Controller
                'anexocaja_id'      => $a->id,
                'fecha'             =>$lc['fecha'],
                'detalle'           =>$lc['detalle'],
-               'debe'         =>$lc['debe'],
-               'haber'        =>$lc['haber'],
+               'debe'              =>$lc['debe'],
+               'haber'             =>$lc['haber'],
                'saldo'             =>$lc['saldo'],
-               'created_at'              => now(),
-               'updated_at'              => now(),
+               'created_at'        => now(),
+               'updated_at'        => now(),
 
             );
             Cajadatos::insert($datos);
@@ -696,10 +696,10 @@ class TallerContabilidadController extends Controller
 
        } elseif($anexocaja == 1){
         
-        $ids  =[];
-       $accanexo    = Anexocaja::where('user_id', $user_id)->where('taller_id', $taller_id)->first();
-       $accanexo->nombre =$request->nombre;
-       $accanexo->totaldebe = $request->debe;
+        $ids                 =[];
+       $accanexo             = Anexocaja::where('user_id', $user_id)->where('taller_id', $taller_id)->first();
+       $accanexo->nombre     =$request->nombre;
+       $accanexo->totaldebe  = $request->debe;
        $accanexo->totalhaber = $request->haber;
        $accanexo->save();
 
@@ -714,12 +714,12 @@ class TallerContabilidadController extends Controller
         foreach($libros_cajas as $key=>$lc){
 
           $datos = array(
-             'anexocaja_id' => $a->id,
-             'fecha'      =>$lc['fecha'],
-             'detalle'      =>$lc['detalle'],
-             'debe'         =>$lc['debe'],
-             'haber'        =>$lc['haber'],
-             'saldo'        =>$lc['saldo'],
+             'anexocaja_id'  =>$a->id,
+             'fecha'         =>$lc['fecha'],
+             'detalle'       =>$lc['detalle'],
+             'debe'          =>$lc['debe'],
+             'haber'         =>$lc['haber'],
+             'saldo'         =>$lc['saldo'],
              'created_at'              => now(),
              'updated_at'              => now(),
 

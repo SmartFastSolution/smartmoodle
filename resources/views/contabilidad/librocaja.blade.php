@@ -3,7 +3,7 @@
     <h2 class="text-center display-4 font-weight-bold text-danger">Libro Caja</h2>
     <div class="row p-3  mb-2 justify-content-center ">
         <div class="col-5">
-            <input class="form-control" type="text" v-model="nombre" placeholder="Nombre del Anexo" name="">
+            <input class="form-control" type="text" v-model="nombre" placeholder="Nombre de la Empresa" name="">
         </div>
     </div>
     <div class="form-row mb-3 justify-content-center">
@@ -39,11 +39,11 @@
         </thead>
         <tbody is="draggable" group="people" :list="libros_caja" tag="tbody">
             <tr v-for="(caja, index) in libros_caja">
-                <td align="center">@{{ caja.fecha}}</td>
-                <td align="center">@{{ caja.detalle}}</td>
-                <td align="center">@{{ caja.debe}}</td>
-                <td align="center">@{{ caja.haber}}</td>
-                <td align="center">@{{ caja.saldo}}</td>
+                <td align="left">@{{ caja.fecha}}</td>
+                <td align="left">@{{ caja.detalle}}</td>
+                <td align="left">@{{ caja.debe}}</td>
+                <td align="left">@{{ caja.haber}}</td>
+                <td align="left">@{{ caja.saldo}}</td>
                 <td align="center" width="50">
                     <a @click.prevent="deleteLibroCaja(index)" class="btn btn-danger">
                         <i class="fas fa-trash-alt"></i>

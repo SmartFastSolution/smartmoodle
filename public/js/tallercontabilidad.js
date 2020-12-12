@@ -4223,7 +4223,7 @@ const librocaja = new Vue({
        regis.forEach(function(obj, index){
         total2 += Number(obj.haber);
       });
-
+     
       this.suman.debe  = total1.toFixed(2);
       this.suman.haber = total2.toFixed(2);
     },
@@ -4325,7 +4325,6 @@ const librocaja = new Vue({
           let _this = this;
           let url ='/sistema/admin/taller/anexo_caja';
                axios.post(url,{
-
                  id: _this.id_taller,
                  libros_caja:  _this.libros_caja,
                  nombre:       _this.nombre,

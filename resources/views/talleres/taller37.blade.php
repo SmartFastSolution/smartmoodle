@@ -93,6 +93,8 @@
                     href="#list-balance-ajustado" role="tab" aria-controls="balance-ajustado">Balance Ajustado</a>
                 <a class="list-group-item list-group-item-action" id="list-libro-caja-list" data-toggle="list"
                     href="#list-libro-caja" role="tab" aria-controls="libro-caja">Libro Caja</a>
+                <a class="list-group-item list-group-item-action" id="list-arqueo-caja-list" data-toggle="list"
+                    href="#list-arqueo-caja" role="tab" aria-controls="arqueo-caja">Arqueo Caja</a>
             </div>
         </div>
         <div class="col-12 col-sm-12 col-md-10">
@@ -131,9 +133,12 @@
                     @include('contabilidad.balanceajustado')
                 </div>
 
-                <div class="tab-pane fade" id="list-libro-caja" role="tabpanel" 
-                aria-labelledby="list-libro-caja-list">
+                <div class="tab-pane fade" id="list-libro-caja" role="tabpanel" aria-labelledby="list-libro-caja-list">
                     @include('contabilidad.librocaja')
+
+                </div>
+                <div class="tab-pane fade" id="list-arqueo-caja" role="tabpanel" aria-labelledby="list-arqueo-caja-list">
+                    @include('contabilidad.arqueocaja')
 
                 </div>
             </div>
