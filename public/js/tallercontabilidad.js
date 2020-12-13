@@ -2648,6 +2648,7 @@ const kardex = new Vue({
       this.totales.cantidad      = this.inicial.cantidad;
       this.totales.precio        = this.inicial.precio;
       // this.totales.total         = this.inicial.total;
+      this.update = false;
       this.inicial.fecha      = '';
       this.inicial.movimiento = '';
       this.inicial.cantidad   = '';
