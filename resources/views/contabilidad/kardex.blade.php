@@ -11,7 +11,7 @@
 	<h5 class="text-center font-weight-bold text-info">METODO FIFO</h5>
 	<div class="row justify-content-center mb-2">
 		<div class="col-5">
-	<input  v-model="nombre"  type="" name="" placeholder="NOMBRE" class="form-control text-center">
+	<input  v-model="nombre"  type="" name="" placeholder="Nombre de la empresa" class="form-control text-center">
 
 	<input v-model="producto"   type="" name="" placeholder="PRODUCTO" class="form-control text-center">
 			
