@@ -11,8 +11,8 @@
 }
 .calculator {
   display: grid;
-  grid-template-rows: repeat(7, minmax(60px, auto));
-  grid-template-columns: repeat(4, 60px);
+  grid-template-rows: repeat(7, minmax(35px, auto));
+  grid-template-columns: repeat(4, 35px);
   grid-gap: 12px;
   padding: 35px;
   font-family: "Poppins";

@@ -165,9 +165,9 @@
                          Transaccion</a>
                  </div>
                  <div v-else class="row justify-content-around mb-2">
-                     {{-- <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#debe">Crear Transaccion</a> --}}
-                     <a href="#" v-if="diarios.debe.length > 0" class="btn btn-outline-primary" data-toggle="modal" data-target="#porcentajes">Agregar Porcentaje</a>
-                     <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#debe">Agregar
+                     {{-- <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#dg-transaccion">Crear Transaccion</a> --}}
+                <a href="#" v-if="diarios.debe.length > 0" class="btn btn-outline-primary" data-toggle="modal" data-target="#porcentajes">Agregar Porcentaje</a>
+                <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#debe">Agregar
                          Debe</a>
                      <a href="#" class=" btn btn-outline-primary" data-toggle="modal" data-target="#haber">Agregar
                          Haber</a>

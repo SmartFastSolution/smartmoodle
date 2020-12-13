@@ -305,40 +305,56 @@
       </div>
     </div> --}}
 
-{{--     <h1 class="cover-heading">Calculator</h1>
+    {{-- <h1 class="cover-heading">Calculator</h1> --}}
+
+<div class="modal fade" id="calculadoraflotante" tabindex="-1"  role="dialog" aria-labelledby="haberLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content bg-primary">
+            <div class="modal-header">
+                <h5 class="modal-title" id="haberLabel">CALCULADORA</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+   					<div id="calApp">
+				      {{-- <p>@{{ display }}:@{{ prevOps }}:@{{ decimalAdded }}:@{{ total }}</br>CurrentNum=> @{{ currentNum }}</p> --}}
+				      <div class="calculator">
+				          <div class="display font-weight-bold">@{{ display }}</div> 
+				          <div class="boton operator" @click="clear">C</div>
+				          <div class="boton operator" @click="del">DEL</div>
+				          <div class="boton operator" @click="enterOps(4)">÷</div>
+				          <div class="boton operator" @click="enterOps(3)">*</div>
+				       
+				          <div class="boton" @click="enterNum(7)">7</div>
+				          <div class="boton" @click="enterNum(8)">8</div>
+				          <div class="boton" @click="enterNum(9)">9</div>
+				          <div class="boton operator" @click="enterOps(2)">-</div>
+				        
+				          <div class="boton" @click="enterNum(4)">4</div>
+				          <div class="boton" @click="enterNum(5)">5</div>
+				          <div class="boton" @click="enterNum(6)">6</div>
+				          <div class="boton operator" @click="enterOps(1)">+</div>
+				        
+				          <div class="boton" @click="enterNum(1)">1</div>
+				          <div class="boton" @click="enterNum(2)">2</div>
+				          <div class="boton" @click="enterNum(3)">3</div>
+				       
+				          <div class="zero" @click="enterNum(0)">0</div>
+				          <div class="boton" @click="addDecimal">.</div>
+				          <div class="boton operator" @click="sum">=</div>
+				          <div class="btn ">&nbsp;</div>
+				      </div>
+				  </div>
+            </div>
+         
+        </div>
+    </div>
+</div>
 
 
-	<div id="calApp">
-      <p>@{{ display }}:@{{ prevOps }}:@{{ decimalAdded }}:@{{ total }}</br>CurrentNum=> @{{ currentNum }}</p>
-      <div class="calculator">
-          <div class="display font-weight-bold">@{{ display }}</div> 
-          <div class="boton operator" @click="clear">C</div>
-          <div class="boton operator" @click="del">DEL</div>
-          <div class="boton operator" @click="enterOps(4)">÷</div>
-          <div class="boton operator" @click="enterOps(3)">*</div>
-       
-          <div class="boton" @click="enterNum(7)">7</div>
-          <div class="boton" @click="enterNum(8)">8</div>
-          <div class="boton" @click="enterNum(9)">9</div>
-          <div class="boton operator" @click="enterOps(2)">-</div>
         
-          <div class="boton" @click="enterNum(4)">4</div>
-          <div class="boton" @click="enterNum(5)">5</div>
-          <div class="boton" @click="enterNum(6)">6</div>
-          <div class="boton operator" @click="enterOps(1)">+</div>
-        
-          <div class="boton" @click="enterNum(1)">1</div>
-          <div class="boton" @click="enterNum(2)">2</div>
-          <div class="boton" @click="enterNum(3)">3</div>
-       
-          <div class="zero" @click="enterNum(0)">0</div>
-          <div class="boton" @click="addDecimal">.</div>
-          <div class="boton operator" @click="sum">=</div>
-          <div class="btn ">&nbsp;</div>
-      </div>
-  </div>
-        
-  --}}
+ 
 
 
   {{-- <div class="container"> --}}

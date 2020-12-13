@@ -136,9 +136,12 @@
                     </table>
                       <div class="row">
                       <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="bajarExis('mostrar')">Agregar Existencia</a>
+                     <a href="#" class=" btn btn-primary btn-sm float-left mt-3 ml-2" data-toggle="modal" data-target="#calculadoraflotante">CALCULADORA</a>
+
                   </div>
 
                        <div  class="row justify-content-center">
+
                       </div>
                   </div>
                 </div>
