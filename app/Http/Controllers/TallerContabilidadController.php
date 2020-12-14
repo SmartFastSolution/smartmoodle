@@ -19,13 +19,180 @@ use App\Contabilidad\DGRHaber;
 use App\Contabilidad\DGRegistro;
 use App\Contabilidad\DiarioGeneral;
 use App\Contabilidad\KPRegistro;
+use App\Contabilidad\KFRegistro;
+use App\Contabilidad\KFRMovimiento;
 use App\Contabilidad\KardexPromedio;
+
 use App\Movimientocajas;
+
+use App\Contabilidad\KardexFIfo;
+use App\Librobanco;
+use App\Movimientobanco;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TallerContabilidadController extends Controller
 {
+        public function kardexFifo(Request $request)
+    {
+        $id            = Auth::id();
+        $taller_id     = $request->id;
+        $producto_id   = $request->producto_id;
+        $transacciones = $request->kardex_fifo;
+        $conteokardex  = KardexFifo::where('user_id',$id)->where('taller_id', $taller_id)->where('producto_id', $producto_id)->count();
+        if ($conteokardex == 0) { 
+
+        $kardexfifo                       = new KardexFifo;
+        $kardexfifo->taller_id            = $taller_id;
+        $kardexfifo->user_id              = $id;
+        $kardexfifo->producto_id          = $request->producto_id;
+        $kardexfifo->nombre               = $request->nombre;
+        $kardexfifo->producto             = $request->producto;
+        $kardexfifo->inv_inicial_cantidad = $request->inv_inicial_cantidad;
+        $kardexfifo->adquisicion_cantidad = $request->adquisicion_cantidad;
+        $kardexfifo->ventas_cantidad      = $request->ventas_cantidad;
+        $kardexfifo->inv_final_cantidad   = $request->inv_final_cantidad;
+        $kardexfifo->inv_inicial_precio   = $request->inv_inicial_precio;
+        $kardexfifo->adquisicion_precio   = $request->adquisicion_precio;
+        $kardexfifo->ventas_precio        = $request->ventas_precio;
+        $kardexfifo->inv_final_precio     = $request->inv_final_precio;
+        $kardexfifo->save();
+
+        $kardexF = KardexFifo::where('user_id', $id)->get()->last();
+            foreach ($transacciones as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
+                $regis=array(
+                         'kardex_fifo_id'     => $kardexF->id,
+                         'no_registro'        => $key + 1,
+                         // 'comentario'         => $value['comentario'],
+                         // 'fecha'              => $value['debe']['fecha'],
+                         'created_at'         => now(),
+                         'updated_at'         => now(),
+                    );
+                KFRegistro::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
+            }
+            $register = $kardexF->kfRegistro;
+            foreach ($transacciones as $key => $value) {                         ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
+                foreach ($value as $key1 => $value1) {              ////RECORRER TODOS LAS CUENTAS DE DEBE QUE PERTENECEN A UN REGISTRO
+                    $regis1=array(
+                         'k_f_registro_id'     => $register[$key]->id,
+                         'fecha'               => $value1['fecha'],
+                         'movimiento'          => $value1['movimiento'],
+                         'tipo'                => $value1['tipo'],
+                         'ingreso_cantidad'    => $value1['ingreso_cantidad'],
+                         'ingreso_precio'      => $value1['ingreso_precio'],
+                         'ingreso_total'       => $value1['ingreso_total'],
+                         'egreso_cantidad'     => $value1['egreso_cantidad'],
+                         'egreso_precio'       => $value1['egreso_precio'],
+                         'egreso_total'        => $value1['egreso_total'],
+                         'existencia_cantidad' => $value1['existencia_cantidad'],
+                         'existencia_precio'   => $value1['existencia_precio'],
+                         'existencia_total'    => $value1['existencia_total'],
+                         'created_at'          => now(),
+                         'updated_at'          => now(),
+                      );
+                KFRMovimiento::insert($regis1);                             //GURDAR ESAS CUENTAS EN LA TABLA DEBE CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
+                }
+            }                                           //GUARDAR ESE CAMBIO
+             return response(array(                                         //ENVIO DE RESPUESTA
+                    'success' => true,
+                    'estado' => 'guardado',
+                    'message' => 'Kardex Fifo creado correctamente'
+                ),200,[]);
+            
+    }else{
+    $kardexfifod  = KardexFifo::where('user_id',$id)->where('taller_id', $taller_id)->where('producto_id', $producto_id)->first();
+    $idkardex = $kardexfifod->id;
+    $kardexfifod->delete();
+       $kardexfifo                       = new KardexFifo;
+        $kardexfifo->id                    = $idkardex;
+        $kardexfifo->taller_id            = $taller_id;
+        $kardexfifo->user_id              = $id;
+        $kardexfifo->producto_id          = $request->producto_id;
+        $kardexfifo->nombre               = $request->nombre;
+        $kardexfifo->producto             = $request->producto;
+        $kardexfifo->inv_inicial_cantidad = $request->inv_inicial_cantidad;
+        $kardexfifo->adquisicion_cantidad = $request->adquisicion_cantidad;
+        $kardexfifo->ventas_cantidad      = $request->ventas_cantidad;
+        $kardexfifo->inv_final_cantidad   = $request->inv_final_cantidad;
+        $kardexfifo->inv_inicial_precio   = $request->inv_inicial_precio;
+        $kardexfifo->adquisicion_precio   = $request->adquisicion_precio;
+        $kardexfifo->ventas_precio        = $request->ventas_precio;
+        $kardexfifo->inv_final_precio     = $request->inv_final_precio;
+        $kardexfifo->save();
+
+        $kardexF = KardexFifo::where('user_id', $id)->where('producto_id', $producto_id)->get()->last();
+            foreach ($transacciones as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
+                $regis=array(
+                         'kardex_fifo_id'     => $kardexF->id,
+                         'no_registro'        => $key + 1,
+                         // 'comentario'         => $value['comentario'],
+                         // 'fecha'              => $value['debe']['fecha'],
+                         'created_at'         => now(),
+                         'updated_at'         => now(),
+                    );
+                KFRegistro::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
+            }
+            $register = $kardexF->kfRegistro;
+            foreach ($transacciones as $key => $value) {                         ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
+                foreach ($value as $key1 => $value1) {              ////RECORRER TODOS LAS CUENTAS DE DEBE QUE PERTENECEN A UN REGISTRO
+                    $regis1=array(
+                         'k_f_registro_id'     => $register[$key]->id,
+                         'fecha'               => $value1['fecha'],
+                         'movimiento'          => $value1['movimiento'],
+                         'tipo'                => $value1['tipo'],
+                         'ingreso_cantidad'    => $value1['ingreso_cantidad'],
+                         'ingreso_precio'      => $value1['ingreso_precio'],
+                         'ingreso_total'       => $value1['ingreso_total'],
+                         'egreso_cantidad'     => $value1['egreso_cantidad'],
+                         'egreso_precio'       => $value1['egreso_precio'],
+                         'egreso_total'        => $value1['egreso_total'],
+                         'existencia_cantidad' => $value1['existencia_cantidad'],
+                         'existencia_precio'   => $value1['existencia_precio'],
+                         'existencia_total'    => $value1['existencia_total'],
+                         'created_at'          => now(),
+                         'updated_at'          => now(),
+                      );
+                KFRMovimiento::insert($regis1);                             //GURDAR ESAS CUENTAS EN LA TABLA DEBE CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
+                }
+            }                                           //GUARDAR ESE CAMBIO
+             return response(array(                                         //ENVIO DE RESPUESTA
+                    'success' => true,
+                    'estado' => 'actualizado',
+                    'message' => 'Kardex Fifo actualizado correctamente'
+                ),200,[]);
+            
+
+
+    }
+}
+    public function obtenerKardexFifo(Request $request)
+    {
+        $id         = Auth::id();
+        $taller_id  = $request->id;
+        $producto_id = $request->producto_id;
+        $kardexFifo = KardexFifo::where('user_id',$id)->where('taller_id', $taller_id)->where('producto_id', $producto_id)->count();
+        $registros  = [];
+        if ($kardexFifo  >= 1) {
+              $kardex  = KardexFifo::select('id', 'nombre', 'producto', 'inv_inicial_cantidad', 'adquisicion_cantidad', 'ventas_cantidad', 'inv_final_cantidad', 'inv_inicial_precio', 'adquisicion_precio', 'ventas_precio', 'inv_final_precio')->where('user_id',$id)->where('taller_id', $taller_id)->where('producto_id', $producto_id)->first();
+
+        $obtener = KFRegistro::where('kardex_fifo_id', $kardex->id)->get();
+            foreach ($obtener as $key => $registro) {
+                $registros[$key]= $registro->kfrMovimientos;
+            }
+            return response(array(
+                'datos' => true,
+                'kardex_fifo' => $registros,
+                'informacion' => $kardex
+            ),200,[]);
+
+         }else{
+             return response(array(
+                'datos' => false,
+            ),200,[]);
+
+         }
+    }
+
     public function kardexPromedio(Request $request)
     {
         $id                 = Auth::id();
@@ -121,9 +288,6 @@ class TallerContabilidadController extends Controller
                   );
                   KPRegistro::insert($datos);
             }
-
-
-
              return response(array(
                 'success' => true,
                 'estado' => 'actualizado',
@@ -679,12 +843,17 @@ class TallerContabilidadController extends Controller
         $registro = $request->registro;
 
         $diariogeneral = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->count();
-        if ($diariogeneral == 1) { 
+if ($diariogeneral == 1){ 
         $cu = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
-
         $cuenta = DGRegistro::where('diario_general_id',$cu->id)->count();
+
                                              // SI YA ESTA CREADO EL REGISTRO DEL DIARIO GENERAL, PARA ESO PRIMERO DEBE TENER CONCLUIDO EL BALANCE INICIAL
      if ($cuenta == 0) {
+
+        // SI YA ESTA CREADO EL REGISTRO DEL DIARIO GENERAL, PARA ESO PRIMERO DEBE TENER CONCLUIDO EL BALANCE INICIAL
+        
+    if ($cuenta == 0) {
+
         $diariog = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
         
         $debe =[];
@@ -697,8 +866,8 @@ class TallerContabilidadController extends Controller
                      'fecha'              => $value['debe'][0]['fecha'],
                      'created_at'         => now(),
                      'updated_at'         => now(),
-                  );
-                  DGRegistro::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
+                );
+                DGRegistro::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
         }
         $register = $diariog->dgRegistro;
         foreach ($registro as $key => $value) {                         ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
@@ -711,7 +880,7 @@ class TallerContabilidadController extends Controller
                      'created_at'         => now(),
                      'updated_at'         => now(),
                   );
-                  DGRDebe::insert($regis1);                             //GURDAR ESAS CUENTAS EN LA TABLA DEBE CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
+                DGRDebe::insert($regis1);                             //GURDAR ESAS CUENTAS EN LA TABLA DEBE CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
             }
               foreach ($value['haber'] as $key2 => $value2) {           ////RECORRER TODOS LAS CUENTAS DE HABER QUE PERTENECEN A UN REGISTRO
                 $regis2=array(
@@ -791,7 +960,7 @@ class TallerContabilidadController extends Controller
             ),200,[]);
         }
     }
-
+    }
     public function AnexoCaja(Request $request)
     {
        $user_id = Auth::id();
@@ -988,5 +1157,116 @@ class TallerContabilidadController extends Controller
         }
 
      }
+
+
+
+     public function LibroBanco (Request $request){
+
+       $uid = Auth::id();
+       $taller_id  = $request->id;
+       $nombre     = $request->nombre;
+       $lb_bancos  = $request->lb_banco;
+       $lb         =Librobanco::where('user_id', $uid)->where('taller_id', $taller_id)->count();
+       if($lb == 0){
+         $b = new Librobanco;
+         $b->taller_id = $taller_id;
+         $b->user_id   = $uid;
+         $b->nombre    = $nombre;
+         $b->totaldebe      = $request->debe;
+         $b->totalhaber     = $request->haber;    
+         $b->save();
+         
+         $mb = Librobanco::where('user_id', $uid)->get()->last();
+
+         foreach($lb_bancos as $key=>$i){
+
+            $datos = array (
+                'librobanco_id'  =>$mb->id,
+                'fecha'             =>$i['fecha'],
+                'detalle'           =>$i['detalle'],
+                'cheque'            =>$i['cheque'],
+                'debe'              =>$i['debe'],
+                'haber'             =>$i['haber'],
+                'saldo'             =>$i['saldo'],
+                'created_at'        => now(),
+                'updated_at'        => now(),
+            );
+            Movimientobanco::insert($datos);
+         }
+         return response(array(
+            'success' => true,
+            'estado'  => 'guardado',
+            'message' => 'Anexo Libro Banco creado correctamente'
+        ),200,[]);
+
+
+       }elseif($lb == 1){
+
+        $ids           =[];
+        $lb            =Librobanco::where('user_id', $uid)->where('taller_id', $taller_id)->first();
+        $lb->nombre    =$request->nombre;
+        $lb->totaldebe  = $request->debe;
+        $lb->totalhaber = $request->haber;
+        $lb->save();
+
+
+        $rgb = Movimientobanco::where('librobanco_id', $lb->id)->get();
+
+        foreach($rgb as $r){
+            $ids[]= $r->id;
+         }
+
+         $deletebanco= Movimientobanco::destroy($ids);
+
+         $a = Librobanco::where('user_id', $uid)->get()->last();
+
+         foreach($lb_bancos as $key=>$i){
+            $datos = array (
+                'librobanco_id'  =>$a->id,
+                'fecha'             =>$i['fecha'],
+                'detalle'           =>$i['detalle'],
+                'cheque'            =>$i['cheque'],
+                'debe'              =>$i['debe'],
+                'haber'             =>$i['haber'],
+                'saldo'             =>$i['saldo'],
+                'created_at'        => now(),
+                'updated_at'        => now(),
+            );
+            Movimientobanco::insert($datos);
+        }
+        return response(array(
+           'success' => true,
+           'estado'  => 'actualizado',
+           'message' => 'Anexo Libro Banco Actualizado correctamente'
+       ),200,[]);
+
+       }
+
+     }
+
+
+     public function obtenerLbanco (Request $request){
+         $uid = Auth::id();
+         $taller_id = $request->id;
+         $lb =Librobanco::where('user_id', $uid)->where('taller_id', $taller_id)->count();
+
+         if($lb == 1){
+             $lbs = Librobanco::where('user_id', $uid)->where('taller_id', $taller_id)->first();
+             $mb  = Movimientobanco::select('fecha','detalle','cheque','debe','haber','saldo')->where('librobanco_id',$lbs->id)->get();
+       
+             return response(array(
+                'datos' => true,
+                'mb' => $mb,
+                'nombre' =>$lbs->nombre
+            ),200,[]);
+            }else{
+                return response(array(
+                   'datos' => false,
+               ),200,[]);
+    
+            }
+
+     }
+
 
 }

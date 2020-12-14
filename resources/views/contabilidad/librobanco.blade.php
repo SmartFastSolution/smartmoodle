@@ -6,7 +6,7 @@
     <div class="row p-3  mb-2 justify-content-center ">
         <div class="col-5">
             <input class="form-control text-center" type="text" v-model="nombre" placeholder="Nombre de la Empresa"
-                name="">
+                name="" required>
         </div>
     </div>
 
@@ -79,7 +79,7 @@
         </tbody>
     </table>
     <div class="row justify-content-center">
-        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="">Guardar Libro Caja</a>
+        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="guardarlbBAnco()">Guardar Libro Caja</a>
 
     </div>
 

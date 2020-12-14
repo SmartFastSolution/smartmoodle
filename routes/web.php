@@ -296,14 +296,22 @@ route::post('/sistema/admin/taller37/{idtaller}', 'TallerEstudianteController@st
 route::post('/sistema/admin/taller/balance_inicial', 'TallerContabilidadController@balance_inicial')->name('balance_inicial');
 
 route::post('/sistema/admin/taller/balance-obtener-comprobacion', 'TallerContabilidadController@obtenerBalanceCompro')->name('balance.obtenercomprobacion');
-route::post('/sistema/admin/taller/kardex-obtener-promedio', 'TallerContabilidadController@obtenerKardexPromedio')->name('kardex.obtenerkardexpromedio');
 
 route::post('/sistema/admin/taller/balance-obtener-ajustado', 'TallerContabilidadController@obtenerBalanceAjustado')->name('balance.obtenerajustado');
 
 route::post('/sistema/admin/taller/balance-ajustado', 'TallerContabilidadController@balanceAjustado')->name('balance.balance-ajustado');
 
 route::post('/sistema/admin/taller/balance-comprobacion', 'TallerContabilidadController@balanceComprobacion')->name('balance.comprobacion');
+
+// RUTAS DEL KARDEX PROMEDIO
 route::post('/sistema/admin/taller/kardex-promedio', 'TallerContabilidadController@kardexPromedio')->name('kardex.promedio');
+route::post('/sistema/admin/taller/kardex-obtener-promedio', 'TallerContabilidadController@obtenerKardexPromedio')->name('kardex.obtenerkardexpromedio');
+//FIN RUTAS DEL KARDEX PROMEDIO
+//
+//// RUTAS DEL KARDEX FIFO
+route::post('/sistema/admin/taller/kardex-fifo', 'TallerContabilidadController@kardexFifo')->name('kardex.fifo');
+route::post('/sistema/admin/taller/kardex-obtener-fifo', 'TallerContabilidadController@obtenerKardexFifo')->name('kardex.obtenerkardexfifo');
+//FIN RUTAS DEL KARDEX FIFO
 
 route::post('/sistema/admin/taller/b_inicial_diario', 'TallerContabilidadController@b_inicial_diario')->name('b_inicial_diario');
 
@@ -318,6 +326,11 @@ route::post('/sistema/admin/taller/anexo-obtener-caja', 'TallerContabilidadContr
 
 route::post('/sistema/admin/taller/arqueo_caja', 'TallerContabilidadController@ArqueoCaja')->name('arqueo_caja');
 route::post('/sistema/admin/taller/arqueo-obtener-caja', 'TallerContabilidadController@obtenerArqueo')->name('arqueocaja.obtener');
+
+route::post('/sistema/admin/taller/libro_banco', 'TallerContabilidadController@LibroBanco')->name('libro_banco');
+route::post('/sistema/admin/taller/libro-obtener-banco', 'TallerContabilidadController@obtenerLbanco')->name('librobanco.obtener');
+
+
 //
 route::post('/sistema/homedoc/respuesta/taller1/{idtaller}', 'TallerDocenteController@store1')->name('taller1.docente');
 route::get('/sistema/admin/create', 'AdminController@admin')->name('admin.create');
