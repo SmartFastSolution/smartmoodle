@@ -176,10 +176,10 @@
                      <a href="#" class="addDiario btn btn-outline-success" @click.prevent="guardarRegistro()">Agregar
                          Transaccion</a>
                  </div>
-                 <div class="row justify-content-center">
+              {{--    <div class="row justify-content-center">
                      <a href="#" class="addDiario btn btn-danger" @click.prevent="guardarDiario()">Completar Diario
                          General</a>
-                 </div>
+                 </div> --}}
              </form>
              <div class="row justify-content-center">
              </div>
