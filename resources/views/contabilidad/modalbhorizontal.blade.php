@@ -439,8 +439,21 @@
             
           <tr>
         <td>
-        <select name="n_cuenta" id="" disabled v-model="pasivo.p_corriente.nom_cuenta" class="custom-select">
-        <option :value="pasivo.p_corriente.nom_cuenta" disabled>@{{ pasivo.p_corriente.nom_cuenta }}</option>
+        <select name="n_cuenta" id="" v-model="pasivo.p_corriente.nom_cuenta" class="custom-select">
+        {{-- <option :value="pasivo.p_corriente.nom_cuenta" disabled>@{{ pasivo.p_corriente.nom_cuenta }}</option> --}}
+         <option value="" disabled>ELIGE UNA CUENTA</option>
+          <option value="Banco">Bancos</option>
+          <option value="Muebles">Muebles</option>
+          <option value="Caja">Caja</option>
+          <option value="Vehiculo">Vehiculo</option>
+          <option value="Inv. Mercaderías">Inv. Mercaderías</option>
+          <option value="Doc. por Cob">Doc. por Cob</option>
+          <option value="Doc. por Pagar">Doc. por Pagar</option>
+          <option value="Muebles Oficina">Muebles Oficina</option>
+          <option value="Equipo Oficina">Equipo Oficina</option>
+          <option value="Eq. de Comp">Eq. de Comp</option>
+          <option value="Hip. por Pagar">Hip. por Pagar</option>
+          <option value="Capital">Capital</option>
         </select>
         </td>
         <td width="125"><input type="text" v-model="pasivo.p_corriente.saldo" name="debe" class="form-control" required></td>

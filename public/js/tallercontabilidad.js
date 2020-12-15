@@ -86,6 +86,7 @@ const b_hori = new Vue({
     this.obtenerBalance();
   },
    methods:{
+ 
     Agregar(){
     if(this.diario.nom_cuenta.trim() === ''){
       toastr.error("El campo Nombre de cuenta es obligatorio", "Smarmoddle", {
@@ -1165,6 +1166,18 @@ const diario = new Vue({
       nombre:'',
       fechabalance:'',
       complete:false,
+      cuentas:[
+          {id:1, nombre:'Caja', nombre_abreviado:'Caja', porcentual:false, porcentual:null},
+          {id:2, nombre:'Bancos', nombre_abreviado:'Bancos', porcentual:false, porcentual:null},
+          {id:3, nombre:'Muebles', nombre_abreviado:'Muebles', porcentual:false, porcentual:null},
+          {id:4, nombre:'Vehiculo', nombre_abreviado:'Vehiculo', porcentual:false, porcentual:null},
+          {id:5, nombre:'Inventario Mercaderia', nombre_abreviado:'Inv Mercaderia', porcentual:false, porcentual:null},
+          {id:6, nombre:'Documentos por cobrar', nombre_abreviado:'DOc. por Cobrar', porcentual:false, porcentual:null},
+          {id:7, nombre:'Documentos por cobrar', nombre_abreviado:'Doc. por Pagar', porcentual:false, porcentual:null},
+          {id:8, nombre:'Mueble de Oficina', nombre_abreviado:'Mueble de Oficina', porcentual:false, porcentual:null},
+          {id:9, nombre:'Equipo de Oficina', nombre_abreviado:'Equipo de Oficina', porcentual:false, porcentual:null},
+          {id:10, nombre:'IVA 12%', nombre_abreviado:'IVA 12%', porcentual:true, porcentual:12},
+        ],
       balanceInicial:{
         debe:[],
         haber:[],
@@ -1212,6 +1225,11 @@ const diario = new Vue({
     },
    
     methods:{
+    valorPorcentual(index, valor){
+      let porcentaje = this.cuenta[index].porcentual;
+      let total = Number((valor * porcentaje) / 100);
+      return total;
+    },
     obtenerBalanceInicial: function(){
       var _this = this;
       var url = '/sistema/admin/taller/b_inicial_diario';
@@ -1236,6 +1254,11 @@ const diario = new Vue({
 
     },
     agregarHaber(){
+      // let index = this.diario.haber.nom_cuenta;
+      // let valor = this.diario.haber.saldo;
+                // if (this.cuenta[index].porcentual == true) {
+                //   let calculo = this.valorPorcentual(index, valor);
+                // }
                 var haber = {fecha:this.diario.haber.fecha, nom_cuenta:this.diario.haber.nom_cuenta, saldo:this.diario.haber.saldo};
                 this.diarios.haber.push(haber);//añadimos el la variable persona al array
                 //Limpiamos los campos
@@ -2054,6 +2077,19 @@ const kardex = new Vue({
     
   // },
   methods:{
+    formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
+      reverseFecha(fecha){
+      let date = fecha.split('/').reverse().join('-');
+      return date;
+    },
     sumasTotales(){
       let transacciones = this.transacciones;
       let in_cantidad = 0;
@@ -2136,6 +2172,7 @@ const kardex = new Vue({
       $('#ingreso').modal('show');
     },
        modalInicial:function () {
+        this.cerrarInicial();
       if (this.transacciones.length >= 1) {
          let i =  this.transacciones.length - 1;
       console.log(this.transacciones[i]);
@@ -2502,7 +2539,9 @@ const kardex = new Vue({
         "timeOut": "3000"
     });
      }else {
-      this.inicial.total = Number(this.inicial.cantidad) * Number(this.inicial.precio);
+      // let fecha = this.formatoFecha(this.inicial.fecha);
+
+      this.inicial.total = Number(this.inicial.cantidad * this.inicial.precio).toFixed(2);
       let existencia = {tipo:'existencia', fecha:'', movimiento:'', tipo:'existencia', ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:'', egreso_precio:'', egreso_total:'',  existencia_cantidad:this.inicial.cantidad, existencia_precio:this.inicial.precio, existencia_total:''}
       this.existencias.push(existencia);
       let registro = [];
@@ -2545,14 +2584,25 @@ const kardex = new Vue({
     }
     
   },
+  cerrarInicial(){
+      this.update = false;
+      this.inicial.fecha      = '';
+      this.inicial.movimiento = '';
+      this.inicial.cantidad   = '';
+      this.inicial.precio     = '';    
+      this.inicial.fecha      = '';
+      this.inicial.movimiento = '';
+      this.inicial.cantidad   = '';
+      this.inicial.precio     = '';
+  },
   actualizarInicial(){
         if(this.inicial.fecha.trim() ==='' || this.inicial.movimiento.trim() ==='' || this.inicial.cantidad.trim() ==='' || this.inicial.precio.trim() ==='' ){
       toastr.error("Todos lo campos son obligatorios", "Smarmoddle", {
         "timeOut": "3000"
     });
      }else {
-
-      this.transacciones[0][0].fecha = this.inicial.fecha
+      // let fecha = this.formatoFecha(this.inicial.fecha)
+      this.transacciones[0][0].fecha = this.inicial.fecha;
       this.transacciones[0][0].movimiento = this.inicial.movimiento
       this.transacciones[0][0].existencia_cantidad = this.inicial.cantidad
       this.transacciones[0][0].existencia_precio = this.inicial.precio
@@ -2648,6 +2698,7 @@ const kardex = new Vue({
       this.totales.cantidad      = this.inicial.cantidad;
       this.totales.precio        = this.inicial.precio;
       // this.totales.total         = this.inicial.total;
+      this.update = false;
       this.inicial.fecha      = '';
       this.inicial.movimiento = '';
       this.inicial.cantidad   = '';
@@ -2665,14 +2716,14 @@ const kardex = new Vue({
     });
      }else {
       let id = this.transacciones.length + 1;
-      
+    
       // let existencia = {id: id ,existencia_cantidad:this.transaccion.ingreso.cantidad, existencia_precio:this.transaccion.ingreso.precio}
       // this.existencias.push(existencia);
       // let registro = [];
       this.transaccion.ingreso.total = Number(this.transaccion.ingreso.cantidad * this.transaccion.ingreso.precio).toFixed(2);
       let calculo = Number(this.transaccion.ingreso.total + this.totales.total);
 
-      let array = {identificador: id, fecha:'', movimiento:'', tipo:'ingreso', fecha: this.transaccion.fecha, movimiento:this.transaccion.movimiento, ingreso_cantidad:this.transaccion.ingreso.cantidad, ingreso_precio:this.transaccion.ingreso.precio, ingreso_total:this.transaccion.ingreso.total, egreso_cantidad:'', egreso_precio:'', egreso_total:'', existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total:''};
+      let array = {identificador: id, tipo:'ingreso', fecha: this.transaccion.fecha, movimiento:this.transaccion.movimiento, ingreso_cantidad:this.transaccion.ingreso.cantidad, ingreso_precio:this.transaccion.ingreso.precio, ingreso_total:this.transaccion.ingreso.total, egreso_cantidad:'', egreso_precio:'', egreso_total:'', existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total:''};
       // this.transacciones.push(this.existencias);
       
       // this.ejercicio.push(array)
@@ -2846,11 +2897,14 @@ const kardex = new Vue({
 
      }
   },
+
   editarTransaccion(index, id){
     // let id = index;
      if (this.transacciones[index][id].tipo == 'inicial') {
       // console.log('Esto es el inventario inicial')
       this.update = true;
+       // let fecha =  this.reverseFecha(this.transacciones[index][id].fecha);
+      // this.inicial.fecha = fecha;
       this.inicial.fecha = this.transacciones[index][id].fecha;
       this.inicial.movimiento = this.transacciones[index][id].movimiento;
       this.inicial.cantidad = this.transacciones[index][id].existencia_cantidad;
@@ -4409,6 +4463,28 @@ const kardex_promedio = new Vue({
    this.obtenerKardexPromedio();
   },
   methods:{
+    formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
+      cancelarActualizacion(tipo){
+    if (tipo == 'egresos') {
+      this.transaccion.egreso.index = '';
+     this.transaccion.egreso.edit = false;
+      this.egresos = [];
+    }else if(tipo == 'ingresos'){
+      this.transaccion.ingreso.index = '';
+     this.transaccion.ingreso.edit = false;
+  
+      this.ingresos = [];
+    }
+
+  },
     exitenciaFinal(){
    let u = this.transacciones.length - 1;
     this.ultima_existencia = [JSON.parse(JSON.stringify(this.transacciones[u]))];
@@ -4448,7 +4524,7 @@ const kardex_promedio = new Vue({
                   // console.log(temp1);
                 } 
             });
-       this.suman.ingreso_total = in_total;
+       this.suman.ingreso_total = in_total.toFixed(2)
 
        console.log(in_total)
 
@@ -4474,12 +4550,13 @@ const kardex_promedio = new Vue({
                   // console.log(temp1);
                 } 
             });
-       this.suman.egreso_total = eg_total;
+       this.suman.egreso_total = eg_total.toFixed(2)
 
        console.log(in_total)
 
     },
      modalInicial:function () {
+      this.cerrarInicial();
       if (this.transacciones.length >= 1) {
         let i =  this.transacciones.length - 1;
         console.log(this.transacciones[i]);
@@ -4540,10 +4617,12 @@ const kardex_promedio = new Vue({
       this.inicial.total = Number(cantidad * precio).toFixed(2);
 
       let inicial = {tipo:'inicial', fecha: this.inicial.fecha, movimiento:this.inicial.movimiento, ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:'', egreso_precio:'', egreso_total:'',  existencia_cantidad:this.inicial.cantidad, existencia_precio: this.inicial.precio, existencia_total:this.inicial.total};
-      this.transacciones.push(inicial)
+      this.transacciones.unshift(inicial)
         toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
         "timeOut": "3000"
           });
+      this.update = false;
+
           this.inicial.fecha               = '';
           this.inicial.movimiento          = '';
           this.inicial.cantidad            = '';
@@ -4557,6 +4636,17 @@ const kardex_promedio = new Vue({
 
      }
     },
+    cerrarInicial(){
+      this.update = false;
+      this.inicial.fecha      = '';
+      this.inicial.movimiento = '';
+      this.inicial.cantidad   = '';
+      this.inicial.precio     = '';    
+      this.inicial.fecha      = '';
+      this.inicial.movimiento = '';
+      this.inicial.cantidad   = '';
+      this.inicial.precio     = '';
+  },
     agregarIngreso(){
       // let ingreso = {tipo:'ingreso', fecha: this.transaccion.ingreso.fecha, movimiento:this.transaccion.ingreso.movimiento, ingreso_cantidad:this.transaccion.ingreso.cantidad, ingreso_precio:this.transaccion.ingreso.precio, ingreso_total:this.transaccion.ingreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total:this.transaccion.existencia.total};
       
@@ -4588,6 +4678,7 @@ const kardex_promedio = new Vue({
     editarTransaccion(id, tipo){
       if (tipo == 'ingreso'){
         this.transaccion.ingreso.edit = true;
+        this.transaccion.egreso.edit = false;
 
         this.ingresos = [JSON.parse(JSON.stringify(this.transacciones[id]))];
         this.transaccion.ingreso.index = id;
@@ -4606,10 +4697,15 @@ const kardex_promedio = new Vue({
 
       }else if(tipo == 'egreso'){
         this.transaccion.egreso.edit = true;
+        this.transaccion.ingreso.edit = false;
+
         this.egresos = [JSON.parse(JSON.stringify(this.transacciones[id]))];
         this.transaccion.egreso.index = id;
 
       }else if(tipo == 'inicial'){
+        this.transaccion.ingreso.edit = false;
+        this.transaccion.egreso.edit = false;
+
           this.inicial.index      = id;
           this.inicial.fecha      = this.transacciones[id].fecha;
           this.inicial.movimiento = this.transacciones[id].movimiento;
@@ -4950,6 +5046,7 @@ const vm = new Vue({
   }
 })
 
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////LIBRO CAJA ANEXO //////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -5125,7 +5222,7 @@ const librocaja = new Vue({
 
   },
 
-})
+});
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////ARQUEO CAJA ANEXO /////////////////////////////////////////////////////////
@@ -5465,23 +5562,12 @@ const librosbanco = new Vue({
      } //fin obtener libro banco
   
  }
-})
+});
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////CONCILIACION BANCARIA /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const conciliacion = new Vue({
-   el: "#conciliacion",
-   data: {
-     
-
-   },
 
 
-
-
-
-
-})

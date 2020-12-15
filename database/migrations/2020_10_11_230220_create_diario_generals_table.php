@@ -35,10 +35,10 @@ class CreateDiarioGeneralsTable extends Migration
             ->on('users')
             ->onDelete('cascade');
 
-            $table->foreign('balance_inicial_id')
-            ->references('id')
-            ->on('balance_inicials')
-            ->onDelete('cascade');
+            // $table->foreign('balance_inicial_id')
+            // ->references('id')
+            // ->on('balance_inicials')
+            // ->onDelete('cascade');
         });
     }
 

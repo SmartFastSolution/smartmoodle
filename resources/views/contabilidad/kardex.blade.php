@@ -11,7 +11,7 @@
 	<h5 class="text-center font-weight-bold text-info">METODO FIFO</h5>
 	<div class="row justify-content-center mb-2">
 		<div class="col-5">
-	<input  v-model="nombre"  type="" name="" placeholder="NOMBRE" class="form-control text-center">
+	<input  v-model="nombre"  type="" name="" placeholder="Nombre de la empresa" class="form-control text-center">
 
 	<input v-model="producto"   type="" name="" placeholder="PRODUCTO" class="form-control text-center">
 			
@@ -25,7 +25,7 @@
 	<table class="table table-bordered table-responsive table-sm">
 		<thead class="bg-warning"> 
 		  <tr class="text-center">
-		    <th style="vertical-align:middle" rowspan="2" width="150">FECHA</th>
+		    <th style="vertical-align:middle" rowspan="2" width="200">FECHA</th>
 		    <th width="300" style="vertical-align:middle" rowspan="2" >MOVIMIENTOS</th>
 		    <th width="300" colspan="3">INGRESOS</th>
 		    <th width="300" colspan="3">EGRESOS</th>
@@ -47,20 +47,20 @@
 		</thead>
 		<tbody v-for="(transa, index) in transacciones" style="border-bottom: solid 3px #0F0101;">
 			<tr v-for="(exist, id) in transa" >
-				<td>@{{ exist.fecha }}</td>
-				<td>@{{ exist.movimiento }}</td>
-				<td>@{{ exist.ingreso_cantidad }}</td>
-				<td>@{{ exist.ingreso_precio }}</td>
-				<td class="text-right">@{{ exist.ingreso_total }}</td>
-				<td>@{{ exist.egreso_cantidad }}</td>
-				<td>@{{ exist.egreso_precio }}</td>
-				<td class="text-right">@{{ exist.egreso_total }}</td>
-				<td>@{{ exist.existencia_cantidad }}</td>
-				<td>@{{ exist.existencia_precio }}</td>
-				<td class="text-right">@{{ exist.existencia_total }}</td>
-				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso' || transacciones[index][id].tipo == 'inicial' || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'ingreso_venta' || transacciones[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-warning" href="" @click.prevent="editarTransaccion(index, id)"><i class="fas fa-edit"></i></a></td>
-				<td v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso'  || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'inicial'||  transacciones[index][id].tipo == 'ingreso_venta' || transacciones[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-danger" href="" @click.prevent="borrarTransaccion(index, id)"><i class="fas fa-trash"></i></a></td>
-				<td v-else colspan="2"></td>
+				<td  style="vertical-align:middle" >@{{ formatoFecha(exist.fecha) }}</td>
+				<td style="vertical-align:middle" >@{{ exist.movimiento }}</td>
+				<td style="vertical-align:middle" >@{{ exist.ingreso_cantidad }}</td>
+				<td style="vertical-align:middle" >@{{ exist.ingreso_precio }}</td>
+				<td style="vertical-align:middle"  class="text-right">@{{ exist.ingreso_total }}</td>
+				<td style="vertical-align:middle" >@{{ exist.egreso_cantidad }}</td>
+				<td style="vertical-align:middle" >@{{ exist.egreso_precio }}</td>
+				<td style="vertical-align:middle"  class="text-right">@{{ exist.egreso_total }}</td>
+				<td style="vertical-align:middle" >@{{ exist.existencia_cantidad }}</td>
+				<td style="vertical-align:middle" >@{{ exist.existencia_precio }}</td>
+				<td style="vertical-align:middle"  class="text-right">@{{ exist.existencia_total }}</td>
+				<td style="vertical-align:middle"  v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso' || transacciones[index][id].tipo == 'inicial' || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'ingreso_venta' || transacciones[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-warning" href="" @click.prevent="editarTransaccion(index, id)"><i class="fas fa-edit"></i></a></td>
+				<td style="vertical-align:middle"  v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso'  || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'inicial'||  transacciones[index][id].tipo == 'ingreso_venta' || transacciones[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-danger" href="" @click.prevent="borrarTransaccion(index, id)"><i class="fas fa-trash"></i></a></td>
+				<td style="vertical-align:middle"  v-else colspan="2"></td>
 			</tr>
 		</tbody>
 
@@ -165,12 +165,15 @@
 			</thead>
 			<tbody is="draggable" group="ejercicio" :list="ejercicio" tag="tbody">
 				<tr v-for="(transa, id) in ejercicio">
-					<td><input type="text"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
-					<td>
-                      <textarea name="" id="" cols="30" rows="30" class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> </textarea>
+					          <td v-if="transa.tipo == 'existencia'"></td>
+                            <td v-if="transa.tipo != 'existencia'"><input type="date"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha">
+                            </td>
+                            <td v-if="transa.tipo == 'existencia'"></td>
 
-						{{-- <input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
-					</td>
+                          <td v-if="transa.tipo != 'existencia'">
+                               <textarea cols="30" rows="3" class="form-control form-control-plaintext" v-model="transa.movimiento"></textarea>
+                              {{-- <input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
+                          </td>
 
 					<td v-if="transa.tipo == 'existencia'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad"></td>
 					<td v-if="transa.tipo == 'existencia'"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio"> </td>
@@ -232,12 +235,15 @@
 						</thead>
 						<tbody>
 							<tr v-for="(transa, id) in egresos">
-								<td><input type="text"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
-								<td>
-                      <textarea name="" id="" cols="30" rows="30" class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> </textarea>
+			          <td v-if="transa.tipo == 'existencia'"></td>
+                            <td v-if="transa.tipo != 'existencia'"><input type="date"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha">
+                            </td>
+                            <td v-if="transa.tipo == 'existencia'"></td>
 
-									{{-- <input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
-								</td>
+                          <td v-if="transa.tipo != 'existencia'">
+                               <textarea cols="30" rows="3" class="form-control form-control-plaintext" v-model="transa.movimiento"></textarea>
+                              {{-- <input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
+                          </td>
 								<td><input type="text"  v-if="transa.ingreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" ></td>
 								<td><input type="text" v-if="transa.ingreso_precio"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" > </td>
 								<td>@{{ transa.ingreso_total }}</td>
@@ -305,40 +311,56 @@
       </div>
     </div> --}}
 
-{{--     <h1 class="cover-heading">Calculator</h1>
+    {{-- <h1 class="cover-heading">Calculator</h1> --}}
+
+<div class="modal fade" id="calculadoraflotante" tabindex="-1"  role="dialog" aria-labelledby="haberLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content bg-primary">
+            <div class="modal-header">
+                <h5 class="modal-title" id="haberLabel">CALCULADORA</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+   					<div id="calApp">
+				      {{-- <p>@{{ display }}:@{{ prevOps }}:@{{ decimalAdded }}:@{{ total }}</br>CurrentNum=> @{{ currentNum }}</p> --}}
+				      <div class="calculator">
+				          <div class="display font-weight-bold">@{{ display }}</div> 
+				          <div class="boton operator" @click="clear">C</div>
+				          <div class="boton operator" @click="del">DEL</div>
+				          <div class="boton operator" @click="enterOps(4)">÷</div>
+				          <div class="boton operator" @click="enterOps(3)">*</div>
+				       
+				          <div class="boton" @click="enterNum(7)">7</div>
+				          <div class="boton" @click="enterNum(8)">8</div>
+				          <div class="boton" @click="enterNum(9)">9</div>
+				          <div class="boton operator" @click="enterOps(2)">-</div>
+				        
+				          <div class="boton" @click="enterNum(4)">4</div>
+				          <div class="boton" @click="enterNum(5)">5</div>
+				          <div class="boton" @click="enterNum(6)">6</div>
+				          <div class="boton operator" @click="enterOps(1)">+</div>
+				        
+				          <div class="boton" @click="enterNum(1)">1</div>
+				          <div class="boton" @click="enterNum(2)">2</div>
+				          <div class="boton" @click="enterNum(3)">3</div>
+				       
+				          <div class="zero" @click="enterNum(0)">0</div>
+				          <div class="boton" @click="addDecimal">.</div>
+				          <div class="boton operator" @click="sum">=</div>
+				          <div class="btn ">&nbsp;</div>
+				      </div>
+				  </div>
+            </div>
+         
+        </div>
+    </div>
+</div>
 
 
-	<div id="calApp">
-      <p>@{{ display }}:@{{ prevOps }}:@{{ decimalAdded }}:@{{ total }}</br>CurrentNum=> @{{ currentNum }}</p>
-      <div class="calculator">
-          <div class="display font-weight-bold">@{{ display }}</div> 
-          <div class="boton operator" @click="clear">C</div>
-          <div class="boton operator" @click="del">DEL</div>
-          <div class="boton operator" @click="enterOps(4)">÷</div>
-          <div class="boton operator" @click="enterOps(3)">*</div>
-       
-          <div class="boton" @click="enterNum(7)">7</div>
-          <div class="boton" @click="enterNum(8)">8</div>
-          <div class="boton" @click="enterNum(9)">9</div>
-          <div class="boton operator" @click="enterOps(2)">-</div>
         
-          <div class="boton" @click="enterNum(4)">4</div>
-          <div class="boton" @click="enterNum(5)">5</div>
-          <div class="boton" @click="enterNum(6)">6</div>
-          <div class="boton operator" @click="enterOps(1)">+</div>
-        
-          <div class="boton" @click="enterNum(1)">1</div>
-          <div class="boton" @click="enterNum(2)">2</div>
-          <div class="boton" @click="enterNum(3)">3</div>
-       
-          <div class="zero" @click="enterNum(0)">0</div>
-          <div class="boton" @click="addDecimal">.</div>
-          <div class="boton operator" @click="sum">=</div>
-          <div class="btn ">&nbsp;</div>
-      </div>
-  </div>
-        
-  --}}
+ 
 
 
   {{-- <div class="container"> --}}

@@ -2,18 +2,18 @@
 
 @section('css')
 <style type="text/css">
-/* #calApp {
+#calApp {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-  width: 100vw;
-}*/
+    /* height: 100vh;
+  width: 100vw;*/
+}
 
 .calculator {
     display: grid;
-    grid-template-rows: repeat(7, minmax(60px, auto));
-    grid-template-columns: repeat(4, 60px);
+    grid-template-rows: repeat(7, minmax(35px, auto));
+    grid-template-columns: repeat(4, 35px);
     grid-gap: 12px;
     padding: 35px;
     font-family: "Poppins";
@@ -100,7 +100,6 @@
                 <a class="list-group-item list-group-item-action" id="list-libro-banco-list" data-toggle="list"
                     href="#list-libro-banco" role="tab" aria-controls="libro-banco">Libro Banco</a>
 
-
             </div>
         </div>
         <div class="col-12 col-sm-12 col-md-10">
@@ -113,6 +112,33 @@
                     aria-labelledby="list-kardex-promedio-list">
                     @include('contabilidad.kardex_promedio')
                 </div>
+                <div class="tab-pane fade" id="list-balance_comp" role="tabpanel"
+                        aria-labelledby="list-balance_comp-list">
+                        @include('contabilidad.balancecomprobacion')
+                    </div>
+
+                    <div class="tab-pane fade border border-danger " id="list-messages" role="tabpanel"
+                        aria-labelledby="list-messages-list">
+                        @include('contabilidad.diariogeneral')
+                    </div>
+                    <div class="tab-pane fade" id="list-balance-ajustado" role="tabpanel"
+                        aria-labelledby="list-balance-ajustado-list">
+                        @include('contabilidad.balanceajustado')
+                    </div>
+                    <div class="tab-pane fade" id="list-libro-caja" role="tabpanel"
+                        aria-labelledby="list-libro-caja-list">
+                        @include('contabilidad.librocaja')
+
+                    </div>
+                    <div class="tab-pane fade" id="list-arqueo-caja" role="tabpanel"
+                        aria-labelledby="list-arqueo-caja-list">
+                        @include('contabilidad.arqueocaja')
+
+                    </div>
+                    <div class="tab-pane fade" id="list-libro-banco" role="tabpanel"
+                        aria-labelledby="list-libro-banco-list">
+                        @include('contabilidad.librobanco')
+                    </div>
                 <div class="tab-pane fade border border-danger p-4" id="list-diario" role="tabpanel"
                     aria-labelledby="list-diario-list">
 
@@ -130,35 +156,8 @@
                         @include('contabilidad.balanceinicial')
                     </div>
                 </div>
-                <div class="tab-pane fade" id="list-balance_comp" role="tabpanel"
-                    aria-labelledby="list-balance_comp-list">
-                    @include('contabilidad.balancecomprobacion')
-                </div>
-                <div class="tab-pane fade border border-danger " id="list-messages" role="tabpanel"
-                    aria-labelledby="list-messages-list">
-                    @include('contabilidad.diariogeneral')
-                </div>
-                <div class="tab-pane fade" id="list-balance-ajustado" role="tabpanel"
-                    aria-labelledby="list-balance-ajustado-list">
-                    @include('contabilidad.balanceajustado')
-                </div>
-                <div class="tab-pane fade" id="list-libro-caja" role="tabpanel" aria-labelledby="list-libro-caja-list">
-                    @include('contabilidad.librocaja')
-
-                </div>
-                <div class="tab-pane fade" id="list-arqueo-caja" role="tabpanel"
-                    aria-labelledby="list-arqueo-caja-list">
-                    @include('contabilidad.arqueocaja')
-
-                </div>
-                <div class="tab-pane fade" id="list-libro-banco" role="tabpanel"
-                    aria-labelledby="list-libro-banco-list">
-                    @include('contabilidad.librobanco')
-
-                </div>
             </div>
         </div>
-
     </div>
 
     {{--   <div class="row justify-content-center">
