@@ -1167,16 +1167,16 @@ const diario = new Vue({
       fechabalance:'',
       complete:false,
       cuentas:[
-          {id:1, nombre:'Caja', nombre_abreviado:'Caja', porcentual:false, porcentual:null},
-          {id:2, nombre:'Bancos', nombre_abreviado:'Bancos', porcentual:false, porcentual:null},
-          {id:3, nombre:'Muebles', nombre_abreviado:'Muebles', porcentual:false, porcentual:null},
-          {id:4, nombre:'Vehiculo', nombre_abreviado:'Vehiculo', porcentual:false, porcentual:null},
-          {id:5, nombre:'Inventario Mercaderia', nombre_abreviado:'Inv Mercaderia', porcentual:false, porcentual:null},
-          {id:6, nombre:'Documentos por cobrar', nombre_abreviado:'DOc. por Cobrar', porcentual:false, porcentual:null},
-          {id:7, nombre:'Documentos por cobrar', nombre_abreviado:'Doc. por Pagar', porcentual:false, porcentual:null},
-          {id:8, nombre:'Mueble de Oficina', nombre_abreviado:'Mueble de Oficina', porcentual:false, porcentual:null},
-          {id:9, nombre:'Equipo de Oficina', nombre_abreviado:'Equipo de Oficina', porcentual:false, porcentual:null},
-          {id:10, nombre:'IVA 12%', nombre_abreviado:'IVA 12%', porcentual:true, porcentual:12},
+          {id:1, nombre:'Caja', nombre_abreviado:'Caja', porcentual:false, porcentaje:null},
+          {id:2, nombre:'Bancos', nombre_abreviado:'Bancos', porcentual:false, porcentaje:null},
+          {id:3, nombre:'Muebles', nombre_abreviado:'Muebles', porcentual:false, porcentaje:null},
+          {id:4, nombre:'Vehiculo', nombre_abreviado:'Vehiculo', porcentual:false, porcentaje:null},
+          {id:5, nombre:'Inventario Mercaderia', nombre_abreviado:'Inv Mercaderia', porcentual:false, porcentaje:null},
+          {id:6, nombre:'Documentos por cobrar', nombre_abreviado:'DOc. por Cobrar', porcentual:false, porcentaje:null},
+          {id:7, nombre:'Documentos por cobrar', nombre_abreviado:'Doc. por Pagar', porcentual:false, porcentaje:null},
+          {id:8, nombre:'Mueble de Oficina', nombre_abreviado:'Mueble de Oficina', porcentual:false, porcentaje:null},
+          {id:9, nombre:'Equipo de Oficina', nombre_abreviado:'Equipo de Oficina', porcentual:false, porcentaje:null},
+          {id:10, nombre:'IVA 12%', nombre_abreviado:'IVA 12%', porcentual:true, porcentaje:12},
         ],
       balanceInicial:{
         debe:[],
@@ -1206,11 +1206,15 @@ const diario = new Vue({
         },
         diario:{
           debe:{
+            edit: false,
+            index:'',
             fecha:'',
             nom_cuenta:'',
             saldo:'0.00',
           },
           haber:{
+            edit: false,
+            index:'',
             fecha:'',
             nom_cuenta:'',
             saldo:'0.00'
@@ -1225,8 +1229,8 @@ const diario = new Vue({
     },
    
     methods:{
-    valorPorcentual(index, valor){
-      let porcentaje = this.cuenta[index].porcentual;
+    valorPorcentual(porcentaje, valor){
+      // let porcentaje = this.cuentas[index].porcentaje;
       let total = Number((valor * porcentaje) / 100);
       return total;
     },
@@ -1254,13 +1258,25 @@ const diario = new Vue({
 
     },
     agregarHaber(){
-      // let index = this.diario.haber.nom_cuenta;
-      // let valor = this.diario.haber.saldo;
-                // if (this.cuenta[index].porcentual == true) {
-                //   let calculo = this.valorPorcentual(index, valor);
-                // }
-                var haber = {fecha:this.diario.haber.fecha, nom_cuenta:this.diario.haber.nom_cuenta, saldo:this.diario.haber.saldo};
-                this.diarios.haber.push(haber);//añadimos el la variable persona al array
+      if (this.diario.haber.nom_cuenta === '') {
+        toastr.error("No has registrado una cuenta", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+      }else{
+
+      let id = this.diario.haber.nom_cuenta;
+      let cuenta = this.cuentas.filter(x => x.id == id);
+      let valor = this.diario.haber.saldo;
+      // console.log(cuenta)
+            if (cuenta[0].porcentual == true) {
+                  let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
+                  let haber = {cuenta_id: cuenta[0].id, fecha:this.diario.haber.fecha, nom_cuenta: cuenta[0].nombre, saldo:calculo};
+                  this.diarios.haber.push(haber);//añadimos el la variable persona al array
+            }else{
+                  let haber = {cuenta_id: cuenta[0].id, fecha:this.diario.haber.fecha, nom_cuenta: cuenta[0].nombre, saldo:this.diario.haber.saldo};
+                  this.diarios.haber.push(haber);
+            }
+               
                 //Limpiamos los campos
                 toastr.success("Activo agregado correctamente", "Smarmoddle", {
                 "timeOut": "3000"
@@ -1268,16 +1284,33 @@ const diario = new Vue({
                 this.diario.haber.fecha =''
                 this.diario.haber.nom_cuenta =''
                 this.diario.haber.saldo =''
+        }
     },
      agregarDebe(){
+      // let index = this.diario.debe.nom_cuenta;
+      let id = this.diario.debe.nom_cuenta;
+      let cuenta = this.cuentas.filter(x => x.id == id);
+      let valor = this.diario.debe.saldo;
+
       if (this.diarios.debe.length == 0) {
         if (this.diario.debe.fecha.trim() === '') {
           toastr.error("La fecha es obligatoria en la primera cuenta del registro", "Smarmoddle", {
                 "timeOut": "3000"
             });
+        }else if(this.diario.debe.nom_cuenta === ''){
+           toastr.error("La cuenta es obligatoria", "Smarmoddle", {
+                "timeOut": "3000"
+            });
         }else{
-         var debe = {fecha:this.diario.debe.fecha, nom_cuenta:this.diario.debe.nom_cuenta, saldo:this.diario.debe.saldo};
-                this.diarios.debe.push(debe);//añadimos el la variable persona al array
+          if (cuenta[0].porcentual == true) {
+                  let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
+                  
+                  let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:calculo};
+                  this.diarios.debe.push(debe);//añadimos el la variable persona al array
+            }else{
+                  let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:this.diario.debe.saldo};
+                  this.diarios.debe.push(debe);
+            }
                 //Limpiamos los campos
                 toastr.success("Activo agregado correctamente", "Smarmoddle", {
                 "timeOut": "3000"
@@ -1286,10 +1319,21 @@ const diario = new Vue({
                 this.diario.debe.nom_cuenta =''
                 this.diario.debe.saldo =''
         }
-      } else {
-         var debe = {fecha:'', nom_cuenta:this.diario.debe.nom_cuenta, saldo:this.diario.debe.saldo};
-                this.diarios.debe.push(debe);//añadimos el la variable persona al array
-                //Limpiamos los campos
+      }else{
+          if(this.diario.debe.nom_cuenta === ''){
+           toastr.error("La cuenta es obligatoria", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+        }else{
+            if (cuenta[0].porcentual == true) {
+                  let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
+                  
+                  let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:calculo};
+                  this.diarios.debe.push(debe);//añadimos el la variable persona al array
+            }else{
+                  let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:this.diario.debe.saldo};
+                  this.diarios.debe.push(debe);
+            }
                 toastr.success("Activo agregado correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
@@ -1297,7 +1341,7 @@ const diario = new Vue({
                 this.diario.debe.nom_cuenta =''
                 this.diario.debe.saldo =''
       }
-               
+          }     
     },
     agregarComentario(){
       this.diarios.comentario = this.diario.comentario;
@@ -1310,12 +1354,28 @@ const diario = new Vue({
       this.diarios.debe.splice(index, 1);
     },
     guardarRegistro(){
+      let total_debe = 0;
+      let total_haber = 0;
+      
+      this.diarios.debe.forEach(function(debe, id){
+                let saldo = debe.saldo;
+                    total_debe += Number(saldo);
+              });
+      this.diarios.haber.forEach(function(haber, id){
+                let saldo = haber.saldo;
+                    total_haber += Number(saldo);
+              });
+
       if (this.diarios.debe == 0) {
          toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
                 "timeOut": "3000"
             });
       }else  if (this.diarios.comentario.trim() === '') {
          toastr.error("Debes agregar un comentario", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else  if (total_haber != total_debe) {
+         toastr.error("El Total de Debe y Haber no coinciden", "Smarmoddle", {
                 "timeOut": "3000"
             });
       }else{
@@ -1328,7 +1388,6 @@ const diario = new Vue({
                 this.diarios.debe =[];
                 this.diarios.haber =[];
                 this.diarios.comentario = '';
-                // console.log(this.registros);
                 this.totalDebe();
            this.totalHaber();
                 
@@ -1377,6 +1436,7 @@ const diario = new Vue({
                 this.diario.haber.saldo =''
    },
    agregarEditPasivo(){
+
          var debe = {fecha:'', nom_cuenta:this.diario.debe.nom_cuenta, saldo:this.diario.debe.saldo};
                 this.edit.debe.push(debe);//añadimos el la variable persona al array
                 //Limpiamos los campos
@@ -1396,18 +1456,43 @@ const diario = new Vue({
       $('#haber_a').modal('show'); 
     },
     updateHaber(){
-      var id                         = this.cuentaindex;
-      this.edit.haber[id].nom_cuenta = this.diario.haber.nom_cuenta;
-      this.edit.haber[id].saldo      = this.diario.haber.saldo;
-      $('#haber_a').modal('hide'); 
+      let id     =  this.diario.haber.nom_cuenta;
+      let index  = this.diario.haber.index;
+      let cuenta = this.cuentas.filter(x => x.id == id);
+      console.log(cuenta)
+      let valor  = this.diario.haber.saldo;
+      if (cuenta[0].porcentual == true) {
+        let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
+        this.diarios.haber[index].nom_cuenta = cuenta[0].nombre;
+        this.diarios.haber[index].saldo      = calculo;
+      }else{
+        this.diarios.haber[index].nom_cuenta = cuenta[0].nombre;
+        this.diarios.haber[index].saldo      = valor;
+      }
         this.diario.haber.nom_cuenta = '';
-        this.diario.haber.saldo = '';
+        this.diario.haber.saldo      = '';
+        this.diario.haber.edit       = false;
     },
     habediarioEdit(index){
-      this.cuentaindex  = index;
-      this.diario.haber.nom_cuenta  = this.diarios.haber[index].nom_cuenta;
-      this.diario.haber.saldo       = this.diarios.haber[index].saldo;
-      $('#haber_d').modal('show'); 
+      this.diario.haber.index = index;
+      let cuenta_id = this.diarios.haber[index].cuenta_id;
+
+      let cuenta = this.cuentas.filter(x => x.id == cuenta_id);
+      console.log(cuenta)
+      if (cuenta[0].porcentual == true){
+
+        this.diario.haber.nom_cuenta = cuenta_id;
+        this.diario.haber.saldo      = '';
+      }else{
+
+        this.diario.haber.nom_cuenta = cuenta_id;
+        this.diario.haber.saldo      = this.diarios.haber[index].saldo;
+      }
+        this.diario.haber.edit       = true;
+      
+      // this.diario.haber.nom_cuenta  = this.diarios.haber[index].nom_cuenta;
+      // this.diario.haber.saldo       = this.diarios.haber[index].saldo;
+      $('#haber-diario-tab').tab('show'); 
     },
       updateHaber1(){
       var id = this.cuentaindex;
@@ -1451,27 +1536,64 @@ const diario = new Vue({
         this.diario.debe.saldo = '';
     },
      debediairoEdit(index){
-      this.cuentaindex     = index;
-      if (index == 0) {
-      this.diario.debe.fecha  = this.diarios.debe[index].fecha;  
+      this.diario.debe.index = index;
+      // this.cuentaindex     = index;
+      let cuenta_id = this.diarios.debe[index].cuenta_id;
+
+      if (this.diarios.debe[index].fecha !== '') {
+        this.diario.debe.fecha  = this.diarios.debe[index].fecha;  
+      }else{
+        this.diario.debe.fecha  = '';  
       }
-      this.diario.debe.nom_cuenta  = this.diarios.debe[index].nom_cuenta;
-      this.diario.debe.saldo       = this.diarios.debe[index].saldo;
-      $('#debe_d').modal('show'); 
+      let cuenta = this.cuentas.filter(x => x.id == cuenta_id);
+      // console.log(cuenta)
+      if (cuenta[0].porcentual == true){
+        this.diario.debe.nom_cuenta = cuenta_id;
+        this.diario.debe.saldo      = '';
+      }else{
+        this.diario.debe.nom_cuenta = cuenta_id;
+        this.diario.debe.saldo      = this.diarios.debe[index].saldo;
+      }
+        this.diario.debe.edit       = true;
+      $('#debe-diario-tab').tab('show'); 
     },
-    updateDebe1(){
-      var id  = this.cuentaindex;
-       if (id == 0) {
-      this.diarios.debe[id].fecha = this.diario.debe.fecha; 
-      }
-      this.diarios.debe[id].nom_cuenta = this.diario.debe.nom_cuenta;
-      this.diarios.debe[id].saldo      = this.diario.debe.saldo;
-      $('#debe_d').modal('hide');
-      if (id == 0) {
+    cancelarEdicion(cuenta){
+      if (cuenta == 'debe') {
         this.diario.debe.fecha = '';
-      } 
         this.diario.debe.nom_cuenta = '';
-        this.diario.debe.saldo = '';
+        this.diario.debe.saldo      = '';
+        this.diario.debe.edit       = false;
+      } else {
+        this.diario.haber.nom_cuenta = '';
+        this.diario.haber.saldo      = '';
+        this.diario.haber.edit       = false;
+      }
+    },
+    updateDebe(){
+      let id     =  this.diario.debe.nom_cuenta;
+      let index  = this.diario.debe.index;
+      let cuenta = this.cuentas.filter(x => x.id == id);
+      console.log(cuenta)
+      let valor  = this.diario.debe.saldo;
+      if (this.diario.debe.fecha !== '') {
+         this.diarios.debe[index].fecha = this.diario.debe.fecha; 
+      }
+      if (cuenta[0].porcentual == true) {
+        let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
+        this.diarios.debe[index].nom_cuenta = cuenta[0].nombre;
+        this.diarios.debe[index].saldo      = calculo;
+      }else{
+        this.diarios.debe[index].nom_cuenta = cuenta[0].nombre;
+        this.diarios.debe[index].saldo      = valor;
+      }
+      
+      if (this.diario.debe.fecha !== '') {
+        this.diario.debe.fecha = ''; 
+      }
+        this.diario.debe.nom_cuenta = '';
+        this.diario.debe.saldo      = '';
+        this.diario.debe.edit       = false;
+
     },
     debeDelete(index){
       this.edit.debe.splice(index, 1);

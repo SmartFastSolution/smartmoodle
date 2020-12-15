@@ -1,7 +1,7 @@
 {{-- TRANSACCION --}}
 
 <div class="modal fade" id="dg-transaccion" tabindex="-1"  role="dialog" aria-labelledby="dg-transaccionLabel" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered modal-xl" role="document">
+    <div class="modal-dialog  modal-dialog-centered modal-xl " role="document">
         <div class="modal-content bg-primary">
             <div class="modal-header">
                 <h5 class="modal-title" id="haberLabel">AGREGAR TRANSACCION</h5>
@@ -14,34 +14,34 @@
                    <div class="col-6">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                       <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">DEBE</a>
+                        <a class="nav-link active text-dark font-weight-bold" id="debe-diario-tab" data-toggle="tab" href="#debe-diario" role="tab" aria-controls="debe-diario" aria-selected="true">DEBE</a>
                       </li>
                       <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">HABER</a>
+                        <a class="nav-link text-dark font-weight-bold" id="haber-diario-tab" data-toggle="tab" href="#haber-diario" role="tab" aria-controls="haber-diario" aria-selected="false">HABER</a>
                       </li>
                       <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">COMENTARIO</a>
+                        <a class="nav-link text-dark font-weight-bold" id="comentario-diario-tab" data-toggle="tab" href="#comentario-diario" role="tab" aria-controls="comentario-diario" aria-selected="false">COMENTARIO</a>
                       </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                      <div class="tab-pane fade show active" id="debe-diario" role="tabpanel" aria-labelledby="debe-diario-tab">
                                <h2 class="text-center">AGREGAR DEBE</h2>
                        <table class="table table-bordered table-sm">
                           <thead class="bg-success">
                             <tr>
-                              <th v-if="diarios.debe.length == 0 && edit.debe.length == 0" width="50" >Fecha</th>
+                              <th v-if="diarios.debe.length == 0 || diario.debe.fecha !== ''" width="50" >Fecha</th>
                               <th  align="center" class="text-center">Cuentas</th>
                               <th  align="center" class="text-center">Saldo</th>    
                             </tr>
                        </thead>
                         <tbody >  
                           <tr>
-                              <td v-if="diarios.debe.length == 0 && edit.debe.length == 0" width="50" > <input type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required></td>
+                              <td v-if="diarios.debe.length == 0 || diario.debe.fecha !== ''" width="50" ><input type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required></td>
                               <td>
                               <select name="n_cuenta" v-model="diario.debe.nom_cuenta" class="custom-select">
                                 <option value="" disabled>ELIGE UNA CUENTA</option>
-                                {{-- <option v-for="(cuenta, index) in cuentas" :value="index">@{{ cuenta.nombre }} </option> --}}
-                                <option value="Banco">Bancos</option>
+                                <option v-for="(cuenta, index) in cuentas" :value="cuenta.id">@{{ cuenta.nombre }} </option>
+                              {{--   <option value="Banco">Bancos</option>
                                 <option value="Muebles">Muebles</option>
                                 <option value="Caja">Caja</option>
                                 <option value="Vehiculo">Vehiculo</option>
@@ -52,21 +52,23 @@
                                 <option value="Equipo Oficina">Equipo Oficina</option>
                                 <option value="Eq. de Comp">Eq. de Comp</option>
                                 <option value="Hip. por Pagar">Hip. por Pagar</option>
-                                <option value="Capital">Capital</option>
+                                <option value="Capital">Capital</option> --}}
                               </select>
                               </td>
-                              <td width="125"><input type="numeric" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
+                              <td width="125"><input type="number" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
                         </tr>
                       </tbody>
                     </table>
-                    <div v-if="edit.debe.length >= 1" class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="agregarEditPasivo()">Agregar Activos</a>
-                      </div>
-                       <div v-else class="row justify-content-center">
+                    <div v-if="!diario.debe.edit" class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="agregarDebe()">Agregar Activos</a>
                       </div>
+                       <div v-else class="row justify-content-center">
+                            <a href="#" class="btn btn-light" @click.prevent="updateDebe()">Actualizar Activo</a>
+                            <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicion('debe')"><i class="fa fa-window-close"></i></a>
+
                       </div>
-                      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                      </div>
+                      <div class="tab-pane fade" id="haber-diario" role="tabpanel" aria-labelledby="haber-diario-tab">
                         <h2 class="text-center">AGREGAR HABER</h2>
 
                       <table class="table table-bordered table-sm">
@@ -79,9 +81,15 @@
                         <tbody >  
                           <tr>
                               <td>
-                              <select name="n_cuenta" v-model="diario.haber.nom_cuenta" class="custom-select">
+                                <vue-select class="vue-select2" name="select2"
+                                      :options="cuentas" :model.sync="diario.haber.nom_cuenta"
+                                      :searchable="true" language="en-US">
+                              </vue-select>
+                              {{-- <select name="n_cuenta" v-model="diario.haber.nom_cuenta" class="custom-select">
                                 <option value="" disabled>ELIGE UNA CUENTA</option>
-                                <option value="Banco">Bancos</option>
+                                <option v-for="(cuenta, index) in cuentas" :value="cuenta.id">@{{ cuenta.nombre }} </option> --}}
+
+                                {{-- <option value="Banco">Bancos</option>
                                 <option value="Muebles">Muebles</option>
                                 <option value="Caja">Caja</option>
                                 <option value="Vehiculo">Vehiculo</option>
@@ -92,22 +100,23 @@
                                 <option value="Equipo Oficina">Equipo Oficina</option>
                                 <option value="Eq. de Comp">Eq. de Comp</option>
                                 <option value="Hip. por Pagar">Hip. por Pagar</option>
-                                <option value="Capital">Capital</option>
-                              </select>
+                                <option value="Capital">Capital</option> --}}
+                              {{-- </select> --}}
                               </td>
-                              <td width="125"><input type="numeric" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
+                              <td width="125"><input type="number" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
                         </tr>
                       </tbody>
                     </table>
-                    <div v-if="edit.debe.length >= 1" class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="agregarEdit()">Agregar Pasivo</a>
+                    <div v-if="!diario.haber.edit" class="row justify-content-center">
+                            <a href="#" class="btn btn-light" @click.prevent="agregarHaber()">Agregar Pasivo</a>
                       </div>
 
                        <div v-else class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="agregarHaber()">Agregar Pasivo</a>
+                            <a href="#" class="btn btn-light" @click.prevent="updateHaber()">Actualizar Pasivo</a>
+                            <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicion('haber')"><i class="fa fa-window-close"></i></a>
                       </div>
                       </div>
-                      <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                      <div class="tab-pane fade" id="comentario-diario" role="tabpanel" aria-labelledby="comentario-diario-tab">
                         <h2 class="text-center">AGREGAR COMENTARIO</h2>
 
                           <table class="table table-bordered table-sm">
@@ -131,10 +140,18 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-6">
+                  <div class="col-6" style=" height:300px; overflow-y: scroll;">
                     <h3 class="text-center">Transacciones</h3>
 
-                    <p>
+                    <p  >
+                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
+                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
+                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
+                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
+                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
+                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
+                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
+                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
                       Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
                       Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
                       Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
@@ -171,7 +188,7 @@
                          <th scope="col" width="450">NOMBRE DE CUENTAS</th>
                          <th scope="col " width="125">DEBE</th>
                          <th scope="col">HABER</th>
-                         <th  v-if="diarios.debe.length > 0 || diarios.haber.length > 0">ACCION</th>
+                         <th colspan="2"  v-if="diarios.debe.length > 0 || diarios.haber.length > 0">ACCION</th>
                      </tr>
                  </thead>
                  <tbody is="draggable" group="people" :list="diarios.debe" tag="tbody">
@@ -180,10 +197,10 @@
                          <td>@{{ diar.nom_cuenta}}</td>
                          <td align="center" width="125">@{{ diar.saldo }}</td>
                          <td align="center" width="125"></td>
-                        {{--  <td align="center" width="25">
+                         <td align="center" width="25">
                              <a @click="debediairoEdit(index)" class="btn btn-warning btn-sm"><i
                                      class="fas fas fa-edit"></i></a>
-                         </td> --}}
+                         </td>
                          <td align="center" width="25">
                              <a @click="deleteDebe(index)" class="btn btn-danger btn-sm"><i
                                      class="fas fa-trash-alt"></i></a>
@@ -196,12 +213,11 @@
                          <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
                          <td align="center" width="125"></td>
                          <td align="center" width="125">@{{ diar.saldo }}</td>
-                        {{--  <td>
-                             <a @click="habediarioEdit(index)" class="btn btn-warning btn-sm"><i
-                                     class="fas fas fa-edit"></i></a>
-                         </td> --}}
-                         <td align="center" width="25"><a @click="deleteHaber(index)" class="btn btn-danger btn-sm"><i
-                                     class="fas fa-trash-alt"></i></a></td>
+                         <td>
+                            <a @click="habediarioEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i>
+                            </a>
+                         </td>
+                         <td align="center" width="25"><a @click="deleteHaber(index)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></td>
                      </tr>
                      <tr v-if="diarios.comentario !== ''" class="text-muted">
                          <td></td>
@@ -213,8 +229,7 @@
 
              </table>
               <div class="row justify-content-around mb-2">
-              <a href="#" class="addDiario btn btn-success" @click.prevent="guardarRegistro()">Agregar
-                         Transaccion</a> 
+              <a href="#" class="addDiario btn btn-success" @click.prevent="guardarRegistro()">AgregarTransaccion</a> 
                   </div>
                   </div>
                 </div>
@@ -270,7 +285,7 @@
                                 <option value="Capital">Capital</option>
                               </select>
                               </td>
-                              <td width="125"><input type="numeric" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
+                              <td width="125"><input type="number" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
                         </tr>
                       </tbody>
                     </table>
@@ -331,7 +346,7 @@
                                 <option value="Capital">Capital</option>
                               </select>
                               </td>
-                              <td width="125"><input type="numeric" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
+                              <td width="125"><input type="number" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
                         </tr>
                       </tbody>
                     </table>
@@ -432,7 +447,7 @@
                                 <option value="Capital">Capital</option>
                               </select>
                               </td>
-                              <td width="125"><input type="numeric" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
+                              <td width="125"><input type="number" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
                         </tr>
                       </tbody>
                     </table>
@@ -490,7 +505,7 @@
                                 <option value="Capital">Capital</option>
                               </select>
                               </td>
-                              <td width="125"><input type="numeric" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
+                              <td width="125"><input type="number" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
                         </tr>
                       </tbody>
                     </table>
@@ -549,7 +564,7 @@
                                 <option value="Capital">Capital</option>
                               </select>
                               </td>
-                              <td width="125"><input type="numeric" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
+                              <td width="125"><input type="number" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
                         </tr>
                       </tbody>
                     </table>
@@ -607,7 +622,7 @@
                                 <option value="Capital">Capital</option>
                               </select>
                               </td>
-                              <td width="125"><input type="numeric" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
+                              <td width="125"><input type="number" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
                         </tr>
                       </tbody>
                     </table>
@@ -669,7 +684,7 @@
                               </select>
                               </td>
                               <td width="125">
-                                <input type="numeric" v-model="porcentajes.cantidad" name="debe" class="form-control">
+                                <input type="number" v-model="porcentajes.cantidad" name="debe" class="form-control">
                               </td>         
                         </tr>
                       </tbody>

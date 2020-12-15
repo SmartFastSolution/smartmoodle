@@ -42,18 +42,37 @@
                          <td v-if="diar.fecha != '' && diar.fecha !== null" align="center" width="50"><a
                                  @click="deleteRegistro(id)" class="btn btn-danger btn-sm"><i
                                      class="fas fa-trash-alt"></i></a></td>
+                                     <td colspan="2" v-else></td>
                      </tr>
                      <tr v-for="(diar, index) in registro.haber">
                          <td align="center" width="50"></td>
                          <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
                          <td align="center" width="125"></td>
                          <td align="center" width="125">@{{ diar.saldo }}</td>
+                        <td colspan="2"></td>
+
                      </tr>
                      <tr class="text-muted">
                          <td></td>
                          <td>@{{ registro.comentario }}</td>
                          <td></td>
                          <td></td>
+                        <td colspan="2"></td>
+
+                     </tr>
+
+                 </tbody>
+                 <tbody>
+                         <tr >
+                         <td class="bg-dark" align="center" colspan="2" width="450" valign="middle">PASAN</td>
+                         <td class="bg-dark" align="center" width="125">
+                             @{{ pasan.debe }}
+                         </td>
+                         <td class="bg-dark" align="center" width="125">
+                             @{{ pasan.haber }}
+                         </td>
+                         <td v-if="registros.length > 0" width="90" style="border: none;"></td>
+
                      </tr>
                  </tbody>
              </table>
@@ -136,7 +155,7 @@
                      </tr>
                  </tbody>
              </table>
-             <table class="table table-bordered table-sm">
+        {{--      <table class="table table-bordered table-sm">
                  <tbody>
                      <tr >
                          <td class="bg-dark" align="center" colspan="2" width="450" valign="middle">PASAN</td>
@@ -150,7 +169,7 @@
 
                      </tr>
                  </tbody>
-             </table>
+             </table> --}}
              <form action="">
 
                  @csrf
@@ -165,8 +184,8 @@
                          Transaccion</a>
                  </div>
                  <div v-else class="row justify-content-around mb-2">
-                     {{-- <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#dg-transaccion">Crear Transaccion</a> --}}
-                <a href="#" v-if="diarios.debe.length > 0" class="btn btn-outline-primary" data-toggle="modal" data-target="#porcentajes">Agregar Porcentaje</a>
+                     <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#dg-transaccion">Crear Transaccion</a>
+                {{-- <a href="#" v-if="diarios.debe.length > 0" class="btn btn-outline-primary" data-toggle="modal" data-target="#porcentajes">Agregar Porcentaje</a>
                 <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#debe">Agregar
                          Debe</a>
                      <a href="#" class=" btn btn-outline-primary" data-toggle="modal" data-target="#haber">Agregar
@@ -174,7 +193,7 @@
                      <a href="#" class=" btn btn-outline-primary" data-toggle="modal" data-target="#comentario">Agregar
                          Comentario</a>
                      <a href="#" class="addDiario btn btn-outline-success" @click.prevent="guardarRegistro()">Agregar
-                         Transaccion</a>
+                         Transaccion</a> --}}
                  </div>
               {{--    <div class="row justify-content-center">
                      <a href="#" class="addDiario btn btn-danger" @click.prevent="guardarDiario()">Completar Diario
