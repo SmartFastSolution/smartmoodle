@@ -22,7 +22,11 @@
             
           <tr>
         <td>
-        <select name="n_cuenta" id="" required v-model="activo.a_corriente.nom_cuenta" class="custom-select">
+          <model-select :options="options" 
+                                v-model="activo.a_corriente.nom_cuenta"
+                                placeholder="ELEGIR CUENTA" >
+        </model-select>
+        {{-- <select name="n_cuenta" id="" required v-model="activo.a_corriente.nom_cuenta" class="custom-select">
           <option value="" disabled>ELIGE UNA CUENTA</option>
           <option value="Banco">Bancos</option>
           <option value="Muebles">Muebles</option>
@@ -36,7 +40,7 @@
           <option value="Eq. de Comp">Eq. de Comp</option>
           <option value="Hip. por Pagar">Hip. por Pagar</option>
           <option value="Capital">Capital</option>
-        </select>
+        </select> --}}
         </td>
         <td width="125"><input type="numeric" v-model="activo.a_corriente.saldo" name="debe" class="form-control" required></td>
               
@@ -81,7 +85,11 @@
             
           <tr>
         <td>
-        <select name="n_cuenta" id="" v-model="activo.a_nocorriente.nom_cuenta" class="custom-select">
+           <model-select :options="options" 
+                                v-model="activo.a_nocorriente.nom_cuenta"
+                                placeholder="ELEGIR CUENTA" >
+        </model-select>
+        {{-- <select name="n_cuenta" id="" v-model="activo.a_nocorriente.nom_cuenta" class="custom-select">
           <option value="" disabled>ELIGE UNA CUENTA</option>
           <option value="Banco">Bancos</option>
           <option value="Muebles">Muebles</option>
@@ -95,7 +103,7 @@
           <option value="Eq. de Comp">Eq. de Comp</option>
           <option value="Hip. por Pagar">Hip. por Pagar</option>
           <option value="Capital">Capital</option>
-        </select>
+        </select> --}}
         </td>
         <td width="125"><input type="text" v-model="activo.a_nocorriente.saldo" name="debe" class="form-control" required></td>
               
@@ -139,7 +147,12 @@
             
           <tr>
         <td>
-        <select name="n_cuenta" id="" v-model="pasivo.p_corriente.nom_cuenta" class="custom-select">
+              <model-select :options="options" 
+                                v-model="pasivo.p_corriente.nom_cuenta"
+                                placeholder="ELEGIR CUENTA" >
+        </model-select>
+
+       {{--  <select name="n_cuenta" id="" v-model="pasivo.p_corriente.nom_cuenta" class="custom-select">
         <option value="" disabled>ELIGE UNA CUENTA</option>
           <option value="Banco">Bancos</option>
           <option value="Muebles">Muebles</option>
@@ -153,7 +166,7 @@
           <option value="Eq. de Comp">Eq. de Comp</option>
           <option value="Hip. por Pagar">Hip. por Pagar</option>
           <option value="Capital">Capital</option>
-        </select>
+        </select> --}}
         </td>
         <td width="125"><input type="text" v-model="pasivo.p_corriente.saldo" name="debe" class="form-control" required></td>
               
@@ -198,7 +211,13 @@
             
           <tr>
         <td>
-        <select name="n_cuenta" id="" v-model="pasivo.p_nocorriente.nom_cuenta" class="custom-select">
+            <model-select :options="options" 
+                                v-model="pasivo.p_nocorriente.nom_cuenta"
+                                placeholder="ELEGIR CUENTA" >
+        </model-select>
+
+
+{{--         <select name="n_cuenta" id="" v-model="pasivo.p_nocorriente.nom_cuenta" class="custom-select">
          <option value="" disabled>ELIGE UNA CUENTA</option>
           <option value="Banco">Bancos</option>
           <option value="Muebles">Muebles</option>
@@ -212,7 +231,7 @@
           <option value="Eq. de Comp">Eq. de Comp</option>
           <option value="Hip. por Pagar">Hip. por Pagar</option>
           <option value="Capital">Capital</option>
-        </select>
+        </select> --}}
         </td>
         <td width="125"><input type="text" v-model="pasivo.p_nocorriente.saldo" name="debe" class="form-control" required></td>
               
@@ -259,7 +278,12 @@
             
           <tr>
         <td>
-        <select name="n_cuenta" id="" v-model="patrimonio.nom_cuenta" class="custom-select">
+            <model-select :options="options" 
+                                v-model="patrimonio.nom_cuenta"
+                                placeholder="ELEGIR CUENTA" >
+        </model-select>
+
+{{--         <select name="n_cuenta" id="" v-model="patrimonio.nom_cuenta" class="custom-select">
           <option value="" disabled>ELIGE UNA CUENTA</option>
           <option value="Banco">Bancos</option>
           <option value="Muebles">Muebles</option>
@@ -273,7 +297,7 @@
           <option value="Eq. de Comp">Eq. de Comp</option>
           <option value="Hip. por Pagar">Hip. por Pagar</option>
           <option value="Capital">Capital</option>
-        </select>
+        </select> --}}
         </td>
         <td width="125"><input type="text" v-model="patrimonio.saldo" name="debe" class="form-control" required></td>
               
@@ -321,8 +345,12 @@
         <tbody >
             
           <tr>
-        <td>
-        <select name="n_cuenta" id="" v-model="activo.a_corriente.nom_cuenta" class="custom-select">
+            <td>
+                <model-select :options="options" 
+                                v-model="activo.a_corriente.nom_cuenta"
+                                placeholder="ELEGIR CUENTA" >
+        </model-select>
+{{--         <select name="n_cuenta" id="" v-model="" class="custom-select">
           <option value="" disabled>ELIGE UNA CUENTA</option>
           <option value="Banco">Bancos</option>
           <option value="Muebles">Muebles</option>
@@ -336,7 +364,7 @@
           <option value="Eq. de Comp">Eq. de Comp</option>
           <option value="Hip. por Pagar">Hip. por Pagar</option>
           <option value="Capital">Capital</option>
-        </select>
+        </select> --}}
         </td>
         <td width="125"><input type="numeric" v-model="activo.a_corriente.saldo" name="debe" class="form-control" required></td>
               
@@ -381,7 +409,11 @@
             
           <tr>
         <td>
-        <select name="n_cuenta" id="" v-model="activo.a_nocorriente.nom_cuenta" class="custom-select">
+              <model-select :options="options" 
+                                v-model="activo.a_nocorriente.nom_cuenta"
+                                placeholder="ELEGIR CUENTA" >
+        </model-select>
+{{--         <select name="n_cuenta" id="" v-model="" class="custom-select">
           <option value="" disabled>ELIGE UNA CUENTA</option>
           <option value="Banco">Bancos</option>
           <option value="Muebles">Muebles</option>
@@ -395,7 +427,7 @@
           <option value="Eq. de Comp">Eq. de Comp</option>
           <option value="Hip. por Pagar">Hip. por Pagar</option>
           <option value="Capital">Capital</option>
-        </select>
+        </select> --}}
         </td>
         <td width="125"><input type="text" v-model="activo.a_nocorriente.saldo" name="debe" class="form-control" required></td>
               
@@ -439,8 +471,12 @@
             
           <tr>
         <td>
-        <select name="n_cuenta" id=""  v-model="pasivo.p_corriente.nom_cuenta" class="custom-select">
-        {{-- <option :value="pasivo.p_corriente.nom_cuenta" disabled>@{{ pasivo.p_corriente.nom_cuenta }}</option> --}}
+              <model-select :options="options" 
+                v-model="pasivo.p_corriente.nom_cuenta"
+              placeholder="ELEGIR CUENTA" >
+        </model-select>
+{{--         <select name="n_cuenta" id=""  v-model="" class="custom-select">
+        <option :value="pasivo.p_corriente.nom_cuenta" disabled>@{{ pasivo.p_corriente.nom_cuenta }}</option>
         <option value="" disabled>ELIGE UNA CUENTA</option>
           <option value="Banco">Bancos</option>
           <option value="Muebles">Muebles</option>
@@ -454,7 +490,7 @@
           <option value="Eq. de Comp">Eq. de Comp</option>
           <option value="Hip. por Pagar">Hip. por Pagar</option>
           <option value="Capital">Capital</option>
-        </select>
+        </select> --}}
         </td>
         <td width="125"><input type="text" v-model="pasivo.p_corriente.saldo" name="debe" class="form-control" required></td>
               
@@ -499,7 +535,11 @@
             
           <tr>
         <td>
-        <select name="n_cuenta" id="" v-model="pasivo.p_nocorriente.nom_cuenta" class="custom-select">
+              <model-select :options="options" 
+                                v-model="pasivo.p_nocorriente.nom_cuenta"
+                                placeholder="ELEGIR CUENTA" >
+        </model-select>
+{{--         <select name="n_cuenta" id="" v-model="" class="custom-select">
          <option value="" disabled>ELIGE UNA CUENTA</option>
           <option value="Banco">Bancos</option>
           <option value="Muebles">Muebles</option>
@@ -513,7 +553,7 @@
           <option value="Eq. de Comp">Eq. de Comp</option>
           <option value="Hip. por Pagar">Hip. por Pagar</option>
           <option value="Capital">Capital</option>
-        </select>
+        </select> --}}
         </td>
         <td width="125"><input type="text" v-model="pasivo.p_nocorriente.saldo" name="debe" class="form-control" required></td>
               
@@ -560,7 +600,11 @@
             
           <tr>
         <td>
-        <select name="n_cuenta" id="" v-model="patrimonio.nom_cuenta" class="custom-select">
+              <model-select :options="options" 
+                                v-model="patrimonio.nom_cuenta"
+                                placeholder="ELEGIR CUENTA" >
+        </model-select>
+{{--         <select name="n_cuenta" id="" v-model="patrimonio.nom_cuenta" class="custom-select">
           <option value="" disabled>ELIGE UNA CUENTA</option>
           <option value="Banco">Bancos</option>
           <option value="Muebles">Muebles</option>
@@ -574,7 +618,7 @@
           <option value="Eq. de Comp">Eq. de Comp</option>
           <option value="Hip. por Pagar">Hip. por Pagar</option>
           <option value="Capital">Capital</option>
-        </select>
+        </select> --}}
         </td>
         <td width="125"><input type="text" v-model="patrimonio.saldo" name="debe" class="form-control" required></td>
               

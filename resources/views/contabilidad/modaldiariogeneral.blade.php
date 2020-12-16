@@ -20,7 +20,7 @@
                         <a class="nav-link text-dark font-weight-bold" id="haber-diario-tab" data-toggle="tab" href="#haber-diario" role="tab" aria-controls="haber-diario" aria-selected="false">HABER</a>
                       </li>
                       <li class="nav-item" role="presentation">
-                        <a class="nav-link text-dark font-weight-bold" id="comentario-diario-tab" data-toggle="tab" href="#comentario-diario" role="tab" aria-controls="comentario-diario" aria-selected="false">COMENTARIO</a>
+                        <a class="nav-link text-dark font-weight-bold" id="comentario-diario-tab" data-toggle="tab" href="#comentario-diario" role="tab" aria-controls="comentario-diario" aria-selected="false">DETALLE</a>
                       </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
@@ -29,19 +29,23 @@
                        <table class="table table-bordered table-sm">
                           <thead class="bg-success">
                             <tr>
-                              <th v-if="diarios.debe.length == 0 || diario.debe.fecha !== ''" width="50" >Fecha</th>
+                              {{-- <th v-if="diarios.debe.length == 0 || diario.debe.fecha !== ''" width="50" >Fecha</th> --}}
                               <th  align="center" class="text-center">Cuentas</th>
                               <th  align="center" class="text-center">Saldo</th>    
                             </tr>
                        </thead>
                         <tbody >  
                           <tr>
-                              <td v-if="diarios.debe.length == 0 || diario.debe.fecha !== ''" width="50" ><input type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required></td>
+                              {{-- <td v-if="diarios.debe.length == 0 || diario.debe.fecha !== ''" width="50" ><input type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required></td> --}}
                               <td>
-                              <select name="n_cuenta" v-model="diario.debe.nom_cuenta" class="custom-select">
+                                          <model-select :options="options" 
+                                v-model="diario.debe.nom_cuenta"
+                                placeholder="ELEGIR CUENTA" >
+        </model-select>
+                             {{--  <select name="n_cuenta" v-model="diario.debe.nom_cuenta" class="custom-select">
                                 <option value="" disabled>ELIGE UNA CUENTA</option>
                                 <option v-for="(cuenta, index) in cuentas" :value="cuenta.id">@{{ cuenta.nombre }} </option>
-                              {{--   <option value="Banco">Bancos</option>
+                                <option value="Banco">Bancos</option>
                                 <option value="Muebles">Muebles</option>
                                 <option value="Caja">Caja</option>
                                 <option value="Vehiculo">Vehiculo</option>
@@ -52,8 +56,8 @@
                                 <option value="Equipo Oficina">Equipo Oficina</option>
                                 <option value="Eq. de Comp">Eq. de Comp</option>
                                 <option value="Hip. por Pagar">Hip. por Pagar</option>
-                                <option value="Capital">Capital</option> --}}
-                              </select>
+                                <option value="Capital">Capital</option>
+                              </select> --}}
                               </td>
                               <td width="125"><input type="number" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
                         </tr>
@@ -81,27 +85,28 @@
                         <tbody >  
                           <tr>
                               <td>
-                                <vue-select class="vue-select2" name="select2"
-                                      :options="cuentas" :model.sync="diario.haber.nom_cuenta"
-                                      :searchable="true" language="en-US">
-                              </vue-select>
-                              {{-- <select name="n_cuenta" v-model="diario.haber.nom_cuenta" class="custom-select">
-                                <option value="" disabled>ELIGE UNA CUENTA</option>
-                                <option v-for="(cuenta, index) in cuentas" :value="cuenta.id">@{{ cuenta.nombre }} </option> --}}
+                        <model-select :options="options" 
+                                v-model="diario.haber.nom_cuenta"
+                                placeholder="ELEGIR CUENTA" >
+                        </model-select>
+                             
+                                {{-- <select name="n_cuenta" v-model="diario.haber.nom_cuenta" class="custom-select">
+                                  <option value="" disabled>ELIGE UNA CUENTA</option>
+                                  <option v-for="(cuenta, index) in cuentas" :value="cuenta.id">@{{ cuenta.nombre }} </option>
 
-                                {{-- <option value="Banco">Bancos</option>
-                                <option value="Muebles">Muebles</option>
-                                <option value="Caja">Caja</option>
-                                <option value="Vehiculo">Vehiculo</option>
-                                <option value="Inv. Mercaderías">Inv. Mercaderías</option>
-                                <option value="Doc. por Cob">Doc. por Cob</option>
-                                <option value="Doc. por Pagar">Doc. por Pagar</option>
-                                <option value="Muebles Oficina">Muebles Oficina</option>
-                                <option value="Equipo Oficina">Equipo Oficina</option>
-                                <option value="Eq. de Comp">Eq. de Comp</option>
-                                <option value="Hip. por Pagar">Hip. por Pagar</option>
-                                <option value="Capital">Capital</option> --}}
-                              {{-- </select> --}}
+                                  <option value="Banco">Bancos</option>
+                                  <option value="Muebles">Muebles</option>
+                                  <option value="Caja">Caja</option>
+                                  <option value="Vehiculo">Vehiculo</option>
+                                  <option value="Inv. Mercaderías">Inv. Mercaderías</option>
+                                  <option value="Doc. por Cob">Doc. por Cob</option>
+                                  <option value="Doc. por Pagar">Doc. por Pagar</option>
+                                  <option value="Muebles Oficina">Muebles Oficina</option>
+                                  <option value="Equipo Oficina">Equipo Oficina</option>
+                                  <option value="Eq. de Comp">Eq. de Comp</option>
+                                  <option value="Hip. por Pagar">Hip. por Pagar</option>
+                                  <option value="Capital">Capital</option>
+                                </select> --}} 
                               </td>
                               <td width="125"><input type="number" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
                         </tr>
@@ -117,17 +122,19 @@
                       </div>
                       </div>
                       <div class="tab-pane fade" id="comentario-diario" role="tabpanel" aria-labelledby="comentario-diario-tab">
-                        <h2 class="text-center">AGREGAR COMENTARIO</h2>
+                        <h2 class="text-center">AGREGAR DETALLES</h2>
 
                           <table class="table table-bordered table-sm">
                         <thead class="thead-dark">
                         <tr>
+                          <th  align="center" class="text-center">Fecha</th>    
                           <th  align="center" class="text-center">Comentario</th>    
                         </tr>
                        </thead>
                         <tbody >  
                           <tr>
-                            <td width="125"><input type="text" v-model="diario.comentario" name="comentario" class="form-control" required></td>         
+                            <td width="25"><input type="date" v-model="diario.fecha" name="fecha" class="form-control" required></td>         
+                            <td ><input type="text" v-model="diario.comentario" name="comentario" class="form-control" required></td>         
                           </tr>
                       </tbody>
                     </table>
@@ -142,32 +149,29 @@
                   </div>
                   <div class="col-6" style=" height:300px; overflow-y: scroll;">
                     <h3 class="text-center">Transacciones</h3>
+                    <p >
+                      Se compra s/fra. #040 a Importadora “ELMARY” (contribuyente especial) - doce acondicionadores de aire en $ 550 c/u. Se cancela con ch/.# 050 Bco. Guayaquil. <br> <br>
+                      Se cancela la Fra.#023 a “Publicitas” (No Obligada a llevar Contabilidad) por servicios de publicidad $ 300 con ch/.#051 Bco. Guayaquil. <br> <br>
 
-                    <p  >
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
-                      Transacciones 1.- Se obtiene mediante el debe, el haber y el comentario <br>
+                      Se vende S/. Fra. # 010 - cincuenta acondicionadores de aire en $ 1.200 c/u a Comercial “Felipao” (Obligado a llevar Contabilidad). Nos cancela con ch/. #082 Bco. Austro. <br> <br>
+
+                      Se deposita en cta. cte.# 3050 Bco. Guayaquil $ 60.000  <br> <br>
+
+                      Se cancela la Fra.#088 a “Servinet” (No Obligada a llevar Contabilidad) por servicios de internet $ 60 con ch/.#052 Bco. Guayaquil. <br> <br>
+
+                      Se compra s/fra. # 056 a Importadora “CASIRON” (contribuyente especial) - diez acondicionadores de aire en $ 555 c/u. con ch/.# 053 Bco. Guayaquil. <br> <br>
+
+                      De la última compra se devuelve dos acondicionadores de aire por no estar de acuerdo con el pedido (Fra. # 011). <br> <br>
+
+                      Se cancela a “CNT” la Fra. #073 por servicio telefónico $ 150 con ch/.# 054 Bco. Guayaquil. <br> <br>
+
+                      Se vende S/Fra. #012 - treinta acondicionadores de aire en $ 1.200 c/u a Comercial “INCOR” (Obligado a llevar Contabilidad). Se recibe ch/. #101 Bco. del Austro. <br> <br>
+
+                      De la última venta nos devuelven un acondicionador de aire por no estar de acuerdo con el pedido. Se cancela con ch/.#055 Bco. Guayaquil. (Fra. # 057) <br> <br>
+
+
+
+
 
                     </p>
 

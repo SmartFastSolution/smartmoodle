@@ -24,6 +24,10 @@ Vue.component('draggable', draggable);
 // import select2 from 'v-select2-component';
 // Vue.component('select2', select2);
 
+import 'vue-search-select/dist/VueSearchSelect.css';
+ import { ModelSelect } from 'vue-search-select';
+Vue.component('ModelSelect', ModelSelect);
+ 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('drag-component', require('./components/DragComponent.vue').default);
 //Vue.component('letra-component', require('./components/LetraComponent.vue').default);

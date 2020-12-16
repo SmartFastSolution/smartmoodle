@@ -1,9 +1,32 @@
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////BALANCE INICIAL HPRIZONTAL//////////////////////////////////////////////////
+//////////////////////////////////////////////////FUNCIONES//////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const funciones = new Vue({
+   data:{
+        options: objeto,
+        cuentas: cuentas,
+
+      },
+      methods:{
+        obtenerNombre(id){
+        let cuenta = this.cuentas.filter(x => x.id == id);
+        let nombre = cuenta[0].nombre;
+        return nombre;
+
+        }
+      }
+
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////BALANCE INICIAL HORIZONTAL//////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const b_hori = new Vue({
         el: '#b_horizontal',
         data:{
+        options: objeto,
+        cuentas: cuentas,
         id_taller: taller,
         tipo: 'horizontal',
    		 	//diarios:[],
@@ -202,13 +225,16 @@ const b_hori = new Vue({
     editAcorriente(index){ //OBTENEMOS EL INDICE DEL ARRAY SELECCIONADO
       this.update = index;                                                       //IGUALAMOS LA VARIABLE UPDATE CON EL INDICE DEL ARRAY
       this.activo.a_corriente.saldo = this.a_corrientes[index].saldo;           //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
-      this.activo.a_corriente.nom_cuenta = this.a_corrientes[index].nom_cuenta; //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
+      this.activo.a_corriente.nom_cuenta = this.a_corrientes[index].cuenta_id; //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
       $('#a_corriente_e').modal('show');                                        //MOSTRAR EL MODAL CON JS
       //var activo = this.a_corrientes[index];
     },
     updateACorriente(){
+      let id = this.activo.a_corriente.nom_cuenta;
+      let nombre = funciones.obtenerNombre(id);
       var i = this.update;                                                    //I SERA EL INDICE QUE SE ASIGNO EN EL METODO EDITAR
-      this.a_corrientes[i].nom_cuenta = this.activo.a_corriente.nom_cuenta;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+      this.a_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+      this.a_corrientes[i].nom_cuenta = nombre;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
       this.a_corrientes[i].saldo = this.activo.a_corriente.saldo;             //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
       $('#a_corriente_e').modal('hide');                                      //OCULTAR EL MODAL
       this.limpiar();
@@ -218,13 +244,16 @@ const b_hori = new Vue({
     editANocorriente(index){
       this.update = index;
       this.activo.a_nocorriente.saldo = this.a_nocorrientes[index].saldo;
-      this.activo.a_nocorriente.nom_cuenta = this.a_nocorrientes[index].nom_cuenta;
+      this.activo.a_nocorriente.nom_cuenta = this.a_nocorrientes[index].cuenta_id;
       $('#a_nocorriente_e').modal('show');
       //var activo = this.a_nocorrientes[index];
     },
     updateANoCorriente(){
+      let id = this.activo.a_nocorriente.nom_cuenta;
+      let nombre = funciones.obtenerNombre(id);
       var i = this.update;
-      this.a_nocorrientes[i].nom_cuenta = this.activo.a_nocorriente.nom_cuenta;
+      this.a_nocorrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+      this.a_nocorrientes[i].nom_cuenta = nombre;
       this.a_nocorrientes[i].saldo = this.activo.a_nocorriente.saldo;
       $('#a_nocorriente_e').modal('hide');
       this.limpiar();
@@ -234,13 +263,16 @@ const b_hori = new Vue({
     editPcorriente(index){
       this.update = index ;
       this.pasivo.p_corriente.saldo = this.p_corrientes[index].saldo;
-      this.pasivo.p_corriente.nom_cuenta = this.p_corrientes[index].nom_cuenta;
+      this.pasivo.p_corriente.nom_cuenta = this.p_corrientes[index].cuenta_id;
       $('#p_corriente_e').modal('show');
       //var activo = this.a_corrientes[index];
     },
     updatePCorriente(){
+      let id = this.pasivo.p_corriente.nom_cuenta;
+      let nombre = funciones.obtenerNombre(id);
       var i = this.update;
-      this.p_corrientes[i].nom_cuenta = this.pasivo.p_corriente.nom_cuenta;
+      this.p_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+      this.p_corrientes[i].nom_cuenta = nombre;
       this.p_corrientes[i].saldo = this.pasivo.p_corriente.saldo;
       $('#p_corriente_e').modal('hide');
       this.limpiar();
@@ -250,13 +282,16 @@ const b_hori = new Vue({
     editPNocorriente(index){
       this.update = index ;
       this.pasivo.p_nocorriente.saldo = this.p_nocorrientes[index].saldo;
-      this.pasivo.p_nocorriente.nom_cuenta = this.p_nocorrientes[index].nom_cuenta;
+      this.pasivo.p_nocorriente.nom_cuenta = this.p_nocorrientes[index].cuenta_id;
       $('#p_nocorriente_e').modal('show');
       //var activo = this.a_corrientes[index];
     },
     updatePNoCorriente(){
+      let id = this.pasivo.p_nocorriente.nom_cuenta;
+      let nombre = funciones.obtenerNombre(id);
       var i = this.update;
-      this.p_nocorrientes[i].nom_cuenta = this.pasivo.p_nocorriente.nom_cuenta;
+      this.p_nocorrientes[i].cuenta_id = id;
+      this.p_nocorrientes[i].nom_cuenta = nombre;
       this.p_nocorrientes[i].saldo = this.pasivo.p_nocorriente.saldo;
       $('#p_nocorriente_e').modal('hide');
       this.limpiar();
@@ -266,13 +301,16 @@ const b_hori = new Vue({
     editPatrimonio(index){
       this.update = index ;
       this.patrimonio.saldo = this.patrimonios[index].saldo;
-      this.patrimonio.nom_cuenta = this.patrimonios[index].nom_cuenta;
+      this.patrimonio.nom_cuenta = this.patrimonios[index].cuenta_id;
       $('#patrimonio_e').modal('show');
       //var activo = this.a_corrientes[index];
     },
     updatePatrimonio(){
+       let id = this.patrimonio.nom_cuenta;
+      let nombre = funciones.obtenerNombre(id);
       var i = this.update;
-      this.patrimonios[i].nom_cuenta = this.patrimonio.nom_cuenta;
+      this.patrimonios[i].cuenta_id = id;
+      this.patrimonios[i].nom_cuenta = nombre;
       this.patrimonios[i].saldo = this.patrimonio.saldo;
       $('#patrimonio_e').modal('hide');
       this.limpiar();
@@ -295,13 +333,18 @@ const b_hori = new Vue({
          //        });   
                 
          //    },
+        
             agregarActivoCorriente(){
-               if(this.activo.a_corriente.nom_cuenta.trim() === '' || this.activo.a_corriente.saldo === ''){
+              
+              
+               if(this.activo.a_corriente.nom_cuenta == '' || this.activo.a_corriente.saldo === ''){
                 toastr.error("Estos campos son obligatorio", "Smarmoddle", {
                 "timeOut": "3000"
                 });
              }else{
-                var a_corr = {nom_cuenta:this.activo.a_corriente.nom_cuenta, saldo:this.activo.a_corriente.saldo};
+              let id = this.activo.a_corriente.nom_cuenta;
+              let nombre = funciones.obtenerNombre(id);
+                var a_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_corriente.saldo};
                 this.a_corrientes.push(a_corr);                               //añadimos el la variable persona al array
                   toastr.success("Registro agregado correctamente", "Smarmoddle", {
                     "timeOut": "3000"
@@ -315,12 +358,14 @@ const b_hori = new Vue({
               }
             },
              agregarActivoNoCorriente(){
-                if(this.activo.a_nocorriente.nom_cuenta.trim() === '' || this.activo.a_nocorriente.saldo === ''){
+                if(this.activo.a_nocorriente.nom_cuenta == '' || this.activo.a_nocorriente.saldo === ''){
                 toastr.error("Estos campos son obligatorio", "Smarmoddle", {
                 "timeOut": "3000"
                 });
              }else{
-                  var a_nocorr = {nom_cuenta:this.activo.a_nocorriente.nom_cuenta, saldo:this.activo.a_nocorriente.saldo};//CREANDO EL OBJETO QUE SE AGREGARA AL ARRAY
+              let id = this.activo.a_nocorriente.nom_cuenta;
+              let nombre = funciones.obtenerNombre(id);
+                  var a_nocorr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_nocorriente.saldo};//CREANDO EL OBJETO QUE SE AGREGARA AL ARRAY
                 this.a_nocorrientes.push(a_nocorr);//AGREGAR UNA NUEVA CUENTA AL ARRAY DE PASIVOS
                   //Limpiamos los campos
                   toastr.success("Registro agregado correctamente", "Smarmoddle", {
@@ -332,12 +377,15 @@ const b_hori = new Vue({
               }
              },
                agregarPasivoCorriente(){
-                if(this.pasivo.p_corriente.nom_cuenta.trim() === '' || this.pasivo.p_corriente.saldo === ''){
+                if(this.pasivo.p_corriente.nom_cuenta == '' || this.pasivo.p_corriente.saldo === ''){
                 toastr.error("Estos campos son obligatorio", "Smarmoddle", {
                 "timeOut": "3000"
                 });
               }else{
-                var p_corr = {nom_cuenta:this.pasivo.p_corriente.nom_cuenta, saldo:this.pasivo.p_corriente.saldo};
+                let id = this.pasivo.p_corriente.nom_cuenta;
+                let nombre = funciones.obtenerNombre(id);
+
+                var p_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.pasivo.p_corriente.saldo};
                 this.p_corrientes.push(p_corr);//añadimos el la variable persona al array
                   //Limpiamos los campos
                   toastr.success("Registro agregado correctamente", "Smarmoddle", {
@@ -349,12 +397,14 @@ const b_hori = new Vue({
               }
             },
              agregarPasivoNoCorriente(){
-                if(this.pasivo.p_nocorriente.nom_cuenta.trim() === '' || this.pasivo.p_nocorriente.saldo === ''){
+                if(this.pasivo.p_nocorriente.nom_cuenta == '' || this.pasivo.p_nocorriente.saldo === ''){
                 toastr.error("Estos campos son obligatorio", "Smarmoddle", {
                 "timeOut": "3000"
                 });
              }else{
-                  var p_nocorr = {nom_cuenta:this.pasivo.p_nocorriente.nom_cuenta, saldo:this.pasivo.p_nocorriente.saldo};
+                let id = this.pasivo.p_nocorriente.nom_cuenta;
+                let nombre = funciones.obtenerNombre(id);
+                let p_nocorr = {cuenta_id: id, nom_cuenta: nombre, saldo:this.pasivo.p_nocorriente.saldo};
                 this.p_nocorrientes.push(p_nocorr);//añadimos el la variable persona al array
                   //Limpiamos los campos
                 toastr.success("Registro agregado correctamente", "Smarmoddle", {
@@ -366,12 +416,15 @@ const b_hori = new Vue({
                 }   
              }, 
              agregarPatrimonio(){
-                if(this.patrimonio.nom_cuenta.trim() === '' || this.patrimonio.saldo === ''){
+                if(this.patrimonio.nom_cuenta == '' || this.patrimonio.saldo === ''){
                 toastr.error("Estos campos son obligatorio", "Smarmoddle", {
                 "timeOut": "3000"
                 });
              }else{
-               var patri = {nom_cuenta:this.patrimonio.nom_cuenta, saldo:this.patrimonio.saldo};
+               let id = this.patrimonio.nom_cuenta;
+              let nombre = funciones.obtenerNombre(id);
+
+               let patri = {cuenta_id: id, nom_cuenta:nombre, saldo:this.patrimonio.saldo};
                 this.patrimonios.push(patri);//añadimos el la variable persona al array
                   //Limpiamos los campos
                 toastr.success("Registro agregado correctamente", "Smarmoddle", {
@@ -594,6 +647,8 @@ const b_ver = new Vue({
           nom_cuenta:'',
           saldo:'',
         },
+         options: objeto,
+        cuentas: cuentas,
         //diarios2:[],
         total_balance_inicial:{ //Totales de activo, pasivo y patrimonio
           t_activo:'',
@@ -779,15 +834,18 @@ const b_ver = new Vue({
     editAcorriente(index){ //OBTENEMOS EL INDICE DEL ARRAY SELECCIONADO
       this.update = index;                                                       //IGUALAMOS LA VARIABLE UPDATE CON EL INDICE DEL ARRAY
       this.activo.a_corriente.saldo = this.a_corrientes[index].saldo;           //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
-      this.activo.a_corriente.nom_cuenta = this.a_corrientes[index].nom_cuenta; //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
-      $('#a_corriente_e2').modal('show');                                        //MOSTRAR EL MODAL CON JS
+      this.activo.a_corriente.nom_cuenta = this.a_corrientes[index].cuenta_id; //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
+      $('#a_corriente_e').modal('show');                                        //MOSTRAR EL MODAL CON JS
       //var activo = this.a_corrientes[index];
     },
     updateACorriente(){
+      let id = this.activo.a_corriente.nom_cuenta;
+      let nombre = funciones.obtenerNombre(id);
       var i = this.update;                                                    //I SERA EL INDICE QUE SE ASIGNO EN EL METODO EDITAR
-      this.a_corrientes[i].nom_cuenta = this.activo.a_corriente.nom_cuenta;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+      this.a_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+      this.a_corrientes[i].nom_cuenta = nombre;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
       this.a_corrientes[i].saldo = this.activo.a_corriente.saldo;             //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-      $('#a_corriente_e2').modal('hide');                                      //OCULTAR EL MODAL
+      $('#a_corriente_e').modal('hide');                                      //OCULTAR EL MODAL
       this.limpiar();
       this.cambioActivo();
   
@@ -795,15 +853,18 @@ const b_ver = new Vue({
     editANocorriente(index){
       this.update = index;
       this.activo.a_nocorriente.saldo = this.a_nocorrientes[index].saldo;
-      this.activo.a_nocorriente.nom_cuenta = this.a_nocorrientes[index].nom_cuenta;
-      $('#a_nocorriente_e2').modal('show');
+      this.activo.a_nocorriente.nom_cuenta = this.a_nocorrientes[index].cuenta_id;
+      $('#a_nocorriente_e').modal('show');
       //var activo = this.a_nocorrientes[index];
     },
     updateANoCorriente(){
+      let id = this.activo.a_nocorriente.nom_cuenta;
+      let nombre = funciones.obtenerNombre(id);
       var i = this.update;
-      this.a_nocorrientes[i].nom_cuenta = this.activo.a_nocorriente.nom_cuenta;
+      this.a_nocorrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+      this.a_nocorrientes[i].nom_cuenta = nombre;
       this.a_nocorrientes[i].saldo = this.activo.a_nocorriente.saldo;
-      $('#a_nocorriente_e2').modal('hide');
+      $('#a_nocorriente_e').modal('hide');
       this.limpiar();
       this.cambioActivoNo();
       this.TotalActivo();
@@ -811,15 +872,18 @@ const b_ver = new Vue({
     editPcorriente(index){
       this.update = index ;
       this.pasivo.p_corriente.saldo = this.p_corrientes[index].saldo;
-      this.pasivo.p_corriente.nom_cuenta = this.p_corrientes[index].nom_cuenta;
-      $('#p_corriente_e2').modal('show');
+      this.pasivo.p_corriente.nom_cuenta = this.p_corrientes[index].cuenta_id;
+      $('#p_corriente_e').modal('show');
       //var activo = this.a_corrientes[index];
     },
     updatePCorriente(){
+      let id = this.pasivo.p_corriente.nom_cuenta;
+      let nombre = funciones.obtenerNombre(id);
       var i = this.update;
-      this.p_corrientes[i].nom_cuenta = this.pasivo.p_corriente.nom_cuenta;
+      this.p_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+      this.p_corrientes[i].nom_cuenta = nombre;
       this.p_corrientes[i].saldo = this.pasivo.p_corriente.saldo;
-      $('#p_corriente_e2').modal('hide');
+      $('#p_corriente_e').modal('hide');
       this.limpiar();
       this.cambioPasivo();
       this.TotalPasivo();
@@ -827,15 +891,18 @@ const b_ver = new Vue({
     editPNocorriente(index){
       this.update = index ;
       this.pasivo.p_nocorriente.saldo = this.p_nocorrientes[index].saldo;
-      this.pasivo.p_nocorriente.nom_cuenta = this.p_nocorrientes[index].nom_cuenta;
-      $('#p_nocorriente_e2').modal('show');
+      this.pasivo.p_nocorriente.nom_cuenta = this.p_nocorrientes[index].cuenta_id;
+      $('#p_nocorriente_e').modal('show');
       //var activo = this.a_corrientes[index];
     },
     updatePNoCorriente(){
+      let id = this.pasivo.p_nocorriente.nom_cuenta;
+      let nombre = funciones.obtenerNombre(id);
       var i = this.update;
-      this.p_nocorrientes[i].nom_cuenta = this.pasivo.p_nocorriente.nom_cuenta;
+      this.p_nocorrientes[i].cuenta_id = id;
+      this.p_nocorrientes[i].nom_cuenta = nombre;
       this.p_nocorrientes[i].saldo = this.pasivo.p_nocorriente.saldo;
-      $('#p_nocorriente_e2').modal('hide');
+      $('#p_nocorriente_e').modal('hide');
       this.limpiar();
       this.cambioPasivoNo();
       this.TotalPasivo();
@@ -843,15 +910,18 @@ const b_ver = new Vue({
     editPatrimonio(index){
       this.update = index ;
       this.patrimonio.saldo = this.patrimonios[index].saldo;
-      this.patrimonio.nom_cuenta = this.patrimonios[index].nom_cuenta;
-      $('#patrimonio_e2').modal('show');
+      this.patrimonio.nom_cuenta = this.patrimonios[index].cuenta_id;
+      $('#patrimonio_e').modal('show');
       //var activo = this.a_corrientes[index];
     },
     updatePatrimonio(){
+       let id = this.patrimonio.nom_cuenta;
+      let nombre = funciones.obtenerNombre(id);
       var i = this.update;
-      this.patrimonios[i].nom_cuenta = this.patrimonio.nom_cuenta;
+      this.patrimonios[i].cuenta_id = id;
+      this.patrimonios[i].nom_cuenta = nombre;
       this.patrimonios[i].saldo = this.patrimonio.saldo;
-      $('#patrimonio_e2').modal('hide');
+      $('#patrimonio_e').modal('hide');
       this.limpiar();
       this.cambioPatrimonio();
     },      
@@ -872,13 +942,18 @@ const b_ver = new Vue({
          //        });   
                 
          //    },
+        
             agregarActivoCorriente(){
-               if(this.activo.a_corriente.nom_cuenta.trim() === '' || this.activo.a_corriente.saldo === ''){
+              
+              
+               if(this.activo.a_corriente.nom_cuenta == '' || this.activo.a_corriente.saldo === ''){
                 toastr.error("Estos campos son obligatorio", "Smarmoddle", {
                 "timeOut": "3000"
                 });
              }else{
-                var a_corr = {nom_cuenta:this.activo.a_corriente.nom_cuenta, saldo:this.activo.a_corriente.saldo};
+              let id = this.activo.a_corriente.nom_cuenta;
+              let nombre = funciones.obtenerNombre(id);
+                var a_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_corriente.saldo};
                 this.a_corrientes.push(a_corr);                               //añadimos el la variable persona al array
                   toastr.success("Registro agregado correctamente", "Smarmoddle", {
                     "timeOut": "3000"
@@ -892,12 +967,14 @@ const b_ver = new Vue({
               }
             },
              agregarActivoNoCorriente(){
-                if(this.activo.a_nocorriente.nom_cuenta.trim() === '' || this.activo.a_nocorriente.saldo === ''){
+                if(this.activo.a_nocorriente.nom_cuenta == '' || this.activo.a_nocorriente.saldo === ''){
                 toastr.error("Estos campos son obligatorio", "Smarmoddle", {
                 "timeOut": "3000"
                 });
              }else{
-                  var a_nocorr = {nom_cuenta:this.activo.a_nocorriente.nom_cuenta, saldo:this.activo.a_nocorriente.saldo};//CREANDO EL OBJETO QUE SE AGREGARA AL ARRAY
+              let id = this.activo.a_nocorriente.nom_cuenta;
+              let nombre = funciones.obtenerNombre(id);
+                  var a_nocorr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_nocorriente.saldo};//CREANDO EL OBJETO QUE SE AGREGARA AL ARRAY
                 this.a_nocorrientes.push(a_nocorr);//AGREGAR UNA NUEVA CUENTA AL ARRAY DE PASIVOS
                   //Limpiamos los campos
                   toastr.success("Registro agregado correctamente", "Smarmoddle", {
@@ -909,12 +986,15 @@ const b_ver = new Vue({
               }
              },
                agregarPasivoCorriente(){
-                if(this.pasivo.p_corriente.nom_cuenta.trim() === '' || this.pasivo.p_corriente.saldo === ''){
+                if(this.pasivo.p_corriente.nom_cuenta == '' || this.pasivo.p_corriente.saldo === ''){
                 toastr.error("Estos campos son obligatorio", "Smarmoddle", {
                 "timeOut": "3000"
                 });
               }else{
-                var p_corr = {nom_cuenta:this.pasivo.p_corriente.nom_cuenta, saldo:this.pasivo.p_corriente.saldo};
+                let id = this.pasivo.p_corriente.nom_cuenta;
+                let nombre = funciones.obtenerNombre(id);
+
+                var p_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.pasivo.p_corriente.saldo};
                 this.p_corrientes.push(p_corr);//añadimos el la variable persona al array
                   //Limpiamos los campos
                   toastr.success("Registro agregado correctamente", "Smarmoddle", {
@@ -926,12 +1006,14 @@ const b_ver = new Vue({
               }
             },
              agregarPasivoNoCorriente(){
-                if(this.pasivo.p_nocorriente.nom_cuenta.trim() === '' || this.pasivo.p_nocorriente.saldo === ''){
+                if(this.pasivo.p_nocorriente.nom_cuenta == '' || this.pasivo.p_nocorriente.saldo === ''){
                 toastr.error("Estos campos son obligatorio", "Smarmoddle", {
                 "timeOut": "3000"
                 });
              }else{
-                  var p_nocorr = {nom_cuenta:this.pasivo.p_nocorriente.nom_cuenta, saldo:this.pasivo.p_nocorriente.saldo};
+                let id = this.pasivo.p_nocorriente.nom_cuenta;
+                let nombre = funciones.obtenerNombre(id);
+                let p_nocorr = {cuenta_id: id, nom_cuenta: nombre, saldo:this.pasivo.p_nocorriente.saldo};
                 this.p_nocorrientes.push(p_nocorr);//añadimos el la variable persona al array
                   //Limpiamos los campos
                 toastr.success("Registro agregado correctamente", "Smarmoddle", {
@@ -943,12 +1025,15 @@ const b_ver = new Vue({
                 }   
              }, 
              agregarPatrimonio(){
-                if(this.patrimonio.nom_cuenta.trim() === '' || this.patrimonio.saldo === ''){
+                if(this.patrimonio.nom_cuenta == '' || this.patrimonio.saldo === ''){
                 toastr.error("Estos campos son obligatorio", "Smarmoddle", {
                 "timeOut": "3000"
                 });
              }else{
-               var patri = {nom_cuenta:this.patrimonio.nom_cuenta, saldo:this.patrimonio.saldo};
+               let id = this.patrimonio.nom_cuenta;
+              let nombre = funciones.obtenerNombre(id);
+
+               let patri = {cuenta_id: id, nom_cuenta:nombre, saldo:this.patrimonio.saldo};
                 this.patrimonios.push(patri);//añadimos el la variable persona al array
                   //Limpiamos los campos
                 toastr.success("Registro agregado correctamente", "Smarmoddle", {
@@ -1160,24 +1245,28 @@ const b_ver = new Vue({
 
 const diario = new Vue({
  el: '#diario',
+
+
     data:{
       id_taller: taller,
       producto_id: 1,
       nombre:'',
       fechabalance:'',
       complete:false,
-      cuentas:[
-          {id:1, nombre:'Caja', nombre_abreviado:'Caja', porcentual:false, porcentaje:null},
-          {id:2, nombre:'Bancos', nombre_abreviado:'Bancos', porcentual:false, porcentaje:null},
-          {id:3, nombre:'Muebles', nombre_abreviado:'Muebles', porcentual:false, porcentaje:null},
-          {id:4, nombre:'Vehiculo', nombre_abreviado:'Vehiculo', porcentual:false, porcentaje:null},
-          {id:5, nombre:'Inventario Mercaderia', nombre_abreviado:'Inv Mercaderia', porcentual:false, porcentaje:null},
-          {id:6, nombre:'Documentos por cobrar', nombre_abreviado:'DOc. por Cobrar', porcentual:false, porcentaje:null},
-          {id:7, nombre:'Documentos por cobrar', nombre_abreviado:'Doc. por Pagar', porcentual:false, porcentaje:null},
-          {id:8, nombre:'Mueble de Oficina', nombre_abreviado:'Mueble de Oficina', porcentual:false, porcentaje:null},
-          {id:9, nombre:'Equipo de Oficina', nombre_abreviado:'Equipo de Oficina', porcentual:false, porcentaje:null},
-          {id:10, nombre:'IVA 12%', nombre_abreviado:'IVA 12%', porcentual:true, porcentaje:12},
-        ],
+      options: objeto,
+      cuentas: cuentas,
+      // cuentas:[
+      //     {id:1, nombre:'Caja', nombre_abreviado:'Caja', porcentual:false, porcentaje:null},
+      //     {id:2, nombre:'Bancos', nombre_abreviado:'Bancos', porcentual:false, porcentaje:null},
+      //     {id:3, nombre:'Muebles', nombre_abreviado:'Muebles', porcentual:false, porcentaje:null},
+      //     {id:4, nombre:'Vehiculo', nombre_abreviado:'Vehiculo', porcentual:false, porcentaje:null},
+      //     {id:5, nombre:'Inventario Mercaderia', nombre_abreviado:'Inv Mercaderia', porcentual:false, porcentaje:null},
+      //     {id:6, nombre:'Documentos por cobrar', nombre_abreviado:'DOc. por Cobrar', porcentual:false, porcentaje:null},
+      //     {id:7, nombre:'Documentos por cobrar', nombre_abreviado:'Doc. por Pagar', porcentual:false, porcentaje:null},
+      //     {id:8, nombre:'Mueble de Oficina', nombre_abreviado:'Mueble de Oficina', porcentual:false, porcentaje:null},
+      //     {id:9, nombre:'Equipo de Oficina', nombre_abreviado:'Equipo de Oficina', porcentual:false, porcentaje:null},
+      //     {id:10, nombre:'IVA 12%', nombre_abreviado:'IVA 12%', porcentual:true, porcentaje:12},
+      //   ],
       balanceInicial:{
         debe:[],
         haber:[],
@@ -1227,8 +1316,14 @@ const diario = new Vue({
         },
         dato:[]
     },
+    mounted: function () {
+      
+
+    },
+
    
     methods:{
+ 
     valorPorcentual(porcentaje, valor){
       // let porcentaje = this.cuentas[index].porcentaje;
       let total = Number((valor * porcentaje) / 100);
@@ -1268,7 +1363,7 @@ const diario = new Vue({
       let cuenta = this.cuentas.filter(x => x.id == id);
       let valor = this.diario.haber.saldo;
       // console.log(cuenta)
-            if (cuenta[0].porcentual == true) {
+            if (cuenta[0].porcentual == 1) {
                   let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
                   let haber = {cuenta_id: cuenta[0].id, fecha:this.diario.haber.fecha, nom_cuenta: cuenta[0].nombre, saldo:calculo};
                   this.diarios.haber.push(haber);//añadimos el la variable persona al array
@@ -1292,40 +1387,40 @@ const diario = new Vue({
       let cuenta = this.cuentas.filter(x => x.id == id);
       let valor = this.diario.debe.saldo;
 
-      if (this.diarios.debe.length == 0) {
-        if (this.diario.debe.fecha.trim() === '') {
-          toastr.error("La fecha es obligatoria en la primera cuenta del registro", "Smarmoddle", {
-                "timeOut": "3000"
-            });
-        }else if(this.diario.debe.nom_cuenta === ''){
-           toastr.error("La cuenta es obligatoria", "Smarmoddle", {
-                "timeOut": "3000"
-            });
-        }else{
-          if (cuenta[0].porcentual == true) {
-                  let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
+      // if (this.diarios.debe.length == 0) {
+      //   if (this.diario.debe.fecha.trim() === '') {
+      //     toastr.error("La fecha es obligatoria en la primera cuenta del registro", "Smarmoddle", {
+      //           "timeOut": "3000"
+      //       });
+      //   }else if(this.diario.debe.nom_cuenta === ''){
+      //      toastr.error("La cuenta es obligatoria", "Smarmoddle", {
+      //           "timeOut": "3000"
+      //       });
+      //   }else{
+      //     if (cuenta[0].porcentual == 1) {
+      //             let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
                   
-                  let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:calculo};
-                  this.diarios.debe.push(debe);//añadimos el la variable persona al array
-            }else{
-                  let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:this.diario.debe.saldo};
-                  this.diarios.debe.push(debe);
-            }
-                //Limpiamos los campos
-                toastr.success("Activo agregado correctamente", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-                this.diario.debe.fecha =''
-                this.diario.debe.nom_cuenta =''
-                this.diario.debe.saldo =''
-        }
-      }else{
+      //             let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:calculo};
+      //             this.diarios.debe.push(debe);//añadimos el la variable persona al array
+      //       }else{
+      //             let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:this.diario.debe.saldo};
+      //             this.diarios.debe.push(debe);
+      //       }
+      //           //Limpiamos los campos
+      //           toastr.success("Activo agregado correctamente", "Smarmoddle", {
+      //           "timeOut": "3000"
+      //           });
+      //           this.diario.debe.fecha =''
+      //           this.diario.debe.nom_cuenta =''
+      //           this.diario.debe.saldo =''
+      //   }
+      // }else{
           if(this.diario.debe.nom_cuenta === ''){
            toastr.error("La cuenta es obligatoria", "Smarmoddle", {
                 "timeOut": "3000"
             });
         }else{
-            if (cuenta[0].porcentual == true) {
+            if (cuenta[0].porcentual == 1) {
                   let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
                   
                   let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:calculo};
@@ -1341,7 +1436,7 @@ const diario = new Vue({
                 this.diario.debe.nom_cuenta =''
                 this.diario.debe.saldo =''
       }
-          }     
+          // }     
     },
     agregarComentario(){
       this.diarios.comentario = this.diario.comentario;
@@ -1461,7 +1556,7 @@ const diario = new Vue({
       let cuenta = this.cuentas.filter(x => x.id == id);
       console.log(cuenta)
       let valor  = this.diario.haber.saldo;
-      if (cuenta[0].porcentual == true) {
+      if (cuenta[0].porcentual == 1) {
         let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
         this.diarios.haber[index].nom_cuenta = cuenta[0].nombre;
         this.diarios.haber[index].saldo      = calculo;
@@ -1479,7 +1574,7 @@ const diario = new Vue({
 
       let cuenta = this.cuentas.filter(x => x.id == cuenta_id);
       console.log(cuenta)
-      if (cuenta[0].porcentual == true){
+      if (cuenta[0].porcentual == 1){
 
         this.diario.haber.nom_cuenta = cuenta_id;
         this.diario.haber.saldo      = '';
@@ -1547,7 +1642,7 @@ const diario = new Vue({
       }
       let cuenta = this.cuentas.filter(x => x.id == cuenta_id);
       // console.log(cuenta)
-      if (cuenta[0].porcentual == true){
+      if (cuenta[0].porcentual == 1){
         this.diario.debe.nom_cuenta = cuenta_id;
         this.diario.debe.saldo      = '';
       }else{
@@ -1578,7 +1673,7 @@ const diario = new Vue({
       if (this.diario.debe.fecha !== '') {
          this.diarios.debe[index].fecha = this.diario.debe.fecha; 
       }
-      if (cuenta[0].porcentual == true) {
+      if (cuenta[0].porcentual == 1) {
         let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
         this.diarios.debe[index].nom_cuenta = cuenta[0].nombre;
         this.diarios.debe[index].saldo      = calculo;

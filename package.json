@@ -24,11 +24,13 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "@alfsnd/vue-bootstrap-select": "^0.4.4",
         "@fortawesome/fontawesome-free": "^5.14.0",
         "admin-lte": "^3.0.5",
         "icheck-bootstrap": "^3.0.1",
         "overlayscrollbars": "^1.13.0",
-        "v-select2-component": "^0.4.3",
+        "vue-search-select": "^2.9.3",
+        "vue-select2": "^0.2.6",
         "vuedraggable": "^2.24.1"
     }
 }
