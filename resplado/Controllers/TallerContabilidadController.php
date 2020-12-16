@@ -537,17 +537,17 @@ public function obtenerBalanceCompro(Request $request)
         $binicial->total_pasivo_patrimonio = $request->t_patrimonio;
 		$binicial->save();
 
-    // if ($tipo == 'horizontal') {
-    //     $a = BalanceInicial::where('user_id', $id)->where('tipo', $tipo)->get()->last(); 
-    //     $diariogeneral                     = new DiarioGeneral;
-    //     $diariogeneral->taller_id          = $taller_id;
-    //     $diariogeneral->user_id            = $id;
-    //     $diariogeneral->balance_inicial_id = $a->id;
-    //     $diariogeneral->enunciado          = $contenido->enunciado;
-    //     $diariogeneral->nombre             = $request->nombre;
-    //     $diariogeneral->completado         = false;
-    //     $diariogeneral->save();
-    // }    
+    if ($tipo == 'horizontal') {
+        $a = BalanceInicial::where('user_id', $id)->where('tipo', $tipo)->get()->last(); 
+        $diariogeneral                     = new DiarioGeneral;
+        $diariogeneral->taller_id          = $taller_id;
+        $diariogeneral->user_id            = $id;
+        $diariogeneral->balance_inicial_id = $a->id;
+        $diariogeneral->enunciado          = $contenido->enunciado;
+        $diariogeneral->nombre             = $request->nombre;
+        $diariogeneral->completado         = false;
+        $diariogeneral->save();
+    }    
 		if ($binicial == true) {
 			   $o = BalanceInicial::where('user_id', $id)->get()->last(); 
                foreach ($a_corriente as $key => $activos) {
@@ -771,7 +771,7 @@ public function obtenerbalance(Request $request)
         $conteo    = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', 'horizontal')->count();
 
         if ($conteo  == 1) {
-        $balanceInicial    = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', 'horizontal')->get()->last();
+        $balanceInicial    = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', 'horizontal')->first();
         $activos           = $balanceInicial->bActivos;
         $pasivo            = $balanceInicial->bPasivos;
         $patrimonios       = $balanceInicial->bPatrimonios;
@@ -789,7 +789,6 @@ public function obtenerbalance(Request $request)
             'datos' => true,
                 'nombre' => $balanceInicial->nombre,
                 'fecha' => $balanceInicial->fecha,
-                'tipo' => 'balance_inicial',
                 'activos' => $activos,
                 'pasivos' => $pasivo_patrimonio
             ),200,[]);
@@ -806,36 +805,20 @@ public function obtenerbalance(Request $request)
         $taller_id         = $request->id;
         $dioGeneral    = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->count();
         $registros = [];
-        $ajustes = [];
         if ($dioGeneral  == 1) {
-        $diairioGeneral    = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
-        $normal = DGRegistro::where('diario_general_id', $diairioGeneral->id)->where('tipo', 'normal')->orderBy('fecha')->get();
-            foreach ($normal as $key => $registro) {
+              $diairioGeneral    = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        $obtener = DGRegistro::where('diario_general_id', $diairioGeneral->id)->orderBy('fecha')->get();
+            foreach ($obtener as $key => $registro) {
                 $regis = array(
                     'debe' => $registro->dgrDebe,
                     'haber'=>$registro->dgrHaber,
-                    'tipo' => $registro->tipo,
-                    'fecha' => $registro->fecha,
                     'comentario' => $registro->comentario
                 );
                 $registros[]= $regis;
             }
-         $ajustado = DGRegistro::where('diario_general_id', $diairioGeneral->id)->where('tipo', 'ajustado')->orderBy('fecha')->get();
-            foreach ($ajustado as $key => $registro) {
-                $regis = array(
-                    'debe' => $registro->dgrDebe,
-                    'haber'=>$registro->dgrHaber,
-                    'tipo' => $registro->tipo,
-                    'fecha' => $registro->fecha,
-                    'comentario' => $registro->comentario
-                );
-                $ajustes[]= $regis;
-            }
             return response(array(
                 'datos' => true,
-                'nombre' => $diairioGeneral->nombre,
-                'registros' => $registros,
-                'ajustes' => $ajustes,
+                'dgeneral' => $registros
             ),200,[]);
          }else{
              return response(array(
@@ -847,24 +830,66 @@ public function obtenerbalance(Request $request)
 
     public function diario(Request $request)
     {
-        $id            = Auth::id();
-        $taller_id     = $request->id;
-        $registro      = $request->registro;
-        
-        $diariogeneral = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->count();
+        $id                = Auth::id();
+        $taller_id         = $request->id;
+        $registro = $request->registro;
 
-    if ($diariogeneral == 1){ 
+        $diariogeneral = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->count();
+if ($diariogeneral == 1){ 
         $cu = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
         $cuenta = DGRegistro::where('diario_general_id',$cu->id)->count();
-
+        // SI YA ESTA CREADO EL REGISTRO DEL DIARIO GENERAL, PARA ESO PRIMERO DEBE TENER CONCLUIDO EL BALANCE INICIAL
+        
+    if ($cuenta == 0) {
+        $diariog = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        
+        $debe =[];
+        $haber =[];
+        foreach ($registro as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
+            $regis=array(
+                     'diario_general_id'  => $diariog->id,
+                     'no_registro'        => $key + 1,
+                     'comentario'         => $value['comentario'],
+                     'fecha'              => $value['debe'][0]['fecha'],
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                );
+                DGRegistro::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
+        }
+        $register = $diariog->dgRegistro;
+        foreach ($registro as $key => $value) {                         ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
+            foreach ($value['debe'] as $key1 => $value1) {              ////RECORRER TODOS LAS CUENTAS DE DEBE QUE PERTENECEN A UN REGISTRO
+                $regis1=array(
+                     'd_g_registro_id'  => $register[$key]->id,
+                     'nom_cuenta'        => $value1['nom_cuenta'],
+                     'saldo'              => $value1['saldo'],
+                     'fecha'              => $value1['fecha'],
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                  );
+                DGRDebe::insert($regis1);                             //GURDAR ESAS CUENTAS EN LA TABLA DEBE CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
+            }
+              foreach ($value['haber'] as $key2 => $value2) {           ////RECORRER TODOS LAS CUENTAS DE HABER QUE PERTENECEN A UN REGISTRO
+                $regis2=array(
+                     'd_g_registro_id'  => $register[$key]->id,
+                     'nom_cuenta'        => $value2['nom_cuenta'],
+                     'saldo'              => $value2['saldo'],
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                  );
+                  DGRHaber::insert($regis2);                            //GURDAR ESAS CUENTAS EN LA TABLA HABER CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
+            }
+        }
+        $diariog->completado = true;                                    //CAMBIAR EL VALOR DE COMPLETADO A TRUE /// ESTO SIGNIFICA QUE EL TALLER HA SIDO COMPLETADO
+        $diariog->save();                                             //GUARDAR ESE CAMBIO
+         return response(array(                                         //ENVIO DE RESPUESTA
+                'success' => true,
+                'message' => 'Diario General creado correctamente'
+            ),200,[]);
+}elseif ($cuenta >= 1) {
         $diariog = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
         $debe =[];
         $haber =[];
-        $diariog->nombre = $request->nombre;
-        $diariog->total_debe = $request->total_debe;
-        $diariog->total_haber = $request->total_haber;
-        $diariog->save();
-
 
         $registros= DGRegistro::where('diario_general_id', $diariog->id)->get();
         
@@ -873,109 +898,53 @@ public function obtenerbalance(Request $request)
         }
         $deleteRegistros = DGRegistro::destroy($ids);
 
-                foreach ($registro as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
+        foreach($registro as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
             $regis=array(
-                     'diario_general_id' => $diariog->id,
-                     'no_registro'       => $key + 1,
-                     'comentario'        => $value['comentario'],
-                     'fecha'             => $value['fecha'],
-                     'tipo'              => $value['tipo'],
-                     'created_at'        => now(),
-                     'updated_at'        => now(),
-                );
-                DGRegistro::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
+                     'diario_general_id'  => $diariog->id,
+                     'no_registro'        => $key + 1,
+                     'comentario'         => $value['comentario'],
+                     'fecha'              => $value['debe'][0]['fecha'],
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                  );
+                  DGRegistro::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
         }
+
         $register = $diariog->dgRegistro;
-        foreach ($registro as $key => $value) {                         ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
+        foreach ($registro as $key => $value) {                       ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
             foreach ($value['debe'] as $key1 => $value1) {              ////RECORRER TODOS LAS CUENTAS DE DEBE QUE PERTENECEN A UN REGISTRO
                 $regis1=array(
-                     'd_g_registro_id' => $register[$key]->id,
-                     'cuenta_id'       => $value1['cuenta_id'],
-                     'nom_cuenta'      => $value1['nom_cuenta'],
-                     'saldo'           => $value1['saldo'],
-                     'fecha'           => $value1['fecha'],
-                     'created_at'      => now(),
-                     'updated_at'      => now(),
+                     'd_g_registro_id'  => $register[$key]->id,
+                     'nom_cuenta'        => $value1['nom_cuenta'],
+                     'saldo'              => $value1['saldo'],
+                     'fecha'              => $value1['fecha'],
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
                   );
-                DGRDebe::insert($regis1);                             //GURDAR ESAS CUENTAS EN LA TABLA DEBE CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
+                  DGRDebe::insert($regis1);                             //GURDAR ESAS CUENTAS EN LA TABLA DEBE CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
             }
               foreach ($value['haber'] as $key2 => $value2) {           ////RECORRER TODOS LAS CUENTAS DE HABER QUE PERTENECEN A UN REGISTRO
                 $regis2=array(
                      'd_g_registro_id'  => $register[$key]->id,
-                     'cuenta_id'       => $value2['cuenta_id'],
                      'nom_cuenta'        => $value2['nom_cuenta'],
                      'saldo'              => $value2['saldo'],
                      'created_at'         => now(),
                      'updated_at'         => now(),
                   );
                   DGRHaber::insert($regis2);                            //GURDAR ESAS CUENTAS EN LA TABLA HABER CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
-            }
-        }
-        return response(array(
+            }      
+}
+   return response(array(
                 'success' => 'act',
                 'message' => 'Datos Actualizados Correctamente'
             ),200,[]);
-    }else{ 
-        $diariogeneral               = new DiarioGeneral;
-        $diariogeneral->taller_id    = $taller_id;
-        $diariogeneral->user_id      = $id;
-        // $diariogeneral->enunciado = $contenido->enunciado;
-        $diariogeneral->nombre       = $request->nombre;
-        $diariogeneral->completado   = false;
-        $diariogeneral->total_haber  = $request->total_haber;
-        $diariogeneral->total_debe   = $request->total_debe;
-
-        $diariogeneral->save();
-
-        $diariog = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
-        
-        $debe =[];
-        $haber =[];
-        foreach ($registro as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
-            $regis=array(
-                     'diario_general_id' => $diariog->id,
-                     'no_registro'       => $key + 1,
-                     'comentario'        => $value['comentario'],
-                     'fecha'             => $value['fecha'],
-                     'tipo'              => $value['tipo'],
-                     'created_at'        => now(),
-                     'updated_at'        => now(),
-                );
-                DGRegistro::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
-        }
-        $register = $diariog->dgRegistro;
-        foreach ($registro as $key => $value) {                         ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
-            foreach ($value['debe'] as $key1 => $value1) {              ////RECORRER TODOS LAS CUENTAS DE DEBE QUE PERTENECEN A UN REGISTRO
-                $regis1=array(
-                     'd_g_registro_id' => $register[$key]->id,
-                     'cuenta_id'       => $value1['cuenta_id'],
-                     'nom_cuenta'      => $value1['nom_cuenta'],
-                     'saldo'           => $value1['saldo'],
-                     'fecha'           => $value1['fecha'],
-                     'created_at'      => now(),
-                     'updated_at'      => now(),
-                  );
-                DGRDebe::insert($regis1);                             //GURDAR ESAS CUENTAS EN LA TABLA DEBE CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
-            }
-              foreach ($value['haber'] as $key2 => $value2) {           ////RECORRER TODOS LAS CUENTAS DE HABER QUE PERTENECEN A UN REGISTRO
-                $regis2=array(
-                     'd_g_registro_id'  => $register[$key]->id,
-                     'cuenta_id'       => $value2['cuenta_id'],
-                     'nom_cuenta'        => $value2['nom_cuenta'],
-                     'saldo'              => $value2['saldo'],
-                     'created_at'         => now(),
-                     'updated_at'         => now(),
-                  );
-                  DGRHaber::insert($regis2);                            //GURDAR ESAS CUENTAS EN LA TABLA HABER CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
-            }
-        }
-        // $diariog->completado = true;                                    //CAMBIAR EL VALOR DE COMPLETADO A TRUE /// ESTO SIGNIFICA QUE EL TALLER HA SIDO COMPLETADO
-        // $diariog->save();                                             //GUARDAR ESE CAMBIO
-         return response(array(                                         //ENVIO DE RESPUESTA
-                'success' => true,
-                'message' => 'Diario General creado correctamente'
+}
+         } else { 
+                                                               // SI NO TIENE CREADO EL BALANCE INICIAL ANTES DE GUARDAR, LE SALDRA UNA NOTIFICACION INDICANDO DICHO PUNTO
+            return response(array(
+                'success' => false,
+                'message' => 'Debes de crear el Balance Inicial primero'
             ),200,[]);
-                                                              // SI NO TIENE CREADO EL BALANCE INICIAL ANTES DE GUARDAR, LE SALDRA UNA NOTIFICACION INDICANDO DICHO P
         }
     }
 }

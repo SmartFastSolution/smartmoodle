@@ -14,7 +14,16 @@ const funciones = new Vue({
         let nombre = cuenta[0].nombre;
         return nombre;
 
-        }
+        },
+    formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
       }
 
 });
@@ -1275,6 +1284,7 @@ const diario = new Vue({
        },
        registros:[
        ],
+       ajustes:[],
        porcentajes:{
         porcentaje:0,
         index_cuenta:'',
@@ -1286,7 +1296,10 @@ const diario = new Vue({
         diarios:{
            debe:[],
           haber:[],
-          comentario:''
+          comentario:'',
+          fecha:'',
+          ajustado:false,
+          tipo:''
         },
          edit:{
            debe:[],
@@ -1314,16 +1327,42 @@ const diario = new Vue({
           debe:0, 
           haber:0
         },
+        total:{
+          debe:0,
+          haber:0,
+        },
+        update:false,
         dato:[]
     },
     mounted: function () {
-      
+      this.obtenerDiarioGeneral();
 
     },
 
    
     methods:{
- 
+    formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
+    abrirTransaccion(){
+      this.update             = false;
+       this.diarios.debe      =[];
+      this.diarios.haber      =[];
+      this.diarios.fecha      =[];
+      this.diarios.comentario =[];
+      this.diarios.ajustado = false;
+
+      $('#dg-transaccion').modal('show');
+      $('#comentario-diario-tab').tab('show'); 
+
+
+    },
     valorPorcentual(porcentaje, valor){
       // let porcentaje = this.cuentas[index].porcentaje;
       let total = Number((valor * porcentaje) / 100);
@@ -1344,6 +1383,8 @@ const diario = new Vue({
             console.log(response.data); 
             this.totalDebeBi();
             this.totalHaberBi();
+            this.totalesFinales();
+
             this.obtenerDiarioGeneral();
           }
                     
@@ -1465,8 +1506,12 @@ const diario = new Vue({
          toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
                 "timeOut": "3000"
             });
-      }else  if (this.diarios.comentario.trim() === '') {
+      }else  if (this.diarios.comentario == '') {
          toastr.error("Debes agregar un comentario", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else  if (this.diarios.fecha == '') {
+         toastr.error("Debes agregar la fecha", "Smarmoddle", {
                 "timeOut": "3000"
             });
       }else  if (total_haber != total_debe) {
@@ -1474,8 +1519,19 @@ const diario = new Vue({
                 "timeOut": "3000"
             });
       }else{
-           var registro = {debe:this.diarios.debe, haber:this.diarios.haber, comentario:this.diarios.comentario};
+        this.diarios.debe[0].fecha = this.diarios.fecha;
+           // let registro = {debe:this.diarios.debe, haber:this.diarios.haber, comentario:this.diarios.comentario, fecha: this.diarios.fecha};
+
+              if (this.diarios.ajustado == true) {
+                let registro = {tipo: 'ajustado', debe:this.diarios.debe, haber:this.diarios.haber, comentario:this.diarios.comentario, fecha: this.diarios.fecha};
+                this.ajustes.push(registro);//añadimos el la variable persona al array
+
+              } else {
+
+                let registro = {tipo: 'normal', debe:this.diarios.debe, haber:this.diarios.haber, comentario:this.diarios.comentario, fecha: this.diarios.fecha};
                 this.registros.push(registro);//añadimos el la variable persona al array
+
+              }
                 //Limpiamos los campos
                 toastr.success("Registro agregado correctamente", "Smarmoddle", {
                 "timeOut": "3000"
@@ -1483,37 +1539,161 @@ const diario = new Vue({
                 this.diarios.debe =[];
                 this.diarios.haber =[];
                 this.diarios.comentario = '';
+                this.diarios.ajustado = false;
                 this.totalDebe();
-           this.totalHaber();
+                this.totalHaber();
+            this.totalesFinales();
+
+      $('#dg-transaccion').modal('hide');
+
                 
       }
     },
     debeEditRegister(id){
-      var register = this.registros;
-      this.registerindex = id;
-      this.edit.debe =[];
-      this.edit.haber =[];
-      this.edit.debe = register[id].debe;
-      this.edit.haber = register[id].haber;
-      this.edit.comentario = register[id].comentario;
-      console.log(this.registros[id]);
+
+      let register = JSON.parse(JSON.stringify(this.registros));
+      this.update             = true;
+      this.registerindex      = id;
+      this.diarios.debe       =[];
+      this.diarios.haber      =[];
+      this.diarios.debe       = register[id].debe;
+      this.diarios.haber      = register[id].haber;
+      this.diarios.comentario = register[id].comentario;
+      this.diarios.fecha = register[id].fecha;
+      if (register[id].tipo == 'ajustado') {
+        this.diarios.ajustado = true;
+      } else {
+      this.diarios.ajustado = false;
+      }
+      this.diarios.tipo = register[id].tipo;
+
+      // console.log(this.registros[id]);
+      $('#dg-transaccion').modal('show');
 
     },
+     debeEditAjustado(id){
+
+      let register = JSON.parse(JSON.stringify(this.ajustes));
+      this.update             = true;
+      this.registerindex      = id;
+      this.diarios.debe       =[];
+      this.diarios.haber      =[];
+      this.diarios.debe       = register[id].debe;
+      this.diarios.haber      = register[id].haber;
+      this.diarios.comentario = register[id].comentario;
+      this.diarios.fecha = register[id].fecha;
+      if (register[id].tipo == 'ajustado') {
+        this.diarios.ajustado = true;
+      } else {
+      this.diarios.ajustado = false;
+      }
+      this.diarios.tipo = register[id].tipo;
+
+      // console.log(this.registros[id]);
+      $('#dg-transaccion').modal('show');
+
+    },
+
     deleteRegistro(id){
       this.registros.splice(id, 1);
       this.totalDebe();
       this.totalHaber();
+      this.totalesFinales();
+
+    },
+
+    deleteAjuste(id){
+      this.ajustes.splice(id, 1);
+      this.totalDebe();
+      this.totalHaber();
+      this.totalesFinales();
+
     },
     updaterRegister(){
-     var  id = this.registerindex;
-     this.registros[id].debe = this.edit.debe;
-     this.registros[id].haber = this.edit.haber;
-     this.registros[id].comentario = this.edit.comentario;
-     this.edit.debe =   [];
-    this.edit.haber = [];
-    this.edit.comentario = '';
-    this.totalDebe();
-           this.totalHaber();
+    let id = this.registerindex;
+    let total_debe = 0;
+      let total_haber = 0;
+      
+      this.diarios.debe.forEach(function(debe, id){
+                let saldo = debe.saldo;
+                    total_debe += Number(saldo);
+              });
+      this.diarios.haber.forEach(function(haber, id){
+                let saldo = haber.saldo;
+                    total_haber += Number(saldo);
+              });
+
+      if (this.diarios.debe == 0) {
+         toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else  if (this.diarios.comentario.trim() === '') {
+         toastr.error("Debes agregar un comentario", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else  if (this.diarios.fecha.trim() === '') {
+         toastr.error("Debes agregar la fecha", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else  if (total_haber != total_debe) {
+         toastr.error("El Total de Debe y Haber no coinciden", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else{
+          if (this.diarios.tipo == 'ajustado' && this.diarios.ajustado == true) {
+            // let register = JSON.parse(JSON.stringify(this.ajustes));
+            this.ajustes[id].debe = this.diarios.debe;
+            this.ajustes[id].haber = this.diarios.haber;
+            this.ajustes[id].comentario = this.diarios.comentario;
+            this.ajustes[id].fecha = this.diarios.fecha;
+          } else if(this.diarios.tipo == 'ajustado' && this.diarios.ajustado !== true){
+            let register = JSON.parse(JSON.stringify(this.ajustes[id]));
+            register.tipo = 'normal';
+            this.registros.push(register);
+            this.ajustes.splice(id, 1);
+
+
+
+          }else if(this.diarios.tipo == 'normal' && this.diarios.ajustado == false){
+            this.registros[id].debe = this.diarios.debe;
+            this.registros[id].haber = this.diarios.haber;
+            this.registros[id].comentario = this.diarios.comentario;
+            this.registros[id].fecha = this.diarios.fecha;
+
+          }else if(this.diarios.tipo == 'normal' && this.diarios.ajustado == true){
+            let register = JSON.parse(JSON.stringify(this.registros[id]));
+            register.tipo = 'ajustado';
+            this.ajustes.push(register);
+            this.registros.splice(id, 1);
+
+
+          }
+          
+         
+
+          // if (this.diarios.ajustado = true) {
+          //     this.registros[id].tipo = 'ajustado';
+          // let register = JSON.parse(JSON.stringify(this.ajustes));
+
+
+          //     }else {
+          //   this.registros[id].tipo = 'normal';
+            
+          // }
+          this.diarios.debe =   [];
+          this.diarios.haber = [];
+          this.diarios.comentario = '';
+          this.diarios.fecha = '';
+          this.diarios.tipo = '';
+          this.diarios.ajustado = false;
+
+          this.totalDebe();
+          this.totalHaber();
+          this.totalesFinales();
+
+          $('#dg-transaccion').modal('hide');
+
+        }
     },
   //   habereditRegister(id, index){
   //     console.log(id);
@@ -1600,6 +1780,29 @@ const diario = new Vue({
     haberDelete(index){
       this.edit.haber.splice(index, 1);
     },
+   totalesFinales: function(){
+        this.total.debe = 0;
+        this.total.haber = 0;
+        var regis = this.ajustes;
+        var total = 0;        
+        var total1 = 0;        
+        regis.forEach(function(obj, index){
+          obj.debe.forEach(function(sal, id){
+            total += Number(sal.saldo);
+          })
+        });
+        // console.log(total);
+        this.total.debe = Number(this.pasan.debe + total).toFixed(2);
+
+          regis.forEach(function(obj, index){
+          obj.haber.forEach(function(sal, id){
+            total1 += Number(sal.saldo);
+          })
+        });
+        this.total.haber = Number(this.pasan.haber + total1).toFixed(2);
+
+
+      },
     comentarioEdit(){
      this.diario.comentario = this.edit.comentario;
      $('#comentario').modal('show'); 
@@ -1712,6 +1915,7 @@ const diario = new Vue({
             });
             // console.log(total);        
             this.balanceInicial.totalhaber = total;
+            this.totalesFinales();
             
           },
     totalDebe: function(){
@@ -1740,11 +1944,21 @@ const diario = new Vue({
             this.pasan.haber =  this.balanceInicial.totalhaber +  total;
           }, 
   guardarDiario: function(){
-        var _this = this;
-        var url = '/sistema/admin/taller/diario';
+      const union = this.registros.concat(this.ajustes);
+      if (union.length == 0) {
+           toastr.error('No tienes registros para guardar', "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+      }else{
+         console.log(union)
+        let _this = this;
+        let url = '/sistema/admin/taller/diario';
             axios.post(url,{
               id: _this.id_taller,
-              registro: _this.registros
+              registro: union,
+              nombre: _this.nombre,
+              total_debe: _this.total.debe,
+              total_haber: _this.total.haber,
               // debe: _this.diarios.debe,
               // haber: _this.diarios.haber
         }).then(response => {
@@ -1756,19 +1970,26 @@ const diario = new Vue({
             toastr.success("Diario General Actualizado Correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
-            this.obtenerDiarioGeneral();
+            // this.obtenerDiarioGeneral();
           }else{
            toastr.success("Diairo General Creado Correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
-          _this.complete = response.data.success
+          // _this.complete = response.data.success
           _this.dato     = response.data;
-          this.obtenerDiarioGeneral();
+          // this.obtenerDiarioGeneral();
             //console.log( _this.dato); 
             }          
         }).catch(function(error){
         });  
+
+
+
+      }
+     
       },
+
+
 
     obtenerDiarioGeneral: function(){
         var _this = this;
@@ -1777,10 +1998,13 @@ const diario = new Vue({
               id: _this.id_taller,
         }).then(response => {
           if (response.data.datos == true) {
-          _this.registros = response.data.dgeneral;
-          _this.complete = true;
+          _this.registros = response.data.registros;
+          _this.ajustes = response.data.ajustes;
+          _this.nombre = response.data.nombre;
+          // _this.complete = true;
            this.totalDebe();
            this.totalHaber();
+           this.totalesFinales();
             }          
         }).catch(function(error){
 

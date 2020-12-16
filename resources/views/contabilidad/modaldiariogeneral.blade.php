@@ -2,9 +2,14 @@
 
 <div class="modal fade" id="dg-transaccion" tabindex="-1"  role="dialog" aria-labelledby="dg-transaccionLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-xl " role="document">
-        <div class="modal-content bg-primary">
+        <div class="modal-content bg-light">
             <div class="modal-header">
+              <div v-if="update">
+                <h5 class="modal-title" id="haberLabel">ACTUALIZAR TRANSACCION</h5>
+              </div>
+              <div v-else="!update">
                 <h5 class="modal-title" id="haberLabel">AGREGAR TRANSACCION</h5>
+              </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,17 +19,19 @@
                    <div class="col-6">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                       <li class="nav-item" role="presentation">
-                        <a class="nav-link active text-dark font-weight-bold" id="debe-diario-tab" data-toggle="tab" href="#debe-diario" role="tab" aria-controls="debe-diario" aria-selected="true">DEBE</a>
+                        <a class="nav-link active text-dark font-weight-bold" id="comentario-diario-tab" data-toggle="tab" href="#comentario-diario" role="tab" aria-controls="comentario-diario" aria-selected="false">DETALLE</a>
+                      </li>
+
+                      <li class="nav-item" role="presentation">
+                        <a class="nav-link  text-dark font-weight-bold" id="debe-diario-tab" data-toggle="tab" href="#debe-diario" role="tab" aria-controls="debe-diario" aria-selected="true">DEBE</a>
                       </li>
                       <li class="nav-item" role="presentation">
                         <a class="nav-link text-dark font-weight-bold" id="haber-diario-tab" data-toggle="tab" href="#haber-diario" role="tab" aria-controls="haber-diario" aria-selected="false">HABER</a>
                       </li>
-                      <li class="nav-item" role="presentation">
-                        <a class="nav-link text-dark font-weight-bold" id="comentario-diario-tab" data-toggle="tab" href="#comentario-diario" role="tab" aria-controls="comentario-diario" aria-selected="false">DETALLE</a>
-                      </li>
+                     
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                      <div class="tab-pane fade show active" id="debe-diario" role="tabpanel" aria-labelledby="debe-diario-tab">
+                      <div class="tab-pane fade " id="debe-diario" role="tabpanel" aria-labelledby="debe-diario-tab">
                                <h2 class="text-center">AGREGAR DEBE</h2>
                        <table class="table table-bordered table-sm">
                           <thead class="bg-success">
@@ -64,10 +71,10 @@
                       </tbody>
                     </table>
                     <div v-if="!diario.debe.edit" class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="agregarDebe()">Agregar Activos</a>
+                            <a href="#" class="btn btn-success" @click.prevent="agregarDebe()">Agregar Activos</a>
                       </div>
                        <div v-else class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="updateDebe()">Actualizar Activo</a>
+                            <a href="#" class="btn btn-success" @click.prevent="updateDebe()">Actualizar Activo</a>
                             <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicion('debe')"><i class="fa fa-window-close"></i></a>
 
                       </div>
@@ -113,18 +120,18 @@
                       </tbody>
                     </table>
                     <div v-if="!diario.haber.edit" class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="agregarHaber()">Agregar Pasivo</a>
+                            <a href="#" class="btn btn-info" @click.prevent="agregarHaber()">Agregar Pasivo</a>
                       </div>
 
                        <div v-else class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="updateHaber()">Actualizar Pasivo</a>
+                            <a href="#" class="btn btn-info" @click.prevent="updateHaber()">Actualizar Pasivo</a>
                             <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicion('haber')"><i class="fa fa-window-close"></i></a>
                       </div>
                       </div>
-                      <div class="tab-pane fade" id="comentario-diario" role="tabpanel" aria-labelledby="comentario-diario-tab">
+                      <div class="tab-pane fade show active" id="comentario-diario" role="tabpanel" aria-labelledby="comentario-diario-tab">
                         <h2 class="text-center">AGREGAR DETALLES</h2>
 
-                          <table class="table table-bordered table-sm">
+                      <table class="table table-bordered table-sm">
                         <thead class="thead-dark">
                         <tr>
                           <th  align="center" class="text-center">Fecha</th>    
@@ -133,17 +140,18 @@
                        </thead>
                         <tbody >  
                           <tr>
-                            <td width="25"><input type="date" v-model="diario.fecha" name="fecha" class="form-control" required></td>         
-                            <td ><input type="text" v-model="diario.comentario" name="comentario" class="form-control" required></td>         
+                            <td width="25"><input type="date" v-model="diarios.fecha" name="fecha" class="form-control" required></td>         
+                            <td ><input type="text" v-model="diarios.comentario" name="comentario" class="form-control" required></td>         
                           </tr>
                       </tbody>
                     </table>
-                    <div v-if="edit.debe.length >= 1" class="row justify-content-center">
+                    <h3>Asiento de ajustes: <input v-model="diarios.ajustado" type="checkbox" class="custom-checkbox"></h3>
+                   {{--  <div v-if="edit.debe.length >= 1" class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="comentarioUpdate()">Editar Comentario</a>
                       </div>
                        <div v-else class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="agregarComentario()">Agregar Comentario</a>
-                      </div>
+                      </div> --}}
                       </div>
                     </div>
                   </div>
@@ -168,11 +176,6 @@
                       Se vende S/Fra. #012 - treinta acondicionadores de aire en $ 1.200 c/u a Comercial “INCOR” (Obligado a llevar Contabilidad). Se recibe ch/. #101 Bco. del Austro. <br> <br>
 
                       De la última venta nos devuelven un acondicionador de aire por no estar de acuerdo con el pedido. Se cancela con ch/.#055 Bco. Guayaquil. (Fra. # 057) <br> <br>
-
-
-
-
-
                     </p>
 
                   </div>
@@ -181,23 +184,22 @@
            
                   </div>
  --}}
-                 
                   <div class="col-12 mt-2" v-if="diarios.debe.length > 0 || diarios.haber.length > 0">
 
                     <h2 class="text-center">ACTUALIZAR REGISTROS</h2>
                 <table  class="table table-bordered table-sm">
                      <thead class="thead-dark">
                      <tr align="center">
-                         <th scope="col" width="200">FECHA</th>
+                         {{-- <th scope="col" width="200">FECHA</th> --}}
                          <th scope="col" width="450">NOMBRE DE CUENTAS</th>
                          <th scope="col " width="125">DEBE</th>
                          <th scope="col">HABER</th>
-                         <th colspan="2"  v-if="diarios.debe.length > 0 || diarios.haber.length > 0">ACCION</th>
+                         <th width="200" colspan="2"  v-if="diarios.debe.length > 0 || diarios.haber.length > 0">ACCION</th>
                      </tr>
                  </thead>
-                 <tbody is="draggable" group="people" :list="diarios.debe" tag="tbody">
+                 <tbody is="draggable" group="people" :list="diarios.debe" tag="tbody" class="bg-light">
                      <tr v-for="(diar, index) in diarios.debe">
-                         <td align="center" width="100">@{{ diar.fecha}}</td>
+                         {{-- <td align="center" width="100">@{{ diar.fecha}}</td> --}}
                          <td>@{{ diar.nom_cuenta}}</td>
                          <td align="center" width="125">@{{ diar.saldo }}</td>
                          <td align="center" width="125"></td>
@@ -211,20 +213,20 @@
                          </td>
                      </tr>
                  </tbody>
-                 <tbody is="draggable" group="people" :list="diarios.haber" tag="tbody">
+                 <tbody is="draggable" group="people" :list="diarios.haber" tag="tbody" class="bg-light">
                      <tr v-for="(diar, index) in diarios.haber">
-                         <td align="center" width="50"></td>
+                         {{-- <td align="center" width="50"></td> --}}
                          <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
                          <td align="center" width="125"></td>
                          <td align="center" width="125">@{{ diar.saldo }}</td>
-                         <td>
+                         <td align="center">
                             <a @click="habediarioEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i>
                             </a>
                          </td>
                          <td align="center" width="25"><a @click="deleteHaber(index)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></td>
                      </tr>
                      <tr v-if="diarios.comentario !== ''" class="text-muted">
-                         <td></td>
+                         {{-- <td></td> --}}
                          <td>@{{ diarios.comentario }}</td>
                          <td></td>
                          <td></td>
@@ -233,7 +235,9 @@
 
              </table>
               <div class="row justify-content-around mb-2">
-              <a href="#" class="addDiario btn btn-success" @click.prevent="guardarRegistro()">AgregarTransaccion</a> 
+
+              <a v-if="update" href="#" class="addDiario btn btn-success" @click.prevent="updaterRegister()">Actualizar Transaccion</a> 
+              <a v-if="!update" href="#" class="addDiario btn btn-success" @click.prevent="guardarRegistro()">Agregar Transaccion</a> 
                   </div>
                   </div>
                 </div>
