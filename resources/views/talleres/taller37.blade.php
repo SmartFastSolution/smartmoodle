@@ -85,6 +85,8 @@
                 <a class="list-group-item list-group-item-action " id="list-diario-list" data-toggle="list" href="#list-diario" role="tab" aria-controls="home">Balance Inicial</a>
                 <a class="list-group-item list-group-item-action" id="list-balance_comp-list" data-toggle="list" href="#list-balance_comp" role="tab" aria-controls="profile">Balance de Comprobacion</a>
                 <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Diario General</a>
+
+                <a class="list-group-item list-group-item-action" id="list-mayor-general-list" data-toggle="list" href="#list-mayor-general" role="tab" aria-controls="mayor-general">Mayor General</a>
                 <a class="list-group-item list-group-item-action" id="list-balance-ajustado-list" data-toggle="list" href="#list-balance-ajustado" role="tab" aria-controls="balance-ajustado">Balance Ajustado</a>
 
             </div>
@@ -121,6 +123,10 @@
                 <div class="tab-pane fade border border-danger " id="list-messages" role="tabpanel"
                     aria-labelledby="list-messages-list">
                     @include('contabilidad.diariogeneral')
+                </div>
+                <div class="tab-pane fade border border-danger " id="list-mayor-general" role="tabpanel"
+                    aria-labelledby="list-mayor-general-list">
+                    @include('contabilidad.mayorgeneral')
                 </div>
                 <div class="tab-pane fade" id="list-balance-ajustado" role="tabpanel" aria-labelledby="list-balance-ajustado-list">
                     @include('contabilidad.balanceajustado')

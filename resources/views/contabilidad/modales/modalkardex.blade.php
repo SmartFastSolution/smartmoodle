@@ -553,17 +553,15 @@
                     </table>
                 <div class="row">
               <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaEgreso()"><i class="fas fa-plus"></i> Existencia</a>
-          <a v-if="transaccion.egreso.active" class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="nuevoEgreso('agregar')"><i class="fas fa-plus"></i> Nuevo Egreso</a>
+         {{--  <a v-if="transaccion.egreso.active" class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="nuevoEgreso('agregar')"><i class="fas fa-plus"></i> Nuevo Egreso</a> --}}
                 </div>
-        <div v-if="transaccion.egreso.add" class="row justify-content-center mt-2">
+     {{--    <div v-if="transaccion.egreso.add" class="row justify-content-center mt-2">
           <div class="col-2"><input type="number" placeholder="cantidad" v-model="edit.egreso.cantidad" class="form-control"></div>
           <div class="col-2"><input type="number" placeholder="precio" v-model="edit.egreso.precio" class="form-control"></div>
           <div class="col-2"><a href="" @click.prevent="nuevoEgreso('crear')" class="btn btn-success">EGRESO</a> <a href="" @click.prevent="nuevoEgreso('cerrar')" class="btn btn-danger"><i class="fas fa-window-close"></i></a> </div>
-        </div>
-                      
-
+        </div> --}}
                     <div v-if="modales.modal_egreso.length > 0">
-                                       <h2 class="text-center font-weight-bold">ACTUALIZAR EXISTENCIAS</h2>
+                                  <h2 class="text-center font-weight-bold">ACTUALIZAR EXISTENCIAS</h2>
 
                     <table  class="table table-bordered table-responsive">
                         <thead class="bg-warning"> 
@@ -591,7 +589,7 @@
                           <tbody is="draggable" group="modales.modal_egreso" :list="modales.modal_egreso" tag="tbody">
                             <tr v-for="(transa, id) in modales.modal_egreso">
                                    <td v-if="transa.tipo == 'existencia'"></td>
-                            <td v-if="transa.tipo != 'existencia'"><input type="date"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha">
+                            <td v-if="transa.tipo != 'existencia'"><input v-if="id == 0" type="date"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha">
                             </td>
                             <td v-if="transa.tipo == 'existencia'"></td>
 

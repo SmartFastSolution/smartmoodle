@@ -35,16 +35,16 @@
 		</thead>
 		<tbody  style="border-bottom: solid 3px #0F0101;">
 			<tr v-for="(exist, id) in transacciones" >
-				<td style="vertical-align:middle">@{{ formatoFecha(exist.fecha) }}</td>
-				<td style="vertical-align:middle">@{{ exist.movimiento }}</td>
-				<td style="vertical-align:middle">@{{ exist.ingreso_cantidad }}</td>
-				<td style="vertical-align:middle">@{{ exist.ingreso_precio }}</td>
+				<td style="vertical-align:middle" >@{{ formatoFecha(exist.fecha) }}</td>
+				<td style="vertical-align:middle" >@{{ exist.movimiento }}</td>
+				<td style="vertical-align:middle" class="text-right">@{{ exist.ingreso_cantidad }}</td>
+				<td style="vertical-align:middle" class="text-right">@{{ decimales(exist.ingreso_precio) }}</td>
 				<td style="vertical-align:middle" class="text-right">@{{ exist.ingreso_total }}</td>
-				<td style="vertical-align:middle">@{{ exist.egreso_cantidad }}</td>
-				<td style="vertical-align:middle">@{{ exist.egreso_precio }}</td>
+				<td style="vertical-align:middle" class="text-right">@{{ exist.egreso_cantidad }}</td>
+				<td style="vertical-align:middle" class="text-right">@{{ decimales(exist.egreso_precio) }}</td>
 				<td style="vertical-align:middle" class="text-right">@{{ exist.egreso_total }}</td>
-				<td style="vertical-align:middle">@{{ exist.existencia_cantidad }}</td>
-				<td style="vertical-align:middle">@{{ exist.existencia_precio }}</td>
+				<td style="vertical-align:middle" class="text-right">@{{ exist.existencia_cantidad }}</td>
+				<td style="vertical-align:middle" class="text-right">@{{ decimales(exist.existencia_precio) }}</td>
 				<td style="vertical-align:middle" class="text-right">@{{ exist.existencia_total }}</td>
 				<td style="vertical-align:middle" v-if="transacciones.length >= 1 && transacciones[id].tipo == 'ingreso' || transacciones[id].tipo == 'inicial' || transacciones[id].tipo == 'egreso'"><a class="btn btn-sm btn-warning" href="" @click.prevent="editarTransaccion(id, exist.tipo)"><i class="fas fa-edit"></i></a></td>
 				<td style="vertical-align:middle" v-if="transacciones.length >= 1 && transacciones[id].tipo == 'ingreso'  || transacciones[id].tipo == 'inicial' || transacciones[id].tipo == 'egreso'"><a class="btn btn-sm btn-danger" href="" @click.prevent="borrarTransaccion(id)"><i class="fas fa-trash"></i></a></td>
@@ -90,24 +90,24 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>Inventario Mercaderia Inicial</td>
-							<td><input v-model="prueba.cantidad.inventario_inicial" type="text" class="form-control form-control-sm"></td>
-							<td><input v-model="prueba.precio.inventario_inicial" type="text" class="form-control form-control-sm"></td>
+							<td>Inventario Inicial de Mercaderias</td>
+							<td><input v-model="prueba.cantidad.inventario_inicial" type="number" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.precio.inventario_inicial" type="number" class="form-control form-control-sm"></td>
 						</tr>
 						<tr>
 							<td>Adquisiciones</td>
-							<td><input v-model="prueba.cantidad.adquicisiones" type="text" placeholder="+" class="form-control form-control-sm"></td>
-							<td><input v-model="prueba.precio.adquicisiones" type="text" placeholder="+" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.cantidad.adquicisiones" type="number" placeholder="+" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.precio.adquicisiones" type="number" placeholder="+" class="form-control form-control-sm"></td>
 						</tr>
 						<tr>
 							<td>(-) Ventas</td>
-							<td><input v-model="prueba.cantidad.ventas" type="text" placeholder="-" class="form-control form-control-sm"></td>
-							<td><input v-model="prueba.precio.ventas" type="text" placeholder="-" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.cantidad.ventas" type="number" placeholder="-" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.precio.ventas" type="number" placeholder="-" class="form-control form-control-sm"></td>
 						</tr>
 						<tr>
 							<td>Inv. Final Mercaderia</td>
-							<td><input v-model="prueba.cantidad.inventario_final" type="text" class="form-control form-control-sm"></td>
-							<td><input v-model="prueba.precio.inventario_final" type="text" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.cantidad.inventario_final" type="number" class="form-control form-control-sm"></td>
+							<td><input v-model="prueba.precio.inventario_final" type="number" class="form-control form-control-sm"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -148,17 +148,17 @@
 				<tr v-for="(transa, id) in ingresos">
                     <td style="vertical-align:middle"><input type="date"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
                           <td v-if="transa.tipo != 'existencia'">
-                               <textarea cols="30" rows="3" class="form-control form-control-plaintext" v-model="transa.movimiento"></textarea>
+                               <textarea style="vertical-align:middle" cols="30" rows="3" class="form-control form-control-plaintext text-center" v-model="transa.movimiento"></textarea>
                               {{-- <input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
                           </td>
-					<td style="vertical-align:middle" ><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" @keyup.enter="totalIng(id)"></td>
-					<td style="vertical-align:middle" ><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" @keyup.enter="totalIng(id)"> </td>
+					<td style="vertical-align:middle"  class="text-right"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" @keyup.enter="totalIng(id)"></td>
+					<td style="vertical-align:middle"  class="text-right"><input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" @keyup.enter="totalIng(id)"> </td>
 					<td style="vertical-align:middle" class="text-right">@{{ transa.ingreso_total }}</td>
-					<td style="vertical-align:middle"><input type="text" v-if="transa.egreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.egreso_cantidad"></td>
-					<td style="vertical-align:middle"><input type="text" v-if="transa.egreso_precio" class="form-control-sm form-control-plaintext" v-model="transa.egreso_precio"></td>
+					<td style="vertical-align:middle" class="text-right"><input type="text" v-if="transa.egreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.egreso_cantidad"></td>
+					<td style="vertical-align:middle" class="text-right"><input type="text" v-if="transa.egreso_precio" class="form-control-sm form-control-plaintext" v-model="transa.egreso_precio"></td>
 					<td style="vertical-align:middle" class="text-right">@{{ transa.egreso_total }}</td>
-					<td style="vertical-align:middle"><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_cantidad"></td>
-					<td style="vertical-align:middle"><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_precio"></td>
+					<td style="vertical-align:middle" class="text-right"><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_cantidad"></td>
+					<td style="vertical-align:middle" class="text-right"><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_precio"></td>
 					{{-- <td v-if="!actuingreso.estado">@{{ transa.existencia_total }}</td> --}}
 					<td style="vertical-align:middle" class="text-right"><input type="text" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
 					{{-- <td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarIngreso(id, 'ingreso')"> <i class="fas fa-trash"></i></a></td> --}}
@@ -199,7 +199,7 @@
 							<tr v-for="(transa, id) in egresos">
 							  <td style="vertical-align:middle" ><input type="date"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
                           <td style="vertical-align:middle"  v-if="transa.tipo != 'existencia'">
-                               <textarea cols="30" rows="3" class="form-control form-control-plaintext" v-model="transa.movimiento"></textarea>
+                               <textarea style="vertical-align:middle" cols="30" rows="3" class="form-control form-control-plaintext text-center" v-model="transa.movimiento"></textarea>
                               {{-- <input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
                           </td>
 								<td style="vertical-align:middle" ><input type="text"  v-if="transa.ingreso_cantidad !== ''" class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" ></td>

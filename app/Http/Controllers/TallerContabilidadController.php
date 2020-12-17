@@ -18,7 +18,10 @@ use App\Contabilidad\DiarioGeneral;
 use App\Contabilidad\KPRegistro;
 use App\Contabilidad\KFRegistro;
 use App\Contabilidad\KFRMovimiento;
+use App\Contabilidad\MGRegistro;
+use App\Contabilidad\MGRMovimiento;
 use App\Contabilidad\KardexPromedio;
+use App\Contabilidad\MayorGeneral;
 use App\Contabilidad\KardexFIfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -554,6 +557,7 @@ public function obtenerBalanceCompro(Request $request)
                   $datos=array(
                      'balance_inicial_id' => $o->id,
                      'nom_cuenta'         => $activos['nom_cuenta'],
+                     'cuenta_id'          => $activos['cuenta_id'],
                      'saldo'              => $activos['saldo'],
                      'tipo'               => 'corriente',
                      'created_at'         => now(),
@@ -565,6 +569,7 @@ public function obtenerBalanceCompro(Request $request)
                   $datos=array(
                      'balance_inicial_id' => $o->id,
                      'nom_cuenta'         => $activo['nom_cuenta'],
+                     'cuenta_id'          => $activo['cuenta_id'],
                      'saldo'              => $activo['saldo'],
                      'tipo'               => 'nocorriente',
                      'created_at'         => now(),
@@ -576,6 +581,7 @@ public function obtenerBalanceCompro(Request $request)
                   $datos=array(
                      'balance_inicial_id' => $o->id,
                      'nom_cuenta'         => $pasivos['nom_cuenta'],
+                     'cuenta_id'          => $pasivos['cuenta_id'],
                      'saldo'              => $pasivos['saldo'],
                      'tipo'               => 'corriente',
                      'created_at'         => now(),
@@ -587,6 +593,7 @@ public function obtenerBalanceCompro(Request $request)
                   $datos=array(
                      'balance_inicial_id' => $o->id,
                      'nom_cuenta'         => $pasivo['nom_cuenta'],
+                     'cuenta_id'          => $pasivo['cuenta_id'],
                      'saldo'              => $pasivo['saldo'],
                      'tipo'               => 'nocorriente',
                      'created_at'         => now(),
@@ -598,6 +605,7 @@ public function obtenerBalanceCompro(Request $request)
                      $datos               =array(
                      'balance_inicial_id' => $o->id,
                      'nom_cuenta'         => $patri['nom_cuenta'],
+                     'cuenta_id'          => $patri['cuenta_id'],
                      'saldo'              => $patri['saldo'],
                      'created_at'         => now(),
                      'updated_at'         => now(),
@@ -784,14 +792,27 @@ public function obtenerbalance(Request $request)
         $pasivo_patrimonio[]= $valu;       
         }
 
+        $inicial = array(
+        'tipo' => 'inicial',
+        'fecha' => $balanceInicial->fecha,
+        'comentario' => 'Para registrar el B.I de '.$balanceInicial->nombre,
+        'debe' => $activos,
+        'haber' => $pasivo_patrimonio
+        );
+
         // BIActivo::where('balance_inicial_id', $balanceInicial->id)->get();
-         return response(array(
+         // return response(array(
+         //    'datos' => true,
+         //        'nombre' => $balanceInicial->nombre,
+         //        'fecha' => $balanceInicial->fecha,
+         //        'tipo' => 'balance_inicial',
+         //        'activos' => $activos,
+         //        'pasivos' => $pasivo_patrimonio
+         //    ),200,[]);
+
+               return response(array(
             'datos' => true,
-                'nombre' => $balanceInicial->nombre,
-                'fecha' => $balanceInicial->fecha,
-                'tipo' => 'balance_inicial',
-                'activos' => $activos,
-                'pasivos' => $pasivo_patrimonio
+                'inicial' => $inicial
             ),200,[]);
         }else{
              return response(array(
@@ -831,11 +852,23 @@ public function obtenerbalance(Request $request)
                 );
                 $ajustes[]= $regis;
             }
+            $iniciales = DGRegistro::where('diario_general_id', $diairioGeneral->id)->where('tipo', 'inicial')->orderBy('fecha')->first();
+            
+                $regis = array(
+                    'debe'       => $iniciales->dgrDebe,
+                    'haber'      =>$iniciales->dgrHaber,
+                    'tipo'       => $iniciales->tipo,
+                    'fecha'      => $iniciales->fecha,
+                    'comentario' => $iniciales->comentario
+                );
+                $inicial= $regis;
+            
             return response(array(
-                'datos' => true,
-                'nombre' => $diairioGeneral->nombre,
+                'datos'     => true,
+                'nombre'    => $diairioGeneral->nombre,
                 'registros' => $registros,
-                'ajustes' => $ajustes,
+                'inicial'   => $inicial,
+                'ajustes'   => $ajustes,
             ),200,[]);
          }else{
              return response(array(
@@ -977,6 +1010,192 @@ public function obtenerbalance(Request $request)
             ),200,[]);
                                                               // SI NO TIENE CREADO EL BALANCE INICIAL ANTES DE GUARDAR, LE SALDRA UNA NOTIFICACION INDICANDO DICHO P
         }
+    }
+
+      public function mayorGeneral(Request $request)
+    {
+        $id            = Auth::id();
+        $taller_id     = $request->id;
+        $registro      = $request->registro;
+        $nombre = $request->nombre;
+        
+        $mayorgeneral = MayorGeneral::where('user_id',$id)->where('taller_id', $taller_id)->count();
+
+    if ($mayorgeneral == 1){ 
+        $cu = MayorGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        $cuenta = MGRegistro::where('mayor_general_id',$cu->id)->count();
+
+        $mayorg = MayorGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        $debe =[];
+        $haber =[];
+        $ids =[];
+        $mayorg->nombre = $nombre;
+        $mayorg->save();
+
+
+        $registros= MGRegistro::where('mayor_general_id', $mayorg->id)->get();
+        
+        foreach($registros as $act){
+                $ids[]=$act->id;
+        }
+        $deleteRegistros = MGRegistro::destroy($ids);
+
+                foreach ($registro as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
+            $regis=array(
+                     'mayor_general_id' => $mayorg->id,
+                     'cuenta_id'        => $value['cuenta_id'],
+                     'cuenta'           => $value['cuenta'],
+                     'no_registro'      => $key + 1,
+                     'total_debe'       => $value['total_debe'],
+                     'total_haber'      => $value['total_haber'],
+                     'total_saldo'      => $value['total_saldo'],
+                     'created_at'       => now(),
+                     'updated_at'       => now(),
+                );
+                MGRegistro::insert($regis);                           
+        }
+        $register = $mayorg->mgRegistro;
+
+        foreach ($registro as $key => $value) { 
+              
+            foreach ($value['registros'] as $key1 => $value1) {              
+                $regis1=array(
+                     'm_g_registro_id' => $register[$key]->id,
+                     'tipo'            => 'normal',
+                     'fecha'           => $value1['fecha'],
+                     'detalle'         => $value1['detalle'],
+                     'debe'            => $value1['debe'],
+                     'haber'           => $value1['haber'],
+                     'saldo'           => $value1['saldo'],
+                     'created_at'      => now(),
+                     'updated_at'      => now(),
+                  );
+                MGRMovimiento::insert($regis1);                             
+            }
+              foreach ($value['cierres'] as $key2 => $value2) {           
+                $regis2=array(
+                     'm_g_registro_id' => $register[$key]->id,
+                     'tipo'            => 'cierre',
+                     'fecha'           => $value1['fecha'],
+                     'detalle'         => $value1['detalle'],
+                     'debe'            => $value1['debe'],
+                     'haber'           => $value1['haber'],
+                     'saldo'           => $value1['saldo'],
+                     'created_at'      => now(),
+                     'updated_at'      => now(),
+                  );
+                  MGRMovimiento::insert($regis2);                            
+            }
+        }
+        return response(array(
+                'success' => 'act',
+                'message' => 'Datos Actualizados Correctamente'
+            ),200,[]);
+    }else{ 
+        $mayorgeneral               = new MayorGeneral;
+        $mayorgeneral->taller_id    = $taller_id;
+        $mayorgeneral->user_id      = $id;
+        $mayorgeneral->nombre       = $nombre;
+        $mayorgeneral->save();
+
+        $mayorg = MayorGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        
+        $debe =[];
+        $haber =[];
+        foreach ($registro as $key => $value) {                         
+            $regis=array(
+                    'mayor_general_id' => $mayorg->id,
+                     'cuenta_id'        => $value['cuenta_id'],
+                     'cuenta'           => $value['cuenta'],
+                     'no_registro'      => $key + 1,
+                     'total_debe'       => $value['total_debe'],
+                     'total_haber'      => $value['total_haber'],
+                     'total_saldo'      => $value['total_saldo'],
+                     'created_at'       => now(),
+                     'updated_at'       => now(),
+                );
+                DGRegistro::insert($regis);                          
+        }
+        $register = $mayorg->mgRegistro;
+
+         foreach ($registro as $key => $value) { 
+              
+            foreach ($value['registros'] as $key1 => $value1) {              
+                $regis1=array(
+                     'm_g_registro_id' => $register[$key]->id,
+                     'tipo'            => 'normal',
+                     'fecha'           => $value1['fecha'],
+                     'detalle'         => $value1['detalle'],
+                     'debe'            => $value1['debe'],
+                     'haber'           => $value1['haber'],
+                     'saldo'           => $value1['saldo'],
+                     'created_at'      => now(),
+                     'updated_at'      => now(),
+                  );
+                MGRMovimiento::insert($regis1);                             
+            }
+              foreach ($value['cierres'] as $key2 => $value2) {           
+                $regis2=array(
+                     'm_g_registro_id' => $register[$key]->id,
+                     'tipo'            => 'cierre',
+                     'fecha'           => $value1['fecha'],
+                     'detalle'         => $value1['detalle'],
+                     'debe'            => $value1['debe'],
+                     'haber'           => $value1['haber'],
+                     'saldo'           => $value1['saldo'],
+                     'created_at'      => now(),
+                     'updated_at'      => now(),
+                  );
+                  MGRMovimiento::insert($regis2);                            
+            }
+        }
+        // $mayorg->completado = true;                                    //CAMBIAR EL VALOR DE COMPLETADO A TRUE /// ESTO SIGNIFICA QUE EL TALLER HA SIDO COMPLETADO
+        // $mayorg->save();                                             //GUARDAR ESE CAMBIO
+         return response(array(                                         //ENVIO DE RESPUESTA
+                'success' => true,
+                'message' => 'Mayor General creado correctamente'
+            ),200,[]);
+                                                              // SI NO TIENE CREADO EL BALANCE INICIAL ANTES DE GUARDAR, LE SALDRA UNA NOTIFICACION INDICANDO DICHO P
+        }
+    }
+        public function obtenermayor(Request $request)
+    {
+        $id         = Auth::id();
+        $taller_id  = $request->id;
+        $mayorGeneral = MayorGeneral::where('user_id',$id)->where('taller_id', $taller_id)->count();
+        $registros  = [];
+        $cierres    = [];
+        if ($mayorGeneral  == 1) {
+        $mgeneral = MayorGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
+
+
+        $normal  = MGRegistro::where('mayor_general_id', $mgeneral->id)->get();
+            foreach ($normal as $key => $registro) {
+                $normales = MGRMovimiento::where('m_g_registro_id', $registro->id)->where('tipo', 'normal')->get();
+                $cierres = MGRMovimiento::where('m_g_registro_id', $registro->id)->where('tipo', 'cierre')->get();
+                $regis = array(
+                    'cuenta_id'   => $registro->cuenta_id,
+                    'cuenta'      =>$registro->cuenta,
+                    'registros'   =>$normales,
+                    'cierres'     =>$cierres,
+                    'total_debe'  => $registro->total_debe,
+                    'total_haber' => $registro->total_haber,
+                    'total_saldo' => $registro->total_saldo,
+                );
+                $registros[]= $regis;
+            }
+            
+            return response(array(
+                'datos'     => true,
+                'nombre'    => $mgeneral->nombre,
+                'registros' => $registros,
+            ),200,[]);
+         }else{
+             return response(array(
+                'datos' => false,
+            ),200,[]);
+
+         }
     }
 }
 

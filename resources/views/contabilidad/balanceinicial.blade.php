@@ -48,9 +48,9 @@
       
       </div>
        <div class="row justify-content-between">
-        <div class="col-5  ">
+        <div class="col-6">
           <h3 class="text-danger">ACTIVOS</h3>
-          <h3 class="text-primary">CORRIENTE <a data-toggle="modal" data-target="#a_corriente" @click="limpiar()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3><br>
+          <h3 class="text-primary">CORRIENTE <a data-toggle="tooltip" data-placement="top" title="Agregar Activo Corriente" @click="abrirActivoC()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3><br>
             <draggable class="list-group list-group-flush" :list="a_corrientes" group="people" @change="cambioActivo">
                    <div v-for="(element, index) in a_corrientes" :key="element.name">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -70,7 +70,7 @@
             </table>
             
         <br><br>
-            <h3 class="text-primary">NO CORRIENTE <a data-toggle="modal" data-target="#a_nocorriente" @click="limpiar()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3><br>
+            <h3 class="text-primary">NO CORRIENTE <a data-toggle="tooltip" data-placement="top" title="Agregar Activo No Corriente" @click="abrirActivoNoC()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3><br>
             <draggable class="list-group list-group-flush" :list="a_nocorrientes" group="people" @change="cambioActivoNo()">
                    <div v-for="(element, index) in a_nocorrientes" :key="element.name">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -88,9 +88,9 @@
               </tbody>
             </table>
             </div>
-        <div class="col-5 ">
+        <div class="col-6">
       <h3 class="text-danger">PASIVO</h3>
-          <h3 class="text-primary">CORRIENTE <a data-toggle="modal" data-target="#p_corriente" @click="limpiar()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3>
+          <h3 class="text-primary">CORRIENTE <a data-toggle="tooltip" data-placement="top" title="Agregar Pasivo Corriente" @click="abrirPasivoC()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3>
           <draggable class="list-group list-group-flush" :list="p_corrientes" group="people" @change="cambioPasivo()">
                <div v-for="(element, index) in p_corrientes" :key="element.name">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -110,7 +110,7 @@
         <br><br>
            
 
-          <h3 class="text-primary">NO CORRIENTE <a data-toggle="modal" data-target="#p_nocorriente" @click="limpiar()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3>
+          <h3 class="text-primary">NO CORRIENTE <a data-toggle="tooltip" data-placement="top" title="Agregar Pasivo No Corriente" @click="abrirPasivoNoC()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3>
           <draggable class="list-group list-group-flush" :list="p_nocorrientes" group="people" @change="cambioPasivoNo()">
                <div v-for="(element, index) in p_nocorrientes" :key="element.name">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -139,7 +139,7 @@
             </table>
         <br><br>
 
-        <h3 class="text-danger">PATRIMONIO <a data-toggle="modal" data-target="#patrimonio" @click="limpiar()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3><br>
+        <h3 class="text-danger">PATRIMONIO <a data-toggle="tooltip" data-placement="top" title="Agregar Patrimonio" @click="abrirPatrimonio()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3><br>
             <draggable class="list-group list-group-flush" :list="patrimonios" group="people" @change="cambioPatrimonio()">
                     <div v-for="(element, index) in patrimonios" :key="element.name">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -174,7 +174,7 @@
               <tbody>
                 <tr>
                   <td class="font-weight-bold" style="font-size: 20px;" width="250">TOT. PAS. Y PATRI.</td>
-                  <td class="text-right"><input type="text" v-model="total_balance_inicial.t_patrimonio_pasivo" class="form-control form-control-sm"></td>
+                  <td class="text-right"><input type="number" v-model="total_balance_inicial.t_patrimonio_pasivo" class="form-control form-control-sm"></td>
                 </tr>
               </tbody>
             </table>
@@ -244,7 +244,7 @@
       <h2 class="text-center font-weight-bold text-danger">ACTIVOS</h2>
       <div class="row">    
         <div class="col-7">             
-          <h3 class="text-primary">ACTIVOS CORRIENTE <a data-toggle="modal" data-target="#a_corriente2" @click="limpiar()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3><br>
+          <h3 class="text-primary">ACTIVOS CORRIENTE <a data-toggle="tooltip" data-placement="top" title="Agregar Activo Corriente" @click="abrirActivoC()"  class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3><br>
             <draggable class="list-group list-group-flush" :list="a_corrientes" group="people" @change="cambioActivo">
               <div v-for="(element, index) in a_corrientes" :key="element.name">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -264,7 +264,7 @@
             </table>
           </div>
             <div class="col-7"> 
-          <h3 class="text-primary">ACTIVOS NO CORRIENTE <a data-toggle="modal" data-target="#a_nocorriente2" @click="limpiar()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3><br>
+          <h3 class="text-primary">ACTIVOS NO CORRIENTE <a data-toggle="tooltip" data-placement="top" title="Agregar Activo No Corriente" @click="abrirActivoNoC()"   class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3><br>
             <draggable class="list-group list-group-flush" :list="a_nocorrientes" group="people" @change="cambioActivoNo()">
               <div v-for="(element, index) in a_nocorrientes" :key="element.name">
                 <li class="list-group-item d-flex justify-content-between align-items-center">@{{ element.nom_cuenta }}
@@ -297,7 +297,7 @@
         <h2 class="text-center font-weight-bold text-danger">PASIVOS</h2>
       <div class="row">
     <div class="col-7 ">
-          <h3 class="text-primary">PASIVOS CORRIENTE <a data-toggle="modal" data-target="#p_corriente2" @click="limpiar()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3>
+          <h3 class="text-primary">PASIVOS CORRIENTE <a data-toggle="tooltip" data-placement="top" title="Agregar Pasivo Corriente" @click="abrirPasivoC()"  class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3>
           <draggable class="list-group list-group-flush" :list="p_corrientes" group="people" @change="cambioPasivo()">
                <div v-for="(element, index) in p_corrientes" :key="element.name">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -319,7 +319,7 @@
         </div>
         <br><br>
         <div class="col-7 ">
-          <h3 class="text-primary">NO CORRIENTE <a data-toggle="modal" data-target="#p_nocorriente2" @click="limpiar()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3>
+          <h3 class="text-primary">NO CORRIENTE <a data-toggle="tooltip" data-placement="top" title="Agregar Pasivo No Corriente" @click="abrirPasivoNoC()"  class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3>
           <draggable class="list-group list-group-flush" :list="p_nocorrientes" group="people" @change="cambioPasivoNo()">
                <div v-for="(element, index) in p_nocorrientes" :key="element.name">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -351,7 +351,7 @@
             </table>
         </div>
       </div>
-        <h2 class="text-center font-weight-bold text-danger">PATRIMONIO <a data-toggle="modal" data-target="#patrimonio2" @click="limpiar()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h2>
+        <h2 class="text-center font-weight-bold text-danger">PATRIMONIO <a data-toggle="tooltip" data-placement="top" title="Agregar Patrimonio" @click="abrirPatrimonio()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h2>
        
 <div class="row">
         <div class="col-7">
@@ -379,7 +379,7 @@
               <tbody>
                 <tr>
                   <td class="font-weight-bold" style="font-size: 20px;" width="750">TOT. PAS. Y PATRI.</td>
-                  <td><input type="text" v-model="total_balance_inicial.t_patrimonio_pasivo" class="form-control"></td>
+                  <td><input type="number" v-model="total_balance_inicial.t_patrimonio_pasivo" class="form-control"></td>
                 </tr>
               </tbody>
             </table>

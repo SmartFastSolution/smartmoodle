@@ -1,6 +1,6 @@
 {{-- TRANSACCION --}}
 
-<div class="modal fade" id="dg-transaccion" tabindex="-1"  role="dialog" aria-labelledby="dg-transaccionLabel" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="dg-transaccion" tabindex="-1"  role="dialog" aria-labelledby="dg-transaccionLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-xl " role="document">
         <div class="modal-content bg-light">
             <div class="modal-header">
@@ -16,23 +16,23 @@
             </div>
             <div class="modal-body">
                 <div class="row justify-content-center">
-                   <div class="col-6">
+                   <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                       <li class="nav-item" role="presentation">
-                        <a class="nav-link active text-dark font-weight-bold" id="comentario-diario-tab" data-toggle="tab" href="#comentario-diario" role="tab" aria-controls="comentario-diario" aria-selected="false">DETALLE</a>
+                        <a class="nav-link active text-dark font-weight-bold" id="comentario-diario-tab" style="font-size: 15px" data-toggle="tab" href="#comentario-diario" role="tab" aria-controls="comentario-diario" aria-selected="false">DETALLE MOVIMIENTO</a>
                       </li>
 
                       <li class="nav-item" role="presentation">
-                        <a class="nav-link  text-dark font-weight-bold" id="debe-diario-tab" data-toggle="tab" href="#debe-diario" role="tab" aria-controls="debe-diario" aria-selected="true">DEBE</a>
+                        <a class="nav-link  text-dark font-weight-bold" id="debe-diario-tab" style="font-size: 15px" data-toggle="tab" href="#debe-diario" role="tab" aria-controls="debe-diario" aria-selected="true">CUENTAS DEUDORAS</a>
                       </li>
                       <li class="nav-item" role="presentation">
-                        <a class="nav-link text-dark font-weight-bold" id="haber-diario-tab" data-toggle="tab" href="#haber-diario" role="tab" aria-controls="haber-diario" aria-selected="false">HABER</a>
+                        <a class="nav-link text-dark font-weight-bold" id="haber-diario-tab" style="font-size: 15px" data-toggle="tab" href="#haber-diario" role="tab" aria-controls="haber-diario" aria-selected="false">CUENTAS ACREEDORAS</a>
                       </li>
                      
                     </ul>
                     <div class="tab-content" id="myTabContent">
                       <div class="tab-pane fade " id="debe-diario" role="tabpanel" aria-labelledby="debe-diario-tab">
-                               <h2 class="text-center">AGREGAR DEBE</h2>
+                               <h2 class="text-center">AGREGAR CUENTAS DEUDORAS</h2>
                        <table class="table table-bordered table-sm">
                           <thead class="bg-success">
                             <tr>
@@ -71,16 +71,18 @@
                       </tbody>
                     </table>
                     <div v-if="!diario.debe.edit" class="row justify-content-center">
-                            <a href="#" class="btn btn-success" @click.prevent="agregarDebe()">Agregar Activos</a>
+                          <a href="#" class="btn btn-success" @click.prevent="agregarDebe()">Agregar</a>
+                        <a href=""data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark ml-1">KARDEX</a>
+
                       </div>
                        <div v-else class="row justify-content-center">
-                            <a href="#" class="btn btn-success" @click.prevent="updateDebe()">Actualizar Activo</a>
+                            <a href="#" class="btn btn-success" @click.prevent="updateDebe()">Actualizar</a>
                             <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicion('debe')"><i class="fa fa-window-close"></i></a>
 
                       </div>
                       </div>
                       <div class="tab-pane fade" id="haber-diario" role="tabpanel" aria-labelledby="haber-diario-tab">
-                        <h2 class="text-center">AGREGAR HABER</h2>
+                        <h2 class="text-center">AGREGAR CUENTAS ACREEDORAS</h2>
 
                       <table class="table table-bordered table-sm">
                           <thead class="bg-danger">
@@ -120,11 +122,13 @@
                       </tbody>
                     </table>
                     <div v-if="!diario.haber.edit" class="row justify-content-center">
-                            <a href="#" class="btn btn-info" @click.prevent="agregarHaber()">Agregar Pasivo</a>
+                            <a href="#" class="btn btn-info" @click.prevent="agregarHaber()">Agregar</a>
+                        <a href="" data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark ml-1">KARDEX</a>
+
                       </div>
 
                        <div v-else class="row justify-content-center">
-                            <a href="#" class="btn btn-info" @click.prevent="updateHaber()">Actualizar Pasivo</a>
+                            <a href="#" class="btn btn-info" @click.prevent="updateHaber()">Actualizar</a>
                             <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicion('haber')"><i class="fa fa-window-close"></i></a>
                       </div>
                       </div>
@@ -134,7 +138,7 @@
                       <table class="table table-bordered table-sm">
                         <thead class="thead-dark">
                         <tr>
-                          <th  align="center" class="text-center">Fecha</th>    
+                          <th align="center" class="text-center">Fecha</th>    
                           <th  align="center" class="text-center">Comentario</th>    
                         </tr>
                        </thead>
@@ -145,7 +149,15 @@
                           </tr>
                       </tbody>
                     </table>
+                    <div class="row">
+                      <div class="col-6">
                     <h3>Asiento de ajustes: <input v-model="diarios.ajustado" type="checkbox" class="custom-checkbox"></h3>
+                        
+                      </div>
+                      <div class="col-6">
+                        {{-- <a href="" data-toggle="modal" data-target="#kardex-diairo" class="btn btn-sm btn-dark">KARDEX</a> --}}
+                      </div>
+                    </div>
                    {{--  <div v-if="edit.debe.length >= 1" class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="comentarioUpdate()">Editar Comentario</a>
                       </div>
@@ -156,7 +168,7 @@
                     </div>
                   </div>
                   <div class="col-6" style=" height:300px; overflow-y: scroll;">
-                    <h3 class="text-center">Transacciones</h3>
+                    <h3 class="text-center">Datos para realizar el Diario General</h3>
                     <p >
                       Se compra s/fra. #040 a Importadora “ELMARY” (contribuyente especial) - doce acondicionadores de aire en $ 550 c/u. Se cancela con ch/.# 050 Bco. Guayaquil. <br> <br>
                       Se cancela la Fra.#023 a “Publicitas” (No Obligada a llevar Contabilidad) por servicios de publicidad $ 300 con ch/.#051 Bco. Guayaquil. <br> <br>
@@ -249,7 +261,91 @@
 </div>
 
 
+{{-- KARDEX --}}
+<div class="modal fade" id="kardex-diairo" tabindex="-1"  role="dialog" aria-labelledby="kardex-diairo" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content bg-primary">
+            <div class="modal-header">
+                <h5 class="modal-title" id="kardex-diairo">KARDEX</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="float-left">
+    <select v-model="producto_id" class="custom-select" name="" id="" @change="obtenerKardexFifo()">
+      <option disabled selected value="">ELIGE UN PRODUCTO</option>
+      <option :value="1">COCINAS</option>
+      <option :value="2">AIRE ACONDICIONADO</option>
+      <option :value="3">MESA</option>
+    </select>
+  </div><br><br>
+  <h1 class="text-center font-weight-bold text-danger">KARDEX</h1>
+  <h5 class="text-center font-weight-bold text-dark">METODO FIFO</h5>
+      <h3 class="text-center font-weight-bold text-dark">@{{ nombre_kardex }}</h3><br>
+      <h3 class="text-center font-weight-bold text-dark">@{{ producto_kardex }}</h3><br>
+  <table class="table table-bordered table-responsive table-sm">
+    <thead class="bg-warning"> 
+      <tr class="text-center">
+        <th style="vertical-align:middle" rowspan="2" width="200">FECHA</th>
+        <th width="300" style="vertical-align:middle" rowspan="2" >MOVIMIENTOS</th>
+        <th width="300" colspan="3">INGRESOS</th>
+        <th width="300" colspan="3">EGRESOS</th>
+        <th width="300" colspan="3">EXISTENCIA</th>
+        {{-- <th v-if="kardex.length >= 1" style="vertical-align:middle" rowspan="2" colspan="2">ACCIONES</th> --}}
 
+      </tr>
+      <tr class="text-center">
+        <td>CANT.</td>
+        <td>PREC. UNIT</td>
+        <td>TOTAL</td>
+        <td>CANT.</td>
+        <td>PREC. UNIT</td>
+        <td>TOTAL</td>
+        <td>CANT</td>
+        <td>PREC. UNIT</td>
+        <td>TOTAL</td>
+      </tr>
+    </thead>
+    <tbody v-for="(transa, index) in kardex" style="border-bottom: solid 3px #0F0101;">
+      <tr v-for="(exist, id) in transa" >
+        <td  style="vertical-align:middle" >@{{ formatoFecha(exist.fecha) }}</td>
+        <td style="vertical-align:middle" >@{{ exist.movimiento }}</td>
+        <td style="vertical-align:middle" >@{{ exist.ingreso_cantidad }}</td>
+        <td style="vertical-align:middle" >@{{ exist.ingreso_precio }}</td>
+        <td style="vertical-align:middle"  class="text-right">@{{ exist.ingreso_total }}</td>
+        <td style="vertical-align:middle" >@{{ exist.egreso_cantidad }}</td>
+        <td style="vertical-align:middle" >@{{ exist.egreso_precio }}</td>
+        <td style="vertical-align:middle"  class="text-right">@{{ exist.egreso_total }}</td>
+        <td style="vertical-align:middle" >@{{ exist.existencia_cantidad }}</td>
+        <td style="vertical-align:middle" >@{{ exist.existencia_precio }}</td>
+        <td style="vertical-align:middle"  class="text-right">@{{ exist.existencia_total }}</td>
+        {{-- <td style="vertical-align:middle"  v-if="kardex.length >= 1 && kardex[index][id].tipo == 'ingreso' || kardex[index][id].tipo == 'inicial' || kardex[index][id].tipo == 'egreso' || kardex[index][id].tipo == 'ingreso_venta' || kardex[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-warning" href="" @click.prevent="editarTransaccion(index, id)"><i class="fas fa-edit"></i></a></td>
+        <td style="vertical-align:middle"  v-if="kardex.length >= 1 && kardex[index][id].tipo == 'ingreso'  || kardex[index][id].tipo == 'egreso' || kardex[index][id].tipo == 'inicial'||  kardex[index][id].tipo == 'ingreso_venta' || kardex[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-danger" href="" @click.prevent="borrarTransaccion(index, id)"><i class="fas fa-trash"></i></a></td>
+        <td style="vertical-align:middle"  v-else colspan="2"></td> --}}
+      </tr>
+    </tbody>
+
+{{--     <tbody>
+      <tr class="bg-secondary">
+        <td></td>
+        <td class="font-weight-bold text-danger">SUMAN</td>
+        <td>@{{ suman.ingreso_cantidad }}</td>
+        <td></td>
+        <td class="text-right">@{{ suman.ingreso_total }}</td>
+        <td>@{{ suman.egreso_cantidad }}</td>
+        <td></td>
+        <td class="text-right">@{{ suman.egreso_total }}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody> --}}
+</table>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

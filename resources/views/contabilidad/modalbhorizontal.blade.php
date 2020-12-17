@@ -42,7 +42,7 @@
           <option value="Capital">Capital</option>
         </select> --}}
         </td>
-        <td width="125"><input type="numeric" v-model="activo.a_corriente.saldo" name="debe" class="form-control" required></td>
+        <td width="125"><input type="number" v-model="activo.a_corriente.saldo" name="debe" class="form-control" required></td>
               
         </tr>
       </tbody>
@@ -105,7 +105,7 @@
           <option value="Capital">Capital</option>
         </select> --}}
         </td>
-        <td width="125"><input type="text" v-model="activo.a_nocorriente.saldo" name="debe" class="form-control" required></td>
+        <td width="125"><input type="number" v-model="activo.a_nocorriente.saldo" name="debe" class="form-control" required></td>
               
         </tr>
       </tbody>
@@ -167,7 +167,7 @@
           <option value="Capital">Capital</option>
         </select> --}}
         </td>
-        <td width="125"><input type="text" v-model="pasivo.p_corriente.saldo" name="debe" class="form-control" required></td>
+        <td width="125"><input type="number" v-model="pasivo.p_corriente.saldo" name="debe" class="form-control" required></td>
               
         </tr>
       </tbody>
@@ -230,7 +230,7 @@
           <option value="Capital">Capital</option>
         </select> --}}
         </td>
-        <td width="125"><input type="text" v-model="pasivo.p_nocorriente.saldo" name="debe" class="form-control" required></td>
+        <td width="125"><input type="number" v-model="pasivo.p_nocorriente.saldo" name="debe" class="form-control" required></td>
               
         </tr>
       </tbody>
@@ -295,7 +295,7 @@
           <option value="Capital">Capital</option>
         </select> --}}
         </td>
-        <td width="125"><input type="text" v-model="patrimonio.saldo" name="debe" class="form-control" required></td>
+        <td width="125"><input type="number" v-model="patrimonio.saldo" name="debe" class="form-control" required></td>
               
         </tr>
       </tbody>
@@ -362,7 +362,7 @@
           <option value="Capital">Capital</option>
         </select> --}}
         </td>
-        <td width="125"><input type="numeric" v-model="activo.a_corriente.saldo" name="debe" class="form-control" required></td>
+        <td width="125"><input type="number" v-model="activo.a_corriente.saldo" name="debe" class="form-control" required></td>
               
         </tr>
       </tbody>
@@ -425,7 +425,7 @@
           <option value="Capital">Capital</option>
         </select> --}}
         </td>
-        <td width="125"><input type="text" v-model="activo.a_nocorriente.saldo" name="debe" class="form-control" required></td>
+        <td width="125"><input type="number" v-model="activo.a_nocorriente.saldo" name="debe" class="form-control" required></td>
               
         </tr>
       </tbody>
@@ -488,7 +488,7 @@
           <option value="Capital">Capital</option>
         </select> --}}
         </td>
-        <td width="125"><input type="text" v-model="pasivo.p_corriente.saldo" name="debe" class="form-control" required></td>
+        <td width="125"><input type="number" v-model="pasivo.p_corriente.saldo" name="debe" class="form-control" required></td>
               
         </tr>
       </tbody>
@@ -551,7 +551,7 @@
           <option value="Capital">Capital</option>
         </select> --}}
         </td>
-        <td width="125"><input type="text" v-model="pasivo.p_nocorriente.saldo" name="debe" class="form-control" required></td>
+        <td width="125"><input type="number" v-model="pasivo.p_nocorriente.saldo" name="debe" class="form-control" required></td>
               
         </tr>
       </tbody>
@@ -616,7 +616,7 @@
           <option value="Capital">Capital</option>
         </select> --}}
         </td>
-        <td width="125"><input type="text" v-model="patrimonio.saldo" name="debe" class="form-control" required></td>
+        <td width="125"><input type="number" v-model="patrimonio.saldo" name="debe" class="form-control" required></td>
               
         </tr>
       </tbody>
@@ -656,7 +656,7 @@
        </thead>
         <tbody > 
           <tr>
-            <td width="125"><input type="text" v-model="total_balance_inicial.t_patrimonio_pasivo" name="debe" class="form-control" required></td>   
+            <td width="125"><input type="number" v-model="total_balance_inicial.t_patrimonio_pasivo" name="debe" class="form-control" required></td>   
         </tr>
       </tbody>
     </table>

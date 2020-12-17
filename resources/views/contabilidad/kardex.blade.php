@@ -1,11 +1,16 @@
 <div id="kardex" class="border border-danger p-4">
-	<div class="float-left">
-		<select v-model="producto_id" class="custom-select" name="" id="" @change="obtenerKardexFifo()">
+	<div class=" row">
+		<div class="col-3">
+			<h6 class="font-weight-bold">Inventario existente:</h6>
+			<select v-model="producto_id" class="custom-select" name="" id="" @change="obtenerKardexFifo()">
 			<option disabled selected value="">ELIGE UN PRODUCTO</option>
 			<option :value="1">COCINAS</option>
 			<option :value="2">AIRE ACONDICIONADO</option>
 			<option :value="3">MESA</option>
 		</select>
+		</div>
+	
+		
 	</div><br><br>
 	<h1 class="text-center font-weight-bold text-danger">KARDEX</h1>
 	<h5 class="text-center font-weight-bold text-info">METODO FIFO</h5>
@@ -49,14 +54,14 @@
 			<tr v-for="(exist, id) in transa" >
 				<td  style="vertical-align:middle" >@{{ formatoFecha(exist.fecha) }}</td>
 				<td style="vertical-align:middle" >@{{ exist.movimiento }}</td>
-				<td style="vertical-align:middle" >@{{ exist.ingreso_cantidad }}</td>
-				<td style="vertical-align:middle" >@{{ exist.ingreso_precio }}</td>
+				<td style="vertical-align:middle" class="text-right">@{{ exist.ingreso_cantidad }}</td>
+				<td style="vertical-align:middle" class="text-right">@{{ decimales(exist.ingreso_precio) }}</td>
 				<td style="vertical-align:middle"  class="text-right">@{{ exist.ingreso_total }}</td>
-				<td style="vertical-align:middle" >@{{ exist.egreso_cantidad }}</td>
-				<td style="vertical-align:middle" >@{{ exist.egreso_precio }}</td>
+				<td style="vertical-align:middle" class="text-right">@{{ exist.egreso_cantidad }}</td>
+				<td style="vertical-align:middle" class="text-right">@{{ decimales(exist.egreso_precio) }}</td>
 				<td style="vertical-align:middle"  class="text-right">@{{ exist.egreso_total }}</td>
-				<td style="vertical-align:middle" >@{{ exist.existencia_cantidad }}</td>
-				<td style="vertical-align:middle" >@{{ exist.existencia_precio }}</td>
+				<td style="vertical-align:middle" class="text-right">@{{ exist.existencia_cantidad }}</td>
+				<td style="vertical-align:middle" class="text-right">@{{ decimales(exist.existencia_precio) }}</td>
 				<td style="vertical-align:middle"  class="text-right">@{{ exist.existencia_total }}</td>
 				<td style="vertical-align:middle"  v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso' || transacciones[index][id].tipo == 'inicial' || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'ingreso_venta' || transacciones[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-warning" href="" @click.prevent="editarTransaccion(index, id)"><i class="fas fa-edit"></i></a></td>
 				<td style="vertical-align:middle"  v-if="transacciones.length >= 1 && transacciones[index][id].tipo == 'ingreso'  || transacciones[index][id].tipo == 'egreso' || transacciones[index][id].tipo == 'inicial'||  transacciones[index][id].tipo == 'ingreso_venta' || transacciones[index][id].tipo == 'egreso_compra'"><a class="btn btn-sm btn-danger" href="" @click.prevent="borrarTransaccion(index, id)"><i class="fas fa-trash"></i></a></td>
@@ -68,10 +73,10 @@
 		  <tr class="bg-secondary">
 		    <td></td>
 		    <td class="font-weight-bold text-danger">SUMAN</td>
-		    <td>@{{ suman.ingreso_cantidad }}</td>
+		    <td class="text-right">@{{ suman.ingreso_cantidad }}</td>
 		    <td></td>
 		    <td class="text-right">@{{ suman.ingreso_total }}</td>
-		    <td>@{{ suman.egreso_cantidad }}</td>
+		    <td class="text-right">@{{ suman.egreso_cantidad }}</td>
 		    <td></td>
 		    <td class="text-right">@{{ suman.egreso_total }}</td>
 		    <td></td>
@@ -109,7 +114,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>Inventario Mercaderia Inicial</td>
+							<td>Inventario Inicial de Mercaderias</td>
 							<td><input v-model="prueba.cantidad.inventario_inicial" type="number" class="form-control form-control-sm"></td>
 							<td><input v-model="prueba.precio.inventario_inicial" type="number" class="form-control form-control-sm"></td>
 						</tr>
@@ -264,7 +269,7 @@
 						</tbody>
 			</table>
 			<div v-if="!transaccion.egreso.edit" class="row justify-content-center">
-			<a class="btn btn-sm btn-primary mr-2 float-left" v-if="actuegreso.estado && actuegreso.tipo" href="" @click.prevent="agregarNewEgreso('agregar')">Agregar Egreso</a>
+			{{-- <a class="btn btn-sm btn-primary mr-2 float-left" v-if="actuegreso.estado && actuegreso.tipo" href="" @click.prevent="agregarNewEgreso('agregar')">Agregar Egreso</a> --}}
 			<a class="btn btn-sm btn-primary mr-2 float-left"  href="" @click.prevent="exisEgresoAct('egreso')">Agregar Existencia</a>
 			<a class="btn btn-sm btn-secondary mr-2" v-if="actuegreso.estado" href="" @click.prevent="ActualizarEgresos()">Actualizar Transaccion</a>
 			<a class="btn btn-sm btn-warning mr-2" v-if="actuegreso.estado" href="" @click.prevent="cancelarActualizacion('egresos')">Cancelar</a>
