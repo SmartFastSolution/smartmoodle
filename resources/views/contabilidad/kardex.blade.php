@@ -90,7 +90,7 @@
  @include('contabilidad.modales.modalkardex')
 
 
-<div v-if="!actuingreso.estado && !actuegreso.estado" class="row justify-content-center">
+<div v-if="!actuingreso.estado && !actuegreso.estado && producto_id !== ''" class="row justify-content-center">
 
 	<div class="col-4 align-self-center">
 	{{-- <a class="btn btn-sm btn-primary mr-2" href="">Agregar Inicial</a> --}}

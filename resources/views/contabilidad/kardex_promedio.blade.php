@@ -1,6 +1,18 @@
 <div id="kardex_promedio" class="border border-danger p-4">
+	<div class=" row">
+		<div class="col-3">
+			<h6 class="font-weight-bold">Inventario existente:</h6>
+			<select v-model="producto_id" class="custom-select" name="" id="" @change="obtenerKardexPromedio()">
+			<option disabled selected value="">ELIGE UN PRODUCTO</option>
+			<option :value="1">COCINAS</option>
+			<option :value="2">AIRE ACONDICIONADO</option>
+			<option :value="3">MESA</option>
+		</select>
+		</div>
+	</div><br><br>
 	<h1 class="text-center font-weight-bold text-danger">KARDEX</h1>
 	<h5 class="text-center font-weight-bold text-info">METODO PROMEDIO</h5>
+
 	<div class="row justify-content-center mb-2">
 		<div class="col-5 mb-3">
 
@@ -70,14 +82,14 @@
 </table>
  	@include('contabilidad.modales.modalkardex_promedio')
 
- <div v-if="!transaccion.ingreso.edit && !transaccion.egreso.edit " class="col-4 align-self-center">
+ <div v-if="!transaccion.ingreso.edit && !transaccion.egreso.edit  && producto_id !== ''" class="col-4 align-self-center">
 
 	<a {{-- v-if="transacciones.length == 0" --}} class="btn btn-sm btn-success mr-2" @click.prevent="modalInicial()">Saldo Inicial</a>
 	<a  class="btn btn-sm btn-info mr-2" @click.prevent="modalTransacciones()">Agregar Ingreso / Egreso</a>
 	{{-- <a  class="btn btn-sm btn-info mr-2" href="#" @click.prevent="modalEgreso()" data-toggle="modal" data-target="#egreso">EGRESO</a> --}}
 	
 </div>
-	<div v-if="!transaccion.ingreso.edit && !transaccion.egreso.edit " class="col-12 mt-3">
+	<div v-if="!transaccion.ingreso.edit && !transaccion.egreso.edit  && producto_id !== ''" class="col-12 mt-3">
 		<div class="row justify-content-center">
 			<div class="col-6 border rounded border-danger">
 				<table class="table table-sm">

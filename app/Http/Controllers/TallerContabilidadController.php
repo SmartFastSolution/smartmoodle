@@ -193,7 +193,8 @@ class TallerContabilidadController extends Controller
         $id                 = Auth::id();
         $taller_id          = $request->id;
         $kardex             = $request->kardex_promedio;
-        $kardexCompro       = KardexPromedio::where('user_id',$id)->where('taller_id', $taller_id)->count();
+        $producto_id  = $request->producto_id;
+        $kardexCompro       = KardexPromedio::where('user_id',$id)->where('taller_id', $taller_id)->where('producto_id', $producto_id)->count();
         if ($kardexCompro  == 0) {
         // $contenido          = TallerContabilidad::select('enunciado')->where('taller_id', $taller_id)->firstOrFail();
         $kardex_promedio            = new KardexPromedio;
@@ -201,7 +202,7 @@ class TallerContabilidadController extends Controller
         $kardex_promedio->user_id              = $id;
         $kardex_promedio->nombre               = $request->nombre;
         $kardex_promedio->producto             = $request->producto;
-        // $kardex_promedio->enunciado         = $contenido->enunciado;
+        $kardex_promedio->producto_id          = $request->producto_id;
         $kardex_promedio->inv_inicial_cantidad = $request->inv_inicial_cantidad;
         $kardex_promedio->adquisicion_cantidad = $request->adquisicion_cantidad;
         $kardex_promedio->ventas_cantidad      = $request->ventas_cantidad;
@@ -241,10 +242,10 @@ class TallerContabilidadController extends Controller
             ),200,[]);
         }elseif($kardexCompro  == 1){
         $ids                                 = [];
-        $kardexComprob                       = KardexPromedio::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        $kardexComprob                       = KardexPromedio::where('user_id',$id)->where('taller_id', $taller_id)->where('producto_id', $producto_id)->first();
         $kardexComprob->nombre               = $request->nombre;
         $kardexComprob->producto             = $request->producto;
-        // $kardexComprob->enunciado         = $contenido->enunciado;
+        $kardexComprob->producto_id          = $request->producto_id;
         $kardexComprob->inv_inicial_cantidad = $request->inv_inicial_cantidad;
         $kardexComprob->adquisicion_cantidad = $request->adquisicion_cantidad;
         $kardexComprob->ventas_cantidad      = $request->ventas_cantidad;
@@ -296,7 +297,8 @@ class TallerContabilidadController extends Controller
     {
         $id         = Auth::id();
         $taller_id  = $request->id;
-        $kardexpro = KardexPromedio::where('user_id',$id)->where('taller_id', $taller_id)->count();
+        $producto_id  = $request->producto_id;
+        $kardexpro = KardexPromedio::where('user_id',$id)->where('taller_id', $taller_id)->where('producto_id', $producto_id)->count();
         // $registros  = [];
         if ($kardexpro  == 1) {
             $kardexPromedio = KardexPromedio::select('id', 'nombre', 'producto', 'inv_inicial_cantidad', 'adquisicion_cantidad', 'ventas_cantidad', 'inv_final_cantidad', 'inv_inicial_precio', 'adquisicion_precio', 'ventas_precio', 'inv_final_precio',)->where('user_id',$id)->where('taller_id', $taller_id)->first();
