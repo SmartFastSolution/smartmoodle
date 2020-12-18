@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMovimientocajasTable extends Migration
+class CreateArqueoExisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateMovimientocajasTable extends Migration
      */
     public function up()
     {
-        Schema::create('movimientocajas', function (Blueprint $table) {
+        Schema::create('arqueo_exis', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('arqueocaja_id');
-            $table->string('cuenta');
-            $table->string('comentario')->nullable();
-            $table->string('debe')->nullable();
-            $table->string('haber')->nullable();
+            $table->string('detalle');
+            $table->string('e_debe')->nullable();
+            $table->string('e_haber')->nullable();
             $table->timestamps();
             $table->foreign('arqueocaja_id')
             ->references('id')
@@ -35,6 +34,6 @@ class CreateMovimientocajasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('movimientocajas');
+        Schema::dropIfExists('arqueo_exis');
     }
 }

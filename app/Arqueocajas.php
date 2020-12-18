@@ -6,9 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Arqueocajas extends Model
 {
-    public function movimientocajas(){
+    public function arqueosaldos(){
 
-        return $this->hasMany('App\Movimientocajas');
+        return $this->hasMany('App\ArqueoSaldo');
+    }
+    public function arqueoexis(){
+
+        return $this->hasMany('App\ArqueoExi');
     }
 
     public function taller(){

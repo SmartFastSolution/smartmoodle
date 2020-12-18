@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Admin\TallerContabilidad;
 use App\Anexocaja;
 use App\Arqueocajas;
+use App\ArqueoExi;
+use App\ArqueoSaldo;
 use App\Cajadatos;
 use App\Contabilidad\BCARegistro;
 use App\Contabilidad\BCRegistro;
@@ -23,7 +25,7 @@ use App\Contabilidad\KFRegistro;
 use App\Contabilidad\KFRMovimiento;
 use App\Contabilidad\KardexPromedio;
 
-use App\Movimientocajas;
+
 
 use App\Contabilidad\KardexFIfo;
 use App\Librobanco;
@@ -1044,7 +1046,6 @@ if ($diariogeneral == 1){
      
         $user_id =Auth::id();        
         $taller_id = $request->id;
-    
         $obanexo = Anexocaja::where('user_id', $user_id)->where('taller_id', $taller_id)->count();
             if($obanexo == 1){
            $anexocaja = Anexocaja::where('user_id', $user_id)->where('taller_id', $taller_id)->first();
@@ -1067,31 +1068,44 @@ if ($diariogeneral == 1){
     public function ArqueoCaja(Request $request){
         $uid           = Auth::id();
         $taller_id     = $request->id;
-        $arqueos_cajas = $request->arqueos_caja;
+        $t_saldo       = $request->t_saldo;
+        $t_exis        = $request->t_exis;
         $ar  = Arqueocajas::where('user_id', $uid)->where('taller_id',$taller_id)->count();      
        if($ar == 0){
           $a = new Arqueocajas;
           $a->taller_id = $taller_id;
           $a->user_id   = $uid;
-          $a->totaldebe = $request->debe;
-          $a->totalhaber= $request->haber;
+          $a->totaldebe = $request->td;
+          $a->totalhaber= $request->th;
           $a->save();
 
           $e= Arqueocajas::where('user_id', $uid)->get()->last();
 
-          foreach($arqueos_cajas as $key=>$i){
+          foreach($t_saldo as $key=>$s){
 
             $datos = array(
                 'arqueocaja_id' =>$e->id,
-                'cuenta'        =>$i['cuenta'],
-                'comentario'    =>$i['comentario'],
-                'debe'          =>$i['debe'],
-                'haber'         =>$i['haber'],
+                'detalle'        =>$s['detalle'],
+                's_debe'           =>$s['s_debe'],
+                's_haber'          =>$s['s_haber'],
                 'created_at'        => now(),
                 'updated_at'        => now(),
  
             );
-            Movimientocajas::insert($datos);
+            ArqueoSaldo::insert($datos);
+          }
+          foreach($t_exis as $key=>$ex){
+
+            $datos = array(
+                'arqueocaja_id'  =>$e->id,
+                'detalle'        =>$ex['detalle'],
+                'e_debe'           =>$ex['e_debe'],
+                'e_haber'          =>$ex['e_haber'],
+                'created_at'        => now(),
+                'updated_at'        => now(),
+ 
+            );
+            ArqueoExi::insert($datos);
           }
           return response(array(
             'success' => true,
@@ -1103,30 +1117,52 @@ if ($diariogeneral == 1){
             
             $ids     =[];
             $ar      = Arqueocajas::where('user_id', $uid)->where('taller_id',$taller_id)->first();
-            $ar->totaldebe      = $request->debe;
-            $ar->totalhaber      = $request->haber;
+            $ar->totaldebe      = $request->td;
+            $ar->totalhaber      = $request->th;
             $ar->save();
 
-            $r = Movimientocajas::where('arqueocaja_id', $ar->id)->get();
-
-            foreach($r as $i){
+            $sa = ArqueoSaldo::where('arqueocaja_id', $ar->id)->get();        
+            foreach($sa as $i){
                $ids[]=$i->id;
             }
-            $deteletearqueo = Movimientocajas::destroy($ids);
+            $deteletearqueosaldo = ArqueoSaldo::destroy($ids);
+
+
+            $ex = ArqueoExi::where('arqueocaja_id', $ar->id)->get(); 
+            foreach($ex as $i){
+               $ids[]=$i->id;
+            }          
+            $deteletearqueoexis = ArqueoExi::destroy($ids);
+
+
             $e = Arqueocajas::where('user_id', $uid)->get()->last();
 
-            foreach($arqueos_cajas as $key=>$i){
+            foreach($t_saldo as $key=>$s){
+
                 $datos = array(
                     'arqueocaja_id' =>$e->id,
-                    'cuenta'        =>$i['cuenta'],
-                    'comentario'    =>$i['comentario'],
-                    'debe'          =>$i['debe'],
-                    'haber'         =>$i['haber'],
+                    'detalle'        =>$s['detalle'],
+                    's_debe'           =>$s['s_debe'],
+                    's_haber'          =>$s['s_haber'],
                     'created_at'        => now(),
                     'updated_at'        => now(),
-                     );
-                     Movimientocajas::insert($datos); 
-            }
+     
+                );
+                ArqueoSaldo::insert($datos);
+              } 
+               foreach($t_exis as $key=>$ex){
+
+                $datos = array(
+                    'arqueocaja_id' =>$e->id,
+                    'detalle'        =>$ex['detalle'],
+                    'e_debe'          =>$ex['e_debe'],
+                    'e_haber'         =>$ex['e_haber'],
+                    'created_at'        => now(),
+                    'updated_at'        => now(),
+     
+                );
+                ArqueoExi::insert($datos);
+              }
             return response(array(
                 'success' => true,
                 'estado'  => 'actualizado',
@@ -1143,11 +1179,13 @@ if ($diariogeneral == 1){
 
           if($ar==1){
             $a = Arqueocajas::where('user_id', $user_id)->where('taller_id',$taller_id)->first();
-            $e = Movimientocajas::select('cuenta','comentario','debe','haber')->where('arqueocaja_id', $a->id)->get();
+            $sa = ArqueoSaldo::select('detalle','s_debe','s_haber')->where('arqueocaja_id', $a->id)->get();
+            $ex = ArqueoExi::select('detalle','e_debe','e_haber')->where('arqueocaja_id', $a->id)->get();
          
             return response(array(
                 'datos' => true,
-                'arqueocaja' => $e,
+                'saldo' => $sa, 
+                'exis' =>  $ex, 
             ),200,[]);
         }else{
             return response(array(

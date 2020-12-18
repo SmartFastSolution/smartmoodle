@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Movimientocajas extends Model
+class ArqueoSaldo extends Model
 {
     public function Arqueocaja(){
 
