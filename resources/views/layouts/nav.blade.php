@@ -384,9 +384,9 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('admin.create')}}" class="nav-link">
+                                    <a href="{{route('admin.tallercontable')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Lista de Talleres</p>
+                                        <p>Modulos Contables</p>
                                     </a>
                                 </li>
                             </ul>

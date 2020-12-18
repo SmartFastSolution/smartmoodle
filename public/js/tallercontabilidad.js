@@ -2340,6 +2340,7 @@ let mayor_general = new Vue({
           total_saldo:'',
         },
         mayor:{
+          seleccion:'',
           registro:{
             edit: false,
             cierre:false,
@@ -2368,6 +2369,48 @@ let mayor_general = new Vue({
       return
     }
      
+    },
+    onSelect(){
+      if (this.mayor.seleccion == null) {
+        this.update            = false;
+
+      this.mayores.registros =[];
+      this.mayores.cierres   =[];
+      this.mayor.cuenta   = id;
+      this.mayor.registro.cierre = false;
+      this.mayor.registro.detalle = '';
+      this.mayor.registro.fecha = '';
+      this.mayor.registro.debe = '';
+      this.mayor.registro.haber = '';
+      this.mayor.registro.saldo = '';
+        return
+
+      }
+      let id = this.mayor.seleccion.value;
+      let cuenta = this.registros.filter(x => x.cuenta_id == id);
+      console.log(id);
+      if (cuenta.length > 0) {
+      this.update            = true;
+
+      this.mayores.registros = cuenta[0].registros;
+      this.mayores.cierres   = cuenta[0].cierres;
+      this.mayor.cuenta   = cuenta[0].cuenta_id;
+      }else{
+      this.update            = false;
+
+      this.mayores.registros =[];
+      this.mayores.cierres   =[];
+      this.mayor.cuenta   = id;
+      this.mayor.registro.cierre = false;
+      this.mayor.registro.detalle = '';
+      this.mayor.registro.fecha = '';
+      this.mayor.registro.debe = '';
+      this.mayor.registro.haber = '';
+      this.mayor.registro.saldo = '';
+      }
+
+    
+      
     },
      abrirTransaccion(){
       this.update            = false;
@@ -2629,7 +2672,13 @@ let mayor_general = new Vue({
 const balance_comp = new Vue({
   el: '#balance_comp',
   data:{
+    nombre:'',
+    fecha:'',
+    enunciados: ``,
     id_taller: taller,
+    nombre_mayor:'',
+    options: objeto,
+    cuentas: cuentas,
     balances:[], //array del balance de COMPROBACION
     balance:{ //variables a utilizar para el balance de COMPROBACION
       cuenta:'',
@@ -2637,7 +2686,9 @@ const balance_comp = new Vue({
       suma_haber:'',
       saldo_debe:'',
       saldo_haber:'',
+      edit:false
     },
+    mayorgeneral:[],
     suman:{ //suma total del balance COMPROBACION
       sum_debe:0,
       sum_haber:0,
@@ -2650,8 +2701,55 @@ const balance_comp = new Vue({
   },
   mounted: function(){
     this.obtenerBalanceCom();
+    this.obtenerMayorGeneral();
   },
   methods:{
+        decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+        formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
+      obtenerMayorGeneral: function(){
+        var _this = this;
+        var url = '/sistema/admin/taller/mayorgeneral';
+            axios.post(url,{
+              id: _this.id_taller,
+        }).then(response => {
+          if (response.data.datos == true) {
+          _this.mayorgeneral = response.data.registros;
+          _this.nombre_mayor = response.data.nombre;
+          // console.log(response.data.registros)
+         
+                     }          
+        }).catch(function(error){
+
+        }); 
+    },
+    abrirTransaccion(){
+      this.update             = false;
+      this.balance.cuenta      ='';
+      this.balance.suma_debe   ='';
+      this.balance.suma_haber  ='';
+      this.balance.saldo_debe ='';
+      this.balance.saldo_haber = '';
+      $('#bc-transaccion').modal('show');
+      // $('#comentario-diario-tab').tab('show'); 
+
+
+    },
     sumas(){
       let debe = Number(this.balance.suma_debe);
       let haber = Number(this.balance.suma_haber);
@@ -2666,7 +2764,7 @@ const balance_comp = new Vue({
     },
     mover(){
       this.update = false;
-        this.balance.cuenta =''
+      this.balance.cuenta =''
      this.balance.suma_debe=''
      this.balance.suma_haber=''
     },
@@ -2706,28 +2804,31 @@ const balance_comp = new Vue({
 
     agregarRegistro(){
 
-     if(this.balance.cuenta.trim() ===''){
+     if(this.balance.cuenta ==''){
       toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
         "timeOut": "3000"
     });
 
-     } else if(this.balance.suma_debe.trim() ==='' && this.balance.suma_haber.trim() ===''){
-      toastr.error("No puedes dejar los campos de haber y debe vacios", "Smarmoddle", {
-        "timeOut": "3000"
-    });
+    //  } else if(this.balance.suma_debe =='' && this.balance.suma_haber ==''){
+    //   toastr.error("No puedes dejar los campos de haber y debe vacios", "Smarmoddle", {
+    //     "timeOut": "3000"
+    // });
 
      }else {
-      this.sumas()
-
-      var balance ={ cuenta:this.balance.cuenta, suma_debe:this.balance.suma_debe, suma_haber:this.balance.suma_haber, saldo_debe:this.balance.saldo_debe, saldo_haber:this.balance.saldo_haber}
+      let id       = this.balance.cuenta;
+      let nombre   = funciones.obtenerNombre(id);
+      // this.sumas()
+      var balance ={ cuenta_id: id, cuenta:nombre, suma_debe:this.balance.suma_debe, suma_haber:this.balance.suma_haber, saldo_debe:this.balance.saldo_debe, saldo_haber:this.balance.saldo_haber}
       this.balances.push(balance);
       toastr.success("Registro agregado correctamente", "Smarmoddle", {
         "timeOut": "3000"
     });
 
-     this.balance.cuenta =''
-     this.balance.suma_debe=''
-     this.balance.suma_haber=''
+     this.balance.cuenta      =''
+     this.balance.suma_debe   =''
+     this.balance.saldo_debe  =''
+     this.balance.suma_haber  =''
+     this.balance.saldo_haber =''
      this.totales();
 
      }                
@@ -2739,39 +2840,53 @@ const balance_comp = new Vue({
       
 
       editBalance(index){
-       this.update = true;
+       this.balance.edit = true;
        this.registro_id = index;
-       this.balance.cuenta     = this.balances[index].cuenta;
+       this.balance.cuenta     = this.balances[index].cuenta_id;
        this.balance.suma_debe  = this.balances[index].suma_debe;
        this.balance.suma_haber = this.balances[index].suma_haber;
+       this.balance.saldo_debe = this.balances[index].saldo_debe;
+       this.balance.saldo_haber = this.balances[index].saldo_haber;
               
       },
+       cancelarEdicion(){
+        this.balance.cuenta      =''
+        this.balance.suma_debe   =''
+        this.balance.suma_haber  =''
+        this.balance.saldo_haber =''
+        this.balance.saldo_haber =''
+        this.balance.edit        = false;
+     
+    },
     actualizarBalance(){
-      if(this.balance.cuenta.trim() ===''){
+      if(this.balance.cuenta ==''){
       toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
         "timeOut": "3000"
     });
 
-     } else if(this.balance.suma_debe.trim() ==='' && this.balance.suma_haber.trim() ===''){
-      toastr.error("No puedes dejar los campos de haber y debe vacios", "Smarmoddle", {
-        "timeOut": "3000"
-    });
+    //  } else if(this.balance.suma_debe.trim() ==='' && this.balance.suma_haber.trim() ===''){
+    //   toastr.error("No puedes dejar los campos de haber y debe vacios", "Smarmoddle", {
+    //     "timeOut": "3000"
+    // });
 
      }else {
-        this.sumas();
-        let id = this.registro_id;
-        this.balances[id].cuenta     = this.balance.cuenta;
-        this.balances[id].suma_debe  = this.balance.suma_debe;
-        this.balances[id].suma_haber = this.balance.suma_haber;
-        this.balances[id].saldo_debe = this.balance.saldo_debe;
-        this.balances[id].saldo_haber = this.balance.saldo_haber;
+        // this.sumas();
+        let index = this.registro_id;
+        let id       = this.balance.cuenta;
+        let nombre   = funciones.obtenerNombre(id);
+        this.balances[index].cuenta     = nombre;
+        this.balances[index].cuenta_id  = id;
+        this.balances[index].suma_debe  = this.balance.suma_debe;
+        this.balances[index].suma_haber = this.balance.suma_haber;
+        this.balances[index].saldo_debe = this.balance.saldo_debe;
+        this.balances[index].saldo_haber = this.balance.saldo_haber;
 
-        this.balance.cuenta =''
-        this.balance.suma_debe=''
-        this.balance.suma_haber=''
-        this.balance.saldo_haber=''
-        this.balance.saldo_haber=''
-        this.update = false;
+        this.balance.cuenta      =''
+        this.balance.suma_debe   =''
+        this.balance.suma_haber  =''
+        this.balance.saldo_debe =''
+        this.balance.saldo_haber =''
+        this.balance.edit        = false;
         this.totales();
 
       }
@@ -2782,11 +2897,18 @@ const balance_comp = new Vue({
             "timeOut": "3000"
         });
 
+     }else if(this.fecha == '' || this.nombre == ''){
+          toastr.error("Fecha y Nombre son obligaorios", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+
      }else{
         let _this = this;
         let url = '/sistema/admin/taller/balance-comprobacion';
             axios.post(url,{
               id: _this.id_taller,
+              nombre:_this.nombre,
+              fecha:_this.fecha,
               balances: _this.balances,
               sum_debe: _this.suman.sum_debe,
               sum_haber: _this.suman.sum_haber,
@@ -2821,6 +2943,8 @@ const balance_comp = new Vue({
             "timeOut": "3000"
             });
               this.balances = response.data.bcomprobacion;
+              this.nombre = response.data.nombre;
+              this.fecha = response.data.fecha;
               this.totales();
             }          
         }).catch(function(error){

@@ -425,6 +425,8 @@ class TallerContabilidadController extends Controller
         $balance->taller_id = $taller_id ;
         $balance->user_id   = $id;
         $balance->enunciado = $contenido->enunciado;
+        $balance->nombre    = $request->nombre;
+        $balance->fecha     = $request->fecha;
         $balance->sum_debe  = $request->sum_debe;
         $balance->sum_haber = $request->sum_haber;
         $balance->sal_debe  = $request->sal_debe;
@@ -436,6 +438,7 @@ class TallerContabilidadController extends Controller
         foreach ($balances as $key => $balance) {
                   $datos=array(
                      'balance_comprobacion_id' => $o->id,
+                     'cuenta_id'               => $balance['cuenta_id'],
                      'cuenta'                  => $balance['cuenta'],
                      'suma_debe'               => $balance['suma_debe'],
                      'suma_haber'              => $balance['suma_haber'],
@@ -454,6 +457,8 @@ class TallerContabilidadController extends Controller
         }elseif($balanceCompro  == 1){
         $ids = [];
         $balanceComprob  = BalanceComprobacion::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        $balanceComprob->nombre    = $request->nombre;
+        $balanceComprob->fecha     = $request->fecha;
         $balanceComprob->sum_debe  = $request->sum_debe;
         $balanceComprob->sum_haber = $request->sum_haber;
         $balanceComprob->sal_debe  = $request->sal_debe;
@@ -501,11 +506,13 @@ public function obtenerBalanceCompro(Request $request)
         // $registros  = [];
         if ($dioGeneral  == 1) {
             $balanceCompro = BalanceComprobacion::where('user_id',$id)->where('taller_id', $taller_id)->first();
-            $obtener       = BCRegistro::select('cuenta','suma_debe', 'suma_haber', 'saldo_debe', 'saldo_haber')->where('balance_comprobacion_id', $balanceCompro->id)->get();
+            $obtener       = BCRegistro::select('cuenta','cuenta_id', 'suma_debe', 'suma_haber', 'saldo_debe', 'saldo_haber')->where('balance_comprobacion_id', $balanceCompro->id)->get();
         
             return response(array(
                 'datos' => true,
-                'bcomprobacion' => $obtener
+                'bcomprobacion' => $obtener,
+                'nombre' => $balanceCompro->nombre,
+                'fecha' => $balanceCompro->fecha
             ),200,[]);
 
          }else{

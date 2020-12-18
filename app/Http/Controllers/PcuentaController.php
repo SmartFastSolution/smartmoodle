@@ -15,7 +15,7 @@ class PcuentaController extends Controller
      */
     public function index()
     {
-        $cuentas= Pcuenta::orderBy('id','Asc')->paginate(7);
+        $cuentas= Pcuenta::orderBy('id','Asc')->get();
     
         return view('Cuentas.indexcuenta',['cuentas'=>$cuentas]);
     }
@@ -38,16 +38,29 @@ class PcuentaController extends Controller
      */
     public function store(Request $request)
     { 
-        $request->validate([
+        $pcuenta = new Pcuenta;
+        $pcuenta->tpcuenta   = $request->tpcuenta;
+        $pcuenta->nombre     = $request->nombre;
+        $pcuenta->porcentual = $request->porcentual;
+        $pcuenta->porcentaje = $request->porcentaje;
+        $pcuenta->estado = $request->estado;
+        $pcuenta->save();
 
-            'tpcuenta'      => 'required|string|max:150',
-            'cuenta'      => 'required|string|max:150',
-            'estado'      => 'required|in:on,off',
-        ]);
+            return response(array(                                         //ENVIO DE RESPUESTA
+                    'success' => true,
+                    'estado' => 'guardado',
+                    'message' => 'Kardex Fifo creado correctamente'
+                ),200,[]);
+        // $request->validate([
 
-        $pcuenta = Pcuenta::create($request->all());
+        //     'tpcuenta'      => 'required|string|max:150',
+        //     'cuenta'      => 'required|string|max:150',
+        //     'estado'      => 'required|in:on,off',
+        // ]);
+
+        // $pcuenta = Pcuenta::create($request->all());
    
-        return \redirect('sistema/pcuentas');
+        // return \redirect('sistema/pcuentas');
         
     }
 
@@ -80,20 +93,35 @@ class PcuentaController extends Controller
      * @param  \App\Pcuenta  $pcuenta
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pcuenta $pcuenta)
+    public function update(Request $request)
     {
        
-       
-        $request->validate([
+       $pcuenta = Pcuenta::find($request->id);
+        // $request->validate([
 
-            'tpcuenta'      => 'string|max:150',
-            'cuenta'      => 'string|max:150',
-            'estado'      => 'required|in:on,off',
-        ]);
+        //     'tpcuenta'      => 'string|max:150',
+        //     'nombre'      => 'string|max:150',
+        //     'estado'      => 'required|in:on,off',
+        // ]);
 
-        $pcuenta->update($request->all());
+        // if ($request->porcentual == on) {
+        //     $porcentual = 1;
+        // }
+        $pcuenta->tpcuenta   = $request->tpcuenta;
+        $pcuenta->nombre     = $request->nombre;
+        $pcuenta->porcentual = $request->porcentual;
+        $pcuenta->porcentaje = $request->porcentaje;
+        $pcuenta->estado = $request->estado;
+        $pcuenta->save();
+
+            return response(array(                                         //ENVIO DE RESPUESTA
+                    'success' => true,
+                    'estado' => 'guardado',
+                    'message' => 'Kardex Fifo creado correctamente'
+                ),200,[]);
+        // $pcuenta->update($request->all());
    
-        return \redirect('sistema/pcuentas');
+        // return \redirect('sistema/pcuentas');
 
     }
 

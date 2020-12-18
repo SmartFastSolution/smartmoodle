@@ -16,6 +16,7 @@ class CreateBCRegistrosTable extends Migration
         Schema::create('b_c_registros', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('balance_comprobacion_id');
+            $table->unsignedbigInteger('cuenta_id');
             $table->text('cuenta')->nullable();
             $table->string('suma_debe')->nullable();
             $table->string('suma_haber')->nullable();

@@ -18,7 +18,7 @@ class CreatePcuentasTable extends Migration
             $table->bigIncrements('id');
             $table->string('tpcuenta');
             $table->boolean('porcentual')->nullable();
-            $table->integer('porcentaje')->nullable();
+            $table->float('porcentaje')->nullable();
             $table->enum('estado',['on','off'])->nullable();
             $table->timestamps();
         });

@@ -8,7 +8,7 @@
      <div class="row justify-content-center">
      	<div v-for="(cuenta, index) in registros" class="col-11">
      		<a href="" class="float-right btn bt-sm btn-danger ml-2" @click.prevent="warningEliminar(index)"><i class="fas fa-trash"></i> </a>
-     		<a href="" class="float-right btn bt-sm btn-warning " @click.prevent="editarTransaccion(index)"><i class="fas fa-edit"></i> </a>
+     		{{-- <a href="" class="float-right btn bt-sm btn-warning " @click.prevent="editarTransaccion(index)"><i class="fas fa-edit"></i> </a> --}}
      		<h3 class="text-center font-weight-bold text-danger">@{{ cuenta.cuenta }} </h3>
      		  <table class="table table-bordered table-sm">
                  <thead class="thead-dark">
@@ -33,9 +33,9 @@
                        <tr>
                         <td></td>
                         <td class="font-weight-bold text-gray-dark">SUMAN</td>
-                        <td class="text-right">@{{ decimales(cuenta.total_debe )}}</td>
-                        <td class="text-right">@{{ decimales(cuenta.total_haber) }}</td>
-                        <td class="text-right">{{-- @{{ decimales(cuenta.total_saldo) }} --}}</td>
+                        <td class="text-right font-weight-bold text-gray-dark">@{{ decimales(cuenta.total_debe )}}</td>
+                        <td class="text-right font-weight-bold text-gray-dark">@{{ decimales(cuenta.total_haber) }}</td>
+                        <td class="text-right font-weight-bold text-gray-dark">{{-- @{{ decimales(cuenta.total_saldo) }} --}}</td>
                      </tr>
                      <tr v-for="(diar, index) in cuenta.cierres">
                        	<td align="center" width="50">@{{ formatoFecha(diar.fecha)}}</td>
@@ -49,7 +49,7 @@
      	</div>
      </div>
        <div class="row justify-content-around mb-2">
-         <a href="#" class="btn btn-outline-primary" @click.prevent="abrirTransaccion()">Crear Transaccion</a>
+         <a href="#" class="btn btn-outline-primary" @click.prevent="abrirTransaccion()">Transacciones</a>
      </div>
     <div class="row justify-content-center">
         <a href="#" class="addDiario btn btn-danger" @click.prevent="guardarMayor()">Completar Mayor General</a>

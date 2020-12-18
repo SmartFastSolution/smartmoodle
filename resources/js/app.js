@@ -24,7 +24,17 @@ Vue.component('draggable', draggable);
 // import select2 from 'v-select2-component';
 // Vue.component('select2', select2);
 
+import Multiselect from 'vue-multiselect'
+
+  // register globally
+  Vue.component('multiselect', Multiselect);
+
 import 'vue-search-select/dist/VueSearchSelect.css';
+import 'vue-multiselect/dist/vue-multiselect.min.css';
+
+import CKEditor from '@ckeditor/ckeditor5-vue2';
+Vue.use( CKEditor );
+
  import { ModelSelect } from 'vue-search-select';
 Vue.component('ModelSelect', ModelSelect);
  

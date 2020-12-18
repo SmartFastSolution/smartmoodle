@@ -1,7 +1,7 @@
 <div id="kardex_promedio" class="border border-danger p-4">
 	<div class=" row">
 		<div class="col-3">
-			<h6 class="font-weight-bold">Inventario existente:</h6>
+			<h6 class="font-weight-bold">Elegir Producto:</h6>
 			<select v-model="producto_id" class="custom-select" name="" id="" @change="obtenerKardexPromedio()">
 			<option disabled selected value="">ELIGE UN PRODUCTO</option>
 			<option :value="1">COCINAS</option>

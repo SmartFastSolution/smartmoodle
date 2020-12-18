@@ -18,11 +18,16 @@
                    <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
                         <h2 class="text-center">AGREGAR MOVIMIENTOS</h2>
                            <div class="form-group row">
-                            <label  class="col-sm-5 col-form-label">Selecciona la Cuenta</label>
+                            <label  class="col-sm-4 col-form-label">Selecciona la Cuenta</label>
                             <div class="col-sm-7">
-                          <model-select :options="options" v-model="mayor.cuenta" placeholder="ELEGIR CUENTA"></model-select>
+                              <multiselect v-model="mayor.seleccion" :options="options"  placeholder="Elige Una Cuenta" label="text" track-by="value" @input="onSelect()"></multiselect>
+                          {{-- <model-select :options="options" v-model="mayor.cuenta" placeholder="ELEGIR CUENTA"  @click="onSelect"></model-select> --}}
                             </div>
+                            {{-- <div class="col-sm-2">
+                            <a href="" class="btn btn-danger" @click.prevent="onSelect">Seleccionar</a>
+                          </div> --}}
                           </div>
+                          
                        <table class="table table-bordered table-sm mb-2">
                           <thead class="bg-success">
                             <tr>

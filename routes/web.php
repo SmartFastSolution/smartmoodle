@@ -107,7 +107,13 @@ route::resource('contenidos','ContenidoController');
 route::resource('distribucionmacus','DistribucionmacuController');
 
 //Ruta Resource para plan de cuentas
-route::resource('pcuentas','PcuentaController');
+route::get('pcuentas','PcuentaController@index')->name('pcuentas.index');
+route::get('pcuentas/create','PcuentaController@create')->name('pcuentas.create');
+route::post('pcuentas','PcuentaController@store')->name('pcuentas.store');
+route::get('pcuentas/{pcuenta}','PcuentaController@show')->name('pcuentas.show');
+route::get('pcuentas/{pcuenta}/edit','PcuentaController@edit')->name('pcuentas.edit');
+route::post('pcuentas/actualizar','PcuentaController@update')->name('pcuentas.update');
+route::delete('pcuentas/{pcuenta}','PcuentaController@destroy')->name('pcuentas.destroy');
 
 //Ruta Resource para distribucion alumno curso/materia
 route::resource('distrimas','DistrimaController');
@@ -138,6 +144,7 @@ route::resource('assignments','AssignmentController');
 Route::group(['prefix' => 'sistema/admin'], function() {
 
 route::post('/plantilla', 'AdminController@plantilla')->name('admin.plantilla');
+route::get('/plantilla/tallercontable', 'AdminController@tallercontable')->name('admin.tallercontable');
 route::post('/taller1', 'AdminController@taller1')->name('admin.taller1');
 route::post('/taller2', 'AdminController@taller2')->name('admin.taller2');
 route::post('/taller3', 'AdminController@taller3')->name('admin.taller3');
