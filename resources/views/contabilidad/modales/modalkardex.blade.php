@@ -92,9 +92,10 @@
                       </div>
                   </div>
                 </div> --}}
-              <h2 class="text-center font-weight-bold">AGREGAR INGRESO</h2>
+             
                 <div class="row justify-content-center">
-                    <div class="col-12">
+                    <div class="col-6">
+                       <h2 class="text-center font-weight-bold">AGREGAR INGRESO</h2>
                       <table class="table table-bordered table-sm">
                           <thead class="thead-dark">
                         <tr>
@@ -143,6 +144,9 @@
                        <div  class="row justify-content-center">
 
                       </div>
+                  </div>
+                  <div class="col-6">
+                    
                   </div>
                 </div>
 
@@ -285,9 +289,10 @@
                   </table>
 
                 </div> --}}
-                  <h2 class="text-center font-weight-bold">DEVOLUCION</h2>
                 <div class="row justify-content-center">
-                    <div class="col-12">
+                    <div class="col-6">
+                  <h2 class="text-center font-weight-bold">DEVOLUCION</h2>
+
                       <table class="table table-bordered table-sm ">
                           <thead class="thead-dark">
                         <tr>
@@ -331,6 +336,9 @@
                 </div>
                        <div  class="row justify-content-center">
                       </div>
+                  </div>
+                  <div class="col-6">
+                    
                   </div>
                 </div>
 
@@ -508,9 +516,10 @@
 
                 </div> --}}
                 <div class="row justify-content-center">
+
+                    <div class="col-6">
               <h2 class="text-center font-weight-bold">AGREGAR EGRESO</h2>
 
-                    <div class="col-12">
                       <table class="table table-bordered table-sm">
                           <thead class="thead-dark">
                         <tr>
@@ -555,11 +564,17 @@
               <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaEgreso()"><i class="fas fa-plus"></i> Existencia</a>
          {{--  <a v-if="transaccion.egreso.active" class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="nuevoEgreso('agregar')"><i class="fas fa-plus"></i> Nuevo Egreso</a> --}}
                 </div>
+              </div>
+              <div class="col-6">
+                
+              </div>
      {{--    <div v-if="transaccion.egreso.add" class="row justify-content-center mt-2">
           <div class="col-2"><input type="number" placeholder="cantidad" v-model="edit.egreso.cantidad" class="form-control"></div>
           <div class="col-2"><input type="number" placeholder="precio" v-model="edit.egreso.precio" class="form-control"></div>
           <div class="col-2"><a href="" @click.prevent="nuevoEgreso('crear')" class="btn btn-success">EGRESO</a> <a href="" @click.prevent="nuevoEgreso('cerrar')" class="btn btn-danger"><i class="fas fa-window-close"></i></a> </div>
         </div> --}}
+                    
+          <div class="col-12">
                     <div v-if="modales.modal_egreso.length > 0">
                                   <h2 class="text-center font-weight-bold">ACTUALIZAR EXISTENCIAS</h2>
 
@@ -698,7 +713,7 @@
 
                 </div> --}}
                 <div class="row justify-content-center mt-3">
-                  <div class="col-12">
+                  <div class="col-6">
                   <h2 class="font-weight-bold text-center">DEVOLUCION</h2>
                       <table class="table table-bordered table-sm">
                           <thead class="thead-dark">
@@ -744,6 +759,7 @@
                   <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaEgreso('compra')">Agregar Existencia</a>
                 </div>
               </div>
+              <div class="col-6"></div>
                       
 
               <div v-if="modales.modal_devolucion_compra.length > 0">

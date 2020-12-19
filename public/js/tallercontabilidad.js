@@ -80,6 +80,9 @@ const b_hori = new Vue({
                 saldo:'',
               },
         },
+        bi:{
+          const_id:''
+        },
         pasivo:{
           p_corriente:
             { //Agregar un nuevo pasivo corriente al array
@@ -259,12 +262,16 @@ const b_hori = new Vue({
       this.activo.a_corriente.saldo = '';
       this.activo.a_nocorriente.nom_cuenta = '';
       this.activo.a_nocorriente.saldo = '';
+      this.bi.const_id = '';
       },
     //EDITAR ELEMENTOS DE UN ARRAY
     editAcorriente(index){ //OBTENEMOS EL INDICE DEL ARRAY SELECCIONADO
       this.update = index;                                                       //IGUALAMOS LA VARIABLE UPDATE CON EL INDICE DEL ARRAY
       this.activo.a_corriente.saldo = this.a_corrientes[index].saldo;           //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
-      this.activo.a_corriente.nom_cuenta = this.a_corrientes[index].cuenta_id; //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
+      this.activo.a_corriente.nom_cuenta = this.a_corrientes[index].cuenta_id;
+      this.bi.const_id = this.a_corrientes[index].cuenta_id;
+
+       //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
       $('#a_corriente_e').modal('show');                                        //MOSTRAR EL MODAL CON JS
       //var activo = this.a_corrientes[index];
     },
@@ -290,6 +297,8 @@ const b_hori = new Vue({
       this.update = index;
       this.activo.a_nocorriente.saldo = this.a_nocorrientes[index].saldo;
       this.activo.a_nocorriente.nom_cuenta = this.a_nocorrientes[index].cuenta_id;
+      this.bi.const_id = this.a_nocorrientes[index].cuenta_id;
+
       $('#a_nocorriente_e').modal('show');
       //var activo = this.a_nocorrientes[index];
     },
@@ -316,6 +325,8 @@ const b_hori = new Vue({
       this.update = index ;
       this.pasivo.p_corriente.saldo = this.p_corrientes[index].saldo;
       this.pasivo.p_corriente.nom_cuenta = this.p_corrientes[index].cuenta_id;
+      this.bi.const_id = this.p_corrientes[index].cuenta_id;
+
       $('#p_corriente_e').modal('show');
       //var activo = this.a_corrientes[index];
     },
@@ -342,6 +353,8 @@ const b_hori = new Vue({
       this.update = index ;
       this.pasivo.p_nocorriente.saldo = this.p_nocorrientes[index].saldo;
       this.pasivo.p_nocorriente.nom_cuenta = this.p_nocorrientes[index].cuenta_id;
+      this.bi.const_id = this.p_nocorrientes[index].cuenta_id;
+
       $('#p_nocorriente_e').modal('show');
       //var activo = this.a_corrientes[index];
     },
@@ -368,6 +381,8 @@ const b_hori = new Vue({
       this.update = index ;
       this.patrimonio.saldo = this.patrimonios[index].saldo;
       this.patrimonio.nom_cuenta = this.patrimonios[index].cuenta_id;
+      this.bi.const_id = this.patrimonios[index].cuenta_id;
+
       $('#patrimonio_e').modal('show');
       //var activo = this.a_corrientes[index];
     },
@@ -407,6 +422,9 @@ const b_hori = new Vue({
                 
          //    },
         verificarCuenta(id){
+            if (Number(this.bi.const_id) === id) {
+              return false
+            }
            let ac  = this.a_corrientes.filter(x => x.cuenta_id == id);
            let anc = this.a_nocorrientes.filter(x => x.cuenta_id == id);
            let pc  = this.p_corrientes.filter(x => x.cuenta_id == id);
@@ -775,6 +793,7 @@ const b_ver = new Vue({
           nom_cuenta:'',
           saldo:'',
         },
+        bi:{const_id:''},
          options: objeto,
         cuentas: cuentas,
         //diarios2:[],
@@ -986,13 +1005,17 @@ const b_ver = new Vue({
       this.activo.a_corriente.saldo = '';
       this.activo.a_nocorriente.nom_cuenta = '';
       this.activo.a_nocorriente.saldo = '';
+      this.bi.const_id = '';
+
       },
     //EDITAR ELEMENTOS DE UN ARRAY
     editAcorriente(index){ //OBTENEMOS EL INDICE DEL ARRAY SELECCIONADO
       this.update = index;                                                       //IGUALAMOS LA VARIABLE UPDATE CON EL INDICE DEL ARRAY
       this.activo.a_corriente.saldo = this.a_corrientes[index].saldo;           //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
       this.activo.a_corriente.nom_cuenta = this.a_corrientes[index].cuenta_id; //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
-      $('#a_corriente2').modal('show');                                        //MOSTRAR EL MODAL CON JS
+      $('#a_corriente2').modal('show'); 
+       this.bi.const_id = this.a_corrientes[index].cuenta_id;  
+                                           //MOSTRAR EL MODAL CON JS
       //var activo = this.a_corrientes[index];
     },
   updateACorriente(){
@@ -1018,6 +1041,8 @@ const b_ver = new Vue({
       this.activo.a_nocorriente.saldo = this.a_nocorrientes[index].saldo;
       this.activo.a_nocorriente.nom_cuenta = this.a_nocorrientes[index].cuenta_id;
       $('#a_nocorriente2').modal('show');
+       this.bi.const_id = this.a_nocorrientes[index].cuenta_id;
+
       //var activo = this.a_nocorrientes[index];
     },
     updateANoCorriente(){
@@ -1044,6 +1069,8 @@ const b_ver = new Vue({
       this.pasivo.p_corriente.saldo = this.p_corrientes[index].saldo;
       this.pasivo.p_corriente.nom_cuenta = this.p_corrientes[index].cuenta_id;
       $('#p_corriente2').modal('show');
+      this.bi.const_id = this.p_corrientes[index].cuenta_id;
+
       //var activo = this.a_corrientes[index];
     },
     updatePCorriente(){
@@ -1070,6 +1097,8 @@ const b_ver = new Vue({
       this.pasivo.p_nocorriente.saldo = this.p_nocorrientes[index].saldo;
       this.pasivo.p_nocorriente.nom_cuenta = this.p_nocorrientes[index].cuenta_id;
       $('#p_nocorriente2').modal('show');
+       this.bi.const_id = this.p_nocorrientes[index].cuenta_id;
+
       //var activo = this.a_corrientes[index];
     },
     updatePNoCorriente(){
@@ -1096,6 +1125,8 @@ const b_ver = new Vue({
       this.patrimonio.saldo = this.patrimonios[index].saldo;
       this.patrimonio.nom_cuenta = this.patrimonios[index].cuenta_id;
       $('#patrimonio2').modal('show');
+      this.bi.const_id = this.patrimonios[index].cuenta_id;
+
       //var activo = this.a_corrientes[index];
     },
     updatePatrimonio(){
@@ -1134,6 +1165,9 @@ const b_ver = new Vue({
                 
          //    },
         verificarCuenta(id){
+           if (Number(this.bi.const_id) === id) {
+              return false
+            }
            let ac  = this.a_corrientes.filter(x => x.cuenta_id == id);
            let anc = this.a_nocorrientes.filter(x => x.cuenta_id == id);
            let pc  = this.p_corrientes.filter(x => x.cuenta_id == id);
@@ -1882,18 +1916,54 @@ producto_kardex:'',
     },
 
     deleteRegistro(id){
-      this.registros.splice(id, 1);
-      this.totalDebe();
-      this.totalHaber();
-      this.totalesFinales();
+       Swal.fire({
+        title: 'Seguro que deseas eliminar este registro??',
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro se elimino',
+            'success'
+          );
+           this.registros.splice(id, 1);
+            this.totalDebe();
+            this.totalHaber();
+            this.totalesFinales();
+        }
+      });
+     
 
     },
 
     deleteAjuste(id){
-      this.ajustes.splice(id, 1);
+             Swal.fire({
+        title: 'Seguro que deseas eliminar este registro??',
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro se elimino',
+            'success'
+          );
+       this.ajustes.splice(id, 1);
       this.totalDebe();
       this.totalHaber();
       this.totalesFinales();
+        }
+      });
+      
 
     },
     updaterRegister(){
@@ -2417,6 +2487,7 @@ let mayor_general = new Vue({
       this.mayores.registros =[];
       this.mayores.cierres   =[];
       this.mayor.cuenta      = '';
+      this.mayor.seleccion      = '';
       this.mayor.registro.cierre = false;
       this.mayor.registro.detalle = '';
       this.mayor.registro.fecha = '';
@@ -2511,12 +2582,13 @@ let mayor_general = new Vue({
                 this.mayores.registros =[];
                 this.mayores.cierres   =[];
                 this.mayor.cuenta      = '';
+                this.mayor.seleccion   = '';
                 this.mayor.registro.cierre  = false;
             //     this.totalDebe();
             //     this.totalHaber();
             // this.totalesFinales();
 
-      $('#mg-transaccion').modal('hide');
+      // $('#mg-transaccion').modal('hide');
 
                 
       }
@@ -2568,7 +2640,9 @@ let mayor_general = new Vue({
           this.update = false,
           this.mayores.registros=   [];
           this.mayores.cierres = [];
-          $('#mg-transaccion').modal('hide');
+          this.mayor.seleccion   = '';
+
+          // $('#mg-transaccion').modal('hide');
             toastr.success("Registro Actualizado Correctamente ", "Smarmoddle", {
                 "timeOut": "3000"
             });
@@ -2594,7 +2668,25 @@ let mayor_general = new Vue({
     warningEliminar(id){
       this.eliminar.index = id;
       this.eliminar.nombre = this.registros[id].cuenta;
-      $('#eliminar-mg').modal('show');
+            Swal.fire({
+        title: 'Seguro que deseas eliminar la cuenta '+this.eliminar.nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+this.eliminar.nombre,
+            'success'
+          );
+          this.registros.splice(id, 1);
+        }
+      });
+      // $('#eliminar-mg').modal('show');
 
     },
     eliminarRegistro(){
@@ -2666,7 +2758,7 @@ let mayor_general = new Vue({
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////BALANCE DE COMPROBACION /////////////////////////////////////////////
+////////////////////////////////////////////////////////BALANCE DE COMPROBACION /////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const balance_comp = new Vue({
@@ -2686,7 +2778,8 @@ const balance_comp = new Vue({
       suma_haber:'',
       saldo_debe:'',
       saldo_haber:'',
-      edit:false
+      edit:false,
+      const_id:''
     },
     mayorgeneral:[],
     suman:{ //suma total del balance COMPROBACION
@@ -2704,6 +2797,18 @@ const balance_comp = new Vue({
     this.obtenerMayorGeneral();
   },
   methods:{
+        verificarCuenta(id){
+        if (Number(this.balance.const_id) === id) {
+            return false
+          }
+           let ac  = this.balances.filter(x => x.cuenta_id == id);
+           
+            if (ac.length > 0) {
+            return true
+             }else{
+              return false
+            }
+          },
         decimales(saldo){
       if (saldo !== null && saldo !== '' && saldo !== 0) {
          let total = Number(saldo).toFixed(2);
@@ -2816,6 +2921,13 @@ const balance_comp = new Vue({
 
      }else {
       let id       = this.balance.cuenta;
+         let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+
       let nombre   = funciones.obtenerNombre(id);
       // this.sumas()
       var balance ={ cuenta_id: id, cuenta:nombre, suma_debe:this.balance.suma_debe, suma_haber:this.balance.suma_haber, saldo_debe:this.balance.saldo_debe, saldo_haber:this.balance.saldo_haber}
@@ -2831,22 +2943,56 @@ const balance_comp = new Vue({
      this.balance.saldo_haber =''
      this.totales();
 
-     }                
+     }    
+     }            
       }, //fin metodo agregar registro   
       deleteBalance(index){
-        this.balances.splice(index, 1);
+             Swal.fire({
+        title: 'Seguro que deseas eliminar la cuenta '+this.balances[index].cuenta ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+this.balances[index].cuenta ,
+            'success'
+          );
+           this.balances.splice(index, 1);
         this.totales();
+        }
+      });
+       
       },//fin metodo delete cuenta 
       
 
       editBalance(index){
        this.balance.edit = true;
        this.registro_id = index;
+       this.balance.const_id = this.balances[index].cuenta_id;
        this.balance.cuenta     = this.balances[index].cuenta_id;
        this.balance.suma_debe  = this.balances[index].suma_debe;
        this.balance.suma_haber = this.balances[index].suma_haber;
        this.balance.saldo_debe = this.balances[index].saldo_debe;
        this.balance.saldo_haber = this.balances[index].saldo_haber;
+              
+      },
+        editBalanceFuera(index){
+       this.balance.edit = true;
+       this.registro_id = index;
+       this.balance.const_id = this.balances[index].cuenta_id;
+       this.balance.cuenta     = this.balances[index].cuenta_id;
+       this.balance.suma_debe  = this.balances[index].suma_debe;
+       this.balance.suma_haber = this.balances[index].suma_haber;
+       this.balance.saldo_debe = this.balances[index].saldo_debe;
+       this.balance.saldo_haber = this.balances[index].saldo_haber;
+      $('#bc-transaccion').modal('show');
+
+
               
       },
        cancelarEdicion(){
@@ -2873,6 +3019,12 @@ const balance_comp = new Vue({
         // this.sumas();
         let index = this.registro_id;
         let id       = this.balance.cuenta;
+        let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
         let nombre   = funciones.obtenerNombre(id);
         this.balances[index].cuenta     = nombre;
         this.balances[index].cuenta_id  = id;
@@ -2890,6 +3042,7 @@ const balance_comp = new Vue({
         this.totales();
 
       }
+    }
     },
     guardarBalance: function() {
         if(this.balances.length == 0){
@@ -2924,6 +3077,7 @@ const balance_comp = new Vue({
               toastr.warning("Balance actualizado correctamente", "Smarmoddle", {
             "timeOut": "3000"
             });
+              console.log(this.balances)
             }        
         }).catch(function(error){
 
@@ -2955,6 +3109,482 @@ const balance_comp = new Vue({
   }
   
 });
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////HOJA DE TRABAJO ////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+let hoja_trabajo = new Vue({
+  el: "#hoja_trabajo",
+  data:{
+    id_taller: taller,
+    nombre:'',
+     options: objeto,
+    cuentas: cuentas,
+    balances:[],
+    nombre_mayor:'',
+    mayorgeneral:[],
+    nombre_balance:'',
+    eliminar:{
+      index:'',
+      nombre:''
+    },
+    fecha_balance:'',
+    registros:[],
+    registro_id:'',
+    registro:{
+      edit:false,
+      const_id:'',
+      cuenta_id:'',
+      balance_comp:{
+        debe:'',
+        haber:''
+      },
+       ajustes:{
+        debe:'',
+        haber:''
+      },
+       balance_ajustado:{
+        debe:'',
+        haber:''
+      },
+       estado_resultado:{
+        debe:'',
+        haber:''
+      },
+       balance_general:{
+        debe:'',
+        haber:''
+      },
+    },
+    suman:{
+      balance_comp:{
+        total_debe:0,
+        total_haber:0
+      },
+       ajustes:{
+        total_debe:0,
+        total_haber:0
+      },
+       balance_ajustado:{
+        total_debe:0,
+        total_haber:0
+      },
+       estado_resultado:{
+        total_debe:0,
+        total_haber:0
+      },
+       balance_general:{
+        total_debe:0,
+        total_haber:0
+      },
+    },
+    update:false
+  },
+  mounted: function () {
+    this.obtenerBalanceCom();
+    this.obtenerMayorGeneral();
+    this.obtenerHojita();
+  },
+  methods:{
+    sumasTotales(){
+      let registros    = this.registros;
+      let bc_debe      = 0;
+      let bc_haber     = 0;
+      let ajuste_debe  = 0;
+      let ajuste_haber = 0;
+      let ba_debe      = 0;
+      let ba_haber     = 0;
+      let er_debe      = 0;
+      let er_haber     = 0;
+      let bg_debe      = 0;
+      let bg_haber     = 0;
+
+        //INGRESO CANTIDAD
+       registros.forEach(function(registro, i){
+                let temp = registro.bc_debe;
+                if (temp != null && temp !=='') {
+                    bc_debe += Number(temp);
+                } 
+            });
+       this.suman.balance_comp.total_debe = bc_debe.toFixed(2);
+
+         registros.forEach(function(registro, i){
+                let temp = registro.bc_haber;
+                if (temp != null && temp !=='') {
+                    bc_haber += Number(temp);
+                } 
+            });
+       this.suman.balance_comp.total_haber = bc_haber.toFixed(2);
+
+
+             registros.forEach(function(registro, i){
+                let temp = registro.ajuste_debe;
+                if (temp != null && temp !=='') {
+                    ajuste_debe += Number(temp);
+                } 
+            });
+       this.suman.ajustes.total_debe = ajuste_debe.toFixed(2);
+
+         registros.forEach(function(registro, i){
+                let temp = registro.ajuste_haber;
+                if (temp != null && temp !=='') {
+                    ajuste_haber += Number(temp);
+                } 
+            });
+       this.suman.ajustes.total_haber = ajuste_haber.toFixed(2);
+
+                registros.forEach(function(registro, i){
+                let temp = registro.ba_debe;
+                if (temp != null && temp !=='') {
+                    ba_debe += Number(temp);
+                } 
+            });
+       this.suman.balance_ajustado.total_debe = ba_debe.toFixed(2);
+
+         registros.forEach(function(registro, i){
+                let temp = registro.ba_haber;
+                if (temp != null && temp !=='') {
+                    ba_haber += Number(temp);
+                } 
+            });
+       this.suman.balance_ajustado.total_haber = ba_haber.toFixed(2);
+
+              registros.forEach(function(registro, i){
+                let temp = registro.er_debe;
+                if (temp != null && temp !=='') {
+                    er_debe += Number(temp);
+                } 
+            });
+       this.suman.estado_resultado.total_debe = er_debe.toFixed(2);
+
+         registros.forEach(function(registro, i){
+                let temp = registro.er_haber;
+                if (temp != null && temp !=='') {
+                    er_haber += Number(temp);
+                } 
+            });
+       this.suman.estado_resultado.total_haber = er_haber.toFixed(2);
+
+         registros.forEach(function(registro, i){
+                let temp = registro.bg_debe;
+                if (temp != null && temp !=='') {
+                    bg_debe += Number(temp);
+                } 
+            });
+       this.suman.balance_general.total_debe = bg_debe.toFixed(2);
+
+         registros.forEach(function(registro, i){
+                let temp = registro.bg_haber;
+                if (temp != null && temp !=='') {
+                    bg_haber += Number(temp);
+                } 
+            });
+       this.suman.balance_general.total_haber = bg_haber.toFixed(2);
+       
+       
+
+
+    },
+  verificarCuenta(id){
+    if (Number(this.registro.const_id) === id) {
+      return false
+    }
+     let ac  = this.registros.filter(x => x.cuenta_id == id);
+
+      if (ac.length > 0) {
+      return true
+       }else{
+        return false
+      }
+    },
+    decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+  formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
+    abrirTransaccion(){
+       this.update             = false;
+      //  this.diarios.debe      =[];
+      // this.diarios.haber      =[];
+      // this.diarios.fecha      =[];
+      // this.diarios.comentario =[];
+      // this.diarios.ajustado = false;
+
+      $('#ht-transaccion').modal('show');
+    },
+  agregarRegistro(){
+    if(this.registro.cuenta_id == ''){
+      toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+    }else{
+      let id = this.registro.cuenta_id;
+         let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+      let nombre   = funciones.obtenerNombre(id);
+      
+      let balance ={ cuenta_id: id, cuenta:nombre, bc_debe:this.registro.balance_comp.debe, bc_haber:this.registro.balance_comp.haber, ajuste_debe:this.registro.ajustes.debe, ajuste_haber:this.registro.ajustes.haber, ba_debe:this.registro.balance_ajustado.debe, ba_haber:this.registro.balance_ajustado.haber, er_debe:this.registro.estado_resultado.debe, er_haber:this.registro.estado_resultado.haber, bg_debe:this.registro.balance_general.debe, bg_haber:this.registro.balance_general.haber}
+      this.registros.push(balance);
+      toastr.success("Registro agregado correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+      });
+      this.registro.cuenta_id              = '';
+      this.registro.balance_comp.debe      = '';
+      this.registro.balance_comp.haber     = '';
+      this.registro.ajustes.debe           = '';
+      this.registro.ajustes.haber          = '';
+      this.registro.balance_ajustado.debe  = '';
+      this.registro.balance_ajustado.haber = '';
+      this.registro.estado_resultado.debe  = '';
+      this.registro.estado_resultado.haber = '';
+      this.registro.balance_general.debe   = '';
+      this.registro.balance_general.haber  = '';
+      this.sumasTotales();
+      }    
+     }            
+      },  
+
+      editBalance(index){
+       this.registro.edit = true;
+       this.registro_id = index;
+      this.registro.const_id              = this.registros[index].cuenta_id;
+      this.registro.cuenta_id              = this.registros[index].cuenta_id;
+      this.registro.balance_comp.debe      = this.registros[index].bc_debe;
+      this.registro.balance_comp.haber     = this.registros[index].bc_haber;
+      this.registro.ajustes.debe           = this.registros[index].ajuste_debe;
+      this.registro.ajustes.haber          = this.registros[index].ajuste_haber;
+      this.registro.balance_ajustado.debe  = this.registros[index].ba_debe;
+      this.registro.balance_ajustado.haber = this.registros[index].ba_haber;
+      this.registro.estado_resultado.debe  = this.registros[index].er_debe;
+      this.registro.estado_resultado.haber = this.registros[index].er_haber;
+      this.registro.balance_general.debe   = this.registros[index].bg_debe;
+      this.registro.balance_general.haber  = this.registros[index].bg_haber;
+      
+      },
+       editBalanceFuera(index){
+      this.registro.edit = true;
+      this.registro_id = index;
+      this.registro.const_id              = this.registros[index].cuenta_id;
+      this.registro.cuenta_id              = this.registros[index].cuenta_id;
+      this.registro.balance_comp.debe      = this.registros[index].bc_debe;
+      this.registro.balance_comp.haber     = this.registros[index].bc_haber;
+      this.registro.ajustes.debe           = this.registros[index].ajuste_debe;
+      this.registro.ajustes.haber          = this.registros[index].ajuste_haber;
+      this.registro.balance_ajustado.debe  = this.registros[index].ba_debe;
+      this.registro.balance_ajustado.haber = this.registros[index].ba_haber;
+      this.registro.estado_resultado.debe  = this.registros[index].er_debe;
+      this.registro.estado_resultado.haber = this.registros[index].er_haber;
+      this.registro.balance_general.debe   = this.registros[index].bg_debe;
+      this.registro.balance_general.haber  = this.registros[index].bg_haber;
+      $('#ht-transaccion').modal('show');   
+      },
+       cancelarEdicion(){
+      this.registro.const_id              = '';
+      this.registro.cuenta_id              = '';
+      this.registro.balance_comp.debe      = '';
+      this.registro.balance_comp.haber     = '';
+      this.registro.ajustes.debe           = '';
+      this.registro.ajustes.haber          = '';
+      this.registro.balance_ajustado.debe  = '';
+      this.registro.balance_ajustado.haber = '';
+      this.registro.estado_resultado.debe  = '';
+      this.registro.estado_resultado.haber = '';
+      this.registro.balance_general.debe   = '';
+      this.registro.balance_general.haber  = '';
+      this.registro.edit        = false;
+     
+    },
+     actualizarBalance(){
+      if(this.registro.cuenta_id ==''){
+      toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+     }else {
+        let index = this.registro_id;
+        let id    = this.registro.cuenta_id;
+           let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+        }else{
+        let nombre   = funciones.obtenerNombre(id);
+        this.registros[index].cuenta       = nombre;
+        this.registros[index].cuenta_id    = id;
+        this.registros[index].bc_debe      = this.registro.balance_comp.debe;
+        this.registros[index].bc_haber     =  this.registro.balance_comp.haber;
+        this.registros[index].ajuste_debe  = this.registro.ajustes.debe ;
+        this.registros[index].ajuste_haber = this.registro.ajustes.haber;
+        this.registros[index].ba_debe      = this.registro.balance_ajustado.debe ;
+        this.registros[index].ba_haber     = this.registro.balance_ajustado.haber;
+        this.registros[index].er_debe      = this.registro.estado_resultado.debe;
+        this.registros[index].er_haber     = this.registro.estado_resultado.haber;
+        this.registros[index].bg_debe      = this.registro.balance_general.debe ;
+        this.registros[index].bg_haber     = this.registro.balance_general.haber;
+        this.cancelarEdicion();
+        this.sumasTotales();
+
+        toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+        // this.totales();
+
+      }
+    }
+    },
+      eliminarRegistro(){
+      let id = this.eliminar.index;
+      this.registros.splice(id, 1);
+      this.eliminar.index = '';
+      this.eliminar.nombre = '';
+      $('#eliminar-ht').modal('hide');
+
+    },
+      deleteBalance(index){
+        this.registros.splice(index, 1);
+        this.sumasTotales();
+        
+      },
+    warningEliminar(id){
+      this.eliminar.index = id;
+      this.eliminar.nombre = this.registros[id].cuenta;
+      Swal.fire({
+        title: 'Seguro que deseas eliminar la cuenta '+this.eliminar.nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+this.eliminar.nombre,
+            'success'
+          );
+          this.registros.splice(id, 1);
+        }
+      });
+      // $('#eliminar-ht').modal('show');
+
+    },
+        obtenerBalanceCom: function() {
+        let _this = this;
+        let url = '/sistema/admin/taller/balance-obtener-comprobacion';
+            axios.post(url,{
+              id: _this.id_taller,
+        }).then(response => {
+          if (response.data.datos == true) {
+         
+              this.balances       = response.data.bcomprobacion;
+              this.nombre_balance = response.data.nombre;
+              this.fecha_balance  = response.data.fecha;
+            }          
+        }).catch(function(error){
+
+        }); 
+     },
+     obtenerMayorGeneral: function(){
+        var _this = this;
+        var url = '/sistema/admin/taller/mayorgeneral';
+            axios.post(url,{
+              id: _this.id_taller,
+        }).then(response => {
+          if (response.data.datos == true) {
+          _this.mayorgeneral = response.data.registros;
+          _this.nombre_mayor = response.data.nombre;
+          // console.log(response.data.registros)
+         
+                     }          
+        }).catch(function(error){
+
+        }); 
+    },
+    guardarHoja: function() {
+        if(this.registros.length == 0){
+          toastr.error("Debe haber al menos un registro en la Hoja", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+
+     }else if(this.nombre == ''){
+          toastr.error("Nombre es obligaorios", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+
+     }else{
+        let _this = this;
+        let url = '/sistema/admin/taller/hoja-trabajo';
+            axios.post(url,{
+              id: _this.id_taller,
+              nombre:_this.nombre,
+              registros: _this.registros,
+              bc_total_debe: _this.suman.bc_total_debe,
+              bc_total_haber: _this.suman.bc_total_haber,
+              ajuste_total_debe: _this.suman.ajuste_total_debe,
+              ajuste_total_haber: _this.suman.ajuste_total_haber,
+              ba_total_debe: _this.suman.ba_total_debe,
+              ba_total_haber: _this.suman.ba_total_haber,
+              er_total_debe: _this.suman.er_total_debe,
+              er_total_haber: _this.suman.er_total_haber,
+              bg_total_debe: _this.suman.bg_total_debe,
+              bg_total_haber: _this.suman.bg_total_haber,
+
+        }).then(response => {
+          if (response.data.estado == 'guardado') {
+              toastr.success("Hoja de Trabajo Creada Correctamente", "Smarmoddle", {
+            "timeOut": "3000"
+            });
+            }else if (response.data.estado == 'actualizado') {
+              toastr.warning("Hoja de Trabajo Actualizada correctamente", "Smarmoddle", {
+            "timeOut": "3000"
+            });
+              
+            }        
+        }).catch(function(error){
+
+        }); 
+
+     } 
+     
+     },
+      obtenerHojita: function() {
+        let _this = this;
+        let url = '/sistema/admin/taller/hoja-obtener-trabajo';
+            axios.post(url,{
+              id: _this.id_taller,
+        }).then(response => {
+          if (response.data.datos == true) {
+              this.registros = response.data.hojatrabajo;
+              this.nombre = response.data.nombre;
+              this.sumasTotales();
+            }          
+        }).catch(function(error){
+
+        }); 
+     } 
+
+  }
+
+})
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////BALANCE DE COMPROBACIO AJUSTADO /////////////////////////////////////////////
@@ -2963,12 +3593,19 @@ const balance_comp = new Vue({
 const balance_ajustado = new Vue({
   el: "#balance_ajustado",
   data:{
-        id_taller: taller,
+      id_taller: taller,
+      hojatrabajo:[],
+      options: objeto,
+    cuentas: cuentas,
+      nombre_hoja:'',
+      nombre:'',
     balances_ajustados:[], //array del balance de COMPROBACION
     balance:{ //variables a utilizar para el balance de COMPROBACION
-      cuenta:'',
+      cuenta_id:'',
       debe:'',
       haber:'',
+      const_id:'',
+      edit:false,
     },
     suman:{ //suma total del balance COMPROBACION
       debe:0,
@@ -2979,8 +3616,54 @@ const balance_ajustado = new Vue({
   },
    mounted: function(){
     this.obtenerBalanceAjus();
+    this.obtenerHojita();
   },
   methods:{
+    obtenerHojita: function() {
+        let _this = this;
+        let url = '/sistema/admin/taller/hoja-obtener-trabajo';
+            axios.post(url,{
+              id: _this.id_taller,
+        }).then(response => {
+          if (response.data.datos == true) {
+              this.hojatrabajo = response.data.hojatrabajo;
+              this.nombre_hoja = response.data.nombre;
+             
+            }          
+        }).catch(function(error){
+
+        }); 
+     },
+     verificarCuenta(id){
+    if (Number(this.balance.const_id) === id) {
+      return false
+    }
+     let ac  = this.balances_ajustados.filter(x => x.cuenta_id == id);
+
+      if (ac.length > 0) {
+      return true
+       }else{
+        return false
+      }
+    },
+    decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+  formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
      totales: function(){
             this.suman.debe  = 0;
             this.suman.haber = 0;
@@ -2999,39 +3682,54 @@ const balance_ajustado = new Vue({
             this.suman.haber =   total2.toFixed(2);
 
           }, 
+    abrirTransaccion(){
+       this.update             = false;
+      //  this.diarios.debe      =[];
+      // this.diarios.haber      =[];
+      // this.diarios.fecha      =[];
+      // this.diarios.comentario =[];
+      // this.diarios.ajustado = false;
 
+      $('#ba-transaccion').modal('show');
+    },
     agregarRegistro(){
-     if(this.balance.cuenta.trim() ===''){
+     if(this.balance.cuenta_id  ==''){
       toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
         "timeOut": "3000"
     });
 
-     } else if(this.balance.debe.trim() !='' && this.balance.haber.trim() !=''){
-      toastr.error("No puedes llenar ambos campos de debe y haber", "Smarmoddle", {
-        "timeOut": "3000"
-    });
+    //  } else if(this.balance.debe.trim() !='' && this.balance.haber.trim() !=''){
+    //   toastr.error("No puedes llenar ambos campos de debe y haber", "Smarmoddle", {
+    //     "timeOut": "3000"
+    // });
 
-     }else if(this.balance.debe.trim() ==='' && this.balance.haber.trim() ===''){
-      toastr.error("No puedes dejar ambos campos de debe y haber en blanco", "Smarmoddle", {
-        "timeOut": "3000"
-    });
-
+    //  }else if(this.balance.debe.trim() ==='' && this.balance.haber.trim() ===''){
+    //   toastr.error("No puedes dejar ambos campos de debe y haber en blanco", "Smarmoddle", {
+    //     "timeOut": "3000"
+    // });
      }else {
-      // this.sumas()
-
-      var balance ={ cuenta:this.balance.cuenta, debe:this.balance.debe, haber:this.balance.haber}
+       let id = this.balance.cuenta_id;
+         let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+      let nombre   = funciones.obtenerNombre(id);
+      var balance ={cuenta_id:this.balance.cuenta_id, cuenta:nombre, debe:this.balance.debe, haber:this.balance.haber}
       this.balances_ajustados.push(balance);
       toastr.success("Registro agregado correctamente", "Smarmoddle", {
         "timeOut": "3000"
     });
 
-     this.balance.cuenta =''
-     this.balance.debe=''
-     this.balance.haber=''
+     this.balance.cuenta_id =''
+     this.balance.debe      =''
+     this.balance.haber     =''
      this.totales();
-
+   }
      }                
       }, //fin metodo agregar registro  
+
       deleteBalance(index){
         this.balances_ajustados.splice(index, 1);
         this.totales();
@@ -3039,47 +3737,105 @@ const balance_ajustado = new Vue({
       
 
       editBalance(index){
-       this.update = true;
-       this.registro_id = index;
-       this.balance.cuenta     = this.balances_ajustados[index].cuenta;
-       this.balance.debe  = this.balances_ajustados[index].debe;
-       this.balance.haber = this.balances_ajustados[index].haber;
+       this.balance.edit   = true;
+       this.registro_id    = index;
+       this.balance.const_id = this.balances_ajustados[index].cuenta_id;
+       this.balance.cuenta_id = this.balances_ajustados[index].cuenta_id;
+       this.balance.debe   = this.balances_ajustados[index].debe;
+       this.balance.haber  = this.balances_ajustados[index].haber;
               
       },
+      
+      editBalanceFuera(index){
+       this.balance.edit   = true;
+       this.registro_id    = index;
+       this.balance.const_id = this.balances_ajustados[index].cuenta_id;
+       this.balance.cuenta_id = this.balances_ajustados[index].cuenta_id;
+       this.balance.debe   = this.balances_ajustados[index].debe;
+       this.balance.haber  = this.balances_ajustados[index].haber;
+      $('#ba-transaccion').modal('show');
+        
+      },
+
+    cancelarEdicion(){
+      this.balance.cuenta_id =''
+      this.balance.debe      =''
+      this.balance.haber     =''
+      this.balance.edit      = false;
+     
+    },
       actualizarBalance(){
-          if(this.balance.cuenta.trim() ===''){
+          if(this.balance.cuenta_id ==''){
           toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
             "timeOut": "3000"
         });
 
-         } else if(this.balance.debe.trim() !='' && this.balance.haber.trim() !=''){
-          toastr.error("No puedes llenar ambos campos de debe y haber", "Smarmoddle", {
-        "timeOut": "3000"
-        });
+        //  } else if(this.balance.debe.trim() !='' && this.balance.haber.trim() !=''){
+        //   toastr.error("No puedes llenar ambos campos de debe y haber", "Smarmoddle", {
+        // "timeOut": "3000"
+        // });
 
-        }else if(this.balance.debe.trim() ==='' && this.balance.haber.trim() ===''){
-          toastr.error("No puedes dejar ambos campos de debe y haber en blanco", "Smarmoddle", {
-          "timeOut": "3000"
-        });
+        // }else if(this.balance.debe.trim() ==='' && this.balance.haber.trim() ===''){
+        //   toastr.error("No puedes dejar ambos campos de debe y haber en blanco", "Smarmoddle", {
+        //   "timeOut": "3000"
+        // });
 
         }else {
-            // this.sumas();
-            let id                             = this.registro_id;
-            this.balances_ajustados[id].cuenta = this.balance.cuenta;
-            this.balances_ajustados[id].debe   = this.balance.debe;
-            this.balances_ajustados[id].haber  = this.balance.haber;
-            
-            this.balance.cuenta =''
+          let id = this.balance.cuenta_id;
+         let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+            let nombre   = funciones.obtenerNombre(id);
+            let index                             = this.registro_id;
+            this.balances_ajustados[index].cuenta_id = this.balance.cuenta_id;
+            this.balances_ajustados[index].cuenta = nombre;
+            this.balances_ajustados[index].debe   = this.balance.debe;
+            this.balances_ajustados[index].haber  = this.balance.haber;
+            this.balance.cuenta_id =''
             this.balance.debe   =''
             this.balance.haber  =''
-            this.update         = false;
+            this.balance.edit   = false;
+            this.registro_id = '';
             this.totales();
+          }
 
       }
+    },
+     warningEliminar(id){
+      
+      let nombre = this.balances_ajustados[id].cuenta;
+      Swal.fire({
+        title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+nombre,
+            'success'
+          );
+          this.balances_ajustados.splice(id, 1);
+        }
+      });
+      // $('#eliminar-ht').modal('show');
+
     },
      guardarBalance: function() {
         if(this.balances_ajustados.length == 0){
           toastr.error("Debe haber al menos un registro en el Balance", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+
+     }else    if(this.nombre == ''){
+          toastr.error("El nombre es obligatorio", "Smarmoddle", {
             "timeOut": "3000"
         });
 
@@ -3091,6 +3847,7 @@ const balance_ajustado = new Vue({
               balances: _this.balances_ajustados,
               total_debe: _this.suman.debe,
               total_haber: _this.suman.haber,
+              nombre: _this.nombre
 
         }).then(response => {
           if (response.data.estado == 'guardado') {
@@ -5314,11 +6071,22 @@ const kardex = new Vue({
         }); 
      },
     borrarTransaccion(index, id){
-      // let ultimo = this.transacciones.length -1;
-      // let tipo = this.transacciones[index][id].tipo;
-      //  let  transacciones = this.transacciones;
-      // let identificador = transacciones.length - 1;
-      let u = this.transacciones.length - 1;
+       Swal.fire({
+        title: 'Seguro que deseas eliminar este registro??',
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro se elimino',
+            'success'
+          );
+        let u = this.transacciones.length - 1;
 
       if (u == index) {
 
@@ -5416,6 +6184,15 @@ const kardex = new Vue({
 
       }
       
+
+
+        }
+      });
+      // let ultimo = this.transacciones.length -1;
+      // let tipo = this.transacciones[index][id].tipo;
+      //  let  transacciones = this.transacciones;
+      // let identificador = transacciones.length - 1;
+    
 
 
       // if (index == ultimo) {
@@ -5975,7 +6752,23 @@ const kardex_promedio = new Vue({
     },
 
     borrarTransaccion(index){
-     let u = this.transacciones.length - 1;
+
+       Swal.fire({
+        title: 'Seguro que deseas eliminar este registro?? ',
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta se elimino correctamente',
+            'success'
+          );
+         let u = this.transacciones.length - 1;
 
      if (index == u) {
         if (u == 0) {
@@ -5994,6 +6787,10 @@ const kardex_promedio = new Vue({
           });
       this.sumasTotales();
 
+        }
+      });
+
+     
     },
       guardarKardex: function() {
     if(this.transacciones.length == 0){

@@ -788,6 +788,8 @@ class ComposerStaticInit125d0f3b9d5ef9f879142eac4e98f511
         'App\\Contabilidad\\DGRegistro' => __DIR__ . '/../..' . '/app/Contabilidad/DGRegistro.php',
         'App\\Contabilidad\\Diario' => __DIR__ . '/../..' . '/app/Contabilidad/Diario.php',
         'App\\Contabilidad\\DiarioGeneral' => __DIR__ . '/../..' . '/app/Contabilidad/DiarioGeneral.php',
+        'App\\Contabilidad\\HTRegistro' => __DIR__ . '/../..' . '/app/Contabilidad/HTRegistro.php',
+        'App\\Contabilidad\\HojaTrabajo' => __DIR__ . '/../..' . '/app/Contabilidad/HojaTrabajo.php',
         'App\\Contabilidad\\KFRMovimiento' => __DIR__ . '/../..' . '/app/Contabilidad/KFRMovimiento.php',
         'App\\Contabilidad\\KFRegistro' => __DIR__ . '/../..' . '/app/Contabilidad/KFRegistro.php',
         'App\\Contabilidad\\KPRegistro' => __DIR__ . '/../..' . '/app/Contabilidad/KPRegistro.php',

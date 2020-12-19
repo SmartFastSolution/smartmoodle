@@ -10,6 +10,8 @@ use App\Contabilidad\BIPasivo;
 use App\Contabilidad\BIPatrimonio;
 use App\Contabilidad\BalanceAjustado;
 use App\Contabilidad\BalanceComprobacion;
+use App\Contabilidad\HTRegistro;
+use App\Contabilidad\HojaTrabajo;
 use App\Contabilidad\BalanceInicial;
 use App\Contabilidad\DGRDebe;
 use App\Contabilidad\DGRHaber;
@@ -332,6 +334,7 @@ class TallerContabilidadController extends Controller
         $balance->taller_id = $taller_id ;
         $balance->user_id   = $id;
         $balance->enunciado = $contenido->enunciado;
+        $balance->nombre = $request->nombre;
         $balance->total_debe  = $request->total_debe;
         $balance->total_haber = $request->total_haber;
         $balance->save();
@@ -342,6 +345,7 @@ class TallerContabilidadController extends Controller
                   $datos=array(
                      'balance_ajustado_id' => $o->id,
                      'cuenta'                  => $balance['cuenta'],
+                     'cuenta_id'                  => $balance['cuenta_id'],
                      'debe'                    => $balance['debe'],
                      'haber'                   => $balance['haber'],
                      'created_at'              => now(),
@@ -358,6 +362,7 @@ class TallerContabilidadController extends Controller
         $ids                       = [];
         $balanceComprob            = BalanceAjustado::where('user_id',$id)->where('taller_id', $taller_id)->first();
         $balanceComprob->total_debe  = $request->total_debe;
+        $balanceComprob->nombre = $request->nombre;
         $balanceComprob->total_haber = $request->total_haber;
         $balanceComprob->save();
 
@@ -373,6 +378,7 @@ class TallerContabilidadController extends Controller
                   $datos=array(
                      'balance_ajustado_id' => $o->id,
                      'cuenta'                  => $balance['cuenta'],
+                     'cuenta_id'                  => $balance['cuenta_id'],
                      'debe'                    => $balance['debe'],
                      'haber'                   => $balance['haber'],
                      'created_at'              => now(),
@@ -399,7 +405,7 @@ class TallerContabilidadController extends Controller
         // $registros  = [];
         if ($dioGeneral  == 1) {
             $balanceCompro = BalanceAjustado::where('user_id',$id)->where('taller_id', $taller_id)->first();
-            $obtener       = BCARegistro::select('cuenta','debe', 'haber')->where('balance_ajustado_id', $balanceCompro->id)->get();
+            $obtener       = BCARegistro::select('cuenta', 'cuenta_id','debe', 'haber')->where('balance_ajustado_id', $balanceCompro->id)->get();
         
             return response(array(
                 'datos' => true,
@@ -477,6 +483,7 @@ class TallerContabilidadController extends Controller
                   $datos=array(
                      'balance_comprobacion_id' => $o->id,
                      'cuenta'                  => $balance['cuenta'],
+                     'cuenta_id'               => $balance['cuenta_id'],
                      'suma_debe'               => $balance['suma_debe'],
                      'suma_haber'              => $balance['suma_haber'],
                      'saldo_debe'              => $balance['saldo_debe'],
@@ -522,6 +529,143 @@ public function obtenerBalanceCompro(Request $request)
 
          }
     }
+
+        public function hojaTrabajo(Request $request)
+    {
+        $id                              = Auth::id();
+        $taller_id                       = $request->id;
+        $registros                       = $request->registros;
+        $hojaTra                         = HojaTrabajo::where('user_id',$id)->where('taller_id', $taller_id)->count();
+        if ($hojaTra                     == 0) {
+        // $contenido                    = TallerContabilidad::select('enunciado')->where('taller_id', $taller_id)->firstOrFail();
+        $hojaTrabajo                     = new HojaTrabajo;
+        $hojaTrabajo->taller_id          = $taller_id ;
+        $hojaTrabajo->user_id            = $id;
+        // $hojaTrabajo->enunciado       = $contenido->enunciado;
+        $hojaTrabajo->nombre             = $request->nombre;
+        // $hojaTrabajo->fecha           = $request->fecha;
+        $hojaTrabajo->bc_total_debe      = $request->bc_total_debe;
+        $hojaTrabajo->bc_total_haber     = $request->bc_total_haber;
+        $hojaTrabajo->ajuste_total_debe  = $request->ajuste_total_debe;
+        $hojaTrabajo->ajuste_total_haber = $request->ajuste_total_haber;
+        $hojaTrabajo->ba_total_debe      = $request->ba_total_debe;
+        $hojaTrabajo->ba_total_haber     = $request->ba_total_haber;
+        $hojaTrabajo->er_total_debe      = $request->er_total_debe;
+        $hojaTrabajo->er_total_haber     = $request->er_total_haber;
+        $hojaTrabajo->bg_total_debe      = $request->bg_total_debe;
+        $hojaTrabajo->bg_total_haber     = $request->bg_total_haber;
+        $hojaTrabajo->save();
+
+        $o = HojaTrabajo::where('user_id', $id)->get()->last(); 
+
+        foreach ($registros as $key => $balance) {
+                  $datos=array(
+                     'hoja_trabajo_id' => $o->id,
+                     'cuenta_id'               => $balance['cuenta_id'],
+                     'cuenta'                  => $balance['cuenta'],
+                     'bc_debe'                 => $balance['bc_debe'],
+                     'bc_haber'                => $balance['bc_haber'],
+                     'ajuste_debe'             => $balance['ajuste_debe'],
+                     'ajuste_haber'            => $balance['ajuste_haber'],
+                     'ba_debe'                 => $balance['ba_debe'],
+                     'ba_haber'                => $balance['ba_haber'],
+                     'er_debe'                 => $balance['er_debe'],
+                     'er_haber'                => $balance['er_haber'],
+                     'bg_debe'                 => $balance['bg_debe'],
+                     'bg_haber'                => $balance['bg_haber'],
+                     'created_at'              => now(),
+                     'updated_at'              => now(),
+                  );
+                  HTRegistro::insert($datos);
+            }
+         return response(array(
+                'success' => true,
+                'estado' => 'guardado',
+                'message' => 'Hoja de Trabajo creada correctamente'
+            ),200,[]);
+        }elseif($balanceCompro  == 1){
+        $ids                                = [];
+        $balanceComprob                     = HojaTrabajo::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        $balanceComprob->nombre             = $request->nombre;
+        $balanceComprob->nombre             = $request->nombre;
+        // $balanceComprob->fecha           = $request->fecha;
+        $balanceComprob->bc_total_debe      = $request->bc_total_debe;
+        $balanceComprob->bc_total_haber     = $request->bc_total_haber;
+        $balanceComprob->ajuste_total_debe  = $request->ajuste_total_debe;
+        $balanceComprob->ajuste_total_haber = $request->ajuste_total_haber;
+        $balanceComprob->ba_total_debe      = $request->ba_total_debe;
+        $balanceComprob->ba_total_haber     = $request->ba_total_haber;
+        $balanceComprob->er_total_debe      = $request->er_total_debe;
+        $balanceComprob->er_total_haber     = $request->er_total_haber;
+        $balanceComprob->bg_total_debe      = $request->bg_total_debe;
+        $balanceComprob->bg_total_haber     = $request->bg_total_haber;
+        $balanceComprob->save();
+
+
+        $registros= HTRegistro::where('hoja_trabajo_id', $balanceComprob->id)->get();
+        
+        foreach($registros as $regis){
+                $ids[]=$regis->id;
+        }
+        $deleteRegistros = HTRegistro::destroy($ids);
+        $o = HojaTrabajo::where('user_id', $id)->get()->last(); 
+         foreach ($registros as $key => $balance) {
+                  $datos=array(
+                    'hoja_trabajo_id' => $o->id,
+                     'cuenta_id'               => $balance['cuenta_id'],
+                     'cuenta'                  => $balance['cuenta'],
+                     'bc_debe'                 => $balance['bc_debe'],
+                     'bc_haber'                => $balance['bc_haber'],
+                     'ajuste_debe'             => $balance['ajuste_debe'],
+                     'ajuste_haber'            => $balance['ajuste_haber'],
+                     'ba_debe'                 => $balance['ba_debe'],
+                     'ba_haber'                => $balance['ba_haber'],
+                     'er_debe'                 => $balance['er_debe'],
+                     'er_haber'                => $balance['er_haber'],
+                     'bg_debe'                 => $balance['bg_debe'],
+                     'bg_haber'                => $balance['bg_haber'],
+                     'created_at'              => now(),
+                     'updated_at'              => now(),
+                  );
+                  HTRegistro::insert($datos);
+            }
+
+
+
+             return response(array(
+                'success' => true,
+                'estado' => 'actualizado',
+                'message' => 'Hoja de Trabajo actualizada correctamente'
+            ),200,[]);
+
+        }
+
+    }
+
+    public function obtenerHojaTraba(Request $request)
+    {
+        $id         = Auth::id();
+        $taller_id  = $request->id;
+        $dioGeneral = HojaTrabajo::where('user_id',$id)->where('taller_id', $taller_id)->count();
+        // $registros  = [];
+        if ($dioGeneral  == 1) {
+            $balanceCompro = HojaTrabajo::where('user_id',$id)->where('taller_id', $taller_id)->first();
+            $obtener       = HTRegistro::select('cuenta','cuenta_id', 'bc_debe', 'bc_haber', 'ajuste_debe', 'ajuste_haber' , 'ba_debe', 'ba_haber', 'er_debe', 'er_haber', 'bg_debe', 'bg_haber')->where('hoja_trabajo_id', $balanceCompro->id)->get();
+        
+            return response(array(
+                'datos' => true,
+                'hojatrabajo' => $obtener,
+                'nombre' => $balanceCompro->nombre,
+            ),200,[]);
+
+         }else{
+             return response(array(
+                'datos' => false,
+            ),200,[]);
+
+         }
+    }
+
 
     public function balance_inicial(Request $request)
     {
@@ -664,6 +808,7 @@ public function obtenerBalanceCompro(Request $request)
                   $datos=array(
                      'balance_inicial_id' => $o->id,
                      'nom_cuenta'         => $activos['nom_cuenta'],
+                     'cuenta_id'         => $activos['cuenta_id'],
                      'saldo'              => $activos['saldo'],
                      'tipo'               => 'corriente',
                      'created_at'         => now(),
@@ -675,6 +820,8 @@ public function obtenerBalanceCompro(Request $request)
                   $datos=array(
                      'balance_inicial_id' => $o->id,
                      'nom_cuenta'         => $activo['nom_cuenta'],
+                     'cuenta_id'         => $activo['cuenta_id'],
+
                      'saldo'              => $activo['saldo'],
                      'tipo'               => 'nocorriente',
                      'created_at'         => now(),
@@ -686,6 +833,7 @@ public function obtenerBalanceCompro(Request $request)
                   $datos=array(
                      'balance_inicial_id' => $o->id,
                      'nom_cuenta'         => $pasivos['nom_cuenta'],
+                     'cuenta_id'         => $pasivos['cuenta_id'],
                      'saldo'              => $pasivos['saldo'],
                      'tipo'               => 'corriente',
                      'created_at'         => now(),
@@ -697,6 +845,7 @@ public function obtenerBalanceCompro(Request $request)
                   $datos=array(
                      'balance_inicial_id' => $o->id,
                      'nom_cuenta'         => $pasivo['nom_cuenta'],
+                     'cuenta_id'         => $pasivo['cuenta_id'],
                      'saldo'              => $pasivo['saldo'],
                      'tipo'               => 'nocorriente',
                      'created_at'         => now(),
@@ -708,6 +857,7 @@ public function obtenerBalanceCompro(Request $request)
                      $datos               =array(
                      'balance_inicial_id' => $o->id,
                      'nom_cuenta'         => $patri['nom_cuenta'],
+                     'cuenta_id'         => $patri['cuenta_id'],
                      'saldo'              => $patri['saldo'],
                      'created_at'         => now(),
                      'updated_at'         => now(),
@@ -736,10 +886,10 @@ public function obtenerbalance(Request $request)
 
         if ($tipo == 'horizontal' && $datos1 == 1) {
                 $datos = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', $tipo)->first();
-    $a_corrientes      = BIActivo::select('nom_cuenta', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'corriente')->get();
-    $a_nocorrientes    = BIActivo::select('nom_cuenta', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'nocorriente')->get();
-    $p_corriente       = BIPasivo::select('nom_cuenta', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'corriente')->get();
-    $p_nocorriente     = BIPasivo::select('nom_cuenta', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'nocorriente')->get();
+    $a_corrientes      = BIActivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'corriente')->get();
+    $a_nocorrientes    = BIActivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'nocorriente')->get();
+    $p_corriente       = BIPasivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'corriente')->get();
+    $p_nocorriente     = BIPasivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'nocorriente')->get();
     $patrimonios       = $datos->bPatrimonios;
 
         return response(array(
@@ -755,10 +905,10 @@ public function obtenerbalance(Request $request)
             ),200,[]);
         }elseif ($tipo == 'vertical' && $datos2 == 1) {
     $datos = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', $tipo)->first();
-    $a_corrientes      = BIActivo::select('nom_cuenta', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'corriente')->get();
-    $a_nocorrientes    = BIActivo::select('nom_cuenta', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'nocorriente')->get();
-    $p_corriente       = BIPasivo::select('nom_cuenta', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'corriente')->get();
-    $p_nocorriente     = BIPasivo::select('nom_cuenta', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'nocorriente')->get();
+    $a_corrientes      = BIActivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'corriente')->get();
+    $a_nocorrientes    = BIActivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'nocorriente')->get();
+    $p_corriente       = BIPasivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'corriente')->get();
+    $p_nocorriente     = BIPasivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'nocorriente')->get();
     $patrimonios       = $datos->bPatrimonios;
 
         return response(array(

@@ -37,7 +37,7 @@
                 <th rowspan="2" align="center" class="text-center">CUENTAS</th>
                 <th colspan="2" align="center" class="text-center">SUMAS</th>
                 <th colspan="2" align="center" class="text-center">SALDOS</th>
-                {{-- <td  class="text-center" valign="center" v-if="balances.length >=1" colspan="2" rowspan="2">ACCIONES</td> --}}
+                <td  class="text-center" valign="center" v-if="balances.length >=1" colspan="2" rowspan="2">ACCIONES</td>
 
             </tr>
             <tr class="bg-dark">
@@ -54,10 +54,10 @@
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.suma_haber) }}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.saldo_debe) }}</td>
                 <td  class="text-right"align="center" width="125">@{{ decimales(balan.saldo_haber) }}</td>
-       {{--          <td align="center" width="50"><a @click.prevent="deleteBalance(index)"  class="btn btn-danger"><i
+                <td align="center"  width="50"><a @click.prevent="editBalanceFuera(index)" class="btn btn-warning"><i
+                            class="fas fa-edit"></i></a></td>
+                <td align="center" width="50"><a @click.prevent="deleteBalance(index)"  class="btn btn-danger"><i
                             class="fas fa-trash-alt"></i></a></td>
-                <td align="center"  width="50"><a @click.prevent="editBalance(index)" class="btn btn-warning"><i
-                            class="fas fa-edit"></i></a></td> --}}
 
             </tr>
             <tr class="text-center bg-secondary">

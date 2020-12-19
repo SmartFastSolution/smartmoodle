@@ -16,6 +16,7 @@ class CreateBCARegistrosTable extends Migration
         Schema::create('b_c_a_registros', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('balance_ajustado_id');
+            $table->unsignedbigInteger('cuenta_id');
             $table->text('cuenta')->nullable();
             $table->string('debe')->nullable();
             $table->string('haber')->nullable();

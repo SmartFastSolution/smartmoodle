@@ -254,8 +254,15 @@ route::post('/sistema/admin/taller/balance-obtener-comprobacion', 'TallerContabi
 route::post('/sistema/admin/taller/balance-obtener-ajustado', 'TallerContabilidadController@obtenerBalanceAjustado')->name('balance.obtenerajustado');
 
 route::post('/sistema/admin/taller/balance-ajustado', 'TallerContabilidadController@balanceAjustado')->name('balance.balance-ajustado');
-
+// RUTAS HOJA DE TRABAJO
 route::post('/sistema/admin/taller/balance-comprobacion', 'TallerContabilidadController@balanceComprobacion')->name('balance.comprobacion');
+// FIN RUTAS HOJA DE TRABAJO
+// 
+// // RUTAS HOJA DE TRABAJO
+route::post('/sistema/admin/taller/hoja-trabajo', 'TallerContabilidadController@hojaTrabajo')->name('hoja.trabajo');
+route::post('/sistema/admin/taller/hoja-obtener-trabajo', 'TallerContabilidadController@obtenerHojaTraba')->name('balance.obtenerhoja');
+
+// FIN RUTAS HOJA DE TRABAJO
 
 // RUTAS DEL KARDEX PROMEDIO
 route::post('/sistema/admin/taller/kardex-promedio', 'TallerContabilidadController@kardexPromedio')->name('kardex.promedio');

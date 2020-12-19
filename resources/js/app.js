@@ -19,6 +19,7 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+import Swal from 'sweetalert2/src/sweetalert2.js'
 import draggable from "vuedraggable";
 Vue.component('draggable', draggable);
 // import select2 from 'v-select2-component';
@@ -32,8 +33,14 @@ import Multiselect from 'vue-multiselect'
 import 'vue-search-select/dist/VueSearchSelect.css';
 import 'vue-multiselect/dist/vue-multiselect.min.css';
 
-import CKEditor from '@ckeditor/ckeditor5-vue2';
-Vue.use( CKEditor );
+// import CKEditor from '@ckeditor/ckeditor5-vue2';
+// Vue.use( CKEditor );
+
+import 'ckeditor5-vuejs/dist/ckeditor.css';
+import {CKEditor, AutosavePlugin, MediaEmbedPlugin, UploaderPlugin} from 'ckeditor5-vuejs';
+Vue.component('ckeditor', CKEditor);
+
+
 
  import { ModelSelect } from 'vue-search-select';
 Vue.component('ModelSelect', ModelSelect);

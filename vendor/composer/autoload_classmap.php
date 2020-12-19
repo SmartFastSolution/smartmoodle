@@ -161,6 +161,8 @@ return array(
     'App\\Contabilidad\\DGRegistro' => $baseDir . '/app/Contabilidad/DGRegistro.php',
     'App\\Contabilidad\\Diario' => $baseDir . '/app/Contabilidad/Diario.php',
     'App\\Contabilidad\\DiarioGeneral' => $baseDir . '/app/Contabilidad/DiarioGeneral.php',
+    'App\\Contabilidad\\HTRegistro' => $baseDir . '/app/Contabilidad/HTRegistro.php',
+    'App\\Contabilidad\\HojaTrabajo' => $baseDir . '/app/Contabilidad/HojaTrabajo.php',
     'App\\Contabilidad\\KFRMovimiento' => $baseDir . '/app/Contabilidad/KFRMovimiento.php',
     'App\\Contabilidad\\KFRegistro' => $baseDir . '/app/Contabilidad/KFRegistro.php',
     'App\\Contabilidad\\KPRegistro' => $baseDir . '/app/Contabilidad/KPRegistro.php',
