@@ -16,6 +16,7 @@ class CreateDGRDebesTable extends Migration
         Schema::create('d_g_r_debes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('d_g_registro_id');
+            $table->unsignedbigInteger('cuenta_id');
             $table->string('nom_cuenta');
             $table->string('saldo');
             $table->date('fecha')->nullable();

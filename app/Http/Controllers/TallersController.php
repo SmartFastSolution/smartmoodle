@@ -49,6 +49,7 @@ use App\Admin\TallerValeCaja;
 use App\Admin\TallerVerdaderoFalso;
 use App\Http\Controllers\Controller;
 use App\Materia;
+use App\Pcuenta;
 use App\TalleLocalizarAbreRe;
 use App\Taller;
 use App\TallerAbreviaturaDatoRe;
@@ -338,8 +339,30 @@ class TallersController extends Controller
             return view('talleres.taller36', compact('datos', 'd', 'a'));
 
         }elseif ($plant == 37) {
+
+            $cuentas = Pcuenta::all();
+            $objeto =[];
+            $balanceinicial = [];
+
+            foreach($cuentas as $key => $cuenta){
+                $objeto[]= array(
+                    'value' => $cuenta->id,
+                    'text'=> $cuenta->nombre
+                );
+            }
+
+            foreach($cuentas as $key => $cuenta){
+                $balanceinicial[]= array(
+                    'value' => $cuenta->nombre,
+                    'text'=> $cuenta->nombre
+                );
+            }
                 JavaScript::put([
-                 'taller' => $d,
+                 'taller'         => $d,
+                 'cuentas'        => $cuentas,
+                 'objeto'         => $objeto,
+                 'balanceinicial' => $balanceinicial,
+
                 ]);
             $consul = Taller::findorfail($id);
              $datos = TallerContabilidad::where('taller_id', $consul->id)->firstOrFail();

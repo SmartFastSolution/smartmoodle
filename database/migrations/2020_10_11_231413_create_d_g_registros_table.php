@@ -19,6 +19,7 @@ class CreateDGRegistrosTable extends Migration
             $table->string('no_registro');
             $table->string('comentario')->nullable();
             $table->string('fecha')->nullable();
+            $table->string('tipo')->nullable();
             $table->timestamps();
 
 

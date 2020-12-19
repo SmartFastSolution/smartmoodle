@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Pcuenta extends Model
 {
     protected $fillable = [
-        'tpcuenta','cuenta','estado',
+        'tpcuenta','nombre','estado', 'porcentual', 'porcentaje'
     ];
 }

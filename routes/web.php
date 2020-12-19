@@ -153,7 +153,13 @@ route::resource('contenidos','ContenidoController');
 route::resource('distribucionmacus','DistribucionmacuController');
 
 //Ruta Resource para plan de cuentas
-route::resource('pcuentas','PcuentaController');
+route::get('pcuentas','PcuentaController@index')->name('pcuentas.index');
+route::get('pcuentas/create','PcuentaController@create')->name('pcuentas.create');
+route::post('pcuentas','PcuentaController@store')->name('pcuentas.store');
+route::get('pcuentas/{pcuenta}','PcuentaController@show')->name('pcuentas.show');
+route::get('pcuentas/{pcuenta}/edit','PcuentaController@edit')->name('pcuentas.edit');
+route::post('pcuentas/actualizar','PcuentaController@update')->name('pcuentas.update');
+route::delete('pcuentas/{pcuenta}','PcuentaController@destroy')->name('pcuentas.destroy');
 
 //Ruta Resource para distribucion alumno curso/materia
 route::resource('distrimas','DistrimaController');
@@ -191,6 +197,7 @@ route::resource('assignments','AssignmentController');
 Route::group(['prefix' => 'sistema/admin'], function() {
 
 route::post('/plantilla', 'AdminController@plantilla')->name('admin.plantilla');
+route::get('/plantilla/tallercontable', 'AdminController@tallercontable')->name('admin.tallercontable');
 route::post('/taller1', 'AdminController@taller1')->name('admin.taller1');
 route::post('/taller2', 'AdminController@taller2')->name('admin.taller2');
 route::post('/taller3', 'AdminController@taller3')->name('admin.taller3');
@@ -307,7 +314,8 @@ route::post('/sistema/admin/taller/balance-comprobacion', 'TallerContabilidadCon
 route::post('/sistema/admin/taller/kardex-promedio', 'TallerContabilidadController@kardexPromedio')->name('kardex.promedio');
 route::post('/sistema/admin/taller/kardex-obtener-promedio', 'TallerContabilidadController@obtenerKardexPromedio')->name('kardex.obtenerkardexpromedio');
 //FIN RUTAS DEL KARDEX PROMEDIO
-//
+
+
 //// RUTAS DEL KARDEX FIFO
 route::post('/sistema/admin/taller/kardex-fifo', 'TallerContabilidadController@kardexFifo')->name('kardex.fifo');
 route::post('/sistema/admin/taller/kardex-obtener-fifo', 'TallerContabilidadController@obtenerKardexFifo')->name('kardex.obtenerkardexfifo');
@@ -315,9 +323,20 @@ route::post('/sistema/admin/taller/kardex-obtener-fifo', 'TallerContabilidadCont
 
 route::post('/sistema/admin/taller/b_inicial_diario', 'TallerContabilidadController@b_inicial_diario')->name('b_inicial_diario');
 
+//// RUTAS DEL DIARIO
 route::post('/sistema/admin/taller/diario', 'TallerContabilidadController@diario')->name('diario');
-
 route::post('/sistema/admin/taller/diariogeneral', 'TallerContabilidadController@obtenerdiario')->name('obtenerdiario');
+
+//// FIN RUTAS DEL DIARIO
+
+
+/////// RUTAS DEL MAYOR
+route::post('/sistema/admin/taller/mayor', 'TallerContabilidadController@mayorGeneral')->name('mayor');
+route::post('/sistema/admin/taller/mayorgeneral', 'TallerContabilidadController@obtenermayor')->name('obtenermayor');
+
+//// FIN RUTAS DEL DIARIO
+
+
 route::post('/sistema/admin/taller/obtenerbalance', 'TallerContabilidadController@obtenerbalance')->name('obtenerbalance');
 
 //rutas anexos

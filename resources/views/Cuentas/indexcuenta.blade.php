@@ -33,6 +33,8 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">Tipo de Cuenta</th>
                                     <th scope="col">Cuenta</th>
+                                    <th scope="col">Porcentual</th>
+                                    <th scope="col">Porcentaje</th>
                                     <th scope="col">Estado</th>
                                     <th scope="col">Tools</th>
                                 </tr>
@@ -42,7 +44,15 @@
                                     @foreach ($cuentas as $cuenta)
                                     <th scope="row">{{ $cuenta['id']}}</th>
                                     <td>{{ $cuenta['tpcuenta']}}</td>
-                                    <td>{{ $cuenta['cuenta']}}</td>
+                                    <td>{{ $cuenta['nombre']}}</td>
+                                    <td align="center">@if ($cuenta['porcentual'] == 1)
+                                        SI
+                                        @else
+                                        NO
+                                    @endif
+                                   
+                                </td>
+                                    <td>{{ $cuenta['porcentaje']}}</td>
                                     <td>{{ $cuenta['estado']}}</td>
                            
                            
@@ -65,7 +75,7 @@
                             <!--Table body-->
 
                         </table>
-                        {{$cuentas->links()}}
+                        {{-- {{$cuentas->links()}} --}}
                         <!--Table-->
                     </div>
                 </div>

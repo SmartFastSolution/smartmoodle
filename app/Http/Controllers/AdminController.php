@@ -103,6 +103,11 @@ class AdminController extends Controller
        }
 
     }
+    public function tallercontable()
+    {
+      return view('contabilidad.modulocontable');
+      
+    }
    public function admin()
    {
          $g = 0;

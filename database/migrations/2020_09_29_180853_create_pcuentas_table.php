@@ -14,10 +14,11 @@ class CreatePcuentasTable extends Migration
     public function up()
     {
         Schema::create('pcuentas', function (Blueprint $table) {
+            $table->string('nombre');
             $table->bigIncrements('id');
             $table->string('tpcuenta');
-            $table->string('cuenta');
-            $table->string('porcentaje')->nullable();
+            $table->boolean('porcentual')->nullable();
+            $table->float('porcentaje')->nullable();
             $table->enum('estado',['on','off'])->nullable();
             $table->timestamps();
         });

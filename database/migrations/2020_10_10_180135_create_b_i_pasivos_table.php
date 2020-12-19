@@ -16,6 +16,9 @@ class CreateBIPasivosTable extends Migration
         Schema::create('b_i_pasivos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('balance_inicial_id');
+            $table->string('fecha')->nullable();
+            $table->unsignedbigInteger('cuenta_id');
+            
             $table->string('nom_cuenta');
             $table->string('saldo');
             $table->string('tipo');

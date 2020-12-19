@@ -17,12 +17,12 @@ class CreateDiarioGeneralsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->unsignedbigInteger('balance_inicial_id');
-            $table->string('enunciado');
-            $table->string('nombre');
+            // $table->unsignedbigInteger('balance_inicial_id');
+            $table->string('enunciado')->nullable();
+            $table->string('nombre')->nullable();
             $table->string('total_debe')->nullable();
             $table->string('total_haber')->nullable();
-            $table->string('completado');   
+            $table->string('completado')->nullable();   
             $table->timestamps();
 
             $table->foreign('taller_id')
