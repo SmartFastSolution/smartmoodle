@@ -18,6 +18,8 @@ class CreateLibrobancosTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->string('nombre');
+            $table->string('n_banco');
+            $table->string('c_banco');
             $table->string('totaldebe');
             $table->string('totalhaber');
             $table->timestamps();

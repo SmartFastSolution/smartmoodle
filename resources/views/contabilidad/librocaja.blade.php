@@ -15,15 +15,15 @@
             <input type="text" class="form-control" v-model="caja.detalle" placeholder="Detalle">
         </div>
         <div class="col col-lg-2">
-            <input type="text" class="form-control" v-model="caja.debe" placeholder="Debe">
+            <input type="number" class="form-control" v-model="caja.debe" placeholder="Debe">
         </div>
         <div class="col col-lg-2">
-            <input type="text" class="form-control" v-model="caja.haber" placeholder="Haber">
+            <input type="number" class="form-control" v-model="caja.haber" placeholder="Haber">
             <br>
         </div>
         <div class="col col-lg-2">
-            <input type="text" class="form-control" v-model="caja.saldo" placeholder="Saldo">
-            
+            <input type="number" class="form-control" v-model="caja.saldo" placeholder="Saldo">
+
         </div>
 
         <a v-if="!update" href="#" class="btn btn-outline-danger  " @click.prevent="agregarRegistro()">Agregar
@@ -44,11 +44,11 @@
         </thead>
         <tbody is="draggable" group="people" :list="libros_caja" tag="tbody">
             <tr v-for="(caja, index) in libros_caja">
-                <td align="left">@{{ caja.fecha}}</td>
-                <td align="left">@{{ caja.detalle}}</td>
-                <td align="right">@{{ caja.debe}}</td>
-                <td align="right">@{{ caja.haber}}</td>
-                <td align="right">@{{ caja.saldo}}</td>
+                <td align="left">@{{formatoFecha(caja.fecha)}}</td>
+                <td align="left">@{{caja.detalle}}</td>
+                <td align="right">@{{decimales( caja.debe)}}</td>
+                <td align="right">@{{decimales(caja.haber)}}</td>
+                <td align="right">@{{decimales(caja.saldo)}}</td>
                 <td align="center" width="50">
                     <a @click.prevent="deleteLibroCaja(index)" class="btn btn-danger">
                         <i class="fas fa-trash-alt"></i>
@@ -64,8 +64,8 @@
             <tr class="bg-secondary">
                 <td class="text-left font-weight-bold">SUMAN</td>
                 <td class="text-left font-weight-bold"></td>
-                <td class="text-center">@{{ suman.debe }}</td>
-                <td class="text-center">@{{ suman.haber }}</td>
+                <td class="text-center font-weight-bold">@{{ suman.debe }}</td>
+                <td class="text-center font-weight-bold">@{{ suman.haber }}</td>
             </tr>
         </tbody>
     </table>

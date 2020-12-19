@@ -6273,6 +6273,23 @@ const librocaja = new Vue({
     this.obtenerLibroCaja();
   },
   methods:{
+    decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+  },
+  formatoFecha(fecha){
+    if (fecha !== null) {
+       let date = fecha.split('-').reverse().join('-');
+    return date;
+  }else{
+    return
+  }
+   
+  },
     totales: function(){
        this.suman.debe  =0;
        this.suman.haber =0;
@@ -6453,7 +6470,15 @@ const arqueo_caja = new Vue ({
     this.ObtenerArqueo();
   },
   methods:{
-   
+    decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+  },
+
     totales_s: function(){
       this.sumas.td =0;
       this.sumas.th =0;
@@ -6682,6 +6707,9 @@ const librosbanco = new Vue({
   data:{
     id_taller: taller,
     nombre:'',
+    n_banco:'',
+    c_banco:'',
+
      lb_banco:[],
 
       banco:{
@@ -6704,6 +6732,23 @@ const librosbanco = new Vue({
   },
 
   methods:{
+    decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+  },
+  formatoFecha(fecha){
+    if (fecha !== null) {
+       let date = fecha.split('-').reverse().join('-');
+    return date;
+  }else{
+    return
+  }
+   
+  },
         totales: function(){
           this.suman.debe  =0;
           this.suman.haber =0;
@@ -6817,6 +6862,8 @@ const librosbanco = new Vue({
                 id:  _this.id_taller,
           lb_banco:  _this.lb_banco,
             nombre:  _this.nombre,
+           n_banco:  _this.n_banco,
+           c_banco:  _this.c_banco,
               debe:  _this.suman.debe,
              haber:  _this.suman.haber,
         }).then(response=>{
@@ -6848,6 +6895,8 @@ const librosbanco = new Vue({
             });
             this.lb_banco = response.data.mb;
             this.nombre = response.data.nombre;
+            this.n_banco = response.data.n_banco;
+            this.c_banco = response.data.c_banco;
             this.totales();
         }
       }).catch(function(error){

@@ -23,9 +23,9 @@
                                 <tr>
                                     <td><input type="text" v-model="saldo.detalle" name="detalle" class="form-control"
                                             required></td>
-                                    <td width="125"><input type="numeric" v-model="saldo.s_debe" name="s_debe"
+                                    <td width="125"><input type="number" v-model="saldo.s_debe" name="s_debe"
                                             class="form-control" required></td>
-                                    <td width="125"><input type="numeric" v-model="saldo.s_haber" name="s_haber"
+                                    <td width="125"><input type="number" v-model="saldo.s_haber" name="s_haber"
                                             class="form-control" required></td>
                                           
                                 </tr>
@@ -69,9 +69,9 @@
                                 <tr>
                                     <td><input type="text" v-model="exis.detalle" name="detalle" class="form-control"
                                             required></td>
-                                    <td width="125"><input type="numeric" v-model="exis.e_debe" name="e_debe"
+                                    <td width="125"><input type="number" v-model="exis.e_debe" name="e_debe"
                                             class="form-control" required></td>
-                                    <td width="125"><input type="numeric" v-model="exis.e_haber" name="e_haber"
+                                    <td width="125"><input type="number" v-model="exis.e_haber" name="e_haber"
                                             class="form-control" required></td>
 
                                 </tr>
@@ -116,9 +116,9 @@
                                 <tr>
                                     <td><input type="text" v-model="saldo.detalle" name="detalle" class="form-control"
                                             required></td>
-                                    <td width="125"><input type="numeric" v-model="saldo.s_debe" name="s_debe"
+                                    <td width="125"><input type="number" v-model="saldo.s_debe" name="s_debe"
                                             class="form-control" required></td>
-                                    <td width="125"><input type="numeric" v-model="saldo.s_haber" name="s_haber"
+                                    <td width="125"><input type="number" v-model="saldo.s_haber" name="s_haber"
                                             class="form-control" required></td>
 
                                 </tr>
@@ -163,18 +163,16 @@
                                 <tr>
                                     <td><input type="text" v-model="exis.detalle" name="detalle" class="form-control"
                                             required></td>
-                                    <td width="125"><input type="numeric" v-model="exis.e_debe" name="e_debe"
+                                    <td width="125"><input type="number" v-model="exis.e_debe" name="e_debe"
                                             class="form-control" required></td>
-                                    <td width="125"><input type="numeric" v-model="exis.e_haber" name="e_haber"
+                                    <td width="125"><input type="number" v-model="exis.e_haber" name="e_haber"
                                             class="form-control" required></td>
-
                                 </tr>
                             </tbody>
                         </table>
                         <div class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="updateExis()">Actualizar
                                 Existencias</a>
-
                         </div>
                     </div>
                 </div>

@@ -627,8 +627,6 @@
 
 
 
-
-
 {{-- ACTUALIZAR UN REGISTRO --}}
 <div class="modal fade" id="haber_d" tabindex="-1"  role="dialog" aria-labelledby="haberLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
