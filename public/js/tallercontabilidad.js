@@ -3889,6 +3889,457 @@ const balance_ajustado = new Vue({
   
 });
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////ESTADO RESULTADO ///////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const estado_resultado = new Vue({
+
+  el: "#estado_resultado",
+   data:{
+    id_taller: taller,
+    hojatrabajo:[],
+    options: objeto,
+    cuentas: cuentas,
+    nombre_hoja:'',
+    venta:'',
+    costo_venta:'',
+    producto:'',
+    nombre:'',
+    fecha:'',
+    ingresos:[],
+    gastos:[],
+    ingreso:{
+      cuenta_id:'',
+      saldo:'',
+      edit:false,
+      const_id:''
+    },
+    gasto:{
+      cuenta_id:'',
+      saldo:'',
+      edit:false,
+      const_id:''
+    },
+    utilida:{
+      cuenta_id:'',
+      saldo:'',
+      edit:false,
+      const_id:''
+    },
+    utilidades:[],
+    utilidad:'',
+    totales:{
+      ingreso:0,
+      gastos:0,
+    },
+    update:false,
+    totales:{
+      ingreso:0,
+      gasto:0,
+      utilidad_bruta_ventas:'',
+      utilidad_neta_o:0,
+      utilidad_ejercicio:'',
+      utilidad_liquida:''
+    }
+  },
+
+  mounted: function () {
+    this.obtenerHojita();
+  },
+  methods:{
+   VueSweetAlert2(component,propsData)
+    {
+        Swal.fire({
+            html: '<div id="VueSweetAlert2"></div>',
+            showConfirmButton: false,
+            showCloseButton: true,
+            willOpen: () => {
+                let ComponentClass = Vue.extend(Vue.component(component));
+                let instance = new ComponentClass({
+                    propsData: propsData,
+                });
+                instance.$mount();
+                document.getElementById('VueSweetAlert2').appendChild(instance.$el);
+            }
+        });
+    },
+   totale: function(){
+      this.totales.ingreso = 0;
+      this.totales.gastos   = 0;
+      let ingreso  = this.ingresos;
+      let gasto  = this.gastos;
+      let total1 = 0;
+      let total2 = 0;
+      
+      ingreso.forEach(function(obj, index){
+          total1 += Number(obj.saldo );
+      });
+
+       gasto.forEach(function(obj, index){
+          total2 += Number(obj.saldo );
+      }); 
+      this.totales.ingreso =   total1.toFixed(2);
+      this.totales.gastos =   total2.toFixed(2);
+
+    }, 
+    selectUtilidad(){
+      if (this.utilidad == 'perdida') {
+
+      }else if (this.utilidad == 'ganancia') {
+
+      }
+    },
+  obtenerHojita: function() {
+        let _this = this;
+        let url = '/sistema/admin/taller/hoja-obtener-trabajo';
+            axios.post(url,{
+              id: _this.id_taller,
+        }).then(response => {
+          if (response.data.datos == true) {
+              this.hojatrabajo = response.data.hojatrabajo;
+              this.nombre_hoja = response.data.nombre;
+             
+            }          
+        }).catch(function(error){
+
+        }); 
+     },
+      verificarCuentaIngreso(id){
+    if (Number(this.ingreso.const_id) === id) {
+      return false
+    }
+     let ac  = this.ingresos.filter(x => x.cuenta_id == id);
+     let ga  = this.gastos.filter(x => x.cuenta_id == id);
+     let u  = this.utilidades.filter(x => x.cuenta_id == id);
+
+      if (ac.length > 0) {
+      return true
+      }else if(ga.length > 0) {
+        return true
+      }else if(u.length > 0) {
+        return true
+      }else{
+        return false
+      }
+    },
+    verificarCuentaGasto(id){
+    if (Number(this.gasto.const_id) === id) {
+      return false
+    }
+      let ac  = this.ingresos.filter(x => x.cuenta_id == id);
+     let ga  = this.gastos.filter(x => x.cuenta_id == id);
+     let u  = this.utilidades.filter(x => x.cuenta_id == id);
+
+      if (ac.length > 0) {
+      return true
+      }else if(ga.length > 0) {
+        return true
+      }else if(u.length > 0) {
+        return true
+      }else{
+        return false
+      }
+    },
+  verificarCuentaUtilidad(id){
+    if (Number(this.utilida.const_id) === id) {
+      return false
+    }
+        let ac  = this.ingresos.filter(x => x.cuenta_id == id);
+     let ga  = this.gastos.filter(x => x.cuenta_id == id);
+     let u  = this.utilidades.filter(x => x.cuenta_id == id);
+
+      if (ac.length > 0) {
+      return true
+      }else if(ga.length > 0) {
+        return true
+      }else if(u.length > 0) {
+        return true
+      }else{
+        return false
+      }
+    },
+    decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+  formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
+    abrirIngreso(){
+      $('#er-ingreso').modal('show');
+      $('#nav-er-ingreso-tab').tab('show');
+
+
+    },
+      abrirGastos(){
+      $('#er-ingreso').modal('show');
+      $('#nav-er-gastos-tab').tab('show');
+
+
+    },
+      abrirUtilidades(){
+      $('#er-ingreso').modal('show');
+      $('#nav-er-utilidad-tab').tab('show');
+
+
+    },
+    agregarIngreso(){
+     if(this.ingreso.cuenta_id  ==''){
+      toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+  }else {
+       let id = this.ingreso.cuenta_id;
+         let verificar = this.verificarCuentaIngreso(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+      let nombre   = funciones.obtenerNombre(id);
+      var ingreso ={cuenta_id:this.ingreso.cuenta_id, cuenta:nombre, saldo:this.ingreso.saldo}
+      this.ingresos.push(ingreso);
+      toastr.success("Ingreso agregado correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+      });
+     this.ingreso.cuenta_id =''
+     this.ingreso.saldo     =''
+     this.totale();
+   }
+     }                
+      }, 
+      agregarGasto(){
+     if(this.gasto.cuenta_id  ==''){
+      toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+  }else {
+       let id = this.gasto.cuenta_id;
+         let verificar = this.verificarCuentaGasto(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+      let nombre   = funciones.obtenerNombre(id);
+      var gasto ={cuenta_id:this.gasto.cuenta_id, cuenta:nombre, saldo:this.gasto.saldo}
+      this.gastos.push(gasto);
+      toastr.success("Gasto agregado correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+      });
+     this.gasto.cuenta_id =''
+     this.gasto.saldo     =''
+     this.totale();
+   }
+     }                
+      }, 
+    agregarUtilidad(){
+     if(this.utilida.cuenta_id  ==''){
+      toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+  }else {
+       let id = this.utilida.cuenta_id;
+         let verificar = this.verificarCuentaUtilidad(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+      let nombre   = funciones.obtenerNombre(id);
+      var utilida ={cuenta_id:this.utilida.cuenta_id, cuenta:nombre, saldo:this.utilida.saldo}
+      this.utilidades.push(utilida);
+      toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+      });
+     this.utilida.cuenta_id =''
+     this.utilida.saldo     =''
+     this.totale();
+   }
+     }                
+      }, 
+
+
+      editIngreso(index){
+       this.ingreso.edit      = true;
+       this.registro.ingreso  = index;
+       this.ingreso.const_id  = this.ingresos[index].cuenta_id;
+       this.ingreso.cuenta_id = this.ingresos[index].cuenta_id;
+       this.ingreso.saldo      = this.ingresos[index].saldo;
+              
+      },
+      
+      editIngresoFuera(index){
+       this.ingreso.edit      = true;
+       this.registro.ingreso  = index;
+       this.ingreso.const_id  = this.ingresos[index].cuenta_id;
+       this.ingreso.cuenta_id = this.ingresos[index].cuenta_id;
+       this.ingreso.saldo      = this.ingresos[index].saldo;
+       $('#er-ingreso').modal('show');
+      $('#nav-er-ingreso-tab').tab('show');
+        
+      },
+
+    cancelarEdicionIngreso(){
+      this.ingreso.cuenta_id =''
+      this.ingreso.saldo      =''
+      this.ingreso.edit      = false;
+     
+    },
+      actualizarIngreso(){
+          if(this.ingreso.cuenta_id ==''){
+          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else {
+          let id = this.ingreso.cuenta_id;
+         let verificar = this.verificarCuentaIngreso(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+            let nombre                     = funciones.obtenerNombre(id);
+            let index                      = this.registro.ingreso;
+            this.ingresos[index].cuenta_id = this.ingreso.cuenta_id;
+            this.ingresos[index].cuenta    = nombre;
+            this.ingresos[index].saldo      = this.ingreso.saldo;
+            this.ingreso.cuenta_id         =''
+            this.ingreso.saldo             =''
+            this.ingreso.edit              = false;
+            this.registro.ingreso              = '';
+            this.totale();
+          }
+
+      }
+    },
+
+      editGasto(index){
+       this.gasto.edit      = true;
+       this.registro.gasto  = index;
+       this.gasto.const_id  = this.gastos[index].cuenta_id;
+       this.gasto.cuenta_id = this.gastos[index].cuenta_id;
+       this.gasto.saldo      = this.gastos[index].saldo;
+              
+      },
+      
+      editGastoFuera(index){
+       this.gasto.edit      = true;
+       this.registro.gasto  = index;
+       this.gasto.const_id  = this.gastos[index].cuenta_id;
+       this.gasto.cuenta_id = this.gastos[index].cuenta_id;
+       this.gasto.saldo      = this.gastos[index].saldo;
+       $('#er-ingreso').modal('show');
+      $('#nav-er-gastos-tab').tab('show');
+        
+      },
+
+    cancelarEdicionGasto(){
+      this.gasto.cuenta_id =''
+      this.gasto.saldo      =''
+      this.gasto.edit      = false;
+     
+    },
+      actualizarGasto(){
+          if(this.gasto.cuenta_id ==''){
+          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else {
+          let id = this.gasto.cuenta_id;
+         let verificar = this.verificarCuentaGasto(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+            let nombre                   = funciones.obtenerNombre(id);
+            let index                    = this.registro.gasto;
+            this.gastos[index].cuenta_id = this.gasto.cuenta_id;
+            this.gastos[index].cuenta    = nombre;
+            this.gastos[index].saldo     = this.gasto.saldo;
+            this.gasto.cuenta_id         =''
+            this.gasto.saldo             =''
+            this.gasto.edit              = false;
+            this.registro.gasto          = '';
+           
+            this.totales();
+          }
+
+      }
+    },
+      editUtilidad(index){
+       this.utilida.edit      = true;
+       this.registro.utilida  = index;
+       this.utilida.const_id  = this.utilidades[index].cuenta_id;
+       this.utilida.cuenta_id = this.utilidades[index].cuenta_id;
+       this.utilida.saldo     = this.utilidades[index].saldo;
+              
+      },
+      
+      editUtilidadFuera(index){
+       this.utilida.edit      = true;
+       this.registro.utilida  = index;
+       this.utilida.const_id  = this.utilidades[index].cuenta_id;
+       this.utilida.cuenta_id = this.utilidades[index].cuenta_id;
+       this.utilida.saldo     = this.utilidades[index].saldo;
+       $('#er-ingreso').modal('show');
+      $('#nav-er-utilidad-tab').tab('show');
+        
+      },
+
+    cancelarEdicionUtilidad(){
+      this.utilida.cuenta_id =''
+      this.utilida.saldo     =''
+      this.utilida.edit      = false;
+     
+    },
+      actualizarUtilidad(){
+          if(this.utilida.cuenta_id ==''){
+          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else {
+          let id = this.utilida.cuenta_id;
+         let verificar = this.verificarCuentaUtilidad(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+            let nombre                       = funciones.obtenerNombre(id);
+            let index                        = this.registro.utilida;
+            this.utilidades[index].cuenta_id = this.utilida.cuenta_id;
+            this.utilidades[index].cuenta    = nombre;
+            this.utilidades[index].saldo     = this.utilida.saldo;
+            this.utilida.cuenta_id           =''
+            this.utilida.saldo               =''
+            this.utilida.edit                = false;
+            this.registro.utilidad           = '';
+            this.totale();
+          }
+
+      }
+    },
+
+
+
+  }
+
+
+});
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////KARDEX ///////////////////////////////////////////////////////////
@@ -4007,6 +4458,24 @@ const kardex = new Vue({
     
   // },
   methods:{
+       VueSweetAlert2(component,propsData)
+    {
+        Swal.fire({
+            html: '<div id="VueSweetAlert2"></div>',
+            showConfirmButton: false,
+            showCloseButton: true,
+            heightAuto: true,
+            customClass: 'swal-wide',
+            willOpen: () => {
+                let ComponentClass = Vue.extend(Vue.component(component));
+                let instance = new ComponentClass({
+                    propsData: propsData,
+                });
+                instance.$mount();
+                document.getElementById('VueSweetAlert2').appendChild(instance.$el);
+            }
+        });
+    },
     decimales(saldo){
       if (saldo !== null && saldo !== '' && saldo !== 0) {
          let total = Number(saldo).toFixed(2);

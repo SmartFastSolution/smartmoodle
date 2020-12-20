@@ -137,7 +137,11 @@
                     </table>
                       <div class="row">
                       <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="bajarExis('mostrar')">Agregar Existencia</a>
-                     <a href="#" class=" btn btn-primary btn-sm float-left mt-3 ml-2" data-toggle="modal" data-target="#calculadoraflotante">CALCULADORA</a>
+                     <a href="#" class=" btn btn-primary btn-sm float-left mt-3 ml-2" @click.prevent="VueSweetAlert2('example-component',{title: 'Called from basic js',
+                    noteProp: [
+                        'Note number 1',
+                        'Note number 2'
+                    ]})">CALCULADORA</a>
 
                   </div>
 

@@ -9,18 +9,21 @@
  /* height: 100vh;
   width: 100vw;*/
 }
+.swal-wide{
+    width:300px !important;
+}
 .calculator {
   display: grid;
-  grid-template-rows: repeat(7, minmax(35px, auto));
-  grid-template-columns: repeat(4, 35px);
-  grid-gap: 12px;
-  padding: 35px;
+  grid-template-rows: repeat(7, minmax(50px, auto));
+  grid-template-columns: repeat(4, 50px);
+  grid-gap: 10px;
+/*  padding: 35px;*/
   font-family: "Poppins";
   font-weight: 300;
   font-size: 18px;
-  background-color: #ffffff;
+  /*background-color: #ffffff;*/
   border-radius: 10px;
-  box-shadow: 0px 3px 80px -30px rgba(13, 81, 134, 1);
+  /*box-shadow: 0px 3px 80px -30px rgba(13, 81, 134, 1);*/
 }
 
 .boton,
@@ -47,6 +50,7 @@
 
 .display {
   color: #0B0202;
+  font-size: 20px;
   border-bottom: 1px solid #e1e1e1;
   margin-bottom: 15px;
   overflow: hidden;
@@ -89,6 +93,8 @@
                 <a class="list-group-item list-group-item-action" id="list-mayor-general-list" data-toggle="list" href="#list-mayor-general" role="tab" aria-controls="mayor-general">Mayor General</a>
                 <a class="list-group-item list-group-item-action" id="list-balance-ajustado-list" data-toggle="list" href="#list-balance-ajustado" role="tab" aria-controls="balance-ajustado">Balance Ajustado</a>
                 <a class="list-group-item list-group-item-action" id="list-hoja-trabajo-list" data-toggle="list" href="#list-hoja-trabajo" role="tab" aria-controls="hoja-trabajo">Hoja de Trabajo</a>
+                <a class="list-group-item list-group-item-action" id="list-estado-resultado-list" data-toggle="list" href="#list-estado-resultado" role="tab" aria-controls="estado-resultado">Estado de Resultado</a>
+
 
             </div>
         </div>
@@ -134,6 +140,9 @@
                 </div>
                  <div class="tab-pane fade" id="list-hoja-trabajo" role="tabpanel" aria-labelledby="list-hoja-trabajo-list">
                     @include('contabilidad.hojatrabajo')
+                </div>
+                <div class="tab-pane fade" id="list-estado-resultado" role="tabpanel" aria-labelledby="list-estado-resultado-list">
+                    @include('contabilidad.estadoresultado')
                 </div>
             </div>
         </div>
