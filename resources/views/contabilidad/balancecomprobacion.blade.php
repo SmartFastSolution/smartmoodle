@@ -1,15 +1,15 @@
 <div id="balance_comp" class="border border-danger p-4">
-        <h2 class="text-center display-4 font-weight-bold text-danger">Balance de Comprobacion</h2>
-<div class="row p-3  mb-2 justify-content-center ">
-    <div class="col-8 mb-3">
-          <input class="form-control" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="" >
+    <h2 class="text-center display-4 font-weight-bold text-danger">Balance de Comprobacion</h2>
+    <div class="row p-3  mb-2 justify-content-center ">
+        <div class="col-8 mb-3">
+            <input class="form-control" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="">
         </div>
         <div class="col-5">
-          <input class="form-control" type="date" v-model="fecha" placeholder="Agrega la fecha" name="" >
+            <input class="form-control" type="date" v-model="fecha" placeholder="Agrega la fecha" name="">
         </div>
-      
-      </div>
-{{--         <h2 class="text-center">Agregar Sumas</h2>
+
+    </div>
+    {{--         <h2 class="text-center">Agregar Sumas</h2>
     <div class="form-row mb-2 justify-content-center">
         <div class="col">
            <select name="n_cuenta" id="" v-model="balance.cuenta" class="custom-select">
@@ -48,13 +48,13 @@
             </tr>
         </thead>
         <tbody is="draggable" group="people" :list="balances" tag="tbody" @change="mover">
-            <tr v-for="(balan, index) in balances" >
+            <tr v-for="(balan, index) in balances">
                 <td align="center">@{{ balan.cuenta}}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.suma_debe)}}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.suma_haber) }}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.saldo_debe) }}</td>
-                <td  class="text-right"align="center" width="125">@{{ decimales(balan.saldo_haber) }}</td>
-       {{--          <td align="center" width="50"><a @click.prevent="deleteBalance(index)"  class="btn btn-danger"><i
+                <td class="text-right" align="center" width="125">@{{ decimales(balan.saldo_haber) }}</td>
+                {{--          <td align="center" width="50"><a @click.prevent="deleteBalance(index)"  class="btn btn-danger"><i
                             class="fas fa-trash-alt"></i></a></td>
                 <td align="center"  width="50"><a @click.prevent="editBalance(index)" class="btn btn-warning"><i
                             class="fas fa-edit"></i></a></td> --}}
@@ -69,18 +69,18 @@
             </tr>
         </tbody>
     </table>
-    
-        <div class="row justify-content-center mb-2">
-            <a  href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Movimientos</a>
-        </div>
+
+    <div class="row justify-content-center mb-2">
+        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Movimientos</a>
+    </div>
 
 
-        <div class="row justify-content-center">
-            <a  href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarBalance()">Guardar Balance</a>
-        </div>
-        
+    <div class="row justify-content-center">
+        <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarBalance()">Guardar Balance</a>
+    </div>
 
-       
+
+
 
     @include ('contabilidad.modales.modalbalancecomprobacion')
 </div>

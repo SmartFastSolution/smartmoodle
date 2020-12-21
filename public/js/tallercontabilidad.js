@@ -6576,11 +6576,11 @@ const arqueo_caja = new Vue ({
 
     deleteSaldo(index){
       this.t_saldo.splice(index, 1);
-      //this.totales();
+      this.totales_s();
      },// delete saldo
     deleteExis(index){
       this.t_exis.splice(index, 1);
-      //this.totales();
+      this.totales_s();
      },// delete existencias
 
      limpiar(){
@@ -6912,6 +6912,420 @@ const librosbanco = new Vue({
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////CONCILIACION BANCARIA /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const conciliacion_b = new Vue({
+   el: "#conciliacion_b",
+   data:{
+    id_taller: taller,
+     nombre:'',
+     n_banco:'',
+     fecha : '',
+    
+     c_saldos:[],
+     saldo:{
+      detalle:'',
+      saldo:'',
+     },
+     c_debitos:[],
+     debito:{
+       detalle:'',
+       saldo:'',
+     },
+     c_creditos:[],
+     credito:{
+       detalle:'',
+       saldo:'',
+     },
+     c_cheques:[],
+     cheques:{
+       detalle:'',
+       saldo:'',
+     },
 
+     suman:{
+   
+       saldo_c :0,
+       saldo_ch:0,
+       saldo_d :0,
+       total   :0,
+
+     }
+
+   },
+   mounted: function() {
+    this.obtenerConciliacionBancaria();
+  },
+      methods:{
+
+    decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+  }, //fin metodo decimal 
+  formatoFecha(fecha){
+    if (fecha !== null) {
+       let date = fecha.split('-').reverse().join('-');
+    return date;
+  }else{
+    return
+  }
+   
+  },// fin fecha
+
+    totales: function(){
+      
+       this.suman.saldo_c =0;
+       this.suman.saldo_ch =0;
+       this.suman.saldo_d =0;
+       this.suman.total =0;
+
+       let r1 = this.c_saldos;
+       let r2 = this.c_debitos;
+       let r3 = this.c_creditos;
+       let r4 = this.c_cheques;
+       
+       let t1 =0;
+       let t2 =0;
+       let t3 =0;
+       let t4 =0;
+     
+
+       r1.forEach(function(obj, index){
+          t1 +=Number(obj.saldo);
+       });
+
+       r2.forEach(function(obj, index){
+        t2 +=Number(obj.saldo);
+       });
+
+      r3.forEach(function(obj, index){
+       t3 +=Number(obj.saldo);
+      });
+
+      r4.forEach(function(obj, index){
+        t4 +=Number(obj.saldo);
+     });
+
+      var tsd  = t1 + t2;
+      var tsdc = tsd - t3;
+      var tch  = tsdc - t4;
+     
+     
+      this.suman.saldo_d   = t2.toFixed(2);
+      this.suman.saldo_c   = t3.toFixed(2);
+      this.suman.saldo_ch  = t4.toFixed(2);
+      this.suman.total     = tch.toFixed(2);
+      
+       
+    }, //fin function totales
+
+    agregarSaldo(){
+       
+      if(this.saldo.detalle.trim() === ''){
+        toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+    }else if(this.saldo.saldo.trim() ===''){
+      toastr.error("El Saldo es Obligatorio ", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+    } else{
+        var saldo ={detalle:this.saldo.detalle, saldo:this.saldo.saldo,}
+        this.c_saldos.push(saldo);
+        toastr.success("El Valor agregado correctamente", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+       
+      this.saldo.detalle =''
+      this.saldo.saldo  =''
+      this.totales();
+      }
+
+    },//fin metodo agregar saldo
+
+    agregarCreditos(){
+       
+      if(this.credito.detalle.trim() === ''){
+        toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+    }else if(this.credito.saldo.trim() ===''){
+      toastr.error("El Valor es Obligatorio ", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+    } else{
+        var credito ={detalle:this.credito.detalle, saldo:this.credito.saldo,}
+        this.c_creditos.push(credito);
+        toastr.success("El Credito agregado correctamente", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+       
+      this.credito.detalle =''
+      this.credito.saldo  =''
+      this.totales();
+      }
+
+    },//fin metodo agregar saldo
+
+    agregarDebitos(){
+       
+      if(this.debito.detalle.trim() === ''){
+        toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+    }else if(this.debito.saldo.trim() ===''){
+      toastr.error("El Valor es Obligatorio ", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+    } else{
+        var debito ={detalle:this.debito.detalle, saldo:this.debito.saldo,}
+        this.c_debitos.push(debito);
+        toastr.success("El Debito agregado correctamente", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+       
+      this.debito.detalle =''
+      this.debito.saldo  =''
+      this.totales();
+      }
+
+    },//fin metodo agregar saldo
+
+    agregarCheques(){
+          
+          if(this.cheques.detalle.trim() === ''){
+            toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+
+        }else if(this.cheques.saldo.trim() ===''){
+          toastr.error("El Valor es Obligatorio ", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        } else{
+            var cheques ={detalle:this.cheques.detalle, saldo:this.cheques.saldo,}
+            this.c_cheques.push(cheques);
+            toastr.success("El Cheque agregado correctamente", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+          
+          this.cheques.detalle =''
+          this.cheques.saldo  =''
+          this.totales();
+          }
+
+     },//fin metodo agregar cheque
+      deleteSaldo(index){
+        this.c_saldos.splice(index, 1);
+        this.totales();
+      },// delete saldo
+      deleteDebito(index){
+        this.c_debitos.splice(index, 1);
+        this.totales();
+      },// delete debitos
+      deleteCredito(index){
+        this.c_creditos.splice(index, 1);
+        this.totales();
+      },// delete credito
+      deleteCheque(index){
+        this.c_cheques.splice(index, 1);
+        this.totales();
+      },// delete cheque
+
+ 
+      limpiar(){
+        this.saldo.detalle    ='';
+        this.saldo.saldo      ='';
+        this.debito.detalle   ='';
+        this.debito.saldo     ='';
+        this.credito.detalle  ='';
+        this.credito.saldo    ='';
+        this.cheques.detalle  ='';
+        this.cheques.saldo    ='';
+  
+      },//fin metodo limpiar todos los campos
+
+      editSaldo(index){
+        this.update = index;
+        
+        this.saldo.detalle   = this.c_saldos[index].detalle;
+        this.saldo.saldo    = this.c_saldos[index].saldo;
+       
+        $('#conciliacion_saldos').modal('show');     
+       
+      },//end edit saldos
+  
+       updateSaldo(){
+         var i = this.update;
+         this.c_saldos[i].detalle = this.saldo.detalle;
+         this.c_saldos[i].saldo  = this.saldo.saldo;
+         $('#conciliacion_saldos').modal('hide');  
+         this.limpiar();
+         this.totales();
+       
+  
+       }, //fin udpate saldo
+
+       editDebitos(index){
+        this.update = index;
+        this.debito.detalle   = this.c_debitos[index].detalle;
+        this.debito.saldo    = this.c_debitos[index].saldo;
+       
+        $('#conciliacion_debitos').modal('show');     
+       
+      },//end edit saldos
+  
+       updateDebitos(){
+         var i = this.update;
+         this.c_debitos[i].detalle = this.debito.detalle;
+         this.c_debitos[i].saldo  = this.debito.saldo;
+       
+         $('#conciliacion_debitos').modal('hide');  
+         this.limpiar();
+         this.totales();
+       
+  
+       }, //fin udpate saldo
+       editCreditos(index){
+        this.update = index;
+        this.credito.detalle   = this.c_creditos[index].detalle;
+        this.credito.saldo     = this.c_creditos[index].saldo;
+       
+        $('#conciliacion_creditos').modal('show');     
+       
+      },//end edit saldos
+  
+       updateCreditos(){
+         var i = this.update;
+         this.c_creditos[i].detalle = this.credito.detalle;
+         this.c_creditos[i].saldo   = this.credito.saldo;
+       
+         $('#conciliacion_creditos').modal('hide');  
+         this.limpiar();
+         this.totales();
+       
+       }, //fin udpate saldo
+
+       editCheques(index){
+        this.update = index;
+        this.cheques.detalle   = this.c_cheques[index].detalle;
+        this.cheques.saldo     = this.c_cheques[index].saldo;
+       
+        $('#conciliacion_cheques').modal('show');     
+       
+      },//end edit saldos
+  
+       updateCheques(){
+         var i = this.update;
+         this.c_cheques[i].detalle = this.cheques.detalle;
+         this.c_cheques[i].saldo   = this.cheques.saldo;
+       
+         $('#conciliacion_cheques').modal('hide');  
+         this.limpiar();
+         this.totales();
+       
+       }, //fin udpate saldo
+
+
+       guardarConciliacionB(){
+
+       
+        if(this.nombre.length == 0){
+          toastr.error("Debe Registrar el Nombre del Comercial", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else if(this.fecha.length == 0){
+          toastr.error("Debe Ingresar la Fecha", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else if(this.n_banco.length == 0){
+          toastr.error("Debe Ingresar el Nombre del Banco", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else if(this.c_saldos.length == 0){
+          toastr.error("Debe haber al menos un Saldo Registrado", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else if (this.c_debitos.length == 0){
+          toastr.error("Debe haber al menos un Débito Registrado", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else if (this.c_creditos.length == 0){
+          toastr.error("Debe haber al menos un Crédito Registrado", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else if (this.c_cheques.length == 0){
+          toastr.error("Debe haber al menos un Cheque Registrado", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else {
+          let _this = this;
+          let url= '/sistema/admin/taller/conciliacion_bancaria';
+          axios.post(url,{
+                 id:  _this.id_taller,
+             nombre:  _this.nombre,
+            n_banco:  _this.n_banco,
+              fecha:  _this.fecha,
+            saldo_c:  _this.suman.saldo_c,
+            saldo_d:  _this.suman.saldo_d,
+           saldo_ch:  _this.suman.saldo_ch,
+              total:  _this.suman.total,
+           c_saldos:  _this.c_saldos,
+          c_debitos:  _this.c_debitos,
+         c_creditos:  _this.c_creditos,
+          c_cheques:  _this.c_cheques,
+          
+          }).then(response=>{
+            if (response.data.estado == 'guardado') {
+              toastr.success("Conciliación Bancaria creada correctamente", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+            }else if (response.data.estado == 'actualizado') {
+             toastr.warning("Conciliación Bancaria actualizado correctamente", "Smarmoddle", {
+            "timeOut": "3000"
+          });
+          }  
+  
+        }).catch(function(error){
+        });
+        
+        }//end else
+       },//fin guardado conciliacion
+      
+       obtenerConciliacionBancaria : function(){
+         let _this = this;
+         let   url = '/sistema/admin/taller/conciliacion-obtener-bancaria';
+         axios.post(url,{
+          id: _this.id_taller,
+        }).then(response=>{
+          if(response.data.datos == true){
+            toastr.info("Anexo Conciliación Bancaria cargado correctamente", "Smarmoddle", {
+              "timeOut": "3000"
+              });
+              this.c_saldos   = response.data.saldo;
+              this.c_debitos  = response.data.debito;
+              this.c_creditos = response.data.credito;
+              this.c_cheques  = response.data.cheque;
+              this.nombre     = response.data.nombre;
+              this.n_banco    = response.data.n_banco;
+              this.fecha      = response.data.fecha;
+              this.totales();
+          }
+        }).catch(function(error){
+  
+        });
+  
+
+       }//fin metodo obtener conciliacion bancaria
+
+    },
+
+
+});
 
 

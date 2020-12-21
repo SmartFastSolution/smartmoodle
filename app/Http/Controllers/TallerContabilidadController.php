@@ -8,6 +8,11 @@ use App\Arqueocajas;
 use App\ArqueoExi;
 use App\ArqueoSaldo;
 use App\Cajadatos;
+use App\Conciliacionbancaria;
+use App\Conciliacioncheque;
+use App\Conciliacioncredito;
+use App\Conciliaciondebito;
+use App\Conciliacionsaldo;
 use App\Contabilidad\BCARegistro;
 use App\Contabilidad\BCRegistro;
 use App\Contabilidad\BIActivo;
@@ -1571,6 +1576,215 @@ class TallerContabilidadController extends Controller
 
          }
     }
+
+   public function ConciliacionBancaria(Request $request){
+      $id  = Auth::id();
+      $taller_id   = $request->id;
+      $nombre      =$request->nombre;
+      $fecha       =$request->fecha;
+      $n_banco     =$request->n_banco;
+      $c_saldos    =$request->c_saldos;
+      $c_debitos   =$request->c_debitos;
+      $c_creditos  =$request->c_creditos;
+      $c_cheques   =$request->c_cheques;
+    
+      $cb  = Conciliacionbancaria::where('user_id', $id)->where('taller_id',$taller_id)->count();      
+      if($cb ==0){
+        $b = new Conciliacionbancaria;
+        $b->taller_id  = $taller_id;
+        $b->user_id    = $id;
+        $b->nombre     = $nombre;
+        $b->fecha      = $fecha;
+        $b->n_banco    = $n_banco;
+        $b->saldo_c    = $request->saldo_c;
+        $b->saldo_ch   = $request->saldo_ch;
+        $b->saldo_d    = $request->saldo_d;
+        $b->total      = $request->total;
+        $b->save();
+        $cbs= Conciliacionbancaria::where('user_id', $id)->get()->last();
+                foreach($c_saldos as $key=>$s){
+
+                    $datos = array(
+                        'conciliacionbancaria_id' =>$cbs->id,
+                        'detalle'        =>$s['detalle'],
+                        'saldo'          =>$s['saldo'],
+                        'created_at'        => now(),
+                        'updated_at'        => now(),
+        
+                    );
+                    Conciliacionsaldo::insert($datos);
+                }
+                foreach($c_debitos as $key=>$s){
+
+                    $datos = array(
+                        'conciliacionbancaria_id' =>$cbs->id,
+                        'detalle'        =>$s['detalle'],
+                        'saldo'          =>$s['saldo'],
+                        'created_at'        => now(),
+                        'updated_at'        => now(),
+        
+                    );
+                    Conciliaciondebito::insert($datos);
+                }
+                foreach($c_creditos as $key=>$s){
+
+                    $datos = array(
+                        'conciliacionbancaria_id' =>$cbs->id,
+                        'detalle'        =>$s['detalle'],
+                        'saldo'          =>$s['saldo'],
+                        'created_at'        => now(),
+                        'updated_at'        => now(),
+        
+                    );
+                    Conciliacioncredito::insert($datos);
+                }
+                foreach($c_cheques as $key=>$s){
+
+                    $datos = array(
+                        'conciliacionbancaria_id' =>$cbs->id,
+                        'detalle'        =>$s['detalle'],
+                        'saldo'          =>$s['saldo'],
+                        'created_at'        => now(),
+                        'updated_at'        => now(),
+        
+                    );
+                    Conciliacioncheque::insert($datos);
+                }
+                return response(array(
+                    'success' => true,
+                    'estado'  => 'guardado',
+                    'message' => 'Anexo Conciliación Bancaria creado correctamente'
+                ),200,[]);
+   
+
+        }elseif ($cb == 1){
+            $ids     =[];
+            $cb  = Conciliacionbancaria::where('user_id', $id)->where('taller_id',$taller_id)->first();     
+            $cb->nombre     = $nombre;
+            $cb->fecha      = $fecha;
+            $cb->n_banco    = $n_banco;
+            $cb->saldo_c    = $request->saldo_c;
+            $cb->saldo_ch   = $request->saldo_ch;
+            $cb->saldo_d    = $request->saldo_d;
+            $cb->total      = $request->total;
+            $cb->save();
+            
+            $cbs = Conciliacionsaldo::where('conciliacionbancaria_id',$cb->id)->get();
+            foreach($cbs as $i){
+                $ids[]=$i->id;
+             }
+             $deteletesaldo = Conciliacionsaldo::destroy($ids);
+
+             $cbd = Conciliaciondebito::where('conciliacionbancaria_id',$cb->id)->get();
+             foreach($cbd as $i){
+                 $ids[]=$i->id;
+              }
+             $deteletedebito = Conciliaciondebito::destroy($ids);
+
+             $cbc = Conciliacioncredito::where('conciliacionbancaria_id',$cb->id)->get();
+             foreach($cbc as $i){
+                 $ids[]=$i->id;
+              }
+             $deteletecredito = Conciliacioncredito::destroy($ids);
+
+             $cbch = Conciliacioncheque::where('conciliacionbancaria_id',$cb->id)->get();
+             foreach($cbch as $i){
+                 $ids[]=$i->id;
+              }
+             $deteletecheque = Conciliacioncheque::destroy($ids);
+
+             
+             $cba= Conciliacionbancaria::where('user_id', $id)->get()->last();
+
+             foreach($c_saldos as $key=>$s){
+
+                $datos = array(
+                    'conciliacionbancaria_id' =>$cba->id,
+                    'detalle'        =>$s['detalle'],
+                    'saldo'          =>$s['saldo'],
+                    'created_at'        => now(),
+                    'updated_at'        => now(),
+    
+                );
+                Conciliacionsaldo::insert($datos);
+            }
+            foreach($c_debitos as $key=>$s){
+
+                $datos = array(
+                    'conciliacionbancaria_id' =>$cba->id,
+                    'detalle'        =>$s['detalle'],
+                    'saldo'          =>$s['saldo'],
+                    'created_at'        => now(),
+                    'updated_at'        => now(),
+    
+                );
+                Conciliaciondebito::insert($datos);
+            }
+            foreach($c_creditos as $key=>$s){
+
+                $datos = array(
+                    'conciliacionbancaria_id' =>$cba->id,
+                    'detalle'        =>$s['detalle'],
+                    'saldo'          =>$s['saldo'],
+                    'created_at'        => now(),
+                    'updated_at'        => now(),
+    
+                );
+                Conciliacioncredito::insert($datos);
+            }
+            foreach($c_cheques as $key=>$s){
+
+                $datos = array(
+                    'conciliacionbancaria_id' =>$cba->id,
+                    'detalle'        =>$s['detalle'],
+                    'saldo'          =>$s['saldo'],
+                    'created_at'        => now(),
+                    'updated_at'        => now(),
+    
+                );
+                Conciliacioncheque::insert($datos);
+            }
+            return response(array(
+                'success' => true,
+                'estado'  => 'actualizado',
+                'message' => 'Anexo Conciliación Bancaria Actualizado correctamente'
+            ),200,[]);
+
+        } //end elseif
+   }
+
+   public function ObtenerConciliacionB (Request $request){
+    $id = Auth::id();
+    $taller_id = $request->id;
+    $cb  = Conciliacionbancaria::where('user_id', $id)->where('taller_id',$taller_id)->count();
+
+    if($cb==1){
+        $a     = Conciliacionbancaria::where('user_id', $id)->where('taller_id',$taller_id)->first();
+      $saldo   = Conciliacionsaldo::select('detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+      $debito  = Conciliaciondebito::select('detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+      $credito = Conciliacioncredito::select('detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+      $cheque  = Conciliacioncheque::select('detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+   
+      return response(array(
+        'datos'   => true,
+        'saldo'   => $saldo, 
+        'debito'  => $debito, 
+        'credito' => $credito, 
+        'cheque'  => $cheque, 
+        'nombre'  => $a->nombre,
+        'fecha'   => $a->fecha,
+        'n_banco' => $a->n_banco,
+    ),200,[]);
+    
+    }else{
+        return response(array(
+           'datos' => false,
+       ),200,[]);
+
+    } //fin else
+
+   } //fin metodo obtener
+
+
+
 }
-
-

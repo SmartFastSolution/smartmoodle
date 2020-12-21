@@ -350,6 +350,8 @@ route::post('/sistema/admin/taller/libro_banco', 'TallerContabilidadController@L
 route::post('/sistema/admin/taller/libro-obtener-banco', 'TallerContabilidadController@obtenerLbanco')->name('librobanco.obtener');
 
 
+route::post('/sistema/admin/taller/conciliacion_bancaria', 'TallerContabilidadController@ConciliacionBancaria')->name('conciliacion_bancaria');
+route::post('/sistema/admin/taller/conciliacion-obtener-bancaria', 'TallerContabilidadController@ObtenerConciliacionB')->name('conciliacionbancaria.obtener');
 //
 route::post('/sistema/homedoc/respuesta/taller1/{idtaller}', 'TallerDocenteController@store1')->name('taller1.docente');
 route::get('/sistema/admin/create', 'AdminController@admin')->name('admin.create');

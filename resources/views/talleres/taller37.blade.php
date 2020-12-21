@@ -94,7 +94,7 @@
                     href="#list-messages" role="tab" aria-controls="messages">Diario General</a>
                 <a class="list-group-item list-group-item-action" id="list-balance-ajustado-list" data-toggle="list"
                     href="#list-balance-ajustado" role="tab" aria-controls="balance-ajustado">Balance Ajustado</a>
-                    <a class="list-group-item list-group-item-action" id="list-mayor-general-list" data-toggle="list"
+                <a class="list-group-item list-group-item-action" id="list-mayor-general-list" data-toggle="list"
                     href="#list-mayor-general" role="tab" aria-controls="mayor-general">Mayor General</a>
                 <a class="list-group-item list-group-item-action" id="list-libro-caja-list" data-toggle="list"
                     href="#list-libro-caja" role="tab" aria-controls="libro-caja">Libro Caja</a>
@@ -102,10 +102,14 @@
                     href="#list-arqueo-caja" role="tab" aria-controls="arqueo-caja">Arqueo Caja</a>
                 <a class="list-group-item list-group-item-action" id="list-libro-banco-list" data-toggle="list"
                     href="#list-libro-banco" role="tab" aria-controls="libro-banco">Libro Banco</a>
+                <a class="list-group-item list-group-item-action" id="list-conciliacion-bancaria-list"
+                    data-toggle="list" href="#list-conciliacion-bancaria" role="tab"
+                    aria-controls="conciliacion-bancaria">Conciliación Bancaria</a>
+                <a class="list-group-item list-group-item-action" id="list-retencion-iva-list" data-toggle="list"
+                    href="#list-retencion-iva" role="tab" aria-controls="retencion-iva">Retencion del IVA</a>
 
-          
-            
-        
+
+
             </div>
         </div>
         <div class="col-12 col-sm-12 col-md-10">
@@ -139,6 +143,11 @@
                     @include('contabilidad.librocaja')
 
                 </div>
+                <div class="tab-pane fade" id="list-conciliacion-bancaria" role="tabpanel"
+                    aria-labelledby="list-conciliacion-bancaria-list">
+                    @include('contabilidad.conciliacionbancaria')
+
+                </div>
                 <div class="tab-pane fade" id="list-arqueo-caja" role="tabpanel"
                     aria-labelledby="list-arqueo-caja-list">
                     @include('contabilidad.arqueocaja')
@@ -147,6 +156,10 @@
                 <div class="tab-pane fade" id="list-libro-banco" role="tabpanel"
                     aria-labelledby="list-libro-banco-list">
                     @include('contabilidad.librobanco')
+                </div>
+                <div class="tab-pane fade" id="list-retencion-iva" role="tabpanel"
+                    aria-labelledby="list-retencion-iva-list">
+                    @include('contabilidad.retencioniva')
                 </div>
                 <div class="tab-pane fade border border-danger p-4" id="list-diario" role="tabpanel"
                     aria-labelledby="list-diario-list">

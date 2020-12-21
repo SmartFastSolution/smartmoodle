@@ -384,6 +384,11 @@ class Taller extends Model
           
         return $this->hasMany('App\Arqueocajas');
     }
+    public function conciliacionbancarias(){
+          
+        return $this->hasMany('App\Conciliacionbancaria');
+    }
+    
     
 }
 
