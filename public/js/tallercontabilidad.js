@@ -3915,6 +3915,10 @@ const estado_resultado = new Vue({
       edit:false,
       const_id:''
     },
+    utilidad_bruta:{
+      costo:'',
+      costo_venta:'',
+    },
     gasto:{
       cuenta_id:'',
       saldo:'',
@@ -3925,6 +3929,7 @@ const estado_resultado = new Vue({
       cuenta_id:'',
       saldo:'',
       edit:false,
+      create:false,
       const_id:''
     },
     utilidades:[],
@@ -3934,6 +3939,11 @@ const estado_resultado = new Vue({
       gastos:0,
     },
     update:false,
+    registro:{
+      ingreso:'',
+      gasto:'',
+      utilida:'',
+    },
     totales:{
       ingreso:0,
       gasto:0,
@@ -3946,8 +3956,97 @@ const estado_resultado = new Vue({
 
   mounted: function () {
     this.obtenerHojita();
+    this.obtenerEstadoResultado();
   },
   methods:{
+    agregarBruta(){
+      this.venta                      = this.utilidad_bruta.venta;
+      this.costo_venta                = this.utilidad_bruta.costo_venta;
+      toastr.info("Datos agregados", "Smarmoddle", {
+            "timeOut": "3000"
+            });
+      // this.utilidad_bruta.venta       = '';
+      // this.utilidad_bruta.costo_venta = '';
+
+      let suma_ventas = Number(this.venta - this.costo_venta);
+      this.totales.utilidad_bruta_ventas = suma_ventas;
+      console.log(suma_ventas)
+      this.totale();
+    },
+    subtotal(){
+      let total = Number(this.totales.ingreso) + Number(this.totales.utilidad_bruta_ventas);
+      console.log(total);
+      this.totales.utilidad_neta_o = Number(total).toFixed(2);
+    },
+  warningEliminarIngreso(id){
+      let nombre = this.ingresos[id].cuenta;
+      Swal.fire({
+        title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+nombre,
+            'success'
+          );
+          this.ingresos.splice(id, 1);
+        }
+      });
+      // $('#eliminar-ht').modal('show');
+
+    },
+      warningEliminarGastos(id){
+      let nombre = this.gastos[id].cuenta;
+      Swal.fire({
+        title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+nombre,
+            'success'
+          );
+          this.gastos.splice(id, 1);
+        }
+      });
+      // $('#eliminar-ht').modal('show');
+
+    },
+      warningEliminarUtilidad(id){
+      let nombre = this.utilidades[id].cuenta;
+      Swal.fire({
+        title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+nombre,
+            'success'
+          );
+          this.utilidades.splice(id, 1);
+        }
+      });
+      // $('#eliminar-ht').modal('show');
+
+    },
    VueSweetAlert2(component,propsData)
     {
         Swal.fire({
@@ -3981,6 +4080,10 @@ const estado_resultado = new Vue({
       }); 
       this.totales.ingreso =   total1.toFixed(2);
       this.totales.gastos =   total2.toFixed(2);
+
+      console.log(total1)
+      console.log(total2)
+      this.subtotal();
 
     }, 
     selectUtilidad(){
@@ -4095,6 +4198,17 @@ const estado_resultado = new Vue({
 
 
     },
+    mostrarUtilidades(){
+      this.utilida.create = true;
+    },
+    cerrarUtilidades(){
+      this.utilida.create    = false;
+      this.utilida.cuenta_id = '' ;
+      this.utilida.saldo     = '' ;
+      this.utilida.edit      = false ;
+      this.utilida.create    = false ;
+      this.const_id          = '';
+    },
     agregarIngreso(){
      if(this.ingreso.cuenta_id  ==''){
       toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
@@ -4117,6 +4231,7 @@ const estado_resultado = new Vue({
      this.ingreso.cuenta_id =''
      this.ingreso.saldo     =''
      this.totale();
+     this.subtotal();
    }
      }                
       }, 
@@ -4142,6 +4257,7 @@ const estado_resultado = new Vue({
      this.gasto.cuenta_id =''
      this.gasto.saldo     =''
      this.totale();
+     this.subtotal();
    }
      }                
       }, 
@@ -4167,6 +4283,7 @@ const estado_resultado = new Vue({
      this.utilida.cuenta_id =''
      this.utilida.saldo     =''
      this.totale();
+     this.subtotal();
    }
      }                
       }, 
@@ -4221,6 +4338,7 @@ const estado_resultado = new Vue({
             this.ingreso.edit              = false;
             this.registro.ingreso              = '';
             this.totale();
+            this.subtotal();
           }
 
       }
@@ -4276,11 +4394,13 @@ const estado_resultado = new Vue({
             this.registro.gasto          = '';
            
             this.totales();
+            this.subtotal();
           }
 
       }
     },
       editUtilidad(index){
+       this.utilida.create      = true;
        this.utilida.edit      = true;
        this.registro.utilida  = index;
        this.utilida.const_id  = this.utilidades[index].cuenta_id;
@@ -4327,12 +4447,80 @@ const estado_resultado = new Vue({
             this.utilida.cuenta_id           =''
             this.utilida.saldo               =''
             this.utilida.edit                = false;
+            this.utilida.create                = false;
             this.registro.utilidad           = '';
             this.totale();
+            this.subtotal();
           }
 
       }
     },
+              guardarEstadoResultado: function(){
+                if (this.nombre.trim() === '') {
+                  toastr.error("Campo Nombre es obligatorio", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else if (this.fecha.trim() === '') {
+                  toastr.error("Campo Fecha es obligatorio", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else{
+                let _this = this;
+                let url = '/sistema/admin/taller/estado-resultado';
+                    axios.post(url,{
+                    id: _this.id_taller,
+                    nombre: _this.nombre,
+                    fecha: _this.fecha,
+                    ingresos: _this.ingresos,
+                    gastos: _this.gastos,
+                    utilidades: _this.utilidades,
+                    totales:_this.totales,
+                    venta: _this.venta,
+                    costo_venta: _this.costo_venta,
+                }).then(response => {
+                  if (response.data.success == 'actualizado') {
+                     toastr.success(response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+                  
+                  }else{
+                      toastr.success(response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+                    
+                  
+                  }                     
+                }).catch(function(error){
+                  toastr.error(error.response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+                });
+              }
+            },
+        obtenerEstadoResultado: function() {
+        let _this = this;
+        let url = '/sistema/admin/taller/estado-obtener-resultado';
+            axios.post(url,{
+              id: _this.id_taller,
+        }).then(response => {
+          if (response.data.datos == true) {
+                    _this.nombre           = response.data.estadoresultado.nombre
+                    _this.fecha            = response.data.estadoresultado.fecha
+                    _this.ingresos         = response.data.ingresos
+                    _this.gastos           = response.data.gastos
+                    _this.utilidades       = response.data.utilidades
+                    _this.venta            = response.data.estadoresultado.venta
+                    _this.costo_venta      = response.data.estadoresultado.costo_venta
+                    _this.totales.utilidad_ejercicio  = response.data.estadoresultado.utilidad_neta_o
+                    _this.totales.utilidad_liquida = response.data.estadoresultado.utilidad_liquida
+                    console.log(response.data.estadoresultado)
+              this.totale();
+            this.subtotal();
+            }          
+        }).catch(function(error){
+
+        }); 
+     } 
 
 
 
@@ -4340,6 +4528,692 @@ const estado_resultado = new Vue({
 
 
 });
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////BALANCE GENERAL ///////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+var balance_general = new Vue({
+
+  el: "#balance_general",
+  data:{
+    nombre:'',
+    fecha:'',
+        id_taller: taller,
+        hojatrabajo:[],
+        nombre_hoja:'',
+        //diarios:[],
+        update:0,
+        balance_inicial:{ //Nombre y fecha del balance inicial
+          nombre:'',
+          fecha:''
+        },
+        patrimonio:{ //Asignar Patrimonio
+          nom_cuenta:'',
+          saldo:'',
+        },
+        bi:{
+          const_id:''
+        },
+         options: objeto,
+        cuentas: cuentas,
+        //diarios2:[],
+        total_balance_inicial:{ //Totales de activo, pasivo y patrimonio
+          t_activo:'',
+          t_pasivo:'',
+          t_patrimonio_pasivo:''
+        },
+        b_initotal:{
+            t_a_corriente:'', //Total de activo corriente
+            t_a_nocorriente:'', //Total de activo no corriente
+            t_p_corriente:'', //Total de pasivo corriente
+            t_p_no_corriente:'', //Total de pasivo no corriente
+            t_patrimonio:'' //Total de patrimonio
+        },
+        a_corrientes:[], //Array de activos corrientes
+        a_nocorrientes:[], //Array de activos no corrientes
+        p_corrientes:[], //Array de pasivos corrientes
+        p_nocorrientes:[], //Array de pasivos no corrientes
+        patrimonios:[], //Array de patrimonios
+        activo:{
+          a_corriente:
+            { //Agregar un nuevo activo corriente al array
+                cuenta_id:'',
+                saldo:'', 
+                edit:false             
+              },
+          a_nocorriente:
+            { //Agregar un nuevo activo no corriente al array
+                cuenta_id:'',
+                saldo:'',
+                edit:false
+              },
+        },
+        pasivo:{
+          p_corriente:
+            { 
+                cuenta_id:'',
+                saldo:'',
+                total:'',
+                edit:false
+              },
+          p_nocorriente:
+            { 
+                cuenta_id:'',
+                saldo:'',
+                total:'',
+                edit:false
+              }
+        },
+  
+  },
+  mounted: function(){
+    this.obtenerHojita();
+    this.cambioActivo();
+    this.cambioActivoNo();
+    this.cambioPasivo();
+    this.cambioPasivoNo();
+    this.cambioPatrimonio();
+    this.TotalActivo();
+    this.TotalPasivo();
+    this.obtenerBalance();
+  },
+   methods:{
+      decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+      obtenerHojita: function() {
+        let _this = this;
+        let url = '/sistema/admin/taller/hoja-obtener-trabajo';
+            axios.post(url,{
+              id: _this.id_taller,
+        }).then(response => {
+          if (response.data.datos == true) {
+              this.hojatrabajo = response.data.hojatrabajo;
+              this.nombre_hoja = response.data.nombre;
+             
+            }          
+        }).catch(function(error){
+
+        }); 
+     },
+    abrirActivoC(){
+      // this.limpiar();
+      $('#bg-transaccion').modal('show');
+      $('#nav-bg-activo-corrente-tab').tab('show')
+      // $('#kardex-promedio-ingreso-edit-tab').tab('show')
+
+    },
+      abrirActivoNoC(){
+        this.limpiar();
+      $('#a_nocorriente2').modal('show')
+    },
+      abrirPasivoC(){
+        this.limpiar();
+      $('#p_corriente2').modal('show')
+    },
+      abrirPasivoNoC(){
+        this.limpiar();
+      $('#p_nocorriente2').modal('show')
+    },
+      abrirPatrimonio(){
+        this.limpiar();
+      $('#patrimonio2').modal('show')
+    },
+    
+//ELIMINAR ELEMENTOS DE UN ARRAY /////////
+    deleteAcCooriente(index){
+      this.a_corrientes.splice(index, 1);   //ELIMINAR UN ELEMENTO DEL ARRAY COMENZANDO DESDE SU INDEX
+      this.cambioActivo();                  //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
+      this.TotalActivo();                   //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
+    },
+     deletePaCooriente(index){
+      this.p_corrientes.splice(index, 1);
+      this.cambioPasivo();
+      this.TotalPasivo();
+    },
+     deleteAcNoCooriente(index){
+      this.a_nocorrientes.splice(index, 1);
+      this.cambioActivoNo();
+      this.TotalActivo();
+    },
+     deletePaNoCooriente(index){
+      this.p_nocorrientes.splice(index, 1);
+      this.cambioPasivoNo();
+      this.TotalPasivo();
+    },
+     deletePatrimonio(index){
+      this.patrimonios.splice(index, 1);
+      this.cambioPatrimonio();
+    },
+    limpiar(){ //LIMPIAR TODOS LOS CAMPOS DE ACTIVOS PASIVOS Y PATRIMONIOS
+      this.pasivo.p_corriente.nom_cuenta = '';
+      this.pasivo.p_corriente.saldo = '';
+      this.pasivo.p_nocorriente.nom_cuenta = '';
+      this.pasivo.p_nocorriente.saldo = '';
+      this.activo.a_corriente.nom_cuenta = '';
+      this.activo.a_corriente.saldo = '';
+      this.activo.a_nocorriente.nom_cuenta = '';
+      this.activo.a_nocorriente.saldo = '';
+      this.bi.const_id = '';
+
+      },
+    //EDITAR ELEMENTOS DE UN ARRAY
+    editAcorriente(index){ //OBTENEMOS EL INDICE DEL ARRAY SELECCIONADO
+      this.update = index;                                                       //IGUALAMOS LA VARIABLE UPDATE CON EL INDICE DEL ARRAY
+      this.activo.a_corriente.saldo = this.a_corrientes[index].saldo;           //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
+      this.activo.a_corriente.nom_cuenta = this.a_corrientes[index].cuenta_id; //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
+      $('#a_corriente2').modal('show'); 
+       this.bi.const_id = this.a_corrientes[index].cuenta_id;  
+                                           //MOSTRAR EL MODAL CON JS
+      //var activo = this.a_corrientes[index];
+    },
+  updateACorriente(){
+      let id = this.activo.a_corriente.nom_cuenta;
+           let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+      let nombre = funciones.obtenerNombre(id);
+      var i = this.update;                                                    //I SERA EL INDICE QUE SE ASIGNO EN EL METODO EDITAR
+      this.a_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+      this.a_corrientes[i].nom_cuenta = nombre;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+      this.a_corrientes[i].saldo = this.activo.a_corriente.saldo;             //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+      $('#a_corriente2').modal('hide');                                      //OCULTAR EL MODAL
+      this.limpiar();
+      this.cambioActivo();
+  }
+    },
+    editANocorriente(index){
+      this.update = index;
+      this.activo.a_nocorriente.saldo = this.a_nocorrientes[index].saldo;
+      this.activo.a_nocorriente.nom_cuenta = this.a_nocorrientes[index].cuenta_id;
+      $('#a_nocorriente2').modal('show');
+       this.bi.const_id = this.a_nocorrientes[index].cuenta_id;
+
+      //var activo = this.a_nocorrientes[index];
+    },
+    updateANoCorriente(){
+      let id = this.activo.a_nocorriente.nom_cuenta;
+           let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+      let nombre = funciones.obtenerNombre(id);
+      var i = this.update;
+      this.a_nocorrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+      this.a_nocorrientes[i].nom_cuenta = nombre;
+      this.a_nocorrientes[i].saldo = this.activo.a_nocorriente.saldo;
+      $('#a_nocorriente2').modal('hide');
+      this.limpiar();
+      this.cambioActivoNo();
+      this.TotalActivo();
+    }
+    },
+    editPcorriente(index){
+      this.update = index ;
+      this.pasivo.p_corriente.saldo = this.p_corrientes[index].saldo;
+      this.pasivo.p_corriente.nom_cuenta = this.p_corrientes[index].cuenta_id;
+      $('#p_corriente2').modal('show');
+      this.bi.const_id = this.p_corrientes[index].cuenta_id;
+
+      //var activo = this.a_corrientes[index];
+    },
+    updatePCorriente(){
+      let id = this.pasivo.p_corriente.nom_cuenta;
+           let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+      let nombre = funciones.obtenerNombre(id);
+      var i = this.update;
+      this.p_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+      this.p_corrientes[i].nom_cuenta = nombre;
+      this.p_corrientes[i].saldo = this.pasivo.p_corriente.saldo;
+      $('#p_corriente2').modal('hide');
+      this.limpiar();
+      this.cambioPasivo();
+      this.TotalPasivo();
+    }
+    },
+    editPNocorriente(index){
+      this.update = index ;
+      this.pasivo.p_nocorriente.saldo = this.p_nocorrientes[index].saldo;
+      this.pasivo.p_nocorriente.nom_cuenta = this.p_nocorrientes[index].cuenta_id;
+      $('#p_nocorriente2').modal('show');
+       this.bi.const_id = this.p_nocorrientes[index].cuenta_id;
+
+      //var activo = this.a_corrientes[index];
+    },
+    updatePNoCorriente(){
+      let id = this.pasivo.p_nocorriente.nom_cuenta;
+           let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+      let nombre = funciones.obtenerNombre(id);
+      var i = this.update;
+      this.p_nocorrientes[i].cuenta_id = id;
+      this.p_nocorrientes[i].nom_cuenta = nombre;
+      this.p_nocorrientes[i].saldo = this.pasivo.p_nocorriente.saldo;
+      $('#p_nocorriente2').modal('hide');
+      this.limpiar();
+      this.cambioPasivoNo();
+      this.TotalPasivo();
+    }
+    },
+    editPatrimonio(index){
+      this.update = index ;
+      this.patrimonio.saldo = this.patrimonios[index].saldo;
+      this.patrimonio.nom_cuenta = this.patrimonios[index].cuenta_id;
+      $('#patrimonio2').modal('show');
+      this.bi.const_id = this.patrimonios[index].cuenta_id;
+
+      //var activo = this.a_corrientes[index];
+    },
+    updatePatrimonio(){
+       let id = this.patrimonio.nom_cuenta;
+            let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+      let nombre = funciones.obtenerNombre(id);
+      var i = this.update;
+      this.patrimonios[i].cuenta_id = id;
+      this.patrimonios[i].nom_cuenta = nombre;
+      this.patrimonios[i].saldo = this.patrimonio.saldo;
+      $('#patrimonio2').modal('hide');
+      this.limpiar();
+      this.cambioPatrimonio();
+    }
+    },      
+         // ejemplo(){
+         //        let me =this;
+         //        var formdata = new FormData();
+         //        formdata.append('data', JSON.stringify(this.diarios))
+                
+         //        axios.post(url,formdata).then(function (response) {
+         //              console.log(response.data);
+         //        toastr.success("Diario general guardado correctamente", "Smarmoddle", {
+         //            "timeOut": "3000"
+         //           });
+         //        diarios:[];
+         //        })
+         //        .catch(function (error) {
+         //            console.log(error);
+         //        });   
+                
+         //    },
+        verificarCuenta(id){
+           if (Number(this.bi.const_id) === id) {
+              return false
+            }
+           let ac  = this.a_corrientes.filter(x => x.cuenta_id == id);
+           let anc = this.a_nocorrientes.filter(x => x.cuenta_id == id);
+           let pc  = this.p_corrientes.filter(x => x.cuenta_id == id);
+           let pnc = this.a_nocorrientes.filter(x => x.cuenta_id == id);
+           let p   = this.patrimonios.filter(x => x.cuenta_id == id);
+            if (ac.length > 0) {
+            return true
+             }else if(anc.length > 0) {
+            return true
+             }else if(pc.length > 0) {
+            return true
+             }else if(pnc.length > 0) {
+            return true
+             }else if(p.length > 0) {
+            return true
+             }else{
+              return false
+             }
+          },
+            agregarActivoCorriente(){
+              
+               if(this.activo.a_corriente.nom_cuenta == '' || this.activo.a_corriente.saldo === ''){
+                toastr.error("Estos campos son obligatorio", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+               
+             }else{
+            let id = this.activo.a_corriente.nom_cuenta;
+            let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+              let nombre = funciones.obtenerNombre(id);
+                var a_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_corriente.saldo};
+                this.a_corrientes.push(a_corr);                               //añadimos el la variable persona al array
+                  toastr.success("Registro agregado correctamente", "Smarmoddle", {
+                    "timeOut": "3000"
+                });
+                //Limpiamos los campos
+                this.activo.a_corriente.nom_cuenta = '';
+                this.activo.a_corriente.saldo = '';
+                //SUMAR TOTALES
+                
+                this.cambioActivo();  
+              }
+              }
+            },
+             agregarActivoNoCorriente(){
+
+                if(this.activo.a_nocorriente.nom_cuenta == '' || this.activo.a_nocorriente.saldo === ''){
+                toastr.error("Estos campos son obligatorio", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+            let id = this.activo.a_nocorriente.nom_cuenta;
+            let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+              let nombre = funciones.obtenerNombre(id);
+                  var a_nocorr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_nocorriente.saldo};//CREANDO EL OBJETO QUE SE AGREGARA AL ARRAY
+                this.a_nocorrientes.push(a_nocorr);//AGREGAR UNA NUEVA CUENTA AL ARRAY DE PASIVOS
+                  //Limpiamos los campos
+                  toastr.success("Registro agregado correctamente", "Smarmoddle", {
+                    "timeOut": "3000"
+                });
+                this.activo.a_nocorriente.nom_cuenta = '';
+                this.activo.a_nocorriente.saldo = '';
+                this.cambioActivoNo();          
+              }
+               }
+             },
+               agregarPasivoCorriente(){
+                if(this.pasivo.p_corriente.nom_cuenta == '' || this.pasivo.p_corriente.saldo === ''){
+                toastr.error("Estos campos son obligatorio", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+              }else{
+                let id = this.pasivo.p_corriente.nom_cuenta;
+                     let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+                let nombre = funciones.obtenerNombre(id);
+
+                var p_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.pasivo.p_corriente.saldo};
+                this.p_corrientes.push(p_corr);//añadimos el la variable persona al array
+                  //Limpiamos los campos
+                  toastr.success("Registro agregado correctamente", "Smarmoddle", {
+                    "timeOut": "3000"
+                });
+                this.pasivo.p_corriente.nom_cuenta = '';
+                this.pasivo.p_corriente.saldo = '';
+                this.cambioPasivo();          
+              }
+            }
+            },
+             agregarPasivoNoCorriente(){
+                if(this.pasivo.p_nocorriente.nom_cuenta == '' || this.pasivo.p_nocorriente.saldo === ''){
+                toastr.error("Estos campos son obligatorio", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+                let id = this.pasivo.p_nocorriente.nom_cuenta;
+                     let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+                let nombre = funciones.obtenerNombre(id);
+                let p_nocorr = {cuenta_id: id, nom_cuenta: nombre, saldo:this.pasivo.p_nocorriente.saldo};
+                this.p_nocorrientes.push(p_nocorr);//añadimos el la variable persona al array
+                  //Limpiamos los campos
+                toastr.success("Registro agregado correctamente", "Smarmoddle", {
+                    "timeOut": "3000"
+                });
+                this.pasivo.p_nocorriente.nom_cuenta = '';
+                this.pasivo.p_nocorriente.saldo = '';
+                this.cambioPasivoNo();
+                }  
+                } 
+             }, 
+             agregarPatrimonio(){
+                if(this.patrimonio.nom_cuenta == '' || this.patrimonio.saldo === ''){
+                toastr.error("Estos campos son obligatorio", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+               let id = this.patrimonio.nom_cuenta;
+                    let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+              let nombre = funciones.obtenerNombre(id);
+
+               let patri = {cuenta_id: id, nom_cuenta:nombre, saldo:this.patrimonio.saldo};
+                this.patrimonios.push(patri);//añadimos el la variable persona al array
+                  //Limpiamos los campos
+                toastr.success("Registro agregado correctamente", "Smarmoddle", {
+                    "timeOut": "3000"
+                });
+                this.patrimonio.nom_cuenta = '';
+                this.patrimonio.saldo = '';
+                this.cambioPatrimonio();
+              }
+            }
+             },
+            //ACTUALIZAR SUMAS DE PASIVOS, ACTIVOS Y PATRIMONIO
+             cambioActivo(){
+              this.b_initotal.t_a_corriente = 0;
+              var t_activo = this.a_corrientes;           //CARGAR EL ARRAY DE LOS ACTIVOS
+              //console.log(t_activo)
+              var total = 0;
+              t_activo.forEach(function(obj){           //RECORRER ESE ARRAY
+                total += Number(obj.saldo);           //SUMAR EL SALDO DE CADA CUENTA EN EL ARRAY UNA Y OTRA VEZ
+              });
+              //console.log(total);          
+              this.b_initotal.t_a_corriente = total;          //IGUALAR LA VARIABLE QUE CONTIENE LA SUMA TOTAL CON LA SUMA REALIZADA
+              this.TotalActivo();
+             },
+                cambioActivoNo(){
+              this.b_initotal.t_a_nocorriente = 0;
+              var t_noactivo = this.a_nocorrientes;
+              //console.log(t_noactivo)
+              var total = 0;
+              t_noactivo.forEach(function(obj){
+                total += Number(obj.saldo);
+              });
+              //console.log(total);  
+              this.b_initotal.t_a_nocorriente = total;
+            this.TotalActivo();
+
+             },
+                cambioPasivo(){
+              this.b_initotal.t_p_corriente = 0;
+              var t_pasivo = this.p_corrientes;
+              //console.log(t_pasivo)
+              var total = 0;
+              t_pasivo.forEach(function(obj){
+                total += Number(obj.saldo);
+              });
+              //console.log(total);
+              this.b_initotal.t_p_corriente = total;
+                this.TotalPasivo();
+             },
+                cambioPasivoNo(){
+              this.b_initotal.t_p_no_corriente = 0;
+              var t_nopasivo = this.p_nocorrientes;
+              //console.log(t_nopasivo)
+              var total = 0;
+              t_nopasivo.forEach(function(obj){
+                total += Number(obj.saldo);
+              });
+              //console.log(total);
+              this.b_initotal.t_p_no_corriente = total;
+                this.TotalPasivo();
+             },
+            cambioPatrimonio(){
+              this.b_initotal.t_patrimonio = 0;
+              var t_patrimo = this.patrimonios;
+              //console.log(t_patrimo)
+              var total = 0;
+              t_patrimo.forEach(function(obj){
+                total += Number(obj.saldo); 
+              });
+              //console.log(total);
+              this.b_initotal.t_patrimonio = total;
+             },
+
+             //TOTAL GENERAL DE ACTIVO, PASIVO Y PATRIMONIO       
+             TotalActivo(){
+              var activo = this.b_initotal.t_a_corriente + this.b_initotal.t_a_nocorriente;
+             //console.log(activo);
+              this.total_balance_inicial.t_activo = activo;
+             },
+              TotalPasivo(){
+              var pasivo = this.b_initotal.t_p_corriente + this.b_initotal.t_p_no_corriente;
+              //onsole.log(pasivo);
+              this.total_balance_inicial.t_pasivo = pasivo;
+             },
+               totalPasivoPatrimonio(){
+                  $('#pasivo_patrimonio').modal('hide');
+                toastr.success("Total Agregado Correctamente", "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+            },
+            //GUARDAR BALANCE INICIAL
+                guardarBalanceInicial: function(){
+                if (this.balance_inicial.nombre.trim() === '') {
+                  toastr.error("Campo Nombre es obligatorio", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else if (this.balance_inicial.fecha.trim() === '') {
+                  toastr.error("Campo Fecha es obligatorio", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else if(this.a_corrientes.length == 0){
+                  toastr.error("Debe haber al menos un Activo Corriente", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else if(this.a_nocorrientes.length == 0){
+                  toastr.error("Debe haber al menos un Activo No Corriente", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else if(this.p_corrientes.length == 0){
+                  toastr.error("Debe haber al menos un Pasivo Corriente", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else if(this.p_nocorrientes.length == 0){
+                  toastr.error("Debe haber al menos un Pasivo No Corriente", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else if(this.patrimonios.length == 0){
+                  toastr.error("Debe haber al menos un Patrimonio", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else if(this.total_balance_inicial.t_patrimonio_pasivo.trim() === ''){
+                  toastr.error("Debes calcular el Total del Pasivo + Patrimonio", "Smarmoddle", {
+                    "timeOut": "3000"
+                   }); 
+                }else{
+                var _this = this;
+                var url = '/sistema/admin/taller/balance_inicial';
+                    axios.post(url,{
+                    id: _this.id_taller,
+                    nombre: _this.balance_inicial.nombre,
+                    fecha: _this.balance_inicial.fecha,
+                    tipo: _this.tipo,
+                    a_corriente: _this.a_corrientes,
+                    a_nocorriente: _this.a_nocorrientes,
+                    p_corriente: _this.p_corrientes,
+                    p_nocorriente: _this.p_nocorrientes,
+                    patrimonio: _this.patrimonios,
+                    t_patrimonio: _this.total_balance_inicial.t_patrimonio_pasivo
+                }).then(response => {
+                  if (response.data.success == true) {
+                     toastr.success(response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+                    _this.cambioActivo();
+                    _this.cambioActivoNo();
+                    _this.cambioPasivo();
+                    _this.cambioPasivoNo();
+                    _this.cambioPatrimonio();
+                    // diario.obtenerBalanceInicial();
+                    $('#list-tab a:nth-child(3)').tab('show');
+                    console.log(response.data); 
+                  } else {
+                      toastr.success(response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+                    _this.cambioActivo();
+                    _this.cambioActivoNo();
+                    _this.cambioPasivo();
+                    _this.cambioPasivoNo();
+                    _this.cambioPatrimonio();
+                    // diario.obtenerBalanceInicial();
+                  }                     
+                }).catch(function(error){
+                  toastr.error(error.response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+                });
+              }
+            },
+            obtenerBalance:function(){
+              var _this = this;
+                var url = '/sistema/admin/taller/obtenerbalance';
+                    axios.post(url,{
+                    id: _this.id_taller,
+                    tipo: _this.tipo
+                }).then(response => {
+                  if (response.data.tipo == _this.tipo || response.data.datos == true ) {
+                      toastr.success(response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+                    _this.balance_inicial.nombre = response.data.nombre
+                    _this.balance_inicial.fecha = response.data.fecha
+                    _this.a_corrientes = response.data.a_corriente;
+                    _this.a_nocorrientes = response.data.a_nocorriente;
+                    _this.p_corrientes = response.data.p_corriente;
+                    _this.p_nocorrientes = response.data.p_nocorriente;
+                    _this.patrimonios = response.data.patrimonios;
+                    _this.total_balance_inicial.t_patrimonio_pasivo = response.data.total_pasivo_patrimonio;
+                    _this.cambioActivo();
+                    _this.cambioActivoNo();
+                    _this.cambioPasivo();
+                    _this.cambioPasivoNo();
+                    _this.cambioPatrimonio();
+                    //diario.obtenerBalanceInicial();
+                    console.log(response.data);                 
+                  } else {
+
+                  }
+                }).catch(function(error){
+                
+                });
+
+            }
+  }   
+});
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////KARDEX ///////////////////////////////////////////////////////////

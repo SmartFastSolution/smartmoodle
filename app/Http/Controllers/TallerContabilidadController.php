@@ -10,21 +10,23 @@ use App\Contabilidad\BIPasivo;
 use App\Contabilidad\BIPatrimonio;
 use App\Contabilidad\BalanceAjustado;
 use App\Contabilidad\BalanceComprobacion;
-use App\Contabilidad\HTRegistro;
-use App\Contabilidad\HojaTrabajo;
 use App\Contabilidad\BalanceInicial;
 use App\Contabilidad\DGRDebe;
 use App\Contabilidad\DGRHaber;
 use App\Contabilidad\DGRegistro;
 use App\Contabilidad\DiarioGeneral;
-use App\Contabilidad\KPRegistro;
-use App\Contabilidad\KFRegistro;
+use App\Contabilidad\ERIngreso;
+use App\Contabilidad\EstadoResultado;
+use App\Contabilidad\HTRegistro;
+use App\Contabilidad\HojaTrabajo;
 use App\Contabilidad\KFRMovimiento;
-use App\Contabilidad\MGRegistro;
-use App\Contabilidad\MGRMovimiento;
-use App\Contabilidad\KardexPromedio;
-use App\Contabilidad\MayorGeneral;
+use App\Contabilidad\KFRegistro;
+use App\Contabilidad\KPRegistro;
 use App\Contabilidad\KardexFIfo;
+use App\Contabilidad\KardexPromedio;
+use App\Contabilidad\MGRMovimiento;
+use App\Contabilidad\MGRegistro;
+use App\Contabilidad\MayorGeneral;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -1052,6 +1054,7 @@ public function obtenerbalance(Request $request)
         $diariog = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
         $debe =[];
         $haber =[];
+        $ids=[];
         $diariog->nombre = $request->nombre;
         $diariog->total_debe = $request->total_debe;
         $diariog->total_haber = $request->total_haber;
@@ -1348,6 +1351,182 @@ public function obtenerbalance(Request $request)
                 'datos'     => true,
                 'nombre'    => $mgeneral->nombre,
                 'registros' => $registros,
+            ),200,[]);
+         }else{
+             return response(array(
+                'datos' => false,
+            ),200,[]);
+
+         }
+    }
+
+      public function estadoResultado(Request $request)
+    {
+        $id         = Auth::id();
+        $taller_id  = $request->id;
+        $registro   = $request->registro;
+        $nombre     = $request->nombre;
+        $fecha      = $request->fecha;
+        $ingresos   = $request->ingresos;
+        $gastos     = $request->gastos;
+        $utilidades = $request->utilidades;
+        $totales    = $request->totales;
+        
+        $mayorgeneral = EstadoResultado::where('user_id',$id)->where('taller_id', $taller_id)->count();
+
+    if ($mayorgeneral == 1){ 
+        $cu = EstadoResultado::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        $estadoResul = EstadoResultado::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        $ids =[];
+        $estadoResul->nombre                = $nombre;
+        $estadoResul->fecha                 = $fecha;
+        $estadoResul->venta                 = $request->venta;
+        $estadoResul->costo_venta           = $request->costo_venta;
+        $estadoResul->utilidad_bruta_ventas = $totales['utilidad_bruta_ventas'];
+        $estadoResul->utilidad_neta_o       = $totales['utilidad_neta_o'];
+        $estadoResul->utilidad_ejercicio    = $totales['utilidad_ejercicio'];
+        $estadoResul->utilidad_liquida      = $totales['utilidad_liquida'];
+        $estadoResul->total_ingresos        = $totales['ingreso'];
+        $estadoResul->total_gastos          = $totales['gasto'];
+        $estadoResul->save();
+        $registros= ERIngreso::where('estado_resultado_id', $estadoResul->id)->get();
+        foreach($registros as $act){
+                $ids[]=$act->id;
+        }
+
+        $deleteRegistros = ERIngreso::destroy($ids);
+            foreach ($ingresos as $key => $value) {                         
+                $regis=array(
+                     'estado_resultado_id' => $estadoResul->id,
+                     'tipo'                => 'ingresos',
+                     'cuenta_id'           => $value['cuenta_id'],
+                     'cuenta'              => $value['cuenta'],
+                     'saldo'               => $value['saldo'],
+                     'created_at'          => now(),
+                     'updated_at'          => now(),
+                );
+                ERIngreso::insert($regis);                          
+        }
+        // $register = $estadoResul->mgRegistro;
+              
+            foreach ($gastos as $key1 => $value1) {              
+                $regis1=array(
+                     'estado_resultado_id' => $estadoResul->id,
+                     'tipo'                => 'gastos',
+                     'cuenta_id'           => $value['cuenta_id'],
+                     'cuenta'              => $value['cuenta'],
+                     'saldo'               => $value['saldo'],
+                     'created_at'          => now(),
+                     'updated_at'          => now(),
+                  );
+                ERIngreso::insert($regis1);                             
+            }
+        if (count($utilidades) > 0) {
+            foreach ($utilidades as $key2 => $value2) {           
+                $regis2=array(
+                     'estado_resultado_id' => $estadoResul->id,
+                     'tipo'                => 'utilidades',
+                     'cuenta_id'           => $value['cuenta_id'],
+                     'cuenta'              => $value['cuenta'],
+                     'saldo'               => $value['saldo'],
+                     'created_at'          => now(),
+                     'updated_at'          => now(),
+                  );
+                  ERIngreso::insert($regis2);                            
+            }  
+        }
+        return response(array(
+                'success' => 'actualizado',
+                'message' => 'Datos Actualizados Correctamente'
+            ),200,[]);
+    }else{ 
+        $estadoResultado                        = new EstadoResultado;
+        $estadoResultado->taller_id             = $taller_id;
+        $estadoResultado->user_id               = $id;
+        $estadoResultado->nombre                = $nombre;
+        $estadoResultado->fecha                 = $fecha;
+        $estadoResultado->venta                 = $request->venta;
+        $estadoResultado->costo_venta           = $request->costo_venta;
+        $estadoResultado->utilidad_bruta_ventas = $totales['utilidad_bruta_ventas'];
+        $estadoResultado->utilidad_neta_o       = $totales['utilidad_neta_o'];
+        $estadoResultado->utilidad_ejercicio    = $totales['utilidad_ejercicio'];
+        $estadoResultado->utilidad_liquida      = $totales['utilidad_liquida'];
+        $estadoResultado->total_ingresos        = $totales['ingreso'];
+        $estadoResultado->total_gastos          = $totales['gasto'];
+        $estadoResultado->save();
+        $mayorg = EstadoResultado::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        
+        foreach ($ingresos as $key => $value) {                         
+            $regis=array(
+                     'estado_resultado_id' => $mayorg->id,
+                     'tipo'                => 'ingresos',
+                     'cuenta_id'           => $value['cuenta_id'],
+                     'cuenta'              => $value['cuenta'],
+                     'saldo'               => $value['saldo'],
+                     'created_at'          => now(),
+                     'updated_at'          => now(),
+                );
+                ERIngreso::insert($regis);                          
+        }
+        // $register = $mayorg->mgRegistro;
+              
+            foreach ($gastos as $key1 => $value1) {              
+                $regis1=array(
+                     'estado_resultado_id' => $mayorg->id,
+                     'tipo'                => 'gastos',
+                     'cuenta_id'           => $value1['cuenta_id'],
+                     'cuenta'              => $value1['cuenta'],
+                     'saldo'               => $value1['saldo'],
+                     'created_at'          => now(),
+                     'updated_at'          => now(),
+                  );
+                ERIngreso::insert($regis1);                             
+            }
+        if (count($utilidades > 0)) {
+            foreach ($utilidades as $key2 => $value2) {           
+                $regis2=array(
+                     'estado_resultado_id' => $mayorg->id,
+                     'tipo'                => 'utilidades',
+                     'cuenta_id'           => $value2['cuenta_id'],
+                     'cuenta'              => $value2['cuenta'],
+                     'saldo'               => $value2['saldo'],
+                     'created_at'          => now(),
+                     'updated_at'          => now(),
+                  );
+                  ERIngreso::insert($regis2);                            
+            }  
+        }
+         return response(array(                                   
+                'success' => true,
+                'message' => 'Estado Resultado creado correctamente'
+            ),200,[]);
+                                                        
+        }
+    }
+
+public function obtenerEstado(Request $request)
+    {
+        $id         = Auth::id();
+        $taller_id  = $request->id;
+        $mayorGeneral = EstadoResultado::where('user_id',$id)->where('taller_id', $taller_id)->count();
+        $registros  = [];
+        $cierres    = [];
+        if ($mayorGeneral  == 1) {
+        $mgeneral = EstadoResultado::where('user_id',$id)->where('taller_id', $taller_id)->first();
+
+
+        // $normal  = ERIngreso::where('ESTA', $mgeneral->id)->get();
+           
+                $ingresos   = ERIngreso::where('estado_resultado_id', $mgeneral->id)->where('tipo', 'ingresos')->get();
+                $gastos     = ERIngreso::where('estado_resultado_id', $mgeneral->id)->where('tipo', 'gastos')->get();
+                $utilidades = ERIngreso::where('estado_resultado_id', $mgeneral->id)->where('tipo', 'utilidades')->get();
+                    
+            return response(array(
+                'datos'           => true,
+                'estadoresultado' => $mgeneral,
+                'ingresos'        => $ingresos,
+                'gastos'          => $gastos,
+                'utilidades'      => $utilidades,
             ),200,[]);
          }else{
              return response(array(

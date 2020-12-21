@@ -270,6 +270,12 @@ route::post('/sistema/admin/taller/kardex-obtener-promedio', 'TallerContabilidad
 //FIN RUTAS DEL KARDEX PROMEDIO
 
 
+
+// RUTAS DEL KARDEX PROMEDIO
+route::post('/sistema/admin/taller/estado-resultado', 'TallerContabilidadController@estadoResultado')->name('estado.resultado');
+route::post('/sistema/admin/taller/estado-obtener-resultado', 'TallerContabilidadController@obtenerEstado')->name('estado.obtenerresultado');
+//FIN RUTAS DEL KARDEX PROMEDIO
+
 //// RUTAS DEL KARDEX FIFO
 route::post('/sistema/admin/taller/kardex-fifo', 'TallerContabilidadController@kardexFifo')->name('kardex.fifo');
 route::post('/sistema/admin/taller/kardex-obtener-fifo', 'TallerContabilidadController@obtenerKardexFifo')->name('kardex.obtenerkardexfifo');
