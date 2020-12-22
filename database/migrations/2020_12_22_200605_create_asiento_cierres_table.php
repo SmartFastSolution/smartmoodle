@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBalanceGeneralsTable extends Migration
+class CreateAsientoCierresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,13 @@ class CreateBalanceGeneralsTable extends Migration
      */
     public function up()
     {
-        Schema::create('balance_generals', function (Blueprint $table) {
+        Schema::create('asiento_cierres', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->string('nombre')->nullable();
-            $table->string('fecha')->nullable();
-            $table->string('t_activo')->nullable();
-            $table->string('t_pasivo')->nullable();
-            $table->string('t_a_corriente')->nullable();
-            $table->string('t_a_nocorriente')->nullable();
-            $table->string('t_p_corriente')->nullable();
-            $table->string('t_p_no_corriente')->nullable();
-            $table->string('t_patrimonio')->nullable();
-            $table->string('total_pasivo_patrimonio')->nullable();
+            $table->string('total_debe')->nullable();
+            $table->string('total_haber')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')
@@ -38,6 +31,7 @@ class CreateBalanceGeneralsTable extends Migration
             ->references('id')
             ->on('users')
             ->onDelete('cascade');
+
         });
     }
 
@@ -48,6 +42,6 @@ class CreateBalanceGeneralsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('balance_generals');
+        Schema::dropIfExists('asiento_cierres');
     }
 }

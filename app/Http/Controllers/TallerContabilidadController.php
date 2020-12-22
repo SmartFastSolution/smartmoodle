@@ -19,6 +19,12 @@ use App\Contabilidad\DGRDebe;
 use App\Contabilidad\DGRHaber;
 use App\Contabilidad\DGRegistro;
 use App\Contabilidad\DiarioGeneral;
+
+use App\Contabilidad\ACRDebe;
+use App\Contabilidad\ACRHaber;
+use App\Contabilidad\ACRegistro;
+use App\Contabilidad\AsientoCierre;
+
 use App\Contabilidad\ERIngreso;
 use App\Contabilidad\EstadoResultado;
 use App\Contabilidad\HTRegistro;
@@ -478,9 +484,9 @@ class TallerContabilidadController extends Controller
         $balanceComprob->save();
 
 
-        $registros= BCRegistro::where('balance_comprobacion_id', $balanceComprob->id)->get();
+        $registro= BCRegistro::where('balance_comprobacion_id', $balanceComprob->id)->get();
         
-        foreach($registros as $regis){
+        foreach($registro as $regis){
                 $ids[]=$regis->id;
         }
         $deleteRegistros = BCRegistro::destroy($ids);
@@ -589,7 +595,7 @@ public function obtenerBalanceCompro(Request $request)
                 'estado' => 'guardado',
                 'message' => 'Hoja de Trabajo creada correctamente'
             ),200,[]);
-        }elseif($balanceCompro  == 1){
+        }elseif($hojaTra  == 1){
         $ids                                = [];
         $balanceComprob                     = HojaTrabajo::where('user_id',$id)->where('taller_id', $taller_id)->first();
         $balanceComprob->nombre             = $request->nombre;
@@ -608,12 +614,14 @@ public function obtenerBalanceCompro(Request $request)
         $balanceComprob->save();
 
 
-        $registros= HTRegistro::where('hoja_trabajo_id', $balanceComprob->id)->get();
+        $registro= HTRegistro::where('hoja_trabajo_id', $balanceComprob->id)->get();
         
-        foreach($registros as $regis){
+        foreach($registro as $regis){
                 $ids[]=$regis->id;
         }
+
         $deleteRegistros = HTRegistro::destroy($ids);
+
         $o = HojaTrabajo::where('user_id', $id)->get()->last(); 
          foreach ($registros as $key => $balance) {
                   $datos=array(
@@ -635,9 +643,6 @@ public function obtenerBalanceCompro(Request $request)
                   );
                   HTRegistro::insert($datos);
             }
-
-
-
              return response(array(
                 'success' => true,
                 'estado' => 'actualizado',
@@ -1409,7 +1414,7 @@ public function obtenerbalance(Request $request)
         $estadoResul->utilidad_ejercicio    = $totales['utilidad_ejercicio'];
         $estadoResul->utilidad_liquida      = $totales['utilidad_liquida'];
         $estadoResul->total_ingresos        = $totales['ingreso'];
-        $estadoResul->total_gastos          = $totales['gasto'];
+        $estadoResul->total_gastos          = $totales['gastos'];
         $estadoResul->save();
         $registros= ERIngreso::where('estado_resultado_id', $estadoResul->id)->get();
         foreach($registros as $act){
@@ -1574,10 +1579,15 @@ public function obtenerEstado(Request $request)
         $bgeneral                          = new BalanceGeneral; 
         $bgeneral->taller_id               = $taller_id;
         $bgeneral->user_id                 = $id;
-        // $bgeneral->tipo                    = $tipo;
-        // $bgeneral->enunciado               = $contenido->enunciado;
         $bgeneral->nombre                  = $request->nombre;
         $bgeneral->fecha                   = $request->fecha;
+        $bgeneral->t_activo                = $request->total_balance_inicial['t_activo'];
+        $bgeneral->t_pasivo                = $request->total_balance_inicial['t_pasivo'];
+        $bgeneral->t_a_corriente           = $request->totales['t_a_corriente'];
+        $bgeneral->t_a_nocorriente         = $request->totales['t_a_nocorriente'];
+        $bgeneral->t_p_corriente           = $request->totales['t_p_corriente'];
+        $bgeneral->t_p_no_corriente        = $request->totales['t_p_no_corriente'];
+        $bgeneral->t_patrimonio            = $request->totales['t_patrimonio'];
         $bgeneral->total_pasivo_patrimonio = $request->t_patrimonio;
         $bgeneral->save();
 
@@ -1661,18 +1671,25 @@ public function obtenerEstado(Request $request)
             
         } 
     }else if($balanceGeneral == 1){
-       $ids = [];
-       $ids1 = [];
-       $ids2 = [];
-        $o = BalanceGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
-            $a_corriente   = $request->a_corriente;
-            $a_nocorriente = $request->a_nocorriente;
-            $p_corriente   = $request->p_corriente;
-            $p_nocorriente = $request->p_nocorriente;
-            $patrimonios   = $request->patrimonio;
-            $o->fecha      = $request->fecha;
-            $o->nombre     = $request->nombre;
-            $o->save();
+                $ids                 = [];
+                $ids1                = [];
+                $ids2                = [];
+                $o                   = BalanceGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
+                $a_corriente         = $request->a_corriente;
+                $a_nocorriente       = $request->a_nocorriente;
+                $p_corriente         = $request->p_corriente;
+                $p_nocorriente       = $request->p_nocorriente;
+                $patrimonios         = $request->patrimonio;
+                $o->fecha            = $request->fecha;
+                $o->nombre           = $request->nombre;
+                $o->t_activo         = $request->total_balance_inicial['t_activo'];
+                $o->t_pasivo         = $request->total_balance_inicial['t_pasivo'];
+                $o->t_a_corriente    = $request->totales['t_a_corriente'];
+                $o->t_a_nocorriente  = $request->totales['t_a_nocorriente'];
+                $o->t_p_corriente    = $request->totales['t_p_corriente'];
+                $o->t_p_no_corriente = $request->totales['t_p_no_corriente'];
+                $o->t_patrimonio     = $request->totales['t_patrimonio'];
+                $o->save();
 
             $activ=BGActivo::where('balance_general_id', $o->id)->get();
 
@@ -1794,15 +1811,16 @@ public function obtenerbalanceGeneral(Request $request)
     $patrimonios       = $datos->bgPatrimonios;
 
         return response(array(
-            'datos' => true,
-                'nombre' => $datos->nombre,
-                'fecha' => $datos->fecha,
+                'datos' => true,
+                'nombre'                  => $datos->nombre,
+                'fecha'                   => $datos->fecha,
                 'total_pasivo_patrimonio' => $datos->total_pasivo_patrimonio,
-                'a_corriente' => $a_corrientes,
-                'a_nocorriente' => $a_nocorrientes,
-                'p_corriente' => $p_corriente,
-                'p_nocorriente' => $p_nocorriente,
-                'patrimonios' => $patrimonios,
+                'a_corriente'             => $a_corrientes,
+                'a_nocorriente'           => $a_nocorrientes,
+                'p_corriente'             => $p_corriente,
+                'p_nocorriente'           => $p_nocorriente,
+                'patrimonios'             => $patrimonios,
+                'bgneral'                 => $datos
             ),200,[]);
         
 
@@ -1812,5 +1830,157 @@ public function obtenerbalanceGeneral(Request $request)
             ),200,[]);
     }
 }
+    public function asientosCierre(Request $request)
+    {
+        $id              = Auth::id();
+        $taller_id       = $request->id;
+        $registro        = $request->registro;
+        $asientodecierre = AsientoCierre::where('user_id',$id)->where('taller_id', $taller_id)->count();
+    if ($asientodecierre == 1){ 
+        $cu                   = AsientoCierre::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        $cuenta               = ACRegistro::where('asiento_cierre_id',$cu->id)->count();
+        $acierre              = AsientoCierre::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        $debe                 =[];
+        $haber                =[];
+        $ids                  =[];
+        $acierre->nombre      = $request->nombre;
+        $acierre->total_debe  = $request->total_debe;
+        $acierre->total_haber = $request->total_haber;
+        $acierre->save();
+        $registros= ACRegistro::where('asiento_cierre_id', $acierre->id)->get();
+        foreach($registros as $act){
+                $ids[]=$act->id;
+        }
+        $deleteRegistros = ACRegistro::destroy($ids);
+
+                foreach ($registro as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
+            $regis=array(
+                     'asiento_cierre_id' => $acierre->id,
+                     'no_registro'       => $key + 1,
+                     'comentario'        => $value['comentario'],
+                     'fecha'             => $value['fecha'],
+                     // 'tipo'              => $value['tipo'],
+                     'created_at'        => now(),
+                     'updated_at'        => now(),
+                );
+                ACRegistro::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
+        }
+        $register = $acierre->acRegistro;
+        foreach ($registro as $key => $value) {                         ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
+            foreach ($value['debe'] as $key1 => $value1) {              ////RECORRER TODOS LAS CUENTAS DE DEBE QUE PERTENECEN A UN REGISTRO
+                $regis1=array(
+                     'a_c_registro_id' => $register[$key]->id,
+                     'cuenta_id'       => $value1['cuenta_id'],
+                     'nom_cuenta'      => $value1['nom_cuenta'],
+                     'saldo'           => $value1['saldo'],
+                     'fecha'           => $value1['fecha'],
+                     'created_at'      => now(),
+                     'updated_at'      => now(),
+                  );
+                ACRDebe::insert($regis1);                             //GURDAR ESAS CUENTAS EN LA TABLA DEBE CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
+            }
+              foreach ($value['haber'] as $key2 => $value2) {           ////RECORRER TODOS LAS CUENTAS DE HABER QUE PERTENECEN A UN REGISTRO
+                $regis2=array(
+                     'a_c_registro_id' => $register[$key]->id,
+                     'cuenta_id'       => $value2['cuenta_id'],
+                     'nom_cuenta'      => $value2['nom_cuenta'],
+                     'saldo'           => $value2['saldo'],
+                     'created_at'      => now(),
+                     'updated_at'      => now(),
+                  );
+                  ACRHaber::insert($regis2);                            //GURDAR ESAS CUENTAS EN LA TABLA HABER CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
+            }
+        }
+        return response(array(
+                'success' => 'act',
+                'message' => 'Asiento de Cierre  Actualizado Correctamente'
+            ),200,[]);
+    }else{ 
+        $asientodecierre               = new AsientoCierre;
+        $asientodecierre->taller_id    = $taller_id;
+        $asientodecierre->user_id      = $id;
+        $asientodecierre->nombre       = $request->nombre;
+        $asientodecierre->total_haber  = $request->total_haber;
+        $asientodecierre->total_debe   = $request->total_debe;
+        $asientodecierre->save();
+        $acierre = AsientoCierre::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        $debe =[];
+        $haber =[];
+        foreach ($registro as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
+            $regis=array(
+                     'asiento_cierre_id' => $acierre->id,
+                     'no_registro'       => $key + 1,
+                     'comentario'        => $value['comentario'],
+                     'fecha'             => $value['fecha'],
+                     // 'tipo'              => $value['tipo'],
+                     'created_at'        => now(),
+                     'updated_at'        => now(),
+                );
+                ACRegistro::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
+        }
+        $register = $acierre->acRegistro;
+        foreach ($registro as $key => $value) {                         ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
+            foreach ($value['debe'] as $key1 => $value1) {              ////RECORRER TODOS LAS CUENTAS DE DEBE QUE PERTENECEN A UN REGISTRO
+                $regis1=array(
+                     'a_c_registro_id' => $register[$key]->id,
+                     'cuenta_id'       => $value1['cuenta_id'],
+                     'nom_cuenta'      => $value1['nom_cuenta'],
+                     'saldo'           => $value1['saldo'],
+                     'fecha'           => $value1['fecha'],
+                     'created_at'      => now(),
+                     'updated_at'      => now(),
+                  );
+                ACRDebe::insert($regis1);                             //GURDAR ESAS CUENTAS EN LA TABLA DEBE CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
+            }
+              foreach ($value['haber'] as $key2 => $value2) {           ////RECORRER TODOS LAS CUENTAS DE HABER QUE PERTENECEN A UN REGISTRO
+                $regis2=array(
+                     'a_c_registro_id'  => $register[$key]->id,
+                     'cuenta_id'       => $value2['cuenta_id'],
+                     'nom_cuenta'        => $value2['nom_cuenta'],
+                     'saldo'              => $value2['saldo'],
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                  );
+                  ACRHaber::insert($regis2);                            //GURDAR ESAS CUENTAS EN LA TABLA HABER CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
+            }
+        }                                           //GUARDAR ESE CAMBIO
+         return response(array(                                         //ENVIO DE RESPUESTA
+                'success' => true,
+                'message' => 'Asiento de Cierre creado correctamente'
+            ),200,[]);
+                                                              // SI NO TIENE CREADO EL BALANCE INICIAL ANTES DE GUARDAR, LE SALDRA UNA NOTIFICACION INDICANDO DICHO P
+        }
+    }
+    public function obtenerAsientoCierre(Request $request)
+    {
+        $id         = Auth::id();
+        $taller_id  = $request->id;
+        $dioGeneral = AsientoCierre::where('user_id',$id)->where('taller_id', $taller_id)->count();
+        $registros  = [];
+        if ($dioGeneral  == 1) {
+        $diairioGeneral    = AsientoCierre::where('user_id',$id)->where('taller_id', $taller_id)->first();
+        $normal = ACRegistro::where('asiento_cierre_id', $diairioGeneral->id)->orderBy('fecha')->get();
+            foreach ($normal as $key => $registro) {
+                $regis = array(
+                    'debe'       => $registro->acrDebe,
+                    'haber'      =>$registro->acrHaber,
+                    'fecha'      => $registro->fecha,
+                    'comentario' => $registro->comentario
+                );
+                $registros[]= $regis;
+            }
+            return response(array(
+                'datos'     => true,
+                'nombre'    => $diairioGeneral->nombre,
+                'registros' => $registros,
+            ),200,[]);
+            
+         }else{
+             return response(array(
+                'datos' => false,
+            ),200,[]);
+
+         }
+    }
 }
 

@@ -290,6 +290,13 @@ route::post('/sistema/admin/taller/diariogeneral', 'TallerContabilidadController
 //// FIN RUTAS DEL DIARIO
 
 
+/////// RUTAS DEL ASIENTOS DE CIERRE
+route::post('/sistema/admin/taller/asiento-cierre', 'TallerContabilidadController@asientosCierre')->name('asiento.cierre');
+route::post('/sistema/admin/taller/asiento-cierre-obtener', 'TallerContabilidadController@obtenerAsientoCierre')->name('obtenercierre');
+
+//// FIN RUTAS DEL ASIENTOS DE CIERRE
+
+
 /////// RUTAS DEL MAYOR
 route::post('/sistema/admin/taller/mayor', 'TallerContabilidadController@mayorGeneral')->name('mayor');
 route::post('/sistema/admin/taller/mayorgeneral', 'TallerContabilidadController@obtenermayor')->name('obtenermayor');

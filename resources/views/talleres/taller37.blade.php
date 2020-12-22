@@ -95,6 +95,7 @@
                 <a class="list-group-item list-group-item-action" id="list-hoja-trabajo-list" data-toggle="list" href="#list-hoja-trabajo" role="tab" aria-controls="hoja-trabajo">Hoja de Trabajo</a>
                 <a class="list-group-item list-group-item-action" id="list-estado-resultado-list" data-toggle="list" href="#list-estado-resultado" role="tab" aria-controls="estado-resultado">Estado de Resultado</a>
                 <a class="list-group-item list-group-item-action" id="list-balance-general-list" data-toggle="list" href="#list-balance-general" role="tab" aria-controls="balance-general">Balance General</a>
+                <a class="list-group-item list-group-item-action" id="list-asento-cierre-list" data-toggle="list" href="#list-asento-cierre" role="tab" aria-controls="asento-cierre">Asientos de Cierre</a>
 
 
 
@@ -148,6 +149,9 @@
                 </div>
                   <div class="tab-pane fade" id="list-balance-general" role="tabpanel" aria-labelledby="list-balance-general-list">
                     @include('contabilidad.balancegeneral')
+                </div>
+                <div class="tab-pane fade" id="list-asento-cierre" role="tabpanel" aria-labelledby="list-asento-cierre-list">
+                    @include('contabilidad.asientosdecierre')
                 </div>
             </div>
         </div>

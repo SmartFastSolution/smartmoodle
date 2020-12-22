@@ -411,7 +411,7 @@ const b_hori = new Vue({
                 
          //        axios.post(url,formdata).then(function (response) {
          //              console.log(response.data);
-         //        toastr.success("Diario general guardado correctamente", "Smarmoddle", {
+         //        toastr.success("Asiento de Cierre guardado correctamente", "Smarmoddle", {
          //            "timeOut": "3000"
          //           });
          //        diarios:[];
@@ -2432,12 +2432,33 @@ let mayor_general = new Vue({
           tipo:'',
         },
         update:false,
+        registros_cierres:[],
+nombre_cierre:''
   },
   mounted: function() {
     this.obtenerDiarioGeneral();
     this.obtenerMayorGeneral();
+    this.obtenerAsientoCierre();
   },
   methods:{
+    obtenerAsientoCierre: function(){
+        var _this = this;
+        var url = '/sistema/admin/taller/asiento-cierre-obtener';
+            axios.post(url,{
+              id: _this.id_taller,
+        }).then(response => {
+          if (response.data.datos == true) {
+          _this.registros_cierres = response.data.registros;
+          _this.nombre_cierre = response.data.nombre;  
+           toastr.success("Diairo General cargado Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+            }          
+        }).catch(function(error){
+
+        }); 
+    },
+
     formatoFecha(fecha){
       if (fecha !== null ) {
          let date = fecha.split('-').reverse().join('-');
@@ -2728,6 +2749,7 @@ let mayor_general = new Vue({
                 "timeOut": "3000"
                 });
             // this.obtenerDiarioGeneral();
+            balance_comp.obtenerMayorGeneral();
           }else{
            toastr.success("Diairo General Creado Correctamente", "Smarmoddle", {
                 "timeOut": "3000"
@@ -3081,11 +3103,13 @@ const balance_comp = new Vue({
               toastr.success("Balance creado correctamente", "Smarmoddle", {
             "timeOut": "3000"
             });
+              hoja_trabajo.obtenerBalanceCom();
             }else if (response.data.estado == 'actualizado') {
               toastr.warning("Balance actualizado correctamente", "Smarmoddle", {
             "timeOut": "3000"
             });
               console.log(this.balances)
+              hoja_trabajo.obtenerBalanceCom();
             }        
         }).catch(function(error){
 
@@ -3561,11 +3585,18 @@ let hoja_trabajo = new Vue({
               toastr.success("Hoja de Trabajo Creada Correctamente", "Smarmoddle", {
             "timeOut": "3000"
             });
+              balance_ajustado.obtenerHojita();
+              estado_resultado.obtenerHojita();
+              balance_general.obtenerHojita();
+
             }else if (response.data.estado == 'actualizado') {
               toastr.warning("Hoja de Trabajo Actualizada correctamente", "Smarmoddle", {
             "timeOut": "3000"
             });
-              
+              balance_ajustado.obtenerHojita();
+              estado_resultado.obtenerHojita();
+              balance_general.obtenerHojita();
+
             }        
         }).catch(function(error){
 
@@ -5453,7 +5484,10 @@ var balance_general = new Vue({
                     p_corriente: _this.p_corrientes,
                     p_nocorriente: _this.p_nocorrientes,
                     patrimonio: _this.patrimonios,
+                    totales: _this.b_initotal,
+                    total_balance_inicial: _this.total_balance_inicial,
                     t_patrimonio: _this.total_balance_inicial.t_patrimonio_pasivo
+
                 }).then(response => {
                   if (response.data.success == true) {
                      toastr.success(response.data.message, "Smarmoddle", {
@@ -5465,6 +5499,7 @@ var balance_general = new Vue({
                     _this.cambioPasivoNo();
                     _this.cambioPatrimonio();
                     console.log(response.data); 
+                    asientos_cierre.obtenerBalance();
                   } else {
                       toastr.success(response.data.message, "Smarmoddle", {
                     "timeOut": "3000"
@@ -5474,6 +5509,7 @@ var balance_general = new Vue({
                     _this.cambioPasivo();
                     _this.cambioPasivoNo();
                     _this.cambioPatrimonio();
+                    asientos_cierre.obtenerBalance();
                     // diario.obtenerBalanceInicial();
                   }                     
                 }).catch(function(error){
@@ -5516,6 +5552,783 @@ var balance_general = new Vue({
 
             }
   }   
+});
+
+const asientos_cierre = new Vue({
+ el: '#asientos_cierre',
+    data:{
+      id_taller: taller,
+      producto_id: 1,
+      nombre:'',
+      fechabalance:'',
+      complete:false,
+      options: objeto,
+      cuentas: cuentas,
+      balanceInicial:{
+        debe:[],
+        haber:[],
+        totaldebe:0,
+        totalhaber:0
+       },
+       kardex:[],
+        nombre_kardex:'',
+        producto_kardex:'',
+       registros:[
+       ],
+       eliminar:{
+        index:''
+       },
+          porcentajes:{
+        porcentaje:0,
+        index_cuenta:'',
+        tipo:'',
+        cantidad:0
+       },
+       registerindex: 0,
+       cuentaindex: 0,
+        diarios:{
+           debe:[],
+          haber:[],
+          comentario:'',
+          fecha:'',
+          tipo:''
+        },
+         edit:{
+           debe:[],
+          haber:[],
+          comentario:''
+        },
+        diario:{
+          debe:{
+            edit: false,
+            index:'',
+            fecha:'',
+            nom_cuenta:'',
+            saldo:'',
+          },
+          haber:{
+            edit: false,
+            index:'',
+            fecha:'',
+            nom_cuenta:'',
+            saldo:''
+          },
+          comentario:''
+        },
+        pasan:{ 
+          debe:0, 
+          haber:0
+        },
+        total:{
+          debe:0,
+          haber:0,
+        },
+        update:false,
+        dato:[],
+        estadoresultado:{
+          nombre_e_resultado:'',
+          fecha_e_resultado:'',
+          ingresos:[],
+          gastos:[],
+          utilidades:[],
+          utilidad:'',
+          venta_e_resultado:'',
+          costo_venta_e_resultado:'',
+          totales:{
+            ingreso:'',
+            gasto:'',
+            utilidad_bruta_ventas_e_resultado:'',
+            utilidad_ejercicio_e_resultado:'',
+            utilidad_liquida_e_resultado:'',
+          }
+        },
+        balance_general:{
+          a_corrientes:[],
+          a_nocorrientes:[],
+          p_corrientes:[],
+          p_nocorrientes:[],
+          patrimonios:[],
+          total_balance_inicial:{
+              t_activo:'',
+              t_pasivo:'',
+              t_patrimonio:'',
+              t_patrimonio_pasivo:'',
+          },
+        },
+        b_initotal:{}
+    },
+    mounted: function () {
+      this.obtenerAsientoCierre();
+      this.obtenerEstadoResultado();
+      this.obtenerBalance();
+
+    },
+
+    methods:{
+    obtenerEstadoResultado: function() {
+        let _this = this;
+        let url = '/sistema/admin/taller/estado-obtener-resultado';
+            axios.post(url,{
+              id: _this.id_taller,
+        }).then(response => {
+          if (response.data.datos == true) {
+                    _this.estadoresultado.nombre_e_resultado                        = response.data.estadoresultado.nombre
+                    _this.estadoresultado.fecha_e_resultado                         = response.data.estadoresultado.fecha
+                    _this.estadoresultado.ingresos                                  = response.data.ingresos;
+                    _this.estadoresultado.totales.ingreso                           = response.data.estadoresultado.total_ingresos;
+                    _this.estadoresultado.totales.gasto                             = response.data.estadoresultado.total_gastos;
+                    _this.estadoresultado.gastos                                    = response.data.gastos;
+                    _this.estadoresultado.utilidades                                = response.data.utilidades;
+                    _this.estadoresultado.utilidad                                  = response.data.estadoresultado.utilidad;
+                    _this.estadoresultado.venta_e_resultado                         = response.data.estadoresultado.venta
+                    _this.estadoresultado.costo_venta_e_resultado                   = response.data.estadoresultado.costo_venta
+                    _this.estadoresultado.totales.utilidad_bruta_ventas_e_resultado = response.data.estadoresultado.utilidad_bruta_ventas
+                    _this.estadoresultado.totales.utilidad_ejercicio_e_resultado    = response.data.estadoresultado.utilidad_ejercicio
+                    _this.estadoresultado.totales.utilidad_liquida_e_resultado      = response.data.estadoresultado.utilidad_liquida
+                    console.log(response.data.estadoresultado)
+              this.totale();
+            this.subtotal();
+            }          
+        }).catch(function(error){
+
+        }); 
+     }, 
+        obtenerBalance:function(){
+              var _this = this;
+                var url = '/sistema/admin/taller/obtener-balance-general';
+                    axios.post(url,{
+                    id: _this.id_taller,
+                }).then(response => {
+                  if ( response.data.datos == true ) {
+                      toastr.success(response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+                    _this.balance_general.nombre                                    = response.data.nombre
+                    _this.balance_general.fecha                                     = response.data.fecha
+                    _this.balance_general.a_corrientes                              = response.data.a_corriente;
+                    _this.balance_general.a_nocorrientes                            = response.data.a_nocorriente;
+                    _this.balance_general.p_corrientes                              = response.data.p_corriente;
+                    _this.balance_general.p_nocorrientes                            = response.data.p_nocorriente;
+                    _this.balance_general.patrimonios                               = response.data.patrimonios;
+                    _this.balance_general.total_balance_inicial.t_patrimonio_pasivo = response.data.total_pasivo_patrimonio;  
+                    _this.balance_general.total_balance_inicial.t_pasivo            = response.data.bgneral.t_pasivo;  
+                    _this.balance_general.total_balance_inicial.t_activo            = response.data.bgneral.t_activo;  
+                    _this.balance_general.total_balance_inicial.t_patrimonio        = response.data.bgneral.t_patrimonio;  
+                    _this.b_initotal.t_a_corriente                                  = response.data.bgneral.t_a_corriente;  
+                    _this.b_initotal.t_a_nocorriente                                = response.data.bgneral.t_a_nocorriente;  
+                    _this.b_initotal.t_p_corriente                                  = response.data.bgneral.t_p_corriente;  
+                    _this.b_initotal.t_p_no_corriente                               = response.data.bgneral.t_p_no_corriente;  
+                    _this.b_initotal.t_patrimonio                               = response.data.bgneral.t_patrimonio;  
+
+                  } else {
+
+                  }
+                }).catch(function(error){
+                
+                });
+
+            },
+    formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
+    decimales(saldo){
+      if (saldo !== null) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+    abrirTransaccion(){
+      this.update             = false;
+       this.diarios.debe      =[];
+      this.diarios.haber      =[];
+      this.diarios.fecha      =[];
+      this.diarios.comentario =[];
+      this.diarios.ajustado = false;
+
+      $('#as-transaccion').modal('show');
+      $('#comentario-diario-tab').tab('show'); 
+
+
+    },
+    valorPorcentual(porcentaje, valor){
+      // let porcentaje = this.cuentas[index].porcentaje;
+      let total = Number((valor * porcentaje) / 100);
+      return total;
+    },
+     //  obtenerKardexFifo: function() {
+     //    let _this = this;
+     //    let url = '/sistema/admin/taller/kardex-obtener-fifo';
+     //        axios.post(url,{
+     //          id: _this.id_taller,
+     //          producto_id: _this.producto_id
+     //    }).then(response => {
+     //      if (response.data.datos == true) {
+     //          _this.kardex = response.data.kardex_fifo;
+     //          _this.nombre_kardex =  response.data.informacion.nombre;
+     //          _this.producto_kardex = response.data.informacion.producto;         
+     //        }else{
+     //          _this.kardex = [];
+     //          _this.nombre =  '';
+     //          _this.producto = '';     
+     //        }        
+     //    }).catch(function(error){
+
+     //    }); 
+     // },
+    // obtenerBalanceInicial: function(){
+      
+    //   let verificar = this.registros.filter(x => x.tipo == 'inicial');
+
+    //   if (verificar.length >= 1) {
+    //       toastr.warning("Ya tienes cargado los datos del balance inicial", "Smarmoddle", {
+    //             "timeOut": "3000"
+    //             });
+    //       return
+    //   }
+
+    //   var _this = this;
+    //   var url = '/sistema/admin/taller/b_inicial_diario';
+    //     axios.post(url,{
+    //       id: _this.id_taller,
+    //     }).then(response => {
+    //       if (response.data.datos == true) {
+    //         let inicial = response.data.inicial;
+    //         inicial.debe[0].fecha = inicial.fecha;
+    //         _this.registros.unshift(inicial);
+    //       // _this.balanceInicial.debe = response.data.activos;
+    //       // _this.balanceInicial.haber = response.data.pasivos;
+    //       // _this.nombre = response.data.nombre;
+    //       // _this.fechabalance = response.data.fecha;
+    //       // $('#list-tab a:nth-child(3)').tab('show');
+    //         console.log(response.data); 
+    //          this.totalDebe();
+    //           this.totalHaber();
+    //         
+
+    //         // this.obtenerDiarioGeneral();
+    //       }else{
+    //          toastr.warning("Aun no has creado tu balance Inicial", "Smarmoddle", {
+    //             "timeOut": "3000"
+    //             });
+    //       }
+                    
+    //     }).catch(function(error){
+
+    //     });
+
+    // },
+    agregarHaber(){
+      if (this.diario.haber.nom_cuenta === '') {
+        toastr.error("No has registrado una cuenta", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+      }else{
+      let id = this.diario.haber.nom_cuenta;
+      let cuenta = this.cuentas.filter(x => x.id == id);
+      let valor = this.diario.haber.saldo;
+
+            if (cuenta[0].porcentual == 1) {
+                  let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
+                  let haber = {cuenta_id: cuenta[0].id, fecha:this.diario.haber.fecha, nom_cuenta: cuenta[0].nombre, saldo:calculo};
+                  this.diarios.haber.push(haber);//añadimos el la variable persona al array
+            }else{
+                  let haber = {cuenta_id: cuenta[0].id, fecha:this.diario.haber.fecha, nom_cuenta: cuenta[0].nombre, saldo:this.diario.haber.saldo};
+                  this.diarios.haber.push(haber);
+            }
+               
+                //Limpiamos los campos
+                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.diario.haber.fecha =''
+                this.diario.haber.nom_cuenta =''
+                this.diario.haber.saldo =''
+        }
+    },
+     agregarDebe(){
+      let id = this.diario.debe.nom_cuenta;
+      let cuenta = this.cuentas.filter(x => x.id == id);
+      let valor = this.diario.debe.saldo;
+          if(this.diario.debe.nom_cuenta === ''){
+           toastr.error("La cuenta es obligatoria", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+        }else{
+            if (cuenta[0].porcentual == 1) {
+                  let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
+                  
+                  let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:calculo};
+                  this.diarios.debe.push(debe);
+            }else{
+                  let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:this.diario.debe.saldo};
+                  this.diarios.debe.push(debe);
+            }
+                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.diario.debe.fecha =''
+                this.diario.debe.nom_cuenta =''
+                this.diario.debe.saldo =''
+      }   
+    },
+    agregarComentario(){
+      this.diarios.comentario = this.diario.comentario;
+      this.diario.comentario = '';
+    },
+    deleteHaber(index){
+        this.diarios.haber.splice(index, 1);
+      },
+    deleteDebe(index){
+        this.diarios.debe.splice(index, 1);
+      },
+    guardarRegistro(){
+      let total_debe = 0;
+      let total_haber = 0;
+      
+      this.diarios.debe.forEach(function(debe, id){
+                let saldo = debe.saldo;
+                    total_debe += Number(saldo);
+              });
+      this.diarios.haber.forEach(function(haber, id){
+                let saldo = haber.saldo;
+                    total_haber += Number(saldo);
+              });
+
+      if (this.diarios.debe == 0) {
+         toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else  if (this.diarios.comentario == '') {
+         toastr.error("Debes agregar un comentario", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else  if (this.diarios.fecha == '') {
+         toastr.error("Debes agregar la fecha", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else  if (total_haber != total_debe) {
+         toastr.error("El Total de Debe y Haber no coinciden", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else{
+        this.diarios.debe[0].fecha = this.diarios.fecha;
+                let registro = {debe:this.diarios.debe, haber:this.diarios.haber, comentario:this.diarios.comentario, fecha: this.diarios.fecha};
+                this.registros.push(registro);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Registro agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.diarios.debe =[];
+                this.diarios.haber =[];
+                this.diarios.comentario = '';
+                this.diarios.ajustado = false;
+                this.totalDebe();
+                this.totalHaber();
+                
+
+      $('#as-transaccion').modal('hide');
+
+                
+      }
+    },
+    debeEditRegister(id){
+      let register = JSON.parse(JSON.stringify(this.registros));
+      this.update             = true;
+      this.registerindex      = id;
+      this.diarios.debe       =[];
+      this.diarios.haber      =[];
+      this.diarios.debe       = register[id].debe;
+      this.diarios.haber      = register[id].haber;
+      this.diarios.comentario = register[id].comentario;
+      this.diarios.fecha = register[id].fecha;
+      // this.diarios.tipo = register[id].tipo;
+
+      // console.log(this.registros[id]);
+      $('#as-transaccion').modal('show');
+
+    },
+
+
+    deleteRegistro(id){
+       Swal.fire({
+        title: 'Seguro que deseas eliminar este registro??',
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro se elimino',
+            'success'
+          );
+           this.registros.splice(id, 1);
+            this.totalDebe();
+            this.totalHaber();
+            
+        }
+      });
+     
+
+    },
+
+    updaterRegister(){
+    let id = this.registerindex;
+    let total_debe = 0;
+      let total_haber = 0;
+      
+      this.diarios.debe.forEach(function(debe, id){
+                let saldo = debe.saldo;
+                    total_debe += Number(saldo);
+              });
+      this.diarios.haber.forEach(function(haber, id){
+                let saldo = haber.saldo;
+                    total_haber += Number(saldo);
+              });
+
+      if (this.diarios.debe == 0) {
+         toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else  if (this.diarios.comentario.trim() === '') {
+         toastr.error("Debes agregar un comentario", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else  if (this.diarios.fecha.trim() === '') {
+         toastr.error("Debes agregar la fecha", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else  if (total_haber != total_debe) {
+         toastr.error("El Total de Debe y Haber no coinciden", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+      }else{
+    
+            this.registros[id].debe       = this.diarios.debe;
+            this.registros[id].haber      = this.diarios.haber;
+            this.registros[id].comentario = this.diarios.comentario;
+            this.registros[id].fecha      = this.diarios.fecha;
+            this.diarios.debe             = [];
+            this.diarios.haber            = [];
+            this.diarios.comentario       = '';
+            this.diarios.fecha            = '';
+            // this.diarios.tipo             = '';
+            this.diarios.ajustado         = false;
+            
+            this.totalDebe();
+            this.totalHaber();
+            // 
+
+          $('#as-transaccion').modal('hide');
+
+        }
+    },
+  //   habereditRegister(id, index){
+  //     console.log(id);
+  //   console.log(index);
+  // },
+  agregarEdit(){
+     var haber = {fecha:this.diario.haber.fecha, nom_cuenta:this.diario.haber.nom_cuenta, saldo:this.diario.haber.saldo};
+              this.edit.haber.push(haber);//añadimos el la variable persona al array
+                //Limpiamos los campos
+            toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+                this.diario.haber.fecha =''
+                this.diario.haber.nom_cuenta =''
+                this.diario.haber.saldo =''
+   },
+   agregarEditPasivo(){
+
+         var debe = {fecha:'', nom_cuenta:this.diario.debe.nom_cuenta, saldo:this.diario.debe.saldo};
+                this.edit.debe.push(debe);//añadimos el la variable persona al array
+                //Limpiamos los campos
+                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.diario.debe.fecha =''
+                this.diario.debe.nom_cuenta =''
+                this.diario.debe.saldo =''
+             
+   },
+    haberEdit(index){
+      var edit = this.edit;
+      this.cuentaindex  = index;
+      this.diario.haber.nom_cuenta  = edit.haber[index].nom_cuenta;
+      this.diario.haber.saldo       = edit.haber[index].saldo;
+      $('#haber_a').modal('show'); 
+    },
+    updateHaber(){
+      let id     =  this.diario.haber.nom_cuenta;
+      let index  = this.diario.haber.index;
+      let cuenta = this.cuentas.filter(x => x.id == id);
+      console.log(cuenta)
+      let valor  = this.diario.haber.saldo;
+      if (cuenta[0].porcentual == 1) {
+        let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
+        this.diarios.haber[index].nom_cuenta = cuenta[0].nombre;
+        this.diarios.haber[index].saldo      = calculo;
+      }else{
+        this.diarios.haber[index].cuenta_id  = id;
+        this.diarios.haber[index].nom_cuenta = cuenta[0].nombre;
+        this.diarios.haber[index].saldo      = valor;
+      }
+        this.diario.haber.nom_cuenta = '';
+        this.diario.haber.saldo      = '';
+        this.diario.haber.edit       = false;
+    },
+    habediarioEdit(index){
+      this.diario.haber.index = index;
+      let cuenta_id = this.diarios.haber[index].cuenta_id;
+
+      let cuenta = this.cuentas.filter(x => x.id == cuenta_id);
+      console.log(cuenta)
+      if (cuenta[0].porcentual == 1){
+
+        this.diario.haber.nom_cuenta = cuenta_id;
+        this.diario.haber.saldo      = '';
+      }else{
+
+        this.diario.haber.nom_cuenta = cuenta_id;
+        this.diario.haber.saldo      = this.diarios.haber[index].saldo;
+      }
+        this.diario.haber.edit       = true;
+      
+      // this.diario.haber.nom_cuenta  = this.diarios.haber[index].nom_cuenta;
+      // this.diario.haber.saldo       = this.diarios.haber[index].saldo;
+      $('#haber-diario-tab').tab('show'); 
+    },
+      updateHaber1(){
+      var id = this.cuentaindex;
+      this.diarios.haber[id].nom_cuenta  = this.diario.haber.nom_cuenta;
+      this.diarios.haber[id].saldo       = this.diario.haber.saldo;
+      $('#haber_d').modal('hide'); 
+        this.diario.haber.nom_cuenta = '';
+        this.diario.haber.saldo = '';
+    },
+    haberDelete(index){
+      this.edit.haber.splice(index, 1);
+    },
+ // unction(){
+   //      this.total.debe  = 0;
+   //      this.total.haber = 0;
+   //      var regis        = this.ajustes;
+   //      var total        = 0;        
+   //      var total1       = 0;        
+   //      regis.forEach(function(obj, index){
+   //        obj.debe.forEach(function(sal, id){
+   //          total += Number(sal.saldo);
+   //        })
+   //      });
+   //      this.total.debe = Number(this.pasan.debe + total).toFixed(2);
+
+   //        regis.forEach(function(obj, index){
+   //        obj.haber.forEach(function(sal, id){
+   //          total1 += Number(sal.saldo);
+   //        })
+   //      });
+   //      this.total.haber = Number(this.pasan.haber + total1).toFixed(2);
+   //    },
+    comentarioEdit(){
+     this.diario.comentario = this.edit.comentario;
+     $('#comentario').modal('show'); 
+
+    },
+    comentarioUpdate(){
+      this.edit.comentario = this.diario.comentario;
+      $('#comentario').modal('hide'); 
+      this.diario.comentario = '';
+    },
+    debeEdit(index){
+      this.cuentaindex        = index;
+      if (index == 0) {
+      this.diario.debe.fecha  = this.edit.debe[index].fecha;  
+      }
+      this.diario.debe.nom_cuenta  = this.edit.debe[index].nom_cuenta;
+      this.diario.debe.saldo       = this.edit.debe[index].saldo;
+      $('#debe_a').modal('show'); 
+    },
+     debediairoEdit(index){
+      this.diario.debe.index = index;
+      // this.cuentaindex     = index;
+      let cuenta_id = this.diarios.debe[index].cuenta_id;
+
+      if (this.diarios.debe[index].fecha !== '') {
+        this.diario.debe.fecha  = this.diarios.debe[index].fecha;  
+      }else{
+        this.diario.debe.fecha  = '';  
+      }
+      let cuenta = this.cuentas.filter(x => x.id == cuenta_id);
+      // console.log(cuenta)
+      if (cuenta[0].porcentual == 1){
+        this.diario.debe.nom_cuenta = cuenta_id;
+        this.diario.debe.saldo      = '';
+      }else{
+        this.diario.debe.nom_cuenta = cuenta_id;
+        this.diario.debe.saldo      = this.diarios.debe[index].saldo;
+      }
+        this.diario.debe.edit       = true;
+      $('#debe-diario-tab').tab('show'); 
+    },
+    cancelarEdicion(cuenta){
+      if (cuenta == 'debe') {
+        this.diario.debe.fecha      = '';
+        this.diario.debe.nom_cuenta = '';
+        this.diario.debe.saldo      = '';
+        this.diario.debe.edit       = false;
+      } else {
+        this.diario.haber.nom_cuenta = '';
+        this.diario.haber.saldo      = '';
+        this.diario.haber.edit       = false;
+      }
+    },
+    updateDebe(){
+      let id     =  this.diario.debe.nom_cuenta;
+      let index  = this.diario.debe.index;
+      let cuenta = this.cuentas.filter(x => x.id == id);
+      console.log(cuenta)
+      let valor  = this.diario.debe.saldo;
+      if (this.diario.debe.fecha !== '') {
+         this.diarios.debe[index].fecha = this.diario.debe.fecha; 
+      }
+      if (cuenta[0].porcentual == 1) {
+        let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
+        this.diarios.debe[index].nom_cuenta = cuenta[0].nombre;
+        this.diarios.debe[index].saldo      = calculo;
+      }else{
+        this.diarios.debe[index].nom_cuenta = cuenta[0].nombre;
+        this.diarios.debe[index].saldo      = valor;
+      }
+        this.diarios.debe[index].cuenta_id = id;
+      
+      if (this.diario.debe.fecha !== '') {
+        this.diario.debe.fecha = ''; 
+      }
+        this.diario.debe.nom_cuenta = '';
+        this.diario.debe.saldo      = '';
+        this.diario.debe.edit       = false;
+
+    },
+    debeDelete(index){
+      this.edit.debe.splice(index, 1);
+    },
+     totalDebeBi: function(){
+            let balan = this.balanceInicial;
+            let total = 0; 
+            balan.debe.forEach(function(obj, index){
+                total += Number(obj.saldo);
+            });
+            // console.log(total);        
+            this.balanceInicial.totaldebe = total;
+            
+
+          },
+    totalHaberBi: function(){
+            let balan = this.balanceInicial;
+            let total = 0; 
+            balan.haber.forEach(function(obj, index){
+                total += Number(obj.saldo);
+            });
+            // console.log(total);        
+            this.balanceInicial.totalhaber = total;
+            
+            
+          },
+    totalDebe: function(){
+            this.pasan.debe = 0;
+            let regis = this.registros;
+            let total = 0;        
+            regis.forEach(function(obj, index){
+              obj.debe.forEach(function(sal, id){
+                total += Number(sal.saldo);
+              })
+            });
+            // console.log(total);
+            this.pasan.debe = this.balanceInicial.totaldebe + total;
+          },
+    totalHaber: function(){
+            this.pasan.haber = 0;
+            let regis = this.registros;
+            let total = 0;
+            
+            regis.forEach(function(obj, index){
+              obj.haber.forEach(function(sal, id){
+                total += Number(sal.saldo);
+              })
+            });
+            // console.log(total);  
+            this.pasan.haber =  this.balanceInicial.totalhaber +  total;
+          }, 
+  guardarDiario: function(){
+      if (this.registros.length == 0) {
+           toastr.error('No tienes registros para guardar', "Smarmoddle", {
+                    "timeOut": "3000"
+          });
+      }else{
+         // console.log(union)
+        let _this = this;
+        let url = '/sistema/admin/taller/asiento-cierre';
+            axios.post(url,{
+              id: _this.id_taller,
+              registro: _this.registros,
+              nombre: _this.nombre,
+              total_debe: _this.pasan.debe,
+              total_haber: _this.pasan.haber,
+        }).then(response => {
+          if (response.data.success == false) {
+                    toastr.error(response.data.message, "Smarmoddle", {
+                    "timeOut": "3000"
+                   });
+          }else if(response.data.success == 'act'){
+            toastr.success("Asiento de Cierre Actualizado Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+           mayor_general.obtenerDiarioGeneral();
+          }else{
+           toastr.success("Asiento de Cierre Creado Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+          _this.dato = response.data;
+            //
+            }          
+        }).catch(function(error){
+        });  
+      }
+      },
+    obtenerAsientoCierre: function(){
+        var _this = this;
+        var url = '/sistema/admin/taller/asiento-cierre-obtener';
+            axios.post(url,{
+              id: _this.id_taller,
+        }).then(response => {
+          if (response.data.datos == true) {
+          _this.registros = response.data.registros;
+          _this.nombre = response.data.nombre;
+           this.totalDebe();
+           this.totalHaber();
+           
+           toastr.success("Diairo General cargado Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+            }          
+        }).catch(function(error){
+
+        }); 
+    }
+
+    }
 });
 
 
@@ -8194,6 +9007,32 @@ const kardex_promedio = new Vue({
       // this.transaccion.existencia.total    = '';
 
      }
+    },
+      actuaIng(id){
+      let i = id;
+      // let exis = this.totales.total
+      let cantidad = Number(this.modales.modal_ingreso[i].ingreso_cantidad);
+      let precio = Number(this.modales.modal_ingreso[i].ingreso_precio);
+      let total1 = this.modales.modal_ingreso[i].ingreso_total;
+      let multiplicacion =  cantidad * precio;
+      this.modales.modal_ingreso[i].ingreso_total = multiplicacion.toFixed(2);
+        toastr.success("Datos Actualizado", "Smarmoddle", {
+        "timeOut": "3000"
+        });
+    
+    },
+      actuaEgre(id){
+      let i = id;
+      // let exis = this.totales.total
+      let cantidad = Number(this.modales.modal_egreso[i].egreso_cantidad);
+      let precio = Number(this.modales.modal_egreso[i].egreso_precio);
+      let total1 = this.modales.modal_egreso[i].egreso_total;
+      let multiplicacion =  cantidad * precio;
+      this.modales.modal_egreso[i].egreso_total = multiplicacion.toFixed(2);
+        toastr.success("Datos Actualizado", "Smarmoddle", {
+        "timeOut": "3000"
+        });
+    
     },
     calcularTotalEgreso(){
     if(this.transaccion.egreso.cantidad.trim() ==='' || this.transaccion.egreso.precio.trim() ==='' ){

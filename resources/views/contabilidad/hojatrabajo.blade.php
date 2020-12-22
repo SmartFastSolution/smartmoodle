@@ -50,6 +50,19 @@
                 <td align="center" width="50"><a @click.prevent="warningEliminar(index)"  class="btn btn-danger"><i
                             class="fas fa-trash-alt"></i></a></td>
         </tr>
+       {{--  <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>2050000</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr> --}}
   <tr>
     <td class="font-weight-bold">SUMAN</td>
     <td class="text-right">@{{ suman.balance_comp.total_debe }}</td>
