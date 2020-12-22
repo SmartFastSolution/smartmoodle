@@ -17,7 +17,7 @@
             <draggable class="list-group list-group-flush" :list="a_corrientes" group="people" @change="cambioActivo">
               <div v-for="(element, index) in a_corrientes" :key="element.name">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                  @{{ element.nom_cuenta }}<span class="badge-pill">@{{ decimales(element.saldo) }} <a @click="editAcorriente(index)" class="btn btn-warning btn-sm mr-1"><i class="fas fa-edit"></i></a><a @click="deleteAcCooriente(index)" class="btn btn-danger btn-sm re_diario"><i class="fas fa-trash-alt"></i></a></span>
+                  @{{ element.cuenta }}<span class="badge-pill">@{{ decimales(element.saldo) }} <a @click="editAcorriente(index)" class="btn btn-warning btn-sm mr-1"><i class="fas fa-edit"></i></a><a @click="deleteAcCooriente(index)" class="btn btn-danger btn-sm re_diario"><i class="fas fa-trash-alt"></i></a></span>
                 </li> 
               </div>   
             </draggable>
@@ -32,15 +32,31 @@
               </tbody>
             </table>
           </div>
-            <div class="col-7"> 
+            <div class="col-9"> 
           <h3 class="text-primary">ACTIVOS NO CORRIENTE <a data-toggle="tooltip" data-placement="top" title="Agregar Activo No Corriente" @click="abrirActivoNoC()"   class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3><br>
-            <draggable class="list-group list-group-flush" :list="a_nocorrientes" group="people" @change="cambioActivoNo()">
-              <div v-for="(element, index) in a_nocorrientes" :key="element.name">
-                <li class="list-group-item d-flex justify-content-between align-items-center">@{{ element.nom_cuenta }}
-                  <span class="badge-pill">@{{ decimales(element.saldo) }} <a @click="editANocorriente(index)" class="btn btn-warning btn-sm mr-1"><i class="fas fa-edit"></i></a><a @click="deleteAcNoCooriente(index)" class="btn btn-danger btn-sm re_diario"><i class="fas fa-trash-alt"></i></a></span>
+           
+            	<table class="table table-borderless">
+            		<tbody v-for="(element, index) in a_nocorrientes" :key="element.name">
+            			<tr>
+            				<td width="400">@{{ element.cuenta }}</td>
+            				<td class="text-right">@{{ decimales(element.saldo) }}</td>
+            				<td>  <span class="badge-pill">@{{ decimales(element.total_saldo) }} <a @click="editNoAcorriente(index)" class="btn btn-warning btn-sm mr-1"><i class="fas fa-edit"></i></a><a @click="deleteAcNoCooriente(index)" class="btn btn-danger btn-sm re_diario"><i class="fas fa-trash-alt"></i></a></span></td>
+            			</tr>
+            			<tr v-if="element.cuenta2 !== '' && element.saldo2 !== '' && element.total_saldo2 !==''">
+            				<td >(-)@{{ element.cuenta2 }}</td>
+            				<td style="border-bottom: solid 2px" class="text-right border-danger">@{{ decimales(element.saldo2) }}</td>
+            				<td>@{{ decimales(element.total_saldo2) }}</td>
+            			</tr>
+            		</tbody>
+            	</table>
+
+      {{--         <div >
+                <li class="list-group-item d-flex justify-content-between align-items-center">@{{ element.cuenta }}
+                  <span class="badge-pill">@{{ decimales(element.saldo) }} <a @click="editNoAcorriente(index)" class="btn btn-warning btn-sm mr-1"><i class="fas fa-edit"></i></a><a @click="deleteAcNoCooriente(index)" class="btn btn-danger btn-sm re_diario"><i class="fas fa-trash-alt"></i></a></span>
                 </li> 
-              </div>   
-            </draggable>
+              </div> 
+
+            </draggable> --}}
           </div>
            <div class="col-12"> 
             <table>
@@ -70,7 +86,7 @@
           <draggable class="list-group list-group-flush" :list="p_corrientes" group="people" @change="cambioPasivo()">
                <div v-for="(element, index) in p_corrientes" :key="element.name">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                      @{{ element.nom_cuenta }}
+                      @{{ element.cuenta }}
                       <span class=" badge-pill">@{{ decimales(element.saldo) }} <a @click="editPcorriente(index)" class="btn btn-warning btn-sm mr-1"><i class="fas fa-edit"></i></a><a @click="deletePaCooriente(index)" class="btn btn-danger btn-sm re_diario"><i class="fas fa-trash-alt"></i></a></span>
                     </li> 
                 </div>     
@@ -92,7 +108,7 @@
           <draggable class="list-group list-group-flush" :list="p_nocorrientes" group="people" @change="cambioPasivoNo()">
                <div v-for="(element, index) in p_nocorrientes" :key="element.name">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-              @{{ element.nom_cuenta }}
+              @{{ element.cuenta }}
               <span class=" badge-pill">@{{ decimales(element.saldo) }} <a @click="editPNocorriente(index)" class="btn btn-warning btn-sm mr-1"><i class="fas fa-edit"></i></a><a @click="deletePaNoCooriente(index)" class="btn btn-danger btn-sm re_diario"><i class="fas fa-trash-alt"></i></a></span>
           </li> 
                 </div>     
@@ -127,7 +143,7 @@
             <draggable class="list-group list-group-flush" :list="patrimonios" group="people" @change="cambioPatrimonio()">
                     <div v-for="(element, index) in patrimonios" :key="element.name">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                    @{{ element.nom_cuenta }}
+                    @{{ element.cuenta }}
                     <span class="badge-pill">@{{ decimales(element.saldo) }} <a @click="editPatrimonio(index)" class="btn btn-warning btn-sm mr-1"><i class="fas fa-edit"></i></a><a @click="deletePatrimonio(index)" class="btn btn-danger btn-sm re_diario"><i class="fas fa-trash-alt"></i></a></span>
                     </li> 
                     </div>   

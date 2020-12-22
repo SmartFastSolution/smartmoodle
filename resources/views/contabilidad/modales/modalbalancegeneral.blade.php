@@ -65,7 +65,7 @@
     <div class="col-12">
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-link active" id="nav-bg-activo-corrente-tab" data-toggle="tab" href="#nav-bg-activo-corrente" role="tab" aria-controls="nav-bg-activo-corrente" aria-selected="true">Activo Corriente</a>
+            <a class="nav-link active" id="nav-bg-activo-corriente-tab" data-toggle="tab" href="#nav-bg-activo-corrente" role="tab" aria-controls="nav-bg-activo-corrente" aria-selected="true">Activo Corriente</a>
 
             <a class="nav-link" id="nav-bg-activo-no-corriente-tab" data-toggle="tab" href="#nav-bg-activo-no-corriente" role="tab" aria-controls="nav-bg-activo-no-corriente" aria-selected="false">Activo No Corriente</a>
 
@@ -112,11 +112,11 @@
                             </div>
                           </div> --}}
                     <div v-if="!activo.a_corriente.edit" class="row justify-content-center">
-                          <a href="#" class="btn btn-success" @click.prevent="agregarIngreso()">Agregar</a>
+                          <a href="#" class="btn btn-success" @click.prevent="agregarActivoCorriente()">Agregar</a>
                       </div>
                        <div v-else class="row justify-content-center">
-                            <a href="#" class="btn btn-success" @click.prevent="actualizarIngreso()">Actualizar</a>
-                            <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicionIngreso()"><i class="fa fa-window-close"></i></a>
+                            <a href="#" class="btn btn-success" @click.prevent="actualizarActivoC()">Actualizar</a>
+                            <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicionActivoC()"><i class="fa fa-window-close"></i></a>
                       </div>              
                   </div>
                
@@ -138,19 +138,19 @@
                           <td align="center">@{{ balan.cuenta}}</td>
                           <td align="center">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
-                            <a @click.prevent="editIngreso(index)" class="btn btn-warning">
+                            <a @click.prevent="editAcorriente(index)" class="btn btn-warning">
                               <i class="fas fa-edit"></i>
                             </a>
                           </td>
                             <td align="center" width="50">
-                            <a @click.prevent="warningEliminarIngreso(index)" class="btn btn-danger">
+                            <a @click.prevent="deleteAcCooriente(index)" class="btn btn-danger">
                               <i class="fas fa-trash-alt"></i>
                             </a>
                           </td>
                         </tr>
                       <tr class="bg-secondary">
-                        <td class="text-left font-weight-bold">Total Ingresos</td>
-                        {{-- <td class="text-center">@{{ totales.ingreso }}</td> --}}
+                        <td class="text-left font-weight-bold">Total Activo Corriente</td>
+                        <td class="text-center">@{{ decimales(b_initotal.t_a_corriente) }}</td>
                         <td></td>
                       </tr>
                     </tbody>
@@ -168,6 +168,7 @@
                             <tr>
                               <th>Cuenta</th>
                               <th>Saldo</th>
+                              <th>A. Cuenta</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -179,16 +180,32 @@
                               <td  width="200">
                               <input type="number" v-model="activo.a_nocorriente.saldo" class="form-control">
                                 
+                              </td >
+                              <td width="100" align="center"> 
+                                <a v-if="!activo.a_nocorriente.double" class="btn btn-sm btn-info" href="" @click.prevent="DoubleCouenta()"><i class="fa fa-plus"></i></a>
+                                <a  v-if="activo.a_nocorriente.double" class="btn btn-sm btn-danger" href="" @click.prevent="DoubleCouentaC()"><i class="fas fa-window-close"></i></a>
                               </td>
                             </tr>
+
+                            <tr v-if="activo.a_nocorriente.double">
+                              <td>
+                          <model-select :options="options" v-model="activo.a_nocorriente.cuenta_id2" placeholder="ELEGIR CUENTA"></model-select>
+                                
+                              </td>
+                              <td  width="200">
+                              <input type="number" v-model="activo.a_nocorriente.saldo2" class="form-control">
+                                
+                              </td>
+                            </tr>
+
                           </tbody>
                         </table>
                     <div v-if="!activo.a_nocorriente.edit" class="row justify-content-center">
-                          <a href="#" class="btn btn-success" @click.prevent="agregarGasto()">Agregar</a>
+                          <a href="#" class="btn btn-success" @click.prevent="agregarActivoNoCorriente()">Agregar</a>
                       </div>
                        <div v-else class="row justify-content-center">
-                            <a href="#" class="btn btn-success" @click.prevent="actualizarGasto()">Actualizar</a>
-                            <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicionGasto()"><i class="fa fa-window-close"></i></a>
+                            <a href="#" class="btn btn-success" @click.prevent="actualizarActivoNC()">Actualizar</a>
+                            <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicionActivoNC()"><i class="fa fa-window-close"></i></a>
                       </div>              
                   </div>
                
@@ -199,30 +216,42 @@
                     <thead>
                       <tr class="text-center bg-dark">
                         <th>CUENTA</th>
-                        <th width="200">SALDO</th>
+                        <th >SALDO</th>
+                        <th >TOTAL</th>
                         <th class="text-center" colspan="2">ACCIONES</th>
 
                       </tr>
                     </thead>
-                    <tbody is="draggable" group="people" :list="a_nocorrientes" tag="tbody">
+                    <tbody  v-for="(balan, index) in a_nocorrientes">
 
-                        <tr v-for="(balan, index) in a_nocorrientes">
-                          <td align="center">@{{ balan.cuenta}}</td>
-                          <td align="center">@{{ decimales(balan.saldo)}}</td>
+                        <tr>
+                          <td width="300">@{{ balan.cuenta}}</td>
+                          <td width="100" class="text-right">@{{ decimales(balan.saldo)}}</td>
+                          <td width="100" class="text-right">@{{ decimales(balan.total_saldo) }}</td>
+
                           <td align="center"  width="50">
-                            <a @click.prevent="editGasto(index)" class="btn btn-warning">
+                            <a @click.prevent="editNoAcorriente(index)" class="btn btn-warning btn-sm">
                               <i class="fas fa-edit"></i>
                             </a>
                           </td>
                             <td align="center" width="50">
-                            <a @click.prevent="warningEliminarGastos(index)" class="btn btn-danger">
+                            <a @click.prevent="deleteAcNoCooriente(index)" class="btn btn-danger btn-sm">
                               <i class="fas fa-trash-alt"></i>
                             </a>
                           </td>
                         </tr>
-                      <tr class="bg-secondary">
-                        <td class="text-left font-weight-bold">Total Gastos</td>
-                        {{-- <td class="text-center">@{{ totales.gasto }}</td> --}}
+
+                        <tr v-if="balan.cuenta2 !== '' && balan.saldo2 !== '' && balan.total_saldo2 !==''">
+                          <td>(-)@{{ balan.cuenta2 }}</td>
+                          <td  class="text-right">@{{ decimales(balan.saldo2) }}</td>
+                          <td  class="text-right">@{{ decimales(balan.total_saldo2) }}</td>
+                          <td colspan="2"></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                       <tr class="bg-secondary">
+                        <td class="text-left font-weight-bold">Total Activo Corriente</td>
+                        <td class="text-center">@{{ b_initotal.t_a_nocorriente }}</td>
                         <td></td>
                       </tr>
                     </tbody>
@@ -255,12 +284,12 @@
                             </tr>
                           </tbody>
                         </table>
-                    <div v-if="!activo.a_nocorriente.edit" class="row justify-content-center">
-                          <a href="#" class="btn btn-success" @click.prevent="agregarGasto()">Agregar</a>
+                    <div v-if="!pasivo.p_corriente.edit" class="row justify-content-center">
+                          <a href="#" class="btn btn-success" @click.prevent="agregarPasivoCorriente()">Agregar</a>
                       </div>
                        <div v-else class="row justify-content-center">
-                            <a href="#" class="btn btn-success" @click.prevent="actualizarGasto()">Actualizar</a>
-                            <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicionGasto()"><i class="fa fa-window-close"></i></a>
+                            <a href="#" class="btn btn-success" @click.prevent="actualizarPasivoC()">Actualizar</a>
+                            <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicionPcorriente()"><i class="fa fa-window-close"></i></a>
                       </div>              
                   </div>
                
@@ -282,19 +311,19 @@
                           <td align="center">@{{ balan.cuenta}}</td>
                           <td align="center">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
-                            <a @click.prevent="editGasto(index)" class="btn btn-warning">
+                            <a @click.prevent="editPcorriente(index)" class="btn btn-warning">
                               <i class="fas fa-edit"></i>
                             </a>
                           </td>
                             <td align="center" width="50">
-                            <a @click.prevent="warningEliminarGastos(index)" class="btn btn-danger">
+                            <a @click.prevent="deletePaCooriente(index)" class="btn btn-danger">
                               <i class="fas fa-trash-alt"></i>
                             </a>
                           </td>
                         </tr>
                       <tr class="bg-secondary">
-                        <td class="text-left font-weight-bold">Total Gastos</td>
-                        {{-- <td class="text-center">@{{ totales.gasto }}</td> --}}
+                        <td class="text-left font-weight-bold">Total Pasivo No Corriente</td>
+                        <td class="text-center">@{{ b_initotal.t_p_corriente }}</td>
                         <td></td>
                       </tr>
                     </tbody>
@@ -318,22 +347,22 @@
                           <tbody>
                             <tr>
                               <td>
-                          <model-select :options="options" v-model="pasivo.p_corriente.cuenta_id" placeholder="ELEGIR CUENTA"></model-select>
+                          <model-select :options="options" v-model="pasivo.p_nocorriente.cuenta_id" placeholder="ELEGIR CUENTA"></model-select>
                                 
                               </td>
                               <td  width="200">
-                              <input type="number" v-model="pasivo.p_corriente.saldo" class="form-control">
+                              <input type="number" v-model="pasivo.p_nocorriente.saldo" class="form-control">
                                 
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                    <div v-if="!activo.a_nocorriente.edit" class="row justify-content-center">
-                          <a href="#" class="btn btn-success" @click.prevent="agregarGasto()">Agregar</a>
+                    <div v-if="!pasivo.p_nocorriente.edit" class="row justify-content-center">
+                          <a href="#" class="btn btn-success" @click.prevent="agregarPasivoNoCorriente()">Agregar</a>
                       </div>
                        <div v-else class="row justify-content-center">
-                            <a href="#" class="btn btn-success" @click.prevent="actualizarGasto()">Actualizar</a>
-                            <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicionGasto()"><i class="fa fa-window-close"></i></a>
+                            <a href="#" class="btn btn-success" @click.prevent="actualizarPasivoNC()">Actualizar</a>
+                            <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicionPNocorriente()"><i class="fa fa-window-close"></i></a>
                       </div>              
                   </div>
                
@@ -355,19 +384,19 @@
                           <td align="center">@{{ balan.cuenta}}</td>
                           <td align="center">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
-                            <a @click.prevent="editGasto(index)" class="btn btn-warning">
+                            <a @click.prevent="editPNocorriente(index)" class="btn btn-warning">
                               <i class="fas fa-edit"></i>
                             </a>
                           </td>
                             <td align="center" width="50">
-                            <a @click.prevent="warningEliminarGastos(index)" class="btn btn-danger">
+                            <a @click.prevent="deletePaNoCooriente(index)" class="btn btn-danger">
                               <i class="fas fa-trash-alt"></i>
                             </a>
                           </td>
                         </tr>
                       <tr class="bg-secondary">
-                        <td class="text-left font-weight-bold">Total Gastos</td>
-                        {{-- <td class="text-center">@{{ totales.gasto }}</td> --}}
+                        <td class="text-left font-weight-bold">Total Pasivo No corriente</td>
+                        <td class="text-center">@{{ b_initotal.t_p_no_corriente }}</td>
                         <td></td>
                       </tr>
                     </tbody>
@@ -391,22 +420,22 @@
                           <tbody>
                             <tr>
                               <td>
-                          <model-select :options="options" v-model="pasivo.p_corriente.cuenta_id" placeholder="ELEGIR CUENTA"></model-select>
+                          <model-select :options="options" v-model="patrimonio.cuenta_id" placeholder="ELEGIR CUENTA"></model-select>
                                 
                               </td>
                               <td  width="200">
-                              <input type="number" v-model="pasivo.p_corriente.saldo" class="form-control">
+                              <input type="number" v-model="patrimonio.saldo" class="form-control">
                                 
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                    <div v-if="!activo.a_nocorriente.edit" class="row justify-content-center">
-                          <a href="#" class="btn btn-success" @click.prevent="agregarGasto()">Agregar</a>
+                    <div v-if="!patrimonio.edit" class="row justify-content-center">
+                          <a href="#" class="btn btn-success" @click.prevent="agregarPatrimonio()">Agregar</a>
                       </div>
                        <div v-else class="row justify-content-center">
-                            <a href="#" class="btn btn-success" @click.prevent="actualizarGasto()">Actualizar</a>
-                            <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicionGasto()"><i class="fa fa-window-close"></i></a>
+                            <a href="#" class="btn btn-success" @click.prevent="actualizarPatrimonio()">Actualizar</a>
+                            <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicionPatrimonio()"><i class="fa fa-window-close"></i></a>
                       </div>              
                   </div>
                
@@ -428,19 +457,19 @@
                           <td align="center">@{{ balan.cuenta}}</td>
                           <td align="center">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
-                            <a @click.prevent="editGasto(index)" class="btn btn-warning">
+                            <a @click.prevent="editPatrimonio(index)" class="btn btn-warning">
                               <i class="fas fa-edit"></i>
                             </a>
                           </td>
                             <td align="center" width="50">
-                            <a @click.prevent="warningEliminarGastos(index)" class="btn btn-danger">
+                            <a @click.prevent="deletePatrimonio(index)" class="btn btn-danger">
                               <i class="fas fa-trash-alt"></i>
                             </a>
                           </td>
                         </tr>
                       <tr class="bg-secondary">
-                        <td class="text-left font-weight-bold">Total Gastos</td>
-                        {{-- <td class="text-center">@{{ totales.gasto }}</td> --}}
+                        <td class="text-left font-weight-bold">Total Patrimonio</td>
+                        <td class="text-center">@{{ b_initotal.t_patrimonio }}</td>
                         <td></td>
                       </tr>
                     </tbody>
