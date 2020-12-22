@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDGRHabersTable extends Migration
+class CreateBGPasivosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,19 @@ class CreateDGRHabersTable extends Migration
      */
     public function up()
     {
-        Schema::create('d_g_r_habers', function (Blueprint $table) {
+        Schema::create('b_g_pasivos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedbigInteger('d_g_registro_id');
-            $table->unsignedbigInteger('cuenta_id');
-            $table->string('nom_cuenta');
+            $table->unsignedbigInteger('balance_general_id');
+            $table->string('fecha')->nullable();
+            $table->string('cuenta')->nullable();
+            $table->unsignedbigInteger('cuenta_id')->nullable();
             $table->string('saldo')->nullable();
+            $table->string('tipo')->nullable();
             $table->timestamps();
 
-
-            $table->foreign('d_g_registro_id')
+            $table->foreign('balance_general_id')
             ->references('id')
-            ->on('d_g_registros')
+            ->on('balance_generals')
             ->onDelete('cascade');
         });
     }
@@ -36,6 +37,6 @@ class CreateDGRHabersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('d_g_r_habers');
+        Schema::dropIfExists('b_g_pasivos');
     }
 }

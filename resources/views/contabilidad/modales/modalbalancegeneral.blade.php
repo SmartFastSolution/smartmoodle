@@ -241,7 +241,7 @@
                           </td>
                         </tr>
 
-                        <tr v-if="balan.cuenta2 !== '' && balan.saldo2 !== '' && balan.total_saldo2 !==''">
+                        <tr v-if="balan.cuenta2 !== '' && balan.saldo2 !== '' && balan.total_saldo2 !=='' && balan.cuenta2 !== null">
                           <td>(-)@{{ balan.cuenta2 }}</td>
                           <td  class="text-right">@{{ decimales(balan.saldo2) }}</td>
                           <td  class="text-right">@{{ decimales(balan.total_saldo2) }}</td>
@@ -251,8 +251,8 @@
                     <tbody>
                        <tr class="bg-secondary">
                         <td class="text-left font-weight-bold">Total Activo Corriente</td>
+                        <td class="text-center"></td>
                         <td class="text-center">@{{ b_initotal.t_a_nocorriente }}</td>
-                        <td></td>
                       </tr>
                     </tbody>
                     </table>

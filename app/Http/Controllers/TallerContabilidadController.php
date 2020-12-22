@@ -8,9 +8,13 @@ use App\Contabilidad\BCRegistro;
 use App\Contabilidad\BIActivo;
 use App\Contabilidad\BIPasivo;
 use App\Contabilidad\BIPatrimonio;
+use App\Contabilidad\BGActivo;
+use App\Contabilidad\BGPasivo;
+use App\Contabilidad\BGPatrimonio;
 use App\Contabilidad\BalanceAjustado;
 use App\Contabilidad\BalanceComprobacion;
 use App\Contabilidad\BalanceInicial;
+use App\Contabilidad\BalanceGeneral;
 use App\Contabilidad\DGRDebe;
 use App\Contabilidad\DGRHaber;
 use App\Contabilidad\DGRegistro;
@@ -775,7 +779,9 @@ public function obtenerBalanceCompro(Request $request)
 			
 		} 
     }else if($balanceInicial == 1){
-       
+       $ids = [];
+       $ids1 = [];
+       $ids2 = [];
         $o = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', $tipo)->first();
             $a_corriente   = $request->a_corriente;
             $a_nocorriente = $request->a_nocorriente;
@@ -1013,8 +1019,10 @@ public function obtenerbalance(Request $request)
                 );
                 $ajustes[]= $regis;
             }
-            $iniciales = DGRegistro::where('diario_general_id', $diairioGeneral->id)->where('tipo', 'inicial')->orderBy('fecha')->first();
-            
+            $inicial = [];
+            $iniciales = DGRegistro::where('diario_general_id', $diairioGeneral->id)->where('tipo', 'inicial')->orderBy('fecha')->count();
+            if ($iniciales >= 1) {
+                $iniciales = DGRegistro::where('diario_general_id', $diairioGeneral->id)->where('tipo', 'inicial')->orderBy('fecha')->first();
                 $regis = array(
                     'debe'       => $iniciales->dgrDebe,
                     'haber'      =>$iniciales->dgrHaber,
@@ -1023,14 +1031,27 @@ public function obtenerbalance(Request $request)
                     'comentario' => $iniciales->comentario
                 );
                 $inicial= $regis;
-            
             return response(array(
                 'datos'     => true,
                 'nombre'    => $diairioGeneral->nombre,
                 'registros' => $registros,
+                'tieneinicial' => true,
                 'inicial'   => $inicial,
                 'ajustes'   => $ajustes,
             ),200,[]);
+            }else{
+            return response(array(
+                'datos'     => true,
+                'nombre'    => $diairioGeneral->nombre,
+                'registros' => $registros,
+                'tieneinicial' => false,
+                'inicial'   => $inicial,
+                'ajustes'   => $ajustes,
+            ),200,[]);
+            }
+                
+            
+     
          }else{
              return response(array(
                 'datos' => false,
@@ -1382,6 +1403,7 @@ public function obtenerbalance(Request $request)
         $estadoResul->fecha                 = $fecha;
         $estadoResul->venta                 = $request->venta;
         $estadoResul->costo_venta           = $request->costo_venta;
+        $estadoResul->utilidad           = $request->utilidad;
         $estadoResul->utilidad_bruta_ventas = $totales['utilidad_bruta_ventas'];
         $estadoResul->utilidad_neta_o       = $totales['utilidad_neta_o'];
         $estadoResul->utilidad_ejercicio    = $totales['utilidad_ejercicio'];
@@ -1413,9 +1435,9 @@ public function obtenerbalance(Request $request)
                 $regis1=array(
                      'estado_resultado_id' => $estadoResul->id,
                      'tipo'                => 'gastos',
-                     'cuenta_id'           => $value['cuenta_id'],
-                     'cuenta'              => $value['cuenta'],
-                     'saldo'               => $value['saldo'],
+                     'cuenta_id'           => $value1['cuenta_id'],
+                     'cuenta'              => $value1['cuenta'],
+                     'saldo'               => $value1['saldo'],
                      'created_at'          => now(),
                      'updated_at'          => now(),
                   );
@@ -1426,9 +1448,9 @@ public function obtenerbalance(Request $request)
                 $regis2=array(
                      'estado_resultado_id' => $estadoResul->id,
                      'tipo'                => 'utilidades',
-                     'cuenta_id'           => $value['cuenta_id'],
-                     'cuenta'              => $value['cuenta'],
-                     'saldo'               => $value['saldo'],
+                     'cuenta_id'           => $value2['cuenta_id'],
+                     'cuenta'              => $value2['cuenta'],
+                     'saldo'               => $value2['saldo'],
                      'created_at'          => now(),
                      'updated_at'          => now(),
                   );
@@ -1482,7 +1504,7 @@ public function obtenerbalance(Request $request)
                   );
                 ERIngreso::insert($regis1);                             
             }
-        if (count($utilidades > 0)) {
+        if (isset($utilidades)) {
             foreach ($utilidades as $key2 => $value2) {           
                 $regis2=array(
                      'estado_resultado_id' => $mayorg->id,
@@ -1535,5 +1557,260 @@ public function obtenerEstado(Request $request)
 
          }
     }
+        public function balanceGeneral(Request $request)
+    {
+        $id             = Auth::id();
+        $taller_id      = $request->id;
+        $balanceGeneral = BalanceGeneral::where('user_id',$id)->where('taller_id', $taller_id)->count();
+
+        if ($balanceGeneral == 0) { 
+        $a_corriente   = $request->a_corriente;
+        $a_nocorriente = $request->a_nocorriente;
+        $p_corriente   = $request->p_corriente;
+        $p_nocorriente = $request->p_nocorriente;
+        $patrimonios   = $request->patrimonio;
+
+        // $contenido = TallerContabilidad::select('enunciado')->where('taller_id', $taller_id)->firstOrFail();
+        $bgeneral                          = new BalanceGeneral; 
+        $bgeneral->taller_id               = $taller_id;
+        $bgeneral->user_id                 = $id;
+        // $bgeneral->tipo                    = $tipo;
+        // $bgeneral->enunciado               = $contenido->enunciado;
+        $bgeneral->nombre                  = $request->nombre;
+        $bgeneral->fecha                   = $request->fecha;
+        $bgeneral->total_pasivo_patrimonio = $request->t_patrimonio;
+        $bgeneral->save();
+
+        if ($bgeneral == true) {
+            $o = BalanceGeneral::where('user_id', $id)->get()->last(); 
+               foreach ($a_corriente as $key => $activos) {
+                  $datos=array(
+                     'balance_general_id' => $o->id,
+                     'cuenta'         => $activos['cuenta'],
+                     'cuenta2'            => $activos['cuenta2'],
+                     'resta'              => $activos['resta'],
+                     'cuenta_id'          => $activos['cuenta_id'],
+                     'saldo'              => $activos['saldo'],
+                     'total_saldo'        => $activos['total_saldo'],
+                     'cuenta_id2'         => $activos['cuenta_id2'],
+                     'saldo2'             => $activos['saldo2'],
+                     'total_saldo2'       => $activos['total_saldo2'],
+                     'tipo'               => 'corriente',
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                  );
+                  BGActivo::insert($datos);
+               }
+                foreach ($a_nocorriente as $key => $activo) {
+                  $datos=array(
+                     'balance_general_id' => $o->id,
+                     'cuenta'             => $activo['cuenta'],
+                     'cuenta2'            => $activo['cuenta2'],
+                     'resta'              => $activo['resta'],
+                     'cuenta_id'          => $activo['cuenta_id'],
+                     'saldo'              => $activo['saldo'],
+                     'total_saldo'        => $activo['total_saldo'],
+                     'cuenta_id2'         => $activo['cuenta_id2'],
+                     'saldo2'             => $activo['saldo2'],
+                     'total_saldo2'       => $activo['total_saldo2'],
+                     'tipo'               => 'nocorriente',
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                  );
+                  BGActivo::insert($datos);
+               }
+                foreach ($p_corriente as $key => $pasivos) {
+                  $datos=array(
+                     'balance_general_id' => $o->id,
+                     'cuenta'         => $pasivos['cuenta'],
+                     'cuenta_id'          => $pasivos['cuenta_id'],
+                     'saldo'              => $pasivos['saldo'],
+                     'tipo'               => 'corriente',
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                  );
+                  BGPasivo::insert($datos);
+               }
+               foreach ($p_nocorriente as $key => $pasivo) {
+                  $datos=array(
+                     'balance_general_id' => $o->id,
+                     'cuenta'         => $pasivo['cuenta'],
+                     'cuenta_id'          => $pasivo['cuenta_id'],
+                     'saldo'              => $pasivo['saldo'],
+                     'tipo'               => 'nocorriente',
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                  );
+                  BGPasivo::insert($datos);
+               }
+                 foreach ($patrimonios as $key => $patri) {
+                     $datos               =array(
+                     'balance_general_id' => $o->id,
+                     'cuenta'         => $patri['cuenta'],
+                     'cuenta_id'          => $patri['cuenta_id'],
+                     'saldo'              => $patri['saldo'],
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                  );
+                  BGPatrimonio::insert($datos);
+               }
+             return response(array(
+                'success' => true,
+                'message' => 'Balance General creado correctamente'
+            ),200,[]);
+            
+        } 
+    }else if($balanceGeneral == 1){
+       $ids = [];
+       $ids1 = [];
+       $ids2 = [];
+        $o = BalanceGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
+            $a_corriente   = $request->a_corriente;
+            $a_nocorriente = $request->a_nocorriente;
+            $p_corriente   = $request->p_corriente;
+            $p_nocorriente = $request->p_nocorriente;
+            $patrimonios   = $request->patrimonio;
+            $o->fecha      = $request->fecha;
+            $o->nombre     = $request->nombre;
+            $o->save();
+
+            $activ=BGActivo::where('balance_general_id', $o->id)->get();
+
+            foreach($activ as $act){
+                $ids[]=$act->id;
+            }
+            $activosdelete = BGActivo::destroy($ids);
+
+            $pasi =  BGPasivo::where('balance_general_id', $o->id)->get();
+            foreach($pasi as $pas){
+                $ids1[]=$pas->id;
+            }
+
+            $pasivosdelete = BGPasivo::destroy($ids1);
+
+            $patrim = BGPatrimonio::where('balance_general_id', $o->id)->get();
+             foreach($patrim as $pas){
+                $ids2[]=$pas->id;
+            }
+            $patrimoniodelete  = BGPatrimonio::destroy($ids2);
+
+            foreach ($a_corriente as $key => $activos) {
+                  $datos=array(
+                     'balance_general_id' => $o->id,
+                    'cuenta'         => $activos['cuenta'],
+                     'cuenta2'            => $activos['cuenta2'],
+                     'resta'              => $activos['resta'],
+                     'cuenta_id'          => $activos['cuenta_id'],
+                     'saldo'              => $activos['saldo'],
+                     'total_saldo'        => $activos['total_saldo'],
+                     'cuenta_id2'         => $activos['cuenta_id2'],
+                     'saldo2'             => $activos['saldo2'],
+                     'total_saldo2'       => $activos['total_saldo2'],
+                     'tipo'               => 'corriente',
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                  );
+                  BGActivo::insert($datos);
+               }
+                foreach ($a_nocorriente as $key => $activo) {
+                  $datos=array(
+                     'balance_general_id' => $o->id,
+                    'cuenta'             => $activo['cuenta'],
+                     'cuenta2'            => $activo['cuenta2'],
+                     'resta'              => $activo['resta'],
+                     'cuenta_id'          => $activo['cuenta_id'],
+                     'saldo'              => $activo['saldo'],
+                     'total_saldo'        => $activo['total_saldo'],
+                     'cuenta_id2'         => $activo['cuenta_id2'],
+                     'saldo2'             => $activo['saldo2'],
+                     'total_saldo2'       => $activo['total_saldo2'],
+                     'tipo'               => 'nocorriente',
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                  );
+                  BGActivo::insert($datos);
+               }
+                foreach ($p_corriente as $key => $pasivos) {
+                  $datos=array(
+                     'balance_general_id' => $o->id,
+                     'cuenta'         => $pasivos['cuenta'],
+                     'cuenta_id'         => $pasivos['cuenta_id'],
+                     'saldo'              => $pasivos['saldo'],
+                     'tipo'               => 'corriente',
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                  );
+                  BGPasivo::insert($datos);
+               }
+               foreach ($p_nocorriente as $key => $pasivo) {
+                  $datos=array(
+                     'balance_general_id' => $o->id,
+                     'cuenta'         => $pasivo['cuenta'],
+                     'cuenta_id'         => $pasivo['cuenta_id'],
+                     'saldo'              => $pasivo['saldo'],
+                     'tipo'               => 'nocorriente',
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                  );
+                  BGPasivo::insert($datos);
+               }
+                 foreach ($patrimonios as $key => $patri) {
+                     $datos               =array(
+                     'balance_general_id' => $o->id,
+                     'cuenta'         => $patri['cuenta'],
+                     'cuenta_id'         => $patri['cuenta_id'],
+                     'saldo'              => $patri['saldo'],
+                     'created_at'         => now(),
+                     'updated_at'         => now(),
+                  );
+                  BGPatrimonio::insert($datos);
+               }
+
+
+        return response(array(
+            'success'   =>  false,
+            'message'   => 'Datos Actualizados Correctamente',             
+            ),200,[]);
+    }
+}
+public function obtenerbalanceGeneral(Request $request)
+{
+    $id            = Auth::id();
+    $taller_id     = $request->id;
+    $balanceGeneral = BalanceGeneral::where('user_id',$id)->where('taller_id', $taller_id)->count();
+
+    if ($balanceGeneral >= 1 ) { 
+
+    $datos = BalanceGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
+
+    $a_corrientes      = BGActivo::select('cuenta', 'cuenta2', 'resta' , 'cuenta_id' , 'saldo' , 'total_saldo' , 'cuenta_id2' , 'saldo2' , 'total_saldo2' , 'tipo')->where('balance_general_id', $datos->id)->where('tipo', 'corriente')->get();
+
+    $a_nocorrientes    = BGActivo::select('cuenta', 'cuenta2', 'resta' , 'cuenta_id' , 'saldo' , 'total_saldo' , 'cuenta_id2' , 'saldo2' , 'total_saldo2' , 'tipo')->where('balance_general_id', $datos->id)->where('tipo', 'nocorriente')->get();
+
+    $p_corriente       = BGPasivo::select('cuenta', 'cuenta_id', 'saldo')->where('balance_general_id', $datos->id)->where('tipo', 'corriente')->get();
+
+    $p_nocorriente     = BGPasivo::select('cuenta', 'cuenta_id', 'saldo')->where('balance_general_id', $datos->id)->where('tipo', 'nocorriente')->get();
+
+    $patrimonios       = $datos->bgPatrimonios;
+
+        return response(array(
+            'datos' => true,
+                'nombre' => $datos->nombre,
+                'fecha' => $datos->fecha,
+                'total_pasivo_patrimonio' => $datos->total_pasivo_patrimonio,
+                'a_corriente' => $a_corrientes,
+                'a_nocorriente' => $a_nocorrientes,
+                'p_corriente' => $p_corriente,
+                'p_nocorriente' => $p_nocorriente,
+                'patrimonios' => $patrimonios,
+            ),200,[]);
+        
+
+    }else{
+          return response(array(
+            'datos' => false,
+            ),200,[]);
+    }
+}
 }
 

@@ -130,7 +130,7 @@
 
                         <tr v-for="(balan, index) in ingresos">
                           <td align="center">@{{ balan.cuenta}}</td>
-                          <td align="center">@{{ decimales(balan.saldo)}}</td>
+                          <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editIngreso(index)" class="btn btn-warning">
                               <i class="fas fa-edit"></i>
@@ -202,7 +202,7 @@
 
                         <tr v-for="(balan, index) in gastos">
                           <td align="center">@{{ balan.cuenta}}</td>
-                          <td align="center">@{{ decimales(balan.saldo)}}</td>
+                          <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editGasto(index)" class="btn btn-warning">
                               <i class="fas fa-edit"></i>

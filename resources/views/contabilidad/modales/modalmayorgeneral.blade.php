@@ -160,11 +160,11 @@
              
                 <tbody class="bg-light" is="draggable" group="people" :list="mayores.registros" tag="tbody" >
                   <tr v-for="(diar, index) in mayores.registros"  >
-                         <td align="center" width="50"><input class=" form-control-plaintext" type="date" v-model="diar.fecha"></td>
-                         <td align="center" width="200"><input class=" form-control-plaintext" type="text" v-model="diar.detalle"></td>
-                         <td class="text-right"><input class=" form-control-plaintext" type="number" v-model="diar.debe"></td>
-                         <td class="text-right"><input class=" form-control-plaintext" type="number" v-model="diar.haber"></td>
-                         <td class="text-right" width="125"><input class="form-control-plaintext" type="number" v-model="diar.saldo"></td>
+                         <td align="center" width="50"><input class=" form-control-plaintext text-right" type="date" v-model="diar.fecha"></td>
+                         <td align="center" width="200"><input class=" form-control-plaintext text-right" type="text" v-model="diar.detalle"></td>
+                         <td class="text-right"><input class=" form-control-plaintext text-right" type="number" v-model="diar.debe"></td>
+                         <td class="text-right"><input class=" form-control-plaintext text-right" type="number" v-model="diar.haber"></td>
+                         <td class="text-right" width="125"><input class="form-control-plaintext text-right" type="number" v-model="diar.saldo"></td>
                        {{--   <td align="center">
                             <a @click="habediarioEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i>
                             </a>
@@ -175,11 +175,11 @@
                  </tbody>
                  <tbody is="draggable" group="people" :list="mayores.cierres" tag="tbody">
                        <tr v-for="(diar, index) in mayores.cierres">
-                         <td align="center" width="50"><input class=" form-control-plaintext" type="date" v-model="diar.fecha"></td>
-                         <td align="center" width="200"><input class=" form-control-plaintext" type="text" v-model="diar.detalle"></td>
-                         <td class="text-right"><input class=" form-control-plaintext" type="number" v-model="diar.debe"></td>
-                         <td class="text-right"><input class=" form-control-plaintext" type="number" v-model="diar.haber"></td>
-                         <td class="text-right" width="125"><input class="form-control-plaintext" type="number" v-model="diar.saldo"></td>
+                         <td align="center" width="50"><input class=" form-control-plaintext text-right" type="date" v-model="diar.fecha"></td>
+                         <td align="center" width="200"><input class=" form-control-plaintext text-right" type="text" v-model="diar.detalle"></td>
+                         <td class="text-right"><input class=" form-control-plaintext text-right" type="number" v-model="diar.debe"></td>
+                         <td class="text-right"><input class=" form-control-plaintext text-right" type="number" v-model="diar.haber"></td>
+                         <td class="text-right" width="125"><input class="form-control-plaintext text-right" type="number" v-model="diar.saldo"></td>
                        {{--   <td align="center">
                             <a @click="habediarioEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i>
                             </a>

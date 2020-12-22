@@ -18,7 +18,7 @@
 </div>
 <div class="row">
 	<div class="col-10"><h3 class="font-weight-bold text-info">Utilidad Bruta en Ventas <a data-toggle="tooltip" data-placement="top" title="Agregar Utilidad Bruta" @click="abrirUtilidades()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3></div>
-	<div class="col-2 text-right"><span class="badge badge-danger" style="font-size: 20px;">@{{ totales.utilidad_bruta_ventas }}</span></div>
+	<div class="col-2 text-right"><span class="badge badge-danger" style="font-size: 20px;">@{{ decimales(totales.utilidad_bruta_ventas) }}</span></div>
 </div>
 
 <div class="row mt-2">
@@ -92,7 +92,7 @@
 		<select class="custom-select" v-model="utilidad" name="" id="" @change="selectUtilidad()">
 		<option selected="" disabled="" value="">ELEGIR UNA OPCION</option>
 		<option value="utilidad_neta">UTILIDAD NETA DEL EJERCICIO</option>
-		<option value="utilidad_perdida">UTILIDAD PERDIDA DEL EJERCICIO</option>
+		<option value="utilidad_perdida"> PERDIDA DEL EJERCICIO</option>
 		</select>
 	</div>
 	<div class="col-3"><input type="number" v-model="totales.utilidad_ejercicio" class="form-control text-right"></div>

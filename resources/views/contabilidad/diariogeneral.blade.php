@@ -79,10 +79,10 @@
                  <tbody>
                          <tr >
                          <td class="bg-dark" align="center" colspan="2" width="450" valign="middle">SUMAN</td>
-                         <td class="bg-dark" align="center" width="125">
+                         <td class="bg-dark text-right"  width="125">
                              @{{ decimales(pasan.debe) }}
                          </td>
-                         <td class="bg-dark" align="center" width="125">
+                         <td class="bg-dark text-right"  width="125">
                              @{{ decimales(pasan.haber) }}
                          </td>
                          <td v-if="registros.length > 0" width="90" style="border: none;"></td>
@@ -135,10 +135,10 @@
                  <tbody>
                          <tr >
                          <td class="bg-dark" align="center" colspan="2" width="450" valign="middle">TOTAL</td>
-                         <td class="bg-dark" align="center" width="125">
+                         <td class="bg-dark text-right"  width="125">
                              @{{ decimales(total.debe) }}
                          </td>
-                         <td class="bg-dark" align="center" width="125">
+                         <td class="bg-dark text-right"  width="125">
                              @{{ decimales(total.haber) }}
                          </td>
                          <td v-if="registros.length > 0" width="90" style="border: none;"></td>

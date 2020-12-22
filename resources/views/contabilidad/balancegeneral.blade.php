@@ -2,8 +2,8 @@
         <h2 class="text-center display-4 font-weight-bold text-danger">Balance General</h2>
 <div class="row p-3 justify-content-center ">
     <div class="col-5 mb-3">
-          <input class="form-control" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="" ><br>
-          <input type="date" v-model="fecha" class="form-control">
+          <input class="form-control" type="text" v-model="balance_general.nombre" placeholder="Nombre de la empresa" name="" ><br>
+          <input type="date" v-model="balance_general.fecha" class="form-control">
     </div>
    
 </div>
@@ -27,7 +27,7 @@
               <tbody>
                 <tr>
                   <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOTAL ACT. CORR.</td>
-                  <td style="font-size: 20px;" class="badge-danger badge">@{{ b_initotal.t_a_corriente }}</td>
+                  <td style="font-size: 20px;" class="badge-danger badge">@{{ decimales(b_initotal.t_a_corriente )}}</td>
                 </tr>
               </tbody>
             </table>
@@ -40,12 +40,15 @@
             			<tr>
             				<td width="400">@{{ element.cuenta }}</td>
             				<td class="text-right">@{{ decimales(element.saldo) }}</td>
-            				<td>  <span class="badge-pill">@{{ decimales(element.total_saldo) }} <a @click="editNoAcorriente(index)" class="btn btn-warning btn-sm mr-1"><i class="fas fa-edit"></i></a><a @click="deleteAcNoCooriente(index)" class="btn btn-danger btn-sm re_diario"><i class="fas fa-trash-alt"></i></a></span></td>
+            				<td class="text-right">@{{ decimales(element.total_saldo) }}</td>
+                    <td><a @click="editNoAcorriente(index)" class="btn btn-warning btn-sm mr-1"><i class="fas fa-edit"></i></a></td>
+                    <td><a @click="deleteAcNoCooriente(index)" class="btn btn-danger btn-sm re_diario"><i class="fas fa-trash-alt"></i></a></td>
             			</tr>
-            			<tr v-if="element.cuenta2 !== '' && element.saldo2 !== '' && element.total_saldo2 !==''">
+            			<tr v-if="element.cuenta2 !== '' && element.saldo2 !== '' && element.total_saldo2 !=='' && element.cuenta2 !== null">
             				<td >(-)@{{ element.cuenta2 }}</td>
             				<td style="border-bottom: solid 2px" class="text-right border-danger">@{{ decimales(element.saldo2) }}</td>
-            				<td>@{{ decimales(element.total_saldo2) }}</td>
+            				<td class="text-right">@{{ decimales(element.total_saldo2) }}</td>
+                    <td colspan="2"></td>
             			</tr>
             		</tbody>
             	</table>
@@ -63,7 +66,7 @@
               <tbody>
                 <tr>
                   <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOTAL ACT. NO CORR.</td>
-                  <td style="font-size: 20px;" class="badge-danger badge">@{{ b_initotal.t_a_nocorriente }}</td>
+                  <td style="font-size: 20px;" class="badge-danger badge">@{{ decimales(b_initotal.t_a_nocorriente) }}</td>
                 </tr>
               </tbody>
             </table>
@@ -72,7 +75,7 @@
               <tbody>
                 <tr>
                   <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOTAL ACTIVO.</td>
-                  <td style="font-size: 20px;" class="badge-danger badge">@{{ total_balance_inicial.t_activo }}</td>
+                  <td style="font-size: 20px;" class="badge-danger badge">@{{ decimales(total_balance_inicial.t_activo) }}</td>
                 </tr>
               </tbody>
             </table>
@@ -97,7 +100,7 @@
               <tbody>
                 <tr>
                   <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOTAL PAS. CORR.</td>
-                  <td style="font-size: 20px;" class="badge-danger badge">@{{ b_initotal.t_p_corriente }}</td>
+                  <td style="font-size: 20px;" class="badge-danger badge">@{{ decimales(b_initotal.t_p_corriente) }}</td>
                 </tr>
               </tbody>
             </table>
@@ -119,7 +122,7 @@
               <tbody>
                 <tr>
                   <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOTAL PAS. CORR.</td>
-                  <td style="font-size: 20px;" class="badge-danger badge">@{{ b_initotal.t_p_no_corriente }}</td>
+                  <td style="font-size: 20px;" class="badge-danger badge">@{{ decimales(b_initotal.t_p_no_corriente) }}</td>
                 </tr>
               </tbody>
             </table>
@@ -130,7 +133,7 @@
               <tbody>
                 <tr>
                   <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOTAL PASIVO</td>
-                  <td style="font-size: 20px;" class="badge-danger badge">@{{ total_balance_inicial.t_pasivo }}</td>
+                  <td style="font-size: 20px;" class="badge-danger badge">@{{ decimales(total_balance_inicial.t_pasivo) }}</td>
                 </tr>
               </tbody>
             </table>
@@ -154,7 +157,7 @@
               <tbody>
                 <tr>
                   <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOTAL PATRIMONIO.</td>
-                  <td style="font-size: 20px;" class="badge-danger badge">@{{ b_initotal.t_patrimonio }}</td>
+                  <td style="font-size: 20px;" class="badge-danger badge">@{{ decimales(b_initotal.t_patrimonio) }}</td>
                 </tr>
               </tbody>
             </table>
@@ -174,7 +177,7 @@
         </div>
 </div>
         <div class="row justify-content-center">
-            <a class="btn p-2 mt-3 btn-outline-info" @click.prevent="guardarBalanceInicial()">Guardar Balance Inicial</a>
+            <a class="btn p-2 mt-3 btn-outline-info" @click.prevent="guardarBalanceGeneral()">Guardar Balance General</a>
        </div>
 @include ('contabilidad.modales.modalbalancegeneral')
 </div>

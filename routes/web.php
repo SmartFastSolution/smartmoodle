@@ -297,6 +297,13 @@ route::post('/sistema/admin/taller/mayorgeneral', 'TallerContabilidadController@
 //// FIN RUTAS DEL DIARIO
 
 
+/// RUTAS DEL BALANCE GENERAL
+route::post('/sistema/admin/taller/balance-general', 'TallerContabilidadController@balanceGeneral')->name('balance-general');
+route::post('/sistema/admin/taller/obtener-balance-general', 'TallerContabilidadController@obtenerbalanceGeneral')->name('balance-obtener-general');
+
+//// FIN RUTAS DEL BALANCE GENERAL
+
+
 route::post('/sistema/admin/taller/obtenerbalance', 'TallerContabilidadController@obtenerbalance')->name('obtenerbalance');
 
 

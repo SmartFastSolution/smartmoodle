@@ -42,9 +42,9 @@
 
     <tr v-for="(balan, index) in balances_ajustados">
       <td align="center">@{{ balan.cuenta}}</td>
-      <td align="center">@{{ decimales(balan.debe)}}</td>
-      <td align="center" width="125">@{{ decimales(balan.haber) }}</td>
-       <td align="center"  width="50">
+      <td class="text-right">@{{ decimales(balan.debe)}}</td>
+      <td class="text-right" width="125">@{{ decimales(balan.haber) }}</td>
+       <td class="text-right"  width="50">
         <a @click.prevent="editBalanceFuera(index)" class="btn btn-warning">
           <i class="fas fa-edit"></i>
         </a>
@@ -58,8 +58,8 @@
     </tr>
   <tr class="bg-secondary">
     <td class="text-left font-weight-bold">SUMAN</td>
-    <td class="text-center">@{{ suman.debe }}</td>
-    <td class="text-center">@{{ suman.haber }}</td>
+    <td class="text-right">@{{ suman.debe }}</td>
+    <td class="text-right">@{{ suman.haber }}</td>
   </tr>
 </tbody>
 </table>

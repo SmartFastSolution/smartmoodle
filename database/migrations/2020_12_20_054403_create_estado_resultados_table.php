@@ -18,6 +18,7 @@ class CreateEstadoResultadosTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
           $table->string('nombre')->nullable();
+          $table->string('utilidad')->nullable();
           $table->string('fecha')->nullable();
           $table->string('venta')->nullable();
           $table->string('costo_venta')->nullable();

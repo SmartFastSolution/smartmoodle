@@ -213,9 +213,9 @@
                      <tr v-for="(diar, index) in diarios.debe">
                          {{-- <td align="center" width="100">@{{ diar.fecha}}</td> --}}
                          <td>@{{ diar.nom_cuenta}}</td>
-                         <td align="center" width="125">@{{ diar.saldo }}</td>
-                         <td align="center" width="125"></td>
-                         <td align="center" width="25">
+                         <td class="text-right" width="125">@{{ decimales(diar.saldo) }}</td>
+                         <td class="text-right" width="125"></td>
+                         <td class="text-right" width="25">
                              <a @click="debediairoEdit(index)" class="btn btn-warning btn-sm"><i
                                      class="fas fas fa-edit"></i></a>
                          </td>
@@ -229,9 +229,9 @@
                      <tr v-for="(diar, index) in diarios.haber">
                          {{-- <td align="center" width="50"></td> --}}
                          <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
-                         <td align="center" width="125"></td>
-                         <td align="center" width="125">@{{ diar.saldo }}</td>
-                         <td align="center">
+                         <td class="text-right" width="125"></td>
+                         <td class="text-right" width="125">@{{ decimales(diar.saldo) }}</td>
+                         <td class="text-right">
                             <a @click="habediarioEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i>
                             </a>
                          </td>

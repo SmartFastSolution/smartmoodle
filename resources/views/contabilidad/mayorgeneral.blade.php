@@ -8,7 +8,7 @@
      <div class="row justify-content-center">
      	<div v-for="(cuenta, index) in registros" class="col-11">
      		<a href="" class="float-right btn bt-sm btn-danger ml-2" @click.prevent="warningEliminar(index)"><i class="fas fa-trash"></i> </a>
-     		{{-- <a href="" class="float-right btn bt-sm btn-warning " @click.prevent="editarTransaccion(index)"><i class="fas fa-edit"></i> </a> --}}
+     		<a href="" class="float-right btn bt-sm btn-warning " @click.prevent="editarTransaccion(index)"><i class="fas fa-edit"></i> </a>
      		<h3 class="text-center font-weight-bold text-danger">@{{ cuenta.cuenta }} </h3>
      		  <table class="table table-bordered table-sm">
                  <thead class="thead-dark">
