@@ -1,4 +1,4 @@
-<div id="conciliacion_b" class="border border-danger p-4">
+<div id="conciliacionb" class="border border-danger p-4">
     <h1 class="text-center text-danger font-weight-bold mt-2">Conciliación Bancaria</h1>
     <div class="row p-3  mb-2 justify-content-center ">
         <div class="col-8 mb-3">
@@ -163,5 +163,5 @@
 
 
 
-    @include ('contabilidad.modalconciliacionbancaria')
+    @include('contabilidad.modalconciliacionbancaria')
 </div>
