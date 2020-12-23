@@ -147,10 +147,10 @@
         <tbody is="draggable" group="people" :list="balances" tag="tbody" @change="mover">
             <tr v-for="(balan, index) in balances" >
                 <td align="center">@{{ balan.cuenta}}</td>
-                <td align="center"  width="125">@{{ decimales(balan.suma_debe)}}</td>
-                <td align="center" width="125">@{{ decimales(balan.suma_haber) }}</td>
-                <td align="center" width="125">@{{ decimales(balan.saldo_debe) }}</td>
-                <td align="center" width="125">@{{ decimales(balan.saldo_haber) }}</td>
+                <td class="text-right"  width="125">@{{ decimales(balan.suma_debe)}}</td>
+                <td class="text-right" width="125">@{{ decimales(balan.suma_haber) }}</td>
+                <td class="text-right" width="125">@{{ decimales(balan.saldo_debe) }}</td>
+                <td class="text-right" width="125">@{{ decimales(balan.saldo_haber) }}</td>
                 <td align="center"  width="50"><a @click.prevent="editBalance(index)" class="btn btn-warning"><i
                             class="fas fa-edit"></i></a></td>
                 <td align="center" width="50"><a @click.prevent="deleteBalance(index)"  class="btn btn-danger"><i
@@ -160,10 +160,10 @@
             </tr>
             <tr class="text-center bg-secondary">
                 <td align="center" valign="middle">SUMAN</td>
-                <td>@{{ suman.sum_debe }}</td>
-                <td>@{{ suman.sum_haber }}</td>
-                <td>@{{ suman.sal_debe }}</td>
-                <td>@{{ suman.sal_haber }}</td>
+                <td class="text-right">@{{ suman.sum_debe }}</td>
+                <td class="text-right">@{{ suman.sum_haber }}</td>
+                <td class="text-right">@{{ suman.sal_debe }}</td>
+                <td class="text-right">@{{ suman.sal_haber }}</td>
             </tr>
         </tbody>
     </table>

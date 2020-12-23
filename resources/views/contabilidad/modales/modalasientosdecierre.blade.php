@@ -1,6 +1,6 @@
 {{-- TRANSACCION --}}
 
-<div class="modal fade" data-backdrop="static" data-keyboard="false" id="dg-transaccion" tabindex="-1"  role="dialog" aria-labelledby="dg-transaccionLabel" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="as-transaccion" tabindex="-1"  role="dialog" aria-labelledby="dg-transaccionLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-xl " role="document">
         <div class="modal-content bg-light">
             <div class="modal-header">
@@ -19,19 +19,19 @@
                    <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                       <li class="nav-item" role="presentation">
-                        <a class="nav-link active text-dark font-weight-bold" id="comentario-diario-tab" style="font-size: 15px" data-toggle="tab" href="#comentario-diario" role="tab" aria-controls="comentario-diario" aria-selected="false">DETALLE MOVIMIENTO</a>
+                        <a class="nav-link active text-dark font-weight-bold" id="comentario-asiento-tab" style="font-size: 15px" data-toggle="tab" href="#comentario-asiento" role="tab" aria-controls="comentario-asiento" aria-selected="false">DETALLE MOVIMIENTO</a>
                       </li>
 
                       <li class="nav-item" role="presentation">
-                        <a class="nav-link  text-dark font-weight-bold" id="debe-diario-tab" style="font-size: 15px" data-toggle="tab" href="#debe-diario" role="tab" aria-controls="debe-diario" aria-selected="true">CUENTAS DEUDORAS</a>
+                        <a class="nav-link  text-dark font-weight-bold" id="debe-asiento-tab" style="font-size: 15px" data-toggle="tab" href="#debe-asiento" role="tab" aria-controls="debe-asiento" aria-selected="true">CUENTAS DEUDORAS</a>
                       </li>
                       <li class="nav-item" role="presentation">
-                        <a class="nav-link text-dark font-weight-bold" id="haber-diario-tab" style="font-size: 15px" data-toggle="tab" href="#haber-diario" role="tab" aria-controls="haber-diario" aria-selected="false">CUENTAS ACREEDORAS</a>
+                        <a class="nav-link text-dark font-weight-bold" id="haber-asiento-tab" style="font-size: 15px" data-toggle="tab" href="#haber-asiento" role="tab" aria-controls="haber-asiento" aria-selected="false">CUENTAS ACREEDORAS</a>
                       </li>
                      
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                      <div class="tab-pane fade " id="debe-diario" role="tabpanel" aria-labelledby="debe-diario-tab">
+                      <div class="tab-pane fade " id="debe-asiento" role="tabpanel" aria-labelledby="debe-asiento-tab">
                                <h2 class="text-center">AGREGAR CUENTAS DEUDORAS</h2>
                        <table class="table table-bordered table-sm">
                           <thead class="bg-success">
@@ -81,7 +81,7 @@
 
                       </div>
                       </div>
-                      <div class="tab-pane fade" id="haber-diario" role="tabpanel" aria-labelledby="haber-diario-tab">
+                      <div class="tab-pane fade" id="haber-asiento" role="tabpanel" aria-labelledby="haber-asiento-tab">
                         <h2 class="text-center">AGREGAR CUENTAS ACREEDORAS</h2>
 
                       <table class="table table-bordered table-sm">
@@ -132,7 +132,7 @@
                             <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicion('haber')"><i class="fa fa-window-close"></i></a>
                       </div>
                       </div>
-                      <div class="tab-pane fade show active" id="comentario-diario" role="tabpanel" aria-labelledby="comentario-diario-tab">
+                      <div class="tab-pane fade show active" id="comentario-asiento" role="tabpanel" aria-labelledby="comentario-asiento-tab">
                         <h2 class="text-center">AGREGAR DETALLES</h2>
 
                       <table class="table table-bordered table-sm">
@@ -151,7 +151,7 @@
                     </table>
                     <div class="row">
                       <div class="col-6">
-                    <h3>Asiento de ajustes: <input v-model="diarios.ajustado" type="checkbox" class="custom-checkbox"></h3>
+                    {{-- <h3>Asiento de ajustes: <input v-model="diarios.ajustado" type="checkbox" class="custom-checkbox"></h3> --}}
                         
                       </div>
                       <div class="col-6">
@@ -167,35 +167,292 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-6" style=" height:300px; overflow-y: scroll;">
-                    <h3 class="text-center">Datos para realizar el Diario General</h3>
-                    <p >
-                      Se compra s/fra. #040 a Importadora “ELMARY” (contribuyente especial) - doce acondicionadores de aire en $ 550 c/u. Se cancela con ch/.# 050 Bco. Guayaquil. <br> <br>
-                      Se cancela la Fra.#023 a “Publicitas” (No Obligada a llevar Contabilidad) por servicios de publicidad $ 300 con ch/.#051 Bco. Guayaquil. <br> <br>
+                  <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                    <h3 class="text-center font-weight-bold">Datos para realizar los Asientos de Cierre</h3>
+                      <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                          <a class="nav-link active" id="as-estado-resultado-tab" data-toggle="tab" href="#as-estado-resultado" role="tab" aria-controls="as-estado-resultado" aria-selected="true">Estado de Resultado</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <a class="nav-link" id="as-balance-general-tab" data-toggle="tab" href="#as-balance-general" role="tab" aria-controls="as-balance-general" aria-selected="false">Balance General</a>
+                        </li>
+                      </ul>
+                      <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="as-estado-resultado" role="tabpanel" aria-labelledby="as-estado-resultado-tab">
+                                  <h2 class="text-center display-4 font-weight-bold text-danger">Estado de Resultado</h2>
+                          <div class="row p-3  mb-2 justify-content-center ">
+                              <div class="col-5 mb-3">
+                                <h3 class="text-center font-weight-bold">@{{ estadoresultado.nombre_e_resultado }}</h3>
+                                <h3 class="text-center font-weight-bold">@{{ estadoresultado.fecha_e_resultado }}</h3>
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-5"><h5>Ventas</h5></div>
+                            <div class="col-2 text-right"><span>@{{ decimales(estadoresultado.venta_e_resultado) }}</span></div>
+                          </div>
+                          <div class="row">
+                            <div class="col-5"><h5>- Costos de Ventas</h5></div>
+                            <div class="col-2 border-danger text-right" style="border-bottom: solid; 2px">@{{ decimales(estadoresultado.costo_venta_e_resultado) }}</div>
+                          </div>
+                          <div class="row">
+                            <div class="col-10"><h4 class="font-weight-bold text-info">Utilidad Bruta en Ventas</h4></div>
+                            <div class="col-2 text-right"><span class="badge badge-danger" style="font-size: 20px;">@{{ decimales(estadoresultado.totales.utilidad_bruta_ventas_e_resultado) }}</span></div>
+                          </div>
 
-                      Se vende S/. Fra. # 010 - cincuenta acondicionadores de aire en $ 1.200 c/u a Comercial “Felipao” (Obligado a llevar Contabilidad). Nos cancela con ch/. #082 Bco. Austro. <br> <br>
+                          <div class="row mt-2">
+                            <div class="col-6">
+                            <h2 class="font-weight-bold pl-3">INGRESOS</h2>
+                              
+                            </div>
+                            <div class="col-12">
+                            <table>
+                              <tbody is="draggable" group="ingresos" :list="estadoresultado.ingresos" tag="tbody">
+                                <tr v-for="(balan, index) in estadoresultado.ingresos">
+                                            <td class="text-left" width="300">@{{ balan.cuenta}}</td>
+                                            <td align="center">@{{ decimales(balan.saldo)}}</td>
+                                          </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          </div>
+                          <div class="row justify-content-between">
+                            <div class="col-10"><h4 class="font-weight-bold text-info">Total de ingresos</h4></div>
+                            <div class="col-2 text-right"><span class="badge badge-danger" style="font-size: 20px;">@{{ estadoresultado.totales.ingreso }}</span></div>
+                          </div>
+                          <div class="row justify-content-between">
+                            <div class="col-10"><h4 class="font-weight-bold text-info">Utilidad Neta en Operaciones</h4></div>
+                            <div class="col-2 text-right"><span class="badge badge-danger" style="font-size: 20px;">@{{ estadoresultado.totales.utilidad_neta_o }}</span></div>
+                          </div>
 
-                      Se deposita en cta. cte.# 3050 Bco. Guayaquil $ 60.000  <br> <br>
+                          <div class="row mt-2">
+                            <div class="col-6">
+                            <h2 class="font-weight-bold pl-3">GASTOS</h2>
+                          </div>
+                              <div class="col-12">
+                            <table>
+                              <tbody is="draggable" group="gastos" :list="estadoresultado.gastos" tag="tbody">
+                                <tr v-for="(balan, index) in estadoresultado.gastos">
+                                  <td class="text-left" width="300">@{{ balan.cuenta}}</td>
+                                  <td align="center">@{{ decimales(balan.saldo)}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          </div>
 
-                      Se cancela la Fra.#088 a “Servinet” (No Obligada a llevar Contabilidad) por servicios de internet $ 60 con ch/.#052 Bco. Guayaquil. <br> <br>
+                          <div class="row justify-content-between mb-2">
+                            <div class="col-10"><h4 class="font-weight-bold text-info">Total de gastos</h4></div>
+                            <div class="col-2 text-right border-danger" style="border-bottom: solid 2px;"><span class="badge badge-danger" style="font-size: 20px; ">@{{ estadoresultado.totales.gasto }}</span></div>
+                          </div>
 
-                      Se compra s/fra. # 056 a Importadora “CASIRON” (contribuyente especial) - diez acondicionadores de aire en $ 555 c/u. con ch/.# 053 Bco. Guayaquil. <br> <br>
+                          <div class="row justify-content-between">
+                            <div class="col-7">
+                              <h3 v-if="estadoresultado.utilidad == 'utilidad_neta'" class="font-weight-bold">UTILIDAD NETA DEL EJERCICIO</h3>
+                              <h3 v-else class="font-weight-bold">PERDIDA DEL EJERCICIO DEL EJERCICIO</h3>
+                            </div>
+                            <div class="col-3"><span class="badge badge-danger" style="font-size: 20px; ">@{{ estadoresultado.totales.utilidad_ejercicio_e_resultado }}</span></div>
+                          </div>
 
-                      De la última compra se devuelve dos acondicionadores de aire por no estar de acuerdo con el pedido (Fra. # 011). <br> <br>
 
-                      Se cancela a “CNT” la Fra. #073 por servicio telefónico $ 150 con ch/.# 054 Bco. Guayaquil. <br> <br>
+                          <div class="mt-2 row justify-content-between" v-if="estadoresultado.utilidad == 'utilidad_neta'">
+                            <div class="col-12">
+                            <table>
+                              <tbody is="draggable" group="people" :list="estadoresultado.utilidades" tag="tbody">
+                                <tr v-for="(balan, index) in estadoresultado.utilidades">
+                                          <td class="text-left" width="750">@{{ balan.cuenta}}</td>
+                                          <td align="center">@{{ decimales(balan.saldo)}}</td>
+                                        </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="col-12">
+                           <div class="row mt-2 justify-content-between">
+                            <div class="col-10">
+                              <h3 class="font-weight-bold">UTILIDAD LIQUIDA DEL EJERCICIO</h3>
+                            </div>
+                            <div class="col-2"><span class="badge badge-danger" style="font-size: 20px; ">@{{ estadoresultado.totales.utilidad_liquida_e_resultado }}</span></div>
+                          </div> 
+                          </div>
+                          </div>
+                        </div>
 
-                      Se vende S/Fra. #012 - treinta acondicionadores de aire en $ 1.200 c/u a Comercial “INCOR” (Obligado a llevar Contabilidad). Se recibe ch/. #101 Bco. del Austro. <br> <br>
 
-                      De la última venta nos devuelven un acondicionador de aire por no estar de acuerdo con el pedido. Se cancela con ch/.#055 Bco. Guayaquil. (Fra. # 057) <br> <br>
-                    </p>
 
+                    <div class="tab-pane fade" id="as-balance-general" role="tabpanel" aria-labelledby="as-balance-general-tab">
+                                  <h2 class="text-center display-4 font-weight-bold text-danger">Balance General</h2>
+                      <div class="row p-3 justify-content-center ">
+                          <div class="col-5 mb-3">
+                            <h3 class="text-center">
+                              @{{ balance_general.nombre }}
+                            </h3>
+                            <h3 class="text-center">
+                              @{{ balance_general.fecha }}
+                            </h3>
+                               
+                          </div>
+                         
+                      </div>
+
+                        <div class="row p-3  mb-2 justify-content-center ">     
+                            </div>
+                            <h2 class="text-center font-weight-bold text-danger">ACTIVOS</h2>
+                            <div class="row">    
+                              <div class="col-7">             
+                                <h3 class="text-primary">ACTIVOS CORRIENTE</h3><br>
+                                  <draggable class="list-group list-group-flush" :list="balance_general.a_corrientes" group="people">
+                                    <div v-for="(element, index) in balance_general.a_corrientes" :key="element.name">
+                                      <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        @{{ element.cuenta }}<span class="badge-pill">@{{ decimales(element.saldo) }}</span>
+                                      </li> 
+                                    </div>   
+                                  </draggable>
+                                </div>
+                                  <div class="col-12"> 
+                                  <table>
+                                    <tbody>
+                                      <tr>
+                                        <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOTAL ACT. CORR.</td>
+                                        <td style="font-size: 20px;" class="badge-danger badge">@{{ decimales(b_initotal.t_a_corriente )}}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                                  <div class="col-9"> 
+                                <h3 class="text-primary">ACTIVOS NO CORRIENTE</h3><br>
+                                 
+                                    <table class="table table-borderless">
+                                      <tbody v-for="(element, index) in balance_general.a_nocorrientes" :key="element.name">
+                                        <tr>
+                                          <td width="400">@{{ element.cuenta }}</td>
+                                          <td class="text-right">@{{ decimales(element.saldo) }}</td>
+                                          <td class="text-right">@{{ decimales(element.total_saldo) }}</td>
+                                        </tr>
+                                        <tr v-if="element.cuenta2 !== '' && element.saldo2 !== '' && element.total_saldo2 !=='' && element.cuenta2 !== null">
+                                          <td >(-)@{{ element.cuenta2 }}</td>
+                                          <td style="border-bottom: solid 2px" class="text-right border-danger">@{{ decimales(element.saldo2) }}</td>
+                                          <td class="text-right">@{{ decimales(element.total_saldo2) }}</td>
+                                          
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                </div>
+                                 <div class="col-12"> 
+                                  <table>
+                                    <tbody>
+                                      <tr>
+                                        <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOTAL ACT. NO CORR.</td>
+                                        <td style="font-size: 20px;" class="badge-danger badge">@{{ decimales(b_initotal.t_a_nocorriente) }}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+
+                                    <table>
+                                    <tbody>
+                                      <tr>
+                                        <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOTAL ACTIVO.</td>
+                                        <td style="font-size: 20px;" class="badge-danger badge">@{{ decimales(balance_general.total_balance_inicial.t_activo) }}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+
+                              </div>
+                            </div>
+                              <h2 class="text-center font-weight-bold text-danger">PASIVOS</h2>
+                            <div class="row">
+                          <div class="col-7 ">
+                                <h3 class="text-primary">PASIVOS CORRIENTE</h3>
+                                <draggable class="list-group list-group-flush" :list="balance_general.p_corrientes" group="people" >
+                                     <div v-for="(element, index) in balance_general.p_corrientes" :key="element.name">
+                                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            @{{ element.cuenta }}
+                                            <span class=" badge-pill">@{{ decimales(element.saldo) }}</span>
+                                          </li> 
+                                      </div>     
+                                </draggable> 
+                            </div>
+                            <div class="col-12">
+                                  <table>
+                                    <tbody>
+                                      <tr>
+                                        <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOTAL PAS. CORR.</td>
+                                        <td style="font-size: 20px;" class="badge-danger badge">@{{ decimales(b_initotal.t_p_corriente) }}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                              </div>
+                              <br><br>
+                              <div class="col-7 ">
+                                <h3 class="text-primary">NO CORRIENTE </h3>
+                                <draggable class="list-group list-group-flush" :list="balance_general.p_nocorrientes" group="people" >
+                                     <div v-for="(element, index) in balance_general.p_nocorrientes" :key="element.name">
+                                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    @{{ element.cuenta }}
+                                    <span class=" badge-pill">@{{ decimales(element.saldo) }}</span>
+                                </li> 
+                                      </div>     
+                                  </draggable> 
+                         </div>
+                         <div class="col-12">
+                                  <table>
+                                    <tbody>
+                                      <tr>
+                                        <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOTAL PAS. CORR.</td>
+                                        <td style="font-size: 20px;" class="badge-danger badge">@{{ decimales(b_initotal.t_p_no_corriente) }}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                          </div>
+                              <br><br>
+                            <div class="col-12">
+                               <table>
+                                    <tbody>
+                                      <tr>
+                                        <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOTAL PASIVO</td>
+                                        <td style="font-size: 20px;" class="badge-danger badge">@{{ decimales(balance_general.total_balance_inicial.t_pasivo) }}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                              </div>
+                            </div>
+                              <h2 class="text-center font-weight-bold text-danger">PATRIMONIO </h2>
+                             
+                      <div class="row">
+                              <div class="col-7">
+                                  <draggable class="list-group list-group-flush" :list="balance_general.patrimonios" group="people" >
+                                          <div v-for="(element, index) in balance_general.patrimonios" :key="element.name">
+                                          <li class="list-group-item d-flex justify-content-between align-items-center">
+                                          @{{ element.cuenta }}
+                                          <span class="badge-pill">@{{ decimales(element.saldo) }}</span>
+                                          </li> 
+                                          </div>   
+                                    </draggable>
+                            </div>
+                            <div class="col-12">
+                                   <table>
+                                    <tbody>
+                                      <tr>
+                                        <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOTAL PATRIMONIO.</td>
+                                        <td style="font-size: 20px;" class="badge-danger badge">@{{ decimales(b_initotal.t_patrimonio) }}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                              </div>
+                                  <div class="col-12">
+                                 <table>
+                                    <tbody>
+                                      <tr>
+                                        <td class="font-weight-bold" style="font-size: 20px;" width="750">TOT. PAS. Y PATRI.</td>
+                                        <td style="font-size: 20px;" class="badge-danger badge">@{{ decimales(balance_general.total_balance_inicial.t_patrimonio_pasivo) }}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                              </div>
+                      </div>
+
+                        </div>
+                      </div>
                   </div>
-                  {{--   <div class="col-6">
-
-           
-                  </div>
- --}}
+                 
                   <div class="col-12 mt-2" v-if="diarios.debe.length > 0 || diarios.haber.length > 0">
 
                     <h2 class="text-center">ACTUALIZAR REGISTROS</h2>
@@ -624,6 +881,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 

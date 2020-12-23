@@ -4,7 +4,7 @@
 
 @section('content')
 <h1 class="text-center  mt-5 text-danger font-weight-bold">Modulo Contable</h1>
-<div class="container" id="modulo">
+<div class="container-fluid" id="modulo">
   
   <div class="form-row" >
     <div class="col-3">
@@ -49,7 +49,18 @@
                   <div class="col-9">
                     <div class="tab-content" id="nav-tabContent">
                       <div class="tab-pane fade show active" id="list-balance-inicial" role="tabpanel" aria-labelledby="list-balance-inicial-list">
-                           <ckeditor :editor="editor" v-model="data" :config="editorConfig"></ckeditor>
+                        <div class="row p-3">
+                            <div class="col-6">
+                                <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="editorData"></ckeditor>
+                                <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a>
+                            </div>
+                            <div class="col-6">
+                                <div v-html="comercial"></div>
+                            </div>
+                        </div>
+                      {{-- <div id="editor"></div> --}}
+                       {{-- <ckeditor class="form-control" rows="10" cols="10" type="classic" v-model="editorData"  :config="editorConfig"></ckeditor> --}}
+                           {{-- <example-component></example-component> --}}
                       </div>
                       <div class="tab-pane fade" id="list-kardex" role="tabpanel" aria-labelledby="list-kardex-list">
                           Kardex
@@ -90,13 +101,14 @@
 </div>
 
 @section('js')
-<script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 
 <script type="text/javascript">
+
     let modulo_contable = new Vue({
       el: "#modulo",
+  
       data:{
         categoria:'',
         individual:{
@@ -105,12 +117,19 @@
         concatenado:{
             active:false,
         },
-        editor: '',
-        data:'',
-        editorData: '<p>Content of the editor.</p>',
-                editorConfig: {
-                    // The configuration of the editor.
-                }
+        comercial:'',
+         editorData: '',
+        editorConfig: {
+                toolbar: {
+        items: [ 'heading', 'paragraph','bold', 'italic', 'alignment', 'undo', 'redo', 'numberedList', 'bulletedList' ],
+
+        viewportTopOffset: 30,
+
+        shouldNotGroupWhenFull: true
+    }
+            }
+
+
 
 
       },
@@ -129,6 +148,10 @@
             }
 
 
+        },
+        agregar(){
+          this.comercial =  this.editorData;
+          this.editorData = ''; 
         }
       }
     

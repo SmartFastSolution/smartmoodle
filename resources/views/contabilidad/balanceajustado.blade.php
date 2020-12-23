@@ -1,7 +1,13 @@
 <div id="balance_ajustado" class="border border-danger p-4">
         <h2 class="text-center display-4 font-weight-bold text-danger">Balance de Comprobacion Ajustado</h2>
-        <h2 class="text-center">Agregar Cuenta</h2>
-    <div class="form-row mb-2 justify-content-center">
+        <div class="row p-3  mb-2 justify-content-center ">
+    <div class="col-5 mb-3">
+          <input class="form-control" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="" >
+        </div>
+   
+</div>
+        {{-- <h2 class="text-center">Agregar Cuenta</h2> --}}
+{{--     <div class="form-row mb-2 justify-content-center">
         <div class="col-xl col-sm-12 mb-sm-1">
            <select name="n_cuenta" id="" v-model="balance.cuenta" class="custom-select">
             <option value="" disabled>ELIGE UNA CUENTA</option>
@@ -21,7 +27,7 @@
         <a  v-if="!update" href="#" class=" addDiario btn btn-outline-danger  " @click.prevent="agregarRegistro()">Agregar Registro</a>
         <a  v-if="update" href="#" class="  addDiario btn btn-outline-danger  " @click.prevent="actualizarBalance()">Actualizar Registro</a>
 
-  </div>
+  </div> --}}
   <table class="table table-bordered table-sm mb-2">
 <thead>
   <tr class="text-center bg-dark">
@@ -36,28 +42,34 @@
 
     <tr v-for="(balan, index) in balances_ajustados">
       <td align="center">@{{ balan.cuenta}}</td>
-      <td align="center">@{{ balan.debe}}</td>
-      <td align="center" width="125">@{{ balan.haber }}</td>
-      <td align="center" width="50">
-        <a @click.prevent="deleteBalance(index)" class="btn btn-danger">
-          <i class="fas fa-trash-alt"></i>
-        </a>
-      </td>
-      <td align="center"  width="50">
-        <a @click.prevent="editBalance(index)" class="btn btn-warning">
+      <td class="text-right">@{{ decimales(balan.debe)}}</td>
+      <td class="text-right" width="125">@{{ decimales(balan.haber) }}</td>
+       <td class="text-right"  width="50">
+        <a @click.prevent="editBalanceFuera(index)" class="btn btn-warning">
           <i class="fas fa-edit"></i>
         </a>
       </td>
+      <td align="center" width="50">
+        <a @click.prevent="warningEliminar(index)" class="btn btn-danger">
+          <i class="fas fa-trash-alt"></i>
+        </a>
+      </td>
+     
     </tr>
   <tr class="bg-secondary">
     <td class="text-left font-weight-bold">SUMAN</td>
-    <td class="text-center">@{{ suman.debe }}</td>
-    <td class="text-center">@{{ suman.haber }}</td>
+    <td class="text-right">@{{ suman.debe }}</td>
+    <td class="text-right">@{{ suman.haber }}</td>
   </tr>
 </tbody>
 </table>
+ <div class="row justify-content-center mb-2">
+      <a  href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Movimientos</a>
+  </div>
     <div class="row justify-content-center">
         <a  href="#" class="addDiario btn btn-outline-info " @click.prevent="guardarBalance()">Guardar Balance</a>
         
     </div>
+    @include ('contabilidad.modales.modalbalanceajustado')
+
 </div>

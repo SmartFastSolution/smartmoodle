@@ -307,14 +307,27 @@ route::post('/sistema/admin/taller/balance-obtener-comprobacion', 'TallerContabi
 route::post('/sistema/admin/taller/balance-obtener-ajustado', 'TallerContabilidadController@obtenerBalanceAjustado')->name('balance.obtenerajustado');
 
 route::post('/sistema/admin/taller/balance-ajustado', 'TallerContabilidadController@balanceAjustado')->name('balance.balance-ajustado');
-
+// RUTAS HOJA DE TRABAJO
 route::post('/sistema/admin/taller/balance-comprobacion', 'TallerContabilidadController@balanceComprobacion')->name('balance.comprobacion');
+// FIN RUTAS HOJA DE TRABAJO
+// 
+// // RUTAS HOJA DE TRABAJO
+route::post('/sistema/admin/taller/hoja-trabajo', 'TallerContabilidadController@hojaTrabajo')->name('hoja.trabajo');
+route::post('/sistema/admin/taller/hoja-obtener-trabajo', 'TallerContabilidadController@obtenerHojaTraba')->name('balance.obtenerhoja');
+
+// FIN RUTAS HOJA DE TRABAJO
 
 // RUTAS DEL KARDEX PROMEDIO
 route::post('/sistema/admin/taller/kardex-promedio', 'TallerContabilidadController@kardexPromedio')->name('kardex.promedio');
 route::post('/sistema/admin/taller/kardex-obtener-promedio', 'TallerContabilidadController@obtenerKardexPromedio')->name('kardex.obtenerkardexpromedio');
 //FIN RUTAS DEL KARDEX PROMEDIO
 
+
+
+// RUTAS DEL KARDEX PROMEDIO
+route::post('/sistema/admin/taller/estado-resultado', 'TallerContabilidadController@estadoResultado')->name('estado.resultado');
+route::post('/sistema/admin/taller/estado-obtener-resultado', 'TallerContabilidadController@obtenerEstado')->name('estado.obtenerresultado');
+//FIN RUTAS DEL KARDEX PROMEDIO
 
 //// RUTAS DEL KARDEX FIFO
 route::post('/sistema/admin/taller/kardex-fifo', 'TallerContabilidadController@kardexFifo')->name('kardex.fifo');
@@ -330,11 +343,25 @@ route::post('/sistema/admin/taller/diariogeneral', 'TallerContabilidadController
 //// FIN RUTAS DEL DIARIO
 
 
+/////// RUTAS DEL ASIENTOS DE CIERRE
+route::post('/sistema/admin/taller/asiento-cierre', 'TallerContabilidadController@asientosCierre')->name('asiento.cierre');
+route::post('/sistema/admin/taller/asiento-cierre-obtener', 'TallerContabilidadController@obtenerAsientoCierre')->name('obtenercierre');
+
+//// FIN RUTAS DEL ASIENTOS DE CIERRE
+
+
 /////// RUTAS DEL MAYOR
 route::post('/sistema/admin/taller/mayor', 'TallerContabilidadController@mayorGeneral')->name('mayor');
 route::post('/sistema/admin/taller/mayorgeneral', 'TallerContabilidadController@obtenermayor')->name('obtenermayor');
 
 //// FIN RUTAS DEL DIARIO
+
+
+/// RUTAS DEL BALANCE GENERAL
+route::post('/sistema/admin/taller/balance-general', 'TallerContabilidadController@balanceGeneral')->name('balance-general');
+route::post('/sistema/admin/taller/obtener-balance-general', 'TallerContabilidadController@obtenerbalanceGeneral')->name('balance-obtener-general');
+
+//// FIN RUTAS DEL BALANCE GENERAL
 
 
 route::post('/sistema/admin/taller/obtenerbalance', 'TallerContabilidadController@obtenerbalance')->name('obtenerbalance');

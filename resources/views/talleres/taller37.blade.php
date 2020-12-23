@@ -10,18 +10,22 @@
   width: 100vw;*/
 }
 
+.swal-wide {
+    width: 300px !important;
+}
+
 .calculator {
     display: grid;
-    grid-template-rows: repeat(7, minmax(35px, auto));
-    grid-template-columns: repeat(4, 35px);
-    grid-gap: 12px;
-    padding: 35px;
+    grid-template-rows: repeat(7, minmax(50px, auto));
+    grid-template-columns: repeat(4, 50px);
+    grid-gap: 10px;
+    /*  padding: 35px;*/
     font-family: "Poppins";
     font-weight: 300;
     font-size: 18px;
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
     border-radius: 10px;
-    box-shadow: 0px 3px 80px -30px rgba(13, 81, 134, 1);
+    /*box-shadow: 0px 3px 80px -30px rgba(13, 81, 134, 1);*/
 }
 
 .boton,
@@ -48,6 +52,7 @@
 
 .display {
     color: #0B0202;
+    font-size: 20px;
     border-bottom: 1px solid #e1e1e1;
     margin-bottom: 15px;
     overflow: hidden;
@@ -82,6 +87,7 @@
         <div class="col-12 col-sm-12 col-md-2 mb-3">
             <div class="list-group" id="list-tab" role="tablist">
 
+
                 <a class="list-group-item list-group-item-action active" id="list-kardex-list" data-toggle="list"
                     href="#list-kardex" role="tab" aria-controls="kardex">Kardex</a>
                 <a class="list-group-item list-group-item-action " id="list-kardex-promedio-list" data-toggle="list"
@@ -94,7 +100,7 @@
                     href="#list-messages" role="tab" aria-controls="messages">Diario General</a>
                 <a class="list-group-item list-group-item-action" id="list-balance-ajustado-list" data-toggle="list"
                     href="#list-balance-ajustado" role="tab" aria-controls="balance-ajustado">Balance Ajustado</a>
-                <a class="list-group-item list-group-item-action" id="list-mayor-general-list" data-toggle="list"
+                    <a class="list-group-item list-group-item-action" id="list-mayor-general-list" data-toggle="list"
                     href="#list-mayor-general" role="tab" aria-controls="mayor-general">Mayor General</a>
                 <a class="list-group-item list-group-item-action" id="list-libro-caja-list" data-toggle="list"
                     href="#list-libro-caja" role="tab" aria-controls="libro-caja">Libro Caja</a>
@@ -107,6 +113,18 @@
                     aria-controls="conciliacion-bancaria">Conciliación Bancaria</a>
                 <a class="list-group-item list-group-item-action" id="list-retencion-iva-list" data-toggle="list"
                     href="#list-retencion-iva" role="tab" aria-controls="retencion-iva">Retencion del IVA</a>
+
+               
+               
+                <a class="list-group-item list-group-item-action" id="list-hoja-trabajo-list" data-toggle="list"
+                    href="#list-hoja-trabajo" role="tab" aria-controls="hoja-trabajo">Hoja de Trabajo</a>
+                <a class="list-group-item list-group-item-action" id="list-estado-resultado-list" data-toggle="list"
+                    href="#list-estado-resultado" role="tab" aria-controls="estado-resultado">Estado de Resultado</a>
+                <a class="list-group-item list-group-item-action" id="list-balance-general-list" data-toggle="list"
+                    href="#list-balance-general" role="tab" aria-controls="balance-general">Balance General</a>
+                <a class="list-group-item list-group-item-action" id="list-asento-cierre-list" data-toggle="list"
+                    href="#list-asento-cierre" role="tab" aria-controls="asento-cierre">Asientos de Cierre</a>
+
 
 
 
@@ -178,6 +196,41 @@
                         @include('contabilidad.balanceinicial')
                     </div>
                 </div>
+
+
+                <div class="tab-pane fade" id="list-balance_comp" role="tabpanel"
+                    aria-labelledby="list-balance_comp-list">
+                    @include('contabilidad.balancecomprobacion')
+                </div>
+                <div class="tab-pane fade border border-danger " id="list-messages" role="tabpanel"
+                    aria-labelledby="list-messages-list">
+                    @include('contabilidad.diariogeneral')
+                </div>
+                <div class="tab-pane fade border border-danger " id="list-mayor-general" role="tabpanel"
+                    aria-labelledby="list-mayor-general-list">
+                    @include('contabilidad.mayorgeneral')
+                </div>
+                <div class="tab-pane fade" id="list-balance-ajustado" role="tabpanel"
+                    aria-labelledby="list-balance-ajustado-list">
+                    @include('contabilidad.balanceajustado')
+                </div>
+                <div class="tab-pane fade" id="list-hoja-trabajo" role="tabpanel"
+                    aria-labelledby="list-hoja-trabajo-list">
+                    @include('contabilidad.hojatrabajo')
+                </div>
+                <div class="tab-pane fade" id="list-estado-resultado" role="tabpanel"
+                    aria-labelledby="list-estado-resultado-list">
+                    @include('contabilidad.estadoresultado')
+                </div>
+                <div class="tab-pane fade" id="list-balance-general" role="tabpanel"
+                    aria-labelledby="list-balance-general-list">
+                    @include('contabilidad.balancegeneral')
+                </div>
+                <div class="tab-pane fade" id="list-asento-cierre" role="tabpanel"
+                    aria-labelledby="list-asento-cierre-list">
+                    @include('contabilidad.asientosdecierre')
+                </div>
+
             </div>
         </div>
     </div>
@@ -190,6 +243,7 @@
 
 @include ('layouts.footer')
 @section('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script type="text/javascript" src="{{ asset('js/tallercontabilidad.js') }}"></script>
 
 @endsection
