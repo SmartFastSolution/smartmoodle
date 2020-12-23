@@ -17,6 +17,7 @@ class CreateBalanceAjustadosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
+            $table->string('nombre');
             $table->string('enunciado');
             $table->string('total_debe')->nullable();
             $table->string('total_haber')->nullable();
