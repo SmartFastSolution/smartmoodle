@@ -96,7 +96,7 @@
                                 
                               </td>
                               <td  width="200">
-                              <input type="number" v-model="activo.a_corriente.saldo" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="activo.a_corriente.saldo" class="form-control">
                                 
                               </td>
                             </tr>
@@ -108,7 +108,7 @@
                           <model-select :options="options" v-model="ingreso.cuenta_id" placeholder="ELEGIR CUENTA"></model-select>
                             </div>
                             <div class="col-2">
-                              <input type="number" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" class="form-control">
                             </div>
                           </div> --}}
                     <div v-if="!activo.a_corriente.edit" class="row justify-content-center">
@@ -178,7 +178,7 @@
                                 
                               </td>
                               <td  width="200">
-                              <input type="number" v-model="activo.a_nocorriente.saldo" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="activo.a_nocorriente.saldo" class="form-control">
                                 
                               </td >
                               <td width="100" align="center"> 
@@ -193,7 +193,7 @@
                                 
                               </td>
                               <td  width="200">
-                              <input type="number" v-model="activo.a_nocorriente.saldo2" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="activo.a_nocorriente.saldo2" class="form-control">
                                 
                               </td>
                             </tr>
@@ -278,7 +278,7 @@
                                 
                               </td>
                               <td  width="200">
-                              <input type="number" v-model="pasivo.p_corriente.saldo" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="pasivo.p_corriente.saldo" class="form-control">
                                 
                               </td>
                             </tr>
@@ -351,7 +351,7 @@
                                 
                               </td>
                               <td  width="200">
-                              <input type="number" v-model="pasivo.p_nocorriente.saldo" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="pasivo.p_nocorriente.saldo" class="form-control">
                                 
                               </td>
                             </tr>
@@ -424,7 +424,7 @@
                                 
                               </td>
                               <td  width="200">
-                              <input type="number" v-model="patrimonio.saldo" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="patrimonio.saldo" class="form-control">
                                 
                               </td>
                             </tr>

@@ -2,7 +2,7 @@
         <h2 class="text-center display-4 font-weight-bold text-danger">Balance de Comprobacion Ajustado</h2>
         <div class="row p-3  mb-2 justify-content-center ">
     <div class="col-5 mb-3">
-          <input class="form-control" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="" >
+          <input autocomplete="ÑÖcompletes" class="form-control" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="" >
         </div>
    
 </div>
@@ -18,10 +18,10 @@
             </select>
         </div>
         <div class="col-xl col-sm-12 mb-sm-1">
-          <input type="text" class="form-control" v-model="balance.debe" placeholder="Debe">
+          <input autocomplete="ÑÖcompletes" type="text" class="form-control" v-model="balance.debe" placeholder="Debe">
         </div>
          <div class="col-xl col-sm-12 mb-sm-1" >
-          <input type="text" class="form-control" v-model="balance.haber"  placeholder="Haber">
+          <input autocomplete="ÑÖcompletes" type="text" class="form-control" v-model="balance.haber"  placeholder="Haber">
         </div>
 
         <a  v-if="!update" href="#" class="addDiario btn btn-outline-danger  " @click.prevent="agregarRegistro()">Agregar Registro</a>

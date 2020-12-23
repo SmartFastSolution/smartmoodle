@@ -16,9 +16,9 @@
 	<h5 class="text-center font-weight-bold text-info">METODO FIFO</h5>
 	<div class="row justify-content-center mb-2">
 		<div class="col-5">
-	<input  v-model="nombre"  type="" name="" placeholder="Nombre de la empresa" class="form-control text-center">
+	<input autocomplete="ÑÖcompletes"  v-model="nombre"  type="" name="" placeholder="Nombre de la empresa" class="form-control text-center">
 
-	<input v-model="producto"   type="" name="" placeholder="PRODUCTO" class="form-control text-center">
+	<input autocomplete="ÑÖcompletes" v-model="producto"   type="" name="" placeholder="PRODUCTO" class="form-control text-center">
 			
 		</div>
 	</div>
@@ -115,23 +115,23 @@
 					<tbody>
 						<tr>
 							<td>Inventario Inicial de Mercaderias</td>
-							<td><input v-model="prueba.cantidad.inventario_inicial" type="number" class="form-control form-control-sm"></td>
-							<td><input v-model="prueba.precio.inventario_inicial" type="number" class="form-control form-control-sm"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.inventario_inicial" type="number" class="form-control form-control-sm"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.inventario_inicial" type="number" class="form-control form-control-sm"></td>
 						</tr>
 						<tr>
 							<td>Adquisiciones</td>
-							<td><input v-model="prueba.cantidad.adquicisiones" type="number" placeholder="+" class="form-control form-control-sm"></td>
-							<td><input v-model="prueba.precio.adquicisiones" type="number" placeholder="+" class="form-control form-control-sm"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.adquicisiones" type="number" placeholder="+" class="form-control form-control-sm"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.adquicisiones" type="number" placeholder="+" class="form-control form-control-sm"></td>
 						</tr>
 						<tr>
 							<td>(-) Ventas</td>
-							<td><input v-model="prueba.cantidad.ventas" type="number" placeholder="-" class="form-control form-control-sm"></td>
-							<td><input v-model="prueba.precio.ventas" type="number" placeholder="-" class="form-control form-control-sm"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.ventas" type="number" placeholder="-" class="form-control form-control-sm"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.ventas" type="number" placeholder="-" class="form-control form-control-sm"></td>
 						</tr>
 						<tr>
 							<td>Inv. Final de Mercaderia </td>
-							<td><input v-model="prueba.cantidad.inventario_final" type="number" class="form-control form-control-sm"></td>
-							<td><input v-model="prueba.precio.inventario_final" type="number" class="form-control form-control-sm"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.inventario_final" type="number" class="form-control form-control-sm"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.inventario_final" type="number" class="form-control form-control-sm"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -171,35 +171,35 @@
 			<tbody is="draggable" group="ejercicio" :list="ejercicio" tag="tbody">
 				<tr v-for="(transa, id) in ejercicio">
 					          <td v-if="transa.tipo == 'existencia'"></td>
-                            <td v-if="transa.tipo != 'existencia'"><input type="date"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha">
+                            <td v-if="transa.tipo != 'existencia'"><input autocomplete="ÑÖcompletes" type="date"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha">
                             </td>
                             <td v-if="transa.tipo == 'existencia'"></td>
 
                           <td v-if="transa.tipo != 'existencia'">
                                <textarea cols="30" rows="3" class="form-control form-control-plaintext" v-model="transa.movimiento"></textarea>
-                              {{-- <input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
+                              {{-- <input autocomplete="ÑÖcompletes" type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
                           </td>
 
-					<td v-if="transa.tipo == 'existencia'"><input type="number"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad"></td>
-					<td v-if="transa.tipo == 'existencia'"><input type="number"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio"> </td>
+					<td v-if="transa.tipo == 'existencia'"><input autocomplete="ÑÖcompletes" type="number"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad"></td>
+					<td v-if="transa.tipo == 'existencia'"><input autocomplete="ÑÖcompletes" type="number"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio"> </td>
 
-					<td v-if="transa.tipo == 'ingreso'"><input type="number"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" @keyup.enter="totalIng(id)"></td>
-					<td v-if="transa.tipo == 'ingreso'"><input type="number"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" @keyup.enter="totalIng(id)"> </td>
+					<td v-if="transa.tipo == 'ingreso'"><input autocomplete="ÑÖcompletes" type="number"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" @keyup.enter="totalIng(id)"></td>
+					<td v-if="transa.tipo == 'ingreso'"><input autocomplete="ÑÖcompletes" type="number"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" @keyup.enter="totalIng(id)"> </td>
 
-					<td v-if="transa.tipo == 'ingreso_venta'"><input type="number"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" @keyup.enter="ventaIng(id)"></td>
-					<td v-if="transa.tipo == 'ingreso_venta'"><input type="number"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" @keyup.enter="ventaIng(id)"> </td>
+					<td v-if="transa.tipo == 'ingreso_venta'"><input autocomplete="ÑÖcompletes" type="number"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" @keyup.enter="ventaIng(id)"></td>
+					<td v-if="transa.tipo == 'ingreso_venta'"><input autocomplete="ÑÖcompletes" type="number"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" @keyup.enter="ventaIng(id)"> </td>
 
 					<td>@{{ transa.ingreso_total }}</td>
-					{{-- <td><input type="number" v-if="transa.ingreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.ingreso_total"></td> --}}
-					<td><input type="number" v-if="transa.egreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.egreso_cantidad"></td>
-					<td><input type="number" v-if="transa.egreso_precio" class="form-control-sm form-control-plaintext" v-model="transa.egreso_precio"></td>
-					{{-- <td><input type="number" v-if="transa.egreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.egreso_total"></td> --}}
+					{{-- <td><input autocomplete="ÑÖcompletes" type="number" v-if="transa.ingreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.ingreso_total"></td> --}}
+					<td><input autocomplete="ÑÖcompletes" type="number" v-if="transa.egreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.egreso_cantidad"></td>
+					<td><input autocomplete="ÑÖcompletes" type="number" v-if="transa.egreso_precio" class="form-control-sm form-control-plaintext" v-model="transa.egreso_precio"></td>
+					{{-- <td><input autocomplete="ÑÖcompletes" type="number" v-if="transa.egreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.egreso_total"></td> --}}
 					<td>@{{ transa.egreso_total }}</td>
-					<td><input type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_cantidad"></td>
-					<td><input type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_precio"></td>
-					{{-- <td><input type="number" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
+					<td><input autocomplete="ÑÖcompletes" type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_cantidad"></td>
+					<td><input autocomplete="ÑÖcompletes" type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_precio"></td>
+					{{-- <td><input autocomplete="ÑÖcompletes" type="number" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
 					<td v-if="!actuingreso.estado">@{{ transa.existencia_total }}</td>
-					<td v-if="actuingreso.estado"><input type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
+					<td v-if="actuingreso.estado"><input autocomplete="ÑÖcompletes" type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
 					<td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarIngreso(id, 'ingreso')"> <i class="fas fa-trash"></i></a></td>
 				</tr>
 			</tbody>
@@ -241,27 +241,27 @@
 						<tbody>
 							<tr v-for="(transa, id) in egresos">
 			          <td v-if="transa.tipo == 'existencia'"></td>
-                            <td v-if="transa.tipo != 'existencia'"><input type="date"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha">
+                            <td v-if="transa.tipo != 'existencia'"><input autocomplete="ÑÖcompletes" type="date"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha">
                             </td>
                             <td v-if="transa.tipo == 'existencia'"></td>
 
                           <td v-if="transa.tipo != 'existencia'">
                                <textarea cols="30" rows="3" class="form-control form-control-plaintext" v-model="transa.movimiento"></textarea>
-                              {{-- <input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
+                              {{-- <input autocomplete="ÑÖcompletes" type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
                           </td>
-								<td><input type="number"  v-if="transa.ingreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" ></td>
-								<td><input type="number" v-if="transa.ingreso_precio"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" > </td>
+								<td><input autocomplete="ÑÖcompletes" type="number"  v-if="transa.ingreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" ></td>
+								<td><input autocomplete="ÑÖcompletes" type="number" v-if="transa.ingreso_precio"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" > </td>
 								<td>@{{ transa.ingreso_total }}</td>
-								{{-- <td><input type="number" v-if="transa.ingreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.ingreso_total"></td> --}}
-								<td><input type="number" class="form-control-sm form-control-plaintext" v-model="transa.egreso_cantidad" @keyup.enter="totaEgre(id)"></td>
-								<td><input type="number"  class="form-control-sm form-control-plaintext" v-model="transa.egreso_precio" @keyup.enter="totaEgre(id)"></td>
-								{{-- <td><input type="number" v-if="transa.egreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.egreso_total"></td> --}}
+								{{-- <td><input autocomplete="ÑÖcompletes" type="number" v-if="transa.ingreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.ingreso_total"></td> --}}
+								<td><input autocomplete="ÑÖcompletes" type="number" class="form-control-sm form-control-plaintext" v-model="transa.egreso_cantidad" @keyup.enter="totaEgre(id)"></td>
+								<td><input autocomplete="ÑÖcompletes" type="number"  class="form-control-sm form-control-plaintext" v-model="transa.egreso_precio" @keyup.enter="totaEgre(id)"></td>
+								{{-- <td><input autocomplete="ÑÖcompletes" type="number" v-if="transa.egreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.egreso_total"></td> --}}
 								<td>@{{ transa.egreso_total }}</td>
-								<td><input type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_cantidad"></td>
-								<td><input type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_precio"></td>
-								{{-- <td><input type="number" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
+								<td><input autocomplete="ÑÖcompletes" type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_cantidad"></td>
+								<td><input autocomplete="ÑÖcompletes" type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_precio"></td>
+								{{-- <td><input autocomplete="ÑÖcompletes" type="number" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
 								<td v-if="!actuegreso.estado">@{{ transa.existencia_total }}</td>
-								<td v-if="actuegreso.estado"><input type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
+								<td v-if="actuegreso.estado"><input autocomplete="ÑÖcompletes" type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
 								<td v-if="transa.tipo == 'existencia'"><a href="#"   class="btn btn-sm btn-danger" @click.prevent="borrarEgresoAct(id, 'existencia')"> <i class="fas fa-trash"></i></a></td>
 								<td v-if="transa.tipo == 'egreso_compra'"><a href="#"   class="btn btn-sm btn-danger" @click.prevent="borrarEgresoAct(id, 'egreso_compra')"> <i class="fas fa-trash"></i></a></td>
 								<td v-if="transa.tipo == 'egreso'"><a href="#"   class="btn btn-sm btn-danger" @click.prevent="borrarEgresoAct(id, 'egreso')"> <i class="fas fa-trash"></i></a></td>
@@ -275,10 +275,10 @@
 			<a class="btn btn-sm btn-warning mr-2" v-if="actuegreso.estado" href="" @click.prevent="cancelarActualizacion('egresos')">Cancelar</a>
 			</div>
 			<div v-if="transaccion.egreso.edit" class="row justify-content-center">
-			{{-- 	<div class="col"><input type="text"  placeholder="fecha" v-model="transaccion.fecha" class="form-control"></div>
-				<div class="col-4"><input type="text" placeholder="movimiento" v-model="transaccion.movimiento" class="form-control"></div> --}}
-				<div class="col-2"><input type="number" placeholder="cantidad" v-model="transaccion.egreso.cantidad" class="form-control"></div>
-				<div class="col-2"><input type="number" placeholder="precio" v-model="transaccion.egreso.precio" class="form-control"></div>
+			{{-- 	<div class="col"><input autocomplete="ÑÖcompletes" type="text"  placeholder="fecha" v-model="transaccion.fecha" class="form-control"></div>
+				<div class="col-4"><input autocomplete="ÑÖcompletes" type="text" placeholder="movimiento" v-model="transaccion.movimiento" class="form-control"></div> --}}
+				<div class="col-2"><input autocomplete="ÑÖcompletes" type="number" placeholder="cantidad" v-model="transaccion.egreso.cantidad" class="form-control"></div>
+				<div class="col-2"><input autocomplete="ÑÖcompletes" type="number" placeholder="precio" v-model="transaccion.egreso.precio" class="form-control"></div>
 				<div class="col-2"><a href="" @click.prevent="agregarEgresoNew()" class="btn btn-success">EGRESO</a> <a href="" @click.prevent="agregarNewEgreso('cerrar')" class="btn btn-danger"><i class="fas fa-window-close"></i></a> </div>
 			</div>
 			</div>

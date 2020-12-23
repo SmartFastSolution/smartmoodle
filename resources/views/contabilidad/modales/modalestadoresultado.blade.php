@@ -90,7 +90,7 @@
                                 
                               </td>
                               <td  width="200">
-                              <input type="number" v-model="ingreso.saldo" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="ingreso.saldo" class="form-control">
                                 
                               </td>
                             </tr>
@@ -102,7 +102,7 @@
                           <model-select :options="options" v-model="ingreso.cuenta_id" placeholder="ELEGIR CUENTA"></model-select>
                             </div>
                             <div class="col-2">
-                              <input type="number" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" class="form-control">
                             </div>
                           </div> --}}
                     <div v-if="!ingreso.edit" class="row justify-content-center">
@@ -171,7 +171,7 @@
                                 
                               </td>
                               <td  width="200">
-                              <input type="number" v-model="gasto.saldo" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="gasto.saldo" class="form-control">
                                 
                               </td>
                             </tr>
@@ -238,8 +238,8 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td><input type="number"  v-model="utilidad_bruta.venta" class="form-control"></td>
-                    <td><input type="number"  v-model="utilidad_bruta.costo_venta" class="form-control"></td>
+                    <td><input autocomplete="ÑÖcompletes" type="number"  v-model="utilidad_bruta.venta" class="form-control"></td>
+                    <td><input autocomplete="ÑÖcompletes" type="number"  v-model="utilidad_bruta.costo_venta" class="form-control"></td>
                     <td><a href="#" class="btn btn-dark" @click.prevent="agregarBruta()">Guardar</a></td>
                   </tr>
                 </tbody>
@@ -269,7 +269,7 @@
                                 
                               </td>
                               <td  width="200">
-                              <input type="number" v-model="utilida.saldo" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="utilida.saldo" class="form-control">
                                 
                               </td>
                             </tr>

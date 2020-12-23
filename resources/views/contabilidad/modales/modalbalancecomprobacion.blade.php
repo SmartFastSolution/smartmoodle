@@ -39,10 +39,10 @@
                         <tbody >  
                           <tr>
                             <td>
-                              <input type="number" v-model="balance.suma_debe" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="balance.suma_debe" name="fecha" class="form-control">
                             </td>
                              <td>
-                              <input type="number" v-model="balance.suma_haber" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="balance.suma_haber" name="fecha" class="form-control">
                             </td>     
                         </tr>
                       </tbody>
@@ -59,10 +59,10 @@
                         <tbody >  
                           <tr>
                             <td>
-                              <input type="number" v-model="balance.saldo_debe" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="balance.saldo_debe" name="fecha" class="form-control">
                             </td>
                              <td>
-                              <input type="number" v-model="balance.saldo_haber" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="balance.saldo_haber" name="fecha" class="form-control">
                             </td>     
                         </tr>
                       </tbody>

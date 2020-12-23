@@ -1999,27 +1999,57 @@ producto_kardex:'',
       }else{
           if (this.diarios.tipo == 'ajustado' && this.diarios.ajustado == true) {
             // let register = JSON.parse(JSON.stringify(this.ajustes));
-            this.ajustes[id].debe = this.diarios.debe;
-            this.ajustes[id].haber = this.diarios.haber;
+            this.diarios.debe.forEach(function(sal, id){
+                sal.fecha = '';
+              });
+            this.diarios.debe[0].fecha  = this.diarios.fecha;
+            this.ajustes[id].debe       = this.diarios.debe;
+            this.ajustes[id].haber      = this.diarios.haber;
             this.ajustes[id].comentario = this.diarios.comentario;
-            this.ajustes[id].fecha = this.diarios.fecha;
+            this.ajustes[id].fecha      = this.diarios.fecha;
           } else if(this.diarios.tipo == 'ajustado' && this.diarios.ajustado !== true){
+
             let register = JSON.parse(JSON.stringify(this.ajustes[id]));
-            register.tipo = 'normal';
+
+            this.diarios.debe.forEach(function(sal, id){
+              sal.fecha = '';
+            });
+            this.diarios.debe[0].fecha = this.diarios.fecha;
+            register.debe               = this.diarios.debe;
+            register.haber              = this.diarios.haber;
+            register.comentario         = this.diarios.comentario;
+            register.fecha              = this.diarios.fecha;
+            register.tipo               = 'normal';
             this.registros.push(register);
             this.ajustes.splice(id, 1);
 
 
 
           }else if(this.diarios.tipo == 'normal' && this.diarios.ajustado == false){
-            this.registros[id].debe = this.diarios.debe;
-            this.registros[id].haber = this.diarios.haber;
+             this.diarios.debe.forEach(function(sal, id){
+              sal.fecha = '';
+            });
+            this.diarios.debe[0].fecha    = this.diarios.fecha;
+            this.registros[id].debe       = this.diarios.debe;
+            this.registros[id].haber      = this.diarios.haber;
             this.registros[id].comentario = this.diarios.comentario;
-            this.registros[id].fecha = this.diarios.fecha;
+            this.registros[id].fecha      = this.diarios.fecha;
 
           }else if(this.diarios.tipo == 'normal' && this.diarios.ajustado == true){
+
             let register = JSON.parse(JSON.stringify(this.registros[id]));
-            register.tipo = 'ajustado';
+           this.diarios.debe.forEach(function(sal, id){
+              sal.fecha = '';
+            console.log(sal.fecha);
+
+            });
+            console.log(register);
+            this.diarios.debe[0].fecha = this.diarios.fecha;
+            register.debe              = this.diarios.debe;
+            register.haber             = this.diarios.haber;
+            register.comentario        = this.diarios.comentario;
+            register.fecha             = this.diarios.fecha;
+            register.tipo              = 'ajustado';
             this.ajustes.push(register);
             this.registros.splice(id, 1);
 
@@ -2750,11 +2780,13 @@ nombre_cierre:''
                 });
             // this.obtenerDiarioGeneral();
             balance_comp.obtenerMayorGeneral();
+            hoja_trabajo.obtenerMayorGeneral();
           }else{
            toastr.success("Diairo General Creado Correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
-            
+             balance_comp.obtenerMayorGeneral();
+            hoja_trabajo.obtenerMayorGeneral();
             }          
         }).catch(function(error){
         });  

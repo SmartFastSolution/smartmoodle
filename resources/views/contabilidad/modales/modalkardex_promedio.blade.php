@@ -11,19 +11,19 @@
             <div class="modal-body">
                 <div  class="form-row mb-2 justify-content-center">
                     <div class="col-3">
-                      <input type="date" class="form-control" v-model="inicial.fecha" placeholder="Debe">
+                      <input autocomplete="ÑÖcompletes" type="date" class="form-control" v-model="inicial.fecha" placeholder="Debe">
                     </div>
                     <div class="col-5">
-                      <input type="text" class="form-control" v-model="inicial.movimiento" placeholder="Movimiento">
+                      <input autocomplete="ÑÖcompletes" type="text" class="form-control" v-model="inicial.movimiento" placeholder="Movimiento">
                     </div>
                      <div class="col">
-                      <input type="number" class="form-control" v-model="inicial.cantidad"  placeholder="Cant.">
+                      <input autocomplete="ÑÖcompletes" type="number" class="form-control" v-model="inicial.cantidad"  placeholder="Cant.">
                     </div>
                      <div class="col">
-                      <input type="number" class="form-control" v-model="inicial.precio"  placeholder="Prec.">
+                      <input autocomplete="ÑÖcompletes" type="number" class="form-control" v-model="inicial.precio"  placeholder="Prec.">
                     </div>
                    {{--  <div class="col">
-                      <input type="number" class="form-control" v-model="inicial.total"  placeholder="Total">
+                      <input autocomplete="ÑÖcompletes" type="number" class="form-control" v-model="inicial.total"  placeholder="Total">
                     </div> --}}
                     <a v-if="!update" href="#" class="addDiario btn btn-outline-danger " @click.prevent="agregarInicial()">Agregar Registro</a>
                     <a v-if="update" href="#" class="addDiario btn btn-outline-danger " @click.prevent="actualizarInicial()">Actualizar Registro</a>
@@ -84,21 +84,21 @@
                 <div class="form-row">
                   <div class="form-group col-md-4">
                     <label for="inputEmail4">Fecha</label>
-                    <input v-model="transaccion.ingreso.fecha" type="date"  class="form-control" id="fecha-ingreso-promedio">
+                    <input autocomplete="ÑÖcompletes" v-model="transaccion.ingreso.fecha" type="date"  class="form-control" id="fecha-ingreso-promedio">
                   </div>
                   <div class="form-group col-md-8">
                     <label for="inputPassword4">Movimiento</label>
-                    <input v-model="transaccion.ingreso.movimiento" type="text" class="form-control" id="movimiento-ingreso-promedio">
+                    <input autocomplete="ÑÖcompletes" v-model="transaccion.ingreso.movimiento" type="text" class="form-control" id="movimiento-ingreso-promedio">
                   </div>
                 </div>
                 <div class="form-row ">
                   <div class="form-group col-3">
                     <label for="inputCity">Ingreso Cantidad</label>
-                    <input v-model="transaccion.ingreso.cantidad" type="text" class="form-control" >
+                    <input autocomplete="ÑÖcompletes" v-model="transaccion.ingreso.cantidad" type="text" class="form-control" >
                   </div>
                   <div class="form-group col-3">
                     <label for="inputState">Ingreso Precio</label>
-                    <input v-model="transaccion.ingreso.precio" type="text" class="form-control" >
+                    <input autocomplete="ÑÖcompletes" v-model="transaccion.ingreso.precio" type="text" class="form-control" >
                   </div>
                   <div class="form-group col-3">
                     <label for="inputZip">Calcular</label>
@@ -106,22 +106,22 @@
                   </div>
                   <div class="form-group col-3">
                     <label for="inputZip">Ingreso Total</label>
-                    <input v-model="transaccion.ingreso.total" type="text" readonly class="form-control">
+                    <input autocomplete="ÑÖcompletes" v-model="transaccion.ingreso.total" type="text" readonly class="form-control">
                   </div>
                
                 </div>
                 <div class="form-row justify-content-center">
                   <div class="form-group col-md-3">
                     <label for="inputCity">Existencia Cantidad</label>
-                    <input v-model="transaccion.existencia.cantidad" type="text" class="form-control" >
+                    <input autocomplete="ÑÖcompletes" v-model="transaccion.existencia.cantidad" type="text" class="form-control" >
                   </div>
                   <div class="form-group col-md-3">
                     <label for="inputState">Existencia Precio</label>
-                    <input v-model="transaccion.existencia.precio" type="text" class="form-control" >
+                    <input autocomplete="ÑÖcompletes" v-model="transaccion.existencia.precio" type="text" class="form-control" >
                   </div>
                   <div class="form-group col-md-3">
                     <label for="inputZip">Existencia Total</label>
-                    <input v-model="transaccion.existencia.total" type="text" class="form-control">
+                    <input autocomplete="ÑÖcompletes" v-model="transaccion.existencia.total" type="text" class="form-control">
                   </div>
                 </div>
                 <div class="row justify-content-center">
@@ -142,17 +142,17 @@
                         <tbody >  
                           <tr>
                             <td>
-                              <input type="date" v-model="transaccion.ingreso.fecha"  name="fecha" class="form-control" required>
+                              <input autocomplete="ÑÖcompletes" type="date" v-model="transaccion.ingreso.fecha"  name="fecha" class="form-control" required>
                             </td>
                               <td>
-                                <input type="text"  v-model="transaccion.ingreso.movimiento"  name="movimiento" class="form-control" required>
+                                <input autocomplete="ÑÖcompletes" type="text"  v-model="transaccion.ingreso.movimiento"  name="movimiento" class="form-control" required>
                               </td> 
                        
                               {{--  <td>
-                                <input type="number"  v-model="transaccion.existencia.cantidad"  name="precio" class="form-control" required>
+                                <input autocomplete="ÑÖcompletes" type="number"  v-model="transaccion.existencia.cantidad"  name="precio" class="form-control" required>
                               </td>  
                               <td>
-                                <input type="number"  v-model="transaccion.existencia.precio"  name="precio" class="form-control" required>
+                                <input autocomplete="ÑÖcompletes" type="number"  v-model="transaccion.existencia.precio"  name="precio" class="form-control" required>
                               </td>         --}}          
                             </tr>
                       </tbody>
@@ -168,10 +168,10 @@
                       <tbody>
                         <tr>
                             <td>
-                              <input type="number" v-model="transaccion.ingreso.cantidad"   name="cantidad" class="form-control" required>
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="transaccion.ingreso.cantidad"   name="cantidad" class="form-control" required>
                             </td>  
                             <td>
-                              <input type="number"  v-model="transaccion.ingreso.precio"  name="precio" class="form-control" required>
+                              <input autocomplete="ÑÖcompletes" type="number"  v-model="transaccion.ingreso.precio"  name="precio" class="form-control" required>
                             </td>
                             <td>
                                 <a href="#" class="btn btn-light btn-block" @click.prevent="calcularTotalIngreso()">Agregar Ingreso</a>
@@ -211,25 +211,25 @@
                         </thead>
                         <tbody>
                           <tr v-for="(transa, id) in modales.modal_ingreso">
-                         <td style="vertical-align:middle" ><input type="date"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
+                         <td style="vertical-align:middle" ><input autocomplete="ÑÖcompletes" type="date"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
                           <td style="vertical-align:middle" >
                                <textarea cols="30" rows="3" class="form-control form-control-plaintext" v-model="transa.movimiento"></textarea>
-                              {{-- <input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
+                              {{-- <input autocomplete="ÑÖcompletes" type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
                           </td>
                         {{--     <td v-if="transa.tipo == 'existencia'">@{{ transa.ingreso_cantidad }}</td>
                             <td v-if="transa.tipo == 'existencia'">@{{ transa.ingreso_precio }}</td> --}}
-                            <td style="vertical-align:middle"  ><input type="number"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" @keyup.enter="actuaIng(id)"></td>
-                            <td style="vertical-align:middle"  ><input type="number"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" @keyup.enter="actuaIng(id)"> </td>
+                            <td style="vertical-align:middle"  ><input autocomplete="ÑÖcompletes" type="number"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" @keyup.enter="actuaIng(id)"></td>
+                            <td style="vertical-align:middle"  ><input autocomplete="ÑÖcompletes" type="number"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" @keyup.enter="actuaIng(id)"> </td>
                             <td style="vertical-align:middle" >@{{ transa.ingreso_total }}</td>
-                            {{-- <td><input type="number" v-if="transa.ingreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.ingreso_total"></td> --}}
-                            <td style="vertical-align:middle" ><input type="number" v-if="transa.egreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.egreso_cantidad"></td>
-                            <td style="vertical-align:middle" ><input type="number" v-if="transa.egreso_precio" class="form-control-sm form-control-plaintext" v-model="transa.egreso_precio"></td>
-                            {{-- <td><input type="number" v-if="transa.egreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.egreso_total"></td> --}}
+                            {{-- <td><input autocomplete="ÑÖcompletes" type="number" v-if="transa.ingreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.ingreso_total"></td> --}}
+                            <td style="vertical-align:middle" ><input autocomplete="ÑÖcompletes" type="number" v-if="transa.egreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.egreso_cantidad"></td>
+                            <td style="vertical-align:middle" ><input autocomplete="ÑÖcompletes" type="number" v-if="transa.egreso_precio" class="form-control-sm form-control-plaintext" v-model="transa.egreso_precio"></td>
+                            {{-- <td><input autocomplete="ÑÖcompletes" type="number" v-if="transa.egreso_total" class="form-control-sm form-control-plaintext" v-model=" transa.egreso_total"></td> --}}
                             <td style="vertical-align:middle" >@{{ transa.egreso_total }}</td>
-                            <td style="vertical-align:middle" ><input type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_cantidad"></td>
-                            <td style="vertical-align:middle" ><input type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_precio"></td>
-                            {{-- <td><input type="number" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
-                            <td style="vertical-align:middle" ><input type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
+                            <td style="vertical-align:middle" ><input autocomplete="ÑÖcompletes" type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_cantidad"></td>
+                            <td style="vertical-align:middle" ><input autocomplete="ÑÖcompletes" type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_precio"></td>
+                            {{-- <td><input autocomplete="ÑÖcompletes" type="number" v-if="transa.existencia_total" class="form-control-sm form-control-plaintext" v-model=" transa.existencia_total"></td> --}}
+                            <td style="vertical-align:middle" ><input autocomplete="ÑÖcompletes" type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
                             {{-- <td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarIngreso(id)"> <i class="fas fa-trash"></i></a></td> --}}
                           </tr>
                         </tbody>
@@ -265,21 +265,21 @@
   {{--                  <div class="form-row">
                   <div class="form-group col-md-4">
                     <label for="inputEmail4">Fecha</label>
-                    <input v-model="transaccion.egreso.fecha" type="date" class="form-control" >
+                    <input autocomplete="ÑÖcompletes" v-model="transaccion.egreso.fecha" type="date" class="form-control" >
                   </div>
                   <div class="form-group col-md-8">
                     <label for="inputPassword4">Movimiento</label>
-                    <input v-model="transaccion.egreso.movimiento" type="text" class="form-control" >
+                    <input autocomplete="ÑÖcompletes" v-model="transaccion.egreso.movimiento" type="text" class="form-control" >
                   </div>
                 </div>
                 <div class="form-row ">
                   <div class="form-group col-3">
                     <label for="inputCity">Egreso Cantidad</label>
-                    <input v-model="transaccion.egreso.cantidad" type="number" class="form-control" >
+                    <input autocomplete="ÑÖcompletes" v-model="transaccion.egreso.cantidad" type="number" class="form-control" >
                   </div>
                   <div class="form-group col-3">
                     <label for="inputState">Egreso Precio</label>
-                    <input v-model="transaccion.egreso.precio" type="number" class="form-control" >
+                    <input autocomplete="ÑÖcompletes" v-model="transaccion.egreso.precio" type="number" class="form-control" >
                   </div>
                   <div class="form-group col-3">
                     <label for="inputZip">Calcular</label>
@@ -287,22 +287,22 @@
                   </div>
                   <div class="form-group col-3">
                     <label for="inputZip">Egreso Total</label>
-                    <input v-model="transaccion.egreso.total" type="number" readonly class="form-control">
+                    <input autocomplete="ÑÖcompletes" v-model="transaccion.egreso.total" type="number" readonly class="form-control">
                   </div>
                
                 </div>
                 <div class="form-row justify-content-center">
                   <div class="form-group col-md-3">
                     <label for="inputCity">Existencia Cantidad</label>
-                    <input v-model="transaccion.existencia.cantidad" type="number" class="form-control" >
+                    <input autocomplete="ÑÖcompletes" v-model="transaccion.existencia.cantidad" type="number" class="form-control" >
                   </div>
                   <div class="form-group col-md-3">
                     <label for="inputState">Existencia Precio</label>
-                    <input v-model="transaccion.existencia.precio" type="number" class="form-control" >
+                    <input autocomplete="ÑÖcompletes" v-model="transaccion.existencia.precio" type="number" class="form-control" >
                   </div>
                   <div class="form-group col-md-3">
                     <label for="inputZip">Existencia Total</label>
-                    <input v-model="transaccion.existencia.total" type="number" class="form-control" >
+                    <input autocomplete="ÑÖcompletes" v-model="transaccion.existencia.total" type="number" class="form-control" >
                   </div>
                 </div>
                 <div class="row justify-content-center">
@@ -323,17 +323,17 @@
                         <tbody >  
                             <tr>
                             <td>
-                              <input type="date" v-model="transaccion.egreso.fecha"  name="fecha" class="form-control" required>
+                              <input autocomplete="ÑÖcompletes" type="date" v-model="transaccion.egreso.fecha"  name="fecha" class="form-control" required>
                             </td>
                               <td>
-                                <input type="text"  v-model="transaccion.egreso.movimiento"  name="movimiento" class="form-control" required>
+                                <input autocomplete="ÑÖcompletes" type="text"  v-model="transaccion.egreso.movimiento"  name="movimiento" class="form-control" required>
                               </td> 
                         
                              {{--  <td>
-                                <input type="number"  v-model="transaccion.existencia.cantidad"  name="exis_cantidad" class="form-control" required>
+                                <input autocomplete="ÑÖcompletes" type="number"  v-model="transaccion.existencia.cantidad"  name="exis_cantidad" class="form-control" required>
                               </td>  
                               <td>
-                                <input type="number"  v-model="transaccion.existencia.precio"  name="exis_precio" class="form-control" required>
+                                <input autocomplete="ÑÖcompletes" type="number"  v-model="transaccion.existencia.precio"  name="exis_precio" class="form-control" required>
                               </td>          --}}   
                             </tr>
                       </tbody>
@@ -349,10 +349,10 @@
                       <tbody>
                         <tr>
                           <td>
-                                <input type="number" v-model="transaccion.egreso.cantidad"   name="cantidad" class="form-control" required>
+                                <input autocomplete="ÑÖcompletes" type="number" v-model="transaccion.egreso.cantidad"   name="cantidad" class="form-control" required>
                               </td>  
                               <td>
-                                <input type="number"  v-model="transaccion.egreso.precio"  name="precio" class="form-control" required>
+                                <input autocomplete="ÑÖcompletes" type="number"  v-model="transaccion.egreso.precio"  name="precio" class="form-control" required>
                               </td>
                               <td>
                                 <a href="#" class="btn btn-light btn-block" @click.prevent="calcularTotalEgreso()">Agregar Egreso</a>
@@ -393,21 +393,21 @@
                           </thead>
                           <tbody is="draggable" group="modales.modal_egreso" :list="modales.modal_egreso" tag="tbody">
                             <tr v-for="(transa, id) in modales.modal_egreso">
-                          <td style="vertical-align:middle"><input type="date"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
+                          <td style="vertical-align:middle"><input autocomplete="ÑÖcompletes" type="date"   class="form-control-sm form-control-plaintext" v-model=" transa.fecha"></td>
                           <td style="vertical-align:middle">
                                <textarea cols="30" rows="3" class="form-control form-control-plaintext" v-model="transa.movimiento"></textarea>
-                              {{-- <input type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
+                              {{-- <input autocomplete="ÑÖcompletes" type="text"  class="form-control-sm form-control-plaintext" v-model="transa.movimiento"> --}}
                           </td>
-                              <td style="vertical-align:middle"><input type="number"  v-if="transa.ingreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" ></td>
-                              <td style="vertical-align:middle"><input type="number" v-if="transa.ingreso_precio"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" > </td>
+                              <td style="vertical-align:middle"><input autocomplete="ÑÖcompletes" type="number"  v-if="transa.ingreso_cantidad" class="form-control-sm form-control-plaintext" v-model="transa.ingreso_cantidad" ></td>
+                              <td style="vertical-align:middle"><input autocomplete="ÑÖcompletes" type="number" v-if="transa.ingreso_precio"  class="form-control-sm form-control-plaintext" v-model="transa.ingreso_precio" > </td>
                               <td style="vertical-align:middle">@{{ transa.ingreso_total }}</td>
-                              <td style="vertical-align:middle"><input type="number" class="form-control-sm form-control-plaintext" v-model="transa.egreso_cantidad" @keyup.enter="actualEgre(id)"></td>
-                              <td style="vertical-align:middle"><input type="number"  class="form-control-sm form-control-plaintext" v-model="transa.egreso_precio" @keyup.enter="actualEgre(id)"></td>
+                              <td style="vertical-align:middle"><input autocomplete="ÑÖcompletes" type="number" class="form-control-sm form-control-plaintext" v-model="transa.egreso_cantidad" @keyup.enter="actualEgre(id)"></td>
+                              <td style="vertical-align:middle"><input autocomplete="ÑÖcompletes" type="number"  class="form-control-sm form-control-plaintext" v-model="transa.egreso_precio" @keyup.enter="actualEgre(id)"></td>
                               <td style="vertical-align:middle">@{{ transa.egreso_total }}</td>
-                              <td style="vertical-align:middle"><input type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_cantidad"></td>
-                              <td style="vertical-align:middle"><input type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_precio"></td>
+                              <td style="vertical-align:middle"><input autocomplete="ÑÖcompletes" type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_cantidad"></td>
+                              <td style="vertical-align:middle"><input autocomplete="ÑÖcompletes" type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_precio"></td>
                               {{-- <td v-if="!actuegreso.estado">@{{ transa.existencia_total }}</td> --}}
-                              <td style="vertical-align:middle" ><input type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
+                              <td style="vertical-align:middle" ><input autocomplete="ÑÖcompletes" type="number" class="form-control-sm form-control-plaintext" v-model="transa.existencia_total"></td>
                               {{-- <td><a href="#" class="btn btn-sm btn-danger" @click.prevent="borrarEgreso(id)"> <i class="fas fa-trash"></i></a></td> --}}
                             </tr>
                           </tbody>

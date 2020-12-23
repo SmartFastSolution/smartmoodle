@@ -157,16 +157,16 @@
 </thead>
 <tbody>
      <tr>
-      <td class="text-right" align="center" width="125"><input v-model="registro.balance_comp.debe" type="number" class="form-control form-control-sm"></td>
-      <td class="text-right" align="center" width="125"><input v-model="registro.balance_comp.haber" type="number" class="form-control form-control-sm"></td>
-      <td class="text-right" align="center" width="125"><input v-model="registro.ajustes.debe" type="number" class="form-control form-control-sm"></td>
-      <td  class="text-right"align="center" width="125"><input v-model="registro.ajustes.haber" type="number" class="form-control form-control-sm"></td>
-      <td class="text-right" align="center" width="125"><input v-model="registro.balance_ajustado.debe" type="number" class="form-control form-control-sm"></td>
-      <td  class="text-right"align="center" width="125"><input v-model="registro.balance_ajustado.haber" type="number" class="form-control form-control-sm"></td>
-      <td class="text-right" align="center" width="125"><input v-model="registro.estado_resultado.debe" type="number" class="form-control form-control-sm"></td>
-      <td  class="text-right"align="center" width="125"><input v-model="registro.estado_resultado.haber" type="number" class="form-control form-control-sm"></td>
-      <td class="text-right" align="center" width="125"><input v-model="registro.balance_general.debe" type="number" class="form-control form-control-sm"></td>
-      <td  class="text-right"align="center" width="125"><input v-model="registro.balance_general.haber" type="number" class="form-control form-control-sm"></td>
+      <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.balance_comp.debe" type="number" class="form-control form-control-sm"></td>
+      <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.balance_comp.haber" type="number" class="form-control form-control-sm"></td>
+      <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.ajustes.debe" type="number" class="form-control form-control-sm"></td>
+      <td  class="text-right"align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.ajustes.haber" type="number" class="form-control form-control-sm"></td>
+      <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.balance_ajustado.debe" type="number" class="form-control form-control-sm"></td>
+      <td  class="text-right"align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.balance_ajustado.haber" type="number" class="form-control form-control-sm"></td>
+      <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.estado_resultado.debe" type="number" class="form-control form-control-sm"></td>
+      <td  class="text-right"align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.estado_resultado.haber" type="number" class="form-control form-control-sm"></td>
+      <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.balance_general.debe" type="number" class="form-control form-control-sm"></td>
+      <td  class="text-right"align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.balance_general.haber" type="number" class="form-control form-control-sm"></td>
         </tr>
 </tbody>
 </table>
@@ -182,10 +182,10 @@
                         <tbody >  
                           <tr>
                             <td>
-                              <input type="number" v-model="registro.balance_comp.debe" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="registro.balance_comp.debe" name="fecha" class="form-control">
                             </td>
                              <td>
-                              <input type="number" v-model="registro.balance_comp.haber" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="registro.balance_comp.haber" name="fecha" class="form-control">
                             </td>     
                         </tr>
                       </tbody>
@@ -202,10 +202,10 @@
                         <tbody >  
                           <tr>
                             <td>
-                              <input type="number" v-model="registro.ajustes.debe" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="registro.ajustes.debe" name="fecha" class="form-control">
                             </td>
                              <td>
-                              <input type="number" v-model="registro.ajustes.haber" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="registro.ajustes.haber" name="fecha" class="form-control">
                             </td>     
                         </tr>
                       </tbody>
@@ -222,10 +222,10 @@
                         <tbody >  
                           <tr>
                             <td>
-                              <input type="number" v-model="registro.balance_ajustado.debe" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="registro.balance_ajustado.debe" name="fecha" class="form-control">
                             </td>
                              <td>
-                              <input type="number" v-model="registro.balance_ajustado.haber" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="registro.balance_ajustado.haber" name="fecha" class="form-control">
                             </td>     
                         </tr>
                       </tbody>
@@ -243,10 +243,10 @@
                         <tbody >  
                           <tr>
                             <td>
-                              <input type="number" v-model="registro.estado_resultado.debe" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="registro.estado_resultado.debe" name="fecha" class="form-control">
                             </td>
                              <td>
-                              <input type="number" v-model="registro.estado_resultado.haber" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="registro.estado_resultado.haber" name="fecha" class="form-control">
                             </td>     
                         </tr>
                       </tbody>
@@ -263,10 +263,10 @@
                         <tbody >  
                           <tr>
                             <td>
-                              <input type="number" v-model="registro.balance_general.debe" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="registro.balance_general.debe" name="fecha" class="form-control">
                             </td>
                              <td>
-                              <input type="number" v-model="registro.balance_general.haber" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="registro.balance_general.haber" name="fecha" class="form-control">
                             </td>     
                         </tr>
                       </tbody>

@@ -38,10 +38,10 @@
                         <tbody >  
                           <tr>
                             <td width="20">
-                              <input type="date" v-model="mayor.registro.fecha" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="date" v-model="mayor.registro.fecha" name="fecha" class="form-control">
                             </td>
                             <td>
-                              <input type="text" v-model="mayor.registro.detalle" name="debe" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="text" v-model="mayor.registro.detalle" name="debe" class="form-control">
                             </td>         
                         </tr>
                       </tbody>
@@ -59,16 +59,16 @@
                         <tbody >  
                           <tr>
                             <td>
-                              <input type="number" v-model="mayor.registro.debe" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="mayor.registro.debe" name="fecha" class="form-control">
                             </td>
                              <td>
-                              <input type="number" v-model="mayor.registro.haber" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="mayor.registro.haber" name="fecha" class="form-control">
                             </td>
                             <td width="125">
-                              <input type="number" v-model="mayor.registro.saldo" name="debe" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="mayor.registro.saldo" name="debe" class="form-control">
                             </td> 
                             <td v-if="registros_cierres.length > 0" align="center">
-                              <input type="checkbox" v-model="mayor.registro.cierre" name="debe" class="custom-checkbox">
+                              <input autocomplete="ÑÖcompletes" type="checkbox" v-model="mayor.registro.cierre" name="debe" class="custom-checkbox">
                             </td>            
                         </tr>
                       </tbody>
@@ -211,11 +211,11 @@
              
                 <tbody class="bg-light" is="draggable" group="people" :list="mayores.registros" tag="tbody" >
                   <tr v-for="(diar, index) in mayores.registros"  >
-                         <td align="center" width="50"><input class=" form-control-plaintext text-right" type="date" v-model="diar.fecha"></td>
-                         <td align="center" width="200"><input class=" form-control-plaintext text-right" type="text" v-model="diar.detalle"></td>
-                         <td class="text-right"><input class=" form-control-plaintext text-right" type="number" v-model="diar.debe"></td>
-                         <td class="text-right"><input class=" form-control-plaintext text-right" type="number" v-model="diar.haber"></td>
-                         <td class="text-right" width="125"><input class="form-control-plaintext text-right" type="number" v-model="diar.saldo"></td>
+                         <td align="center" width="50"><input autocomplete="ÑÖcompletes" class=" form-control-plaintext text-right" type="date" v-model="diar.fecha"></td>
+                         <td align="center" width="200"><input autocomplete="ÑÖcompletes" class=" form-control-plaintext text-right" type="text" v-model="diar.detalle"></td>
+                         <td class="text-right"><input autocomplete="ÑÖcompletes" class=" form-control-plaintext text-right" type="number" v-model="diar.debe"></td>
+                         <td class="text-right"><input autocomplete="ÑÖcompletes" class=" form-control-plaintext text-right" type="number" v-model="diar.haber"></td>
+                         <td class="text-right" width="125"><input autocomplete="ÑÖcompletes" class="form-control-plaintext text-right" type="number" v-model="diar.saldo"></td>
                        {{--   <td align="center">
                             <a @click="habediarioEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i>
                             </a>
@@ -226,11 +226,11 @@
                  </tbody>
                  <tbody is="draggable" group="cierres" :list="mayores.cierres" tag="tbody">
                        <tr v-for="(diar, index) in mayores.cierres">
-                         <td align="center" width="50"><input class=" form-control-plaintext text-right" type="date" v-model="diar.fecha"></td>
-                         <td align="center" width="200"><input class=" form-control-plaintext text-right" type="text" v-model="diar.detalle"></td>
-                         <td class="text-right"><input class=" form-control-plaintext text-right" type="number" v-model="diar.debe"></td>
-                         <td class="text-right"><input class=" form-control-plaintext text-right" type="number" v-model="diar.haber"></td>
-                         <td class="text-right" width="125"><input class="form-control-plaintext text-right" type="number" v-model="diar.saldo"></td>
+                         <td align="center" width="50"><input autocomplete="ÑÖcompletes" class=" form-control-plaintext text-right" type="date" v-model="diar.fecha"></td>
+                         <td align="center" width="200"><input autocomplete="ÑÖcompletes" class=" form-control-plaintext text-right" type="text" v-model="diar.detalle"></td>
+                         <td class="text-right"><input autocomplete="ÑÖcompletes" class=" form-control-plaintext text-right" type="number" v-model="diar.debe"></td>
+                         <td class="text-right"><input autocomplete="ÑÖcompletes" class=" form-control-plaintext text-right" type="number" v-model="diar.haber"></td>
+                         <td class="text-right" width="125"><input autocomplete="ÑÖcompletes" class="form-control-plaintext text-right" type="number" v-model="diar.saldo"></td>
                        {{--   <td align="center">
                             <a @click="habediarioEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i>
                             </a>

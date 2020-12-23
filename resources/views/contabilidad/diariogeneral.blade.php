@@ -2,7 +2,7 @@
      <h1 class="text-center text-danger font-weight-bold mt-2">DIARIO GENERAL</h1>
      <div class="row justify-content-center">
          <div class="col-3">
-     <input type="text" v-model="nombre" class="form-control form-control-sm" placeholder="Nombre de la Empresa">
+     <input autocomplete="ÑÖcompletes" type="text" v-model="nombre" class="form-control form-control-sm" placeholder="Nombre de la Empresa">
              
          </div>
      </div>
@@ -44,16 +44,16 @@
                  </tbody>
 
                  <tbody v-for="(registro, id) in registros" @change="totalDebe()">
-                     <tr v-for="(diar, index) in registro.debe">
-                         <td align="center" width="50">@{{ formatoFecha(diar.fecha)}}</td>
-                         <td align="rigth">@{{ diar.nom_cuenta}}</td>
-                         <td class="text-right" width="125">@{{ decimales(diar.saldo) }}</td>
+                     <tr v-for="(diardebe, index) in registro.debe">
+                         <td align="center" width="50">@{{ formatoFecha(diardebe.fecha)}}</td>
+                         <td align="rigth">@{{ diardebe.nom_cuenta}}</td>
+                         <td class="text-right" width="125">@{{ decimales(diardebe.saldo) }}</td>
                          <td class="text-right" width="125"></td>
-                         <td v-if="diar.fecha !== '' && diar.fecha !== null && registro.tipo !== 'inicial'" align="center" width="50"><a
+                         <td v-if="diardebe.fecha !== '' && diardebe.fecha !== null && registro.tipo !== 'inicial'" align="center" width="50"><a
                                  @click="debeEditRegister(id)" class="btn btn-warning btn-sm"><i
                                      class="fas fas fa-edit"></i></a></td>
-                                     <td v-if="registro.tipo == 'inicial' && diar.fecha !== '' && diar.fecha !== null"></td>
-                         <td  v-if="diar.fecha != '' && diar.fecha !== null" align="center" width="50"><a
+                                     <td v-if="registro.tipo == 'inicial' && diardebe.fecha !== '' && diardebe.fecha !== null"></td>
+                         <td  v-if="diardebe.fecha != '' && diardebe.fecha !== null" align="center" width="50"><a
                                  @click="deleteRegistro(id)" class="btn btn-danger btn-sm"><i
                                      class="fas fa-trash-alt"></i></a></td>
                                      <td colspan="2" v-else></td>
@@ -104,15 +104,15 @@
                      </tr>
                  </thead> --}}
                  <tbody v-for="(registro, id) in ajustes" @change="totalDebe()">
-                     <tr v-for="(diar, index) in registro.debe">
-                         <td align="center"width="200">@{{ formatoFecha(diar.fecha)}}</td>
-                         <td align="rigth" width="450">@{{ diar.nom_cuenta}}</td>
-                         <td align="center" width="125">@{{ decimales(diar.saldo) }}</td>
+                     <tr v-for="(diardebe, index) in registro.debe">
+                         <td align="center"width="200">@{{ formatoFecha(diardebe.fecha)}}</td>
+                         <td align="rigth" width="450">@{{ diardebe.nom_cuenta}}</td>
+                         <td align="center" width="125">@{{ decimales(diardebe.saldo) }}</td>
                          <td align="center" width="125"></td>
-                         <td v-if="diar.fecha !== '' && diar.fecha !== null" align="center" width="50"><a
+                         <td v-if="diardebe.fecha !== '' && diardebe.fecha !== null" align="center" width="50"><a
                                  @click="debeEditAjustado(id)" class="btn btn-warning btn-sm"><i
                                      class="fas fas fa-edit"></i></a></td>
-                         <td v-if="diar.fecha != '' && diar.fecha !== null" align="center" width="50"><a
+                         <td v-if="diardebe.fecha != '' && diardebe.fecha !== null" align="center" width="50"><a
                                  @click="deleteAjuste(id)" class="btn btn-danger btn-sm"><i
                                      class="fas fa-trash-alt"></i></a></td>
                                      <td colspan="2" v-else></td>

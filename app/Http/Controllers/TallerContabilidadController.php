@@ -1302,7 +1302,7 @@ public function obtenerbalance(Request $request)
                      'created_at'       => now(),
                      'updated_at'       => now(),
                 );
-                DGRegistro::insert($regis);                          
+                MGRegistro::insert($regis);                          
         }
         $register = $mayorg->mgRegistro;
 

@@ -84,10 +84,10 @@
                         <tbody >  
                           <tr>
                             <td>
-                              <input type="number" v-model="balance.debe" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="balance.debe" name="fecha" class="form-control">
                             </td>
                              <td>
-                              <input type="number" v-model="balance.haber" name="fecha" class="form-control">
+                              <input autocomplete="ÑÖcompletes" type="number" v-model="balance.haber" name="fecha" class="form-control">
                             </td>     
                         </tr>
                       </tbody>
