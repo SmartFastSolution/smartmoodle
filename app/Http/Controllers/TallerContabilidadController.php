@@ -1804,7 +1804,7 @@ class TallerContabilidadController extends Controller
             }
         }
 
-       public function estadoResultado(Request $request)
+        public function estadoResultado(Request $request)
         {
             $id         = Auth::id();
             $taller_id  = $request->id;
@@ -2401,7 +2401,8 @@ class TallerContabilidadController extends Controller
             }
         }
  
-        public function ConciliacionBancaria(Request $request){
+        public function ConciliacionBancaria(Request $request)
+        {
             $id  = Auth::id();
             $taller_id   = $request->id;
             $nombre      =$request->nombre;
@@ -2577,7 +2578,8 @@ class TallerContabilidadController extends Controller
                 } //end elseif
         }
 
-        public function ObtenerConciliacionB (Request $request){
+        public function ObtenerConciliacionB (Request $request)
+        {
             $id = Auth::id();
             $taller_id = $request->id;
             $cb  = Conciliacionbancaria::where('user_id', $id)->where('taller_id',$taller_id)->count();
