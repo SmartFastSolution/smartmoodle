@@ -795,6 +795,8 @@ public function obtenerBalanceCompro(Request $request)
             $patrimonios   = $request->patrimonio;
             $o->fecha      = $request->fecha;
             $o->nombre     = $request->nombre;
+            $o->total_pasivo_patrimonio = $request->t_patrimonio;
+
             $o->save();
 
             $activ=BIActivo::where('balance_inicial_id', $o->id)->get();

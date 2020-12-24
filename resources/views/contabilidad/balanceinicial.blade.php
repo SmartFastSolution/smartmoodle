@@ -173,8 +173,8 @@
            <table class="table table-borderless">
               <tbody>
                 <tr>
-                  <td class="font-weight-bold" style="font-size: 20px;" width="250">TOT. PAS. Y PATRI.</td>
-                  <td class="text-right"><input autocomplete="ÑÖcompletes" type="number" v-model="total_balance_inicial.t_patrimonio_pasivo" class="form-control form-control-sm"></td>
+                  <td class="font-weight-bold" style="font-size: 20px;" width="200">TOT. PAS. Y PATRI.</td>
+                  <td class="text-right"><input autocomplete="ÑÖcompletes" type="number" v-model="total_balance_inicial.t_patrimonio_pasivo" class="form-control text-right font-weight-bold"></td>
                 </tr>
               </tbody>
             </table>
@@ -379,7 +379,7 @@
               <tbody>
                 <tr>
                   <td class="font-weight-bold" style="font-size: 20px;" width="750">TOT. PAS. Y PATRI.</td>
-                  <td><input autocomplete="ÑÖcompletes" type="number" v-model="total_balance_inicial.t_patrimonio_pasivo" class="form-control"></td>
+                  <td><input autocomplete="ÑÖcompletes" type="number" v-model="total_balance_inicial.t_patrimonio_pasivo" class="form-control text-right font-weight-bold"></td>
                 </tr>
               </tbody>
             </table>

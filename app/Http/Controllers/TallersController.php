@@ -21,6 +21,8 @@ use App\Admin\TallerContabilidad;
 use App\Admin\TallerConvertirCheque;
 use App\Admin\TallerDefinirEnunciado;
 use App\Admin\TallerDiferencia;
+use App\Admin\TallerModuloContable;
+use App\Admin\TallerModuloTransaccion;
 use App\Admin\TallerEscribirCuenta;
 use App\Admin\TallerFactura;
 use App\Admin\TallerGusanillo;
@@ -357,16 +359,41 @@ class TallersController extends Controller
                     'text'=> $cuenta->nombre
                 );
             }
+            $consul = Taller::findorfail($id);
+            //  $datos = TallerContabilidad::where('taller_id', $consul->id)->firstOrFail();
+            
+            $datos = TallerModuloContable::where('taller_id', $consul->id)->firstOrFail();
+            if ($datos->metodo == 'individual') {
+                if ($datos->tipo == 'fifo' or $datos->tipo == 'promedio') {
+                    $transacciones = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->get();
+                }else{
+                    $transacciones = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->first();
+                }
                 JavaScript::put([
                  'taller'         => $d,
                  'cuentas'        => $cuentas,
                  'objeto'         => $objeto,
                  'balanceinicial' => $balanceinicial,
-
                 ]);
-            $consul = Taller::findorfail($id);
-             $datos = TallerContabilidad::where('taller_id', $consul->id)->firstOrFail();
             return view('talleres.taller37', compact('datos', 'd'));
+
+            }else{
+                $balancesInicial = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->where('tipo', 'horizontal')->first();
+                $diariogeneral = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->where('tipo', 'diario_general')->first();
+                $productos = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->where('tipo','fifo')->get();
+                    JavaScript::put([
+                     'taller'          => $d,
+                     'cuentas'         => $cuentas,
+                     'objeto'          => $objeto,
+                     'balanceinicial'  => $balanceinicial,
+                     'balancesinicial' => $balancesInicial,
+                     'diariogeneral'   => $diariogeneral,
+                     'productos'       => $productos,
+                    ]);
+                return view('talleres.taller37', compact('datos', 'd', 'diariogeneral'));
+
+            }
+                
 
         }elseif ($plant == 38) {
             $consul = Taller::findorfail($id);

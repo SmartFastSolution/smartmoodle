@@ -314,6 +314,23 @@ route::post('/sistema/admin/taller/obtener-balance-general', 'TallerContabilidad
 route::post('/sistema/admin/taller/obtenerbalance', 'TallerContabilidadController@obtenerbalance')->name('obtenerbalance');
 
 
+//MODULOS CONTABLES
+route::post('/sistema/admin/modulo/balance-inicial', 'AdminController@balance_inicial')->name('modulo.balance_inicial');
+route::post('/sistema/admin/modulo/kardex-fifo', 'AdminController@kardex')->name('modulo.kardex_fifo');
+route::post('/sistema/admin/modulo/diario-general', 'AdminController@crearDiario')->name('modulo.diariogeneral');
+route::post('/sistema/admin/modulo/mayor-general', 'AdminController@crearMayor')->name('modulo.mayor');
+route::post('/sistema/admin/modulo/balance-comprobacion', 'AdminController@crearBalanceCompro')->name('modulo.balancecompro');
+route::post('/sistema/admin/modulo/hoja-trabajo', 'AdminController@crearHojaTrabajo')->name('modulo.hojatrabajo');
+route::post('/sistema/admin/modulo/balance-comprobacion-ajustado', 'AdminController@crearBalanceAjustado')->name('modulo.balanajustado');
+route::post('/sistema/admin/modulo/estado-resultado', 'AdminController@crearEtadoResultado')->name('modulo.estadoresultado');
+route::post('/sistema/admin/modulo/balance-general', 'AdminController@crearBalanceGeneral')->name('modulo.balance-general');
+route::post('/sistema/admin/modulo/asiento-cierre', 'AdminController@crearAsientosCierre')->name('modulo.asientocierre');
+route::post('/sistema/admin/modulo/taller-concatenado', 'AdminController@tallerConcatenado')->name('modulo.tallerconcatenado');
+
+
+
+
+//FIN DE MODULOS CONTABLES
 route::post('/sistema/homedoc/respuesta/taller1/{idtaller}', 'TallerDocenteController@store1')->name('taller1.docente');
 route::get('/sistema/admin/create', 'AdminController@admin')->name('admin.create');
 route::post('/sistema/admin', 'AdminController@store')->name('admin');

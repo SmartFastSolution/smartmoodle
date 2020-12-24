@@ -161,7 +161,7 @@
                       </div>
                   </div>
                   <div class="col-5">
-                    
+                    <div v-html="datos_transacciones"></div>
                   </div>
                 </div>
 
@@ -365,6 +365,7 @@
                       </div>
                   </div>
                   <div class="col-5">
+                    <div v-html="datos_transacciones"></div>
                     
                   </div>
                 </div>
@@ -605,6 +606,7 @@
                 </div>
               </div>
               <div class="col-5">
+                    <div v-html="datos_transacciones"></div>
                 
               </div>
      {{--    <div v-if="transaccion.egreso.add" class="row justify-content-center mt-2">
@@ -811,7 +813,10 @@
                   <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaEgreso('compra')">Agregar Existencia</a>
                 </div>
               </div>
-              <div class="col-5"></div>
+              <div class="col-5">
+                    <div v-html="datos_transacciones"></div>
+                
+              </div>
                       
 
               <div v-if="modales.modal_devolucion_compra.length > 0">

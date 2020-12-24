@@ -169,7 +169,11 @@
                   </div>
                   <div class="col-6" style=" height:300px; overflow-y: scroll;">
                     <h3 class="text-center">Datos para realizar el Diario General</h3>
-                    <p >
+                    <div>
+                      {!! $diariogeneral->transacciones !!}
+                    </div>
+                    {{-- <div v-html="datos_diario.transacciones"></div> --}}
+                    {{-- <p >
                       Se compra s/fra. #040 a Importadora “ELMARY” (contribuyente especial) - doce acondicionadores de aire en $ 550 c/u. Se cancela con ch/.# 050 Bco. Guayaquil. <br> <br>
                       Se cancela la Fra.#023 a “Publicitas” (No Obligada a llevar Contabilidad) por servicios de publicidad $ 300 con ch/.#051 Bco. Guayaquil. <br> <br>
 
@@ -188,7 +192,7 @@
                       Se vende S/Fra. #012 - treinta acondicionadores de aire en $ 1.200 c/u a Comercial “INCOR” (Obligado a llevar Contabilidad). Se recibe ch/. #101 Bco. del Austro. <br> <br>
 
                       De la última venta nos devuelven un acondicionador de aire por no estar de acuerdo con el pedido. Se cancela con ch/.#055 Bco. Guayaquil. (Fra. # 057) <br> <br>
-                    </p>
+                    </p> --}}
 
                   </div>
                   {{--   <div class="col-6">

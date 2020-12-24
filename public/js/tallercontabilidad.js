@@ -1,6 +1,9 @@
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
+// console.log(balancesinicial)
+// console.log(diariogeneral)
+// console.log(productos)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////FUNCIONES//////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1527,6 +1530,7 @@ const diario = new Vue({
  el: '#diario',
     data:{
       id_taller: taller,
+      datos_diario: diariogeneral,
       producto_id: 1,
       nombre:'',
       fechabalance:'',
@@ -1554,6 +1558,7 @@ const diario = new Vue({
        kardex:[],
 nombre_kardex:'',
 producto_kardex:'',
+transacciones:'',
        registros:[
        ],
        eliminar:{
@@ -1662,7 +1667,8 @@ producto_kardex:'',
           if (response.data.datos == true) {
               _this.kardex = response.data.kardex_fifo;
               _this.nombre_kardex =  response.data.informacion.nombre;
-              _this.producto_kardex = response.data.informacion.producto;         
+              _this.producto_kardex = response.data.informacion.producto;
+        
             }else{
               _this.kardex = [];
               _this.nombre =  '';
@@ -6380,6 +6386,7 @@ const kardex = new Vue({
     },
     producto:'',
     producto_id:'',
+    productos:productos,
     nombre:'',
     suman:{
       ingreso_cantidad:0,
@@ -6388,6 +6395,7 @@ const kardex = new Vue({
       egreso_total:0,
       muestra:0
     },
+    datos_transacciones:'',
     totales:{
       cantidad:'',
       precio:'',
@@ -8538,6 +8546,10 @@ const kardex = new Vue({
                _this.prueba.precio.ventas             = response.data.informacion.ventas_precio;
                _this.prueba.precio.inventario_final   = response.data.informacion.inv_final_precio;
 
+              let datos = this.productos.filter(x => x.id == _this.producto_id);
+              _this.datos_transacciones =  datos[0].transacciones  
+              console.log(datos)      
+
               this.sumasTotales();
        this.ultimaExistencia();
               
@@ -8553,6 +8565,9 @@ const kardex = new Vue({
                _this.prueba.precio.adquicisiones      = '' ;
                _this.prueba.precio.ventas             = '' ;
                _this.prueba.precio.inventario_final   = '' ;
+                let datos = this.productos.filter(x => x.id == _this.producto_id);
+              _this.datos_transacciones =  datos[0].transacciones  
+              console.log(datos)   
                   this.sumasTotales();
                   
        this.ultimaExistencia();
