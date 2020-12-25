@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Admin\TallerContabilidad;
+use App\Admin\TallerModuloContable;
 use App\Contabilidad\BCARegistro;
 use App\Contabilidad\BCRegistro;
 use App\Contabilidad\BIActivo;
@@ -19,12 +20,10 @@ use App\Contabilidad\DGRDebe;
 use App\Contabilidad\DGRHaber;
 use App\Contabilidad\DGRegistro;
 use App\Contabilidad\DiarioGeneral;
-
 use App\Contabilidad\ACRDebe;
 use App\Contabilidad\ACRHaber;
 use App\Contabilidad\ACRegistro;
 use App\Contabilidad\AsientoCierre;
-
 use App\Contabilidad\ERIngreso;
 use App\Contabilidad\EstadoResultado;
 use App\Contabilidad\HTRegistro;
@@ -341,7 +340,7 @@ class TallerContabilidadController extends Controller
         $balances           = $request->balances;
         $balanceCompro      = BalanceAjustado::where('user_id',$id)->where('taller_id', $taller_id)->count();
         if ($balanceCompro  == 0) {
-        $contenido          = TallerContabilidad::select('enunciado')->where('taller_id', $taller_id)->firstOrFail();
+        // $contenido          = TallerContabilidad::select('enunciado')->where('taller_id', $taller_id)->firstOrFail();
         $balance            = new BalanceAjustado;
         $balance->taller_id = $taller_id ;
         $balance->user_id   = $id;
@@ -438,7 +437,7 @@ class TallerContabilidadController extends Controller
         $balances           = $request->balances;
         $balanceCompro      = BalanceComprobacion::where('user_id',$id)->where('taller_id', $taller_id)->count();
         if ($balanceCompro  == 0) {
-        $contenido          = TallerContabilidad::select('enunciado')->where('taller_id', $taller_id)->firstOrFail();
+        // $contenido          = TallerContabilidad::select('enunciado')->where('taller_id', $taller_id)->firstOrFail();
         $balance            = new BalanceComprobacion;
         $balance->taller_id = $taller_id ;
         $balance->user_id   = $id;
@@ -693,7 +692,7 @@ public function obtenerBalanceCompro(Request $request)
         $p_nocorriente = $request->p_nocorriente;
         $patrimonios   = $request->patrimonio;
 
-        $contenido = TallerContabilidad::select('enunciado')->where('taller_id', $taller_id)->firstOrFail();
+        $contenido = TallerModuloContable::select('enunciado')->where('taller_id', $taller_id)->firstOrFail();
         $binicial                          = new BalanceInicial; 
         $binicial->taller_id               = $taller_id;
         $binicial->user_id                 = $id;

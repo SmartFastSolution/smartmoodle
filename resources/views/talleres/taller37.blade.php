@@ -77,7 +77,7 @@
 @section('title', 'Talleres de contabilidad')
 @section('content')
 <div class="container mb-3">
-
+<h1 class="text-center text-danger font-weight-bold display-4">Modulo Contable</h1>
     <h1 class="text-center m-2">{{ $datos->taller->nombre }}</h1>
     <h3 class="text-center mt-3">{{ $datos->enunciado }}</h3>
 
@@ -96,9 +96,6 @@
                 <a class="list-group-item list-group-item-action" id="list-estado-resultado-list" data-toggle="list" href="#list-estado-resultado" role="tab" aria-controls="estado-resultado">Estado de Resultado</a>
                 <a class="list-group-item list-group-item-action" id="list-balance-general-list" data-toggle="list" href="#list-balance-general" role="tab" aria-controls="balance-general">Balance General</a>
                 <a class="list-group-item list-group-item-action" id="list-asento-cierre-list" data-toggle="list" href="#list-asento-cierre" role="tab" aria-controls="asento-cierre">Asientos de Cierre</a>
-
-
-
             </div>
         </div>
         <div class="col-12 col-sm-12 col-md-10">
@@ -117,10 +114,14 @@
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#b_horizontal" role="tab"
                                 aria-controls="b_horizontal" aria-selected="true">Balance Inicial Horizontal</a>
                         </li>
+                        @if ($datos->metodo == 'individual')
+                          
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#b_vertical" role="tab"
                                 aria-controls="b_vertical" aria-selected="false">Balance Inicial Vertical</a>
                         </li>
+
+                        @endif
                     </ul>
                     <div class="tab-content" id="bInicialContent">
                         @include('contabilidad.balanceinicial')

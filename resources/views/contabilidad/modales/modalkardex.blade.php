@@ -160,7 +160,7 @@
 
                       </div>
                   </div>
-                  <div class="col-5">
+                  <div class="col-5" style=" height:400px; overflow-y: scroll; border: solid 3px red;">
                     <div v-html="datos_transacciones"></div>
                   </div>
                 </div>
@@ -364,7 +364,7 @@
                        <div  class="row justify-content-center">
                       </div>
                   </div>
-                  <div class="col-5">
+                  <div class="col-5" style=" height:400px; overflow-y: scroll; border: solid 3px red;">
                     <div v-html="datos_transacciones"></div>
                     
                   </div>
@@ -605,7 +605,7 @@
          {{--  <a v-if="transaccion.egreso.active" class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="nuevoEgreso('agregar')"><i class="fas fa-plus"></i> Nuevo Egreso</a> --}}
                 </div>
               </div>
-              <div class="col-5">
+              <div class="col-5" style=" height:400px; overflow-y: scroll; border: solid 3px red;">
                     <div v-html="datos_transacciones"></div>
                 
               </div>
@@ -813,7 +813,7 @@
                   <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaEgreso('compra')">Agregar Existencia</a>
                 </div>
               </div>
-              <div class="col-5">
+              <div class="col-5" style=" height:400px; overflow-y: scroll; border: solid 3px red;">
                     <div v-html="datos_transacciones"></div>
                 
               </div>

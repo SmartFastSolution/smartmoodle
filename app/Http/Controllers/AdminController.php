@@ -1700,7 +1700,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
           $binicial->taller_modulo_contable_id = $e->id;
           $binicial->tipo                      = 'horizontal';
           $binicial->enunciado                 = $request->enunciado;
-          $binicial->transacciones             = $request->balance_vertical;
+          $binicial->transacciones             = $request->balance_horizontal;
           $binicial->save();
 
            foreach ($request->productos as $key=>$v) {

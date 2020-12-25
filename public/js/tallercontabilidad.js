@@ -29,7 +29,16 @@ const funciones = new Vue({
     }
      
     },
+    horasExtras(horas, sueldo){
+      let total = 0;
+      let horaTrabajo = Number(sueldo) / 30 / 8;
+
+      horas.forEach(function(hora){           
+                total += Number(hora.dia) * horaTrabajo * 1.50;  
+              });
+      return total;
       }
+    }
 
 });
 
@@ -71,16 +80,25 @@ const b_hori = new Vue({
         p_corrientes:[], //Array de pasivos corrientes
         p_nocorrientes:[], //Array de pasivos no corrientes
         patrimonios:[], //Array de patrimonios
+        registro:{
+          activo_corriente:'',
+          activo_nocorriente:'',
+          pasivo_corriente:'',
+          pasivo_nocorriente:'',
+          patrimonio:'',
+        },
         activo:{
           a_corriente:
             { //Agregar un nuevo activo corriente al array
                 nom_cuenta:'',
-                saldo:'',              
+                saldo:'', 
+                edit:false,             
               },
           a_nocorriente:
             { //Agregar un nuevo activo no corriente al array
                 nom_cuenta:'',
                 saldo:'',
+                edit:false,
               },
         },
         bi:{
@@ -91,12 +109,14 @@ const b_hori = new Vue({
             { //Agregar un nuevo pasivo corriente al array
                 nom_cuenta:'',
                 saldo:'',
+                edit:false,
                 total:''
               },
           p_nocorriente:
             { //Agregar un nuevo pasivo no corriente al array
                 nom_cuenta:'',
                 saldo:'',
+                edit:false,
                 total:''
               }
         },
@@ -135,25 +155,521 @@ const b_hori = new Vue({
     }
      
     },
-    abrirActivoC(){
+        abrirActivoC(){
       this.limpiar();
-      $('#a_corriente').modal('show')
+      $('#bih-transaccion').modal('show');
+      $('#nav-bih-activo-corriente-tab').tab('show')
+      // $('#kardex-promedio-ingreso-edit-tab').tab('show')
+
     },
       abrirActivoNoC(){
         this.limpiar();
-      $('#a_nocorriente').modal('show')
+      $('#bih-transaccion').modal('show');
+      
+      $('#nav-bih-activo-no-corriente-tab').tab('show')
+
     },
       abrirPasivoC(){
         this.limpiar();
-      $('#p_corriente').modal('show')
+      $('#bih-transaccion').modal('show');
+      
+      $('#nav-bih-pasivo-corriente-tab').tab('show')
+
     },
       abrirPasivoNoC(){
         this.limpiar();
-      $('#p_nocorriente').modal('show')
+      $('#bih-transaccion').modal('show');
+      
+      $('#nav-bih-pasivo-no-corriente-tab').tab('show')
+
     },
       abrirPatrimonio(){
         this.limpiar();
-      $('#patrimonio').modal('show')
+      $('#bih-transaccion').modal('show');
+     
+      $('#nav-bih-patrimonio-tab').tab('show')
+
+    },
+    
+//ELIMINAR ELEMENTOS DE UN ARRAY /////////
+    deleteAcCooriente(index){
+     let nombre = this.a_corrientes[index].nom_cuenta;
+      Swal.fire({
+        title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+nombre,
+            'success'
+          );
+          this.a_corrientes.splice(index, 1);   
+          this.cambioActivo();                  
+          this.TotalActivo();    
+        }
+      });
+    },
+                   
+  
+     deletePaCooriente(index){
+      let nombre = this.p_corrientes[index].nom_cuenta;
+      Swal.fire({
+        title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+nombre,
+            'success'
+          );
+       
+      this.p_corrientes.splice(index, 1);
+      this.cambioPasivo();
+      this.TotalPasivo(); 
+        }
+      });
+
+    },
+     deleteAcNoCooriente(index){
+      let nombre = this.a_nocorrientes[index].nom_cuenta;
+      Swal.fire({
+        title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+nombre,
+            'success'
+          );
+      this.a_nocorrientes.splice(index, 1);
+      this.cambioActivoNo();
+      this.TotalActivo();
+        }
+      });
+
+    },
+     deletePaNoCooriente(index){
+      let nombre = this.p_nocorrientes[index].nom_cuenta;
+      Swal.fire({
+        title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+nombre,
+            'success'
+          );
+      this.p_nocorrientes.splice(index, 1);
+      this.cambioPasivoNo();
+      this.TotalPasivo();
+        }
+      });
+ 
+    },
+     deletePatrimonio(index){
+      let nombre = this.patrimonios[index].nom_cuenta;
+      Swal.fire({
+        title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+nombre,
+            'success'
+          );
+      this.patrimonios.splice(index, 1);
+      this.cambioPatrimonio();
+        }
+      });
+    
+    },
+    limpiar(){ //LIMPIAR TODOS LOS CAMPOS DE ACTIVOS PASIVOS Y PATRIMONIOS
+      this.pasivo.p_corriente.nom_cuenta = '';
+      this.pasivo.p_corriente.saldo = '';
+      this.pasivo.p_nocorriente.nom_cuenta = '';
+      this.pasivo.p_nocorriente.saldo = '';
+      this.activo.a_corriente.nom_cuenta = '';
+      this.activo.a_corriente.saldo = '';
+      this.activo.a_nocorriente.nom_cuenta = '';
+      this.activo.a_nocorriente.saldo = '';
+      this.bi.const_id = '';
+
+      },
+      agregarActivoCorriente(){
+           if(this.activo.a_corriente.cuenta_id  ==''){
+            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+        }else {
+             let id = this.activo.a_corriente.cuenta_id;
+               let verificar = this.verificarCuenta(id);
+                   if (verificar == true) {
+                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                      "timeOut": "3000"
+                      });
+                   }else{
+            let nombre   = funciones.obtenerNombre(id);
+            var a_corriente ={cuenta_id:this.activo.a_corriente.cuenta_id, nom_cuenta:nombre, saldo:this.activo.a_corriente.saldo}
+            this.a_corrientes.push(a_corriente);
+            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+           this.activo.a_corriente.cuenta_id =''
+           this.activo.a_corriente.saldo     =''
+           this.cambioActivo(); 
+         }
+           }                
+      }, 
+
+    //EDITAR ELEMENTOS DE UN ARRAY
+      editAcorriente(index){
+       this.activo.a_corriente.edit      = true;
+       this.registro.a_corriente    = index;
+       this.bi.const_id                  = this.a_corrientes[index].cuenta_id;
+       this.activo.a_corriente.cuenta_id = this.a_corrientes[index].cuenta_id;
+       this.activo.a_corriente.saldo     = this.a_corrientes[index].saldo;
+        $('#bih-transaccion').modal('show');
+        $('#nav-bih-activo-corriente-tab').tab('show')
+              
+      },
+      actualizarActivoC(){
+          if(this.activo.a_corriente.cuenta_id ==''){
+          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else {
+          let id = this.activo.a_corriente.cuenta_id;
+         let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+            let nombre                         = funciones.obtenerNombre(id);
+            let index                          = this.registro.a_corriente;
+            this.a_corrientes[index].cuenta_id = this.activo.a_corriente.cuenta_id;
+            this.a_corrientes[index].nom_cuenta    = nombre;
+            this.a_corrientes[index].saldo     = this.activo.a_corriente.saldo;
+            this.activo.a_corriente.cuenta_id  =''
+            this.activo.a_corriente.saldo      =''
+            this.activo.a_corriente.edit       = false;
+            this.registro.a_corriente          = '';
+          this.cambioActivo();
+          }
+      }
+    },
+    cancelarEdicionActivoC(){
+      this.activo.a_corriente.cuenta_id =''
+      this.activo.a_corriente.saldo      =''
+      this.activo.a_corriente.edit      = false;
+    },
+    agregarActivoNoCorriente(){
+         if(this.activo.a_nocorriente.cuenta_id  ==''){
+            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+        }else {
+             let id = this.activo.a_nocorriente.cuenta_id;
+               let verificar = this.verificarCuenta(id);
+                   if (verificar == true) {
+                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                      "timeOut": "3000"
+                      });
+                   }else{
+            let nombre   = funciones.obtenerNombre(id);
+            var a_nocorriente ={cuenta_id:this.activo.a_nocorriente.cuenta_id, nom_cuenta:nombre, saldo:this.activo.a_nocorriente.saldo}
+            this.a_nocorrientes.push(a_nocorriente);
+            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+           this.activo.a_nocorriente.cuenta_id =''
+           this.activo.a_nocorriente.saldo     =''
+           this.cambioActivoNo(); 
+         }
+           }                      
+      }, 
+
+    //EDITAR ELEMENTOS DE UN ARRAY
+      editNoAcorriente(index){
+       this.activo.a_nocorriente.edit       = true;
+       this.registro.a_nocorriente          = index;
+       this.bi.const_id                     = this.a_nocorrientes[index].cuenta_id;
+       this.activo.a_nocorriente.cuenta_id  = this.a_nocorrientes[index].cuenta_id;
+       this.activo.a_nocorriente.saldo      = this.a_nocorrientes[index].saldo;
+        $('#bih-transaccion').modal('show');
+        $('#nav-bih-activo-no-corriente-tab').tab('show');           
+      },
+      actualizarActivoNC(){
+        if(this.activo.a_nocorriente.cuenta_id ==''){
+          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else {
+          let id = this.activo.a_nocorriente.cuenta_id;
+         let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+            let nombre                         = funciones.obtenerNombre(id);
+            let index                          = this.registro.a_nocorriente;
+            this.a_nocorrientes[index].cuenta_id = this.activo.a_nocorriente.cuenta_id;
+            this.a_nocorrientes[index].nom_cuenta    = nombre;
+            this.a_nocorrientes[index].saldo     = this.activo.a_nocorriente.saldo;
+            this.activo.a_nocorriente.cuenta_id  =''
+            this.activo.a_nocorriente.saldo      =''
+            this.activo.a_nocorriente.edit       = false;
+            this.registro.a_nocorriente          = '';
+          this.cambioActivoNo();
+          }
+      }
+    },
+    cancelarEdicionActivoNC(){
+      this.activo.a_nocorriente.cuenta_id  =''
+      this.activo.a_nocorriente.saldo      =''
+      this.activo.a_nocorriente.edit       = false;
+    },
+
+    agregarPasivoCorriente(){
+           if(this.pasivo.p_corriente.cuenta_id  ==''){
+            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+        }else {
+             let id = this.pasivo.p_corriente.cuenta_id;
+               let verificar = this.verificarCuenta(id);
+                   if (verificar == true) {
+                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                      "timeOut": "3000"
+                      });
+                   }else{
+            let nombre   = funciones.obtenerNombre(id);
+            var p_corriente ={cuenta_id:this.pasivo.p_corriente.cuenta_id, nom_cuenta:nombre, saldo:this.pasivo.p_corriente.saldo}
+            this.p_corrientes.push(p_corriente);
+            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+           this.pasivo.p_corriente.cuenta_id ='';
+           this.pasivo.p_corriente.saldo     ='';
+           this.cambioPasivo();
+               
+           
+         }
+           }                
+      }, 
+
+    //EDITAR ELEMENTOS DE UN ARRAY
+      editPcorriente(index){
+       this.pasivo.p_corriente.edit      = true;
+       this.registro.p_corriente    = index;
+       this.bi.const_id                  = this.p_corrientes[index].cuenta_id;
+       this.pasivo.p_corriente.cuenta_id = this.p_corrientes[index].cuenta_id;
+       this.pasivo.p_corriente.saldo     = this.p_corrientes[index].saldo;
+        $('#bih-transaccion').modal('show');
+        $('#nav-bih-pasivo-corriente-tab').tab('show')
+              
+      },
+      actualizarPasivoC(){
+          if(this.pasivo.p_corriente.cuenta_id ==''){
+          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else {
+          let id = this.pasivo.p_corriente.cuenta_id;
+         let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+            let nombre                         = funciones.obtenerNombre(id);
+            let index                          = this.registro.p_corriente;
+            this.p_corrientes[index].cuenta_id = this.pasivo.p_corriente.cuenta_id;
+            this.p_corrientes[index].nom_cuenta    = nombre;
+            this.p_corrientes[index].saldo     = this.pasivo.p_corriente.saldo;
+            this.pasivo.p_corriente.cuenta_id  =''
+            this.pasivo.p_corriente.saldo      =''
+            this.pasivo.p_corriente.edit       = false;
+            this.registro.p_corriente          = '';
+          this.cambioPasivoNo();
+          }
+      }
+    },
+    cancelarEdicionPcorriente(){
+      this.pasivo.p_corriente.cuenta_id =''
+      this.pasivo.p_corriente.saldo      =''
+      this.pasivo.p_corriente.edit      = false;
+    },
+
+    agregarPasivoNoCorriente(){
+           if(this.pasivo.p_nocorriente.cuenta_id  ==''){
+            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+        }else {
+             let id = this.pasivo.p_nocorriente.cuenta_id;
+               let verificar = this.verificarCuenta(id);
+                   if (verificar == true) {
+                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                      "timeOut": "3000"
+                      });
+                   }else{
+            let nombre   = funciones.obtenerNombre(id);
+            var p_nocorriente ={cuenta_id:this.pasivo.p_nocorriente.cuenta_id, nom_cuenta:nombre, saldo:this.pasivo.p_nocorriente.saldo}
+            this.p_nocorrientes.push(p_nocorriente);
+            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+           this.pasivo.p_nocorriente.cuenta_id ='';
+           this.pasivo.p_nocorriente.saldo     ='';
+           this.cambioPasivoNo();
+               
+           
+         }
+           }                
+      }, 
+
+    //EDITAR ELEMENTOS DE UN ARRAY
+      editPNocorriente(index){
+       this.pasivo.p_nocorriente.edit      = true;
+       this.registro.p_nocorriente    = index;
+       this.bi.const_id                  = this.p_nocorrientes[index].cuenta_id;
+       this.pasivo.p_nocorriente.cuenta_id = this.p_nocorrientes[index].cuenta_id;
+       this.pasivo.p_nocorriente.saldo     = this.p_nocorrientes[index].saldo;
+        $('#bih-transaccion').modal('show');
+        $('#nav-bih-pasivo-no-corriente-tab').tab('show')
+              
+      },
+      actualizarPasivoNC(){
+          if(this.pasivo.p_nocorriente.cuenta_id ==''){
+          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else {
+          let id = this.pasivo.p_nocorriente.cuenta_id;
+         let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+            let nombre                         = funciones.obtenerNombre(id);
+            let index                          = this.registro.p_nocorriente;
+            this.p_nocorrientes[index].cuenta_id = this.pasivo.p_nocorriente.cuenta_id;
+            this.p_nocorrientes[index].nom_cuenta    = nombre;
+            this.p_nocorrientes[index].saldo     = this.pasivo.p_nocorriente.saldo;
+            this.pasivo.p_nocorriente.cuenta_id  =''
+            this.pasivo.p_nocorriente.saldo      =''
+            this.pasivo.p_nocorriente.edit       = false;
+            this.registro.p_nocorriente          = '';
+          this.cambioPasivoNo();
+          }
+      }
+    },
+    cancelarEdicionPNocorriente(){
+      this.pasivo.p_nocorriente.cuenta_id =''
+      this.pasivo.p_nocorriente.saldo      =''
+      this.pasivo.p_nocorriente.edit      = false;
+    },
+        agregarPatrimonio(){
+           if(this.patrimonio.cuenta_id  ==''){
+            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+        }else {
+             let id = this.patrimonio.cuenta_id;
+               let verificar = this.verificarCuenta(id);
+                   if (verificar == true) {
+                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                      "timeOut": "3000"
+                      });
+                   }else{
+            let nombre   = funciones.obtenerNombre(id);
+            var patrimonio ={cuenta_id:this.patrimonio.cuenta_id, nom_cuenta:nombre, saldo:this.patrimonio.saldo}
+            this.patrimonios.push(patrimonio);
+            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+           this.patrimonio.cuenta_id ='';
+           this.patrimonio.saldo     ='';
+           this.cambioPatrimonio();       
+           
+         }
+           }                
+      }, 
+
+    //EDITAR ELEMENTOS DE UN ARRAY
+      editPatrimonio(index){
+       this.patrimonio.edit      = true;
+       this.registro.patrimonio    = index;
+       this.bi.const_id                  = this.patrimonios[index].cuenta_id;
+       this.patrimonio.cuenta_id = this.patrimonios[index].cuenta_id;
+       this.patrimonio.saldo     = this.patrimonios[index].saldo;
+        $('#bih-transaccion').modal('show');
+        $('#nav-bih-patrimonio-tab').tab('show')
+              
+      },
+      actualizarPatrimonio(){
+          if(this.patrimonio.cuenta_id ==''){
+          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else {
+          let id = this.patrimonio.cuenta_id;
+         let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+            let nombre                         = funciones.obtenerNombre(id);
+            let index                          = this.registro.patrimonio;
+            this.patrimonios[index].cuenta_id = this.patrimonio.cuenta_id;
+            this.patrimonios[index].nom_cuenta    = nombre;
+            this.patrimonios[index].saldo     = this.patrimonio.saldo;
+            this.patrimonio.cuenta_id  =''
+            this.patrimonio.saldo      =''
+            this.patrimonio.edit       = false;
+            this.registro.patrimonio          = '';
+          this.cambioPatrimonio()
+        }
+      }
+    },
+    cancelarEdicionPatrimonio(){
+      this.patrimonio.cuenta_id =''
+      this.patrimonio.saldo      =''
+      this.patrimonio.edit      = false;
     },
     Agregar(){
     if(this.diario.nom_cuenta.trim() === ''){
@@ -228,34 +744,34 @@ const b_hori = new Vue({
       this.balance.saldo_haber =''
     }
     },
-      deleteBalance(index){
-      this.balances.splice(index, 1);
-    },
-//ELIMINAR ELEMENTOS DE UN ARRAY /////////
-    deleteAcCooriente(index){
-      this.a_corrientes.splice(index, 1);   //ELIMINAR UN ELEMENTO DEL ARRAY COMENZANDO DESDE SU INDEX
-      this.cambioActivo();                  //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
-      this.TotalActivo();                   //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
-    },
-     deletePaCooriente(index){
-      this.p_corrientes.splice(index, 1);
-      this.cambioPasivo();
-      this.TotalPasivo();
-    },
-     deleteAcNoCooriente(index){
-      this.a_nocorrientes.splice(index, 1);
-      this.cambioActivoNo();
-      this.TotalActivo();
-    },
-     deletePaNoCooriente(index){
-      this.p_nocorrientes.splice(index, 1);
-      this.cambioPasivoNo();
-      this.TotalPasivo();
-    },
-     deletePatrimonio(index){
-      this.patrimonios.splice(index, 1);
-      this.cambioPatrimonio();
-    },
+//       deleteBalance(index){
+//       this.balances.splice(index, 1);
+//     },
+// //ELIMINAR ELEMENTOS DE UN ARRAY /////////
+//     deleteAcCooriente(index){
+//       this.a_corrientes.splice(index, 1);   //ELIMINAR UN ELEMENTO DEL ARRAY COMENZANDO DESDE SU INDEX
+//       this.cambioActivo();                  //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
+//       this.TotalActivo();                   //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
+//     },
+//      deletePaCooriente(index){
+//       this.p_corrientes.splice(index, 1);
+//       this.cambioPasivo();
+//       this.TotalPasivo();
+//     },
+//      deleteAcNoCooriente(index){
+//       this.a_nocorrientes.splice(index, 1);
+//       this.cambioActivoNo();
+//       this.TotalActivo();
+//     },
+//      deletePaNoCooriente(index){
+//       this.p_nocorrientes.splice(index, 1);
+//       this.cambioPasivoNo();
+//       this.TotalPasivo();
+//     },
+//      deletePatrimonio(index){
+//       this.patrimonios.splice(index, 1);
+//       this.cambioPatrimonio();
+//     },
     limpiar(){ //LIMPIAR TODOS LOS CAMPOS DE ACTIVOS PASIVOS Y PATRIMONIOS
       this.pasivo.p_corriente.nom_cuenta = '';
       this.pasivo.p_corriente.saldo = '';
@@ -268,145 +784,145 @@ const b_hori = new Vue({
       this.bi.const_id = '';
       },
     //EDITAR ELEMENTOS DE UN ARRAY
-    editAcorriente(index){ //OBTENEMOS EL INDICE DEL ARRAY SELECCIONADO
-      this.update = index;                                                       //IGUALAMOS LA VARIABLE UPDATE CON EL INDICE DEL ARRAY
-      this.activo.a_corriente.saldo = this.a_corrientes[index].saldo;           //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
-      this.activo.a_corriente.nom_cuenta = this.a_corrientes[index].cuenta_id;
-      this.bi.const_id = this.a_corrientes[index].cuenta_id;
+  //   editAcorriente(index){ //OBTENEMOS EL INDICE DEL ARRAY SELECCIONADO
+  //     this.update = index;                                                       //IGUALAMOS LA VARIABLE UPDATE CON EL INDICE DEL ARRAY
+  //     this.activo.a_corriente.saldo = this.a_corrientes[index].saldo;           //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
+  //     this.activo.a_corriente.nom_cuenta = this.a_corrientes[index].cuenta_id;
+  //     this.bi.const_id = this.a_corrientes[index].cuenta_id;
 
-       //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
-      $('#a_corriente_e').modal('show');                                        //MOSTRAR EL MODAL CON JS
-      //var activo = this.a_corrientes[index];
-    },
-    updateACorriente(){
-      let id = this.activo.a_corriente.nom_cuenta;
-           let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-      let nombre = funciones.obtenerNombre(id);
-      var i = this.update;                                                    //I SERA EL INDICE QUE SE ASIGNO EN EL METODO EDITAR
-      this.a_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-      this.a_corrientes[i].nom_cuenta = nombre;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-      this.a_corrientes[i].saldo = this.activo.a_corriente.saldo;             //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-      $('#a_corriente_e').modal('hide');                                      //OCULTAR EL MODAL
-      this.limpiar();
-      this.cambioActivo();
-  }
-    },
-    editANocorriente(index){
-      this.update = index;
-      this.activo.a_nocorriente.saldo = this.a_nocorrientes[index].saldo;
-      this.activo.a_nocorriente.nom_cuenta = this.a_nocorrientes[index].cuenta_id;
-      this.bi.const_id = this.a_nocorrientes[index].cuenta_id;
+  //      //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
+  //     $('#a_corriente_e').modal('show');                                        //MOSTRAR EL MODAL CON JS
+  //     //var activo = this.a_corrientes[index];
+  //   },
+  //   updateACorriente(){
+  //     let id = this.activo.a_corriente.nom_cuenta;
+  //          let verificar = this.verificarCuenta(id);
+  //            if (verificar == true) {
+  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+  //               "timeOut": "3000"
+  //               });
+  //            }else{
+  //     let nombre = funciones.obtenerNombre(id);
+  //     var i = this.update;                                                    //I SERA EL INDICE QUE SE ASIGNO EN EL METODO EDITAR
+  //     this.a_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+  //     this.a_corrientes[i].nom_cuenta = nombre;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+  //     this.a_corrientes[i].saldo = this.activo.a_corriente.saldo;             //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+  //     $('#a_corriente_e').modal('hide');                                      //OCULTAR EL MODAL
+  //     this.limpiar();
+  //     this.cambioActivo();
+  // }
+  //   },
+  //   editANocorriente(index){
+  //     this.update = index;
+  //     this.activo.a_nocorriente.saldo = this.a_nocorrientes[index].saldo;
+  //     this.activo.a_nocorriente.nom_cuenta = this.a_nocorrientes[index].cuenta_id;
+  //     this.bi.const_id = this.a_nocorrientes[index].cuenta_id;
 
-      $('#a_nocorriente_e').modal('show');
-      //var activo = this.a_nocorrientes[index];
-    },
-    updateANoCorriente(){
-      let id = this.activo.a_nocorriente.nom_cuenta;
-           let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-      let nombre = funciones.obtenerNombre(id);
-      var i = this.update;
-      this.a_nocorrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-      this.a_nocorrientes[i].nom_cuenta = nombre;
-      this.a_nocorrientes[i].saldo = this.activo.a_nocorriente.saldo;
-      $('#a_nocorriente_e').modal('hide');
-      this.limpiar();
-      this.cambioActivoNo();
-      this.TotalActivo();
-    }
-    },
-    editPcorriente(index){
-      this.update = index ;
-      this.pasivo.p_corriente.saldo = this.p_corrientes[index].saldo;
-      this.pasivo.p_corriente.nom_cuenta = this.p_corrientes[index].cuenta_id;
-      this.bi.const_id = this.p_corrientes[index].cuenta_id;
+  //     $('#a_nocorriente_e').modal('show');
+  //     //var activo = this.a_nocorrientes[index];
+  //   },
+  //   updateANoCorriente(){
+  //     let id = this.activo.a_nocorriente.nom_cuenta;
+  //          let verificar = this.verificarCuenta(id);
+  //            if (verificar == true) {
+  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+  //               "timeOut": "3000"
+  //               });
+  //            }else{
+  //     let nombre = funciones.obtenerNombre(id);
+  //     var i = this.update;
+  //     this.a_nocorrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+  //     this.a_nocorrientes[i].nom_cuenta = nombre;
+  //     this.a_nocorrientes[i].saldo = this.activo.a_nocorriente.saldo;
+  //     $('#a_nocorriente_e').modal('hide');
+  //     this.limpiar();
+  //     this.cambioActivoNo();
+  //     this.TotalActivo();
+  //   }
+  //   },
+  //   editPcorriente(index){
+  //     this.update = index ;
+  //     this.pasivo.p_corriente.saldo = this.p_corrientes[index].saldo;
+  //     this.pasivo.p_corriente.nom_cuenta = this.p_corrientes[index].cuenta_id;
+  //     this.bi.const_id = this.p_corrientes[index].cuenta_id;
 
-      $('#p_corriente_e').modal('show');
-      //var activo = this.a_corrientes[index];
-    },
-    updatePCorriente(){
-      let id = this.pasivo.p_corriente.nom_cuenta;
-           let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-      let nombre = funciones.obtenerNombre(id);
-      var i = this.update;
-      this.p_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-      this.p_corrientes[i].nom_cuenta = nombre;
-      this.p_corrientes[i].saldo = this.pasivo.p_corriente.saldo;
-      $('#p_corriente_e').modal('hide');
-      this.limpiar();
-      this.cambioPasivo();
-      this.TotalPasivo();
-    }
-    },
-    editPNocorriente(index){
-      this.update = index ;
-      this.pasivo.p_nocorriente.saldo = this.p_nocorrientes[index].saldo;
-      this.pasivo.p_nocorriente.nom_cuenta = this.p_nocorrientes[index].cuenta_id;
-      this.bi.const_id = this.p_nocorrientes[index].cuenta_id;
+  //     $('#p_corriente_e').modal('show');
+  //     //var activo = this.a_corrientes[index];
+  //   },
+  //   updatePCorriente(){
+  //     let id = this.pasivo.p_corriente.nom_cuenta;
+  //          let verificar = this.verificarCuenta(id);
+  //            if (verificar == true) {
+  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+  //               "timeOut": "3000"
+  //               });
+  //            }else{
+  //     let nombre = funciones.obtenerNombre(id);
+  //     var i = this.update;
+  //     this.p_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+  //     this.p_corrientes[i].nom_cuenta = nombre;
+  //     this.p_corrientes[i].saldo = this.pasivo.p_corriente.saldo;
+  //     $('#p_corriente_e').modal('hide');
+  //     this.limpiar();
+  //     this.cambioPasivo();
+  //     this.TotalPasivo();
+  //   }
+  //   },
+  //   editPNocorriente(index){
+  //     this.update = index ;
+  //     this.pasivo.p_nocorriente.saldo = this.p_nocorrientes[index].saldo;
+  //     this.pasivo.p_nocorriente.nom_cuenta = this.p_nocorrientes[index].cuenta_id;
+  //     this.bi.const_id = this.p_nocorrientes[index].cuenta_id;
 
-      $('#p_nocorriente_e').modal('show');
-      //var activo = this.a_corrientes[index];
-    },
-    updatePNoCorriente(){
-      let id = this.pasivo.p_nocorriente.nom_cuenta;
-           let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-      let nombre = funciones.obtenerNombre(id);
-      var i = this.update;
-      this.p_nocorrientes[i].cuenta_id = id;
-      this.p_nocorrientes[i].nom_cuenta = nombre;
-      this.p_nocorrientes[i].saldo = this.pasivo.p_nocorriente.saldo;
-      $('#p_nocorriente_e').modal('hide');
-      this.limpiar();
-      this.cambioPasivoNo();
-      this.TotalPasivo();
-    }
-    },
-    editPatrimonio(index){
-      this.update = index ;
-      this.patrimonio.saldo = this.patrimonios[index].saldo;
-      this.patrimonio.nom_cuenta = this.patrimonios[index].cuenta_id;
-      this.bi.const_id = this.patrimonios[index].cuenta_id;
+  //     $('#p_nocorriente_e').modal('show');
+  //     //var activo = this.a_corrientes[index];
+  //   },
+  //   updatePNoCorriente(){
+  //     let id = this.pasivo.p_nocorriente.nom_cuenta;
+  //          let verificar = this.verificarCuenta(id);
+  //            if (verificar == true) {
+  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+  //               "timeOut": "3000"
+  //               });
+  //            }else{
+  //     let nombre = funciones.obtenerNombre(id);
+  //     var i = this.update;
+  //     this.p_nocorrientes[i].cuenta_id = id;
+  //     this.p_nocorrientes[i].nom_cuenta = nombre;
+  //     this.p_nocorrientes[i].saldo = this.pasivo.p_nocorriente.saldo;
+  //     $('#p_nocorriente_e').modal('hide');
+  //     this.limpiar();
+  //     this.cambioPasivoNo();
+  //     this.TotalPasivo();
+  //   }
+  //   },
+  //   editPatrimonio(index){
+  //     this.update = index ;
+  //     this.patrimonio.saldo = this.patrimonios[index].saldo;
+  //     this.patrimonio.nom_cuenta = this.patrimonios[index].cuenta_id;
+  //     this.bi.const_id = this.patrimonios[index].cuenta_id;
 
-      $('#patrimonio_e').modal('show');
-      //var activo = this.a_corrientes[index];
-    },
-    updatePatrimonio(){
-       let id = this.patrimonio.nom_cuenta;
-            let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-      let nombre = funciones.obtenerNombre(id);
-      var i = this.update;
-      this.patrimonios[i].cuenta_id = id;
-      this.patrimonios[i].nom_cuenta = nombre;
-      this.patrimonios[i].saldo = this.patrimonio.saldo;
-      $('#patrimonio_e').modal('hide');
-      this.limpiar();
-      this.cambioPatrimonio();
-    }
-    },      
+  //     $('#patrimonio_e').modal('show');
+  //     //var activo = this.a_corrientes[index];
+  //   },
+  //   updatePatrimonio(){
+  //      let id = this.patrimonio.nom_cuenta;
+  //           let verificar = this.verificarCuenta(id);
+  //            if (verificar == true) {
+  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+  //               "timeOut": "3000"
+  //               });
+  //            }else{
+  //     let nombre = funciones.obtenerNombre(id);
+  //     var i = this.update;
+  //     this.patrimonios[i].cuenta_id = id;
+  //     this.patrimonios[i].nom_cuenta = nombre;
+  //     this.patrimonios[i].saldo = this.patrimonio.saldo;
+  //     $('#patrimonio_e').modal('hide');
+  //     this.limpiar();
+  //     this.cambioPatrimonio();
+  //   }
+  //   },      
          // ejemplo(){
          //        let me =this;
          //        var formdata = new FormData();
@@ -447,143 +963,143 @@ const b_hori = new Vue({
               return false
              }
           },
-            agregarActivoCorriente(){
+            // agregarActivoCorriente(){
               
-               if(this.activo.a_corriente.nom_cuenta == '' || this.activo.a_corriente.saldo === ''){
-                toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-                "timeOut": "3000"
-                });
+            //    if(this.activo.a_corriente.nom_cuenta == '' || this.activo.a_corriente.saldo === ''){
+            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
                
-             }else{
-            let id = this.activo.a_corriente.nom_cuenta;
-            let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-              let nombre = funciones.obtenerNombre(id);
-                var a_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_corriente.saldo};
-                this.a_corrientes.push(a_corr);                               //añadimos el la variable persona al array
-                  toastr.success("Registro agregado correctamente", "Smarmoddle", {
-                    "timeOut": "3000"
-                });
-                //Limpiamos los campos
-                this.activo.a_corriente.nom_cuenta = '';
-                this.activo.a_corriente.saldo = '';
-                //SUMAR TOTALES
+            //  }else{
+            // let id = this.activo.a_corriente.nom_cuenta;
+            // let verificar = this.verificarCuenta(id);
+            //  if (verificar == true) {
+            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //  }else{
+            //   let nombre = funciones.obtenerNombre(id);
+            //     var a_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_corriente.saldo};
+            //     this.a_corrientes.push(a_corr);                               //añadimos el la variable persona al array
+            //       toastr.success("Registro agregado correctamente", "Smarmoddle", {
+            //         "timeOut": "3000"
+            //     });
+            //     //Limpiamos los campos
+            //     this.activo.a_corriente.nom_cuenta = '';
+            //     this.activo.a_corriente.saldo = '';
+            //     //SUMAR TOTALES
                 
-                this.cambioActivo();  
-              }
-              }
-            },
-             agregarActivoNoCorriente(){
+            //     this.cambioActivo();  
+            //   }
+            //   }
+            // },
+            //  agregarActivoNoCorriente(){
 
-                if(this.activo.a_nocorriente.nom_cuenta == '' || this.activo.a_nocorriente.saldo === ''){
-                toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-            let id = this.activo.a_nocorriente.nom_cuenta;
-            let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-              let nombre = funciones.obtenerNombre(id);
-                  var a_nocorr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_nocorriente.saldo};//CREANDO EL OBJETO QUE SE AGREGARA AL ARRAY
-                this.a_nocorrientes.push(a_nocorr);//AGREGAR UNA NUEVA CUENTA AL ARRAY DE PASIVOS
-                  //Limpiamos los campos
-                  toastr.success("Registro agregado correctamente", "Smarmoddle", {
-                    "timeOut": "3000"
-                });
-                this.activo.a_nocorriente.nom_cuenta = '';
-                this.activo.a_nocorriente.saldo = '';
-                this.cambioActivoNo();          
-              }
-               }
-             },
-               agregarPasivoCorriente(){
-                if(this.pasivo.p_corriente.nom_cuenta == '' || this.pasivo.p_corriente.saldo === ''){
-                toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-              }else{
-                let id = this.pasivo.p_corriente.nom_cuenta;
-                     let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-                let nombre = funciones.obtenerNombre(id);
+            //     if(this.activo.a_nocorriente.nom_cuenta == '' || this.activo.a_nocorriente.saldo === ''){
+            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //  }else{
+            // let id = this.activo.a_nocorriente.nom_cuenta;
+            // let verificar = this.verificarCuenta(id);
+            //  if (verificar == true) {
+            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //  }else{
+            //   let nombre = funciones.obtenerNombre(id);
+            //       var a_nocorr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_nocorriente.saldo};//CREANDO EL OBJETO QUE SE AGREGARA AL ARRAY
+            //     this.a_nocorrientes.push(a_nocorr);//AGREGAR UNA NUEVA CUENTA AL ARRAY DE PASIVOS
+            //       //Limpiamos los campos
+            //       toastr.success("Registro agregado correctamente", "Smarmoddle", {
+            //         "timeOut": "3000"
+            //     });
+            //     this.activo.a_nocorriente.nom_cuenta = '';
+            //     this.activo.a_nocorriente.saldo = '';
+            //     this.cambioActivoNo();          
+            //   }
+            //    }
+            //  },
+            //    agregarPasivoCorriente(){
+            //     if(this.pasivo.p_corriente.nom_cuenta == '' || this.pasivo.p_corriente.saldo === ''){
+            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //   }else{
+            //     let id = this.pasivo.p_corriente.nom_cuenta;
+            //          let verificar = this.verificarCuenta(id);
+            //  if (verificar == true) {
+            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //  }else{
+            //     let nombre = funciones.obtenerNombre(id);
 
-                var p_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.pasivo.p_corriente.saldo};
-                this.p_corrientes.push(p_corr);//añadimos el la variable persona al array
-                  //Limpiamos los campos
-                  toastr.success("Registro agregado correctamente", "Smarmoddle", {
-                    "timeOut": "3000"
-                });
-                this.pasivo.p_corriente.nom_cuenta = '';
-                this.pasivo.p_corriente.saldo = '';
-                this.cambioPasivo();          
-              }
-            }
-            },
-             agregarPasivoNoCorriente(){
-                if(this.pasivo.p_nocorriente.nom_cuenta == '' || this.pasivo.p_nocorriente.saldo === ''){
-                toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-                let id = this.pasivo.p_nocorriente.nom_cuenta;
-                     let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-                let nombre = funciones.obtenerNombre(id);
-                let p_nocorr = {cuenta_id: id, nom_cuenta: nombre, saldo:this.pasivo.p_nocorriente.saldo};
-                this.p_nocorrientes.push(p_nocorr);//añadimos el la variable persona al array
-                  //Limpiamos los campos
-                toastr.success("Registro agregado correctamente", "Smarmoddle", {
-                    "timeOut": "3000"
-                });
-                this.pasivo.p_nocorriente.nom_cuenta = '';
-                this.pasivo.p_nocorriente.saldo = '';
-                this.cambioPasivoNo();
-                }  
-                } 
-             }, 
-             agregarPatrimonio(){
-                if(this.patrimonio.nom_cuenta == '' || this.patrimonio.saldo === ''){
-                toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-               let id = this.patrimonio.nom_cuenta;
-                    let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-              let nombre = funciones.obtenerNombre(id);
+            //     var p_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.pasivo.p_corriente.saldo};
+            //     this.p_corrientes.push(p_corr);//añadimos el la variable persona al array
+            //       //Limpiamos los campos
+            //       toastr.success("Registro agregado correctamente", "Smarmoddle", {
+            //         "timeOut": "3000"
+            //     });
+            //     this.pasivo.p_corriente.nom_cuenta = '';
+            //     this.pasivo.p_corriente.saldo = '';
+            //     this.cambioPasivo();          
+            //   }
+            // }
+            // },
+            //  agregarPasivoNoCorriente(){
+            //     if(this.pasivo.p_nocorriente.nom_cuenta == '' || this.pasivo.p_nocorriente.saldo === ''){
+            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //  }else{
+            //     let id = this.pasivo.p_nocorriente.nom_cuenta;
+            //          let verificar = this.verificarCuenta(id);
+            //  if (verificar == true) {
+            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //  }else{
+            //     let nombre = funciones.obtenerNombre(id);
+            //     let p_nocorr = {cuenta_id: id, nom_cuenta: nombre, saldo:this.pasivo.p_nocorriente.saldo};
+            //     this.p_nocorrientes.push(p_nocorr);//añadimos el la variable persona al array
+            //       //Limpiamos los campos
+            //     toastr.success("Registro agregado correctamente", "Smarmoddle", {
+            //         "timeOut": "3000"
+            //     });
+            //     this.pasivo.p_nocorriente.nom_cuenta = '';
+            //     this.pasivo.p_nocorriente.saldo = '';
+            //     this.cambioPasivoNo();
+            //     }  
+            //     } 
+            //  }, 
+            //  agregarPatrimonio(){
+            //     if(this.patrimonio.nom_cuenta == '' || this.patrimonio.saldo === ''){
+            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //  }else{
+            //    let id = this.patrimonio.nom_cuenta;
+            //         let verificar = this.verificarCuenta(id);
+            //  if (verificar == true) {
+            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //  }else{
+            //   let nombre = funciones.obtenerNombre(id);
 
-               let patri = {cuenta_id: id, nom_cuenta:nombre, saldo:this.patrimonio.saldo};
-                this.patrimonios.push(patri);//añadimos el la variable persona al array
-                  //Limpiamos los campos
-                toastr.success("Registro agregado correctamente", "Smarmoddle", {
-                    "timeOut": "3000"
-                });
-                this.patrimonio.nom_cuenta = '';
-                this.patrimonio.saldo = '';
-                this.cambioPatrimonio();
-              }
-            }
-             },
+            //    let patri = {cuenta_id: id, nom_cuenta:nombre, saldo:this.patrimonio.saldo};
+            //     this.patrimonios.push(patri);//añadimos el la variable persona al array
+            //       //Limpiamos los campos
+            //     toastr.success("Registro agregado correctamente", "Smarmoddle", {
+            //         "timeOut": "3000"
+            //     });
+            //     this.patrimonio.nom_cuenta = '';
+            //     this.patrimonio.saldo = '';
+            //     this.cambioPatrimonio();
+            //   }
+            // }
+            //  },
             //ACTUALIZAR SUMAS DE PASIVOS, ACTIVOS Y PATRIMONIO
              cambioActivo(){
               this.b_initotal.t_a_corriente = 0;
@@ -817,16 +1333,25 @@ const b_ver = new Vue({
         p_corrientes:[], //Array de pasivos corrientes
         p_nocorrientes:[], //Array de pasivos no corrientes
         patrimonios:[], //Array de patrimonios
+         registro:{
+          activo_corriente:'',
+          activo_nocorriente:'',
+          pasivo_corriente:'',
+          pasivo_nocorriente:'',
+          patrimonio:'',
+        },
         activo:{
           a_corriente:
             { //Agregar un nuevo activo corriente al array
                 nom_cuenta:'',
-                saldo:'',              
+                saldo:'', 
+                edit:false,             
               },
           a_nocorriente:
             { //Agregar un nuevo activo no corriente al array
                 nom_cuenta:'',
                 saldo:'',
+                edit:false,
               },
         },
         pasivo:{
@@ -834,12 +1359,14 @@ const b_ver = new Vue({
             { //Agregar un nuevo pasivo corriente al array
                 nom_cuenta:'',
                 saldo:'',
+                edit:false,
                 total:''
               },
           p_nocorriente:
             { //Agregar un nuevo pasivo no corriente al array
                 nom_cuenta:'',
                 saldo:'',
+                edit:false,
                 total:''
               }
         },
@@ -878,26 +1405,542 @@ const b_ver = new Vue({
     }
      
     },
-        abrirActivoC(){
+            abrirActivoC(){
       this.limpiar();
-      $('#a_corriente2').modal('show')
+      $('#biv-transaccion').modal('show');
+      $('#nav-biv-activo-corriente-tab').tab('show')
+      // $('#kardex-promedio-ingreso-edit-tab').tab('show')
+
     },
       abrirActivoNoC(){
         this.limpiar();
-      $('#a_nocorriente2').modal('show')
+      $('#biv-transaccion').modal('show');
+      
+      $('#nav-biv-activo-no-corriente-tab').tab('show')
+
     },
       abrirPasivoC(){
         this.limpiar();
-      $('#p_corriente2').modal('show')
+      $('#biv-transaccion').modal('show');
+      
+      $('#nav-biv-pasivo-corriente-tab').tab('show')
+
     },
       abrirPasivoNoC(){
         this.limpiar();
-      $('#p_nocorriente2').modal('show')
+      $('#biv-transaccion').modal('show');
+      
+      $('#nav-biv-pasivo-no-corriente-tab').tab('show')
+
     },
       abrirPatrimonio(){
         this.limpiar();
-      $('#patrimonio2').modal('show')
+      $('#biv-transaccion').modal('show');
+     
+      $('#nav-biv-patrimonio-tab').tab('show')
+
     },
+    
+//ELIMINAR ELEMENTOS DE UN ARRAY /////////
+    deleteAcCooriente(index){
+     let nombre = this.a_corrientes[index].nom_cuenta;
+      Swal.fire({
+        title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+nombre,
+            'success'
+          );
+          this.a_corrientes.splice(index, 1);   
+          this.cambioActivo();                  
+          this.TotalActivo();    
+        }
+      });
+    },
+                   
+  
+     deletePaCooriente(index){
+      let nombre = this.p_corrientes[index].nom_cuenta;
+      Swal.fire({
+        title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+nombre,
+            'success'
+          );
+       
+      this.p_corrientes.splice(index, 1);
+      this.cambioPasivo();
+      this.TotalPasivo(); 
+        }
+      });
+
+    },
+     deleteAcNoCooriente(index){
+      let nombre = this.a_nocorrientes[index].nom_cuenta;
+      Swal.fire({
+        title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+nombre,
+            'success'
+          );
+      this.a_nocorrientes.splice(index, 1);
+      this.cambioActivoNo();
+      this.TotalActivo();
+        }
+      });
+
+    },
+     deletePaNoCooriente(index){
+      let nombre = this.p_nocorrientes[index].nom_cuenta;
+      Swal.fire({
+        title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+nombre,
+            'success'
+          );
+      this.p_nocorrientes.splice(index, 1);
+      this.cambioPasivoNo();
+      this.TotalPasivo();
+        }
+      });
+ 
+    },
+     deletePatrimonio(index){
+      let nombre = this.patrimonios[index].nom_cuenta;
+      Swal.fire({
+        title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+nombre,
+            'success'
+          );
+      this.patrimonios.splice(index, 1);
+      this.cambioPatrimonio();
+        }
+      });
+    
+    },
+    limpiar(){ //LIMPIAR TODOS LOS CAMPOS DE ACTIVOS PASIVOS Y PATRIMONIOS
+      this.pasivo.p_corriente.nom_cuenta = '';
+      this.pasivo.p_corriente.saldo = '';
+      this.pasivo.p_nocorriente.nom_cuenta = '';
+      this.pasivo.p_nocorriente.saldo = '';
+      this.activo.a_corriente.nom_cuenta = '';
+      this.activo.a_corriente.saldo = '';
+      this.activo.a_nocorriente.nom_cuenta = '';
+      this.activo.a_nocorriente.saldo = '';
+      this.bi.const_id = '';
+
+      },
+      agregarActivoCorriente(){
+           if(this.activo.a_corriente.cuenta_id  ==''){
+            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+        }else {
+             let id = this.activo.a_corriente.cuenta_id;
+               let verificar = this.verificarCuenta(id);
+                   if (verificar == true) {
+                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                      "timeOut": "3000"
+                      });
+                   }else{
+            let nombre   = funciones.obtenerNombre(id);
+            var a_corriente ={cuenta_id:this.activo.a_corriente.cuenta_id, nom_cuenta:nombre, saldo:this.activo.a_corriente.saldo}
+            this.a_corrientes.push(a_corriente);
+            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+           this.activo.a_corriente.cuenta_id =''
+           this.activo.a_corriente.saldo     =''
+           this.cambioActivo(); 
+         }
+           }                
+      }, 
+
+    //EDITAR ELEMENTOS DE UN ARRAY
+      editAcorriente(index){
+       this.activo.a_corriente.edit      = true;
+       this.registro.a_corriente    = index;
+       this.bi.const_id                  = this.a_corrientes[index].cuenta_id;
+       this.activo.a_corriente.cuenta_id = this.a_corrientes[index].cuenta_id;
+       this.activo.a_corriente.saldo     = this.a_corrientes[index].saldo;
+        $('#biv-transaccion').modal('show');
+        $('#nav-biv-activo-corriente-tab').tab('show')
+              
+      },
+      actualizarActivoC(){
+          if(this.activo.a_corriente.cuenta_id ==''){
+          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else {
+          let id = this.activo.a_corriente.cuenta_id;
+         let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+            let nombre                         = funciones.obtenerNombre(id);
+            let index                          = this.registro.a_corriente;
+            this.a_corrientes[index].cuenta_id = this.activo.a_corriente.cuenta_id;
+            this.a_corrientes[index].nom_cuenta    = nombre;
+            this.a_corrientes[index].saldo     = this.activo.a_corriente.saldo;
+            this.activo.a_corriente.cuenta_id  =''
+            this.activo.a_corriente.saldo      =''
+            this.activo.a_corriente.edit       = false;
+            this.registro.a_corriente          = '';
+          this.cambioActivo();
+          }
+      }
+    },
+    cancelarEdicionActivoC(){
+      this.activo.a_corriente.cuenta_id =''
+      this.activo.a_corriente.saldo      =''
+      this.activo.a_corriente.edit      = false;
+    },
+    agregarActivoNoCorriente(){
+         if(this.activo.a_nocorriente.cuenta_id  ==''){
+            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+        }else {
+             let id = this.activo.a_nocorriente.cuenta_id;
+               let verificar = this.verificarCuenta(id);
+                   if (verificar == true) {
+                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                      "timeOut": "3000"
+                      });
+                   }else{
+            let nombre   = funciones.obtenerNombre(id);
+            var a_nocorriente ={cuenta_id:this.activo.a_nocorriente.cuenta_id, nom_cuenta:nombre, saldo:this.activo.a_nocorriente.saldo}
+            this.a_nocorrientes.push(a_nocorriente);
+            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+           this.activo.a_nocorriente.cuenta_id =''
+           this.activo.a_nocorriente.saldo     =''
+           this.cambioActivoNo(); 
+         }
+           }                      
+      }, 
+
+    //EDITAR ELEMENTOS DE UN ARRAY
+      editNoAcorriente(index){
+       this.activo.a_nocorriente.edit       = true;
+       this.registro.a_nocorriente          = index;
+       this.bi.const_id                     = this.a_nocorrientes[index].cuenta_id;
+       this.activo.a_nocorriente.cuenta_id  = this.a_nocorrientes[index].cuenta_id;
+       this.activo.a_nocorriente.saldo      = this.a_nocorrientes[index].saldo;
+        $('#biv-transaccion').modal('show');
+        $('#nav-biv-activo-no-corriente-tab').tab('show');           
+      },
+      actualizarActivoNC(){
+        if(this.activo.a_nocorriente.cuenta_id ==''){
+          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else {
+          let id = this.activo.a_nocorriente.cuenta_id;
+         let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+            let nombre                         = funciones.obtenerNombre(id);
+            let index                          = this.registro.a_nocorriente;
+            this.a_nocorrientes[index].cuenta_id = this.activo.a_nocorriente.cuenta_id;
+            this.a_nocorrientes[index].nom_cuenta    = nombre;
+            this.a_nocorrientes[index].saldo     = this.activo.a_nocorriente.saldo;
+            this.activo.a_nocorriente.cuenta_id  =''
+            this.activo.a_nocorriente.saldo      =''
+            this.activo.a_nocorriente.edit       = false;
+            this.registro.a_nocorriente          = '';
+          this.cambioActivoNo();
+          }
+      }
+    },
+    cancelarEdicionActivoNC(){
+      this.activo.a_nocorriente.cuenta_id  =''
+      this.activo.a_nocorriente.saldo      =''
+      this.activo.a_nocorriente.edit       = false;
+    },
+
+    agregarPasivoCorriente(){
+           if(this.pasivo.p_corriente.cuenta_id  ==''){
+            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+        }else {
+             let id = this.pasivo.p_corriente.cuenta_id;
+               let verificar = this.verificarCuenta(id);
+                   if (verificar == true) {
+                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                      "timeOut": "3000"
+                      });
+                   }else{
+            let nombre   = funciones.obtenerNombre(id);
+            var p_corriente ={cuenta_id:this.pasivo.p_corriente.cuenta_id, nom_cuenta:nombre, saldo:this.pasivo.p_corriente.saldo}
+            this.p_corrientes.push(p_corriente);
+            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+           this.pasivo.p_corriente.cuenta_id ='';
+           this.pasivo.p_corriente.saldo     ='';
+           this.cambioPasivo();
+               
+           
+         }
+           }                
+      }, 
+
+    //EDITAR ELEMENTOS DE UN ARRAY
+      editPcorriente(index){
+       this.pasivo.p_corriente.edit      = true;
+       this.registro.p_corriente    = index;
+       this.bi.const_id                  = this.p_corrientes[index].cuenta_id;
+       this.pasivo.p_corriente.cuenta_id = this.p_corrientes[index].cuenta_id;
+       this.pasivo.p_corriente.saldo     = this.p_corrientes[index].saldo;
+        $('#biv-transaccion').modal('show');
+        $('#nav-biv-pasivo-corriente-tab').tab('show')
+              
+      },
+      actualizarPasivoC(){
+          if(this.pasivo.p_corriente.cuenta_id ==''){
+          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else {
+          let id = this.pasivo.p_corriente.cuenta_id;
+         let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+            let nombre                         = funciones.obtenerNombre(id);
+            let index                          = this.registro.p_corriente;
+            this.p_corrientes[index].cuenta_id = this.pasivo.p_corriente.cuenta_id;
+            this.p_corrientes[index].nom_cuenta    = nombre;
+            this.p_corrientes[index].saldo     = this.pasivo.p_corriente.saldo;
+            this.pasivo.p_corriente.cuenta_id  =''
+            this.pasivo.p_corriente.saldo      =''
+            this.pasivo.p_corriente.edit       = false;
+            this.registro.p_corriente          = '';
+          this.cambioPasivoNo();
+          }
+      }
+    },
+    cancelarEdicionPcorriente(){
+      this.pasivo.p_corriente.cuenta_id =''
+      this.pasivo.p_corriente.saldo      =''
+      this.pasivo.p_corriente.edit      = false;
+    },
+
+    agregarPasivoNoCorriente(){
+           if(this.pasivo.p_nocorriente.cuenta_id  ==''){
+            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+        }else {
+             let id = this.pasivo.p_nocorriente.cuenta_id;
+               let verificar = this.verificarCuenta(id);
+                   if (verificar == true) {
+                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                      "timeOut": "3000"
+                      });
+                   }else{
+            let nombre   = funciones.obtenerNombre(id);
+            var p_nocorriente ={cuenta_id:this.pasivo.p_nocorriente.cuenta_id, nom_cuenta:nombre, saldo:this.pasivo.p_nocorriente.saldo}
+            this.p_nocorrientes.push(p_nocorriente);
+            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+           this.pasivo.p_nocorriente.cuenta_id ='';
+           this.pasivo.p_nocorriente.saldo     ='';
+           this.cambioPasivoNo();
+               
+           
+         }
+           }                
+      }, 
+
+    //EDITAR ELEMENTOS DE UN ARRAY
+      editPNocorriente(index){
+       this.pasivo.p_nocorriente.edit      = true;
+       this.registro.p_nocorriente    = index;
+       this.bi.const_id                  = this.p_nocorrientes[index].cuenta_id;
+       this.pasivo.p_nocorriente.cuenta_id = this.p_nocorrientes[index].cuenta_id;
+       this.pasivo.p_nocorriente.saldo     = this.p_nocorrientes[index].saldo;
+        $('#biv-transaccion').modal('show');
+        $('#nav-biv-pasivo-no-corriente-tab').tab('show')
+              
+      },
+      actualizarPasivoNC(){
+          if(this.pasivo.p_nocorriente.cuenta_id ==''){
+          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else {
+          let id = this.pasivo.p_nocorriente.cuenta_id;
+         let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+            let nombre                         = funciones.obtenerNombre(id);
+            let index                          = this.registro.p_nocorriente;
+            this.p_nocorrientes[index].cuenta_id = this.pasivo.p_nocorriente.cuenta_id;
+            this.p_nocorrientes[index].nom_cuenta    = nombre;
+            this.p_nocorrientes[index].saldo     = this.pasivo.p_nocorriente.saldo;
+            this.pasivo.p_nocorriente.cuenta_id  =''
+            this.pasivo.p_nocorriente.saldo      =''
+            this.pasivo.p_nocorriente.edit       = false;
+            this.registro.p_nocorriente          = '';
+          this.cambioPasivoNo();
+          }
+      }
+    },
+    cancelarEdicionPNocorriente(){
+      this.pasivo.p_nocorriente.cuenta_id =''
+      this.pasivo.p_nocorriente.saldo      =''
+      this.pasivo.p_nocorriente.edit      = false;
+    },
+        agregarPatrimonio(){
+           if(this.patrimonio.cuenta_id  ==''){
+            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+        }else {
+             let id = this.patrimonio.cuenta_id;
+               let verificar = this.verificarCuenta(id);
+                   if (verificar == true) {
+                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                      "timeOut": "3000"
+                      });
+                   }else{
+            let nombre   = funciones.obtenerNombre(id);
+            var patrimonio ={cuenta_id:this.patrimonio.cuenta_id, nom_cuenta:nombre, saldo:this.patrimonio.saldo}
+            this.patrimonios.push(patrimonio);
+            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+           this.patrimonio.cuenta_id ='';
+           this.patrimonio.saldo     ='';
+           this.cambioPatrimonio();       
+           
+         }
+           }                
+      }, 
+
+    //EDITAR ELEMENTOS DE UN ARRAY
+      editPatrimonio(index){
+       this.patrimonio.edit      = true;
+       this.registro.patrimonio    = index;
+       this.bi.const_id                  = this.patrimonios[index].cuenta_id;
+       this.patrimonio.cuenta_id = this.patrimonios[index].cuenta_id;
+       this.patrimonio.saldo     = this.patrimonios[index].saldo;
+        $('#biv-transaccion').modal('show');
+        $('#nav-biv-patrimonio-tab').tab('show')
+              
+      },
+      actualizarPatrimonio(){
+          if(this.patrimonio.cuenta_id ==''){
+          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        }else {
+          let id = this.patrimonio.cuenta_id;
+         let verificar = this.verificarCuenta(id);
+             if (verificar == true) {
+               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+             }else{
+            let nombre                         = funciones.obtenerNombre(id);
+            let index                          = this.registro.patrimonio;
+            this.patrimonios[index].cuenta_id = this.patrimonio.cuenta_id;
+            this.patrimonios[index].nom_cuenta    = nombre;
+            this.patrimonios[index].saldo     = this.patrimonio.saldo;
+            this.patrimonio.cuenta_id  =''
+            this.patrimonio.saldo      =''
+            this.patrimonio.edit       = false;
+            this.registro.patrimonio          = '';
+          this.cambioPatrimonio()
+        }
+      }
+    },
+    cancelarEdicionPatrimonio(){
+      this.patrimonio.cuenta_id =''
+      this.patrimonio.saldo      =''
+      this.patrimonio.edit      = false;
+    },
+    //     abrirActivoC(){
+    //   this.limpiar();
+    //   $('#a_corriente2').modal('show')
+    // },
+    //   abrirActivoNoC(){
+    //     this.limpiar();
+    //   $('#a_nocorriente2').modal('show')
+    // },
+    //   abrirPasivoC(){
+    //     this.limpiar();
+    //   $('#p_corriente2').modal('show')
+    // },
+    //   abrirPasivoNoC(){
+    //     this.limpiar();
+    //   $('#p_nocorriente2').modal('show')
+    // },
+    //   abrirPatrimonio(){
+    //     this.limpiar();
+    //   $('#patrimonio2').modal('show')
+    // },
     Agregar(){
     if(this.diario.nom_cuenta.trim() === ''){
       toastr.error("El campo Nombre de cuenta es obligatorio", "Smarmoddle", {
@@ -971,34 +2014,34 @@ const b_ver = new Vue({
       this.balance.saldo_haber =''
     }
     },
-      deleteBalance(index){
-      this.balances.splice(index, 1);
-    },
-//ELIMINAR ELEMENTOS DE UN ARRAY /////////
-    deleteAcCooriente(index){
-      this.a_corrientes.splice(index, 1);   //ELIMINAR UN ELEMENTO DEL ARRAY COMENZANDO DESDE SU INDEX
-      this.cambioActivo();                  //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
-      this.TotalActivo();                   //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
-    },
-     deletePaCooriente(index){
-      this.p_corrientes.splice(index, 1);
-      this.cambioPasivo();
-      this.TotalPasivo();
-    },
-     deleteAcNoCooriente(index){
-      this.a_nocorrientes.splice(index, 1);
-      this.cambioActivoNo();
-      this.TotalActivo();
-    },
-     deletePaNoCooriente(index){
-      this.p_nocorrientes.splice(index, 1);
-      this.cambioPasivoNo();
-      this.TotalPasivo();
-    },
-     deletePatrimonio(index){
-      this.patrimonios.splice(index, 1);
-      this.cambioPatrimonio();
-    },
+//       deleteBalance(index){
+//       this.balances.splice(index, 1);
+//     },
+// //ELIMINAR ELEMENTOS DE UN ARRAY /////////
+//     deleteAcCooriente(index){
+//       this.a_corrientes.splice(index, 1);   //ELIMINAR UN ELEMENTO DEL ARRAY COMENZANDO DESDE SU INDEX
+//       this.cambioActivo();                  //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
+//       this.TotalActivo();                   //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
+//     },
+//      deletePaCooriente(index){
+//       this.p_corrientes.splice(index, 1);
+//       this.cambioPasivo();
+//       this.TotalPasivo();
+//     },
+//      deleteAcNoCooriente(index){
+//       this.a_nocorrientes.splice(index, 1);
+//       this.cambioActivoNo();
+//       this.TotalActivo();
+//     },
+//      deletePaNoCooriente(index){
+//       this.p_nocorrientes.splice(index, 1);
+//       this.cambioPasivoNo();
+//       this.TotalPasivo();
+//     },
+//      deletePatrimonio(index){
+//       this.patrimonios.splice(index, 1);
+//       this.cambioPatrimonio();
+//     },
     limpiar(){ //LIMPIAR TODOS LOS CAMPOS DE ACTIVOS PASIVOS Y PATRIMONIOS
       this.pasivo.p_corriente.nom_cuenta = '';
       this.pasivo.p_corriente.saldo = '';
@@ -1012,144 +2055,144 @@ const b_ver = new Vue({
 
       },
     //EDITAR ELEMENTOS DE UN ARRAY
-    editAcorriente(index){ //OBTENEMOS EL INDICE DEL ARRAY SELECCIONADO
-      this.update = index;                                                       //IGUALAMOS LA VARIABLE UPDATE CON EL INDICE DEL ARRAY
-      this.activo.a_corriente.saldo = this.a_corrientes[index].saldo;           //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
-      this.activo.a_corriente.nom_cuenta = this.a_corrientes[index].cuenta_id; //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
-      $('#a_corriente2').modal('show'); 
-       this.bi.const_id = this.a_corrientes[index].cuenta_id;  
-                                           //MOSTRAR EL MODAL CON JS
-      //var activo = this.a_corrientes[index];
-    },
-  updateACorriente(){
-      let id = this.activo.a_corriente.nom_cuenta;
-           let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-      let nombre = funciones.obtenerNombre(id);
-      var i = this.update;                                                    //I SERA EL INDICE QUE SE ASIGNO EN EL METODO EDITAR
-      this.a_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-      this.a_corrientes[i].nom_cuenta = nombre;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-      this.a_corrientes[i].saldo = this.activo.a_corriente.saldo;             //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-      $('#a_corriente2').modal('hide');                                      //OCULTAR EL MODAL
-      this.limpiar();
-      this.cambioActivo();
-  }
-    },
-    editANocorriente(index){
-      this.update = index;
-      this.activo.a_nocorriente.saldo = this.a_nocorrientes[index].saldo;
-      this.activo.a_nocorriente.nom_cuenta = this.a_nocorrientes[index].cuenta_id;
-      $('#a_nocorriente2').modal('show');
-       this.bi.const_id = this.a_nocorrientes[index].cuenta_id;
+  //   editAcorriente(index){ //OBTENEMOS EL INDICE DEL ARRAY SELECCIONADO
+  //     this.update = index;                                                       //IGUALAMOS LA VARIABLE UPDATE CON EL INDICE DEL ARRAY
+  //     this.activo.a_corriente.saldo = this.a_corrientes[index].saldo;           //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
+  //     this.activo.a_corriente.nom_cuenta = this.a_corrientes[index].cuenta_id; //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
+  //     $('#a_corriente2').modal('show'); 
+  //      this.bi.const_id = this.a_corrientes[index].cuenta_id;  
+  //                                          //MOSTRAR EL MODAL CON JS
+  //     //var activo = this.a_corrientes[index];
+  //   },
+  // updateACorriente(){
+  //     let id = this.activo.a_corriente.nom_cuenta;
+  //          let verificar = this.verificarCuenta(id);
+  //            if (verificar == true) {
+  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+  //               "timeOut": "3000"
+  //               });
+  //            }else{
+  //     let nombre = funciones.obtenerNombre(id);
+  //     var i = this.update;                                                    //I SERA EL INDICE QUE SE ASIGNO EN EL METODO EDITAR
+  //     this.a_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+  //     this.a_corrientes[i].nom_cuenta = nombre;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+  //     this.a_corrientes[i].saldo = this.activo.a_corriente.saldo;             //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+  //     $('#a_corriente2').modal('hide');                                      //OCULTAR EL MODAL
+  //     this.limpiar();
+  //     this.cambioActivo();
+  // }
+  //   },
+  //   editANocorriente(index){
+  //     this.update = index;
+  //     this.activo.a_nocorriente.saldo = this.a_nocorrientes[index].saldo;
+  //     this.activo.a_nocorriente.nom_cuenta = this.a_nocorrientes[index].cuenta_id;
+  //     $('#a_nocorriente2').modal('show');
+  //      this.bi.const_id = this.a_nocorrientes[index].cuenta_id;
 
-      //var activo = this.a_nocorrientes[index];
-    },
-    updateANoCorriente(){
-      let id = this.activo.a_nocorriente.nom_cuenta;
-           let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-      let nombre = funciones.obtenerNombre(id);
-      var i = this.update;
-      this.a_nocorrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-      this.a_nocorrientes[i].nom_cuenta = nombre;
-      this.a_nocorrientes[i].saldo = this.activo.a_nocorriente.saldo;
-      $('#a_nocorriente2').modal('hide');
-      this.limpiar();
-      this.cambioActivoNo();
-      this.TotalActivo();
-    }
-    },
-    editPcorriente(index){
-      this.update = index ;
-      this.pasivo.p_corriente.saldo = this.p_corrientes[index].saldo;
-      this.pasivo.p_corriente.nom_cuenta = this.p_corrientes[index].cuenta_id;
-      $('#p_corriente2').modal('show');
-      this.bi.const_id = this.p_corrientes[index].cuenta_id;
+  //     //var activo = this.a_nocorrientes[index];
+  //   },
+  //   updateANoCorriente(){
+  //     let id = this.activo.a_nocorriente.nom_cuenta;
+  //          let verificar = this.verificarCuenta(id);
+  //            if (verificar == true) {
+  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+  //               "timeOut": "3000"
+  //               });
+  //            }else{
+  //     let nombre = funciones.obtenerNombre(id);
+  //     var i = this.update;
+  //     this.a_nocorrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+  //     this.a_nocorrientes[i].nom_cuenta = nombre;
+  //     this.a_nocorrientes[i].saldo = this.activo.a_nocorriente.saldo;
+  //     $('#a_nocorriente2').modal('hide');
+  //     this.limpiar();
+  //     this.cambioActivoNo();
+  //     this.TotalActivo();
+  //   }
+  //   },
+  //   editPcorriente(index){
+  //     this.update = index ;
+  //     this.pasivo.p_corriente.saldo = this.p_corrientes[index].saldo;
+  //     this.pasivo.p_corriente.nom_cuenta = this.p_corrientes[index].cuenta_id;
+  //     $('#p_corriente2').modal('show');
+  //     this.bi.const_id = this.p_corrientes[index].cuenta_id;
 
-      //var activo = this.a_corrientes[index];
-    },
-    updatePCorriente(){
-      let id = this.pasivo.p_corriente.nom_cuenta;
-           let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-      let nombre = funciones.obtenerNombre(id);
-      var i = this.update;
-      this.p_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-      this.p_corrientes[i].nom_cuenta = nombre;
-      this.p_corrientes[i].saldo = this.pasivo.p_corriente.saldo;
-      $('#p_corriente2').modal('hide');
-      this.limpiar();
-      this.cambioPasivo();
-      this.TotalPasivo();
-    }
-    },
-    editPNocorriente(index){
-      this.update = index ;
-      this.pasivo.p_nocorriente.saldo = this.p_nocorrientes[index].saldo;
-      this.pasivo.p_nocorriente.nom_cuenta = this.p_nocorrientes[index].cuenta_id;
-      $('#p_nocorriente2').modal('show');
-       this.bi.const_id = this.p_nocorrientes[index].cuenta_id;
+  //     //var activo = this.a_corrientes[index];
+  //   },
+  //   updatePCorriente(){
+  //     let id = this.pasivo.p_corriente.nom_cuenta;
+  //          let verificar = this.verificarCuenta(id);
+  //            if (verificar == true) {
+  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+  //               "timeOut": "3000"
+  //               });
+  //            }else{
+  //     let nombre = funciones.obtenerNombre(id);
+  //     var i = this.update;
+  //     this.p_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
+  //     this.p_corrientes[i].nom_cuenta = nombre;
+  //     this.p_corrientes[i].saldo = this.pasivo.p_corriente.saldo;
+  //     $('#p_corriente2').modal('hide');
+  //     this.limpiar();
+  //     this.cambioPasivo();
+  //     this.TotalPasivo();
+  //   }
+  //   },
+  //   editPNocorriente(index){
+  //     this.update = index ;
+  //     this.pasivo.p_nocorriente.saldo = this.p_nocorrientes[index].saldo;
+  //     this.pasivo.p_nocorriente.nom_cuenta = this.p_nocorrientes[index].cuenta_id;
+  //     $('#p_nocorriente2').modal('show');
+  //      this.bi.const_id = this.p_nocorrientes[index].cuenta_id;
 
-      //var activo = this.a_corrientes[index];
-    },
-    updatePNoCorriente(){
-      let id = this.pasivo.p_nocorriente.nom_cuenta;
-           let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-      let nombre = funciones.obtenerNombre(id);
-      var i = this.update;
-      this.p_nocorrientes[i].cuenta_id = id;
-      this.p_nocorrientes[i].nom_cuenta = nombre;
-      this.p_nocorrientes[i].saldo = this.pasivo.p_nocorriente.saldo;
-      $('#p_nocorriente2').modal('hide');
-      this.limpiar();
-      this.cambioPasivoNo();
-      this.TotalPasivo();
-    }
-    },
-    editPatrimonio(index){
-      this.update = index ;
-      this.patrimonio.saldo = this.patrimonios[index].saldo;
-      this.patrimonio.nom_cuenta = this.patrimonios[index].cuenta_id;
-      $('#patrimonio2').modal('show');
-      this.bi.const_id = this.patrimonios[index].cuenta_id;
+  //     //var activo = this.a_corrientes[index];
+  //   },
+  //   updatePNoCorriente(){
+  //     let id = this.pasivo.p_nocorriente.nom_cuenta;
+  //          let verificar = this.verificarCuenta(id);
+  //            if (verificar == true) {
+  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+  //               "timeOut": "3000"
+  //               });
+  //            }else{
+  //     let nombre = funciones.obtenerNombre(id);
+  //     var i = this.update;
+  //     this.p_nocorrientes[i].cuenta_id = id;
+  //     this.p_nocorrientes[i].nom_cuenta = nombre;
+  //     this.p_nocorrientes[i].saldo = this.pasivo.p_nocorriente.saldo;
+  //     $('#p_nocorriente2').modal('hide');
+  //     this.limpiar();
+  //     this.cambioPasivoNo();
+  //     this.TotalPasivo();
+  //   }
+  //   },
+  //   editPatrimonio(index){
+  //     this.update = index ;
+  //     this.patrimonio.saldo = this.patrimonios[index].saldo;
+  //     this.patrimonio.nom_cuenta = this.patrimonios[index].cuenta_id;
+  //     $('#patrimonio2').modal('show');
+  //     this.bi.const_id = this.patrimonios[index].cuenta_id;
 
-      //var activo = this.a_corrientes[index];
-    },
-    updatePatrimonio(){
-       let id = this.patrimonio.nom_cuenta;
-            let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-      let nombre = funciones.obtenerNombre(id);
-      var i = this.update;
-      this.patrimonios[i].cuenta_id = id;
-      this.patrimonios[i].nom_cuenta = nombre;
-      this.patrimonios[i].saldo = this.patrimonio.saldo;
-      $('#patrimonio2').modal('hide');
-      this.limpiar();
-      this.cambioPatrimonio();
-    }
-    },      
+  //     //var activo = this.a_corrientes[index];
+  //   },
+  //   updatePatrimonio(){
+  //      let id = this.patrimonio.nom_cuenta;
+  //           let verificar = this.verificarCuenta(id);
+  //            if (verificar == true) {
+  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+  //               "timeOut": "3000"
+  //               });
+  //            }else{
+  //     let nombre = funciones.obtenerNombre(id);
+  //     var i = this.update;
+  //     this.patrimonios[i].cuenta_id = id;
+  //     this.patrimonios[i].nom_cuenta = nombre;
+  //     this.patrimonios[i].saldo = this.patrimonio.saldo;
+  //     $('#patrimonio2').modal('hide');
+  //     this.limpiar();
+  //     this.cambioPatrimonio();
+  //   }
+  //   },      
          // ejemplo(){
          //        let me =this;
          //        var formdata = new FormData();
@@ -1190,143 +2233,143 @@ const b_ver = new Vue({
               return false
              }
           },
-            agregarActivoCorriente(){
+            // agregarActivoCorriente(){
               
-               if(this.activo.a_corriente.nom_cuenta == '' || this.activo.a_corriente.saldo === ''){
-                toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-                "timeOut": "3000"
-                });
+            //    if(this.activo.a_corriente.nom_cuenta == '' || this.activo.a_corriente.saldo === ''){
+            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
                
-             }else{
-            let id = this.activo.a_corriente.nom_cuenta;
-            let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-              let nombre = funciones.obtenerNombre(id);
-                var a_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_corriente.saldo};
-                this.a_corrientes.push(a_corr);                               //añadimos el la variable persona al array
-                  toastr.success("Registro agregado correctamente", "Smarmoddle", {
-                    "timeOut": "3000"
-                });
-                //Limpiamos los campos
-                this.activo.a_corriente.nom_cuenta = '';
-                this.activo.a_corriente.saldo = '';
-                //SUMAR TOTALES
+            //  }else{
+            // let id = this.activo.a_corriente.nom_cuenta;
+            // let verificar = this.verificarCuenta(id);
+            //  if (verificar == true) {
+            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //  }else{
+            //   let nombre = funciones.obtenerNombre(id);
+            //     var a_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_corriente.saldo};
+            //     this.a_corrientes.push(a_corr);                               //añadimos el la variable persona al array
+            //       toastr.success("Registro agregado correctamente", "Smarmoddle", {
+            //         "timeOut": "3000"
+            //     });
+            //     //Limpiamos los campos
+            //     this.activo.a_corriente.nom_cuenta = '';
+            //     this.activo.a_corriente.saldo = '';
+            //     //SUMAR TOTALES
                 
-                this.cambioActivo();  
-              }
-              }
-            },
-             agregarActivoNoCorriente(){
+            //     this.cambioActivo();  
+            //   }
+            //   }
+            // },
+            //  agregarActivoNoCorriente(){
 
-                if(this.activo.a_nocorriente.nom_cuenta == '' || this.activo.a_nocorriente.saldo === ''){
-                toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-            let id = this.activo.a_nocorriente.nom_cuenta;
-            let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-              let nombre = funciones.obtenerNombre(id);
-                  var a_nocorr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_nocorriente.saldo};//CREANDO EL OBJETO QUE SE AGREGARA AL ARRAY
-                this.a_nocorrientes.push(a_nocorr);//AGREGAR UNA NUEVA CUENTA AL ARRAY DE PASIVOS
-                  //Limpiamos los campos
-                  toastr.success("Registro agregado correctamente", "Smarmoddle", {
-                    "timeOut": "3000"
-                });
-                this.activo.a_nocorriente.nom_cuenta = '';
-                this.activo.a_nocorriente.saldo = '';
-                this.cambioActivoNo();          
-              }
-               }
-             },
-               agregarPasivoCorriente(){
-                if(this.pasivo.p_corriente.nom_cuenta == '' || this.pasivo.p_corriente.saldo === ''){
-                toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-              }else{
-                let id = this.pasivo.p_corriente.nom_cuenta;
-                     let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-                let nombre = funciones.obtenerNombre(id);
+            //     if(this.activo.a_nocorriente.nom_cuenta == '' || this.activo.a_nocorriente.saldo === ''){
+            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //  }else{
+            // let id = this.activo.a_nocorriente.nom_cuenta;
+            // let verificar = this.verificarCuenta(id);
+            //  if (verificar == true) {
+            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //  }else{
+            //   let nombre = funciones.obtenerNombre(id);
+            //       var a_nocorr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_nocorriente.saldo};//CREANDO EL OBJETO QUE SE AGREGARA AL ARRAY
+            //     this.a_nocorrientes.push(a_nocorr);//AGREGAR UNA NUEVA CUENTA AL ARRAY DE PASIVOS
+            //       //Limpiamos los campos
+            //       toastr.success("Registro agregado correctamente", "Smarmoddle", {
+            //         "timeOut": "3000"
+            //     });
+            //     this.activo.a_nocorriente.nom_cuenta = '';
+            //     this.activo.a_nocorriente.saldo = '';
+            //     this.cambioActivoNo();          
+            //   }
+            //    }
+            //  },
+            //    agregarPasivoCorriente(){
+            //     if(this.pasivo.p_corriente.nom_cuenta == '' || this.pasivo.p_corriente.saldo === ''){
+            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //   }else{
+            //     let id = this.pasivo.p_corriente.nom_cuenta;
+            //          let verificar = this.verificarCuenta(id);
+            //  if (verificar == true) {
+            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //  }else{
+            //     let nombre = funciones.obtenerNombre(id);
 
-                var p_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.pasivo.p_corriente.saldo};
-                this.p_corrientes.push(p_corr);//añadimos el la variable persona al array
-                  //Limpiamos los campos
-                  toastr.success("Registro agregado correctamente", "Smarmoddle", {
-                    "timeOut": "3000"
-                });
-                this.pasivo.p_corriente.nom_cuenta = '';
-                this.pasivo.p_corriente.saldo = '';
-                this.cambioPasivo();          
-              }
-            }
-            },
-             agregarPasivoNoCorriente(){
-                if(this.pasivo.p_nocorriente.nom_cuenta == '' || this.pasivo.p_nocorriente.saldo === ''){
-                toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-                let id = this.pasivo.p_nocorriente.nom_cuenta;
-                     let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-                let nombre = funciones.obtenerNombre(id);
-                let p_nocorr = {cuenta_id: id, nom_cuenta: nombre, saldo:this.pasivo.p_nocorriente.saldo};
-                this.p_nocorrientes.push(p_nocorr);//añadimos el la variable persona al array
-                  //Limpiamos los campos
-                toastr.success("Registro agregado correctamente", "Smarmoddle", {
-                    "timeOut": "3000"
-                });
-                this.pasivo.p_nocorriente.nom_cuenta = '';
-                this.pasivo.p_nocorriente.saldo = '';
-                this.cambioPasivoNo();
-                }  
-                } 
-             }, 
-             agregarPatrimonio(){
-                if(this.patrimonio.nom_cuenta == '' || this.patrimonio.saldo === ''){
-                toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-               let id = this.patrimonio.nom_cuenta;
-                    let verificar = this.verificarCuenta(id);
-             if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-             }else{
-              let nombre = funciones.obtenerNombre(id);
+            //     var p_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.pasivo.p_corriente.saldo};
+            //     this.p_corrientes.push(p_corr);//añadimos el la variable persona al array
+            //       //Limpiamos los campos
+            //       toastr.success("Registro agregado correctamente", "Smarmoddle", {
+            //         "timeOut": "3000"
+            //     });
+            //     this.pasivo.p_corriente.nom_cuenta = '';
+            //     this.pasivo.p_corriente.saldo = '';
+            //     this.cambioPasivo();          
+            //   }
+            // }
+            // },
+            //  agregarPasivoNoCorriente(){
+            //     if(this.pasivo.p_nocorriente.nom_cuenta == '' || this.pasivo.p_nocorriente.saldo === ''){
+            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //  }else{
+            //     let id = this.pasivo.p_nocorriente.nom_cuenta;
+            //          let verificar = this.verificarCuenta(id);
+            //  if (verificar == true) {
+            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //  }else{
+            //     let nombre = funciones.obtenerNombre(id);
+            //     let p_nocorr = {cuenta_id: id, nom_cuenta: nombre, saldo:this.pasivo.p_nocorriente.saldo};
+            //     this.p_nocorrientes.push(p_nocorr);//añadimos el la variable persona al array
+            //       //Limpiamos los campos
+            //     toastr.success("Registro agregado correctamente", "Smarmoddle", {
+            //         "timeOut": "3000"
+            //     });
+            //     this.pasivo.p_nocorriente.nom_cuenta = '';
+            //     this.pasivo.p_nocorriente.saldo = '';
+            //     this.cambioPasivoNo();
+            //     }  
+            //     } 
+            //  }, 
+            //  agregarPatrimonio(){
+            //     if(this.patrimonio.nom_cuenta == '' || this.patrimonio.saldo === ''){
+            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //  }else{
+            //    let id = this.patrimonio.nom_cuenta;
+            //         let verificar = this.verificarCuenta(id);
+            //  if (verificar == true) {
+            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+            //     "timeOut": "3000"
+            //     });
+            //  }else{
+            //   let nombre = funciones.obtenerNombre(id);
 
-               let patri = {cuenta_id: id, nom_cuenta:nombre, saldo:this.patrimonio.saldo};
-                this.patrimonios.push(patri);//añadimos el la variable persona al array
-                  //Limpiamos los campos
-                toastr.success("Registro agregado correctamente", "Smarmoddle", {
-                    "timeOut": "3000"
-                });
-                this.patrimonio.nom_cuenta = '';
-                this.patrimonio.saldo = '';
-                this.cambioPatrimonio();
-              }
-            }
-             },
+            //    let patri = {cuenta_id: id, nom_cuenta:nombre, saldo:this.patrimonio.saldo};
+            //     this.patrimonios.push(patri);//añadimos el la variable persona al array
+            //       //Limpiamos los campos
+            //     toastr.success("Registro agregado correctamente", "Smarmoddle", {
+            //         "timeOut": "3000"
+            //     });
+            //     this.patrimonio.nom_cuenta = '';
+            //     this.patrimonio.saldo = '';
+            //     this.cambioPatrimonio();
+            //   }
+            // }
+            //  },
             //ACTUALIZAR SUMAS DE PASIVOS, ACTIVOS Y PATRIMONIO
              cambioActivo(){
               this.b_initotal.t_a_corriente = 0;
@@ -1641,11 +2684,21 @@ transacciones:'',
     },
     abrirTransaccion(){
       this.update             = false;
-       this.diarios.debe      =[];
+      this.diarios.debe      =[];
       this.diarios.haber      =[];
       this.diarios.fecha      =[];
       this.diarios.comentario =[];
       this.diarios.ajustado = false;
+      this.diario.haber.fecha =''
+      this.diario.haber.nom_cuenta =''
+      this.diario.haber.saldo =''
+      this.diario.haber.edit =false
+      this.diario.debe.fecha =''
+      this.diario.debe.nom_cuenta =''
+      this.diario.debe.saldo =''
+      this.diario.debe.edit =false
+              
+
 
       $('#dg-transaccion').modal('show');
       $('#comentario-diario-tab').tab('show'); 
@@ -4740,7 +5793,7 @@ var balance_general = new Vue({
         }); 
      },
     abrirActivoC(){
-      // this.limpiar();
+      this.limpiar();
       $('#bg-transaccion').modal('show');
       $('#nav-bg-activo-corriente-tab').tab('show')
       // $('#kardex-promedio-ingreso-edit-tab').tab('show')

@@ -390,7 +390,7 @@ class TallersController extends Controller
                      'diariogeneral'   => $diariogeneral,
                      'productos'       => $productos,
                     ]);
-                return view('talleres.taller37', compact('datos', 'd', 'diariogeneral'));
+                return view('talleres.taller37', compact('datos', 'd', 'diariogeneral', 'balancesInicial'));
 
             }
                 

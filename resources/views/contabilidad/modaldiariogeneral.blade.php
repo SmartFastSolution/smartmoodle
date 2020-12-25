@@ -16,7 +16,7 @@
             </div>
             <div class="modal-body">
                 <div class="row justify-content-center">
-                   <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
+                   <div class="col-6 ">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                       <li class="nav-item" role="presentation">
                         <a class="nav-link active text-dark font-weight-bold" id="comentario-diario-tab" style="font-size: 15px" data-toggle="tab" href="#comentario-diario" role="tab" aria-controls="comentario-diario" aria-selected="false">DETALLE MOVIMIENTO</a>
@@ -71,8 +71,9 @@
                       </tbody>
                     </table>
                     <div v-if="!diario.debe.edit" class="row justify-content-center">
+                        <a href=""data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark mr-1">KARDEX</a>
+
                           <a href="#" class="btn btn-success" @click.prevent="agregarDebe()">Agregar</a>
-                        <a href=""data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark ml-1">KARDEX</a>
 
                       </div>
                        <div v-else class="row justify-content-center">
@@ -122,8 +123,9 @@
                       </tbody>
                     </table>
                     <div v-if="!diario.haber.edit" class="row justify-content-center">
+                        <a href="" data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark mr-1">KARDEX</a>
+
                             <a href="#" class="btn btn-info" @click.prevent="agregarHaber()">Agregar</a>
-                        <a href="" data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark ml-1">KARDEX</a>
 
                       </div>
 
@@ -133,13 +135,13 @@
                       </div>
                       </div>
                       <div class="tab-pane fade show active" id="comentario-diario" role="tabpanel" aria-labelledby="comentario-diario-tab">
-                        <h2 class="text-center">AGREGAR DETALLES</h2>
+                        <h2 class="text-center">AGREGAR DETALLES DEL MOVIMIENTO</h2>
 
                       <table class="table table-bordered table-sm">
                         <thead class="thead-dark">
                         <tr>
                           <th align="center" class="text-center">Fecha</th>    
-                          <th  align="center" class="text-center">Comentario</th>    
+                          <th  align="center" class="text-center">Descripcion del asiento</th>    
                         </tr>
                        </thead>
                         <tbody >  
@@ -167,7 +169,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-6" style=" height:300px; overflow-y: scroll;">
+                  <div class="col-6" style=" height:300px; overflow-y: scroll; border: solid 3px red;">
                     <h3 class="text-center">Datos para realizar el Diario General</h3>
                     <div>
                       {!! $diariogeneral->transacciones !!}
@@ -202,7 +204,7 @@
  --}}
                   <div class="col-12 mt-2" v-if="diarios.debe.length > 0 || diarios.haber.length > 0">
 
-                    <h2 class="text-center">ACTUALIZAR REGISTROS</h2>
+                    <h2 class="text-center">ACTUALIZAR MOVIMIENTOS</h2>
                 <table  class="table table-bordered table-sm">
                      <thead class="thead-dark">
                      <tr align="center">

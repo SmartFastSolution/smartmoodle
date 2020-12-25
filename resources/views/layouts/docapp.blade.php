@@ -18,7 +18,7 @@
 
 </head>
 
-<body class="  layout-fixed"> --}}
+<body class="  layout-fixed"> 
     <div class="wrapper">
         <!-- Navbar -->
         <nav class=" navbar navbar-expand navbar-light bg-light fixed-top">
