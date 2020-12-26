@@ -83,13 +83,13 @@
                 <td class="text-center font-weight-bold">SUMAN</td>
                 <td class="text-left font-weight-bold"></td>
                 <td class="text-left font-weight-bold"></td>
-                <td class="text-center font-weight-bold">@{{ suman.debe }}</td>
-                <td class="text-center font-weight-bold">@{{ suman.haber }}</td>
+                <td class="text-right font-weight-bold">@{{ suman.debe }}</td>
+                <td class="text-right font-weight-bold">@{{ suman.haber }}</td>
             </tr>
         </tbody>
     </table>
     <div class="row justify-content-center">
-        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="guardarlbBAnco()">Guardar Libro Caja</a>
+        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="guardarlbBAnco()">Guardar Libro Banco</a>
 
     </div>
 

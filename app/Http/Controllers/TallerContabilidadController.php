@@ -49,6 +49,13 @@ use App\Movimientobanco;
 use App\Contabilidad\MGRMovimiento;
 use App\Contabilidad\MGRegistro;
 use App\Contabilidad\MayorGeneral;
+use App\Movimientonomina;
+use App\Movimientoprovision;
+use App\Nominaempleado;
+use App\Provisionsocial;
+use App\Retencioniva;
+use App\Retencionivacompra;
+use App\Retencionivaventa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -1004,7 +1011,7 @@ class TallerContabilidadController extends Controller
                 }
         }
     
-       public function b_inicial_diario(Request $request)
+        public function b_inicial_diario(Request $request)
         {
             $id                = Auth::id();
             $taller_id         = $request->id;
@@ -2611,6 +2618,479 @@ class TallerContabilidadController extends Controller
 
         } //fin metodo obtener
 
+        public function RetencionIva (Request $request){
 
+          $id = Auth::id();
+          $taller_id  = $request->id;
+          $nombre_c  = $request->nombre_c;
+          $fecha     = $request->fecha;
+          $ruc       = $request->ruc;
+          $t_compras = $request->t_compras;
+          $t_ventas  = $request->t_ventas;
+
+          $rt = Retencioniva::where('user_id', $id)->where('taller_id',$taller_id)->count();   
+          
+          if($rt == 0){
+              $r = new Retencioniva;
+              $r->taller_id   = $taller_id;
+              $r->user_id     = $id;
+              $r->nombre      = $nombre_c;
+              $r->fecha       = $fecha;
+              $r->ruc         = $ruc;
+              $r->sumac_base  = $request->sumac_base;
+              $r->sumac_reten = $request->sumac_reten;
+              $r->sumac_ivac  = $request->sumac_ivac;
+              $r->sumac_10    = $request->sumac_10;
+              $r->sumac_20    = $request->sumac_20;
+              $r->sumac_30    = $request->sumac_30;
+              $r->sumac_70    = $request->sumac_70;
+              $r->sumac_100    = $request->sumac_100;
+              $r->sumav_base  = $request->sumav_base;
+              $r->sumav_reten = $request->sumav_reten;
+              $r->sumav_ivav  = $request->sumav_ivav;
+              $r->sumav_10    = $request->sumav_10;
+              $r->sumav_20    = $request->sumav_20;
+              $r->sumav_30    = $request->sumav_30;
+              $r->sumav_70    = $request->sumav_70;
+              $r->sumav_100   = $request->sumav_100;
+              $r->t_ivacompra = $request->t_ivacompra;
+              $r->t_ivaventa  = $request->t_ivaventa;
+              $r->total       = $request->total;
+              $r->t_reten     = $request->t_reten;
+              $r->result_iva  =$request->result_iva;
+              $r->save();
+
+              $rti = Retencioniva::where('user_id', $id)->get()->last();
+
+              foreach($t_compras as $key=>$c){
+                    $datos=array(
+                        'retencioniva_id' => $rti->id,
+                        'fecha_c'         =>$c['fecha_c'],
+                        'detalle'         =>$c['detalle'],
+                        'proveedor'       =>$c['proveedor'],
+                        'base_im'         =>$c['base_im'],
+                        'porcentaje'      =>$c['porcentaje'],
+                        'v_retenido'      =>$c['v_retenido'],
+                        'iva'             =>$c['iva'],
+                        'ret_10'          =>$c['ret_10'],
+                        'ret_20'          =>$c['ret_20'],
+                        'ret_30'          =>$c['ret_30'],
+                        'ret_70'          =>$c['ret_70'],
+                        'ret_100'         =>$c['ret_100'],
+                        'created_at'        => now(),
+                        'updated_at'        => now(),
+                    );
+                    Retencionivacompra::insert($datos);
+                }
+                foreach($t_ventas as $key=>$v){
+                    $datos=array(
+                        'retencioniva_id' => $rti->id,
+                        'fecha_v'         =>$v['fecha_v'],
+                        'detalle'         =>$v['detalle'],
+                        'cliente'         =>$v['cliente'],
+                        'base_im'         =>$v['base_im'],
+                        'porcentaje'      =>$v['porcentaje'],
+                        'v_retenido'      =>$v['v_retenido'],
+                        'iva'             =>$v['iva'],
+                        'ret_10'          =>$v['ret_10'],
+                        'ret_20'          =>$v['ret_20'],
+                        'ret_30'          =>$v['ret_30'],
+                        'ret_70'          =>$v['ret_70'],
+                        'ret_100'         =>$v['ret_100'],
+                        'created_at'        => now(),
+                        'updated_at'        => now(),
+                    );
+                    Retencionivaventa::insert($datos);
+                }
+                return response(array(
+                    'success' => true,
+                    'estado'  => 'guardado',
+                    'message' => 'Anexo Retención del Iva creado correctamente'
+                ),200,[]);            
+          
+            }elseif($rt == 1){
+              
+                $ids =[];
+                $r = Retencioniva::where('user_id', $id)->where('taller_id',$taller_id)->first();     
+                $r->nombre      = $nombre_c;
+                $r->fecha       = $fecha;
+                $r->ruc         = $ruc;
+                $r->sumac_base  = $request->sumac_base;
+                $r->sumac_reten = $request->sumac_reten;
+                $r->sumac_ivac  = $request->sumac_ivac;
+                $r->sumac_10    = $request->sumac_10;
+                $r->sumac_20    = $request->sumac_20;
+                $r->sumac_30    = $request->sumac_30;
+                $r->sumac_70    = $request->sumac_70;
+                $r->sumac_100    = $request->sumac_100;
+                $r->sumav_base  = $request->sumav_base;
+                $r->sumav_reten = $request->sumav_reten;
+                $r->sumav_ivav  = $request->sumav_ivav;
+                $r->sumav_10    = $request->sumav_10;
+                $r->sumav_20    = $request->sumav_20;
+                $r->sumav_30    = $request->sumav_30;
+                $r->sumav_70    = $request->sumav_70;
+                $r->sumav_100   = $request->sumav_100;
+                $r->t_ivacompra = $request->t_ivacompra;
+                $r->t_ivaventa  = $request->t_ivaventa;
+                $r->total       = $request->total;
+                $r->t_reten     = $request->t_reten;
+                $r->result_iva  =$request->result_iva;
+                $r->save();
+
+                $rtc = Retencionivacompra::where('retencioniva_id',$r->id)->get();
+                foreach($rtc as $i){
+                    $ids[]=$i->id;
+                }
+                $deteleretencionivacompra = Retencionivacompra::destroy($ids);
+         
+                $rtv = Retencionivaventa::where('retencioniva_id',$r->id)->get();
+                foreach($rtv as $i){
+                    $ids[]=$i->id;
+                }
+                $deteleretencionivaventa = Retencionivaventa::destroy($ids);
+               
+                $rti = Retencioniva::where('user_id', $id)->get()->last();
+
+                foreach($t_compras as $key=>$c){
+                    $datos = array(
+                        'retencioniva_id' => $rti->id,
+                        'fecha_c'         =>$c['fecha_c'],
+                        'detalle'         =>$c['detalle'],
+                        'proveedor'       =>$c['proveedor'],
+                        'base_im'         =>$c['base_im'],
+                        'porcentaje'      =>$c['porcentaje'],
+                        'v_retenido'      =>$c['v_retenido'],
+                        'iva'             =>$c['iva'],
+                        'ret_10'          =>$c['ret_10'],
+                        'ret_20'          =>$c['ret_20'],
+                        'ret_30'          =>$c['ret_30'],
+                        'ret_70'          =>$c['ret_70'],
+                        'ret_100'         =>$c['ret_100'],
+                        'created_at'        => now(),
+                        'updated_at'        => now(),
+                    );
+                    Retencionivacompra::insert($datos);
+                }
+                foreach($t_ventas as $key=>$v){
+                    $datos = array(
+                        'retencioniva_id' => $rti->id,
+                        'fecha_v'         =>$v['fecha_v'],
+                        'detalle'         =>$v['detalle'],
+                        'cliente'         =>$v['cliente'],
+                        'base_im'         =>$v['base_im'],
+                        'porcentaje'      =>$v['porcentaje'],
+                        'v_retenido'      =>$v['v_retenido'],
+                        'iva'             =>$v['iva'],
+                        'ret_10'          =>$v['ret_10'],
+                        'ret_20'          =>$v['ret_20'],
+                        'ret_30'          =>$v['ret_30'],
+                        'ret_70'          =>$v['ret_70'],
+                        'ret_100'         =>$v['ret_100'],
+                        'created_at'        => now(),
+                        'updated_at'        => now(),
+                    );
+                    Retencionivaventa::insert($datos);
+                }
+                return response(array(
+                    'success' => true,
+                    'estado'  => 'actualizado',
+                    'message' => 'Anexo Retención del Iva Actualizado correctamente'
+                ),200,[]);            
+         
+            } //end elseif
+        } //fin guardar retencion del iva
+
+        public function ObtenerRetencionIva(Request $request){
+            $id = Auth::id();            
+            $taller_id = $request->id;
+            $rt = Retencioniva::where('user_id', $id)->where('taller_id',$taller_id)->count();
+
+            if($rt == 1){
+            
+                    $r = Retencioniva::where('user_id', $id)->where('taller_id',$taller_id)->first();
+                $compra = Retencionivacompra::select('fecha_c','detalle','proveedor','base_im','porcentaje', 'v_retenido', 'iva', 'ret_10', 'ret_20', 'ret_30', 'ret_70', 'ret_100'   )->where('retencioniva_id',  $r->id)->get();
+                $venta = Retencionivaventa::select('fecha_v','detalle','cliente','base_im','porcentaje', 'v_retenido', 'iva', 'ret_10', 'ret_20', 'ret_30', 'ret_70', 'ret_100'   )->where('retencioniva_id',  $r->id)->get();
+
+                return response(array(
+                    'datos'       => true,
+                    'compra'      => $compra, 
+                    'venta'       => $venta, 
+                    'nombre'      => $r->nombre,
+                    'fecha'       => $r->fecha,
+                    'ruc'         => $r->ruc,
+                    't_ivacompra' => $r->t_ivacompra,
+                    't_ivaventa'  => $r->t_ivaventa,
+                    't_reten'     => $r->t_reten,
+                    'result_iva'  => $r->result_iva,
+                    'total'       => $r->total,
+                    
+                    ),200,[]);
+            }else{
+                    return response(array(
+                    'datos' => false,
+                ),200,[]);
+
+            } //fin else
+           
+            
+            
+
+        } //fin metodo obtener retencion del iva
+
+        public function NominaEmpleado(Request $request){
+  
+            $id = Auth::id();
+            $taller_id      = $request->id;
+            $nombre         =$request->nombre;
+            $fecha          =$request->fecha;
+            $t_nomina       =$request->t_nomina;
+           $nomina          =Nominaempleado::where('user_id', $id)->where('taller_id',$taller_id)->count();
+
+           if($nomina ==0){
+               $n = new Nominaempleado;
+               $n->taller_id      = $taller_id;
+               $n->user_id        = $id;
+               $n->nombre         = $nombre;
+               $n->fecha          = $fecha;
+               $n->s_sueldo       =$request->s_sueldo;
+               $n->s_sobretiempo  =$request->s_sobretiempo;
+               $n->s_tingreso     =$request->s_tingreso;
+               $n->s_iess         =$request->s_iess;
+               $n->s_piess        =$request->s_piess;
+               $n->s_pcias        =$request->s_pcias;
+               $n->s_anticipo     =$request->s_anticipo;
+               $n->s_impr         =$request->s_impr;
+               $n->s_tegresos     =$request->s_tegresos;
+               $n->s_netopagar    =$request->s_netopagar;
+               $n->save();
+
+               $no = Nominaempleado::where('user_id', $id)->get()->last();
+               
+               foreach($t_nomina as $key=>$d){
+                   $datos = array (
+                        'nominaempleado_id' =>$no->id,
+                        'nombre_e'         =>$d['nombre_e'],
+                        'cargo'            =>$d['cargo'],
+                        'sueldo'           =>$d['sueldo'],
+                        's_tiempo'         =>$d['s_tiempo'],
+                        'ingresos'         =>$d['ingresos'],
+                        'iees'             =>$d['iees'],
+                        'pres_iees'        =>$d['pres_iees'],
+                        'pres_cia'         =>$d['pres_cia'],
+                        'anticipo'         =>$d['anticipo'],
+                        'imp_renta'        =>$d['imp_renta'],
+                        'egresos'          =>$d['egresos'],
+                        'neto_pagar'       =>$d['neto_pagar'],
+                        'created_at'        => now(),
+                        'updated_at'        => now(),
+                   );
+                   Movimientonomina::insert($datos);
+               } //end foreach
+               return response(array(
+                'success' => true,
+                'estado'  => 'guardado',
+                'message' => 'Anexo Nómina Empleados creado correctamente'
+            ),200,[]);    
+               
+           } elseif($nomina==1){
+
+            $ids=[];
+            $n = Nominaempleado::where('user_id', $id)->where('taller_id',$taller_id)->first();     
+            $n->nombre         = $nombre;
+            $n->fecha          = $fecha;
+            $n->s_sueldo       =$request->s_sueldo;
+            $n->s_sobretiempo  =$request->s_sobretiempo;
+            $n->s_tingreso     =$request->s_tingreso;
+            $n->s_iess         =$request->s_iess;
+            $n->s_piess        =$request->s_piess;
+            $n->s_pcias        =$request->s_pcias;
+            $n->s_anticipo     =$request->s_anticipo;
+            $n->s_impr         =$request->s_impr;
+            $n->s_tegresos     =$request->s_tegresos;
+            $n->s_netopagar    =$request->s_netopagar;
+            $n->save();
+
+            $o = Movimientonomina::where('nominaempleado_id',$n->id)->get();
+
+            foreach($o as $i){
+                $ids[]=$i->id;
+            }
+            $detelemovimientonomina = Movimientonomina::destroy($ids);
+
+            $new = Nominaempleado::where('user_id', $id)->get()->last();
+
+            foreach($t_nomina as $key=>$d){
+                $datos = array (
+                     'nominaempleado_id' =>$new->id,
+                     'nombre_e'         =>$d['nombre_e'],
+                     'cargo'            =>$d['cargo'],
+                     'sueldo'           =>$d['sueldo'],
+                     's_tiempo'         =>$d['s_tiempo'],
+                     'ingresos'         =>$d['ingresos'],
+                     'iees'             =>$d['iees'],
+                     'pres_iees'        =>$d['pres_iees'],
+                     'pres_cia'         =>$d['pres_cia'],
+                     'anticipo'         =>$d['anticipo'],
+                     'imp_renta'        =>$d['imp_renta'],
+                     'egresos'          =>$d['egresos'],
+                     'neto_pagar'       =>$d['neto_pagar'],
+                     'created_at'        => now(),
+                     'updated_at'        => now(),
+                );
+                Movimientonomina::insert($datos);
+            } //end foreach
+            return response(array(
+                'success' => true,
+                'estado'  => 'actualizado',
+                'message' => 'Anexo Retención del Iva Actualizado correctamente'
+            ),200,[]);            
+     
+          } //end elseif
+        } //end metodo guardar nomina
+
+        public function obtenerNomina(Request $request){
+            $id =Auth::id();
+            $taller_id     = $request->id;
+
+            $no = Nominaempleado::where('user_id', $id)->where('taller_id',$taller_id)->count();
+            
+            if($no == 1){
+            
+                $n = Nominaempleado::where('user_id', $id)->where('taller_id',$taller_id)->first();
+                $m =Movimientonomina::select( 'nombre_e','cargo','sueldo','s_tiempo','ingresos','iees','pres_iees','pres_cia', 'anticipo', 'imp_renta','egresos','neto_pagar')->where('nominaempleado_id',  $n->id)->get();
+         
+                return response(array(
+                    'datos'   => true,
+                    'nomina'   => $m, 
+                    'nombre'  => $n->nombre,
+                    'fecha'   => $n->fecha,
+                   
+                ),200,[]);
+            }else{
+                return response(array(
+                'datos' => false,
+            ),200,[]);
+
+            } //fin else
+
+        }//fin metodo obtener
+
+
+        public function ProvisionB(Request $request){
+ 
+            $id = Auth::id();
+            $taller_id      = $request->id;
+            $t_pro          = $request->t_pro;
+
+            $pro = Provisionsocial::where('user_id', $id)->where('taller_id',$taller_id)->count();
+
+            if($pro == 0){
+
+                $p = new Provisionsocial;
+                $p->taller_id     = $taller_id;
+                $p->user_id       = $id;
+                $p->s_valor       = $request->s_valor;
+                $p->s_tercero     = $request->s_tercero;
+                $p->s_cuarto      = $request->s_cuarto;
+                $p->s_vacaciones  = $request->s_vacaciones;
+                $p->s_res         = $request->s_res;
+                $p->save();
+                
+                $po = Provisionsocial::where('user_id', $id)->get()->last();
+
+                foreach($t_pro as $key=>$m){
+                    $datos = array (
+                     'provisionsocial_id' =>$po->id,
+                     'nombre_em'          =>$m['nombre_em'],
+                     'dias'               =>$m['dias'],
+                     'v_recibido'         =>$m['v_recibido'],
+                     'd_tercero'          =>$m['d_tercero'],
+                     'd_cuarto'           =>$m['d_cuarto'],
+                     'vacaciones'         =>$m['vacaciones'],
+                     'f_reserva'          =>$m['f_reserva'],
+                     'created_at'        => now(),
+                     'updated_at'        => now(),
+              
+                
+                    );
+                    Movimientoprovision::insert($datos);
+                } //endforeach
+                return response(array(
+                    'success' => true,
+                    'estado'  => 'guardado',
+                    'message' => 'Anexo Provision de Beneficio Social creado correctamente'
+                ),200,[]);    
+            
+            } elseif($pro == 1){
+                $ids=[];
+                $p = Provisionsocial::where('user_id', $id)->where('taller_id',$taller_id)->first();     
+                $p->taller_id     = $taller_id;
+                $p->user_id       = $id;
+                $p->s_valor       = $request->s_valor;
+                $p->s_tercero     = $request->s_tercero;
+                $p->s_cuarto      = $request->s_cuarto;
+                $p->s_vacaciones  = $request->s_vacaciones;
+                $p->s_res         = $request->s_res;
+                $p->save();
+
+                $mp = Movimientoprovision::where('provisionsocial_id',$p->id)->get();
+                foreach($mp as $i){
+                    $ids[]=$i->id;
+                }
+                $detelemovimientoprovision = Movimientoprovision::destroy($ids);
+
+                $new = Provisionsocial::where('user_id', $id)->get()->last();
+
+                foreach($t_pro as $key=>$m){
+                    $datos = array (
+                     'provisionsocial_id' =>$new->id,
+                     'nombre_em'          =>$m['nombre_em'],
+                     'dias'               =>$m['dias'],
+                     'v_recibido'         =>$m['v_recibido'],
+                     'd_tercero'          =>$m['d_tercero'],
+                     'd_cuarto'           =>$m['d_cuarto'],
+                     'vacaciones'         =>$m['vacaciones'],
+                     'f_reserva'          =>$m['f_reserva'],
+                     'created_at'        => now(),
+                     'updated_at'        => now(),
+                    
+                    );
+                    Movimientoprovision::insert($datos);
+                } //endforeach
+                return response(array(
+                    'success' => true,
+                    'estado'  => 'actualizado',
+                    'message' => 'Anexo Provision de Beneficio Social Actualizado correctamente'
+                ),200,[]);  
+            }//endelseif           
+        }//fin metodo provision
+
+
+        public function ObtenerProvison(Request $request){
+
+            $id =Auth::id();
+            $taller_id     = $request->id;
+            $no = Provisionsocial::where('user_id', $id)->where('taller_id',$taller_id)->count();
+
+            if($no == 1){
+
+                $n = Provisionsocial::where('user_id', $id)->where('taller_id',$taller_id)->first();
+                $m = Movimientoprovision::select( 'nombre_em','dias','v_recibido','d_tercero','d_cuarto','vacaciones','f_reserva')->where('provisionsocial_id',  $n->id)->get();
+          
+                return response(array(
+                    'datos'   => true,
+                    'pro'   => $m, 
+                  
+                   
+                ),200,[]);         
+            }else{
+                return response(array(
+                'datos' => false,
+            ),200,[]);
+
+            } //fin else
+
+        }//end provision obtener
 
 }

@@ -141,8 +141,8 @@
         <tbody>
             <tr class="bg-secondary">
                 <td class="text-left font-weight-bold">SUMAN</td>
-                <td class="text-center font-weight-bold">@{{sumas.td}}</td>
-                <td class="text-center font-weight-bold">@{{sumas.th}}</td>
+                <td class="text-right font-weight-bold">@{{sumas.td}}</td>
+                <td class="text-right font-weight-bold">@{{sumas.th}}</td>
             </tr>
 
         </tbody>

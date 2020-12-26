@@ -389,6 +389,18 @@ class Taller extends Model
         return $this->hasMany('App\Conciliacionbancaria');
     }
     
+    public function retencionivas(){
+        return $this->hasMany('App\Retencioniva');
+    }
+    
+    public function nominaempleados(){ 
+        return $this->hasMany('App\Nominaempleado');
+    }
+
+    public function provisionsocial(){
+        return $this->hasMany('App\Provisionsocial');
+     }
+    
     
 }
 

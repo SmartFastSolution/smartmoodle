@@ -379,6 +379,20 @@ route::post('/sistema/admin/taller/libro-obtener-banco', 'TallerContabilidadCont
 
 route::post('/sistema/admin/taller/conciliacion_bancaria', 'TallerContabilidadController@ConciliacionBancaria')->name('conciliacion_bancaria');
 route::post('/sistema/admin/taller/conciliacion-obtener-bancaria', 'TallerContabilidadController@ObtenerConciliacionB')->name('conciliacionbancaria.obtener');
+
+
+
+
+route::post('/sistema/admin/taller/retencion_iva', 'TallerContabilidadController@RetencionIva')->name('retencion_iva');
+route::post('/sistema/admin/taller/retencion-obtener-iva', 'TallerContabilidadController@ObtenerRetencionIva')->name('retencioniva.obtener');
+
+route::post('/sistema/admin/taller/nomina_empleado', 'TallerContabilidadController@NominaEmpleado')->name('nomina_empleado');
+route::post('/sistema/admin/taller/nomina-obtener-empleado', 'TallerContabilidadController@obtenerNomina')->name('nominaempleado.obtener');
+
+route::post('/sistema/admin/taller/provision_social', 'TallerContabilidadController@ProvisionB')->name('provision_social');
+route::post('/sistema/admin/taller/provision-obtener-beneficio', 'TallerContabilidadController@ObtenerProvison')->name('provisionbeneficio.obtener');
+
+
 //
 route::post('/sistema/homedoc/respuesta/taller1/{idtaller}', 'TallerDocenteController@store1')->name('taller1.docente');
 route::get('/sistema/admin/create', 'AdminController@admin')->name('admin.create');
