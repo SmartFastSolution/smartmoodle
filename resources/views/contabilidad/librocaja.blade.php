@@ -1,44 +1,24 @@
 <div id="librocaja" class="border border-danger p-4">
     <h2 class="text-center display-4 font-weight-bold text-danger">Anexos de Control Interno</h2>
-    <h2 class="text-center display-4 font-weight-bold text-danger">Libro Caja</h2>
-    <div class="row p-3  mb-2 justify-content-center ">
-        <div class="col-5">
-            <input class="form-control text-center" type="text" v-model="nombre" placeholder="Nombre de la Empresa"
+    <h1 class="text-center text-danger font-weight-bold mt-2">Libro Caja</h1>
+
+
+    <div class="row p-4  mb-3 justify-content-center ">
+        <div class="col-5 mb-3">
+            <input class="form-control text-center" type="text" v-model="nombre" placeholder="Nombre de la empresa"
                 name="">
-        </div>
-    </div>
-    <div class="form-row mb-3 justify-content-center">
-        <div class="col col-lg-3">
-            <input type="date" name="fecha" v-model="caja.fecha" class="form-control text-center" required>
-        </div>
-        <div class="col col-lg-5">
-            <input type="text" class="form-control" v-model="caja.detalle" placeholder="Detalle">
-        </div>
-        <div class="col col-lg-2">
-            <input type="number" class="form-control" v-model="caja.debe" placeholder="Debe">
-        </div>
-        <div class="col col-lg-2">
-            <input type="number" class="form-control" v-model="caja.haber" placeholder="Haber">
-            <br>
-        </div>
-        <div class="col col-lg-2">
-            <input type="number" class="form-control" v-model="caja.saldo" placeholder="Saldo">
 
         </div>
-
-        <a v-if="!update" href="#" class="btn btn-outline-danger  " @click.prevent="agregarRegistro()">Agregar
-            Registro</a>
-        <a v-if="update" href="#" class="btn btn-outline-danger  " @click.prevent="actualizarLibroCaja()">Actualizar
-            Registro</a>
     </div>
-    <table class="table table-bordered table-sm mb-2">
+
+    <table class="table table-bordered table-sm">
         <thead>
             <tr class="text-center bg-dark">
                 <th width="100">Fecha</th>
                 <th width="300">Detalle</th>
-                <th>Debe</th>
-                <th>Haber</th>
-                <th>Saldo</th>
+                <th width="100">Debe</th>
+                <th width="100">Haber</th>
+                <th width="100">Saldo</th>
                 <th class="text-center" v-if="libros_caja.length >=1" colspan="2">ACCIONES</th>
             </tr>
         </thead>
@@ -50,17 +30,16 @@
                 <td align="right">@{{decimales(caja.haber)}}</td>
                 <td align="right">@{{decimales(caja.saldo)}}</td>
                 <td align="center" width="50">
-                    <a @click.prevent="deleteLibroCaja(index)" class="btn btn-danger">
+                    <a @click.prevent="WarningEliminarLibro(index)" class="btn btn-danger">
                         <i class="fas fa-trash-alt"></i>
                     </a>
                 </td>
                 <td align="center" width="50">
-                    <a @click.prevent="editLibroCaja(index)" class="btn btn-warning">
+                    <a @click.prevent="editlibrocajafuera(index)" class="btn btn-warning">
                         <i class="fas fa-edit"></i>
                     </a>
                 </td>
             </tr>
-
             <tr class="bg-secondary">
                 <td class="text-left font-weight-bold">SUMAN</td>
                 <td class="text-left font-weight-bold"></td>
@@ -69,8 +48,14 @@
             </tr>
         </tbody>
     </table>
-    <div class="row justify-content-center">
-        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="guardarLibro()">Guardar Libro Caja</a>
 
+    <div class="row justify-content-center mb-2">
+        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirLibro()">Agregar Detalle</a>
     </div>
+
+    <div class="row justify-content-center">
+        <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarLibro()">Guardar Libro Caja</a>
+    </div>
+    <br>
+    @include ('contabilidad.modallibrocaja')
 </div>

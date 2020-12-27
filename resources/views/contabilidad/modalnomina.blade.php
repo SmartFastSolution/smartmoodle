@@ -34,8 +34,80 @@
                             <div class="tab-pane fade " id="desarollo-nomina" role="tabpanel"
                                 aria-labelledby="desarollo-nomina-tab">
                                 <h1 class="text-center text-danger font-weight-bold mt-2">DESARROLLO DE NÓMINA</h1>
-                                <h3>hi1</h3>
                             </div>
+                            <h4 class="text-center text-success font-weight-bold mt-2">Calculo Préstamo Hipotecario</h4>
+                            <div class="row">
+                                <div class="col">
+                                    <td width="100">
+                                        <input type="number" class="form-control form-control-sm" v-model="calculo.valor" placeholder="Valor ">
+                                    </td>
+
+                                </div>
+                                <div class="col">
+                                    <td width="100">
+                                        <input type="number" class="form-control form-control-sm" v-model="calculo.tiempo" placeholder="Tiempo ">
+                                    </td>
+                                </div>
+                                <div class="col">
+                                    <td width="100">
+                                        <input type="number" class="form-control form-control-sm"  v-model="calculo.interes" placeholder="Interes">
+                                    </td>
+                                </div>
+                                <div class="col">
+                                    <td width="100">
+                                        <a href="#" class="addDiario btn btn-outline-success  btn-sm"
+                                            @click.prevent="calculoHipo()">Calculo</a>
+                                    </td>
+                                </div>
+                                <div class="col">
+                                    <td width="150">
+                                        <input type="number" v-model="calculo.total" class="form-control form-control-sm"
+                                            placeholder="Resultado">
+                                    </td>
+                                </div>
+
+                            </div>
+                            <br>
+
+                            <h4 class="text-center text-success font-weight-bold mt-2">Calculo Préstamo Quirografario
+                            </h4>
+                            <div class="row">
+                                <div class="col">
+                                    <td width="100">
+                                        <input type="number" class="form-control form-control-sm" v-model="calculo1.valor" placeholder="valor ">
+                                    </td>
+
+                                </div>
+                                <div class="col">
+                                    <td width="100">
+                                        <input type="number" class="form-control form-control-sm"  v-model="calculo1.mes" placeholder="Mes">
+                                    </td>
+                                </div>
+                                <div class="col">
+                                    <td width="100">
+                                        <input type="number" class="form-control form-control-sm" v-model="calculo1.interes" placeholder="Interes">
+                                    </td>
+                                </div>
+                                <div class="col">
+                                    <td width="100">
+                                        <a href="#" class="addDiario btn btn-outline-success btn-sm"
+                                            @click.prevent="calculoquiro()">Calculo</a>
+                                    </td>
+                                </div>
+                                <div class="col">
+                                    <td width="150">
+                                        <input type="number" v-model="calculo1.total" class="form-control form-control-sm"
+                                            placeholder="Resultado">
+                                    </td>
+                                </div>
+
+                            </div>
+                            <br>
+
+
+
+
+
 
 
                         </div>

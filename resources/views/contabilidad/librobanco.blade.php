@@ -10,43 +10,18 @@
         </div>
     </div>
 
-    <div class="form-row mb-8 justify-content-center">
-
-        <div class="col col-lg-3">
-            <input type="date" v-model="banco.fecha" class="form-control" required>
+    <div class="row">
+        <div class="col">
+            <input type="text" class="form-control" v-model="n_banco" placeholder="Nombre Del Banco" align="left"
+                required>
         </div>
-        <div class="col col-lg-5">
-            <input type="text" class="form-control" v-model="banco.detalle" placeholder="Detalle">
-        </div>
-        <div class="col col-lg-2">
-            <input type="number" class="form-control" v-model="banco.cheque" placeholder="ch/">
-        </div>
-        <div class="col col-lg-2">
-            <input type="number" class="form-control" v-model="banco.debe" placeholder="Debe">
-            <br>
-        </div>
-        <div class="col col-lg-2">
-            <input type="number" class="form-control text-center" v-model="banco.haber" placeholder="Haber">
-
-        </div>
-        <div class="col col-lg-2">
-            <input type="number" class="form-control" v-model="banco.saldo" placeholder="Saldo">
-
-        </div>
-        <a v-if="!update" href="#" class="btn btn-outline-danger  " @click.prevent="agregarBanco()">Agregar Registro</a>
-        <a v-if="update" href="#" class="btn btn-outline-danger  " @click.prevent="actualizarLibroBanco()">Actualizar
-            Registro</a>
-    </div>
-    <br>
-    <div class="form-row mb-8 justify-content-center">
-        <div class="col col-lg-5">
-            <input type="text" class="form-control" v-model="n_banco" placeholder="Nombre Del Banco" align="left" required>
-        </div>
-        <div class="col col-lg-5">
-            <input type="text" class="form-control" v-model="c_banco" placeholder="Cuenta de Banco" align="right" required>
+        <div class="col">
+            <input type="text" class="form-control" v-model="c_banco" placeholder="Cuenta de Banco" align="right"
+                required>
         </div>
     </div>
     <br>
+
     <table style="border: hidden" class="table table-bordered table-sm mb-2">
         <thead style="border: hidden">
             <tr style="border: hidden" class="text-center bg-dark">
@@ -63,17 +38,17 @@
             <tr style="border: hidden" v-for="(banco, index) in lb_banco">
                 <td align="left">@{{formatoFecha(banco.fecha)}}</td>
                 <td align="left">@{{banco.detalle}}</td>
-                <td align="center">@{{banco.cheque}}</td>
+                <td align="left">@{{banco.cheque}}</td>
                 <td align="right">@{{decimales(banco.debe)}}</td>
                 <td align="right">@{{decimales(banco.haber)}}</td>
                 <td align="right">@{{decimales(banco.saldo)}}</td>
                 <td align="center" width="50">
-                    <a @click.prevent="deleteLibroBanco(index)" class="btn btn-danger">
+                    <a @click.prevent="WarningEliminarLibro(index)" class="btn btn-danger">
                         <i class="fas fa-trash-alt"></i>
                     </a>
                 </td>
                 <td align="center" width="50">
-                    <a @click.prevent="editLibroBanco(index)" class="btn btn-warning">
+                    <a @click.prevent="editLibroBancoFuera(index)" class="btn btn-warning">
                         <i class="fas fa-edit"></i>
                     </a>
                 </td>
@@ -88,10 +63,18 @@
             </tr>
         </tbody>
     </table>
-    <div class="row justify-content-center">
-        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="guardarlbBAnco()">Guardar Libro Banco</a>
 
+
+
+    <div class="row justify-content-center mb-2">
+        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirLibroB()">Agregar </a>
     </div>
 
+    <div class="row justify-content-center">
+        <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarlbBAnco()">Guardar Libro Banco</a>
+    </div>
+    <br>
+
+    @include ('contabilidad.modallibrobanco')
 
 </div>

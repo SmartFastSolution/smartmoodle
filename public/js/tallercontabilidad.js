@@ -9574,17 +9574,22 @@ const librocaja = new Vue({
     libros_caja:[], //donde se almacenara todos los datos del libro CAJA
     caja:{ // variables a utilizar para el libro CAJA
       fecha:'',
+      edit:false,
       detalle:'',
       debe:'',
       haber:'',
       saldo:'',
+    },
+    eliminar:{
+      index:'',
+      nombre:''
     },
     suman:{ //suma total del libro CAJA
       debe:0,
       haber:0,
     },
     update: false,
-    registro_id:0
+    registro_id:'',
   },
   mounted: function() {
     this.obtenerLibroCaja();
@@ -9625,6 +9630,12 @@ const librocaja = new Vue({
       this.suman.haber = total2.toFixed(2);
     },
 
+    abrirLibro(){ //solo para acceder al modal para agregar todo pilas 
+      this.update             = false;   
+     $('#libro-caja').modal('show');
+   }, //fin de metodo abrirtransaccion
+
+
     agregarRegistro(){
          
       if(this.caja.fecha.trim() === ''){
@@ -9656,13 +9667,10 @@ const librocaja = new Vue({
 
     }, // function agregarregistro
  
-    deleteLibroCaja(index){
-     this.libros_caja.splice(index, 1);
-     this.totales();
-    },
+ 
 
     editLibroCaja(index){
-      this.update = true;
+      this.caja.edit =true;
       this.registro_id  = index;
       this.caja.fecha   = this.libros_caja[index].fecha;
       this.caja.detalle = this.libros_caja[index].detalle;
@@ -9670,6 +9678,32 @@ const librocaja = new Vue({
       this.caja.haber   = this.libros_caja[index].haber;
       this.caja.saldo   = this.libros_caja[index].saldo;
     },
+
+
+    editlibrocajafuera(index){
+
+      this.caja.edit =true;
+      this.registro_id  = index;
+      this.caja.fecha   = this.libros_caja[index].fecha;
+      this.caja.detalle = this.libros_caja[index].detalle;
+      this.caja.debe    = this.libros_caja[index].debe;
+      this.caja.haber   = this.libros_caja[index].haber;
+      this.caja.saldo   = this.libros_caja[index].saldo;
+      $('#libro-caja').modal('show');
+
+    },//fin editlibrocajafuera
+
+
+    cancelarEditlibro(){
+
+      this.caja.fecha   =''
+      this.caja.detalle =''
+      this.caja.debe    =''
+      this.caja.haber   =''
+      this.caja.saldo   =''
+      this.caja.edit       =false;
+    },
+
 
     actualizarLibroCaja(){
 
@@ -9689,18 +9723,53 @@ const librocaja = new Vue({
        this.libros_caja[id].debe     = this.caja.debe;
        this.libros_caja[id].haber    = this.caja.haber;
        this.libros_caja[id].saldo    = this.caja.saldo;
-
-       this.caja.fecha   =''
-       this.caja.detalle =''
-       this.caja.debe    =''
-       this.caja.haber   =''
-       this.caja.saldo   =''
-       this.update       = false;
+       this.cancelarEditlibro()
        this.totales();
-       
+       toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+        });
       }
      
     },//fin de actualizar libro de caja
+
+    eliminarLibro(){
+      let id = this.eliminar.index;
+      this.libros_caja.splice(id, 1);
+      this.eliminar.index ='';
+      this.eliminar.nombre ='';
+      $('#eliminar-libro').modal('hide'); // en prueba para eliminar
+    }, //fin metodo eliminar compra 
+
+    deleteLibroCaja(index){
+      this.libros_caja.splice(index, 1);
+      this.totales();
+     },
+
+     WarningEliminarLibro(id){
+      this.eliminar.index = id;
+      this.eliminar.nombre = this.libros_caja[id].detalle;
+
+      Swal.fire({
+        title: 'Seguro que deseas eliminar el Registro de '+this.eliminar.nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+this.eliminar.nombre,
+            'success'
+          );
+          this.libros_caja.splice(id, 1);
+        }
+      });
+    }, //fin metodo warningeliminarcompra
+
+
       guardarLibro : function(){
 
         if(this.libros_caja.length == 0){
@@ -9750,7 +9819,7 @@ const librocaja = new Vue({
                 }).catch(function(error){
 
                 });
-      }
+      },
 
   },
 
@@ -9764,14 +9833,19 @@ const arqueo_caja = new Vue ({
  
   data:{
     id_taller : taller,
+    libros_caja:[],
+    nombre_lb:'',
     t_saldo:[], // array de saldos 
     saldo:{
+      edit:false,
        detalle:'',
        s_debe   :'',
        s_haber  :'',
     },
+
     t_exis:[], // array de existencias
     exis:{
+      edit:false,
       detalle:'',
       e_debe   :'',
       e_haber  :'',
@@ -9780,13 +9854,47 @@ const arqueo_caja = new Vue ({
       td:0,
       th:0,
     },  
-    //update: false,
+    eliminar:{
+      index:'',
+      nombre:''
+    },
+    update: false,
+    registro_id:'',
     
   },
   mounted: function() {
     this.ObtenerArqueo();
+    this.obtenerLibroCaja();
   },
   methods:{
+
+    obtenerLibroCaja: function(){
+      let _this = this;
+      let url ='/sistema/admin/taller/anexo-obtener-caja';
+            axios.post(url,{
+              id: _this.id_taller, 
+              }).then(response =>{
+                if(response.data.datos == true){
+                  
+                    this.libros_caja = response.data.banexocaja;
+                    this.nombre_lb = response.data.nombre;
+                   
+                }
+              }).catch(function(error){
+
+              });
+    }, //end function obtener libro caja
+
+
+    formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },// fin fecha
     decimales(saldo){
       if (saldo !== null && saldo !== '' && saldo !== 0) {
          let total = Number(saldo).toFixed(2);
@@ -9839,6 +9947,12 @@ const arqueo_caja = new Vue ({
      this.sumas.th = th1.toFixed(2);
 
     },
+
+    abrirArqueo(){ //solo para acceder al modal para agregar todo pilas 
+      this.update             = false;   
+     $('#arqueo-caja').modal('show');
+   }, //fin de metodo abrirtransaccion
+
     agregarsaldo(){
        
       if(this.saldo.detalle.trim() === ''){
@@ -9891,66 +10005,188 @@ const arqueo_caja = new Vue ({
 
     },//fin metodo agregar existencia
 
+  
+
+        
+    editSaldo(index){
+      this.registro_id = index;
+      this.saldo.edit= true;
+      this.saldo.detalle   = this.t_saldo[index].detalle;
+      this.saldo.s_debe    = this.t_saldo[index].s_debe;
+      this.saldo.s_haber   = this.t_saldo[index].s_haber;
+     
+    },//end edit saldos
+
+     editSaldoFuera(index){
+      this.registro_id = index;
+      this.saldo.edit= true;
+      this.saldo.detalle   = this.t_saldo[index].detalle;
+      this.saldo.s_debe    = this.t_saldo[index].s_debe;
+      this.saldo.s_haber   = this.t_saldo[index].s_haber;
+      $('#arqueo-caja').modal('show');     
+     
+    },//end edit saldos
+
+     
+
+    editExis(index){
+      this.exis.edit= true;
+      this.registro_id = index;
+      this.exis.detalle   = this.t_exis[index].detalle;
+      this.exis.e_debe    = this.t_exis[index].e_debe;
+      this.exis.e_haber   = this.t_exis[index].e_haber;
+      
+    },//end edit EXISTENCIAS
+   
+    editExisFuera(index){
+      this.exis.edit= true;
+      this.registro_id = index;
+      this.exis.detalle   = this.t_exis[index].detalle;
+      this.exis.e_debe    = this.t_exis[index].e_debe;
+      this.exis.e_haber   = this.t_exis[index].e_haber;
+      $('#arqueo-caja').modal('show');   
+    },//end edit EXISTENCIAS
+    
+    cancelarEditSaldo(){
+      this.saldo.detalle =''
+      this.saldo.s_debe  =''
+      this.saldo.s_haber =''
+      this.saldo.edit       =false;
+     
+    }, //fin de cancelar edicion
+
+    cancelarEditExis(){
+      this.exis.detalle =''
+      this.exis.e_debe  =''
+      this.exis.e_haber =''
+      this.exis.edit       =false;
+     
+    }, //fin de cancelar edicion
+
+
+
+    actualizarSaldo (){
+      if(this.saldo.detalle == ''){
+        toastr.error("El campo Detalle es obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+      }else {
+        
+        let index  = this.registro_id;
+        
+        this.t_saldo[index].detalle      =   this.saldo.detalle;
+        this.t_saldo[index].s_debe       =   this.saldo.s_debe;
+        this.t_saldo[index].s_haber      =   this.saldo.s_haber;
+       
+        this.cancelarEditSaldo();
+        this.totales_s();
+        toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+          "timeOut": "3000"
+          });
+      }
+    }, //fin de function  actualizar 
+
+    actualizarExis (){
+      if(this.exis.detalle == ''){
+        toastr.error("El campo Detalle es obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+      }else {
+        
+        let index  = this.registro_id;
+        
+        this.t_exis[index].detalle      =   this.exis.detalle;
+        this.t_exis[index].e_debe       =   this.exis.e_debe;
+        this.t_exis[index].e_haber      =   this.exis.e_haber;
+       
+        this.cancelarEditExis();
+        this.totales_s();
+        toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+          "timeOut": "3000"
+          });
+      }
+    }, //fin de function  actualizar 
+
+    
+    eliminarSaldo(){
+      let id = this.eliminar.index;
+      this.t_saldo.splice(id, 1);
+      this.eliminar.index ='';
+      this.eliminar.nombre ='';
+      $('#eliminar-arqueo').modal('hide'); // en prueba para eliminar
+    }, //fin metodo eliminar compra 
+
+    
+    eliminarExis(){
+      let id = this.eliminar.index;
+      this.t_exis.splice(id, 1);
+      this.eliminar.index ='';
+      this.eliminar.nombre ='';
+      $('#eliminar-arqueo2').modal('hide'); // en prueba para eliminar
+    }, //fin metodo eliminar compra 
+
+
     deleteSaldo(index){
       this.t_saldo.splice(index, 1);
       this.totales_s();
      },// delete saldo
+
     deleteExis(index){
       this.t_exis.splice(index, 1);
       this.totales_s();
      },// delete existencias
 
-     limpiar(){
-      this.saldo.detalle ='';
-      this.saldo.s_debe  ='';
-      this.saldo.s_haber ='';
-      this.exis.detalle  ='';
-      this.exis.e_debe   ='';
-      this.exis.e_haber  ='';
 
-    },//fin metodo limpiar todos los campos
-    
 
-     editSaldo(index){
-      this.update = index;
-      
-      this.saldo.detalle   = this.t_saldo[index].detalle;
-      this.saldo.s_debe    = this.t_saldo[index].s_debe;
-      this.saldo.s_haber   = this.t_saldo[index].s_haber;
-      $('#ed_saldos').modal('show');     
-     
-    },//end edit saldos
+     WarningEliminarSaldo(id){
+      this.eliminar.index = id;
+      this.eliminar.nombre = this.t_saldo[id].detalle;
 
-     updateSaldo(){
-       var i = this.update;
-       this.t_saldo[i].detalle = this.saldo.detalle;
-       this.t_saldo[i].s_debe  = this.saldo.s_debe;
-       this.t_saldo[i].s_haber = this.saldo.s_haber;
-       $('#ed_saldos').modal('hide');  
-       this.limpiar();
-       this.totales_s();
-     
+      Swal.fire({
+        title: 'Seguro que deseas eliminar este Registro '+this.eliminar.nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+this.eliminar.nombre,
+            'success'
+          );
+          this.t_saldo.splice(id, 1);
+        }
+      });
+    }, //fin metodo warningeliminarcompra
 
-     }, //fin udpate saldo
+    WarningEliminarExis(id){
+      this.eliminar.index = id;
+      this.eliminar.nombre = this.t_exis[id].detalle;
 
-    editExis(index){
-      this.update =  index;
-      this.exis.detalle   = this.t_exis[index].detalle;
-      this.exis.e_debe    = this.t_exis[index].e_debe;
-      this.exis.e_haber   = this.t_exis[index].e_haber;
-      $('#ed_exis').modal('show');   
-    },//end edit EXISTENCIAS
-    updateExis(){
-      var i = this.update;
-      this.t_exis[i].detalle = this.exis.detalle;
-      this.t_exis[i].e_debe  = this.exis.e_debe;
-      this.t_exis[i].e_haber = this.exis.e_haber;
-      $('#ed_exis').modal('hide');  
-      this.limpiar();
-      this.totales_s();
-    
+      Swal.fire({
+        title: 'Seguro que deseas eliminar este Registro '+this.eliminar.nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+this.eliminar.nombre,
+            'success'
+          );
+          this.t_exis.splice(id, 1);
+        }
+      });
+    }, //fin metodo warningeliminarcompra
 
-    }, //fin udpate EXISTENCIAS
+   
 
    guardaArqueo: function(){
 
@@ -10028,8 +10264,12 @@ const librosbanco = new Vue({
     c_banco:'',
 
      lb_banco:[],
-
+     eliminar:{
+      index:'',
+      nombre:''
+    },
       banco:{
+      edit:false,
       fecha:'',
       detalle:'',
       cheque:'',
@@ -10042,7 +10282,7 @@ const librosbanco = new Vue({
       haber:0,
     },
     update: false,
-    registro_id:0
+    registro_id:'',
   },
   mounted: function() {
     this.obtenerLibroBanco();
@@ -10084,6 +10324,11 @@ const librosbanco = new Vue({
         this.suman.haber = total2.toFixed(2);
       },
 
+      abrirLibroB(){ //solo para acceder al modal para agregar todo pilas 
+        this.update             = false;   
+       $('#libro-banco').modal('show');
+     }, //fin de metodo abrirtransaccion
+
       agregarBanco(){
         if(this.banco.fecha.trim() === ''){
           toastr.error("La fecha es obligatoria ", "Smarmoddle", {
@@ -10115,13 +10360,9 @@ const librosbanco = new Vue({
 
       },  // function agregarbanco end
 
-      deleteLibroBanco(index){
-        this.lb_banco.splice(index, 1);
-        this.totales();
-      },//finde delete
 
       editLibroBanco(index){
-        this.update = true;
+        this.banco.edit =true;
         this.registro_id   = index;
         this.banco.fecha   = this.lb_banco[index].fecha;
         this.banco.detalle = this.lb_banco[index].detalle;
@@ -10130,6 +10371,32 @@ const librosbanco = new Vue({
         this.banco.haber   = this.lb_banco[index].haber;
         this.banco.saldo   = this.lb_banco[index].saldo;
       }, //end edit
+
+      editLibroBancoFuera(index){
+        this.banco.edit =true;
+        this.registro_id   = index;
+        this.banco.fecha   = this.lb_banco[index].fecha;
+        this.banco.detalle = this.lb_banco[index].detalle;
+        this.banco.cheque  = this.lb_banco[index].cheque;
+        this.banco.debe    = this.lb_banco[index].debe;
+        this.banco.haber   = this.lb_banco[index].haber;
+        this.banco.saldo   = this.lb_banco[index].saldo;
+        $('#libro-banco').modal('show');
+      }, //end edit
+   
+   
+      cancelarEditlibroBanco(){
+
+        this.banco.fecha   =''
+        this.banco.detalle =''
+        this.banco.cheque  =''
+        this.banco.debe    =''
+        this.banco.haber   =''
+        this.banco.saldo   =''
+        this.banco.edit       =false;
+      },
+    
+  
 
     actualizarLibroBanco(){
 
@@ -10151,18 +10418,54 @@ const librosbanco = new Vue({
         this.lb_banco[id].haber       = this.banco.haber;
         this.lb_banco[id].saldo       = this.banco.saldo;
 
-        this.banco.fecha     =''
-        this.banco.detalle   =''
-        this.banco.cheque    =''
-        this.banco.debe      =''
-        this.banco.haber     =''
-        this.banco.saldo     =''
-        this.update          = false;
+        this.cancelarEditlibroBanco();
         this.totales();
+        toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+          "timeOut": "3000"
+          });
       
        }
    
     },//fin de actualizar libro Banco
+
+    eliminarLibro(){
+      let id = this.eliminar.index;
+      this.lb_banco.splice(id, 1);
+      this.eliminar.index ='';
+      this.eliminar.nombre ='';
+      $('#eliminar-banco').modal('hide'); // en prueba para eliminar
+    }, //fin metodo eliminar compra 
+
+    deleteLibroBanco(index){
+      this.lb_banco.splice(index, 1);
+      this.totales();
+    },//finde delete
+
+    WarningEliminarLibro(id){
+      this.eliminar.index = id;
+      this.eliminar.nombre = this.lb_banco[id].detalle;
+
+      Swal.fire({
+        title: 'Seguro que deseas eliminar el Registro de '+this.eliminar.nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+this.eliminar.nombre,
+            'success'
+          );
+          this.lb_banco.splice(id, 1);
+        }
+      });
+    }, //fin metodo warningeliminarcompra
+
+
 
      guardarlbBAnco(){
      
@@ -10239,21 +10542,25 @@ const conciliacionb = new Vue({
     
      c_saldos:[],
      saldo:{
+       fecha:'',
       detalle:'',
       saldo:'',
      },
      c_debitos:[],
      debito:{
+      fecha:'',
        detalle:'',
        saldo:'',
      },
      c_creditos:[],
      credito:{
+      fecha:'',
        detalle:'',
        saldo:'',
      },
      c_cheques:[],
      cheques:{
+       fecha:'',
        detalle:'',
        saldo:'',
      },
@@ -10340,7 +10647,12 @@ const conciliacionb = new Vue({
 
     agregarSaldo(){
        
-      if(this.saldo.detalle.trim() === ''){
+      if(this.saldo.fecha.trim() === ''){
+        toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+    }else if(this.saldo.detalle.trim() === ''){
         toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
           "timeOut": "3000"
       });
@@ -10350,12 +10662,12 @@ const conciliacionb = new Vue({
         "timeOut": "3000"
     });
     } else{
-        var saldo ={detalle:this.saldo.detalle, saldo:this.saldo.saldo,}
+        var saldo ={fecha:this.saldo.fecha, detalle:this.saldo.detalle, saldo:this.saldo.saldo,}
         this.c_saldos.push(saldo);
         toastr.success("El Valor agregado correctamente", "Smarmoddle", {
           "timeOut": "3000"
       });
-       
+      this.saldo.fecha =''
       this.saldo.detalle =''
       this.saldo.saldo  =''
       this.totales();
@@ -10365,7 +10677,12 @@ const conciliacionb = new Vue({
 
     agregarCreditos(){
        
-      if(this.credito.detalle.trim() === ''){
+      if(this.credito.fecha.trim() === ''){
+        toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+    }else if(this.credito.detalle.trim() === ''){
         toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
           "timeOut": "3000"
       });
@@ -10375,12 +10692,12 @@ const conciliacionb = new Vue({
         "timeOut": "3000"
     });
     } else{
-        var credito ={detalle:this.credito.detalle, saldo:this.credito.saldo,}
+        var credito ={fecha:this.credito.fecha, detalle:this.credito.detalle, saldo:this.credito.saldo,}
         this.c_creditos.push(credito);
         toastr.success("El Credito agregado correctamente", "Smarmoddle", {
           "timeOut": "3000"
       });
-       
+      this.credito.fecha =''
       this.credito.detalle =''
       this.credito.saldo  =''
       this.totales();
@@ -10390,7 +10707,12 @@ const conciliacionb = new Vue({
 
     agregarDebitos(){
        
-      if(this.debito.detalle.trim() === ''){
+      if(this.debito.fecha.trim() === ''){
+        toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+    }else if(this.debito.detalle.trim() === ''){
         toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
           "timeOut": "3000"
       });
@@ -10400,12 +10722,12 @@ const conciliacionb = new Vue({
         "timeOut": "3000"
     });
     } else{
-        var debito ={detalle:this.debito.detalle, saldo:this.debito.saldo,}
+        var debito ={fecha:this.debito.fecha, detalle:this.debito.detalle, saldo:this.debito.saldo,}
         this.c_debitos.push(debito);
         toastr.success("El Debito agregado correctamente", "Smarmoddle", {
           "timeOut": "3000"
       });
-       
+      this.debito.fecha =''
       this.debito.detalle =''
       this.debito.saldo  =''
       this.totales();
@@ -10415,7 +10737,12 @@ const conciliacionb = new Vue({
 
     agregarCheques(){
           
-          if(this.cheques.detalle.trim() === ''){
+        if(this.cheques.fecha.trim() === ''){
+          toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+
+       }else if(this.cheques.detalle.trim() === ''){
             toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
               "timeOut": "3000"
           });
@@ -10425,12 +10752,13 @@ const conciliacionb = new Vue({
             "timeOut": "3000"
         });
         } else{
-            var cheques ={detalle:this.cheques.detalle, saldo:this.cheques.saldo,}
+            var cheques ={fecha:this.cheques.fecha,detalle:this.cheques.detalle, saldo:this.cheques.saldo,}
             this.c_cheques.push(cheques);
             toastr.success("El Cheque agregado correctamente", "Smarmoddle", {
               "timeOut": "3000"
           });
-          
+
+          this.cheques.fecha =''
           this.cheques.detalle =''
           this.cheques.saldo  =''
           this.totales();
@@ -10456,22 +10784,26 @@ const conciliacionb = new Vue({
 
  
       limpiar(){
+        this.saldo.fecha      ='';     
         this.saldo.detalle    ='';
         this.saldo.saldo      ='';
+        this.debito.fecha     ='';
         this.debito.detalle   ='';
         this.debito.saldo     ='';
+        this.credito.fecha    ='';
         this.credito.detalle  ='';
         this.credito.saldo    ='';
         this.cheques.detalle  ='';
         this.cheques.saldo    ='';
+        this.cheques.fecha    ='';
   
       },//fin metodo limpiar todos los campos
 
       editSaldo(index){
         this.update = index;
-        
+        this.saldo.fecha     = this.c_saldos[index].fecha;
         this.saldo.detalle   = this.c_saldos[index].detalle;
-        this.saldo.saldo    = this.c_saldos[index].saldo;
+        this.saldo.saldo     = this.c_saldos[index].saldo;
        
         $('#conciliacion_saldos').modal('show');     
        
@@ -10479,8 +10811,9 @@ const conciliacionb = new Vue({
   
        updateSaldo(){
          var i = this.update;
+         this.c_saldos[i].fecha   = this.saldo.fecha;
          this.c_saldos[i].detalle = this.saldo.detalle;
-         this.c_saldos[i].saldo  = this.saldo.saldo;
+         this.c_saldos[i].saldo   = this.saldo.saldo;
          $('#conciliacion_saldos').modal('hide');  
          this.limpiar();
          this.totales();
@@ -10490,6 +10823,7 @@ const conciliacionb = new Vue({
 
        editDebitos(index){
         this.update = index;
+        this.debito.fecha   = this.c_debitos[index].fecha;
         this.debito.detalle   = this.c_debitos[index].detalle;
         this.debito.saldo    = this.c_debitos[index].saldo;
        
@@ -10499,6 +10833,7 @@ const conciliacionb = new Vue({
   
        updateDebitos(){
          var i = this.update;
+         this.c_debitos[i].fecha = this.debito.fecha;
          this.c_debitos[i].detalle = this.debito.detalle;
          this.c_debitos[i].saldo  = this.debito.saldo;
        
@@ -10510,6 +10845,7 @@ const conciliacionb = new Vue({
        }, //fin udpate saldo
        editCreditos(index){
         this.update = index;
+        this.credito.fecha   = this.c_creditos[index].fecha;
         this.credito.detalle   = this.c_creditos[index].detalle;
         this.credito.saldo     = this.c_creditos[index].saldo;
        
@@ -10519,6 +10855,7 @@ const conciliacionb = new Vue({
   
        updateCreditos(){
          var i = this.update;
+         this.c_creditos[i].fecha = this.credito.fecha;
          this.c_creditos[i].detalle = this.credito.detalle;
          this.c_creditos[i].saldo   = this.credito.saldo;
        
@@ -10530,6 +10867,7 @@ const conciliacionb = new Vue({
 
        editCheques(index){
         this.update = index;
+        this.cheques.fecha   = this.c_cheques[index].fecha;
         this.cheques.detalle   = this.c_cheques[index].detalle;
         this.cheques.saldo     = this.c_cheques[index].saldo;
        
@@ -10539,6 +10877,7 @@ const conciliacionb = new Vue({
   
        updateCheques(){
          var i = this.update;
+         this.c_cheques[i].fecha = this.cheques.fecha;
          this.c_cheques[i].detalle = this.cheques.detalle;
          this.c_cheques[i].saldo   = this.cheques.saldo;
        
@@ -11383,6 +11722,20 @@ const nomina_em = new Vue({
       index:'',
       nombre:''
     },
+    calculo:{
+
+      valor:'',
+      tiempo:'',
+      interes:'',
+      total :'',
+    },
+    calculo1:{
+
+      valor:'',
+      mes:'',
+      interes:'',
+      total :'',
+    },
     suma:{
      
       s_sueldo:0,
@@ -11407,6 +11760,50 @@ const nomina_em = new Vue({
   },
 
 methods:{
+
+      prestamoHipotecario(valor, tiempo, interes){
+        let total =0;
+        let division = Number(valor)/Number(tiempo);
+        let porcentaje = (division * Number(interes))/100;
+
+        let subtotal = division + porcentaje;
+
+        total = subtotal/12;
+
+        return Number(total).toFixed(2);
+      
+        }, //end prestamo hipotecario
+
+        calculoHipo(){
+           let calculo = this.calculo.valor;
+           let tiempo  = this.calculo.tiempo;
+           let interes = this.calculo.interes;
+          let hipo = this.prestamoHipotecario(calculo,tiempo,interes);                 
+          this.calculo.total = hipo;
+        
+        },//fin calculo 
+
+        prestamoQuirografario(valor, meses, interes){
+          let total =0;
+          let division = Number(valor)/Number(meses);
+          let porcentaje = (division * Number(interes))/100;
+         
+         total = division + porcentaje;
+
+          return Number(total).toFixed(2);
+       },//end prestamo
+
+        calculoquiro(){
+            let valor    = this.calculo1.valor;
+            let mes      = this.calculo1.mes;
+            let interes  = this.calculo1.interes;
+            let hipo      = this.prestamoQuirografario(valor,mes,interes);                 
+           
+            this.calculo1.total = hipo;
+        
+        },//fin calculo 
+
+
   decimales(saldo){
     if (saldo !== null && saldo !== '' && saldo !== 0) {
        let total = Number(saldo).toFixed(2);

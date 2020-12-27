@@ -14,23 +14,29 @@
                         <table class="table table-bordered table-sm">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th align="center" class="text-center" width="50">Fecha</th>
                                     <th align="center" class="text-center">Detalle</th>
                                     <th align="center" class="text-center">Valor</th>
-                                   
+
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>
+                                        <input class="form-control" type="date" v-model="saldo.fecha"
+                                            placeholder="Agrega la fecha" name="">
+                                    </td>
+
                                     <td><input type="text" v-model="saldo.detalle" name="detalle" class="form-control"
                                             required></td>
                                     <td width="125"><input type="number" v-model="saldo.saldo" name="saldo"
-                                            class="form-control" required></td>                                     
+                                            class="form-control" required></td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="agregarSaldo()">Agregar
-                               Saldo</a>
+                                Saldo</a>
 
                         </div>
                     </div>
@@ -56,23 +62,28 @@
                         <table class="table table-bordered table-sm">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th align="center" class="text-center" width="50">Fecha</th>
                                     <th align="center" class="text-center">Detalle</th>
                                     <th align="center" class="text-center">Valor</th>
-                                   
+
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>
+                                        <input class="form-control" type="date" v-model="debito.fecha"
+                                            placeholder="Agrega la fecha" name="">
+                                    </td>
                                     <td><input type="text" v-model="debito.detalle" name="detalle" class="form-control"
                                             required></td>
                                     <td width="125"><input type="number" v-model="debito.saldo" name="saldo"
-                                            class="form-control" required></td>                                     
+                                            class="form-control" required></td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="agregarDebitos()">Agregar
-                               Debito</a>
+                                Debito</a>
 
                         </div>
                     </div>
@@ -98,23 +109,28 @@
                         <table class="table table-bordered table-sm">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th align="center" class="text-center" width="50">Fecha</th>
                                     <th align="center" class="text-center">Detalle</th>
                                     <th align="center" class="text-center">Valor</th>
-                                   
+
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>
+                                        <input class="form-control" type="date" v-model="credito.fecha"
+                                            placeholder="Agrega la fecha" name="">
+                                    </td>
                                     <td><input type="text" v-model="credito.detalle" name="detalle" class="form-control"
                                             required></td>
                                     <td width="125"><input type="number" v-model="credito.saldo" name="saldo"
-                                            class="form-control" required></td>                                     
+                                            class="form-control" required></td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="agregarCreditos()">Agregar
-                               Credito</a>
+                                Credito</a>
 
                         </div>
                     </div>
@@ -140,23 +156,28 @@
                         <table class="table table-bordered table-sm">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th align="center" class="text-center"width="50">Fecha</th>
                                     <th align="center" class="text-center">Detalle</th>
                                     <th align="center" class="text-center">Valor</th>
-                                   
+
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>
+                                        <input class="form-control" type="date" v-model="cheques.fecha"
+                                            placeholder="Agrega la fecha" name="">
+                                    </td>
                                     <td><input type="text" v-model="cheques.detalle" name="detalle" class="form-control"
                                             required></td>
                                     <td width="125"><input type="number" v-model="cheques.saldo" name="saldo"
-                                            class="form-control" required></td>                                     
+                                            class="form-control" required></td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="agregarCheques()">Agregar
-                               Cheque</a>
+                                Cheque</a>
 
                         </div>
                     </div>
@@ -170,7 +191,8 @@
 <!-- /////////////////////////////////////////////////////////////////////EDITAR CONCILIACION BANCARIA//////////////////////////////////////////////////////// -->
 
 {{-- EDITAR SALDO--}}
-<div class="modal fade" id="conciliacion_saldos" tabindex="-1" role="dialog" aria-labelledby="taller1Label" aria-hidden="true">
+<div class="modal fade" id="conciliacion_saldos" tabindex="-1" role="dialog" aria-labelledby="taller1Label"
+    aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
         <div class="modal-content bg-dark">
             <div class="modal-header">
@@ -185,23 +207,29 @@
                         <table class="table table-bordered table-sm">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th align="center" class="text-center"width="50">FEcha</th>
                                     <th align="center" class="text-center">Detalle</th>
                                     <th align="center" class="text-center">Valor</th>
-                                   
+
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>
+                                        <input class="form-control" type="date" v-model="saldo.fecha"
+                                            placeholder="Agrega la fecha" name="">
+                                    </td>
+
                                     <td><input type="text" v-model="saldo.detalle" name="detalle" class="form-control"
                                             required></td>
                                     <td width="125"><input type="number" v-model="saldo.saldo" name="saldo"
-                                            class="form-control" required></td>                                     
+                                            class="form-control" required></td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="updateSaldo()">Actualizar
-                               Saldo</a>
+                                Saldo</a>
 
                         </div>
                     </div>
@@ -212,9 +240,10 @@
 </div>
 
 {{-- EDITAR DEBITO--}}
-<div class="modal fade" id="conciliacion_debitos" tabindex="-1" role="dialog" aria-labelledby="taller1Label" aria-hidden="true">
+<div class="modal fade" id="conciliacion_debitos" tabindex="-1" role="dialog" aria-labelledby="taller1Label"
+    aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content bg-primary">
+        <div class="modal-content bg-dark">
             <div class="modal-header">
                 <h5 class="modal-title" id="taller1Label">DEBITO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -227,23 +256,29 @@
                         <table class="table table-bordered table-sm">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th align="center" class="text-center" width="50">Fecha</th>
                                     <th align="center" class="text-center">Detalle</th>
                                     <th align="center" class="text-center">Valor</th>
-                                   
+
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>
+                                        <input class="form-control" type="date" v-model="debito.fecha"
+                                            placeholder="Agrega la fecha" name="">
+                                    </td>
+
                                     <td><input type="text" v-model="debito.detalle" name="detalle" class="form-control"
                                             required></td>
                                     <td width="125"><input type="number" v-model="debito.saldo" name="saldo"
-                                            class="form-control" required></td>                                     
+                                            class="form-control" required></td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="updateDebitos()">Actualizar
-                               Debito</a>
+                                Debito</a>
 
                         </div>
                     </div>
@@ -254,7 +289,8 @@
 </div>
 
 {{-- EDITAR CREDITO--}}
-<div class="modal fade" id="conciliacion_creditos" tabindex="-1" role="dialog" aria-labelledby="taller1Label" aria-hidden="true">
+<div class="modal fade" id="conciliacion_creditos" tabindex="-1" role="dialog" aria-labelledby="taller1Label"
+    aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
         <div class="modal-content bg-dark">
             <div class="modal-header">
@@ -269,23 +305,28 @@
                         <table class="table table-bordered table-sm">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th align="center" class="text-center" width="50">Fecha</th>
                                     <th align="center" class="text-center">Detalle</th>
                                     <th align="center" class="text-center">Valor</th>
-                                   
+
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>
+                                        <input class="form-control" type="date" v-model="credito.fecha"
+                                            placeholder="Agrega la fecha" name="">
+                                    </td>
                                     <td><input type="text" v-model="credito.detalle" name="detalle" class="form-control"
                                             required></td>
                                     <td width="125"><input type="number" v-model="credito.saldo" name="saldo"
-                                            class="form-control" required></td>                                     
+                                            class="form-control" required></td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="updateCreditos()">Actualizar
-                               Credito</a>
+                                Credito</a>
 
                         </div>
                     </div>
@@ -297,7 +338,8 @@
 
 
 {{-- EDITAR CHEQUE--}}
-<div class="modal fade" id="conciliacion_cheques" tabindex="-1" role="dialog" aria-labelledby="taller1Label" aria-hidden="true">
+<div class="modal fade" id="conciliacion_cheques" tabindex="-1" role="dialog" aria-labelledby="taller1Label"
+    aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
         <div class="modal-content bg-dark">
             <div class="modal-header">
@@ -312,23 +354,28 @@
                         <table class="table table-bordered table-sm">
                             <thead class="thead-dark">
                                 <tr>
+                                    <th align="center" class="text-center" width="50">Fecha</th>
                                     <th align="center" class="text-center">Detalle</th>
                                     <th align="center" class="text-center">Valor</th>
-                                   
+
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>
+                                        <input class="form-control" type="date" v-model="cheques.fecha"
+                                            placeholder="Agrega la fecha" name="">
+                                    </td>
                                     <td><input type="text" v-model="cheques.detalle" name="detalle" class="form-control"
                                             required></td>
                                     <td width="125"><input type="number" v-model="cheques.saldo" name="saldo"
-                                            class="form-control" required></td>                                     
+                                            class="form-control" required></td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="updateCheques()">Actualizar
-                               Cheque</a>
+                                Cheque</a>
 
                         </div>
                     </div>

@@ -2438,6 +2438,7 @@ class TallerContabilidadController extends Controller
 
                             $datos = array(
                                 'conciliacionbancaria_id' =>$cbs->id,
+                                'fecha'          =>$s['fecha'],
                                 'detalle'        =>$s['detalle'],
                                 'saldo'          =>$s['saldo'],
                                 'created_at'        => now(),
@@ -2450,6 +2451,7 @@ class TallerContabilidadController extends Controller
 
                             $datos = array(
                                 'conciliacionbancaria_id' =>$cbs->id,
+                                'fecha'          =>$s['fecha'],
                                 'detalle'        =>$s['detalle'],
                                 'saldo'          =>$s['saldo'],
                                 'created_at'        => now(),
@@ -2462,6 +2464,7 @@ class TallerContabilidadController extends Controller
 
                             $datos = array(
                                 'conciliacionbancaria_id' =>$cbs->id,
+                                'fecha'          =>$s['fecha'],
                                 'detalle'        =>$s['detalle'],
                                 'saldo'          =>$s['saldo'],
                                 'created_at'        => now(),
@@ -2474,6 +2477,7 @@ class TallerContabilidadController extends Controller
 
                             $datos = array(
                                 'conciliacionbancaria_id' =>$cbs->id,
+                                'fecha'          =>$s['fecha'],
                                 'detalle'        =>$s['detalle'],
                                 'saldo'          =>$s['saldo'],
                                 'created_at'        => now(),
@@ -2532,6 +2536,7 @@ class TallerContabilidadController extends Controller
 
                         $datos = array(
                             'conciliacionbancaria_id' =>$cba->id,
+                            'fecha'          =>$s['fecha'],
                             'detalle'        =>$s['detalle'],
                             'saldo'          =>$s['saldo'],
                             'created_at'        => now(),
@@ -2544,6 +2549,7 @@ class TallerContabilidadController extends Controller
 
                         $datos = array(
                             'conciliacionbancaria_id' =>$cba->id,
+                            'fecha'          =>$s['fecha'],
                             'detalle'        =>$s['detalle'],
                             'saldo'          =>$s['saldo'],
                             'created_at'        => now(),
@@ -2556,6 +2562,7 @@ class TallerContabilidadController extends Controller
 
                         $datos = array(
                             'conciliacionbancaria_id' =>$cba->id,
+                            'fecha'          =>$s['fecha'],
                             'detalle'        =>$s['detalle'],
                             'saldo'          =>$s['saldo'],
                             'created_at'        => now(),
@@ -2568,6 +2575,7 @@ class TallerContabilidadController extends Controller
 
                         $datos = array(
                             'conciliacionbancaria_id' =>$cba->id,
+                            'fecha'          =>$s['fecha'],
                             'detalle'        =>$s['detalle'],
                             'saldo'          =>$s['saldo'],
                             'created_at'        => now(),
@@ -2593,10 +2601,10 @@ class TallerContabilidadController extends Controller
 
             if($cb==1){
                 $a     = Conciliacionbancaria::where('user_id', $id)->where('taller_id',$taller_id)->first();
-            $saldo   = Conciliacionsaldo::select('detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
-            $debito  = Conciliaciondebito::select('detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
-            $credito = Conciliacioncredito::select('detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
-            $cheque  = Conciliacioncheque::select('detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $saldo   = Conciliacionsaldo::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $debito  = Conciliaciondebito::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $credito = Conciliacioncredito::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $cheque  = Conciliacioncheque::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
         
             return response(array(
                 'datos'   => true,

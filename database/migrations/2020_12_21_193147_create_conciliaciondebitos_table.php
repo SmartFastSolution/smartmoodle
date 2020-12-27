@@ -16,6 +16,7 @@ class CreateConciliaciondebitosTable extends Migration
         Schema::create('conciliaciondebitos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('conciliacionbancaria_id');
+            $table->string('fecha');
             $table->string('detalle');
             $table->string('saldo')->nullable();
             $table->timestamps();
