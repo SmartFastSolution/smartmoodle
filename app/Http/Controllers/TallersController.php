@@ -431,11 +431,17 @@ class TallersController extends Controller
         }elseif ($plant == 42) {
 
             $datos = Taller::findorfail($id);
-            $ideas = TallerOrdenIdea::select('id','idea')->where('taller_id',$id)->get();
+            $principal = TallerOrdenIdea::select('id','idea')->where('taller_id',$id)->first();
+
+            $ideas = TallerOrdenIdea::select('id','idea')->where('taller_id',$id)->where('id','!=', $principal->id)->get();
+             $ideas->shuffle();
+            // shuffle($ideas);
+           
+
             // $ideas = $datos->tallerOrdenIdea;
 
             if ($datos->plantilla_id == $plant && $datos->id = $id) {
-            return view('talleres.taller42', compact('datos', 'd', 'ideas'));  
+            return view('talleres.taller42', compact('datos', 'd', 'ideas', 'principal'));  
              }else {
             return abort(404);   
              }

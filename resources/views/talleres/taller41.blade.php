@@ -3,7 +3,7 @@
 @section('title',  $datos->nombre )
 @section('content')
 
-	<h1 class="text-center  mt-5 text-danger">{{ $datos->nombre }}</h1>
+	<h1 class="text-center  mt-5 text-danger font-weight-bold display-4">{{ $datos->nombre }}</h1>
 	<h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
   <form action="{{ route('taller41', ['idtaller' => $d]) }}" method="POST">
            @csrf
@@ -30,20 +30,20 @@
 				</div>
 
 				<div class="row justify-content-lg-between">
-					<div class="col-3 align-self-center text-center border-danger border p-3">
+					<div class="col-3 align-self-center text-center p-3" style="box-shadow: 5px 5px 15px 0px  #087980;">
 						<h5>1</h5>
 						<input required="" type="text" class="form-control" name="seccion1a">
 						<img class="img-fluid mb-1 mt-1 " src="{{ asset('img/talleres/imagen-32.jpg') }}" alt="">
 						<input required="" type="text" class="form-control" name="seccion1b">
 					</div>
-					<div class="col-3 align-self-center text-center border-danger border p-3">
+					<div class="col-3 align-self-center text-center p-3" style="box-shadow: 5px 5px 15px 0px  #087980;">
 						<h5>2</h5>
 
 						<input required="" type="text" class="form-control" name="seccion2a">
 						<img class="img-fluid mb-1 mt-1 " src="{{ asset('img/talleres/imagen-32.jpg') }}" alt="">
 						<input required="" type="text" class="form-control" name="seccion2b">
 					</div>
-					<div class="col-3 align-self-center text-center border-danger border p-3">
+					<div class="col-3 align-self-center text-center p-3" style="box-shadow: 5px 5px 15px 0px  #087980;">
 						<h5>3</h5>
 
 						<input required="" type="text" class="form-control" name="seccion3a">

@@ -4,7 +4,7 @@
 @section('content')
 
 <!--SEÑALE  LA  ALTERNATIVA  CORRECTA -->
-<h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>
+<h1 class="text-center  mt-5 text-danger font-weight-bold display-4"> {{ $datos->taller->nombre }}</h1>
      <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
       <form action="{{ route('taller5', ['idtaller' => $d]) }}" method="POST">
       	@csrf
@@ -12,7 +12,7 @@
 		<div class="row">
 			@foreach ($datos->options as $key => $info)
 			<div class="col-12">
-				<div class="row bg-info border border-danger p-2">
+				<div class="row bg-secondary border border-danger p-2" style="box-shadow: 3px 6px 5px 4px #64F4F2">
 					<div class="col-4 align-self-center">
 						<label for="">{{ $info->concepto }} </label>
 					</div>

@@ -3,14 +3,14 @@
 @section('title', $datos->nombre)
 @section('content')
 
-	<h1 class="text-center  mt-5 text-danger">{{ $datos->nombre }}</h1>
+	<h1 class="text-center  mt-5 text-danger font-weight-bold display-4">{{ $datos->nombre }}</h1>
     <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
    <form action="{{ route('taller28',  ['idtaller' => $d]) }}" method="POST">
            @csrf
 	<div class="container mb-3">
 		<div class="row justify-content-center">
-			<div class="col-8 border border-danger p-3">
+			<div class="col-8 p-3" style="box-shadow: 5px 5px 15px 0px  #EC0A5F;">
 				<div class="row justify-content-end">
 					<div  class="col-6 mt-3">
 						<h4 draggable="true">Señor  Ingeniero.</h4>
@@ -47,7 +47,7 @@
 
 
 		<div class="row justify-content-center">
-			<div class="col-8 border border-danger p-3">
+			<div class="col-8 p-3" style="box-shadow: 5px 5px 15px 0px  #79102E;">
 				<div class="row justify-content-end">
 					<div class="col-6 mt-3">
 						<h4>Señor  Ingeniero.</h4>
@@ -62,8 +62,8 @@
 				</div>
 				<div class="row">
 					<div class="col-12 form-inline">
-						<p class="text-justify" style="font-size: 16px;">La  presente  tiene  por  objeto  saludarlo  y  a  la  vez  solicitarle  me envíe  la  <input required type="text" class="form-control m-1" size="5" name="abreviatura1">  de  los  pedidos  según  <input required type="text" class="form-control m-1" size="5" name="abreviatura2">   1830 correspondiente  al <input required type="text" class="form-control m-1" size="5" name="abreviatura3">    mes,  con  el  detalle  de  cada  uno  de los <input required type="text" class="form-control m-1" size="5" name="abreviatura4"> artículos  entregados.  La  <input required type="text" class="form-control m-1" size="5" name="abreviatura5">   contiene  15  cocinas,  con las  características  ya  señaladas.    El  valor  de  la <input required type="text" class="form-control m-1" size="5" name="abreviatura6">    asciende  a  la  cantidad  de  $ 4.800  dicho  valor  será  depositado en  su <input required type="text" class="form-control m-1" size="5" name="abreviatura7"> </p>
-						<p class="text-justify" style="font-size: 16px;">Nos  despedimos  de <input required type="text" class="form-control m-1" size="5" name="abreviatura8"> no  sin  antes  reiterarle  nuestra consideración  y  estima</p>
+						<p class="text-justify" style="font-size: 16px;">La  presente  tiene  por  objeto  saludarlo  y  a  la  vez  solicitarle  me envíe  la  <input style="box-shadow: 5px 5px 15px 0px  #5CDBE3;" required type="text" class="form-control m-1" size="5" name="abreviatura1">  de  los  pedidos  según  <input style="box-shadow: 5px 5px 15px 0px  #5CDBE3;" required type="text" class="form-control m-1" size="5" name="abreviatura2">   1830 correspondiente  al <input style="box-shadow: 5px 5px 15px 0px  #5CDBE3;" required type="text" class="form-control m-1" size="5" name="abreviatura3">    mes,  con  el  detalle  de  cada  uno  de los <input style="box-shadow: 5px 5px 15px 0px  #5CDBE3;" required type="text" class="form-control m-1" size="5" name="abreviatura4"> artículos  entregados.  La  <input style="box-shadow: 5px 5px 15px 0px  #5CDBE3;" required type="text" class="form-control m-1" size="5" name="abreviatura5">   contiene  15  cocinas,  con las  características  ya  señaladas.    El  valor  de  la <input style="box-shadow: 5px 5px 15px 0px  #5CDBE3;" required type="text" class="form-control m-1" size="5" name="abreviatura6">    asciende  a  la  cantidad  de  $ 4.800  dicho  valor  será  depositado en  su <input style="box-shadow: 5px 5px 15px 0px  #5CDBE3;" required type="text" class="form-control m-1" size="5" name="abreviatura7"> </p>
+						<p class="text-justify" style="font-size: 16px;">Nos  despedimos  de <input style="box-shadow: 5px 5px 15px 0px  #5CDBE3;" required type="text" class="form-control m-1" size="5" name="abreviatura8"> no  sin  antes  reiterarle  nuestra consideración  y  estima</p>
 					</div>
 
 				</div>
@@ -76,7 +76,7 @@
 				</div>
 			</div>
 		</div>
-		 <div class="row justify-content-center">
+		 <div class="row justify-content-center mb-3">
         	<input type="submit" value="Guardar Datos" class="btn p-2 mt-3 btn-danger">
     	</div>
 	</div>

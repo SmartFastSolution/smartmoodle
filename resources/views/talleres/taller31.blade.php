@@ -1,11 +1,29 @@
 @extends('layouts.nav')
  @section('css')
  <link rel="stylesheet" href="{{ asset('css/dropzone.min.css') }}">
+ <style type="text/css">
+   .container .dropzone{
+    border: dotted;
+    height: 250px;
+      background-color: #9CF0E5;
+      box-shadow: 5px 5px 15px 0px  #27D5F4;
+  outline: 2px dashed #F59696;
+  outline-offset: -10px;
+   }
+   .dropzone .dz-message {
+    font-weight: bold;
+    text-align: center;
+    margin: 2em 0;
+    color: red;
+    font-size: 20px;
+   line-height: 150px;
+}
+ </style>
  @endsection
  {{-- EN EL SIGUIENTE COLLAGE APLIQUE FIGURAS QUE SE  RELACIONEN CON CONTABILIDAD HOTELERA, CON EFICACIA --}}
 @section('title', $datos->taller->nombre)
 @section('content')
-<h1 class="text-center  mt-5 text-danger">{{$datos->taller->nombre }} </h1>
+<h1 class="text-center  mt-5 text-danger font-weight-bold display-4">{{$datos->taller->nombre }} </h1>
 <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->taller->enunciado }}</h3>
 <div class="container">
 	<form action="{{ route('taller31', ['idtaller' => $d]) }}"
@@ -35,7 +53,7 @@
   let numero = @json($datos->img_num);
   Dropzone.options.myAwesomeDropzone = {
     autoProcessQueue: false,
-    dictDefaultMessage: "Agregue las imagenes en el recuadro",
+    dictDefaultMessage: "AGREGUE LAS IMAGENES EN EL RECUADRO",
       maxFilesize: 5, // MB
       acceptedFiles: "image/*",
       maxFiles: numero,

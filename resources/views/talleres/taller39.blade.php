@@ -4,7 +4,7 @@
 @section('content')
 
 {{-- ARMA  UNA  PALABRA  DE  9  LETRAS  REFERENTE  A TRANSACCIÓN  COMERCIAL.  (Las  letras  deben  estar  unidas por  líneas) --}}
-<h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>
+<h1 class="text-center  mt-5 text-danger font-weight-bold display-4"> {{ $datos->taller->nombre }}</h1>
 <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
 	<div class="container" id="taller39" class="mb-5">
@@ -12,7 +12,7 @@
 			<div class="col-9">
 				<div class="row justify-content-between">
 				<div class="col-5">
-					      <draggable class="row justify-content-around border border-success p-3" :list="letras" group="people">
+					      <draggable class="row justify-content-around p-3" style="box-shadow: 5px 5px 15px 0px  #087980" :list="letras" group="people">
 					        <div
 					        style="font-size: 20px; cursor: move;" 
 					          class="col-3 drag align-items-center text-center p-2 border border-danger m-2"

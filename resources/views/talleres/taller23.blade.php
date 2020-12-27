@@ -4,13 +4,13 @@
 @section('content')
 
 <!-- LLENE  CON  LOS  SIGUIENTES  DATOS  LOS  RECIBOS  CORRECTAMENTE. -->
-	<h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>
+	<h1 class="text-center  mt-5 text-danger font-weight-bold display-4"> {{ $datos->taller->nombre }}</h1>
     <h3 class="text-center mt-5 mb-3 text-info">{{  $datos->enunciado }}  </h3>
 <form action="{{ route('taller23', ['idtaller' => $d]) }}" method="POST">
  @csrf
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-3">
+			<div class="col-3" style="box-shadow: -5px 5px 15px 0px  #3527F4">
 				<h3 class="text-center">Datos</h3>
 							<div class="row">				
 								<div class="col-6">
@@ -24,7 +24,7 @@
 							</div>
 
 			</div>
-			<div class="col-8 border">
+			<div class="col-8 border" style="box-shadow: 5px 5px 15px 0px  #27F4AE">
 				<h1 class="text-center">RECIBO</h1>
 				<div class="row justify-content-between">
 					<div class="col-4  form-inline">
@@ -94,7 +94,7 @@
 						</div>
 			</div>
 		</div>
-		<div class="row justify-content-center">
+		<div class="row justify-content-center mb-3">
         	<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
     	</div>
 	</div>

@@ -9,7 +9,64 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div  class="form-row mb-2 justify-content-center">
+                 <div class="row justify-content-center">
+                  <div class="col-7">
+                  <h2 class="text-center font-weight-bold">AGREGAR SALDO INICIAL</h2>
+
+                      <table class="table table-bordered table-sm ">
+                          <thead class="thead-dark">
+                        <tr>
+                          <th width="50"  align="center" class="text-center">Fecha</th>
+                          <th  align="center" class="text-center">Movimiento</th>    
+                        </tr>
+                       </thead>
+                        <tbody >  
+                            <tr>
+                            <td>
+                              <input autocomplete="ÑÖcompletes" type="date" v-model="inicial.fecha"  name="fecha" class="form-control" required>
+                            </td>
+                              <td>
+                                <input autocomplete="ÑÖcompletes" type="text"  v-model="inicial.movimiento"  name="movimiento" class="form-control" required>
+                              </td>     
+                            </tr>
+                      </tbody>
+                    </table>
+                    <table class="table table-bordered table-sm">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th width="75"  align="center" class="text-center">Cantidad</th>    
+                          <th width="125" align="center" class="text-center">Precio Unit</th> 
+                          <th width="150" align="center" class="text-center">Enviar</th> 
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                            <td>
+                                <input autocomplete="ÑÖcompletes" type="number" v-model="inicial.cantidad"   name="cantidad" class="form-control" required>
+                              </td>  
+                              <td>
+                                <input autocomplete="ÑÖcompletes" type="number"  v-model="inicial.precio"  name="precio" class="form-control" required>
+                              </td>
+                              <td>           
+                    <a v-if="!update" href="#" class="addDiario btn btn-info btn-block " @click.prevent="agregarInicial()">Agregar Registro</a>
+                    <a v-if="update" href="#" class="addDiario btn btn-info btn-block " @click.prevent="actualizarInicial()">Actualizar Registro</a>
+                              </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                     <div class="row">
+                
+                </div>
+                       <div  class="row justify-content-center">
+                      </div>
+                  </div>
+                  <div class="col-5" style=" height:250px; overflow-y: scroll; border: solid 3px red;">
+                    {{-- <div v-html="datos_transacciones"></div> --}}
+                    
+                  </div>
+                </div>
+
+{{--                 <div  class="form-row mb-2 justify-content-center">
                     <div class="col-3">
                       <input autocomplete="ÑÖcompletes" type="date" class="form-control" v-model="inicial.fecha" placeholder="Debe">
                     </div>
@@ -22,12 +79,10 @@
                      <div class="col">
                       <input autocomplete="ÑÖcompletes" type="number" class="form-control" v-model="inicial.precio"  placeholder="Prec.">
                     </div>
-                   {{--  <div class="col">
-                      <input autocomplete="ÑÖcompletes" type="number" class="form-control" v-model="inicial.total"  placeholder="Total">
-                    </div> --}}
+               
                     <a v-if="!update" href="#" class="addDiario btn btn-outline-danger " @click.prevent="agregarInicial()">Agregar Registro</a>
                     <a v-if="update" href="#" class="addDiario btn btn-outline-danger " @click.prevent="actualizarInicial()">Actualizar Registro</a>
-              </div>
+              </div> --}}
             </div>
            <div class="modal-footer">
           </div>

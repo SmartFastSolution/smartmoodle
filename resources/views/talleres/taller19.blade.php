@@ -4,7 +4,7 @@
 @section('content')
 <!-- LLENE  CON  LOS  SIGUIENTES  DATOS  LOS  CERTIFICADOS DE DEPÓSITO 
 ADECUADAMENTE -->
-	<h1 class="text-center  mt-5 text-danger">{{ $datos->taller->nombre }}</h1>
+	<h1 class="text-center  mt-5 text-danger font-weight-bold display-4">{{ $datos->taller->nombre }}</h1>
     <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }} </h3>
 
 <form action="{{ route('taller19', ['idtaller' => $d]) }}" method="POST">
@@ -44,7 +44,7 @@ ADECUADAMENTE -->
 						</div>
 					</div>
 			</div>
-			<div class="col-10 border border-warning">
+			<div class="col-10" style="box-shadow: 5px 5px 15px 0px  #C6F427">
 				<div class="row justify-content-center">
 						<div class="col-10 p-2  ">
 							<div class="row">
@@ -95,7 +95,7 @@ ADECUADAMENTE -->
 				</div>
 			</div>
 		</div>
-		<div class="row justify-content-center">
+		<div class="row justify-content-center mb-4">
         	<input required  type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
     	</div>
 	</div>

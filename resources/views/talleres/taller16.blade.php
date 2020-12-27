@@ -5,14 +5,14 @@
 @section('content')
 
 <!-- ENDOSE  EL  CHEQUE  A  NOMBRE DE  LA  ING. ISABEL  PANTOJA -->
-<h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>
+<h1 class="text-center  mt-5 text-danger font-weight-bold display-4"> {{ $datos->taller->nombre }}</h1>
      <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }} LA {{ $datos->endoso }} </h3>
 
      <form action="{{ route('taller16', ['idtaller' => $d]) }}" method="POST">
           @csrf
      	<div class="container">
      		<div class="row justify-content-center">
-     			<div class="col-5 border-success border">
+     			<div class="col-5"  style="box-shadow: 5px 5px 15px 0px  #27F4AE">
      				<div class="text-center">
      					<h2>ESPACIO PARA ENDOSO</h2>
      			<h6 class="mt-0">(en caso de requerirse)</h6>
@@ -25,7 +25,7 @@
 		        </div>
      		</div>
      		<div class="row justify-content-center">
-     			<div class="col-5 border border-success">
+     			<div class="col-5" style="box-shadow: 5px 5px 15px 0px  #27F4AE">
      				<div class="row justify-content-center mt-3 mb-2">
      					<div class="col-8 text-center">
      						<input type="text" name="endoso" class="form-control" required>
@@ -47,7 +47,7 @@
 					</div>
      			</div>
      			<div class="row justify-content-center">
-     			<div class="col-5 border border-success">
+     			<div class="col-5" style="box-shadow: 5px 5px 15px 0px  #27F4AE">
      				<div class="row justify-content-center mt-3 mb-2">
      					<div class="col-8 text-center">
      						<input type="text" disabled="" value="ING. JUAN PEREZ " class="form-control text-center">

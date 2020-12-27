@@ -2,11 +2,9 @@
         <h2 class="text-center display-4 font-weight-bold text-danger">HOJA DE TRABAJO</h2>
 <div class="row p-3  mb-2 justify-content-center ">
     <div class="col-5 mb-3">
-          <input autocomplete="ÑÖcompletes" class="form-control" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="" >
+        <h2 class="text-center font-weight-bold display-4">@{{ nombre }}</h2>
         </div>
-   
 </div>
-
 <table class="table table-bordered table-sm">
 <thead class="bg-dark">
   <tr>
@@ -16,7 +14,6 @@
     <th class="text-center" style="vertical-align: middle;" colspan="2">BALANCE AJUSTADO</th>
     <th class="text-center" style="vertical-align: middle;" colspan="2">ESTADO DE RESULTADO</th>
     <th class="text-center" style="vertical-align: middle;" colspan="2">BALANCE GENERAL</th>
-    <th  class="text-center" valign="center" v-if="registros.length >=1" colspan="2" rowspan="2">ACCIONES</th>
 
   </tr>
   <tr>
@@ -45,24 +42,7 @@
                 <td  class="text-right"align="center" width="125">@{{ decimales(balan.er_haber) }}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.bg_debe) }}</td>
                 <td  class="text-right"align="center" width="125">@{{ decimales(balan.bg_haber) }}</td>
-                <td align="center"  width="50"><a @click.prevent="editBalanceFuera(index)" class="btn btn-warning"><i
-                            class="fas fa-edit"></i></a></td>
-                <td align="center" width="50"><a @click.prevent="warningEliminar(index)"  class="btn btn-danger"><i
-                            class="fas fa-trash-alt"></i></a></td>
         </tr>
-       {{--  <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>2050000</td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr> --}}
   <tr>
     <td class="font-weight-bold">SUMAN</td>
     <td class="text-right">@{{ suman.balance_comp.total_debe }}</td>
@@ -78,14 +58,4 @@
   </tr>
 </tbody>
 </table>
-	    <div class="row justify-content-center mb-2">
-            <a  href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Movimientos</a>
-        </div>
-
-        <div class="row justify-content-center">
-            <a  href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarHoja()">Guardar Hoja</a>
-        </div>
-
-    @include ('contabilidad.modales.modalhojatrabajo')
-
 </div>

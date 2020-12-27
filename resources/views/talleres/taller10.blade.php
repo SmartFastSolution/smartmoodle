@@ -18,17 +18,17 @@
 			<div class="col-5">
 				<div class="row align-items-center">
 					<div class="col-6 text-center">
-						<img width="100" src="{{ asset($opciones->img) }}">
+						<img width="150" src="{{ asset($opciones->img) }}">
 					</div>
 					<div class="col-6 text-center ">
 						<label for="">{{ $opciones->enunciado }}</label><br>
-						<input type="text" required size="2" name="order[]" class="border-0 bg-info">
+						<input type="text" required size="2" name="order[]" class=" font-weight-bold text-center" style="outline: none; background-color: #94F0E4; box-shadow: 5px 5px 15px 0px  #18DEF0;" >
 					</div>
 				</div>
 			</div>
 		</div>
 		@endforeach
-		 <div class="row justify-content-center">
+		 <div class="row justify-content-center mb-3">
                   <input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
                </div>
 

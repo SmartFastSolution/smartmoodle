@@ -5,7 +5,7 @@ $(function () {
 // console.log(diariogeneral)
 // console.log(productos)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////FUNCIONES//////////////////////////////////////////////////
+///////////////////////////////////////////////////////////FUNCIONES/////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const funciones = new Vue({
    data:{
@@ -27,23 +27,56 @@ const funciones = new Vue({
     }else{
       return
     }
-     
     },
     horasExtras(horas, sueldo){
       let total = 0;
       let horaTrabajo = Number(sueldo) / 30 / 8;
-
       horas.forEach(function(hora){           
-                total += Number(hora.dia) * horaTrabajo * 1.50;  
-              });
+        total += Number(hora.dia) * horaTrabajo * 1.50;  
+      });
       return total;
+      },
+
+    impuestoAgregado(sueldo, deduciones,fraccion, impuesto_fraccion, interes){
+      let total = 0;
+      let iies = (sueldo * 9.45) / 100;
+      let ingreso_liquido =  sueldo - iies;
+      let ingreso_mensual = ingreso_liquido - deduciones;
+      let ingreso_anual = ingreso_mensual * 12;
+      let fraccion_excedente = ingreso_anual - fraccion;
+      let fraccion_excedenteiva = (fraccion_excedente * interes) / 100;
+      let total_impuesto = impuesto_fraccion + fraccion_excedenteiva;
+      total = total_impuesto / 12;
+      
+      return Number(total).toFixed(2);
+      },
+
+      prestamoHipotecario(valor, tiempo, interes){
+      let total = 0;
+      let division = Number(valor) / Number(tiempo);
+      let porcentaje = (division * Number(interes)) / 100;
+
+      let subtotal = division + porcentaje;
+      total = subtotal / 12;
+
+      return Number(total).toFixed(2);
+      },
+      prestamoQuirografario(valor, meses, interes){
+        let total = 0;
+      let division = Number(valor) / Number(meses);
+      let porcentaje = (division * Number(interes)) / 100;
+
+      total = division + porcentaje;
+      
+
+      return Number(total).toFixed(2);
       }
     }
 
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////BALANCE INICIAL HORIZONTAL//////////////////////////////////////////////////
+//////////////////////////////////////////////////BALANCE INICIAL HORIZONTAL/////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const b_hori = new Vue({
         el: '#b_horizontal',
@@ -5668,7 +5701,7 @@ const estado_resultado = new Vue({
 //////////////////////////////////////////////////BALANCE GENERAL ///////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var balance_general = new Vue({
+const balance_general = new Vue({
 
   el: "#balance_general",
   data:{

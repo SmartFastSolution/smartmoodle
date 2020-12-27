@@ -5,14 +5,14 @@
 
 <!-- LLENE  CON  LOS SIGUIENTES DATOS LAS LETRAS  DE  CAMBIO CORRECTAMENTE -->
 
-<h1 class="text-center  mt-5 text-danger">{{ $datos->taller->nombre }}</h1>
+<h1 class="text-center  mt-5 text-danger font-weight-bold display-4">{{ $datos->taller->nombre }}</h1>
      <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }} </h3>
 
 <form action="{{ route('taller18', ['idtaller' => $d]) }}" method="POST">
     @csrf
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-2">
+			<div class="col-2" style="box-shadow: -5px 0px 15px 0px  #27F4AE">
 				 <h2>Datos</h2>				 
 				  <label for="">Valor</label><br>
                     <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->valor }}')" ondragend="this.classList.add('text-muted');">{{ $datos->valor }}</p>
@@ -28,7 +28,7 @@
                 <p draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->lugar }}')" ondragend="this.classList.add('text-muted');"> {{ $datos->lugar }}</p>
                 <p>{{ $datos->fecha_de_emision }}</p>
 			</div>
-			<div class="col-9 border border-info p-3">
+			<div class="col-9 p-3" style="box-shadow: 5px 5px 15px 0px  #3A27F4">
 				<div class="row mb-2">
 					<div class="col-5 mt-3">
 						<h2>LETRA DE CAMBIO</h2>
@@ -110,7 +110,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row justify-content-center">
+		<div class="row justify-content-center mb-4">
         	<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
     	</div>
 	</div>

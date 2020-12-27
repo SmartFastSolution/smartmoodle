@@ -4,7 +4,7 @@
 @section('content')
 
 {{-- LUEGO  DE  REALIZAR  LOS  EJERCICIOS,  DETERMINE  EL  TIPO  DE  SALDO CON  EXACTITUD.  --}}
-<h1 class="text-center  mt-5 text-danger"> {{ $datos->nombre }}</h1>
+<h1 class="text-center  mt-5 text-danger font-weight-bold display-4"> {{ $datos->nombre }}</h1>
 <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
 <form action="{{ route('taller34', ['idtaller' => $d]) }}" method="POST">
@@ -69,7 +69,7 @@
 						<div class="col-4 text-center align-self-center">
 							<div class="border bg-light p-2">
 								<h5>SALDO :</h5>
-								<input required type="text" name="saldo[]" class="form-control">
+								<input required type="text" name="saldo[]" class="form-control" style="box-shadow: 5px 5px 15px 0px  #087980;">
 							</div>
 
 						</div>
@@ -78,7 +78,7 @@
 				</div>
 			
 		</div>
-		 <div class="row justify-content-center">
+		 <div class="row justify-content-center mb-3">
         	<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
     	</div>
 	</div>

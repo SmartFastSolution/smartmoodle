@@ -17,6 +17,7 @@ class CreateTallerModuloContablesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->string('metodo');
+            $table->string('tipo');
             $table->string('enunciado')->nullable();
             $table->boolean('balance_inicial_vertical')->default(0);
             $table->boolean('balance_inicial_horizontal')->default(0);

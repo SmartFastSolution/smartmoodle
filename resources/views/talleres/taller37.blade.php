@@ -159,9 +159,9 @@
 
     </div>
 
-    {{--   <div class="row justify-content-center">
+      <div class="row justify-content-center">
         <input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
-     </div> --}}
+     </div>
     {{--  @include ('layouts.modacontabilidad') --}}
 </div>
 

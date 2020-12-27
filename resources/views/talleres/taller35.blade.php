@@ -4,7 +4,7 @@
 @section('content')
 
 {{-- >DESARROLLE  FÓRMULAS  DE  LA  ECUACIÓN  CONTABLE,  CON  EXACTITUD. --}}
-<h1 class="text-center  mt-5 text-danger"> {{ $datos->nombre }}</h1>
+<h1 class="text-center  mt-5 text-danger font-weight-bold display-4"> {{ $datos->nombre }}</h1>
 <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
  <form action="{{ route('taller35', ['idtaller' => $d]) }}" method="POST">
@@ -14,7 +14,7 @@
 			<div class="col-8">
 				<div class="row">
 					<div class="col-5 text-center">
-						<table class="table table-bordered">
+						<table class="table " style="box-shadow: 5px 5px 15px 0px  #087980;">
 						  <thead>
 						    <tr>
 							    <th colspan="2" scope="col">
@@ -39,13 +39,13 @@
 						</table>
 					</div>
 					<div class="col-7 text-center  align-items-center">
-						<input type="text" name="formula1" required=""  class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula1" required=""  class="form-control">
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-5 text-center">
-						<table class="table table-bordered">
+						<table class="table " style="box-shadow: 5px 5px 15px 0px  #087980;">
 						  <thead>
 						    <tr>
 							    <th colspan="2" scope="col">
@@ -70,13 +70,13 @@
 						</table>
 					</div>
 					<div class="col-7 text-center">
-						<input type="text" name="formula2" required=""  class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula2" required=""  class="form-control">
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-5 text-center">
-						<table class="table table-bordered">
+						<table class="table " style="box-shadow: 5px 5px 15px 0px  #087980;">
 						  <thead>
 						    <tr>
 							    <th colspan="2" scope="col">
@@ -100,13 +100,13 @@
 						</table>
 					</div>
 					<div class="col-7 text-center">
-						<input type="text" name="formula3" required=""  class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula3" required=""  class="form-control">
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-5 text-center">
-						<table class="table table-bordered">
+						<table class="table " style="box-shadow: 5px 5px 15px 0px  #087980;">
 						  <thead>
 						    <tr>
 							    <th colspan="2" scope="col">
@@ -130,13 +130,13 @@
 						</table>
 					</div>
 					<div class="col-7 text-center">
-						<input type="text" name="formula4" required=""  class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula4" required=""  class="form-control">
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-5 text-center">
-						<table class="table table-bordered">
+						<table class="table " style="box-shadow: 5px 5px 15px 0px  #087980;">
 						  <thead>
 						    <tr>
 							    <th colspan="2" scope="col">
@@ -160,13 +160,13 @@
 						</table>
 					</div>
 					<div class="col-7 text-center">
-						<input type="text"  name="formula5" required="" class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text"  name="formula5" required="" class="form-control">
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-5 text-center">
-						<table class="table table-bordered">
+						<table class="table " style="box-shadow: 5px 5px 15px 0px  #087980;">
 						  <thead>
 						    <tr>
 							    <th colspan="2" scope="col">
@@ -190,12 +190,12 @@
 						</table>
 					</div>
 					<div class="col-7 text-center">
-						<input type="text" name="formula6" required=""  class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula6" required=""  class="form-control">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-5 text-center">
-						<table class="table table-bordered">
+						<table class="table " style="box-shadow: 5px 5px 15px 0px  #087980;">
 						  <thead>
 						    <tr>
 							    <th colspan="2" scope="col">
@@ -219,14 +219,14 @@
 						</table>
 					</div>
 					<div class="col-7 text-center align-content-center">
-						<input type="text" name="formula7" required=""  class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula7" required=""  class="form-control">
 					</div>
 				</div>
 
 
 				<div class="row">
 					<div class="col-5 text-center">
-						<table class="table table-bordered">
+						<table class="table " style="box-shadow: 5px 5px 15px 0px  #087980;">
 						  <thead>
 						    <tr>
 							    <th colspan="2" scope="col">
@@ -250,14 +250,14 @@
 						</table>
 					</div>
 					<div class="col-7 text-center align-content-center">
-						<input type="text" name="formula8" required=""  class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula8" required=""  class="form-control">
 					</div>
 				</div>
 
 
 				<div class="row">
 					<div class="col-5 text-center">
-						<table class="table table-bordered">
+						<table class="table " style="box-shadow: 5px 5px 15px 0px  #087980;">
 						  <thead>
 						    <tr>
 							    <th colspan="2" scope="col">
@@ -281,15 +281,15 @@
 						</table>
 					</div>
 					<div class="col-7 text-center align-content-center">
-						<input type="text" name="formula9" required=""  class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula9" required=""  class="form-control">
 					</div>
 				</div>
 
 			</div>
 
 		</div>
-		 <div class="row justify-content-center">
-        	<input type="submit" value="Guardar Datos" class="btn p-2 mt-3 btn-danger">
+		 <div class="row justify-content-center mb-3">
+        	<input  type="submit" value="Guardar Datos" class="btn p-2 mt-3 btn-danger">
     	</div>
 	</div>
 </form>

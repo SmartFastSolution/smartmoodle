@@ -3,14 +3,14 @@
 @section('title',  $datos->nombre )
 @section('content')
 
-	<h1 class="text-center  mt-5 text-danger"> {{ $datos->nombre }}</h1>
+	<h1 class="text-center  mt-5 text-danger display-4 font-weight-bold"> {{ $datos->nombre }}</h1>
     <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
   <form action="{{ route('taller29', ['idtaller' => $d]) }}" method="POST">
            @csrf
 	<div class="container mb-4">
 		<div class="row justify-content-center">
-			<div class="col-8 border border-danger p-3">
+			<div class="col-8 p-3" style="box-shadow: 5px 5px 15px 0px  #E81853;">
 				<ul class="nav justify-content-center">
 <li draggable="true" ondragstart="event.dataTransfer.setData('text/plain', 'Cheque'); " class="badge badge-primary nav-item m-2 text-wrap" ondragend="this.classList.remove('badge', 'badge-primary'); this.classList.add('badge'); " style="cursor: move;">Cheque</li>
 
@@ -42,7 +42,7 @@
 				</ul>
 				
 			</div>
-			<div class="col-7 border border-danger mt-3">
+			<div class="col-7  mt-3" style="box-shadow: 5px 5px 15px 0px  #800846;">
 				<div class="row p-2">
 					<div class="col-4">
 						<img class="img-fluid" src="{{ asset('img/talleres/imagen-29.jpg') }}" alt="">
@@ -62,26 +62,26 @@
 						</p>
 					</div>
 					<div class="col-12 form-inline">
-						<p>Estimada <input required type="text" name="abreviatura1" class="form-control"></p>
+						<p>Estimada <input style="box-shadow: 5px 5px 15px 0px  #5EE1E9;" required type="text" name="abreviatura1" class="form-control"></p>
 						
 					</div>
 					<div class="col-12 form-inline">
-						<p class="text-justify">Es grato enviarle la <input required type="text" name="abreviatura2"  class="form-control"> o. 124 correspondiente  a cuatro  bultos  de mercaderías  que  hemos  enviado  por  vía terrestre, utilizando transportes ECUADOR, el 3 de Mayo del <input required type="text" name="abreviatura3"  class="form-control" size="5"> año</p>
+						<p class="text-justify">Es grato enviarle la <input style="box-shadow: 5px 5px 15px 0px  #5EE1E9;" required type="text" name="abreviatura2"  class="form-control"> o. 124 correspondiente  a cuatro  bultos  de mercaderías  que  hemos  enviado  por  vía terrestre, utilizando transportes ECUADOR, el 3 de Mayo del <input style="box-shadow: 5px 5px 15px 0px  #5EE1E9;" required type="text" name="abreviatura3"  class="form-control" size="5"> año</p>
 					</div>
 
 					<div class="col-12 form-inline">
 						<p class="text-justify">
-							Esta <input required type="text" name="abreviatura4"  class="form-control"> contiene <input required type="text" name="abreviatura5"  class="form-control m-1" size="7"> con  las  características señaladas  por <input required type="text" name="abreviatura6"  class="form-control m-1" size="7"> a  nuestra <input required type="text" name="abreviatura7"  class="form-control m-1" size="7">
+							Esta <input style="box-shadow: 5px 5px 15px 0px  #5EE1E9;" required type="text" name="abreviatura4"  class="form-control"> contiene <input style="box-shadow: 5px 5px 15px 0px  #5EE1E9;" required type="text" name="abreviatura5"  class="form-control m-1" size="7"> con  las  características señaladas  por <input style="box-shadow: 5px 5px 15px 0px  #5EE1E9;" required type="text" name="abreviatura6"  class="form-control m-1" size="7"> a  nuestra <input style="box-shadow: 5px 5px 15px 0px  #5EE1E9;" required type="text" name="abreviatura7"  class="form-control m-1" size="7">
 						</p>
 					</div>
 					<div class="col-12 form-inline">
 						<p class="text-justify">
-							El  valor  de  la <input required type="text" name="abreviatura8"  class="form-control m-1" size="7"> asciende  a  la  cantidad  de $ 8.500; la hemos cargado a su <input required type="text" name="abreviatura9"  class="form-control m-1" size="7"> rogando nos envíe  un <input required type="text" name="abreviatura10"  class="form-control m-1" size="4"> certificado  por  dicho  valor.
+							El  valor  de  la <input style="box-shadow: 5px 5px 15px 0px  #5EE1E9;" required type="text" name="abreviatura8"  class="form-control m-1" size="7"> asciende  a  la  cantidad  de $ 8.500; la hemos cargado a su <input style="box-shadow: 5px 5px 15px 0px  #5EE1E9;" required type="text" name="abreviatura9"  class="form-control m-1" size="7"> rogando nos envíe  un <input style="box-shadow: 5px 5px 15px 0px  #5EE1E9;" required type="text" name="abreviatura10"  class="form-control m-1" size="4"> certificado  por  dicho  valor.
 						</p>
 					</div>
 					<div class="col-12 form-inline">
 						<p class="text-justify">
-							De  no  ser  posible  esperamos  que  el  valor  de  la <input required type="text" name="abreviatura11"  class="form-control m-1" size="7"> lo  deposite  en  nuestra <input required type="text" name="abreviatura12"  class="form-control m-1" size="7"> <input required type="text" name="abreviatura13"  class="form-control m-1" size="7"> del <input required type="text" name="abreviatura14"  class="form-control m-1" size="7">  Produbanco  No. 40035873.
+							De  no  ser  posible  esperamos  que  el  valor  de  la <input style="box-shadow: 5px 5px 15px 0px  #5EE1E9;" required type="text" name="abreviatura11"  class="form-control m-1" size="7"> lo  deposite  en  nuestra <input style="box-shadow: 5px 5px 15px 0px  #5EE1E9;" required type="text" name="abreviatura12"  class="form-control m-1" size="7"> <input style="box-shadow: 5px 5px 15px 0px  #5EE1E9;" required type="text" name="abreviatura13"  class="form-control m-1" size="7"> del <input style="box-shadow: 5px 5px 15px 0px  #5EE1E9;" required type="text" name="abreviatura14"  class="form-control m-1" size="7">  Produbanco  No. 40035873.
 						</p>
 					</div>
 					<div class="col-12">
@@ -97,8 +97,8 @@
 				</div>
 			</div>
 		</div>
-		 <div class="row justify-content-center">
-        	<input type="submit" value="Guardar Datos" class="btn p-2 mt-3 btn-danger">
+		 <div class="row justify-content-center mb-3">
+        	<input style="box-shadow: 5px 5px 15px 0px  #5EE1E9;" type="submit" value="Guardar Datos" class="btn p-2 mt-3 btn-danger">
     	</div>
 	</div>
 </form>
