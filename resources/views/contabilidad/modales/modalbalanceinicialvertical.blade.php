@@ -88,7 +88,7 @@
                     <tbody is="draggable" group="people" :list="a_corrientes" tag="tbody">
 
                         <tr v-for="(balan, index) in a_corrientes">
-                          <td align="center">@{{ balan.nom_cuenta}}</td>
+                          <td class="text-left">@{{ balan.nom_cuenta}}</td>
                           <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editAcorriente(index)" class="btn btn-warning">
@@ -163,7 +163,7 @@
                     <tbody is="draggable" group="people" :list="a_nocorrientes" tag="tbody">
 
                         <tr v-for="(balan, index) in a_nocorrientes">
-                          <td align="center">@{{ balan.nom_cuenta}}</td>
+                          <td class="text-left">@{{ balan.nom_cuenta}}</td>
                           <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editNoAcorriente(index)" class="btn btn-warning">
@@ -238,7 +238,7 @@
                     <tbody is="draggable" group="people" :list="p_corrientes" tag="tbody">
 
                         <tr v-for="(balan, index) in p_corrientes">
-                          <td align="center">@{{ balan.nom_cuenta}}</td>
+                          <td class="text-left">@{{ balan.nom_cuenta}}</td>
                           <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editPcorriente(index)" class="btn btn-warning">
@@ -314,7 +314,7 @@
                     <tbody is="draggable" group="people" :list="p_nocorrientes" tag="tbody">
 
                         <tr v-for="(balan, index) in p_nocorrientes">
-                          <td align="center">@{{ balan.nom_cuenta}}</td>
+                          <td class="text-left">@{{ balan.nom_cuenta}}</td>
                           <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editPNocorriente(index)" class="btn btn-warning">
@@ -390,7 +390,7 @@
                     <tbody is="draggable" group="people" :list="patrimonios" tag="tbody">
 
                         <tr v-for="(balan, index) in patrimonios">
-                          <td align="center">@{{ balan.nom_cuenta}}</td>
+                          <td class="text-left">@{{ balan.nom_cuenta}}</td>
                           <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editPatrimonio(index)" class="btn btn-warning">

@@ -37,37 +37,45 @@ const funciones = new Vue({
       return total;
       },
 
-    impuestoAgregado(sueldo, deduciones,fraccion, impuesto_fraccion, interes){
-      let total = 0;
-      let iies = (sueldo * 9.45) / 100;
-      let ingreso_liquido =  sueldo - iies;
-      let ingreso_mensual = ingreso_liquido - deduciones;
-      let ingreso_anual = ingreso_mensual * 12;
-      let fraccion_excedente = ingreso_anual - fraccion;
-      let fraccion_excedenteiva = (fraccion_excedente * interes) / 100;
-      let total_impuesto = impuesto_fraccion + fraccion_excedenteiva;
-      total = total_impuesto / 12;
+    impuestoAgregado(sueldo, comision, deduciones, fraccion, impuesto_fraccion, interes){
+        let total           = 0;
+        let deduccion       = 0;
+
+        let ingreso_gravable = sueldo - comision;
+        let iies            = (ingreso_gravable * 9.45) / 100;
+        let ingreso_liquido =  ingreso_gravable - iies;
+        deduciones.forEach(function(d){           
+        deduccion           += Number(d.valor); 
+      });
+        console.log(deduccion)
+
+      let ingreso_mensual       = ingreso_liquido - deduccion;
+      let ingreso_anual         = ingreso_mensual * 12;
+      let fraccion_excedente    = ingreso_anual - Number(fraccion);
+      let fraccion_excedenteiva = (fraccion_excedente * Number(interes)) / 100;
+      let total_impuesto        = Number(impuesto_fraccion) + fraccion_excedenteiva;
+      total                     = total_impuesto / 12;
       
       return Number(total).toFixed(2);
       },
 
       prestamoHipotecario(valor, tiempo, interes){
-      let total = 0;
-      let division = Number(valor) / Number(tiempo);
+      let total      = 0;
+      let division   = Number(valor) / Number(tiempo);
       let porcentaje = (division * Number(interes)) / 100;
-
-      let subtotal = division + porcentaje;
-      total = subtotal / 12;
+      
+      let subtotal   = division + porcentaje;
+      total          = subtotal / 12;
 
       return Number(total).toFixed(2);
       },
       prestamoQuirografario(valor, meses, interes){
-        let total = 0;
-      let division = Number(valor) / Number(meses);
-      let porcentaje = (division * Number(interes)) / 100;
-
-      total = division + porcentaje;
-      
+        let total      = 0;
+        let division   = Number(valor) / Number(meses);
+        let porcentaje = (division * Number(interes)) / 100;
+        
+        total          = division + porcentaje;
+        
 
       return Number(total).toFixed(2);
       }
@@ -153,6 +161,18 @@ const b_hori = new Vue({
                 total:''
               }
         },
+        deduccion:{
+          valor:''
+        },
+        deducciones:[],
+        impuesto:{
+          sueldo:'',
+          comisiones:'',
+          fraccion:'',
+          impuesto_fraccion:'',
+          interes:'',
+          total:''
+        }
         // balances:[],
         // balance:{
         //   cuenta:'',
@@ -187,6 +207,56 @@ const b_hori = new Vue({
       return
     }
      
+    },
+    agregardeduccion(){
+      if (this.deduccion.valor == '') {
+            toastr.error("No puede dejar el campo vacio", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+      }else{
+    let valor =  Number(this.deduccion.valor);
+    let deduccio  = {valor:valor};
+    this.deducciones.push(deduccio);
+    this.deduccion.valor = '';
+  }
+    },
+    borrarDeduccion(index){
+    this.deducciones.splice(index, 1);   
+    },
+    impuestoRenta(){
+      if (this.impuesto.sueldo == '') {
+         toastr.error("No has agregado el sueldo", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+      }else if(this.impuesto.fraccion == ''){
+         toastr.error("No has agregado la fraccion basica", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+      }else if(this.impuesto.impuesto_fraccion == ''){
+         toastr.error("No has agregado el impuesto a fraccion basica", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+      }else if(this.impuesto.interes == ''){
+           toastr.error("No has agregado el porcentaje", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+      }else if(this.deducciones.length == 0){
+           toastr.error("No has agregado deducciones", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+      }else{
+        let deducciones = this.deducciones;
+        let comision = Number(this.impuesto.comisiones);
+        let impuesto = funciones.impuestoAgregado(this.impuesto.sueldo, comision, deducciones,  this.impuesto.fraccion, this.impuesto.impuesto_fraccion, this.impuesto.interes);
+      console.log(impuesto);
+      this.impuesto.total = impuesto
+      this.impuesto.sueldo = '';
+      this.impuesto.fraccion = '';
+      this.impuesto.impuesto_fraccion = '';
+      this.impuesto.interes = '';
+      this.deducciones =[];
+      this.impuesto.comisiones ='';
+      }
     },
         abrirActivoC(){
       this.limpiar();

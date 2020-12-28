@@ -71,6 +71,68 @@
                   <div class="col-6 mt-2 " style=" height:400px; overflow-y: scroll; border: solid 3px red;">
                     {!! $balancesInicial->transacciones !!}
 
+                    <h2>Ejemplo del impuesto a la renta</h2>
+
+                <form>
+                  <div class="row">
+                    <div class="col">
+                      <input type="number" v-model="impuesto.sueldo" class="form-control" placeholder="Agregar Sueldo">
+                    </div>
+                    <div class="col">
+                      <input type="number" v-model="impuesto.comisiones" class="form-control" placeholder="Agregar Comision(Opcional)">
+                    </div>
+                  </div>
+
+                    <div class="row mt-3 justify-content-center">
+                    <h4>Deducciones</h4>
+                    <div class="col">
+                      <input type="number" v-model="deduccion.valor" class="form-control" placeholder="Valor">
+                    </div>
+                       <div class="col">
+                      <a href="" class="btn btn-danger" @click.prevent="agregardeduccion()">Agregar</a>
+                    </div>
+                  </div>
+
+                    <div class="row mt-3 justify-content-center">
+                       <div class="col-5">
+                  <table class="table table-bordered table-sm mt-2" v-if="deducciones.length >= 1">
+                    <thead class="bg-info">
+                      <tr >
+                        <th class="text-center" width="500">Valor</th>
+                        <th class="text-center">Eliminar</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(valore, index) in deducciones">
+                        <td class="text-left"><input type="number" v-model="valore.valor" name="" class="form-control form-control-sm"></td>
+                        <td align="center"><a href="" class="btn btn-sm btn-danger" @click.prevent="borrarDeduccion(index)"><i class="fa fa-trash"></i></a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                    </div>
+                  </div>
+   
+                  <div class="row mb-2">
+                    <div class="col">
+                      <input type="number" v-model="impuesto.fraccion" class="form-control" placeholder="Fraccion Basica">
+                    </div>
+                    <div class="col">
+                      <input type="number" v-model="impuesto.impuesto_fraccion" class="form-control" placeholder="Impuesto Fraccion Basica">
+                    </div>
+                      <div class="col-2">
+                      <input type="number" v-model="impuesto.interes" class="form-control" placeholder="%">
+                    </div>
+                  </div>
+                  <div class="row justify-content-center mb-3">
+                    <a href="" class="btn btn-info" @click.prevent="impuestoRenta()">Calcular Impuesto a la Renta</a>
+                  </div>
+
+
+                </form>
+
+                <h2>TOTAL DE IMPUESTO: <strong>@{{ impuesto.total }}</strong></h2>
+
                   </div>
                
                   <div class="col-12 mt-2 p-2"  style=" height:400px; overflow-y: scroll;">
@@ -88,7 +150,7 @@
                     <tbody is="draggable" group="people" :list="a_corrientes" tag="tbody">
 
                         <tr v-for="(balan, index) in a_corrientes">
-                          <td align="center">@{{ balan.nom_cuenta}}</td>
+                          <td class="text-left">@{{ balan.nom_cuenta}}</td>
                           <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editAcorriente(index)" class="btn btn-warning">
@@ -163,7 +225,7 @@
                     <tbody is="draggable" group="people" :list="a_nocorrientes" tag="tbody">
 
                         <tr v-for="(balan, index) in a_nocorrientes">
-                          <td align="center">@{{ balan.nom_cuenta}}</td>
+                          <td class="text-left">@{{ balan.nom_cuenta}}</td>
                           <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editNoAcorriente(index)" class="btn btn-warning">
@@ -238,7 +300,7 @@
                     <tbody is="draggable" group="people" :list="p_corrientes" tag="tbody">
 
                         <tr v-for="(balan, index) in p_corrientes">
-                          <td align="center">@{{ balan.nom_cuenta}}</td>
+                          <td class="text-left">@{{ balan.nom_cuenta}}</td>
                           <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editPcorriente(index)" class="btn btn-warning">
@@ -314,7 +376,7 @@
                     <tbody is="draggable" group="people" :list="p_nocorrientes" tag="tbody">
 
                         <tr v-for="(balan, index) in p_nocorrientes">
-                          <td align="center">@{{ balan.nom_cuenta}}</td>
+                          <td class="text-left">@{{ balan.nom_cuenta}}</td>
                           <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editPNocorriente(index)" class="btn btn-warning">
@@ -390,7 +452,7 @@
                     <tbody is="draggable" group="people" :list="patrimonios" tag="tbody">
 
                         <tr v-for="(balan, index) in patrimonios">
-                          <td align="center">@{{ balan.nom_cuenta}}</td>
+                          <td class="text-left">@{{ balan.nom_cuenta}}</td>
                           <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editPatrimonio(index)" class="btn btn-warning">
