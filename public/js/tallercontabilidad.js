@@ -13059,12 +13059,32 @@ methods:{
         }, //end prestamo hipotecario
 
         calculoHipo(){
-           let calculo = this.calculo.valor;
-           let tiempo  = this.calculo.tiempo;
-           let interes = this.calculo.interes;
-          let hipo = this.prestamoHipotecario(calculo,tiempo,interes);                 
-          this.calculo.total = hipo;
-        
+
+
+            if (this.calculo.valor == '') {
+                toastr.error("No has agregado el valor", "Smarmoddle", {
+                    "timeOut": "3000"
+                  });
+            }else if(this.calculo.tiempo == ''){
+              toastr.error("No has agregado el tiempo", "Smarmoddle", {
+                  "timeOut": "3000"
+                });
+            }else if(this.calculo.interes == ''){
+              toastr.error("Debe agregar el Interes", "Smarmoddle", {
+                  "timeOut": "3000"
+                });
+            }else{
+
+              let calculo = this.calculo.valor;
+              let tiempo  = this.calculo.tiempo;
+              let interes = this.calculo.interes;
+              let hipo = this.prestamoHipotecario(calculo,tiempo,interes);                 
+              
+              this.calculo.total = hipo;
+              this.calculo.valor ='';
+              this.calculo.tiempo ='';
+              this.calculo.interes ='';
+            }        
         },//fin calculo 
 
         prestamoQuirografario(valor, meses, interes){
@@ -13078,12 +13098,31 @@ methods:{
        },//end prestamo
 
         calculoquiro(){
+
+          if (this.calculo1.valor == '') {
+            toastr.error("No has agregado el valor", "Smarmoddle", {
+                "timeOut": "3000"
+              });
+        }else if(this.calculo1.mes == ''){
+          toastr.error("No has agregado el Mes", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+        }else if(this.calculo1.interes == ''){
+          toastr.error("Debe agregar el Interes", "Smarmoddle", {
+              "timeOut": "3000"
+            });
+        }else{
+
             let valor    = this.calculo1.valor;
             let mes      = this.calculo1.mes;
             let interes  = this.calculo1.interes;
             let hipo      = this.prestamoQuirografario(valor,mes,interes);                 
-           
-            this.calculo1.total = hipo;
+            
+              this.calculo1.total = hipo;
+              this.calculo1.valor ='';
+              this.calculo1.mes ='';
+              this.calculo1.interes ='';
+        }
         
         },//fin calculo 
 
