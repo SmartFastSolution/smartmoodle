@@ -39,18 +39,21 @@
                             <div class="row">
                                 <div class="col">
                                     <td width="100">
-                                        <input type="number" class="form-control form-control-sm" v-model="calculo.valor" placeholder="Valor ">
+                                        <input type="number" class="form-control form-control-sm"
+                                            v-model="calculo.valor" placeholder="Valor ">
                                     </td>
 
                                 </div>
                                 <div class="col">
                                     <td width="100">
-                                        <input type="number" class="form-control form-control-sm" v-model="calculo.tiempo" placeholder="Tiempo ">
+                                        <input type="number" class="form-control form-control-sm"
+                                            v-model="calculo.tiempo" placeholder="Tiempo ">
                                     </td>
                                 </div>
                                 <div class="col">
                                     <td width="100">
-                                        <input type="number" class="form-control form-control-sm"  v-model="calculo.interes" placeholder="Interes">
+                                        <input type="number" class="form-control form-control-sm"
+                                            v-model="calculo.interes" placeholder="Interes">
                                     </td>
                                 </div>
                                 <div class="col">
@@ -61,8 +64,8 @@
                                 </div>
                                 <div class="col">
                                     <td width="150">
-                                        <input type="number" v-model="calculo.total" class="form-control form-control-sm"
-                                            placeholder="Resultado">
+                                        <input type="number" v-model="calculo.total"
+                                            class="form-control form-control-sm" placeholder="Resultado">
                                     </td>
                                 </div>
 
@@ -74,18 +77,21 @@
                             <div class="row">
                                 <div class="col">
                                     <td width="100">
-                                        <input type="number" class="form-control form-control-sm" v-model="calculo1.valor" placeholder="valor ">
+                                        <input type="number" class="form-control form-control-sm"
+                                            v-model="calculo1.valor" placeholder="valor ">
                                     </td>
 
                                 </div>
                                 <div class="col">
                                     <td width="100">
-                                        <input type="number" class="form-control form-control-sm"  v-model="calculo1.mes" placeholder="Mes">
+                                        <input type="number" class="form-control form-control-sm" v-model="calculo1.mes"
+                                            placeholder="Mes">
                                     </td>
                                 </div>
                                 <div class="col">
                                     <td width="100">
-                                        <input type="number" class="form-control form-control-sm" v-model="calculo1.interes" placeholder="Interes">
+                                        <input type="number" class="form-control form-control-sm"
+                                            v-model="calculo1.interes" placeholder="Interes">
                                     </td>
                                 </div>
                                 <div class="col">
@@ -96,18 +102,98 @@
                                 </div>
                                 <div class="col">
                                     <td width="150">
-                                        <input type="number" v-model="calculo1.total" class="form-control form-control-sm"
-                                            placeholder="Resultado">
+                                        <input type="number" v-model="calculo1.total"
+                                            class="form-control form-control-sm" placeholder="Resultado">
                                     </td>
                                 </div>
 
                             </div>
                             <br>
+                            {{-- Impuesto a La Renta--}}
+
+                            <h4 class="text-center text-success font-weight-bold mt-2">Impuesto a La Renta
+                            </h4>
+
+                            <form>
+                                <div class="row">
+                                    <div class="col">
+                                        <input type="number" v-model="impuesto.sueldo"
+                                            class="form-control  form-control-sm" placeholder="Agregar Sueldo">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" v-model="impuesto.comisiones"
+                                            class="form-control  form-control-sm"
+                                            placeholder="Agregar Comision(Opcional)">
+                                    </div>
+                                </div>
+
+                                <div class="row mt-4 justify-content-center">
+
+                                    <div class="col">
+                                        <h5 class="text-center text-success font-weight-bold mt-2">Deducciones:
+                                        </h5>
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" v-model="deduccion.valor"
+                                            class="form-control  form-control-sm" placeholder="Valor">
+                                    </div>
+                                    <div class="col">
+                                        <a href="" class="btn btn-danger  btn-sm"
+                                            @click.prevent="agregardeduccion()">Agregar</a>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-3 justify-content-center">
+                                    <div class="col-5">
+                                        <table class="table table-bordered table-sm mt-2"
+                                            v-if="deducciones.length >= 1">
+                                            <thead class="bg-info">
+                                                <tr>
+                                                    <th class="text-center" width="300">Valor</th>
+                                                    <th class="text-center">Eliminar</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="(valore, index) in deducciones">
+                                                    <td class="text-left"><input type="number" v-model="valore.valor"
+                                                            name="" class="form-control form-control-sm"></td>
+                                                    <td align="center"><a href="" class="btn btn-sm btn-danger"
+                                                            @click.prevent="borrarDeduccion(index)"><i
+                                                                class="fa fa-trash"></i></a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col">
+                                        <input type="number" v-model="impuesto.fraccion"
+                                            class="form-control  form-control-sm" placeholder="Fraccion Basica">
+                                    </div>
+                                    <div class="col">
+                                        <input type="number" v-model="impuesto.impuesto_fraccion"
+                                            class="form-control  form-control-sm"
+                                            placeholder="Impuesto Fraccion Basica">
+                                    </div>
+                                    <div class="col-2">
+                                        <input type="number" v-model="impuesto.interes"
+                                            class="form-control form-control-sm" placeholder="%">
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center mb-3">
+                                    <a href="" class="btn btn-info btn-sm" @click.prevent="impuestoRenta()">Calcular
+                                        Impuesto a
+                                        la Renta</a>
+                                </div>
 
 
+                            </form>
 
+                            <h2>TOTAL DE IMPUESTO: <strong>@{{ impuesto.total }}</strong></h2>
 
-
+                            {{--Impuesto a la Renta --}}
 
 
                         </div>

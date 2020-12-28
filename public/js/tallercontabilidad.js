@@ -12938,6 +12938,18 @@ const nomina_em = new Vue({
       s_tegresos:0,
       s_netopagar:0,
     },
+    deduccion:{
+      valor:''
+    },
+    deducciones:[],
+    impuesto:{
+      sueldo:'',
+      comisiones:'',
+      fraccion:'',
+      impuesto_fraccion:'',
+      interes:'',
+      total:''
+    },
 
     update: false,
     registro_id:'',
@@ -12949,6 +12961,89 @@ const nomina_em = new Vue({
   },
 
 methods:{
+
+
+          //impuesto agregadi
+
+          impuestoAgregado(sueldo, comision, deduciones, fraccion, impuesto_fraccion, interes){
+            let total           = 0;
+            let deduccion       = 0;
+
+            let ingreso_gravable = sueldo - comision;
+            let iies            = (ingreso_gravable * 9.45) / 100;
+            let ingreso_liquido =  ingreso_gravable - iies;
+            deduciones.forEach(function(d){           
+            deduccion           += Number(d.valor); 
+          });
+            console.log(deduccion)
+
+          let ingreso_mensual       = ingreso_liquido - deduccion;
+          let ingreso_anual         = ingreso_mensual * 12;
+          let fraccion_excedente    = ingreso_anual - Number(fraccion);
+          let fraccion_excedenteiva = (fraccion_excedente * Number(interes)) / 100;
+          let total_impuesto        = Number(impuesto_fraccion) + fraccion_excedenteiva;
+          total                     = total_impuesto / 12;
+
+          return Number(total).toFixed(2);
+          },
+
+
+
+          agregardeduccion(){
+            if (this.deduccion.valor == '') {
+                  toastr.error("No puede dejar el campo vacio", "Smarmoddle", {
+                    "timeOut": "3000"
+                  });
+            }else{
+          let valor =  Number(this.deduccion.valor);
+          let deduccio  = {valor:valor};
+          this.deducciones.push(deduccio);
+          this.deduccion.valor = '';
+            }
+          },
+          borrarDeduccion(index){
+          this.deducciones.splice(index, 1);   
+          },
+          impuestoRenta(){
+            if (this.impuesto.sueldo == '') {
+               toastr.error("No has agregado el sueldo", "Smarmoddle", {
+                    "timeOut": "3000"
+                  });
+            }else if(this.impuesto.fraccion == ''){
+               toastr.error("No has agregado la fraccion basica", "Smarmoddle", {
+                    "timeOut": "3000"
+                  });
+            }else if(this.impuesto.impuesto_fraccion == ''){
+               toastr.error("No has agregado el impuesto a fraccion basica", "Smarmoddle", {
+                    "timeOut": "3000"
+                  });
+            }else if(this.impuesto.interes == ''){
+                 toastr.error("No has agregado el porcentaje", "Smarmoddle", {
+                    "timeOut": "3000"
+                  });
+            }else if(this.deducciones.length == 0){
+                 toastr.error("No has agregado deducciones", "Smarmoddle", {
+                    "timeOut": "3000"
+                  });
+            }else{
+              let deducciones = this.deducciones;
+              let comision = Number(this.impuesto.comisiones);
+              let impuesto = funciones.impuestoAgregado(this.impuesto.sueldo, comision, deducciones,  this.impuesto.fraccion, this.impuesto.impuesto_fraccion, this.impuesto.interes);
+            console.log(impuesto);
+            this.impuesto.total = impuesto
+            this.impuesto.sueldo = '';
+            this.impuesto.fraccion = '';
+            this.impuesto.impuesto_fraccion = '';
+            this.impuesto.interes = '';
+            this.deducciones =[];
+            this.impuesto.comisiones ='';
+            }
+          },
+
+          //impuesto agregado
+
+
+
 
       prestamoHipotecario(valor, tiempo, interes){
         let total =0;
