@@ -1,3 +1,5 @@
+//const { update } = require("lodash");
+
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
@@ -10912,7 +10914,7 @@ const librocaja = new Vue({
        this.libros_caja[id].debe     = this.caja.debe;
        this.libros_caja[id].haber    = this.caja.haber;
        this.libros_caja[id].saldo    = this.caja.saldo;
-       this.cancelarEditlibro()
+       this.cancelarEditlibro();
        this.totales();
        toastr.error("Registro actualizado correctamente", "Smarmoddle", {
         "timeOut": "3000"
@@ -11731,24 +11733,28 @@ const conciliacionb = new Vue({
     
      c_saldos:[],
      saldo:{
+      edit:false,
        fecha:'',
       detalle:'',
       saldo:'',
      },
      c_debitos:[],
      debito:{
-      fecha:'',
+      edit:false,
+       fecha:'',
        detalle:'',
        saldo:'',
      },
      c_creditos:[],
      credito:{
+      edit:false,
       fecha:'',
        detalle:'',
        saldo:'',
      },
      c_cheques:[],
      cheques:{
+      edit:false,
        fecha:'',
        detalle:'',
        saldo:'',
@@ -11761,7 +11767,10 @@ const conciliacionb = new Vue({
        saldo_d :0,
        total   :0,
 
-     }
+     },
+     update:false,
+     registro_id:'',
+
 
    },
    mounted: function() {
@@ -11787,6 +11796,7 @@ const conciliacionb = new Vue({
    
   },// fin fecha
 
+  
     totales: function(){
       
        this.suman.saldo_c =0;
@@ -11834,6 +11844,37 @@ const conciliacionb = new Vue({
        
     }, //fin function totales
 
+
+    abrirSaldos(){ //solo para acceder al modal para agregar todo pilas 
+    this.limpiar(); 
+     $('#conciliacion-bancaria').modal('show');
+     $('#nav-bih-conciliacion-saldo-tab').tab('show');
+    
+   }, //fin de metodo abrirtransaccion
+
+   abrirDebito(){ //solo para acceder al modal para agregar todo pilas 
+    this.limpiar(); 
+     $('#conciliacion-bancaria').modal('show');
+     $('#nav-bih-conciliacion-debito-tab').tab('show');
+    
+   }, //fin de metodo abrirtransaccion
+
+   abrirCredito(){ //solo para acceder al modal para agregar todo pilas 
+    this.limpiar(); 
+     $('#conciliacion-bancaria').modal('show');
+     $('#nav-bih-conciliacion-credito-tab').tab('show');
+    
+   }, //fin de metodo abrirtransaccion
+
+   abrirCheques(){ //solo para acceder al modal para agregar todo pilas 
+    this.limpiar(); 
+     $('#conciliacion-bancaria').modal('show');
+     $('#nav-bih-conciliacion-cheque-tab').tab('show');
+    
+   }, //fin de metodo abrirtransaccion
+
+
+
     agregarSaldo(){
        
       if(this.saldo.fecha.trim() === ''){
@@ -11863,6 +11904,96 @@ const conciliacionb = new Vue({
       }
 
     },//fin metodo agregar saldo
+
+    editSaldo(index){
+      this.saldo.edit =true;
+      this.registro_id  = index;
+      this.saldo.fecha     = this.c_saldos[index].fecha;
+      this.saldo.detalle   = this.c_saldos[index].detalle;
+      this.saldo.saldo     = this.c_saldos[index].saldo;
+      $('#nav-bih-conciliacion-saldo-tab').tab('show');
+       
+     
+    },//end edit saldos
+
+    editSaldoFuera(index){
+     
+      this.saldo.edit =true;
+      this.registro_id  = index;
+      this.saldo.fecha     = this.c_saldos[index].fecha;
+      this.saldo.detalle   = this.c_saldos[index].detalle;
+      this.saldo.saldo     = this.c_saldos[index].saldo;
+      $('#conciliacion-bancaria').modal('show');  
+      $('#nav-bih-conciliacion-saldo-tab').tab('show');  
+
+     }, //fin udpate saldo
+
+
+     cancelarEditSaldo(){
+      this.saldo.fecha     =''
+      this.saldo.detalle   =''
+      this.saldo.saldo     =''
+      this.saldo.edit      =false;
+     },
+
+     EliminarSaldo(index){
+      let nombre = this.c_saldos[index].detalle;
+       Swal.fire({
+         title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+         text: "Esta accion no se puede revertir",
+         icon: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         confirmButtonText: 'Si, eliminar!'
+           }).then((result) => {
+         if (result.isConfirmed) {
+           Swal.fire(
+             'Eliminado!',
+             'El Registro de la cuenta '+nombre,
+             'success'
+           );
+           this.c_saldos.splice(index, 1);   
+                           
+           this.totales();    
+         }
+       });
+     },
+
+     actualizarSaldo(){
+
+      if(this.saldo.fecha.trim() === ''){
+        toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+    }else if(this.saldo.detalle.trim() === ''){
+        toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+    }else if(this.saldo.saldo.trim() ===''){
+      toastr.error("El Saldo es Obligatorio ", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+    } else{
+       let id                      = this.registro_id;
+       this.c_saldos[id].fecha     = this.saldo.fecha;
+       this.c_saldos[id].detalle   = this.saldo.detalle;
+       this.c_saldos[id].saldo     = this.saldo.saldo;
+     
+       this.cancelarEditSaldo();
+       this.totales();
+       toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+        });
+      }
+     
+    },//fin de actualizar saldo
+
+
+
+
 
     agregarCreditos(){
        
@@ -11894,6 +12025,98 @@ const conciliacionb = new Vue({
 
     },//fin metodo agregar saldo
 
+
+    editCredito(index){
+      this.credito.edit =true;
+      this.registro_id  = index;
+      this.credito.fecha     = this.c_creditos[index].fecha;
+      this.credito.detalle   = this.c_creditos[index].detalle;
+      this.credito.saldo     = this.c_creditos[index].saldo;
+      
+     $('#nav-bih-conciliacion-credito-tab').tab('show');
+       
+     
+    },//end edit saldos
+
+    editCreditoFuera(index){
+     
+      this.credito.edit =true;
+      this.registro_id  = index;
+      this.credito.fecha     = this.c_creditos[index].fecha;
+      this.credito.detalle   = this.c_creditos[index].detalle;
+      this.credito.saldo     = this.c_creditos[index].saldo;
+     
+      $('#conciliacion-bancaria').modal('show');
+     $('#nav-bih-conciliacion-credito-tab').tab('show');
+     }, //fin udpate saldo
+
+
+     cancelarEditCredito(){
+      this.credito.fecha =''
+      this.credito.detalle =''
+      this.credito.saldo  =''
+      this.credito.edit =false;
+     },
+
+     EliminarCredito(index){
+      let nombre = this.c_creditos[index].detalle;
+       Swal.fire({
+         title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+         text: "Esta accion no se puede revertir",
+         icon: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         confirmButtonText: 'Si, eliminar!'
+           }).then((result) => {
+         if (result.isConfirmed) {
+           Swal.fire(
+             'Eliminado!',
+             'El Registro de la cuenta '+nombre,
+             'success'
+           );
+           this.c_creditos.splice(index, 1);   
+                           
+           this.totales();    
+         }
+       });
+     },
+
+     actualizarCredito(){
+
+      if(this.credito.fecha.trim() === ''){
+        toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+    }else if(this.credito.detalle.trim() === ''){
+        toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+    }else if(this.credito.saldo.trim() ===''){
+      toastr.error("El Saldo es Obligatorio ", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+    } else{
+       let id                        = this.registro_id;
+       this.c_creditos[id].fecha     = this.credito.fecha;
+       this.c_creditos[id].detalle   = this.credito.detalle;
+       this.c_creditos[id].saldo     = this.credito.saldo;
+     
+       this.cancelarEditCredito();
+       this.totales();
+       toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+        });
+      }
+     
+    },//fin de actualizar credito
+
+
+
+
+
     agregarDebitos(){
        
       if(this.debito.fecha.trim() === ''){
@@ -11923,6 +12146,97 @@ const conciliacionb = new Vue({
       }
 
     },//fin metodo agregar saldo
+
+
+    editDebito(index){
+      this.debito.edit      =true;
+      this.registro_id      = index;
+      this.debito.fecha     = this.c_debitos[index].fecha;
+      this.debito.detalle   = this.c_debitos[index].detalle;
+      this.debito.saldo     = this.c_debitos[index].saldo;
+      $('#nav-bih-conciliacion-debito-tab').tab('show');   
+       
+     
+    },//end edit saldos
+
+    editDebitoFuera(index){
+     
+      this.debito.edit =true;
+      this.registro_id  = index;
+      this.debito.fecha     = this.c_debitos[index].fecha;
+      this.debito.detalle   = this.c_debitos[index].detalle;
+      this.debito.saldo     = this.c_debitos[index].saldo;
+     
+      $('#conciliacion-bancaria').modal('show');
+      $('#nav-bih-conciliacion-debito-tab').tab('show');   
+
+     }, //fin udpate saldo
+
+
+     cancelarEditDebito(){
+      this.debito.fecha =''
+      this.debito.detalle =''
+      this.debito.saldo  =''
+      this.debito.edit =false;
+     },
+
+     EliminarDebito(index){
+      let nombre = this.c_debitos[index].detalle;
+       Swal.fire({
+         title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+         text: "Esta accion no se puede revertir",
+         icon: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         confirmButtonText: 'Si, eliminar!'
+           }).then((result) => {
+         if (result.isConfirmed) {
+           Swal.fire(
+             'Eliminado!',
+             'El Registro de la cuenta '+nombre,
+             'success'
+           );
+           this.c_debitos.splice(index, 1);   
+                           
+           this.totales();    
+         }
+       });
+     },
+
+     actualizarDebito(){
+
+      if(this.debito.fecha.trim() === ''){
+        toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+    }else if(this.debito.detalle.trim() === ''){
+        toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+    }else if(this.debito.saldo.trim() ===''){
+      toastr.error("El Saldo es Obligatorio ", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+    } else{
+       let id                        = this.registro_id;
+       this.c_debitos[id].fecha     = this.debito.fecha;
+       this.c_debitos[id].detalle   = this.debito.detalle;
+       this.c_debitos[id].saldo     = this.debito.saldo;
+     
+       this.cancelarEditDebito();
+       this.totales();
+       toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+        });
+      }
+     
+    },//fin de actualizar debito
+
+
+
 
     agregarCheques(){
           
@@ -11954,22 +12268,111 @@ const conciliacionb = new Vue({
           }
 
      },//fin metodo agregar cheque
-      deleteSaldo(index){
-        this.c_saldos.splice(index, 1);
-        this.totales();
-      },// delete saldo
-      deleteDebito(index){
-        this.c_debitos.splice(index, 1);
-        this.totales();
-      },// delete debitos
-      deleteCredito(index){
-        this.c_creditos.splice(index, 1);
-        this.totales();
-      },// delete credito
-      deleteCheque(index){
-        this.c_cheques.splice(index, 1);
-        this.totales();
-      },// delete cheque
+
+
+     editCheque(index){
+      this.cheques.edit      =true;
+      this.registro_id      = index;
+      this.cheques.fecha     = this.c_cheques[index].fecha;
+      this.cheques.detalle   = this.c_cheques[index].detalle;
+      this.cheques.saldo     = this.c_cheques[index].saldo;
+     
+      $('#nav-bih-conciliacion-cheque-tab').tab('show');
+     
+    },//end edit saldos
+
+    editChequeFuera(index){
+     
+      this.cheques.edit =true;
+      this.registro_id  = index;
+      this.cheques.fecha     = this.c_cheques[index].fecha;
+      this.cheques.detalle   = this.c_cheques[index].detalle;
+      this.cheques.saldo     = this.c_cheques[index].saldo;
+     
+      $('#conciliacion-bancaria').modal('show');
+     $('#nav-bih-conciliacion-cheque-tab').tab('show');
+     }, //fin udpate saldo
+
+
+     cancelarEditCheque(){
+      this.cheques.fecha =''
+      this.cheques.detalle =''
+      this.cheques.saldo  =''
+      this.cheques.edit =false;
+     },
+
+     EliminarCheque(index){
+      let nombre = this.c_cheques[index].detalle;
+       Swal.fire({
+         title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+         text: "Esta accion no se puede revertir",
+         icon: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         confirmButtonText: 'Si, eliminar!'
+           }).then((result) => {
+         if (result.isConfirmed) {
+           Swal.fire(
+             'Eliminado!',
+             'El Registro de la cuenta '+nombre,
+             'success'
+           );
+           this.c_cheques.splice(index, 1);   
+                           
+           this.totales();    
+         }
+       });
+     },
+
+     actualizarCheque(){
+
+      if(this.cheques.fecha.trim() === ''){
+        toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+    }else if(this.cheques.detalle.trim() === ''){
+        toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+    }else if(this.cheques.saldo.trim() ===''){
+      toastr.error("El Saldo es Obligatorio ", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+    } else{
+       let id                        = this.registro_id;
+       this.c_cheques[id].fecha     = this.cheques.fecha;
+       this.c_cheques[id].detalle   = this.cheques.detalle;
+       this.c_cheques[id].saldo     = this.cheques.saldo;
+     
+       this.cancelarEditCheque()
+       this.totales();
+       toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+        });
+      }
+     
+    },//fin de actualizar debito
+
+
+      // deleteSaldo(index){
+      //   this.c_saldos.splice(index, 1);
+      //   this.totales();
+      // },// delete saldo
+      // deleteDebito(index){
+      //   this.c_debitos.splice(index, 1);
+      //   this.totales();
+      // },// delete debitos
+      // deleteCredito(index){
+      //   this.c_creditos.splice(index, 1);
+      //   this.totales();
+      // },// delete credito
+      // deleteCheque(index){
+      //   this.c_cheques.splice(index, 1);
+      //   this.totales();
+      // },// delete cheque
 
  
       limpiar(){
@@ -11988,93 +12391,73 @@ const conciliacionb = new Vue({
   
       },//fin metodo limpiar todos los campos
 
-      editSaldo(index){
-        this.update = index;
-        this.saldo.fecha     = this.c_saldos[index].fecha;
-        this.saldo.detalle   = this.c_saldos[index].detalle;
-        this.saldo.saldo     = this.c_saldos[index].saldo;
-       
-        $('#conciliacion_saldos').modal('show');     
-       
-      },//end edit saldos
-  
-       updateSaldo(){
-         var i = this.update;
-         this.c_saldos[i].fecha   = this.saldo.fecha;
-         this.c_saldos[i].detalle = this.saldo.detalle;
-         this.c_saldos[i].saldo   = this.saldo.saldo;
-         $('#conciliacion_saldos').modal('hide');  
-         this.limpiar();
-         this.totales();
-       
-  
-       }, //fin udpate saldo
+   
 
-       editDebitos(index){
-        this.update = index;
-        this.debito.fecha   = this.c_debitos[index].fecha;
-        this.debito.detalle   = this.c_debitos[index].detalle;
-        this.debito.saldo    = this.c_debitos[index].saldo;
+      //  editDebitos(index){
+      //   this.update = index;
+      //   this.debito.fecha   = this.c_debitos[index].fecha;
+      //   this.debito.detalle   = this.c_debitos[index].detalle;
+      //   this.debito.saldo    = this.c_debitos[index].saldo;
        
-        $('#conciliacion_debitos').modal('show');     
+      //   $('#conciliacion_debitos').modal('show');     
        
-      },//end edit saldos
+      // },//end edit saldos
   
-       updateDebitos(){
-         var i = this.update;
-         this.c_debitos[i].fecha = this.debito.fecha;
-         this.c_debitos[i].detalle = this.debito.detalle;
-         this.c_debitos[i].saldo  = this.debito.saldo;
+      //  updateDebitos(){
+      //    var i = this.update;
+      //    this.c_debitos[i].fecha = this.debito.fecha;
+      //    this.c_debitos[i].detalle = this.debito.detalle;
+      //    this.c_debitos[i].saldo  = this.debito.saldo;
        
-         $('#conciliacion_debitos').modal('hide');  
-         this.limpiar();
-         this.totales();
+      //    $('#conciliacion_debitos').modal('hide');  
+      //    this.limpiar();
+      //    this.totales();
        
   
-       }, //fin udpate saldo
-       editCreditos(index){
-        this.update = index;
-        this.credito.fecha   = this.c_creditos[index].fecha;
-        this.credito.detalle   = this.c_creditos[index].detalle;
-        this.credito.saldo     = this.c_creditos[index].saldo;
+      //  }, //fin udpate saldo
+      //  editCreditos(index){
+      //   this.update = index;
+      //   this.credito.fecha   = this.c_creditos[index].fecha;
+      //   this.credito.detalle   = this.c_creditos[index].detalle;
+      //   this.credito.saldo     = this.c_creditos[index].saldo;
        
-        $('#conciliacion_creditos').modal('show');     
+      //   $('#conciliacion_creditos').modal('show');     
        
-      },//end edit saldos
+      // },//end edit saldos
   
-       updateCreditos(){
-         var i = this.update;
-         this.c_creditos[i].fecha = this.credito.fecha;
-         this.c_creditos[i].detalle = this.credito.detalle;
-         this.c_creditos[i].saldo   = this.credito.saldo;
+      //  updateCreditos(){
+      //    var i = this.update;
+      //    this.c_creditos[i].fecha = this.credito.fecha;
+      //    this.c_creditos[i].detalle = this.credito.detalle;
+      //    this.c_creditos[i].saldo   = this.credito.saldo;
        
-         $('#conciliacion_creditos').modal('hide');  
-         this.limpiar();
-         this.totales();
+      //    $('#conciliacion_creditos').modal('hide');  
+      //    this.limpiar();
+      //    this.totales();
        
-       }, //fin udpate saldo
+      //  }, //fin udpate saldo
 
-       editCheques(index){
-        this.update = index;
-        this.cheques.fecha   = this.c_cheques[index].fecha;
-        this.cheques.detalle   = this.c_cheques[index].detalle;
-        this.cheques.saldo     = this.c_cheques[index].saldo;
+      //  editCheques(index){
+      //   this.update = index;
+      //   this.cheques.fecha   = this.c_cheques[index].fecha;
+      //   this.cheques.detalle   = this.c_cheques[index].detalle;
+      //   this.cheques.saldo     = this.c_cheques[index].saldo;
        
-        $('#conciliacion_cheques').modal('show');     
+      //   $('#conciliacion_cheques').modal('show');     
        
-      },//end edit saldos
+      // },//end edit saldos
   
-       updateCheques(){
-         var i = this.update;
-         this.c_cheques[i].fecha = this.cheques.fecha;
-         this.c_cheques[i].detalle = this.cheques.detalle;
-         this.c_cheques[i].saldo   = this.cheques.saldo;
+      //  updateCheques(){
+      //    var i = this.update;
+      //    this.c_cheques[i].fecha = this.cheques.fecha;
+      //    this.c_cheques[i].detalle = this.cheques.detalle;
+      //    this.c_cheques[i].saldo   = this.cheques.saldo;
        
-         $('#conciliacion_cheques').modal('hide');  
-         this.limpiar();
-         this.totales();
+      //    $('#conciliacion_cheques').modal('hide');  
+      //    this.limpiar();
+      //    this.totales();
        
-       }, //fin udpate saldo
+      //  }, //fin udpate saldo
 
 
        guardarConciliacionB(){
@@ -13028,7 +13411,7 @@ methods:{
             }else{
               let deducciones = this.deducciones;
               let comision = Number(this.impuesto.comisiones);
-              let impuesto = funciones.impuestoAgregado(this.impuesto.sueldo, comision, deducciones,  this.impuesto.fraccion, this.impuesto.impuesto_fraccion, this.impuesto.interes);
+              let impuesto = this.impuestoAgregado(this.impuesto.sueldo, comision, deducciones,  this.impuesto.fraccion, this.impuesto.impuesto_fraccion, this.impuesto.interes);
             console.log(impuesto);
             this.impuesto.total = impuesto
             this.impuesto.sueldo = '';

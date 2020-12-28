@@ -30,8 +30,8 @@
                                     aria-selected="true">Diario General</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="ht-mayor-general-tab" data-toggle="tab" href="#ht-mayor-general"
-                                    role="tab" aria-controls="ht-mayor-general" aria-selected="false">Enunciados</a>
+                                <a class="nav-link" id="ht-enunciado-retencion-tab" data-toggle="tab" href="#ht-enunciado-retencion"
+                                    role="tab" aria-controls="ht-enunciado-retencion" aria-selected="false">Enunciados</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="diario">
@@ -72,8 +72,8 @@
                                 </table>
                             </div>
 
-                            <div class="tab-pane fade" id="ht-mayor-general" role="tabpanel"
-                                aria-labelledby="ht-mayor-general-tab"
+                            <div class="tab-pane fade" id="ht-enunciado-retencion" role="tabpanel"
+                                aria-labelledby="ht-enunciado-retencion-tab"
                                 style=" height:400px; overflow-y: scroll; overflow-x: hidden;">
                                 <h1 class="text-center text-danger font-weight-bold mt-2">ENUNCIADOS</h1>
                                

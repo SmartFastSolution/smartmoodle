@@ -1,9 +1,14 @@
-{{-- AGREGAR SALDO--}}
-<div class="modal fade" id="c_saldos" tabindex="-1" role="dialog" aria-labelledby="taller1Label" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content bg-dark">
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="conciliacion-bancaria" tabindex="-1"
+    role="dialog" aria-labelledby="bg-transaccionLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered modal-xl " role="document">
+        <div class="modal-content bg-light">
             <div class="modal-header">
-                <h5 class="modal-title" id="taller1Label">SALDO</h5>
+                <div v-if="update">
+                    <h5 class="modal-title" id="er-ingresoLabel">ACTUALIZAR CUENTAS</h5>
+                </div>
+                <div v-else="!update">
+                    <h5 class="modal-title" id="ba-transaccionLabel">AGREGAR TRANSACCIONES</h5>
+                </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -11,376 +16,371 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col-12">
-                        <table class="table table-bordered table-sm">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th align="center" class="text-center" width="50">Fecha</th>
-                                    <th align="center" class="text-center">Detalle</th>
-                                    <th align="center" class="text-center">Valor</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input class="form-control" type="date" v-model="saldo.fecha"
-                                            placeholder="Agrega la fecha" name="">
-                                    </td>
-
-                                    <td><input type="text" v-model="saldo.detalle" name="detalle" class="form-control"
-                                            required></td>
-                                    <td width="125"><input type="number" v-model="saldo.saldo" name="saldo"
-                                            class="form-control" required></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="agregarSaldo()">Agregar
-                                Saldo</a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-{{-- AGREGAR DEBITO--}}
-<div class="modal fade" id="c_debitos" tabindex="-1" role="dialog" aria-labelledby="taller1Label" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content bg-dark">
-            <div class="modal-header">
-                <h5 class="modal-title" id="taller1Label">DEBITO</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <table class="table table-bordered table-sm">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th align="center" class="text-center" width="50">Fecha</th>
-                                    <th align="center" class="text-center">Detalle</th>
-                                    <th align="center" class="text-center">Valor</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input class="form-control" type="date" v-model="debito.fecha"
-                                            placeholder="Agrega la fecha" name="">
-                                    </td>
-                                    <td><input type="text" v-model="debito.detalle" name="detalle" class="form-control"
-                                            required></td>
-                                    <td width="125"><input type="number" v-model="debito.saldo" name="saldo"
-                                            class="form-control" required></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="agregarDebitos()">Agregar
-                                Debito</a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-{{-- AGREGAR CREDITO--}}
-<div class="modal fade" id="c_creditos" tabindex="-1" role="dialog" aria-labelledby="taller1Label" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content bg-dark">
-            <div class="modal-header">
-                <h5 class="modal-title" id="taller1Label">CREDITO</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <table class="table table-bordered table-sm">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th align="center" class="text-center" width="50">Fecha</th>
-                                    <th align="center" class="text-center">Detalle</th>
-                                    <th align="center" class="text-center">Valor</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input class="form-control" type="date" v-model="credito.fecha"
-                                            placeholder="Agrega la fecha" name="">
-                                    </td>
-                                    <td><input type="text" v-model="credito.detalle" name="detalle" class="form-control"
-                                            required></td>
-                                    <td width="125"><input type="number" v-model="credito.saldo" name="saldo"
-                                            class="form-control" required></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="agregarCreditos()">Agregar
-                                Credito</a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-{{-- AGREGAR CHEQUE--}}
-<div class="modal fade" id="c_cheques" tabindex="-1" role="dialog" aria-labelledby="taller1Label" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content bg-dark">
-            <div class="modal-header">
-                <h5 class="modal-title" id="taller1Label">CHEQUE</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <table class="table table-bordered table-sm">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th align="center" class="text-center"width="50">Fecha</th>
-                                    <th align="center" class="text-center">Detalle</th>
-                                    <th align="center" class="text-center">Valor</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input class="form-control" type="date" v-model="cheques.fecha"
-                                            placeholder="Agrega la fecha" name="">
-                                    </td>
-                                    <td><input type="text" v-model="cheques.detalle" name="detalle" class="form-control"
-                                            required></td>
-                                    <td width="125"><input type="number" v-model="cheques.saldo" name="saldo"
-                                            class="form-control" required></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="agregarCheques()">Agregar
-                                Cheque</a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
-<!-- /////////////////////////////////////////////////////////////////////EDITAR CONCILIACION BANCARIA//////////////////////////////////////////////////////// -->
+                        <nav>
+                            <div style="font-size: 15px" class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-link active" id="nav-bih-conciliacion-saldo-tab" data-toggle="tab"
+                                    href="#nav-bih-conciliacion-saldo" role="tab"
+                                    aria-controls="nav-bih-conciliacion-saldo" aria-selected="true">SALDOS</a>
 
-{{-- EDITAR SALDO--}}
-<div class="modal fade" id="conciliacion_saldos" tabindex="-1" role="dialog" aria-labelledby="taller1Label"
-    aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content bg-dark">
-            <div class="modal-header">
-                <h5 class="modal-title" id="taller1Label">SALDO</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <table class="table table-bordered table-sm">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th align="center" class="text-center"width="50">FEcha</th>
-                                    <th align="center" class="text-center">Detalle</th>
-                                    <th align="center" class="text-center">Valor</th>
+                                <a class="nav-link" id="nav-bih-conciliacion-debito-tab" data-toggle="tab"
+                                    href="#nav-bih-conciliacion-debito" role="tab"
+                                    aria-controls="nav-bih-conciliacion-debito" aria-selected="false">DÉBITOS</a>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input class="form-control" type="date" v-model="saldo.fecha"
-                                            placeholder="Agrega la fecha" name="">
-                                    </td>
+                                <a class="nav-link" id="nav-bih-conciliacion-credito-tab" data-toggle="tab"
+                                    href="#nav-bih-conciliacion-credito" role="tab"
+                                    aria-controls="nav-bih-conciliacion-credito" aria-selected="false">CRÉDITOS</a>
 
-                                    <td><input type="text" v-model="saldo.detalle" name="detalle" class="form-control"
-                                            required></td>
-                                    <td width="125"><input type="number" v-model="saldo.saldo" name="saldo"
-                                            class="form-control" required></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="updateSaldo()">Actualizar
-                                Saldo</a>
+                                <a class="nav-link" id="nav-bih-conciliacion-cheque-tab" data-toggle="tab"
+                                    href="#nav-bih-conciliacion-cheque" role="tab"
+                                    aria-controls="nav-bih-conciliacion-cheque" aria-selected="false">CHEQUES</a>
+                            </div>
+                        </nav>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                        <div class="tab-content" id="nav-tabContent">
 
-{{-- EDITAR DEBITO--}}
-<div class="modal fade" id="conciliacion_debitos" tabindex="-1" role="dialog" aria-labelledby="taller1Label"
-    aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content bg-dark">
-            <div class="modal-header">
-                <h5 class="modal-title" id="taller1Label">DEBITO</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <table class="table table-bordered table-sm">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th align="center" class="text-center" width="50">Fecha</th>
-                                    <th align="center" class="text-center">Detalle</th>
-                                    <th align="center" class="text-center">Valor</th>
+                            <!-- saldos -->
+                            <div class="tab-pane fade show active" id="nav-bih-conciliacion-saldo" role="tabpanel"
+                                aria-labelledby="nav-bih-conciliacion-saldo-tab">
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input class="form-control" type="date" v-model="debito.fecha"
-                                            placeholder="Agrega la fecha" name="">
-                                    </td>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h2 class="text-center">AGREGAR SALDO</h2>
+                                        <table class="table table-bordered table-sm">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th align="center" class="text-center" width="50">Fecha</th>
+                                                    <th align="center" class="text-center">Detalle</th>
+                                                    <th align="center" class="text-center">Valor</th>
 
-                                    <td><input type="text" v-model="debito.detalle" name="detalle" class="form-control"
-                                            required></td>
-                                    <td width="125"><input type="number" v-model="debito.saldo" name="saldo"
-                                            class="form-control" required></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="updateDebitos()">Actualizar
-                                Debito</a>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <input class="form-control" type="date" v-model="saldo.fecha"
+                                                            placeholder="Agrega la fecha" name="">
+                                                    </td>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-{{-- EDITAR CREDITO--}}
-<div class="modal fade" id="conciliacion_creditos" tabindex="-1" role="dialog" aria-labelledby="taller1Label"
-    aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content bg-dark">
-            <div class="modal-header">
-                <h5 class="modal-title" id="taller1Label">CREDITO</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <table class="table table-bordered table-sm">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th align="center" class="text-center" width="50">Fecha</th>
-                                    <th align="center" class="text-center">Detalle</th>
-                                    <th align="center" class="text-center">Valor</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input class="form-control" type="date" v-model="credito.fecha"
-                                            placeholder="Agrega la fecha" name="">
-                                    </td>
-                                    <td><input type="text" v-model="credito.detalle" name="detalle" class="form-control"
-                                            required></td>
-                                    <td width="125"><input type="number" v-model="credito.saldo" name="saldo"
-                                            class="form-control" required></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="updateCreditos()">Actualizar
-                                Credito</a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                                                    <td><input type="text" v-model="saldo.detalle" name="detalle"
+                                                            class="form-control" required></td>
+                                                    <td width="125"><input type="number" v-model="saldo.saldo"
+                                                            name="saldo" class="form-control" required></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div v-if="!saldo.edit" class="row justify-content-center">
+                                            <a href="#" class="btn btn-success"
+                                                @click.prevent="agregarSaldo()">Agregar</a>
+                                        </div>
+                                        <div v-else class="row justify-content-center">
+                                            <a href="#" class="btn btn-success"
+                                                @click.prevent="actualizarSaldo()">Actualizar</a>
+                                            <a href="#" class="btn btn-danger ml-1"
+                                                @click.prevent="cancelarEditSaldo()"><i
+                                                    class="fa fa-window-close"></i></a>
+                                        </div>
 
 
-{{-- EDITAR CHEQUE--}}
-<div class="modal fade" id="conciliacion_cheques" tabindex="-1" role="dialog" aria-labelledby="taller1Label"
-    aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content bg-dark">
-            <div class="modal-header">
-                <h5 class="modal-title" id="taller1Label">CHEQUE</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="row justify-content-center">
-                    <div class="col-12">
-                        <table class="table table-bordered table-sm">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th align="center" class="text-center" width="50">Fecha</th>
-                                    <th align="center" class="text-center">Detalle</th>
-                                    <th align="center" class="text-center">Valor</th>
+                                    </div>
+                                    <!-- fin del div col-6 -->
+                                    <div class="col-6 mt-2 "
+                                        style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+                                        <h2>Enunciados</h2>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input class="form-control" type="date" v-model="cheques.fecha"
-                                            placeholder="Agrega la fecha" name="">
-                                    </td>
-                                    <td><input type="text" v-model="cheques.detalle" name="detalle" class="form-control"
-                                            required></td>
-                                    <td width="125"><input type="number" v-model="cheques.saldo" name="saldo"
-                                            class="form-control" required></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="updateCheques()">Actualizar
-                                Cheque</a>
+                                    </div>
+                                    <!-- fin del div col-6 mt-2-->
+                                    <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
+                                        <h2 class="text-center">SALDO</h2>
+                                        <div class="row justify-content-around mb-2">
+                                            <table class="table table-bordered table-sm mb-2 p-2">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th align="center" class="text-center" width="150">Fecha</th>
+                                                        <th align="center" class="text-center">Detalle</th>
+                                                        <th align="center" class="text-center">Valor</th>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                                                    </tr>
+                                                </thead>
+                                                <tbody is="draggable" group="people" :list="c_saldos" tag="tbody">
+                                                    <tr v-for="(s, index) in c_saldos">
+                                                        <td align="center">@{{formatoFecha(s.fecha)}}</td>
+                                                        <td align="center">@{{ s.detalle}}</td>
+                                                        <td class="text-right">@{{ decimales(s.saldo)}}</td>
+                                                        <td align="center" width="50">
+                                                            <a @click.prevent="editSaldo(index)"
+                                                                class="btn btn-warning">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td align="center" width="50">
+                                                            <a @click.prevent="EliminarSaldo(index)"
+                                                                class="btn btn-danger">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end saldos -->
+                            <!-- debitos -->
+                            <div class="tab-pane fade" id="nav-bih-conciliacion-debito" role="tabpanel"
+                                aria-labelledby="nav-bih-conciliacion-debito-tab">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h2 class="text-center">AGREGAR DÉBITOS</h2>
+                                        <table class="table table-bordered table-sm">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th align="center" class="text-center" width="100">Fecha</th>
+                                                    <th align="center" class="text-center">Detalle</th>
+                                                    <th align="center" class="text-center">Valor</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <input class="form-control" type="date" v-model="debito.fecha"
+                                                            placeholder="Agrega la fecha" name="">
+                                                    </td>
+                                                    <td><input type="text" v-model="debito.detalle" name="detalle"
+                                                            class="form-control" required></td>
+                                                    <td width="125"><input type="number" v-model="debito.saldo"
+                                                            name="saldo" class="form-control" required></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div v-if="!debito.edit" class="row justify-content-center">
+                                            <a href="#" class="btn btn-success"
+                                                @click.prevent="agregarDebitos()">Agregar</a>
+                                        </div>
+                                        <div v-else class="row justify-content-center">
+                                            <a href="#" class="btn btn-success"
+                                                @click.prevent="actualizarDebito()">Actualizar</a>
+                                            <a href="#" class="btn btn-danger ml-1"
+                                                @click.prevent="cancelarEditDebito()"><i
+                                                    class="fa fa-window-close"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mt-2 "
+                                        style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+                                        <h2>Enunciados</h2>
+
+                                    </div>
+
+                                    <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
+                                        <h2 class="text-center">DÉBITOS</h2>
+                                        <div class="row justify-content-around mb-2">
+                                            <table class="table table-bordered table-sm mb-2 p-2">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th align="center" class="text-center" width="150">Fecha</th>
+                                                        <th align="center" class="text-center">Detalle</th>
+                                                        <th align="center" class="text-center">Valor</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody is="draggable" group="people" :list="c_debitos" tag="tbody">
+                                                    <tr v-for="(d, index) in c_debitos">
+                                                        <td align="center">@{{formatoFecha(d.fecha)}}</td>
+                                                        <td align="center">@{{ d.detalle}}</td>
+                                                        <td class="text-right">@{{ decimales(d.saldo)}}</td>
+                                                        <td align="center" width="50">
+                                                            <a @click.prevent="editDebito(index)"
+                                                                class="btn btn-warning">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td align="center" width="50">
+                                                            <a @click.prevent="EliminarDebito(index)"
+                                                                class="btn btn-danger">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end debitos -->
+                            <!-- creditos -->
+                            <div class="tab-pane fade " id="nav-bih-conciliacion-credito" role="tabpanel"
+                                aria-labelledby="nav-bih-conciliacion-credito-tab">
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h2 class="text-center">AGREGAR CRÉDITO</h2>
+                                        <table class="table table-bordered table-sm">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th align="center" class="text-center" width="50">Fecha</th>
+                                                    <th align="center" class="text-center">Detalle</th>
+                                                    <th align="center" class="text-center">Valor</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <input class="form-control" type="date" v-model="credito.fecha"
+                                                            placeholder="Agrega la fecha" name="">
+                                                    </td>
+                                                    <td><input type="text" v-model="credito.detalle" name="detalle"
+                                                            class="form-control" required></td>
+                                                    <td width="125"><input type="number" v-model="credito.saldo"
+                                                            name="saldo" class="form-control" required></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div v-if="!credito.edit" class="row justify-content-center">
+                                            <a href="#" class="btn btn-success"
+                                                @click.prevent="agregarCreditos()">Agregar</a>
+                                        </div>
+                                        <div v-else class="row justify-content-center">
+                                            <a href="#" class="btn btn-success"
+                                                @click.prevent="actualizarCredito()">Actualizar</a>
+                                            <a href="#" class="btn btn-danger ml-1"
+                                                @click.prevent="cancelarEditCredito()"><i
+                                                    class="fa fa-window-close"></i></a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6 mt-2 "
+                                        style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+                                        <h2>Enunciados</h2>
+                                    </div>
+                                    <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
+                                        <h2 class="text-center">CRÉDITOS</h2>
+                                        <div class="row justify-content-around mb-2">
+                                            <table class="table table-bordered table-sm mb-2 p-2">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th align="center" class="text-center" width="150">Fecha</th>
+                                                        <th align="center" class="text-center">Detalle</th>
+                                                        <th align="center" class="text-center">Valor</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody is="draggable" group="people" :list="c_creditos" tag="tbody">
+                                                    <tr v-for="(c, index) in c_creditos">
+                                                        <td align="center">@{{formatoFecha(c.fecha)}}</td>
+                                                        <td align="center">@{{ c.detalle}}</td>
+                                                        <td class="text-right">@{{ decimales(c.saldo)}}</td>
+                                                        <td align="center" width="50">
+                                                            <a @click.prevent="editCredito(index)"
+                                                                class="btn btn-warning">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td align="center" width="50">
+                                                            <a @click.prevent="EliminarCredito(index)"
+                                                                class="btn btn-danger">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end creditos -->
+                            <!-- cheques -->
+                            <div class="tab-pane fade " id="nav-bih-conciliacion-cheque" role="tabpanel"
+                                aria-labelledby="nav-bih-conciliacion-cheque-tab">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h2 class="text-center">AGREGAR CHEQUES</h2>
+
+                                        <table class="table table-bordered table-sm">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th align="center" class="text-center" width="50">Fecha</th>
+                                                    <th align="center" class="text-center">Detalle</th>
+                                                    <th align="center" class="text-center">Valor</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <input class="form-control" type="date" v-model="cheques.fecha"
+                                                            placeholder="Agrega la fecha" name="">
+                                                    </td>
+                                                    <td><input type="text" v-model="cheques.detalle" name="detalle"
+                                                            class="form-control" required></td>
+                                                    <td width="125"><input type="number" v-model="cheques.saldo"
+                                                            name="saldo" class="form-control" required></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div v-if="!cheques.edit" class="row justify-content-center">
+                                            <a href="#" class="btn btn-success"
+                                                @click.prevent="agregarCheques()">Agregar</a>
+                                        </div>
+                                        <div v-else class="row justify-content-center">
+                                            <a href="#" class="btn btn-success"
+                                                @click.prevent="actualizarCheque()">Actualizar</a>
+                                            <a href="#" class="btn btn-danger ml-1"
+                                                @click.prevent="cancelarEditCheque()"><i
+                                                    class="fa fa-window-close"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mt-2 "
+                                        style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+                                        <h2>Enunciados</h2>
+                                    </div>
+
+                                    <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
+                                        <h2 class="text-center">CHEQUES</h2>
+                                        <div class="row justify-content-around mb-2">
+                                            <table class="table table-bordered table-sm mb-2 p-2">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th align="center" class="text-center" width="150">Fecha</th>
+                                                        <th align="center" class="text-center">Detalle</th>
+                                                        <th align="center" class="text-center">Valor</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody is="draggable" group="people" :list="c_cheques" tag="tbody">
+                                                    <tr v-for="(c, index) in c_cheques">
+                                                        <td align="center">@{{formatoFecha(c.fecha)}}</td>
+                                                        <td align="center">@{{ c.detalle}}</td>
+                                                        <td class="text-right">@{{ decimales(c.saldo)}}</td>
+                                                        <td align="center" width="50">
+                                                            <a @click.prevent="editCheque(index)"
+                                                                class="btn btn-warning">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td align="center" width="50">
+                                                            <a @click.prevent="EliminarCheque(index)"
+                                                                class="btn btn-danger">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end cheques -->
+                        </div> <!-- cierre de modal tab-content -->
+                    </div> <!-- col-12 -->
+                </div> <!-- cierre de modal content center -->
+            </div> <!-- cierre de modal body -->
+        </div> <!-- cierre de modal content -->
+    </div> <!-- cierre de modal document -->
+</div> <!-- cierre de modal -->
