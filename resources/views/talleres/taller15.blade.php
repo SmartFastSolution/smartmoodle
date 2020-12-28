@@ -3,14 +3,14 @@
 @section('content')
 <!--CON LOS SIGUIENTES DATOS LLENE EL CHEQUE AL PORTADOR, CON CERTEZA. -->
 
-<h1 class="text-center  mt-5 text-danger">{{ $datos->taller->nombre }}</h1>
+<h1 class="text-center  mt-5 text-danger font-weight-bold display-4">{{ $datos->taller->nombre }}</h1>
      <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
 <form action="{{ route('taller15', ['idtaller' => $d]) }}" method="POST">
 	@csrf
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-2">
+			<div class="col-2" style="box-shadow: -5px 5px 15px 0px  #FB5EBA">
 				<h2>Datos</h2>
 				<label for="">Girador</label><br>
 					<p style="cursor: move;" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->girador }}')" ondragend="this.classList.add('text-muted');">{{ $datos->girador }}</p>
@@ -22,7 +22,7 @@
 				<p style="cursor: move;" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->lugar }}')" ondragend="this.classList.add('text-muted');">{{ $datos->lugar }}</p>
 				<p>{{ $datos->fecha }}</p>
 			</div>
-			<div class="col-9 border">
+			<div class="col-9 border p-2" style="box-shadow: 5px 5px 15px 0px  #27B8F4">
 				<div class="row ">
 					<div class="col-6">
 						<input type="text" name="girador" class="form-control mt-2" required>

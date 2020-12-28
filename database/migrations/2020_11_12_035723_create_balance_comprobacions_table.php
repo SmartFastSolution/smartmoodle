@@ -17,7 +17,7 @@ class CreateBalanceComprobacionsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
+            $table->string('enunciado')->nullable();
             $table->string('nombre');
             $table->string('fecha');
             $table->string('sum_debe')->nullable();

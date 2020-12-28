@@ -40,12 +40,12 @@
             <h2 align="center">Balance Inicial</h2>
         </div>
         <div class="col-8 mb-3">
-            <input class="form-control" type="text" v-model="balance_inicial.nombre" placeholder="Nombre de la empresa"
-                name="">
+            <input autocomplete="ÑÖcompletes" class="form-control" type="text" v-model="balance_inicial.nombre"
+                placeholder="Nombre de la empresa" name="">
         </div>
         <div class="col-5">
-            <input class="form-control" type="date" v-model="balance_inicial.fecha" placeholder="Agrega la fecha"
-                name="">
+            <input autocomplete="ÑÖcompletes" class="form-control" type="date" v-model="balance_inicial.fecha"
+                placeholder="Agrega la fecha" name="">
         </div>
 
     </div>
@@ -210,9 +210,10 @@
             <table class="table table-borderless">
                 <tbody>
                     <tr>
-                        <td class="font-weight-bold" style="font-size: 20px;" width="250">TOT. PAS. Y PATRI.</td>
-                        <td class="text-right"><input type="number" v-model="total_balance_inicial.t_patrimonio_pasivo"
-                                class="form-control form-control-sm"></td>
+                        <td class="font-weight-bold" style="font-size: 20px;" width="200">TOT. PAS. Y PATRI.</td>
+                        <td class="text-right"><input autocomplete="ÑÖcompletes" type="number"
+                                v-model="total_balance_inicial.t_patrimonio_pasivo"
+                                class="form-control text-right font-weight-bold"></td>
                     </tr>
                 </tbody>
             </table>
@@ -225,7 +226,8 @@
     <div class="row justify-content-center">
         <a class="btn p-2 mt-3 btn-outline-info" @click.prevent="guardarBalanceInicial()">Guardar Balance Inicial</a>
     </div>
-    @include ('contabilidad.modalbhorizontal')
+    @include ('contabilidad.modales.modalbalanceinicialhorizontal')
+    {{-- @include ('contabilidad.modalbhorizontal') --}}
 
 </div>
 
@@ -272,13 +274,13 @@
             <h2 align="center">Balance Inicial</h2>
         </div>
         <div class="col-8 mb-3">
-            <input class="form-control" type="text" v-model="balance_inicial.nombre" placeholder="Nombre de la empresa"
-                name="">
+            <input autocomplete="ÑÖcompletes" class="form-control" type="text" v-model="balance_inicial.nombre"
+                placeholder="Nombre de la empresa" name="">
         </div>
 
         <div class="col-5">
-            <input class="form-control" type="date" v-model="balance_inicial.fecha" placeholder="Agrega la fecha"
-                name="">
+            <input autocomplete="ÑÖcompletes" class="form-control" type="date" v-model="balance_inicial.fecha"
+                placeholder="Agrega la fecha" name="">
         </div>
     </div>
     <h2 class="text-center font-weight-bold text-danger">ACTIVOS</h2>
@@ -450,8 +452,9 @@
                 <tbody>
                     <tr>
                         <td class="font-weight-bold" style="font-size: 20px;" width="750">TOT. PAS. Y PATRI.</td>
-                        <td><input type="number" v-model="total_balance_inicial.t_patrimonio_pasivo"
-                                class="form-control"></td>
+                        <td><input autocomplete="ÑÖcompletes" type="number"
+                                v-model="total_balance_inicial.t_patrimonio_pasivo"
+                                class="form-control text-right font-weight-bold"></td>
                     </tr>
                 </tbody>
             </table>
@@ -463,5 +466,7 @@
     <div class="row justify-content-center">
         <a class="btn p-2 mt-3 btn-outline-info" @click.prevent="guardarBalanceInicial()">Guardar Balance Inicial</a>
     </div>
-    @include ('contabilidad.modalbvertical')
+    {{-- @include ('contabilidad.modalbvertical') --}}
+    @include ('contabilidad.modales.modalbalanceinicialvertical')
+
 </div>

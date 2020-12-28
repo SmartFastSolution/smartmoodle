@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- CONVIERTA  Y  COMPLETE  EL  CHEQUE  CERTIFICADO  CORRECTAMENTE -->
-<h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>
+<h1 class="text-center  mt-5 text-danger font-weight-bold display-4"> {{ $datos->taller->nombre }}</h1>
      <h3 class="text-center mt-5 mb-3 text-info"> {{ $datos->enunciado }} </h3>
 
 <form action="{{ route('taller17', ['idtaller' => $d]) }}" method="POST">
@@ -11,7 +11,7 @@
 	 <div class="container">
 	 	<div class="row">
      		<div class="col-8 ">
-     			<div class="border border-info p-2">
+     			<div class=" p-2" style="box-shadow: 5px 5px 15px 0px  #27A4F4">
 				<div class="row ">
 					<div class="col-6">
 						<img class="img-fluid" src="{{ asset('img/talleres/imagen-15.jpg') }}" alt="">

@@ -4,7 +4,7 @@
 {{-- @section('title','Taller 33') --}}
 @section('content')
 
-<h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>
+<h1 class="text-center  mt-5 text-danger font-weight-bold display-4"> {{ $datos->taller->nombre }}</h1>
 <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
 {{-- <h1 class="text-center  text-danger"> Taller 33</h1>
@@ -39,7 +39,7 @@
 			  </tbody>
 			</table>
 		</div>
-		<div class="row justify-content-center">
+		<div class="row justify-content-center mb-3">
         	<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
     	</div>
 	</div>

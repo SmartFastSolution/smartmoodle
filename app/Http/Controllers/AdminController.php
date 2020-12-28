@@ -24,6 +24,11 @@ use App\Admin\TallerCollage;
 use App\Admin\TallerCompletar;
 use App\Admin\TallerCompletarEnunciado;
 use App\Admin\TallerContabilidad;
+use App\Admin\TallerModuloContable;
+use App\Admin\TallerBalanceInicial;
+use App\Admin\TallerModuloTransaccion;
+use App\Admin\TallerKardex;
+use App\Admin\TallerDiarioGeneral;
 use App\Admin\TallerContabilidadOp;
 use App\Admin\TallerConvertirCheque;
 use App\Admin\TallerDefinirEnunOp;
@@ -1255,41 +1260,478 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
              }
       }
 
-   public function taller37(Request $request)
+   public function balance_inicial(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();
-         $taller37               = new Taller;
-         $taller37->nombre       = 'Taller '.++$i;
-         $taller37->enunciado = $request->input('enunciado');
-         $taller37->plantilla_id = $request->input('id_plantilla');
-         $taller37->contenido_id   = $request->input('contenido_id');
-         $taller37->estado       = 0;
-         $taller37->save();
+         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $balance_inicial               = new Taller;
+         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->enunciado    = $request->enunciado;
+         $balance_inicial->plantilla_id = 37;
+         $balance_inicial->contenido_id = $request->contenido_id;
+         $balance_inicial->estado       = 0;
+         $balance_inicial->save();
 
-          if ($taller37 = true) {
-            $a                    = Taller::get()->last();
-            $taller_37            = new TallerContabilidad;
-            $taller_37->taller_id = $a->id;
-            $taller_37->enunciado = $request->input('enunciado');
-            $taller_37->save();
-         }
+        $a                    = Taller::get()->last();
+        $taller_37            = new TallerModuloContable;
+        $taller_37->taller_id = $a->id;
+        $taller_37->enunciado = $request->enunciado;
+        $taller_37->metodo    = 'individual';
+        $taller_37->tipo   = $request->tipo;
+          if ($request->tipo  == 'vertical') {
 
-           if ($taller_37 = true) {
+              $taller_37->balance_inicial_vertical   = true;
+             
+            }elseif($request->tipo  == 'horizontal'){
+              $taller_37->balance_inicial_horizontal = true;
+          }
+        $taller_37->save();
 
-               $o = TallerContabilidad::get()->last();              
-               foreach ($request->enun as $key=>$v) {
-                  $datos=array(
-                     'taller_contabilidad_id'=> $o->id,
-                     'enunciado'=> $request->enun[$key],
-                     'created_at'=> now(),
-                     'updated_at'=> now(),
-                  );
-                  TallerContabilidadOp::insert($datos);
-               }
+        if ($taller_37 = true) {
+          $e                                   = TallerModuloContable::get()->last();
+          $vertical                            = new TallerModuloTransaccion;
+          $vertical->taller_modulo_contable_id = $e->id;
+          $vertical->enunciado                 = $request->enunciado;
+          $vertical->tipo                      = $request->tipo;
+          $vertical->transacciones             = $request->transacciones;
+          $vertical->save();
+       }
+        return response(array(                                         //ENVIO DE RESPUESTA
+                    'success' => true,
+                    'estado' => 'guardado',
+                    'message' => 'Taller creado correctamente'
+                ),200,[]);
 
-                 return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');
-             }
+         //   if ($taller_37 = true) {
+
+         //       $o = TallerContabilidad::get()->last();              
+         //       foreach ($request->enun as $key=>$v) {
+         //          $datos=array(
+         //             'taller_contabilidad_id'=> $o->id,
+         //             'enunciado'=> $request->enun[$key],
+         //             'created_at'=> now(),
+         //             'updated_at'=> now(),
+         //          );
+         //          TallerContabilidadOp::insert($datos);
+         //       }
+
+         //         return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');
+         //     }
       }
+
+         public function kardex(Request $request)
+      {
+         $i                    = Taller::where('contenido_id', $request->contenido_id)->count();
+         $kardex               = new Taller;
+         $kardex->nombre       = 'Taller '.++$i;
+         $kardex->enunciado    = $request->enunciado;
+         $kardex->plantilla_id = 37;
+         $kardex->contenido_id = $request->contenido_id;
+         $kardex->estado       = 0;
+         $kardex->save();
+
+        $a                    = Taller::get()->last();
+        $taller_37            = new TallerModuloContable;
+        $taller_37->taller_id = $a->id;
+        $taller_37->enunciado = $request->enunciado;
+        $taller_37->metodo    = 'individual';
+        $taller_37->tipo   = $request->tipo;
+
+
+          if ($request->tipo  == 'fifo') {
+              $taller_37->kardex_fifo   = true;
+            }elseif($request->tipo  == 'promedio'){
+              $taller_37->kardex_promedio = true;
+          }
+        $taller_37->save();
+
+        if ($taller_37 = true) {
+          $e = TallerModuloContable::get()->last();
+
+        if ($request->tipo  == 'fifo') {
+         foreach ($request->productos as $key=>$v) {
+              $datos=array(
+                 'taller_modulo_contable_id' => $e->id,
+                 'tipo'                      => 'fifo',
+                 'enunciado'                 => $request->enunciado,
+                 'nombre'                  => $v['nombre'],
+                 'transacciones'             => $v['transacciones'],
+                 'created_at'                => now(),
+                 'updated_at'                => now(),
+                );
+              TallerModuloTransaccion::insert($datos);
+           }
+         }elseif($request->tipo  == 'promedio'){
+          foreach ($request->productos as $key=>$v) {
+            $datos=array(
+                 'taller_modulo_contable_id' => $e->id,
+                 'tipo'                      => 'promedio',
+                 'enunciado'                 => $request->enunciado,
+                 'nombre'                  => $v['nombre'],
+                 'transacciones'             => $v['transacciones'],
+                 'created_at'                => now(),
+                 'updated_at'                => now(),
+                );
+              TallerModuloTransaccion::insert($datos);
+         }
+        
+       }
+        return response(array(                                      
+                    'success' => true,
+                    'estado' => 'guardado',
+                    'message' => 'Taller creado correctamente'
+                ),200,[]);
+      }
+    }
+
+       public function crearDiario(Request $request)
+      {
+         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $balance_inicial               = new Taller;
+         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->enunciado    = $request->enunciado;
+         $balance_inicial->plantilla_id = 37;
+         $balance_inicial->contenido_id = $request->contenido_id;
+         $balance_inicial->estado       = 0;
+         $balance_inicial->save();
+
+        $a                    = Taller::get()->last();
+        $taller_37            = new TallerModuloContable;
+        $taller_37->taller_id = $a->id;
+        $taller_37->enunciado = $request->enunciado;
+        $taller_37->metodo    = 'individual';
+        $taller_37->diario_general = true;
+        $taller_37->tipo   = 'diario_general';
+
+        $taller_37->save();
+
+        if ($taller_37 = true) {
+          $e                                   = TallerModuloContable::get()->last();
+          $vertical                            = new TallerModuloTransaccion;
+          $vertical->taller_modulo_contable_id = $e->id;
+          $vertical->tipo                      = 'diario_general';
+          $vertical->enunciado                 = $request->enunciado;
+          $vertical->transacciones             = $request->transacciones;
+          $vertical->save();
+       }
+        return response(array(                                         //ENVIO DE RESPUESTA
+                    'success' => true,
+                    'estado' => 'guardado',
+                    'message' => 'Taller creado correctamente'
+                ),200,[]);
+      }
+
+        public function crearMayor(Request $request)
+      {
+         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $balance_inicial               = new Taller;
+         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->enunciado    = $request->enunciado;
+         $balance_inicial->plantilla_id = 37;
+         $balance_inicial->contenido_id = $request->contenido_id;
+         $balance_inicial->estado       = 0;
+         $balance_inicial->save();
+
+        $a                    = Taller::get()->last();
+        $taller_37            = new TallerModuloContable;
+        $taller_37->taller_id = $a->id;
+        $taller_37->enunciado = $request->enunciado;
+        $taller_37->metodo    = 'individual';
+        $taller_37->mayor_general = true;
+        $taller_37->tipo   = 'mayor_general';
+
+        $taller_37->save();
+
+        if ($taller_37 = true) {
+          $e                                   = TallerModuloContable::get()->last();
+          $vertical                            = new TallerModuloTransaccion;
+          $vertical->taller_modulo_contable_id = $e->id;
+          $vertical->tipo                      = 'mayor_general';
+          $vertical->enunciado                 = $request->enunciado;
+          $vertical->transacciones             = $request->transacciones;
+          $vertical->save();
+       }
+        return response(array(                                         //ENVIO DE RESPUESTA
+                    'success' => true,
+                    'estado' => 'guardado',
+                    'message' => 'Taller creado correctamente'
+                ),200,[]);
+      }
+
+       public function crearBalanceCompro(Request $request)
+      {
+         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $balance_inicial               = new Taller;
+         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->enunciado    = $request->enunciado;
+         $balance_inicial->plantilla_id = 37;
+         $balance_inicial->contenido_id = $request->contenido_id;
+         $balance_inicial->estado       = 0;
+         $balance_inicial->save();
+
+        $a                    = Taller::get()->last();
+        $taller_37            = new TallerModuloContable;
+        $taller_37->taller_id = $a->id;
+        $taller_37->enunciado = $request->enunciado;
+        $taller_37->metodo    = 'individual';
+        $taller_37->balance_comprobacion = true;
+        $taller_37->tipo   = 'balance_comprobacion';
+
+        $taller_37->save();
+
+        if ($taller_37 = true) {
+          $e                                   = TallerModuloContable::get()->last();
+          $vertical                            = new TallerModuloTransaccion;
+          $vertical->taller_modulo_contable_id = $e->id;
+          $vertical->tipo                      = 'balance_comprobacion';
+          $vertical->enunciado                 = $request->enunciado;
+          $vertical->transacciones             = $request->transacciones;
+          $vertical->save();
+       }
+        return response(array(                                         //ENVIO DE RESPUESTA
+                    'success' => true,
+                    'estado' => 'guardado',
+                    'message' => 'Taller creado correctamente'
+                ),200,[]);
+      }
+         public function crearHojaTrabajo(Request $request)
+      {
+         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $balance_inicial               = new Taller;
+         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->enunciado    = $request->enunciado;
+         $balance_inicial->plantilla_id = 37;
+         $balance_inicial->contenido_id = $request->contenido_id;
+         $balance_inicial->estado       = 0;
+         $balance_inicial->save();
+
+        $a                    = Taller::get()->last();
+        $taller_37            = new TallerModuloContable;
+        $taller_37->taller_id = $a->id;
+        $taller_37->enunciado = $request->enunciado;
+        $taller_37->metodo    = 'individual';
+        $taller_37->hoja_trabajo = true;
+        $taller_37->tipo   = 'hoja_trabajo';   
+        $taller_37->save();
+
+        if ($taller_37 = true) {
+          $e                                   = TallerModuloContable::get()->last();
+          $vertical                            = new TallerModuloTransaccion;
+          $vertical->taller_modulo_contable_id = $e->id;
+          $vertical->tipo                      = 'hoja_trabajo';
+          $vertical->enunciado                 = $request->enunciado;
+          $vertical->transacciones             = $request->transacciones;
+          $vertical->save();
+       }
+        return response(array(                                         //ENVIO DE RESPUESTA
+                    'success' => true,
+                    'estado' => 'guardado',
+                    'message' => 'Taller creado correctamente'
+                ),200,[]);
+      }
+    public function crearBalanceAjustado(Request $request)
+      {
+         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $balance_inicial               = new Taller;
+         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->enunciado    = $request->enunciado;
+         $balance_inicial->plantilla_id = 37;
+         $balance_inicial->contenido_id = $request->contenido_id;
+         $balance_inicial->estado       = 0;
+         $balance_inicial->save();
+
+        $a                    = Taller::get()->last();
+        $taller_37            = new TallerModuloContable;
+        $taller_37->taller_id = $a->id;
+        $taller_37->enunciado = $request->enunciado;
+        $taller_37->metodo    = 'individual';
+        $taller_37->balance_comprobacion_ajustado = true;
+        $taller_37->tipo   = 'balance_comprobacion_ajustado';   
+        $taller_37->save();
+
+        if ($taller_37 = true) {
+          $e                                   = TallerModuloContable::get()->last();
+          $vertical                            = new TallerModuloTransaccion;
+          $vertical->taller_modulo_contable_id = $e->id;
+          $vertical->tipo                      = 'balance_comprobacion_ajustado';
+          $vertical->enunciado                 = $request->enunciado;
+          $vertical->transacciones             = $request->transacciones;
+          $vertical->save();
+       }
+        return response(array(                                         //ENVIO DE RESPUESTA
+                    'success' => true,
+                    'estado' => 'guardado',
+                    'message' => 'Taller creado correctamente'
+                ),200,[]);
+      }
+
+          public function crearEtadoResultado(Request $request)
+      {
+         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $balance_inicial               = new Taller;
+         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->enunciado    = $request->enunciado;
+         $balance_inicial->plantilla_id = 37;
+         $balance_inicial->contenido_id = $request->contenido_id;
+         $balance_inicial->estado       = 0;
+         $balance_inicial->save();
+
+        $a                    = Taller::get()->last();
+        $taller_37            = new TallerModuloContable;
+        $taller_37->taller_id = $a->id;
+        $taller_37->enunciado = $request->enunciado;
+        $taller_37->metodo    = 'individual';
+        $taller_37->estado_resultado = true;
+        $taller_37->tipo   = 'estado_resultado';       
+        $taller_37->save();
+
+        if ($taller_37 = true) {
+          $e                                   = TallerModuloContable::get()->last();
+          $vertical                            = new TallerModuloTransaccion;
+          $vertical->taller_modulo_contable_id = $e->id;
+          $vertical->tipo                      = 'estado_resultado';
+          $vertical->enunciado                 = $request->enunciado;
+          $vertical->transacciones             = $request->transacciones;
+          $vertical->save();
+       }
+        return response(array(                                         //ENVIO DE RESPUESTA
+                    'success' => true,
+                    'estado' => 'guardado',
+                    'message' => 'Taller creado correctamente'
+                ),200,[]);
+      }
+      public function crearBalanceGeneral(Request $request)
+      {
+         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $balance_inicial               = new Taller;
+         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->enunciado    = $request->enunciado;
+         $balance_inicial->plantilla_id = 37;
+         $balance_inicial->contenido_id = $request->contenido_id;
+         $balance_inicial->estado       = 0;
+         $balance_inicial->save();
+
+        $a                    = Taller::get()->last();
+        $taller_37            = new TallerModuloContable;
+        $taller_37->taller_id = $a->id;
+        $taller_37->enunciado = $request->enunciado;
+        $taller_37->metodo    = 'individual';
+        $taller_37->tipo   = 'balance_general';       
+        $taller_37->balance_general = true;
+        $taller_37->save();
+
+        if ($taller_37 = true) {
+          $e                                   = TallerModuloContable::get()->last();
+          $vertical                            = new TallerModuloTransaccion;
+          $vertical->taller_modulo_contable_id = $e->id;
+          $vertical->tipo                      = 'balance_general';
+          $vertical->enunciado                 = $request->enunciado;
+          $vertical->transacciones             = $request->transacciones;
+          $vertical->save();
+
+
+
+       }
+        return response(array(                                         //ENVIO DE RESPUESTA
+                    'success' => true,
+                    'estado' => 'guardado',
+                    'message' => 'Taller creado correctamente'
+                ),200,[]);
+      }
+      public function crearAsientosCierre(Request $request)
+      {
+         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $balance_inicial               = new Taller;
+         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->enunciado    = $request->enunciado;
+         $balance_inicial->plantilla_id = 37;
+         $balance_inicial->contenido_id = $request->contenido_id;
+         $balance_inicial->estado       = 0;
+         $balance_inicial->save();
+
+        $a                    = Taller::get()->last();
+        $taller_37            = new TallerModuloContable;
+        $taller_37->taller_id = $a->id;
+        $taller_37->enunciado = $request->enunciado;
+        $taller_37->metodo    = 'individual';
+        $taller_37->asientos_cierre = true;
+        $taller_37->tipo   = 'asientos_cierre';       
+
+        $taller_37->save();
+
+        if ($taller_37 = true) {
+          $e                                   = TallerModuloContable::get()->last();
+          $vertical                            = new TallerModuloTransaccion;
+          $vertical->taller_modulo_contable_id = $e->id;
+          $vertical->tipo                      = 'asientos_cierre';
+          $vertical->enunciado                 = $request->enunciado;
+          $vertical->transacciones             = $request->transacciones;
+          $vertical->save();
+       }
+        return response(array(                                         //ENVIO DE RESPUESTA
+                    'success' => true,
+                    'estado' => 'guardado',
+                    'message' => 'Taller creado correctamente'
+                ),200,[]);
+      }
+
+       public function tallerConcatenado(Request $request)
+      {
+         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $balance_inicial               = new Taller;
+         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->enunciado    = $request->enunciado;
+         $balance_inicial->plantilla_id = 37;
+         $balance_inicial->contenido_id = $request->contenido_id;
+         $balance_inicial->estado       = 0;
+         $balance_inicial->save();
+
+        $a                    = Taller::get()->last();
+        $taller_37            = new TallerModuloContable;
+        $taller_37->taller_id = $a->id;
+        $taller_37->enunciado = $request->enunciado;
+        $taller_37->metodo    = 'concatenado';
+        $taller_37->tipo      = 'concatenado';       
+
+        $taller_37->save();
+
+        if ($taller_37 = true) {
+          $e                                   = TallerModuloContable::get()->last();
+          $binicial                            = new TallerModuloTransaccion;
+          $binicial->taller_modulo_contable_id = $e->id;
+          $binicial->tipo                      = 'horizontal';
+          $binicial->enunciado                 = $request->enunciado;
+          $binicial->transacciones             = $request->balance_horizontal;
+          $binicial->save();
+
+           foreach ($request->productos as $key=>$v) {
+          $datos=array(
+             'taller_modulo_contable_id' => $e->id,
+             'tipo'                      => 'fifo',
+             'enunciado'                 => $request->enunciado,
+             'nombre'                  => $v['nombre'],
+             'transacciones'             => $v['transacciones'],
+             'created_at'                => now(),
+             'updated_at'                => now(),
+            );
+          TallerModuloTransaccion::insert($datos);
+          }
+
+          $diariogeneral                            = new TallerModuloTransaccion;
+          $diariogeneral->taller_modulo_contable_id = $e->id;
+          $diariogeneral->tipo                      = 'diario_general';
+          $diariogeneral->enunciado                 = $request->enunciado;
+          $diariogeneral->transacciones             = $request->diario_general;
+          $diariogeneral->save();
+
+       }
+        return response(array(                                         //ENVIO DE RESPUESTA
+                    'success' => true,
+                    'estado' => 'guardado',
+                    'message' => 'Taller creado correctamente'
+                ),200,[]);
+      }
+
+
        public function taller38(Request $request)
       {
          $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();

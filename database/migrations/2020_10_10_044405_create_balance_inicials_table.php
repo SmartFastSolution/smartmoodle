@@ -17,11 +17,11 @@ class CreateBalanceInicialsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
-            $table->string('nombre');
-            $table->string('tipo');
-            $table->string('fecha');
-            $table->string('total_pasivo_patrimonio');
+            $table->string('enunciado')->nullable();
+            $table->string('nombre')->nullable();
+            $table->string('tipo')->nullable();
+            $table->string('fecha')->nullable();
+            $table->string('total_pasivo_patrimonio')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

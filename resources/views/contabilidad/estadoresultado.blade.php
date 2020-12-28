@@ -2,8 +2,8 @@
         <h2 class="text-center display-4 font-weight-bold text-danger">Estado de Resultado</h2>
 <div class="row p-3  mb-2 justify-content-center ">
     <div class="col-5 mb-3">
-          <input class="form-control" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="" ><br>
-          <input type="date" v-model="fecha" class="form-control">
+          <input autocomplete="ÑÖcompletes" class="form-control" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="" ><br>
+          <input autocomplete="ÑÖcompletes" type="date" v-model="fecha" class="form-control">
     </div>
    
 </div>
@@ -95,13 +95,13 @@
 		<option value="utilidad_perdida"> PERDIDA DEL EJERCICIO</option>
 		</select>
 	</div>
-	<div class="col-3"><input type="number" v-model="totales.utilidad_ejercicio" class="form-control text-right"></div>
+	<div class="col-3"><input autocomplete="ÑÖcompletes" type="number" v-model="totales.utilidad_ejercicio" class="form-control text-right"></div>
 </div>
 
 
 <div class="mt-2 row justify-content-between" v-if="utilidad == 'utilidad_neta'">
   <div class="col-8">
-    <a href="" class="btn btn-danger btn-sm" @click.prevent="mostrarUtilidades()">Agregar Cuentas</a>
+    <a href="" class="btn btn-danger btn-sm" @click.prevent="mostrarUtilidades()">Distribuir Utilidades</a>
   </div>
 
   <div v-if="utilida.create" class="col-12 mt-2">
@@ -111,7 +111,7 @@
       </div>
 
       <div class="col-3">
-        <input type="text"  v-model="utilida.saldo" class="form-control">  
+        <input autocomplete="ÑÖcompletes" type="text"  v-model="utilida.saldo" class="form-control">  
       </div>
 
       <div v-if="!utilida.edit" class="col-3">
@@ -154,7 +154,7 @@
     <h2 class="font-weight-bold">UTILIDAD LIQUIDA DEL EJERCICIO</h2>
   </div>
 
-  <div class="col-2"><input type="number" v-model="totales.utilidad_liquida" class="form-control text-right"></div>
+  <div class="col-2"><input autocomplete="ÑÖcompletes" type="number" v-model="totales.utilidad_liquida" class="form-control text-right"></div>
 
 </div> 
 

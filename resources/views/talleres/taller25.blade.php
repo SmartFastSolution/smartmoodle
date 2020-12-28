@@ -6,7 +6,7 @@
 @section('title', $datos->taller->nombre)
 @section('content')
 
-	<h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>
+	<h1 class="text-center  mt-5 text-danger font-weight-bold display-4"> {{ $datos->taller->nombre }}</h1>
     <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
 	<form action="{{ route('taller25', ['idtaller' => $d]) }}" method="POST">
@@ -54,7 +54,7 @@
                 </table>
 								 
 			</div>
-			<div class="col-9 border border-danger">
+			<div class="col-10" style="box-shadow: 5px 5px 15px 0px  #F42787">
 				<div class="row p-3 justify-content-between">
 					<div class="col-5">
 					 	<img class="img-fluid" src="{{ asset('img/talleres/imagen-27.jpg') }}" alt="">
@@ -121,13 +121,13 @@
 					  </thead>
 					  <tbody class="prin">
 					  	<tr>
-					  		<td width="100"> <input type="text" name="codigo[]" class="form-control" required></td>
-					  		<td width="100"><input type="text" name="cod_aux[]" class="form-control" required></td>
-					  		<td width="50"><input type="text" name="cantidad[]" class="form-control" required></td>
+					  		<td width="100"> <input type="number" name="codigo[]" class="form-control" required></td>
+					  		<td width="100"><input type="number" name="cod_aux[]" class="form-control" required></td>
+					  		<td width="100"><input type="number" name="cantidad[]" class="form-control" required></td>
 					  		<td ><textarea  name="descripcion[]" class="form-control" required></textarea> </td>
-					  		<td width="50"><input type="text" name="precio[]" class="form-control" required></td>
-					  		<td width="50"><input type="text" name="descuento[]" class="form-control" required></td>
-					  		<td width="75"><input type="text" name="valor[]" class="form-control" required></td>
+					  		<td width="50"><input type="number" name="precio[]" class="form-control" required></td>
+					  		<td width="50"><input type="number" name="descuento[]" class="form-control" required></td>
+					  		<td width="75"><input type="number" name="valor[]" class="form-control" required></td>
                       		<td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>
 
 					  	</tr>
@@ -158,48 +158,48 @@
 					  <tbody>
 					    <tr>
 					      <th scope="row">SUBTOTAL {{ $datos->iva }}%</th>
-					      <td><input required type="text" name="subtotal_12" class="form-control"></td>
+					      <td><input required type="NUMBER" name="subtotal_12" class="form-control"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">SUBTOTAL 0%</th>
-					      <td><input required type="text" name="subtotal_0" class="form-control"></td>
+					      <td><input required type="NUMBER" name="subtotal_0" class="form-control"></td>
 					      
 					    </tr>
 					    <tr>
 					      <th scope="row">SUBTOTAL No objeto de IVA</th>
-					      <td><input required type="text" name="subtotal_iva" class="form-control"></td>
+					      <td><input required type="NUMBER" name="subtotal_iva" class="form-control"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">SUBTOTAL Exento de IVA</th>
-					      <td><input required type="text" name="subtotal_siniva" class="form-control"></td>
+					      <td><input required type="NUMBER" name="subtotal_siniva" class="form-control"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">SUBTOTAL SIN IMPUESTOS</th>
-					      <td><input required type="text" name="subtotal_sin_imp" class="form-control"></td>
+					      <td><input required type="NUMBER" name="subtotal_sin_imp" class="form-control"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">TOTAL DESCUENTO</th>
-					      <td><input required type="text" name="descuento_total" class="form-control"></td>
+					      <td><input required type="NUMBER" name="descuento_total" class="form-control"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">ICE</th>
-					      <td><input required type="text" name="ice" class="form-control"></td>
+					      <td><input required type="NUMBER" name="ice" class="form-control"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">IVA {{ $datos->iva }}%</th>
-					      <td><input required type="text" name="iva12" class="form-control"></td>
+					      <td><input required type="NUMBER" name="iva12" class="form-control"></td>
 					    </tr>
 					     <tr>
 					      <th scope="row">IRBPNR</th>
-					      <td><input required type="text" name="irbpnr" class="form-control"></td>
+					      <td><input required type="NUMBER" name="irbpnr" class="form-control"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">PROPINA</th>
-					      <td><input required type="text" name="propina" class="form-control"></td>
+					      <td><input required type="NUMBER" name="propina" class="form-control"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">VALOR TOTAL</th>
-					      <td><input required type="text" name="valor_total" class="form-control"></td>
+					      <td><input required type="NUMBER" name="valor_total" class="form-control"></td>
 					    </tr>
 
 					  </tbody>

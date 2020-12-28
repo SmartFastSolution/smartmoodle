@@ -5,7 +5,7 @@
 @section('content')
 
 <!-- LLENE  CON  LOS  SIGUIENTES  DATOS  EL  PAGARÉ  CORRECTAMENTE -->
-	<h1 class="text-center  mt-5 text-danger">{{ $datos->taller->nombre }}</h1>
+	<h1 class="text-center  mt-5 text-danger font-weight-bold display-4">{{ $datos->taller->nombre }}</h1>
     <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }} </h3>
 
 <form action="{{ route('taller20', ['idtaller' => $d]) }}" method="POST">
@@ -60,7 +60,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-10 border border-warning">
+				<div class="col-10" style="box-shadow: 5px 5px 15px 0px  #27F4AE">
 					<div class="row justify-content-center">
 						<div class="col-10 p-2  ">
 							<div class="row justify-content-center">

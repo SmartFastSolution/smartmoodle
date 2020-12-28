@@ -36,9 +36,16 @@ import 'vue-multiselect/dist/vue-multiselect.min.css';
 // import CKEditor from '@ckeditor/ckeditor5-vue2';
 // Vue.use( CKEditor );
 
-import 'ckeditor5-vuejs/dist/ckeditor.css';
-import {CKEditor, AutosavePlugin, MediaEmbedPlugin, UploaderPlugin} from 'ckeditor5-vuejs';
-Vue.component('ckeditor', CKEditor);
+// import 'ckeditor5-vuejs/dist/ckeditor.css';
+// import {CKEditor, AutosavePlugin, MediaEmbedPlugin, UploaderPlugin} from 'ckeditor5-vuejs';
+// Vue.component('ckeditor', CKEditor);
+
+// import Editor from '@tinymce/tinymce-vue';
+// Vue.component('editor', Editor);
+import VueCkeditor from 'vue-ckeditor2';
+Vue.component('vue-ckeditor', VueCkeditor );
+
+
 
 
 

@@ -2,12 +2,14 @@
         <h2 class="text-center display-4 font-weight-bold text-danger">HOJA DE TRABAJO</h2>
 <div class="row p-3  mb-2 justify-content-center ">
     <div class="col-5 mb-3">
-          <input class="form-control" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="" >
+          <input autocomplete="ÑÖcompletes" class="form-control" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="" >
         </div>
    
 </div>
-
-<table class="table table-bordered table-sm">
+   <div class="row justify-content-start mb-2">
+            <a  href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Movimientos</a>
+        </div>
+<table class="table table-bordered table-sm table-responsive">
 <thead class="bg-dark">
   <tr>
     <th class="text-center " style="vertical-align: middle;"  rowspan="2">CUENTAS</th>
@@ -34,7 +36,7 @@
 </thead>
 <tbody>
      <tr v-for="(balan, index) in registros" >
-                <td align="center" width="200">@{{ balan.cuenta}}</td>
+                <td class="text-left" width="200">@{{ balan.cuenta}}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.bc_debe)}}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.bc_haber) }}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.ajuste_debe) }}</td>

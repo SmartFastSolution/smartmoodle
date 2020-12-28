@@ -2905,7 +2905,7 @@
                                 </div>
                                  <div class="form-group col-6">
                                     <label for="recipient-name" class="col-form-label">Unidad:</label>
-                                    <select name="contenido_id" class="custom-select">
+                                    <select name="contenido_id" class="custom-select" required="">
                                         
                                        <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
                                         </option> 

@@ -5,13 +5,13 @@
 @section('content')
 
 <!-- LLENE  CON  LOS  SIGUIENTES  DATOS  LOS  VALES,  CORRECTAMENTE. -->
-<h1 class="text-center  mt-5 text-danger">{{ $datos->taller->nombre }}</h1>
+<h1 class="text-center  mt-5 text-danger font-weight-bold display-4">{{ $datos->taller->nombre }}</h1>
      <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }} </h3>
 <form action="{{ route('taller21', ['idtaller' => $d]) }}" method="POST">
           @csrf
 	<div class="container">
 		<div class="row justify-content-center">
-			<div class="col-3">
+			<div class="col-3" style="box-shadow: -5px 5px 15px 0px  #27B8F4">
 					<h3 class="text-center">Datos</h3>
 					<div class="row">				
 						<div class="col-6">
@@ -22,7 +22,7 @@
 						</div>
 					</div>
 			</div>
-			<div class="col-9 border border-warning">
+			<div class="col-9" style="box-shadow: 5px 5px 15px 0px  #27F4AE">
 				<div class="row justify-content-end">
 					<div class="col-12 text-center mt-2">
 						<h2>VALE DE CAJA</h2>

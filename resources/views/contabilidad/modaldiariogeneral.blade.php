@@ -16,7 +16,7 @@
             </div>
             <div class="modal-body">
                 <div class="row justify-content-center">
-                   <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
+                   <div class="col-6 ">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                       <li class="nav-item" role="presentation">
                         <a class="nav-link active text-dark font-weight-bold" id="comentario-diario-tab" style="font-size: 15px" data-toggle="tab" href="#comentario-diario" role="tab" aria-controls="comentario-diario" aria-selected="false">DETALLE MOVIMIENTO</a>
@@ -43,7 +43,7 @@
                        </thead>
                         <tbody >  
                           <tr>
-                              {{-- <td v-if="diarios.debe.length == 0 || diario.debe.fecha !== ''" width="50" ><input type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required></td> --}}
+                              {{-- <td v-if="diarios.debe.length == 0 || diario.debe.fecha !== ''" width="50" ><input autocomplete="ÑÖcompletes" type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required></td> --}}
                               <td>
                                           <model-select :options="options" 
                                 v-model="diario.debe.nom_cuenta"
@@ -66,13 +66,14 @@
                                 <option value="Capital">Capital</option>
                               </select> --}}
                               </td>
-                              <td width="125"><input type="number" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
+                              <td width="125"><input autocomplete="ÑÖcompletes" type="number" v-model="diario.debe.saldo" autocomplete="ÑÖcompletes" class="form-control"></td>         
                         </tr>
                       </tbody>
                     </table>
                     <div v-if="!diario.debe.edit" class="row justify-content-center">
+                        <a href=""data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark mr-1">KARDEX</a>
+
                           <a href="#" class="btn btn-success" @click.prevent="agregarDebe()">Agregar</a>
-                        <a href=""data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark ml-1">KARDEX</a>
 
                       </div>
                        <div v-else class="row justify-content-center">
@@ -117,13 +118,14 @@
                                   <option value="Capital">Capital</option>
                                 </select> --}} 
                               </td>
-                              <td width="125"><input type="number" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
+                              <td width="125"><input autocomplete="ÑÖcompletes" type="number" v-model="diario.haber.saldo" autocomplete="ÑÖcompletes" name="haber" class="form-control" required></td>         
                         </tr>
                       </tbody>
                     </table>
                     <div v-if="!diario.haber.edit" class="row justify-content-center">
+                        <a href="" data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark mr-1">KARDEX</a>
+
                             <a href="#" class="btn btn-info" @click.prevent="agregarHaber()">Agregar</a>
-                        <a href="" data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark ml-1">KARDEX</a>
 
                       </div>
 
@@ -133,25 +135,25 @@
                       </div>
                       </div>
                       <div class="tab-pane fade show active" id="comentario-diario" role="tabpanel" aria-labelledby="comentario-diario-tab">
-                        <h2 class="text-center">AGREGAR DETALLES</h2>
+                        <h2 class="text-center">AGREGAR DETALLES DEL MOVIMIENTO</h2>
 
                       <table class="table table-bordered table-sm">
                         <thead class="thead-dark">
                         <tr>
                           <th align="center" class="text-center">Fecha</th>    
-                          <th  align="center" class="text-center">Comentario</th>    
+                          <th  align="center" class="text-center">Descripcion del asiento</th>    
                         </tr>
                        </thead>
                         <tbody >  
                           <tr>
-                            <td width="25"><input type="date" v-model="diarios.fecha" name="fecha" class="form-control" required></td>         
-                            <td ><input type="text" v-model="diarios.comentario" name="comentario" class="form-control" required></td>         
+                            <td width="25"><input autocomplete="ÑÖcompletes" type="date" v-model="diarios.fecha" name="fecha" class="form-control" required></td>         
+                            <td ><input autocomplete="ÑÖcompletes" type="text" v-model="diarios.comentario" name="comentario" class="form-control" required></td>         
                           </tr>
                       </tbody>
                     </table>
                     <div class="row">
                       <div class="col-6">
-                    <h3>Asiento de ajustes: <input v-model="diarios.ajustado" type="checkbox" class="custom-checkbox"></h3>
+                    <h3>Asiento de ajustes: <input autocomplete="ÑÖcompletes" v-model="diarios.ajustado" type="checkbox" class="custom-checkbox"></h3>
                         
                       </div>
                       <div class="col-6">
@@ -167,9 +169,13 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-6" style=" height:300px; overflow-y: scroll;">
+                  <div class="col-6" style=" height:300px; overflow-y: scroll; border: solid 3px red;">
                     <h3 class="text-center">Datos para realizar el Diario General</h3>
-                    <p >
+                    <div>
+                      {!! $diariogeneral->transacciones !!}
+                    </div>
+                    {{-- <div v-html="datos_diario.transacciones"></div> --}}
+                    {{-- <p >
                       Se compra s/fra. #040 a Importadora “ELMARY” (contribuyente especial) - doce acondicionadores de aire en $ 550 c/u. Se cancela con ch/.# 050 Bco. Guayaquil. <br> <br>
                       Se cancela la Fra.#023 a “Publicitas” (No Obligada a llevar Contabilidad) por servicios de publicidad $ 300 con ch/.#051 Bco. Guayaquil. <br> <br>
 
@@ -188,7 +194,7 @@
                       Se vende S/Fra. #012 - treinta acondicionadores de aire en $ 1.200 c/u a Comercial “INCOR” (Obligado a llevar Contabilidad). Se recibe ch/. #101 Bco. del Austro. <br> <br>
 
                       De la última venta nos devuelven un acondicionador de aire por no estar de acuerdo con el pedido. Se cancela con ch/.#055 Bco. Guayaquil. (Fra. # 057) <br> <br>
-                    </p>
+                    </p> --}}
 
                   </div>
                   {{--   <div class="col-6">
@@ -198,7 +204,7 @@
  --}}
                   <div class="col-12 mt-2" v-if="diarios.debe.length > 0 || diarios.haber.length > 0">
 
-                    <h2 class="text-center">ACTUALIZAR REGISTROS</h2>
+                    <h2 class="text-center">ACTUALIZAR MOVIMIENTOS</h2>
                 <table  class="table table-bordered table-sm">
                      <thead class="thead-dark">
                      <tr align="center">
@@ -389,7 +395,7 @@
                                 <option value="Capital">Capital</option>
                               </select>
                               </td>
-                              <td width="125"><input type="number" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
+                              <td width="125"><input autocomplete="ÑÖcompletes" type="number" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
                         </tr>
                       </tbody>
                     </table>
@@ -432,7 +438,7 @@
                        </thead>
                         <tbody >  
                           <tr>
-                              <td v-if="diarios.debe.length == 0 && edit.debe.length == 0" width="50" > <input type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required></td>
+                              <td v-if="diarios.debe.length == 0 && edit.debe.length == 0" width="50" > <input autocomplete="ÑÖcompletes" type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required></td>
                               <td>
                               <select name="n_cuenta" v-model="diario.debe.nom_cuenta" class="custom-select">
                                 <option value="" disabled>ELIGE UNA CUENTA</option>
@@ -450,7 +456,7 @@
                                 <option value="Capital">Capital</option>
                               </select>
                               </td>
-                              <td width="125"><input type="number" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
+                              <td width="125"><input autocomplete="ÑÖcompletes" type="number" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
                         </tr>
                       </tbody>
                     </table>
@@ -490,7 +496,7 @@
                        </thead>
                         <tbody >  
                           <tr>
-                            <td width="125"><input type="text" v-model="diario.comentario" name="comentario" class="form-control" required></td>         
+                            <td width="125"><input autocomplete="ÑÖcompletes" type="text" v-model="diario.comentario" name="comentario" class="form-control" required></td>         
                           </tr>
                       </tbody>
                     </table>
@@ -551,7 +557,7 @@
                                 <option value="Capital">Capital</option>
                               </select>
                               </td>
-                              <td width="125"><input type="number" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
+                              <td width="125"><input autocomplete="ÑÖcompletes" type="number" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
                         </tr>
                       </tbody>
                     </table>
@@ -591,7 +597,7 @@
                        </thead>
                         <tbody >  
                           <tr>
-                              <td v-if="diario.fecha != ''" width="50" > <input type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required></td>
+                              <td v-if="diario.fecha != ''" width="50" > <input autocomplete="ÑÖcompletes" type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required></td>
                               <td>
                               <select name="n_cuenta" v-model="diario.debe.nom_cuenta" class="custom-select">
                                 <option value="" disabled>ELIGE UNA CUENTA</option>
@@ -609,7 +615,7 @@
                                 <option value="Capital">Capital</option>
                               </select>
                               </td>
-                              <td width="125"><input type="number" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
+                              <td width="125"><input autocomplete="ÑÖcompletes" type="number" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
                         </tr>
                       </tbody>
                     </table>
@@ -666,7 +672,7 @@
                                 <option value="Capital">Capital</option>
                               </select>
                               </td>
-                              <td width="125"><input type="number" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
+                              <td width="125"><input autocomplete="ÑÖcompletes" type="number" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
                         </tr>
                       </tbody>
                     </table>
@@ -706,7 +712,7 @@
                        </thead>
                         <tbody >  
                           <tr>
-                              <td v-if="diario.debe.fecha != ''" width="50" > <input type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required></td>
+                              <td v-if="diario.debe.fecha != ''" width="50" > <input autocomplete="ÑÖcompletes" type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required></td>
                               <td>
                               <select name="n_cuenta" v-model="diario.debe.nom_cuenta" class="custom-select">
                                 <option value="" disabled>ELIGE UNA CUENTA</option>
@@ -724,7 +730,7 @@
                                 <option value="Capital">Capital</option>
                               </select>
                               </td>
-                              <td width="125"><input type="number" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
+                              <td width="125"><input autocomplete="ÑÖcompletes" type="number" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
                         </tr>
                       </tbody>
                     </table>
@@ -765,7 +771,7 @@
                        </thead>
                         <tbody >  
                           <tr>
-                            {{--   <td v-if="diario.debe.fecha != ''" width="50" > <input type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required>
+                            {{--   <td v-if="diario.debe.fecha != ''" width="50" > <input autocomplete="ÑÖcompletes" type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required>
                               </td> --}}
                               <td>
                               <select name="n_cuenta" v-model="porcentajes.index_cuenta" class="custom-select">
@@ -786,7 +792,7 @@
                               </select>
                               </td>
                               <td width="125">
-                                <input type="number" v-model="porcentajes.cantidad" name="debe" class="form-control">
+                                <input autocomplete="ÑÖcompletes" type="number" v-model="porcentajes.cantidad" name="debe" class="form-control">
                               </td>         
                         </tr>
                       </tbody>

@@ -7,7 +7,7 @@
 @section('content')
 
 <!-- LLENE  CON  LOS  SIGUIENTES  DATOS  LA  ORDEN  DE  PAGO CORRECTAMENTE-->
-<h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>
+<h1 class="text-center  mt-5 text-danger font-weight-bold display-4"> {{ $datos->taller->nombre }}</h1>
   
 <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
@@ -46,7 +46,7 @@
                   </tbody>
                 </table>
 			</div>
-			<div class="col-8 border border-danger p-5">
+			<div class="col-8 p-5" style="box-shadow: 5px 5px 15px 0px  #F427A0">
 				<div class="row ">
 					<div class="col-6 text-center">
 						<h1>TECNOLOGY  S.A.</h1>

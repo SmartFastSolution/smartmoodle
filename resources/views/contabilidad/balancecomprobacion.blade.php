@@ -2,10 +2,10 @@
         <h2 class="text-center display-4 font-weight-bold text-danger">Balance de Comprobacion</h2>
 <div class="row p-3  mb-2 justify-content-center ">
     <div class="col-8 mb-3">
-          <input class="form-control" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="" >
+          <input autocomplete="ÑÖcompletes" class="form-control" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="" >
         </div>
         <div class="col-5">
-          <input class="form-control" type="date" v-model="fecha" placeholder="Agrega la fecha" name="" >
+          <input autocomplete="ÑÖcompletes" class="form-control" type="date" v-model="fecha" placeholder="Agrega la fecha" name="" >
         </div>
       
       </div>
@@ -21,14 +21,17 @@
             </select>
         </div>
         <div class="col">
-          <input type="text" class="form-control" v-model="balance.suma_debe" placeholder="Debe">
+          <input autocomplete="ÑÖcompletes" type="text" class="form-control" v-model="balance.suma_debe" placeholder="Debe">
         </div>
          <div class="col">
-          <input type="text" class="form-control" v-model="balance.suma_haber"  placeholder="Haber">
+          <input autocomplete="ÑÖcompletes" type="text" class="form-control" v-model="balance.suma_haber"  placeholder="Haber">
         </div>
         <a v-if="!update" href="#" class="addDiario btn btn-outline-danger " @click.prevent="agregarRegistro()">Agregar Registro</a>
         <a v-if="update" href="#" class="addDiario btn btn-outline-danger " @click.prevent="actualizarBalance()">Actualizar Registro</a>
   </div> --}}
+    <div class="row justify-content-start mb-2">
+            <a  href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Cuentas</a>
+        </div>
     <table class="table table-bordered table-sm mb-2">
         <thead>
             <tr class="bg-dark">
@@ -47,7 +50,7 @@
         </thead>
         <tbody is="draggable" group="people" :list="balances" tag="tbody" @change="mover">
             <tr v-for="(balan, index) in balances" >
-                <td align="center">@{{ balan.cuenta}}</td>
+                <td class="text-left">@{{ balan.cuenta}}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.suma_debe)}}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.suma_haber) }}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.saldo_debe) }}</td>
@@ -69,7 +72,7 @@
     </table>
     
         <div class="row justify-content-center mb-2">
-            <a  href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Movimientos</a>
+            <a  href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Cuentas</a>
         </div>
 
 

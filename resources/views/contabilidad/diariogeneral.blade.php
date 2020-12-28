@@ -2,22 +2,22 @@
      <h1 class="text-center text-danger font-weight-bold mt-2">DIARIO GENERAL</h1>
      <div class="row justify-content-center">
          <div class="col-3">
-             <input type="text" v-model="nombre" class="form-control form-control-sm"
-                 placeholder="Nombre de la Empresa">
-
+     <input autocomplete="ÑÖcompletes" type="text" v-model="nombre" class="form-control form-control-sm" placeholder="Nombre de la Empresa">
+             
          </div>
      </div>
 
      {{-- <h4 class="text-center text-primary font-weight-bold mt-2">@{{ nombre }}</h4> --}}
      <div class="row p-3  mb-2 ">
-         <div class="col-3 mb-2">
-             <a class="btn btn-sm btn-danger" href="" @click.prevent="obtenerBalanceInicial()">Obtener Balance
-                 Inicial</a>
-         </div>
-         <div class="col-3 mb-2">
-             <a href="#" class="btn btn-sm btn-outline-primary" @click.prevent="abrirTransaccion()">Crear
-                 Transaccion</a>
-         </div>
+        @if ($datos->metodo == 'concatenado')
+        <div class="col-3 mb-2">
+        <a class="btn btn-sm btn-danger" href="" @click.prevent="obtenerBalanceInicial()">Obtener Balance Inicial</a>
+        </div>
+            {{-- expr --}}
+        @endif
+          <div class="col-3 mb-2">
+        <a href="#" class="btn btn-sm btn-outline-primary" @click.prevent="abrirTransaccion()">Crear Transaccion</a>  
+        </div>
          <div class="col-12">
              <table class="table table-bordered table-sm">
                  <thead class="thead-dark">
@@ -47,16 +47,16 @@
                  </tbody>
 
                  <tbody v-for="(registro, id) in registros" @change="totalDebe()">
-                     <tr v-for="(diar, index) in registro.debe">
-                         <td align="center" width="50">@{{ formatoFecha(diar.fecha)}}</td>
-                         <td align="rigth">@{{ diar.nom_cuenta}}</td>
-                         <td class="text-right" width="125">@{{ decimales(diar.saldo) }}</td>
+                     <tr v-for="(diardebe, index) in registro.debe">
+                         <td align="center" width="50">@{{ formatoFecha(diardebe.fecha)}}</td>
+                         <td align="rigth">@{{ diardebe.nom_cuenta}}</td>
+                         <td class="text-right" width="125">@{{ decimales(diardebe.saldo) }}</td>
                          <td class="text-right" width="125"></td>
-                         <td v-if="diar.fecha !== '' && diar.fecha !== null && registro.tipo !== 'inicial'"
-                             align="center" width="50"><a @click="debeEditRegister(id)"
-                                 class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i></a></td>
-                         <td v-if="registro.tipo == 'inicial' && diar.fecha !== '' && diar.fecha !== null"></td>
-                         <td v-if="diar.fecha != '' && diar.fecha !== null" align="center" width="50"><a
+                         <td v-if="diardebe.fecha !== '' && diardebe.fecha !== null && registro.tipo !== 'inicial'" align="center" width="50"><a
+                                 @click="debeEditRegister(id)" class="btn btn-warning btn-sm"><i
+                                     class="fas fas fa-edit"></i></a></td>
+                                     <td v-if="registro.tipo == 'inicial' && diardebe.fecha !== '' && diardebe.fecha !== null"></td>
+                         <td  v-if="diardebe.fecha != '' && diardebe.fecha !== null" align="center" width="50"><a
                                  @click="deleteRegistro(id)" class="btn btn-danger btn-sm"><i
                                      class="fas fa-trash-alt"></i></a></td>
                          <td colspan="2" v-else></td>
@@ -106,45 +106,45 @@
                          <th colspan="2" v-if="ajustes.length > 0">ACCION</th>
                      </tr>
                  </thead> --}}
-                     <tbody v-for="(registro, id) in ajustes" @change="totalDebe()">
-                         <tr v-for="(diar, index) in registro.debe">
-                             <td align="center" width="200">@{{ formatoFecha(diar.fecha)}}</td>
-                             <td align="rigth" width="450">@{{ diar.nom_cuenta}}</td>
-                             <td align="center" width="125">@{{ decimales(diar.saldo) }}</td>
-                             <td align="center" width="125"></td>
-                             <td v-if="diar.fecha !== '' && diar.fecha !== null" align="center" width="50"><a
-                                     @click="debeEditAjustado(id)" class="btn btn-warning btn-sm"><i
-                                         class="fas fas fa-edit"></i></a></td>
-                             <td v-if="diar.fecha != '' && diar.fecha !== null" align="center" width="50"><a
-                                     @click="deleteAjuste(id)" class="btn btn-danger btn-sm"><i
-                                         class="fas fa-trash-alt"></i></a></td>
-                             <td colspan="2" v-else></td>
-                         </tr>
-                         <tr v-for="(diar, index) in registro.haber">
-                             <td align="center" width="50"></td>
-                             <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
-                             <td align="center" width="125"></td>
-                             <td align="center" width="125">@{{ decimales(diar.saldo) }}</td>
-                             <td colspan="2"></td>
-                         </tr>
-                         <tr class="text-muted">
-                             <td></td>
-                             <td>@{{ registro.comentario }}</td>
-                             <td></td>
-                             <td></td>
-                             <td colspan="2"></td>
-                         </tr>
-                     </tbody>
-                     <tbody>
-                         <tr>
-                             <td class="bg-dark" align="center" colspan="2" width="450" valign="middle">TOTAL</td>
-                             <td class="bg-dark text-right" width="125">
-                                 @{{ decimales(total.debe) }}
-                             </td>
-                             <td class="bg-dark text-right" width="125">
-                                 @{{ decimales(total.haber) }}
-                             </td>
-                             <td v-if="registros.length > 0" width="90" style="border: none;"></td>
+                 <tbody v-for="(registro, id) in ajustes" @change="totalDebe()">
+                     <tr v-for="(diardebe, index) in registro.debe">
+                         <td align="center"width="200">@{{ formatoFecha(diardebe.fecha)}}</td>
+                         <td align="rigth" width="450">@{{ diardebe.nom_cuenta}}</td>
+                         <td align="center" width="125">@{{ decimales(diardebe.saldo) }}</td>
+                         <td align="center" width="125"></td>
+                         <td v-if="diardebe.fecha !== '' && diardebe.fecha !== null" align="center" width="50"><a
+                                 @click="debeEditAjustado(id)" class="btn btn-warning btn-sm"><i
+                                     class="fas fas fa-edit"></i></a></td>
+                         <td v-if="diardebe.fecha != '' && diardebe.fecha !== null" align="center" width="50"><a
+                                 @click="deleteAjuste(id)" class="btn btn-danger btn-sm"><i
+                                     class="fas fa-trash-alt"></i></a></td>
+                                     <td colspan="2" v-else></td>
+                     </tr>
+                     <tr v-for="(diar, index) in registro.haber">
+                         <td align="center" width="50"></td>
+                         <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
+                         <td align="center" width="125"></td>
+                         <td align="center" width="125">@{{ decimales(diar.saldo) }}</td>
+                        <td colspan="2"></td>
+                     </tr>
+                     <tr class="text-muted">
+                         <td></td>
+                         <td>@{{ registro.comentario }}</td>
+                         <td></td>
+                         <td></td>
+                        <td colspan="2"></td>
+                     </tr>
+                 </tbody>
+                 <tbody>
+                         <tr >
+                         <td class="bg-dark" align="center" colspan="2" width="450" valign="middle">TOTAL</td>
+                         <td class="bg-dark text-right"  width="125">
+                             @{{ decimales(total.debe) }}
+                         </td>
+                         <td class="bg-dark text-right"  width="125">
+                             @{{ decimales(total.haber) }}
+                         </td>
+                         <td v-if="registros.length > 0" width="90" style="border: none;"></td>
 
                          </tr>
                      </tbody>

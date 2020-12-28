@@ -9,10 +9,10 @@
      <h3 class="text-center mt-5 mb-3 text-info"> {{ $datos->enunciado }} </h3>
 <form action="{{ route('taller14', ['idtaller' => $d]) }}" method="POST">
  @csrf
-<div class="container">
-	<div class="row justify-content-center">
+<div class="container p-2" style="box-shadow: 5px 5px 15px 0px  #EB5389">
+	<div class="row justify-content-center" >
 		<div class="col-8">
-			<p class="text-justify">{{ $datos->descripcion }} </p>		
+			<p class="text-justify font-italic" style="font-size: 20px">{{ $datos->descripcion }} </p>		
 		</div>
 	</div>
 

@@ -79,14 +79,13 @@
 @section('title', 'Talleres de contabilidad')
 @section('content')
 <div class="container mb-3">
-
+    <h1 class="text-center text-danger font-weight-bold display-4">Modulo Contable</h1>
     <h1 class="text-center m-2">{{ $datos->taller->nombre }}</h1>
     <h3 class="text-center mt-3">{{ $datos->enunciado }}</h3>
 
     <div class="row justify-content-md-center">
         <div class="col-12 col-sm-12 col-md-2 mb-3">
             <div class="list-group" id="list-tab" role="tablist">
-
 
                 <a class="list-group-item list-group-item-action active" id="list-kardex-list" data-toggle="list"
                     href="#list-kardex" role="tab" aria-controls="kardex">Kardex</a>
@@ -105,7 +104,8 @@
                 <a class="list-group-item list-group-item-action" id="list-hoja-trabajo-list" data-toggle="list"
                     href="#list-hoja-trabajo" role="tab" aria-controls="hoja-trabajo">Hoja de Trabajo</a>
                 <a class="list-group-item list-group-item-action" id="list-estado-resultado-list" data-toggle="list"
-                    href="#list-estado-resultado" role="tab" aria-controls="estado-resultado">Estado de Resultado</a>
+                    href="#list-estado-resultado" role="tab" aria-controls="estado-resultado">Estado de
+                    Resultado</a>
                 <a class="list-group-item list-group-item-action" id="list-balance-general-list" data-toggle="list"
                     href="#list-balance-general" role="tab" aria-controls="balance-general">Balance General</a>
                 <a class="list-group-item list-group-item-action" id="list-asento-cierre-list" data-toggle="list"
@@ -130,13 +130,12 @@
                     href="#list-provision-beneficio" role="tab" aria-controls="provision-beneficio">Provisión de
                     Benficios</a>
 
-
-
             </div>
         </div>
         <div class="col-12 col-sm-12 col-md-10">
             <div class="tab-content" id="nav-tabContent">
-               
+
+                {{--ARREGLADOS--}}
 
                 <div class="tab-pane show active fade" id="list-kardex" role="tabpanel"
                     aria-labelledby="list-kardex-list">
@@ -148,11 +147,13 @@
                     @include('contabilidad.kardex_promedio')
                 </div>
 
+
                 <div class="tab-pane fade" id="list-balance_comp" role="tabpanel"
                     aria-labelledby="list-balance_comp-list">
                     @include('contabilidad.balancecomprobacion')
                 </div>
 
+             
                 <div class="tab-pane fade border border-danger " id="list-messages" role="tabpanel"
                     aria-labelledby="list-messages-list">
                     @include('contabilidad.diariogeneral')
@@ -167,6 +168,12 @@
                     aria-labelledby="list-mayor-general-list">
                     @include('contabilidad.mayorgeneral')
                 </div>
+
+                <div class="tab-pane fade" id="list-hoja-trabajo" role="tabpanel"
+                    aria-labelledby="list-hoja-trabajo-list">
+                    @include('contabilidad.hojatrabajo')
+                </div>      
+
                 <div class="tab-pane fade border border-danger p-4" id="list-diario" role="tabpanel"
                     aria-labelledby="list-diario-list">
 
@@ -175,38 +182,18 @@
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#b_horizontal" role="tab"
                                 aria-controls="b_horizontal" aria-selected="true">Balance Inicial Horizontal</a>
                         </li>
+                        @if ($datos->metodo == 'individual')
+
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#b_vertical" role="tab"
                                 aria-controls="b_vertical" aria-selected="false">Balance Inicial Vertical</a>
                         </li>
+
+                        @endif
                     </ul>
                     <div class="tab-content" id="bInicialContent">
                         @include('contabilidad.balanceinicial')
                     </div>
-                </div>
-                <div class="tab-pane fade" id="list-balance_comp" role="tabpanel"
-                    aria-labelledby="list-balance_comp-list">
-                    @include('contabilidad.balancecomprobacion')
-                </div>
-
-                <div class="tab-pane fade border border-danger " id="list-messages" role="tabpanel"
-                    aria-labelledby="list-messages-list">
-                    @include('contabilidad.diariogeneral')
-                </div>
-
-                <div class="tab-pane fade border border-danger " id="list-mayor-general" role="tabpanel"
-                    aria-labelledby="list-mayor-general-list">
-                    @include('contabilidad.mayorgeneral')
-                </div>
-
-                <div class="tab-pane fade" id="list-balance-ajustado" role="tabpanel"
-                    aria-labelledby="list-balance-ajustado-list">
-                    @include('contabilidad.balanceajustado')
-                </div>
-
-                <div class="tab-pane fade" id="list-hoja-trabajo" role="tabpanel"
-                    aria-labelledby="list-hoja-trabajo-list">
-                    @include('contabilidad.hojatrabajo')
                 </div>
 
                 <div class="tab-pane fade" id="list-estado-resultado" role="tabpanel"
@@ -214,6 +201,7 @@
                     @include('contabilidad.estadoresultado')
                 </div>
 
+                
                 <div class="tab-pane fade" id="list-balance-general" role="tabpanel"
                     aria-labelledby="list-balance-general-list">
                     @include('contabilidad.balancegeneral')
@@ -223,8 +211,9 @@
                     aria-labelledby="list-asento-cierre-list">
                     @include('contabilidad.asientosdecierre')
                 </div>
+                {{--ARREGLADOS--}}
 
-              
+                {{--parte anexos arreglado--}}
 
                 <div class="tab-pane fade" id="list-libro-caja" role="tabpanel" aria-labelledby="list-libro-caja-list">
                     @include('contabilidad.librocaja')
@@ -251,7 +240,7 @@
                     aria-labelledby="list-retencion-iva-list">
                     @include('contabilidad.retencioniva')
                 </div>
-              
+
                 <div class="tab-pane fade" id="list-nomina-empleado" role="tabpanel"
                     aria-labelledby="list-nomina-empleado-list">
                     @include('contabilidad.nominaempleados')
@@ -260,12 +249,13 @@
                     aria-labelledby="list-provision-beneficio-list">
                     @include('contabilidad.provisiondebeneficio')
                 </div>
-
+                {{--parte anexos arreglados--}}
+          
             </div>
         </div>
     </div>
 
-    {{--   <div class="row justify-content-center">
+    {{--    <div class="row justify-content-center">
         <input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
      </div> --}}
     {{--  @include ('layouts.modacontabilidad') --}}

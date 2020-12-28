@@ -2,7 +2,7 @@
         <h2 class="text-center display-4 font-weight-bold text-danger">Balance de Comprobacion Ajustado</h2>
         <div class="row p-3  mb-2 justify-content-center ">
     <div class="col-5 mb-3">
-          <input class="form-control" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="" >
+          <input autocomplete="ÑÖcompletes" class="form-control" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="" >
         </div>
    
 </div>
@@ -18,16 +18,22 @@
             </select>
         </div>
         <div class="col-xl col-sm-12 mb-sm-1">
-          <input type="text" class="form-control" v-model="balance.debe" placeholder="Debe">
+          <input autocomplete="ÑÖcompletes" type="text" class="form-control" v-model="balance.debe" placeholder="Debe">
         </div>
          <div class="col-xl col-sm-12 mb-sm-1" >
-          <input type="text" class="form-control" v-model="balance.haber"  placeholder="Haber">
+          <input autocomplete="ÑÖcompletes" type="text" class="form-control" v-model="balance.haber"  placeholder="Haber">
         </div>
 
         <a  v-if="!update" href="#" class=" addDiario btn btn-outline-danger  " @click.prevent="agregarRegistro()">Agregar Registro</a>
         <a  v-if="update" href="#" class="  addDiario btn btn-outline-danger  " @click.prevent="actualizarBalance()">Actualizar Registro</a>
 
   </div> --}}
+   <div class="row justify-content-start mb-2">
+      <a  href="#" class="addDiario btn btn-outline-info mr-2 " @click.prevent="abrirTransaccion()">Agregar Movimientos</a>
+      <a  href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarBalance()">Guardar Balance</a>
+
+
+  </div>
   <table class="table table-bordered table-sm mb-2">
 <thead>
   <tr class="text-center bg-dark">
@@ -41,7 +47,7 @@
 <tbody is="draggable" group="people" :list="balances_ajustados" tag="tbody">
 
     <tr v-for="(balan, index) in balances_ajustados">
-      <td align="center">@{{ balan.cuenta}}</td>
+      <td class="text-left">@{{ balan.cuenta}}</td>
       <td class="text-right">@{{ decimales(balan.debe)}}</td>
       <td class="text-right" width="125">@{{ decimales(balan.haber) }}</td>
        <td class="text-right"  width="50">

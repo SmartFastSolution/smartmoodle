@@ -5,7 +5,7 @@
 @endsection
 @section('titulo', $datos->nombre)
 @section('content')
-<h1 class="text-center  mt-5 text-danger"> {{ $datos->nombre }}</h1>
+<h1 class="text-center  mt-5 text-danger font-weight-bold display-4"> {{ $datos->nombre }}</h1>
      <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
 <form action="{{ route('taller46', ['idtaller' => $d]) }}" method="POST">
