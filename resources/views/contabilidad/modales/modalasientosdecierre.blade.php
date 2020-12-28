@@ -72,7 +72,7 @@
                     </table>
                     <div v-if="!diario.debe.edit" class="row justify-content-center">
                           <a href="#" class="btn btn-success" @click.prevent="agregarDebe()">Agregar</a>
-                        <a href=""data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark ml-1">KARDEX</a>
+                        {{-- <a href=""data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark ml-1">KARDEX</a> --}}
 
                       </div>
                        <div v-else class="row justify-content-center">
@@ -123,7 +123,7 @@
                     </table>
                     <div v-if="!diario.haber.edit" class="row justify-content-center">
                             <a href="#" class="btn btn-info" @click.prevent="agregarHaber()">Agregar</a>
-                        <a href="" data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark ml-1">KARDEX</a>
+                        {{-- <a href="" data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark ml-1">KARDEX</a> --}}
 
                       </div>
 

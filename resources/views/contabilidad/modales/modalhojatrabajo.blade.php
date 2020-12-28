@@ -283,9 +283,9 @@
 
                   </div>
               
-      <div class="col-12 mt-2" v-if="registros.length > 0">
+      <div class="col-12 mt-2" v-if="registros.length > 0" style=" height:400px; overflow-y: scroll; overflow-x: hidden;">
                     <h2 class="text-center">REGISTROS</h2>
-         <table class="table table-bordered table-sm">
+         <table class="table table-bordered table-sm table-responsive">
             <thead class="bg-dark">
               <tr>
                 <th class="text-center " style="vertical-align: middle;"  rowspan="2">CUENTAS</th>
@@ -311,7 +311,7 @@
             </thead>
             <tbody>
                  <tr v-for="(balan, index) in registros" >
-                            <td align="center" width="300">@{{ balan.cuenta}}</td>
+                            <td class="text-left" width="300">@{{ balan.cuenta}}</td>
                             <td class="text-right" align="center" width="100">@{{ decimales(balan.bc_debe)}}</td>
                             <td class="text-right" align="center" width="100">@{{ decimales(balan.bc_haber) }}</td>
                             <td class="text-right" align="center" width="100">@{{ decimales(balan.ajuste_debe) }}</td>
@@ -328,17 +328,17 @@
                             class="fas fa-trash-alt"></i></a></td>
                     </tr>
               <tr>
-                <td class="font-weight-bold">SUMAN</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                 <td class="font-weight-bold">SUMAN</td>
+    <td class="text-right">@{{ suman.balance_comp.total_debe }}</td>
+    <td class="text-right">@{{ suman.balance_comp.total_haber }}</td>
+    <td class="text-right">@{{ suman.ajustes.total_debe }}</td>
+    <td class="text-right">@{{ suman.ajustes.total_haber }}</td>
+    <td class="text-right">@{{ suman.balance_ajustado.total_debe }}</td>
+    <td class="text-right">@{{ suman.balance_ajustado.total_haber }}</td>
+    <td class="text-right">@{{ suman.estado_resultado.total_debe }}</td>
+    <td class="text-right">@{{ suman.estado_resultado.total_haber }}</td>
+    <td class="text-right">@{{ suman.balance_general.total_debe }}</td>
+    <td class="text-right">@{{ suman.balance_general.total_haber }}</td>
               </tr>
             </tbody>
             </table>

@@ -4,10 +4,10 @@
         <div class="modal-content bg-light">
             <div class="modal-header">
               <div v-if="update">
-                <h5 class="modal-title" id="ba-transaccionLabel">ACTUALIZAR TRANSACCION</h5>
+                <h5 class="modal-title" id="ba-transaccionLabel">ACTUALIZAR</h5>
               </div>
               <div v-else="!update">
-                <h5 class="modal-title" id="ba-transaccionLabel">AGREGAR TRANSACCION</h5>
+                <h5 class="modal-title" id="ba-transaccionLabel">TRANSCRIBIR CUENTAS</h5>
               </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -45,7 +45,7 @@
 </thead>
 <tbody>
      <tr v-for="(balan, index) in hojatrabajo" >
-                <td align="center" width="200">@{{ balan.cuenta}}</td>
+                <td class="text-left" width="200">@{{ balan.cuenta}}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.bc_debe)}}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.bc_haber) }}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.ajuste_debe) }}</td>
@@ -63,7 +63,7 @@
 
                   </div>
                    <div class="col-4 border border-bottom-0 border-left-0 border-top-0 border-danger">
-                        <h2 class="text-center">AGREGAR MOVIMIENTOS</h2>
+                        <h2 class="text-center">AGREGAR CUENTAS</h2>
                            <div class="form-group row">
                             <label  class="col-sm-4 col-form-label">Selecciona la Cuenta</label>
                             <div class="col-sm-7">
@@ -118,7 +118,7 @@
               <tbody is="draggable" group="people" :list="balances_ajustados" tag="tbody">
 
                   <tr v-for="(balan, index) in balances_ajustados">
-                    <td align="center">@{{ balan.cuenta}}</td>
+                    <td class="text-left">@{{ balan.cuenta}}</td>
                     <td class="text-right">@{{ decimales(balan.debe)}}</td>
                     <td class="text-right" width="125">@{{ decimales(balan.haber) }}</td>
                     <td class="text-right"  width="50">

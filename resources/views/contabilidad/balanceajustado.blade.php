@@ -28,6 +28,12 @@
         <a  v-if="update" href="#" class="addDiario btn btn-outline-danger  " @click.prevent="actualizarBalance()">Actualizar Registro</a>
 
   </div> --}}
+   <div class="row justify-content-start mb-2">
+      <a  href="#" class="addDiario btn btn-outline-info mr-2 " @click.prevent="abrirTransaccion()">Agregar Movimientos</a>
+      <a  href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarBalance()">Guardar Balance</a>
+
+
+  </div>
   <table class="table table-bordered table-sm mb-2">
 <thead>
   <tr class="text-center bg-dark">
@@ -41,7 +47,7 @@
 <tbody is="draggable" group="people" :list="balances_ajustados" tag="tbody">
 
     <tr v-for="(balan, index) in balances_ajustados">
-      <td align="center">@{{ balan.cuenta}}</td>
+      <td class="text-left">@{{ balan.cuenta}}</td>
       <td class="text-right">@{{ decimales(balan.debe)}}</td>
       <td class="text-right" width="125">@{{ decimales(balan.haber) }}</td>
        <td class="text-right"  width="50">

@@ -7,7 +7,7 @@
                 <h5 class="modal-title" id="bg-transaccionLabel">ACTUALIZAR TRANSACCION</h5>
               </div>
               <div v-else="!update">
-                <h5 class="modal-title" id="bg-transaccionLabel">AGREGAR TRANSACCION</h5>
+                <h5 class="modal-title" id="bg-transaccionLabel">TRANSCRIBIR CUENTAS DEL MAYOR AL BALANCE DE COMPROBACION</h5>
               </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -16,7 +16,7 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                    <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
-                        <h2 class="text-center">AGREGAR MOVIMIENTOS</h2>
+                        <h2 class="text-center">AGREGAR CUENTA</h2>
                            <div class="form-group row">
                             <label  class="col-sm-4 col-form-label">Selecciona la Cuenta</label>
                             <div class="col-sm-7">
@@ -77,6 +77,7 @@
                       </div>              
                   </div>
                   <div class="col-6" style=" height:400px; overflow-y: scroll;">
+                               <h4 class="text-center text-danger font-weight-bold mt-2">Datos necesarios para completar el balance de comprobacion</h4>
                                <h1 class="text-center text-danger font-weight-bold mt-2">MAYOR GENERAL</h1>
      <div class="row justify-content-center">
          <div class="col-3 mb-2">
@@ -125,7 +126,7 @@
       </div>
      </div>
                   </div>
-                  <div class="col-12 mt-2" v-if="balances.length > 0">
+                  <div class="col-12 mt-2" v-if="balances.length > 0" style=" height:400px; overflow-y: scroll;">
                     <h2 class="text-center">REGISTROS</h2>
               <div class="row justify-content-around mb-2">
                 <table class="table table-bordered table-sm mb-2">
@@ -146,7 +147,7 @@
         </thead>
         <tbody is="draggable" group="people" :list="balances" tag="tbody" @change="mover">
             <tr v-for="(balan, index) in balances" >
-                <td align="center">@{{ balan.cuenta}}</td>
+                <td class="text-left">@{{ balan.cuenta}}</td>
                 <td class="text-right"  width="125">@{{ decimales(balan.suma_debe)}}</td>
                 <td class="text-right" width="125">@{{ decimales(balan.suma_haber) }}</td>
                 <td class="text-right" width="125">@{{ decimales(balan.saldo_debe) }}</td>

@@ -4,10 +4,10 @@
         <div class="modal-content bg-light">
             <div class="modal-header">
               <div v-if="update">
-                <h5 class="modal-title" id="er-ingresoLabel">ACTUALIZAR CUENTAS</h5>
+                <h5 class="modal-title" id="er-ingresoLabel">ACTUALIZAR </h5>
               </div>
               <div v-else="!update">
-                <h5 class="modal-title" id="ba-transaccionLabel">AGREGAR CUENTAS</h5>
+                <h5 class="modal-title" id="ba-transaccionLabel">TRANSCRIBIR CUENTAS</h5>
               </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -16,9 +16,21 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
 
-                  <div class="col-12 mt-2 border border-top-0 border-left-0 border-right-0 border-danger" style=" height:400px; overflow-y: scroll;">
+                  <div class="col-12 mt-2 border border-top-0 border-left-0 border-right-0 border-danger" >
+
                      <h1 class="text-center font-weight-bold mt-2">Datos para elaborar estado de resultados</h1>
-                     <h2 class="text-center font-weight-bold mt-2">HOJA DE TRABAJO</h2>
+                          <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                          <a class="nav-link active" id="bg-hoja-trabajo-tab" data-toggle="tab" href="#bg-hoja-trabajo" role="tab" aria-controls="bg-hoja-trabajo" aria-selected="true">Hoja de trabajo</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <a class="nav-link" id="bg-estado-resultado-tab" data-toggle="tab" href="#bg-estado-resultado" role="tab" aria-controls="bg-estado-resultado" aria-selected="false">Estado De Resultado</a>
+                        </li>
+                      </ul>
+
+                      <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="bg-hoja-trabajo" role="tabpanel" aria-labelledby="bg-hoja-trabajo-tab" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                                           <h2 class="text-center font-weight-bold mt-2">HOJA DE TRABAJO</h2>
                     <h3 class="font-weight-bold text-danger text-center">@{{ nombre_hoja }}</h3>
                     <table class="table table-bordered table-sm">
                     <thead class="bg-dark">
@@ -60,6 +72,110 @@
 
                     </tbody>
                     </table>
+                        </div>
+
+                         <div class="tab-pane fade" id="bg-estado-resultado" role="tabpanel" aria-labelledby="bg-estado-resultado-tab" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+
+
+                      <h2 class="text-center display-4 font-weight-bold text-danger">Estado de Resultado</h2>
+                          <div class="row p-3  mb-2 justify-content-center ">
+                              <div class="col-5 mb-3">
+                                <h3 class="text-center font-weight-bold">@{{ estadoresultado.nombre_e_resultado }}</h3>
+                                <h3 class="text-center font-weight-bold">@{{ estadoresultado.fecha_e_resultado }}</h3>
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-5"><h5>Ventas</h5></div>
+                            <div class="col-2 text-right"><span>@{{ decimales(estadoresultado.venta_e_resultado) }}</span></div>
+                          </div>
+                          <div class="row">
+                            <div class="col-5"><h5>- Costos de Ventas</h5></div>
+                            <div class="col-2 border-danger text-right" style="border-bottom: solid; 2px">@{{ decimales(estadoresultado.costo_venta_e_resultado) }}</div>
+                          </div>
+                          <div class="row">
+                            <div class="col-10"><h4 class="font-weight-bold text-info">Utilidad Bruta en Ventas</h4></div>
+                            <div class="col-2 text-right"><span class="badge badge-danger" style="font-size: 20px;">@{{ decimales(estadoresultado.totales.utilidad_bruta_ventas_e_resultado) }}</span></div>
+                          </div>
+
+                          <div class="row mt-2">
+                            <div class="col-6">
+                            <h2 class="font-weight-bold pl-3">INGRESOS</h2>
+                              
+                            </div>
+                            <div class="col-12">
+                            <table>
+                              <tbody is="draggable" group="ingresos" :list="estadoresultado.ingresos" tag="tbody">
+                                <tr v-for="(balan, index) in estadoresultado.ingresos">
+                                            <td class="text-left" width="300">@{{ balan.cuenta}}</td>
+                                            <td align="center">@{{ decimales(balan.saldo)}}</td>
+                                          </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          </div>
+                          <div class="row justify-content-between">
+                            <div class="col-10"><h4 class="font-weight-bold text-info">Total de ingresos</h4></div>
+                            <div class="col-2 text-right"><span class="badge badge-danger" style="font-size: 20px;">@{{ estadoresultado.totales.ingreso }}</span></div>
+                          </div>
+                          <div class="row justify-content-between">
+                            <div class="col-10"><h4 class="font-weight-bold text-info">Utilidad Neta en Operaciones</h4></div>
+                            <div class="col-2 text-right"><span class="badge badge-danger" style="font-size: 20px;">@{{ estadoresultado.totales.utilidad_neta_o }}</span></div>
+                          </div>
+
+                          <div class="row mt-2">
+                            <div class="col-6">
+                            <h2 class="font-weight-bold pl-3">GASTOS</h2>
+                          </div>
+                              <div class="col-12">
+                            <table>
+                              <tbody is="draggable" group="gastos" :list="estadoresultado.gastos" tag="tbody">
+                                <tr v-for="(balan, index) in estadoresultado.gastos">
+                                  <td class="text-left" width="300">@{{ balan.cuenta}}</td>
+                                  <td align="center">@{{ decimales(balan.saldo)}}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          </div>
+
+                          <div class="row justify-content-between mb-2">
+                            <div class="col-10"><h4 class="font-weight-bold text-info">Total de gastos</h4></div>
+                            <div class="col-2 text-right border-danger" style="border-bottom: solid 2px;"><span class="badge badge-danger" style="font-size: 20px; ">@{{ estadoresultado.totales.gasto }}</span></div>
+                          </div>
+
+                          <div class="row justify-content-between">
+                            <div class="col-7">
+                              <h3 v-if="estadoresultado.utilidad == 'utilidad_neta'" class="font-weight-bold">UTILIDAD NETA DEL EJERCICIO</h3>
+                              <h3 v-else class="font-weight-bold">PERDIDA DEL EJERCICIO DEL EJERCICIO</h3>
+                            </div>
+                            <div class="col-3"><span class="badge badge-danger" style="font-size: 20px; ">@{{ estadoresultado.totales.utilidad_ejercicio_e_resultado }}</span></div>
+                          </div>
+
+
+                          <div class="mt-2 row justify-content-between" v-if="estadoresultado.utilidad == 'utilidad_neta'">
+                            <div class="col-12">
+                            <table>
+                              <tbody is="draggable" group="people" :list="estadoresultado.utilidades" tag="tbody">
+                                <tr v-for="(balan, index) in estadoresultado.utilidades">
+                                          <td class="text-left" width="750">@{{ balan.cuenta}}</td>
+                                          <td align="center">@{{ decimales(balan.saldo)}}</td>
+                                        </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="col-12">
+                           <div class="row mt-2 justify-content-between">
+                            <div class="col-10">
+                              <h3 class="font-weight-bold">UTILIDAD LIQUIDA DEL EJERCICIO</h3>
+                            </div>
+                            <div class="col-2"><span class="badge badge-danger" style="font-size: 20px; ">@{{ estadoresultado.totales.utilidad_liquida_e_resultado }}</span></div>
+                          </div> 
+                          </div>
+                          </div>
+
+                        </div>
+                      </div>
+    
                   </div>
 
     <div class="col-12">
@@ -135,8 +251,8 @@
                     <tbody is="draggable" group="people" :list="a_corrientes" tag="tbody">
 
                         <tr v-for="(balan, index) in a_corrientes">
-                          <td align="center">@{{ balan.cuenta}}</td>
-                          <td align="center">@{{ decimales(balan.saldo)}}</td>
+                          <td class="text-left">@{{ balan.cuenta}}</td>
+                          <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editAcorriente(index)" class="btn btn-warning">
                               <i class="fas fa-edit"></i>
@@ -150,7 +266,7 @@
                         </tr>
                       <tr class="bg-secondary">
                         <td class="text-left font-weight-bold">Total Activo Corriente</td>
-                        <td class="text-center">@{{ decimales(b_initotal.t_a_corriente) }}</td>
+                        <td class="text-right">@{{ decimales(b_initotal.t_a_corriente) }}</td>
                         <td></td>
                       </tr>
                     </tbody>
@@ -225,7 +341,7 @@
                     <tbody  v-for="(balan, index) in a_nocorrientes">
 
                         <tr>
-                          <td width="300">@{{ balan.cuenta}}</td>
+                          <td width="300" class="text-left">@{{ balan.cuenta}}</td>
                           <td width="100" class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td width="100" class="text-right">@{{ decimales(balan.total_saldo) }}</td>
 
@@ -242,7 +358,7 @@
                         </tr>
 
                         <tr v-if="balan.cuenta2 !== '' && balan.saldo2 !== '' && balan.total_saldo2 !=='' && balan.cuenta2 !== null">
-                          <td>(-)@{{ balan.cuenta2 }}</td>
+                          <td class="text-left">(-)@{{ balan.cuenta2 }}</td>
                           <td  class="text-right">@{{ decimales(balan.saldo2) }}</td>
                           <td  class="text-right">@{{ decimales(balan.total_saldo2) }}</td>
                           <td colspan="2"></td>
@@ -252,7 +368,7 @@
                        <tr class="bg-secondary">
                         <td class="text-left font-weight-bold">Total Activo Corriente</td>
                         <td class="text-center"></td>
-                        <td class="text-center">@{{ b_initotal.t_a_nocorriente }}</td>
+                        <td class="text-right">@{{ b_initotal.t_a_nocorriente }}</td>
                       </tr>
                     </tbody>
                     </table>
@@ -308,8 +424,8 @@
                     <tbody is="draggable" group="people" :list="p_corrientes" tag="tbody">
 
                         <tr v-for="(balan, index) in p_corrientes">
-                          <td align="center">@{{ balan.cuenta}}</td>
-                          <td align="center">@{{ decimales(balan.saldo)}}</td>
+                          <td class="text-left">@{{ balan.cuenta}}</td>
+                          <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editPcorriente(index)" class="btn btn-warning">
                               <i class="fas fa-edit"></i>
@@ -323,7 +439,7 @@
                         </tr>
                       <tr class="bg-secondary">
                         <td class="text-left font-weight-bold">Total Pasivo No Corriente</td>
-                        <td class="text-center">@{{ b_initotal.t_p_corriente }}</td>
+                        <td class="text-right">@{{ b_initotal.t_p_corriente }}</td>
                         <td></td>
                       </tr>
                     </tbody>
@@ -381,8 +497,8 @@
                     <tbody is="draggable" group="people" :list="p_nocorrientes" tag="tbody">
 
                         <tr v-for="(balan, index) in p_nocorrientes">
-                          <td align="center">@{{ balan.cuenta}}</td>
-                          <td align="center">@{{ decimales(balan.saldo)}}</td>
+                          <td class="text-left">@{{ balan.cuenta}}</td>
+                          <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editPNocorriente(index)" class="btn btn-warning">
                               <i class="fas fa-edit"></i>
@@ -396,7 +512,7 @@
                         </tr>
                       <tr class="bg-secondary">
                         <td class="text-left font-weight-bold">Total Pasivo No corriente</td>
-                        <td class="text-center">@{{ b_initotal.t_p_no_corriente }}</td>
+                        <td class="text-right">@{{ b_initotal.t_p_no_corriente }}</td>
                         <td></td>
                       </tr>
                     </tbody>
@@ -454,8 +570,8 @@
                     <tbody is="draggable" group="people" :list="patrimonios" tag="tbody">
 
                         <tr v-for="(balan, index) in patrimonios">
-                          <td align="center">@{{ balan.cuenta}}</td>
-                          <td align="center">@{{ decimales(balan.saldo)}}</td>
+                          <td class="text-left">@{{ balan.cuenta}}</td>
+                          <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editPatrimonio(index)" class="btn btn-warning">
                               <i class="fas fa-edit"></i>
@@ -469,7 +585,7 @@
                         </tr>
                       <tr class="bg-secondary">
                         <td class="text-left font-weight-bold">Total Patrimonio</td>
-                        <td class="text-center">@{{ b_initotal.t_patrimonio }}</td>
+                        <td class="text-right">@{{ b_initotal.t_patrimonio }}</td>
                         <td></td>
                       </tr>
                     </tbody>

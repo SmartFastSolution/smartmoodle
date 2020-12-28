@@ -344,7 +344,7 @@ class TallerContabilidadController extends Controller
         $balance            = new BalanceAjustado;
         $balance->taller_id = $taller_id ;
         $balance->user_id   = $id;
-        $balance->enunciado = $contenido->enunciado;
+        // $balance->enunciado = $contenido->enunciado;
         $balance->nombre = $request->nombre;
         $balance->total_debe  = $request->total_debe;
         $balance->total_haber = $request->total_haber;
@@ -420,6 +420,7 @@ class TallerContabilidadController extends Controller
         
             return response(array(
                 'datos' => true,
+                'nombre' => $balanceCompro->nombre,
                 'bcomprobacionAjustado' => $obtener
             ),200,[]);
 
@@ -441,7 +442,7 @@ class TallerContabilidadController extends Controller
         $balance            = new BalanceComprobacion;
         $balance->taller_id = $taller_id ;
         $balance->user_id   = $id;
-        $balance->enunciado = $contenido->enunciado;
+        // $balance->enunciado = $contenido->enunciado;
         $balance->nombre    = $request->nombre;
         $balance->fecha     = $request->fecha;
         $balance->sum_debe  = $request->sum_debe;
@@ -1265,11 +1266,11 @@ public function obtenerbalance(Request $request)
                 $regis2=array(
                      'm_g_registro_id' => $register[$key]->id,
                      'tipo'            => 'cierre',
-                     'fecha'           => $value1['fecha'],
-                     'detalle'         => $value1['detalle'],
-                     'debe'            => $value1['debe'],
-                     'haber'           => $value1['haber'],
-                     'saldo'           => $value1['saldo'],
+                     'fecha'           => $value2['fecha'],
+                     'detalle'         => $value2['detalle'],
+                     'debe'            => $value2['debe'],
+                     'haber'           => $value2['haber'],
+                     'saldo'           => $value2['saldo'],
                      'created_at'      => now(),
                      'updated_at'      => now(),
                   );
@@ -1327,11 +1328,11 @@ public function obtenerbalance(Request $request)
                 $regis2=array(
                      'm_g_registro_id' => $register[$key]->id,
                      'tipo'            => 'cierre',
-                     'fecha'           => $value1['fecha'],
-                     'detalle'         => $value1['detalle'],
-                     'debe'            => $value1['debe'],
-                     'haber'           => $value1['haber'],
-                     'saldo'           => $value1['saldo'],
+                     'fecha'           => $value2['fecha'],
+                     'detalle'         => $value2['detalle'],
+                     'debe'            => $value2['debe'],
+                     'haber'           => $value2['haber'],
+                     'saldo'           => $value2['saldo'],
                      'created_at'      => now(),
                      'updated_at'      => now(),
                   );
@@ -1473,6 +1474,7 @@ public function obtenerbalance(Request $request)
         $estadoResultado->user_id               = $id;
         $estadoResultado->nombre                = $nombre;
         $estadoResultado->fecha                 = $fecha;
+        $estadoResultado->utilidad           = $request->utilidad;
         $estadoResultado->venta                 = $request->venta;
         $estadoResultado->costo_venta           = $request->costo_venta;
         $estadoResultado->utilidad_bruta_ventas = $totales['utilidad_bruta_ventas'];
@@ -1480,7 +1482,7 @@ public function obtenerbalance(Request $request)
         $estadoResultado->utilidad_ejercicio    = $totales['utilidad_ejercicio'];
         $estadoResultado->utilidad_liquida      = $totales['utilidad_liquida'];
         $estadoResultado->total_ingresos        = $totales['ingreso'];
-        $estadoResultado->total_gastos          = $totales['gasto'];
+        $estadoResultado->total_gastos          = $totales['gastos'];
         $estadoResultado->save();
         $mayorg = EstadoResultado::where('user_id',$id)->where('taller_id', $taller_id)->first();
         

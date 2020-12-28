@@ -31,6 +31,9 @@
         <a v-if="update" href="#" class="addDiario btn btn-outline-danger " @click.prevent="actualizarBalance()">Actualizar Registro</a>
 
   </div> --}}
+    <div class="row justify-content-start mb-2">
+            <a  href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Cuentas</a>
+        </div>
     <table class="table table-bordered table-sm mb-2">
         <thead>
             <tr class="bg-dark">
@@ -49,7 +52,7 @@
         </thead>
         <tbody is="draggable" group="people" :list="balances" tag="tbody" @change="mover">
             <tr v-for="(balan, index) in balances" >
-                <td align="center">@{{ balan.cuenta}}</td>
+                <td class="text-left">@{{ balan.cuenta}}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.suma_debe)}}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.suma_haber) }}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.saldo_debe) }}</td>
@@ -71,7 +74,7 @@
     </table>
     
         <div class="row justify-content-center mb-2">
-            <a  href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Movimientos</a>
+            <a  href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Cuentas</a>
         </div>
 
 
