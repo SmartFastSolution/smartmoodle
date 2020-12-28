@@ -1,44 +1,27 @@
 <div id="balance_comp" class="border border-danger p-4">
-        <h2 class="text-center display-4 font-weight-bold text-danger">Balance de Comprobacion</h2>
-<div class="row p-3  mb-2 justify-content-center ">
-    <div class="col-8 mb-3">
-          <input autocomplete="ÑÖcompletes" class="form-control" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="" >
+    <h2 class="text-center display-4 font-weight-bold text-danger">Balance de Comprobacion</h2>
+    <div class="row p-3  mb-2 justify-content-center ">
+        <div class="col-8 mb-3">
+            <input autocomplete="ÑÖcompletes" class="form-control" type="text" v-model="nombre"
+                placeholder="Nombre de la empresa" name="">
         </div>
         <div class="col-5">
-          <input autocomplete="ÑÖcompletes" class="form-control" type="date" v-model="fecha" placeholder="Agrega la fecha" name="" >
+            <input autocomplete="ÑÖcompletes" class="form-control" type="date" v-model="fecha"
+                placeholder="Agrega la fecha" name="">
         </div>
-      
-      </div>
-{{--         <h2 class="text-center">Agregar Sumas</h2>
-    <div class="form-row mb-2 justify-content-center">
-        <div class="col">
-           <select name="n_cuenta" id="" v-model="balance.cuenta" class="custom-select">
-            <option value="" disabled>ELIGE UNA CUENTA</option>
-            <option value="banco">BANCO</option>
-            <option value="muebles">MUEBLES</option>
-            <option value="caja">CAJA</option>
-            <option value="vehiculo">VEHICULO</option>
-            </select>
-        </div>
-        <div class="col">
-          <input autocomplete="ÑÖcompletes" type="text" class="form-control" v-model="balance.suma_debe" placeholder="Debe">
-        </div>
-         <div class="col">
-          <input autocomplete="ÑÖcompletes" type="text" class="form-control" v-model="balance.suma_haber"  placeholder="Haber">
-        </div>
-        <a v-if="!update" href="#" class="addDiario btn btn-outline-danger " @click.prevent="agregarRegistro()">Agregar Registro</a>
-        <a v-if="update" href="#" class="addDiario btn btn-outline-danger " @click.prevent="actualizarBalance()">Actualizar Registro</a>
-  </div> --}}
+
+    </div>
+
     <div class="row justify-content-start mb-2">
-            <a  href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Cuentas</a>
-        </div>
+        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Cuentas</a>
+    </div>
     <table class="table table-bordered table-sm mb-2">
         <thead>
             <tr class="bg-dark">
                 <th rowspan="2" align="center" class="text-center">CUENTAS</th>
                 <th colspan="2" align="center" class="text-center">SUMAS</th>
                 <th colspan="2" align="center" class="text-center">SALDOS</th>
-                <td  class="text-center" valign="center" v-if="balances.length >=1" colspan="2" rowspan="2">ACCIONES</td>
+                <td class="text-center" valign="center" v-if="balances.length >=1" colspan="2" rowspan="2">ACCIONES</td>
 
             </tr>
             <tr class="bg-dark">
@@ -49,15 +32,15 @@
             </tr>
         </thead>
         <tbody is="draggable" group="people" :list="balances" tag="tbody" @change="mover">
-            <tr v-for="(balan, index) in balances" >
+            <tr v-for="(balan, index) in balances">
                 <td class="text-left">@{{ balan.cuenta}}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.suma_debe)}}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.suma_haber) }}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(balan.saldo_debe) }}</td>
-                <td  class="text-right"align="center" width="125">@{{ decimales(balan.saldo_haber) }}</td>
-                <td align="center"  width="50"><a @click.prevent="editBalanceFuera(index)" class="btn btn-warning"><i
+                <td class="text-right" align="center" width="125">@{{ decimales(balan.saldo_haber) }}</td>
+                <td align="center" width="50"><a @click.prevent="editBalanceFuera(index)" class="btn btn-warning"><i
                             class="fas fa-edit"></i></a></td>
-                <td align="center" width="50"><a @click.prevent="deleteBalance(index)"  class="btn btn-danger"><i
+                <td align="center" width="50"><a @click.prevent="deleteBalance(index)" class="btn btn-danger"><i
                             class="fas fa-trash-alt"></i></a></td>
 
             </tr>
@@ -70,18 +53,18 @@
             </tr>
         </tbody>
     </table>
-    
-        <div class="row justify-content-center mb-2">
-            <a  href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Cuentas</a>
-        </div>
+
+    <div class="row justify-content-center mb-2">
+        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Cuentas</a>
+    </div>
 
 
-        <div class="row justify-content-center">
-            <a  href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarBalance()">Guardar Balance</a>
-        </div>
-        
+    <div class="row justify-content-center">
+        <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarBalance()">Guardar Balance</a>
+    </div>
 
-       
+
+
 
     @include ('contabilidad.modales.modalbalancecomprobacion')
 </div>

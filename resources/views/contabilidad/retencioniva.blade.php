@@ -21,7 +21,6 @@
                 <th class="text-center" style="vertical-align: middle;" colspan="5">RETENCIÓN DEL IVA</th>
                 <th class="text-center" valign="center" v-if="t_compras.length >=1" colspan="2" rowspan="2">ACCIONES
                 </th>
-
             </tr>
             <tr>
                 <td class="text-center" width="125">BASE IMPONIBLE</td>
