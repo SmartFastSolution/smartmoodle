@@ -33,12 +33,14 @@
              
 
                     @forelse($au->materias as $materia)
+                    @foreach($materia->distribucionmacus as $curso)
                 <!-- ./col -->
                 <div class="col-lg-3 col-5">
                     <!-- small box -->
                     <div class="small-box bg-gradient-info">
                         <div class="inner">
                             <h3> <i class="far fa-bookmark"></i></h3>
+                            <p>Curso:{{$curso->curso->nombre}} </p>
                             <p> {{$materia->nombre}}</p>
                         </div>
                         <div class="icon">
@@ -50,6 +52,7 @@
                     </div>
                 </div>
                 <!-- ./col -->
+                @endforeach
                 @empty 
                     <h1>No tienes cursos asignados</h1>
                 

@@ -4,15 +4,22 @@
 			<h6 class="font-weight-bold">Elegir Producto:</h6>
 			<select v-model="producto_id" class="custom-select" name="" id="" @change="obtenerKardexFifo()">
 			<option disabled selected value="">ELIGE UN PRODUCTO</option>
-
-			<option v-for="(producto, index) in productos" :value="producto.id">@{{ producto.nombre }}</option>
+			@if ($datos->metodo == 'concatenado')
+				@foreach ($productos as $producto)
+					<option :value="{{ $producto->id }}">{{ $producto->nombre }}</option>
+				@endforeach
+			@elseif($datos->metodo == 'individual')
+				@foreach ($transacciones as $producto)
+					<option :value="{{ $producto->id }}">{{ $producto->nombre }}</option>
+				@endforeach
+			@endif
+		
+			{{-- <option v-for="(producto, index) in productos" :value="producto.id">@{{ producto.nombre }}</option> --}}
 			{{-- <option :value="2">AIRE ACONDICIONADO</option>
 			<option :value="3">MESA</option> --}}
 
 		</select>
 		</div>
-	
-		
 	</div><br><br>
 	<h1 class="text-center font-weight-bold text-danger">KARDEX</h1>
 	<h5 class="text-center font-weight-bold text-info">METODO FIFO</h5>

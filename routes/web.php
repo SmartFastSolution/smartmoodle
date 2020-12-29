@@ -51,9 +51,48 @@ route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta e
 
 
 
+ ////////////////////////////////////////////////
+ ////////////////Reporte Vuejs///////////////////
+ ////////////////////////////////////////////////
+ ////////////////////////////////////////////////
+ //rutas vue para reporte
+
+// Route::get('/reporte','PDFController@Reporte')->name('Reporte');
+// Route::post('informes','PDFController@Instituto')->name('informes');
+// Route::post('distinst1','PDFController@curso')->name('distinst1');  //filtro del select curso dependiente del select instituto
+// Route::post('cursoall','PDFController@Filtrocurso')->name('cursoall'); //filtro de curso por el select curso vmodel de curso
+
+////////////////////////////////////////////////
+ ////////////////Fin Reporte Vuejs//////////////
+ ////////////////////////////////////////////////
+ ////////////////////////////////////////////////
+
+
+ 
+////////////////////////////////////////////////
+ //////////////// Reporte Eloquent//////////////
+
+ Route::get('/reportes','PDFController@Reporteindex')->name('Reportes');
+ 
+ ///////////////////////////////////////////////
+ ////////////////Descargar Excel////////////////
+////////////////////////////////////////////////
+ 
+Route::get('users-list-excel','PDFController@UserExport')->name('users.excel');
+Route::get('distribucion-list-excel','PDFController@DistribucionExport')->name('distribucion.excel');
+Route::get('asignaciones-list-excel','PDFController@AssigmentExport')->name('asignacion.excel');
+Route::get('docentes-list-excel','PDFController@DocenteExport')->name('docente.excel');
+Route::get('cursos-list-excel','PDFController@CursoExport')->name('curso.excel');
+
+
+ ////////////////////////////////////////////////
+ ////////////////////////////////////////////////
+
+
+
 ///rutas menu docente
 route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
-
+route::get('Documento-pdf/{contenido}', 'DocenteController@VerPDF')->name('Contenido.docente'); //para visualizar el documento en el menu estudiante
 
 //rutas menu estudiante
 route::post('admin/cambiarestado','AdminController@status')->name('taller.status');
@@ -62,6 +101,7 @@ route::get('perfil','EstudianteController@show')->name('perfile');
 route::get('unidad/{id}','EstudianteController@unidades')->name('Unidades');
 route::get('estudiante/password', 'EstudianteController@password')->name('AlumnoPass'); //para metodo get del password 
 route::post('estudiante/password','EstudianteController@updatep')->name('Estudiantes.updatep'); // para guardar el nuevo password
+route::get('Contenido-pdf/{contenido}', 'EstudianteController@VisualizacionPDF')->name('Contenido.alumno'); //para visualizar el documento en el menu estudiante
 
 ///rutas menu docente
 
@@ -76,6 +116,8 @@ route::get('alumnos/{id}', 'DocenteController@cursos')->name('Alumnos');
 
 //rutas usuario
 route::resource('users','UsersController');
+Route::post('estadouser','HomeController@EstadoUser')->name('Estado');
+
 
 // rutas instituto
 route::resource('institutos','InstitutoController');// FUNCIONA AL 100%
@@ -99,9 +141,13 @@ route::resource('cursos','CursoController');
 
 //Ruta Resource de Materias que va aliada con el curso
 route::resource('materias','MateriaController');
+//ver documento pdf en el archivo
+Route::get('Unidad-pdf/{contenido}','HomeController@Verdocumento')->name('Unidad.contenido');
+
 
 //Ruta Resource de Materias que va aliada con el curso
 route::resource('contenidos','ContenidoController');
+
 
 //Ruta Resource par asignacion de cursos y materias prueba 2 
 route::resource('distribucionmacus','DistribucionmacuController');
@@ -139,6 +185,13 @@ route::put('/reply/{comment}','CommentController@update')->name('comment.update'
 
 //rutas de nueva asignacion estudiante a materias 
 route::resource('assignments','AssignmentController');
+
+
+//rutas de reportes
+
+// route::get('/pdfDocentes','PDFController@PDFDocentes')->name('descargarPDFDocentes');
+
+
 });
 
 Route::group(['prefix' => 'sistema/admin'], function() {
@@ -235,6 +288,7 @@ route::post('/sistema/admin/taller33/{idtaller}', 'TallerEstudianteController@st
 route::post('/sistema/admin/taller34/{idtaller}', 'TallerEstudianteController@store34')->name('taller34');
 route::post('/sistema/admin/taller35/{idtaller}', 'TallerEstudianteController@store35')->name('taller35');
 route::post('/sistema/admin/taller36/{idtaller}', 'TallerEstudianteController@store36')->name('taller36');
+route::post('/sistema/admin/taller37/{idtaller}', 'TallerEstudianteController@store37')->name('taller37');
 route::post('/sistema/admin/taller38/{idtaller}', 'TallerEstudianteController@store38')->name('taller38');
 route::post('/sistema/admin/taller39/{idtaller}', 'TallerEstudianteController@store39')->name('taller39');
 route::post('/sistema/admin/taller40/{idtaller}', 'TallerEstudianteController@store40')->name('taller40');
@@ -313,6 +367,32 @@ route::post('/sistema/admin/taller/obtener-balance-general', 'TallerContabilidad
 
 route::post('/sistema/admin/taller/obtenerbalance', 'TallerContabilidadController@obtenerbalance')->name('obtenerbalance');
 
+//rutas anexos
+route::post('/sistema/admin/taller/anexo_caja', 'TallerContabilidadController@AnexoCaja')->name('anexo_caja');
+route::post('/sistema/admin/taller/anexo-obtener-caja', 'TallerContabilidadController@obtenerLibroCaja')->name('anexocaja.obtener');
+
+route::post('/sistema/admin/taller/arqueo_caja', 'TallerContabilidadController@ArqueoCaja')->name('arqueo_caja');
+route::post('/sistema/admin/taller/arqueo-obtener-caja', 'TallerContabilidadController@obtenerArqueo')->name('arqueocaja.obtener');
+
+route::post('/sistema/admin/taller/libro_banco', 'TallerContabilidadController@LibroBanco')->name('libro_banco');
+route::post('/sistema/admin/taller/libro-obtener-banco', 'TallerContabilidadController@obtenerLbanco')->name('librobanco.obtener');
+
+
+route::post('/sistema/admin/taller/conciliacion_bancaria', 'TallerContabilidadController@ConciliacionBancaria')->name('conciliacion_bancaria');
+route::post('/sistema/admin/taller/conciliacion-obtener-bancaria', 'TallerContabilidadController@ObtenerConciliacionB')->name('conciliacionbancaria.obtener');
+
+
+
+
+route::post('/sistema/admin/taller/retencion_iva', 'TallerContabilidadController@RetencionIva')->name('retencion_iva');
+route::post('/sistema/admin/taller/retencion-obtener-iva', 'TallerContabilidadController@ObtenerRetencionIva')->name('retencioniva.obtener');
+
+route::post('/sistema/admin/taller/nomina_empleado', 'TallerContabilidadController@NominaEmpleado')->name('nomina_empleado');
+route::post('/sistema/admin/taller/nomina-obtener-empleado', 'TallerContabilidadController@obtenerNomina')->name('nominaempleado.obtener');
+
+route::post('/sistema/admin/taller/provision_social', 'TallerContabilidadController@ProvisionB')->name('provision_social');
+route::post('/sistema/admin/taller/provision-obtener-beneficio', 'TallerContabilidadController@ObtenerProvison')->name('provisionbeneficio.obtener');
+
 
 //MODULOS CONTABLES
 route::post('/sistema/admin/modulo/balance-inicial', 'AdminController@balance_inicial')->name('modulo.balance_inicial');
@@ -325,6 +405,13 @@ route::post('/sistema/admin/modulo/balance-comprobacion-ajustado', 'AdminControl
 route::post('/sistema/admin/modulo/estado-resultado', 'AdminController@crearEtadoResultado')->name('modulo.estadoresultado');
 route::post('/sistema/admin/modulo/balance-general', 'AdminController@crearBalanceGeneral')->name('modulo.balance-general');
 route::post('/sistema/admin/modulo/asiento-cierre', 'AdminController@crearAsientosCierre')->name('modulo.asientocierre');
+route::post('/sistema/admin/modulo/librocaja', 'AdminController@crearLibroCaja')->name('modulo.librocaja');
+route::post('/sistema/admin/modulo/conciliacionbancaria', 'AdminController@crearConciliacion')->name('modulo.conciliacionbancaria');
+route::post('/sistema/admin/modulo/arqueocaja', 'AdminController@crearArqueo')->name('modulo.arqueocaja');
+route::post('/sistema/admin/modulo/librobanco', 'AdminController@libroBanco')->name('modulo.librobanco');
+route::post('/sistema/admin/modulo/retencioniva', 'AdminController@retencionIva')->name('modulo.retencioniva');
+route::post('/sistema/admin/modulo/nominaempleados', 'AdminController@crearNomina')->name('modulo.nominaempleados');
+route::post('/sistema/admin/modulo/provisiondebeneficio', 'AdminController@crearProvision')->name('modulo.provisiondebeneficio');
 route::post('/sistema/admin/modulo/taller-concatenado', 'AdminController@tallerConcatenado')->name('modulo.tallerconcatenado');
 
 

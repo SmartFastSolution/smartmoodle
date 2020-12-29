@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Assignment;
 use APp\User;
 use App\Contenido;
 use App\Curso;
@@ -94,6 +95,7 @@ class DocenteController extends Controller
       
         $materia =Materia::where('id', $id)->firstOrfail();
         $contenidos=Contenido::get();
+        $cons =Contenido::where('materia_id',$materia->id)->paginate(6);
 
         $users = DB::table('tallers')
             ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
@@ -124,24 +126,25 @@ class DocenteController extends Controller
             ->paginate(10);
 
       // return $calificado;
-   return view ('Docente.contenidodocente',compact('user','institutomate','materia','contenidos', 'users', 'calificado'));
+   return view ('Docente.contenidodocente',compact('user','institutomate','materia','contenidos', 'users', 'calificado','cons'));
 
 }
 
     public function cursos($id){
-        $materia =Materia::where('id', $id)->firstOrfail();
-        $distribucion = Distribucionmacu::get();
+        $materia =Materia::where('id', $id)->firstOrfail(); 
+       
         $curso = Curso::get();
-        $distrima =Distrima::get();
-        $mate = $materia->distribucionmacus;
+        $assignment= Assignment::get();
+        $mate = $materia->assignments;
         
-     return view('Docente.cursos',compact('materia','distribucion','curso','distrima', 'mate'));
+     return view('Docente.cursos',compact('materia','curso', 'mate','assignment',));
 
     }
     public function talleres($id)
     {
         $contenidos=Contenido::where('materia_id', $id)->get();
         $materia = Materia::select('nombre')->where('id', $id)->first();
+      
         $tallers=Taller::paginate(10);
         $talleres =[];
         foreach ($contenidos as $key => $value) {
@@ -159,7 +162,6 @@ class DocenteController extends Controller
     $contenidos=Contenido::where('materia_id', $request->materia)->get();
     $talleres =[];
       
-
     $taller = Taller::find($request->taller_id);
     $estado = $request->estado;
        // return $estado;
@@ -202,6 +204,15 @@ class DocenteController extends Controller
             ),200,[]);   
        }
 
+    }
+
+
+
+    public function VerPDF($id){
+
+        $contenido =Contenido::where('id', $id)->firstOrfail();
+         return \view('Docente.archivopdf',['contenido'=>$contenido]);
+  
     }
 
 

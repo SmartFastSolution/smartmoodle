@@ -4,9 +4,15 @@
 			<h6 class="font-weight-bold">Elegir Producto:</h6>
 			<select v-model="producto_id" class="custom-select" name="" id="" @change="obtenerKardexPromedio()">
 			<option disabled selected value="">ELIGE UN PRODUCTO</option>
-			<option :value="1">COCINAS</option>
-			<option :value="2">AIRE ACONDICIONADO</option>
-			<option :value="3">MESA</option>
+			@if ($datos->metodo == 'concatenado')
+				@foreach ($productos as $producto)
+					<option :value="{{ $producto->id }}">{{ $producto->nombre }}</option>
+				@endforeach
+			@elseif($datos->metodo == 'individual')
+				@foreach ($transacciones as $producto)
+					<option :value="{{ $producto->id }}">{{ $producto->nombre }}</option>
+				@endforeach
+			@endif
 		</select>
 		</div>
 	</div><br><br>

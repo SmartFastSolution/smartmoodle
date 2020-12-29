@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use  Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 
 class LoginController extends Controller
@@ -56,5 +57,10 @@ class LoginController extends Controller
        return redirect()->route('administrador');
    }
    
+   protected function credentials(Request $request)
+    {
+     $credentials = $request->only($this->username(), 'password');
+     return array_merge($credentials, ['estado' => 'on']); 
+    }
 
 }

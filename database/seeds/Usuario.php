@@ -38,7 +38,7 @@ class Usuario extends Seeder
            ]);
 
            DB::table('users')->insert([
-           'instituto_id'    => 1,
+         
            'cedula'          => '0943557611',
            'name'            =>'Juan',
            'apellido'        => 'Perez',

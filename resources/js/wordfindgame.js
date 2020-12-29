@@ -17,7 +17,7 @@
   * WordFindGame requires wordfind.js and jQuery.
   */
 
-  /**
+  /**npm,
   * Initializes the WordFindGame object.
   *
   * @api private

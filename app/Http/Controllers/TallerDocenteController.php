@@ -30,6 +30,7 @@ use App\Admin\Respuesta\EscribirCuenta;
 use App\Admin\Respuesta\Factura;
 use App\Admin\Respuesta\RAlternativa;
 use App\Admin\TallerRAlternativa;
+use App\Admin\TallerModuloContable;
 
 use App\Admin\Respuesta\FacturaDato;
 use App\Admin\Respuesta\FormulasContable;
@@ -112,6 +113,7 @@ use App\Admin\TallerescribirCuenta;
 use App\Taller;
 use App\TallerChequeRe;
 use App\User;
+use JavaScript;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -390,9 +392,8 @@ class TallerDocenteController extends Controller
                 JavaScript::put([
                  'taller' => $d,
                 ]);
-            
-             $datos = TallerContabilidad::where('taller_id', $consul->id)->firstOrFail();
-            return view('docentes.talleres.taller37', compact('datos', 'd', 'update_imei'));
+             $datos = TallerModuloContable::where('taller_id', $consul->id)->firstOrFail();
+            return view('docentes.talleres.taller37', compact('datos', 'd', 'update_imei', 'user'));
 
         }elseif ($plant == 38) {
             $taller = TallerALectura::where('taller_id', $consul->id)->firstOrFail();

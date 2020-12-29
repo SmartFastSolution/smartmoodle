@@ -12,17 +12,25 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/preloader.css') }}">
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+
+
     <!-- datatabes -->
-    <link rel="stylesheet" href=" {{ asset('css/jquery.dataTables.min.css')}}">
+    <link rel="stylesheet" href=" {{ asset('https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css')}}">
+    <link rel="stylesheet"
+        href=" {{ asset('https://cdn.datatables.net/fixedheader/3.1.7/css/fixedHeader.dataTables.min.css')}}">
+
+
+    <!-- <link rel="stylesheet" href=" {{ asset('css/jquery.dataTables.min.css')}}"> -->
+
     @yield('css')
 
 </head>
 
 <body class="hold-transition sidebar-mini  layout-fixed">
     <li class="d-none">
-    @if (Auth::check())
-       
-   
+        @if (Auth::check())
+
+
         @foreach (auth()->user()->roles as $role)
         {{ $rol = $role->descripcion}}
         @endforeach
@@ -225,7 +233,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
                                 <p>
-                                   Clonacion
+                                    Clonacion
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -339,7 +347,7 @@
                             <a href="#" class="nav-link">
                                 <i class="fas fa-user-cog"></i>
                                 <p>
-                                   Publicaciones
+                                    Publicaciones
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
@@ -348,6 +356,25 @@
                                     <a href="{{route('posts.index')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Sección Post</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endcan
+                        @can('haveaccess', 'reporte.index')
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-user-cog"></i>
+                                <p>
+                                    Reportes
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('Reportes')}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Sección Reporte</p>
                                     </a>
                                 </li>
                             </ul>
@@ -443,22 +470,36 @@
                 </div><!-- /.container-fluid -->
             </section>
             <section class="content">
+
                 @yield('content')
             </section>
+
+
         </div>
         @elseif($rol ==='estudiante')
+
         @include('layouts.estapp')
         @elseif($rol ==='docente')
+
         @include('layouts.docapp')
+        
         @endif
-     @endif
+        @endif
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="{{ asset('js/preloader.js') }}"></script>
     <!-- datatables script -->
-    <script src="{{ asset('js/jquery.dataTables.min.js')}}"></script>
+
     <script src="{{ asset('vendor/ckeditor/ckeditor.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <!-- <script src="{{asset('https://code.jquery.com/jquery-3.5.1.js')}}"></script> -->
+    <script src="{{asset('https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js')}}"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
+
+
+
+
     @yield('js')
     {{--   @include('sweetalert::alert') --}}
 </body>

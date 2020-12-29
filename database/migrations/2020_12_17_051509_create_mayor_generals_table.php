@@ -17,7 +17,7 @@ class CreateMayorGeneralsTable extends Migration
           $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('nombre');
+            $table->string('nombre')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

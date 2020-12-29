@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
+   
 
     @yield('css')
 
@@ -30,9 +31,6 @@
                 <span class="brand-text font-weight-light">SmartMoodle</span>
             </a>
             <ul class="navbar-nav">
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ url('/sistema/home') }}" class="nav-link">Administracion</a>
-                </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ url('/sistema/perfil') }}" class="nav-link">Perfil</a>
                 </li>
@@ -89,7 +87,7 @@
 {{--     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script> --}}
 
-
+   
     <!-- datatables script -->
 
 {{--     @yield('js')

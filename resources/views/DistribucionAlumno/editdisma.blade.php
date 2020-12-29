@@ -106,7 +106,6 @@ $(function() {
 
 })
 </script>
-
 <script>
 var distribucion = @json($distribucion);
 var distribucion_all = @json($distribucion_all);

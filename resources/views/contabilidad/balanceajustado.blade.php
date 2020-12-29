@@ -24,8 +24,8 @@
           <input autocomplete="ÑÖcompletes" type="text" class="form-control" v-model="balance.haber"  placeholder="Haber">
         </div>
 
-        <a  v-if="!update" href="#" class="addDiario btn btn-outline-danger  " @click.prevent="agregarRegistro()">Agregar Registro</a>
-        <a  v-if="update" href="#" class="addDiario btn btn-outline-danger  " @click.prevent="actualizarBalance()">Actualizar Registro</a>
+        <a  v-if="!update" href="#" class=" addDiario btn btn-outline-danger  " @click.prevent="agregarRegistro()">Agregar Registro</a>
+        <a  v-if="update" href="#" class="  addDiario btn btn-outline-danger  " @click.prevent="actualizarBalance()">Actualizar Registro</a>
 
   </div> --}}
    <div class="row justify-content-start mb-2">

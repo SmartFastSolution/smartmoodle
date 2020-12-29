@@ -77,7 +77,7 @@
                                     </div>
                                 </div>
                                 <br>
-                              <a href="{{route('distribuciondos.index')}}" class="btn btn-primary">Atras</a>
+                              <a href="{{route('assignments.index')}}" class="btn btn-primary">Atras</a>
                               <input type="submit" class="btn btn-dark " value="Guardar">
                             </div>
 

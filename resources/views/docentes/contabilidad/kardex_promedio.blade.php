@@ -18,9 +18,8 @@
 			<h2 class="text-center font-weight-bold display-4">@{{ nombre }}</h2>
         	<h4 class="text-center font-weight-bold display-4">@{{ producto }}</h4>	
 		</div>
-		
-
-			<table class="table table-bordered table-responsive table-sm">
+</div>
+	<table class="table table-bordered  table-sm">
 		<thead class="bg-warning"> 
 		  <tr class="text-center">
 		    <th style="vertical-align:middle" rowspan="2" width="100">FECHA</th>
@@ -28,8 +27,6 @@
 		    <th colspan="3">INGRESOS</th>
 		    <th colspan="3">EGRESOS</th>
 		    <th colspan="3">EXISTENCIA</th>
-		   
-
 		  </tr>
 		  <tr class="text-center">
 		    <td>CANT.</td>
@@ -75,8 +72,4 @@
 		  </tr>
 		</tbody>
 </table>
- 	
-	
-		</div>
-
 </div>

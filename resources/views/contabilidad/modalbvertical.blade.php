@@ -636,9 +636,6 @@
         </div>
     </div>
 </div>
-
-
-
 {{-- TOTAL PASIVO + PATRIMONIO --}}
 <div class="modal fade" id="pasivo_patrimonio2" tabindex="-1"  role="dialog" aria-labelledby="p_corrienteLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-sm" role="document">

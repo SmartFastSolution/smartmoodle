@@ -29,7 +29,6 @@ class UsersController extends Controller
     {
         //Gate::authorize('haveaccess', 'user.index');
       //  $users= User::where('Titulo','Administrador')->orderBy('id','Asc')->paginate(5);
-
       //$users= User::orderBy('id','Asc')->paginate(5);
          $users= User::all();
          return view('Persona.inicio',['users'=>$users]);
@@ -65,11 +64,10 @@ class UsersController extends Controller
        // Gate::authorize('haveaccess', 'user.store');
         //validacion de datos 
          $request->validate([
-            'cedula'          =>  'required|string|max:10',
+            'cedula'          =>  'required|string|max:10|unique:users' ,
             'name'            =>  'required|string|max:20',
             'apellido'        =>  'required|string|max:20',
             'domicilio'       =>  'required|string|max:255',
-            'instituto'       =>  'required',
             'role'            =>  'required',
             'telefono'        =>  'required|string|max:13',
             'celular'         =>  'required|string|max:13',
@@ -119,13 +117,19 @@ class UsersController extends Controller
     {
        // Gate::authorize('haveaccess', 'user.show');
        
-        $roles= Role::orderBy('name')->get();
+       $us=User::find($user->id);
+       $roles= Role::orderBy('name')->get();
         // $roles = Role::all();
-        
+        $cursos= Curso::get();
+        $nivels= Nivel::get();
         $institutos = Instituto::get(); // todos los datos de la bd
         $institutouser = User::find($user->id)->instituto()->get(); //llama al instituto que este relacionado a un usuario 
-      
-        return view('Persona.showu',['user'=>$user, 'roles'=>$roles,'institutos'=>$institutos,'institutouser'=>$institutouser]);
+        $cursouser=User::find($user->id)->curso()->get();
+        $niveluser = User::find($user->id)->nivel()->get();
+        $roluser=  $us->roles()->get();
+     
+       return view('Persona.showu',compact('roles','institutos','cursos','nivels','institutouser','cursouser','niveluser','user','roluser'));
+        
     
         
     }
@@ -206,16 +210,7 @@ class UsersController extends Controller
 
           $user->roles()->sync($request->get('roles'));
          
-       //ejemplo para decision al guarda docente alumno
-        // if($request->input('rol') == 'estudiante'){
-        //     $user = User::get()->last();
-        //     $estudiante = new Estudiante;
-        //     $estudiante->user_id = $user->id;
-
-       // }elseif($request->input('rol') == 'docente'){
-        // }elseif($request->input('rol') == 'admin'){
-        // }
-
+      
 
         $user->save();
     

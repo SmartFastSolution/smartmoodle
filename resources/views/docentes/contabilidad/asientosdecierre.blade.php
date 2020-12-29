@@ -18,23 +18,6 @@
                 
                      </tr>
                  </thead>
-                 <tbody>
-                     <tr v-for="(diar, index) in balanceInicial.debe">
-                         <td v-if="index == 0" align="center" width="100">@{{ fechabalance }} </td>
-                         <td v-else align="center"></td>
-                         <td align="rigth">@{{ diar.nom_cuenta}}</td>
-                         <td align="center" width="125">@{{ diar.saldo }}</td>
-                         <td align="center" width="125"></td>
-                     </tr>
-                     <tr v-for="(diar, index) in balanceInicial.haber">
-                         <td align="center" width="50"></td>
-                         <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
-                         <td align="center" width="125"></td>
-                         <td align="center" width="125">@{{ diar.saldo }}</td>
-                     </tr>
-
-                 </tbody>
-
                  <tbody v-for="(registro, id) in registros" >
                      <tr v-for="(diar, index) in registro.debe">
                          <td align="center" width="50">@{{ formatoFecha(diar.fecha)}}</td>

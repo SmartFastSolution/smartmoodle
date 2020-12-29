@@ -25,11 +25,12 @@
     },
     "dependencies": {
         "@alfsnd/vue-bootstrap-select": "^0.4.4",
+        "@ckeditor/ckeditor5-build-classic": "^24.0.0",
+        "@ckeditor/ckeditor5-vue2": "^1.0.5",
         "@fortawesome/fontawesome-free": "^5.14.0",
         "@sweetalert2/theme-dark": "^4.0.1",
         "@tinymce/tinymce-vue": "^3.2.6",
         "admin-lte": "^3.0.5",
-        "ckeditor5-vuejs": "^1.0.18",
         "icheck-bootstrap": "^3.0.1",
         "overlayscrollbars": "^1.13.0",
         "sweetalert2": "^10.12.5",

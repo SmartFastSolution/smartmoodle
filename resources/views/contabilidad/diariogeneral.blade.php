@@ -1,4 +1,4 @@
- <div id="diario">
+ <div id="diario" class="border border-danger">
      <h1 class="text-center text-danger font-weight-bold mt-2">DIARIO GENERAL</h1>
      <div class="row justify-content-center">
          <div class="col-3">
@@ -6,7 +6,7 @@
              
          </div>
      </div>
-  
+
      {{-- <h4 class="text-center text-primary font-weight-bold mt-2">@{{ nombre }}</h4> --}}
      <div class="row p-3  mb-2 ">
         @if ($datos->metodo == 'concatenado')
@@ -59,14 +59,14 @@
                          <td  v-if="diardebe.fecha != '' && diardebe.fecha !== null" align="center" width="50"><a
                                  @click="deleteRegistro(id)" class="btn btn-danger btn-sm"><i
                                      class="fas fa-trash-alt"></i></a></td>
-                                     <td colspan="2" v-else></td>
+                         <td colspan="2" v-else></td>
                      </tr>
                      <tr v-for="(diar, index) in registro.haber">
                          <td align="center" width="50"></td>
                          <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
                          <td class="text-right" width="125"></td>
                          <td class="text-right" width="125">@{{ decimales(diar.saldo) }}</td>
-                        <td colspan="2"></td>
+                         <td colspan="2"></td>
 
                      </tr>
                      <tr class="text-muted">
@@ -74,18 +74,18 @@
                          <td>@{{ registro.comentario }}</td>
                          <td></td>
                          <td></td>
-                        <td colspan="2"></td>
+                         <td colspan="2"></td>
 
                      </tr>
 
                  </tbody>
                  <tbody>
-                         <tr >
+                     <tr>
                          <td class="bg-dark" align="center" colspan="2" width="450" valign="middle">SUMAN</td>
-                         <td class="bg-dark text-right"  width="125">
+                         <td class="bg-dark text-right" width="125">
                              @{{ decimales(pasan.debe) }}
                          </td>
-                         <td class="bg-dark text-right"  width="125">
+                         <td class="bg-dark text-right" width="125">
                              @{{ decimales(pasan.haber) }}
                          </td>
                          <td v-if="registros.length > 0" width="90" style="border: none;"></td>
@@ -94,10 +94,10 @@
                  </tbody>
              </table>
 
-        <div v-if="ajustes.length > 0"> 
-        <h2 class="font-weight-bold text-center">Asientos de ajustes </h2> 
-                   <table class="table table-bordered table-sm">
-             {{--     <thead class="thead-dark">
+             <div v-if="ajustes.length > 0">
+                 <h2 class="font-weight-bold text-center">Asientos de ajustes </h2>
+                 <table class="table table-bordered table-sm">
+                     {{--     <thead class="thead-dark">
                      <tr align="center">
                          <th scope="col" width="200">FECHA</th>
                          <th scope="col" width="450">NOMBRE DE CUENTAS</th>
@@ -146,9 +146,9 @@
                          </td>
                          <td v-if="registros.length > 0" width="90" style="border: none;"></td>
 
-                     </tr>
-                 </tbody>
-             </table>
+                         </tr>
+                     </tbody>
+                 </table>
 
 
              </div>
@@ -156,39 +156,37 @@
                  <tbody is="draggable" group="people" :list="diarios.debe" tag="tbody">
                      <tr v-for="(diar, index) in diarios.debe">
                          <td align="center" width="100">@{{ diar.fecha}}</td>
-                         <td>@{{ diar.nom_cuenta}}</td>
-                         <td align="center" width="125">@{{ diar.saldo }}</td>
-                         <td align="center" width="125"></td>
-                         <td align="center" width="25">
-                             <a @click="debediairoEdit(index)" class="btn btn-warning btn-sm"><i
-                                     class="fas fas fa-edit"></i></a>
-                         </td>
-                         <td align="center" width="25">
-                             <a @click="deleteDebe(index)" class="btn btn-danger btn-sm"><i
-                                     class="fas fa-trash-alt"></i></a>
-                         </td>
-                     </tr>
-                 </tbody>
-                 <tbody is="draggable" group="people" :list="diarios.haber" tag="tbody">
-                     <tr v-for="(diar, index) in diarios.haber">
-                         <td align="center" width="50"></td>
-                         <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
-                         <td align="center" width="125"></td>
-                         <td align="center" width="125">@{{ diar.saldo }}</td>
-                         <td>
-                             <a @click="habediarioEdit(index)" class="btn btn-warning btn-sm"><i
-                                     class="fas fas fa-edit"></i></a>
-                         </td>
-                         <td align="center" width="25"><a @click="deleteHaber(index)" class="btn btn-danger btn-sm"><i
-                                     class="fas fa-trash-alt"></i></a></td>
-                     </tr>
-                     <tr v-if="diarios.comentario !== ''" class="text-muted">
-                         <td></td>
-                         <td>@{{ diarios.comentario }}</td>
-                         <td></td>
-                         <td></td>
-                     </tr>
-                 </tbody>
+             <td>@{{ diar.nom_cuenta}}</td>
+             <td align="center" width="125">@{{ diar.saldo }}</td>
+             <td align="center" width="125"></td>
+             <td align="center" width="25">
+                 <a @click="debediairoEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i></a>
+             </td>
+             <td align="center" width="25">
+                 <a @click="deleteDebe(index)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
+             </td>
+             </tr>
+             </tbody>
+             <tbody is="draggable" group="people" :list="diarios.haber" tag="tbody">
+                 <tr v-for="(diar, index) in diarios.haber">
+                     <td align="center" width="50"></td>
+                     <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
+                     <td align="center" width="125"></td>
+                     <td align="center" width="125">@{{ diar.saldo }}</td>
+                     <td>
+                         <a @click="habediarioEdit(index)" class="btn btn-warning btn-sm"><i
+                                 class="fas fas fa-edit"></i></a>
+                     </td>
+                     <td align="center" width="25"><a @click="deleteHaber(index)" class="btn btn-danger btn-sm"><i
+                                 class="fas fa-trash-alt"></i></a></td>
+                 </tr>
+                 <tr v-if="diarios.comentario !== ''" class="text-muted">
+                     <td></td>
+                     <td>@{{ diarios.comentario }}</td>
+                     <td></td>
+                     <td></td>
+                 </tr>
+             </tbody>
 
              </table>
              <table class="table table-bordered table-sm">
@@ -231,25 +229,25 @@
                      </tr>
                  </tbody>
              </table> --}}
-        {{--      <table class="table table-bordered table-sm">
+             {{--      <table class="table table-bordered table-sm">
                  <tbody>
                      <tr >
                          <td class="bg-dark" align="center" colspan="2" width="450" valign="middle">PASAN</td>
                          <td class="bg-dark" align="center" width="125">
                              @{{ pasan.debe }}
-                         </td>
-                         <td class="bg-dark" align="center" width="125">
-                             @{{ pasan.haber }}
-                         </td>
-                         <td v-if="registros.length > 0" width="90" style="border: none;"></td>
+             </td>
+             <td class="bg-dark" align="center" width="125">
+                 @{{ pasan.haber }}
+             </td>
+             <td v-if="registros.length > 0" width="90" style="border: none;"></td>
 
-                     </tr>
-                 </tbody>
+             </tr>
+             </tbody>
              </table> --}}
              <form action="">
 
                  @csrf
-               {{--   <div v-if="edit.debe.length >= 1" class="row justify-content-around mb-2">
+                 {{--   <div v-if="edit.debe.length >= 1" class="row justify-content-around mb-2">
                      <a href="#" class="btn btn-outline-secondary" data-toggle="modal" data-target="#debe">Agregar
                          Debe</a>
                      <a href="#" class=" btn btn-outline-secondary" data-toggle="modal" data-target="#haber">Agregar
@@ -260,8 +258,9 @@
                          Transaccion</a>
                  </div> --}}
                  <div class="row justify-content-around mb-2">
-                     <a href="#" class="btn btn-outline-primary" @click.prevent="abrirTransaccion()">Crear Transaccion</a>
-                {{-- <a href="#" v-if="diarios.debe.length > 0" class="btn btn-outline-primary" data-toggle="modal" data-target="#porcentajes">Agregar Porcentaje</a>
+                     <a href="#" class="btn btn-outline-primary" @click.prevent="abrirTransaccion()">Crear
+                         Transaccion</a>
+                     {{-- <a href="#" v-if="diarios.debe.length > 0" class="btn btn-outline-primary" data-toggle="modal" data-target="#porcentajes">Agregar Porcentaje</a>
                 <a href="#" class="btn btn-outline-primary" data-toggle="modal" data-target="#debe">Agregar
                          Debe</a>
                      <a href="#" class=" btn btn-outline-primary" data-toggle="modal" data-target="#haber">Agregar

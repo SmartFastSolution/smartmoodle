@@ -76,7 +76,7 @@
 		<option value="utilidad_perdida"> PERDIDA DEL EJERCICIO</option>
 		</select>
 	</div>
-  <div class="col-3 text-right border-danger" style="border-bottom: solid 2px;"><span class="badge badge-danger" style="font-size: 20px; ">@{{ utilidad_ejercicio.gastos }}</span></div>
+  <div class="col-3 text-right border-danger" style="border-bottom: solid 2px;"><span class="badge badge-danger" style="font-size: 20px; ">@{{ totales.utilidad_ejercicio }}</span></div>
 </div>
 
 

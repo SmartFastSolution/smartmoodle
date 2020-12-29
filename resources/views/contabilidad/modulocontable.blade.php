@@ -38,7 +38,13 @@
               <option value="estado-resultado">Estado de Resultado</option>
               <option value="balance-general">Balance General</option>
               <option value="asientos-cierre">Asientos de cierre</option>
-              <option value="anexos">Anexos</option>
+              <option value="librocaja">Libro Caja</option>
+              <option value="conciliacionbancaria">Consiliacion Bancaria</option>
+              <option value="arqueocaja">Arqueo Caja</option>
+              <option value="librobanco">Libro Caja</option>
+              <option value="retencioniva">Retencion IVA</option>
+              <option value="nominaempleados">Nomina Empleados</option>
+              <option value="provisiondebeneficio">Probiciones de Beneficio</option>
           </select>
         </div>
       </div>
@@ -325,19 +331,121 @@
       </div>
       </div>
 
-      <div class="container border mt-1 mb-3  p-2 bg-info" v-else-if="taller_individual == 'anexos'">
-        <h2 class="text-center font-weight-bold text-danger">ANEXOS</h2>
+      <div class="container border mt-1 mb-3  p-2 bg-info" v-else-if="taller_individual == 'librocaja'">
+        <h2 class="text-center font-weight-bold text-danger">Libro Caja</h2>
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
               <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
-              <vue-ckeditor v-model="individuales.anexos" :config="config"/>
+              <vue-ckeditor v-model="individuales.librocaja" :config="config"/>
 
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('anexos')">Crear Taller</a>
+                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('librocaja')">Crear Taller</a>
+            </div>
+        </div>
+      </div>
+      </div>
+            <div class="container border mt-1 mb-3  p-2 bg-info" v-else-if="taller_individual == 'conciliacionbancaria'">
+        <h2 class="text-center font-weight-bold text-danger">Consiliacion Bancaria</h2>
+        <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 mb-2">
+              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              <vue-ckeditor v-model="individuales.conciliacionbancaria" :config="config"/>
+
+              {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
+                {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
+            </div>
+            <div class="col-2 mb-2">
+                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('conciliacionbancaria')">Crear Taller</a>
+            </div>
+        </div>
+      </div>
+      </div>
+            <div class="container border mt-1 mb-3  p-2 bg-info" v-else-if="taller_individual == 'arqueocaja'">
+        <h2 class="text-center font-weight-bold text-danger">Arqueo Caja</h2>
+        <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 mb-2">
+              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              <vue-ckeditor v-model="individuales.arqueocaja" :config="config"/>
+
+              {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
+                {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
+            </div>
+            <div class="col-2 mb-2">
+                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('arqueocaja')">Crear Taller</a>
+            </div>
+        </div>
+      </div>
+      </div>
+            <div class="container border mt-1 mb-3  p-2 bg-info" v-else-if="taller_individual == 'librobanco'">
+        <h2 class="text-center font-weight-bold text-danger">Libro Caja</h2>
+        <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 mb-2">
+              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              <vue-ckeditor v-model="individuales.librobanco" :config="config"/>
+
+              {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
+                {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
+            </div>
+            <div class="col-2 mb-2">
+                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('librobanco')">Crear Taller</a>
+            </div>
+        </div>
+      </div>
+      </div>
+            <div class="container border mt-1 mb-3  p-2 bg-info" v-else-if="taller_individual == 'retencioniva'">
+        <h2 class="text-center font-weight-bold text-danger">Retencion IVA</h2>
+        <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 mb-2">
+              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              <vue-ckeditor v-model="individuales.retencioniva" :config="config"/>
+
+              {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
+                {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
+            </div>
+            <div class="col-2 mb-2">
+                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('retencioniva')">Crear Taller</a>
+            </div>
+        </div>
+      </div>
+      </div>
+            <div class="container border mt-1 mb-3  p-2 bg-info" v-else-if="taller_individual == 'nominaempleados'">
+        <h2 class="text-center font-weight-bold text-danger">Nomina Empleados</h2>
+        <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 mb-2">
+              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              <vue-ckeditor v-model="individuales.nominaempleados" :config="config"/>
+
+              {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
+                {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
+            </div>
+            <div class="col-2 mb-2">
+                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('nominaempleados')">Crear Taller</a>
+            </div>
+        </div>
+      </div>
+      </div>
+            <div class="container border mt-1 mb-3  p-2 bg-info" v-else-if="taller_individual == 'provisiondebeneficio'">
+        <h2 class="text-center font-weight-bold text-danger">Probiciones de Beneficio</h2>
+        <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 mb-2">
+              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              <vue-ckeditor v-model="individuales.provisiondebeneficio" :config="config"/>
+
+              {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
+                {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
+            </div>
+            <div class="col-2 mb-2">
+                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('provisiondebeneficio')">Crear Taller</a>
             </div>
         </div>
       </div>
@@ -377,6 +485,8 @@
                <textarea v-model="enunciado" name="" id="" cols="15" rows="5" class="form-control"></textarea>
               </div>
           </div>
+          <h4>Modulos a utilizar</h4>
+          <multiselect v-model="value" tag-placeholder="Busca un modulo" placeholder="Seleciona los modulos" label="name" track-by="code" :options="options" :multiple="true" :taggable="true"></multiselect>
       </div>
 
 
@@ -515,6 +625,30 @@
         materia:'Seleccionar una materia',
         materias: [],
         contenido:[],
+            value: [
+      
+      ],
+      options: [
+
+        { name: 'Balance Inicial Horizontal', code: 'diario' },
+        { name: 'Kardex', code: 'kardex' },
+        { name: 'Balance de Comprobacion', code: 'balance_comp' },
+        { name: 'Diario General', code: 'messages' },
+        { name: 'Balance Ajustado', code: 'balance-ajustado' },
+        { name: 'Mayor General', code: 'mayor-general' },
+        { name: 'Hoja de Trabajo', code: 'hoja-trabajo' },
+        { name: 'Estado de Resultado', code: 'estado-resultado' },
+        { name: 'Balance General', code: 'balance-general' },
+        { name: 'Asientos de Cierre', code: 'asento-cierre' },
+        { name: ' Libro Caja', code: 'libro-caja' },
+        { name: ' Arqueo Caja', code: 'arqueo-caja' },
+        { name: ' Libro Banco', code: 'libro-banco' },
+        { name: ' Conciliación Bancaria', code: 'conciliacion-bancaria' },
+        { name: ' Retencion del IVA', code: 'retencion-iva' },
+        { name: ' Nomina Empleados', code: 'nomina-empleado' },
+        { name: ' Provisión de Benficios', code: 'provision-beneficio' },
+
+      ],
         contenido_id:'',
         enunciado:'',
         individuales:{
@@ -527,6 +661,13 @@
           balance_comprobacion_ajustado:'',
           estado_resultado:'',
           balance_general:'',
+          librocaja:'',
+          conciliacionbancaria:'',
+          arqueocaja:'',
+          librobanco:'',
+          retencioniva:'',
+          nominaempleados:'',
+          provisiondebeneficio:'',
           asientos_cierre:'',
           kardex_promedio:{
             nombre:'',
@@ -1008,8 +1149,209 @@
                     }); 
 
                     }
-                }else if(tipo == 'anexos'){
+                }else if(tipo == 'librocaja'){
+                         let url = '/sistema/admin/modulo/librocaja';
+                    if (set.individuales.librocaja.trim() === '' ) {
+                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "Smarmoddle", {
+                            "timeOut": "3000"
+                        });
+                    }else if (set.enunciado == '' ) {
+                     toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                              "timeOut": "3000"
+                          });
+                      }else if (set.contenido_id == '' ) {
+                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                            "timeOut": "3000"
+                        });
+                    }else{
+                        axios.post(url,{
+                          id: set.id_taller,
+                          enunciado: set.enunciado,
+                          transacciones: set.individuales.librocaja,
+                          contenido_id: set.contenido_id,
+                          plantilla: 37,
+                    }).then(response => {
+                       window.location = "/sistema/home";
+                         
+                    }).catch(function(error){
 
+                    }); 
+
+                    }
+                }else if(tipo == 'conciliacionbancaria'){
+                       let url = '/sistema/admin/modulo/conciliacionbancaria';
+                    if (set.individuales.conciliacionbancaria.trim() === '' ) {
+                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "Smarmoddle", {
+                            "timeOut": "3000"
+                        });
+                    }else if (set.enunciado == '' ) {
+                     toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                              "timeOut": "3000"
+                          });
+                      }else if (set.contenido_id == '' ) {
+                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                            "timeOut": "3000"
+                        });
+                    }else{
+                        axios.post(url,{
+                          id: set.id_taller,
+                          enunciado: set.enunciado,
+                          transacciones: set.individuales.conciliacionbancaria,
+                          contenido_id: set.contenido_id,
+                          plantilla: 37,
+                    }).then(response => {
+                       window.location = "/sistema/home";
+                         
+                    }).catch(function(error){
+
+                    }); 
+
+                    }
+                }else if(tipo == 'arqueocaja'){
+                       let url = '/sistema/admin/modulo/arqueocaja';
+                    if (set.individuales.arqueocaja.trim() === '' ) {
+                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "Smarmoddle", {
+                            "timeOut": "3000"
+                        });
+                    }else if (set.enunciado == '' ) {
+                     toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                              "timeOut": "3000"
+                          });
+                      }else if (set.contenido_id == '' ) {
+                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                            "timeOut": "3000"
+                        });
+                    }else{
+                        axios.post(url,{
+                          id: set.id_taller,
+                          enunciado: set.enunciado,
+                          transacciones: set.individuales.arqueocaja,
+                          contenido_id: set.contenido_id,
+                          plantilla: 37,
+                    }).then(response => {
+                       window.location = "/sistema/home";
+                         
+                    }).catch(function(error){
+
+                    }); 
+
+                    }
+                }else if(tipo == 'librobanco'){
+                       let url = '/sistema/admin/modulo/librobanco';
+                    if (set.individuales.librobanco.trim() === '' ) {
+                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "Smarmoddle", {
+                            "timeOut": "3000"
+                        });
+                    }else if (set.enunciado == '' ) {
+                     toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                              "timeOut": "3000"
+                          });
+                      }else if (set.contenido_id == '' ) {
+                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                            "timeOut": "3000"
+                        });
+                    }else{
+                        axios.post(url,{
+                          id: set.id_taller,
+                          enunciado: set.enunciado,
+                          transacciones: set.individuales.librobanco,
+                          contenido_id: set.contenido_id,
+                          plantilla: 37,
+                    }).then(response => {
+                       window.location = "/sistema/home";
+                         
+                    }).catch(function(error){
+
+                    }); 
+
+                    }
+                }else if(tipo == 'retencioniva'){
+                       let url = '/sistema/admin/modulo/retencioniva';
+                    if (set.individuales.retencioniva.trim() === '' ) {
+                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "Smarmoddle", {
+                            "timeOut": "3000"
+                        });
+                    }else if (set.enunciado == '' ) {
+                     toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                              "timeOut": "3000"
+                          });
+                      }else if (set.contenido_id == '' ) {
+                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                            "timeOut": "3000"
+                        });
+                    }else{
+                        axios.post(url,{
+                          id: set.id_taller,
+                          enunciado: set.enunciado,
+                          transacciones: set.individuales.retencioniva,
+                          contenido_id: set.contenido_id,
+                          plantilla: 37,
+                    }).then(response => {
+                       window.location = "/sistema/home";
+                         
+                    }).catch(function(error){
+
+                    }); 
+
+                    }
+                }else if(tipo == 'nominaempleados'){
+                       let url = '/sistema/admin/modulo/nominaempleados';
+                    if (set.individuales.nominaempleados.trim() === '' ) {
+                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "Smarmoddle", {
+                            "timeOut": "3000"
+                        });
+                    }else if (set.enunciado == '' ) {
+                     toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                              "timeOut": "3000"
+                          });
+                      }else if (set.contenido_id == '' ) {
+                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                            "timeOut": "3000"
+                        });
+                    }else{
+                        axios.post(url,{
+                          id: set.id_taller,
+                          enunciado: set.enunciado,
+                          transacciones: set.individuales.nominaempleados,
+                          contenido_id: set.contenido_id,
+                          plantilla: 37,
+                    }).then(response => {
+                       window.location = "/sistema/home";
+                         
+                    }).catch(function(error){
+
+                    }); 
+
+                    }
+                }else if(tipo == 'provisiondebeneficio'){
+                       let url = '/sistema/admin/modulo/provisiondebeneficio';
+                    if (set.individuales.provisiondebeneficio.trim() === '' ) {
+                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "Smarmoddle", {
+                            "timeOut": "3000"
+                        });
+                    }else if (set.enunciado == '' ) {
+                     toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                              "timeOut": "3000"
+                          });
+                      }else if (set.contenido_id == '' ) {
+                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                            "timeOut": "3000"
+                        });
+                    }else{
+                        axios.post(url,{
+                          id: set.id_taller,
+                          enunciado: set.enunciado,
+                          transacciones: set.individuales.provisiondebeneficio,
+                          contenido_id: set.contenido_id,
+                          plantilla: 37,
+                    }).then(response => {
+                       window.location = "/sistema/home";
+                         
+                    }).catch(function(error){
+
+                    }); 
+
+                    }
                 }
 
           },
@@ -1097,8 +1439,8 @@
                  toastr.error("No has puesto las transacciones en el Diario General", "Smarmoddle", {
                     "timeOut": "3000"
                 });
-            }else if (set.concatenados.kardex_fifos.length == 0 ) {
-                 toastr.error("No tienes productos en el kardex", "Smarmoddle", {
+            }else if (set.value.length == 0 ) {
+                 toastr.error("No has puesto elegido ni un modulo", "Smarmoddle", {
                     "timeOut": "3000"
                 });
             }else{
@@ -1110,6 +1452,7 @@
                   diario_general: set.concatenados.diario_general,
                   productos: set.concatenados.kardex_fifos,
                   contenido_id: set.contenido_id,
+                  modulos:set.value,
                   plantilla: 37,
             }).then(response => {
                window.location = "/sistema/home";

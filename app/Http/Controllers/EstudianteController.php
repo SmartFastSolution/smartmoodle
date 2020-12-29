@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
 use APp\User;
 use App\Contenido;
 use App\Curso;
 use App\Distribucionmacu;
 use App\Distrima;
 use App\Assignment;
-use App\Http\Controllers\Controller;
 use App\Instituto;
 use App\Materia;
 use App\Nivel;
@@ -28,13 +28,15 @@ class EstudianteController extends Controller
         $this->middleware('estudiante');
     }
 
-    public function index(){
+    public function index()
+    {
      
-        // $au =  auth()->user()->distrimas;
-        //  if ($au == null) {
-        //  return view('errors.error'); //ruta estudiante //ruta estudiante       
+
+        $au =  auth()->user()->assignmets;
+         if ($au == null) {
+         return view('errors.error'); //ruta estudiante //ruta estudiante       
              
-        // }
+        }
         return view('Estudiante.indexes'); //ruta estudiante       
     }
 
@@ -71,8 +73,8 @@ class EstudianteController extends Controller
          $tallers = Taller::whereNotIn('id', $ids)->get();
  
          $materia =Materia::where('id', $id)->firstOrfail();
-              
-         return view ('Estudiante.contenido',['materia'=>$materia,'contenidos'=>$contenido,'institutomate'=>$institutomate,'tallers'=>$tallers]);
+         $cons =Contenido::where('materia_id',$materia->id)->paginate(6);
+         return view ('Estudiante.contenido',['materia'=>$materia,'contenidos'=>$contenido,'institutomate'=>$institutomate,'tallers'=>$tallers,'cons'=>$cons]);
 
        // return $tallers;
 
@@ -97,72 +99,24 @@ class EstudianteController extends Controller
         // 'password' => ['required'],
         'newpassword' => ['required', 'string', 'min:8', 'confirmed'],
         'newpassword_confirmation'=>['required']
-      ]);
-    
-     
+      ]); 
       
         $request->user()->fill([
             'password' => Hash::make($request->newpassword)
         ])->save();
 
-     
-
-
-
         return redirect('sistema/homees')->with('Password actualizado');
-       
-
-   /////////////////////////////////////////////////////////////////////////////////////
-   //////////////////////////////////METODO DOS/////////////////////////////////////////
-   /////////////////////////////////////////////////////////////////////////////////////
-
-    //    $request->validate([
-    //     'password' => ['required'],
-    //     'newpassword' => ['required', 'string', 'min:8', 'confirmed'],
-    //     'newpassword_confirmation'=>['required']
-       
-    //     ]);
-             
-
-    //       if (Hash::check('password', Auth::user()->password))
-    //             {
-    //             $user =new User;
-    //             $user->where('email', '=', Auth::user()->email)->update(['password'=> Hash::make($request->newpassword)]);
-
-    //             return redirect('sistema/homees')->with('status','Contraseña Actualizada con Exito');
-    //         }
-    //         else{
-    //             return redirect('sistema/estudiante/password')->with('Credenciales Incorrectas');
-    //         }
-     
-       
-
-
-    /////////////////////////////////////////////////////////////////////////////////////
-    //////////////////////////////////METODO TRES////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////
-      //metodo funcional 3 pero no verifica el password anterior
-
-    //   $this->validate($request, [
-    //     'password' => ['required'],
-    //     'newpassword' => ['required', 'string', 'min:8', 'confirmed'],
-    //     'newpassword_confirmation'=>['required']
-    //   ]);
-     
-     
-      
-    //   if (Hash::check('password',Auth::user()->password)) {
-    //         $user =new User;
-    //         //$user->where('email', '=', Auth::user()->email)->update(['password'=> Hash::make($request->newpassword)]);
-    //         $user->password = Hash::make($request->newpassword);
-    //         $user->save();
-    //         return redirect(' sistema/homees')->with('Password actualizado');
-    //   }
-    //   else{
-    //     return redirect()->back()->with('Credenciales Incorrectas');
-    //   }
-    
+          
 
      }
+
+
+
+     public function VisualizacionPDF($id){
+
+      $contenido =Contenido::where('id', $id)->firstOrfail();
+       return \view('Estudiante.archivopdf',['contenido'=>$contenido]);
+
+  }
 
 }

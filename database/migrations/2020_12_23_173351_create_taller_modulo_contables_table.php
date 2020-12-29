@@ -19,6 +19,7 @@ class CreateTallerModuloContablesTable extends Migration
             $table->string('metodo');
             $table->string('tipo');
             $table->string('enunciado')->nullable();
+            $table->text('modulos')->nullable();
             $table->boolean('balance_inicial_vertical')->default(0);
             $table->boolean('balance_inicial_horizontal')->default(0);
             $table->boolean('kardex_fifo')->default(0);
@@ -31,7 +32,13 @@ class CreateTallerModuloContablesTable extends Migration
             $table->boolean('estado_resultado')->default(0);
             $table->boolean('balance_general')->default(0);
             $table->boolean('asientos_cierre')->default(0);
-            $table->boolean('anexos')->default(0);
+            $table->boolean('librocaja')->default(0);
+            $table->boolean('conciliacionbancaria')->default(0);
+            $table->boolean('arqueocaja')->default(0);
+            $table->boolean('librobanco')->default(0);
+            $table->boolean('retencioniva')->default(0);
+            $table->boolean('nominaempleados')->default(0);
+            $table->boolean('provisiondebeneficio')->default(0);
             $table->timestamps();
             
             $table->foreign('taller_id')

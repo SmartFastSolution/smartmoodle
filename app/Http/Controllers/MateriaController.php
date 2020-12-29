@@ -79,15 +79,12 @@ class MateriaController extends Controller
     public function show ($id)
     {
         // todos los datos de la bd
-         $institutomate = Materia::find($id)->instituto()->get();
-         $contenido=Contenido::get();
-          
-         $materia =Materia::where('id', $id)->firstOrfail();
-       
-         $tallers=Taller::get();
-      
-       
-         return view ('Materias.showm',['materia'=>$materia,'tallers'=>$tallers,'contenidos'=>$contenido,'institutomate'=>$institutomate]);
+        
+         $materia =Materia::where('id', $id)->firstOrfail();  
+         $institutomate = Materia::find($materia->id)->instituto()->get(); 
+         $contenido =Contenido::where('materia_id',$materia->id)->paginate(10);
+         
+         return view ('Materias.showm',['materia'=>$materia,'contenidos'=>$contenido,'institutomate'=>$institutomate]);
     }
 
     /**
@@ -98,11 +95,11 @@ class MateriaController extends Controller
      */
     public function edit(Materia $materia)
     {
-        $contenido=Contenido::get();
+     
         $institutos = Instituto::get(); // todos los datos de la bd
         $institutomate = Materia::find($materia->id)->instituto()->get();
     
-        return view('Materias.editm',['materias'=>$materia,'institutos'=>$institutos,'institutomate'=>$institutomate, 'contenidos'=>$contenido]);
+        return view('Materias.editm',['materias'=>$materia,'institutos'=>$institutos,'institutomate'=>$institutomate,]);
 
 
     }

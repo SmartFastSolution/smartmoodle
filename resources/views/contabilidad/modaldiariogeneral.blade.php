@@ -160,48 +160,24 @@
                         {{-- <a href="" data-toggle="modal" data-target="#kardex-diairo" class="btn btn-sm btn-dark">KARDEX</a> --}}
                       </div>
                     </div>
-                   {{--  <div v-if="edit.debe.length >= 1" class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="comentarioUpdate()">Editar Comentario</a>
-                      </div>
-                       <div v-else class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="agregarComentario()">Agregar Comentario</a>
-                      </div> --}}
+            
                       </div>
                     </div>
                   </div>
-                  <div class="col-6" style=" height:300px; overflow-y: scroll; border: solid 3px red;">
-                    <h3 class="text-center">Datos para realizar el Diario General</h3>
-                    <div>
-                      {!! $diariogeneral->transacciones !!}
-                    </div>
-                    {{-- <div v-html="datos_diario.transacciones"></div> --}}
-                    {{-- <p >
-                      Se compra s/fra. #040 a Importadora “ELMARY” (contribuyente especial) - doce acondicionadores de aire en $ 550 c/u. Se cancela con ch/.# 050 Bco. Guayaquil. <br> <br>
-                      Se cancela la Fra.#023 a “Publicitas” (No Obligada a llevar Contabilidad) por servicios de publicidad $ 300 con ch/.#051 Bco. Guayaquil. <br> <br>
+                   @if($datos->metodo == 'individual')
 
-                      Se vende S/. Fra. # 010 - cincuenta acondicionadores de aire en $ 1.200 c/u a Comercial “Felipao” (Obligado a llevar Contabilidad). Nos cancela con ch/. #082 Bco. Austro. <br> <br>
+                     <div class="col-6 p-3" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: solid 3px red;">
+                        {!! $transacciones->transacciones !!}
+                     </div>
+                    @elseif($datos->metodo == 'concatenado')
+                                    <div class="col-6 p-3 mt-2 "
+                                        style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+                                        {!! $diariogeneral->transacciones !!}
 
-                      Se deposita en cta. cte.# 3050 Bco. Guayaquil $ 60.000  <br> <br>
+                                    </div>
+                                    @endif
+            
 
-                      Se cancela la Fra.#088 a “Servinet” (No Obligada a llevar Contabilidad) por servicios de internet $ 60 con ch/.#052 Bco. Guayaquil. <br> <br>
-
-                      Se compra s/fra. # 056 a Importadora “CASIRON” (contribuyente especial) - diez acondicionadores de aire en $ 555 c/u. con ch/.# 053 Bco. Guayaquil. <br> <br>
-
-                      De la última compra se devuelve dos acondicionadores de aire por no estar de acuerdo con el pedido (Fra. # 011). <br> <br>
-
-                      Se cancela a “CNT” la Fra. #073 por servicio telefónico $ 150 con ch/.# 054 Bco. Guayaquil. <br> <br>
-
-                      Se vende S/Fra. #012 - treinta acondicionadores de aire en $ 1.200 c/u a Comercial “INCOR” (Obligado a llevar Contabilidad). Se recibe ch/. #101 Bco. del Austro. <br> <br>
-
-                      De la última venta nos devuelven un acondicionador de aire por no estar de acuerdo con el pedido. Se cancela con ch/.#055 Bco. Guayaquil. (Fra. # 057) <br> <br>
-                    </p> --}}
-
-                  </div>
-                  {{--   <div class="col-6">
-
-           
-                  </div>
- --}}
                   <div class="col-12 mt-2" v-if="diarios.debe.length > 0 || diarios.haber.length > 0">
 
                     <h2 class="text-center">ACTUALIZAR MOVIMIENTOS</h2>
@@ -630,8 +606,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 

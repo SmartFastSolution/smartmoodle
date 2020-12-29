@@ -5,7 +5,7 @@
 
 <form action="{{ route('taller1.docente', ['idtaller' => $d]) }}" method="POST">
     @csrf
-  <div class="container">
+  <div class="container-fluid p-3">
   <h1 class="text-center text-danger display-1">{{ $datos->taller->nombre }}</h1>
         <div class="card border border-danger mb-3" >
           <div class="card-header "> 
@@ -40,28 +40,93 @@
                 <div class="row justify-content-md-center">
         <div class="col-12 col-sm-12 col-md-2 mb-3">
             <div class="list-group" id="list-tab" role="tablist">
-                <a class="list-group-item list-group-item-action active" id="list-kardex-list" data-toggle="list" href="#list-kardex" role="tab" aria-controls="kardex">Kardex</a>
-                <a class="list-group-item list-group-item-action " id="list-kardex-promedio-list" data-toggle="list" href="#list-kardex-promedio" role="tab" aria-controls="kardex-promedio">Kardex Promedio</a>
-                <a class="list-group-item list-group-item-action " id="list-diario-list" data-toggle="list" href="#list-diario" role="tab" aria-controls="home">Balance Inicial</a>
-                <a class="list-group-item list-group-item-action" id="list-balance_comp-list" data-toggle="list" href="#list-balance_comp" role="tab" aria-controls="profile">Balance de Comprobacion</a>
-                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Diario General</a>
+               
+                <a class="list-group-item list-group-item-action active" id="list-kardex-list" data-toggle="list"
+                    href="#list-kardex" role="tab" aria-controls="kardex">Kardex</a>
+                <a class="list-group-item list-group-item-action " id="list-kardex-promedio-list" data-toggle="list"
+                    href="#list-kardex-promedio" role="tab" aria-controls="kardex-promedio">Kardex Promedio</a>
+                <a class="list-group-item list-group-item-action " id="list-diario-list" data-toggle="list"
+                    href="#list-diario" role="tab" aria-controls="home">Balance Inicial</a>
+                <a class="list-group-item list-group-item-action" id="list-balance_comp-list" data-toggle="list"
+                    href="#list-balance_comp" role="tab" aria-controls="profile">Balance de Comprobacion</a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
+                    href="#list-messages" role="tab" aria-controls="messages">Diario General</a>
+                <a class="list-group-item list-group-item-action" id="list-balance-ajustado-list" data-toggle="list"
+                    href="#list-balance-ajustado" role="tab" aria-controls="balance-ajustado">Balance Ajustado</a>
+                <a class="list-group-item list-group-item-action" id="list-mayor-general-list" data-toggle="list"
+                    href="#list-mayor-general" role="tab" aria-controls="mayor-general">Mayor General</a>
+                <a class="list-group-item list-group-item-action" id="list-hoja-trabajo-list" data-toggle="list"
+                    href="#list-hoja-trabajo" role="tab" aria-controls="hoja-trabajo">Hoja de Trabajo</a>
+                <a class="list-group-item list-group-item-action" id="list-estado-resultado-list" data-toggle="list"
+                    href="#list-estado-resultado" role="tab" aria-controls="estado-resultado">Estado de
+                    Resultado</a>
+                <a class="list-group-item list-group-item-action" id="list-balance-general-list" data-toggle="list"
+                    href="#list-balance-general" role="tab" aria-controls="balance-general">Balance General</a>
+                <a class="list-group-item list-group-item-action" id="list-asento-cierre-list" data-toggle="list"
+                    href="#list-asento-cierre" role="tab" aria-controls="asento-cierre">Asientos de Cierre</a>
 
-                <a class="list-group-item list-group-item-action" id="list-mayor-general-list" data-toggle="list" href="#list-mayor-general" role="tab" aria-controls="mayor-general">Mayor General</a>
-                <a class="list-group-item list-group-item-action" id="list-balance-ajustado-list" data-toggle="list" href="#list-balance-ajustado" role="tab" aria-controls="balance-ajustado">Balance Ajustado</a>
-                <a class="list-group-item list-group-item-action" id="list-hoja-trabajo-list" data-toggle="list" href="#list-hoja-trabajo" role="tab" aria-controls="hoja-trabajo">Hoja de Trabajo</a>
-                <a class="list-group-item list-group-item-action" id="list-estado-resultado-list" data-toggle="list" href="#list-estado-resultado" role="tab" aria-controls="estado-resultado">Estado de Resultado</a>
-                <a class="list-group-item list-group-item-action" id="list-balance-general-list" data-toggle="list" href="#list-balance-general" role="tab" aria-controls="balance-general">Balance General</a>
-                <a class="list-group-item list-group-item-action" id="list-asento-cierre-list" data-toggle="list" href="#list-asento-cierre" role="tab" aria-controls="asento-cierre">Asientos de Cierre</a>
+
+
+                <a class="list-group-item list-group-item-action" id="list-libro-caja-list" data-toggle="list"
+                    href="#list-libro-caja" role="tab" aria-controls="libro-caja">Libro Caja</a>
+                <a class="list-group-item list-group-item-action" id="list-arqueo-caja-list" data-toggle="list"
+                    href="#list-arqueo-caja" role="tab" aria-controls="arqueo-caja">Arqueo Caja</a>
+                <a class="list-group-item list-group-item-action" id="list-libro-banco-list" data-toggle="list"
+                    href="#list-libro-banco" role="tab" aria-controls="libro-banco">Libro Banco</a>
+                <a class="list-group-item list-group-item-action" id="list-conciliacion-bancaria-list"
+                    data-toggle="list" href="#list-conciliacion-bancaria" role="tab"
+                    aria-controls="conciliacion-bancaria">Conciliación Bancaria</a>
+                <a class="list-group-item list-group-item-action" id="list-retencion-iva-list" data-toggle="list"
+                    href="#list-retencion-iva" role="tab" aria-controls="retencion-iva">Retencion del IVA</a>
+                <a class="list-group-item list-group-item-action" id="list-nomina-empleado-list" data-toggle="list"
+                    href="#list-nomina-empleado" role="tab" aria-controls="nomina-empleado">Nomina Empleados</a>
+                <a class="list-group-item list-group-item-action" id="list-provision-beneficio-list" data-toggle="list"
+                    href="#list-provision-beneficio" role="tab" aria-controls="provision-beneficio">Provisión de
+                    Benficios</a>
             </div>
         </div>
         <div class="col-12 col-sm-12 col-md-10">
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane show active fade" id="list-kardex" role="tabpanel" aria-labelledby="list-kardex-list">
-                    @include('doceentes.contabilidad.kardex')
+              
+                {{--ARREGLADOS--}}
+
+                <div class="tab-pane show active fade" id="list-kardex" role="tabpanel"
+                    aria-labelledby="list-kardex-list">
+                    @include('docentes.contabilidad.kardex')
                 </div>
-                   <div class="tab-pane fade" id="list-kardex-promedio" role="tabpanel" aria-labelledby="list-kardex-promedio-list">
-                    @include('doceentes.contabilidad.kardex_promedio')
+
+                <div class="tab-pane fade" id="list-kardex-promedio" role="tabpanel"
+                    aria-labelledby="list-kardex-promedio-list">
+                    @include('docentes.contabilidad.kardex_promedio')
                 </div>
+
+
+                <div class="tab-pane fade" id="list-balance_comp" role="tabpanel"
+                    aria-labelledby="list-balance_comp-list">
+                    @include('docentes.contabilidad.balancecomprobacion')
+                </div>
+
+             
+                <div class="tab-pane fade border border-danger " id="list-messages" role="tabpanel"
+                    aria-labelledby="list-messages-list">
+                    @include('docentes.contabilidad.diariogeneral')
+                </div>
+
+                <div class="tab-pane fade" id="list-balance-ajustado" role="tabpanel"
+                    aria-labelledby="list-balance-ajustado-list">
+                    @include('docentes.contabilidad.balanceajustado')
+                </div>
+
+                <div class="tab-pane fade border border-danger " id="list-mayor-general" role="tabpanel"
+                    aria-labelledby="list-mayor-general-list">
+                    @include('docentes.contabilidad.mayorgeneral')
+                </div>
+
+                <div class="tab-pane fade" id="list-hoja-trabajo" role="tabpanel"
+                    aria-labelledby="list-hoja-trabajo-list">
+                    @include('docentes.contabilidad.hojatrabajo')
+                </div>      
+
                 <div class="tab-pane fade border border-danger p-4" id="list-diario" role="tabpanel"
                     aria-labelledby="list-diario-list">
 
@@ -71,7 +136,7 @@
                                 aria-controls="b_horizontal" aria-selected="true">Balance Inicial Horizontal</a>
                         </li>
                         @if ($datos->metodo == 'individual')
-                          
+
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#b_vertical" role="tab"
                                 aria-controls="b_vertical" aria-selected="false">Balance Inicial Vertical</a>
@@ -80,36 +145,64 @@
                         @endif
                     </ul>
                     <div class="tab-content" id="bInicialContent">
-                        @include('doceentes.contabilidad.balanceinicial')
+                        @include('docentes.contabilidad.balanceinicial')
                     </div>
                 </div>
-                <div class="tab-pane fade" id="list-balance_comp" role="tabpanel"
-                    aria-labelledby="list-balance_comp-list">
-                    @include('doceentes.contabilidad.balancecomprobacion')
+
+                <div class="tab-pane fade" id="list-estado-resultado" role="tabpanel"
+                    aria-labelledby="list-estado-resultado-list">
+                    @include('docentes.contabilidad.estadoresultado')
                 </div>
-                <div class="tab-pane fade border border-danger " id="list-messages" role="tabpanel"
-                    aria-labelledby="list-messages-list">
-                    @include('doceentes.contabilidad.diariogeneral')
+
+                
+                <div class="tab-pane fade" id="list-balance-general" role="tabpanel"
+                    aria-labelledby="list-balance-general-list">
+                    @include('docentes.contabilidad.balancegeneral')
                 </div>
-                <div class="tab-pane fade border border-danger " id="list-mayor-general" role="tabpanel"
-                    aria-labelledby="list-mayor-general-list">
-                    @include('doceentes.contabilidad.mayorgeneral')
+
+                <div class="tab-pane fade" id="list-asento-cierre" role="tabpanel"
+                    aria-labelledby="list-asento-cierre-list">
+                    @include('docentes.contabilidad.asientosdecierre')
                 </div>
-                <div class="tab-pane fade" id="list-balance-ajustado" role="tabpanel" aria-labelledby="list-balance-ajustado-list">
-                    @include('doceentes.contabilidad.balanceajustado')
+                {{--ARREGLADOS--}}
+
+                {{--parte anexos arreglado--}}
+
+                <div class="tab-pane fade" id="list-libro-caja" role="tabpanel" aria-labelledby="list-libro-caja-list">
+                    @include('docentes.contabilidad.librocaja')
                 </div>
-                 <div class="tab-pane fade" id="list-hoja-trabajo" role="tabpanel" aria-labelledby="list-hoja-trabajo-list">
-                    @include('doceentes.contabilidad.hojatrabajo')
+
+                <div class="tab-pane fade" id="list-conciliacion-bancaria" role="tabpanel"
+                    aria-labelledby="list-conciliacion-bancaria-list">
+                    @include('docentes.contabilidad.conciliacionbancaria')
+
                 </div>
-                <div class="tab-pane fade" id="list-estado-resultado" role="tabpanel" aria-labelledby="list-estado-resultado-list">
-                    @include('doceentes.contabilidad.estadoresultado')
+
+                <div class="tab-pane fade" id="list-arqueo-caja" role="tabpanel"
+                    aria-labelledby="list-arqueo-caja-list">
+                    @include('docentes.contabilidad.arqueocaja')
+
                 </div>
-                  <div class="tab-pane fade" id="list-balance-general" role="tabpanel" aria-labelledby="list-balance-general-list">
-                    @include('doceentes.contabilidad.balancegeneral')
+
+                <div class="tab-pane fade" id="list-libro-banco" role="tabpanel"
+                    aria-labelledby="list-libro-banco-list">
+                    @include('docentes.contabilidad.librobanco')
                 </div>
-                <div class="tab-pane fade" id="list-asento-cierre" role="tabpanel" aria-labelledby="list-asento-cierre-list">
-                    @include('doceentes.contabilidad.asientosdecierre')
+
+                <div class="tab-pane fade" id="list-retencion-iva" role="tabpanel"
+                    aria-labelledby="list-retencion-iva-list">
+                    @include('docentes.contabilidad.retencioniva')
                 </div>
+
+                <div class="tab-pane fade" id="list-nomina-empleado" role="tabpanel"
+                    aria-labelledby="list-nomina-empleado-list">
+                    @include('docentes.contabilidad.nominaempleados')
+                </div>
+                <div class="tab-pane fade" id="list-provision-beneficio" role="tabpanel"
+                    aria-labelledby="list-provision-beneficio-list">
+                    @include('docentes.contabilidad.provisiondebeneficio')
+                </div>
+                {{--parte anexos arreglados--}}
             </div>
         </div>
     </div>
@@ -136,7 +229,7 @@
 
 @section('js')
 <script>
-  let user_id = @json($user->id);
+  let taller = @json($user->id);
  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////BALANCE INICIAL HORIZONTAL/////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -170,6 +263,24 @@ const b_hori = new Vue({
  
   },
   methods:{
+           decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+        formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
       obtenerBalance:function(){
     var _this = this;
       var url = '/sistema/admin/taller/obtenerbalance';
@@ -233,6 +344,24 @@ const b_ver = new Vue({
  
   },
   methods:{
+           decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+        formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
       obtenerBalance:function(){
     var _this = this;
       var url = '/sistema/admin/taller/obtenerbalance';
@@ -286,6 +415,24 @@ const asientos_cierre = new Vue({
         b_initotal:{}
     },
     methods:{
+             decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+        formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
         obtenerAsientoCierre: function(){
         let _this = this;
         let url = '/sistema/admin/taller/asiento-cierre-obtener';
@@ -318,7 +465,7 @@ const kardex = new Vue({
 
     producto:'',
     producto_id:'',
-    productos:productos,
+    productos:[],
     nombre:'',
     suman:{
       ingreso_cantidad:0,
@@ -354,7 +501,26 @@ const kardex = new Vue({
     movimientos:[],
   },
 methods:{
-   obtenerKardexFifo: function() {
+  
+           decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+        formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
+     obtenerKardexFifo: function() {
         let _this = this;
         let url = '/sistema/admin/taller/kardex-obtener-fifo';
             axios.post(url,{
@@ -440,6 +606,24 @@ const kardex_promedio = new Vue({
    // this.obtenerKardexPromedio();
   },
   methods:{
+           decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+        formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
             obtenerKardexPromedio: function() {
         let _this = this;
         let url = '/sistema/admin/taller/kardex-obtener-promedio';
@@ -510,6 +694,24 @@ transacciones:'',
         dato:[]
     },
     methods:{
+             decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+        formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
           obtenerDiarioGeneral: function(){
         var _this = this;
         var url = '/sistema/admin/taller/diariogeneral';
@@ -543,8 +745,8 @@ let mayor_general = new Vue({
       nombre_dgral:'',
       fechabalance:'',
       complete:false,
-      options: objeto,
-      cuentas: cuentas,
+      options: '',
+      
        dgeneral:[],
         nombre_kardex:'',
         producto_kardex:'',
@@ -552,6 +754,24 @@ let mayor_general = new Vue({
        ajustes:[],
   },
 methods:{
+         decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+        formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
       obtenerMayorGeneral: function(){
         var _this = this;
         var url = '/sistema/admin/taller/mayorgeneral';
@@ -591,6 +811,24 @@ const balance_comp = new Vue({
     }
   },
   methods:{
+           decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+        formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
         obtenerBalanceCom: function() {
         let _this = this;
         let url = '/sistema/admin/taller/balance-obtener-comprobacion';
@@ -617,7 +855,7 @@ let hoja_trabajo = new Vue({
   el: "#hoja_trabajo",
   data:{
     id_taller: taller,
-    nombre:'',,
+    nombre:'',
     balances:[],
     registros:[],
     suman:{
@@ -646,6 +884,24 @@ let hoja_trabajo = new Vue({
   },
 
   methods:{
+           decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+        formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
       obtenerHojita: function() {
         let _this = this;
         let url = '/sistema/admin/taller/hoja-obtener-trabajo';
@@ -678,6 +934,24 @@ const balance_ajustado = new Vue({
     },
   },
   methods:{
+           decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+        formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
     obtenerBalanceAjus: function() {
         let _this = this;
         let url = '/sistema/admin/taller/balance-obtener-ajustado';
@@ -708,6 +982,7 @@ const estado_resultado = new Vue({
     fecha:'',
     ingresos:[],
     gastos:[],
+    utilidad:'',
     utilidad_bruta:{
       costo:'',
       costo_venta:'',
@@ -723,6 +998,24 @@ const estado_resultado = new Vue({
     }
   },
   methods:{
+           decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+        formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
         obtenerEstadoResultado: function() {
     let _this = this;
     let url = '/sistema/admin/taller/estado-obtener-resultado';
@@ -787,6 +1080,24 @@ var balance_general = new Vue({
   
   },
   methods:{
+           decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+     
+    },
+        formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },
       obtenerBalance:function(){
       var _this = this;
         var url = '/sistema/admin/taller/obtener-balance-general';
@@ -816,6 +1127,413 @@ var balance_general = new Vue({
 
   }
 });
+
+const librocaja = new Vue({
+  el: "#librocaja",
+  data:{
+    id_taller: taller,
+    nombre:'',
+    libros_caja:[], 
+    suman:{ 
+      debe:0,
+      haber:0,
+    },
+  },
+  methods:{
+    decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+  },
+       obtenerLibroCaja: function(){
+        let _this = this;
+        let url ='/sistema/admin/taller/anexo-obtener-caja';
+              axios.post(url,{
+                id: _this.id_taller, 
+                }).then(response =>{
+                  if(response.data.datos == true){
+                    toastr.info("Anexo Libro Caja cargado correctamente", "Smarmoddle", {
+                      "timeOut": "3000"
+                      });
+                      this.libros_caja = response.data.banexocaja;
+                      this.nombre = response.data.nombre;
+                      this.totales();
+                  }
+                }).catch(function(error){
+
+                });
+      },
+}
+
+  });
+
+const arqueo_caja = new Vue ({
+  el: "#arqueo_caja",
+ 
+  data:{
+    id_taller : taller,
+    libros_caja:[],
+    nombre_lb:'',
+    t_saldo:[], // array de saldos 
+    t_exis:[], // array de existencias
+
+    sumas:{  // totales de Saldo debe y haber
+      td:0,
+      th:0,
+    },  
+  },
+  methods:{
+    formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+     
+    },// fin fecha
+    decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+  },
+     obtenerArqueo: function(){
+    let _this = this;
+    let  url = '/sistema/admin/taller/arqueo-obtener-caja';
+   
+    axios.post(url,{
+      id: _this.id_taller,
+    }).then(response =>{
+      if(response.data.datos == true){
+        toastr.info("Anexo Arqueo Caja cargado correctamente", "Smarmoddle", {
+          "timeOut": "3000"
+          });
+          this.t_saldo = response.data.saldo;
+          this.t_exis = response.data.exis;
+          this.totales_s();
+      }
+    }).catch(function(error){
+
+    });
+   }  //fin function obtener
+}
+});
+
+
+const librosbanco = new Vue({
+  el: "#librosbanco",
+
+  data:{
+    id_taller: taller,
+    nombre:'',
+    n_banco:'',
+    c_banco:'',
+     lb_banco:[],
+    suman:{ //suma total del libro CAJA
+      debe:0,
+      haber:0,
+    },
+  },
+  methods:{
+    decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+  },
+  formatoFecha(fecha){
+    if (fecha !== null) {
+       let date = fecha.split('-').reverse().join('-');
+    return date;
+  }else{
+    return
+  }
+   
+  },
+       obtenerLibroBanco: function (){
+       let _this = this;
+       let   url = '/sistema/admin/taller/libro-obtener-banco';
+       axios.post(url,{
+         id: _this.id_taller,
+       }).then(response=>{
+        if(response.data.datos == true){
+          toastr.info("Anexo Libro Banco cargado correctamente", "Smarmoddle", {
+            "timeOut": "3000"
+            });
+            this.lb_banco = response.data.mb;
+            this.nombre = response.data.nombre;
+            this.n_banco = response.data.n_banco;
+            this.c_banco = response.data.c_banco;
+            this.totales();
+        }
+      }).catch(function(error){
+
+      });
+
+     } //fin obtener libro banco
+}
+  });
+
+
+const conciliacionb = new Vue({
+   el: "#conciliacionb",
+   data:{
+    id_taller: taller,
+     nombre:'',
+     n_banco:'',
+     fecha : '',
+     c_saldos:[],
+     c_debitos:[],
+     c_creditos:[],
+     c_cheques:[],
+     suman:{
+       saldo_c :0,
+       saldo_ch:0,
+       saldo_d :0,
+       total   :0,
+     },
+   },
+      methods:{
+
+    decimales(saldo){
+      if (saldo !== null && saldo !== '' && saldo !== 0) {
+         let total = Number(saldo).toFixed(2);
+      return total;
+    }else{
+      return
+    }
+  }, //fin metodo decimal 
+  formatoFecha(fecha){
+    if (fecha !== null) {
+       let date = fecha.split('-').reverse().join('-');
+    return date;
+  }else{
+    return
+  }
+   
+  },// fin fecha
+         obtenerConciliacionBancaria : function(){
+         let _this = this;
+         let   url = '/sistema/admin/taller/conciliacion-obtener-bancaria';
+         axios.post(url,{
+          id: _this.id_taller,
+        }).then(response=>{
+          if(response.data.datos == true){
+            toastr.info("Anexo Conciliación Bancaria cargado correctamente", "Smarmoddle", {
+              "timeOut": "3000"
+              });
+              this.c_saldos   = response.data.saldo;
+              this.c_debitos  = response.data.debito;
+              this.c_creditos = response.data.credito;
+              this.c_cheques  = response.data.cheque;
+              this.nombre     = response.data.nombre;
+              this.n_banco    = response.data.n_banco;
+              this.fecha      = response.data.fecha;
+              this.totales();
+          }
+        }).catch(function(error){
+  
+        });
+  
+
+       }//fin metodo obtener conciliacion bancaria
+
+}
+});
+
+let reten_iva = new Vue({
+    el:"#retencion_iva",
+  data:{
+    id_taller: taller,
+    nombre_c:'', 
+    fecha:'',
+    ruc:'',
+    dgeneral:[],
+
+    t_ventas:[],
+    t_compras:[],
+      suma_c:{
+          suma_base:0,
+          suma_reten:0,
+          suma_ivac:0,
+          suma_10:0,
+          suma_20:0,
+          suma_30:0,
+          suma_70:0,
+          suma_100:0,
+      },
+      suma_v:{
+          suma_base:0,
+          suma_reten:0,
+          suma_ivav:0,
+          suma_10:0,
+          suma_20:0,
+          suma_30:0,
+          suma_70:0,
+          suma_100:0,
+      },
+      total:{
+        t_ivacompra:'',
+        t_ivaventa:'',
+        total_pagar:'',
+        result_iva:'',
+        t_reten:'',
+        
+      }, 
+  }, //fin del data
+
+      methods:{
+        formatoFecha(fecha){
+          if (fecha !== null ) {
+             let date = fecha.split('-').reverse().join('-');
+          return date;
+        }else{
+          return
+        }
+         
+        }, //fin metodo formatofecha
+
+        decimales(saldo){
+          if (saldo !== null && saldo !== '' && saldo !== 0) {
+             let total = Number(saldo).toFixed(2);
+          return total;
+        }else{
+          return
+        }
+         
+        }, //fin metodo decimales
+
+      obtenerRetencionIva: function(){
+        let _this = this;
+        let url   = '/sistema/admin/taller/retencion-obtener-iva';
+        axios.post(url,{
+          id: _this.id_taller,  
+        }).then(response=>{
+           if(response.data.datos == true){
+            toastr.info("Anexo Retencion del Iva cargado correctamente", "Smarmoddle", {
+              "timeOut": "3000"
+              });
+              this.t_compras    = response.data.compra;
+              this.t_ventas     = response.data.venta;
+              this.nombre_c     = response.data.nombre;
+              this.ruc          = response.data.ruc;
+              this.fecha        = response.data.fecha;
+              this.total.t_ivacompra  = response.data.t_ivacompra;
+              this.total.t_ivaventa   = response.data.t_ivaventa;
+              this.total.t_reten      = response.data.t_reten;
+              this.total.result_iva   = response.data.result_iva;
+              this.total.total_pagar        = response.data.total;
+              this.Totales();
+           }
+
+        }).catch(function(error){
+          });
+        
+      }, //fin metodo obtener retencion del iva
+        }
+      });
+
+const nomina_em = new Vue({
+ el: '#nomina_empleado',
+ data:{
+  id_taller: taller,
+  fecha:'',
+  nombre:'',
+  t_nomina:[],
+ suma:{
+      s_sueldo:0,
+      s_sobretiempo:0,
+      s_tingreso:0,
+      s_iess:0,
+      s_piess:0,
+      s_pcias:0,
+      s_anticipo:0,
+      s_impr:0,
+      s_tegresos:0,
+      s_netopagar:0,
+    },
+
+    deducciones:[],
+ },
+
+methods:{
+          obtenerNomina : function(){
+   
+          let _this = this;
+          let   url = '/sistema/admin/taller/nomina-obtener-empleado';
+
+          axios.post(url,{
+            id: _this.id_taller,
+          }).then(response =>{
+            if(response.data.datos == true){
+              toastr.info("Anexo Nómina de Empleado cargado correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.nombre       = response.data.nombre;
+                this.fecha        = response.data.fecha;
+                this.t_nomina     = response.data.nomina;
+                this.totales();
+            }
+          }).catch(function(error){
+          });
+        }, //fin metodo obtener nomina
+
+}
+});
+
+const provision_b = new Vue({
+  el:'#provision_beneficio',
+   data:{
+    id_taller: taller,
+    t_nomina:[], // de la nomina
+    nombre:'',   //de la nomina
+    fecha:'',    //de la nomina
+    t_pro:[],
+     suma:{
+      s_valor:'',
+      s_tercero:'',
+      s_cuarto:'',
+      s_vacaciones:'',
+      s_res:'',
+     },
+   },
+   methods:{
+  decimales(saldo){
+    if (saldo !== null && saldo !== '' && saldo !== 0) {
+      let total = Number(saldo).toFixed(2);
+    return total;
+  }else{
+    return
+  }
+   }, 
+         obtenerProvision: function(){
+        let _this = this;
+        let url   = '/sistema/admin/taller/provision-obtener-beneficio';
+        axios.post(url,{
+          id: _this.id_taller,  
+        }).then(response=>{
+          if(response.data.datos == true){
+            toastr.success("Anexo Provisión Beneficio Social cargado correctamente", "Smarmoddle", {
+              "timeOut": "3000"
+              });
+
+              this.t_pro = response.data.pro;
+              this.totales();
+            }
+          }).catch(function(error){
+          });
+      } // end obtener  
+
+         }
+       });
 </script>
 @endsection
 
