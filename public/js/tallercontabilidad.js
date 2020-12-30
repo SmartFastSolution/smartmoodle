@@ -12566,6 +12566,7 @@ let reten_iva = new Vue({
     nombre_c:'', 
     fecha:'',
     ruc:'',
+    contribuyente:'',
     dgeneral:[],
     eliminar:{
       index:'',
@@ -12838,10 +12839,18 @@ let reten_iva = new Vue({
         
         }, //fin de sumatotales
 
-        abrirRetencion(){ //solo para acceder al modal para agregar todo pilas 
-          this.update             = false;   
+        abrirCompra(){ //solo para acceder al modal para agregar todo pilas 
+         
          $('#modal-retencion').modal('show');
+         $('#nav-bih-retencion-compra-tab').tab('show');
+
        }, //fin de metodo abrirtransaccion
+       abrirVenta(){ //solo para acceder al modal para agregar todo pilas 
+         
+        $('#modal-retencion').modal('show');
+        $('#nav-bih-retencion-venta-tab').tab('show');
+
+      }, //fin de metodo abrirtransaccion
 
 
        agregarCompra(){
@@ -12892,6 +12901,8 @@ let reten_iva = new Vue({
         this.compra.ret_30        = this.t_compras[index].ret_30;
         this.compra.ret_70        = this.t_compras[index].ret_70;
         this.compra.ret_100       = this.t_compras[index].ret_100;
+    
+        $('#nav-bih-retencion-compra-tab').tab('show');
        }, //fin de edit modal
 
        editCompraFuera(index){
@@ -12909,7 +12920,9 @@ let reten_iva = new Vue({
         this.compra.ret_30        = this.t_compras[index].ret_30;
         this.compra.ret_70        = this.t_compras[index].ret_70;
         this.compra.ret_100       = this.t_compras[index].ret_100;
+      
         $('#modal-retencion').modal('show');
+        $('#nav-bih-retencion-compra-tab').tab('show');
        }, //fin de edit modal
 
        cancelarEditCompra(){
@@ -12997,6 +13010,7 @@ let reten_iva = new Vue({
               'success'
             );
             this.t_compras.splice(id, 1);
+            this.Totales();
           }
         });
       }, //fin metodo warningeliminarcompra
@@ -13050,6 +13064,8 @@ let reten_iva = new Vue({
         this.venta.ret_30        = this.t_ventas[index].ret_30;
         this.venta.ret_70        = this.t_ventas[index].ret_70;
         this.venta.ret_100       = this.t_ventas[index].ret_100;
+      
+        $('#nav-bih-retencion-venta-tab').tab('show');
        }, //fin de edit modal
 
 
@@ -13068,7 +13084,9 @@ let reten_iva = new Vue({
         this.venta.ret_30        = this.t_ventas[index].ret_30;
         this.venta.ret_70        = this.t_ventas[index].ret_70;
         this.venta.ret_100       = this.t_ventas[index].ret_100;
+        
         $('#modal-retencion').modal('show');
+        $('#nav-bih-retencion-venta-tab').tab('show');
        }, //fin de edit modal venta
 
        cancelarEditVenta(){
@@ -13157,6 +13175,7 @@ let reten_iva = new Vue({
               'success'
             );
             this.t_ventas.splice(id, 1);
+            this.Totales();
           }
         });
       }, //fin metodo warningeliminarcompra
@@ -13168,6 +13187,10 @@ let reten_iva = new Vue({
               });
             }else if(this.fecha.length == 0){
               toastr.error("Debe Ingresar la Fecha", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+            }else if(this.contribuyente.length == 0){
+              toastr.error("Debe Ingresar El Contribuyente", "Smarmoddle", {
                 "timeOut": "3000"
             });
             }else if(this.ruc.length == 0){
@@ -13182,6 +13205,7 @@ let reten_iva = new Vue({
             axios.post(url,{
                      id:  _this.id_taller,
                nombre_c:  _this.nombre_c,
+          contribuyente:  _this.contribuyente,
                   fecha:  _this.fecha,
                     ruc:  _this.ruc,   
              sumac_base:  _this.suma_c.suma_base,
@@ -13238,6 +13262,7 @@ let reten_iva = new Vue({
               this.t_ventas     = response.data.venta;
               this.nombre_c     = response.data.nombre;
               this.ruc          = response.data.ruc;
+              this.contribuyente= response.data.contribuyente;
               this.fecha        = response.data.fecha;
               this.total.t_ivacompra  = response.data.t_ivacompra;
               this.total.t_ivaventa   = response.data.t_ivaventa;

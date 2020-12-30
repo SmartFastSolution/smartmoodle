@@ -2596,6 +2596,7 @@ class TallerContabilidadController extends Controller
           $id = Auth::id();
           $taller_id  = $request->id;
           $nombre_c  = $request->nombre_c;
+          $contribuyente  = $request->contribuyente;
           $fecha     = $request->fecha;
           $ruc       = $request->ruc;
           $t_compras = $request->t_compras;
@@ -2608,6 +2609,7 @@ class TallerContabilidadController extends Controller
               $r->taller_id   = $taller_id;
               $r->user_id     = $id;
               $r->nombre      = $nombre_c;
+              $r->contribuyente = $contribuyente;
               $r->fecha       = $fecha;
               $r->ruc         = $ruc;
               $r->sumac_base  = $request->sumac_base;
@@ -2686,6 +2688,7 @@ class TallerContabilidadController extends Controller
                 $ids =[];
                 $r = Retencioniva::where('user_id', $id)->where('taller_id',$taller_id)->first();     
                 $r->nombre      = $nombre_c;
+                $r->contribuyente = $contribuyente;
                 $r->fecha       = $fecha;
                 $r->ruc         = $ruc;
                 $r->sumac_base  = $request->sumac_base;
@@ -2786,17 +2789,18 @@ class TallerContabilidadController extends Controller
                 $venta = Retencionivaventa::select('fecha_v','detalle','cliente','base_im','porcentaje', 'v_retenido', 'iva', 'ret_10', 'ret_20', 'ret_30', 'ret_70', 'ret_100'   )->where('retencioniva_id',  $r->id)->get();
 
                 return response(array(
-                    'datos'       => true,
-                    'compra'      => $compra, 
-                    'venta'       => $venta, 
-                    'nombre'      => $r->nombre,
-                    'fecha'       => $r->fecha,
-                    'ruc'         => $r->ruc,
-                    't_ivacompra' => $r->t_ivacompra,
-                    't_ivaventa'  => $r->t_ivaventa,
-                    't_reten'     => $r->t_reten,
-                    'result_iva'  => $r->result_iva,
-                    'total'       => $r->total,
+                    'datos'        => true,
+                    'compra'       => $compra, 
+                    'venta'        => $venta, 
+                    'nombre'       => $r->nombre,
+                    'contribuyente'=> $r->contribuyente,
+                    'fecha'        => $r->fecha,
+                    'ruc'          => $r->ruc,
+                    't_ivacompra'  => $r->t_ivacompra,
+                    't_ivaventa'   => $r->t_ivaventa,
+                    't_reten'      => $r->t_reten,
+                    'result_iva'   => $r->result_iva,
+                    'total'        => $r->total,
                     
                     ),200,[]);
             }else{

@@ -1,12 +1,15 @@
 <div id="retencion_iva" class="border border-danger p-4">
-    <h2 class="text-center display-4 font-weight-bold text-danger"> CUADRO DE RETENCIÓN EN LA FUENTE DEL IVA</h2>
+    <h4 class="text-center display-5 font-weight-bold text-danger"> CUADRO DE RETENCIÓN EN LA FUENTE DEL IVA</h4>
 
     <div class="row p-3  mb-2 justify-content-center ">
-        <div class="col-5 mb-3">
-            <input class="form-control  text-center" type="text" v-model="nombre_c" placeholder="Nombre de la empresa"
+        <div class="col-4 mb-3">
+            <input class="form-control  text-center form-control-sm" type="text" v-model="nombre_c"
+                placeholder="Nombre de la empresa" name="">
+            <input class="form-control  text-center form-control-sm" type="text" v-model="contribuyente"
+                placeholder="Tipo de Contribuyente" name="">
+            <input class="form-control  text-center form-control-sm" type="text" v-model="ruc" placeholder="RUC"
                 name="">
-            <input class="form-control  text-center" type="text" v-model="ruc" placeholder="RUC" name="">
-            <input type="date" name="fecha" v-model="fecha" class="form-control text-center" required>
+            <input type="date" name="fecha" v-model="fecha" class="form-control text-center form-control-sm" required>
         </div>
     </div>
     <h3 class="text-center font-weight-bold text-danger">COMPRAS</h3>
@@ -36,8 +39,8 @@
         <tbody>
             <tr v-for="(c , index) in t_compras">
                 <td class="text-right" align="center" width="1">@{{ formatoFecha(c.fecha_c)}}</td>
-                <td class="text-right" align="center" width="300">@{{ c.detalle}}</td>
-                <td class="text-right" align="center" width="100">@{{ c.proveedor}}</td>
+                <td class="text-left" align="center" width="300">@{{ c.detalle}}</td>
+                <td class="text-left" align="center" width="100">@{{ c.proveedor}}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(c.base_im) }}</td>
                 <td class="text-right" align="center" width="100">@{{ c.porcentaje }}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(c.v_retenido) }}</td>
@@ -74,6 +77,10 @@
 
     </table>
 
+    <div class="row justify-content-center mb-2">
+        <a href="#" class="addDiario btn btn-outline-info btn-sm" @click.prevent="abrirCompra()">Agregar Compra</a>
+    </div>
+
     {{-- VENTAS DE RETENCION DEL IVA--}}
     <br><br>
 
@@ -105,8 +112,8 @@
         <tbody>
             <tr v-for="(v , index) in t_ventas">
                 <td class="text-right" align="center" width="125">@{{ formatoFecha(v.fecha_v)}}</td>
-                <td class="text-right" align="center" width="300">@{{ v.detalle}}</td>
-                <td class="text-right" align="center" width="100">@{{ v.cliente}}</td>
+                <td class="text-left" align="center" width="300">@{{ v.detalle}}</td>
+                <td class="text-left" align="center" width="100">@{{ v.cliente}}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(v.base_im) }}</td>
                 <td class="text-right" align="center" width="100">@{{ v.porcentaje }}</td>
                 <td class="text-right" align="center" width="125">@{{ decimales(v.v_retenido) }}</td>
@@ -140,26 +147,75 @@
         </tbody>
     </table>
 
-
-    <div class="row p-4  mb-2 justify-content-center ">
-        <div class="col-4 mb-3">
-
-            <input class="form-control  text-center" type="number" v-model="total.t_ivaventa"
-                placeholder="IVA EN VENTAS" name="">
-            <input class="form-control  text-center" type="number" v-model="total.t_ivacompra"
-                placeholder="- IVA EN COMPRAS" name="">
-            <input class="form-control  text-center" type="number" v-model="total.result_iva" placeholder="RES. IVA"
-                name="">
-            <input class="form-control  text-center" type="number" v-model="total.t_reten" placeholder="+ RET. IVA"
-                name="">
-            <input class="form-control  text-center" type="number" v-model="total.total_pagar"
-                placeholder="TOTAL A PAGAR" name="">
-
-        </div>
-    </div>
     <div class="row justify-content-center mb-2">
-        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirRetencion()">Agregar Retención</a>
+        <a href="#" class="addDiario btn btn-outline-info btn-sm" @click.prevent="abrirVenta()">Agregar Venta</a>
     </div>
+
+    <div class="row p-4  mb-4 justify-content-center ">
+        <table>
+            <tbody>
+                <tr>
+                    <td> <label for="inputEmail3" class="col-sm col-form-label">IVA EN VENTAS</label></td>
+                    <td>
+                        <div class="col-sm-8">
+                            <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
+                                v-model="total.t_ivaventa" placeholder="IVA EN VENTAS" name="">
+                        </div>
+                    </td>
+
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+
+                    <td><label for="inputEmail3" class="col-sm col-form-label"> -IVA EN COMPRAS</label></td>
+                    <td>
+
+                        <div class="col-sm-8">
+                            <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
+                                v-model="total.t_ivacompra" placeholder="- IVA EN COMPRAS" name="">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td> <label for="inputEmail3" class="col-sm col-form-label"></label></td>
+                    <td>
+                        <div class="col-sm-8">
+                            <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
+                                v-model="total.result_iva" placeholder="RES. IVA" name="">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td><label for="inputEmail3" class="col-sm col-form-label"> + RET. IVA</label></td>
+                    <td>
+
+                        <div class="col-sm-8">
+                            <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
+                                v-model="total.t_reten" placeholder="+ RET. IVA" name="">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td><label for="inputEmail3" class="col-sm col-form-label"> TOTAL A PAGAR</label></td>
+                    <td>
+                        <div class="col-sm-8">
+                            <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
+                                v-model="total.total_pagar" placeholder="TOTAL A PAGAR" name="">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
 
     <div class="row justify-content-center">
         <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardaretencioniva()">Guardar
