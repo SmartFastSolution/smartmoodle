@@ -1,6 +1,7 @@
 @foreach ($comments as $comment)
 <div class="media mb-4 mt-4">
-    <img class="d-flex mr-3 rounded-circle" src="https://img.icons8.com/office/36/000000/person-male.png" alt="">
+
+<i class="fas fa-user"></i>
     <div class="media-body">
         <div class="comment-text"> <span class="username">
                 <div class="ml-2">
