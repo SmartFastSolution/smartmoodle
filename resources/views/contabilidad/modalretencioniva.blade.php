@@ -446,7 +446,6 @@
                                                         @click.prevent="WarningEliminarVenta(index)"
                                                         class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                                                 </td>
-
                                             </tr>
                                         </tbody>
                                     </table>

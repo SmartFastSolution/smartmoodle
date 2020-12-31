@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Post;
+use Illuminate\Support\Facades\Hash;
 
 class DocenteController extends Controller
 {
@@ -30,62 +32,73 @@ class DocenteController extends Controller
         $this->middleware('docente');
     }
 
-    public function index(){
-        // $materi = auth()->user()->distribuciondos->pivot->materia_id;
-        // 
-        
-            $au = User::find(Auth::id())->distribuciondos;
-            // if ($au == null) {
-            // return redirect()->route('welcome'); 
-               
-            // }
-       if (isset($au->materias)) {
-            $ids =[];
-            foreach ($au->materias as $value) {
-                foreach ($value->contenidos as $conte) {
-                $ids[] = $conte->id;
-                    
-                }
-            }
-            // $materias = $au->materias;
-        $users = DB::table('tallers')
-            ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
-            ->join('users', 'users.id', '=', 'taller_user.user_id')
-            ->join('cursos', 'users.curso_id', '=', 'cursos.id')
-            ->join('nivels', 'users.nivel_id', '=', 'nivels.id')
-            ->join('contenidos', 'contenidos.id', '=', 'tallers.contenido_id')
-            ->join('materias', 'materias.id', '=', 'contenidos.materia_id')
-            ->whereIn('tallers.contenido_id', $ids)
-            // ->wherein('tallers.contenido_id','==', 1)
-            ->where('taller_user.status', 'completado')
-            ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre','nivels.nombre as nivel_nombre', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
-            ->paginate(10);
-           
+   public function Perfil(){
 
-              $calificado = DB::table('tallers')
-            ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
-            ->join('users', 'users.id', '=', 'taller_user.user_id')
-            ->join('cursos', 'users.curso_id', '=', 'cursos.id')
-            ->join('nivels', 'users.nivel_id', '=', 'nivels.id')
+
+    $au = User::find(Auth::id())->distribuciondos;
+    // if ($au == null) {
+    // return redirect()->route('welcome'); 
+       
+    // }
+if (isset($au->materias)) {
+    $ids =[];
+    foreach ($au->materias as $value) {
+        foreach ($value->contenidos as $conte) {
+        $ids[] = $conte->id;
             
-            ->join('contenidos', 'contenidos.id', '=', 'tallers.contenido_id')
-            ->join('materias', 'materias.id', '=', 'contenidos.materia_id')
-            ->whereIn('tallers.contenido_id', $ids)
-            // ->wherein('tallers.contenido_id','==', 1)
-            ->where('taller_user.status', 'calificado')
-            ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre' ,'nivels.nombre as nivel_nombre',  'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
-            ->paginate(10);
-
-
-            // return $users;
-        return view('Docente.indexd', compact('users','au', 'calificado')); //ruta docente
-       }else{
-
-
-        return view('Docente.indexd'); //ruta docente
-          } 
-
+        }
     }
+    // $materias = $au->materias;
+    $users = DB::table('tallers')
+    ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
+    ->join('users', 'users.id', '=', 'taller_user.user_id')
+    ->join('cursos', 'users.curso_id', '=', 'cursos.id')
+    ->join('nivels', 'users.nivel_id', '=', 'nivels.id')
+    ->join('contenidos', 'contenidos.id', '=', 'tallers.contenido_id')
+    ->join('materias', 'materias.id', '=', 'contenidos.materia_id')
+    ->whereIn('tallers.contenido_id', $ids)
+    // ->wherein('tallers.contenido_id','==', 1)
+    ->where('taller_user.status', 'completado')
+    ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre','nivels.nombre as nivel_nombre', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
+    ->paginate(10);
+   
+
+      $calificado = DB::table('tallers')
+    ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
+    ->join('users', 'users.id', '=', 'taller_user.user_id')
+    ->join('cursos', 'users.curso_id', '=', 'cursos.id')
+    ->join('nivels', 'users.nivel_id', '=', 'nivels.id')
+    
+    ->join('contenidos', 'contenidos.id', '=', 'tallers.contenido_id')
+    ->join('materias', 'materias.id', '=', 'contenidos.materia_id')
+    ->whereIn('tallers.contenido_id', $ids)
+    // ->wherein('tallers.contenido_id','==', 1)
+    ->where('taller_user.status', 'calificado')
+    ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre' ,'nivels.nombre as nivel_nombre',  'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
+    ->paginate(10);
+
+
+    // return $users;
+            return view('Docente.Pcurso', compact('users','au', 'calificado')); //ruta docente
+            }else{
+
+
+            return view('Docente.Pcurso'); //ruta docente
+  } 
+
+
+
+   }
+
+
+
+          public function index(){
+            
+                $p = Post::all();
+                // $p = Post::where('id',$id)->with('user','image','comments','comments.user')->get();
+                return view('Docente.indexd',compact('p'));
+     
+        }
     
 
     public function contenidos($id){
@@ -214,6 +227,39 @@ class DocenteController extends Controller
          return \view('Docente.archivopdf',['contenido'=>$contenido]);
   
     }
+
+
+
+    public function password(){
+
+        return view('Docente.password');
+    }
+  
+
+    public function updatep(Request $request){
+
+            //dd($request);
+      /////////////////////////////////////////////////////////////////////////////////////
+      //////////////////////////////////METODO UNO/////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////////////////////////
+            //metodo funcional 1 pero no verifica el password anterior
+
+      $request->validate([
+        // 'password' => ['required'],
+        'newpassword' => ['required', 'string', 'min:8', 'confirmed'],
+        'newpassword_confirmation'=>['required']
+      ]); 
+      
+        $request->user()->fill([
+            'password' => Hash::make($request->newpassword)
+        ])->save();
+
+        return redirect('sistema/homedoc')->with('Password actualizado');
+          
+
+     }
+
+
 
 
 }

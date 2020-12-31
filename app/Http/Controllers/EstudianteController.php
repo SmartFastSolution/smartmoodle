@@ -12,6 +12,7 @@ use App\Instituto;
 use App\Materia;
 use App\Nivel;
 use App\Taller;
+use App\Post;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +38,12 @@ class EstudianteController extends Controller
          return view('errors.error'); //ruta estudiante //ruta estudiante       
              
         }
-        return view('Estudiante.indexes'); //ruta estudiante       
+        $p = Post::all();
+        // $p = Post::where('id',$id)->with('user','image','comments','comments.user')->get();
+        return view('Estudiante.indexes',compact('p'));
+
+
+        // return view('Estudiante.indexes'); //ruta estudiante       
     }
 
    
@@ -89,11 +95,11 @@ class EstudianteController extends Controller
 
     public function updatep(Request $request){
 
-      //dd($request);
-/////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////METODO UNO/////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////
-      //metodo funcional 1 pero no verifica el password anterior
+            //dd($request);
+      /////////////////////////////////////////////////////////////////////////////////////
+      //////////////////////////////////METODO UNO/////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////////////////////////
+            //metodo funcional 1 pero no verifica el password anterior
 
       $request->validate([
         // 'password' => ['required'],

@@ -23,6 +23,7 @@
     <!-- <link rel="stylesheet" href=" {{ asset('css/jquery.dataTables.min.css')}}"> -->
 
     @yield('css')
+    @livewireStyles
 
 </head>
 
@@ -498,6 +499,7 @@
 
 
     @yield('js')
+    @livewireScripts
     {{--   @include('sweetalert::alert') --}}
 </body>
 
