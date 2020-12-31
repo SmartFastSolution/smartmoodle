@@ -17,7 +17,8 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <h1 class="text-center font-weight-bold mt-2">Datos para elaborar hoja de trabajo</h1>
-                     @if($datos->metodo == 'individual')
+
+                    @if($datos->metodo == 'individual')
                      <div class="col-12" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
                         {!! $transacciones->transacciones !!}
                      </div>
@@ -33,6 +34,11 @@
                                 <a class="nav-link" id="ht-mayor-general-tab" data-toggle="tab" href="#ht-mayor-general"
                                     role="tab" aria-controls="ht-mayor-general" aria-selected="false">Mayor General</a>
                             </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link bg-dark" id="calculadoraht-tab" data-toggle="tab" href="#calculadoraht"
+                                    role="tab" aria-controls="calculadoraht" aria-selected="false" @click.prevent="calculadora()">CALCULADORA</a>
+                            </li>
+                           
 
                         </ul>
                         <div class="tab-content" id="datosHojaContent">

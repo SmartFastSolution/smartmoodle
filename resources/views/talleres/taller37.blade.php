@@ -78,6 +78,13 @@
 @endsection
 @section('title', 'Talleres de contabilidad')
 @section('content')
+    <li class="d-none">
+        @if (Auth::check())
+        @foreach (auth()->user()->roles as $role)
+        {{ $rol = $role->descripcion}}
+        @endforeach
+        @endif
+    </li>
 <div class="container mb-3">
     <h1 class="text-center text-danger font-weight-bold display-4">Modulo Contable</h1>
     <h1 class="text-center m-2">{{ $datos->taller->nombre }}</h1>
@@ -88,7 +95,7 @@
         <div class="col-12 col-sm-12 col-md-2 mb-3">
             <div class="list-group" id="list-tab" role="tablist">
                
-                    @foreach ($modulo as $key => $element)
+                @foreach ($modulo as $key => $element)
                   <a class="list-group-item list-group-item-action @if ($key == 0) active @endif" id="list-{{ $element->code }}-list" data-toggle="list"
                     href="#list-{{ $element->code }}" role="tab" aria-controls="{{ $element->code }}">{{ $element->name }}</a>
                @endforeach 
@@ -320,13 +327,12 @@
       @endif
 
 
-
+ @if ($rol === 'estudiante')
     <div class="row justify-content-center" id="enviarTaller">
         <a href="" @click.prevent="CompletarTaller" class="btn p-2 mt-3 btn-danger">Completar Taller Contable</a>
         
      </div>
-
-      
+@endif
     {{--  @include ('layouts.modacontabilidad') --}}
 </div>
 

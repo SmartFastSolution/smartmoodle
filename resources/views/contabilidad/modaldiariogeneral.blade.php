@@ -71,9 +71,15 @@
                       </tbody>
                     </table>
                     <div v-if="!diario.debe.edit" class="row justify-content-center">
-                        <a href=""data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark mr-1">KARDEX</a>
-
+                      <div class="col-12 text-center mb-1">
                           <a href="#" class="btn btn-success" @click.prevent="agregarDebe()">Agregar</a>
+                      </div>
+                      @if($datos->metodo == 'concatenado')
+                      <div class="col-12 text-center">
+                        <a href=""data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark mr-1">KARDEX</a>
+                      </div>
+                      @endif
+
 
                       </div>
                        <div v-else class="row justify-content-center">
@@ -123,10 +129,14 @@
                       </tbody>
                     </table>
                     <div v-if="!diario.haber.edit" class="row justify-content-center">
-                        <a href="" data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark mr-1">KARDEX</a>
-
+                      <div class="col-12 text-center mb-1">
                             <a href="#" class="btn btn-info" @click.prevent="agregarHaber()">Agregar</a>
-
+                      </div>
+                      @if($datos->metodo == 'concatenado')
+                      <div class="col-12 text-center mb-1">
+                        <a href="" data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark mr-1">KARDEX</a>
+                        </div>
+                      @endif
                       </div>
 
                        <div v-else class="row justify-content-center">
@@ -172,7 +182,10 @@
                     @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 p-3 mt-2 "
                                         style=" height:400px; overflow-y: scroll; border: solid 3px red;">
-                                        {!! $diariogeneral->transacciones !!}
+                                        @isset ($diariogeneral->transacciones )
+                                             {!! $diariogeneral->transacciones !!}
+                                        @endisset
+                                       
 
                                     </div>
                                     @endif
@@ -242,7 +255,7 @@
     </div>
 </div>
 
-
+  @if($datos->metodo == 'concatenado')
 {{-- KARDEX --}}
 <div class="modal fade" id="kardex-diairo" tabindex="-1"  role="dialog" aria-labelledby="kardex-diairo" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
@@ -254,14 +267,26 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="float-left">
-    <select v-model="producto_id" class="custom-select" name="" id="" @change="obtenerKardexFifo()">
+    <div class="float-left">
+      <h6 class="font-weight-bold">Elegir Producto:</h6>
+      <select v-model="producto_id" class="custom-select" name="" id="" @change="obtenerKardexFifo()">
       <option disabled selected value="">ELIGE UN PRODUCTO</option>
-      <option :value="1">COCINAS</option>
-      <option :value="2">AIRE ACONDICIONADO</option>
-      <option :value="3">MESA</option>
+      @if ($datos->metodo == 'concatenado')
+        @foreach ($productos as $producto)
+          <option :value="{{ $producto->id }}">{{ $producto->nombre }}</option>
+        @endforeach
+      @elseif($datos->metodo == 'individual')
+        @foreach ($transacciones as $producto)
+          <option :value="{{ $producto->id }}">{{ $producto->nombre }}</option>
+        @endforeach
+      @endif
+    
+      {{-- <option v-for="(producto, index) in productos" :value="producto.id">@{{ producto.nombre }}</option> --}}
+      {{-- <option :value="2">AIRE ACONDICIONADO</option>
+      <option :value="3">MESA</option> --}}
+
     </select>
-  </div><br><br>
+    </div>
   <h1 class="text-center font-weight-bold text-danger">KARDEX</h1>
   <h5 class="text-center font-weight-bold text-dark">METODO FIFO</h5>
       <h3 class="text-center font-weight-bold text-dark">@{{ nombre_kardex }}</h3><br>
@@ -328,7 +353,7 @@
         </div>
     </div>
 </div>
-
+@endif
 
 
 {{-- PASIVOS --}}

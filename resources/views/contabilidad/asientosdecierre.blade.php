@@ -11,13 +11,16 @@
         {{--         <div class="col-3 mb-2">
         <a class="btn btn-sm btn-danger" href="" @click.prevent="obtenerBalanceInicial()">Obtener Balance Inicial</a>
         </div> --}}
+@if ($rol === 'estudiante')
         <div class="col-2 mb-2">
             <a href="#" class="btn btn-sm btn-outline-primary" @click.prevent="abrirTransaccion()">Crear Transaccion</a>
         </div>
+    @if($datos->metodo == 'concatenado')
         <div class="col-3">
             <a href="#" class="btn btn-sm btn-outline-danger" @click.prevent="llamarDiario()">Ir al Mayor General</a>
-
         </div>
+    @endif
+@endif
         <div class="col-12">
             <table class="table table-bordered table-sm">
                 <thead class="thead-dark">
@@ -95,7 +98,7 @@
             <form action="">
 
                 @csrf
-
+ @if ($rol === 'estudiante')
                 <div class="row justify-content-around mb-2">
                     <a href="#" class="btn btn-outline-primary" @click.prevent="abrirTransaccion()">Crear
                         Transaccion</a>
@@ -104,6 +107,8 @@
                     <a href="#" class="addDiario btn btn-danger" @click.prevent="guardarDiario()">Completar Asiento de
                         Cierre</a>
                 </div>
+
+@endif
             </form>
             <div class="row justify-content-center">
             </div>

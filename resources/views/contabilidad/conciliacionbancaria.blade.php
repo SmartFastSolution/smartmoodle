@@ -157,11 +157,12 @@
 
 
 
-
+ @if ($rol === 'estudiante')
     <div class="row justify-content-center">
         <a class="btn p-2 mt-3 btn-outline-info" @click.prevent="guardarConciliacionB()">Guardar Conciliación
             Bancaria</a>
     </div>
+@endif
 
 
 

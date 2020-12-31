@@ -9,15 +9,20 @@
 
      {{-- <h4 class="text-center text-primary font-weight-bold mt-2">@{{ nombre }}</h4> --}}
      <div class="row p-3  mb-2 ">
+ @if ($rol === 'estudiante')
+
         @if ($datos->metodo == 'concatenado')
         <div class="col-3 mb-2">
-        <a class="btn btn-sm btn-danger" href="" @click.prevent="obtenerBalanceInicial()">Obtener Balance Inicial</a>
+            <a class="btn btn-sm btn-danger" href="" @click.prevent="obtenerBalanceInicial()">Obtener Balance Inicial</a>
         </div>
             {{-- expr --}}
         @endif
-          <div class="col-3 mb-2">
-        <a href="#" class="btn btn-sm btn-outline-primary" @click.prevent="abrirTransaccion()">Crear Transaccion</a>  
+          <div class="col-5 mb-2">
+            <a href="#" class="btn btn-sm btn-outline-primary" @click.prevent="abrirTransaccion()">Crear Transaccion</a>
+            <a href="#" class="addDiario btn-sm btn btn-danger" @click.prevent="guardarDiario()">Completar Diario </a>
+
         </div>
+            @endif
          <div class="col-12">
              <table class="table table-bordered table-sm">
                  <thead class="thead-dark">
@@ -257,6 +262,8 @@
                      <a href="#" class="addDiario btn btn-outline-warning" @click.prevent="updaterRegister()">Actualizar
                          Transaccion</a>
                  </div> --}}
+ @if ($rol === 'estudiante')
+
                  <div class="row justify-content-around mb-2">
                      <a href="#" class="btn btn-outline-primary" @click.prevent="abrirTransaccion()">Crear
                          Transaccion</a>
@@ -271,9 +278,10 @@
                          Transaccion</a> --}}
                  </div>
                  <div class="row justify-content-center">
-                     <a href="#" class="addDiario btn btn-danger" @click.prevent="guardarDiario()">Completar Diario
+                     <a href="#" class="addDiario btn btn-outline-danger" @click.prevent="guardarDiario()">Completar Diario
                          General</a>
                  </div>
+    @endif
              </form>
              <div class="row justify-content-center">
              </div>

@@ -15,7 +15,11 @@
             </div>
             <div class="modal-body">
                 <div class="row justify-content-center">
-
+            @if($datos->metodo == 'individual')
+                     <div class="col-12" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 4px red;">
+                        {!! $transacciones->transacciones !!}
+                     </div>
+                @elseif($datos->metodo == 'concatenado')
                   <div class="col-12 mt-2 border border-top-0 border-left-0 border-right-0 border-danger" style=" height:400px; overflow-y: scroll;">
                      <h1 class="text-center font-weight-bold mt-2">Datos para elaborar estado de resultados</h1>
                      <h2 class="text-center font-weight-bold mt-2">HOJA DE TRABAJO</h2>
@@ -61,13 +65,14 @@
                     </tbody>
                     </table>
                   </div>
-
+                  @endif
     <div class="col-12">
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a  class="nav-link" id="nav-er-utilidad-tab" data-toggle="tab" href="#nav-er-utilidad" role="tab" aria-controls="nav-er-utilidad" aria-selected="false">Utilidad Bruta</a>
             <a class="nav-link active" id="nav-er-ingreso-tab" data-toggle="tab" href="#nav-er-ingreso" role="tab" aria-controls="nav-er-ingreso" aria-selected="true">Ingresos</a>
             <a class="nav-link" id="nav-er-gastos-tab" data-toggle="tab" href="#nav-er-gastos" role="tab" aria-controls="nav-er-gastos" aria-selected="false">Gastos</a>
+            <a class="nav-link bg-dark" @click.prevent="calculadora()">CALCULADORA</a>
            
           </div>
         </nav>

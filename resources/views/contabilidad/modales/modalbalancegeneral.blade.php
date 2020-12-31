@@ -16,7 +16,11 @@
             </div>
             <div class="modal-body">
                 <div class="row justify-content-center">
-
+                          @if($datos->metodo == 'individual')
+                     <div class="col-12" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 4px red;">
+                        {!! $transacciones->transacciones !!}
+                     </div>
+                @elseif($datos->metodo == 'concatenado')
                     <div class="col-12 mt-2 border border-top-0 border-left-0 border-right-0 border-danger">
 
                         <h1 class="text-center font-weight-bold mt-2">Datos para elaborar estado de resultados</h1>
@@ -30,6 +34,10 @@
                                 <a class="nav-link" id="bg-estado-resultado-tab" data-toggle="tab"
                                     href="#bg-estado-resultado" role="tab" aria-controls="bg-estado-resultado"
                                     aria-selected="false">Estado De Resultado</a>
+                            </li>
+                              <li class="nav-item" role="presentation">
+            <a class="nav-link bg-dark" @click.prevent="calculadora()">CALCULADORA</a>
+                                
                             </li>
                         </ul>
 
@@ -235,6 +243,7 @@
                         </div>
 
                     </div>
+                    @endif
 
                     <div class="col-12">
                         <nav>

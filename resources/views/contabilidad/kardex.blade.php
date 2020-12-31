@@ -36,7 +36,16 @@
 
 	<example-component :nombres="'ANTHONY'">
 	</example-component> --}}
-	<table class="table table-bordered table-responsive table-sm">
+ @if ($rol === 'estudiante')
+<div v-if="!actuingreso.estado && !actuegreso.estado && producto_id !== ''" class="row justify-content-center">
+	<a {{-- v-if="transacciones.length == 0" --}} class="btn btn-sm btn-success mr-2" @click.prevent="modalInicial()">Saldo Inicial</a>
+	<a  class="btn btn-sm btn-secondary mr-2" @click.prevent="modalIngreso()" href="#" data-toggle="modal" data-target="#ingreso">INGRESO</a>
+	<a  class="btn btn-sm btn-info mr-2" href="#" @click.prevent="modalEgreso()" data-toggle="modal" data-target="#egreso">EGRESO</a>
+	<a href="" class="btn btn-primary btn-sm" @click.prevent="guardarKardex()">GUARDAR KARDEX</a>
+
+</div>
+@endif
+	<table class="table table-bordered table-responsive table-sm mt-3">
 		<thead class="bg-warning"> 
 		  <tr class="text-center">
 		    <th style="vertical-align:middle" rowspan="2" width="200">FECHA</th>
@@ -98,10 +107,10 @@
 
  @include('contabilidad.modales.modalkardex')
 
-
+ @if ($rol === 'estudiante')
 <div v-if="!actuingreso.estado && !actuegreso.estado && producto_id !== ''" class="row justify-content-center">
 
-	<div class="col-4 align-self-center">
+	
 	{{-- <a class="btn btn-sm btn-primary mr-2" href="">Agregar Inicial</a> --}}
 	<a {{-- v-if="transacciones.length == 0" --}} class="btn btn-sm btn-success mr-2" @click.prevent="modalInicial()">Saldo Inicial</a>
 	<a  class="btn btn-sm btn-secondary mr-2" @click.prevent="modalIngreso()" href="#" data-toggle="modal" data-target="#ingreso">INGRESO</a>
@@ -109,7 +118,7 @@
 	{{-- <a class="btn btn-sm btn-success mr-2" href="#" @click.prevent="modalCompra()" data-toggle="modal" data-target="#devolucion_compra">Devolucion compra</a>
 	<a class="btn btn-sm btn-warning mr-2" href="#"@click.prevent="modalVenta()"  data-toggle="modal" data-target="#devolucion_venta">Devolucion Venta</a> --}}
 
-	</div>
+
 	<div class="col-12 mt-3">
 <div class="row justify-content-center">
 			<div class="col-6 border rounded border-danger">
@@ -148,10 +157,13 @@
 		</div>
 		
 	</div>
+	
 		<div class="col-2 mt-2">
 			<a href="" class="btn btn-primary" @click.prevent="guardarKardex()">GUARDAR KARDEX</a>
 		</div>
+	
 </div>
+@endif
 
 <div v-if="ejercicio.length > 0 && actuingreso.estado">
 <table  class="table table-bordered table-responsive table-sm">

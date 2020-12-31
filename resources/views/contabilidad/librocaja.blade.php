@@ -10,7 +10,12 @@
 
         </div>
     </div>
+ @if ($rol === 'estudiante')
+        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirLibro()">Agregar Detalle</a>
 
+        <a href="#" class="addDiario btn btn-outline-success ml-1 " @click.prevent="guardarLibro()">Guardar Libro Caja</a>
+
+@endif
     <table class="table table-bordered table-sm">
         <thead>
             <tr class="text-center bg-dark">
@@ -48,6 +53,7 @@
             </tr>
         </tbody>
     </table>
+ @if ($rol === 'estudiante')
 
     <div class="row justify-content-center mb-2">
         <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirLibro()">Agregar Detalle</a>
@@ -56,6 +62,7 @@
     <div class="row justify-content-center">
         <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarLibro()">Guardar Libro Caja</a>
     </div>
+@endif
     <br>
     @include ('contabilidad.modallibrocaja')
 </div>

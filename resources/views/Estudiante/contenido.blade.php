@@ -24,7 +24,7 @@
                 @endforeach
 
                 <a class="btn btn-primary btn" href=""><i class="far fa-clipboard"></i> Calificaciones</i></a>
-                <a class="btn btn-success btn" href=""><i class="fas fa-users"></i> Participantes</i></a>
+                {{-- <a class="btn btn-success btn" href=""><i class="fas fa-users"></i> Participantes</i></a> --}}
             </div>
             <div class="row">
                 <div class="card-body">
@@ -50,7 +50,7 @@
                                 <h3 class="card-title"> {{$contenido->nombre}}</h3>
                             </div>
                             <div class="card-body">
-                                <table class="table table-hover">
+                                <table class="table table-hover myTable" >
                                     <thead>
                                         <tr>
                                             <th scope="col" width="100">Unidad</th>
@@ -101,7 +101,7 @@
                                 <h3 class="card-title"> {{$contenido->nombre}}</h3>
                             </div>
                             <div class="card-body">
-                                <table class="table table-hover">
+                                <table class="table table-hover myTable">
                                     <thead>
                                         <tr>
                                             <th scope="col" width="50">#</th>
@@ -157,7 +157,7 @@
 <script>
 $(function() {
     $(document).ready(function() {
-        $('#myTable').DataTable({
+        $('.myTable').DataTable({
             "info": true,
             "autoWidth": true,
             "language": {

@@ -111,6 +111,10 @@ use App\Admin\TallerescribirCuenta;
 use App\Taller;
 use App\TallerChequeRe;
 use App\User;
+use JavaScript;
+use App\Admin\TallerModuloContable;
+use App\Admin\TallerModuloTransaccion;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -544,9 +548,26 @@ class VistaEstudianteController extends Controller
             ->where('taller_user.taller_id', $id)
             ->select('taller_user.*')
             ->get();
-            
-             $datos = TallerContabilidad::where('taller_id', $consul->id)->firstOrFail();
+                $datos = TallerModuloContable::where('taller_id', $consul->id)->firstOrFail();
+                  JavaScript::put([
+                 'taller' => $d,
+                 'datos' => $datos,
+                ]);
+                 if ($datos->metodo == 'individual') {
+
             return view('estudiantes.talleres.taller37', compact('datos', 'd' , 'relacion'));
+           
+    
+            }else{
+                $productos = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->where('tipo','fifo')->get();
+                $modulo = json_decode($datos->modulos);
+            return view('estudiantes.talleres.taller37', compact('datos', 'd' , 'relacion', 'productos', 'modulo'));
+               
+            }
+
+       
+       
+
 
         }elseif ($plant == 38) {
             $relacion = DB::table('taller_user')

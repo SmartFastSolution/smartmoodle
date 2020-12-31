@@ -26,9 +26,18 @@
 			<input autocomplete="ÑÖcompletes" v-model="producto" type="" name="" placeholder="Producto" class="form-control text-center">
 
 		</div>
-		
 
-			<table class="table table-bordered table-responsive table-sm">
+		
+ @if ($rol === 'estudiante')
+ <div v-if="!transaccion.ingreso.edit && !transaccion.egreso.edit  && producto_id !== ''" class="col-12 text-center mb-3">
+	<a {{-- v-if="transacciones.length == 0" --}} class="btn btn-sm btn-success mr-2" @click.prevent="modalInicial()">Saldo Inicial</a>
+	<a  class="btn btn-sm btn-info mr-2" @click.prevent="modalTransacciones()">Agregar Ingreso / Egreso</a>
+	<a href="" class="btn btn-primary btn-sm" @click.prevent="guardarKardex()">GUARDAR KARDEX</a>
+
+</div>
+@endif
+
+	<table class="table table-bordered  table-sm">
 		<thead class="bg-warning"> 
 		  <tr class="text-center">
 		    <th style="vertical-align:middle" rowspan="2" width="100">FECHA</th>
@@ -87,8 +96,8 @@
 		</tbody>
 </table>
  	@include('contabilidad.modales.modalkardex_promedio')
-
- <div v-if="!transaccion.ingreso.edit && !transaccion.egreso.edit  && producto_id !== ''" class="col-4 align-self-center">
+ @if ($rol === 'estudiante')
+ <div v-if="!transaccion.ingreso.edit && !transaccion.egreso.edit  && producto_id !== ''" class="text-center">
 
 	<a {{-- v-if="transacciones.length == 0" --}} class="btn btn-sm btn-success mr-2" @click.prevent="modalInicial()">Saldo Inicial</a>
 	<a  class="btn btn-sm btn-info mr-2" @click.prevent="modalTransacciones()">Agregar Ingreso / Egreso</a>
@@ -137,6 +146,7 @@
 		</div>
 		
 	</div>
+@endif
 </div>
 <div v-if="ingresos.length > 0 && transaccion.ingreso.edit ">
 <table  class="table table-bordered table-responsive table-sm">

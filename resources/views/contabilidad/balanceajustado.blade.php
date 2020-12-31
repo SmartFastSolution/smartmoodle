@@ -28,12 +28,12 @@
         <a  v-if="update" href="#" class="  addDiario btn btn-outline-danger  " @click.prevent="actualizarBalance()">Actualizar Registro</a>
 
   </div> --}}
+  @if ($rol === 'estudiante')
    <div class="row justify-content-start mb-2">
       <a  href="#" class="addDiario btn btn-outline-info mr-2 " @click.prevent="abrirTransaccion()">Agregar Movimientos</a>
       <a  href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarBalance()">Guardar Balance</a>
-
-
   </div>
+@endif
   <table class="table table-bordered table-sm mb-2">
 <thead>
   <tr class="text-center bg-dark">
@@ -69,13 +69,15 @@
   </tr>
 </tbody>
 </table>
+ @if ($rol === 'estudiante')
  <div class="row justify-content-center mb-2">
       <a  href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Movimientos</a>
   </div>
     <div class="row justify-content-center">
-        <a  href="#" class="addDiario btn btn-outline-info " @click.prevent="guardarBalance()">Guardar Balance</a>
+        <a  href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarBalance()">Guardar Balance</a>
         
     </div>
+  @endif
     @include ('contabilidad.modales.modalbalanceajustado')
 
 </div>

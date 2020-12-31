@@ -1953,12 +1953,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
         if ($taller_37 = true) {
           $e                                   = TallerModuloContable::get()->last();
+           if (isset($request->balance_horizontal)  ) {
           $binicial                            = new TallerModuloTransaccion;
           $binicial->taller_modulo_contable_id = $e->id;
           $binicial->tipo                      = 'horizontal';
           $binicial->enunciado                 = $request->enunciado;
           $binicial->transacciones             = $request->balance_horizontal;
           $binicial->save();
+        }
           if (isset($request->productos)  ) {
                   foreach ($request->productos as $key=>$v) {
                     $datos=array(
@@ -1973,13 +1975,15 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
                     TallerModuloTransaccion::insert($datos);
                     }
           }
+           if (isset($request->balance_horizontal)  ) {
+
           $diariogeneral                            = new TallerModuloTransaccion;
           $diariogeneral->taller_modulo_contable_id = $e->id;
           $diariogeneral->tipo                      = 'diario_general';
           $diariogeneral->enunciado                 = $request->enunciado;
           $diariogeneral->transacciones             = $request->diario_general;
           $diariogeneral->save();
-
+}
        }
         return response(array(                                         //ENVIO DE RESPUESTA
                     'success' => true,

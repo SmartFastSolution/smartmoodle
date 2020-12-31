@@ -44,12 +44,12 @@
                                     </select>
                                 </div>
                             </div>
-                      <div class="form-group col-4">
+                 {{--      <div class="form-group col-4">
                                     <label for="" class="col-form-label">Imagen(Opcional):</label>
                                         <input type="file" class="inputfile inputfile-1" name="imagen" id="file-1">
                                         <label for="file-1"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>
                                    
-                                  </div>
+                                  </div> --}}
                       <div class="form-group">
                         <label for="" class="col-form-label">Leyenda(Usar cuando no hay imagen):</label>
                         <textarea  class="form-control" name="leyenda" ></textarea>
@@ -2609,7 +2609,7 @@
                                           <th width="25" colspan="2" v-if="registros.length > 0 || ejercicios.debe.length > 0">ACCION</th>
                                         </tr>
                                       </thead>
-                                          <tbody v-for="(registro, id) in registros" @change="totalDebe()">
+                                          <tbody v-for="(registro, id) in registros">
                                             <tr v-for="(diar, index) in registro.debe">
                                                 <td align="rigth">@{{ diar.nom_cuenta}}</td>
                                                 <td align="center" width="125">@{{ diar.saldo }}</td>
@@ -2622,99 +2622,85 @@
                                                 <td align="center" width="125"></td>
                                                 <td align="center" width="125">@{{ diar.saldo }}</td>
                                             </tr>
-                                          </tbody>
-                                        <tbody>
-                                            <tr v-for="(diar, index) in ejercicios.debe" class="table-info">
-                                                <td >@{{ diar.nom_cuenta}}</td>
-                                                <td align="center" width="125">@{{ diar.saldo }}</td>
-                                                <td align="center" width="125"></td>
-                                                <td align="center" width="25">
-                                                    <a @click="debediairoEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i></a>
-                                                </td>
-                                                <td align="center" width="25">
-                                                    <a @click="deleteDebe(index)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr v-for="(diar, index) in ejercicios.haber" class="table-info">
-                                                <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
-                                                <td align="center" width="125"></td>
-                                                <td align="center" width="125">@{{ diar.saldo }}</td>
-                                                <td>
-                                                    <a @click="habediarioEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i></a>
-                                                </td>
-                                                <td align="center" width="25"><a @click="deleteHaber(index)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></td>
-                                            </tr>
-                                        </tbody>
-                                        <tbody>
-                                            <tr v-for="(diar, index) in edit.debe" class="table-danger">
-                                                <td >@{{ diar.nom_cuenta}}</td>
-                                                <td align="center" width="125">@{{ diar.saldo }}</td>
-                                                <td align="center" width="125"></td>
-                                                <td align="center" width="25">
-                                                    <a @click="debeEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i></a>
-                                                </td>
-                                                <td align="center" width="25">
-                                                    <a @click="debeDelete(index)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                            <tr v-for="(diar, index) in edit.haber" class="table-danger">
-                                                <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
-                                                <td align="center" width="125"></td>
-                                                <td align="center" width="125">@{{ diar.saldo }}</td>
-                                                <td>
-                                                    <a @click="haberEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i></a>
-                                                </td>
-                                                <td align="center" width="25"><a @click="haberDelete(index)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></td>
-                                            </tr>
-                                        </tbody>                        
+                                          </tbody>      
                                 </table>
 
-         
+                                <div class="col-12 mt-2" v-if="ejercicios.debe.length > 0 || ejercicios.haber.length > 0">
+
+                                    <h2 v-if="!update" class="text-center">AGRERAR MOVIMIENTOS</h2>
+
+                                    <h2 v-if="update" class="text-center">ACTUALIZAR MOVIMIENTOS</h2>
+                                    <table  class="table table-bordered table-sm">
+                                         <thead class="thead-dark">
+                                         <tr align="center">
+                                             {{-- <th scope="col" width="200">FECHA</th> --}}
+                                             <th scope="col" width="450">NOMBRE DE CUENTAS</th>
+                                             <th scope="col " width="125">DEBE</th>
+                                             <th scope="col">HABER</th>
+                                             <th width="200" colspan="2"  v-if="ejercicios.debe.length > 0 || ejercicios.haber.length > 0">ACCION</th>
+                                         </tr>
+                                     </thead>
+                                     <tbody is="draggable" group="people" :list="ejercicios.debe" tag="tbody" class="bg-light">
+                                         <tr v-for="(diar, index) in ejercicios.debe">
+                                             {{-- <td align="center" width="100">@{{ diar.fecha}}</td> --}}
+                                             <td>@{{ diar.nom_cuenta}}</td>
+                                             <td class="text-right" width="125">@{{ diar.saldo }}</td>
+                                             <td class="text-right" width="125"></td>
+                                             <td class="text-right" width="25">
+                                                 <a @click="debediairoEdit(index)" class="btn btn-warning btn-sm"><i
+                                                         class="fas fas fa-edit"></i></a>
+                                             </td>
+                                             <td align="center" width="25">
+                                                 <a @click="deleteDebe(index)" class="btn btn-danger btn-sm"><i
+                                                         class="fas fa-trash-alt"></i></a>
+                                             </td>
+                                         </tr>
+                                     </tbody>
+                                     <tbody is="draggable" group="people" :list="ejercicios.haber" tag="tbody" class="bg-light">
+                                         <tr v-for="(diar, index) in ejercicios.haber">
+                                             {{-- <td align="center" width="50"></td> --}}
+                                             <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
+                                             <td class="text-right" width="125"></td>
+                                             <td class="text-right" width="125">@{{ diar.saldo }}</td>
+                                             <td class="text-right">
+                                                <a @click="habediarioEdit(index)" class="btn btn-warning btn-sm"><i class="fas fas fa-edit"></i>
+                                                </a>
+                                             </td>
+                                             <td align="center" width="25"><a @click="deleteHaber(index)" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></td>
+                                         </tr>
+                                     </tbody>
+
+                                 </table>
+          {{--     <div class="row justify-content-around mb-2">
+
+              <a v-if="update" href="#" class="addDiario btn btn-success" @click.prevent="updaterRegister()">Actualizar Transaccion</a> 
+              <a v-if="!update" href="#" class="addDiario btn btn-success" @click.prevent="guardarRegistro()">Agregar Transaccion</a> 
+                  </div> --}}
+                  </div>
                             </div>
-                            <div v-if="edit.debe.length >= 1" class="form-row justify-content-center">
-                                <div class="form-inline col-6">
-                                    <input required="" v-model="ejercicio.debe.nom_cuenta"  type="text" placeholder="Actualizar Cuenta " class="form-control form-control-sm mr-1">
-                                    <input required="" v-model="ejercicio.debe.saldo" type="text" placeholder="Actualizar saldo" class="form-control form-control-sm">
-                                    <a class="btn ml-2 btn-outline-info btn-sm text-center mt-1" href="#" @click.prevent="updateDebe">Actualizar Debe</a>
-                                </div>
-                                <div class="form-inline col-6">
-                                    <input required="" type="text" v-model="ejercicio.haber.nom_cuenta" class="form-control form-control-sm mr-1" placeholder="Actualizar Cuenta ">
-                                    <input required="" type="text" v-model="ejercicio.haber.saldo" class="form-control form-control-sm" placeholder="Actualizar saldo">
-                                    <a class="btn ml-2 btn-outline-info btn-sm mt-1" href="#" @click.prevent="updateHaber()"> Actualizar Haber</a>
-                            </div>
-                            <div class="text-center">
-                                 <a class="btn ml-2 btn-outline-primary btn-sm mt-1" href="#" @click.prevent="updaterRegister()"> Actualizar Registro</a>
-                            </div>
-                            </div>
-                            <div v-else class="">
-                                <div v-if="ejercicioedit == 100" class="form-row">
+                            <div class="">
+                                <div class="form-row">
                                 <div class="form-inline col-6">
                                     <input required="" v-model="ejercicio.debe.nom_cuenta"  type="text" placeholder="Agregar Cuenta " class="form-control form-control-sm mr-1">
-                                    <input required="" v-model="ejercicio.debe.saldo" type="text" placeholder="Agregar saldo" class="form-control form-control-sm">
-                                    <a class="btn ml-2 btn-outline-info btn-sm text-center mt-1" href="#" @click.prevent="updateEjeDebe">Actualizar Debe</a>
-                                </div>
-                                <div class="form-inline col-6">
-                                    <input required="" type="text" v-model="ejercicio.haber.nom_cuenta" class="form-control form-control-sm mr-1" placeholder="Agregar Cuenta ">
-                                    <input required="" type="text" v-model="ejercicio.haber.saldo" class="form-control form-control-sm" placeholder="Agregar saldo">
-                                    <a class="btn ml-2 btn-outline-info btn-sm mt-1" href="#" @click.prevent="updateeEjeHaber()"> Actualizar Haber</a>
+                                    <input required="" v-model="ejercicio.debe.saldo" type="number" placeholder="Agregar saldo" class="form-control form-control-sm">
+                                    <a v-if="!ejercicio.debe.edit" class="btn ml-2 btn-outline-info btn-sm text-center mt-1" href="#" @click.prevent="agregarDebe">Agregar Debe</a>
+                                    <a v-if="ejercicio.debe.edit" href="#" class="btn btn-sm btn-success" @click.prevent="updateEjeDebe()">Actualizar</a>
+                                    <a v-if="ejercicio.debe.edit" href="#" class="btn btn-sm btn-danger ml-1" @click.prevent="cancelarEdicion('debe')"><i class="fa fa-window-close"></i></a>
                                 </div>
 
-                                </div>
-                                <div v-else class="form-row">
-                                    <div class="form-inline col-6">
-                                    <input required="" v-model="ejercicio.debe.nom_cuenta"  type="text" placeholder="Agregar Cuenta " class="form-control form-control-sm mr-1">
-                                    <input required="" v-model="ejercicio.debe.saldo" type="text" placeholder="Agregar saldo" class="form-control form-control-sm">
-                                    <a class="btn ml-2 btn-outline-info btn-sm text-center mt-1" href="#" @click.prevent="agregarDebe">Agregar Debe</a>
-                                </div>
                                 <div class="form-inline col-6">
                                     <input required="" type="text" v-model="ejercicio.haber.nom_cuenta" class="form-control form-control-sm mr-1" placeholder="Agregar Cuenta ">
-                                    <input required="" type="text" v-model="ejercicio.haber.saldo" class="form-control form-control-sm" placeholder="Agregar saldo">
-                                    <a class="btn ml-2 btn-outline-info btn-sm mt-1" href="#" @click.prevent="agregarHaber()"> Agregar Haber</a>
+                                    <input required="" type="number" v-model="ejercicio.haber.saldo" class="form-control form-control-sm" placeholder="Agregar saldo">
+                                    <a v-if="!ejercicio.haber.edit" class="btn ml-2 btn-outline-info btn-sm mt-1" href="#" @click.prevent="agregarHaber()"> Agregar Haber</a>
+                                    <a v-if="ejercicio.haber.edit" href="#" class="btn btn-sm btn-success mr-1" @click.prevent="updateeEjeHaber()">Actualizar</a>
+                                    <a v-if="ejercicio.haber.edit" href="#" class="btn btn-sm btn-danger ml-1" @click.prevent="cancelarEdicion('haber')"><i class="fa fa-window-close"></i></a>
                                 </div>
                                 </div>
                           
-                             <div class="mt-2">
-                                 <a class="btn ml-2 btn-outline-success btn-sm mt-1" href="#" @click.prevent="guardarRegistro()"> Agregar Registro</a>
+                             <div class="mt-2 text-center">
+                            <a v-if="!update && !ejercicio.debe.edit && !ejercicio.haber.edit" class="btn ml-2 btn-outline-success btn-sm mt-1" href="#" @click.prevent="guardarRegistro()"> Agregar Registro</a>
+                         <a  v-if="update && !ejercicio.debe.edit && !ejercicio.haber.edit"class="btn ml-2 btn-outline-success btn-sm mt-1" href="#" @click.prevent="updaterRegister()"> Actualizar Registro</a>
+                         <a  v-if="update && !ejercicio.debe.edit && !ejercicio.haber.edit"class="btn ml-2 btn-outline-danger btn-sm mt-1" href="#" @click.prevent="updaterCancel()"> Cancelar</a>
                             </div>
                             </div>
                     </div>

@@ -18,6 +18,9 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
+
+                           <a class="btn btn-dark" href="" @click.prevent="calculadora()">CALCULADORA</a>
+
                         <h2 class="text-center">AGREGAR CUENTA</h2>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Selecciona la Cuenta</label>

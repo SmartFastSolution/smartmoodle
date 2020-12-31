@@ -30,6 +30,23 @@ const funciones = new Vue({
       return
     }
     },
+    VueSweetAlert2(component,propsData)
+    {
+        Swal.fire({
+            html: '<div id="VueSweetAlert2"></div>',
+            showConfirmButton: false,
+            showCloseButton: true,
+            customClass: 'swal-wide',
+            willOpen: () => {
+                let ComponentClass = Vue.extend(Vue.component(component));
+                let instance = new ComponentClass({
+                    propsData: propsData,
+                });
+                instance.$mount();
+                document.getElementById('VueSweetAlert2').appendChild(instance.$el);
+            }
+        });
+    },
     horasExtras(horas, sueldo){
       let total = 0;
       let horaTrabajo = Number(sueldo) / 30 / 8;
@@ -80,6 +97,7 @@ const funciones = new Vue({
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////BALANCE INICIAL HORIZONTAL/////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if(document.getElementById('b_horizontal')){
 const b_hori = new Vue({
         el: '#b_horizontal',
         data:{
@@ -189,6 +207,11 @@ const b_hori = new Vue({
       return
     }
      
+    },
+    calculadora(){
+     let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
     },
         abrirActivoC(){
       this.limpiar();
@@ -1261,6 +1284,8 @@ const b_hori = new Vue({
                     p_corriente: _this.p_corrientes,
                     p_nocorriente: _this.p_nocorrientes,
                     patrimonio: _this.patrimonios,
+                    totales_iniciales:_this.total_balance_inicial,
+                    totales_totales:_this.b_initotal,
                     t_patrimonio: _this.total_balance_inicial.t_patrimonio_pasivo
                 }).then(response => {
                   if (response.data.success == true) {
@@ -1273,7 +1298,7 @@ const b_hori = new Vue({
                     _this.cambioPasivoNo();
                     _this.cambioPatrimonio();
                     // diario.obtenerBalanceInicial();
-                    $('#list-tab a:nth-child(3)').tab('show');
+                    // $('#list-tab a:nth-child(3)').tab('show');
                     console.log(response.data); 
                   } else {
                       toastr.success(response.data.message, "Smarmoddle", {
@@ -1304,13 +1329,13 @@ const b_hori = new Vue({
                       toastr.success(response.data.message, "Smarmoddle", {
                     "timeOut": "3000"
                    });
-                    _this.balance_inicial.nombre = response.data.nombre
-                    _this.balance_inicial.fecha = response.data.fecha
-                    _this.a_corrientes = response.data.a_corriente;
-                    _this.a_nocorrientes = response.data.a_nocorriente;
-                    _this.p_corrientes = response.data.p_corriente;
-                    _this.p_nocorrientes = response.data.p_nocorriente;
-                    _this.patrimonios = response.data.patrimonios;
+                    _this.balance_inicial.nombre                    = response.data.nombre
+                    _this.balance_inicial.fecha                     = response.data.fecha
+                    _this.a_corrientes                              = response.data.a_corriente;
+                    _this.a_nocorrientes                            = response.data.a_nocorriente;
+                    _this.p_corrientes                              = response.data.p_corriente;
+                    _this.p_nocorrientes                            = response.data.p_nocorriente;
+                    _this.patrimonios                               = response.data.patrimonios;
                     _this.total_balance_inicial.t_patrimonio_pasivo = response.data.total_pasivo_patrimonio;
                     _this.cambioActivo();
                     _this.cambioActivoNo();
@@ -1329,6 +1354,9 @@ const b_hori = new Vue({
             }
   }   
 });
+}
+
+if(document.getElementById('b_vertical')){
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////BALANCE INICIAL VERTICAL///////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1439,6 +1467,11 @@ const b_ver = new Vue({
       return
     }
      
+    },
+     calculadora(){
+     let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
     },
             abrirActivoC(){
       this.limpiar();
@@ -2543,7 +2576,7 @@ const b_ver = new Vue({
                     _this.cambioPasivoNo();
                     _this.cambioPatrimonio();
                     // diario.obtenerBalanceInicial();
-                    $('#list-tab a:nth-child(3)').tab('show');
+                    // $('#list-tab a:nth-child(3)').tab('show');
                     console.log(response.data); 
                   } else {
                       toastr.success(response.data.message, "Smarmoddle", {
@@ -2599,11 +2632,11 @@ const b_ver = new Vue({
             }
   }   
 });
-
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////DIARIO GENERAL//////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+if(document.getElementById('diario')){
 const diario = new Vue({
  el: '#diario',
     data:{
@@ -2696,7 +2729,11 @@ transacciones:'',
       this.obtenerDiarioGeneral();
 
     },
-
+    calculadora(){
+     let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
+    },
    
     methods:{
     formatoFecha(fecha){
@@ -3505,6 +3542,8 @@ transacciones:'',
 
     }
 });
+}
+if(document.getElementById('mayor_general')){
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////MAYOR GENERAL//////// /////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3565,6 +3604,11 @@ nombre_cierre:''
     this.obtenerAsientoCierre();
   },
   methods:{
+    calculadora(){
+     let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
+    },
     obtenerAsientoCierre: function(){
         var _this = this;
         var url = '/sistema/admin/taller/asiento-cierre-obtener';
@@ -3924,10 +3968,11 @@ nombre_cierre:''
   }
 
 });
-
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////BALANCE DE COMPROBACION /////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if(document.getElementById('balance_comp')){
 
 const balance_comp = new Vue({
   el: '#balance_comp',
@@ -3965,6 +4010,11 @@ const balance_comp = new Vue({
     this.obtenerMayorGeneral();
   },
   methods:{
+    calculadora(){
+    let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
+    },
         verificarCuenta(id){
         if (Number(this.balance.const_id) === id) {
             return false
@@ -4280,10 +4330,12 @@ const balance_comp = new Vue({
   }
   
 });
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////HOJA DE TRABAJO ////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+if(document.getElementById('hoja_trabajo')){
 
 let hoja_trabajo = new Vue({
   el: "#hoja_trabajo",
@@ -4358,6 +4410,11 @@ let hoja_trabajo = new Vue({
     this.obtenerHojita();
   },
   methods:{
+  calculadora(){
+    let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
+    },
     sumasTotales(){
       let registros    = this.registros;
       let bc_debe      = 0;
@@ -4708,16 +4765,16 @@ let hoja_trabajo = new Vue({
               id: _this.id_taller,
               nombre:_this.nombre,
               registros: _this.registros,
-              bc_total_debe: _this.suman.bc_total_debe,
-              bc_total_haber: _this.suman.bc_total_haber,
-              ajuste_total_debe: _this.suman.ajuste_total_debe,
-              ajuste_total_haber: _this.suman.ajuste_total_haber,
-              ba_total_debe: _this.suman.ba_total_debe,
-              ba_total_haber: _this.suman.ba_total_haber,
-              er_total_debe: _this.suman.er_total_debe,
-              er_total_haber: _this.suman.er_total_haber,
-              bg_total_debe: _this.suman.bg_total_debe,
-              bg_total_haber: _this.suman.bg_total_haber,
+              bc_total_debe: _this.suman.balance_comp.total_debe,
+              bc_total_haber: _this.suman.balance_comp.total_haber,
+              ajuste_total_debe: _this.suman.ajustes.total_debe,
+              ajuste_total_haber: _this.suman.ajustes.total_haber,
+              ba_total_debe: _this.suman.balance_ajustado.total_debe,
+              ba_total_haber: _this.suman.balance_ajustado.total_haber,
+              er_total_debe: _this.suman.estado_resultado.total_debe,
+              er_total_haber: _this.suman.estado_resultado.total_haber,
+              bg_total_debe: _this.suman.balance_general.total_debe,
+              bg_total_haber: _this.suman.balance_general.total_haber,
 
         }).then(response => {
           if (response.data.estado == 'guardado') {
@@ -4762,11 +4819,12 @@ let hoja_trabajo = new Vue({
 
   }
 
-})
-
+});
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////BALANCE DE COMPROBACIO AJUSTADO /////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if(document.getElementById('balance_ajustado')){
 
 const balance_ajustado = new Vue({
   el: "#balance_ajustado",
@@ -4797,6 +4855,11 @@ const balance_ajustado = new Vue({
     this.obtenerHojita();
   },
   methods:{
+      calculadora(){
+    let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
+    },
     obtenerHojita: function() {
         let _this = this;
         let url = '/sistema/admin/taller/hoja-obtener-trabajo';
@@ -5067,10 +5130,12 @@ const balance_ajustado = new Vue({
 
   
 });
-
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////ESTADO RESULTADO ///////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+if(document.getElementById('estado_resultado')){
 
 const estado_resultado = new Vue({
 
@@ -5138,7 +5203,11 @@ const estado_resultado = new Vue({
     this.obtenerEstadoResultado();
   },
   methods:{
-    
+    calculadora(){
+    let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
+    },
     agregarBruta(){
       this.venta                      = this.utilidad_bruta.venta;
       this.costo_venta                = this.utilidad_bruta.costo_venta;
@@ -5717,9 +5786,11 @@ const estado_resultado = new Vue({
 
 
 });
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////BALANCE GENERAL ///////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if(document.getElementById('balance_general')){
 
 const balance_general = new Vue({
 
@@ -5839,6 +5910,11 @@ const balance_general = new Vue({
     this.obtenerEstadoResultado();
   },
    methods:{
+        calculadora(){
+    let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
+    },
         obtenerEstadoResultado: function() {
         let _this = this;
         let url = '/sistema/admin/taller/estado-obtener-resultado';
@@ -6745,6 +6821,9 @@ const balance_general = new Vue({
             }
   }   
 });
+}
+
+if(document.getElementById('asientos_cierre')){
 
 const asientos_cierre = new Vue({
  el: '#asientos_cierre',
@@ -6857,6 +6936,11 @@ const asientos_cierre = new Vue({
     },
 
     methods:{
+          calculadora(){
+    let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
+    },
     obtenerEstadoResultado: function() {
         let _this = this;
         let url = '/sistema/admin/taller/estado-obtener-resultado';
@@ -7544,11 +7628,13 @@ const asientos_cierre = new Vue({
 
     }
 });
-
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////KARDEX ///////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+if(document.getElementById('kardex')){
 
 const kardex = new Vue({
   el: "#kardex",
@@ -10013,6 +10099,9 @@ const kardex = new Vue({
         }   
 }
 });
+}
+
+if(document.getElementById('kardex_promedio')){
 
 const kardex_promedio = new Vue({
 
@@ -10095,7 +10184,11 @@ const kardex_promedio = new Vue({
    // this.obtenerKardexPromedio();
   },
   methods:{
-
+  calculadora(){
+    let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
+    },
       decimales(saldo){
       if (saldo !== null && saldo !== '' && saldo !== 0) {
          let total = Number(saldo).toFixed(2);
@@ -10750,14 +10843,15 @@ const vm = new Vue({
       this.currentNum = 0;
     }
   }
-})
-
+});
+}
 
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////LIBRO CAJA ANEXO //////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+if(document.getElementById('librocaja')){
 
 const librocaja = new Vue({
   el: "#librocaja",
@@ -10792,6 +10886,11 @@ const librocaja = new Vue({
     this.obtenerLibroCaja();
   },
   methods:{
+  calculadora(){
+    let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
+    },
     decimales(saldo){
       if (saldo !== null && saldo !== '' && saldo !== 0) {
          let total = Number(saldo).toFixed(2);
@@ -11021,6 +11120,9 @@ const librocaja = new Vue({
   },
 
 });
+}
+
+if(document.getElementById('arqueo_caja')){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////ARQUEO CAJA ANEXO /////////////////////////////////////////////////////////
@@ -11064,7 +11166,11 @@ const arqueo_caja = new Vue ({
     this.obtenerLibroCaja();
   },
   methods:{
-
+      calculadora(){
+    let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
+    },
     obtenerLibroCaja: function(){
       let _this = this;
       let url ='/sistema/admin/taller/anexo-obtener-caja';
@@ -11446,6 +11552,9 @@ const arqueo_caja = new Vue ({
   },
 
 });
+}
+
+if(document.getElementById('librosbanco')){
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -11491,6 +11600,11 @@ const librosbanco = new Vue({
   },
 
   methods:{
+      calculadora(){
+    let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
+    },
     decimales(saldo){
       if (saldo !== null && saldo !== '' && saldo !== 0) {
          let total = Number(saldo).toFixed(2);
@@ -11729,6 +11843,9 @@ const librosbanco = new Vue({
   
  }
 });
+}
+
+if(document.getElementById('conciliacionb')){
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -11741,7 +11858,11 @@ const conciliacionb = new Vue({
      nombre:'',
      n_banco:'',
      fecha : '',
-    
+     lb_nombre:'',
+    lb_n_banco:'',
+    lb_c_banco:'',
+
+     lb_banco:[],
      c_saldos:[],
      saldo:{
       edit:false,
@@ -11786,8 +11907,32 @@ const conciliacionb = new Vue({
    },
    mounted: function() {
     this.obtenerConciliacionBancaria();
+    this.obtenerLibroBanco();
   },
       methods:{
+    calculadora(){
+    let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
+    },
+      obtenerLibroBanco: function (){
+       let _this = this;
+       let   url = '/sistema/admin/taller/libro-obtener-banco';
+       axios.post(url,{
+         id: _this.id_taller,
+       }).then(response=>{
+        if(response.data.datos == true){
+            this.lb_banco = response.data.mb;
+            this.lb_nombre = response.data.nombre;
+            this.lb_n_banco = response.data.n_banco;
+            this.lb_c_banco = response.data.c_banco;
+            // this.totales();
+        }
+      }).catch(function(error){
+
+      });
+
+     },
 
     decimales(saldo){
       if (saldo !== null && saldo !== '' && saldo !== 0) {
@@ -12566,6 +12711,9 @@ const conciliacionb = new Vue({
 
 
 });
+}
+
+if(document.getElementById('retencion_iva')){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////RETENCION DEL IVA /////////////////////////////////////////////////////////
@@ -12653,7 +12801,11 @@ let reten_iva = new Vue({
     },
     
       methods:{
-
+          calculadora(){
+    let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
+    },
         obtenerDiarioGeneral: function(){
           var _this = this;
           var url = '/sistema/admin/taller/diariogeneral';
@@ -13272,9 +13424,10 @@ let reten_iva = new Vue({
      
 
 });
+}
 
 
-
+if(document.getElementById('nomina_empleado')){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////NOMINA DE EMPLEADOS ///////////////////////////////////////////////////////
@@ -13305,6 +13458,16 @@ const nomina_em = new Vue({
       index:'',
       nombre:''
     },
+    sobretiempo:{
+      sueldo:'',
+      hora_trabajo:'',
+      total_suple:'',
+      total_extra:'',
+      suma_suple:'',
+      suma_extra:'',
+
+      total:''
+    },
     calculo:{
 
       valor:'',
@@ -13333,16 +13496,27 @@ const nomina_em = new Vue({
       s_netopagar:0,
     },
     deduccion:{
-      valor:''
+      valor:'',
+      descripcion:''
     },
     deducciones:[],
     impuesto:{
+      iva:'',
+      fraccion_excedente_iva:'',
+      ingreso_gravable:'',
+      iies:'',
+      ingreso_liquido:'',
       sueldo:'',
       comisiones:'',
       fraccion:'',
+      fraccion_excedente:'',
       impuesto_fraccion:'',
+      ingreso_mensual:'',
+      base_imponible:'',
+      ingreso_anual:'',
       interes:'',
-      total:''
+      total:'',
+      total_impuesto:''
     },
 
     update: false,
@@ -13355,31 +13529,118 @@ const nomina_em = new Vue({
   },
 
 methods:{
+  calculadora(){
+    let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
+    },
+  calculoHora(){
+    if (this.sobretiempo.sueldo == '') {
+        toastr.error("No ha agregado el sueldo", "Smarmoddle", {
+          "timeOut": "3000"
+        });
+      }else{
+        let hora_trabajo = Number(this.sobretiempo.sueldo) / 30 / 8;
+        this.sobretiempo.hora_trabajo = Number(hora_trabajo).toFixed(2);
+      }
+  },
+  calculoSobre(){
+      let suplementaria           = Number(this.sobretiempo.total_suple) * Number(this.sobretiempo.hora_trabajo) * 1.5;
+      let extraordinaria          = Number(this.sobretiempo.total_extra) * Number(this.sobretiempo.hora_trabajo) * 2;
+      this.sobretiempo.suma_suple = Number(suplementaria).toFixed(2);
+      this.sobretiempo.suma_extra = Number(extraordinaria).toFixed(2);
+      this.sobretiempo.total      = Number(suplementaria + extraordinaria).toFixed(2);
+  },
+  limpiarSobre(){
+    this.sobretiempo.sueldo       = '';
+    this.sobretiempo.hora_trabajo = '';
+    this.sobretiempo.total_suple  = '';
+    this.sobretiempo.total_extra  = '';
+    this.sobretiempo.suma_suple   = '';
+    this.sobretiempo.suma_extra   = '';
+    this.sobretiempo.total        = '';
+  },
+          impuestoAgregado(tipo){
+            if (tipo == 'ingresos') {
+              let sueldo = Number(this.impuesto.sueldo);
+              let comision = Number(this.impuesto.comisiones);
+
+              let ingreso_gravable = sueldo - comision;
+              this.impuesto.ingreso_gravable = Number(ingreso_gravable).toFixed(2);
+
+              let iies            = (ingreso_gravable * 9.45) / 100;
+              this.impuesto.iies  = Number(iies).toFixed(2);;
+
+              let ingreso_liquido =  ingreso_gravable - iies;
+              this.impuesto.ingreso_liquido = Number(ingreso_liquido).toFixed(2);
+              this.impuestoAgregado('deduccion')
+
+            }else if (tipo == 'deduccion'){
+              let deduccion = 0;
+              let deducciones = this.deducciones;
+                deducciones.forEach(function(d){           
+                  deduccion  += Number(d.valor); 
+                });
+             let ingreso_liquido     = Number(this.impuesto.ingreso_liquido);
+              let ingreso_mensual = ingreso_liquido - deduccion;
+              let ingreso_anual   = ingreso_mensual * 12;
+
+              this.impuesto.ingreso_mensual = Number(ingreso_mensual).toFixed(2);
+              this.impuesto.ingreso_anual   = Number(ingreso_anual).toFixed(2);
+              this.impuesto.base_imponible  = Number(ingreso_anual).toFixed(2);
+
+            }else if (tipo == 'final'){
+             let iva               = Number(this.impuesto.interes)
+             let base_imponible    = Number(this.impuesto.base_imponible);
+             let fraccion          = Number(this.impuesto.fraccion);
+             let impuesto_fraccion = Number(this.impuesto.impuesto_fraccion)
+
+              let fraccion_excedente    = base_imponible - Number(fraccion);
+              let fraccion_excedenteiva = (fraccion_excedente * Number(iva)) / 100;
+              let total_impuesto        = Number(impuesto_fraccion) + fraccion_excedenteiva;
 
 
-          //impuesto agregadi
+              this.impuesto.fraccion_excedente    = Number(fraccion_excedente).toFixed(2);
+              this.impuesto.fraccion_excedente_iva = Number(fraccion_excedenteiva).toFixed(2);
+              this.impuesto.total_impuesto        = Number(total_impuesto).toFixed(2);
+              let total = total_impuesto / 12;
+              this.impuesto.total = Number(total).toFixed(2);
+              this.impuesto.iva = iva;
+            }
+      
+     
 
-          impuestoAgregado(sueldo, comision, deduciones, fraccion, impuesto_fraccion, interes){
-            let total           = 0;
-            let deduccion       = 0;
+          // let ingreso_mensual       = ingreso_liquido - deduccion;
+          // let ingreso_anual         = ingreso_mensual * 12;
+          // let fraccion_excedente    = ingreso_anual - Number(fraccion);
+          // let fraccion_excedenteiva = (fraccion_excedente * Number(interes)) / 100;
+          // let total_impuesto        = Number(impuesto_fraccion) + fraccion_excedenteiva;
+          // total                     = total_impuesto / 12;
 
-            let ingreso_gravable = sueldo - comision;
-            let iies            = (ingreso_gravable * 9.45) / 100;
-            let ingreso_liquido =  ingreso_gravable - iies;
-            deduciones.forEach(function(d){           
-            deduccion           += Number(d.valor); 
-          });
-            console.log(deduccion)
-
-          let ingreso_mensual       = ingreso_liquido - deduccion;
-          let ingreso_anual         = ingreso_mensual * 12;
-          let fraccion_excedente    = ingreso_anual - Number(fraccion);
-          let fraccion_excedenteiva = (fraccion_excedente * Number(interes)) / 100;
-          let total_impuesto        = Number(impuesto_fraccion) + fraccion_excedenteiva;
-          total                     = total_impuesto / 12;
-
-          return Number(total).toFixed(2);
+          // return Number(total).toFixed(2);
           },
+
+          // impuestoAgregado(sueldo, comision, deduciones, fraccion, impuesto_fraccion, interes){
+          //   let total           = 0;
+          //   let deduccion       = 0;
+
+          //   let ingreso_gravable = sueldo - comision;
+          //   let iies            = (ingreso_gravable * 9.45) / 100;
+          //   let ingreso_liquido =  ingreso_gravable - iies;
+          //   deduciones.forEach(function(d){           
+          //   deduccion           += Number(d.valor); 
+          // });
+          //   console.log(deduccion)
+
+          // let ingreso_mensual       = ingreso_liquido - deduccion;
+          // let ingreso_anual         = ingreso_mensual * 12;
+          // let fraccion_excedente    = ingreso_anual - Number(fraccion);
+          // let fraccion_excedenteiva = (fraccion_excedente * Number(interes)) / 100;
+          // let total_impuesto        = Number(impuesto_fraccion) + fraccion_excedenteiva;
+          // total                     = total_impuesto / 12;
+
+          // return Number(total).toFixed(2);
+          // },
 
 
 
@@ -13390,20 +13651,47 @@ methods:{
                   });
             }else{
           let valor =  Number(this.deduccion.valor);
-          let deduccio  = {valor:valor};
+          let deduccio  = {valor:valor , descripcion: this.deduccion.descripcion};
           this.deducciones.push(deduccio);
+          this.deduccion.descripcion = '';
           this.deduccion.valor = '';
+          this.impuestoAgregado('deduccion')
             }
+
           },
-          borrarDeduccion(index){
-          this.deducciones.splice(index, 1);   
-          },
-          impuestoRenta(){
-            if (this.impuesto.sueldo == '') {
-               toastr.error("No has agregado el sueldo", "Smarmoddle", {
+          limpiar(){
+              this.impuesto.total                  = ''
+              this.impuesto.sueldo                 = '';
+              this.impuesto.fraccion               = '';
+              this.impuesto.impuesto_fraccion      = '';
+              this.impuesto.interes                = '';
+              this.deducciones                     =[];
+              this.impuesto.comisiones             ='';
+              this.impuesto.ingreso_gravable       = '';
+              this.impuesto.iies                   = '';
+              this.impuesto.ingreso_liquido        = '';
+              this.impuesto.ingreso_mensual        = '';
+              this.impuesto.ingreso_anual          = '';
+              this.impuesto.base_imponible         = '';
+              this.impuesto.fraccion_excedente     = '';
+              this.impuesto.fraccion_excedente_iva = '';
+              this.impuesto.total_impuesto         = '';
+              this.impuesto.iva                    = '';
+               toastr.error("Limpiado Correctamente", "Smarmoddle", {
                     "timeOut": "3000"
                   });
-            }else if(this.impuesto.fraccion == ''){
+          },
+          borrarDeduccion(index){
+          this.deducciones.splice(index, 1);
+          this.impuestoAgregado('deduccion')
+          },
+          impuestoRenta(){
+            // if (this.impuesto.sueldo == '') {
+            //    toastr.error("No has agregado el sueldo", "Smarmoddle", {
+            //         "timeOut": "3000"
+            //       });
+            // }else
+             if(this.impuesto.fraccion == ''){
                toastr.error("No has agregado la fraccion basica", "Smarmoddle", {
                     "timeOut": "3000"
                   });
@@ -13415,22 +13703,19 @@ methods:{
                  toastr.error("No has agregado el porcentaje", "Smarmoddle", {
                     "timeOut": "3000"
                   });
-            }else if(this.deducciones.length == 0){
-                 toastr.error("No has agregado deducciones", "Smarmoddle", {
-                    "timeOut": "3000"
-                  });
             }else{
-              let deducciones = this.deducciones;
-              let comision = Number(this.impuesto.comisiones);
-              let impuesto = this.impuestoAgregado(this.impuesto.sueldo, comision, deducciones,  this.impuesto.fraccion, this.impuesto.impuesto_fraccion, this.impuesto.interes);
-            console.log(impuesto);
-            this.impuesto.total = impuesto
-            this.impuesto.sueldo = '';
-            this.impuesto.fraccion = '';
-            this.impuesto.impuesto_fraccion = '';
-            this.impuesto.interes = '';
-            this.deducciones =[];
-            this.impuesto.comisiones ='';
+            this.impuestoAgregado('final')
+            //   let deducciones = this.deducciones;
+            //   let comision = Number(this.impuesto.comisiones);
+            //   let impuesto = this.impuestoAgregado(this.impuesto.sueldo, comision, deducciones,  this.impuesto.fraccion, this.impuesto.impuesto_fraccion, this.impuesto.interes);
+            // console.log(impuesto);
+            // this.impuesto.total = impuesto
+            // this.impuesto.sueldo = '';
+            // this.impuesto.fraccion = '';
+            // this.impuesto.impuesto_fraccion = '';
+            // this.impuesto.interes = '';
+            // this.deducciones =[];
+            // this.impuesto.comisiones ='';
             }
           },
 
@@ -13796,6 +14081,7 @@ abrirNomina(){ //solo para acceder al modal para agregar todo pilas
                 'success'
               );
               this.t_nomina.splice(id, 1);
+              this.totales()
             }
           });
         }, //fin metodo warningeliminarnomina
@@ -13836,10 +14122,17 @@ abrirNomina(){ //solo para acceder al modal para agregar todo pilas
               toastr.success("Nómina de Empleados creada correctamente", "Smarmoddle", {
               "timeOut": "3000"
             });
+            provision_b.obtenerNomina();
+          
             }else if (response.data.estado == 'actualizado') {
-            toastr.warning("Nómina de Empleados actualizado correctamente", "Smarmoddle", {
+               
+            toastr.warning("Nómina de Empleados actualizado", "Smarmoddle", {
             "timeOut": "3000"
           });
+            provision_b.obtenerNomina();
+
+          
+
           }  
 
             }).catch(function(error){
@@ -13848,7 +14141,7 @@ abrirNomina(){ //solo para acceder al modal para agregar todo pilas
         } //end else
         }, //fin metodo guardar nomina
 
-        obtenerNomina : function(){
+        obtenerNomina: function(){
    
           let _this = this;
           let   url = '/sistema/admin/taller/nomina-obtener-empleado';
@@ -13872,9 +14165,7 @@ abrirNomina(){ //solo para acceder al modal para agregar todo pilas
 }, //fin methods
 
 
-})
-
-
+});
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////PROVISIONDE BENEFICIOS SOCIALES////////////////////////////////////////////
@@ -13922,11 +14213,14 @@ const provision_b = new Vue({
    },
 
    methods:{
-
-        obtenerNomina : function(){
-      
-          var _this = this;
-          var   url = '/sistema/admin/taller/nomina-obtener-empleado';
+      calculadora(){
+    let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
+    let component = 'example-component';
+    funciones.VueSweetAlert2(component,propsData);
+    },
+        obtenerNomina: function(){
+          let _this = this;
+          let   url = '/sistema/admin/taller/nomina-obtener-empleado';
 
           axios.post(url,{
             id: _this.id_taller,
@@ -14145,6 +14439,7 @@ const provision_b = new Vue({
               'success'
             );
             this.t_pro.splice(id, 1);
+            this.totales();
           }
         });
       }, //fin metodo warningeliminarnomina
@@ -14203,5 +14498,5 @@ const provision_b = new Vue({
           });
       } // end obtener   
     }, // end methods
-})
-
+});
+}

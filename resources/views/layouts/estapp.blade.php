@@ -8,13 +8,13 @@
                     class="brand-image img-circle elevation-4" style="opacity: .8">
                 <span class="brand-text font-weight-light">SmartMoodle</span>
             </a>
-            <ul class="navbar-nav">
-                <!-- <li class="nav-item d-none d-sm-inline-block">
+   {{--          <ul class="navbar-nav">
+                <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ url('/sistema/home') }}" class="nav-link">Administracion</a>
-                </li> -->
-                <!-- <li class="nav-item d-none d-sm-inline-block">
+                </li>
+                <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ url('/sistema/perfil') }}" class="nav-link">Perfil</a>
-                </li> -->
+                </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Actividades</a>
                 </li>
@@ -30,7 +30,7 @@
                         <a class="dropdown-item" href="#">Contact</a>
                     </div>
                 </li>
-            </ul>
+            </ul> --}}
 
             <ul class="navbar-nav ml-auto">
                 @guest

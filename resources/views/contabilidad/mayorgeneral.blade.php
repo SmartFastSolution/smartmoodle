@@ -6,6 +6,12 @@
                 placeholder="Nombre de la Empresa">
         </div>
     </div>
+ @if ($rol === 'estudiante')
+
+        <a href="#" v-if="registros.length >= 1" class="btn btn-outline-primary" @click.prevent="abrirTransaccion()">Transacciones</a>
+        <a href="#" v-if="registros.length >= 1" class="addDiario btn btn-outline-secondary ml-1" @click.prevent="guardarMayor()">Completar Mayor General</a>
+
+@endif
     <div class="row justify-content-center">
         <div v-for="(cuenta, index) in registros" class="col-11">
             <a href="" class="float-right btn bt-sm btn-danger ml-2" @click.prevent="warningEliminar(index)"><i
@@ -52,12 +58,14 @@
             </table>
         </div>
     </div>
+ @if ($rol === 'estudiante')
     <div class="row justify-content-around mb-2">
         <a href="#" class="btn btn-outline-primary" @click.prevent="abrirTransaccion()">Transacciones</a>
     </div>
     <div class="row justify-content-center">
-        <a href="#" class="addDiario btn btn-danger" @click.prevent="guardarMayor()">Completar Mayor General</a>
+        <a href="#" class="addDiario btn btn-outline-secondary" @click.prevent="guardarMayor()">Completar Mayor General</a>
     </div>
+@endif
     @include ('contabilidad.modales.modalmayorgeneral')
 
 </div>

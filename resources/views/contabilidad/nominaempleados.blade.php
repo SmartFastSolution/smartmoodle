@@ -1,4 +1,14 @@
-<div id="nomina_empleado">
+<ul class="nav nav-tabs" id="myTab" role="tablist" >
+  <li class="nav-item" role="presentation">
+    <a class="nav-link active" id="ne-nomina-tab" data-toggle="tab" href="#ne-nomina" role="tab" aria-controls="ne-nomina" aria-selected="true">Nomina de empleados</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="ne-provision-tab" data-toggle="tab" href="#ne-provision" role="tab" aria-controls="ne-provision" aria-selected="false">Provision de beneficios</a>
+  </li>
+</ul>
+<div class="tab-content border border-danger p-3" id="myTabContent">
+  <div class="tab-pane fade show active " id="ne-nomina" role="tabpanel" aria-labelledby="ne-nomina-tab">
+      <div id="nomina_empleado">
     <h1 class="text-center text-danger font-weight-bold mt-2">Nómina Empleados</h1>
     <div class="row p-4  mb-3 justify-content-center ">
         <div class="col-5 mb-3">
@@ -7,7 +17,12 @@
             <input type="date" name="fecha" v-model="fecha" class="form-control text-center" required>
         </div>
     </div>
+ @if ($rol === 'estudiante')
+        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirNomina()">Agregar Nómina</a>
 
+        <a href="#" class="addDiario btn btn-outline-success ml-1 " @click.prevent="guardarNomina()">Guardar Nómina</a>
+
+@endif
     <table class="table table-bordered table-sm">
         <thead class="bg-dark">
             <tr>
@@ -65,6 +80,7 @@
             </tr>
         </tbody>
     </table>
+ @if ($rol === 'estudiante')
 
     <div class="row justify-content-center mb-2">
         <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirNomina()">Agregar Nómina</a>
@@ -73,7 +89,13 @@
     <div class="row justify-content-center">
         <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarNomina()">Guardar Nómina</a>
     </div>
-
+@endif
 <br>
     @include ('contabilidad.modalnomina')
 </div>
+  </div>
+  <div class="tab-pane fade" id="ne-provision" role="tabpanel" aria-labelledby="ne-provision-tab">
+      @include ('contabilidad.provisiondebeneficio')
+  </div>
+</div>
+

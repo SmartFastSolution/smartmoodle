@@ -33,6 +33,7 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
 </section>
 @stop
 @section('css')
@@ -58,7 +59,7 @@ $(function() {
         $('#myTable thead tr').clone(true).appendTo('#myTable thead');
         $('#myTable thead tr:eq(1) th').each(function(i) {
 
-            var title = $(this).text(); //es el nombre de la columna
+            let title = $(this).text(); //es el nombre de la columna
             $(this).html('<input type="text" placeholder="Buscar..." />');
 
             $('input', this).on('keyup change', function() {

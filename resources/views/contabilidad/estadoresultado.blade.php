@@ -185,18 +185,15 @@
 
                           <div class="col-2"><input autocomplete="ÑÖcompletes" type="number" v-model="totales.utilidad_liquida"
                                   class="form-control text-right"></div>
-
                       </div>
-
                   </div>
-
           </div>
-
-
+ @if ($rol === 'estudiante')
     <div class="row justify-content-center mt-2">
-        <a href="#" class="addDiario btn btn-danger" @click.prevent="guardarEstadoResultado()">Completar Estado de
+        <a href="#" class="addDiario btn btn-outline-success" @click.prevent="guardarEstadoResultado()">Completar Estado de
             resultado</a>
     </div>
+  @endif
 
     @include ('contabilidad.modales.modalestadoresultado')
 

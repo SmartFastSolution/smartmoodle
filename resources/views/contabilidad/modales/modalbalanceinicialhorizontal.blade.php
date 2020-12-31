@@ -41,6 +41,9 @@
                                 <a class="nav-link" id="nav-bih-patrimonio-tab" data-toggle="tab"
                                     href="#nav-bih-patrimonio" role="tab" aria-controls="nav-bih-patrimonio"
                                     aria-selected="false">Patrimonio</a>
+                                <a class="nav-link bg-dark" id="nav-calculadora-tab" data-toggle="tab"
+                                    href="#nav-calculadora" role="tab" aria-controls="nav-calculadora"
+                                    aria-selected="false" @click.prevent="calculadora()">CALCULADORA</a>
 
                             </div>
                         </nav>
@@ -94,7 +97,10 @@
                     @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 mt-2 "
                                         style=" height:400px; overflow-y: scroll; border: solid 3px red;">
-                                        {!! $balancesInicial->transacciones !!}
+
+                                         @isset ($balancesInicial->transacciones )
+                                             {!! $balancesInicial->transacciones !!}
+                                        @endisset
 
                                     </div>
                                     @endif
@@ -190,7 +196,9 @@
                     @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 mt-2 "
                                         style=" height:400px; overflow-y: scroll; border: solid 3px red;">
-                                        {!! $balancesInicial->transacciones !!}
+                                            @isset ($balancesInicial->transacciones )
+                                             {!! $balancesInicial->transacciones !!}
+                                        @endisset
 
                                     </div>
                                     @endif
@@ -286,7 +294,9 @@
                     @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 mt-2 "
                                         style=" height:400px; overflow-y: scroll; border: solid 3px red;">
-                                        {!! $balancesInicial->transacciones !!}
+                                            @isset ($balancesInicial->transacciones )
+                                             {!! $balancesInicial->transacciones !!}
+                                        @endisset
 
                                     </div>
                                     @endif
@@ -382,7 +392,9 @@
                     @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 mt-2 "
                                         style=" height:400px; overflow-y: scroll; border: solid 3px red;">
-                                        {!! $balancesInicial->transacciones !!}
+                                            @isset ($balancesInicial->transacciones )
+                                             {!! $balancesInicial->transacciones !!}
+                                        @endisset
 
                                     </div>
                                     @endif
@@ -477,8 +489,9 @@
                     @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 mt-2 "
                                         style=" height:400px; overflow-y: scroll; border: solid 3px red;">
-                                        {!! $balancesInicial->transacciones !!}
-
+                                        @isset ($balancesInicial->transacciones )
+                                             {!! $balancesInicial->transacciones !!}
+                                        @endisset
                                     </div>
                                     @endif
 

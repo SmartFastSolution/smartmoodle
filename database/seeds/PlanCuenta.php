@@ -921,7 +921,7 @@ class PlanCuenta extends Seeder
 				'updated_at' => now()
         ]);
          DB::table('pcuentas')->insert([
-				'nombre'     => 'DEPRECIACION DE EQUIPOSDE COMPUTACION',
+				'nombre'     => 'DEPRECIACION DE EQUIPOS DE COMPUTACION',
 				'tpcuenta'   => 'costos y gastos',
 				'porcentual' => false,
 				'estado' => 'on',

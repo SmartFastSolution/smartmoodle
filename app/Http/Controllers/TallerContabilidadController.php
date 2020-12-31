@@ -730,14 +730,22 @@ class TallerContabilidadController extends Controller
                             $patrimonios   = $request->patrimonio;
 
                             $contenido = TallerModuloContable::select('enunciado')->where('taller_id', $taller_id)->firstOrFail();
-                            $binicial                          = new BalanceInicial; 
-                            $binicial->taller_id               = $taller_id;
-                            $binicial->user_id                 = $id;
-                            $binicial->tipo                    = $tipo;
-                            $binicial->enunciado               = $contenido->enunciado;
-                            $binicial->nombre                  = $request->nombre;
-                            $binicial->fecha                   = $request->fecha;
-                            $binicial->total_pasivo_patrimonio = $request->t_patrimonio;
+                            $binicial                           = new BalanceInicial; 
+                            $binicial->taller_id                = $taller_id;
+                            $binicial->user_id                  = $id;
+                            $binicial->tipo                     = $tipo;
+                            $binicial->enunciado                = $contenido->enunciado;
+                            $binicial->nombre                   = $request->nombre;
+                            $binicial->fecha                    = $request->fecha;
+                            $binicial->total_activo_corriente   = $request->totales_totales['t_a_corriente'];
+                            $binicial->total_activo_nocorriente = $request->totales_totales['t_a_nocorriente'];
+                            $binicial->total_pasivo_corriente   = $request->totales_totales['t_p_corriente'];
+                            $binicial->total_pasivo_nocorriente = $request->totales_totales['t_p_no_corriente'];
+                            $binicial->total_activo             = $request->totales_iniciales['t_activo'];
+                            $binicial->total_pasivo             = $request->totales_iniciales['t_pasivo'];
+                            $binicial->total_patrimonio         = $request->totales_totales['t_patrimonio'];
+                            $binicial->total_pasivo_patrimonio  = $request->t_patrimonio;
+
                             $binicial->save();
 
                         // if ($tipo == 'horizontal') {
@@ -824,17 +832,22 @@ class TallerContabilidadController extends Controller
                         $ids1 = [];
                         $ids2 = [];
                             $o = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', $tipo)->first();
-                                $a_corriente   = $request->a_corriente;
-                                $a_nocorriente = $request->a_nocorriente;
-                                $p_corriente   = $request->p_corriente;
-                                $p_nocorriente = $request->p_nocorriente;
-                                $patrimonios   = $request->patrimonio;
-                                $o->fecha      = $request->fecha;
-                                $o->nombre     = $request->nombre;
-                                $o->total_pasivo_patrimonio = $request->t_patrimonio;
-
+                                $a_corriente                 = $request->a_corriente;
+                                $a_nocorriente               = $request->a_nocorriente;
+                                $p_corriente                 = $request->p_corriente;
+                                $p_nocorriente               = $request->p_nocorriente;
+                                $patrimonios                 = $request->patrimonio;
+                                $o->fecha                    = $request->fecha;
+                                $o->nombre                   = $request->nombre;
+                                $o->total_activo_corriente   = $request->totales_totales['t_a_corriente'];
+                                $o->total_activo_nocorriente = $request->totales_totales['t_a_nocorriente'];
+                                $o->total_pasivo_corriente   = $request->totales_totales['t_p_corriente'];
+                                $o->total_pasivo_nocorriente = $request->totales_totales['t_p_no_corriente'];
+                                $o->total_activo             = $request->totales_iniciales['t_activo'];
+                                $o->total_pasivo             = $request->totales_iniciales['t_pasivo'];
+                                $o->total_patrimonio         = $request->totales_totales['t_patrimonio'];
+                                $o->total_pasivo_patrimonio  = $request->t_patrimonio;
                                 $o->save();
-
                                 $activ=BIActivo::where('balance_inicial_id', $o->id)->get();
 
                                 foreach($activ as $act){
@@ -2120,7 +2133,7 @@ class TallerContabilidadController extends Controller
             return response(array(
                 'datos' => true,
                 'banexocaja' => $obtenerc,
-                'nombre' =>$anexocaja->nombre
+                'nombre' =>$anexocaja->nombre,
             ),200,[]);
             }else{
                 return response(array(

@@ -227,10 +227,12 @@
         </button> --}}
         </div>
     </div>
+@if ($rol === 'estudiante')
 
     <div class="row justify-content-center">
         <a class="btn p-2 mt-3 btn-outline-info" @click.prevent="guardarBalanceInicial()">Guardar Balance Inicial</a>
     </div>
+@endif
     @include ('contabilidad.modales.modalbalanceinicialhorizontal')
     {{-- @include ('contabilidad.modalbhorizontal') --}}
 
@@ -473,9 +475,12 @@
         </button> --}}
         </div>
     </div>
+ @if ($rol === 'estudiante')
+
     <div class="row justify-content-center">
         <a class="btn p-2 mt-3 btn-outline-info" @click.prevent="guardarBalanceInicial()">Guardar Balance Inicial</a>
     </div>
+    @endif
     {{-- @include ('contabilidad.modalbvertical') --}}
     @include ('contabilidad.modales.modalbalanceinicialvertical')
 

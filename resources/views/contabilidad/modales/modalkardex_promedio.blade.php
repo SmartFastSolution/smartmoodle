@@ -109,6 +109,10 @@
                 <li class="nav-item" role="presentation">
                   <a class="nav-link text-dark font-weight-bold" id="kardex-promedio-egreso-tab" data-toggle="tab" href="#kardex-promedio-egreso" role="tab" aria-controls="kardex-promedio-egreso" aria-selected="false">EGRESO</a>
                 </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
+                  
+                </li>
               </ul>
 
               <div class="tab-content" id="myTabContent">

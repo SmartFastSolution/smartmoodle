@@ -413,11 +413,51 @@ route::post('/sistema/admin/modulo/retencioniva', 'AdminController@retencionIva'
 route::post('/sistema/admin/modulo/nominaempleados', 'AdminController@crearNomina')->name('modulo.nominaempleados');
 route::post('/sistema/admin/modulo/provisiondebeneficio', 'AdminController@crearProvision')->name('modulo.provisiondebeneficio');
 route::post('/sistema/admin/modulo/taller-concatenado', 'AdminController@tallerConcatenado')->name('modulo.tallerconcatenado');
-
-
-
-
 //FIN DE MODULOS CONTABLES
+//
+//
+
+//MODULOS DOCENTES
+route::post('/sistema/admin/docente/balance-obtener-comprobacion', 'TallerContabilidadDocenteController@obtenerBalanceCompro')->name('balance.obtenercomprobacion');
+
+route::post('/sistema/admin/docente/balance-obtener-ajustado', 'TallerContabilidadDocenteController@obtenerBalanceAjustado')->name('balance.obtenerajustado');
+
+route::post('/sistema/admin/docente/hoja-obtener-trabajo', 'TallerContabilidadDocenteController@obtenerHojaTraba')->name('balance.obtenerhoja');
+
+route::post('/sistema/admin/docente/kardex-obtener-promedio', 'TallerContabilidadDocenteController@obtenerKardexPromedio')->name('kardex.obtenerkardexpromedio');
+
+route::post('/sistema/admin/docente/estado-obtener-resultado', 'TallerContabilidadDocenteController@obtenerEstado')->name('estado.obtenerresultado');
+
+route::post('/sistema/admin/docente/kardex-obtener-fifo', 'TallerContabilidadDocenteController@obtenerKardexFifo')->name('kardex.obtenerkardexfifo');
+
+route::post('/sistema/admin/docente/diariogeneral', 'TallerContabilidadDocenteController@obtenerdiario')->name('obtenerdiario');
+
+route::post('/sistema/admin/docente/asiento-cierre-obtener', 'TallerContabilidadDocenteController@obtenerAsientoCierre')->name('obtenercierre');
+
+route::post('/sistema/admin/docente/mayorgeneral', 'TallerContabilidadDocenteController@obtenermayor')->name('obtenermayor');
+
+route::post('/sistema/admin/docente/obtener-balance-general', 'TallerContabilidadDocenteController@obtenerbalanceGeneral')->name('balance-obtener-general');
+
+route::post('/sistema/admin/docente/obtenerbalance', 'TallerContabilidadDocenteController@obtenerbalance')->name('obtenerbalance');
+
+route::post('/sistema/admin/docente/anexo-obtener-caja', 'TallerContabilidadDocenteController@obtenerLibroCaja')->name('anexocaja.obtener');
+
+route::post('/sistema/admin/docente/arqueo-obtener-caja', 'TallerContabilidadDocenteController@obtenerArqueo')->name('arqueocaja.obtener');
+
+route::post('/sistema/admin/docente/libro-obtener-banco', 'TallerContabilidadDocenteController@obtenerLbanco')->name('librobanco.obtener');
+
+route::post('/sistema/admin/docente/conciliacion-obtener-bancaria', 'TallerContabilidadDocenteController@ObtenerConciliacionB')->name('conciliacionbancaria.obtener');
+
+route::post('/sistema/admin/docente/retencion-obtener-iva', 'TallerContabilidadDocenteController@ObtenerRetencionIva')->name('retencioniva.obtener');
+
+route::post('/sistema/admin/docente/nomina-obtener-empleado', 'TallerContabilidadDocenteController@obtenerNomina')->name('nominaempleado.obtener');
+
+route::post('/sistema/admin/docente/provision-obtener-beneficio', 'TallerContabilidadDocenteController@ObtenerProvison')->name('provisionbeneficio.obtener');
+	
+
+// FIN MODULOS DOCENTES
+
+
 route::post('/sistema/homedoc/respuesta/taller1/{idtaller}', 'TallerDocenteController@store1')->name('taller1.docente');
 route::get('/sistema/admin/create', 'AdminController@admin')->name('admin.create');
 route::post('/sistema/admin', 'AdminController@store')->name('admin');

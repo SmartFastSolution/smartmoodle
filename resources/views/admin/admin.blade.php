@@ -7,15 +7,16 @@
 <script>(function(e,t,n){var r=e.querySelectorAll("html")[0];r.className=r.className.replace(/(^|\s)no-js(\s|$)/,"$1js$2")})(document,window,0);</script>
 @endsection
 @section('content')
-<a class="btn btn-info " href="{{route('materias.index')}}"> <i class="fas fa-eye"> Materias</i></a>
-<a class="btn btn-info " href="{{route('contenidos.index')}}"> <i class="fas fa-eye"> Unidad</i></a>
 
-<h1 class="text-center  mt-5 text-danger">Administrador de Talleres</h1>
+
+<h1 class="text-center mt-5 text-danger display-4 font-weight-bold">Administrador de Talleres</h1>
 
 <div id="tallerlist">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6" >
+        <a class="btn btn-info " href="{{route('materias.index')}}"> <i class="fas fa-eye"> Materias</i></a>
+<a class="btn btn-info " href="{{route('contenidos.index')}}"> <i class="fas fa-eye"> Unidad</i></a>
+        <div class="row justify-content-center mt-3">
+            <div class="col-md-12" >
                 <div class="card text-center">
                     <div class="card-header bg-primary">
                         <h1>Elija la plantilla a utilizar</h1>
@@ -23,8 +24,8 @@
                     <div class="card-body">
                         <h5 class="card-title">Seleccione:</h5>
                         <select class="custom-select" v-model="numbreTaller" name="taller" id="">
-                            <option disabled value="">SELECCIONE UN TALLER</option>
-                            @foreach ($plantillas = App\Plantilla::where('plantilla', 'si')->get() as $plantilla)
+                            <option disabled value="">SELECCIONE UNA PLANTILLA</option>
+                            @foreach ($plantillas = App\Plantilla::where('plantilla', 'si')->whereNotIn('id',[37])->get() as $plantilla)
                             <option class="text-uppercase" value="#taller{{ $plantilla->id }}">{{ $plantilla->nombre }}</option>
                             @endforeach
                         </select>
@@ -39,7 +40,7 @@
 
             </div>
 
-            <div class="col-md-6">
+     {{--        <div class="col-md-6">
                 <form action="{{ route('admin.plantilla') }}" method="POST">
                     @csrf
                     <div class="card text-center">
@@ -63,33 +64,16 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div> --}}
      		</div>
+
          <div class="row justify-content-start">
-        <div class="col-3">
-            <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-outline-danger">Atras</a>
-        </div>
+            <div class="col-3">
+                <a href="{{ redirect()->back()->getTargetUrl() }}" class="btn btn-outline-danger">Atras</a>
+            </div>
       </div>
 </div> 
 </div>
-
- <ul class="list-group m-3">
-    @foreach ($users  as $taller)
-    <li class="list-group-item ">
-        <a class="nav-link"
-        href="{{ route('taller', ['plant' => $taller->plantilla_id, 'id' => $taller->taller_id]) }}"
-        >
-            {{ $taller->nombre }}
-            {{-- - {{ $taller->contenido->nombre }} - --}} - {{ $taller->enunciado }}
-        </a>
-    </li>
-    @endforeach
-  
-
-    <div class="row justify-content-center mt-3"> {{ $users->links() }}</div>
-
-</ul> 
-
 <div id="ejercicios">
     @include('layouts.modal')
 </div>

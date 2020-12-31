@@ -41,10 +41,10 @@
               <option value="librocaja">Libro Caja</option>
               <option value="conciliacionbancaria">Consiliacion Bancaria</option>
               <option value="arqueocaja">Arqueo Caja</option>
-              <option value="librobanco">Libro Caja</option>
+              <option value="librobanco">Libro Banco</option>
               <option value="retencioniva">Retencion IVA</option>
               <option value="nominaempleados">Nomina Empleados</option>
-              <option value="provisiondebeneficio">Probiciones de Beneficio</option>
+              {{-- <option value="provisiondebeneficio">Probiciones de Beneficio</option> --}}
           </select>
         </div>
       </div>
@@ -383,7 +383,7 @@
       </div>
       </div>
             <div class="container border mt-1 mb-3  p-2 bg-info" v-else-if="taller_individual == 'librobanco'">
-        <h2 class="text-center font-weight-bold text-danger">Libro Caja</h2>
+        <h2 class="text-center font-weight-bold text-danger">Libro Banco</h2>
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
@@ -646,7 +646,7 @@
         { name: ' Conciliación Bancaria', code: 'conciliacion-bancaria' },
         { name: ' Retencion del IVA', code: 'retencion-iva' },
         { name: ' Nomina Empleados', code: 'nomina-empleado' },
-        { name: ' Provisión de Benficios', code: 'provision-beneficio' },
+        // { name: ' Provisión de Benficios', code: 'provision-beneficio' },
 
       ],
         contenido_id:'',
@@ -1429,14 +1429,6 @@
                 });
             }else if (set.enunciado == '' ) {
                  toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
-                    "timeOut": "3000"
-                });
-            }else if (set.concatenados.balance_vertical == '' ) {
-                 toastr.error("No has puesto las transacciones en el balance horizontal", "Smarmoddle", {
-                    "timeOut": "3000"
-                });
-            }else if (set.concatenados.diario_general == '' ) {
-                 toastr.error("No has puesto las transacciones en el Diario General", "Smarmoddle", {
                     "timeOut": "3000"
                 });
             }else if (set.value.length == 0 ) {
