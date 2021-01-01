@@ -11,10 +11,13 @@
         </div>
 
     </div>
-
+ @if ($rol === 'estudiante')
     <div class="row justify-content-start mb-2">
         <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Cuentas</a>
+        <a href="#" class="addDiario btn btn-outline-success ml-1" @click.prevent="guardarBalance()">Guardar Balance</a>
+
     </div>
+@endif
     <table class="table table-bordered table-sm mb-2">
         <thead>
             <tr class="bg-dark">
@@ -53,16 +56,14 @@
             </tr>
         </tbody>
     </table>
-
+ @if ($rol === 'estudiante')
     <div class="row justify-content-center mb-2">
         <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Cuentas</a>
     </div>
-
-
     <div class="row justify-content-center">
         <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarBalance()">Guardar Balance</a>
     </div>
-
+@endif
 
 
 

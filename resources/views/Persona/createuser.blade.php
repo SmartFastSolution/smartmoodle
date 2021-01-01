@@ -76,13 +76,13 @@
                                         <option selected disabled>Elija un rol para el Usuario...
                                         </option>
                                         @foreach($roles as $role)
-                                        <option value="{{$role->descripcion}}">{{$role->name}}</option>
+                                        <option value="{{$role->id}}">{{$role->name}}</option>
                                         @endforeach
 
                                     </select>
                                 </div>
                                 <!-- prueba -->
-                                <template v-if="role =='docente'">
+                                <template v-if="role =='estudiante'">
                                     <div>
                                         <div class="form-group">
                                             <label>Instituto</label>

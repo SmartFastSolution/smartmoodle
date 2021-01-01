@@ -9,22 +9,18 @@
 
 <section class="content">
     <div class="container">
-
-
         <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
         <h2 class="font-weight-light"> <strong> {{auth()->user()->curso->nombre}} </strong></h2>
-
         <div class="card card-info card-outline">
             <div class="card-header">
                 <h3 class="font-weight-light"> <strong>{{$materia->nombre}}</strong></h3>
-
                 @foreach($materia->distribuciondos as $doc)
                 <h3 class="font-weight-light"> <strong>Docente: {{$doc->user->name}} {{$doc->user->apellido}}</strong>
                 </h3>
                 @endforeach
 
                 <a class="btn btn-primary btn" href=""><i class="far fa-clipboard"></i> Calificaciones</i></a>
-                <a class="btn btn-success btn" href=""><i class="fas fa-users"></i> Participantes</i></a>
+                {{-- <a class="btn btn-success btn" href=""><i class="fas fa-users"></i> Participantes</i></a> --}}
             </div>
             <div class="row">
                 <div class="card-body">
@@ -50,7 +46,7 @@
                                 <h3 class="card-title"> {{$contenido->nombre}}</h3>
                             </div>
                             <div class="card-body">
-                                <table class="table table-hover">
+                                <table class="table table-hover myTable">
                                     <thead>
                                         <tr>
                                             <th scope="col" width="100">Unidad</th>
@@ -74,7 +70,6 @@
                                                 <a class="btn btn-info"
                                                     href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
                                                         class="fas fa-eye"></i></a>
-
                                             </td>
                                         </tr>
                                         @endforeach
@@ -93,7 +88,6 @@
                 </div>
                 <div class="row">
                     <div class="card-body">
-
                         @foreach($contenidos->where('materia_id', $materia->id) as $contenido)
                         <!-- Inicio de Talleres -->
                         <div class="card card-gray-dark">
@@ -101,7 +95,7 @@
                                 <h3 class="card-title"> {{$contenido->nombre}}</h3>
                             </div>
                             <div class="card-body">
-                                <table class="table table-hover">
+                                <table class="table table-hover myTable">
                                     <thead>
                                         <tr>
                                             <th scope="col" width="50">#</th>
@@ -133,7 +127,6 @@
                                                             class="fas fa-eye"></i></a> @else pendiente
                                                     @endisset</span>
                                             </td>
-
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -142,11 +135,11 @@
                         </div>
                         <!-- fin de talleres -->
                         @endforeach
-
                     </div>
                 </div>
             </div>
-
+        </div>
+    </div>
 </section>
 
 
@@ -157,7 +150,7 @@
 <script>
 $(function() {
     $(document).ready(function() {
-        $('#myTable').DataTable({
+        $('.myTable').DataTable({
             "info": true,
             "autoWidth": true,
             "language": {

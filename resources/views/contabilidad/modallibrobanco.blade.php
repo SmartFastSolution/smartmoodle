@@ -15,6 +15,8 @@
                 </button>
             </div>
             <div class="modal-body">
+                <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
+
                 <div class="row justify-content-center">
                     <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
                         <h2 class="text-center">AGREGAR TRANSACCIÓN</h2>
@@ -80,39 +82,119 @@
                                     class="fa fa-window-close"></i></a>
                         </div>
                     </div>
-                    <div class="col-6" style=" height:400px; overflow-y: scroll;">
-                        <h2 class="text-center">TRANSACCIONES</h2>
+                    @if($datos->metodo == 'individual')
 
-                        <p>
-                            Se compra s/fra. #040 a Importadora “ELMARY” (contribuyente especial) - doce
-                            acondicionadores de aire en $ 550 c/u. Se cancela con ch/.# 050 Bco. Guayaquil. <br> <br>
-                            Se cancela la Fra.#023 a “Publicitas” (No Obligada a llevar Contabilidad) por servicios de
-                            publicidad $ 300 con ch/.#051 Bco. Guayaquil. <br> <br>
-
-                            Se vende S/. Fra. # 010 - cincuenta acondicionadores de aire en $ 1.200 c/u a Comercial
-                            “Felipao” (Obligado a llevar Contabilidad). Nos cancela con ch/. #082 Bco. Austro. <br> <br>
-
-                            Se deposita en cta. cte.# 3050 Bco. Guayaquil $ 60.000 <br> <br>
-
-                            Se cancela la Fra.#088 a “Servinet” (No Obligada a llevar Contabilidad) por servicios de
-                            internet $ 60 con ch/.#052 Bco. Guayaquil. <br> <br>
-
-                            Se compra s/fra. # 056 a Importadora “CASIRON” (contribuyente especial) - diez
-                            acondicionadores de aire en $ 555 c/u. con ch/.# 053 Bco. Guayaquil. <br> <br>
-
-                            De la última compra se devuelve dos acondicionadores de aire por no estar de acuerdo con el
-                            pedido (Fra. # 011). <br> <br>
-
-                            Se cancela a “CNT” la Fra. #073 por servicio telefónico $ 150 con ch/.# 054 Bco. Guayaquil.
-                            <br> <br>
-
-                            Se vende S/Fra. #012 - treinta acondicionadores de aire en $ 1.200 c/u a Comercial “INCOR”
-                            (Obligado a llevar Contabilidad). Se recibe ch/. #101 Bco. del Austro. <br> <br>
-
-                            De la última venta nos devuelven un acondicionador de aire por no estar de acuerdo con el
-                            pedido. Se cancela con ch/.#055 Bco. Guayaquil. (Fra. # 057) <br> <br>
-                        </p>
+                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                        {!! $transacciones->transacciones !!}
                     </div>
+                    @elseif($datos->metodo == 'concatenado')
+                    <div class="col-6" style=" height:300px; overflow-y: scroll;">
+                        <h3 class="text-center font-weight-bold">Datos para realizar el Mayor General</h3>
+                        <h3 class="text-center">Diario General</h3>
+                        <table class="table table-bordered table-sm">
+                            <thead class="thead-dark">
+                                <tr align="center">
+                                    <th scope="col" width="200">FECHA</th>
+                                    <th scope="col" width="450">NOMBRE DE CUENTAS</th>
+                                    <th scope="col " width="125">DEBE</th>
+                                    <th scope="col">HABER</th>
+                                </tr>
+                            </thead>
+                            <tbody v-for="(registro, id) in dgeneral">
+                                <tr v-for="(diar, index) in registro.debe">
+                                    <td align="center" width="50">@{{ formatoFecha(diar.fecha)}}</td>
+                                    <td align="rigth">@{{ diar.nom_cuenta}}</td>
+                                    <td class="text-right" width="125">@{{ decimales(diar.saldo) }}</td>
+                                    <td class="text-right" width="125"></td>
+                                </tr>
+                                <tr v-for="(diar, index) in registro.haber">
+                                    <td align="center" width="50"></td>
+                                    <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
+                                    <td class="text-right" width="125"></td>
+                                    <td class="text-right" width="125">@{{ decimales(diar.saldo) }}</td>
+                                </tr>
+                                <tr class="text-muted">
+                                    <td></td>
+                                    <td>@{{ registro.comentario }}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <div v-if="ajustes.length > 0">
+                            <h2 class="font-weight-bold text-center">Asientos de ajustes </h2>
+                            <table class="table table-bordered table-sm">
+                                <tbody v-for="(registro, id) in ajustes">
+                                    <tr v-for="(diar, index) in registro.debe">
+                                        <td align="center" width="200">@{{ formatoFecha(diar.fecha)}}</td>
+                                        <td align="rigth" width="450">@{{ diar.nom_cuenta}}</td>
+                                        <td align="center" width="125">@{{ decimales(diar.saldo) }}</td>
+                                        <td align="center" width="125"></td>
+                                    </tr>
+                                    <tr v-for="(diar, index) in registro.haber">
+                                        <td align="center" width="50"></td>
+                                        <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
+                                        <td align="center" width="125"></td>
+                                        <td align="center" width="125">@{{ decimales(diar.saldo) }}</td>
+
+                                    </tr>
+                                    <tr class="text-muted">
+                                        <td></td>
+                                        <td>@{{ registro.comentario }}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div v-if="registros_cierres.length > 0">
+                            <h1 class="text-center text-danger font-weight-bold mt-2">ASIENTOS DE CIERRE</h1>
+                            <div class="row justify-content-center">
+                                <div class="col-3">
+                                    <h4 class="text-center font-weight-bold">@{{ nombre_cierre }}</h4>
+                                </div>
+                            </div>
+
+                            <div class="row p-3  mb-2 ">
+                                <div class="col-12">
+                                    <table class="table table-bordered table-sm">
+                                        <thead class="thead-dark">
+                                            <tr align="center">
+                                                <th scope="col" width="200">FECHA</th>
+                                                <th scope="col" width="450">NOMBRE DE CUENTAS</th>
+                                                <th scope="col " width="125">DEBE</th>
+                                                <th scope="col">HABER</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody v-for="(registro, id) in registros_cierres">
+                                            <tr v-for="(diar, index) in registro.debe">
+                                                <td align="center" width="50">@{{ formatoFecha(diar.fecha)}}</td>
+                                                <td align="rigth">@{{ diar.nom_cuenta}}</td>
+                                                <td class="text-right" width="125">@{{ decimales(diar.saldo) }}</td>
+                                                <td class="text-right" width="125"></td>
+                                            </tr>
+                                            <tr v-for="(diar, index) in registro.haber">
+                                                <td align="center" width="50"></td>
+                                                <td style="padding-left:50px">@{{ diar.nom_cuenta}}</td>
+                                                <td class="text-right" width="125"></td>
+                                                <td class="text-right" width="125">@{{ decimales(diar.saldo) }}</td>
+                                            </tr>
+                                            <tr class="text-muted">
+                                                <td></td>
+                                                <td>@{{ registro.comentario }}</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
 
                     <div class="col-12 mt-2" v-if="lb_banco.length > 0">
                         <h2 class="text-center">REGISTROS</h2>
@@ -172,7 +254,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Deseas eliminar el registro  @{{ eliminar.nombre }}?
+                Deseas eliminar el registro @{{ eliminar.nombre }}?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

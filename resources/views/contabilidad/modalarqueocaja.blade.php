@@ -15,6 +15,8 @@
             </div>
 
             <div class="modal-body">
+                <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
+
                 <div class="row justify-content-center">
                     <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -107,6 +109,12 @@
                             </div>
                         </div>
                     </div>
+                    @if($datos->metodo == 'individual')
+
+                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                        {!! $transacciones->transacciones !!}
+                    </div>
+                    @elseif($datos->metodo == 'concatenado')
                     <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
                         <h3 class="text-center font-weight-bold">Datos para realizar el Arqueo de Caja</h3>
 
@@ -140,7 +148,7 @@
                             </tbody>
                         </table>
                     </div>
-
+                    @endif
                     <br>
                 </div>
                 <div class="col-12 mt-2" v-if="t_saldo.length > 0 || t_exis.length > 0">
@@ -208,5 +216,3 @@
         </div>
     </div>
 </div>
-
-

@@ -30,6 +30,8 @@ use App\Admin\Respuesta\EscribirCuenta;
 use App\Admin\Respuesta\Factura;
 use App\Admin\Respuesta\RAlternativa;
 use App\Admin\TallerRAlternativa;
+use App\Admin\TallerModuloContable;
+use App\Admin\TallerModuloTransaccion;
 
 use App\Admin\Respuesta\FacturaDato;
 use App\Admin\Respuesta\FormulasContable;
@@ -112,6 +114,7 @@ use App\Admin\TallerescribirCuenta;
 use App\Taller;
 use App\TallerChequeRe;
 use App\User;
+use JavaScript;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -387,12 +390,22 @@ class TallerDocenteController extends Controller
             return view('docentes.talleres.taller36', compact('datos', 'd', 'update_imei', 'a', 'user', 'taller'));
 
         }elseif ($plant == 37) {
-                JavaScript::put([
+          
+            $consul = Taller::findorfail($id);
+            $datos = TallerModuloContable::where('taller_id', $consul->id)->firstOrFail();
+                  JavaScript::put([
                  'taller' => $d,
+                 'datos' => $datos,
                 ]);
-            
-             $datos = TallerContabilidad::where('taller_id', $consul->id)->firstOrFail();
-            return view('docentes.talleres.taller37', compact('datos', 'd', 'update_imei'));
+            if ($datos->metodo == 'individual') {
+
+            return view('docentes.talleres.taller37', compact('datos', 'd', 'update_imei', 'user'));
+    
+            }else{
+                $productos = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->where('tipo','fifo')->get();
+                $modulo = json_decode($datos->modulos);
+                return view('docentes.talleres.taller37', compact('datos', 'd', 'update_imei', 'user', 'modulo', 'productos'));
+            }
 
         }elseif ($plant == 38) {
             $taller = TallerALectura::where('taller_id', $consul->id)->firstOrFail();

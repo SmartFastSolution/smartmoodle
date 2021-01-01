@@ -6,7 +6,7 @@
                 </div>
                 <div class="col-12">
                             <div class="calculator">
-                          <div class="display text-light font-weight-bold">{{ display }}</div> 
+                          <div class="display text-info font-weight-bold">{{ display }}</div> 
                           <div class="boton operator" @click="clear">C</div>
                           <div class="boton operator" @click="del">DEL</div>
                           <div class="boton operator" @click="enterOps(4)">÷</div>

@@ -15,7 +15,7 @@
 
 
     <!-- datatabes -->
-    <link rel="stylesheet" href=" {{ asset('http://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css')}}">
+    <link rel="stylesheet" href=" {{ asset('https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css')}}">
     <link rel="stylesheet"
         href=" {{ asset('https://cdn.datatables.net/fixedheader/3.1.7/css/fixedHeader.dataTables.min.css')}}">
 
@@ -50,7 +50,7 @@
             </ul>
 
             <!-- SEARCH FORM -->
-            <form class="form-inline ml-3">
+           {{--  <form class="form-inline ml-3">
                 <div class="input-group input-group-sm">
                     <input class="form-control form-control-navbar" type="search" placeholder="Search"
                         aria-label="Search">
@@ -60,7 +60,7 @@
                         </button>
                     </div>
                 </div>
-            </form>
+            </form> --}}
 
             <ul class="navbar-nav ml-auto">
                 @guest
@@ -478,9 +478,12 @@
 
         </div>
         @elseif($rol ==='estudiante')
+
         @include('layouts.estapp')
         @elseif($rol ==='docente')
+
         @include('layouts.docapp')
+        
         @endif
         @endif
     </div>

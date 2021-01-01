@@ -18,8 +18,6 @@
 </section>
 <section class="content">
     <div class="container">
-
-
         @foreach($p as $post)
         <div class="card gedf-card">
             <div class="card-header">

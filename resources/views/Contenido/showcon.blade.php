@@ -22,7 +22,7 @@
             <div class="card-body p-5">
                 <a class="btn btn-info float-right" href="{{route('admin.create')}}"><i class="fas fa-plus"> Crear
                         Talleres</i></a>
-                <h1 class="font-weight-light">Show Unidad</h1>
+                <h1 class="font-weight-light">Vista Unidad</h1>
                 <div class="row">
                     <div class="col-md-10">
 
@@ -118,8 +118,8 @@
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">Unidad</th>
-                                                <th scope="col"> Taller </th>
-                                                <th scope="col">Plantilla </th>
+                                                <th scope="col">Taller</th>
+                                                <th scope="col">Enunciado</th>
                                                 <th scope="col">Estado</th>
                                                 <th></th>
                                                 <th scope="col">Opciones</th>
@@ -145,7 +145,7 @@
                                                 <th scope="row"></th>
                                                 <td>{{$taller->contenido->nombre}}</td>
                                                 <td>{{$taller['nombre']}}</td>
-                                                <td>{{$taller->Plantilla->nombre}}</td>
+                                                <td>{{$taller->enunciado}}</td>
                                                 <td>
                                                     <div class="onoffswitch">
                                                         <input type="checkbox" name="onoffswitch"

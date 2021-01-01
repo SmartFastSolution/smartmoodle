@@ -18,6 +18,9 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
+
+                           <a class="btn btn-dark" href="" @click.prevent="calculadora()">CALCULADORA</a>
+
                         <h2 class="text-center">AGREGAR CUENTA</h2>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Selecciona la Cuenta</label>
@@ -70,28 +73,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div v-if="!balance.edit" class="row justify-content-center">
-                            <a href="#" class="btn btn-success" @click.prevent="agregarRegistro()">Agregar</a>
-                            <table class="table table-bordered table-sm mb-2">
-                                <thead class="bg-success">
-                                    <tr>
-                                        <th width="50" align="center">Debe</th>
-                                        <th width="50" align="center" class="text-center">Haber</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="number" v-model="balance.saldo_debe" name="fecha"
-                                                class="form-control">
-                                        </td>
-                                        <td>
-                                            <input type="number" v-model="balance.saldo_haber" name="fecha"
-                                                class="form-control">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+              
                             <div v-if="!balance.edit" class="row justify-content-center">
                                 <a href="#" class="btn btn-success" @click.prevent="agregarRegistro()">Agregar</a>
 
@@ -102,6 +84,11 @@
                                         class="fa fa-window-close"></i></a>
                             </div>
                         </div>
+                          @if($datos->metodo == 'individual')
+                     <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                        {!! $transacciones->transacciones !!}
+                     </div>
+                    @elseif($datos->metodo == 'concatenado')
                         <div class="col-6" style=" height:400px; overflow-y: scroll;">
                             <h4 class="text-center text-danger font-weight-bold mt-2">Datos necesarios para completar el
                                 balance de comprobacion</h4>
@@ -156,6 +143,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                         <div class="col-12 mt-2" v-if="balances.length > 0" style=" height:400px; overflow-y: scroll;">
                             <h2 class="text-center">REGISTROS</h2>
                             <div class="row justify-content-around mb-2">
@@ -204,7 +192,7 @@
                                 {{-- <a v-if="!update" href="#" class="addDiario btn btn-success" @click.prevent="guardarRegistro()">Agregar Transaccion</a>  --}}
                             </div>
                         </div>
-                    </div>
+                
                 </div>
                 <div class="modal-footer">
                 </div>

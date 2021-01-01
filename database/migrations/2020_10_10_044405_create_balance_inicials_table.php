@@ -21,6 +21,13 @@ class CreateBalanceInicialsTable extends Migration
             $table->string('nombre')->nullable();
             $table->string('tipo')->nullable();
             $table->string('fecha')->nullable();
+            $table->string('total_activo_corriente')->nullable();
+            $table->string('total_activo_nocorriente')->nullable();
+            $table->string('total_pasivo_corriente')->nullable();
+            $table->string('total_pasivo_nocorriente')->nullable();
+            $table->string('total_activo')->nullable();
+            $table->string('total_pasivo')->nullable();
+            $table->string('total_patrimonio')->nullable();
             $table->string('total_pasivo_patrimonio')->nullable();
             $table->timestamps();
 

@@ -375,9 +375,10 @@ class TallersController extends Controller
                  'objeto'         => $objeto,
                  'balanceinicial' => $balanceinicial,
                 ]);
-            return view('talleres.taller37', compact('datos', 'd'));
+            return view('talleres.taller37', compact('datos', 'd', 'transacciones'));
 
             }else{
+                $modulo = json_decode($datos->modulos);
                 $balancesInicial = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->where('tipo', 'horizontal')->first();
                 $diariogeneral = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->where('tipo', 'diario_general')->first();
                 $productos = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->where('tipo','fifo')->get();
@@ -390,7 +391,7 @@ class TallersController extends Controller
                      'diariogeneral'   => $diariogeneral,
                      'productos'       => $productos,
                     ]);
-                return view('talleres.taller37', compact('datos', 'd', 'diariogeneral', 'balancesInicial'));
+                return view('talleres.taller37', compact('datos', 'd', 'diariogeneral', 'balancesInicial', 'modulo', 'productos'));
 
             }
                 

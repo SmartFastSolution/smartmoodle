@@ -18,9 +18,17 @@
 @endif
 
 
+<section class="content">
+    <div class="container">
+        <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
+        <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}
+            @isset (auth()->user()->curso->nombre)
+            <h2 class="font-weight-light"> <strong> {{auth()->user()->curso->nombre}} </strong>
+            </h2>
+            @endisset
+    </div>
+</section>
 @foreach($p as $post)
-
-
 <section class="content">
     <div class="container">
         <div class="card gedf-card">

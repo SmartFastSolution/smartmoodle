@@ -15,6 +15,8 @@
                 </button>
             </div>
             <div class="modal-body">
+                <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
+
                 <div class="row justify-content-center">
                     <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
                         <h2 class="text-center">AGREGAR MOVIMIENTOS</h2>
@@ -92,6 +94,11 @@
                                     class="fa fa-window-close"></i></a>
                         </div>
                     </div>
+                    @if($datos->metodo == 'individual')
+                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                        {!! $transacciones->transacciones !!}
+                    </div>
+                    @elseif($datos->metodo == 'concatenado')
                     <div class="col-6" style=" height:300px; overflow-y: scroll;">
                         <h3 class="text-center font-weight-bold">Datos para realizar el Mayor General</h3>
                         <h3 class="text-center">Diario General</h3>
@@ -197,13 +204,8 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-
                     </div>
+                    @endif
                     <div class="col-12 mt-2" v-if="mayores.registros.length > 0 || mayores.cierres.length > 0">
                         <h2 class="text-center">ACTUALIZAR REGISTROS</h2>
 

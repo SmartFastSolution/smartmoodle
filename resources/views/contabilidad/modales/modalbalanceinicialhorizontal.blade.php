@@ -16,10 +16,7 @@
             </div>
             <div class="modal-body">
                 <div class="row justify-content-center">
-                    {{--      <div class="col-12 mt-2 border border-top-0 border-left-0 border-right-0 border-danger" style=" height:400px; overflow-y: scroll;">
-                    {!! $balancesInicial->transacciones !!}
 
-                  </div> --}}
                     <div class="col-12">
                         <nav>
                             <div style="font-size: 15px" class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -44,6 +41,9 @@
                                 <a class="nav-link" id="nav-bih-patrimonio-tab" data-toggle="tab"
                                     href="#nav-bih-patrimonio" role="tab" aria-controls="nav-bih-patrimonio"
                                     aria-selected="false">Patrimonio</a>
+                                <a class="nav-link bg-dark" id="nav-calculadora-tab" data-toggle="tab"
+                                    href="#nav-calculadora" role="tab" aria-controls="nav-calculadora"
+                                    aria-selected="false" @click.prevent="calculadora()">CALCULADORA</a>
 
                             </div>
                         </nav>
@@ -89,11 +89,21 @@
                                                     class="fa fa-window-close"></i></a>
                                         </div>
                                     </div>
+                                    @if($datos->metodo == 'individual')
+
+                                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                                        {!! $transacciones->transacciones !!}
+                                    </div>
+                                    @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 mt-2 "
                                         style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+
+                                        @isset ($balancesInicial->transacciones )
                                         {!! $balancesInicial->transacciones !!}
+                                        @endisset
 
                                     </div>
+                                    @endif
 
                                     <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
                                         <h2 class="text-center">Activos Corrientes</h2>
@@ -178,11 +188,21 @@
                                                     class="fa fa-window-close"></i></a>
                                         </div>
                                     </div>
-                                    <div class="col-6 mt-2"
+                                    @if($datos->metodo == 'individual')
+
+                                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                                        {!! $transacciones->transacciones !!}
+                                    </div>
+                                    @elseif($datos->metodo == 'concatenado')
+                                    <div class="col-6 mt-2 "
                                         style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+                                        @isset ($balancesInicial->transacciones )
                                         {!! $balancesInicial->transacciones !!}
+                                        @endisset
 
                                     </div>
+                                    @endif
+
                                     <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
                                         <h2 class="text-center">Activos no Corrientes</h2>
                                         <div class="row justify-content-around mb-2">
@@ -266,11 +286,21 @@
                                                     class="fa fa-window-close"></i></a>
                                         </div>
                                     </div>
-                                    <div class="col-6 mt-2"
+                                    @if($datos->metodo == 'individual')
+
+                                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                                        {!! $transacciones->transacciones !!}
+                                    </div>
+                                    @elseif($datos->metodo == 'concatenado')
+                                    <div class="col-6 mt-2 "
                                         style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+                                        @isset ($balancesInicial->transacciones )
                                         {!! $balancesInicial->transacciones !!}
+                                        @endisset
 
                                     </div>
+                                    @endif
+
                                     <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
                                         <h2 class="text-center">Pasivos Corrientes</h2>
                                         <div class="row justify-content-around mb-2">
@@ -354,11 +384,21 @@
                                                     class="fa fa-window-close"></i></a>
                                         </div>
                                     </div>
-                                    <div class="col-6 mt-2"
+                                    @if($datos->metodo == 'individual')
+
+                                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                                        {!! $transacciones->transacciones !!}
+                                    </div>
+                                    @elseif($datos->metodo == 'concatenado')
+                                    <div class="col-6 mt-2 "
                                         style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+                                        @isset ($balancesInicial->transacciones )
                                         {!! $balancesInicial->transacciones !!}
+                                        @endisset
 
                                     </div>
+                                    @endif
+
                                     <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
                                         <h2 class="text-center">Pasivos no Corriente</h2>
                                         <div class="row justify-content-around mb-2">
@@ -441,11 +481,20 @@
                                                     class="fa fa-window-close"></i></a>
                                         </div>
                                     </div>
-                                    <div class="col-6 mt-2"
-                                        style=" height:400px; overflow-y: scroll; border: solid 3px red;">
-                                        {!! $balancesInicial->transacciones !!}
+                                    @if($datos->metodo == 'individual')
 
+                                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                                        {!! $transacciones->transacciones !!}
                                     </div>
+                                    @elseif($datos->metodo == 'concatenado')
+                                    <div class="col-6 mt-2 "
+                                        style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+                                        @isset ($balancesInicial->transacciones )
+                                        {!! $balancesInicial->transacciones !!}
+                                        @endisset
+                                    </div>
+                                    @endif
+
                                     <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
                                         <h2 class="text-center">Patrimonios</h2>
                                         <div class="row justify-content-around mb-2">

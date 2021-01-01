@@ -73,7 +73,7 @@ class PostController extends Controller
     public function show($id)
     {  
          $post = Post::where('id',$id)->with('user','image','comments','comments.user')->firstOrFail();
-               return view('Post.show',compact('post'));
+               return view('Post.show',compact('post', 'id'));
     }
 
   

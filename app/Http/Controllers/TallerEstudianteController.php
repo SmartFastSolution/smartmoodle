@@ -1519,7 +1519,17 @@ public function store11(Request $request, $idtaller)
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
     return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
     }
-
+    public function store37(Request $request, $idtaller)
+        {
+            $id   = Auth::id();
+            $user = User::find($id);
+            $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
+            
+             return response(array(
+                        'success' => true,
+                        'estado'  => 'guardado',
+                    ),200,[]);
+        }
         public function store38(Request $request, $idtaller)
           {
                $id                  = Auth::id();

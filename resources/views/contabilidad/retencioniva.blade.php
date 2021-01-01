@@ -76,10 +76,13 @@
 
 
     </table>
-
+    @if ($rol === 'estudiante')
     <div class="row justify-content-center mb-2">
         <a href="#" class="addDiario btn btn-outline-info btn-sm" @click.prevent="abrirCompra()">Agregar Compra</a>
     </div>
+    @endif
+
+
 
     {{-- VENTAS DE RETENCION DEL IVA--}}
     <br><br>
@@ -147,9 +150,14 @@
         </tbody>
     </table>
 
+    </table>
+    @if ($rol === 'estudiante')
     <div class="row justify-content-center mb-2">
         <a href="#" class="addDiario btn btn-outline-info btn-sm" @click.prevent="abrirVenta()">Agregar Venta</a>
     </div>
+    @endif
+
+
 
     <div class="row p-4  mb-4 justify-content-center ">
         <table>
@@ -215,12 +223,14 @@
         </table>
     </div>
 
-
-
+    @if ($rol === 'estudiante')
     <div class="row justify-content-center">
         <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardaretencioniva()">Guardar
             Retención</a>
     </div>
+    @endif
+
+
     <br>
     @include ('contabilidad.modalretencioniva')
 </div>

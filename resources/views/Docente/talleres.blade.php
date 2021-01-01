@@ -30,7 +30,7 @@
         <div class="tab-content" id="myTabContent">
             @foreach ($contenidos as $c => $contenido)
             <div class="tab-pane fade show @if ($c== 0) active @endif " id="contenido{{ $contenido->id }}"
-                role="tabpanel" aria-labelledby="contenido{{ $contenido->id }}-tab">
+                role="tabpanel" aria-labelledby="contenido{{ $contenido->id }}-tab" style=" height:500px; overflow-y: scroll; overflow-x: hidden;">
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <!-- Inicio de Talleres -->

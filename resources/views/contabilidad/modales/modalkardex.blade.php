@@ -17,6 +17,13 @@
                 <li class="nav-item" role="presentation">
                   <a class="nav-link text-dark font-weight-bold" id="devolucionventa-tab" data-toggle="tab" href="#devolucionventa" role="tab" aria-controls="devolucionventa" aria-selected="false">DEVOLUCION</a>
                 </li>
+                  <li class="nav-item" role="presentation">
+                  <a class="nav-link text-light font-weight-bold bg-dark" id="calculadora-k-tab" data-toggle="tab" href="#calculadora-k" role="tab" aria-controls="calculadora-k" aria-selected="false" @click.prevent="VueSweetAlert2('example-component',{title: 'Called from basic js',
+                    noteProp: [
+                        'Note number 1',
+                        'Note number 2'
+                    ]})">CALCULADORA</a>
+                </li>
               </ul>
 
               <div class="tab-content" id="myTabContent">
@@ -148,11 +155,7 @@
                     </table>
                       <div class="row">
                       <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="bajarExis('mostrar')">Agregar Existencia</a>
-                     <a href="#" class=" btn btn-primary btn-sm float-left mt-3 ml-2" @click.prevent="VueSweetAlert2('example-component',{title: 'Called from basic js',
-                    noteProp: [
-                        'Note number 1',
-                        'Note number 2'
-                    ]})">CALCULADORA</a>
+                     {{-- <a href="#" class=" btn btn-primary btn-sm float-left mt-3 ml-2" >CALCULADORA</a> --}}
 
                   </div>
 
@@ -495,6 +498,13 @@
                 </li>
                 <li class="nav-item" role="presentation">
                   <a class="nav-link text-dark font-weight-bold" id="devolucioncompra-tab" data-toggle="tab" href="#devolucioncompra" role="tab" aria-controls="devolucioncompra" aria-selected="false">DEVOLUCION</a>
+                </li>
+                    <li class="nav-item" role="presentation">
+                  <a class="nav-link text-light font-weight-bold bg-dark" id="calculadora-ke-tab" data-toggle="tab" href="#calculadora-ke" role="tab" aria-controls="calculadora-ke" aria-selected="false" @click.prevent="VueSweetAlert2('example-component',{title: 'Called from basic js',
+                    noteProp: [
+                        'Note number 1',
+                        'Note number 2'
+                    ]})">CALCULADORA</a>
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">

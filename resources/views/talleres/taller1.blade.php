@@ -57,13 +57,13 @@
     @csrf
 	 <div class="container">
         
-	 	<h1 class="text-center  mt-5">{{ $datos->taller->nombre }}</h1>
+	 	<h1 class="text-center mt-5 display-4 font-weight-bold text-danger">{{ $datos->taller->nombre }}</h1>
      <h3 class="text-center mt-3">{{ $datos->enunciado }}</h3>
 
      <div class="row justify-content-md-center">
             @if ($datos->img == true)
-                <div class="col-2 ">
-                        <img src="{{ $datos->img }}" width="170" alt="">
+                <div class="col-5">
+                        <img src="{{ $datos->img }}" width="400" alt="" style="outline: none; background-color: #94F0E4; box-shadow: 5px 5px 15px 0px  #18DEF0;" >
                     </div>
             @endif
          <div class="col ">

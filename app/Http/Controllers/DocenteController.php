@@ -84,14 +84,12 @@ if (isset($au->materias)) {
 
 
             return view('Docente.Pcurso'); //ruta docente
-  } 
+  
+        } 
 
 
 
    }
-
-
-
           public function index(){
             
                 $p = Post::all();
@@ -100,7 +98,6 @@ if (isset($au->materias)) {
      
         }
     
-
     public function contenidos($id){
         // todos los datos de la bd
         $user =  User::findorfail( Auth::id());

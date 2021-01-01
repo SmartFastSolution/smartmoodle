@@ -94,7 +94,7 @@ class UsersController extends Controller
          
         $user->save();
                
-        event(new NewUserRegistered($users));
+        // event(new NewUserRegistered($users));
 
         if ($request->get('role')) {
            

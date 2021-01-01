@@ -22,6 +22,23 @@ $(function(document, window, index ) {
       item:''
     },
     registros:[],
+       diario:{
+          debe:{
+            edit: false,
+            index:'',
+            fecha:'',
+            nom_cuenta:'',
+            saldo:'0.00',
+          },
+          haber:{
+            edit: false,
+            index:'',
+            fecha:'',
+            nom_cuenta:'',
+            saldo:'0.00'
+          },
+          comentario:''
+        },
        ejercicios:{
            debe:[],
           haber:[],
@@ -34,14 +51,20 @@ $(function(document, window, index ) {
        ejercicio:{
           debe:{
             nom_cuenta:'',
+            edit: false,
+            index:'',
             saldo:'',
           },
           haber:{
             fecha:'',
             nom_cuenta:'',
+            index:'',
+            edit: false,
             saldo:''
           },
         },
+        update:false,
+
     },
         methods:{
         onMateria() {
@@ -102,10 +125,15 @@ $(function(document, window, index ) {
             },
              habediarioEdit(index){
               var ejercicios                        = this.ejercicios;
+              this.ejercicio.haber.index               = index;
+              this.ejercicio.haber.edit = true;
               this.ejercicioedit =100;
               this.cuentaindex                = index;
               this.ejercicio.haber.nom_cuenta = ejercicios.haber[index].nom_cuenta;
               this.ejercicio.haber.saldo      = ejercicios.haber[index].saldo;
+              this.ejercicio.debe.nom_cuenta = '';
+              this.ejercicio.debe.saldo      = '';
+              this.ejercicio.debe.edit = false;
             },
             updateeEjeHaber(){
             if (this.ejercicio.haber.nom_cuenta.trim() === '' || this.ejercicio.haber.saldo.trim() === '') {
@@ -113,20 +141,38 @@ $(function(document, window, index ) {
                         "timeOut": "3000"
                     });
                 }else{
-            var id                          = this.cuentaindex;
+            let id = this.ejercicio.haber.index;
             this.ejercicios.haber[id].nom_cuenta  = this.ejercicio.haber.nom_cuenta;
             this.ejercicios.haber[id].saldo       = this.ejercicio.haber.saldo;
             this.ejercicio.haber.nom_cuenta = '';
             this.ejercicio.haber.saldo      = '';
-            this.ejercicioedit =0;
+              this.ejercicio.haber.edit = false;
+
 
                 }        
             },
+                cancelarEdicion(cuenta){
+              if (cuenta == 'debe') {
+                this.ejercicio.debe.fecha = '';
+                this.ejercicio.debe.nom_cuenta = '';
+                this.ejercicio.debe.saldo      = '';
+                this.ejercicio.debe.edit       = false;
+              } else {
+                this.ejercicio.haber.nom_cuenta = '';
+                this.ejercicio.haber.saldo      = '';
+                this.ejercicio.haber.edit       = false;
+              }
+            },
             debediairoEdit(index){
-              this.cuentaindex               = index;
+              this.ejercicio.debe.index               = index;
+              this.ejercicio.debe.edit = true;
               this.ejercicioedit =100;
               this.ejercicio.debe.nom_cuenta = this.ejercicios.debe[index].nom_cuenta;
               this.ejercicio.debe.saldo      = this.ejercicios.debe[index].saldo;
+              this.ejercicio.haber.nom_cuenta = '';
+              this.ejercicio.haber.saldo      = '';
+              this.ejercicio.haber.edit = false;
+
             },
             updateEjeDebe(){
             if (this.ejercicio.debe.nom_cuenta.trim() === '' || this.ejercicio.debe.saldo.trim() === '') {
@@ -134,23 +180,23 @@ $(function(document, window, index ) {
                         "timeOut": "3000"
                     });
                 }else{
-                    var id                         = this.cuentaindex;
+                    let id = this.ejercicio.debe.index;
                     this.ejercicios.debe[id].nom_cuenta  = this.ejercicio.debe.nom_cuenta;
                     this.ejercicios.debe[id].saldo       = this.ejercicio.debe.saldo;
                     this.ejercicio.debe.nom_cuenta = '';
                     this.ejercicio.debe.saldo      = '';
-                    this.ejercicioedit =0;
+                    this.ejercicio.debe.edit = false;
+
 
                 } 
             },
-
             guardarRegistro(){
               if (this.ejercicios.debe == 0) {
                  toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
                         "timeOut": "3000"
                     });
               }else{
-            var registro = {debe:this.ejercicios.debe, haber:this.ejercicios.haber};
+            let registro = {debe:this.ejercicios.debe, haber:this.ejercicios.haber};
                 this.registros.push(registro);//añadimos el la variable persona al array
                 //Limpiamos los campos
                 toastr.success("Registro agregado correctamente", "Smarmoddle", {
@@ -163,21 +209,22 @@ $(function(document, window, index ) {
           }
         },
         debeEditRegister(id){
-              var register          = this.registros;
+              let register = JSON.parse(JSON.stringify(this.registros));
+              this.update = true;
               this.registerindex    = id;
-              this.edit.debe        =[];
-              this.edit.haber       =[];
               this.ejercicios.debe  =[];
               this.ejercicios.haber =[];
-              this.edit.debe        = register[id].debe;
-              this.edit.haber       = register[id].haber;
+              this.ejercicios.debe  = register[id].debe;
+              this.ejercicios.haber = register[id].haber;
             },
         updaterRegister(){
-             var  id                  = this.registerindex;
-             this.registros[id].debe  = this.edit.debe;
-             this.registros[id].haber = this.edit.haber;
-             this.edit.debe           =   [];
-             this.edit.haber          = [];
+             let  id                  = this.registerindex;
+             this.registros[id].debe  = this.ejercicios.debe;
+             this.registros[id].haber = this.ejercicios.haber;
+             this.ejercicios.debe           =   [];
+             this.ejercicios.haber          = [];
+              this.update = false;
+
             },
          deleteRegistro(id){
               this.registros.splice(id, 1);

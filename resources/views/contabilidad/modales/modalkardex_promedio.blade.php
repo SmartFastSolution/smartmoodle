@@ -60,9 +60,8 @@
                        <div  class="row justify-content-center">
                       </div>
                   </div>
-                  <div class="col-5" style=" height:250px; overflow-y: scroll; border: solid 3px red;">
-                    {{-- <div v-html="datos_transacciones"></div> --}}
-                    
+                  <div class="col-5 p-3" style=" height:250px; overflow-y: scroll; border: solid 3px red;">
+                    <div v-html="datos_transacciones"></div>
                   </div>
                 </div>
 
@@ -109,6 +108,10 @@
                 </li>
                 <li class="nav-item" role="presentation">
                   <a class="nav-link text-dark font-weight-bold" id="kardex-promedio-egreso-tab" data-toggle="tab" href="#kardex-promedio-egreso" role="tab" aria-controls="kardex-promedio-egreso" aria-selected="false">EGRESO</a>
+                </li>
+                  <li class="nav-item" role="presentation">
+                    <a class="nav-link btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
+                  
                 </li>
               </ul>
 
@@ -235,7 +238,9 @@
                       </tbody>
                     </table>
                   </div>
-                  <div class="col-5"></div>
+                   <div class="col-5 p-3" style=" height:250px; overflow-y: scroll; border: solid 3px red;">
+                    <div v-html="datos_transacciones"></div>
+                  </div>
                 </div>
 
               <div v-if="modales.modal_ingreso.length > 0">
@@ -416,8 +421,8 @@
                       </tbody>
                     </table>
                   </div>
-                  <div class="col-5">
-                    
+                   <div class="col-5 p-3" style=" height:250px; overflow-y: scroll; border: solid 3px red;">
+                    <div v-html="datos_transacciones"></div>
                   </div>
                 </div>
 

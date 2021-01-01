@@ -80,8 +80,7 @@
     <div class="row">
         <div class="col-7">
             <h3 class="text-left font-weight-bold text-danger"> - CRÉDITOS BANCARIOS NO CONTABILIZADOS
-            <a
-                    data-toggle="tooltip" data-placement="top" title="Agregar Créditos" @click="abrirCredito()"
+                <a data-toggle="tooltip" data-placement="top" title="Agregar Créditos" @click="abrirCredito()"
                     class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a>
             </h3>
             <draggable class="list-group list-group-flush" :list="c_creditos" group="people">
@@ -112,8 +111,7 @@
     <div class="row">
         <div class="col-7">
             <h3 class="text-left font-weight-bold text-danger"> - CHEQUES GIRADOS Y NO COBRADOS
-            <a
-                    data-toggle="tooltip" data-placement="top" title="Agregar Cheques" @click="abrirCheques()"
+                <a data-toggle="tooltip" data-placement="top" title="Agregar Cheques" @click="abrirCheques()"
                     class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a>
             </h3>
             <draggable class="list-group list-group-flush" :list="c_cheques" group="people">
@@ -157,16 +155,11 @@
 
 
 
-
+    @if ($rol === 'estudiante')
     <div class="row justify-content-center">
         <a class="btn p-2 mt-3 btn-outline-info" @click.prevent="guardarConciliacionB()">Guardar Conciliación
             Bancaria</a>
     </div>
-
-
-
-
-
-
+    @endif
     @include('contabilidad.modalconciliacionbancaria')
 </div>

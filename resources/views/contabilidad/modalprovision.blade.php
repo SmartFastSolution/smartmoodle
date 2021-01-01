@@ -14,6 +14,8 @@
                 </button>
             </div>
             <div class="modal-body">
+            <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
+                
                 <div class="row justify-content-center">
                     <div class="col-12 mt-2 border border-top-0 border-left-0 border-right-0 border-danger"
                         style=" height:400px; overflow-y: scroll;">
