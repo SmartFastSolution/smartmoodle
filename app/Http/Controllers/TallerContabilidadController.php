@@ -773,7 +773,8 @@ class TallerContabilidadController extends Controller
                                     );
                                     BIActivo::insert($datos);
                                 }
-                                    foreach ($a_nocorriente as $key => $activo) {
+                                if (isset($a_nocorriente)) {
+                                foreach ($a_nocorriente as $key => $activo) {
                                     $datos=array(
                                         'balance_inicial_id' => $o->id,
                                         'nom_cuenta'         => $activo['nom_cuenta'],
@@ -785,6 +786,10 @@ class TallerContabilidadController extends Controller
                                     );
                                     BIActivo::insert($datos);
                                 }
+                                    
+                                }
+                                if (isset($p_corriente)) {
+                            
                                     foreach ($p_corriente as $key => $pasivos) {
                                     $datos=array(
                                         'balance_inicial_id' => $o->id,
@@ -797,6 +802,9 @@ class TallerContabilidadController extends Controller
                                     );
                                     BIPasivo::insert($datos);
                                 }
+                            }
+                            if (isset($p_nocorriente)) {
+
                                 foreach ($p_nocorriente as $key => $pasivo) {
                                     $datos=array(
                                         'balance_inicial_id' => $o->id,
@@ -809,6 +817,9 @@ class TallerContabilidadController extends Controller
                                     );
                                     BIPasivo::insert($datos);
                                 }
+                            }
+                            if (isset($patrimonios)) {
+
                                     foreach ($patrimonios as $key => $patri) {
                                         $datos               =array(
                                         'balance_inicial_id' => $o->id,
@@ -820,6 +831,7 @@ class TallerContabilidadController extends Controller
                                     );
                                     BIPatrimonio::insert($datos);
                                 }
+                            }
 
                                 return response(array(
                                     'success' => true,
@@ -868,6 +880,8 @@ class TallerContabilidadController extends Controller
                                 }
                                 $patrimoniodelete  = BIPatrimonio::destroy($ids2);
 
+                                if (isset($a_corriente)) {
+
                                 foreach ($a_corriente as $key => $activos) {
                                     $datos=array(
                                         'balance_inicial_id' => $o->id,
@@ -880,6 +894,10 @@ class TallerContabilidadController extends Controller
                                     );
                                     BIActivo::insert($datos);
                                 }
+                            }
+
+                                if (isset($a_nocorriente)) {
+
                                     foreach ($a_nocorriente as $key => $activo) {
                                     $datos=array(
                                         'balance_inicial_id' => $o->id,
@@ -893,6 +911,9 @@ class TallerContabilidadController extends Controller
                                     );
                                     BIActivo::insert($datos);
                                 }
+                            }
+                                if (isset($p_corriente)) {
+
                                     foreach ($p_corriente as $key => $pasivos) {
                                     $datos=array(
                                         'balance_inicial_id' => $o->id,
@@ -905,6 +926,10 @@ class TallerContabilidadController extends Controller
                                     );
                                     BIPasivo::insert($datos);
                                 }
+                            }
+
+                                if (isset($p_nocorriente)) {
+
                                 foreach ($p_nocorriente as $key => $pasivo) {
                                     $datos=array(
                                         'balance_inicial_id' => $o->id,
@@ -917,6 +942,9 @@ class TallerContabilidadController extends Controller
                                     );
                                     BIPasivo::insert($datos);
                                 }
+                            }
+                                if (isset($patrimonios)) {
+
                                     foreach ($patrimonios as $key => $patri) {
                                         $datos               =array(
                                         'balance_inicial_id' => $o->id,
@@ -928,6 +956,7 @@ class TallerContabilidadController extends Controller
                                     );
                                     BIPatrimonio::insert($datos);
                                 }
+                            }
 
 
                             return response(array(
@@ -1056,58 +1085,56 @@ class TallerContabilidadController extends Controller
                 $normal = DGRegistro::where('diario_general_id', $diairioGeneral->id)->where('tipo', 'normal')->orderBy('fecha')->get();
                     foreach ($normal as $key => $registro) {
                         $regis = array(
-                            'debe' => $registro->dgrDebe,
-                            'haber'=>$registro->dgrHaber,
-                            'tipo' => $registro->tipo,
-                            'fecha' => $registro->fecha,
+                            'debe'       => $registro->dgrDebe,
+                            'haber'      =>$registro->dgrHaber,
+                            'tipo'       => $registro->tipo,
+                            'fecha'      => $registro->fecha,
                             'comentario' => $registro->comentario
                         );
                         $registros[]= $regis;
                     }
                 $ajustado = DGRegistro::where('diario_general_id', $diairioGeneral->id)->where('tipo', 'ajustado')->orderBy('fecha')->get();
                     foreach ($ajustado as $key => $registro) {
-                        $regis = array(
-                            'debe' => $registro->dgrDebe,
-                            'haber'=>$registro->dgrHaber,
-                            'tipo' => $registro->tipo,
-                            'fecha' => $registro->fecha,
+                        $regis2 = array(
+                            'debe'       => $registro->dgrDebe,
+                            'haber'      =>$registro->dgrHaber,
+                            'tipo'       => $registro->tipo,
+                            'fecha'      => $registro->fecha,
                             'comentario' => $registro->comentario
                         );
-                        $ajustes[]= $regis;
+                        $ajustes[]= $regis2;
                     }
                     $inicial = [];
                     $iniciales = DGRegistro::where('diario_general_id', $diairioGeneral->id)->where('tipo', 'inicial')->orderBy('fecha')->count();
                     if ($iniciales >= 1) {
                         $iniciales = DGRegistro::where('diario_general_id', $diairioGeneral->id)->where('tipo', 'inicial')->orderBy('fecha')->first();
-                        $regis = array(
+                        $regis3 = array(
                             'debe'       => $iniciales->dgrDebe,
                             'haber'      =>$iniciales->dgrHaber,
                             'tipo'       => $iniciales->tipo,
                             'fecha'      => $iniciales->fecha,
                             'comentario' => $iniciales->comentario
                         );
-                        $inicial= $regis;
+                        $inicial= $regis3;
                     return response(array(
-                        'datos'     => true,
-                        'nombre'    => $diairioGeneral->nombre,
-                        'registros' => $registros,
+                        'datos'        => true,
+                        'nombre'       => $diairioGeneral->nombre,
+                        'registros'    => $registros,
                         'tieneinicial' => true,
-                        'inicial'   => $inicial,
-                        'ajustes'   => $ajustes,
+                        'inicial'      => $inicial,
+                        'ajustes'      => $ajustes,
                     ),200,[]);
                     }else{
                     return response(array(
-                        'datos'     => true,
-                        'nombre'    => $diairioGeneral->nombre,
-                        'registros' => $registros,
+                        'datos'        => true,
+                        'nombre'       => $diairioGeneral->nombre,
+                        'registros'    => $registros,
                         'tieneinicial' => false,
-                        'inicial'   => $inicial,
-                        'ajustes'   => $ajustes,
+                        'inicial'      => $inicial,
+                        'ajustes'      => $ajustes,
                     ),200,[]);
                     }
                         
-                    
-            
                 }else{
                     return response(array(
                         'datos' => false,
@@ -1121,31 +1148,28 @@ class TallerContabilidadController extends Controller
                         $id            = Auth::id();
                         $taller_id     = $request->id;
                         $registro      = $request->registro;
-                        
                         $diariogeneral = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->count();
-
                     if ($diariogeneral == 1){ 
                         $cu = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
                         $cuenta = DGRegistro::where('diario_general_id',$cu->id)->count();
-
-                        $diariog = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
+                        $cuentacalculo = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
                         $debe =[];
                         $haber =[];
                         $ids=[];
-                        $diariog->nombre = $request->nombre;
-                        $diariog->total_debe = $request->total_debe;
-                        $diariog->total_haber = $request->total_haber;
+                        
+                        $udcalculo = $cuentacalculo->id;
+                        $cuentacalculo->delete();
+
+                        $diariog               = new DiarioGeneral;
+                        $diariog->taller_id    = $taller_id;
+                        $diariog->user_id      = $id;
+                        $diariog->nombre       = $request->nombre;
+                        $diariog->completado   = false;
+                        $diariog->total_haber  = $request->total_haber;
+                        $diariog->total_debe   = $request->total_debe;
                         $diariog->save();
 
-
-                        $registros= DGRegistro::where('diario_general_id', $diariog->id)->get();
-                        
-                        foreach($registros as $act){
-                                $ids[]=$act->id;
-                        }
-                        $deleteRegistros = DGRegistro::destroy($ids);
-
-                                foreach ($registro as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
+                        foreach ($registro as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
                             $regis=array(
                                     'diario_general_id' => $diariog->id,
                                     'no_registro'       => $key + 1,
@@ -1158,8 +1182,8 @@ class TallerContabilidadController extends Controller
                                 DGRegistro::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
                         }
                         $register = $diariog->dgRegistro;
-                        foreach ($registro as $key => $value) {                         ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
-                            foreach ($value['debe'] as $key1 => $value1) {              ////RECORRER TODOS LAS CUENTAS DE DEBE QUE PERTENECEN A UN REGISTRO
+                        foreach ($registro as $key => $concatenado) {                         ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
+                            foreach ($concatenado['debe'] as $key1 => $value1) {              ////RECORRER TODOS LAS CUENTAS DE DEBE QUE PERTENECEN A UN REGISTRO
                                 $regis1=array(
                                     'd_g_registro_id' => $register[$key]->id,
                                     'cuenta_id'       => $value1['cuenta_id'],
@@ -1171,16 +1195,16 @@ class TallerContabilidadController extends Controller
                                 );
                                 DGRDebe::insert($regis1);                             //GURDAR ESAS CUENTAS EN LA TABLA DEBE CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
                             }
-                            foreach ($value['haber'] as $key2 => $value2) {           ////RECORRER TODOS LAS CUENTAS DE HABER QUE PERTENECEN A UN REGISTRO
+                            foreach ($concatenado['haber'] as $key2 => $value2) {           ////RECORRER TODOS LAS CUENTAS DE HABER QUE PERTENECEN A UN REGISTRO
                                 $regis2=array(
-                                    'd_g_registro_id'  => $register[$key]->id,
+                                    'd_g_registro_id' => $register[$key]->id,
                                     'cuenta_id'       => $value2['cuenta_id'],
-                                    'nom_cuenta'        => $value2['nom_cuenta'],
-                                    'saldo'              => $value2['saldo'],
-                                    'created_at'         => now(),
-                                    'updated_at'         => now(),
+                                    'nom_cuenta'      => $value2['nom_cuenta'],
+                                    'saldo'           => $value2['saldo'],
+                                    'created_at'      => now(),
+                                    'updated_at'      => now(),
                                 );
-                                DGRHaber::insert($regis2);                            //GURDAR ESAS CUENTAS EN LA TABLA HABER CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
+                                DGRHaber::insert($regis2);                            //GURDAR ESAS CUENTAS EN LA TABLA HABER CON EL ID DEL REGISTRO AL QUE 
                             }
                         }
                         return response(array(
@@ -1191,14 +1215,11 @@ class TallerContabilidadController extends Controller
                         $diariogeneral               = new DiarioGeneral;
                         $diariogeneral->taller_id    = $taller_id;
                         $diariogeneral->user_id      = $id;
-                        // $diariogeneral->enunciado = $contenido->enunciado;
                         $diariogeneral->nombre       = $request->nombre;
                         $diariogeneral->completado   = false;
                         $diariogeneral->total_haber  = $request->total_haber;
                         $diariogeneral->total_debe   = $request->total_debe;
-
                         $diariogeneral->save();
-
                         $diariog = DiarioGeneral::where('user_id',$id)->where('taller_id', $taller_id)->first();
                         
                         $debe =[];
@@ -1216,8 +1237,8 @@ class TallerContabilidadController extends Controller
                                 DGRegistro::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
                         }
                         $register = $diariog->dgRegistro;
-                        foreach ($registro as $key => $value) {                         ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
-                            foreach ($value['debe'] as $key1 => $value1) {              ////RECORRER TODOS LAS CUENTAS DE DEBE QUE PERTENECEN A UN REGISTRO
+                        foreach ($registro as $key => $diario2con) {                         ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
+                            foreach ($diario2con['debe'] as $key1 => $value1) {              ////RECORRER TODOS LAS CUENTAS DE DEBE QUE PERTENECEN A UN REGISTRO
                                 $regis1=array(
                                     'd_g_registro_id' => $register[$key]->id,
                                     'cuenta_id'       => $value1['cuenta_id'],
@@ -1229,7 +1250,7 @@ class TallerContabilidadController extends Controller
                                 );
                                 DGRDebe::insert($regis1);                             //GURDAR ESAS CUENTAS EN LA TABLA DEBE CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
                             }
-                            foreach ($value['haber'] as $key2 => $value2) {           ////RECORRER TODOS LAS CUENTAS DE HABER QUE PERTENECEN A UN REGISTRO
+                            foreach ($diario2con['haber'] as $key2 => $value2) {           ////RECORRER TODOS LAS CUENTAS DE HABER QUE PERTENECEN A UN REGISTRO
                                 $regis2=array(
                                     'd_g_registro_id'  => $register[$key]->id,
                                     'cuenta_id'       => $value2['cuenta_id'],

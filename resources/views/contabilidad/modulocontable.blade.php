@@ -645,7 +645,7 @@
         { name: ' Libro Banco', code: 'libro-banco' },
         { name: ' Conciliación Bancaria', code: 'conciliacion-bancaria' },
         { name: ' Retencion del IVA', code: 'retencion-iva' },
-        { name: ' Nomina Empleados', code: 'nomina-empleado' },
+        // { name: ' Nomina Empleados', code: 'nomina-empleado' },
         // { name: ' Provisión de Benficios', code: 'provision-beneficio' },
 
       ],

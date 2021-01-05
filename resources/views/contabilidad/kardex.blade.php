@@ -133,23 +133,23 @@
 					<tbody>
 						<tr>
 							<td>Inventario Inicial de Mercaderias</td>
-							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.inventario_inicial" type="number" class="form-control form-control-sm"></td>
-							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.inventario_inicial" type="number" class="form-control form-control-sm"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.inventario_inicial" type="number" class="form-control text-right form-control-sm"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.inventario_inicial" type="number" class="form-control text-right form-control-sm"></td>
 						</tr>
 						<tr>
 							<td>Adquisiciones</td>
-							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.adquicisiones" type="number" placeholder="+" class="form-control form-control-sm"></td>
-							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.adquicisiones" type="number" placeholder="+" class="form-control form-control-sm"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.adquicisiones" type="number" placeholder="+" class="form-control text-right form-control-sm"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.adquicisiones" type="number" placeholder="+" class="form-control text-right form-control-sm"></td>
 						</tr>
 						<tr>
 							<td>(-) Ventas</td>
-							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.ventas" type="number" placeholder="-" class="form-control form-control-sm"></td>
-							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.ventas" type="number" placeholder="-" class="form-control form-control-sm"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.ventas" type="number" placeholder="-" class="form-control text-right form-control-sm"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.ventas" type="number" placeholder="-" class="form-control text-right form-control-sm"></td>
 						</tr>
 						<tr>
 							<td>Inv. Final de Mercaderia </td>
-							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.inventario_final" type="number" class="form-control form-control-sm"></td>
-							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.inventario_final" type="number" class="form-control form-control-sm"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.inventario_final" type="number" class="form-control text-right form-control-sm"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.inventario_final" type="number" class="form-control text-right form-control-sm"></td>
 						</tr>
 					</tbody>
 				</table>
