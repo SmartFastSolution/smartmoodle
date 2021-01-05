@@ -91,12 +91,12 @@
                                     </div>
                                     @if($datos->metodo == 'individual')
 
-                                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden;">
                                         {!! $transacciones->transacciones !!}
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 mt-2 "
-                                        style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+                                        style=" height:200px; overflow-y: scroll; border: solid 3px red;">
                                         @isset ($balancesInicial->transacciones )
                                         {!! $balancesInicial->transacciones !!}
                                         @endisset
@@ -105,7 +105,7 @@
                                     @endif
 
 
-                                    <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
+                                    <div class="col-12 mt-2 p-2" style=" height:200px; overflow-y: scroll;">
                                         <h2 class="text-center">Activos Corrientes</h2>
                                         <div class="row justify-content-around mb-2">
                                             <table class="table table-bordered table-sm mb-2 p-2">
@@ -120,7 +120,7 @@
                                                 <tbody is="draggable" group="people" :list="a_corrientes" tag="tbody">
 
                                                     <tr v-for="(balan, index) in a_corrientes">
-                                                        <td align="center">@{{ balan.nom_cuenta}}</td>
+                                                        <td class="text-left">@{{ balan.nom_cuenta}}</td>
                                                         <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                                                         <td align="center" width="50">
                                                             <a @click.prevent="editAcorriente(index)"
@@ -190,12 +190,12 @@
                                     </div>
                                     @if($datos->metodo == 'individual')
 
-                                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden;">
                                         {!! $transacciones->transacciones !!}
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 mt-2 "
-                                        style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+                                        style=" height:200px; overflow-y: scroll; border: solid 3px red;">
                                         @isset ($balancesInicial->transacciones )
                                         {!! $balancesInicial->transacciones !!}
                                         @endisset
@@ -203,7 +203,7 @@
                                     </div>
                                     @endif
 
-                                    <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
+                                    <div class="col-12 mt-2 p-2" style=" height:200px; overflow-y: scroll;">
                                         <h2 class="text-center">Activos no Corrientes</h2>
                                         <div class="row justify-content-around mb-2">
                                             <table class="table table-bordered table-sm mb-2 p-2">
@@ -218,7 +218,7 @@
                                                 <tbody is="draggable" group="people" :list="a_nocorrientes" tag="tbody">
 
                                                     <tr v-for="(balan, index) in a_nocorrientes">
-                                                        <td align="center">@{{ balan.nom_cuenta}}</td>
+                                                        <td class="text-left">@{{ balan.nom_cuenta}}</td>
                                                         <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                                                         <td align="center" width="50">
                                                             <a @click.prevent="editNoAcorriente(index)"
@@ -288,12 +288,12 @@
                                     </div>
                                     @if($datos->metodo == 'individual')
 
-                                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden;">
                                         {!! $transacciones->transacciones !!}
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 mt-2 "
-                                        style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+                                        style=" height:200px; overflow-y: scroll; border: solid 3px red;">
                                         @isset ($balancesInicial->transacciones )
                                         {!! $balancesInicial->transacciones !!}
                                         @endisset
@@ -301,7 +301,7 @@
                                     </div>
                                     @endif
 
-                                    <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
+                                    <div class="col-12 mt-2 p-2" style=" height:200px; overflow-y: scroll;">
                                         <h2 class="text-center">Pasivos Corrientes</h2>
                                         <div class="row justify-content-around mb-2">
                                             <table class="table table-bordered table-sm mb-2 p-2">
@@ -316,7 +316,7 @@
                                                 <tbody is="draggable" group="people" :list="p_corrientes" tag="tbody">
 
                                                     <tr v-for="(balan, index) in p_corrientes">
-                                                        <td align="center">@{{ balan.nom_cuenta}}</td>
+                                                        <td class="text-left">@{{ balan.nom_cuenta}}</td>
                                                         <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                                                         <td align="center" width="50">
                                                             <a @click.prevent="editPcorriente(index)"
@@ -386,12 +386,12 @@
                                     </div>
                                     @if($datos->metodo == 'individual')
 
-                                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden;">
                                         {!! $transacciones->transacciones !!}
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 mt-2 "
-                                        style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+                                        style=" height:200px; overflow-y: scroll; border: solid 3px red;">
                                         @isset ($balancesInicial->transacciones )
                                         {!! $balancesInicial->transacciones !!}
                                         @endisset
@@ -399,7 +399,7 @@
                                     </div>
                                     @endif
 
-                                    <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
+                                    <div class="col-12 mt-2 p-2" style=" height:200px; overflow-y: scroll;">
                                         <h2 class="text-center">Pasivos no Corriente</h2>
                                         <div class="row justify-content-around mb-2">
                                             <table class="table table-bordered table-sm mb-2 p-2">
@@ -414,7 +414,7 @@
                                                 <tbody is="draggable" group="people" :list="p_nocorrientes" tag="tbody">
 
                                                     <tr v-for="(balan, index) in p_nocorrientes">
-                                                        <td align="center">@{{ balan.nom_cuenta}}</td>
+                                                        <td class="text-left">@{{ balan.nom_cuenta}}</td>
                                                         <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                                                         <td align="center" width="50">
                                                             <a @click.prevent="editPNocorriente(index)"
@@ -483,12 +483,12 @@
                                     </div>
                                     @if($datos->metodo == 'individual')
 
-                                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden;">
                                         {!! $transacciones->transacciones !!}
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 mt-2 "
-                                        style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+                                        style=" height:200px; overflow-y: scroll; border: solid 3px red;">
                                         @isset ($balancesInicial->transacciones )
                                         {!! $balancesInicial->transacciones !!}
                                         @endisset
@@ -496,7 +496,7 @@
                                     </div>
                                     @endif
 
-                                    <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
+                                    <div class="col-12 mt-2 p-2" style=" height:200px; overflow-y: scroll;">
                                         <h2 class="text-center">Patrimonios</h2>
                                         <div class="row justify-content-around mb-2">
                                             <table class="table table-bordered table-sm mb-2 p-2">
@@ -511,7 +511,7 @@
                                                 <tbody is="draggable" group="people" :list="patrimonios" tag="tbody">
 
                                                     <tr v-for="(balan, index) in patrimonios">
-                                                        <td align="center">@{{ balan.nom_cuenta}}</td>
+                                                        <td class="text-left">@{{ balan.nom_cuenta}}</td>
                                                         <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                                                         <td align="center" width="50">
                                                             <a @click.prevent="editPatrimonio(index)"

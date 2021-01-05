@@ -213,7 +213,7 @@ const b_hori = new Vue({
     let component = 'example-component';
     funciones.VueSweetAlert2(component,propsData);
     },
-        abrirActivoC(){
+    abrirActivoC(){
       this.limpiar();
       $('#bih-transaccion').modal('show');
       $('#nav-bih-activo-corriente-tab').tab('show')
@@ -222,22 +222,19 @@ const b_hori = new Vue({
     },
       abrirActivoNoC(){
         this.limpiar();
-      $('#bih-transaccion').modal('show');
-      
+      $('#bih-transaccion').modal('show');    
       $('#nav-bih-activo-no-corriente-tab').tab('show')
 
     },
       abrirPasivoC(){
         this.limpiar();
       $('#bih-transaccion').modal('show');
-      
       $('#nav-bih-pasivo-corriente-tab').tab('show')
 
     },
       abrirPasivoNoC(){
         this.limpiar();
       $('#bih-transaccion').modal('show');
-      
       $('#nav-bih-pasivo-no-corriente-tab').tab('show')
 
     },
@@ -372,15 +369,20 @@ const b_hori = new Vue({
     
     },
     limpiar(){ //LIMPIAR TODOS LOS CAMPOS DE ACTIVOS PASIVOS Y PATRIMONIOS
-      this.pasivo.p_corriente.nom_cuenta = '';
-      this.pasivo.p_corriente.saldo = '';
-      this.pasivo.p_nocorriente.nom_cuenta = '';
-      this.pasivo.p_nocorriente.saldo = '';
-      this.activo.a_corriente.nom_cuenta = '';
-      this.activo.a_corriente.saldo = '';
-      this.activo.a_nocorriente.nom_cuenta = '';
-      this.activo.a_nocorriente.saldo = '';
-      this.bi.const_id = '';
+      this.pasivo.p_corriente.cuenta_id   = '';
+      this.pasivo.p_corriente.saldo       = '';
+      this.pasivo.p_nocorriente.cuenta_id = '';
+      this.pasivo.p_nocorriente.saldo     = '';
+      this.activo.a_corriente.cuenta_id   = '';
+      this.activo.a_corriente.saldo       = '';
+      this.activo.a_nocorriente.cuenta_id = '';
+      this.activo.a_nocorriente.saldo     = '';
+      this.pasivo.p_corriente.edit        =  false;
+      this.pasivo.p_nocorriente.edit      =  false;
+      this.activo.a_corriente.edit        =  false;
+      this.activo.a_nocorriente.edit      =  false;
+      this.patrimonio.edit                =  false;
+      this.bi.const_id                    = '';
 
       },
       agregarActivoCorriente(){
@@ -411,8 +413,9 @@ const b_hori = new Vue({
 
     //EDITAR ELEMENTOS DE UN ARRAY
       editAcorriente(index){
+        this.limpiar();
        this.activo.a_corriente.edit      = true;
-       this.registro.a_corriente    = index;
+       this.registro.a_corriente         = index;
        this.bi.const_id                  = this.a_corrientes[index].cuenta_id;
        this.activo.a_corriente.cuenta_id = this.a_corrientes[index].cuenta_id;
        this.activo.a_corriente.saldo     = this.a_corrientes[index].saldo;
@@ -433,22 +436,22 @@ const b_hori = new Vue({
                 "timeOut": "3000"
                 });
              }else{
-            let nombre                         = funciones.obtenerNombre(id);
-            let index                          = this.registro.a_corriente;
-            this.a_corrientes[index].cuenta_id = this.activo.a_corriente.cuenta_id;
-            this.a_corrientes[index].nom_cuenta    = nombre;
-            this.a_corrientes[index].saldo     = this.activo.a_corriente.saldo;
-            this.activo.a_corriente.cuenta_id  =''
-            this.activo.a_corriente.saldo      =''
-            this.activo.a_corriente.edit       = false;
-            this.registro.a_corriente          = '';
-          this.cambioActivo();
+            let nombre                          = funciones.obtenerNombre(id);
+            let index                           = this.registro.a_corriente;
+            this.a_corrientes[index].cuenta_id  = this.activo.a_corriente.cuenta_id;
+            this.a_corrientes[index].nom_cuenta = nombre;
+            this.a_corrientes[index].saldo      = this.activo.a_corriente.saldo;
+            this.activo.a_corriente.cuenta_id   =''
+            this.activo.a_corriente.saldo       =''
+            this.activo.a_corriente.edit        = false;
+            this.registro.a_corriente           = '';
+            this.cambioActivo();
           }
       }
     },
     cancelarEdicionActivoC(){
       this.activo.a_corriente.cuenta_id =''
-      this.activo.a_corriente.saldo      =''
+      this.activo.a_corriente.saldo     =''
       this.activo.a_corriente.edit      = false;
     },
     agregarActivoNoCorriente(){
@@ -479,6 +482,7 @@ const b_hori = new Vue({
 
     //EDITAR ELEMENTOS DE UN ARRAY
       editNoAcorriente(index){
+        this.limpiar();
        this.activo.a_nocorriente.edit       = true;
        this.registro.a_nocorriente          = index;
        this.bi.const_id                     = this.a_nocorrientes[index].cuenta_id;
@@ -500,15 +504,15 @@ const b_hori = new Vue({
                 "timeOut": "3000"
                 });
              }else{
-            let nombre                         = funciones.obtenerNombre(id);
-            let index                          = this.registro.a_nocorriente;
-            this.a_nocorrientes[index].cuenta_id = this.activo.a_nocorriente.cuenta_id;
-            this.a_nocorrientes[index].nom_cuenta    = nombre;
-            this.a_nocorrientes[index].saldo     = this.activo.a_nocorriente.saldo;
-            this.activo.a_nocorriente.cuenta_id  =''
-            this.activo.a_nocorriente.saldo      =''
-            this.activo.a_nocorriente.edit       = false;
-            this.registro.a_nocorriente          = '';
+             let nombre                            = funciones.obtenerNombre(id);
+             let index                             = this.registro.a_nocorriente;
+             this.a_nocorrientes[index].cuenta_id  = this.activo.a_nocorriente.cuenta_id;
+             this.a_nocorrientes[index].nom_cuenta = nombre;
+             this.a_nocorrientes[index].saldo      = this.activo.a_nocorriente.saldo;
+             this.activo.a_nocorriente.cuenta_id   =''
+             this.activo.a_nocorriente.saldo       =''
+             this.activo.a_nocorriente.edit        = false;
+             this.registro.a_nocorriente           = '';
           this.cambioActivoNo();
           }
       }
@@ -549,8 +553,9 @@ const b_hori = new Vue({
 
     //EDITAR ELEMENTOS DE UN ARRAY
       editPcorriente(index){
+        this.limpiar();
        this.pasivo.p_corriente.edit      = true;
-       this.registro.p_corriente    = index;
+       this.registro.p_corriente         = index;
        this.bi.const_id                  = this.p_corrientes[index].cuenta_id;
        this.pasivo.p_corriente.cuenta_id = this.p_corrientes[index].cuenta_id;
        this.pasivo.p_corriente.saldo     = this.p_corrientes[index].saldo;
@@ -620,6 +625,7 @@ const b_hori = new Vue({
 
     //EDITAR ELEMENTOS DE UN ARRAY
       editPNocorriente(index){
+        this.limpiar();
        this.pasivo.p_nocorriente.edit      = true;
        this.registro.p_nocorriente    = index;
        this.bi.const_id                  = this.p_nocorrientes[index].cuenta_id;
@@ -689,6 +695,7 @@ const b_hori = new Vue({
 
     //EDITAR ELEMENTOS DE UN ARRAY
       editPatrimonio(index){
+        this.limpiar();
        this.patrimonio.edit      = true;
        this.registro.patrimonio    = index;
        this.bi.const_id                  = this.patrimonios[index].cuenta_id;
@@ -830,17 +837,17 @@ const b_hori = new Vue({
 //       this.patrimonios.splice(index, 1);
 //       this.cambioPatrimonio();
 //     },
-    limpiar(){ //LIMPIAR TODOS LOS CAMPOS DE ACTIVOS PASIVOS Y PATRIMONIOS
-      this.pasivo.p_corriente.nom_cuenta = '';
-      this.pasivo.p_corriente.saldo = '';
-      this.pasivo.p_nocorriente.nom_cuenta = '';
-      this.pasivo.p_nocorriente.saldo = '';
-      this.activo.a_corriente.nom_cuenta = '';
-      this.activo.a_corriente.saldo = '';
-      this.activo.a_nocorriente.nom_cuenta = '';
-      this.activo.a_nocorriente.saldo = '';
-      this.bi.const_id = '';
-      },
+    // limpiar(){ //LIMPIAR TODOS LOS CAMPOS DE ACTIVOS PASIVOS Y PATRIMONIOS
+    //   this.pasivo.p_corriente.nom_cuenta = '';
+    //   this.pasivo.p_corriente.saldo = '';
+    //   this.pasivo.p_nocorriente.nom_cuenta = '';
+    //   this.pasivo.p_nocorriente.saldo = '';
+    //   this.activo.a_corriente.nom_cuenta = '';
+    //   this.activo.a_corriente.saldo = '';
+    //   this.activo.a_nocorriente.nom_cuenta = '';
+    //   this.activo.a_nocorriente.saldo = '';
+    //   this.bi.const_id = '';
+    //   },
     //EDITAR ELEMENTOS DE UN ARRAY
   //   editAcorriente(index){ //OBTENEMOS EL INDICE DEL ARRAY SELECCIONADO
   //     this.update = index;                                                       //IGUALAMOS LA VARIABLE UPDATE CON EL INDICE DEL ARRAY
@@ -1247,26 +1254,6 @@ const b_hori = new Vue({
                   toastr.error("Campo Fecha es obligatorio", "Smarmoddle", {
                     "timeOut": "3000"
                    }); 
-                }else if(this.a_corrientes.length == 0){
-                  toastr.error("Debe haber al menos un Activo Corriente", "Smarmoddle", {
-                    "timeOut": "3000"
-                   }); 
-                }else if(this.a_nocorrientes.length == 0){
-                  toastr.error("Debe haber al menos un Activo No Corriente", "Smarmoddle", {
-                    "timeOut": "3000"
-                   }); 
-                }else if(this.p_corrientes.length == 0){
-                  toastr.error("Debe haber al menos un Pasivo Corriente", "Smarmoddle", {
-                    "timeOut": "3000"
-                   }); 
-                }else if(this.p_nocorrientes.length == 0){
-                  toastr.error("Debe haber al menos un Pasivo No Corriente", "Smarmoddle", {
-                    "timeOut": "3000"
-                   }); 
-                }else if(this.patrimonios.length == 0){
-                  toastr.error("Debe haber al menos un Patrimonio", "Smarmoddle", {
-                    "timeOut": "3000"
-                   }); 
                 }else if(this.total_balance_inicial.t_patrimonio_pasivo.trim() === ''){
                   toastr.error("Debes calcular el Total del Pasivo + Patrimonio", "Smarmoddle", {
                     "timeOut": "3000"
@@ -1473,7 +1460,7 @@ const b_ver = new Vue({
     let component = 'example-component';
     funciones.VueSweetAlert2(component,propsData);
     },
-            abrirActivoC(){
+      abrirActivoC(){
       this.limpiar();
       $('#biv-transaccion').modal('show');
       $('#nav-biv-activo-corriente-tab').tab('show')
@@ -1632,14 +1619,19 @@ const b_ver = new Vue({
     
     },
     limpiar(){ //LIMPIAR TODOS LOS CAMPOS DE ACTIVOS PASIVOS Y PATRIMONIOS
-      this.pasivo.p_corriente.nom_cuenta = '';
+      this.pasivo.p_corriente.cuenta_id = '';
       this.pasivo.p_corriente.saldo = '';
-      this.pasivo.p_nocorriente.nom_cuenta = '';
+      this.pasivo.p_nocorriente.cuenta_id = '';
       this.pasivo.p_nocorriente.saldo = '';
-      this.activo.a_corriente.nom_cuenta = '';
+      this.activo.a_corriente.cuenta_id = '';
       this.activo.a_corriente.saldo = '';
-      this.activo.a_nocorriente.nom_cuenta = '';
+      this.activo.a_nocorriente.cuenta_id = '';
       this.activo.a_nocorriente.saldo = '';
+
+      this.pasivo.p_corriente.edit = false;
+      this.pasivo.p_nocorriente.edit = false;
+      this.activo.a_corriente.edit = false;
+      this.activo.a_nocorriente.edit = false;
       this.bi.const_id = '';
 
       },
@@ -2110,18 +2102,18 @@ const b_ver = new Vue({
 //       this.patrimonios.splice(index, 1);
 //       this.cambioPatrimonio();
 //     },
-    limpiar(){ //LIMPIAR TODOS LOS CAMPOS DE ACTIVOS PASIVOS Y PATRIMONIOS
-      this.pasivo.p_corriente.nom_cuenta = '';
-      this.pasivo.p_corriente.saldo = '';
-      this.pasivo.p_nocorriente.nom_cuenta = '';
-      this.pasivo.p_nocorriente.saldo = '';
-      this.activo.a_corriente.nom_cuenta = '';
-      this.activo.a_corriente.saldo = '';
-      this.activo.a_nocorriente.nom_cuenta = '';
-      this.activo.a_nocorriente.saldo = '';
-      this.bi.const_id = '';
+    // limpiar(){ //LIMPIAR TODOS LOS CAMPOS DE ACTIVOS PASIVOS Y PATRIMONIOS
+    //   this.pasivo.p_corriente.nom_cuenta = '';
+    //   this.pasivo.p_corriente.saldo = '';
+    //   this.pasivo.p_nocorriente.nom_cuenta = '';
+    //   this.pasivo.p_nocorriente.saldo = '';
+    //   this.activo.a_corriente.nom_cuenta = '';
+    //   this.activo.a_corriente.saldo = '';
+    //   this.activo.a_nocorriente.nom_cuenta = '';
+    //   this.activo.a_nocorriente.saldo = '';
+    //   this.bi.const_id = '';
 
-      },
+    //   },
     //EDITAR ELEMENTOS DE UN ARRAY
   //   editAcorriente(index){ //OBTENEMOS EL INDICE DEL ARRAY SELECCIONADO
   //     this.update = index;                                                       //IGUALAMOS LA VARIABLE UPDATE CON EL INDICE DEL ARRAY
@@ -2525,26 +2517,6 @@ const b_ver = new Vue({
                    }); 
                 }else if (this.balance_inicial.fecha.trim() === '') {
                   toastr.error("Campo Fecha es obligatorio", "Smarmoddle", {
-                    "timeOut": "3000"
-                   }); 
-                }else if(this.a_corrientes.length == 0){
-                  toastr.error("Debe haber al menos un Activo Corriente", "Smarmoddle", {
-                    "timeOut": "3000"
-                   }); 
-                }else if(this.a_nocorrientes.length == 0){
-                  toastr.error("Debe haber al menos un Activo No Corriente", "Smarmoddle", {
-                    "timeOut": "3000"
-                   }); 
-                }else if(this.p_corrientes.length == 0){
-                  toastr.error("Debe haber al menos un Pasivo Corriente", "Smarmoddle", {
-                    "timeOut": "3000"
-                   }); 
-                }else if(this.p_nocorrientes.length == 0){
-                  toastr.error("Debe haber al menos un Pasivo No Corriente", "Smarmoddle", {
-                    "timeOut": "3000"
-                   }); 
-                }else if(this.patrimonios.length == 0){
-                  toastr.error("Debe haber al menos un Patrimonio", "Smarmoddle", {
                     "timeOut": "3000"
                    }); 
                 }else if(this.total_balance_inicial.t_patrimonio_pasivo.trim() === ''){
@@ -9793,7 +9765,7 @@ const kardex = new Vue({
               producto_id: _this.producto_id
         }).then(response => {
           if (response.data.datos == true) {
-              toastr.info("Kardex Promedio cargado correctamente", "Smarmoddle", {
+              toastr.info("Kardex Fifo cargado correctamente", "Smarmoddle", {
             "timeOut": "3000"
             });
               _this.transacciones = response.data.kardex_fifo;
