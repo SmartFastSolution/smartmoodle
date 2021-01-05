@@ -150,15 +150,12 @@
             "dompdf",
             "laravel",
             "pdf"
-<<<<<<< HEAD
         ],
         "funding": [
             {
                 "url": "https://github.com/barryvdh",
                 "type": "github"
             }
-=======
->>>>>>> 9358c424d3b0322082352e8c0e6e69285329bb94
         ]
     },
     {
