@@ -15,6 +15,8 @@
                 </button>
             </div>
             <div class="modal-body">
+            <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
+              
                 <div class="row justify-content-center">
                    <div class="col-6 ">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">

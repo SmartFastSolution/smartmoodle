@@ -206,7 +206,7 @@
                         </div>
                     </div>
                     @endif
-                    <div class="col-12 mt-2" v-if="mayores.registros.length > 0 || mayores.cierres.length > 0">
+                    <div class="col-12 mt-2" v-if="mayores.registros.length > 0 || mayores.cierres.length > 0" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
                         <h2 class="text-center">ACTUALIZAR REGISTROS</h2>
 
                         <table class="table table-bordered table-sm">

@@ -336,7 +336,7 @@
                 <td class="text-center" >HABER</td>
               </tr>
             </thead>
-            <tbody>
+            <tbody is="draggable" group="cuentas" :list="registros" tag="tbody">
                  <tr v-for="(balan, index) in registros" >
                             <td class="text-left" width="300">@{{ balan.cuenta}}</td>
                             <td class="text-right" align="center" width="100">@{{ decimales(balan.bc_debe)}}</td>
@@ -354,7 +354,10 @@
                 <td align="center" width="50"><a @click.prevent="warningEliminar(index)"  class="btn btn-danger"><i
                             class="fas fa-trash-alt"></i></a></td>
                     </tr>
-              <tr>
+          
+            </tbody>
+            <tbody>
+                    <tr>
                  <td class="font-weight-bold">SUMAN</td>
     <td class="text-right">@{{ suman.balance_comp.total_debe }}</td>
     <td class="text-right">@{{ suman.balance_comp.total_haber }}</td>
