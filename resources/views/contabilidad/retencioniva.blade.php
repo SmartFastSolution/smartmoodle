@@ -12,10 +12,10 @@
             <input type="date" name="fecha" v-model="fecha" class="form-control text-center form-control-sm" required>
         </div>
     </div>
-    @if ($rol === 'estudiante')
+    <!-- @if ($rol === 'estudiante')
     <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirRetencion()">Agregar Retención</a>
     <a href="#" class="addDiario btn btn-outline-success ml-1" @click.prevent="guardaretencioniva()">Guardar</a>
-    @endif
+    @endif -->
     <h3 class="text-center font-weight-bold text-danger">COMPRAS</h3>
     <div style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
         <table class="table table-bordered table-sm">
