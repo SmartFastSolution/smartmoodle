@@ -2154,6 +2154,9 @@ class TallerContabilidadController extends Controller
                 'datos' => true,
                 'banexocaja' => $obtenerc,
                 'nombre' =>$anexocaja->nombre,
+                'totaldebe' =>$anexocaja->totaldebe,
+                'totalhaber' =>$anexocaja->totalhaber,
+
             ),200,[]);
             }else{
                 return response(array(
@@ -2406,7 +2409,9 @@ class TallerContabilidadController extends Controller
                     'mb' => $mb,
                     'nombre' =>$lbs->nombre,
                     'n_banco' =>$lbs->n_banco,
-                    'c_banco' =>$lbs->c_banco
+                    'c_banco' =>$lbs->c_banco,
+                    'totaldebe'=>$lbs->totaldebe,
+                    'totalhaber'=>$lbs->totalhaber,
                 ),200,[]);
                 }else{
                     return response(array(

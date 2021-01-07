@@ -16,7 +16,7 @@
                 </button>
             </div>
             <div class="modal-body">
-            <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
+                <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
 
                 <div class="row justify-content-center">
                     <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
@@ -27,57 +27,63 @@
                                     aria-controls="comentario-asiento" aria-selected="false">DETALLE MOVIMIENTO</a>
                             </li>
 
-                      <li class="nav-item" role="presentation">
-                        <a class="nav-link  text-dark font-weight-bold" id="debe-asiento-tab" style="font-size: 15px" data-toggle="tab" href="#debe-asiento" role="tab" aria-controls="debe-asiento" aria-selected="true">CUENTAS DEUDORAS</a>
-                      </li>
-                      <li class="nav-item" role="presentation">
-                        <a class="nav-link text-dark font-weight-bold" id="haber-asiento-tab" style="font-size: 15px" data-toggle="tab" href="#haber-asiento" role="tab" aria-controls="haber-asiento" aria-selected="false">CUENTAS ACREEDORAS</a>
-                      </li>
-                     
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                      <div class="tab-pane fade " id="debe-asiento" role="tabpanel" aria-labelledby="debe-asiento-tab">
-                               <h2 class="text-center">AGREGAR CUENTAS DEUDORAS</h2>
-                       <table class="table table-bordered table-sm">
-                          <thead class="bg-success">
-                            <tr>
-                              {{-- <th v-if="diarios.debe.length == 0 || diario.debe.fecha !== ''" width="50" >Fecha</th> --}}
-                              <th  align="center" class="text-center">Cuentas</th>
-                              <th  align="center" class="text-center">Saldo</th>    
-                            </tr>
-                       </thead>
-                        <tbody >  
-                          <tr>
-                              {{-- <td v-if="diarios.debe.length == 0 || diario.debe.fecha !== ''" width="50" ><input autocomplete="ÑÖcompletes" type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required></td> --}}
-                              <td>
-                                          <model-select :options="options" 
-                                v-model="diario.debe.nom_cuenta"
-                                placeholder="ELEGIR CUENTA" >
-        </model-select>
-                             {{--  <select name="n_cuenta" v-model="diario.debe.nom_cuenta" class="custom-select">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link  text-dark font-weight-bold" id="debe-asiento-tab"
+                                    style="font-size: 15px" data-toggle="tab" href="#debe-asiento" role="tab"
+                                    aria-controls="debe-asiento" aria-selected="true">CUENTAS DEUDORAS</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link text-dark font-weight-bold" id="haber-asiento-tab"
+                                    style="font-size: 15px" data-toggle="tab" href="#haber-asiento" role="tab"
+                                    aria-controls="haber-asiento" aria-selected="false">CUENTAS ACREEDORAS</a>
+                            </li>
+
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade " id="debe-asiento" role="tabpanel"
+                                aria-labelledby="debe-asiento-tab">
+                                <h2 class="text-center">AGREGAR CUENTAS DEUDORAS</h2>
+                                <table class="table table-bordered table-sm">
+                                    <thead class="bg-success">
+                                        <tr>
+                                            {{-- <th v-if="diarios.debe.length == 0 || diario.debe.fecha !== ''" width="50" >Fecha</th> --}}
+                                            <th align="center" class="text-center">Cuentas</th>
+                                            <th align="center" class="text-center">Saldo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            {{-- <td v-if="diarios.debe.length == 0 || diario.debe.fecha !== ''" width="50" ><input autocomplete="ÑÖcompletes" type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required></td> --}}
+                                            <td>
+                                                <model-select :options="options" v-model="diario.debe.nom_cuenta"
+                                                    placeholder="ELEGIR CUENTA">
+                                                </model-select>
+                                                {{--  <select name="n_cuenta" v-model="diario.debe.nom_cuenta" class="custom-select">
                                 <option value="" disabled>ELIGE UNA CUENTA</option>
-                                <option v-for="(cuenta, index) in cuentas" :value="cuenta.id">@{{ cuenta.nombre }} </option>
-                                <option value="Banco">Bancos</option>
-                                <option value="Muebles">Muebles</option>
-                                <option value="Caja">Caja</option>
-                                <option value="Vehiculo">Vehiculo</option>
-                                <option value="Inv. Mercaderías">Inv. Mercaderías</option>
-                                <option value="Doc. por Cob">Doc. por Cob</option>
-                                <option value="Doc. por Pagar">Doc. por Pagar</option>
-                                <option value="Muebles Oficina">Muebles Oficina</option>
-                                <option value="Equipo Oficina">Equipo Oficina</option>
-                                <option value="Eq. de Comp">Eq. de Comp</option>
-                                <option value="Hip. por Pagar">Hip. por Pagar</option>
-                                <option value="Capital">Capital</option>
-                              </select> --}}
-                              </td>
-                              <td width="125"><input autocomplete="ÑÖcompletes" type="number" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div v-if="!diario.debe.edit" class="row justify-content-center">
-                          <a href="#" class="btn btn-success" @click.prevent="agregarDebe()">Agregar</a>
-                        {{-- <a href=""data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark ml-1">KARDEX</a> --}}
+                                <option v-for="(cuenta, index) in cuentas" :value="cuenta.id">@{{ cuenta.nombre }}
+                                                </option>
+                                                <option value="Banco">Bancos</option>
+                                                <option value="Muebles">Muebles</option>
+                                                <option value="Caja">Caja</option>
+                                                <option value="Vehiculo">Vehiculo</option>
+                                                <option value="Inv. Mercaderías">Inv. Mercaderías</option>
+                                                <option value="Doc. por Cob">Doc. por Cob</option>
+                                                <option value="Doc. por Pagar">Doc. por Pagar</option>
+                                                <option value="Muebles Oficina">Muebles Oficina</option>
+                                                <option value="Equipo Oficina">Equipo Oficina</option>
+                                                <option value="Eq. de Comp">Eq. de Comp</option>
+                                                <option value="Hip. por Pagar">Hip. por Pagar</option>
+                                                <option value="Capital">Capital</option>
+                                                </select> --}}
+                                            </td>
+                                            <td width="125"><input autocomplete="ÑÖcompletes" type="number"
+                                                    v-model="diario.debe.saldo" name="debe" class="form-control"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div v-if="!diario.debe.edit" class="row justify-content-center">
+                                    <a href="#" class="btn btn-success" @click.prevent="agregarDebe()">Agregar</a>
+                                    {{-- <a href=""data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark ml-1">KARDEX</a> --}}
 
                                 </div>
                                 <div v-else class="row justify-content-center">
@@ -110,27 +116,29 @@
                                   <option v-for="(cuenta, index) in cuentas" :value="cuenta.id">@{{ cuenta.nombre }}
                                                 </option>
 
-                                  <option value="Banco">Bancos</option>
-                                  <option value="Muebles">Muebles</option>
-                                  <option value="Caja">Caja</option>
-                                  <option value="Vehiculo">Vehiculo</option>
-                                  <option value="Inv. Mercaderías">Inv. Mercaderías</option>
-                                  <option value="Doc. por Cob">Doc. por Cob</option>
-                                  <option value="Doc. por Pagar">Doc. por Pagar</option>
-                                  <option value="Muebles Oficina">Muebles Oficina</option>
-                                  <option value="Equipo Oficina">Equipo Oficina</option>
-                                  <option value="Eq. de Comp">Eq. de Comp</option>
-                                  <option value="Hip. por Pagar">Hip. por Pagar</option>
-                                  <option value="Capital">Capital</option>
-                                </select> --}} 
-                              </td>
-                              <td width="125"><input autocomplete="ÑÖcompletes" type="number" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div v-if="!diario.haber.edit" class="row justify-content-center">
-                            <a href="#" class="btn btn-info" @click.prevent="agregarHaber()">Agregar</a>
-                        {{-- <a href="" data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark ml-1">KARDEX</a> --}}
+                                                <option value="Banco">Bancos</option>
+                                                <option value="Muebles">Muebles</option>
+                                                <option value="Caja">Caja</option>
+                                                <option value="Vehiculo">Vehiculo</option>
+                                                <option value="Inv. Mercaderías">Inv. Mercaderías</option>
+                                                <option value="Doc. por Cob">Doc. por Cob</option>
+                                                <option value="Doc. por Pagar">Doc. por Pagar</option>
+                                                <option value="Muebles Oficina">Muebles Oficina</option>
+                                                <option value="Equipo Oficina">Equipo Oficina</option>
+                                                <option value="Eq. de Comp">Eq. de Comp</option>
+                                                <option value="Hip. por Pagar">Hip. por Pagar</option>
+                                                <option value="Capital">Capital</option>
+                                                </select> --}}
+                                            </td>
+                                            <td width="125"><input autocomplete="ÑÖcompletes" type="number"
+                                                    v-model="diario.haber.saldo" name="haber" class="form-control"
+                                                    required></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div v-if="!diario.haber.edit" class="row justify-content-center">
+                                    <a href="#" class="btn btn-info" @click.prevent="agregarHaber()">Agregar</a>
+                                    {{-- <a href="" data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark ml-1">KARDEX</a> --}}
 
                                 </div>
 
@@ -144,30 +152,34 @@
                                 aria-labelledby="comentario-asiento-tab">
                                 <h2 class="text-center">AGREGAR DETALLES</h2>
 
-                      <table class="table table-bordered table-sm">
-                        <thead class="thead-dark">
-                        <tr>
-                          <th align="center" class="text-center">Fecha</th>    
-                          <th  align="center" class="text-center">Comentario</th>    
-                        </tr>
-                       </thead>
-                        <tbody >  
-                          <tr>
-                            <td width="25"><input autocomplete="ÑÖcompletes" type="date" v-model="diarios.fecha" name="fecha" class="form-control" required></td>         
-                            <td ><input autocomplete="ÑÖcompletes" type="text" v-model="diarios.comentario" name="comentario" class="form-control" required></td>         
-                          </tr>
-                      </tbody>
-                    </table>
-                    <div class="row">
-                      <div class="col-6">
-                    {{-- <h3>Asiento de ajustes: <input autocomplete="ÑÖcompletes" v-model="diarios.ajustado" type="checkbox" class="custom-checkbox"></h3> --}}
-                        
-                      </div>
-                      <div class="col-6">
-                        {{-- <a href="" data-toggle="modal" data-target="#kardex-diairo" class="btn btn-sm btn-dark">KARDEX</a> --}}
-                      </div>
-                    </div>
-                   {{--  <div v-if="edit.debe.length >= 1" class="row justify-content-center">
+                                <table class="table table-bordered table-sm">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th align="center" class="text-center">Fecha</th>
+                                            <th align="center" class="text-center">Comentario</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td width="25"><input autocomplete="ÑÖcompletes" type="date"
+                                                    v-model="diarios.fecha" name="fecha" class="form-control" required>
+                                            </td>
+                                            <td><input autocomplete="ÑÖcompletes" type="text"
+                                                    v-model="diarios.comentario" name="comentario" class="form-control"
+                                                    required></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <div class="col-6">
+                                        {{-- <h3>Asiento de ajustes: <input autocomplete="ÑÖcompletes" v-model="diarios.ajustado" type="checkbox" class="custom-checkbox"></h3> --}}
+
+                                    </div>
+                                    <div class="col-6">
+                                        {{-- <a href="" data-toggle="modal" data-target="#kardex-diairo" class="btn btn-sm btn-dark">KARDEX</a> --}}
+                                    </div>
+                                </div>
+                                {{--  <div v-if="edit.debe.length >= 1" class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="comentarioUpdate()">Editar Comentario</a>
                       </div>
                        <div v-else class="row justify-content-center">
@@ -177,10 +189,11 @@
                         </div>
                     </div>
                     @if($datos->metodo == 'individual')
-                     <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 4px red;">
+                    <div class="col-6"
+                        style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 4px red;">
                         {!! $transacciones->transacciones !!}
-                     </div>
-                @elseif($datos->metodo == 'concatenado')
+                    </div>
+                    @elseif($datos->metodo == 'concatenado')
                     <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
                         <h3 class="text-center font-weight-bold">Datos para realizar los Asientos de Cierre</h3>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -212,7 +225,8 @@
                                         <h5>Ventas</h5>
                                     </div>
                                     <div class="col-2 text-right">
-                                        <span>@{{ decimales(estadoresultado.venta_e_resultado) }}</span></div>
+                                        <span>@{{ decimales(estadoresultado.venta_e_resultado) }}</span>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-5">
@@ -724,28 +738,30 @@
                             <tbody>
                                 <tr>
 
-                              <td>
-                              <select name="n_cuenta" v-model="diario.haber.nom_cuenta" class="custom-select">
-                                <option value="" disabled>ELIGE UNA CUENTA</option>
-                                <option value="Banco">Bancos</option>
-                                <option value="Muebles">Muebles</option>
-                                <option value="Caja">Caja</option>
-                                <option value="Vehiculo">Vehiculo</option>
-                                <option value="Inv. Mercaderías">Inv. Mercaderías</option>
-                                <option value="Doc. por Cob">Doc. por Cob</option>
-                                <option value="Doc. por Pagar">Doc. por Pagar</option>
-                                <option value="Muebles Oficina">Muebles Oficina</option>
-                                <option value="Equipo Oficina">Equipo Oficina</option>
-                                <option value="Eq. de Comp">Eq. de Comp</option>
-                                <option value="Hip. por Pagar">Hip. por Pagar</option>
-                                <option value="Capital">Capital</option>
-                              </select>
-                              </td>
-                              <td width="125"><input autocomplete="ÑÖcompletes" type="number" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div v-if="edit.debe.length >= 1" class="row justify-content-center">
+                                    <td>
+                                        <select name="n_cuenta" v-model="diario.haber.nom_cuenta" class="custom-select">
+                                            <option value="" disabled>ELIGE UNA CUENTA</option>
+                                            <option value="Banco">Bancos</option>
+                                            <option value="Muebles">Muebles</option>
+                                            <option value="Caja">Caja</option>
+                                            <option value="Vehiculo">Vehiculo</option>
+                                            <option value="Inv. Mercaderías">Inv. Mercaderías</option>
+                                            <option value="Doc. por Cob">Doc. por Cob</option>
+                                            <option value="Doc. por Pagar">Doc. por Pagar</option>
+                                            <option value="Muebles Oficina">Muebles Oficina</option>
+                                            <option value="Equipo Oficina">Equipo Oficina</option>
+                                            <option value="Eq. de Comp">Eq. de Comp</option>
+                                            <option value="Hip. por Pagar">Hip. por Pagar</option>
+                                            <option value="Capital">Capital</option>
+                                        </select>
+                                    </td>
+                                    <td width="125"><input autocomplete="ÑÖcompletes" type="number"
+                                            v-model="diario.haber.saldo" name="haber" class="form-control" required>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div v-if="edit.debe.length >= 1" class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="agregarEdit()">Agregar Pasivo</a>
                         </div>
 
@@ -774,39 +790,42 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col-12">
-                      <table class="table table-bordered table-sm">
-                          <thead class="thead-dark">
-                            <tr>
-                              <th v-if="diarios.debe.length == 0 && edit.debe.length == 0" width="50" >Fecha</th>
-                              <th  align="center" class="text-center">Cuentas</th>
-                              <th  align="center" class="text-center">Saldo</th>    
-                            </tr>
-                       </thead>
-                        <tbody >  
-                          <tr>
-                              <td v-if="diarios.debe.length == 0 && edit.debe.length == 0" width="50" > <input autocomplete="ÑÖcompletes" type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required></td>
-                              <td>
-                              <select name="n_cuenta" v-model="diario.debe.nom_cuenta" class="custom-select">
-                                <option value="" disabled>ELIGE UNA CUENTA</option>
-                                <option value="Banco">Bancos</option>
-                                <option value="Muebles">Muebles</option>
-                                <option value="Caja">Caja</option>
-                                <option value="Vehiculo">Vehiculo</option>
-                                <option value="Inv. Mercaderías">Inv. Mercaderías</option>
-                                <option value="Doc. por Cob">Doc. por Cob</option>
-                                <option value="Doc. por Pagar">Doc. por Pagar</option>
-                                <option value="Muebles Oficina">Muebles Oficina</option>
-                                <option value="Equipo Oficina">Equipo Oficina</option>
-                                <option value="Eq. de Comp">Eq. de Comp</option>
-                                <option value="Hip. por Pagar">Hip. por Pagar</option>
-                                <option value="Capital">Capital</option>
-                              </select>
-                              </td>
-                              <td width="125"><input autocomplete="ÑÖcompletes" type="number" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div v-if="edit.debe.length >= 1" class="row justify-content-center">
+                        <table class="table table-bordered table-sm">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th v-if="diarios.debe.length == 0 && edit.debe.length == 0" width="50">Fecha</th>
+                                    <th align="center" class="text-center">Cuentas</th>
+                                    <th align="center" class="text-center">Saldo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td v-if="diarios.debe.length == 0 && edit.debe.length == 0" width="50"> <input
+                                            autocomplete="ÑÖcompletes" type="date" name="fecha"
+                                            v-model="diario.debe.fecha" class="form-control" required></td>
+                                    <td>
+                                        <select name="n_cuenta" v-model="diario.debe.nom_cuenta" class="custom-select">
+                                            <option value="" disabled>ELIGE UNA CUENTA</option>
+                                            <option value="Banco">Bancos</option>
+                                            <option value="Muebles">Muebles</option>
+                                            <option value="Caja">Caja</option>
+                                            <option value="Vehiculo">Vehiculo</option>
+                                            <option value="Inv. Mercaderías">Inv. Mercaderías</option>
+                                            <option value="Doc. por Cob">Doc. por Cob</option>
+                                            <option value="Doc. por Pagar">Doc. por Pagar</option>
+                                            <option value="Muebles Oficina">Muebles Oficina</option>
+                                            <option value="Equipo Oficina">Equipo Oficina</option>
+                                            <option value="Eq. de Comp">Eq. de Comp</option>
+                                            <option value="Hip. por Pagar">Hip. por Pagar</option>
+                                            <option value="Capital">Capital</option>
+                                        </select>
+                                    </td>
+                                    <td width="125"><input autocomplete="ÑÖcompletes" type="number"
+                                            v-model="diario.debe.saldo" name="debe" class="form-control"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div v-if="edit.debe.length >= 1" class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="agregarEditPasivo()">Agregar Activos</a>
                         </div>
                         <div v-else class="row justify-content-center">
@@ -834,19 +853,21 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col-12">
-                      <table class="table table-bordered table-sm">
-                        <thead class="thead-dark">
-                        <tr>
-                          <th  align="center" class="text-center">Comentario</th>    
-                        </tr>
-                       </thead>
-                        <tbody >  
-                          <tr>
-                            <td width="125"><input autocomplete="ÑÖcompletes" type="text" v-model="diario.comentario" name="comentario" class="form-control" required></td>         
-                          </tr>
-                      </tbody>
-                    </table>
-                    <div v-if="edit.debe.length >= 1" class="row justify-content-center">
+                        <table class="table table-bordered table-sm">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th align="center" class="text-center">Comentario</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td width="125"><input autocomplete="ÑÖcompletes" type="text"
+                                            v-model="diario.comentario" name="comentario" class="form-control" required>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div v-if="edit.debe.length >= 1" class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="comentarioUpdate()">Editar Comentario</a>
                         </div>
                         <div v-else class="row justify-content-center">
@@ -878,36 +899,38 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col-12">
-                      <table class="table table-bordered table-sm">
-                          <thead class="thead-dark">
-                          <tr>
-                          <th  align="center" class="text-center">Cuentas</th>
-                          <th  align="center" class="text-center">Saldo</th>    
-                        </tr>
-                       </thead>
-                        <tbody >  
-                          <tr>
-                              <td>
-                              <select name="n_cuenta" v-model="diario.haber.nom_cuenta" class="custom-select">
-                                <option value="" disabled>ELIGE UNA CUENTA</option>
-                                <option value="Banco">Bancos</option>
-                                <option value="Muebles">Muebles</option>
-                                <option value="Caja">Caja</option>
-                                <option value="Vehiculo">Vehiculo</option>
-                                <option value="Inv. Mercaderías">Inv. Mercaderías</option>
-                                <option value="Doc. por Cob">Doc. por Cob</option>
-                                <option value="Doc. por Pagar">Doc. por Pagar</option>
-                                <option value="Muebles Oficina">Muebles Oficina</option>
-                                <option value="Equipo Oficina">Equipo Oficina</option>
-                                <option value="Eq. de Comp">Eq. de Comp</option>
-                                <option value="Hip. por Pagar">Hip. por Pagar</option>
-                                <option value="Capital">Capital</option>
-                              </select>
-                              </td>
-                              <td width="125"><input autocomplete="ÑÖcompletes" type="number" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
-                        </tr>
-                      </tbody>
-                    </table>
+                        <table class="table table-bordered table-sm">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th align="center" class="text-center">Cuentas</th>
+                                    <th align="center" class="text-center">Saldo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <select name="n_cuenta" v-model="diario.haber.nom_cuenta" class="custom-select">
+                                            <option value="" disabled>ELIGE UNA CUENTA</option>
+                                            <option value="Banco">Bancos</option>
+                                            <option value="Muebles">Muebles</option>
+                                            <option value="Caja">Caja</option>
+                                            <option value="Vehiculo">Vehiculo</option>
+                                            <option value="Inv. Mercaderías">Inv. Mercaderías</option>
+                                            <option value="Doc. por Cob">Doc. por Cob</option>
+                                            <option value="Doc. por Pagar">Doc. por Pagar</option>
+                                            <option value="Muebles Oficina">Muebles Oficina</option>
+                                            <option value="Equipo Oficina">Equipo Oficina</option>
+                                            <option value="Eq. de Comp">Eq. de Comp</option>
+                                            <option value="Hip. por Pagar">Hip. por Pagar</option>
+                                            <option value="Capital">Capital</option>
+                                        </select>
+                                    </td>
+                                    <td width="125"><input autocomplete="ÑÖcompletes" type="number"
+                                            v-model="diario.haber.saldo" name="haber" class="form-control" required>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
 
                         <div class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="updateHaber()">Actualizar Pasivo</a>
@@ -934,39 +957,42 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col-12">
-                      <table class="table table-bordered table-sm">
-                          <thead class="thead-dark">
-                            <tr>
-                              <th v-if="diario.fecha != ''" width="50" >Fecha</th>
-                              <th  align="center" class="text-center">Cuentas</th>
-                              <th  align="center" class="text-center">Saldo</th>    
-                            </tr>
-                       </thead>
-                        <tbody >  
-                          <tr>
-                              <td v-if="diario.fecha != ''" width="50" > <input autocomplete="ÑÖcompletes" type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required></td>
-                              <td>
-                              <select name="n_cuenta" v-model="diario.debe.nom_cuenta" class="custom-select">
-                                <option value="" disabled>ELIGE UNA CUENTA</option>
-                                <option value="Banco">Bancos</option>
-                                <option value="Muebles">Muebles</option>
-                                <option value="Caja">Caja</option>
-                                <option value="Vehiculo">Vehiculo</option>
-                                <option value="Inv. Mercaderías">Inv. Mercaderías</option>
-                                <option value="Doc. por Cob">Doc. por Cob</option>
-                                <option value="Doc. por Pagar">Doc. por Pagar</option>
-                                <option value="Muebles Oficina">Muebles Oficina</option>
-                                <option value="Equipo Oficina">Equipo Oficina</option>
-                                <option value="Eq. de Comp">Eq. de Comp</option>
-                                <option value="Hip. por Pagar">Hip. por Pagar</option>
-                                <option value="Capital">Capital</option>
-                              </select>
-                              </td>
-                              <td width="125"><input autocomplete="ÑÖcompletes" type="number" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
-                        </tr>
-                      </tbody>
-                    </table>
-                       <div class="row justify-content-center">
+                        <table class="table table-bordered table-sm">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th v-if="diario.fecha != ''" width="50">Fecha</th>
+                                    <th align="center" class="text-center">Cuentas</th>
+                                    <th align="center" class="text-center">Saldo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td v-if="diario.fecha != ''" width="50"> <input autocomplete="ÑÖcompletes"
+                                            type="date" name="fecha" v-model="diario.debe.fecha" class="form-control"
+                                            required></td>
+                                    <td>
+                                        <select name="n_cuenta" v-model="diario.debe.nom_cuenta" class="custom-select">
+                                            <option value="" disabled>ELIGE UNA CUENTA</option>
+                                            <option value="Banco">Bancos</option>
+                                            <option value="Muebles">Muebles</option>
+                                            <option value="Caja">Caja</option>
+                                            <option value="Vehiculo">Vehiculo</option>
+                                            <option value="Inv. Mercaderías">Inv. Mercaderías</option>
+                                            <option value="Doc. por Cob">Doc. por Cob</option>
+                                            <option value="Doc. por Pagar">Doc. por Pagar</option>
+                                            <option value="Muebles Oficina">Muebles Oficina</option>
+                                            <option value="Equipo Oficina">Equipo Oficina</option>
+                                            <option value="Eq. de Comp">Eq. de Comp</option>
+                                            <option value="Hip. por Pagar">Hip. por Pagar</option>
+                                            <option value="Capital">Capital</option>
+                                        </select>
+                                    </td>
+                                    <td width="125"><input autocomplete="ÑÖcompletes" type="number"
+                                            v-model="diario.debe.saldo" name="debe" class="form-control"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="updateDebe()">Actualizar Activo</a>
                         </div>
                     </div>
@@ -995,38 +1021,40 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col-12">
-                      <table class="table table-bordered table-sm">
-                          <thead class="thead-dark">
-                          <tr>
-                          <th  align="center" class="text-center">Cuentas</th>
-                          <th  align="center" class="text-center">Saldo</th>    
-                        </tr>
-                       </thead>
-                        <tbody >  
-                          <tr>
-                              <td>
-                              <select name="n_cuenta" v-model="diario.haber.nom_cuenta" class="custom-select">
-                                <option value="" disabled>ELIGE UNA CUENTA</option>
-                                <option value="Banco">Bancos</option>
-                                <option value="Muebles">Muebles</option>
-                                <option value="Caja">Caja</option>
-                                <option value="Vehiculo">Vehiculo</option>
-                                <option value="Inv. Mercaderías">Inv. Mercaderías</option>
-                                <option value="Doc. por Cob">Doc. por Cob</option>
-                                <option value="Doc. por Pagar">Doc. por Pagar</option>
-                                <option value="Muebles Oficina">Muebles Oficina</option>
-                                <option value="Equipo Oficina">Equipo Oficina</option>
-                                <option value="Eq. de Comp">Eq. de Comp</option>
-                                <option value="Hip. por Pagar">Hip. por Pagar</option>
-                                <option value="Capital">Capital</option>
-                              </select>
-                              </td>
-                              <td width="125"><input autocomplete="ÑÖcompletes" type="number" v-model="diario.haber.saldo" name="haber" class="form-control" required></td>         
-                        </tr>
-                      </tbody>
-                    </table>
-                    
-                       <div class="row justify-content-center">
+                        <table class="table table-bordered table-sm">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th align="center" class="text-center">Cuentas</th>
+                                    <th align="center" class="text-center">Saldo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <select name="n_cuenta" v-model="diario.haber.nom_cuenta" class="custom-select">
+                                            <option value="" disabled>ELIGE UNA CUENTA</option>
+                                            <option value="Banco">Bancos</option>
+                                            <option value="Muebles">Muebles</option>
+                                            <option value="Caja">Caja</option>
+                                            <option value="Vehiculo">Vehiculo</option>
+                                            <option value="Inv. Mercaderías">Inv. Mercaderías</option>
+                                            <option value="Doc. por Cob">Doc. por Cob</option>
+                                            <option value="Doc. por Pagar">Doc. por Pagar</option>
+                                            <option value="Muebles Oficina">Muebles Oficina</option>
+                                            <option value="Equipo Oficina">Equipo Oficina</option>
+                                            <option value="Eq. de Comp">Eq. de Comp</option>
+                                            <option value="Hip. por Pagar">Hip. por Pagar</option>
+                                            <option value="Capital">Capital</option>
+                                        </select>
+                                    </td>
+                                    <td width="125"><input autocomplete="ÑÖcompletes" type="number"
+                                            v-model="diario.haber.saldo" name="haber" class="form-control" required>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="updateHaber1()">Actualizar Pasivo</a>
                         </div>
                     </div>
@@ -1051,39 +1079,42 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col-12">
-                      <table class="table table-bordered table-sm">
-                          <thead class="thead-dark">
-                            <tr>
-                              <th v-if="diario.debe.fecha != ''" width="50" >Fecha</th>
-                              <th  align="center" class="text-center">Cuentas</th>
-                              <th  align="center" class="text-center">Saldo</th>    
-                            </tr>
-                       </thead>
-                        <tbody >  
-                          <tr>
-                              <td v-if="diario.debe.fecha != ''" width="50" > <input autocomplete="ÑÖcompletes" type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required></td>
-                              <td>
-                              <select name="n_cuenta" v-model="diario.debe.nom_cuenta" class="custom-select">
-                                <option value="" disabled>ELIGE UNA CUENTA</option>
-                                <option value="Banco">Bancos</option>
-                                <option value="Muebles">Muebles</option>
-                                <option value="Caja">Caja</option>
-                                <option value="Vehiculo">Vehiculo</option>
-                                <option value="Inv. Mercaderías">Inv. Mercaderías</option>
-                                <option value="Doc. por Cob">Doc. por Cob</option>
-                                <option value="Doc. por Pagar">Doc. por Pagar</option>
-                                <option value="Muebles Oficina">Muebles Oficina</option>
-                                <option value="Equipo Oficina">Equipo Oficina</option>
-                                <option value="Eq. de Comp">Eq. de Comp</option>
-                                <option value="Hip. por Pagar">Hip. por Pagar</option>
-                                <option value="Capital">Capital</option>
-                              </select>
-                              </td>
-                              <td width="125"><input autocomplete="ÑÖcompletes" type="number" v-model="diario.debe.saldo" name="debe" class="form-control"></td>         
-                        </tr>
-                      </tbody>
-                    </table>
-                       <div class="row justify-content-center">
+                        <table class="table table-bordered table-sm">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th v-if="diario.debe.fecha != ''" width="50">Fecha</th>
+                                    <th align="center" class="text-center">Cuentas</th>
+                                    <th align="center" class="text-center">Saldo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td v-if="diario.debe.fecha != ''" width="50"> <input autocomplete="ÑÖcompletes"
+                                            type="date" name="fecha" v-model="diario.debe.fecha" class="form-control"
+                                            required></td>
+                                    <td>
+                                        <select name="n_cuenta" v-model="diario.debe.nom_cuenta" class="custom-select">
+                                            <option value="" disabled>ELIGE UNA CUENTA</option>
+                                            <option value="Banco">Bancos</option>
+                                            <option value="Muebles">Muebles</option>
+                                            <option value="Caja">Caja</option>
+                                            <option value="Vehiculo">Vehiculo</option>
+                                            <option value="Inv. Mercaderías">Inv. Mercaderías</option>
+                                            <option value="Doc. por Cob">Doc. por Cob</option>
+                                            <option value="Doc. por Pagar">Doc. por Pagar</option>
+                                            <option value="Muebles Oficina">Muebles Oficina</option>
+                                            <option value="Equipo Oficina">Equipo Oficina</option>
+                                            <option value="Eq. de Comp">Eq. de Comp</option>
+                                            <option value="Hip. por Pagar">Hip. por Pagar</option>
+                                            <option value="Capital">Capital</option>
+                                        </select>
+                                    </td>
+                                    <td width="125"><input autocomplete="ÑÖcompletes" type="number"
+                                            v-model="diario.debe.saldo" name="debe" class="form-control"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="updateDebe1()">Actualizar Activo</a>
                         </div>
                     </div>
@@ -1109,44 +1140,46 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col-12">
-                      <table class="table table-bordered table-sm">
-                          <thead class="thead-dark">
-                            <tr>
-                              <th v-if="diario.debe.fecha != ''" width="50" >Fecha</th>
-                              <th  align="center" class="text-center">Cuentas</th>
-                              <th  align="center" class="text-center">Tipo</th>    
-                              <th  align="center" class="text-center">Cantidad</th>    
-                            </tr>
-                       </thead>
-                        <tbody >  
-                          <tr>
-                            {{--   <td v-if="diario.debe.fecha != ''" width="50" > <input autocomplete="ÑÖcompletes" type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required>
+                        <table class="table table-bordered table-sm">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th v-if="diario.debe.fecha != ''" width="50">Fecha</th>
+                                    <th align="center" class="text-center">Cuentas</th>
+                                    <th align="center" class="text-center">Tipo</th>
+                                    <th align="center" class="text-center">Cantidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    {{--   <td v-if="diario.debe.fecha != ''" width="50" > <input autocomplete="ÑÖcompletes" type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required>
                               </td> --}}
-                              <td>
-                              <select name="n_cuenta" v-model="porcentajes.index_cuenta" class="custom-select">
-                                <option value="" disabled>ELIGE UNA CUENTA</option>
-                                <option value="10">RET. IVA 10%</option>
-                                <option value="20">RET. IVA 20%</option>
-                                <option value="30">RET. IVA 30%</option>
-                                <option value="70">RET. IVA 70%</option>
-                                <option value="100">RET. IVA 100%</option>
-                              </select>
-                              </td>
-                              <td>
-                              <select v-model="porcentajes.tipo" class="custom-select">
-                                <option value="" disabled>ELIGE UNA CUENTA</option>
-                                <option value="debe">DEBE</option>
-                                <option value="haber">HABER</option>
-                                
-                              </select>
-                              </td>
-                              <td width="125">
-                                <input autocomplete="ÑÖcompletes" type="number" v-model="porcentajes.cantidad" name="debe" class="form-control">
-                              </td>         
-                        </tr>
-                      </tbody>
-                    </table>
-                       <div class="row justify-content-center">
+                                    <td>
+                                        <select name="n_cuenta" v-model="porcentajes.index_cuenta"
+                                            class="custom-select">
+                                            <option value="" disabled>ELIGE UNA CUENTA</option>
+                                            <option value="10">RET. IVA 10%</option>
+                                            <option value="20">RET. IVA 20%</option>
+                                            <option value="30">RET. IVA 30%</option>
+                                            <option value="70">RET. IVA 70%</option>
+                                            <option value="100">RET. IVA 100%</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select v-model="porcentajes.tipo" class="custom-select">
+                                            <option value="" disabled>ELIGE UNA CUENTA</option>
+                                            <option value="debe">DEBE</option>
+                                            <option value="haber">HABER</option>
+
+                                        </select>
+                                    </td>
+                                    <td width="125">
+                                        <input autocomplete="ÑÖcompletes" type="number" v-model="porcentajes.cantidad"
+                                            name="debe" class="form-control">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="">Agregar Porcentaje</a>
                         </div>
                     </div>

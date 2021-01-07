@@ -10856,8 +10856,27 @@ const librocaja = new Vue({
   },
   mounted: function() {
     this.obtenerLibroCaja();
+    this.obtenerDiarioGeneral();
   },
   methods:{
+
+    obtenerDiarioGeneral: function(){
+      var _this = this;
+      var url = '/sistema/admin/taller/diariogeneral';
+          axios.post(url,{
+            id: _this.id_taller,
+      }).then(response => {
+        if (response.data.datos == true) {
+        _this.dgeneral = response.data.registros;
+        _this.nombre_dgral = response.data.nombre;
+        let inicial = response.data.inicial;
+          _this.dgeneral.unshift(inicial);
+          }          
+      }).catch(function(error){
+
+      }); 
+  },
+
   calculadora(){
     let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
     let component = 'example-component';
@@ -11039,8 +11058,11 @@ const librocaja = new Vue({
 
 
       guardarLibro : function(){
-
-        if(this.libros_caja.length == 0){
+        if(this.nombre.length == 0){
+          toastr.error("Debe Ingresar el Nombre Comercial", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        } else if(this.libros_caja.length == 0){
           toastr.error("Debe haber al menos un registro en el Balance", "Smarmoddle", {
             "timeOut": "3000"
         });
@@ -11105,6 +11127,8 @@ const arqueo_caja = new Vue ({
   data:{
     id_taller : taller,
     libros_caja:[],
+    debe_lb:'',
+    haber_lb:'',
     nombre_lb:'',
     t_saldo:[], // array de saldos 
     saldo:{
@@ -11143,6 +11167,7 @@ const arqueo_caja = new Vue ({
     let component = 'example-component';
     funciones.VueSweetAlert2(component,propsData);
     },
+
     obtenerLibroCaja: function(){
       let _this = this;
       let url ='/sistema/admin/taller/anexo-obtener-caja';
@@ -11152,7 +11177,9 @@ const arqueo_caja = new Vue ({
                 if(response.data.datos == true){
                   
                     this.libros_caja = response.data.banexocaja;
-                    this.nombre_lb = response.data.nombre;
+                    this.nombre_lb   = response.data.nombre;
+                    this.debe_lb     = response.data.totaldebe;
+                    this.haber_lb     = response.data.totalhaber;
                    
                 }
               }).catch(function(error){
@@ -11254,6 +11281,89 @@ const arqueo_caja = new Vue ({
 
     },//fin metodo agregar saldo
 
+
+         
+    editSaldo(index){
+      this.registro_id = index;
+      this.saldo.edit= true;
+      this.saldo.detalle   = this.t_saldo[index].detalle;
+      this.saldo.s_debe    = this.t_saldo[index].s_debe;
+      this.saldo.s_haber   = this.t_saldo[index].s_haber;
+      $('#ht-dato-saldo-tab').tab('show');
+     
+    },//end edit saldos
+
+     editSaldoFuera(index){
+      this.registro_id = index;
+      this.saldo.edit= true;
+      this.saldo.detalle   = this.t_saldo[index].detalle;
+      this.saldo.s_debe    = this.t_saldo[index].s_debe;
+      this.saldo.s_haber   = this.t_saldo[index].s_haber;
+      $('#arqueo-caja').modal('show'); 
+      $('#ht-dato-saldo-tab').tab('show');    
+     
+    },//end edit saldos
+
+
+    cancelarEditSaldo(){
+      this.saldo.detalle =''
+      this.saldo.s_debe  =''
+      this.saldo.s_haber =''
+      this.saldo.edit       =false;
+     
+    }, //fin de cancelar edicion
+
+
+    actualizarSaldo (){
+      if(this.saldo.detalle == ''){
+        toastr.error("El campo Detalle es obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+      }else {
+        
+        let index  = this.registro_id;
+        
+        this.t_saldo[index].detalle      =   this.saldo.detalle;
+        this.t_saldo[index].s_debe       =   this.saldo.s_debe;
+        this.t_saldo[index].s_haber      =   this.saldo.s_haber;
+        this.cancelarEditSaldo();
+        this.totales_s();
+        toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+          "timeOut": "3000"
+          });
+      }
+    }, //fin de function  actualizar 
+
+
+
+    
+    WarningEliminarSaldo(id){
+      this.eliminar.index = id;
+      this.eliminar.nombre = this.t_saldo[id].detalle;
+
+      Swal.fire({
+        title: 'Seguro que deseas eliminar este Registro '+this.eliminar.nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+this.eliminar.nombre,
+            'success'
+          );
+          this.t_saldo.splice(id, 1);
+        }
+      });
+    }, //fin metodo warningeliminarcompra
+
+
+
+
     agregarExistencia(){
        
       if(this.exis.detalle.trim()=== ''){
@@ -11280,36 +11390,14 @@ const arqueo_caja = new Vue ({
 
     },//fin metodo agregar existencia
 
-  
-
-        
-    editSaldo(index){
-      this.registro_id = index;
-      this.saldo.edit= true;
-      this.saldo.detalle   = this.t_saldo[index].detalle;
-      this.saldo.s_debe    = this.t_saldo[index].s_debe;
-      this.saldo.s_haber   = this.t_saldo[index].s_haber;
-     
-    },//end edit saldos
-
-     editSaldoFuera(index){
-      this.registro_id = index;
-      this.saldo.edit= true;
-      this.saldo.detalle   = this.t_saldo[index].detalle;
-      this.saldo.s_debe    = this.t_saldo[index].s_debe;
-      this.saldo.s_haber   = this.t_saldo[index].s_haber;
-      $('#arqueo-caja').modal('show');     
-     
-    },//end edit saldos
-
-     
-
+    
     editExis(index){
       this.exis.edit= true;
       this.registro_id = index;
       this.exis.detalle   = this.t_exis[index].detalle;
       this.exis.e_debe    = this.t_exis[index].e_debe;
       this.exis.e_haber   = this.t_exis[index].e_haber;
+      $('#ht-dato-exis-tab').tab('show');
       
     },//end edit EXISTENCIAS
    
@@ -11320,16 +11408,10 @@ const arqueo_caja = new Vue ({
       this.exis.e_debe    = this.t_exis[index].e_debe;
       this.exis.e_haber   = this.t_exis[index].e_haber;
       $('#arqueo-caja').modal('show');   
+      $('#ht-dato-exis-tab').tab('show');
     },//end edit EXISTENCIAS
     
-    cancelarEditSaldo(){
-      this.saldo.detalle =''
-      this.saldo.s_debe  =''
-      this.saldo.s_haber =''
-      this.saldo.edit       =false;
-     
-    }, //fin de cancelar edicion
-
+  
     cancelarEditExis(){
       this.exis.detalle =''
       this.exis.e_debe  =''
@@ -11340,27 +11422,7 @@ const arqueo_caja = new Vue ({
 
 
 
-    actualizarSaldo (){
-      if(this.saldo.detalle == ''){
-        toastr.error("El campo Detalle es obligatorio", "Smarmoddle", {
-          "timeOut": "3000"
-      });
-      }else {
-        
-        let index  = this.registro_id;
-        
-        this.t_saldo[index].detalle      =   this.saldo.detalle;
-        this.t_saldo[index].s_debe       =   this.saldo.s_debe;
-        this.t_saldo[index].s_haber      =   this.saldo.s_haber;
-       
-        this.cancelarEditSaldo();
-        this.totales_s();
-        toastr.error("Registro actualizado correctamente", "Smarmoddle", {
-          "timeOut": "3000"
-          });
-      }
-    }, //fin de function  actualizar 
-
+   
     actualizarExis (){
       if(this.exis.detalle == ''){
         toastr.error("El campo Detalle es obligatorio", "Smarmoddle", {
@@ -11369,7 +11431,6 @@ const arqueo_caja = new Vue ({
       }else {
         
         let index  = this.registro_id;
-        
         this.t_exis[index].detalle      =   this.exis.detalle;
         this.t_exis[index].e_debe       =   this.exis.e_debe;
         this.t_exis[index].e_haber      =   this.exis.e_haber;
@@ -11383,59 +11444,36 @@ const arqueo_caja = new Vue ({
     }, //fin de function  actualizar 
 
     
-    eliminarSaldo(){
-      let id = this.eliminar.index;
-      this.t_saldo.splice(id, 1);
-      this.eliminar.index ='';
-      this.eliminar.nombre ='';
-      $('#eliminar-arqueo').modal('hide'); // en prueba para eliminar
-    }, //fin metodo eliminar compra 
+    // eliminarSaldo(){
+    //   let id = this.eliminar.index;
+    //   this.t_saldo.splice(id, 1);
+    //   this.eliminar.index ='';
+    //   this.eliminar.nombre ='';
+    //   $('#eliminar-arqueo').modal('hide'); // en prueba para eliminar
+    // }, //fin metodo eliminar compra 
 
     
-    eliminarExis(){
-      let id = this.eliminar.index;
-      this.t_exis.splice(id, 1);
-      this.eliminar.index ='';
-      this.eliminar.nombre ='';
-      $('#eliminar-arqueo2').modal('hide'); // en prueba para eliminar
-    }, //fin metodo eliminar compra 
+    // eliminarExis(){
+    //   let id = this.eliminar.index;
+    //   this.t_exis.splice(id, 1);
+    //   this.eliminar.index ='';
+    //   this.eliminar.nombre ='';
+    //   $('#eliminar-arqueo2').modal('hide'); // en prueba para eliminar
+    // }, //fin metodo eliminar compra 
 
 
-    deleteSaldo(index){
-      this.t_saldo.splice(index, 1);
-      this.totales_s();
-     },// delete saldo
+    // deleteSaldo(index){
+    //   this.t_saldo.splice(index, 1);
+    //   this.totales_s();
+    //  },// delete saldo
 
-    deleteExis(index){
-      this.t_exis.splice(index, 1);
-      this.totales_s();
-     },// delete existencias
+    // deleteExis(index){
+    //   this.t_exis.splice(index, 1);
+    //   this.totales_s();
+    //  },// delete existencias
 
 
 
-     WarningEliminarSaldo(id){
-      this.eliminar.index = id;
-      this.eliminar.nombre = this.t_saldo[id].detalle;
-
-      Swal.fire({
-        title: 'Seguro que deseas eliminar este Registro '+this.eliminar.nombre ,
-        text: "Esta accion no se puede revertir",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, eliminar!'
-          }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire(
-            'Eliminado!',
-            'El Registro de la cuenta '+this.eliminar.nombre,
-            'success'
-          );
-          this.t_saldo.splice(id, 1);
-        }
-      });
-    }, //fin metodo warningeliminarcompra
 
     WarningEliminarExis(id){
       this.eliminar.index = id;
@@ -11561,7 +11599,7 @@ const librosbanco = new Vue({
     },
     update: false,
     registro_id:'',
-        dgeneral:[],
+    dgeneral:[],
     registros_cierres:[],
     ajustes:[],
     nombre_cierre:''
@@ -11569,9 +11607,26 @@ const librosbanco = new Vue({
   },
   mounted: function() {
     this.obtenerLibroBanco();
+    this.obtenerDiarioGeneral();
   },
 
   methods:{
+    obtenerDiarioGeneral: function(){
+      var _this = this;
+      var url = '/sistema/admin/taller/diariogeneral';
+          axios.post(url,{
+            id: _this.id_taller,
+      }).then(response => {
+        if (response.data.datos == true) {
+        _this.dgeneral = response.data.registros;
+        _this.nombre_dgral = response.data.nombre;
+        let inicial = response.data.inicial;
+          _this.dgeneral.unshift(inicial);
+          }          
+      }).catch(function(error){
+
+      }); 
+  },
       calculadora(){
     let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
     let component = 'example-component';
@@ -11757,8 +11812,23 @@ const librosbanco = new Vue({
 
      guardarlbBAnco(){
      
-      if(this.lb_banco.length == 0){
-        toastr.error("Debe haber al menos un registro en el Balance", "Smarmoddle", {
+      if(this.nombre.length == 0){
+        toastr.error("Debe Ingresar el Nombre del Comercial", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+      }else if(this.n_banco.length == 0){
+        toastr.error("Debe Ingresar el Nombre del Banco", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+      }else if(this.c_banco.length == 0){
+        toastr.error("Debe Ingresar la Cuenta del Banco", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+      }else if(this.lb_banco.length == 0){
+        toastr.error("Debe haber al menos un Registro", "Smarmoddle", {
           "timeOut": "3000"
       });
 
@@ -11833,6 +11903,8 @@ const conciliacionb = new Vue({
      lb_nombre:'',
     lb_n_banco:'',
     lb_c_banco:'',
+    debe_lbanco:'',
+    haber_lbanco:'',
 
      lb_banco:[],
      c_saldos:[],
@@ -11898,6 +11970,8 @@ const conciliacionb = new Vue({
             this.lb_nombre = response.data.nombre;
             this.lb_n_banco = response.data.n_banco;
             this.lb_c_banco = response.data.c_banco;
+            this.debe_lbanco = response.data.totaldebe;
+            this.haber_lbanco = response.data.totalhaber;
             // this.totales();
         }
       }).catch(function(error){

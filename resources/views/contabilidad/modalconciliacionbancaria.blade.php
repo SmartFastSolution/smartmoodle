@@ -16,8 +16,6 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                     <div class="col-12">
-
-
                         <nav>
                             <div style="font-size: 15px" class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <a class="nav-link active" id="nav-bih-conciliacion-saldo-tab" data-toggle="tab"
@@ -41,7 +39,6 @@
                         </nav>
 
                         <div class="tab-content" id="nav-tabContent">
-
                             <!-- saldos -->
                             <div class="tab-pane fade show active" id="nav-bih-conciliacion-saldo" role="tabpanel"
                                 aria-labelledby="nav-bih-conciliacion-saldo-tab">
@@ -136,21 +133,20 @@
                                                     <td align="right">@{{decimales(banco.haber)}}</td>
                                                     <td align="right">@{{decimales(banco.saldo)}}</td>
                                                 </tr>
-                                                {{-- 
-                    <tr style="border: hidden" class="bg-secondary">
-                        <td class="text-center font-weight-bold">SUMAN</td>
-                        <td class="text-left font-weight-bold"></td>
-                        <td class="text-left font-weight-bold"></td>
-                        <td class="text-right font-weight-bold">@{{ suman.debe }}</td>
-                                                <td class="text-right font-weight-bold">@{{ suman.haber }}</td>
-                                                </tr> --}}
+                                                <tr style="border: hidden" class="bg-secondary">
+                                                    <td class="text-center font-weight-bold">SUMAN</td>
+                                                    <td class="text-left font-weight-bold"></td>
+                                                    <td class="text-left font-weight-bold"></td>
+                                                    <td class="text-right font-weight-bold">@{{ debe_lbanco }}</td>
+                                                    <td class="text-right font-weight-bold">@{{ haber_lbanco }}</td>
+                                                </tr>
                                             </tbody>
                                         </table>
 
                                     </div>
                                     @endif
                                     <!-- fin del div col-6 mt-2-->
-                                    <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
+                                    <div class="col-12 mt-2 p-2" style=" height:300px; overflow-y: scroll;">
                                         <h2 class="text-center">SALDO</h2>
                                         <div class="row justify-content-around mb-2">
                                             <table class="table table-bordered table-sm mb-2 p-2">
@@ -276,20 +272,19 @@
                                                     <td align="right">@{{decimales(banco.haber)}}</td>
                                                     <td align="right">@{{decimales(banco.saldo)}}</td>
                                                 </tr>
-                                                {{-- 
-                    <tr style="border: hidden" class="bg-secondary">
-                        <td class="text-center font-weight-bold">SUMAN</td>
-                        <td class="text-left font-weight-bold"></td>
-                        <td class="text-left font-weight-bold"></td>
-                        <td class="text-right font-weight-bold">@{{ suman.debe }}</td>
-                                                <td class="text-right font-weight-bold">@{{ suman.haber }}</td>
-                                                </tr> --}}
+                                                <tr style="border: hidden" class="bg-secondary">
+                                                    <td class="text-center font-weight-bold">SUMAN</td>
+                                                    <td class="text-left font-weight-bold"></td>
+                                                    <td class="text-left font-weight-bold"></td>
+                                                    <td class="text-right font-weight-bold">@{{ debe_lbanco }}</td>
+                                                    <td class="text-right font-weight-bold">@{{ haber_lbanco }}</td>
+                                                </tr>
                                             </tbody>
                                         </table>
 
                                     </div> @endif
 
-                                    <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
+                                    <div class="col-12 mt-2 p-2" style=" height:300px; overflow-y: scroll;">
                                         <h2 class="text-center">DÉBITOS</h2>
                                         <div class="row justify-content-around mb-2">
                                             <table class="table table-bordered table-sm mb-2 p-2">
@@ -417,19 +412,18 @@
                                                     <td align="right">@{{decimales(banco.haber)}}</td>
                                                     <td align="right">@{{decimales(banco.saldo)}}</td>
                                                 </tr>
-                                                {{-- 
-                    <tr style="border: hidden" class="bg-secondary">
-                        <td class="text-center font-weight-bold">SUMAN</td>
-                        <td class="text-left font-weight-bold"></td>
-                        <td class="text-left font-weight-bold"></td>
-                        <td class="text-right font-weight-bold">@{{ suman.debe }}</td>
-                                                <td class="text-right font-weight-bold">@{{ suman.haber }}</td>
-                                                </tr> --}}
+                                                <tr style="border: hidden" class="bg-secondary">
+                                                    <td class="text-center font-weight-bold">SUMAN</td>
+                                                    <td class="text-left font-weight-bold"></td>
+                                                    <td class="text-left font-weight-bold"></td>
+                                                    <td class="text-right font-weight-bold">@{{ debe_lbanco }}</td>
+                                                    <td class="text-right font-weight-bold">@{{ haber_lbanco }}</td>
+                                                </tr>
                                             </tbody>
                                         </table>
 
                                     </div> @endif
-                                    <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
+                                    <div class="col-12 mt-2 p-2" style=" height:300px; overflow-y: scroll;">
                                         <h2 class="text-center">CRÉDITOS</h2>
                                         <div class="row justify-content-around mb-2">
                                             <table class="table table-bordered table-sm mb-2 p-2">
@@ -556,20 +550,19 @@
                                                     <td align="right">@{{decimales(banco.haber)}}</td>
                                                     <td align="right">@{{decimales(banco.saldo)}}</td>
                                                 </tr>
-                                                {{-- 
-                    <tr style="border: hidden" class="bg-secondary">
-                        <td class="text-center font-weight-bold">SUMAN</td>
-                        <td class="text-left font-weight-bold"></td>
-                        <td class="text-left font-weight-bold"></td>
-                        <td class="text-right font-weight-bold">@{{ suman.debe }}</td>
-                                                <td class="text-right font-weight-bold">@{{ suman.haber }}</td>
-                                                </tr> --}}
+                                                <tr style="border: hidden" class="bg-secondary">
+                                                    <td class="text-center font-weight-bold">SUMAN</td>
+                                                    <td class="text-left font-weight-bold"></td>
+                                                    <td class="text-left font-weight-bold"></td>
+                                                    <td class="text-right font-weight-bold">@{{ debe_lbanco }}</td>
+                                                    <td class="text-right font-weight-bold">@{{ haber_lbanco }}</td>
+                                                </tr>
                                             </tbody>
                                         </table>
 
                                     </div> @endif
 
-                                    <div class="col-12 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
+                                    <div class="col-12 mt-2 p-2" style=" height:300px; overflow-y: scroll;">
                                         <h2 class="text-center">CHEQUES</h2>
                                         <div class="row justify-content-around mb-2">
                                             <table class="table table-bordered table-sm mb-2 p-2">

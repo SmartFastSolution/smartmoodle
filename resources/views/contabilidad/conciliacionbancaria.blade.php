@@ -2,7 +2,7 @@
     <h1 class="text-center text-danger font-weight-bold mt-2">Conciliación Bancaria</h1>
     <div class="row p-3  mb-2 justify-content-center ">
         <div class="col-8 mb-3">
-            <input class="form-control" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="">
+            <input class="form-control text-center" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="">
         </div>
         <div class="col-5">
             <input class="form-control" type="date" v-model="fecha" placeholder="Agrega la fecha" name="">
@@ -13,7 +13,7 @@
     <br><br>
     <div class="row justify-content-around mb-2">
         <div class="col col-lg-5">
-            <input type="text" class="form-control" v-model="n_banco" placeholder="Nombre Del Banco" align="center"
+            <input type="text" class="form-control text-center" v-model="n_banco" placeholder="Nombre Del Banco" align="center"
                 required>
         </div>
     </div>

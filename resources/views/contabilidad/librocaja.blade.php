@@ -10,12 +10,13 @@
 
         </div>
     </div>
-    @if ($rol === 'estudiante')
+    <!-- @if ($rol === 'estudiante')
     <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirLibro()">Agregar Detalle</a>
 
     <a href="#" class="addDiario btn btn-outline-success ml-1 " @click.prevent="guardarLibro()">Guardar Libro Caja</a>
 
-    @endif
+    @endif -->
+    <div style=" height:400px; overflow-y: scroll; overflow-x: hidden;">
     <table class="table table-bordered table-sm">
         <thead>
             <tr class="text-center bg-dark">
@@ -35,13 +36,13 @@
                 <td align="right">@{{decimales(caja.haber)}}</td>
                 <td align="right">@{{decimales(caja.saldo)}}</td>
                 <td align="center" width="50">
-                    <a @click.prevent="WarningEliminarLibro(index)" class="btn btn-danger">
-                        <i class="fas fa-trash-alt"></i>
+                    <a @click.prevent="editlibrocajafuera(index)" class="btn btn-warning">
+                        <i class="fas fa-edit"></i>
                     </a>
                 </td>
                 <td align="center" width="50">
-                    <a @click.prevent="editlibrocajafuera(index)" class="btn btn-warning">
-                        <i class="fas fa-edit"></i>
+                    <a @click.prevent="WarningEliminarLibro(index)" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i>
                     </a>
                 </td>
             </tr>
@@ -53,6 +54,7 @@
             </tr>
         </tbody>
     </table>
+    </div>
     @if ($rol === 'estudiante')
 
     <div class="row justify-content-center mb-2">
