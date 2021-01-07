@@ -1543,7 +1543,7 @@ class TallerContabilidadController extends Controller
                         $estadoResultado->user_id               = $id;
                         $estadoResultado->nombre                = $nombre;
                         $estadoResultado->fecha                 = $fecha;
-                        $estadoResultado->utilidad           = $request->utilidad;
+                        $estadoResultado->utilidad              = $request->utilidad;
                         $estadoResultado->venta                 = $request->venta;
                         $estadoResultado->costo_venta           = $request->costo_venta;
                         $estadoResultado->utilidad_bruta_ventas = $totales['utilidad_bruta_ventas'];
@@ -1909,21 +1909,30 @@ class TallerContabilidadController extends Controller
                         $registro        = $request->registro;
                         $asientodecierre = AsientoCierre::where('user_id',$id)->where('taller_id', $taller_id)->count();
                     if ($asientodecierre == 1){ 
-                        $cu                   = AsientoCierre::where('user_id',$id)->where('taller_id', $taller_id)->first();
-                        $cuenta               = ACRegistro::where('asiento_cierre_id',$cu->id)->count();
-                        $acierre              = AsientoCierre::where('user_id',$id)->where('taller_id', $taller_id)->first();
-                        $debe                 =[];
-                        $haber                =[];
-                        $ids                  =[];
+                        $cu          = AsientoCierre::where('user_id',$id)->where('taller_id', $taller_id)->first();
+                        $cuenta      = ACRegistro::where('asiento_cierre_id',$cu->id)->count();
+                        $acierredele = AsientoCierre::where('user_id',$id)->where('taller_id', $taller_id)->first();
+                        $debe        =[];
+                        $haber       =[];
+                        $ids         =[];
+                        $udcalculo = $acierredele->id;
+                        $acierredele->delete();
+
+                        $acierre              = new AsientoCierre;
+                        $acierre->id          = $udcalculo;
+                        $acierre->taller_id   = $taller_id;
+                        $acierre->user_id     = $id;
                         $acierre->nombre      = $request->nombre;
-                        $acierre->total_debe  = $request->total_debe;
                         $acierre->total_haber = $request->total_haber;
+                        $acierre->total_debe  = $request->total_debe;
                         $acierre->save();
-                        $registros= ACRegistro::where('asiento_cierre_id', $acierre->id)->get();
-                        foreach($registros as $act){
-                                $ids[]=$act->id;
-                        }
-                        $deleteRegistros = ACRegistro::destroy($ids);
+                     
+
+                        // $registros= ACRegistro::where('asiento_cierre_id', $acierre->id)->get();
+                        // foreach($registros as $act){
+                        //         $ids[]=$act->id;
+                        // }
+                        // $deleteRegistros = ACRegistro::destroy($ids);
 
                         foreach ($registro as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
                     $regis=array(
@@ -1938,10 +1947,10 @@ class TallerContabilidadController extends Controller
                         ACRegistro::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
                     }
                     $register = $acierre->acRegistro;
-                    foreach ($registro as $key => $value) {                         ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
-                        foreach ($value['debe'] as $key1 => $value1) {              ////RECORRER TODOS LAS CUENTAS DE DEBE QUE PERTENECEN A UN REGISTRO
+                    foreach ($registro as $keya => $vcuentas) {                         ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
+                        foreach ($vcuentas['debe'] as $key1 => $value1) {              ////RECORRER TODOS LAS CUENTAS DE DEBE QUE PERTENECEN A UN REGISTRO
                             $regis1=array(
-                                'a_c_registro_id' => $register[$key]->id,
+                                'a_c_registro_id' => $register[$keya]->id,
                                 'cuenta_id'       => $value1['cuenta_id'],
                                 'nom_cuenta'      => $value1['nom_cuenta'],
                                 'saldo'           => $value1['saldo'],
@@ -1951,9 +1960,9 @@ class TallerContabilidadController extends Controller
                             );
                             ACRDebe::insert($regis1);                             //GURDAR ESAS CUENTAS EN LA TABLA DEBE CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
                         }
-                        foreach ($value['haber'] as $key2 => $value2) {           ////RECORRER TODOS LAS CUENTAS DE HABER QUE PERTENECEN A UN REGISTRO
+                        foreach ($vcuentas['haber'] as $key2 => $value2) {           ////RECORRER TODOS LAS CUENTAS DE HABER QUE PERTENECEN A UN REGISTRO
                             $regis2=array(
-                                'a_c_registro_id' => $register[$key]->id,
+                                'a_c_registro_id' => $register[$keya]->id,
                                 'cuenta_id'       => $value2['cuenta_id'],
                                 'nom_cuenta'      => $value2['nom_cuenta'],
                                 'saldo'           => $value2['saldo'],
@@ -1991,10 +2000,10 @@ class TallerContabilidadController extends Controller
                             ACRegistro::insert($regis);                           //GUARDAR CADA REGISTRO EN LA BASE DE DATOS
                     }
                     $register = $acierre->acRegistro;
-                    foreach ($registro as $key => $value) {                         ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
-                        foreach ($value['debe'] as $key1 => $value1) {              ////RECORRER TODOS LAS CUENTAS DE DEBE QUE PERTENECEN A UN REGISTRO
+                    foreach ($registro as $keya => $vcuentas) {                         ////RECORRER TODOS LOS REGISTROS EN EL ARRAY
+                        foreach ($vcuentas['debe'] as $key1 => $value1) {              ////RECORRER TODOS LAS CUENTAS DE DEBE QUE PERTENECEN A UN REGISTRO
                             $regis1=array(
-                                'a_c_registro_id' => $register[$key]->id,
+                                'a_c_registro_id' => $register[$keya]->id,
                                 'cuenta_id'       => $value1['cuenta_id'],
                                 'nom_cuenta'      => $value1['nom_cuenta'],
                                 'saldo'           => $value1['saldo'],
@@ -2004,14 +2013,14 @@ class TallerContabilidadController extends Controller
                             );
                             ACRDebe::insert($regis1);                             //GURDAR ESAS CUENTAS EN LA TABLA DEBE CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
                         }
-                        foreach ($value['haber'] as $key2 => $value2) {           ////RECORRER TODOS LAS CUENTAS DE HABER QUE PERTENECEN A UN REGISTRO
+                        foreach ($vcuentas['haber'] as $key2 => $value2) {           ////RECORRER TODOS LAS CUENTAS DE HABER QUE PERTENECEN A UN REGISTRO
                             $regis2=array(
-                                'a_c_registro_id'  => $register[$key]->id,
+                                'a_c_registro_id' => $register[$keya]->id,
                                 'cuenta_id'       => $value2['cuenta_id'],
-                                'nom_cuenta'        => $value2['nom_cuenta'],
-                                'saldo'              => $value2['saldo'],
-                                'created_at'         => now(),
-                                'updated_at'         => now(),
+                                'nom_cuenta'      => $value2['nom_cuenta'],
+                                'saldo'           => $value2['saldo'],
+                                'created_at'      => now(),
+                                'updated_at'      => now(),
                             );
                             ACRHaber::insert($regis2);                            //GURDAR ESAS CUENTAS EN LA TABLA HABER CON EL ID DEL REGISTRO AL QUE CORRESPONDEN
                         }

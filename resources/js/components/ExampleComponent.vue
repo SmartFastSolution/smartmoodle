@@ -87,11 +87,11 @@
   methods: {
     addDecimal: function() {
       if (this.decimalAdded == false) {
-        if (this.prevOps != 0) {
-          this.display = '0.';
-        } else {
+        // if (this.prevOps != 0) {
+        //   this.display = '0.';
+        // } else {
           this.display += '.';
-        }
+        // }
         this.decimalAdded = true;
       }
     },
@@ -191,7 +191,7 @@
         case 0:
           break;
       }
-      this.display = this.total.toString();
+      this.display = this.total.toFixed(2);
       this.prevOps = 0;
       this.currentNum = 0;
     }

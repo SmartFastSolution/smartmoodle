@@ -120,44 +120,67 @@
                         {!! $transacciones->transacciones !!}
                     </div>
                     @elseif($datos->metodo == 'concatenado')
-                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
-                        <h3 class="text-center font-weight-bold">Datos para realizar el Arqueo de Caja</h3>
 
-                        <h2 class="text-center display-4 font-weight-bold text-danger">Libro Caja</h2>
+                    <div class="col-6 mt-2 ">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-link active" id="nav-arqueo-caja-tab" data-toggle="tab"
+                                    href="#nav-arqueo-caja" role="tab" aria-controls="nav-arqueo-caja"
+                                    aria-selected="true">ENUNCIADOS</a>
+                                <a class="nav-link" id="nav-libro-caja-tab" data-toggle="tab" href="#nav-libro-caja"
+                                    role="tab" aria-controls="nav-libro-caja" aria-selected="false">LIBRO CAJA</a>
 
-                        <div class="row p-3  mb-2 justify-content-center ">
-                            <div class="col-5 mb-3">
-                                <h3 class="text-center font-weight-bold">
-                                    @{{ nombre_lb }}</h3>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-arqueo-caja" role="tabpanel"
+                                aria-labelledby="nav-arqueo-caja-tab"
+                                style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
+                                @isset ($arqueocaja->transacciones)
+                                {!! $arqueocaja->transacciones !!}
+                                @endisset
+                            </div>
+                            <div class="tab-pane fade" id="nav-libro-caja" role="tabpanel"
+                                aria-labelledby="nav-libro-caja-tab"
+                                style=" height:300px; overflow-y: scroll; border: double 8px #E71822;  overflow-x: hidden;">
+                                <h3 class="text-center font-weight-bold">Datos para realizar el Arqueo de Caja</h3>
+
+                                <h2 class="text-center display-4 font-weight-bold text-danger">Libro Caja</h2>
+
+                                <div class="row p-3  mb-2 justify-content-center ">
+                                    <div class="col-5 mb-3">
+                                        <h3 class="text-center font-weight-bold">
+                                            @{{ nombre_lb }}</h3>
+                                    </div>
+                                </div>
+                                <table class="table table-bordered table-sm">
+                                    <thead>
+                                        <tr class="text-center bg-dark">
+                                            <th width="125">Fecha</th>
+                                            <th width="300">Detalle</th>
+                                            <th width="100">Debe</th>
+                                            <th width="100">Haber</th>
+                                            <th width="100">Saldo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(caja, index) in libros_caja">
+                                            <td align="left">@{{formatoFecha(caja.fecha)}}</td>
+                                            <td align="left">@{{caja.detalle}}</td>
+                                            <td align="right">@{{decimales( caja.debe)}}</td>
+                                            <td align="right">@{{decimales(caja.haber)}}</td>
+                                            <td align="right">@{{decimales(caja.saldo)}}</td>
+                                        </tr>
+                                        <tr class="bg-secondary">
+                                            <td class="text-left font-weight-bold">TOTALES</td>
+                                            <td class="text-left font-weight-bold"></td>
+                                            <td class="text-right font-weight-bold">@{{ debe_lb }}</td>
+                                            <td class="text-right font-weight-bold">@{{ haber_lb }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <table class="table table-bordered table-sm">
-                            <thead>
-                                <tr class="text-center bg-dark">
-                                    <th width="125">Fecha</th>
-                                    <th width="300">Detalle</th>
-                                    <th width="100">Debe</th>
-                                    <th width="100">Haber</th>
-                                    <th width="100">Saldo</th>
-
-                                </tr>
-                            </thead>
-                            <tbody is="draggable" group="people" :list="libros_caja" tag="tbody">
-                                <tr v-for="(caja, index) in libros_caja">
-                                    <td align="left">@{{formatoFecha(caja.fecha)}}</td>
-                                    <td align="left">@{{caja.detalle}}</td>
-                                    <td align="right">@{{decimales( caja.debe)}}</td>
-                                    <td align="right">@{{decimales(caja.haber)}}</td>
-                                    <td align="right">@{{decimales(caja.saldo)}}</td>
-                                </tr>
-                                <tr class="bg-secondary">
-                                    <td class="text-left font-weight-bold">TOTALES</td>
-                                    <td class="text-left font-weight-bold"></td>
-                                    <td class="text-right font-weight-bold">@{{ debe_lb }}</td>
-                                    <td class="text-right font-weight-bold">@{{ haber_lb }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
                     @endif
                     <br>

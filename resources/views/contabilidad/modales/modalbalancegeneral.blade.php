@@ -17,11 +17,11 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
                           @if($datos->metodo == 'individual')
-                     <div class="col-12" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 4px red;">
+                     <div class="col-12" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
                         {!! $transacciones->transacciones !!}
                      </div>
                 @elseif($datos->metodo == 'concatenado')
-                    <div class="col-12 mt-2 border border-top-0 border-left-0 border-right-0 border-danger">
+                    <div class="col-12 mt-2" style="border: double 8px #E71822;">
 
                         <h1 class="text-center font-weight-bold mt-2">Datos para elaborar estado de resultados</h1>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -150,8 +150,7 @@
                                     </div>
                                     <div class="col-12">
                                         <table>
-                                            <tbody is="draggable" group="ingresos" :list="estadoresultado.ingresos"
-                                                tag="tbody">
+                                            <tbody>
                                                 <tr v-for="(balan, index) in estadoresultado.ingresos">
                                                     <td class="text-left" width="300">@{{ balan.cuenta}}</td>
                                                     <td align="center">@{{ decimales(balan.saldo)}}</td>
@@ -182,8 +181,7 @@
                                     </div>
                                     <div class="col-12">
                                         <table>
-                                            <tbody is="draggable" group="gastos" :list="estadoresultado.gastos"
-                                                tag="tbody">
+                                            <tbody >
                                                 <tr v-for="(balan, index) in estadoresultado.gastos">
                                                     <td class="text-left" width="300">@{{ balan.cuenta}}</td>
                                                     <td align="center">@{{ decimales(balan.saldo)}}</td>
@@ -218,8 +216,7 @@
                                     v-if="estadoresultado.utilidad == 'utilidad_neta'">
                                     <div class="col-12">
                                         <table>
-                                            <tbody is="draggable" group="people" :list="estadoresultado.utilidades"
-                                                tag="tbody">
+                                            <tbody >
                                                 <tr v-for="(balan, index) in estadoresultado.utilidades">
                                                     <td class="text-left" width="750">@{{ balan.cuenta}}</td>
                                                     <td align="center">@{{ decimales(balan.saldo)}}</td>
@@ -482,7 +479,7 @@
                                                         <td class="text-left font-weight-bold">Total Activo Corriente
                                                         </td>
                                                         <td class="text-center"></td>
-                                                        <td class="text-right">@{{ b_initotal.t_a_nocorriente }}</td>
+                                                        <td class="text-right">@{{ decimales(b_initotal.t_a_nocorriente) }}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -564,7 +561,7 @@
                                                     <tr class="bg-secondary">
                                                         <td class="text-left font-weight-bold">Total Pasivo No Corriente
                                                         </td>
-                                                        <td class="text-right">@{{ b_initotal.t_p_corriente }}</td>
+                                                        <td class="text-right">@{{ decimales(b_initotal.t_p_corriente) }}</td>
                                                         <td></td>
                                                     </tr>
                                                 </tbody>
@@ -648,7 +645,7 @@
                                                     <tr class="bg-secondary">
                                                         <td class="text-left font-weight-bold">Total Pasivo No corriente
                                                         </td>
-                                                        <td class="text-right">@{{ b_initotal.t_p_no_corriente }}</td>
+                                                        <td class="text-right">@{{ decimales(b_initotal.t_p_no_corriente) }}</td>
                                                         <td></td>
                                                     </tr>
                                                 </tbody>
@@ -730,7 +727,7 @@
                                                     </tr>
                                                     <tr class="bg-secondary">
                                                         <td class="text-left font-weight-bold">Total Patrimonio</td>
-                                                        <td class="text-right">@{{ b_initotal.t_patrimonio }}</td>
+                                                        <td class="text-right">@{{ decimales(b_initotal.t_patrimonio) }}</td>
                                                         <td></td>
                                                     </tr>
                                                 </tbody>

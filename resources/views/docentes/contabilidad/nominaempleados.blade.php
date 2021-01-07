@@ -2,11 +2,10 @@
     <h1 class="text-center text-danger font-weight-bold mt-2">Nómina Empleados</h1>
     <div class="row p-4  mb-3 justify-content-center ">
         <div class="col-5 mb-3">
-      <h3 class="text-center font-weight-bold display-4">@{{ nombre }}</h3>
-      <h3 class="text-center font-weight-bold display-4">@{{ fecha }}</h3>
+            <h3 class="text-center font-weight-bold display-4">@{{ nombre }}</h3>
+            <h3 class="text-center font-weight-bold display-4">@{{ fecha }}</h3>
         </div>
     </div>
-
     <table class="table table-bordered table-sm">
         <thead class="bg-dark">
             <tr>
@@ -24,7 +23,6 @@
                 <th class="text-center" style="vertical-align: middle;">V.NETO A PAGAR</th>
             </tr>
         </thead>
-
         <tbody>
             <tr v-for="(n, index) in t_nomina">
                 <td align="center" width="300">@{{ n.nombre_e}}</td>
@@ -41,7 +39,6 @@
                 <td class="text-right" align="center" width="125">@{{ decimales(n.neto_pagar)}}</td>
             </tr>
             <tr>
-
                 <td class="font-weight-bold">TOTALES</td>
                 <td class="text-right"></td>
                 <td class="text-right">@{{ suma.s_sueldo }}</td>
@@ -54,7 +51,6 @@
                 <td class="text-right">@{{ suma.s_impr }}</td>
                 <td class="text-right">@{{ suma.s_tegresos }}</td>
                 <td class="text-right">@{{ suma.s_netopagar }}</td>
-
             </tr>
         </tbody>
     </table>

@@ -381,6 +381,8 @@ class TallersController extends Controller
                 $modulo = json_decode($datos->modulos);
                 $balancesInicial = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->where('tipo', 'horizontal')->first();
                 $diariogeneral = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->where('tipo', 'diario_general')->first();
+                $arqueocaja = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->where('tipo', 'arqueocaja')->first();
+                $conciliacionbancaria = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->where('tipo', 'conciliacionbancaria')->first();
                 $productos = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->where('tipo','fifo')->get();
                     JavaScript::put([
                      'taller'          => $d,
@@ -391,7 +393,7 @@ class TallersController extends Controller
                      'diariogeneral'   => $diariogeneral,
                      'productos'       => $productos,
                     ]);
-                return view('talleres.taller37', compact('datos', 'd', 'diariogeneral', 'balancesInicial', 'modulo', 'productos'));
+                return view('talleres.taller37', compact('datos', 'd', 'diariogeneral', 'balancesInicial', 'modulo', 'productos', 'arqueocaja','conciliacionbancaria'));
 
             }
                 

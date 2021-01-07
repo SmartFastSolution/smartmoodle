@@ -16,11 +16,11 @@
             <div class="modal-body">
                 <div class="row justify-content-center">
             @if($datos->metodo == 'individual')
-                     <div class="col-12" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 4px red;">
+                     <div class="col-12" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
                         {!! $transacciones->transacciones !!}
                      </div>
                 @elseif($datos->metodo == 'concatenado')
-                  <div class="col-12 mt-2 border border-top-0 border-left-0 border-right-0 border-danger" style=" height:400px; overflow-y: scroll;">
+                  <div class="col-12 mt-2" style=" height:400px; overflow-y: scroll; border: double 8px #E71822;">
                      <h1 class="text-center font-weight-bold mt-2">Datos para elaborar estado de resultados</h1>
                      <h2 class="text-center font-weight-bold mt-2">HOJA DE TRABAJO</h2>
                     <h3 class="font-weight-bold text-danger text-center">@{{ nombre_hoja }}</h3>
@@ -134,7 +134,7 @@
                     <tbody is="draggable" group="people" :list="ingresos" tag="tbody">
 
                         <tr v-for="(balan, index) in ingresos">
-                          <td align="center">@{{ balan.cuenta}}</td>
+                          <td class="text-left">@{{ balan.cuenta}}</td>
                           <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editIngreso(index)" class="btn btn-warning">
@@ -149,7 +149,7 @@
                         </tr>
                       <tr class="bg-secondary">
                         <td class="text-left font-weight-bold">Total Ingresos</td>
-                        <td class="text-center">@{{ totales.ingreso }}</td>
+                        <td class="text-right">@{{ totales.ingreso }}</td>
                         <td></td>
                       </tr>
                     </tbody>
@@ -206,7 +206,7 @@
                     <tbody is="draggable" group="people" :list="ingresos" tag="tbody">
 
                         <tr v-for="(balan, index) in gastos">
-                          <td align="center">@{{ balan.cuenta}}</td>
+                          <td align="text-left">@{{ balan.cuenta}}</td>
                           <td class="text-right">@{{ decimales(balan.saldo)}}</td>
                           <td align="center"  width="50">
                             <a @click.prevent="editGasto(index)" class="btn btn-warning">
@@ -221,7 +221,7 @@
                         </tr>
                       <tr class="bg-secondary">
                         <td class="text-left font-weight-bold">Total Gastos</td>
-                        <td class="text-center">@{{ totales.gasto }}</td>
+                        <td class="text-right">@{{ totales.gastos }}</td>
                         <td></td>
                       </tr>
                     </tbody>

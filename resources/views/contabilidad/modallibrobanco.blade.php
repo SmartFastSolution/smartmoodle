@@ -47,7 +47,7 @@
                             </tbody>
                         </table>
 
-                        <table class="table table-bordered table-sm mb-2"   >
+                        <table class="table table-bordered table-sm mb-2">
                             <thead class="bg-success">
                                 <tr>
                                     <th width="50" align="center">Debe</th>
@@ -125,7 +125,7 @@
 
                         <div v-if="ajustes.length > 0">
                             <h2 class="font-weight-bold text-center">Asientos de ajustes </h2>
-                            <table class="table table-bordered table-sm" >
+                            <table class="table table-bordered table-sm">
                                 <tbody v-for="(registro, id) in ajustes">
                                     <tr v-for="(diar, index) in registro.debe">
                                         <td align="center" width="200">@{{ formatoFecha(diar.fecha)}}</td>
@@ -196,10 +196,10 @@
                     </div>
                     @endif
 
-                    <div class="col-12 mt-2" v-if="lb_banco.length > 0"  style=" height:300px; overflow-y: scroll;" >
+                    <div class="col-12 mt-2" v-if="lb_banco.length > 0" style=" height:300px; overflow-y: scroll;">
                         <h2 class="text-center">REGISTROS</h2>
 
-                        <table style="border: hidden" class="table table-bordered table-sm mb-2" >
+                        <table style="border: hidden" class="table table-bordered table-sm mb-2">
                             <thead style="border: hidden">
                                 <tr style="border: hidden" class="text-center bg-dark">
                                     <th width="100">Fecha</th>

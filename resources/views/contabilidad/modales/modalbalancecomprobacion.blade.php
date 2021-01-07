@@ -17,7 +17,7 @@
             </div>
             <div class="modal-body">
                 <div class="row justify-content-center">
-                    <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
+                    <div class="col-6 ">
 
                            <a class="btn btn-dark" href="" @click.prevent="calculadora()">CALCULADORA</a>
 
@@ -85,11 +85,11 @@
                             </div>
                         </div>
                           @if($datos->metodo == 'individual')
-                     <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                     <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
                         {!! $transacciones->transacciones !!}
                      </div>
                     @elseif($datos->metodo == 'concatenado')
-                        <div class="col-6" style=" height:400px; overflow-y: scroll;">
+                        <div class="col-6" style=" height:400px; overflow-y: scroll; border: double 8px #E71822;">
                             <h4 class="text-center text-danger font-weight-bold mt-2">Datos necesarios para completar el
                                 balance de comprobacion</h4>
                             <h1 class="text-center text-danger font-weight-bold mt-2">MAYOR GENERAL</h1>
@@ -129,7 +129,7 @@
                                                 <td class="text-right font-weight-bold text-gray-dark">
                                                     @{{ decimales(cuenta.total_haber) }}</td>
                                                 <td class="text-right font-weight-bold text-gray-dark">
-                                                    {{-- @{{ decimales(cuenta.total_saldo) }} --}}</td>
+                                                    @{{ cuenta.total_saldo }}</td>
                                             </tr>
                                             <tr v-for="(diar, index) in cuenta.cierres">
                                                 <td align="center" width="50">@{{ formatoFecha(diar.fecha)}}</td>
@@ -144,9 +144,9 @@
                             </div>
                         </div>
                         @endif
-                        <div class="col-12 mt-2" v-if="balances.length > 0" style=" height:400px; overflow-y: scroll;">
+                        <div class="col-12 mt-2" v-if="balances.length > 0" >
                             <h2 class="text-center">REGISTROS</h2>
-                            <div class="row justify-content-around mb-2">
+                            <div class="row justify-content-around mb-2" style=" height:300px; overflow-y: scroll;">
                                 <table class="table table-bordered table-sm mb-2">
                                     <thead>
                                         <tr class="bg-dark">

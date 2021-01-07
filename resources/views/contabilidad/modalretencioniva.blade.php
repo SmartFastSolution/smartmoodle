@@ -201,7 +201,7 @@
                                                 class="fa fa-window-close"></i></a>
                                     </div>
 
-                                    <div class="col-12 mt-2" v-if="t_compras.length > 0">
+                                    <div class="col-12 mt-2" v-if="t_compras.length > 0" style=" height:300px; overflow-y: scroll;">
                                         <h2 class="text-center">REGISTRO DE COMPRAS</h2>
 
                                         <table class="table table-bordered table-sm">
@@ -367,7 +367,7 @@
                                                 class="fa fa-window-close"></i></a>
                                     </div>
                                     <br>
-                                    <div class="col-12 mt-2" v-if="t_ventas.length > 0">
+                                    <div class="col-12 mt-2" v-if="t_ventas.length > 0" style=" height:300px; overflow-y: scroll;">
                                         <h2 class="text-center">REGISTRO DE VENTAS</h2>
 
                                         <table class="table table-bordered table-sm">

@@ -19,7 +19,7 @@
                 <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
 
                 <div class="row justify-content-center">
-                    <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
+                    <div class="col-6">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link active text-dark font-weight-bold" id="comentario-asiento-tab"
@@ -189,12 +189,11 @@
                         </div>
                     </div>
                     @if($datos->metodo == 'individual')
-                    <div class="col-6"
-                        style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 4px red;">
+                     <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
                         {!! $transacciones->transacciones !!}
-                    </div>
-                    @elseif($datos->metodo == 'concatenado')
-                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                     </div>
+                @elseif($datos->metodo == 'concatenado')
+                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
                         <h3 class="text-center font-weight-bold">Datos para realizar los Asientos de Cierre</h3>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
@@ -305,9 +304,9 @@
 
                                 <div class="row justify-content-between">
                                     <div class="col-7">
-                                        <h3 v-if="estadoresultado.utilidad == 'utilidad_neta'" class="font-weight-bold">
-                                            UTILIDAD NETA DEL EJERCICIO</h3>
-                                        <h3 v-else class="font-weight-bold">PERDIDA DEL EJERCICIO DEL EJERCICIO</h3>
+                                        <h4 v-if="estadoresultado.utilidad == 'utilidad_neta'" class="font-weight-bold">
+                                            UTILIDAD NETA DEL EJERCICIO</h4>
+                                        <h4 v-else class="font-weight-bold">PERDIDA DEL EJERCICIO</h4>
                                     </div>
                                     <div class="col-3"><span class="badge badge-danger"
                                             style="font-size: 20px; ">@{{ estadoresultado.totales.utilidad_ejercicio_e_resultado }}</span>
@@ -556,7 +555,7 @@
                     </div>
                     @endif
 
-                    <div class="col-12 mt-2" v-if="diarios.debe.length > 0 || diarios.haber.length > 0">
+                    <div class="col-12 mt-2" v-if="diarios.debe.length > 0 || diarios.haber.length > 0" style=" height:300px; overflow-y: scroll;">
 
                         <h2 class="text-center">ACTUALIZAR REGISTROS</h2>
                         <table class="table table-bordered table-sm">

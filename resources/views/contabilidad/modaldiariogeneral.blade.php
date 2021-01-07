@@ -15,6 +15,8 @@
                 </button>
             </div>
             <div class="modal-body">
+            <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
+              
                 <div class="row justify-content-center">
                    <div class="col-6 ">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -176,12 +178,12 @@
                   </div>
                    @if($datos->metodo == 'individual')
 
-                     <div class="col-6 p-3" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: solid 3px red;">
+                     <div class="col-6 p-3" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
                         {!! $transacciones->transacciones !!}
                      </div>
                     @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 p-3 mt-2 "
-                                        style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+                                        style=" height:300px; overflow-y: scroll; border: double 8px #E71822;">
                                         @isset ($diariogeneral->transacciones )
                                              {!! $diariogeneral->transacciones !!}
                                         @endisset
@@ -191,9 +193,10 @@
                                     @endif
             
 
-                  <div class="col-12 mt-2" v-if="diarios.debe.length > 0 || diarios.haber.length > 0">
+                <div class="col-12 mt-2" v-if="diarios.debe.length > 0 || diarios.haber.length > 0" >
 
                     <h2 class="text-center">ACTUALIZAR MOVIMIENTOS</h2>
+                  <div style=" height:300px; overflow-y: scroll;">
                 <table  class="table table-bordered table-sm">
                      <thead class="thead-dark">
                      <tr align="center">
@@ -241,6 +244,7 @@
                  </tbody>
 
              </table>
+           </div>
               <div class="row justify-content-around mb-2">
 
               <a v-if="update" href="#" class="addDiario btn btn-success" @click.prevent="updaterRegister()">Actualizar Transaccion</a> 

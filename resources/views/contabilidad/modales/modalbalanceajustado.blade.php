@@ -19,11 +19,11 @@
                 <div class="row justify-content-center">
 
                 @if($datos->metodo == 'individual')
-                     <div class="col-12" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 4px red;">
+                     <div class="col-12" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
                         {!! $transacciones->transacciones !!}
                      </div>
                 @elseif($datos->metodo == 'concatenado')
-                  <div class="col-12 mt-2 border border-top-0 border-left-0 border-right-0 border-danger" style=" height:400px; overflow-y: scroll;">
+                  <div class="col-12 mt-2" style=" height:400px; overflow-y: scroll; border: double 8px #E71822;">
                      <h1 class="text-center font-weight-bold mt-2">Datos para elaborar hoja de trabajo</h1>
                     <h2 class="font-weight-bold text-danger text-center">@{{ nombre_hoja }}</h2>
                         <table class="table table-bordered table-sm">

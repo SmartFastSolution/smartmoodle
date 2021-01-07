@@ -97,7 +97,7 @@ const funciones = new Vue({
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////BALANCE INICIAL HORIZONTAL/////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-if(document.getElementById('b_horizontal')){
+
 const b_hori = new Vue({
         el: '#b_horizontal',
         data:{
@@ -1341,9 +1341,9 @@ const b_hori = new Vue({
             }
   }   
 });
-}
 
-if(document.getElementById('b_vertical')){
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////BALANCE INICIAL VERTICAL///////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2604,11 +2604,11 @@ const b_ver = new Vue({
             }
   }   
 });
-}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////DIARIO GENERAL//////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-if(document.getElementById('diario')){
+
 const diario = new Vue({
  el: '#diario',
     data:{
@@ -2620,18 +2620,6 @@ const diario = new Vue({
       complete:false,
       options: objeto,
       cuentas: cuentas,
-      // cuentas:[
-      //     {id:1, nombre:'Caja', nombre_abreviado:'Caja', porcentual:false, porcentaje:null},
-      //     {id:2, nombre:'Bancos', nombre_abreviado:'Bancos', porcentual:false, porcentaje:null},
-      //     {id:3, nombre:'Muebles', nombre_abreviado:'Muebles', porcentual:false, porcentaje:null},
-      //     {id:4, nombre:'Vehiculo', nombre_abreviado:'Vehiculo', porcentual:false, porcentaje:null},
-      //     {id:5, nombre:'Inventario Mercaderia', nombre_abreviado:'Inv Mercaderia', porcentual:false, porcentaje:null},
-      //     {id:6, nombre:'Documentos por cobrar', nombre_abreviado:'DOc. por Cobrar', porcentual:false, porcentaje:null},
-      //     {id:7, nombre:'Documentos por cobrar', nombre_abreviado:'Doc. por Pagar', porcentual:false, porcentaje:null},
-      //     {id:8, nombre:'Mueble de Oficina', nombre_abreviado:'Mueble de Oficina', porcentual:false, porcentaje:null},
-      //     {id:9, nombre:'Equipo de Oficina', nombre_abreviado:'Equipo de Oficina', porcentual:false, porcentaje:null},
-      //     {id:10, nombre:'IVA 12%', nombre_abreviado:'IVA 12%', porcentual:true, porcentaje:12},
-      //   ],
       balanceInicial:{
         debe:[],
         haber:[],
@@ -2701,13 +2689,14 @@ transacciones:'',
       this.obtenerDiarioGeneral();
 
     },
-    calculadora(){
+
+   
+    methods:{
+          calculadora(){
      let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
     let component = 'example-component';
     funciones.VueSweetAlert2(component,propsData);
     },
-   
-    methods:{
     formatoFecha(fecha){
       if (fecha !== null) {
          let date = fecha.split('-').reverse().join('-');
@@ -2743,11 +2732,27 @@ transacciones:'',
       this.diario.debe.edit =false
               
 
-
+      this.limpiar();
       $('#dg-transaccion').modal('show');
       $('#comentario-diario-tab').tab('show'); 
 
 
+    },
+    limpiar(){
+      this.update                  = false;
+      this.diarios.debe            =[];
+      this.diarios.haber           =[];
+      this.diarios.fecha           =[];
+      this.diarios.comentario      =[];
+      this.diarios.ajustado        = false;
+      this.diario.haber.fecha      ='';
+      this.diario.haber.nom_cuenta ='';
+      this.diario.haber.saldo      ='';
+      this.diario.haber.edit       =false;
+      this.diario.debe.fecha       ='';
+      this.diario.debe.nom_cuenta  ='';
+      this.diario.debe.saldo       ='';
+      this.diario.debe.edit        = false;
     },
     valorPorcentual(porcentaje, valor){
       // let porcentaje = this.cuentas[index].porcentaje;
@@ -2909,9 +2914,13 @@ transacciones:'',
     },
   deleteHaber(index){
       this.diarios.haber.splice(index, 1);
+      this.limpiar();
+
     },
   deleteDebe(index){
       this.diarios.debe.splice(index, 1);
+      this.limpiar();
+
     },
     guardarRegistro(){
       let total_debe = 0;
@@ -2938,7 +2947,7 @@ transacciones:'',
          toastr.error("Debes agregar la fecha", "Smarmoddle", {
                 "timeOut": "3000"
             });
-      }else  if (total_haber != total_debe) {
+      }else  if (total_haber.toFixed(2) != total_debe.toFixed(2)) {
          toastr.error("El Total de Debe y Haber no coinciden", "Smarmoddle", {
                 "timeOut": "3000"
             });
@@ -2967,6 +2976,8 @@ transacciones:'',
                 this.totalDebe();
                 this.totalHaber();
             this.totalesFinales();
+        this.limpiar();
+
 
       $('#dg-transaccion').modal('hide');
 
@@ -3189,37 +3200,37 @@ transacciones:'',
   //     console.log(id);
   //   console.log(index);
   // },
-  agregarEdit(){
-     var haber = {fecha:this.diario.haber.fecha, nom_cuenta:this.diario.haber.nom_cuenta, saldo:this.diario.haber.saldo};
-              this.edit.haber.push(haber);//añadimos el la variable persona al array
-                //Limpiamos los campos
-            toastr.success("Activo agregado correctamente", "Smarmoddle", {
-                "timeOut": "3000"
-            });
-                this.diario.haber.fecha =''
-                this.diario.haber.nom_cuenta =''
-                this.diario.haber.saldo =''
-   },
-   agregarEditPasivo(){
+  // agregarEdit(){
+  //    var haber = {fecha:this.diario.haber.fecha, nom_cuenta:this.diario.haber.nom_cuenta, saldo:this.diario.haber.saldo};
+  //             this.edit.haber.push(haber);//añadimos el la variable persona al array
+  //               //Limpiamos los campos
+  //           toastr.success("Activo agregado correctamente", "Smarmoddle", {
+  //               "timeOut": "3000"
+  //           });
+  //               this.diario.haber.fecha =''
+  //               this.diario.haber.nom_cuenta =''
+  //               this.diario.haber.saldo =''
+  //  },
+   // agregarEditPasivo(){
 
-         var debe = {fecha:'', nom_cuenta:this.diario.debe.nom_cuenta, saldo:this.diario.debe.saldo};
-                this.edit.debe.push(debe);//añadimos el la variable persona al array
-                //Limpiamos los campos
-                toastr.success("Activo agregado correctamente", "Smarmoddle", {
-                "timeOut": "3000"
-                });
-                this.diario.debe.fecha =''
-                this.diario.debe.nom_cuenta =''
-                this.diario.debe.saldo =''
+   //       var debe = {fecha:'', nom_cuenta:this.diario.debe.nom_cuenta, saldo:this.diario.debe.saldo};
+   //              this.edit.debe.push(debe);//añadimos el la variable persona al array
+   //              //Limpiamos los campos
+   //              toastr.success("Activo agregado correctamente", "Smarmoddle", {
+   //              "timeOut": "3000"
+   //              });
+   //              this.diario.debe.fecha =''
+   //              this.diario.debe.nom_cuenta =''
+   //              this.diario.debe.saldo =''
              
-   },
-    haberEdit(index){
-      var edit = this.edit;
-      this.cuentaindex  = index;
-      this.diario.haber.nom_cuenta  = edit.haber[index].nom_cuenta;
-      this.diario.haber.saldo       = edit.haber[index].saldo;
-      $('#haber_a').modal('show'); 
-    },
+   // },
+    // haberEdit(index){
+    //   var edit = this.edit;
+    //   this.cuentaindex  = index;
+    //   this.diario.haber.nom_cuenta  = edit.haber[index].nom_cuenta;
+    //   this.diario.haber.saldo       = edit.haber[index].saldo;
+    //   $('#haber_a').modal('show'); 
+    // },
     updateHaber(){
       let id     =  this.diario.haber.nom_cuenta;
       let index  = this.diario.haber.index;
@@ -3240,18 +3251,22 @@ transacciones:'',
         this.diario.haber.edit       = false;
     },
     habediarioEdit(index){
+        this.diario.debe.fecha = '';
+        this.diario.debe.nom_cuenta = '';
+        this.diario.debe.saldo      = '';
+        this.diario.debe.edit       = false;
       this.diario.haber.index = index;
-      let cuenta_id = this.diarios.haber[index].cuenta_id;
+      let id_cuenta = this.diarios.haber[index].cuenta_id;
 
-      let cuenta = this.cuentas.filter(x => x.id == cuenta_id);
+      let cuenta = this.cuentas.filter(x => x.id == id_cuenta);
       console.log(cuenta)
       if (cuenta[0].porcentual == 1){
 
-        this.diario.haber.nom_cuenta = cuenta_id;
+        this.diario.haber.nom_cuenta = id_cuenta;
         this.diario.haber.saldo      = '';
       }else{
 
-        this.diario.haber.nom_cuenta = cuenta_id;
+        this.diario.haber.nom_cuenta = id_cuenta;
         this.diario.haber.saldo      = this.diarios.haber[index].saldo;
       }
         this.diario.haber.edit       = true;
@@ -3260,17 +3275,17 @@ transacciones:'',
       // this.diario.haber.saldo       = this.diarios.haber[index].saldo;
       $('#haber-diario-tab').tab('show'); 
     },
-      updateHaber1(){
-      var id = this.cuentaindex;
-      this.diarios.haber[id].nom_cuenta  = this.diario.haber.nom_cuenta;
-      this.diarios.haber[id].saldo       = this.diario.haber.saldo;
-      $('#haber_d').modal('hide'); 
-        this.diario.haber.nom_cuenta = '';
-        this.diario.haber.saldo = '';
-    },
-    haberDelete(index){
-      this.edit.haber.splice(index, 1);
-    },
+    //   updateHaber1(){
+    //   var id = this.cuentaindex;
+    //   this.diarios.haber[id].nom_cuenta  = this.diario.haber.nom_cuenta;
+    //   this.diarios.haber[id].saldo       = this.diario.haber.saldo;
+    //   $('#haber_d').modal('hide'); 
+    //     this.diario.haber.nom_cuenta = '';
+    //     this.diario.haber.saldo = '';
+    // },
+    // haberDelete(index){
+    //   this.edit.haber.splice(index, 1);
+    // },
    totalesFinales: function(){
         this.total.debe = 0;
         this.total.haber = 0;
@@ -3294,25 +3309,25 @@ transacciones:'',
 
 
       },
-    comentarioEdit(){
-     this.diario.comentario = this.edit.comentario;
-     $('#comentario').modal('show'); 
+    // comentarioEdit(){
+    //  this.diario.comentario = this.edit.comentario;
+    //  $('#comentario').modal('show'); 
 
-    },
-    comentarioUpdate(){
-      this.edit.comentario = this.diario.comentario;
-      $('#comentario').modal('hide'); 
-      this.diario.comentario = '';
-    },
-    debeEdit(index){
-      this.cuentaindex        = index;
-      if (index == 0) {
-      this.diario.debe.fecha  = this.edit.debe[index].fecha;  
-      }
-      this.diario.debe.nom_cuenta  = this.edit.debe[index].nom_cuenta;
-      this.diario.debe.saldo       = this.edit.debe[index].saldo;
-      $('#debe_a').modal('show'); 
-    },
+    // },
+    // comentarioUpdate(){
+    //   this.edit.comentario = this.diario.comentario;
+    //   $('#comentario').modal('hide'); 
+    //   this.diario.comentario = '';
+    // },
+    // debeEdit(index){
+    //   this.cuentaindex        = index;
+    //   if (index == 0) {
+    //   this.diario.debe.fecha  = this.edit.debe[index].fecha;  
+    //   }
+    //   this.diario.debe.nom_cuenta  = this.edit.debe[index].nom_cuenta;
+    //   this.diario.debe.saldo       = this.edit.debe[index].saldo;
+    //   $('#debe_a').modal('show'); 
+    // },
     // updateDebe(){
     //   var id                         = this.cuentaindex;
     //    if (id == 0) {
@@ -3325,22 +3340,24 @@ transacciones:'',
     //     this.diario.debe.saldo = '';
     // },
      debediairoEdit(index){
+       this.diario.haber.nom_cuenta = '';
+        this.diario.haber.saldo      = '';
+        this.diario.haber.edit       = false;
       this.diario.debe.index = index;
-      // this.cuentaindex     = index;
-      let cuenta_id = this.diarios.debe[index].cuenta_id;
+      let id_cuenta = this.diarios.debe[index].cuenta_id;
 
       if (this.diarios.debe[index].fecha !== '') {
         this.diario.debe.fecha  = this.diarios.debe[index].fecha;  
       }else{
         this.diario.debe.fecha  = '';  
       }
-      let cuenta = this.cuentas.filter(x => x.id == cuenta_id);
+      let cuenta = this.cuentas.filter(x => x.id == id_cuenta);
       // console.log(cuenta)
       if (cuenta[0].porcentual == 1){
-        this.diario.debe.nom_cuenta = cuenta_id;
+        this.diario.debe.nom_cuenta = id_cuenta;
         this.diario.debe.saldo      = '';
       }else{
-        this.diario.debe.nom_cuenta = cuenta_id;
+        this.diario.debe.nom_cuenta = id_cuenta;
         this.diario.debe.saldo      = this.diarios.debe[index].saldo;
       }
         this.diario.debe.edit       = true;
@@ -3514,8 +3531,7 @@ transacciones:'',
 
     }
 });
-}
-if(document.getElementById('mayor_general')){
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////MAYOR GENERAL//////// /////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3590,9 +3606,9 @@ nombre_cierre:''
           if (response.data.datos == true) {
           _this.registros_cierres = response.data.registros;
           _this.nombre_cierre = response.data.nombre;  
-           toastr.success("Diairo General cargado Correctamente", "Smarmoddle", {
-                "timeOut": "3000"
-                });
+           // toastr.success("Diairo General cargado Correctamente", "Smarmoddle", {
+           //      "timeOut": "3000"
+           //      });
             }          
         }).catch(function(error){
 
@@ -3742,8 +3758,16 @@ nombre_cierre:''
 
       let id       = this.mayor.cuenta;
       let nombre   = funciones.obtenerNombre(id);
-      let registro = {cuenta_id: id, cuenta:nombre, registros:this.mayores.registros, cierres:this.mayores.cierres, total_debe: tdebe, total_haber: thaber, total_saldo:''};
+    
+      if (this.mayores.cierres.length >= 1) {
+         let registro = {cuenta_id: id, cuenta:nombre, registros:this.mayores.registros, cierres:this.mayores.cierres, total_debe: tdebe, total_haber: thaber, total_saldo:'-0-'};
         this.registros.push(registro);//añadimos el la variable persona al array
+      }else{
+        let registro = {cuenta_id: id, cuenta:nombre, registros:this.mayores.registros, cierres:this.mayores.cierres, total_debe: tdebe, total_haber: thaber, total_saldo:''};
+        this.registros.push(registro);//añadimos el la variable persona al array
+      }
+    
+
                 //Limpiamos los campos
                 toastr.success("Registro agregado correctamente", "Smarmoddle", {
                 "timeOut": "3000"
@@ -3791,6 +3815,11 @@ nombre_cierre:''
               });
       cuenta[0].total_debe = tdebe;
       cuenta[0].total_haber = thaber;
+      if (this.mayores.cierres.length >= 1) {
+        cuenta[0].total_saldo = '-0-';
+      }else{
+        cuenta[0].total_saldo = '';
+      }
       // if (this.mayores.registros.length == 0) {
       //    toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
       //           "timeOut": "3000"
@@ -3940,11 +3969,11 @@ nombre_cierre:''
   }
 
 });
-}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////BALANCE DE COMPROBACION /////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-if(document.getElementById('balance_comp')){
+
 
 const balance_comp = new Vue({
   el: '#balance_comp',
@@ -4265,10 +4294,12 @@ const balance_comp = new Vue({
             "timeOut": "3000"
             });
               hoja_trabajo.obtenerBalanceCom();
+
             }else if (response.data.estado == 'actualizado') {
               toastr.warning("Balance actualizado correctamente", "Smarmoddle", {
             "timeOut": "3000"
             });
+
               console.log(this.balances)
               hoja_trabajo.obtenerBalanceCom();
             }        
@@ -4302,12 +4333,12 @@ const balance_comp = new Vue({
   }
   
 });
-}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////HOJA DE TRABAJO ////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-if(document.getElementById('hoja_trabajo')){
+
 
 let hoja_trabajo = new Vue({
   el: "#hoja_trabajo",
@@ -4694,7 +4725,6 @@ let hoja_trabajo = new Vue({
               id: _this.id_taller,
         }).then(response => {
           if (response.data.datos == true) {
-         
               this.balances       = response.data.bcomprobacion;
               this.nombre_balance = response.data.nombre;
               this.fecha_balance  = response.data.fecha;
@@ -4792,11 +4822,10 @@ let hoja_trabajo = new Vue({
   }
 
 });
-}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////BALANCE DE COMPROBACIO AJUSTADO /////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-if(document.getElementById('balance_ajustado')){
 
 const balance_ajustado = new Vue({
   el: "#balance_ajustado",
@@ -5102,12 +5131,12 @@ const balance_ajustado = new Vue({
 
   
 });
-}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////ESTADO RESULTADO ///////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-if(document.getElementById('estado_resultado')){
+
 
 const estado_resultado = new Vue({
 
@@ -5150,10 +5179,10 @@ const estado_resultado = new Vue({
     },
     utilidades:[],
     utilidad:'',
-    totales:{
-      ingreso:0,
-      gastos:0,
-    },
+    // totales:{
+    //   ingreso:0,
+    //   gastos:0,
+    // },
     update:false,
     registro:{
       ingreso:'',
@@ -5161,8 +5190,8 @@ const estado_resultado = new Vue({
       utilida:'',
     },
     totales:{
-      ingreso:0,
-      gasto:0,
+        ingreso:0,
+      gastos:0,
       utilidad_bruta_ventas:'',
       utilidad_neta_o:0,
       utilidad_ejercicio:'',
@@ -5708,13 +5737,18 @@ const estado_resultado = new Vue({
                      toastr.success(response.data.message, "Smarmoddle", {
                     "timeOut": "3000"
                    });
-                  
+                  balance_general.obtenerEstadoResultado();
+                  asientos_cierre.obtenerEstadoResultado();
+
+
                   }else{
                       toastr.success(response.data.message, "Smarmoddle", {
                     "timeOut": "3000"
                    });
-                    
-                  
+                  balance_general.obtenerEstadoResultado();
+                  asientos_cierre.obtenerEstadoResultado();
+
+
                   }                     
                 }).catch(function(error){
                   toastr.error(error.response.data.message, "Smarmoddle", {
@@ -5741,7 +5775,7 @@ const estado_resultado = new Vue({
                     _this.totales.utilidad_bruta_ventas = response.data.estadoresultado.utilidad_bruta_ventas
                     _this.utilidad_bruta.venta          = response.data.estadoresultado.venta
                     _this.utilidad_bruta.costo_venta    = response.data.estadoresultado.costo_venta
-                    _this.totales.utilidad_ejercicio    = response.data.estadoresultado.utilidad_neta_o
+                    _this.totales.utilidad_ejercicio    = response.data.estadoresultado.utilidad_ejercicio
                     _this.totales.utilidad_liquida      = response.data.estadoresultado.utilidad_liquida
                     console.log(response.data.estadoresultado)
               this.totale();
@@ -5758,11 +5792,11 @@ const estado_resultado = new Vue({
 
 
 });
-}
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////BALANCE GENERAL ///////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-if(document.getElementById('balance_general')){
+
 
 const balance_general = new Vue({
 
@@ -5908,7 +5942,6 @@ const balance_general = new Vue({
                     _this.estadoresultado.totales.utilidad_ejercicio_e_resultado    = response.data.estadoresultado.utilidad_ejercicio
                     _this.estadoresultado.totales.utilidad_liquida_e_resultado      = response.data.estadoresultado.utilidad_liquida
                     _this.estadoresultado.totales.utilidad_neta_o      = response.data.estadoresultado.utilidad_neta_o
-
                     console.log(response.data.estadoresultado)
               this.totale();
             this.subtotal();
@@ -6297,6 +6330,7 @@ const balance_general = new Vue({
             this.a_nocorrientes[index].cuenta_id2 = this.activo.a_nocorriente.cuenta_id2;
             this.a_nocorrientes[index].cuenta2    = nombre2;
             this.a_nocorrientes[index].saldo2     = this.activo.a_nocorriente.saldo2;
+            this.a_nocorrientes[index].total_saldo     = '';
 
             let resta = Number(this.activo.a_nocorriente.saldo) - Number(this.activo.a_nocorriente.saldo2);
 
@@ -6305,6 +6339,12 @@ const balance_general = new Vue({
             console.log(resta)
 
              }else{
+             this.a_nocorrientes[index].cuenta_id2 = '';
+            this.a_nocorrientes[index].cuenta2    ='' ;
+            this.a_nocorrientes[index].saldo2     = '';
+
+            this.a_nocorrientes[index].total_saldo2 = '';
+
             this.a_nocorrientes[index].total_saldo = this.activo.a_nocorriente.saldo;
              }
             this.activo.a_nocorriente.cuenta_id  =''
@@ -6793,9 +6833,8 @@ const balance_general = new Vue({
             }
   }   
 });
-}
 
-if(document.getElementById('asientos_cierre')){
+
 
 const asientos_cierre = new Vue({
  el: '#asientos_cierre',
@@ -6943,6 +6982,22 @@ const asientos_cierre = new Vue({
 
         }); 
      }, 
+         limpiar(){
+      this.update                  = false;
+      this.diarios.debe            =[];
+      this.diarios.haber           =[];
+      this.diarios.fecha           =[];
+      this.diarios.comentario      =[];
+      this.diarios.ajustado        = false;
+      this.diario.haber.fecha      ='';
+      this.diario.haber.nom_cuenta ='';
+      this.diario.haber.saldo      ='';
+      this.diario.haber.edit       =false;
+      this.diario.debe.fecha       ='';
+      this.diario.debe.nom_cuenta  ='';
+      this.diario.debe.saldo       ='';
+      this.diario.debe.edit        = false;
+    },
         obtenerBalance:function(){
               var _this = this;
                 var url = '/sistema/admin/taller/obtener-balance-general';
@@ -7012,7 +7067,7 @@ const asientos_cierre = new Vue({
       this.diario.debe.saldo =''
       this.diario.debe.edit =false
 
-
+      this.limpiar();
       $('#as-transaccion').modal('show');
       $('#comentario-diario-tab').tab('show'); 
 
@@ -7117,6 +7172,8 @@ const asientos_cierre = new Vue({
                 this.diario.haber.fecha =''
                 this.diario.haber.nom_cuenta =''
                 this.diario.haber.saldo =''
+                
+
         }
     },
      agregarDebe(){
@@ -7143,6 +7200,8 @@ const asientos_cierre = new Vue({
                 this.diario.debe.fecha =''
                 this.diario.debe.nom_cuenta =''
                 this.diario.debe.saldo =''
+     
+
       }   
     },
     agregarComentario(){
@@ -7151,22 +7210,28 @@ const asientos_cierre = new Vue({
     },
     deleteHaber(index){
         this.diarios.haber.splice(index, 1);
+      this.limpiar();
+
       },
     deleteDebe(index){
         this.diarios.debe.splice(index, 1);
+      this.limpiar();
+
       },
     guardarRegistro(){
       let total_debe = 0;
       let total_haber = 0;
       
       this.diarios.debe.forEach(function(debe, id){
-                let saldo = debe.saldo;
-                    total_debe += Number(saldo);
+                let saldo2 = debe.saldo;
+                    total_debe += Number(saldo2);
               });
       this.diarios.haber.forEach(function(haber, id){
                 let saldo = haber.saldo;
                     total_haber += Number(saldo);
               });
+      console.log(total_debe)
+      console.log(total_haber);
 
       if (this.diarios.debe == 0) {
          toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
@@ -7180,7 +7245,7 @@ const asientos_cierre = new Vue({
          toastr.error("Debes agregar la fecha", "Smarmoddle", {
                 "timeOut": "3000"
             });
-      }else  if (total_haber != total_debe) {
+      }else  if (total_haber.toFixed(2) != total_debe.toFixed(2)) {
          toastr.error("El Total de Debe y Haber no coinciden", "Smarmoddle", {
                 "timeOut": "3000"
             });
@@ -7198,6 +7263,8 @@ const asientos_cierre = new Vue({
                 this.diarios.ajustado = false;
                 this.totalDebe();
                 this.totalHaber();
+                this.limpiar();
+
                 
 
       $('#as-transaccion').modal('hide');
@@ -7294,6 +7361,8 @@ const asientos_cierre = new Vue({
             
             this.totalDebe();
             this.totalHaber();
+            this.limpiar();
+
             // 
 
           $('#as-transaccion').modal('hide');
@@ -7355,18 +7424,22 @@ const asientos_cierre = new Vue({
         this.diario.haber.edit       = false;
     },
     habediarioEdit(index){
+        this.diario.debe.fecha = '';
+        this.diario.debe.nom_cuenta = '';
+        this.diario.debe.saldo      = '';
+        this.diario.debe.edit       = false;
       this.diario.haber.index = index;
-      let cuenta_id = this.diarios.haber[index].cuenta_id;
+      let id_cuenta = this.diarios.haber[index].cuenta_id;
 
-      let cuenta = this.cuentas.filter(x => x.id == cuenta_id);
+      let cuenta = this.cuentas.filter(x => x.id == id_cuenta);
       console.log(cuenta)
       if (cuenta[0].porcentual == 1){
 
-        this.diario.haber.nom_cuenta = cuenta_id;
+        this.diario.haber.nom_cuenta = id_cuenta;
         this.diario.haber.saldo      = '';
       }else{
 
-        this.diario.haber.nom_cuenta = cuenta_id;
+        this.diario.haber.nom_cuenta = id_cuenta;
         this.diario.haber.saldo      = this.diarios.haber[index].saldo;
       }
         this.diario.haber.edit       = true;
@@ -7406,26 +7479,29 @@ const asientos_cierre = new Vue({
    //      });
    //      this.total.haber = Number(this.pasan.haber + total1).toFixed(2);
    //    },
-    comentarioEdit(){
-     this.diario.comentario = this.edit.comentario;
-     $('#comentario').modal('show'); 
+    // comentarioEdit(){
+    //  this.diario.comentario = this.edit.comentario;
+    //  $('#comentario').modal('show'); 
 
-    },
-    comentarioUpdate(){
-      this.edit.comentario = this.diario.comentario;
-      $('#comentario').modal('hide'); 
-      this.diario.comentario = '';
-    },
-    debeEdit(index){
-      this.cuentaindex        = index;
-      if (index == 0) {
-      this.diario.debe.fecha  = this.edit.debe[index].fecha;  
-      }
-      this.diario.debe.nom_cuenta  = this.edit.debe[index].nom_cuenta;
-      this.diario.debe.saldo       = this.edit.debe[index].saldo;
-      $('#debe_a').modal('show'); 
-    },
+    // },
+    // comentarioUpdate(){
+    //   this.edit.comentario = this.diario.comentario;
+    //   $('#comentario').modal('hide'); 
+    //   this.diario.comentario = '';
+    // },
+    // debeEdit(index){
+    //   this.cuentaindex        = index;
+    //   if (index == 0) {
+    //   this.diario.debe.fecha  = this.edit.debe[index].fecha;  
+    //   }
+    //   this.diario.debe.nom_cuenta  = this.edit.debe[index].nom_cuenta;
+    //   this.diario.debe.saldo       = this.edit.debe[index].saldo;
+    //   $('#debe_a').modal('show'); 
+    // },
      debediairoEdit(index){
+        this.diario.haber.nom_cuenta = '';
+        this.diario.haber.saldo      = '';
+        this.diario.haber.edit       = false;
       this.diario.debe.index = index;
       // this.cuentaindex     = index;
       let cuenta_id = this.diarios.debe[index].cuenta_id;
@@ -7600,13 +7676,12 @@ const asientos_cierre = new Vue({
 
     }
 });
-}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////KARDEX ///////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-if(document.getElementById('kardex')){
 
 const kardex = new Vue({
   el: "#kardex",
@@ -10071,9 +10146,7 @@ const kardex = new Vue({
         }   
 }
 });
-}
 
-if(document.getElementById('kardex_promedio')){
 
 const kardex_promedio = new Vue({
 
@@ -10816,14 +10889,14 @@ const vm = new Vue({
     }
   }
 });
-}
+
 
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////LIBRO CAJA ANEXO //////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-if(document.getElementById('librocaja')){
+
 
 const librocaja = new Vue({
   el: "#librocaja",
@@ -11114,9 +11187,9 @@ const librocaja = new Vue({
   },
 
 });
-}
 
-if(document.getElementById('arqueo_caja')){
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////ARQUEO CAJA ANEXO /////////////////////////////////////////////////////////
@@ -11562,9 +11635,7 @@ const arqueo_caja = new Vue ({
   },
 
 });
-}
 
-if(document.getElementById('librosbanco')){
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -11885,9 +11956,8 @@ const librosbanco = new Vue({
   
  }
 });
-}
 
-if(document.getElementById('conciliacionb')){
+
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -12757,9 +12827,6 @@ const conciliacionb = new Vue({
 
 
 });
-}
-
-if(document.getElementById('retencion_iva')){
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////RETENCION DEL IVA /////////////////////////////////////////////////////////
@@ -13495,10 +13562,9 @@ let reten_iva = new Vue({
      
 
 });
-}
 
 
-if(document.getElementById('nomina_empleado')){
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////NOMINA DE EMPLEADOS ///////////////////////////////////////////////////////
@@ -14570,4 +14636,4 @@ const provision_b = new Vue({
       } // end obtener   
     }, // end methods
 });
-}
+

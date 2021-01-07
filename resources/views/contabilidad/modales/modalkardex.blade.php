@@ -163,7 +163,7 @@
 
                       </div>
                   </div>
-                  <div class="col-5" style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+                  <div class="col-5" style=" height:300px; overflow-y: scroll; border: double 4px red;">
                     <div v-html="datos_transacciones"></div>
                   </div>
                 </div>
@@ -171,7 +171,8 @@
                   <div v-if="modales.modal_ingreso.length > 0">
                    <h2 class="text-center font-weight-bold">ACTUALIZAR EXISTENCIAS</h2>
 
-                  <table  class="table table-bordered ">
+                   <div style=" height:300px; overflow-y: scroll;">
+                            <table  class="table table-bordered " >
                       <thead class="bg-warning"> 
                         <tr class="text-center">
                           <th width="30"  style="vertical-align:middle" rowspan="2">FECHA</th>
@@ -230,6 +231,8 @@
                           </tr>
                         </tbody>
                   </table>
+                   </div>
+           
                     <div class="row justify-content-center mt-2">
                     <a class="btn btn-primary mt-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="agregarTransaccion('ingreso')">Agregar Transaccion</a>
                   </div>
@@ -367,7 +370,7 @@
                        <div  class="row justify-content-center">
                       </div>
                   </div>
-                  <div class="col-5" style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+                  <div class="col-5" style=" height:300px; overflow-y: scroll; border: double 4px red;">
                     <div v-html="datos_transacciones"></div>
                     
                   </div>
@@ -375,6 +378,7 @@
 
                   <div v-if="modales.modal_devolucion_venta.length > 0">
                    <h2 class="text-center font-weight-bold">ACTUALIZAR EXISTENCIAS</h2>
+                   <div style=" height:300px; overflow-y: scroll;">
 
                   <table  class="table table-bordered table-responsive">
                       <thead class="bg-warning"> 
@@ -428,6 +432,7 @@
                           </tr>
                         </tbody>
                   </table>
+                </div>
                     <div class="row justify-content-center mt-2">
                     <a class="btn btn-primary mt-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="agregarTransaccion('venta')">Agregar Transaccion</a>
                   </div>
@@ -607,7 +612,7 @@
          {{--  <a v-if="transaccion.egreso.active" class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="nuevoEgreso('agregar')"><i class="fas fa-plus"></i> Nuevo Egreso</a> --}}
                 </div>
               </div>
-              <div class="col-5" style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+              <div class="col-5" style=" height:300px; overflow-y: scroll; border: double 4px red;">
                     <div v-html="datos_transacciones"></div>
                 
               </div>
@@ -620,6 +625,7 @@
           <div class="col-12">
                     <div v-if="modales.modal_egreso.length > 0">
                                   <h2 class="text-center font-weight-bold">ACTUALIZAR EXISTENCIAS</h2>
+                   <div style=" height:300px; overflow-y: scroll;">
 
                     <table  class="table table-bordered table-responsive">
                         <thead class="bg-warning"> 
@@ -667,7 +673,7 @@
                             </tr>
                           </tbody>
                     </table>
-
+</div>
                     <div class="row justify-content-center">
                     <a class="btn btn-sm btn-primary mr-2" href="" @click.prevent="agregarEgresos()">Agregar Transaccion</a>
 
@@ -810,7 +816,7 @@
                   <a class="btn btn-sm btn-success float-left mt-3 ml-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="existenciaEgreso('compra')">Agregar Existencia</a>
                 </div>
               </div>
-              <div class="col-5" style=" height:400px; overflow-y: scroll; border: solid 3px red;">
+              <div class="col-5" style=" height:300px; overflow-y: scroll; border: double 4px red;">
                     <div v-html="datos_transacciones"></div>
                 
               </div>
@@ -818,6 +824,8 @@
 
               <div v-if="modales.modal_devolucion_compra.length > 0">
                 <h2 class="text-center font-weight-bold">ACTUALIZAR EXISTENCIAS</h2>
+                   <div style=" height:300px; overflow-y: scroll;">
+
               <table  class="table table-bordered table-responsive">
                   <thead class="bg-warning"> 
                     <tr class="text-center">
@@ -862,7 +870,7 @@
                       </tr>
                     </tbody>
               </table>
-
+            </div>
               <div class="row justify-content-center">
               <a class="btn btn-sm btn-primary mr-2" href="" @click.prevent="agregarDevolucionCompra()">Agregar Transaccion</a>
               </div>

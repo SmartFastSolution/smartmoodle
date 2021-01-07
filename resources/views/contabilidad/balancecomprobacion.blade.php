@@ -2,11 +2,11 @@
     <h2 class="text-center display-4 font-weight-bold text-danger">Balance de Comprobacion</h2>
     <div class="row p-3  mb-2 justify-content-center ">
         <div class="col-8 mb-3">
-            <input autocomplete="ÑÖcompletes" class="form-control" type="text" v-model="nombre"
+            <input autocomplete="ÑÖcompletes" class="form-control text-center" type="text" v-model="nombre"
                 placeholder="Nombre de la empresa" name="">
         </div>
         <div class="col-5">
-            <input autocomplete="ÑÖcompletes" class="form-control" type="date" v-model="fecha"
+            <input autocomplete="ÑÖcompletes" class="form-control text-center" type="date" v-model="fecha"
                 placeholder="Agrega la fecha" name="">
         </div>
 

@@ -91,12 +91,13 @@
                                     </div>
                                     @if($datos->metodo == 'individual')
 
-                                    <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div class="col-6"
+                                        style=" height:200px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
                                         {!! $transacciones->transacciones !!}
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 mt-2 "
-                                        style=" height:200px; overflow-y: scroll; border: solid 3px red;">
+                                        style=" height:200px; overflow-y: scroll; border: double 8px #E71822;">
                                         @isset ($balancesInicial->transacciones )
                                         {!! $balancesInicial->transacciones !!}
                                         @endisset
@@ -195,7 +196,7 @@
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 mt-2 "
-                                        style=" height:200px; overflow-y: scroll; border: solid 3px red;">
+                                        style=" height:200px; overflow-y: scroll; border: double 8px #E71822;">
                                         @isset ($balancesInicial->transacciones )
                                         {!! $balancesInicial->transacciones !!}
                                         @endisset
@@ -293,7 +294,7 @@
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 mt-2 "
-                                        style=" height:200px; overflow-y: scroll; border: solid 3px red;">
+                                        style=" height:200px; overflow-y: scroll; border: double 8px #E71822;">
                                         @isset ($balancesInicial->transacciones )
                                         {!! $balancesInicial->transacciones !!}
                                         @endisset
@@ -391,7 +392,7 @@
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 mt-2 "
-                                        style=" height:200px; overflow-y: scroll; border: solid 3px red;">
+                                        style=" height:200px; overflow-y: scroll; border: double 8px #E71822;">
                                         @isset ($balancesInicial->transacciones )
                                         {!! $balancesInicial->transacciones !!}
                                         @endisset
@@ -488,7 +489,7 @@
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
                                     <div class="col-6 mt-2 "
-                                        style=" height:200px; overflow-y: scroll; border: solid 3px red;">
+                                        style=" height:200px; overflow-y: scroll; border: double 8px #E71822;">
                                         @isset ($balancesInicial->transacciones )
                                         {!! $balancesInicial->transacciones !!}
                                         @endisset

@@ -1,6 +1,5 @@
 <div id="provision_beneficio">
     <h1 class="text-center text-danger font-weight-bold mt-2">PROVISIÓN DE BENEFICIOS SOCIALES</h1>
-
     <div class="row p-3  mb-2 ">
         <br><br>
         <div class="col-12">
@@ -27,7 +26,6 @@
                         <td class="text-right" align="center" width="125">@{{ decimales(p.f_reserva) }}</td>
                     </tr>
                     <tr>
-
                         <td class="font-weight-bold">TOTALES</td>
                         <td></td>
                         <td class="text-right">@{{ suma.s_valor}}</td>

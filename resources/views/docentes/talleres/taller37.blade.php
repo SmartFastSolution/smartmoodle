@@ -1425,21 +1425,27 @@ const estado_resultado = new Vue({
     let url = '/sistema/admin/docente/estado-obtener-resultado';
         axios.post(url,{
           id: _this.id_taller,
+              user:_this.user_id
+
     }).then(response => {
       if (response.data.datos == true) {
-                _this.nombre                        = response.data.estadoresultado.nombre
-                _this.fecha                         = response.data.estadoresultado.fecha
-                _this.ingresos                      = response.data.ingresos;
-                _this.gastos                        = response.data.gastos;
-                _this.utilidades                    = response.data.utilidades;
-                _this.utilidad                      = response.data.estadoresultado.utilidad;
-                _this.venta                         = response.data.estadoresultado.venta
-                _this.costo_venta                   = response.data.estadoresultado.costo_venta
-                _this.totales.utilidad_bruta_ventas = response.data.estadoresultado.utilidad_bruta_ventas
-                _this.utilidad_bruta.venta          = response.data.estadoresultado.venta
-                _this.utilidad_bruta.costo_venta    = response.data.estadoresultado.costo_venta
-                _this.totales.utilidad_ejercicio    = response.data.estadoresultado.utilidad_neta_o
-                _this.totales.utilidad_liquida      = response.data.estadoresultado.utilidad_liquida
+           _this.nombre                        = response.data.estadoresultado.nombre
+                    _this.fecha                         = response.data.estadoresultado.fecha
+                    _this.ingresos                      = response.data.ingresos;
+                    _this.gastos                        = response.data.gastos;
+                    _this.utilidades                    = response.data.utilidades;
+                    _this.utilidad                      = response.data.estadoresultado.utilidad;
+                    _this.venta                         = response.data.estadoresultado.venta
+                    _this.costo_venta                   = response.data.estadoresultado.costo_venta
+                    _this.totales.utilidad_bruta_ventas = response.data.estadoresultado.utilidad_bruta_ventas
+                    _this.utilidad_bruta.venta          = response.data.estadoresultado.venta
+                    _this.utilidad_bruta.costo_venta    = response.data.estadoresultado.costo_venta
+                    _this.totales.utilidad_ejercicio    = response.data.estadoresultado.utilidad_ejercicio
+                    _this.totales.utilidad_liquida      = response.data.estadoresultado.utilidad_liquida
+                    _this.totales.utilidad_neta_o      = response.data.estadoresultado.utilidad_neta_o
+                    _this.totales.gasto      = response.data.estadoresultado.total_gastos
+                _this.totales.ingreso      = response.data.estadoresultado.total_ingresos
+             
         }          
     }).catch(function(error){
 

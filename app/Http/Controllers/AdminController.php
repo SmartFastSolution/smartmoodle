@@ -1975,7 +1975,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
                     TallerModuloTransaccion::insert($datos);
                     }
           }
-           if (isset($request->balance_horizontal)  ) {
+           if (isset($request->diario_general)  ) {
 
           $diariogeneral                            = new TallerModuloTransaccion;
           $diariogeneral->taller_modulo_contable_id = $e->id;
@@ -1984,6 +1984,23 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
           $diariogeneral->transacciones             = $request->diario_general;
           $diariogeneral->save();
 }
+  if (isset($request->conciliacionbancaria)  ) {
+          $diariogeneral                            = new TallerModuloTransaccion;
+          $diariogeneral->taller_modulo_contable_id = $e->id;
+          $diariogeneral->tipo                      = 'conciliacionbancaria';
+          $diariogeneral->enunciado                 = $request->enunciado;
+          $diariogeneral->transacciones             = $request->conciliacionbancaria;
+          $diariogeneral->save();
+          }
+
+      if (isset($request->arqueocaja)  ) {
+          $diariogeneral                            = new TallerModuloTransaccion;
+          $diariogeneral->taller_modulo_contable_id = $e->id;
+          $diariogeneral->tipo                      = 'arqueocaja';
+          $diariogeneral->enunciado                 = $request->enunciado;
+          $diariogeneral->transacciones             = $request->arqueocaja;
+          $diariogeneral->save();
+}   
        }
         return response(array(                                         //ENVIO DE RESPUESTA
                     'success' => true,

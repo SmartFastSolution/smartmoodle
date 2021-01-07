@@ -336,7 +336,8 @@ class PlanCuenta extends Seeder
       DB::table('pcuentas')->insert([
 				'nombre'     => 'APORTE IESS POR PAGAR 9,45%',
 				'tpcuenta'   => 'pasivos',
-				'porcentual' => false,
+				'porcentual' => true,
+				'porcentaje' => 9.45,
 				'estado' => 'on',
 				'created_at' => now(),
 				'updated_at' => now()
@@ -345,7 +346,8 @@ class PlanCuenta extends Seeder
      DB::table('pcuentas')->insert([
 				'nombre'     => 'APORTES PATRONALES POR PAGAR 11,15%',
 				'tpcuenta'   => 'pasivos',
-				'porcentual' => false,
+				'porcentual' => true,
+				'porcentaje' => 11.15,
 				'estado' => 'on',
 				'created_at' => now(),
 				'updated_at' => now()
@@ -631,7 +633,8 @@ class PlanCuenta extends Seeder
   DB::table('pcuentas')->insert([
 				'nombre'     => 'RESERVA LEGAL 10%',
 				'tpcuenta'   => 'patrimonios',
-				'porcentual' => false,
+				'porcentual' => true,
+				'porcentaje' => 10,
 				'estado' => 'on',
 				'created_at' => now(),
 				'updated_at' => now()
@@ -898,6 +901,14 @@ class PlanCuenta extends Seeder
         ]);
        DB::table('pcuentas')->insert([
 				'nombre'     => 'GASTOS DE ARRIENDO',
+				'tpcuenta'   => 'costos y gastos',
+				'porcentual' => false,
+				'estado' => 'on',
+				'created_at' => now(),
+				'updated_at' => now()
+        ]);
+      	  DB::table('pcuentas')->insert([
+				'nombre'     => 'COSTOS DE VENTAS',
 				'tpcuenta'   => 'costos y gastos',
 				'porcentual' => false,
 				'estado' => 'on',

@@ -90,58 +90,80 @@
                                         {!! $transacciones->transacciones !!}
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
-                                    <div class="col-6 mt-2 "
-                                        style=" height:400px; overflow-y: scroll; border: solid 3px red;">
-                                        <h2 class="text-center  font-weight-bold text-danger">Anexos de Control Interno
-                                        </h2>
-                                        <h3 class="text-center font-weight-bold text-danger">Libro Banco</h3>
+                                    <div class="col-6 mt-2 ">
+                                        <nav>
+                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                <a class="nav-link active" id="nav-conciliacion-tab" data-toggle="tab"
+                                                    href="#nav-conciliacion" role="tab" aria-controls="nav-conciliacion"
+                                                    aria-selected="true">ENUNCIADOS</a>
+                                                <a class="nav-link" id="nav-libro-banco-tab" data-toggle="tab"
+                                                    href="#nav-libro-banco" role="tab" aria-controls="nav-libro-banco"
+                                                    aria-selected="false">LIBRO BANCO</a>
 
-                                        <div class="row p-3  mb-2 justify-content-center ">
-                                            <div class="col-5">
-                                                <h5 class="font-weight-bold">@{{ lb_nombre }}</h5>
+                                            </div>
+                                        </nav>
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="tab-pane fade show active" id="nav-conciliacion" role="tabpanel"
+                                                aria-labelledby="nav-conciliacion-tab"
+                                                style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
+                                                @isset ($conciliacionbancaria->transacciones)
+                                                {!! $conciliacionbancaria->transacciones !!}
+                                                @endisset
+                                            </div>
+                                            <div class="tab-pane fade" id="nav-libro-banco" role="tabpanel"
+                                                aria-labelledby="nav-libro-banco-tab"
+                                                style=" height:300px; overflow-y: scroll; border: double 8px #E71822;  overflow-x: hidden;">
+                                                <h2 class="text-center  font-weight-bold text-danger">Anexos de Control
+                                                    Interno</h2>
+                                                <h3 class="text-center font-weight-bold text-danger">Libro Banco</h3>
+                                                <div class="row p-3  mb-2 justify-content-center ">
+                                                    <div class="col-5">
+                                                        <h5 class="font-weight-bold">@{{ lb_nombre }}</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h5 class="font-weight-bold">@{{ lb_n_banco }}</h5>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5 class="font-weight-bold">@{{ lb_c_banco }}</h5>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <table style="border: hidden"
+                                                    class="table table-bordered table-sm mb-2">
+                                                    <thead style="border: hidden">
+                                                        <tr style="border: hidden" class="text-center bg-dark">
+                                                            <th width="100">Fecha</th>
+                                                            <th width="300">Detalle</th>
+                                                            <th width="50"><i>Ch/</i></th>
+                                                            <th width="90">Debe</th>
+                                                            <th width="90">Haber</th>
+                                                            <th width="100">Saldo</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="border: hidden">
+                                                        <tr style="border: hidden" v-for="(banco, index) in lb_banco">
+                                                            <td align="left">@{{formatoFecha(banco.fecha)}}</td>
+                                                            <td align="left">@{{banco.detalle}}</td>
+                                                            <td align="left">@{{banco.cheque}}</td>
+                                                            <td align="right">@{{decimales(banco.debe)}}</td>
+                                                            <td align="right">@{{decimales(banco.haber)}}</td>
+                                                            <td align="right">@{{decimales(banco.saldo)}}</td>
+                                                        </tr>
+                                                        <tr style="border: hidden" class="bg-secondary">
+                                                            <td class="text-center font-weight-bold">SUMAN</td>
+                                                            <td class="text-left font-weight-bold"></td>
+                                                            <td class="text-left font-weight-bold"></td>
+                                                            <td class="text-right font-weight-bold">@{{ debe_lbanco }}
+                                                            </td>
+                                                            <td class="text-right font-weight-bold">@{{ haber_lbanco }}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col">
-                                                <h5 class="font-weight-bold">@{{ lb_n_banco }}</h5>
-                                            </div>
-                                            <div class="col">
-                                                <h5 class="font-weight-bold">@{{ lb_c_banco }}</h5>
-                                            </div>
-                                        </div>
-                                        <br>
-
-                                        <table style="border: hidden" class="table table-bordered table-sm mb-2">
-                                            <thead style="border: hidden">
-                                                <tr style="border: hidden" class="text-center bg-dark">
-                                                    <th width="100">Fecha</th>
-                                                    <th width="300">Detalle</th>
-                                                    <th width="50"><i>Ch/</i></th>
-                                                    <th width="90">Debe</th>
-                                                    <th width="90">Haber</th>
-                                                    <th width="100">Saldo</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody style="border: hidden" is="draggable" group="people" :list="lb_banco"
-                                                tag="tbody">
-                                                <tr style="border: hidden" v-for="(banco, index) in lb_banco">
-                                                    <td align="left">@{{formatoFecha(banco.fecha)}}</td>
-                                                    <td align="left">@{{banco.detalle}}</td>
-                                                    <td align="left">@{{banco.cheque}}</td>
-                                                    <td align="right">@{{decimales(banco.debe)}}</td>
-                                                    <td align="right">@{{decimales(banco.haber)}}</td>
-                                                    <td align="right">@{{decimales(banco.saldo)}}</td>
-                                                </tr>
-                                                <tr style="border: hidden" class="bg-secondary">
-                                                    <td class="text-center font-weight-bold">SUMAN</td>
-                                                    <td class="text-left font-weight-bold"></td>
-                                                    <td class="text-left font-weight-bold"></td>
-                                                    <td class="text-right font-weight-bold">@{{ debe_lbanco }}</td>
-                                                    <td class="text-right font-weight-bold">@{{ haber_lbanco }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
 
                                     </div>
                                     @endif
@@ -229,60 +251,84 @@
                                         {!! $transacciones->transacciones !!}
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
-                                    <div class="col-6 mt-2 "
-                                        style=" height:400px; overflow-y: scroll; border: solid 3px red;">
-                                        <h2 class="text-center  font-weight-bold text-danger">Anexos de Control Interno
-                                        </h2>
-                                        <h3 class="text-center font-weight-bold text-danger">Libro Banco</h3>
+                                    <div class="col-6 mt-2 ">
+                                        <nav>
+                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                <a class="nav-link active" id="nav-conciliacion1-tab" data-toggle="tab"
+                                                    href="#nav-conciliacion1" role="tab"
+                                                    aria-controls="nav-conciliacion1"
+                                                    aria-selected="true">ENUNCIADOS</a>
+                                                <a class="nav-link" id="nav-libro-banco1-tab" data-toggle="tab"
+                                                    href="#nav-libro-banco1" role="tab" aria-controls="nav-libro-banco1"
+                                                    aria-selected="false">LIBRO BANCO</a>
 
-                                        <div class="row p-3  mb-2 justify-content-center ">
-                                            <div class="col-5">
-                                                <h5 class="font-weight-bold">@{{ lb_nombre }}</h5>
+                                            </div>
+                                        </nav>
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="tab-pane fade show active" id="nav-conciliacion1"
+                                                role="tabpanel" aria-labelledby="nav-conciliacion1-tab"
+                                                style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
+                                                @isset ($conciliacionbancaria->transacciones)
+                                                {!! $conciliacionbancaria->transacciones !!}
+                                                @endisset
+                                            </div>
+                                            <div class="tab-pane fade" id="nav-libro-banco1" role="tabpanel"
+                                                aria-labelledby="nav-libro-banco1-tab"
+                                                style=" height:300px; overflow-y: scroll; border: double 8px #E71822;  overflow-x: hidden;">
+                                                <h2 class="text-center  font-weight-bold text-danger">Anexos de Control
+                                                    Interno</h2>
+                                                <h3 class="text-center font-weight-bold text-danger">Libro Banco</h3>
+                                                <div class="row p-3  mb-2 justify-content-center ">
+                                                    <div class="col-5">
+                                                        <h5 class="font-weight-bold">@{{ lb_nombre }}</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h5 class="font-weight-bold">@{{ lb_n_banco }}</h5>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5 class="font-weight-bold">@{{ lb_c_banco }}</h5>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <table style="border: hidden"
+                                                    class="table table-bordered table-sm mb-2">
+                                                    <thead style="border: hidden">
+                                                        <tr style="border: hidden" class="text-center bg-dark">
+                                                            <th width="100">Fecha</th>
+                                                            <th width="300">Detalle</th>
+                                                            <th width="50"><i>Ch/</i></th>
+                                                            <th width="90">Debe</th>
+                                                            <th width="90">Haber</th>
+                                                            <th width="100">Saldo</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="border: hidden">
+                                                        <tr style="border: hidden" v-for="(banco, index) in lb_banco">
+                                                            <td align="left">@{{formatoFecha(banco.fecha)}}</td>
+                                                            <td align="left">@{{banco.detalle}}</td>
+                                                            <td align="left">@{{banco.cheque}}</td>
+                                                            <td align="right">@{{decimales(banco.debe)}}</td>
+                                                            <td align="right">@{{decimales(banco.haber)}}</td>
+                                                            <td align="right">@{{decimales(banco.saldo)}}</td>
+                                                        </tr>
+                                                        <tr style="border: hidden" class="bg-secondary">
+                                                            <td class="text-center font-weight-bold">SUMAN</td>
+                                                            <td class="text-left font-weight-bold"></td>
+                                                            <td class="text-left font-weight-bold"></td>
+                                                            <td class="text-right font-weight-bold">@{{ debe_lbanco }}
+                                                            </td>
+                                                            <td class="text-right font-weight-bold">@{{ haber_lbanco }}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col">
-                                                <h5 class="font-weight-bold">@{{ lb_n_banco }}</h5>
-                                            </div>
-                                            <div class="col">
-                                                <h5 class="font-weight-bold">@{{ lb_c_banco }}</h5>
-                                            </div>
-                                        </div>
-                                        <br>
-
-                                        <table style="border: hidden" class="table table-bordered table-sm mb-2">
-                                            <thead style="border: hidden">
-                                                <tr style="border: hidden" class="text-center bg-dark">
-                                                    <th width="100">Fecha</th>
-                                                    <th width="300">Detalle</th>
-                                                    <th width="50"><i>Ch/</i></th>
-                                                    <th width="90">Debe</th>
-                                                    <th width="90">Haber</th>
-                                                    <th width="100">Saldo</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody style="border: hidden" is="draggable" group="people" :list="lb_banco"
-                                                tag="tbody">
-                                                <tr style="border: hidden" v-for="(banco, index) in lb_banco">
-                                                    <td align="left">@{{formatoFecha(banco.fecha)}}</td>
-                                                    <td align="left">@{{banco.detalle}}</td>
-                                                    <td align="left">@{{banco.cheque}}</td>
-                                                    <td align="right">@{{decimales(banco.debe)}}</td>
-                                                    <td align="right">@{{decimales(banco.haber)}}</td>
-                                                    <td align="right">@{{decimales(banco.saldo)}}</td>
-                                                </tr>
-                                                <tr style="border: hidden" class="bg-secondary">
-                                                    <td class="text-center font-weight-bold">SUMAN</td>
-                                                    <td class="text-left font-weight-bold"></td>
-                                                    <td class="text-left font-weight-bold"></td>
-                                                    <td class="text-right font-weight-bold">@{{ debe_lbanco }}</td>
-                                                    <td class="text-right font-weight-bold">@{{ haber_lbanco }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                    </div> @endif
+                                    </div>
+                                    @endif
 
                                     <div class="col-12 mt-2 p-2" style=" height:300px; overflow-y: scroll;">
                                         <h2 class="text-center">DÉBITOS</h2>
@@ -369,60 +415,84 @@
                                         {!! $transacciones->transacciones !!}
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
-                                    <div class="col-6 mt-2 "
-                                        style=" height:400px; overflow-y: scroll; border: solid 3px red;">
-                                        <h2 class="text-center  font-weight-bold text-danger">Anexos de Control Interno
-                                        </h2>
-                                        <h3 class="text-center font-weight-bold text-danger">Libro Banco</h3>
+                                    <div class="col-6 mt-2 ">
+                                        <nav>
+                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                <a class="nav-link active" id="nav-conciliacion2-tab" data-toggle="tab"
+                                                    href="#nav-conciliacion2" role="tab"
+                                                    aria-controls="nav-conciliacion2"
+                                                    aria-selected="true">ENUNCIADOS</a>
+                                                <a class="nav-link" id="nav-libro-banco2-tab" data-toggle="tab"
+                                                    href="#nav-libro-banco2" role="tab" aria-controls="nav-libro-banco2"
+                                                    aria-selected="false">LIBRO BANCO</a>
 
-                                        <div class="row p-3  mb-2 justify-content-center ">
-                                            <div class="col-5">
-                                                <h5 class="font-weight-bold">@{{ lb_nombre }}</h5>
+                                            </div>
+                                        </nav>
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="tab-pane fade show active" id="nav-conciliacion2"
+                                                role="tabpanel" aria-labelledby="nav-conciliacion2-tab"
+                                                style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
+                                                @isset ($conciliacionbancaria->transacciones)
+                                                {!! $conciliacionbancaria->transacciones !!}
+                                                @endisset
+                                            </div>
+                                            <div class="tab-pane fade" id="nav-libro-banco2" role="tabpanel"
+                                                aria-labelledby="nav-libro-banco2-tab"
+                                                style=" height:300px; overflow-y: scroll; border: double 8px #E71822;  overflow-x: hidden;">
+                                                <h2 class="text-center  font-weight-bold text-danger">Anexos de Control
+                                                    Interno</h2>
+                                                <h3 class="text-center font-weight-bold text-danger">Libro Banco</h3>
+                                                <div class="row p-3  mb-2 justify-content-center ">
+                                                    <div class="col-5">
+                                                        <h5 class="font-weight-bold">@{{ lb_nombre }}</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h5 class="font-weight-bold">@{{ lb_n_banco }}</h5>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5 class="font-weight-bold">@{{ lb_c_banco }}</h5>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <table style="border: hidden"
+                                                    class="table table-bordered table-sm mb-2">
+                                                    <thead style="border: hidden">
+                                                        <tr style="border: hidden" class="text-center bg-dark">
+                                                            <th width="100">Fecha</th>
+                                                            <th width="300">Detalle</th>
+                                                            <th width="50"><i>Ch/</i></th>
+                                                            <th width="90">Debe</th>
+                                                            <th width="90">Haber</th>
+                                                            <th width="100">Saldo</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="border: hidden">
+                                                        <tr style="border: hidden" v-for="(banco, index) in lb_banco">
+                                                            <td align="left">@{{formatoFecha(banco.fecha)}}</td>
+                                                            <td align="left">@{{banco.detalle}}</td>
+                                                            <td align="left">@{{banco.cheque}}</td>
+                                                            <td align="right">@{{decimales(banco.debe)}}</td>
+                                                            <td align="right">@{{decimales(banco.haber)}}</td>
+                                                            <td align="right">@{{decimales(banco.saldo)}}</td>
+                                                        </tr>
+                                                        <tr style="border: hidden" class="bg-secondary">
+                                                            <td class="text-center font-weight-bold">SUMAN</td>
+                                                            <td class="text-left font-weight-bold"></td>
+                                                            <td class="text-left font-weight-bold"></td>
+                                                            <td class="text-right font-weight-bold">@{{ debe_lbanco }}
+                                                            </td>
+                                                            <td class="text-right font-weight-bold">@{{ haber_lbanco }}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col">
-                                                <h5 class="font-weight-bold">@{{ lb_n_banco }}</h5>
-                                            </div>
-                                            <div class="col">
-                                                <h5 class="font-weight-bold">@{{ lb_c_banco }}</h5>
-                                            </div>
-                                        </div>
-                                        <br>
-
-                                        <table style="border: hidden" class="table table-bordered table-sm mb-2">
-                                            <thead style="border: hidden">
-                                                <tr style="border: hidden" class="text-center bg-dark">
-                                                    <th width="100">Fecha</th>
-                                                    <th width="300">Detalle</th>
-                                                    <th width="50"><i>Ch/</i></th>
-                                                    <th width="90">Debe</th>
-                                                    <th width="90">Haber</th>
-                                                    <th width="100">Saldo</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody style="border: hidden" is="draggable" group="people" :list="lb_banco"
-                                                tag="tbody">
-                                                <tr style="border: hidden" v-for="(banco, index) in lb_banco">
-                                                    <td align="left">@{{formatoFecha(banco.fecha)}}</td>
-                                                    <td align="left">@{{banco.detalle}}</td>
-                                                    <td align="left">@{{banco.cheque}}</td>
-                                                    <td align="right">@{{decimales(banco.debe)}}</td>
-                                                    <td align="right">@{{decimales(banco.haber)}}</td>
-                                                    <td align="right">@{{decimales(banco.saldo)}}</td>
-                                                </tr>
-                                                <tr style="border: hidden" class="bg-secondary">
-                                                    <td class="text-center font-weight-bold">SUMAN</td>
-                                                    <td class="text-left font-weight-bold"></td>
-                                                    <td class="text-left font-weight-bold"></td>
-                                                    <td class="text-right font-weight-bold">@{{ debe_lbanco }}</td>
-                                                    <td class="text-right font-weight-bold">@{{ haber_lbanco }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                    </div> @endif
+                                    </div>
+                                    @endif
                                     <div class="col-12 mt-2 p-2" style=" height:300px; overflow-y: scroll;">
                                         <h2 class="text-center">CRÉDITOS</h2>
                                         <div class="row justify-content-around mb-2">
@@ -507,60 +577,84 @@
                                         {!! $transacciones->transacciones !!}
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
-                                    <div class="col-6 mt-2 "
-                                        style=" height:400px; overflow-y: scroll; border: solid 3px red;">
-                                        <h2 class="text-center  font-weight-bold text-danger">Anexos de Control Interno
-                                        </h2>
-                                        <h3 class="text-center font-weight-bold text-danger">Libro Banco</h3>
+                                    <div class="col-6 mt-2 ">
+                                        <nav>
+                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                <a class="nav-link active" id="nav-conciliacion3-tab" data-toggle="tab"
+                                                    href="#nav-conciliacion3" role="tab"
+                                                    aria-controls="nav-conciliacion3"
+                                                    aria-selected="true">ENUNCIADOS</a>
+                                                <a class="nav-link" id="nav-libro-banco3-tab" data-toggle="tab"
+                                                    href="#nav-libro-banco3" role="tab" aria-controls="nav-libro-banco3"
+                                                    aria-selected="false">LIBRO BANCO</a>
 
-                                        <div class="row p-3  mb-2 justify-content-center ">
-                                            <div class="col-5">
-                                                <h5 class="font-weight-bold">@{{ lb_nombre }}</h5>
+                                            </div>
+                                        </nav>
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="tab-pane fade show active" id="nav-conciliacion3"
+                                                role="tabpanel" aria-labelledby="nav-conciliacion3-tab"
+                                                style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
+                                                @isset ($conciliacionbancaria->transacciones)
+                                                {!! $conciliacionbancaria->transacciones !!}
+                                                @endisset
+                                            </div>
+                                            <div class="tab-pane fade" id="nav-libro-banco3" role="tabpanel"
+                                                aria-labelledby="nav-libro-banco3-tab"
+                                                style=" height:300px; overflow-y: scroll; border: double 8px #E71822;  overflow-x: hidden;">
+                                                <h2 class="text-center  font-weight-bold text-danger">Anexos de Control
+                                                    Interno</h2>
+                                                <h3 class="text-center font-weight-bold text-danger">Libro Banco</h3>
+                                                <div class="row p-3  mb-2 justify-content-center ">
+                                                    <div class="col-5">
+                                                        <h5 class="font-weight-bold">@{{ lb_nombre }}</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h5 class="font-weight-bold">@{{ lb_n_banco }}</h5>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5 class="font-weight-bold">@{{ lb_c_banco }}</h5>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <table style="border: hidden"
+                                                    class="table table-bordered table-sm mb-2">
+                                                    <thead style="border: hidden">
+                                                        <tr style="border: hidden" class="text-center bg-dark">
+                                                            <th width="100">Fecha</th>
+                                                            <th width="300">Detalle</th>
+                                                            <th width="50"><i>Ch/</i></th>
+                                                            <th width="90">Debe</th>
+                                                            <th width="90">Haber</th>
+                                                            <th width="100">Saldo</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="border: hidden">
+                                                        <tr style="border: hidden" v-for="(banco, index) in lb_banco">
+                                                            <td align="left">@{{formatoFecha(banco.fecha)}}</td>
+                                                            <td align="left">@{{banco.detalle}}</td>
+                                                            <td align="left">@{{banco.cheque}}</td>
+                                                            <td align="right">@{{decimales(banco.debe)}}</td>
+                                                            <td align="right">@{{decimales(banco.haber)}}</td>
+                                                            <td align="right">@{{decimales(banco.saldo)}}</td>
+                                                        </tr>
+                                                        <tr style="border: hidden" class="bg-secondary">
+                                                            <td class="text-center font-weight-bold">SUMAN</td>
+                                                            <td class="text-left font-weight-bold"></td>
+                                                            <td class="text-left font-weight-bold"></td>
+                                                            <td class="text-right font-weight-bold">@{{ debe_lbanco }}
+                                                            </td>
+                                                            <td class="text-right font-weight-bold">@{{ haber_lbanco }}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
 
-                                        <div class="row">
-                                            <div class="col">
-                                                <h5 class="font-weight-bold">@{{ lb_n_banco }}</h5>
-                                            </div>
-                                            <div class="col">
-                                                <h5 class="font-weight-bold">@{{ lb_c_banco }}</h5>
-                                            </div>
-                                        </div>
-                                        <br>
-
-                                        <table style="border: hidden" class="table table-bordered table-sm mb-2">
-                                            <thead style="border: hidden">
-                                                <tr style="border: hidden" class="text-center bg-dark">
-                                                    <th width="100">Fecha</th>
-                                                    <th width="300">Detalle</th>
-                                                    <th width="50"><i>Ch/</i></th>
-                                                    <th width="90">Debe</th>
-                                                    <th width="90">Haber</th>
-                                                    <th width="100">Saldo</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody style="border: hidden" is="draggable" group="people" :list="lb_banco"
-                                                tag="tbody">
-                                                <tr style="border: hidden" v-for="(banco, index) in lb_banco">
-                                                    <td align="left">@{{formatoFecha(banco.fecha)}}</td>
-                                                    <td align="left">@{{banco.detalle}}</td>
-                                                    <td align="left">@{{banco.cheque}}</td>
-                                                    <td align="right">@{{decimales(banco.debe)}}</td>
-                                                    <td align="right">@{{decimales(banco.haber)}}</td>
-                                                    <td align="right">@{{decimales(banco.saldo)}}</td>
-                                                </tr>
-                                                <tr style="border: hidden" class="bg-secondary">
-                                                    <td class="text-center font-weight-bold">SUMAN</td>
-                                                    <td class="text-left font-weight-bold"></td>
-                                                    <td class="text-left font-weight-bold"></td>
-                                                    <td class="text-right font-weight-bold">@{{ debe_lbanco }}</td>
-                                                    <td class="text-right font-weight-bold">@{{ haber_lbanco }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-
-                                    </div> @endif
+                                    </div>
+                                    @endif
 
                                     <div class="col-12 mt-2 p-2" style=" height:300px; overflow-y: scroll;">
                                         <h2 class="text-center">CHEQUES</h2>

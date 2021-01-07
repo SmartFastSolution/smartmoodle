@@ -501,6 +501,10 @@
 
                 <a class="list-group-item list-group-item-action" id="list-diario-general-list" data-toggle="list" href="#list-diario-general" role="tab" aria-controls="diario-general">Diario General</a>
 
+                <a class="list-group-item list-group-item-action" id="list-arqueo-caja-list" data-toggle="list" href="#list-arqueo-caja" role="tab" aria-controls="arqueo-caja">Arqueo Caja</a>
+
+                <a class="list-group-item list-group-item-action" id="list-conciliacion-bancaria-list" data-toggle="list" href="#list-conciliacion-bancaria" role="tab" aria-controls="conciliacion-bancaria">Consiliacion bancaria</a>
+
      {{--            <a class="list-group-item list-group-item-action" id="list-mayor-general-list" data-toggle="list" href="#list-mayor-general" role="tab" aria-controls="mayor-general">Mayor General</a>
                 <a class="list-group-item list-group-item-action" id="list-balance-comprobacion-list" data-toggle="list" href="#list-balance-comprobacion" role="tab" aria-controls="balance-comprobacion">Balance de Comprobacion</a>
               <a class="list-group-item list-group-item-action" id="list-hoja-trabajo-list" data-toggle="list" href="#list-hoja-trabajo" role="tab" aria-controls="hoja-trabajo">Hoja de trabajo</a>
@@ -575,13 +579,31 @@
                             </div>
                           </div>
                       </div>
-                      <div class="tab-pane fade" id="list-mayor-general" role="tabpanel" aria-labelledby="list-mayor-general-list">
-                          Mayor General
+                      <div class="tab-pane fade" id="list-conciliacion-bancaria" role="tabpanel" aria-labelledby="list-conciliacion-bancaria-list">
+                        <h2 class="text-center font-weight-bold text-danger">CONCILIACION BANCARIA</h2>
+                            <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-12 mb-2">
+                                  <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+                                  <vue-ckeditor v-model="concatenados.conciliacionbancaria" :config="config"/>
+                                </div>
+                                
+                            </div>
+                          </div>
                       </div>
-                    <div class="tab-pane fade" id="list-balance-comprobacion" role="tabpanel" aria-labelledby="list-balance-comprobacion-list">
-                          Balance comprobacion
+                    <div class="tab-pane fade" id="list-arqueo-caja" role="tabpanel" aria-labelledby="list-arqueo-caja-list">
+                          <h2 class="text-center font-weight-bold text-danger">ARQUEO CAJA</h2>
+                            <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-12 mb-2">
+                                  <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>                                 
+                                  <vue-ckeditor v-model="concatenados.arqueocaja" :config="config"/>                              
+                                </div>
+                                
+                            </div>
+                          </div>
                       </div>
-                       <div class="tab-pane fade" id="list-hoja-trabajo" role="tabpanel" aria-labelledby="list-hoja-trabajo-list">
+           {{--             <div class="tab-pane fade" id="list-hoja-trabajo" role="tabpanel" aria-labelledby="list-hoja-trabajo-list">
                         Hoja de trabajo
                       </div>
                        <div class="tab-pane fade" id="list-balance-comprobacion-ajustado" role="tabpanel" aria-labelledby="list-balance-comprobacion-ajustado-list">
@@ -598,7 +620,7 @@
                       </div>
                       <div class="tab-pane fade" id="list-anexos" role="tabpanel" aria-labelledby="list-anexos-list">
                        Anexos
-                      </div>
+                      </div> --}}
                     </div>
                   </div>
                 </div>
@@ -688,6 +710,8 @@
           kardex_fifos:[],
           balance_horizontal:'',
           diario_general:'',
+          conciliacionbancaria:'',
+          arqueocaja:'',
         },
         kardex_promedios:[],
         kardex_promedio:{
@@ -1442,6 +1466,8 @@
                   productos: set.concatenados.kardex_fifos,
                   balance_horizontal: set.concatenados.balance_horizontal,
                   diario_general: set.concatenados.diario_general,
+                  conciliacionbancaria: set.concatenados.conciliacionbancaria,
+                  arqueocaja: set.concatenados.arqueocaja,
                   productos: set.concatenados.kardex_fifos,
                   contenido_id: set.contenido_id,
                   modulos:set.value,
