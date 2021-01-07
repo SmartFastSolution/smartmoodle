@@ -12925,6 +12925,7 @@ const conciliacionb = new Vue({
               });
               this.c_saldos   = response.data.saldo;
               this.c_debitos  = response.data.debito;
+              this.c_depositos  = response.data.deposito;
               this.c_creditos = response.data.credito;
               this.c_cheques  = response.data.cheque;
               this.nombre     = response.data.nombre;

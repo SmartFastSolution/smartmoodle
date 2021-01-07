@@ -2070,7 +2070,6 @@ class TallerContabilidadController extends Controller
 
 
 
-
         public function AnexoCaja(Request $request)
         {
             $user_id = Auth::id();
@@ -2509,7 +2508,6 @@ class TallerContabilidadController extends Controller
                                 'saldo'          =>$s['saldo'],
                                 'created_at'        => now(),
                                 'updated_at'        => now(),
-                
                             );
                             Conciliacioncredito::insert($datos);
                         }
@@ -2540,6 +2538,7 @@ class TallerContabilidadController extends Controller
                     $cb->fecha      = $fecha;
                     $cb->n_banco    = $n_banco;
                     $cb->saldo_c    = $request->saldo_c;
+                    $cb->saldo_deposito    = $request->saldo_depositos;
                     $cb->saldo_ch   = $request->saldo_ch;
                     $cb->saldo_d    = $request->saldo_d;
                     $cb->total      = $request->total;
@@ -2550,6 +2549,12 @@ class TallerContabilidadController extends Controller
                         $ids[]=$i->id;
                     }
                     $deteletesaldo = Conciliacionsaldo::destroy($ids);
+
+                    $cbde = Conciliaciondeposito::where('conciliacionbancaria_id',$cb->id)->get();
+                    foreach($cbde as $i){
+                        $ids[]=$i->id;
+                    }
+                    $deteletedeposito = Conciliaciondeposito::destroy($ids);
 
                     $cbd = Conciliaciondebito::where('conciliacionbancaria_id',$cb->id)->get();
                     foreach($cbd as $i){
@@ -2666,7 +2671,7 @@ class TallerContabilidadController extends Controller
                 'debito'  => $debito, 
                 'credito' => $credito, 
                 'cheque'  => $cheque, 
-                'deposito'  => $deposito, 
+                'deposito'=> $deposito, 
                 'nombre'  => $a->nombre,
                 'fecha'   => $a->fecha,
                 'n_banco' => $a->n_banco,
