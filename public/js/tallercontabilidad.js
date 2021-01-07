@@ -113,6 +113,7 @@ const b_hori = new Vue({
         },
         patrimonio:{ //Asignar Patrimonio
           nom_cuenta:'',
+          cuenta_id:'',
           saldo:'',
         },
         //diarios2:[],
@@ -144,12 +145,14 @@ const b_hori = new Vue({
           a_corriente:
             { //Agregar un nuevo activo corriente al array
                 nom_cuenta:'',
+                cuenta_id:'',
                 saldo:'', 
                 edit:false,             
               },
           a_nocorriente:
             { //Agregar un nuevo activo no corriente al array
                 nom_cuenta:'',
+                cuenta_id:'',
                 saldo:'',
                 edit:false,
               },
@@ -161,6 +164,7 @@ const b_hori = new Vue({
           p_corriente:
             { //Agregar un nuevo pasivo corriente al array
                 nom_cuenta:'',
+                cuenta_id:'',
                 saldo:'',
                 edit:false,
                 total:''
@@ -168,6 +172,7 @@ const b_hori = new Vue({
           p_nocorriente:
             { //Agregar un nuevo pasivo no corriente al array
                 nom_cuenta:'',
+                cuenta_id:'',
                 saldo:'',
                 edit:false,
                 total:''
@@ -1360,6 +1365,7 @@ const b_ver = new Vue({
         },
         patrimonio:{ //Asignar Patrimonio
           nom_cuenta:'',
+          cuenta_id:'',
           saldo:'',
         },
         bi:{const_id:''},
@@ -1394,12 +1400,14 @@ const b_ver = new Vue({
           a_corriente:
             { //Agregar un nuevo activo corriente al array
                 nom_cuenta:'',
+                cuenta_id:'',
                 saldo:'', 
                 edit:false,             
               },
           a_nocorriente:
             { //Agregar un nuevo activo no corriente al array
                 nom_cuenta:'',
+                cuenta_id:'',
                 saldo:'',
                 edit:false,
               },
@@ -1408,6 +1416,7 @@ const b_ver = new Vue({
           p_corriente:
             { //Agregar un nuevo pasivo corriente al array
                 nom_cuenta:'',
+                cuenta_id:'',
                 saldo:'',
                 edit:false,
                 total:''
@@ -1415,6 +1424,7 @@ const b_ver = new Vue({
           p_nocorriente:
             { //Agregar un nuevo pasivo no corriente al array
                 nom_cuenta:'',
+                cuenta_id:'',
                 saldo:'',
                 edit:false,
                 total:''
@@ -2914,12 +2924,26 @@ transacciones:'',
     },
   deleteHaber(index){
       this.diarios.haber.splice(index, 1);
-      this.limpiar();
+      this.diario.debe.fecha ='';
+      this.diario.debe.nom_cuenta ='';
+      this.diario.debe.saldo ='';
+      this.diario.debe.edit =false;
+      this.diario.haber.fecha ='';
+      this.diario.haber.nom_cuenta ='';
+      this.diario.haber.saldo ='';
+      this.diario.haber.edit =false;
 
     },
   deleteDebe(index){
       this.diarios.debe.splice(index, 1);
-      this.limpiar();
+      this.diario.debe.fecha ='';
+      this.diario.debe.nom_cuenta ='';
+      this.diario.debe.saldo ='';
+      this.diario.debe.edit =false;
+      this.diario.haber.fecha ='';
+      this.diario.haber.nom_cuenta ='';
+      this.diario.haber.saldo ='';
+      this.diario.haber.edit =false;
 
     },
     guardarRegistro(){
@@ -7217,12 +7241,26 @@ const asientos_cierre = new Vue({
     },
     deleteHaber(index){
         this.diarios.haber.splice(index, 1);
-      this.limpiar();
+        this.diario.debe.fecha ='';
+        this.diario.debe.nom_cuenta ='';
+        this.diario.debe.saldo ='';
+        this.diario.debe.edit =false;
+        this.diario.haber.fecha ='';
+        this.diario.haber.nom_cuenta ='';
+        this.diario.haber.saldo ='';
+        this.diario.haber.edit =false;
 
       },
     deleteDebe(index){
         this.diarios.debe.splice(index, 1);
-      this.limpiar();
+        this.diario.debe.fecha ='';
+        this.diario.debe.nom_cuenta ='';
+        this.diario.debe.saldo ='';
+        this.diario.debe.edit =false;
+        this.diario.haber.fecha ='';
+        this.diario.haber.nom_cuenta ='';
+        this.diario.haber.saldo ='';
+        this.diario.haber.edit =false;
 
       },
     guardarRegistro(){
