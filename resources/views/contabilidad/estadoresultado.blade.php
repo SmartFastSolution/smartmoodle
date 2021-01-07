@@ -2,9 +2,9 @@
     <h2 class="text-center display-4 font-weight-bold text-danger">Estado de Resultado</h2>
     <div class="row p-3  mb-2 justify-content-center ">
         <div class="col-5 mb-3">
-            <input autocomplete="ÑÖcompletes" class="form-control" type="text" v-model="nombre"
+            <input autocomplete="ÑÖcompletes" class="form-control text-center" type="text" v-model="nombre"
                 placeholder="Nombre de la empresa" name=""><br>
-            <input autocomplete="ÑÖcompletes" type="date" v-model="fecha" class="form-control">
+            <input autocomplete="ÑÖcompletes" type="date" v-model="fecha" class="form-control text-center">
         </div>
 
     </div>
@@ -127,7 +127,9 @@
 
           <div class="mt-2 row justify-content-between" v-if="utilidad == 'utilidad_neta'">
                   <div class="col-8">
-                      <a href="" class="btn btn-danger btn-sm" @click.prevent="mostrarUtilidades()">Distribuir Utilidades</a>
+                      <a href="" class="btn btn-danger btn-sm mr-2" @click.prevent="mostrarUtilidades()">Distribuir Utilidades</a>
+            <a class="btn btn-dark  btn-sm " href="" @click.prevent="calculadora()">CALCULADORA</a>
+
                   </div>
 
                   <div v-if="utilida.create" class="col-12 mt-2">

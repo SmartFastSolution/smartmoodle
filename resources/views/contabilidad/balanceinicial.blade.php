@@ -45,11 +45,11 @@
             <h2 align="center">Balance Inicial</h2>
         </div>
         <div class="col-8 mb-3">
-            <input autocomplete="ÑÖcompletes" class="form-control" type="text" v-model="balance_inicial.nombre"
+            <input autocomplete="ÑÖcompletes" class="form-control text-center" type="text" v-model="balance_inicial.nombre"
                 placeholder="Nombre de la empresa" name="">
         </div>
         <div class="col-5">
-            <input autocomplete="ÑÖcompletes" class="form-control" type="date" v-model="balance_inicial.fecha"
+            <input autocomplete="ÑÖcompletes" class="form-control text-center" type="date" v-model="balance_inicial.fecha"
                 placeholder="Agrega la fecha" name="">
         </div>
 
@@ -286,12 +286,12 @@
             <h2 align="center">Balance Inicial</h2>
         </div>
         <div class="col-8 mb-3">
-            <input autocomplete="ÑÖcompletes" class="form-control" type="text" v-model="balance_inicial.nombre"
+            <input autocomplete="ÑÖcompletes" class="form-control text-center" type="text" v-model="balance_inicial.nombre"
                 placeholder="Nombre de la empresa" name="">
         </div>
 
         <div class="col-5">
-            <input autocomplete="ÑÖcompletes" class="form-control" type="date" v-model="balance_inicial.fecha"
+            <input autocomplete="ÑÖcompletes" class="form-control text-center" type="date" v-model="balance_inicial.fecha"
                 placeholder="Agrega la fecha" name="">
         </div>
     </div>

@@ -18,7 +18,7 @@
             <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
                 
                 <div class="row justify-content-center">
-                    <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
+                    <div class="col-6 ">
                         <h2 class="text-center">AGREGAR MOVIMIENTOS</h2>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label">Selecciona la Cuenta</label>
@@ -95,11 +95,11 @@
                         </div>
                     </div>
                     @if($datos->metodo == 'individual')
-                     <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                     <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
                         {!! $transacciones->transacciones !!}
                      </div>
                     @elseif($datos->metodo == 'concatenado')
-                                <div class="col-6" style=" height:300px; overflow-y: scroll;">
+                                <div class="col-6" style=" height:300px; overflow-y: scroll; border: double 8px #E71822;">
                         <h3 class="text-center font-weight-bold">Datos para realizar el Mayor General</h3>
                         <h3 class="text-center">Diario General</h3>
                         <table class="table table-bordered table-sm">
@@ -206,9 +206,9 @@
                         </div>
                     </div>
                     @endif
-                    <div class="col-12 mt-2" v-if="mayores.registros.length > 0 || mayores.cierres.length > 0" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                    <div class="col-12 mt-2" v-if="mayores.registros.length > 0 || mayores.cierres.length > 0" >
                         <h2 class="text-center">ACTUALIZAR REGISTROS</h2>
-
+                        <div style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
                         <table class="table table-bordered table-sm">
                             <thead class="thead-dark">
                                 <tr align="center">
@@ -227,7 +227,7 @@
                                             class=" form-control-plaintext text-right" type="date" v-model="diar.fecha">
                                     </td>
                                     <td align="center" width="200"><input autocomplete="ÑÖcompletes"
-                                            class=" form-control-plaintext text-right" type="text"
+                                            class=" form-control-plaintext text-left" type="text"
                                             v-model="diar.detalle"></td>
                                     <td class="text-right"><input autocomplete="ÑÖcompletes"
                                             class=" form-control-plaintext text-right" type="number"
@@ -253,7 +253,7 @@
                                             class=" form-control-plaintext text-right" type="date" v-model="diar.fecha">
                                     </td>
                                     <td align="center" width="200"><input autocomplete="ÑÖcompletes"
-                                            class=" form-control-plaintext text-right" type="text"
+                                            class=" form-control-plaintext text-left" type="text"
                                             v-model="diar.detalle"></td>
                                     <td class="text-right"><input autocomplete="ÑÖcompletes"
                                             class=" form-control-plaintext text-right" type="number"
@@ -273,6 +273,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
                         <div class="row justify-content-around mb-2">
 
                             <a v-if="update" href="#" class="addDiario btn btn-success"

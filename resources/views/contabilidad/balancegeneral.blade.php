@@ -2,9 +2,9 @@
     <h2 class="text-center display-4 font-weight-bold text-danger">Balance General</h2>
     <div class="row p-3 justify-content-center ">
         <div class="col-5 mb-3">
-            <input autocomplete="ÑÖcompletes" class="form-control" type="text" v-model="balance_general.nombre"
+            <input autocomplete="ÑÖcompletes" class="form-control text-center" type="text" v-model="balance_general.nombre"
                 placeholder="Nombre de la empresa" name=""><br>
-            <input autocomplete="ÑÖcompletes" type="date" v-model="balance_general.fecha" class="form-control">
+            <input autocomplete="ÑÖcompletes" type="date" v-model="balance_general.fecha" class="form-control text-center">
         </div>
 
     </div>
@@ -206,7 +206,7 @@
                 <tr>
                     <td class="font-weight-bold" style="font-size: 20px;" width="750">TOT. PAS. Y PATRI.</td>
                     <td><input autocomplete="ÑÖcompletes" type="number"
-                            v-model="total_balance_inicial.t_patrimonio_pasivo" class="form-control"></td>
+                            v-model="total_balance_inicial.t_patrimonio_pasivo" class="form-control text-right"></td>
                 </tr>
             </tbody>
         </table>

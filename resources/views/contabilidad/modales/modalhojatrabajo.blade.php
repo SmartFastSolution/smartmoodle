@@ -19,11 +19,11 @@
                     <h1 class="text-center font-weight-bold mt-2">Datos para elaborar hoja de trabajo</h1>
 
                     @if($datos->metodo == 'individual')
-                     <div class="col-12" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                     <div class="col-12" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;" >
                         {!! $transacciones->transacciones !!}
                      </div>
                     @elseif($datos->metodo == 'concatenado')
-                    <div class="col-12">
+                    <div class="col-12" style="border: double 8px #E71822;">
                         <ul class="nav nav-tabs" id="datosHoja" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link active" id="ht-balance-comprobacion-tab" data-toggle="tab"
@@ -62,16 +62,16 @@
                                             <td align="center">Haber</td>
                                         </tr>
                                     </thead>
-                                    <tbody is="draggable" group="people" :list="balances" tag="tbody">
+                                    <tbody>
                                         <tr v-for="(balan, index) in balances">
-                                            <td align="center">@{{ balan.cuenta}}</td>
-                                            <td class="text-right" align="center" width="125">
+                                            <td class="text-left">@{{ balan.cuenta}}</td>
+                                            <td class="text-right"  width="125">
                                                 @{{ decimales(balan.suma_debe)}}</td>
-                                            <td class="text-right" align="center" width="125">
+                                            <td class="text-right" width="125">
                                                 @{{ decimales(balan.suma_haber) }}</td>
-                                            <td class="text-right" align="center" width="125">
+                                            <td class="text-right"  width="125">
                                                 @{{ decimales(balan.saldo_debe) }}</td>
-                                            <td class="text-right" align="center" width="125">
+                                            <td class="text-right"  width="125">
                                                 @{{ decimales(balan.saldo_haber) }}</td>
                                             {{--          <td align="center" width="50"><a @click.prevent="deleteBalance(index)"  class="btn btn-danger"><i
                                           class="fas fa-trash-alt"></i></a></td>

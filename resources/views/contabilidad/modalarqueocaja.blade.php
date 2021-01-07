@@ -115,8 +115,23 @@
                         {!! $transacciones->transacciones !!}
                      </div>
                     @elseif($datos->metodo == 'concatenado')
-                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
-                        <h3 class="text-center font-weight-bold">Datos para realizar el Arqueo de Caja</h3>
+
+                     <div class="col-6 mt-2 ">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-link active" id="nav-arqueo-caja-tab" data-toggle="tab" href="#nav-arqueo-caja" role="tab" aria-controls="nav-arqueo-caja" aria-selected="true">ENUNCIADOS</a>
+                                <a class="nav-link" id="nav-libro-caja-tab" data-toggle="tab" href="#nav-libro-caja" role="tab" aria-controls="nav-libro-caja" aria-selected="false">LIBRO BANCO</a>
+                             
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-arqueo-caja" role="tabpanel" aria-labelledby="nav-arqueo-caja-tab" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
+                                    @isset ($arqueocaja->transacciones)
+                                    {!! $arqueocaja->transacciones !!}
+                                @endisset
+                            </div>
+                            <div class="tab-pane fade" id="nav-libro-caja" role="tabpanel" aria-labelledby="nav-libro-caja-tab" style=" height:300px; overflow-y: scroll; border: double 8px #E71822;  overflow-x: hidden;">
+                                     <h3 class="text-center font-weight-bold">Datos para realizar el Arqueo de Caja</h3>
 
                         <h2 class="text-center display-4 font-weight-bold text-danger">Libro Caja</h2>
 
@@ -134,10 +149,9 @@
                                     <th width="100">Debe</th>
                                     <th width="100">Haber</th>
                                     <th width="100">Saldo</th>
-
                                 </tr>
                             </thead>
-                            <tbody is="draggable" group="people" :list="libros_caja" tag="tbody">
+                            <tbody>
                                 <tr v-for="(caja, index) in libros_caja">
                                     <td align="left">@{{formatoFecha(caja.fecha)}}</td>
                                     <td align="left">@{{caja.detalle}}</td>
@@ -147,7 +161,9 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                            </div>
+                        </div> 
+                    </div>        
                     @endif
                     <br>
                 </div>

@@ -2,7 +2,7 @@
     <h1 class="text-center text-danger font-weight-bold mt-2">MAYOR GENERAL</h1>
     <div class="row justify-content-center">
         <div class="col-3 mb-2">
-            <input autocomplete="ÑÖcompletes" type="text" v-model="nombre" class="form-control form-control-sm"
+            <input autocomplete="ÑÖcompletes" type="text" v-model="nombre" class="form-control text-center"
                 placeholder="Nombre de la Empresa">
         </div>
     </div>
@@ -44,8 +44,8 @@
                         <td class="font-weight-bold text-gray-dark">SUMAN</td>
                         <td class="text-right font-weight-bold text-gray-dark">@{{ decimales(cuenta.total_debe )}}</td>
                         <td class="text-right font-weight-bold text-gray-dark">@{{ decimales(cuenta.total_haber) }}</td>
-                        <td class="text-right font-weight-bold text-gray-dark">{{-- @{{ decimales(cuenta.total_saldo) }}
-                            --}}</td>
+                        <td class="text-right font-weight-bold text-gray-dark">@{{ cuenta.total_saldo }}
+                           </td>
                     </tr>
                     <tr v-for="(diar, index) in cuenta.cierres">
                         <td align="center" width="50">@{{ formatoFecha(diar.fecha)}}</td>

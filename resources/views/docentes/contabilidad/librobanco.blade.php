@@ -1,24 +1,20 @@
 <div id="librosbanco" class="border border-danger p-4">
-
     <h2 class="text-center display-4 font-weight-bold text-danger">Anexos de Control Interno</h2>
     <h3 class="text-center display-4 font-weight-bold text-danger">Libro Banco</h3>
-
     <div class="row p-3  mb-2 justify-content-center ">
         <div class="col-5">
-      <h3 class="text-center font-weight-bold display-4">@{{ nombre }}</h3>
+            <h3 class="text-center font-weight-bold display-4">@{{ nombre }}</h3>
         </div>
     </div>
-
     <div class="row">
         <div class="col">
-      <h3 class="text-center font-weight-bold display-4">@{{ n_banco }}</h3> 
+            <h3 class="text-center font-weight-bold display-4">@{{ n_banco }}</h3>
         </div>
         <div class="col">
-      <h3 class="text-center font-weight-bold display-4">@{{ c_banco }}</h3>
+            <h3 class="text-center font-weight-bold display-4">@{{ c_banco }}</h3>
         </div>
     </div>
     <br>
-
     <table style="border: hidden" class="table table-bordered table-sm mb-2">
         <thead style="border: hidden">
             <tr style="border: hidden" class="text-center bg-dark">
@@ -39,7 +35,6 @@
                 <td align="right">@{{decimales(banco.haber)}}</td>
                 <td align="right">@{{decimales(banco.saldo)}}</td>
             </tr>
-
             <tr style="border: hidden" class="bg-secondary">
                 <td class="text-center font-weight-bold">SUMAN</td>
                 <td class="text-left font-weight-bold"></td>

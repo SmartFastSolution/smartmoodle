@@ -2,7 +2,7 @@
      <h1 class="text-center text-danger font-weight-bold mt-2">DIARIO GENERAL</h1>
      <div class="row justify-content-center">
          <div class="col-3">
-     <input autocomplete="ÑÖcompletes" type="text" v-model="nombre" class="form-control form-control-sm" placeholder="Nombre de la Empresa">
+     <input autocomplete="ÑÖcompletes" type="text" v-model="nombre" class="form-control text-center" placeholder="Nombre de la Empresa">
              
          </div>
      </div>

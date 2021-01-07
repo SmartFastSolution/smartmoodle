@@ -11,7 +11,7 @@
     </div>
  @if ($rol === 'estudiante')
         <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirRetencion()">Agregar Retención</a>
-        <a href="#" class="addDiario btn btn-outline-success ml-1" @click.prevent="guardaretencioniva()">Guardar
+        <a href="#" class="addDiario btn btn-outline-success ml-1" @click.prevent="guardaretencioniva()">Guardar</a>
 @endif
     <h3 class="text-center font-weight-bold text-danger">COMPRAS</h3>
     <table class="table table-bordered table-sm">
