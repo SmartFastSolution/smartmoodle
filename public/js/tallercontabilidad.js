@@ -3480,7 +3480,9 @@ transacciones:'',
                 "timeOut": "3000"
                 });
            mayor_general.obtenerDiarioGeneral();
-
+           librocaja.obtenerDiarioGeneral();
+           librosbanco.obtenerDiarioGeneral();
+           reten_iva.obtenerDiarioGeneral();
             // this.obtenerDiarioGeneral();
           }else{
            toastr.success("Diairo General Creado Correctamente", "Smarmoddle", {
@@ -3491,6 +3493,11 @@ transacciones:'',
           // this.obtenerDiarioGeneral();
             //console.log( _this.dato); 
            mayor_general.obtenerDiarioGeneral();
+           librocaja.obtenerDiarioGeneral();
+           librosbanco.obtenerDiarioGeneral();
+           reten_iva.obtenerDiarioGeneral();
+
+
             //
             }          
         }).catch(function(error){
@@ -10898,7 +10905,7 @@ const vm = new Vue({
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-const librocaja = new Vue({
+let librocaja = new Vue({
   el: "#librocaja",
   data:{
     id_taller: taller,
@@ -11153,10 +11160,12 @@ const librocaja = new Vue({
                   toastr.success("Anexo creado correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
+                arqueo_caja.obtenerLibroCaja();
                 }else if (response.data.estado == 'actualizado') {
                   toastr.warning("Anexo actualizado correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
+                arqueo_caja.obtenerLibroCaja();
                 }        
             }).catch(function(error){
                });
@@ -11641,7 +11650,7 @@ const arqueo_caja = new Vue ({
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////LIBRO BANCO ANEXO /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const librosbanco = new Vue({
+let librosbanco = new Vue({
   el: "#librosbanco",
 
   data:{
@@ -11920,10 +11929,12 @@ const librosbanco = new Vue({
             toastr.success("Arqueo Libro Banco creado correctamente", "Smarmoddle", {
             "timeOut": "3000"
           });
+          conciliacionb.obtenerLibroBanco();
           }else if (response.data.estado == 'actualizado') {
            toastr.warning("Arqueo Libro Banco actualizado correctamente", "Smarmoddle", {
           "timeOut": "3000"
         });
+        conciliacionb.obtenerLibroBanco();
         }  
 
       }).catch(function(error){
