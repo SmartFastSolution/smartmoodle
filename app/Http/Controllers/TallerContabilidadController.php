@@ -2436,14 +2436,14 @@ class TallerContabilidadController extends Controller
         public function ConciliacionBancaria(Request $request)
         {
             $id  = Auth::id();
-            $taller_id   = $request->id;
-            $nombre      =$request->nombre;
-            $fecha       =$request->fecha;
-            $n_banco     =$request->n_banco;
-            $c_saldos    =$request->c_saldos;
-            $c_debitos   =$request->c_debitos;
-            $c_creditos  =$request->c_creditos;
-            $c_cheques   =$request->c_cheques;
+            $taller_id     = $request->id;
+            $nombre        =$request->nombre;
+            $fecha         =$request->fecha;
+            $n_banco       =$request->n_banco;
+            $c_saldos      =$request->c_saldos;
+            $c_debitos     =$request->c_debitos;
+            $c_creditos    =$request->c_creditos;
+            $c_cheques     =$request->c_cheques;
             $c_depositos   =$request->c_depositos;
             
             $cb  = Conciliacionbancaria::where('user_id', $id)->where('taller_id',$taller_id)->count();      
@@ -2457,7 +2457,7 @@ class TallerContabilidadController extends Controller
                 $b->saldo_c           = $request->saldo_c;
                 $b->saldo_ch          = $request->saldo_ch;
                 $b->saldo_d           = $request->saldo_d;
-                $b->saldo_deposito    = $request->saldo_deposito;
+                $b->saldo_deposito    = $request->saldo_depositos;
                 $b->total             = $request->total;
                 $b->save();
                 $cbs= Conciliacionbancaria::where('user_id', $id)->get()->last();
@@ -2624,6 +2624,19 @@ class TallerContabilidadController extends Controller
                         );
                         Conciliacioncheque::insert($datos);
                     }
+                    foreach($c_depositos as $key=>$de){
+
+                        $datos = array(
+                            'conciliacionbancaria_id' =>$cba->id,
+                            'fecha'          =>$de['fecha'],
+                            'detalle'        =>$de['detalle'],
+                            'saldo'          =>$de['saldo'],
+                            'created_at'        => now(),
+                            'updated_at'        => now(),
+            
+                        );
+                        Conciliaciondeposito::insert($datos);
+                    }
                     return response(array(
                         'success' => true,
                         'estado'  => 'actualizado',
@@ -2641,10 +2654,11 @@ class TallerContabilidadController extends Controller
 
             if($cb==1){
                 $a     = Conciliacionbancaria::where('user_id', $id)->where('taller_id',$taller_id)->first();
-            $saldo   = Conciliacionsaldo::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
-            $debito  = Conciliaciondebito::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
-            $credito = Conciliacioncredito::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
-            $cheque  = Conciliacioncheque::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $saldo     = Conciliacionsaldo::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $debito    = Conciliaciondebito::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $credito   = Conciliacioncredito::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $cheque    = Conciliacioncheque::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $deposito  = Conciliaciondeposito::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
         
             return response(array(
                 'datos'   => true,
@@ -2652,6 +2666,7 @@ class TallerContabilidadController extends Controller
                 'debito'  => $debito, 
                 'credito' => $credito, 
                 'cheque'  => $cheque, 
+                'deposito'  => $deposito, 
                 'nombre'  => $a->nombre,
                 'fecha'   => $a->fecha,
                 'n_banco' => $a->n_banco,
