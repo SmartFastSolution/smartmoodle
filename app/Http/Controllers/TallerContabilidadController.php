@@ -14,6 +14,7 @@ use App\Conciliacioncheque;
 use App\Conciliacioncredito;
 use App\Conciliaciondebito;
 use App\Conciliacionsaldo;
+use App\Conciliaciondeposito;
 
 use App\Admin\TallerModuloContable;
 use App\Admin\TallerModuloTransaccion;
@@ -2443,19 +2444,21 @@ class TallerContabilidadController extends Controller
             $c_debitos   =$request->c_debitos;
             $c_creditos  =$request->c_creditos;
             $c_cheques   =$request->c_cheques;
+            $c_depositos   =$request->c_depositos;
             
             $cb  = Conciliacionbancaria::where('user_id', $id)->where('taller_id',$taller_id)->count();      
             if($cb ==0){
                 $b = new Conciliacionbancaria;
-                $b->taller_id  = $taller_id;
-                $b->user_id    = $id;
-                $b->nombre     = $nombre;
-                $b->fecha      = $fecha;
-                $b->n_banco    = $n_banco;
-                $b->saldo_c    = $request->saldo_c;
-                $b->saldo_ch   = $request->saldo_ch;
-                $b->saldo_d    = $request->saldo_d;
-                $b->total      = $request->total;
+                $b->taller_id         = $taller_id;
+                $b->user_id           = $id;
+                $b->nombre            = $nombre;
+                $b->fecha             = $fecha;
+                $b->n_banco           = $n_banco;
+                $b->saldo_c           = $request->saldo_c;
+                $b->saldo_ch          = $request->saldo_ch;
+                $b->saldo_d           = $request->saldo_d;
+                $b->saldo_deposito    = $request->saldo_deposito;
+                $b->total             = $request->total;
                 $b->save();
                 $cbs= Conciliacionbancaria::where('user_id', $id)->get()->last();
                         foreach($c_saldos as $key=>$s){
@@ -2483,6 +2486,19 @@ class TallerContabilidadController extends Controller
                 
                             );
                             Conciliaciondebito::insert($datos);
+                        }
+                        foreach($c_depositos as $key=>$de){
+
+                            $datos = array(
+                                'conciliacionbancaria_id' =>$cbs->id,
+                                'fecha'          =>$de['fecha'],
+                                'detalle'        =>$de['detalle'],
+                                'saldo'          =>$de['saldo'],
+                                'created_at'        => now(),
+                                'updated_at'        => now(),
+                
+                            );
+                            Conciliaciondeposito::insert($datos);
                         }
                         foreach($c_creditos as $key=>$s){
 

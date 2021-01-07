@@ -26,6 +26,10 @@
                                     href="#nav-bih-conciliacion-debito" role="tab"
                                     aria-controls="nav-bih-conciliacion-debito" aria-selected="false">DÉBITOS</a>
 
+                                <a class="nav-link" id="nav-bih-conciliacion-deposito-tab" data-toggle="tab"
+                                    href="#nav-bih-conciliacion-deposito" role="tab"
+                                    aria-controls="nav-bih-conciliacion-deposito" aria-selected="false">DEPÓSITOS</a>
+
                                 <a class="nav-link" id="nav-bih-conciliacion-credito-tab" data-toggle="tab"
                                     href="#nav-bih-conciliacion-credito" role="tab"
                                     aria-controls="nav-bih-conciliacion-credito" aria-selected="false">CRÉDITOS</a>
@@ -367,6 +371,168 @@
                                 </div>
                             </div>
                             <!-- end debitos -->
+                            <!-- DEPOSITOS -->
+
+                            <div class="tab-pane fade" id="nav-bih-conciliacion-deposito" role="tabpanel"
+                                aria-labelledby="nav-bih-conciliacion-deposito-tab">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h2 class="text-center">AGREGAR DEPÓSITOS</h2>
+                                        <table class="table table-bordered table-sm">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th align="center" class="text-center" width="100">Fecha</th>
+                                                    <th align="center" class="text-center">Detalle</th>
+                                                    <th align="center" class="text-center">Valor</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <input class="form-control" type="date" v-model="deposito.fecha"
+                                                            placeholder="Agrega la fecha" name="">
+                                                    </td>
+                                                    <td><input type="text" v-model="deposito.detalle" name="detalle"
+                                                            class="form-control" required></td>
+                                                    <td width="125"><input type="number" v-model="deposito.saldo"
+                                                            name="saldo" class="form-control" required></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div v-if="!deposito.edit" class="row justify-content-center">
+                                            <a href="#" class="btn btn-success"
+                                                @click.prevent="agregarDeposito()">Agregar</a>
+                                        </div>
+                                        <div v-else class="row justify-content-center">
+                                            <a href="#" class="btn btn-success"
+                                                @click.prevent="actualizarDeposito()">Actualizar</a>
+                                            <a href="#" class="btn btn-danger ml-1"
+                                                @click.prevent="cancelarEditDeposito()"><i
+                                                    class="fa fa-window-close"></i></a>
+                                        </div>
+                                    </div>
+                                    @if($datos->metodo == 'individual')
+                                    <div class="col-6"
+                                        style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 4px red;">
+                                        {!! $transacciones->transacciones !!}
+                                    </div>
+                                    @elseif($datos->metodo == 'concatenado')
+                                    <div class="col-6 mt-2 ">
+                                        <nav>
+                                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                                <a class="nav-link active" id="nav-conciliacion4-tab" data-toggle="tab"
+                                                    href="#nav-conciliacion4" role="tab"
+                                                    aria-controls="nav-conciliacion4"
+                                                    aria-selected="true">ENUNCIADOS</a>
+                                                <a class="nav-link" id="nav-libro-banco4-tab" data-toggle="tab"
+                                                    href="#nav-libro-banco4" role="tab" aria-controls="nav-libro-banco4"
+                                                    aria-selected="false">LIBRO BANCO</a>
+
+                                            </div>
+                                        </nav>
+                                        <div class="tab-content" id="nav-tabContent">
+                                            <div class="tab-pane fade show active" id="nav-conciliacion4"
+                                                role="tabpanel" aria-labelledby="nav-conciliacion4-tab"
+                                                style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
+                                                @isset ($conciliacionbancaria->transacciones)
+                                                {!! $conciliacionbancaria->transacciones !!}
+                                                @endisset
+                                            </div>
+                                            <div class="tab-pane fade" id="nav-libro-banco4" role="tabpanel"
+                                                aria-labelledby="nav-libro-banco4-tab"
+                                                style=" height:300px; overflow-y: scroll; border: double 8px #E71822;  overflow-x: hidden;">
+                                                <h2 class="text-center  font-weight-bold text-danger">Anexos de Control
+                                                    Interno</h2>
+                                                <h3 class="text-center font-weight-bold text-danger">Libro Banco</h3>
+                                                <div class="row p-3  mb-2 justify-content-center ">
+                                                    <div class="col-5">
+                                                        <h5 class="font-weight-bold">@{{ lb_nombre }}</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h5 class="font-weight-bold">@{{ lb_n_banco }}</h5>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h5 class="font-weight-bold">@{{ lb_c_banco }}</h5>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <table style="border: hidden"
+                                                    class="table table-bordered table-sm mb-2">
+                                                    <thead style="border: hidden">
+                                                        <tr style="border: hidden" class="text-center bg-dark">
+                                                            <th width="100">Fecha</th>
+                                                            <th width="300">Detalle</th>
+                                                            <th width="50"><i>Ch/</i></th>
+                                                            <th width="90">Debe</th>
+                                                            <th width="90">Haber</th>
+                                                            <th width="100">Saldo</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody style="border: hidden">
+                                                        <tr style="border: hidden" v-for="(banco, index) in lb_banco">
+                                                            <td align="left">@{{formatoFecha(banco.fecha)}}</td>
+                                                            <td align="left">@{{banco.detalle}}</td>
+                                                            <td align="left">@{{banco.cheque}}</td>
+                                                            <td align="right">@{{decimales(banco.debe)}}</td>
+                                                            <td align="right">@{{decimales(banco.haber)}}</td>
+                                                            <td align="right">@{{decimales(banco.saldo)}}</td>
+                                                        </tr>
+                                                        <tr style="border: hidden" class="bg-secondary">
+                                                            <td class="text-center font-weight-bold">SUMAN</td>
+                                                            <td class="text-left font-weight-bold"></td>
+                                                            <td class="text-left font-weight-bold"></td>
+                                                            <td class="text-right font-weight-bold">@{{ debe_lbanco }}
+                                                            </td>
+                                                            <td class="text-right font-weight-bold">@{{ haber_lbanco }}
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endif
+
+                                    <div class="col-12 mt-2 p-2" style=" height:300px; overflow-y: scroll;">
+                                        <h2 class="text-center">DEPÓSITOS</h2>
+                                        <div class="row justify-content-around mb-2">
+                                            <table class="table table-bordered table-sm mb-2 p-2">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th align="center" class="text-center" width="150">Fecha</th>
+                                                        <th align="center" class="text-center">Detalle</th>
+                                                        <th align="center" class="text-center">Valor</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody is="draggable" group="people" :list="c_depositos" tag="tbody">
+                                                    <tr v-for="(d, index) in c_depositos">
+                                                        <td align="center">@{{formatoFecha(d.fecha)}}</td>
+                                                        <td align="center">@{{ d.detalle}}</td>
+                                                        <td class="text-right">@{{ decimales(d.saldo)}}</td>
+                                                        <td align="center" width="50">
+                                                            <a @click.prevent="editDepositos(index)"
+                                                                class="btn btn-warning">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td align="center" width="50">
+                                                            <a @click.prevent="EliminarDeposito(index)"
+                                                                class="btn btn-danger">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end DEPOSITOS -->
                             <!-- creditos -->
                             <div class="tab-pane fade " id="nav-bih-conciliacion-credito" role="tabpanel"
                                 aria-labelledby="nav-bih-conciliacion-credito-tab">

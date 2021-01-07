@@ -12054,12 +12054,20 @@ const conciliacionb = new Vue({
        detalle:'',
        saldo:'',
      },
+     c_depositos:[],
+     deposito:{
+      edit:false,
+       fecha:'',
+       detalle:'',
+       saldo:'',
+     },
 
      suman:{
    
        saldo_c :0,
        saldo_ch:0,
        saldo_d :0,
+       saldo_depositos:0,
        total   :0,
 
      },
@@ -12123,17 +12131,20 @@ const conciliacionb = new Vue({
        this.suman.saldo_c =0;
        this.suman.saldo_ch =0;
        this.suman.saldo_d =0;
+       this.suman.saldo_depositos=0;
        this.suman.total =0;
 
        let r1 = this.c_saldos;
        let r2 = this.c_debitos;
        let r3 = this.c_creditos;
        let r4 = this.c_cheques;
+       let r5 = this.c_depositos;
        
        let t1 =0;
        let t2 =0;
        let t3 =0;
        let t4 =0;
+       let t5 =0;
      
 
        r1.forEach(function(obj, index){
@@ -12152,7 +12163,11 @@ const conciliacionb = new Vue({
         t4 +=Number(obj.saldo);
      });
 
-      var tsd  = t1 + t2;
+      r5.forEach(function(obj, index){
+      t5 +=Number(obj.saldo);
+      });
+
+      var tsd  = t1 + t2 + t5;
       var tsdc = tsd - t3;
       var tch  = tsdc - t4;
      
@@ -12160,6 +12175,7 @@ const conciliacionb = new Vue({
       this.suman.saldo_d   = t2.toFixed(2);
       this.suman.saldo_c   = t3.toFixed(2);
       this.suman.saldo_ch  = t4.toFixed(2);
+      this.suman.saldo_depositos = t5.toFixed(2);
       this.suman.total     = tch.toFixed(2);
       
        
@@ -12193,6 +12209,132 @@ const conciliacionb = new Vue({
      $('#nav-bih-conciliacion-cheque-tab').tab('show');
     
    }, //fin de metodo abrirtransaccion
+
+   abrirDepositos(){ //solo para acceder al modal para agregar todo pilas 
+    this.limpiar(); 
+     $('#conciliacion-bancaria').modal('show');
+     $('#nav-bih-conciliacion-deposito-tab').tab('show');
+    
+   }, //fin de metodo abrirtransaccion
+
+
+   agregarDeposito(){
+       
+    if(this.deposito.fecha.trim() === ''){
+      toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+
+  }else if(this.deposito.detalle.trim() === ''){
+      toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+
+  }else if(this.deposito.saldo.trim() ===''){
+    toastr.error("El Saldo es Obligatorio ", "Smarmoddle", {
+      "timeOut": "3000"
+  });
+  } else{
+      var deposito ={fecha:this.deposito.fecha, detalle:this.deposito.detalle, saldo:this.deposito.saldo,}
+      this.c_depositos.push(deposito);
+      toastr.success("El Valor agregado correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+    this.deposito.fecha =''
+    this.deposito.detalle =''
+    this.deposito.saldo  =''
+    this.totales();
+    }
+
+  },//fin metodo agregar deposito
+
+  editDepositos(index){
+    this.deposito.edit =true;
+    this.registro_id  = index;
+    this.deposito.fecha     = this.c_depositos[index].fecha;
+    this.deposito.detalle   = this.c_depositos[index].detalle;
+    this.deposito.saldo     = this.c_depositos[index].saldo;
+    $('#nav-bih-conciliacion-deposito-tab').tab('show');
+     
+   
+  },//end edit saldos
+
+  editDepositoFuera(index){
+     
+    this.deposito.edit =true;
+    this.registro_id  = index;
+    this.deposito.fecha     = this.c_depositos[index].fecha;
+    this.deposito.detalle   = this.c_depositos[index].detalle;
+    this.deposito.saldo     = this.c_depositos[index].saldo;
+    $('#conciliacion-bancaria').modal('show');  
+    $('#nav-bih-conciliacion-deposito-tab').tab('show');
+
+   }, //fin udpate saldo
+
+
+   cancelarEditDeposito(){
+    this.deposito.fecha     =''
+    this.deposito.detalle   =''
+    this.deposito.saldo     =''
+    this.deposito.edit      =false;
+   },
+
+   EliminarDeposito(index){
+    let nombre = this.c_depositos[index].detalle;
+     Swal.fire({
+       title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+       text: "Esta accion no se puede revertir",
+       icon: 'warning',
+       showCancelButton: true,
+       confirmButtonColor: '#3085d6',
+       cancelButtonColor: '#d33',
+       confirmButtonText: 'Si, eliminar!'
+         }).then((result) => {
+       if (result.isConfirmed) {
+         Swal.fire(
+           'Eliminado!',
+           'El Registro de la cuenta '+nombre,
+           'success'
+         );
+         this.c_depositos.splice(index, 1);   
+                         
+         this.totales();    
+       }
+     });
+   }, // fin eliminar deposito
+
+
+   actualizarDeposito(){
+
+    if(this.deposito.fecha.trim() === ''){
+      toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+
+  }else if(this.deposito.detalle.trim() === ''){
+      toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+
+  }else if(this.deposito.saldo.trim() ===''){
+    toastr.error("El Saldo es Obligatorio ", "Smarmoddle", {
+      "timeOut": "3000"
+  });
+  } else{
+     let id                      = this.registro_id;
+     this.c_depositos[id].fecha     = this.deposito.fecha;
+     this.c_depositos[id].detalle   = this.deposito.detalle;
+     this.c_depositos[id].saldo     = this.deposito.saldo;
+   
+     this.cancelarEditDeposito();
+     this.totales();
+     toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+      "timeOut": "3000"
+      });
+    }
+   
+  },//fin de actualizar saldo
+
 
 
 
@@ -12678,109 +12820,28 @@ const conciliacionb = new Vue({
     },//fin de actualizar debito
 
 
-      // deleteSaldo(index){
-      //   this.c_saldos.splice(index, 1);
-      //   this.totales();
-      // },// delete saldo
-      // deleteDebito(index){
-      //   this.c_debitos.splice(index, 1);
-      //   this.totales();
-      // },// delete debitos
-      // deleteCredito(index){
-      //   this.c_creditos.splice(index, 1);
-      //   this.totales();
-      // },// delete credito
-      // deleteCheque(index){
-      //   this.c_cheques.splice(index, 1);
-      //   this.totales();
-      // },// delete cheque
-
+    
  
       limpiar(){
-        this.saldo.fecha      ='';     
-        this.saldo.detalle    ='';
-        this.saldo.saldo      ='';
-        this.debito.fecha     ='';
-        this.debito.detalle   ='';
-        this.debito.saldo     ='';
-        this.credito.fecha    ='';
-        this.credito.detalle  ='';
-        this.credito.saldo    ='';
-        this.cheques.detalle  ='';
-        this.cheques.saldo    ='';
-        this.cheques.fecha    ='';
+        this.saldo.fecha       ='';     
+        this.saldo.detalle     ='';
+        this.saldo.saldo       ='';
+        this.debito.fecha      ='';
+        this.debito.detalle    ='';
+        this.debito.saldo      ='';
+        this.credito.fecha     ='';
+        this.credito.detalle   ='';
+        this.credito.saldo     ='';
+        this.cheques.detalle   ='';
+        this.cheques.saldo     ='';
+        this.cheques.fecha     ='';
+        this.deposito.detalle  ='';
+        this.deposito.saldo    ='';
+        this.deposito.fecha    ='';
   
       },//fin metodo limpiar todos los campos
 
-   
-
-      //  editDebitos(index){
-      //   this.update = index;
-      //   this.debito.fecha   = this.c_debitos[index].fecha;
-      //   this.debito.detalle   = this.c_debitos[index].detalle;
-      //   this.debito.saldo    = this.c_debitos[index].saldo;
        
-      //   $('#conciliacion_debitos').modal('show');     
-       
-      // },//end edit saldos
-  
-      //  updateDebitos(){
-      //    var i = this.update;
-      //    this.c_debitos[i].fecha = this.debito.fecha;
-      //    this.c_debitos[i].detalle = this.debito.detalle;
-      //    this.c_debitos[i].saldo  = this.debito.saldo;
-       
-      //    $('#conciliacion_debitos').modal('hide');  
-      //    this.limpiar();
-      //    this.totales();
-       
-  
-      //  }, //fin udpate saldo
-      //  editCreditos(index){
-      //   this.update = index;
-      //   this.credito.fecha   = this.c_creditos[index].fecha;
-      //   this.credito.detalle   = this.c_creditos[index].detalle;
-      //   this.credito.saldo     = this.c_creditos[index].saldo;
-       
-      //   $('#conciliacion_creditos').modal('show');     
-       
-      // },//end edit saldos
-  
-      //  updateCreditos(){
-      //    var i = this.update;
-      //    this.c_creditos[i].fecha = this.credito.fecha;
-      //    this.c_creditos[i].detalle = this.credito.detalle;
-      //    this.c_creditos[i].saldo   = this.credito.saldo;
-       
-      //    $('#conciliacion_creditos').modal('hide');  
-      //    this.limpiar();
-      //    this.totales();
-       
-      //  }, //fin udpate saldo
-
-      //  editCheques(index){
-      //   this.update = index;
-      //   this.cheques.fecha   = this.c_cheques[index].fecha;
-      //   this.cheques.detalle   = this.c_cheques[index].detalle;
-      //   this.cheques.saldo     = this.c_cheques[index].saldo;
-       
-      //   $('#conciliacion_cheques').modal('show');     
-       
-      // },//end edit saldos
-  
-      //  updateCheques(){
-      //    var i = this.update;
-      //    this.c_cheques[i].fecha = this.cheques.fecha;
-      //    this.c_cheques[i].detalle = this.cheques.detalle;
-      //    this.c_cheques[i].saldo   = this.cheques.saldo;
-       
-      //    $('#conciliacion_cheques').modal('hide');  
-      //    this.limpiar();
-      //    this.totales();
-       
-      //  }, //fin udpate saldo
-
-
        guardarConciliacionB(){
 
        
@@ -12804,6 +12865,10 @@ const conciliacionb = new Vue({
           toastr.error("Debe haber al menos un Débito Registrado", "Smarmoddle", {
             "timeOut": "3000"
         });
+        }else if (this.c_depositos.length == 0){
+          toastr.error("Debe haber al menos un Depósito Registrado", "Smarmoddle", {
+            "timeOut": "3000"
+        });
         }else if (this.c_creditos.length == 0){
           toastr.error("Debe haber al menos un Crédito Registrado", "Smarmoddle", {
             "timeOut": "3000"
@@ -12821,6 +12886,7 @@ const conciliacionb = new Vue({
             n_banco:  _this.n_banco,
               fecha:  _this.fecha,
             saldo_c:  _this.suman.saldo_c,
+    saldo_depositos:  _this.suman.saldo_depositos,
             saldo_d:  _this.suman.saldo_d,
            saldo_ch:  _this.suman.saldo_ch,
               total:  _this.suman.total,
@@ -12828,6 +12894,7 @@ const conciliacionb = new Vue({
           c_debitos:  _this.c_debitos,
          c_creditos:  _this.c_creditos,
           c_cheques:  _this.c_cheques,
+        c_depositos:  _this.c_depositos,
           
           }).then(response=>{
             if (response.data.estado == 'guardado') {
