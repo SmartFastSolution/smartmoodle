@@ -40,11 +40,9 @@
         <h2>Talleres Por Calificar</h2>
         <div class="card-body">
             <table id="myTable" class="table table-hover">
-
                 <thead>
                     <tr>
                         <th scope="col">Curso</th>
-
                         <th scope="col">Materia</th>
                         <th scope="col" width="100"> Taller </th>
                         <th scope="col">Alumno </th>
@@ -53,8 +51,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
                         @foreach($users as $taller)
+                    <tr>
                         <td>{{$taller->cur_nombre}} - {{ $taller->nivel_nombre }}</td>
                         <td>{{$taller->mate_nombre}}</td>
                         <td>{{$taller->nombre}}</td>
@@ -82,9 +80,6 @@
                 <thead>
                     <tr>
                         <th scope="col">Curso</th>
-
-
-
                         <th scope="col">Materia</th>
                         <th scope="col" width="100"> Taller </th>
                         <th scope="col">Alumno </th>
@@ -93,12 +88,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
                         @foreach($calificado as $taller)
-
-
+                    <tr>
                         <td>{{$taller->cur_nombre}} - {{ $taller->nivel_nombre }}</td>
-
                         <td>{{$taller->mate_nombre}}</td>
                         <td>{{$taller->nombre}}</td>
                         <td>{{$taller->alumno}}</td>
@@ -107,7 +99,6 @@
                             <a class="btn btn-info"
                                 href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
                                     class="fas fa-eye"></i></a>
-
                         </td>
                     </tr>
                     @endforeach

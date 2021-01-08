@@ -72,17 +72,18 @@
 
                             <thead>
                                 <tr>
-                                    <th scope="col">Curso</th>
-                                    <th scope="col">Materia</th>
-                                    <th scope="col" width="100"> Taller </th>
-                                    <th scope="col">Alumno </th>
-                                    <th scope="col">Enunciado </th>
-                                    <th scope="col">Vista Taller</th>
+                                    <th>Curso</th>
+                                    <th>Materia</th>
+                                    <th width="100"> Taller </th>
+                                    <th>Alumno </th>
+                                    <th>Enunciado </th>
+                                    <th>Vista Taller</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
                                 @forelse($users as $taller)
+
+                                <tr>
                                     <td>{{$taller->cur_nombre}} - {{ $taller->nivel_nombre }}</td>
                                     <td>{{$taller->mate_nombre}}</td>
                                     <td>{{$taller->nombre}}</td>
@@ -96,9 +97,6 @@
                                     </td>
                                 </tr>
                                 @empty
-                                    <tr>
-                                        <td class="text-center" colspan="5">No hay talleres disponibles</td>
-                                    </tr>
                                 
                                 @endforelse
                             </tbody>
@@ -117,20 +115,19 @@
                         <h2>Talleres Calificados</h2>
                      <div class="card-body mb-5">
                         <table id="myTable2" class="table table-hover">
-
                             <thead>
                                 <tr>
-                                    <th scope="col">Curso</th>
-                                    <th scope="col">Materia</th>
-                                    <th scope="col" width="100"> Taller </th>
-                                    <th scope="col">Alumno </th>
-                                    <th scope="col">Enunciado </th>
-                                    <th scope="col">Vista Taller</th>
+                                    <th>Curso</th>
+                                    <th>Materia</th>
+                                    <th width="100"> Taller </th>
+                                    <th>Alumno </th>
+                                    <th>Enunciado </th>
+                                    <th>Vista Taller</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
                                     @foreach($calificado as $taller)
+                                <tr>
                                     <td>{{$taller->cur_nombre}} - {{ $taller->nivel_nombre }}</td>
                                     <td>{{$taller->mate_nombre}}</td>
                                     <td>{{$taller->nombre}}</td>
@@ -140,7 +137,6 @@
                                         <a class="btn btn-info"
                                             href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
                                                 class="fas fa-eye"></i></a>
-
                                     </td>
                                 </tr>
                                 @endforeach

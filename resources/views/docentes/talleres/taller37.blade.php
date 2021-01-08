@@ -6,7 +6,7 @@
 <form action="{{ route('taller1.docente', ['idtaller' => $d]) }}" method="POST">
     @csrf
   <div class="container-fluid p-3">
-  <h1 class="text-center text-danger display-1">{{ $datos->taller->nombre }}</h1>
+  {{-- <h1 class="text-center text-danger display-1">{{ $datos->taller->nombre }}</h1> --}}
         <div class="card border border-danger mb-3" >
           <div class="card-header "> 
             <div class="row">
