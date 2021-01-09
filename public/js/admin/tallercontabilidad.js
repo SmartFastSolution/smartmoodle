@@ -3506,7 +3506,7 @@ transacciones:'',
 
             // this.obtenerDiarioGeneral();
           }else{
-           toastr.success("Diairo General Creado Correctamente", "Smarmoddle", {
+           toastr.success("Diario General Creado Correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
           // _this.complete = response.data.success
@@ -3721,18 +3721,20 @@ nombre_cierre:''
       toastr.error("El campo detalle es obligatorio", "Smarmoddle", {
         "timeOut": "3000"
     });
-
      }else{
+      let saldo = Number(this.mayor.registro.saldo).toFixed(2);
+      let debe = this.decimales(this.mayor.registro.debe);
+      let haber = this.decimales(this.mayor.registro.haber);
       if (this.mayor.registro.cierre == true) {
-         let registro = {tipo:'', fecha:this.mayor.registro.fecha, detalle:this.mayor.registro.detalle, debe:this.mayor.registro.debe, haber:this.mayor.registro.haber, saldo:this.mayor.registro.saldo};
+         let registro = {tipo:'', fecha:this.mayor.registro.fecha, detalle:this.mayor.registro.detalle, debe:debe, haber:haber, saldo:saldo};
           this.mayores.cierres.push(registro);
       }else{
-          let registro = {tipo:'', fecha:this.mayor.registro.fecha, detalle:this.mayor.registro.detalle, debe:this.mayor.registro.debe, haber:this.mayor.registro.haber, saldo:this.mayor.registro.saldo};
+          let registro = {tipo:'', fecha:this.mayor.registro.fecha, detalle:this.mayor.registro.detalle, debe:debe, haber:haber, saldo:saldo};
           this.mayores.registros.push(registro);
       }
-            toastr.success("Movimiento agregado correctamente", "Smarmoddle", {
-              "timeOut": "3000"
-            });
+	    toastr.success("Movimiento agregado correctamente", "Smarmoddle", {
+	      "timeOut": "3000"
+	    });
                 this.mayor.registro.fecha ='';
                 this.mayor.registro.detalle ='';
                 this.mayor.registro.debe ='';
@@ -3949,14 +3951,14 @@ nombre_cierre:''
                     "timeOut": "3000"
                    });
           }else if(response.data.success == 'act'){
-            toastr.success("Diario General Actualizado Correctamente", "Smarmoddle", {
+            toastr.success("Mayor General Actualizado Correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
             // this.obtenerDiarioGeneral();
             balance_comp.obtenerMayorGeneral();
             hoja_trabajo.obtenerMayorGeneral();
           }else{
-           toastr.success("Diairo General Creado Correctamente", "Smarmoddle", {
+           toastr.success("Mayor General Creado Correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
              balance_comp.obtenerMayorGeneral();

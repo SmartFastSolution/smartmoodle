@@ -37,7 +37,7 @@
           </div>
           <div class="card-body">
             <div id="admin" class="hidden"></div>
-            <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{{ $datos->enunciado }}</h2>
+            <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{!! $datos->enunciado !!}<</h2>
         @if ($datos->metodo == 'concatenado')
         <div class="row justify-content-md-center">
         <div class="col-12 col-sm-12 col-md-2 mb-3">

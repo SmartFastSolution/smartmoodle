@@ -15,8 +15,7 @@ class CreateMovimientoprovisionsTable extends Migration
     {
         Schema::create('movimientoprovisions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedbigInteger('provisionsocial_id');
-                   
+            $table->unsignedbigInteger('provisionsocial_id');      
             $table->string('nombre_em');
             $table->string('dias')->nullable();
             $table->string('v_recibido')->nullable();

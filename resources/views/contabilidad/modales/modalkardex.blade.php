@@ -169,7 +169,11 @@
                 </div>
 
                   <div v-if="modales.modal_ingreso.length > 0">
+
                    <h2 class="text-center font-weight-bold">ACTUALIZAR EXISTENCIAS</h2>
+                       <div class="row justify-content-end mt-2 mb-2">
+                    <a class="btn btn-primary mt-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="agregarTransaccion('ingreso')">Agregar Transaccion</a>
+                  </div>
 
                    <div style=" height:300px; overflow-y: scroll;">
                             <table  class="table table-bordered " >
@@ -378,6 +382,9 @@
 
                   <div v-if="modales.modal_devolucion_venta.length > 0">
                    <h2 class="text-center font-weight-bold">ACTUALIZAR EXISTENCIAS</h2>
+                     <div class="row justify-content-end mt-2">
+                    <a class="btn btn-primary mt-2 mb-2" v-if="!modales.existencia_ingreso" href="" @click.prevent="agregarTransaccion('venta')">Agregar Transaccion</a>
+                  </div>
                    <div style=" height:300px; overflow-y: scroll;">
 
                   <table  class="table table-bordered table-responsive">
@@ -625,6 +632,12 @@
           <div class="col-12">
                     <div v-if="modales.modal_egreso.length > 0">
                                   <h2 class="text-center font-weight-bold">ACTUALIZAR EXISTENCIAS</h2>
+                                     <div class="row justify-content-end mb-2">
+                    <a class="btn btn-sm btn-primary mr-2" href="" @click.prevent="agregarEgresos()">Agregar Transaccion</a>
+
+
+
+                    </div>
                    <div style=" height:300px; overflow-y: scroll;">
 
                     <table  class="table table-bordered table-responsive">
@@ -824,6 +837,9 @@
 
               <div v-if="modales.modal_devolucion_compra.length > 0">
                 <h2 class="text-center font-weight-bold">ACTUALIZAR EXISTENCIAS</h2>
+                  <div class="row justify-content-end mb-2">
+              <a class="btn btn-sm btn-primary mr-2" href="" @click.prevent="agregarDevolucionCompra()">Agregar Transaccion</a>
+              </div>
                    <div style=" height:300px; overflow-y: scroll;">
 
               <table  class="table table-bordered table-responsive">
