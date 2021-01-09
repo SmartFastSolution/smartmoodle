@@ -17,7 +17,7 @@
     <a href="#" class="addDiario btn btn-outline-success ml-1" @click.prevent="guardaretencioniva()">Guardar</a>
     @endif -->
     <h3 class="text-center font-weight-bold text-danger">COMPRAS</h3>
-    <div style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+    
         <table class="table table-bordered table-sm">
             <thead class="bg-dark">
                 <tr>
@@ -82,7 +82,7 @@
 
 
         </table>
-    </div>
+    
     @if ($rol === 'estudiante')
     <div class="row justify-content-center mb-2">
         <a href="#" class="addDiario btn btn-outline-info btn-sm" @click.prevent="abrirCompra()">Agregar Compra</a>
@@ -95,7 +95,7 @@
     <br><br>
 
     <h3 class="text-center font-weight-bold text-danger">VENTAS</h3>
-    <div style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+ 
         <table class="table table-bordered table-sm">
             <thead class="bg-dark">
                 <tr>
@@ -158,7 +158,7 @@
 
             </tbody>
         </table>
-    </div>
+    
 
     </table>
     @if ($rol === 'estudiante')

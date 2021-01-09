@@ -39,7 +39,7 @@
               <option value="balance-general">Balance General</option>
               <option value="asientos-cierre">Asientos de cierre</option>
               <option value="librocaja">Libro Caja</option>
-              <option value="conciliacionbancaria">Consiliacion Bancaria</option>
+              <option value="conciliacionbancaria">Conciliacion Bancaria</option>
               <option value="arqueocaja">Arqueo Caja</option>
               <option value="librobanco">Libro Banco</option>
               <option value="retencioniva">Retencion IVA</option>
@@ -503,7 +503,7 @@
 
                 <a class="list-group-item list-group-item-action" id="list-arqueo-caja-list" data-toggle="list" href="#list-arqueo-caja" role="tab" aria-controls="arqueo-caja">Arqueo Caja</a>
 
-                <a class="list-group-item list-group-item-action" id="list-conciliacion-bancaria-list" data-toggle="list" href="#list-conciliacion-bancaria" role="tab" aria-controls="conciliacion-bancaria">Consiliacion bancaria</a>
+                <a class="list-group-item list-group-item-action" id="list-conciliacion-bancaria-list" data-toggle="list" href="#list-conciliacion-bancaria" role="tab" aria-controls="conciliacion-bancaria">Conciliacion bancaria</a>
 
      {{--            <a class="list-group-item list-group-item-action" id="list-mayor-general-list" data-toggle="list" href="#list-mayor-general" role="tab" aria-controls="mayor-general">Mayor General</a>
                 <a class="list-group-item list-group-item-action" id="list-balance-comprobacion-list" data-toggle="list" href="#list-balance-comprobacion" role="tab" aria-controls="balance-comprobacion">Balance de Comprobacion</a>

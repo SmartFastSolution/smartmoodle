@@ -41,7 +41,8 @@ mix.styles([
     
 
 
-], 'public/js/plugins.js').sourceMaps();;
+], 'public/js/plugins.js').sourceMaps();
+mix.js('resources/js/tallercontabilidad.js', 'public/js');
 
 
 
