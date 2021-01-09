@@ -2924,26 +2924,26 @@ transacciones:'',
     },
   deleteHaber(index){
       this.diarios.haber.splice(index, 1);
-      this.diario.debe.fecha ='';
-      this.diario.debe.nom_cuenta ='';
-      this.diario.debe.saldo ='';
-      this.diario.debe.edit =false;
-      this.diario.haber.fecha ='';
-      this.diario.haber.nom_cuenta ='';
-      this.diario.haber.saldo ='';
-      this.diario.haber.edit =false;
+        this.diario.debe.fecha      ='';
+        this.diario.debe.nom_cuenta ='';
+        this.diario.debe.saldo      ='';
+        this.diario.debe.edit       = false;
+        this.diario.haber.fecha      ='';
+        this.diario.haber.nom_cuenta ='';
+        this.diario.haber.saldo      ='';
+        this.diario.haber.edit       = false;
 
     },
   deleteDebe(index){
-      this.diarios.debe.splice(index, 1);
-      this.diario.debe.fecha ='';
-      this.diario.debe.nom_cuenta ='';
-      this.diario.debe.saldo ='';
-      this.diario.debe.edit =false;
-      this.diario.haber.fecha ='';
-      this.diario.haber.nom_cuenta ='';
-      this.diario.haber.saldo ='';
-      this.diario.haber.edit =false;
+        this.diarios.debe.splice(index, 1);
+        this.diario.haber.fecha      ='';
+        this.diario.haber.nom_cuenta ='';
+        this.diario.haber.saldo      ='';
+        this.diario.haber.edit       = false;
+         this.diario.debe.fecha      ='';
+        this.diario.debe.nom_cuenta ='';
+        this.diario.debe.saldo      ='';
+        this.diario.debe.edit       = false;
 
     },
     guardarRegistro(){
@@ -3509,7 +3509,7 @@ transacciones:'',
            reten_iva.obtenerDiarioGeneral();
             // this.obtenerDiarioGeneral();
           }else{
-           toastr.success("Diairo General Creado Correctamente", "Smarmoddle", {
+           toastr.success("Diario General Creado Correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
           // _this.complete = response.data.success
@@ -3729,18 +3729,20 @@ nombre_cierre:''
       toastr.error("El campo detalle es obligatorio", "Smarmoddle", {
         "timeOut": "3000"
     });
-
      }else{
+      let saldo = Number(this.mayor.registro.saldo).toFixed(2);
+      let debe = this.decimales(this.mayor.registro.debe);
+      let haber = this.decimales(this.mayor.registro.haber);
       if (this.mayor.registro.cierre == true) {
-         let registro = {tipo:'', fecha:this.mayor.registro.fecha, detalle:this.mayor.registro.detalle, debe:this.mayor.registro.debe, haber:this.mayor.registro.haber, saldo:this.mayor.registro.saldo};
+         let registro = {tipo:'', fecha:this.mayor.registro.fecha, detalle:this.mayor.registro.detalle, debe:debe, haber:haber, saldo:saldo};
           this.mayores.cierres.push(registro);
       }else{
-          let registro = {tipo:'', fecha:this.mayor.registro.fecha, detalle:this.mayor.registro.detalle, debe:this.mayor.registro.debe, haber:this.mayor.registro.haber, saldo:this.mayor.registro.saldo};
+          let registro = {tipo:'', fecha:this.mayor.registro.fecha, detalle:this.mayor.registro.detalle, debe:debe, haber:haber, saldo:saldo};
           this.mayores.registros.push(registro);
       }
-            toastr.success("Movimiento agregado correctamente", "Smarmoddle", {
-              "timeOut": "3000"
-            });
+	    toastr.success("Movimiento agregado correctamente", "Smarmoddle", {
+	      "timeOut": "3000"
+	    });
                 this.mayor.registro.fecha ='';
                 this.mayor.registro.detalle ='';
                 this.mayor.registro.debe ='';
@@ -7241,26 +7243,26 @@ const asientos_cierre = new Vue({
     },
     deleteHaber(index){
         this.diarios.haber.splice(index, 1);
-        this.diario.debe.fecha ='';
+        this.diario.debe.fecha      ='';
         this.diario.debe.nom_cuenta ='';
-        this.diario.debe.saldo ='';
-        this.diario.debe.edit =false;
-        this.diario.haber.fecha ='';
+        this.diario.debe.saldo      ='';
+        this.diario.debe.edit       = false;
+        this.diario.haber.fecha      ='';
         this.diario.haber.nom_cuenta ='';
-        this.diario.haber.saldo ='';
-        this.diario.haber.edit =false;
+        this.diario.haber.saldo      ='';
+        this.diario.haber.edit       = false;
 
       },
     deleteDebe(index){
         this.diarios.debe.splice(index, 1);
-        this.diario.debe.fecha ='';
+        this.diario.debe.fecha      ='';
         this.diario.debe.nom_cuenta ='';
-        this.diario.debe.saldo ='';
-        this.diario.debe.edit =false;
-        this.diario.haber.fecha ='';
+        this.diario.debe.saldo      ='';
+        this.diario.debe.edit       = false;
+        this.diario.haber.fecha      ='';
         this.diario.haber.nom_cuenta ='';
-        this.diario.haber.saldo ='';
-        this.diario.haber.edit =false;
+        this.diario.haber.saldo      ='';
+        this.diario.haber.edit       = false;
 
       },
     guardarRegistro(){

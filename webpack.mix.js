@@ -14,7 +14,7 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js',
       'public/js')
    .sass('resources/sass/app.scss', 'public/css')
-   .sass('resources/sass/mapa.scss', 'public/css')
+   .sass('resources/sass/mapa.scss', 'public/css');
 
 mix.styles([
     'resources/vendor/toastr/toastr.css',
@@ -38,11 +38,9 @@ mix.styles([
     'resources/vendor/select2/js/select2.min.js',
     'resources/vendor/sweetalert2/sweetalert2.min.js',
     'resources/vendor/bootstrap-switch/js/bootstrap-switch.min.js'
-    
-
-
 ], 'public/js/plugins.js').sourceMaps();
-mix.js('resources/js/tallercontabilidad.js', 'public/js');
+
+ mix.js('resources/js/tallercontabilidad.js', 'public/js');
 
 
 

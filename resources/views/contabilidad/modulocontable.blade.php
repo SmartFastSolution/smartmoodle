@@ -76,7 +76,9 @@
               </div>
               <div class="form-group col-12">
                   <label for="recipient-name" class="col-form-label">Enunciado:</label>
-               <textarea v-model="enunciado" name="" id="" cols="15" rows="5" class="form-control"></textarea>
+              <vue-ckeditor v-model="enunciado" :config="config"/>
+
+           {{--     <textarea v-model="enunciado" name="" id="" cols="15" rows="5" class="form-control"></textarea> --}}
               </div>
           </div>
       </div>
@@ -482,7 +484,9 @@
               </div>
                <div class="form-group col-12">
                   <label for="recipient-name" class="col-form-label">Enunciado:</label>
-               <textarea v-model="enunciado" name="" id="" cols="15" rows="5" class="form-control"></textarea>
+              <vue-ckeditor v-model="enunciado" :config="config"/>
+                  
+               {{-- <textarea v-model="enunciado" name="" id="" cols="15" rows="5" class="form-control"></textarea> --}}
               </div>
           </div>
           <h4>Modulos a utilizar</h4>

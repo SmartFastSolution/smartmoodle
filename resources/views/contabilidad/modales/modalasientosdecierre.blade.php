@@ -1,5 +1,4 @@
 {{-- TRANSACCION --}}
-
 <div class="modal fade" data-backdrop="static" data-keyboard="false" id="as-transaccion" tabindex="-1" role="dialog"
     aria-labelledby="dg-transaccionLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-xl " role="document">
@@ -17,7 +16,6 @@
             </div>
             <div class="modal-body">
                 <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
-
                 <div class="row justify-content-center">
                     <div class="col-6">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -26,7 +24,6 @@
                                     style="font-size: 15px" data-toggle="tab" href="#comentario-asiento" role="tab"
                                     aria-controls="comentario-asiento" aria-selected="false">DETALLE MOVIMIENTO</a>
                             </li>
-
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link  text-dark font-weight-bold" id="debe-asiento-tab"
                                     style="font-size: 15px" data-toggle="tab" href="#debe-asiento" role="tab"
@@ -59,9 +56,8 @@
                                                     placeholder="ELEGIR CUENTA">
                                                 </model-select>
                                                 {{--  <select name="n_cuenta" v-model="diario.debe.nom_cuenta" class="custom-select">
-                                <option value="" disabled>ELIGE UNA CUENTA</option>
-                                <option v-for="(cuenta, index) in cuentas" :value="cuenta.id">@{{ cuenta.nombre }}
-                                                </option>
+                          <option value="" disabled>ELIGE UNA CUENTA</option>
+                          <option v-for="(cuenta, index) in cuentas" :value="cuenta.id">@{{ cuenta.nombre }} </option>
                                                 <option value="Banco">Bancos</option>
                                                 <option value="Muebles">Muebles</option>
                                                 <option value="Caja">Caja</option>
@@ -84,19 +80,16 @@
                                 <div v-if="!diario.debe.edit" class="row justify-content-center">
                                     <a href="#" class="btn btn-success" @click.prevent="agregarDebe()">Agregar</a>
                                     {{-- <a href=""data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark ml-1">KARDEX</a> --}}
-
                                 </div>
                                 <div v-else class="row justify-content-center">
                                     <a href="#" class="btn btn-success" @click.prevent="updateDebe()">Actualizar</a>
                                     <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicion('debe')"><i
                                             class="fa fa-window-close"></i></a>
-
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="haber-asiento" role="tabpanel"
                                 aria-labelledby="haber-asiento-tab">
                                 <h2 class="text-center">AGREGAR CUENTAS ACREEDORAS</h2>
-
                                 <table class="table table-bordered table-sm">
                                     <thead class="bg-danger">
                                         <tr>
@@ -110,12 +103,10 @@
                                                 <model-select :options="options" v-model="diario.haber.nom_cuenta"
                                                     placeholder="ELEGIR CUENTA">
                                                 </model-select>
-
                                                 {{-- <select name="n_cuenta" v-model="diario.haber.nom_cuenta" class="custom-select">
-                                  <option value="" disabled>ELIGE UNA CUENTA</option>
-                                  <option v-for="(cuenta, index) in cuentas" :value="cuenta.id">@{{ cuenta.nombre }}
+                          <option value="" disabled>ELIGE UNA CUENTA</option>
+                          <option v-for="(cuenta, index) in cuentas" :value="cuenta.id">@{{ cuenta.nombre }}
                                                 </option>
-
                                                 <option value="Banco">Bancos</option>
                                                 <option value="Muebles">Muebles</option>
                                                 <option value="Caja">Caja</option>
@@ -139,9 +130,7 @@
                                 <div v-if="!diario.haber.edit" class="row justify-content-center">
                                     <a href="#" class="btn btn-info" @click.prevent="agregarHaber()">Agregar</a>
                                     {{-- <a href="" data-toggle="modal" data-target="#kardex-diairo" class="btn btn-dark ml-1">KARDEX</a> --}}
-
                                 </div>
-
                                 <div v-else class="row justify-content-center">
                                     <a href="#" class="btn btn-info" @click.prevent="updateHaber()">Actualizar</a>
                                     <a href="#" class="btn btn-danger ml-1" @click.prevent="cancelarEdicion('haber')"><i
@@ -151,7 +140,6 @@
                             <div class="tab-pane fade show active" id="comentario-asiento" role="tabpanel"
                                 aria-labelledby="comentario-asiento-tab">
                                 <h2 class="text-center">AGREGAR DETALLES</h2>
-
                                 <table class="table table-bordered table-sm">
                                     <thead class="thead-dark">
                                         <tr>
@@ -180,20 +168,22 @@
                                     </div>
                                 </div>
                                 {{--  <div v-if="edit.debe.length >= 1" class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="comentarioUpdate()">Editar Comentario</a>
-                      </div>
-                       <div v-else class="row justify-content-center">
-                            <a href="#" class="btn btn-light" @click.prevent="agregarComentario()">Agregar Comentario</a>
-                      </div> --}}
+                  <a href="#" class="btn btn-light" @click.prevent="comentarioUpdate()">Editar Comentario</a>
+                </div>
+                <div v-else class="row justify-content-center">
+                  <a href="#" class="btn btn-light" @click.prevent="agregarComentario()">Agregar Comentario</a>
+                </div> --}}
                             </div>
                         </div>
                     </div>
                     @if($datos->metodo == 'individual')
-                     <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
+                    <div class="col-6"
+                        style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
                         {!! $transacciones->transacciones !!}
-                     </div>
-                @elseif($datos->metodo == 'concatenado')
-                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
+                    </div>
+                    @elseif($datos->metodo == 'concatenado')
+                    <div class="col-6"
+                        style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
                         <h3 class="text-center font-weight-bold">Datos para realizar los Asientos de Cierre</h3>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
@@ -242,11 +232,9 @@
                                             style="font-size: 20px;">@{{ decimales(estadoresultado.totales.utilidad_bruta_ventas_e_resultado) }}</span>
                                     </div>
                                 </div>
-
                                 <div class="row mt-2">
                                     <div class="col-6">
                                         <h2 class="font-weight-bold pl-3">INGRESOS</h2>
-
                                     </div>
                                     <div class="col-12">
                                         <table>
@@ -275,7 +263,6 @@
                                             style="font-size: 20px;">@{{ estadoresultado.totales.utilidad_neta_o }}</span>
                                     </div>
                                 </div>
-
                                 <div class="row mt-2">
                                     <div class="col-6">
                                         <h2 class="font-weight-bold pl-3">GASTOS</h2>
@@ -292,7 +279,6 @@
                                         </table>
                                     </div>
                                 </div>
-
                                 <div class="row justify-content-between mb-2">
                                     <div class="col-10">
                                         <h4 class="font-weight-bold text-info">Total de gastos</h4>
@@ -301,7 +287,6 @@
                                             class="badge badge-danger"
                                             style="font-size: 20px; ">@{{ estadoresultado.totales.gasto }}</span></div>
                                 </div>
-
                                 <div class="row justify-content-between">
                                     <div class="col-7">
                                         <h4 v-if="estadoresultado.utilidad == 'utilidad_neta'" class="font-weight-bold">
@@ -312,8 +297,6 @@
                                             style="font-size: 20px; ">@{{ estadoresultado.totales.utilidad_ejercicio_e_resultado }}</span>
                                     </div>
                                 </div>
-
-
                                 <div class="mt-2 row justify-content-between"
                                     v-if="estadoresultado.utilidad == 'utilidad_neta'">
                                     <div class="col-12">
@@ -339,9 +322,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
                             <div class="tab-pane fade" id="as-balance-general" role="tabpanel"
                                 aria-labelledby="as-balance-general-tab">
                                 <h2 class="text-center display-4 font-weight-bold text-danger">Balance General</h2>
@@ -353,11 +333,8 @@
                                         <h3 class="text-center">
                                             @{{ balance_general.fecha }}
                                         </h3>
-
                                     </div>
-
                                 </div>
-
                                 <div class="row p-3  mb-2 justify-content-center ">
                                 </div>
                                 <h2 class="text-center font-weight-bold text-danger">ACTIVOS</h2>
@@ -390,7 +367,6 @@
                                     </div>
                                     <div class="col-9">
                                         <h3 class="text-primary">ACTIVOS NO CORRIENTE</h3><br>
-
                                         <table class="table table-borderless">
                                             <tbody v-for="(element, index) in balance_general.a_nocorrientes"
                                                 :key="element.name">
@@ -406,7 +382,6 @@
                                                         class="text-right border-danger">
                                                         @{{ decimales(element.saldo2) }}</td>
                                                     <td class="text-right">@{{ decimales(element.total_saldo2) }}</td>
-
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -422,7 +397,6 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-
                                         <table>
                                             <tbody>
                                                 <tr>
@@ -434,7 +408,6 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-
                                     </div>
                                 </div>
                                 <h2 class="text-center font-weight-bold text-danger">PASIVOS</h2>
@@ -508,7 +481,6 @@
                                     </div>
                                 </div>
                                 <h2 class="text-center font-weight-bold text-danger">PATRIMONIO </h2>
-
                                 <div class="row">
                                     <div class="col-7">
                                         <draggable class="list-group list-group-flush"
@@ -549,15 +521,19 @@
                                         </table>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                     @endif
-
-                    <div class="col-12 mt-2" v-if="diarios.debe.length > 0 || diarios.haber.length > 0" style=" height:300px; overflow-y: scroll;">
-
+                    <div class="col-12 mt-2" v-if="diarios.debe.length > 0 || diarios.haber.length > 0"
+                        style=" height:300px; overflow-y: scroll;">
                         <h2 class="text-center">ACTUALIZAR REGISTROS</h2>
+                        <div class="row justify-content-end mb-2">
+                            <a v-if="update" href="#" class="addDiario btn btn-success"
+                                @click.prevent="updaterRegister()">Actualizar Transaccion</a>
+                            <a v-if="!update" href="#" class="addDiario btn btn-success"
+                                @click.prevent="guardarRegistro()">Agregar Transaccion</a>
+                        </div>
                         <table class="table table-bordered table-sm">
                             <thead class="thead-dark">
                                 <tr align="center">
@@ -606,10 +582,8 @@
                                     <td></td>
                                 </tr>
                             </tbody>
-
                         </table>
                         <div class="row justify-content-around mb-2">
-
                             <a v-if="update" href="#" class="addDiario btn btn-success"
                                 @click.prevent="updaterRegister()">Actualizar Transaccion</a>
                             <a v-if="!update" href="#" class="addDiario btn btn-success"
@@ -623,8 +597,6 @@
         </div>
     </div>
 </div>
-
-
 {{-- KARDEX --}}
 <div class="modal fade" id="kardex-diairo" tabindex="-1" role="dialog" aria-labelledby="kardex-diairo"
     aria-hidden="true">
@@ -658,7 +630,6 @@
                             <th width="300" colspan="3">EGRESOS</th>
                             <th width="300" colspan="3">EXISTENCIA</th>
                             {{-- <th v-if="kardex.length >= 1" style="vertical-align:middle" rowspan="2" colspan="2">ACCIONES</th> --}}
-
                         </tr>
                         <tr class="text-center">
                             <td>CANT.</td>
@@ -690,7 +661,6 @@
         <td style="vertical-align:middle"  v-else colspan="2"></td> --}}
                         </tr>
                     </tbody>
-
                     {{--     <tbody>
       <tr class="bg-secondary">
         <td></td>
@@ -711,9 +681,6 @@
         </div>
     </div>
 </div>
-
-
-
 {{-- PASIVOS --}}
 <div class="modal fade" id="haber" tabindex="-1" role="dialog" aria-labelledby="haberLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
@@ -736,7 +703,6 @@
                             </thead>
                             <tbody>
                                 <tr>
-
                                     <td>
                                         <select name="n_cuenta" v-model="diario.haber.nom_cuenta" class="custom-select">
                                             <option value="" disabled>ELIGE UNA CUENTA</option>
@@ -763,7 +729,6 @@
                         <div v-if="edit.debe.length >= 1" class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="agregarEdit()">Agregar Pasivo</a>
                         </div>
-
                         <div v-else class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="agregarHaber()">Agregar Pasivo</a>
                         </div>
@@ -775,7 +740,6 @@
         </div>
     </div>
 </div>
-
 {{-- Pasivos --}}
 <div class="modal fade" id="debe" tabindex="-1" role="dialog" aria-labelledby="debeLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
@@ -838,7 +802,6 @@
         </div>
     </div>
 </div>
-
 {{-- AGREGAR COMENTARIO --}}
 <div class="modal fade" id="comentario" tabindex="-1" role="dialog" aria-labelledby="haberLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
@@ -881,10 +844,6 @@
         </div>
     </div>
 </div>
-
-
-
-
 {{-- ACTUALIZAR UN REGISTRO --}}
 <div class="modal fade" id="haber_a" tabindex="-1" role="dialog" aria-labelledby="haberLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
@@ -930,7 +889,6 @@
                                 </tr>
                             </tbody>
                         </table>
-
                         <div class="row justify-content-center">
                             <a href="#" class="btn btn-light" @click.prevent="updateHaber()">Actualizar Pasivo</a>
                         </div>
@@ -942,7 +900,6 @@
         </div>
     </div>
 </div>
-
 {{-- Activo --}}
 <div class="modal fade" id="debe_a" tabindex="-1" role="dialog" aria-labelledby="debeLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
@@ -1002,11 +959,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 {{-- ACTUALIZAR UN REGISTRO --}}
 <div class="modal fade" id="haber_d" tabindex="-1" role="dialog" aria-labelledby="haberLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
@@ -1064,7 +1016,6 @@
         </div>
     </div>
 </div>
-
 {{-- Pasivos --}}
 <div class="modal fade" id="debe_d" tabindex="-1" role="dialog" aria-labelledby="debeLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
@@ -1124,8 +1075,6 @@
         </div>
     </div>
 </div>
-
-
 {{-- Porcentual --}}
 <div class="modal fade" id="porcentajes" tabindex="-1" role="dialog" aria-labelledby="debeLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg" role="document">
@@ -1151,7 +1100,7 @@
                             <tbody>
                                 <tr>
                                     {{--   <td v-if="diario.debe.fecha != ''" width="50" > <input autocomplete="ÑÖcompletes" type="date" name="fecha" v-model="diario.debe.fecha" class="form-control" required>
-                              </td> --}}
+            </td> --}}
                                     <td>
                                         <select name="n_cuenta" v-model="porcentajes.index_cuenta"
                                             class="custom-select">

@@ -5,12 +5,12 @@
 
 
   <div class="container-fluid">
-        
+        {{-- <h1 class="text-center text-danger  display-1">{{ $datos->taller->nombre }}</h1> --}}
         <div class="card border border-danger mb-3" >
           <div class="card-header font-weight-bold" style="font-size: 25px;"> 
             <h1 class="display-3">{{ auth()->user()->name }}{{ auth()->user()->apellido }}</h1></div>
           <div class="card-body">
-            <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{{ $datos->enunciado }}</h2>
+            <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{!! $datos->enunciado !!}<</h2>
          @if ($datos->metodo == 'concatenado')
         <div class="row justify-content-md-center">
         <div class="col-12 col-sm-12 col-md-2 mb-3">

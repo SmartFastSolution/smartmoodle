@@ -3729,18 +3729,20 @@ nombre_cierre:''
       toastr.error("El campo detalle es obligatorio", "Smarmoddle", {
         "timeOut": "3000"
     });
-
      }else{
+      let saldo = Number(this.mayor.registro.saldo).toFixed(2);
+      let debe = this.decimales(this.mayor.registro.debe);
+      let haber = this.decimales(this.mayor.registro.haber);
       if (this.mayor.registro.cierre == true) {
-         let registro = {tipo:'', fecha:this.mayor.registro.fecha, detalle:this.mayor.registro.detalle, debe:this.mayor.registro.debe, haber:this.mayor.registro.haber, saldo:this.mayor.registro.saldo};
+         let registro = {tipo:'', fecha:this.mayor.registro.fecha, detalle:this.mayor.registro.detalle, debe:debe, haber:haber, saldo:saldo};
           this.mayores.cierres.push(registro);
       }else{
-          let registro = {tipo:'', fecha:this.mayor.registro.fecha, detalle:this.mayor.registro.detalle, debe:this.mayor.registro.debe, haber:this.mayor.registro.haber, saldo:this.mayor.registro.saldo};
+          let registro = {tipo:'', fecha:this.mayor.registro.fecha, detalle:this.mayor.registro.detalle, debe:debe, haber:haber, saldo:saldo};
           this.mayores.registros.push(registro);
       }
-            toastr.success("Movimiento agregado correctamente", "Smarmoddle", {
-              "timeOut": "3000"
-            });
+	    toastr.success("Movimiento agregado correctamente", "Smarmoddle", {
+	      "timeOut": "3000"
+	    });
                 this.mayor.registro.fecha ='';
                 this.mayor.registro.detalle ='';
                 this.mayor.registro.debe ='';
@@ -3989,7 +3991,7 @@ nombre_cierre:''
           _this.nombre = response.data.nombre;
           console.log(response.data.registros)
          
-           toastr.success("Mayor General cargado Correctamente", "Smarmoddle", {
+           toastr.success("Mayor Gneral cargado Correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
             }          
@@ -7241,26 +7243,26 @@ const asientos_cierre = new Vue({
     },
     deleteHaber(index){
         this.diarios.haber.splice(index, 1);
-        this.diario.debe.fecha ='';
+        this.diario.debe.fecha      ='';
         this.diario.debe.nom_cuenta ='';
-        this.diario.debe.saldo ='';
-        this.diario.debe.edit =false;
-        this.diario.haber.fecha ='';
+        this.diario.debe.saldo      ='';
+        this.diario.debe.edit       = false;
+        this.diario.haber.fecha      ='';
         this.diario.haber.nom_cuenta ='';
-        this.diario.haber.saldo ='';
-        this.diario.haber.edit =false;
+        this.diario.haber.saldo      ='';
+        this.diario.haber.edit       = false;
 
       },
     deleteDebe(index){
         this.diarios.debe.splice(index, 1);
-        this.diario.debe.fecha ='';
+        this.diario.debe.fecha      ='';
         this.diario.debe.nom_cuenta ='';
-        this.diario.debe.saldo ='';
-        this.diario.debe.edit =false;
-        this.diario.haber.fecha ='';
+        this.diario.debe.saldo      ='';
+        this.diario.debe.edit       = false;
+        this.diario.haber.fecha      ='';
         this.diario.haber.nom_cuenta ='';
-        this.diario.haber.saldo ='';
-        this.diario.haber.edit =false;
+        this.diario.haber.saldo      ='';
+        this.diario.haber.edit       = false;
 
       },
     guardarRegistro(){
@@ -11287,7 +11289,6 @@ const arqueo_caja = new Vue ({
     let component = 'example-component';
     funciones.VueSweetAlert2(component,propsData);
     },
-
     obtenerLibroCaja: function(){
       let _this = this;
       let url ='/sistema/admin/taller/anexo-obtener-caja';
@@ -11564,37 +11565,7 @@ const arqueo_caja = new Vue ({
     }, //fin de function  actualizar 
 
     
-    // eliminarSaldo(){
-    //   let id = this.eliminar.index;
-    //   this.t_saldo.splice(id, 1);
-    //   this.eliminar.index ='';
-    //   this.eliminar.nombre ='';
-    //   $('#eliminar-arqueo').modal('hide'); // en prueba para eliminar
-    // }, //fin metodo eliminar compra 
-
-    
-    // eliminarExis(){
-    //   let id = this.eliminar.index;
-    //   this.t_exis.splice(id, 1);
-    //   this.eliminar.index ='';
-    //   this.eliminar.nombre ='';
-    //   $('#eliminar-arqueo2').modal('hide'); // en prueba para eliminar
-    // }, //fin metodo eliminar compra 
-
-
-    // deleteSaldo(index){
-    //   this.t_saldo.splice(index, 1);
-    //   this.totales_s();
-    //  },// delete saldo
-
-    // deleteExis(index){
-    //   this.t_exis.splice(index, 1);
-    //   this.totales_s();
-    //  },// delete existencias
-
-
-
-
+  
     WarningEliminarExis(id){
       this.eliminar.index = id;
       this.eliminar.nombre = this.t_exis[id].detalle;

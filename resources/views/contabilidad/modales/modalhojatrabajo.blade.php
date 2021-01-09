@@ -46,7 +46,7 @@
                         <div class="tab-content" id="datosHojaContent">
                             <div class="tab-pane fade show active" id="ht-balance-comprobacion" role="tabpanel"
                                 aria-labelledby="ht-balance-comprobacion-tab"
-                                style=" height:400px; overflow-y: scroll;">
+                                style=" height:300px; overflow-y: scroll;">
                                 <h1 class="text-center text-danger font-weight-bold mt-2">BALANCE DE COMPROBACION</h1>
                                 <table class="table table-bordered table-sm mb-2">
                                     <thead>
@@ -93,7 +93,7 @@
                             </div>
                             <div class="tab-pane fade" id="ht-mayor-general" role="tabpanel"
                                 aria-labelledby="ht-mayor-general-tab"
-                                style=" height:400px; overflow-y: scroll; overflow-x: hidden;">
+                                style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
                                 <h1 class="text-center text-danger font-weight-bold mt-2">MAYOR GENERAL</h1>
                                 <div class="row justify-content-center">
                                     <div class="col-3 mb-2">

@@ -18,9 +18,7 @@ class CreateCollagesTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->string('enunciado');
-           
             $table->timestamps();
-            
             $table->foreign('taller_id')
             ->references('id')
             ->on('tallers')
