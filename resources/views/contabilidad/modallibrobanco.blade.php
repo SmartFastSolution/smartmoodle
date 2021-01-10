@@ -14,7 +14,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height: 700px; overflow-y: scroll;  width: 100%;">
                 <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
 
                 <div class="row justify-content-center">

@@ -26,7 +26,8 @@
             @endforeach
 
         </ul>
-
+       
+      
         <div class="tab-content" id="myTabContent">
             @foreach ($contenidos as $c => $contenido)
             <div class="tab-pane fade show @if ($c== 0) active @endif " id="contenido{{ $contenido->id }}"
@@ -55,7 +56,7 @@
                                         <tr v-for="(taller, index) in talleres[{{ $c }}].talleres">
                                             <td>{{$contenido->nombre}}</td>
                                             <td>@{{taller.nombre}}</td>
-                                            <td>@{{taller.enunciado}}</td>
+                                            <td v-html="taller.enunciado">@{{taller.enunciado}}</td>
                                             <td>
                                                 <span v-if="taller.estado == 1"
                                                     class="badge-success badge">activo</span>

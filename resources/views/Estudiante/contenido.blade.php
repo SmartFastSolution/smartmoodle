@@ -62,7 +62,7 @@
                                         <tr>
                                             <td>{{$taller->contenido->nombre}}</td>
                                             <td>{{$taller['nombre']}}</td>
-                                            <td>{{$taller->enunciado}}</td>
+                                            <td>{!!$taller->enunciado!!}</td>
                                             <td class="text-center">
                                                 {{Carbon\Carbon::parse($taller->fecha_entrega)->formatLocalized('%d, %B %Y ') }}
                                             </td>
@@ -115,7 +115,7 @@
                                             <th scope="row">{{-- {{$taller->materia['id']}} --}}</th>
                                             <td>{{$taller->contenido->nombre}}</td>
                                             <td>{{$taller['nombre']}}</td>
-                                            <td>{{$taller->enunciado}}</td>
+                                            <td>{!!$taller->enunciado!!}</td>
                                             <td align="center"> <span
                                                     class="badge @if($taller->pivot->status =='completado')badge-warning @elseif($taller->pivot->status == 'calificado') badge-success @endif ">{{$taller->pivot->status}}</span>
                                             </td>

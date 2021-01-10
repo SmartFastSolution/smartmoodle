@@ -13237,13 +13237,13 @@ let reten_iva = new Vue({
         abrirCompra(){ //solo para acceder al modal para agregar todo pilas 
          
          $('#modal-retencion').modal('show');
-         $('#nav-bih-retencion-compra-tab').tab('show');
+         $('#ht-retencion-compra-tab').tab('show');
 
        }, //fin de metodo abrirtransaccion
        abrirVenta(){ //solo para acceder al modal para agregar todo pilas 
          
         $('#modal-retencion').modal('show');
-        $('#nav-bih-retencion-venta-tab').tab('show');
+        $('#ht-retencion-venta-tab').tab('show');
 
       }, //fin de metodo abrirtransaccion
 
@@ -13297,7 +13297,7 @@ let reten_iva = new Vue({
         this.compra.ret_70        = this.t_compras[index].ret_70;
         this.compra.ret_100       = this.t_compras[index].ret_100;
     
-        $('#nav-bih-retencion-compra-tab').tab('show');
+        $('#ht-retencion-compra-tab').tab('show');
        }, //fin de edit modal
 
        editCompraFuera(index){
@@ -13317,7 +13317,7 @@ let reten_iva = new Vue({
         this.compra.ret_100       = this.t_compras[index].ret_100;
       
         $('#modal-retencion').modal('show');
-        $('#nav-bih-retencion-compra-tab').tab('show');
+        $('#ht-retencion-compra-tab').tab('show');
        }, //fin de edit modal
 
        cancelarEditCompra(){
@@ -13460,7 +13460,7 @@ let reten_iva = new Vue({
         this.venta.ret_70        = this.t_ventas[index].ret_70;
         this.venta.ret_100       = this.t_ventas[index].ret_100;
       
-        $('#nav-bih-retencion-venta-tab').tab('show');
+        $('#ht-retencion-venta-tab').tab('show');
        }, //fin de edit modal
 
 
@@ -13481,7 +13481,7 @@ let reten_iva = new Vue({
         this.venta.ret_100       = this.t_ventas[index].ret_100;
         
         $('#modal-retencion').modal('show');
-        $('#nav-bih-retencion-venta-tab').tab('show');
+        $('#ht-retencion-venta-tab').tab('show');
        }, //fin de edit modal venta
 
        cancelarEditVenta(){

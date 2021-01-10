@@ -13,7 +13,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height: 700px; overflow-y: scroll;  width: 100%;">
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <nav>

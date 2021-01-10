@@ -87,7 +87,7 @@
                         <td>{{$taller->mate_nombre}}</td>
                         <td>{{$taller->nombre}}</td>
                         <td>{{$taller->alumno}}</td>
-                        <td>{{$taller->enunciado}}</td>
+                        <td>{!!$taller->enunciado!!}</td>
                         <td class="table-button ">
                             <a class="btn btn-info"
                                 href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
@@ -131,7 +131,7 @@
                         <td>{{$taller->mate_nombre}}</td>
                         <td>{{$taller->nombre}}</td>
                         <td>{{$taller->alumno}}</td>
-                        <td>{{$taller->enunciado}}</td>
+                        <td>{!!$taller->enunciado!!}</td>
                         <td class="table-button ">
                             <a class="btn btn-info"
                                 href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i

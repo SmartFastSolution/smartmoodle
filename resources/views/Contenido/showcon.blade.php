@@ -145,7 +145,7 @@
                                                 <th scope="row"></th>
                                                 <td>{{$taller->contenido->nombre}}</td>
                                                 <td>{{$taller['nombre']}}</td>
-                                                <td>{{$taller->enunciado}}</td>
+                                                <td>{!!$taller->enunciado!!}</td>
                                                 <td>
                                                     <div class="onoffswitch">
                                                         <input type="checkbox" name="onoffswitch"
