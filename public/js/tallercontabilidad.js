@@ -3927,6 +3927,7 @@ nombre_cierre:''
             'success'
           );
           this.registros.splice(id, 1);
+          
         }
       });
       // $('#eliminar-mg').modal('show');
@@ -4061,15 +4062,16 @@ const balance_comp = new Vue({
               return false
             }
           },
-        decimales(saldo){
-      if (saldo !== null && saldo !== '' && saldo !== 0) {
-         let total = Number(saldo).toFixed(2);
-      return total;
-    }else{
-      return
-    }
-     
-    },
+          decimales(saldo){
+            let vacio = '';
+          if (saldo !== null && saldo !== '' && saldo !== 0) {
+             let total = Number(saldo).toFixed(2);
+          return total;
+        }else{
+          return vacio
+        }
+         
+        },
         formatoFecha(fecha){
       if (fecha !== null) {
          let date = fecha.split('-').reverse().join('-');
@@ -4216,6 +4218,7 @@ const balance_comp = new Vue({
             'success'
           );
            this.balances.splice(index, 1);
+           this.cancelarEdicion();
         this.totales();
         }
       });
@@ -4253,7 +4256,7 @@ const balance_comp = new Vue({
         this.balance.suma_debe   =''
         this.balance.suma_haber  =''
         this.balance.saldo_haber =''
-        this.balance.saldo_haber =''
+        this.balance.saldo_debe =''
         this.balance.edit        = false;
      
     },
@@ -4746,6 +4749,8 @@ let hoja_trabajo = new Vue({
             'success'
           );
           this.registros.splice(id, 1);
+          this.cancelarEdicion();
+          this.sumasTotales();
         }
       });
       // $('#eliminar-ht').modal('show');
@@ -5098,6 +5103,7 @@ const balance_ajustado = new Vue({
             'success'
           );
           this.balances_ajustados.splice(id, 1);
+          this.cancelarEdicion();
         }
       });
       // $('#eliminar-ht').modal('show');
