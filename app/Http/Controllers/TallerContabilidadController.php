@@ -2457,7 +2457,7 @@ class TallerContabilidadController extends Controller
                 $b->saldo_c           = $request->saldo_c;
                 $b->saldo_ch          = $request->saldo_ch;
                 $b->saldo_d           = $request->saldo_d;
-                $b->saldo_deposito    = $request->saldo_depositos;
+                $b->saldo_depositos    = $request->saldo_depositos;
                 $b->total             = $request->total;
                 $b->save();
                 $cbs= Conciliacionbancaria::where('user_id', $id)->get()->last();
@@ -2539,7 +2539,7 @@ class TallerContabilidadController extends Controller
                     $cb->fecha      = $fecha;
                     $cb->n_banco    = $n_banco;
                     $cb->saldo_c    = $request->saldo_c;
-                    $cb->saldo_deposito    = $request->saldo_depositos;
+                    $cb->saldo_depositos    = $request->saldo_depositos;
                     $cb->saldo_ch   = $request->saldo_ch;
                     $cb->saldo_d    = $request->saldo_d;
                     $cb->total      = $request->total;
