@@ -23,7 +23,7 @@
                 @elseif($datos->metodo == 'concatenado')
                     <div class="col-12 mt-2" style="border: double 8px #E71822;">
 
-                        <h1 class="text-center font-weight-bold mt-2">Datos para elaborar estado de resultados</h1>
+                        <h1 class="text-center font-weight-bold mt-2">Datos para elaborar el Balance General</h1>
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link active" id="bg-hoja-trabajo-tab" data-toggle="tab"

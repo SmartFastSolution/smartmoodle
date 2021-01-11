@@ -5,11 +5,11 @@
     <h2 class="text-center display-4 font-weight-bold text-danger">Arqueo de Caja</h2>
 
     <br>
-    <!-- @if ($rol === 'estudiante')
-        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirArqueo()">Agregar Detalle</a>
+    @if ($rol === 'estudiante')
+        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirArqueo()">Agregar Existencias</a>
         <a href="#" class="addDiario btn btn-outline-success ml-1 " @click.prevent="guardaArqueo()">Guardar Arqueo Caja</a>
-@endif -->
-    <div style=" height:400px; overflow-y: scroll; overflow-x: hidden;">
+@endif
+   
         <table style="border: hidden" class="table table-bordered table-sm mt-2 mb-2">
             <thead>
                 <tr style="border: hidden" class="text-center bg-dark">
@@ -75,12 +75,11 @@
 
             </tbody>
         </table>
-
-    </div>
+  
 
     @if ($rol === 'estudiante')
     <div class="row justify-content-center mb-2">
-        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirArqueo()">Agregar Detalle</a>
+        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirArqueo()">Agregar Existencias</a>
     </div>
 
     <div class="row justify-content-center">

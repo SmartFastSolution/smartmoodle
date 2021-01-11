@@ -1762,6 +1762,7 @@ class TallerContabilidadController extends Controller
                                 $o->t_p_corriente    = $request->totales['t_p_corriente'];
                                 $o->t_p_no_corriente = $request->totales['t_p_no_corriente'];
                                 $o->t_patrimonio     = $request->totales['t_patrimonio'];
+                                $o->total_pasivo_patrimonio = $request->t_patrimonio;
                                 $o->save();
 
                             $activ=BGActivo::where('balance_general_id', $o->id)->get();

@@ -7,7 +7,7 @@
                     <h5 class="modal-title" id="bg-transaccionLabel">ACTUALIZAR TRANSACCION</h5>
                 </div>
                 <div v-else="!update">
-                    <h5 class="modal-title" id="bg-transaccionLabel">AGREGAR TRANSACCION</h5>
+                    <h5 class="modal-title" id="bg-transaccionLabel">AGREGAR EXISTENCIAS</h5>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>

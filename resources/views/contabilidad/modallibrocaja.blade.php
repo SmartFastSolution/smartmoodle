@@ -7,7 +7,7 @@
                     <h5 class="modal-title" id="bg-transaccionLabel">ACTUALIZAR TRANSACCION</h5>
                 </div>
                 <div v-else="!update">
-                    <h5 class="modal-title" id="bg-transaccionLabel">AGREGAR TRANSACCION</h5>
+                    <h5 class="modal-title" id="bg-transaccionLabel">AGREGAR  MOVIMIENTO DE EFECTIVO</h5>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -18,7 +18,7 @@
 
                 <div class="row justify-content-center">
                     <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
-                        <h2 class="text-center">AGREGAR TRANSACCIÓN</h2>
+                        <h2 class="text-center">AGREGAR MOVIMIENTO</h2>
                         <table class="table table-bordered table-sm mb-2">
                             <thead class="bg-success">
                                 <tr>

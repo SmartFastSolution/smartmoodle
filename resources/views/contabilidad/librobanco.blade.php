@@ -26,7 +26,7 @@
     <a href="#" class="addDiario btn btn-outline-success ml-1" @click.prevent="guardarlbBAnco()">Guardar Libro Banco</a>
     @endif
     <br>
-    <div style=" height:300px; overflow-y: scroll;">
+   
     <br>
         <table style="border: hidden" class="table table-bordered table-sm mb-2">
             <thead style="border: hidden">
@@ -71,7 +71,7 @@
 
             </tbody>
         </table>
-    </div>
+   
 
     @if ($rol === 'estudiante')
     <div class="row justify-content-center mb-2">

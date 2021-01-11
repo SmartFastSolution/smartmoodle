@@ -11145,18 +11145,18 @@ let librocaja = new Vue({
      
     },//fin de actualizar libro de caja
 
-    eliminarLibro(){
-      let id = this.eliminar.index;
-      this.libros_caja.splice(id, 1);
-      this.eliminar.index ='';
-      this.eliminar.nombre ='';
-      $('#eliminar-libro').modal('hide'); // en prueba para eliminar
-    }, //fin metodo eliminar compra 
+    // eliminarLibro(){
+    //   let id = this.eliminar.index;
+    //   this.libros_caja.splice(id, 1);
+    //   this.eliminar.index ='';
+    //   this.eliminar.nombre ='';
+    //   $('#eliminar-libro').modal('hide'); // en prueba para eliminar
+    // }, //fin metodo eliminar compra 
 
-    deleteLibroCaja(index){
-      this.libros_caja.splice(index, 1);
-      this.totales();
-     },
+    // deleteLibroCaja(index){
+    //   this.libros_caja.splice(index, 1);
+    //   this.totales();
+    //  },
 
      WarningEliminarLibro(id){
       this.eliminar.index = id;
@@ -11178,7 +11178,9 @@ let librocaja = new Vue({
             'success'
           );
           this.libros_caja.splice(id, 1);
-        }
+          this.totales();
+          }
+          
       });
     }, //fin metodo warningeliminarcompra
 
@@ -11212,6 +11214,7 @@ let librocaja = new Vue({
                 "timeOut": "3000"
                 });
                 arqueo_caja.obtenerLibroCaja();
+                this.totales();
                 }        
             }).catch(function(error){
                });
@@ -11485,6 +11488,7 @@ const arqueo_caja = new Vue ({
             'success'
           );
           this.t_saldo.splice(id, 1);
+          this.totales_s();
         }
       });
     }, //fin metodo warningeliminarcompra
@@ -11572,33 +11576,7 @@ const arqueo_caja = new Vue ({
     }, //fin de function  actualizar 
 
     
-    // eliminarSaldo(){
-    //   let id = this.eliminar.index;
-    //   this.t_saldo.splice(id, 1);
-    //   this.eliminar.index ='';
-    //   this.eliminar.nombre ='';
-    //   $('#eliminar-arqueo').modal('hide'); // en prueba para eliminar
-    // }, //fin metodo eliminar compra 
-
-    
-    // eliminarExis(){
-    //   let id = this.eliminar.index;
-    //   this.t_exis.splice(id, 1);
-    //   this.eliminar.index ='';
-    //   this.eliminar.nombre ='';
-    //   $('#eliminar-arqueo2').modal('hide'); // en prueba para eliminar
-    // }, //fin metodo eliminar compra 
-
-
-    // deleteSaldo(index){
-    //   this.t_saldo.splice(index, 1);
-    //   this.totales_s();
-    //  },// delete saldo
-
-    // deleteExis(index){
-    //   this.t_exis.splice(index, 1);
-    //   this.totales_s();
-    //  },// delete existencias
+  
 
 
 
@@ -11623,6 +11601,7 @@ const arqueo_caja = new Vue ({
             'success'
           );
           this.t_exis.splice(id, 1);
+          this.totales_s();
         }
       });
     }, //fin metodo warningeliminarcompra
@@ -11930,6 +11909,7 @@ let librosbanco = new Vue({
             'success'
           );
           this.lb_banco.splice(id, 1);
+          this.totales(); 
         }
       });
     }, //fin metodo warningeliminarcompra
@@ -11981,6 +11961,7 @@ let librosbanco = new Vue({
           "timeOut": "3000"
         });
         conciliacionb.obtenerLibroBanco();
+        this.totales(); 
         }  
 
       }).catch(function(error){
@@ -12913,6 +12894,7 @@ const conciliacionb = new Vue({
              toastr.warning("Conciliación Bancaria actualizado correctamente", "Smarmoddle", {
             "timeOut": "3000"
           });
+          this.totales(); 
           }  
   
         }).catch(function(error){
@@ -13377,19 +13359,19 @@ let reten_iva = new Vue({
         }
       }, //fin de function  actualizar 
    
-      eliminarCompra(){
-        let id = this.eliminar.index;
-        this.t_compras.splice(id, 1);
-        this.eliminar.index ='';
-        this.eliminar.nombre ='';
-        $('#eliminar-retencion').modal('hide'); // en prueba para eliminar
-      }, //fin metodo eliminar compra 
+      // eliminarCompra(){
+      //   let id = this.eliminar.index;
+      //   this.t_compras.splice(id, 1);
+      //   this.eliminar.index ='';
+      //   this.eliminar.nombre ='';
+      //   $('#eliminar-retencion').modal('hide'); // en prueba para eliminar
+      // }, //fin metodo eliminar compra 
 
-      deleteCompra(index){
-       this.t_compras.splice(index, 1);
-       this.Totales();
+      // deleteCompra(index){
+      //  this.t_compras.splice(index, 1);
+      //  this.Totales();
       
-      }, //fin metodo delete
+      // }, //fin metodo delete
 
       WarningEliminarCompra(id){
         this.eliminar.index = id;
@@ -13541,19 +13523,19 @@ let reten_iva = new Vue({
         }
       }, //fin de function  actualizar 
 
-      eliminarVenta(){
-        let id = this.eliminar.index;
-        this.t_ventas.splice(id, 1);
-        this.eliminar.index ='';
-        this.eliminar.nombre ='';
-        $('#eliminar-retencion1').modal('hide'); // en prueba para eliminar
-      }, //fin metodo eliminar venta 
+      // eliminarVenta(){
+      //   let id = this.eliminar.index;
+      //   this.t_ventas.splice(id, 1);
+      //   this.eliminar.index ='';
+      //   this.eliminar.nombre ='';
+      //   $('#eliminar-retencion1').modal('hide'); // en prueba para eliminar
+      // }, //fin metodo eliminar venta 
 
-      deleteVenta(index){
-        this.t_ventas.splice(index, 1);
-        this.Totales();
+      // deleteVenta(index){
+      //   this.t_ventas.splice(index, 1);
+      //   this.Totales();
        
-       }, //fin metodo delete
+      //  }, //fin metodo delete
 
 
        WarningEliminarVenta(id){
@@ -13642,6 +13624,7 @@ let reten_iva = new Vue({
             toastr.warning("Retención del Iva actualizado correctamente", "Smarmoddle", {
             "timeOut": "3000"
           });
+          this.Totales()
           }  
 
             }).catch(function(error){
@@ -13870,40 +13853,10 @@ methods:{
               this.impuesto.iva = iva;
             }
       
-     
-
-          // let ingreso_mensual       = ingreso_liquido - deduccion;
-          // let ingreso_anual         = ingreso_mensual * 12;
-          // let fraccion_excedente    = ingreso_anual - Number(fraccion);
-          // let fraccion_excedenteiva = (fraccion_excedente * Number(interes)) / 100;
-          // let total_impuesto        = Number(impuesto_fraccion) + fraccion_excedenteiva;
-          // total                     = total_impuesto / 12;
-
-          // return Number(total).toFixed(2);
+             
           },
 
-          // impuestoAgregado(sueldo, comision, deduciones, fraccion, impuesto_fraccion, interes){
-          //   let total           = 0;
-          //   let deduccion       = 0;
-
-          //   let ingreso_gravable = sueldo - comision;
-          //   let iies            = (ingreso_gravable * 9.45) / 100;
-          //   let ingreso_liquido =  ingreso_gravable - iies;
-          //   deduciones.forEach(function(d){           
-          //   deduccion           += Number(d.valor); 
-          // });
-          //   console.log(deduccion)
-
-          // let ingreso_mensual       = ingreso_liquido - deduccion;
-          // let ingreso_anual         = ingreso_mensual * 12;
-          // let fraccion_excedente    = ingreso_anual - Number(fraccion);
-          // let fraccion_excedenteiva = (fraccion_excedente * Number(interes)) / 100;
-          // let total_impuesto        = Number(impuesto_fraccion) + fraccion_excedenteiva;
-          // total                     = total_impuesto / 12;
-
-          // return Number(total).toFixed(2);
-          // },
-
+         
 
 
           agregardeduccion(){
@@ -14392,7 +14345,7 @@ abrirNomina(){ //solo para acceder al modal para agregar todo pilas
             "timeOut": "3000"
           });
             provision_b.obtenerNomina();
-
+            this.totales();
           
 
           }  
