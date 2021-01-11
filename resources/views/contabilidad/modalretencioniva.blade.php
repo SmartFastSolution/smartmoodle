@@ -242,10 +242,10 @@
                                                 <tr v-for="(c , index) in t_compras">
                                                     <td class="text-right" align="center" width="125">
                                                         @{{ formatoFecha(c.fecha_c)}}</td>
-                                                    <td class="text-right" align="center" width="300">
+                                                    <td class="text-left" align="center" width="300">
                                                         @{{ c.detalle}}
                                                     </td>
-                                                    <td class="text-right" align="center" width="100">
+                                                    <td class="text-left" align="center" width="100">
                                                         @{{ c.proveedor}}
                                                     </td>
                                                     <td class="text-right" align="center" width="125">
@@ -412,9 +412,9 @@
                                                 <tr v-for="(v , index) in t_ventas">
                                                     <td class="text-right" align="center" width="125">
                                                         @{{ formatoFecha(v.fecha_v)}}</td>
-                                                    <td class="text-right" align="center" width="300">@{{ v.detalle}}
+                                                    <td class="text-left" align="center" width="300">@{{ v.detalle}}
                                                     </td>
-                                                    <td class="text-right" align="center" width="100">@{{ v.cliente}}
+                                                    <td class="text-left" align="center" width="100">@{{ v.cliente}}
                                                     </td>
                                                     <td class="text-right" align="center" width="125">
                                                         @{{ decimales(v.base_im) }}</td>

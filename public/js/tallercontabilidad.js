@@ -13359,20 +13359,7 @@ let reten_iva = new Vue({
         }
       }, //fin de function  actualizar 
    
-      // eliminarCompra(){
-      //   let id = this.eliminar.index;
-      //   this.t_compras.splice(id, 1);
-      //   this.eliminar.index ='';
-      //   this.eliminar.nombre ='';
-      //   $('#eliminar-retencion').modal('hide'); // en prueba para eliminar
-      // }, //fin metodo eliminar compra 
-
-      // deleteCompra(index){
-      //  this.t_compras.splice(index, 1);
-      //  this.Totales();
-      
-      // }, //fin metodo delete
-
+  
       WarningEliminarCompra(id){
         this.eliminar.index = id;
         this.eliminar.nombre = this.t_compras[id].detalle;
@@ -13523,19 +13510,7 @@ let reten_iva = new Vue({
         }
       }, //fin de function  actualizar 
 
-      // eliminarVenta(){
-      //   let id = this.eliminar.index;
-      //   this.t_ventas.splice(id, 1);
-      //   this.eliminar.index ='';
-      //   this.eliminar.nombre ='';
-      //   $('#eliminar-retencion1').modal('hide'); // en prueba para eliminar
-      // }, //fin metodo eliminar venta 
-
-      // deleteVenta(index){
-      //   this.t_ventas.splice(index, 1);
-      //   this.Totales();
-       
-      //  }, //fin metodo delete
+      
 
 
        WarningEliminarVenta(id){

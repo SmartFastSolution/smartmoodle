@@ -12,10 +12,7 @@
             <input type="date" name="fecha" v-model="fecha" class="form-control text-center form-control-sm" required>
         </div>
     </div>
-    <!-- @if ($rol === 'estudiante')
-    <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirRetencion()">Agregar Retención</a>
-    <a href="#" class="addDiario btn btn-outline-success ml-1" @click.prevent="guardaretencioniva()">Guardar</a>
-    @endif -->
+  
     <h3 class="text-center font-weight-bold text-danger">COMPRAS</h3>
     
         <table class="table table-bordered table-sm">
@@ -44,7 +41,7 @@
             </thead>
             <tbody>
                 <tr v-for="(c , index) in t_compras">
-                    <td class="text-right" align="center" width="1">@{{ formatoFecha(c.fecha_c)}}</td>
+                    <td class="text-right" align="center" width="200">@{{ formatoFecha(c.fecha_c)}}</td>
                     <td class="text-left" align="center" width="300">@{{ c.detalle}}</td>
                     <td class="text-left" align="center" width="100">@{{ c.proveedor}}</td>
                     <td class="text-right" align="center" width="125">@{{ decimales(c.base_im) }}</td>
@@ -123,7 +120,7 @@
             </thead>
             <tbody>
                 <tr v-for="(v , index) in t_ventas">
-                    <td class="text-right" align="center" width="125">@{{ formatoFecha(v.fecha_v)}}</td>
+                    <td class="text-right" align="center" width="200">@{{ formatoFecha(v.fecha_v)}}</td>
                     <td class="text-left" align="center" width="300">@{{ v.detalle}}</td>
                     <td class="text-left" align="center" width="100">@{{ v.cliente}}</td>
                     <td class="text-right" align="center" width="125">@{{ decimales(v.base_im) }}</td>
@@ -176,7 +173,7 @@
                     <td> <label for="inputEmail3" class="col-sm col-form-label">IVA EN VENTAS</label></td>
                     <td>
                         <div class="col-sm-8">
-                            <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
+                            <input class="form-control  text-right  form-control-sm"  type="number" step="0.01"
                                 v-model="total.t_ivaventa" placeholder="IVA EN VENTAS" name="">
                         </div>
                     </td>
