@@ -22,7 +22,7 @@
     <h2></h2>
     <div class="row">
         <div class="col-7">
-            <h3 class="text-left font-weight-bold text-danger">SALDO <a data-toggle="tooltip" data-placement="top"
+            <h3 class="text-left font-weight-bold text-danger">SALDO ESTADO DE CUENTA CORRIENTE <a data-toggle="tooltip" data-placement="top"
                     title="Agregar Saldos" @click="abrirSaldos()" class="btn btn-sm btn-info text-light"><i
                         class="fa fa-plus"></i></a></h3>
             <draggable class="list-group list-group-flush" :list="c_saldos" group="people">

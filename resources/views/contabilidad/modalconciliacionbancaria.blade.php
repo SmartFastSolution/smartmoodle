@@ -186,8 +186,8 @@
                                                 </thead>
                                                 <tbody is="draggable" group="people" :list="c_saldos" tag="tbody">
                                                     <tr v-for="(s, index) in c_saldos">
-                                                        <td align="center">@{{formatoFecha(s.fecha)}}</td>
-                                                        <td align="center">@{{ s.detalle}}</td>
+                                                        <td align="left">@{{formatoFecha(s.fecha)}}</td>
+                                                        <td align="left">@{{ s.detalle}}</td>
                                                         <td class="text-right">@{{ decimales(s.saldo)}}</td>
                                                         <td align="center" width="50">
                                                             <a @click.prevent="editSaldo(index)"
@@ -348,8 +348,8 @@
                                                 </thead>
                                                 <tbody is="draggable" group="people" :list="c_debitos" tag="tbody">
                                                     <tr v-for="(d, index) in c_debitos">
-                                                        <td align="center">@{{formatoFecha(d.fecha)}}</td>
-                                                        <td align="center">@{{ d.detalle}}</td>
+                                                        <td align="left">@{{formatoFecha(d.fecha)}}</td>
+                                                        <td align="left">@{{ d.detalle}}</td>
                                                         <td class="text-right">@{{ decimales(d.saldo)}}</td>
                                                         <td align="center" width="50">
                                                             <a @click.prevent="editDebito(index)"
@@ -510,8 +510,8 @@
                                                 </thead>
                                                 <tbody is="draggable" group="people" :list="c_depositos" tag="tbody">
                                                     <tr v-for="(d, index) in c_depositos">
-                                                        <td align="center">@{{formatoFecha(d.fecha)}}</td>
-                                                        <td align="center">@{{ d.detalle}}</td>
+                                                        <td align="left">@{{formatoFecha(d.fecha)}}</td>
+                                                        <td align="left">@{{ d.detalle}}</td>
                                                         <td class="text-right">@{{ decimales(d.saldo)}}</td>
                                                         <td align="center" width="50">
                                                             <a @click.prevent="editDepositos(index)"
@@ -673,8 +673,8 @@
                                                 </thead>
                                                 <tbody is="draggable" group="people" :list="c_creditos" tag="tbody">
                                                     <tr v-for="(c, index) in c_creditos">
-                                                        <td align="center">@{{formatoFecha(c.fecha)}}</td>
-                                                        <td align="center">@{{ c.detalle}}</td>
+                                                        <td align="left">@{{formatoFecha(c.fecha)}}</td>
+                                                        <td align="left">@{{ c.detalle}}</td>
                                                         <td class="text-right">@{{ decimales(c.saldo)}}</td>
                                                         <td align="center" width="50">
                                                             <a @click.prevent="editCredito(index)"
@@ -836,8 +836,8 @@
                                                 </thead>
                                                 <tbody is="draggable" group="people" :list="c_cheques" tag="tbody">
                                                     <tr v-for="(c, index) in c_cheques">
-                                                        <td align="center">@{{formatoFecha(c.fecha)}}</td>
-                                                        <td align="center">@{{ c.detalle}}</td>
+                                                        <td align="left">@{{formatoFecha(c.fecha)}}</td>
+                                                        <td align="left">@{{ c.detalle}}</td>
                                                         <td class="text-right">@{{ decimales(c.saldo)}}</td>
                                                         <td align="center" width="50">
                                                             <a @click.prevent="editCheque(index)"

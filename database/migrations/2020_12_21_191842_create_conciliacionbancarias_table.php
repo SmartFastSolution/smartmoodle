@@ -23,6 +23,7 @@ class CreateConciliacionbancariasTable extends Migration
             $table->string('saldo_c');
             $table->string('saldo_ch');
             $table->string('saldo_d');
+            $table->string('saldo_depositos');
             $table->string('total');
             $table->timestamps();
 

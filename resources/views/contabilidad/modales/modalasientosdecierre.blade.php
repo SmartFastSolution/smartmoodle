@@ -139,12 +139,12 @@
                             </div>
                             <div class="tab-pane fade show active" id="comentario-asiento" role="tabpanel"
                                 aria-labelledby="comentario-asiento-tab">
-                                <h2 class="text-center">AGREGAR DETALLES</h2>
+                                <h2 class="text-center">AGREGAR DETALLES DE MOVIMIENTO</h2>
                                 <table class="table table-bordered table-sm">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th align="center" class="text-center">Fecha</th>
-                                            <th align="center" class="text-center">Comentario</th>
+                                            <th align="center" class="text-center">Descripción del Asiento</th>
                                         </tr>
                                     </thead>
                                     <tbody>

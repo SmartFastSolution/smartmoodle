@@ -271,7 +271,8 @@ const b_hori = new Vue({
           );
           this.a_corrientes.splice(index, 1);   
           this.cambioActivo();                  
-          this.TotalActivo();    
+          this.TotalActivo();  
+          this.limpiar();  
         }
       });
     },
@@ -298,6 +299,7 @@ const b_hori = new Vue({
       this.p_corrientes.splice(index, 1);
       this.cambioPasivo();
       this.TotalPasivo(); 
+      this.limpiar();
         }
       });
 
@@ -322,6 +324,7 @@ const b_hori = new Vue({
       this.a_nocorrientes.splice(index, 1);
       this.cambioActivoNo();
       this.TotalActivo();
+      this.limpiar();
         }
       });
 
@@ -346,6 +349,7 @@ const b_hori = new Vue({
       this.p_nocorrientes.splice(index, 1);
       this.cambioPasivoNo();
       this.TotalPasivo();
+      this.limpiar();
         }
       });
  
@@ -369,6 +373,7 @@ const b_hori = new Vue({
           );
       this.patrimonios.splice(index, 1);
       this.cambioPatrimonio();
+      this.limpiar();
         }
       });
     
@@ -418,7 +423,7 @@ const b_hori = new Vue({
 
     //EDITAR ELEMENTOS DE UN ARRAY
       editAcorriente(index){
-        this.limpiar();
+       this.limpiar();
        this.activo.a_corriente.edit      = true;
        this.registro.a_corriente         = index;
        this.bi.const_id                  = this.a_corrientes[index].cuenta_id;
@@ -6976,7 +6981,13 @@ const asientos_cierre = new Vue({
               t_patrimonio_pasivo:'',
           },
         },
-        b_initotal:{}
+        b_initotal:{
+          t_a_corriente:'', //Total de activo corriente
+          t_a_nocorriente:'', //Total de activo no corriente
+          t_p_corriente:'', //Total de pasivo corriente
+          t_p_no_corriente:'', //Total de pasivo no corriente
+          t_patrimonio:'' //Total de patrimonio
+      },
     },
     mounted: function () {
       this.obtenerAsientoCierre();
@@ -7108,7 +7119,7 @@ const asientos_cierre = new Vue({
 
       this.limpiar();
       $('#as-transaccion').modal('show');
-      $('#comentario-diario-tab').tab('show'); 
+      $('#comentario-asiento-tab').tab('show'); 
 
 
     },

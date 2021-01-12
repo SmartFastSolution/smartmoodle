@@ -96,14 +96,22 @@
             </table>
 
             <form action="">
-
                 @csrf
+
                 @if ($rol === 'estudiante')
-                <div class="row justify-content-around mb-2">
-                    <a href="#" class="btn btn-outline-primary" @click.prevent="abrirTransaccion()">Crear
-                        Transaccion</a>
+                <div class="row justify-content-center mb-2">
+                <div class="col-4 ">
+                <a href="#" class="btn btn-sm btn-outline-primary" @click.prevent="abrirTransaccion()">Crear Transaccion</a>
+                    </div>
+                    @if($datos->metodo == 'concatenado')
+                    <div class="col-3">
+                        <a href="#" class="btn btn-sm btn-outline-danger" @click.prevent="llamarDiario()">Ir al Mayor
+                            General</a>
+                    </div>
                 </div>
-                <div class="row justify-content-center">
+                @endif
+                <br>
+                <div class="row justify-content-center mb-2">
                     <a href="#" class="addDiario btn btn-danger" @click.prevent="guardarDiario()">Completar Asiento de
                         Cierre</a>
                 </div>
