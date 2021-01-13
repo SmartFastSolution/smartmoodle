@@ -6,8 +6,7 @@
 <form action="{{ route('taller1.docente', ['idtaller' => $d]) }}" method="POST">
     @csrf
   <div class="container-fluid p-3">
-  {{-- <h1 class="text-center text-danger display-1">{{ $datos->taller->nombre }}</h1> --}}
-        <div class="card border border-danger mb-3" >
+         <div class="card border border-danger mb-3" >
           <div class="card-header "> 
             <div class="row">
               <div class="col-7" style="font-size: 25px;">
@@ -37,7 +36,7 @@
           </div>
           <div class="card-body">
             <div id="admin" class="hidden"></div>
-            <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{!! $datos->enunciado !!}<</h2>
+            <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{!! $datos->enunciado !!}</h2>
         @if ($datos->metodo == 'concatenado')
         <div class="row justify-content-md-center">
         <div class="col-12 col-sm-12 col-md-2 mb-3">
@@ -46,45 +45,6 @@
                   <a class="list-group-item list-group-item-action @if ($key == 0) active @endif" id="list-{{ $element->code }}-list" data-toggle="list"
                     href="#list-{{ $element->code }}" role="tab" aria-controls="{{ $element->code }}">{{ $element->name }}</a>
                @endforeach 
-          {{--       <a class="list-group-item list-group-item-action active" id="list-kardex-list" data-toggle="list"
-                    href="#list-kardex" role="tab" aria-controls="kardex">Kardex</a>
-                <a class="list-group-item list-group-item-action " id="list-kardex-promedio-list" data-toggle="list"
-                    href="#list-kardex-promedio" role="tab" aria-controls="kardex-promedio">Kardex Promedio</a>
-                <a class="list-group-item list-group-item-action " id="list-diario-list" data-toggle="list"
-                    href="#list-diario" role="tab" aria-controls="home">Balance Inicial</a>
-                <a class="list-group-item list-group-item-action" id="list-balance_comp-list" data-toggle="list"
-                    href="#list-balance_comp" role="tab" aria-controls="profile">Balance de Comprobacion</a>
-                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
-                    href="#list-messages" role="tab" aria-controls="messages">Diario General</a>
-                <a class="list-group-item list-group-item-action" id="list-balance-ajustado-list" data-toggle="list"
-                    href="#list-balance-ajustado" role="tab" aria-controls="balance-ajustado">Balance Ajustado</a>
-                <a class="list-group-item list-group-item-action" id="list-mayor-general-list" data-toggle="list"
-                    href="#list-mayor-general" role="tab" aria-controls="mayor-general">Mayor General</a>
-                <a class="list-group-item list-group-item-action" id="list-hoja-trabajo-list" data-toggle="list"
-                    href="#list-hoja-trabajo" role="tab" aria-controls="hoja-trabajo">Hoja de Trabajo</a>
-                <a class="list-group-item list-group-item-action" id="list-estado-resultado-list" data-toggle="list"
-                    href="#list-estado-resultado" role="tab" aria-controls="estado-resultado">Estado de
-                    Resultado</a>
-                <a class="list-group-item list-group-item-action" id="list-balance-general-list" data-toggle="list"
-                    href="#list-balance-general" role="tab" aria-controls="balance-general">Balance General</a>
-                <a class="list-group-item list-group-item-action" id="list-asento-cierre-list" data-toggle="list"
-                    href="#list-asento-cierre" role="tab" aria-controls="asento-cierre">Asientos de Cierre</a>
-                <a class="list-group-item list-group-item-action" id="list-libro-caja-list" data-toggle="list"
-                    href="#list-libro-caja" role="tab" aria-controls="libro-caja">Libro Caja</a>
-                <a class="list-group-item list-group-item-action" id="list-arqueo-caja-list" data-toggle="list"
-                    href="#list-arqueo-caja" role="tab" aria-controls="arqueo-caja">Arqueo Caja</a>
-                <a class="list-group-item list-group-item-action" id="list-libro-banco-list" data-toggle="list"
-                    href="#list-libro-banco" role="tab" aria-controls="libro-banco">Libro Banco</a>
-                <a class="list-group-item list-group-item-action" id="list-conciliacion-bancaria-list"
-                    data-toggle="list" href="#list-conciliacion-bancaria" role="tab"
-                    aria-controls="conciliacion-bancaria">Conciliación Bancaria</a>
-                <a class="list-group-item list-group-item-action" id="list-retencion-iva-list" data-toggle="list"
-                    href="#list-retencion-iva" role="tab" aria-controls="retencion-iva">Retencion del IVA</a>
-                <a class="list-group-item list-group-item-action" id="list-nomina-empleado-list" data-toggle="list"
-                    href="#list-nomina-empleado" role="tab" aria-controls="nomina-empleado">Nomina Empleados</a>
-                <a class="list-group-item list-group-item-action" id="list-provision-beneficio-list" data-toggle="list"
-                    href="#list-provision-beneficio" role="tab" aria-controls="provision-beneficio">Provisión de
-                    Benficios</a> --}}
             </div>
         </div>
         <div class="col-12 col-sm-12 col-md-10">
@@ -2144,6 +2104,17 @@ const nomina_em = new Vue({
   },
 
 methods:{
+  
+
+  decimales(saldo){
+    if (saldo !== null && saldo !== '' && saldo !== 0) {
+      let total = Number(saldo).toFixed(2);
+    return total;
+  }else{
+    return
+  }
+   }, 
+         
           obtenerNomina : function(){
           let _this = this;
           let   url = '/sistema/admin/docente/nomina-obtener-empleado';

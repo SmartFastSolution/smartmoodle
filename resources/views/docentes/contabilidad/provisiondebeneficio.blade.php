@@ -17,7 +17,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="(p , index) in t_pro">
-                        <td class="text-right" align="center" width="300">@{{ p.nombre_em}}</td>
+                        <td class="text-left" align="center" width="300">@{{ p.nombre_em}}</td>
                         <td class="text-right" align="center" width="100">@{{ p.dias}}</td>
                         <td class="text-right" align="center" width="125">@{{ decimales(p.v_recibido) }}</td>
                         <td class="text-right" align="center" width="125">@{{ decimales(p.d_tercero) }}</td>
