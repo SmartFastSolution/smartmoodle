@@ -48,8 +48,8 @@
 
                 <tbody>
                     <tr v-for="(n, index) in t_nomina">
-                        <td align="center" width="300">@{{ n.nombre_e}}</td>
-                        <td align="center" width="100">@{{ n.cargo}}</td>
+                        <td align="left" width="300">@{{ n.nombre_e}}</td>
+                        <td align="left" width="100">@{{ n.cargo}}</td>
                         <td class="text-right" align="center" width="125">@{{ decimales(n.sueldo)}}</td>
                         <td class="text-right" align="center" width="125">@{{ decimales(n.s_tiempo)}}</td>
                         <td class="text-right" align="center" width="125">@{{ decimales(n.ingresos)}}</td>
