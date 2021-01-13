@@ -71,7 +71,7 @@
                     </div>
                     <div class="col-8">
                         <textarea name="respuesta[]" class="form-control inputcurrent text" id="" cols="30"
-                            rows="5"></textarea>
+                            rows="5" required></textarea>
                     </div>
                 </div>
                 <br>
