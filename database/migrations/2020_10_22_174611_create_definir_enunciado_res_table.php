@@ -16,8 +16,8 @@ class CreateDefinirEnunciadoResTable extends Migration
         Schema::create('definir_enunciado_res', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('definir_enunciado_id');
-            $table->string('concepto')->nullable();
-            $table->string('respuesta')->nullable();
+            $table->longText('concepto')->nullable();
+            $table->longText('respuesta')->nullable();
             $table->timestamps();
 
 

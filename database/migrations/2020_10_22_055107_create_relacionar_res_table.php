@@ -16,7 +16,7 @@ class CreateRelacionarResTable extends Migration
         Schema::create('relacionar_res', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('relacionar_id');
-            $table->string('enunciado')->nullable();
+            $table->longText('enunciado')->nullable();
             $table->string('img')->nullable();
             $table->string('definicion')->nullable();
             $table->string('definicion_aleatoria')->nullable();

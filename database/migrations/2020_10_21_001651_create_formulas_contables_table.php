@@ -17,7 +17,7 @@ class CreateFormulasContablesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('formula1');
             $table->string('formula2');
             $table->string('formula3');

@@ -16,8 +16,8 @@ class CreateTallerIdentificarPersonasTable extends Migration
         Schema::create('taller_identificar_personas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
-            $table->string('descripcion');
+            $table->longText('enunciado');
+            $table->longText('descripcion');
             $table->timestamps();
             
             $table->foreign('taller_id')

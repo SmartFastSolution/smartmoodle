@@ -16,7 +16,7 @@ class CreateOrdenIdeasDatosTable extends Migration
         Schema::create('orden_ideas_datos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('orden_idea_id');
-            $table->string('ideas')->nullable();
+            $table->longText('ideas')->nullable();
             $table->timestamps();
 
             $table->foreign('orden_idea_id')

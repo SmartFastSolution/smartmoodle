@@ -19,7 +19,7 @@ class CreateTallerFacturaDatosTable extends Migration
             $table->text('codigo')->nullable();
             $table->string('cod_auxiliar')->nullable();
             $table->string('cantidad')->nullable();
-            $table->string('descripcion')->nullable();
+            $table->longText('descripcion')->nullable();
             $table->string('precio')->nullable();
             $table->timestamps();
 

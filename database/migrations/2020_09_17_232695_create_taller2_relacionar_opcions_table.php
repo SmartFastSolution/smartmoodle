@@ -17,7 +17,7 @@ class CreateTaller2RelacionarOpcionsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller2_relacionar_id');
             $table->integer('orden')->nullable();
-            $table->string('definicion')->nullable();
+            $table->text('definicion')->nullable();
             $table->timestamps();
             
             $table->foreign('taller2_relacionar_id')

@@ -17,7 +17,7 @@ class CreateOrdenPagosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('señor');
             $table->string('fecha');
             $table->string('fecha_c');

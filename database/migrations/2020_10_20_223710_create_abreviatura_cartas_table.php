@@ -17,7 +17,7 @@ class CreateAbreviaturaCartasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('abreviatura1');
             $table->string('abreviatura2');
             $table->string('abreviatura3');

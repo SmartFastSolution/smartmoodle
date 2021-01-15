@@ -17,7 +17,7 @@ class CreateNotaVentasTable extends Migration
              $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('nombre');
             $table->string('ruc');
             $table->string('fecha');

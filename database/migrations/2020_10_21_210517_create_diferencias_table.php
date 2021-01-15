@@ -17,7 +17,7 @@ class CreateDiferenciasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('diferencia_1a');
             $table->string('diferencia_2a');
             $table->string('diferencia_3a');

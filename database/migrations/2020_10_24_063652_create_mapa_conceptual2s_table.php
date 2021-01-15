@@ -17,7 +17,7 @@ class CreateMapaConceptual2sTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('respuesta')->nullable();
             $table->string('enunciado1')->nullable();
             $table->string('enunciado2')->nullable();

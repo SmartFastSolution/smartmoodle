@@ -39,11 +39,11 @@ class EstudianteController extends Controller
              
         }
         $p = Post::all();
-        // $p = Post::where('id',$id)->with('user','image','comments','comments.user')->get();
+        
         return view('Estudiante.indexes',compact('p'));
 
 
-        // return view('Estudiante.indexes'); //ruta estudiante       
+           
     }
 
    

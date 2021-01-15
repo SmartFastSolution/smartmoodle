@@ -40,13 +40,13 @@ class Usuario extends Seeder
            DB::table('users')->insert([
          
            'cedula'          => '0943557611',
-           'name'            =>'Juan',
-           'apellido'        => 'Perez',
-           'domicilio'       => 'La 20 y domingo sabio',
-           'telefono'        => '0980727393',
-           'celular'         => '044549611',
-           'email'           => 'user1@smartmoodle.com',
-           'password'        => Hash::make('smartmoodle'),
+           'name'            =>'Administrador',
+           'apellido'        => 'SmartMoodle',
+           'domicilio'       => 'Guayaqyil',
+           'telefono'        => '098765432',
+           'celular'         => '049876543',
+           'email'           => 'admin@smartmoodle.com',
+           'password'        => Hash::make('admin_smartmoodle'),
            'estado'          => 'on',
            'created_at'      => now(),
            'updated_at'      => now()

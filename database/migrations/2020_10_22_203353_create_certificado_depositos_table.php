@@ -17,7 +17,7 @@ class CreateCertificadoDepositosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('valor_inicial');
             $table->string('caracter');
             $table->string('beneficiario');

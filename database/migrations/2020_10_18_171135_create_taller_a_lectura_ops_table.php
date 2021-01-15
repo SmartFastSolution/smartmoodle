@@ -16,7 +16,7 @@ class CreateTallerALecturaOpsTable extends Migration
         Schema::create('taller_a_lectura_ops', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_a_lectura_id');
-            $table->string('enunciado')->nullable();
+            $table->longText('enunciado')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_a_lectura_id')

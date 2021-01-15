@@ -16,8 +16,8 @@ class CreateVerdaderoFalsoResTable extends Migration
         Schema::create('verdadero_falso_res', function (Blueprint $table) {
                   $table->bigIncrements('id');
             $table->unsignedbigInteger('verdadero_falso_id');
-            $table->string('enunciado')->nullable();
-            $table->string('respuesta')->nullable();
+            $table->longText('enunciado')->nullable();
+            $table->longText('respuesta')->nullable();
             $table->timestamps();
 
 

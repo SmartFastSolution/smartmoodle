@@ -16,7 +16,7 @@ class CreateTallerAnalizarOpsTable extends Migration
         Schema::create('taller_analizar_ops', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_analizar_id');
-            $table->string('enunciado')->nullable();
+            $table->longText('enunciado')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_analizar_id')

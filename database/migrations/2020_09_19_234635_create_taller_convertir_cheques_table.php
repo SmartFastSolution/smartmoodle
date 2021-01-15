@@ -16,7 +16,7 @@ class CreateTallerConvertirChequesTable extends Migration
         Schema::create('taller_convertir_cheques', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('nombre');
             $table->string('cantidad');
             $table->string('numero');

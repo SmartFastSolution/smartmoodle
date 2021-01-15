@@ -16,7 +16,7 @@ class CreateTallerDiferenciasTable extends Migration
         Schema::create('taller_diferencias', function (Blueprint $table) {
             $table->id();
             $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('img1');
             $table->string('img2');
             $table->timestamps();

@@ -16,7 +16,7 @@ class CreateTallerNotaVentasTable extends Migration
         Schema::create('taller_nota_ventas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('nombre');
             $table->string('ruc');
             $table->string('fecha');

@@ -16,7 +16,7 @@ class CreateTallerCompletarEnunResTable extends Migration
         Schema::create('taller_completar_enun_res', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_completar_enunciado_id');
-            $table->string('enunciados');
+            $table->longText('enunciados');
             $table->timestamps();
 
             $table->foreign('taller_completar_enunciado_id')

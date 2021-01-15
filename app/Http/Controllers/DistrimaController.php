@@ -98,7 +98,7 @@ class DistrimaController extends Controller
 
         $distma=Distrima::find($distrima->id);
         $user=$distma->user()->first();
-        //$distribucion= $distma->distribumacus()->get();
+      
         $distribucion= $distma->distribucionmacu()->first();
         $curs[] =array(
             'id' => $distribucion->id,

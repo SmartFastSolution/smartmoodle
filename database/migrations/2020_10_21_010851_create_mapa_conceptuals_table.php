@@ -17,7 +17,7 @@ class CreateMapaConceptualsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('vender');
             $table->string('comprar');
             $table->string('seccion1a');

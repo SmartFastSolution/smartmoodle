@@ -14,6 +14,7 @@
 
           		<div class="row justify-content-center ">
           			@if ($taller->cuenta == 'activo')
+					  <input type="hidden" name="cuenta" value="activo">
           				<div class="col-3">
           					<h1 class="text-center">ACTIVOS</h1>
           					<ul class="list-group">
@@ -32,6 +33,7 @@
           				</ul>
           				</div>
 					@elseif ($taller->cuenta == 'patrimonio')
+					<input type="hidden" name="cuenta" value="patrimonio">
 						<div class="col-3">
 							<h1 class="text-center">PATRIMONIO</h1>
 								<ul class="list-group">

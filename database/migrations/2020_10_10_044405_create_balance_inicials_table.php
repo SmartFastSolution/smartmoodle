@@ -17,7 +17,7 @@ class CreateBalanceInicialsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado')->nullable();
+            $table->longText('enunciado')->nullable();
             $table->string('nombre')->nullable();
             $table->string('tipo')->nullable();
             $table->string('fecha')->nullable();

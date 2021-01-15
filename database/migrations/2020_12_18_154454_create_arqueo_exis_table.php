@@ -16,7 +16,7 @@ class CreateArqueoExisTable extends Migration
         Schema::create('arqueo_exis', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('arqueocaja_id');
-            $table->string('detalle');
+            $table->longText('detalle');
             $table->string('e_debe')->nullable();
             $table->string('e_haber')->nullable();
             $table->timestamps();

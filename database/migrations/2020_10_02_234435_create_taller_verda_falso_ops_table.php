@@ -16,8 +16,8 @@ class CreateTallerVerdaFalsoOpsTable extends Migration
         Schema::create('taller_verda_falso_ops', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_verdadero_falso_id');
-            $table->string('descripcion');
-            $table->string('respuesta');
+            $table->longText('descripcion');
+            $table->longText('respuesta');
             $table->timestamps();
             
             $table->foreign('taller_verdadero_falso_id')

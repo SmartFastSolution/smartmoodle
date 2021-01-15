@@ -16,8 +16,8 @@ class CreateRelacionar2ResTable extends Migration
         Schema::create('relacionar2_res', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('relacionar2_id');
-            $table->string('letra')->nullable();
-            $table->string('definicion')->nullable();
+            $table->text('letra')->nullable();
+            $table->text('definicion')->nullable();
             $table->timestamps();
 
             $table->foreign('relacionar2_id')

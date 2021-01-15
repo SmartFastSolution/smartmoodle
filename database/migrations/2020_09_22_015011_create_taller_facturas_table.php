@@ -16,7 +16,7 @@ class CreateTallerFacturasTable extends Migration
         Schema::create('taller_facturas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('cliente');
             $table->string('ruc');
             $table->string('iva');

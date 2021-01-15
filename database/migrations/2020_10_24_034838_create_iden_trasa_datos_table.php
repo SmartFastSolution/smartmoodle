@@ -16,8 +16,8 @@ class CreateIdenTrasaDatosTable extends Migration
         Schema::create('iden_trasa_datos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('iden_trasa_id');
-            $table->string('pregunta')->nullable();
-            $table->string('respuesta')->nullable();
+            $table->longText('pregunta')->nullable();
+            $table->longText('respuesta')->nullable();
             $table->timestamps();
 
             $table->foreign('iden_trasa_id')

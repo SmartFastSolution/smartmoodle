@@ -17,7 +17,7 @@ class CreateConciliacionchequesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('conciliacionbancaria_id');
             $table->string('fecha');
-            $table->string('detalle');
+            $table->longText('detalle');
             $table->string('saldo')->nullable();
             $table->timestamps();
             $table->foreign('conciliacionbancaria_id')

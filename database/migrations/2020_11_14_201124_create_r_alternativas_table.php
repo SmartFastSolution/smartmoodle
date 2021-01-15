@@ -17,9 +17,9 @@ class CreateRAlternativasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
-            $table->string('respuesta');
-            $table->string('alternativa_correcta');
+            $table->longText('enunciado');
+            $table->longText('respuesta');
+            $table->longText('alternativa_correcta');
             $table->timestamps();
             
             $table->foreign('taller_id')

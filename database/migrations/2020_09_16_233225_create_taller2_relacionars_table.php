@@ -16,10 +16,10 @@ class CreateTaller2RelacionarsTable extends Migration
         Schema::create('taller2_relacionars', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
-            $table->string('enunciado1');
+            $table->text('enunciado');
+            $table->text('enunciado1');
             $table->string('img1');
-            $table->string('enunciado2');
+            $table->longText('enunciado2');
             $table->string('img2');
 
             $table->timestamps();

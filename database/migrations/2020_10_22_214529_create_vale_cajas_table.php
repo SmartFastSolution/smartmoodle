@@ -17,7 +17,7 @@ class CreateValeCajasTable extends Migration
            $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('por');
             $table->string('deudor');
             $table->string('cantidad');
