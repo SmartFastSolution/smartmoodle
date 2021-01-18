@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 
@@ -20,7 +20,22 @@ class Controller extends BaseController
 
     public function index (){
 
-        return view('welcome');
+        $alumnos = DB::table('users')
+        ->join('role_user', 'role_user.user_id', '=', 'users.id')
+        ->join('roles', 'roles.id', '=', 'role_user.role_id')
+        ->where('users.estado', 'on')
+        ->where('descripcion', 'estudiante')
+        ->count();
+
+        $docente = DB::table('users')
+        ->join('role_user', 'role_user.user_id', '=', 'users.id')
+        ->join('roles', 'roles.id', '=', 'role_user.role_id')
+        ->where('users.estado', 'on')
+        ->where('descripcion', 'docente')
+        ->count();
+        
+    return view('welcome',compact('alumnos','docente'));
+       
     }
      
  

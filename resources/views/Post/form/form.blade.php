@@ -25,21 +25,7 @@
     {!! Form::label('body','Contenido') !!}
     {!! Form::textarea('body', null, ['class'=>'form-control']) !!}
 </div>
-<div class="form-group">
-    {!! Form::label('status','Estado de la publicación ') !!}
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="status" id="exampleRadios1" value="PUBLISHED">
-        <label class="form-check-label" for="exampleRadios1">
-        Publicar
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="status" id="exampleRadios2" value="DRAFT" checked>
-        <label class="form-check-label" for="exampleRadios2">
-        Borrador
-        </label>
-    </div>
-</div>
+
 @section('scripts')
 {!! Html::script('vendor/ckeditor/ckeditor.js') !!}
 <script>

@@ -20,7 +20,10 @@
 
 <section class="content">
     <div class="container">
-        <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
+        <h1 class="font-weight-light" style="color:red;">  @isset ( auth()->user()->instituto->nombre)
+            {{ auth()->user()->instituto->nombre}}
+                
+            @endisset</h1>
         <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}
             @isset (auth()->user()->curso->nombre)
             <h2 class="font-weight-light"> <strong> {{auth()->user()->curso->nombre}} </strong>
@@ -45,11 +48,11 @@
                 </div>
             </div>
             <div class="card-body">
-                <h1 class="mt-5">{{$post->nombre}}</h1>
+                <h1 class="mt-5"> <font face="Times New Roman,Arial,Verdana">{{$post->nombre}}</font></h1>
                 <br>
                 <div class="media m-0">
                     <div class="d-flex mr-3">
-                        <img class="img-fluid rounded" src="{{$post->image->url}}" alt="">
+                        <img class="img-fluid rounded" src="{{$post->image->url}}" width="750" height="400" alt="">
                     </div>
                 </div>
                 <div>
@@ -60,7 +63,7 @@
                 </p>
 
                 <div class="card-footer">
-                    <a href="#" class="card-link"><i class="fa fa-comment"></i> Comentarios</a>
+                <h5><i class="fa fa-comment"></i> Comentarios</h5>
                 </div>
 
                 <div class="card my-4">

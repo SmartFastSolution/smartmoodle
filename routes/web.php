@@ -52,15 +52,7 @@ route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta e
 
 
  ////////////////////////////////////////////////
- ////////////////Reporte Vuejs///////////////////
- ////////////////////////////////////////////////
- ////////////////////////////////////////////////
- //rutas vue para reporte
 
-// Route::get('/reporte','PDFController@Reporte')->name('Reporte');
-// Route::post('informes','PDFController@Instituto')->name('informes');
-// Route::post('distinst1','PDFController@curso')->name('distinst1');  //filtro del select curso dependiente del select instituto
-// Route::post('cursoall','PDFController@Filtrocurso')->name('cursoall'); //filtro de curso por el select curso vmodel de curso
 
 ////////////////////////////////////////////////
  ////////////////Fin Reporte Vuejs//////////////
@@ -253,8 +245,6 @@ route::get('/sistema/homees/taller/vista/{plant}/{id}', 'VistaEstudianteControll
 route::get('/sistema/homedoc/taller/{plant}/{id}/{user}', 'TallerDocenteController@taller')->name('taller.docente');
 
 
-// route::post('/sistema/taller2', 'TallersController@store2')->name('taller2');
-// route::post('/sistema/taller3', 'TallersController@store3')->name('taller3');
 route::post('/sistema/admin/taller1/{idtaller}', 'TallerEstudianteController@store1')->name('taller1');
 route::post('/sistema/admin/taller2/{idtaller}', 'TallerEstudianteController@store2')->name('taller2');
 route::post('/sistema/admin/taller3/{idtaller}', 'TallerEstudianteController@store3')->name('taller3');

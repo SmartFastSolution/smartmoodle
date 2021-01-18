@@ -9,7 +9,10 @@
 
 <section class="content">
     <div class="container">
-        <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
+        <h1 class="font-weight-light" style="color:red;"> @isset ( auth()->user()->instituto->nombre)
+            {{ auth()->user()->instituto->nombre}}
+                
+            @endisset</h1>
         <h2 class="font-weight-light"> <strong> {{auth()->user()->curso->nombre}} </strong></h2>
         <div class="card card-info card-outline">
             <div class="card-header">

@@ -7,9 +7,6 @@ use App\User;
 use App\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
-
-
 class CommentController extends Controller
 {
    
@@ -28,7 +25,7 @@ class CommentController extends Controller
         $post->comments()->save($comment);
 
         return back()->with('success','El comentario esta siendo evaluado');
-        // return redirect('sistema/posts/{id}  ')->with('success','El comentario esta siendo evaluado!');
+       
     }
 
 

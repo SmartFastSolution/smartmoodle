@@ -19,10 +19,8 @@ class CreatePostsTable extends Migration
             $table->string('nombre');
             $table->mediumText('abstract');
             $table->text('body');
-            $table->enum('status',['PUBLISHED','DRAFT'])->default('DRAFT');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
 
         });
     }

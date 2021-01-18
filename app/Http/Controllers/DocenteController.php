@@ -92,13 +92,11 @@ class DocenteController extends Controller
 
     }
     public function index()
-    {
-            
+    {           
                 $p = Post::all();
                
                 return view('Docente.indexd',compact('p'));
-     
-    }
+      }
     
     public function contenidos($id)
     {

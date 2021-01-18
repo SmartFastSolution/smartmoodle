@@ -51,7 +51,7 @@
                 </p>
 
                 <div class="card-footer">
-                    <a href="#" class="card-link"><i class="fa fa-comment"></i> Comentarios</a>
+                    <h5><i class="fa fa-comment"></i> Comentarios</h5>
                 </div>
 
                 <div class="card my-4">

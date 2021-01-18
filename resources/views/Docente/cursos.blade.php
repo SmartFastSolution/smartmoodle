@@ -7,7 +7,10 @@
 
 <section class="content">
     <div class="container">
-        <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
+        <h1 class="font-weight-light" style="color:red;"> @isset ( auth()->user()->instituto->nombre)
+            {{ auth()->user()->instituto->nombre}}
+                
+            @endisset</h1>
         <h1>Cursos</h1>
         <table id="myTable" class="table">
             <thead>
