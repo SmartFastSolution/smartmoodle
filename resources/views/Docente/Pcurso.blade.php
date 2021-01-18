@@ -13,22 +13,32 @@
     <div class="container">
 
 
-        <h1 class="font-weight-light" style="color:red;">  @isset ( auth()->user()->instituto->nombre)
+        <h1 class="font-weight-light" style="color:red;"> @isset ( auth()->user()->instituto->nombre)
             {{ auth()->user()->instituto->nombre}}
-                
             @endisset</h1>
-        <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}
-        </h2>
+
         <h2 class="font-weight-light">
             @foreach(auth()->user()->roles as $role)
-            {{$role->name}}
+            {{$role->name}} | {{ auth()->user()->name, }}
+            {{ auth()->user()->apellido, }}
             @endforeach</h2>
+    </div>
+</section>
 
 
-        <div class="card card-info card-outline">
-            <div class="card-header">
-                <h3 class="font-weight-light"> <strong> Materias</strong></h3>
+<div class="container">
+    <div class="card gedf-card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="ml-2">
+                        <div class="h5 m-0">MATERIAS</div>
+                        <div class="h7 text-muted"></div>
+                    </div>
+                </div>
             </div>
+        </div>
+        <div class="card-body">
 
             @isset ($au->materias)
             <div class="row">
@@ -37,16 +47,16 @@
                 @forelse($au->materias as $materia)
                 @foreach($materia->distribucionmacus as $curso)
                 <!-- ./col -->
-                <div class="col-lg-3 col-5">
+                <div class="col-lg-4 col-6">
                     <!-- small box -->
-                    <div class="small-box bg-gradient-info">
+                    <div class="small-box bg-info">
                         <div class="inner">
-                            <h3> <i class="far fa-bookmark"></i></h3>
-                            <p>Curso:{{$curso->curso->nombre}} </p>
-                            <p> {{$materia->nombre}}</p>
+                            <h3> {{$materia->nombre}}</h3>
+                            <p>{{$curso->curso->nombre}} </p>
+
                         </div>
                         <div class="icon">
-                            <i class="far fa-bookmark"></i>
+                            <i class="fas fa-newspaper"></i>
                         </div>
                         <a href="{{route('Contenidos', $materia->id)}}" class="small-box-footer">
                             Acceder <i class="fas fa-arrow-circle-right"></i>
@@ -65,11 +75,26 @@
             @empty($au->materias)
             <h1>No tienes cursos Asignados</h1>
             @endempty
-        </div>
 
-        @isset ($au->materias)
-        <h2>Talleres Por Calificar</h2>
+        </div>
+    </div>
+</div>
+@isset($au->materias)
+<!--  no lo quiten porq sino da error -->
+<div class="container">
+    <div class="card gedf-card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="ml-2">
+                        <div class="h5 m-0">Talleres Por Calificar</div>
+                        <div class="h7 text-muted"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="card-body">
+
             <table id="myTable" class="table table-hover">
 
                 <thead>
@@ -109,13 +134,23 @@
 
             </div>
             @endif
-
-
-
         </div>
+    </div>
+</div>
 
-        <h2>Talleres Calificados</h2>
-        <div class="card-body mb-5">
+<div class="container">
+    <div class="card gedf-card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="ml-2">
+                        <div class="h5 m-0">Talleres Calificados</div>
+                        <div class="h7 text-muted"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
             <table id="myTable2" class="table table-hover">
                 <thead>
                     <tr>
@@ -149,10 +184,12 @@
 
             </div>
         </div>
-        @endisset
-
     </div>
-</section>
+</div>
+
+@endisset
+
+
 
 @stop
 @section('css')

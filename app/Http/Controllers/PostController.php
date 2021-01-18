@@ -38,7 +38,7 @@ class PostController extends Controller
             'user_id'             =>  'required|integer',
             'abstract'            =>  'required|max:500',
             'body'                =>  'required',
-            // 'status'            =>  'required|in:PUBLISHED,DRAFT',
+       
             'image'            =>  'image|dimensions:min_width=1200, max_with=1200, min_height=490, max_height=490|mimes:jpeg,jpg,png',
 
            

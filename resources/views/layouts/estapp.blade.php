@@ -15,9 +15,9 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ url('/sistema/perfile') }}" class="nav-link">Materias</a>
                 </li>
-                <!-- <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Actividades</a>
-                </li> -->
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="{{ url('/sistema/post-estudiante') }}" class="nav-link">Crear Post</a>
+                </li>
 
                 <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

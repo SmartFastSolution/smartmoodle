@@ -123,6 +123,62 @@ class EstudianteController extends Controller
       $contenido =Contenido::where('id', $id)->firstOrfail();
        return \view('Estudiante.archivopdf',['contenido'=>$contenido]);
 
+   }
+
+  public function PostE()
+  {
+
+     return \view('Estudiante.postestudiante');
+
   }
+
+
+  public function storee(Request $request)
+  {
+      $request->validate([
+          'nombre'              =>  'required|string|max:60',
+          'user_id'             =>  'required|integer',
+          'abstract'            =>  'required|max:500',
+          'body'                =>  'required',    
+          'image'            =>  'image|dimensions:min_width=1200, max_with=1200, min_height=490, max_height=490|mimes:jpeg,jpg,png',
+        
+      ]);
+
+        $urlimage=[];
+      if($request->hasFile('image')){
+
+          $image=$request->file('image');
+          $nombre=time().$image->getClientOriginalName();
+          $ruta= public_path().'/imagenes';
+          $image->move($ruta,$nombre);
+          $urlimage['url']='/imagenes/'.$nombre;
+      }
+
+      $post =New Post;
+      $post->user_id  = e($request->user_id);
+      $post->nombre   = e($request->nombre);
+      $post->abstract = e($request->abstract);
+      $post->body = e($request->body);
+
+      $post->save();
+
+      $post->image()->create($urlimage);
+
+      return redirect('sistema/homees')->with('Post Creado!');
+
+  }
+
+
+  public function destroype(Post $post)
+    {
+        $post = Post::findOrFail($post->id)->delete();
+   
+
+        return redirect('sistema/homees')->with('Post Eliminado!');
+    }
+
+
+
+ 
 
 }

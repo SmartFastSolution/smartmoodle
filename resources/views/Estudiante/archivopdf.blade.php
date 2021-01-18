@@ -1,5 +1,3 @@
-
-
 {{-- @extends('layouts.estapp') --}}
 
 @extends('layouts.nav')
@@ -12,21 +10,37 @@
         <h3 class="font-weight-light">{{$contenido->nombre}}</h3>
 
         <p class="text-center">
+        <div id="pdf" >
             @isset ($contenido->archivo->url)
-            <iframe class="embed-responsive-item" width="800" height="700" src="{{$contenido->archivo->url}}"
-                allowfullscreen></iframe>
-            @endisset
 
+            <object width="100%" height="650" type="application/pdf"
+                data="{{$contenido->archivo->url}}#zoom=85&scrollbar=0&toolbar=0&navpanes=0" id="pdf_content"
+                style="pointer-events: none;">
+                @endisset
+        </div>
         </p>
 
     </div>
 </section>
 
 
+
+
+
+
 @stop
 @section('css')
 @stop
 @section('js')
+<script type="text/javascript">
+$(document).ready(function(){
+    //disable full page
 
+    $("body").on("contextmenu", function(e){
+         return false;
+    });
+})
+
+</script>
 
 @stop
