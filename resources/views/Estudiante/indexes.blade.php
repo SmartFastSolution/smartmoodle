@@ -78,7 +78,9 @@
 
 
                     <p class="card-text">
+                        @isset($post->image->url)
                         <img class="img-fluid rounded" src="{{$post->image->url}}" width="850" height="800" alt="">
+                        @endisset
                     <div>
                         <p class="lead">{{$post->abstract}}</p>
                     </div>

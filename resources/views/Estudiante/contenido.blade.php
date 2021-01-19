@@ -38,30 +38,53 @@
             </div>
         </div>
         <div class="card-body">
-            <h1 class="font-weight-light"> Unidades</h1>
 
-            <table id="myTable3" class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Materia</th>
-                        <th scope="col">Descripcion</th>
-                        <th scope="col" coldspan="1">Ver Documento</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($cons as $c)
-                    <tr>
-                        <td> {{$c->nombre}}</td>
-                        <td> {{$c->descripcion}}</td>
-                        <td><a class="btn btn-dark btn" href="{{route('Contenido.alumno', $c->id)}}"><i
-                                    class="fas fa-eye"></i></a>
-                        </td>
+            <ul class="nav nav-tabs" id="myTab" role="tablist" style="font-size: 20px;">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="mn-documentos-generales-tab" data-toggle="tab"
+                        href="#mn-documentos-generales" role="tab" aria-controls="mn-documentos-generales"
+                        aria-selected="true">Documentos Generales</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link " id="mn-documentos-profesor-tab" data-toggle="tab"
+                        href="#mn-documentos-profesor" role="tab" aria-controls="mn-documentos-profesor"
+                        aria-selected="true">Documentos Profesor</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="mn-documentos-generales" role="tabpanel"
+                    aria-labelledby="mn-documentos-generales-tab">
+                    <table id="myTable3" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Materia</th>
+                                <th scope="col">Descripcion</th>
+                                <th scope="col" coldspan="1">Ver Documento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($cons as $c)
+                            <tr>
+                                <td> {{$c->nombre}}</td>
+                                <td> {{$c->descripcion}}</td>
+                                <td><a class="btn btn-dark btn" href="{{route('Contenido.alumno', $c->id)}}"><i
+                                            class="fas fa-eye"></i></a>
+                                </td>
 
-                    </tr>
+                            </tr>
 
-                    @endforeach
-                </tbody>
-            </table>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade show active" id="mn-documentos-profesor" role="tabpanel"
+                    aria-labelledby="mn-documentos-profesor-tab">
+
+                    documentos del profesor
+                </div>
+
+            </div>
+
         </div>
     </div>
 </div>

@@ -40,8 +40,7 @@
             </div>
         </div>
         <div class="card-body">
-            <h1 class="font-weight-light"> Unidades</h1>
-
+       
             <table id="myTable3" class="table table-hover">
                 <thead>
                     <tr>
