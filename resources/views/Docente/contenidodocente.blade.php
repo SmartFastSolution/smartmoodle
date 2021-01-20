@@ -14,7 +14,7 @@
         <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}
         </h2>
 
-        <!-- <a class="btn btn-primary btn" href=""><i class="far fa-clipboard"></i> Calificaciones</i></a> -->
+
 
 
         <a class="btn btn-dark btn" href="{{route('Alumnos', $materia->id)}}"><i class="fas fa-users"></i>
@@ -40,12 +40,13 @@
             </div>
         </div>
         <div class="card-body">
-       
+
             <table id="myTable3" class="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">Materia</th>
                         <th scope="col">Descripcion</th>
+                        <th scope="col">Acción</th>
                         <th scope="col" coldspan="1">Ver Documento</th>
                     </tr>
                 </thead>
@@ -54,9 +55,28 @@
                     <tr>
                         <td> {{$c->nombre}}</td>
                         <td> {{$c->descripcion}}</td>
-                        <td><a class="btn btn-dark btn" href="{{route('Contenido.docente', $c->id)}}"><i
-                                    class="fas fa-eye"></i></a>
+
+                        <td>@if($c['accion']== '1')
+                            <span class="badge-success badge">Descargable</span>
+                            @else
+                            <span v-else class="badge-info badge">No Descargable</span>
+                            @endif
                         </td>
+
+                        <td>
+                            @if($c['accion']== '1')
+                            <!-- descarganle -->
+                            <a class="btn btn-dark btn" href="{{route('Contenido2.docente', $c->id)}}"><i
+                                    class="fas fa-eye"></i></a>
+
+                            @else
+                            <!-- no descarganle -->
+                            <a class="btn btn-dark btn" href="{{route('Contenido.docente', $c->id)}}"><i
+                                    class="fas fa-eye"></i></a>
+                            @endif
+                        </td>
+
+
 
                     </tr>
 

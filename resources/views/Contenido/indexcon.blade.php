@@ -28,14 +28,15 @@
             Crear</a>
         <h1 class="font-weight-light">Gestión de Unidades</h1>
 
-        <table id="myTable" class="table table-hover">
+        <table id="myTable" class="table table-hover" style="width:100%">
             <thead>
                 <tr>
-                   
+
                     <th scope="col">Nombre</th>
                     <th scope="col">Materia</th>
                     <th scope="col">Descripcion</th>
                     <th scope="col">Estado</th>
+                    <th scope="col">Acción</th>
                     <th scope="col" coldspan="3">Tools</th>
 
                 </tr>
@@ -43,11 +44,17 @@
             <tbody>
                 @foreach ($contenidos as $contenido)
                 <tr>
-                  
+
                     <td>{{ $contenido['nombre']}}</td>
                     <td>{{ $contenido->materia->nombre}}</td>
                     <td>{{ $contenido['descripcion']}}</td>
                     <td>{{ $contenido['estado']}}</td>
+                    <td>@if($contenido['accion']== '1')
+                        <span class="badge-success badge">Descargable</span>
+                        @else
+                        <span v-else class="badge-info badge">No Descargable</span>
+                        @endif
+                    </td>
                     <td class="table-button ">
                         <!--metodo delete funciona pero hay que almacenar la variable array en una variable temporal-->
                         <form method="POST" action="{{route('contenidos.destroy',$contenido->id)}}}"
@@ -97,6 +104,7 @@ $(function() {
             "autoWidth": true,
             "searching": true,
             "responsive": true,
+            "scrollX": true,
 
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"

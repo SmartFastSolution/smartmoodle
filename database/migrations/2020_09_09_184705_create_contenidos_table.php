@@ -19,6 +19,7 @@ class CreateContenidosTable extends Migration
             $table->string('nombre');
             $table->string('descripcion');
             $table->enum('estado',['on','off'])->nullable();
+            $table->boolean('accion');
             $table->timestamps();
 
             $table->foreign('materia_id')->references('id')->on('materias')->onDelete('cascade');

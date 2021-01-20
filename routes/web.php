@@ -84,7 +84,9 @@ Route::get('cursos-list-excel','PDFController@CursoExport')->name('curso.excel')
 
 ///rutas menu docente
 route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
-route::get('docente/Documento-pdf/{contenido}', 'DocenteController@VerPDF')->name('Contenido.docente'); //para visualizar el documento en el menu estudiante
+route::get('docente/Documento-pdf/{contenido}', 'DocenteController@VerPDF')->name('Contenido.docente'); //para visualizar el documento en el menu docente no descargable
+route::get('docente/Documento-pdf2/{contenido}', 'DocenteController@VerPDF2')->name('Contenido2.docente'); //para visualizar el documento en el menu estudiante descargable
+
 
 //rutas menu estudiante
 route::post('admin/cambiarestado','AdminController@status')->name('taller.status');
@@ -93,7 +95,8 @@ route::get('perfile','EstudianteController@show')->name('perfile');
 route::get('unidad/{id}','EstudianteController@unidades')->name('Unidades');
 route::get('estudiante/password', 'EstudianteController@password')->name('AlumnoPass'); //para metodo get del password 
 route::post('estudiante/password','EstudianteController@updatep')->name('Estudiantes.updatep'); // para guardar el nuevo password
-route::get('Contenido-pdf/{contenido}', 'EstudianteController@VisualizacionPDF')->name('Contenido.alumno'); //para visualizar el documento del administrador en el menu estudiante
+route::get('Contenido-pdf/{contenido}', 'EstudianteController@VisualizacionPDF')->name('Contenido.alumno'); //para visualizar el documento del administrador en el menu estudiante no descargable
+route::get('Contenido-pdf2/{contenido}', 'EstudianteController@VisualizacionPDF3')->name('Contenido3.alumno'); //para visualizar el documento del administrador en el menu estudiante y descargable
 route::get('Contenido-pdf/docente/{contenido}', 'EstudianteController@VisualizacionPDF2')->name('Contenido2.alumno'); //para visualizar el documento del docente en el menu estudiante
 route::get('post-estudiante', 'EstudianteController@PostE')->name('Post.alumno');
 route::post('estudiante/post/store', 'EstudianteController@storee')->name('storepost'); //guardar un post desde estudiante

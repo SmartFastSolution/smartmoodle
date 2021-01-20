@@ -228,6 +228,13 @@ class DocenteController extends Controller
   
     }
 
+    public function VerPDF2($id){
+
+        $contenido =Contenido::where('id', $id)->firstOrfail();
+         return \view('Docente.archivopdf2',['contenido'=>$contenido]);
+  
+    }
+
 
     public function password(){
 

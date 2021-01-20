@@ -59,6 +59,7 @@
                             <tr>
                                 <th scope="col">Materia</th>
                                 <th scope="col">Descripcion</th>
+                                <th scope="col">Acción</th>
                                 <th scope="col" coldspan="1">Ver Documento</th>
                             </tr>
                         </thead>
@@ -67,8 +68,24 @@
                             <tr>
                                 <td> {{$c->nombre}}</td>
                                 <td> {{$c->descripcion}}</td>
-                                <td><a class="btn btn-dark btn" href="{{route('Contenido.alumno', $c->id)}}"><i
+                                <td>@if($c['accion']== '1')
+                                    <span class="badge-success badge">Descargable</span>
+                                    @else
+                                    <span v-else class="badge-info badge">No Descargable</span>
+                                    @endif
+                                </td>
+
+                                <td>
+                                @if($c['accion']== '1')
+                                <!-- descarganle -->
+                                <a class="btn btn-dark btn" href="{{route('Contenido3.alumno', $c->id)}}"><i
                                             class="fas fa-eye"></i></a>
+                               
+                                @else
+                                  <!-- no descarganle -->
+                                <a class="btn btn-dark btn" href="{{route('Contenido.alumno', $c->id)}}"><i
+                                            class="fas fa-eye"></i></a>
+                                @endif
                                 </td>
 
                             </tr>

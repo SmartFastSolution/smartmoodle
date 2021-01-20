@@ -7,7 +7,7 @@
 
 <section class="content">
     <div class="container">
-        <h1 class="font-weight-light">Visualización de Documento|No Descargable</h1>
+        <h1 class="font-weight-light">Visualización de Documento|Descargable</h1>
         <h3 class="font-weight-light">{{$contenido->nombre}}</h3>
 
         <p class="text-center">

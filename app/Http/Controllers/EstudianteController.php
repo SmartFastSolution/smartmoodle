@@ -122,15 +122,23 @@ class EstudianteController extends Controller
 
 
      public function VisualizacionPDF($id){
-
+     //documento no descargable 
       $contenido =Contenido::where('id', $id)->firstOrfail();
+
        return \view('Estudiante.archivopdf',['contenido'=>$contenido]);
 
    }
+   public function VisualizacionPDF3($id){
+    //documento  descargable 
+      $contenido =Contenido::where('id', $id)->firstOrfail();
+
+      return \view('Estudiante.archivopdf3',['contenido'=>$contenido]);
+
+  }
 
 
    public function VisualizacionPDF2($id){
-
+  //visualizar documento del docente
     $contenido =Archivodocente::where('id', $id)->firstOrfail();
      return \view('Estudiante.archivopdf2',['contenido'=>$contenido]);
 

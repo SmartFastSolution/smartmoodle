@@ -65,6 +65,13 @@
 
                                 <!-- fin de la prueba imagen en laravel  -->
 
+                                </div>
+                                   <div class="form-group">
+                                    <label for="cuenta">Documento Descargable</label>
+                                    <input type="checkbox" value="1" name="accion" class="custom-checkbox">
+                                </div>
+
+
                                 <div class="form-group">
                                     <label for="nombre">Estado </label>
                                     <br>
