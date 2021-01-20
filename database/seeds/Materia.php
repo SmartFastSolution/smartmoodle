@@ -40,6 +40,14 @@ class Materia extends Seeder
           'descripcion' => 'Unidad # 1',
           'estado'      => 'on',
         ]);
+             DB::table('contenidos')->insert([
+          'url'              => 'prueba',
+          'archivoable_type' => 'App\Contenido',
+          'archivoable_id'   => 1,
+          'created_at'       => now(),
+          'updated_at'       => now(),
+        ]);
+
 
     }
 }

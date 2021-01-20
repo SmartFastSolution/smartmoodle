@@ -75,6 +75,31 @@
                   </div>
                 @endforeach
                 </div>
+                       @if ($taller->estado_resultado == 'si')
+                 <h2 class="text-center font-weight-bold text-danger mt-2 display-4">ESTADO DE RESULTADO</h2>
+                   <div class="row mt-2 justify-content-center">
+                     <div class="col-10">
+                       <table class="table">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">Descripcion</th>
+                              <th class="text-center" scope="col" width="150">.</th>
+                              <th class="text-center" scope="col" width="150">.</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @foreach ($resultado = App\PartidaDobleEstado::where('partida_doble_id', $datos->id)->get() as $registro) 
+                            <tr>
+                              <td>{{ $registro->descripcion }}</td>
+                              <td class="text-right">{{ $registro->saldo1 }}</td>
+                              <td class="text-right">{{ $registro->saldo2 }}</td>
+                            </tr>
+                            @endforeach
+                          </tbody>
+                        </table>
+                     </div>
+                   </div>
+                 @endif
           </div>
             <div class="row justify-content-center">
 	            <div class="col-5">

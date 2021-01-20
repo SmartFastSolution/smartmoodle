@@ -16,8 +16,8 @@ class CreateTallerSubrayarOpsTable extends Migration
         Schema::create('taller_subrayar_ops', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_subrayars_id');
-            $table->string('concepto')->nullable();
-            $table->string('respuesta')->nullable();
+            $table->longText('concepto')->nullable();
+            $table->longText('respuesta')->nullable();
             $table->string('alternativas')->nullable();
             $table->timestamps();
             

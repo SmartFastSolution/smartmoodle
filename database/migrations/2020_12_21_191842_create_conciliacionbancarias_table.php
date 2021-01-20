@@ -17,13 +17,14 @@ class CreateConciliacionbancariasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('nombre');
-            $table->string('n_banco');
-            $table->string('fecha');
-            $table->string('saldo_c');
-            $table->string('saldo_ch');
-            $table->string('saldo_d');
-            $table->string('total');
+            $table->string('nombre')->nullable();
+            $table->string('n_banco')->nullable();
+            $table->string('fecha')->nullable();
+            $table->string('saldo_c')->nullable();
+            $table->string('saldo_ch')->nullable();
+            $table->string('saldo_d')->nullable();
+            $table->string('saldo_depositos')->nullable();
+            $table->string('total')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

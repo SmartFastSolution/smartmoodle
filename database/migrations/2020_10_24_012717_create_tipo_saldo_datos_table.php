@@ -18,6 +18,8 @@ class CreateTipoSaldoDatosTable extends Migration
             $table->unsignedbigInteger('tipo_saldo_id');
             $table->string('pregunta')->nullable();
             $table->string('respuesta')->nullable();
+            $table->string('total_debe')->nullable();
+            $table->string('total_haber')->nullable();
             $table->timestamps();
 
             $table->foreign('tipo_saldo_id')

@@ -68,19 +68,19 @@
 					
 							<h4 class="font-weight-bold text-center"> {{ $datos->seccion1a }}</h4>
 
-							<img class="img-fluid mb-1 mt-1 " src="{{ asset('img/talleres/imagen-32.jpg') }}" alt="">
+							<img class="img-fluid mb-1 mt-1 " src="{{ asset('img/talleres/img-1.jpg') }}" alt="">
 							<h4 class="font-weight-bold text-center"> {{ $datos->seccion1b }}</h4>
 					</div>
 					<div class="col-3 align-self-center text-center border-danger border p-3">
 						<h5>2</h5>
 							<h4 class="font-weight-bold text-center"> {{ $datos->seccion2a }}</h4>
-						<img class="img-fluid mb-1 mt-1 " src="{{ asset('img/talleres/imagen-32.jpg') }}" alt="">
+						<img class="img-fluid mb-1 mt-1 " src="{{ asset('img/talleres/img-2.jpg') }}" alt="">
 							<h4 class="font-weight-bold text-center"> {{ $datos->seccion2b }}</h4>
 					</div>
 					<div class="col-3 align-self-center text-center border-danger border p-3">
 						<h5>3</h5>
 							<h4 class="font-weight-bold text-center"> {{ $datos->seccion3a }}</h4>
-						<img class="img-fluid mb-1 mt-1 " src="{{ asset('img/talleres/imagen-32.jpg') }}" alt="">
+						<img class="img-fluid mb-1 mt-1 " src="{{ asset('img/talleres/img-3.jpg') }}" alt="">
 							<h4 class="font-weight-bold text-center"> {{ $datos->seccion3b }}</h4>
 
 					</div>

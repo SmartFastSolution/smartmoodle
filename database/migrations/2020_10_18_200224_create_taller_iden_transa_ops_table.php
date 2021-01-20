@@ -16,7 +16,7 @@ class CreateTallerIdenTransaOpsTable extends Migration
         Schema::create('taller_iden_transa_ops', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_iden_transa_id');
-            $table->string('enunciado')->nullable();
+            $table->longText('enunciado')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_iden_transa_id')

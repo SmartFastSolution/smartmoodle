@@ -16,7 +16,7 @@ class CreateTallerDefinirEnunOpsTable extends Migration
         Schema::create('taller_definir_enun_ops', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_definir_enunciado_id');
-            $table->string('concepto');
+            $table->longText('concepto');
             $table->timestamps();
             
             $table->foreign('taller_definir_enunciado_id')

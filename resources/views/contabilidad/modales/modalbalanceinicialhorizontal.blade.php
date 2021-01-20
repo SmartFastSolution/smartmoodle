@@ -16,7 +16,7 @@
             </div>
             <div class="modal-body">
                 <div class="row justify-content-center">
-           
+
                     <div class="col-12">
                         <nav>
                             <div style="font-size: 15px" class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -89,7 +89,7 @@
                                                     class="fa fa-window-close"></i></a>
                                         </div>
                                     </div>
-                                      @if($datos->metodo == 'individual')
+                                    @if($datos->metodo == 'individual')
 
                      <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
                         {!! $transacciones->transacciones !!}
@@ -98,8 +98,8 @@
                                     <div class="col-6 mt-2 "
                                         style=" height:250px; overflow-y: scroll; border: double 8px #E71822;">
 
-                                         @isset ($balancesInicial->transacciones )
-                                             {!! $balancesInicial->transacciones !!}
+                                        @isset ($balancesInicial->transacciones )
+                                        {!! $balancesInicial->transacciones !!}
                                         @endisset
 
                                     </div>
@@ -188,7 +188,7 @@
                                                     class="fa fa-window-close"></i></a>
                                         </div>
                                     </div>
-                                                 @if($datos->metodo == 'individual')
+                                    @if($datos->metodo == 'individual')
 
                      <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden;">
                         {!! $transacciones->transacciones !!}
@@ -286,7 +286,7 @@
                                                     class="fa fa-window-close"></i></a>
                                         </div>
                                     </div>
-                                                @if($datos->metodo == 'individual')
+                                    @if($datos->metodo == 'individual')
 
                      <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden;">
                         {!! $transacciones->transacciones !!}
@@ -384,7 +384,7 @@
                                                     class="fa fa-window-close"></i></a>
                                         </div>
                                     </div>
-                                                 @if($datos->metodo == 'individual')
+                                    @if($datos->metodo == 'individual')
 
                      <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden;">
                         {!! $transacciones->transacciones !!}
@@ -481,7 +481,7 @@
                                                     class="fa fa-window-close"></i></a>
                                         </div>
                                     </div>
-                                             @if($datos->metodo == 'individual')
+                                    @if($datos->metodo == 'individual')
 
                      <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden;">
                         {!! $transacciones->transacciones !!}
@@ -490,7 +490,7 @@
                                     <div class="col-6 mt-2 "
                                         style=" height:250px; overflow-y: scroll; border: double 8px #E71822;">
                                         @isset ($balancesInicial->transacciones )
-                                             {!! $balancesInicial->transacciones !!}
+                                        {!! $balancesInicial->transacciones !!}
                                         @endisset
                                     </div>
                                     @endif

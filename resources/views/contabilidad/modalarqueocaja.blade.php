@@ -15,26 +15,29 @@
             </div>
 
             <div class="modal-body">
-            <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
-                
+                <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
+
                 <div class="row justify-content-center">
                     <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+                        <ul class="nav nav-tabs" id="arqueoCaja" role="tablist">
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link  text-dark font-weight-bold" id="dato-saldo-tab"
-                                    style="font-size: 15px" data-toggle="tab" href="#dato-saldo" role="tab"
-                                    aria-controls="dato-saldo" aria-selected="true"> SALDO</a>
+                                <a class="nav-link active  text-dark font-weight-bold" id="ht-dato-saldo-tab"
+                                    data-toggle="tab" href="#ht-dato-saldo" role="tab" aria-controls="ht-dato-saldo"
+                                    aria-selected="true">SALDO</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link text-dark font-weight-bold" id="dato-exis-tab"
-                                    style="font-size: 15px" data-toggle="tab" href="#dato-exis" role="tab"
-                                    aria-controls="dato-exis" aria-selected="false"> EXISTENCIAS</a>
+                                <a class="nav-link  text-dark font-weight-bold" id="ht-dato-exis-tab" data-toggle="tab"
+                                    href="#ht-dato-exis" role="tab" aria-controls="ht-dato-exis"
+                                    aria-selected="false">EXISTENCIAS</a>
                             </li>
                         </ul>
 
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade " id="dato-saldo" role="tabpanel"
-                                aria-labelledby="dato-saldo-tab">
+                        <div class="tab-content" id="dato">
+                            {{--SALDO --}}
+                            <div class="tab-pane fade show active" id="ht-dato-saldo" role="tabpanel"
+                                aria-labelledby="ht-dato-saldo-tab">
+
                                 <h2 class="text-center">AGREGAR SALDO</h2>
                                 <table class="table table-bordered table-sm">
                                     <thead class="thead-dark">
@@ -70,8 +73,10 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="dato-exis" role="tabpanel"
-                                aria-labelledby="haber-asiento-tab">
+                            {{--EXISTENCIAS --}}
+                            <div class="tab-pane fade" id="ht-dato-exis" role="tabpanel"
+                                aria-labelledby="ht-dato-exis-tab">
+
                                 <h2 class="text-center">AGREGAR EXISTENCIAS</h2>
 
                                 <table class="table table-bordered table-sm">
@@ -95,7 +100,7 @@
                                 </table>
 
                                 <br>
-                                <div v-if="!saldo.edit" class="row justify-content-center">
+                                <div v-if="!exis.edit" class="row justify-content-center">
                                     <a href="#" class="btn btn-success" @click.prevent="agregarExistencia()">Agregar</a>
 
                                 </div>
@@ -108,66 +113,80 @@
 
                             </div>
                         </div>
-                    </div> 
-                     @if($datos->metodo == 'individual')
+                    </div>
+                    @if($datos->metodo == 'individual')
 
-                     <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
                         {!! $transacciones->transacciones !!}
-                     </div>
+                    </div>
                     @elseif($datos->metodo == 'concatenado')
 
-                     <div class="col-6 mt-2 ">
+                    <div class="col-6 mt-2 ">
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <a class="nav-link active" id="nav-arqueo-caja-tab" data-toggle="tab" href="#nav-arqueo-caja" role="tab" aria-controls="nav-arqueo-caja" aria-selected="true">ENUNCIADOS</a>
-                                <a class="nav-link" id="nav-libro-caja-tab" data-toggle="tab" href="#nav-libro-caja" role="tab" aria-controls="nav-libro-caja" aria-selected="false">LIBRO BANCO</a>
-                             
+                                <a class="nav-link active" id="nav-arqueo-caja-tab" data-toggle="tab"
+                                    href="#nav-arqueo-caja" role="tab" aria-controls="nav-arqueo-caja"
+                                    aria-selected="true">ENUNCIADOS</a>
+                                <a class="nav-link" id="nav-libro-caja-tab" data-toggle="tab" href="#nav-libro-caja"
+                                    role="tab" aria-controls="nav-libro-caja" aria-selected="false">LIBRO CAJA</a>
+
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-arqueo-caja" role="tabpanel" aria-labelledby="nav-arqueo-caja-tab" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
-                                    @isset ($arqueocaja->transacciones)
-                                    {!! $arqueocaja->transacciones !!}
+                            <div class="tab-pane fade show active" id="nav-arqueo-caja" role="tabpanel"
+                                aria-labelledby="nav-arqueo-caja-tab"
+                                style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
+                                @isset ($arqueocaja->transacciones)
+                                {!! $arqueocaja->transacciones !!}
                                 @endisset
                             </div>
-                            <div class="tab-pane fade" id="nav-libro-caja" role="tabpanel" aria-labelledby="nav-libro-caja-tab" style=" height:300px; overflow-y: scroll; border: double 8px #E71822;  overflow-x: hidden;">
-                                     <h3 class="text-center font-weight-bold">Datos para realizar el Arqueo de Caja</h3>
+                            <div class="tab-pane fade" id="nav-libro-caja" role="tabpanel"
+                                aria-labelledby="nav-libro-caja-tab"
+                                style=" height:300px; overflow-y: scroll; border: double 8px #E71822;  overflow-x: hidden;">
+                                <h3 class="text-center font-weight-bold">Datos para realizar el Arqueo de Caja</h3>
 
-                        <h2 class="text-center display-4 font-weight-bold text-danger">Libro Caja</h2>
+                                <h2 class="text-center display-4 font-weight-bold text-danger">Libro Caja</h2>
 
-                        <div class="row p-3  mb-2 justify-content-center ">
-                            <div class="col-5 mb-3">
-                                <h3 class="text-center font-weight-bold">
-                                    @{{ nombre_lb }}</h3>
+                                <div class="row p-3  mb-2 justify-content-center ">
+                                    <div class="col-5 mb-3">
+                                        <h3 class="text-center font-weight-bold">
+                                            @{{ nombre_lb }}</h3>
+                                    </div>
+                                </div>
+                                <table class="table table-bordered table-sm">
+                                    <thead>
+                                        <tr class="text-center bg-dark">
+                                            <th width="125">Fecha</th>
+                                            <th width="300">Detalle</th>
+                                            <th width="100">Debe</th>
+                                            <th width="100">Haber</th>
+                                            <th width="100">Saldo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(caja, index) in libros_caja">
+                                            <td align="left">@{{formatoFecha(caja.fecha)}}</td>
+                                            <td align="left">@{{caja.detalle}}</td>
+                                            <td align="right">@{{decimales( caja.debe)}}</td>
+                                            <td align="right">@{{decimales(caja.haber)}}</td>
+                                            <td align="right">@{{decimales(caja.saldo)}}</td>
+                                        </tr>
+                                        <tr class="bg-secondary">
+                                            <td class="text-left font-weight-bold">TOTALES</td>
+                                            <td class="text-left font-weight-bold"></td>
+                                            <td class="text-right font-weight-bold">@{{ debe_lb }}</td>
+                                            <td class="text-right font-weight-bold">@{{ haber_lb }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <table class="table table-bordered table-sm">
-                            <thead>
-                                <tr class="text-center bg-dark">
-                                    <th width="125">Fecha</th>
-                                    <th width="300">Detalle</th>
-                                    <th width="100">Debe</th>
-                                    <th width="100">Haber</th>
-                                    <th width="100">Saldo</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(caja, index) in libros_caja">
-                                    <td align="left">@{{formatoFecha(caja.fecha)}}</td>
-                                    <td align="left">@{{caja.detalle}}</td>
-                                    <td align="right">@{{decimales( caja.debe)}}</td>
-                                    <td align="right">@{{decimales(caja.haber)}}</td>
-                                    <td align="right">@{{decimales(caja.saldo)}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                            </div>
-                        </div> 
-                    </div>        
+                    </div>
                     @endif
                     <br>
                 </div>
-                <div class="col-12 mt-2" v-if="t_saldo.length > 0 || t_exis.length > 0">
+                <div class="col-12 mt-2" v-if="t_saldo.length > 0 || t_exis.length > 0"
+                    style=" height:400px; overflow-y: scroll; overflow-x: hidden;">
                     <h2 class="text-center">ACTUALIZAR REGISTROS</h2>
 
                     <table style="border: hidden" class="table table-bordered table-sm mb-2">
@@ -190,13 +209,13 @@
                                 <td style="border: hidden" align="center">@{{decimales(s.s_debe)}}</td>
                                 <td style="border: hidden" align="center">@{{decimales(s.s_haber)}}</td>
                                 <td style="border: hidden" align="center" width="50">
-                                    <a @click.prevent="WarningEliminarSaldo(index)" class="btn btn-danger">
-                                        <i class="fas fa-trash-alt"></i>
+                                    <a @click.prevent="editSaldo(index)" class="btn btn-warning">
+                                        <i class="fas fa-edit"></i>
                                     </a>
                                 </td>
                                 <td style="border: hidden" align="center" width="50">
-                                    <a @click.prevent="editSaldo(index)" class="btn btn-warning">
-                                        <i class="fas fa-edit"></i>
+                                    <a @click.prevent="WarningEliminarSaldo(index)" class="btn btn-danger">
+                                        <i class="fas fa-trash-alt"></i>
                                     </a>
                                 </td>
 
@@ -213,24 +232,22 @@
                                 <td style="padding-left:50px">@{{e.detalle}}</td>
                                 <td style="border: hidden" align="center">@{{decimales(e.e_debe)}}</td>
                                 <td style="border: hidden" align="center">@{{decimales(e.e_haber)}}</td>
-                                <td style="border: hidden" align="center" width="50">
-                                    <a @click.prevent="WarningEliminarExis(index)" class="btn btn-danger">
-                                        <i class="fas fa-trash-alt"></i>
-                                    </a>
-                                </td>
+
                                 <td style="border: hidden" align="center" width="50">
                                     <a @click.prevent="editExis(index)" class="btn btn-warning">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                 </td>
+                                <td style="border: hidden" align="center" width="50">
+                                    <a @click.prevent="WarningEliminarExis(index)" class="btn btn-danger">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
-
                     </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-

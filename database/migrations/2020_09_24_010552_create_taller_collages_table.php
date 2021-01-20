@@ -16,7 +16,7 @@ class CreateTallerCollagesTable extends Migration
         Schema::create('taller_collages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('img_num');
             $table->timestamps();
             

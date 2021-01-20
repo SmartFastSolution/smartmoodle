@@ -16,7 +16,7 @@ class CreateTallerOrdenPagosTable extends Migration
         Schema::create('taller_orden_pagos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('beneficiario');
             $table->string('comprobante');
             $table->string('cantidad');

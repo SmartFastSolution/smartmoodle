@@ -7,18 +7,18 @@
                     <h5 class="modal-title" id="bg-transaccionLabel">ACTUALIZAR TRANSACCION</h5>
                 </div>
                 <div v-else="!update">
-                    <h5 class="modal-title" id="bg-transaccionLabel">AGREGAR TRANSACCION</h5>
+                    <h5 class="modal-title" id="bg-transaccionLabel">AGREGAR  TRANSACCION</h5>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-            <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
+            <div class="modal-body"   style="height: 700px; overflow-y: scroll;  width: 100%;">
+                <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
 
                 <div class="row justify-content-center">
                     <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
-                        <h2 class="text-center">AGREGAR TRANSACCIÓN</h2>
+                        <h2 class="text-center">AGREGAR MOVIMIENTO</h2>
                         <table class="table table-bordered table-sm mb-2">
                             <thead class="bg-success">
                                 <tr>
@@ -75,14 +75,14 @@
                                     class="fa fa-window-close"></i></a>
                         </div>
                     </div>
-                      @if($datos->metodo == 'individual')
+                    @if($datos->metodo == 'individual')
 
-                     <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
                         {!! $transacciones->transacciones !!}
-                     </div>
+                    </div>
                     @elseif($datos->metodo == 'concatenado')
-                <div class="col-6" style=" height:300px; overflow-y: scroll;">
-                        <h3 class="text-center font-weight-bold">Datos para realizar el Mayor General</h3>
+                    <div class="col-6" style=" height:300px; overflow-y: scroll;">
+                        <h3 class="text-center font-weight-bold">Datos para realizar el Libro Caja</h3>
                         <h3 class="text-center">Diario General</h3>
                         <table class="table table-bordered table-sm">
                             <thead class="thead-dark">
@@ -143,7 +143,7 @@
                             </table>
                         </div>
 
-                        <div v-if="registros_cierres.length > 0">
+                        <div v-if="registros_cierres.length > 0" >
                             <h1 class="text-center text-danger font-weight-bold mt-2">ASIENTOS DE CIERRE</h1>
                             <div class="row justify-content-center">
                                 <div class="col-3">
@@ -188,7 +188,7 @@
                         </div>
                     </div>
                     @endif
-                    <div class="col-12 mt-2" v-if="libros_caja.length > 0">
+                    <div class="col-12 mt-2" v-if="libros_caja.length > 0" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
                         <h2 class="text-center">REGISTROS</h2>
 
                         <table class="table table-bordered table-sm">
@@ -209,14 +209,15 @@
                                     <td align="right">@{{decimales( caja.debe)}}</td>
                                     <td align="right">@{{decimales(caja.haber)}}</td>
                                     <td align="right">@{{decimales(caja.saldo)}}</td>
-                                    <td align="center" width="50">
-                                        <a @click.prevent="WarningEliminarLibro(index)" class="btn btn-danger">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </a>
-                                    </td>
+                                   
                                     <td align="center" width="50">
                                         <a @click.prevent="editLibroCaja(index)" class="btn btn-warning">
                                             <i class="fas fa-edit"></i>
+                                        </a>
+                                    </td>
+                                    <td align="center" width="50">
+                                        <a @click.prevent="WarningEliminarLibro(index)" class="btn btn-danger">
+                                            <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -243,7 +244,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Deseas eliminar el registro  @{{ eliminar.nombre }}?
+                Deseas eliminar el registro @{{ eliminar.nombre }}?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

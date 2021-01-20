@@ -14,10 +14,10 @@ use App\Conciliacioncheque;
 use App\Conciliacioncredito;
 use App\Conciliaciondebito;
 use App\Conciliacionsaldo;
+use App\Conciliaciondeposito;
 
 use App\Admin\TallerModuloContable;
 use App\Admin\TallerModuloTransaccion;
-
 use App\Contabilidad\BCARegistro;
 use App\Contabilidad\BCRegistro;
 use App\Contabilidad\BIActivo;
@@ -206,7 +206,7 @@ class TallerContabilidadController extends Controller
                 $kardexFifo = KardexFifo::where('user_id',$id)->where('taller_id', $taller_id)->where('producto_id', $producto_id)->count();
                 $registros  = [];
                 if ($kardexFifo  >= 1) {
-                    $producto = TallerModuloTransaccion::where('id', $producto_id)->first();
+                    $producto =  TallerModuloTransaccion::where('id', $producto_id)->first();
                     $kardex  = KardexFifo::select('id', 'nombre', 'producto', 'inv_inicial_cantidad', 'adquisicion_cantidad', 'ventas_cantidad', 'inv_final_cantidad', 'inv_inicial_precio', 'adquisicion_precio', 'ventas_precio', 'inv_final_precio')->where('user_id',$id)->where('taller_id', $taller_id)->where('producto_id', $producto_id)->first();
 
                 $obtener = KFRegistro::where('kardex_fifo_id', $kardex->id)->get();
@@ -1762,6 +1762,7 @@ class TallerContabilidadController extends Controller
                                 $o->t_p_corriente    = $request->totales['t_p_corriente'];
                                 $o->t_p_no_corriente = $request->totales['t_p_no_corriente'];
                                 $o->t_patrimonio     = $request->totales['t_patrimonio'];
+                                $o->total_pasivo_patrimonio = $request->t_patrimonio;
                                 $o->save();
 
                             $activ=BGActivo::where('balance_general_id', $o->id)->get();
@@ -2070,7 +2071,6 @@ class TallerContabilidadController extends Controller
 
 
 
-
         public function AnexoCaja(Request $request)
         {
             $user_id = Auth::id();
@@ -2164,6 +2164,9 @@ class TallerContabilidadController extends Controller
                 'datos' => true,
                 'banexocaja' => $obtenerc,
                 'nombre' =>$anexocaja->nombre,
+                'totaldebe' =>$anexocaja->totaldebe,
+                'totalhaber' =>$anexocaja->totalhaber,
+
             ),200,[]);
             }else{
                 return response(array(
@@ -2416,7 +2419,9 @@ class TallerContabilidadController extends Controller
                     'mb' => $mb,
                     'nombre' =>$lbs->nombre,
                     'n_banco' =>$lbs->n_banco,
-                    'c_banco' =>$lbs->c_banco
+                    'c_banco' =>$lbs->c_banco,
+                    'totaldebe'=>$lbs->totaldebe,
+                    'totalhaber'=>$lbs->totalhaber,
                 ),200,[]);
                 }else{
                     return response(array(
@@ -2431,27 +2436,29 @@ class TallerContabilidadController extends Controller
         public function ConciliacionBancaria(Request $request)
         {
             $id  = Auth::id();
-            $taller_id   = $request->id;
-            $nombre      =$request->nombre;
-            $fecha       =$request->fecha;
-            $n_banco     =$request->n_banco;
-            $c_saldos    =$request->c_saldos;
-            $c_debitos   =$request->c_debitos;
-            $c_creditos  =$request->c_creditos;
-            $c_cheques   =$request->c_cheques;
+            $taller_id     = $request->id;
+            $nombre        =$request->nombre;
+            $fecha         =$request->fecha;
+            $n_banco       =$request->n_banco;
+            $c_saldos      =$request->c_saldos;
+            $c_debitos     =$request->c_debitos;
+            $c_creditos    =$request->c_creditos;
+            $c_cheques     =$request->c_cheques;
+            $c_depositos   =$request->c_depositos;
             
             $cb  = Conciliacionbancaria::where('user_id', $id)->where('taller_id',$taller_id)->count();      
             if($cb ==0){
                 $b = new Conciliacionbancaria;
-                $b->taller_id  = $taller_id;
-                $b->user_id    = $id;
-                $b->nombre     = $nombre;
-                $b->fecha      = $fecha;
-                $b->n_banco    = $n_banco;
-                $b->saldo_c    = $request->saldo_c;
-                $b->saldo_ch   = $request->saldo_ch;
-                $b->saldo_d    = $request->saldo_d;
-                $b->total      = $request->total;
+                $b->taller_id         = $taller_id;
+                $b->user_id           = $id;
+                $b->nombre            = $nombre;
+                $b->fecha             = $fecha;
+                $b->n_banco           = $n_banco;
+                $b->saldo_c           = $request->saldo_c;
+                $b->saldo_ch          = $request->saldo_ch;
+                $b->saldo_d           = $request->saldo_d;
+                $b->saldo_depositos    = $request->saldo_depositos;
+                $b->total             = $request->total;
                 $b->save();
                 $cbs= Conciliacionbancaria::where('user_id', $id)->get()->last();
                         foreach($c_saldos as $key=>$s){
@@ -2480,6 +2487,19 @@ class TallerContabilidadController extends Controller
                             );
                             Conciliaciondebito::insert($datos);
                         }
+                        foreach($c_depositos as $key=>$de){
+
+                            $datos = array(
+                                'conciliacionbancaria_id' =>$cbs->id,
+                                'fecha'          =>$de['fecha'],
+                                'detalle'        =>$de['detalle'],
+                                'saldo'          =>$de['saldo'],
+                                'created_at'        => now(),
+                                'updated_at'        => now(),
+                
+                            );
+                            Conciliaciondeposito::insert($datos);
+                        }
                         foreach($c_creditos as $key=>$s){
 
                             $datos = array(
@@ -2489,7 +2509,6 @@ class TallerContabilidadController extends Controller
                                 'saldo'          =>$s['saldo'],
                                 'created_at'        => now(),
                                 'updated_at'        => now(),
-                
                             );
                             Conciliacioncredito::insert($datos);
                         }
@@ -2520,6 +2539,7 @@ class TallerContabilidadController extends Controller
                     $cb->fecha      = $fecha;
                     $cb->n_banco    = $n_banco;
                     $cb->saldo_c    = $request->saldo_c;
+                    $cb->saldo_depositos    = $request->saldo_depositos;
                     $cb->saldo_ch   = $request->saldo_ch;
                     $cb->saldo_d    = $request->saldo_d;
                     $cb->total      = $request->total;
@@ -2530,6 +2550,12 @@ class TallerContabilidadController extends Controller
                         $ids[]=$i->id;
                     }
                     $deteletesaldo = Conciliacionsaldo::destroy($ids);
+
+                    $cbde = Conciliaciondeposito::where('conciliacionbancaria_id',$cb->id)->get();
+                    foreach($cbde as $i){
+                        $ids[]=$i->id;
+                    }
+                    $deteletedeposito = Conciliaciondeposito::destroy($ids);
 
                     $cbd = Conciliaciondebito::where('conciliacionbancaria_id',$cb->id)->get();
                     foreach($cbd as $i){
@@ -2604,6 +2630,19 @@ class TallerContabilidadController extends Controller
                         );
                         Conciliacioncheque::insert($datos);
                     }
+                    foreach($c_depositos as $key=>$de){
+
+                        $datos = array(
+                            'conciliacionbancaria_id' =>$cba->id,
+                            'fecha'          =>$de['fecha'],
+                            'detalle'        =>$de['detalle'],
+                            'saldo'          =>$de['saldo'],
+                            'created_at'        => now(),
+                            'updated_at'        => now(),
+            
+                        );
+                        Conciliaciondeposito::insert($datos);
+                    }
                     return response(array(
                         'success' => true,
                         'estado'  => 'actualizado',
@@ -2621,10 +2660,11 @@ class TallerContabilidadController extends Controller
 
             if($cb==1){
                 $a     = Conciliacionbancaria::where('user_id', $id)->where('taller_id',$taller_id)->first();
-            $saldo   = Conciliacionsaldo::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
-            $debito  = Conciliaciondebito::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
-            $credito = Conciliacioncredito::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
-            $cheque  = Conciliacioncheque::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $saldo     = Conciliacionsaldo::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $debito    = Conciliaciondebito::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $credito   = Conciliacioncredito::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $cheque    = Conciliacioncheque::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $deposito  = Conciliaciondeposito::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
         
             return response(array(
                 'datos'   => true,
@@ -2632,6 +2672,7 @@ class TallerContabilidadController extends Controller
                 'debito'  => $debito, 
                 'credito' => $credito, 
                 'cheque'  => $cheque, 
+                'deposito'=> $deposito, 
                 'nombre'  => $a->nombre,
                 'fecha'   => $a->fecha,
                 'n_banco' => $a->n_banco,
@@ -2651,6 +2692,7 @@ class TallerContabilidadController extends Controller
           $id = Auth::id();
           $taller_id  = $request->id;
           $nombre_c  = $request->nombre_c;
+          $contribuyente  = $request->contribuyente;
           $fecha     = $request->fecha;
           $ruc       = $request->ruc;
           $t_compras = $request->t_compras;
@@ -2663,6 +2705,7 @@ class TallerContabilidadController extends Controller
               $r->taller_id   = $taller_id;
               $r->user_id     = $id;
               $r->nombre      = $nombre_c;
+              $r->contribuyente = $contribuyente;
               $r->fecha       = $fecha;
               $r->ruc         = $ruc;
               $r->sumac_base  = $request->sumac_base;
@@ -2741,6 +2784,7 @@ class TallerContabilidadController extends Controller
                 $ids =[];
                 $r = Retencioniva::where('user_id', $id)->where('taller_id',$taller_id)->first();     
                 $r->nombre      = $nombre_c;
+                $r->contribuyente = $contribuyente;
                 $r->fecha       = $fecha;
                 $r->ruc         = $ruc;
                 $r->sumac_base  = $request->sumac_base;
@@ -2841,17 +2885,18 @@ class TallerContabilidadController extends Controller
                 $venta = Retencionivaventa::select('fecha_v','detalle','cliente','base_im','porcentaje', 'v_retenido', 'iva', 'ret_10', 'ret_20', 'ret_30', 'ret_70', 'ret_100'   )->where('retencioniva_id',  $r->id)->get();
 
                 return response(array(
-                    'datos'       => true,
-                    'compra'      => $compra, 
-                    'venta'       => $venta, 
-                    'nombre'      => $r->nombre,
-                    'fecha'       => $r->fecha,
-                    'ruc'         => $r->ruc,
-                    't_ivacompra' => $r->t_ivacompra,
-                    't_ivaventa'  => $r->t_ivaventa,
-                    't_reten'     => $r->t_reten,
-                    'result_iva'  => $r->result_iva,
-                    'total'       => $r->total,
+                    'datos'        => true,
+                    'compra'       => $compra, 
+                    'venta'        => $venta, 
+                    'nombre'       => $r->nombre,
+                    'contribuyente'=> $r->contribuyente,
+                    'fecha'        => $r->fecha,
+                    'ruc'          => $r->ruc,
+                    't_ivacompra'  => $r->t_ivacompra,
+                    't_ivaventa'   => $r->t_ivaventa,
+                    't_reten'      => $r->t_reten,
+                    'result_iva'   => $r->result_iva,
+                    'total'        => $r->total,
                     
                     ),200,[]);
             }else{

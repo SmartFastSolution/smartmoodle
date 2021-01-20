@@ -17,21 +17,21 @@ class CreateAbreviaturaCartasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
-            $table->string('abreviatura1');
-            $table->string('abreviatura2');
-            $table->string('abreviatura3');
-            $table->string('abreviatura4');
-            $table->string('abreviatura5');
-            $table->string('abreviatura6');
-            $table->string('abreviatura7');
-            $table->string('abreviatura8');
-            $table->string('abreviatura9');
-            $table->string('abreviatura10');
-            $table->string('abreviatura11');
-            $table->string('abreviatura12');
-            $table->string('abreviatura13');
-            $table->string('abreviatura14');
+            $table->longText('enunciado');
+            $table->string('abreviatura1')->nullable();
+            $table->string('abreviatura2')->nullable();
+            $table->string('abreviatura3')->nullable();
+            $table->string('abreviatura4')->nullable();
+            $table->string('abreviatura5')->nullable();
+            $table->string('abreviatura6')->nullable();
+            $table->string('abreviatura7')->nullable();
+            $table->string('abreviatura8')->nullable();
+            $table->string('abreviatura9')->nullable();
+            $table->string('abreviatura10')->nullable();
+            $table->string('abreviatura11')->nullable();
+            $table->string('abreviatura12')->nullable();
+            $table->string('abreviatura13')->nullable();
+            $table->string('abreviatura14')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

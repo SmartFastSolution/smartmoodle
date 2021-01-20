@@ -10,6 +10,7 @@ use App\ArqueoExi;
 use App\ArqueoSaldo;
 use App\Cajadatos;
 use App\Conciliacionbancaria;
+use App\Conciliaciondeposito;
 use App\Conciliacioncheque;
 use App\Conciliacioncredito;
 use App\Conciliaciondebito;
@@ -231,21 +232,14 @@ class TallerContabilidadDocenteController extends Controller
             {
                         $id            = $request->user;
                         $taller_id     = $request->id;
-                        $tipo          = $request->tipo;
-                        $balanceInicial = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->count();
-
-                        if ($balanceInicial >= 1 ) { 
-                            $datos1 = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', 'horizontal')->count();
-                            $datos2 = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', 'vertical')->count();
-
-                            if ($tipo == 'horizontal' && $datos1 == 1) {
-                                    $datos = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', $tipo)->first();
+                        $balanceInicial = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', 'horizontal')->count();
+                        if ($balanceInicial == 1 ) { 
+                        $datos = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', 'horizontal')->first();
                         $a_corrientes      = BIActivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'corriente')->get();
                         $a_nocorrientes    = BIActivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'nocorriente')->get();
                         $p_corriente       = BIPasivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'corriente')->get();
                         $p_nocorriente     = BIPasivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'nocorriente')->get();
                         $patrimonios       = $datos->bPatrimonios;
-
                             return response(array(
 									'datos'                   => true,
 									'completo'                => $datos,
@@ -258,33 +252,43 @@ class TallerContabilidadDocenteController extends Controller
 									'p_nocorriente'           => $p_nocorriente,
 									'patrimonios'             => $patrimonios,
                                 ),200,[]);
-                            }elseif ($tipo == 'vertical' && $datos2 == 1) {
-						$datos          = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', $tipo)->first();
-						$a_corrientes   = BIActivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'corriente')->get();
-						$a_nocorrientes = BIActivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'nocorriente')->get();
-						$p_corriente    = BIPasivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'corriente')->get();
-						$p_nocorriente  = BIPasivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'nocorriente')->get();
-						$patrimonios    = $datos->bPatrimonios;
+                            }else{
+                            return response(array(
+                                'datos' => false,
+                                ),200,[]);
+                        }
+                    }
+                    function balance_vertical(Request $request)
+                    {
+                        $id            = $request->user;
+                        $taller_id     = $request->id;
+                        $balanceInicial = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', 'vertical')->count();
+                        if ($balanceInicial == 1) {
+                        $datos          = BalanceInicial::where('user_id',$id)->where('taller_id', $taller_id)->where('tipo', 'vertical')->first();
+                        $a_corrientes   = BIActivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'corriente')->get();
+                        $a_nocorrientes = BIActivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'nocorriente')->get();
+                        $p_corriente    = BIPasivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'corriente')->get();
+                        $p_nocorriente  = BIPasivo::select('nom_cuenta', 'cuenta_id', 'saldo')->where('balance_inicial_id', $datos->id)->where('tipo', 'nocorriente')->get();
+                        $patrimonios    = $datos->bPatrimonios;
 
                             return response(array(
-									'datos'                   => true,
-									'completo'                => $datos,
-									'nombre'                  => $datos->nombre,
-									'fecha'                   => $datos->fecha,
-									'total_pasivo_patrimonio' => $datos->total_pasivo_patrimonio,
-									'a_corriente'             => $a_corrientes,
-									'a_nocorriente'           => $a_nocorrientes,
-									'p_corriente'             => $p_corriente,
-									'p_nocorriente'           => $p_nocorriente,
-									'patrimonios'             => $patrimonios,
+                                    'datos'                   => true,
+                                    'completo'                => $datos,
+                                    'nombre'                  => $datos->nombre,
+                                    'fecha'                   => $datos->fecha,
+                                    'total_pasivo_patrimonio' => $datos->total_pasivo_patrimonio,
+                                    'a_corriente'             => $a_corrientes,
+                                    'a_nocorriente'           => $a_nocorrientes,
+                                    'p_corriente'             => $p_corriente,
+                                    'p_nocorriente'           => $p_nocorriente,
+                                    'patrimonios'             => $patrimonios,
                                 ),200,[]);
-                            }
-
                         }else{
                             return response(array(
                                 'datos' => false,
                                 ),200,[]);
                         }
+
                     }
             public function obtenerdiario(Request $request)
             {
@@ -575,10 +579,11 @@ class TallerContabilidadDocenteController extends Controller
 
             if($cb==1){
                 $a     = Conciliacionbancaria::where('user_id', $id)->where('taller_id',$taller_id)->first();
-            $saldo   = Conciliacionsaldo::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
-            $debito  = Conciliaciondebito::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
-            $credito = Conciliacioncredito::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
-            $cheque  = Conciliacioncheque::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $saldo     = Conciliacionsaldo::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $debito    = Conciliaciondebito::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $credito   = Conciliacioncredito::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $cheque    = Conciliacioncheque::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
+            $deposito  = Conciliaciondeposito::select('fecha','detalle','saldo')->where('conciliacionbancaria_id',  $a->id)->get();
         
             return response(array(
                 'datos'   => true,
@@ -586,6 +591,7 @@ class TallerContabilidadDocenteController extends Controller
                 'debito'  => $debito, 
                 'credito' => $credito, 
                 'cheque'  => $cheque, 
+                'deposito'=> $deposito, 
                 'nombre'  => $a->nombre,
                 'fecha'   => $a->fecha,
                 'n_banco' => $a->n_banco,
@@ -603,7 +609,7 @@ class TallerContabilidadDocenteController extends Controller
                 public function ObtenerRetencionIva(Request $request){
             $id = $request->user;            
             $taller_id = $request->id;
-            $rt = Retencioniva::where('user_id', $id)->where('taller_id',$taller_id)->count();
+                 $rt = Retencioniva::where('user_id', $id)->where('taller_id',$taller_id)->count();
 
             if($rt == 1){
             
@@ -612,17 +618,18 @@ class TallerContabilidadDocenteController extends Controller
                 $venta = Retencionivaventa::select('fecha_v','detalle','cliente','base_im','porcentaje', 'v_retenido', 'iva', 'ret_10', 'ret_20', 'ret_30', 'ret_70', 'ret_100'   )->where('retencioniva_id',  $r->id)->get();
 
                 return response(array(
-                    'datos'       => true,
-                    'compra'      => $compra, 
-                    'venta'       => $venta, 
-                    'nombre'      => $r->nombre,
-                    'fecha'       => $r->fecha,
-                    'ruc'         => $r->ruc,
-                    't_ivacompra' => $r->t_ivacompra,
-                    't_ivaventa'  => $r->t_ivaventa,
-                    't_reten'     => $r->t_reten,
-                    'result_iva'  => $r->result_iva,
-                    'total'       => $r->total,
+                    'datos'        => true,
+                    'compra'       => $compra, 
+                    'venta'        => $venta, 
+                    'nombre'       => $r->nombre,
+                    'contribuyente'=> $r->contribuyente,
+                    'fecha'        => $r->fecha,
+                    'ruc'          => $r->ruc,
+                    't_ivacompra'  => $r->t_ivacompra,
+                    't_ivaventa'   => $r->t_ivaventa,
+                    't_reten'      => $r->t_reten,
+                    'result_iva'   => $r->result_iva,
+                    'total'        => $r->total,
                     
                     ),200,[]);
             }else{
@@ -631,7 +638,6 @@ class TallerContabilidadDocenteController extends Controller
                 ),200,[]);
 
             } //fin else
-           
             
             
 

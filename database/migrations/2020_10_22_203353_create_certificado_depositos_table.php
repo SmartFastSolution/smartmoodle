@@ -17,17 +17,17 @@ class CreateCertificadoDepositosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
-            $table->string('valor_inicial');
-            $table->string('caracter');
-            $table->string('beneficiario');
-            $table->string('cantidad');
-            $table->string('plazo');
-            $table->string('fecha_de_emision');
-            $table->string('fecha_de_vencimiento');
-            $table->string('interes_anual');
-            $table->string('plazo_de_vencimiento');
-            $table->string('lugar_fecha_emision');
+            $table->longText('enunciado');
+            $table->string('valor_inicial')->nullable();
+            $table->string('caracter')->nullable();
+            $table->string('beneficiario')->nullable();
+            $table->string('cantidad')->nullable();
+            $table->string('plazo')->nullable();
+            $table->string('fecha_de_emision')->nullable();
+            $table->string('fecha_de_vencimiento')->nullable();
+            $table->string('interes_anual')->nullable();
+            $table->string('plazo_de_vencimiento')->nullable();
+            $table->string('lugar_fecha_emision')->nullable();
             
             $table->timestamps();
             

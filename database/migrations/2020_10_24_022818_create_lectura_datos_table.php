@@ -16,8 +16,8 @@ class CreateLecturaDatosTable extends Migration
         Schema::create('lectura_datos', function (Blueprint $table) {
              $table->bigIncrements('id');
             $table->unsignedbigInteger('lectura_id');
-            $table->string('pregunta')->nullable();
-            $table->string('respuesta')->nullable();
+            $table->longText('pregunta')->nullable();
+            $table->longText('respuesta')->nullable();
             $table->timestamps();
 
             $table->foreign('lectura_id')

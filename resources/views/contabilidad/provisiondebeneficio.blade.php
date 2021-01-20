@@ -1,11 +1,10 @@
-<div id="provision_beneficio" >
+<div id="provision_beneficio">
     <h1 class="text-center text-danger font-weight-bold mt-2">PROVISIÓN DE BENEFICIOS SOCIALES</h1>
- @if ($rol === 'estudiante')
-        <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirProvision()">Agregar Provisión</a>
+    @if ($rol === 'estudiante')
+    <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirProvision()">Agregar Provisión</a>
 
-        <a href="#" class="addDiario btn btn-outline-success ml-1" @click.prevent="guardarProvision()">Guardar</a>
-
- @endif
+    <a href="#" class="addDiario btn btn-outline-success ml-1" @click.prevent="guardarProvision()">Guardar Provisión</a>
+    @endif
     <div class="row p-3  mb-2 ">
         <br><br>
         <div class="col-12">
@@ -24,7 +23,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="(p , index) in t_pro">
-                        <td class="text-right" align="center" width="300">@{{ p.nombre_em}}</td>
+                        <td class="text-left" align="center" width="300">@{{ p.nombre_em}}</td>
                         <td class="text-right" align="center" width="100">@{{ p.dias}}</td>
                         <td class="text-right" align="center" width="125">@{{ decimales(p.v_recibido) }}</td>
                         <td class="text-right" align="center" width="125">@{{ decimales(p.d_tercero) }}</td>
@@ -50,7 +49,7 @@
             </table>
         </div>
     </div>
- @if ($rol === 'estudiante')
+    @if ($rol === 'estudiante')
 
     <div class="row justify-content-center mb-2">
         <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirProvision()">Agregar Provisión</a>
@@ -60,6 +59,6 @@
         <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarProvision()">Guardar
             Provisión</a>
     </div>
-@endif
+    @endif
     @include ('contabilidad.modalprovision')
 </div>

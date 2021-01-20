@@ -17,15 +17,15 @@ class CreateIdentificarAbreviaturasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
-            $table->string('abreviatura1');
-            $table->string('abreviatura2');
-            $table->string('abreviatura3');
-            $table->string('abreviatura4');
-            $table->string('abreviatura5');
-            $table->string('abreviatura6');
-            $table->string('abreviatura7');
-            $table->string('abreviatura8');
+            $table->longText('enunciado');
+            $table->string('abreviatura1')->nullable();
+            $table->string('abreviatura2')->nullable();
+            $table->string('abreviatura3')->nullable();
+            $table->string('abreviatura4')->nullable();
+            $table->string('abreviatura5')->nullable();
+            $table->string('abreviatura6')->nullable();
+            $table->string('abreviatura7')->nullable();
+            $table->string('abreviatura8')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

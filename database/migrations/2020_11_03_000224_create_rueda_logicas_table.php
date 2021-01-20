@@ -17,11 +17,11 @@ class CreateRuedaLogicasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
-            $table->string('persona_juridica');
-            $table->string('objetivo');
-            $table->string('importancia');
-            $table->string('persona_natural');
+            $table->longText('enunciado');
+            $table->string('persona_juridica')->nullable();
+            $table->string('objetivo')->nullable();
+            $table->string('importancia')->nullable();
+            $table->string('persona_natural')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

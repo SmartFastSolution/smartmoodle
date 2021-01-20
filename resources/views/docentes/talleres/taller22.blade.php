@@ -56,10 +56,10 @@ ADECUADAMENTE. -->
 			                  <tbody>
 			                  	
 			                    <tr class="text-center">
-			                      <td>{{ $datos->pedido }}</td>
-			                      <td>{{ $datos->lugar }} {{ $datos->fecha }}</td>
-			                      <td>{{ $datos->firma }}</td>
-			                      <td>{{ $datos->plazo_entrega }}</td>
+			                      <td>{{ $taller->pedido }}</td>
+			                      <td>{{ $taller->lugar }} {{ $taller->fecha }}</td>
+			                      <td>{{ $taller->firma }}</td>
+			                      <td>{{ $taller->plazo_entrega }}</td>
 			                    </tr>
 			       
 
@@ -99,8 +99,8 @@ ADECUADAMENTE. -->
 						<h5 class="text-left">Tlfs: 2580465 - 2413864</h5>
 					</div>
 					<div class="col-6 text-center p-3">
-						<h1>NOTA DE PEDIDA</h1>
-						<h4>No. <input type="text" disabled value="{{ $datos->pedido }}" name="pedido" class="" size="5"></h4>
+						<h1>NOTA DE PEDIDO</h1>
+						<h4>No. <input type="text" disabled value="{{ $datos->pedido }}" name="pedido" class="text-right" size="5"></h4>
 						<div class="row mb-2">			
 							<div class="col-4 text-left">
 								<label class="col-form-label" for="">Fecha:</label>
@@ -145,17 +145,16 @@ ADECUADAMENTE. -->
 					      <th scope="col">DESCRIPCION</th>
 					      <th scope="col">PRECIO UNIT.</th>
 					      <th scope="col">TOTAL</th>
-					      <th scope="col">ACCION</th>
 					    </tr>
 					  </thead> 
 					  <tbody class="prin">
 					  	@foreach ($datos->notapedidoRe as $dato)
 					    <tr>
-					      <td><input name="cantidad[]" disabled value="{{ $dato->cantidad }}" type="text" class="form-control" ></td>
-					      <td><input name="codigo[]" disabled value="{{ $dato->codigo }}" type="text" class="form-control" ></td>
+					      <td><input name="cantidad[]" disabled value="{{ $dato->cantidad }}" type="text" class="form-control text-right" ></td>
+					      <td><input name="codigo[]" disabled value="{{ $dato->codigo }}" type="text" class="form-control text-right" ></td>
 					      <td><input type="text" disabled value="{{ $dato->descripcion }}" name="descripcion[]" class="form-control" ></td>
-					      <td><input type="text" disabled value="{{ $dato->precio_unit }}" name="precio_unit[]" class="form-control" ></td>
-					      <td><input name="total[]" disabled value="{{ $dato->total }}" type="text" class="form-control" ></td>
+					      <td><input type="text" disabled value="{{ $dato->precio_unit }}" name="precio_unit[]" class="form-control text-right" ></td>
+					      <td><input name="total[]" disabled value="{{ $dato->total }}" type="text" class="form-control text-right" ></td>
 					    </tr>
 					    @endforeach
 					  </tbody>

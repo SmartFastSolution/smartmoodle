@@ -17,22 +17,22 @@ class CreateAbreviaturaEconomicasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
-            $table->string('abreviaturaI1');
-            $table->string('abreviaturaI2');
-            $table->string('abreviaturaI3');
-            $table->string('abreviaturaI4');
-            $table->string('abreviaturaI5');
-            $table->string('abreviaturaC1');
-            $table->string('abreviaturaC2');
-            $table->string('abreviaturaC3');
-            $table->string('abreviaturaC4');
-            $table->string('abreviaturaC5');
-            $table->string('abreviaturaR1');
-            $table->string('abreviaturaR2');
-            $table->string('abreviaturaR3');
-            $table->string('abreviaturaR4');
-            $table->string('abreviaturaR5');
+            $table->longText('enunciado');
+            $table->string('abreviaturaI1')->nullable();
+            $table->string('abreviaturaI2')->nullable();
+            $table->string('abreviaturaI3')->nullable();
+            $table->string('abreviaturaI4')->nullable();
+            $table->string('abreviaturaI5')->nullable();
+            $table->string('abreviaturaC1')->nullable();
+            $table->string('abreviaturaC2')->nullable();
+            $table->string('abreviaturaC3')->nullable();
+            $table->string('abreviaturaC4')->nullable();
+            $table->string('abreviaturaC5')->nullable();
+            $table->string('abreviaturaR1')->nullable();
+            $table->string('abreviaturaR2')->nullable();
+            $table->string('abreviaturaR3')->nullable();
+            $table->string('abreviaturaR4')->nullable();
+            $table->string('abreviaturaR5')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

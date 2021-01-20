@@ -87,7 +87,7 @@
                          <div class="row justify-content-center mt-3 mb-2">
                               <div class="col-8 text-center">
                                    <div class="alert alert-primary" role="alert">
-                                    ING. JUAN PEREZ
+                                    {{ $datos->firma2 }}
                                    </div>
                                    
                                    <label for="">Firma</label>

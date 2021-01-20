@@ -7,13 +7,13 @@
                     <h5 class="modal-title" id="er-ingresoLabel">ACTUALIZAR PROVISIÓN</h5>
                 </div>
                 <div v-else="!update">
-                    <h5 class="modal-title" id="ba-transaccionLabel">AGREGAR PROVISIÓN</h5>
+                    <h5 class="modal-title" id="ba-transaccionLabel">AGREGAR TRANSACCION</h5>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="height: 700px; overflow-y: scroll;  width: 100%;">
             <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
                 
                 <div class="row justify-content-center">
@@ -46,8 +46,8 @@
 
                             <tbody>
                                 <tr v-for="(n, index) in t_nomina">
-                                    <td align="center" width="300">@{{ n.nombre_e}}</td>
-                                    <td align="center" width="125">@{{ n.cargo}}</td>
+                                    <td align="left" width="300">@{{ n.nombre_e}}</td>
+                                    <td align="left" width="125">@{{ n.cargo}}</td>
                                     <td class="text-right" align="center" width="100">@{{ decimales(n.sueldo)}}</td>
                                     <td class="text-right" align="center" width="100">@{{ decimales(n.s_tiempo)}}
                                     </td>
@@ -71,7 +71,7 @@
                         </table>
                     </div>
                     <div class="col-12 mt-2 border border-top-0 border-left-0 border-right-0 border-danger"
-                        style=" height:400px; overflow-y: scroll;">
+                       >
                         <h2 class="text-center">Agregar Provisión</h2>
 
 
@@ -95,11 +95,11 @@
                                     <td class="text-right" align="center" width="100"><input v-model="pro.dias"
                                             type="number" class="form-control form-control-sm"></td>
                                     <td class="text-right" align="center" width="120"><input v-model="pro.v_recibido"
-                                            type="text" class="form-control form-control-sm"></td>
+                                            type="number" class="form-control form-control-sm"></td>
                                     <td class="text-right" align="center" width="125"><input v-model="pro.d_tercero"
                                             type="number" class="form-control form-control-sm"></td>
                                     <td class="text-right" align="center" width="125"><input v-model="pro.d_cuarto"
-                                            type="text" class="form-control form-control-sm"></td>
+                                            type="number" class="form-control form-control-sm"></td>
                                     <td class="text-right" align="center" width="125"><input v-model="pro.vacaciones"
                                             type="number" class="form-control form-control-sm"></td>
                                     <td class="text-right" align="center" width="125"><input v-model="pro.f_reserva"
@@ -123,7 +123,7 @@
 
                         <br>
 
-                        <div class="col-12 mt-2" v-if="t_pro.length > 0">
+                        <div class="col-12 mt-2" v-if="t_pro.length > 0"  style=" height:400px; overflow-y: scroll;">
                             <h2 class="text-center">REGISTROS</h2>
                             <table class="table table-bordered table-sm">
                                 <thead class="thead-dark">
@@ -141,7 +141,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="(p , index) in t_pro">
-                                        <td class="text-right" align="center" width="300">@{{ p.nombre_em}}</td>
+                                        <td class="text-left" align="center" width="300">@{{ p.nombre_em}}</td>
                                         <td class="text-right" align="center" width="100">@{{ p.dias}}</td>
                                         <td class="text-right" align="center" width="125">@{{ decimales(p.v_recibido) }}
                                         </td>

@@ -17,15 +17,15 @@ class CreateNotaPedidosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
-            $table->string('pedido');
-            $table->string('fecha');
-            $table->string('dependencia');
-            $table->string('destino');
-            $table->string('plazo_entrega');
-            $table->string('observaciones');
-            $table->string('fabrica');
-            $table->string('recibido');
+            $table->longText('enunciado')->nullable();
+            $table->string('pedido')->nullable();
+            $table->string('fecha')->nullable();
+            $table->string('dependencia')->nullable();
+            $table->string('destino')->nullable();
+            $table->string('plazo_entrega')->nullable();
+            $table->string('observaciones')->nullable();
+            $table->string('fabrica')->nullable();
+            $table->string('recibido')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

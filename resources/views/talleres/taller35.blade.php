@@ -39,7 +39,7 @@
 						</table>
 					</div>
 					<div class="col-7 text-center  align-items-center">
-						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula1" required=""  class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula1"   class="form-control">
 					</div>
 				</div>
 
@@ -70,7 +70,7 @@
 						</table>
 					</div>
 					<div class="col-7 text-center">
-						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula2" required=""  class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula2"   class="form-control">
 					</div>
 				</div>
 
@@ -100,7 +100,7 @@
 						</table>
 					</div>
 					<div class="col-7 text-center">
-						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula3" required=""  class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula3"   class="form-control">
 					</div>
 				</div>
 
@@ -130,7 +130,7 @@
 						</table>
 					</div>
 					<div class="col-7 text-center">
-						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula4" required=""  class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula4"   class="form-control">
 					</div>
 				</div>
 
@@ -160,7 +160,7 @@
 						</table>
 					</div>
 					<div class="col-7 text-center">
-						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text"  name="formula5" required="" class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text"  name="formula5"  class="form-control">
 					</div>
 				</div>
 
@@ -190,7 +190,7 @@
 						</table>
 					</div>
 					<div class="col-7 text-center">
-						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula6" required=""  class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula6"   class="form-control">
 					</div>
 				</div>
 				<div class="row">
@@ -219,7 +219,7 @@
 						</table>
 					</div>
 					<div class="col-7 text-center align-content-center">
-						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula7" required=""  class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula7"   class="form-control">
 					</div>
 				</div>
 
@@ -250,7 +250,7 @@
 						</table>
 					</div>
 					<div class="col-7 text-center align-content-center">
-						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula8" required=""  class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula8"   class="form-control">
 					</div>
 				</div>
 
@@ -281,7 +281,7 @@
 						</table>
 					</div>
 					<div class="col-7 text-center align-content-center">
-						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula9" required=""  class="form-control">
+						<input style="box-shadow: 5px 5px 15px 0px  #FF1C87;" type="text" name="formula9"   class="form-control">
 					</div>
 				</div>
 

@@ -18,7 +18,7 @@ class CreateTallerCirculosTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->string('enunciado');
             $table->string('img');
-            $table->string('cantidad');
+            $table->longText('cantidad');
             $table->timestamps();
             
             $table->foreign('taller_id')

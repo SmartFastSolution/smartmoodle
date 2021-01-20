@@ -17,17 +17,18 @@ class CreateLetraCambiosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
-            $table->string('vencimiento');
-            $table->string('numero');
-            $table->string('por');
-            $table->string('ciudad');
-            $table->string('fecha');
-            $table->string('orden_de');
-            $table->string('cantidad');
-            $table->string('direccion');
-            $table->string('ciudad2');
-            $table->string('atentamente');
+            $table->longText('enunciado');
+            $table->string('vencimiento')->nullable();
+            $table->string('numero')->nullable();
+            $table->string('por')->nullable();
+            $table->string('interes')->nullable();
+            $table->string('ciudad')->nullable();
+            $table->string('fecha')->nullable();
+            $table->string('orden_de')->nullable();
+            $table->string('cantidad')->nullable();
+            $table->string('direccion')->nullable();
+            $table->string('ciudad2')->nullable();
+            $table->string('atentamente')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

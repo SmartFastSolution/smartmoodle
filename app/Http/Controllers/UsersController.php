@@ -28,8 +28,7 @@ class UsersController extends Controller
     public function index()
     {
         //Gate::authorize('haveaccess', 'user.index');
-      //  $users= User::where('Titulo','Administrador')->orderBy('id','Asc')->paginate(5);
-      //$users= User::orderBy('id','Asc')->paginate(5);
+     
          $users= User::all();
          return view('Persona.inicio',['users'=>$users]);
        
@@ -43,7 +42,7 @@ class UsersController extends Controller
     public function create()
     {
        // Gate::authorize('haveaccess', 'user.create');
-          // $institutos=Instituto::get();
+        
          $cursos= Curso::get();
          $nivels= Nivel::get();
          $roles=Role::get();

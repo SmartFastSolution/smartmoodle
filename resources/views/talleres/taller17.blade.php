@@ -14,7 +14,7 @@
      			<div class=" p-2" style="box-shadow: 5px 5px 15px 0px  #27A4F4">
 				<div class="row ">
 					<div class="col-6">
-						<img class="img-fluid" src="{{ asset('img/talleres/imagen-15.jpg') }}" alt="">
+						<input type="text" disabled="" name="girador" value="Banco de Guayaquil" class="form-control mt-2" >
 					</div>	
 					<div class="col-2 align-self-center">
 						<p>16457 <br>
@@ -78,8 +78,7 @@
 				<div class="row justify-content-center">
      			    <div class="col-10 border-success border">
      				<div class="text-center">
-     					<h4>ESPACIO PARA ENDOSO</h4>
-     			<h6 class="mt-0">(en caso de requerirse)</h6>
+     				<textarea name="espacio1" class="form-control mt-2"></textarea>
      				</div>
 
      				<div class="text-justify">
@@ -92,11 +91,11 @@
      			<div class="col-10 border border-success">
      				<div class="row justify-content-center mt-3 mb-2">
      					<div class="col-8 text-center">
-     						<input type="text" name="endoso" class="form-control" required>
+     						<input type="text" name="endoso" class="form-control" >
      						<label for="">Nombre</label>
      					</div>
      					<div class="col-8 text-center">
-     						<input type="text" name="firma" class="form-control" required>
+     						<input type="text" name="firma" class="form-control" >
      						<label for="">Firma del endosante</label>
      						<h6>(1 beneficiario)</h6>
      					</div>
@@ -106,7 +105,8 @@
      			<div class="row justify-content-center ">
 	     			<div class="col-10 border-success border ">
 	     				<div class="text-center mt-1">
-	     					<h5 class="text-gray-dark">ESPACIO PARA DEPOSITANTE O PERSONA QUE COBRA</h5>
+     				<textarea name="espacio2" class="form-control mt-2 mb-2"></textarea>
+	     					
 	     				</div>
 					</div>
      			</div>
@@ -114,7 +114,7 @@
      			<div class="col-10 border border-success">
      				<div class="row justify-content-center mt-3 mb-2">
      					<div class="col-8 text-center">
-     						<input type="text" value="ING. JUAN PEREZ" disabled="" class="form-control">
+     						<input type="text" name="firma2" class="form-control">
      						<label for="">Firma</label>
      					</div>
      					

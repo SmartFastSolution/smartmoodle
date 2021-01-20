@@ -16,7 +16,7 @@ class CreateTallerCompletarsTable extends Migration
        Schema::create('taller_completars', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('img')->nullable();
             $table->string('leyenda')->nullable();
             $table->timestamps();

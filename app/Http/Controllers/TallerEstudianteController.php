@@ -117,6 +117,7 @@ use App\Admin\TallerValeCaja;
 use App\Admin\TallerVerdaderoFalso;
 use App\Taller;
 use App\TallerChequeRe;
+use App\PartidaDobleEstado;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -525,11 +526,11 @@ class TallerEstudianteController extends Controller
                }
            $registros = $com->pdregistro;
                
-          foreach ($request->datos as $key =>$debe) {
-            if (count($debe['debe']) > 0) {
+          foreach ($request->datos as $key1 =>$debe) {
+           
                 foreach ($debe['debe'] as $k=>$valores) {
                   $datos=array(
-                     'partida_doble_regi_id' => $registros[$key]->id,
+                     'partida_doble_regi_id' => $registros[$key1]->id,
                      'valor'            => $valores['valor'],
                      'created_at'       => now(),
                      'updated_at'       => now(),
@@ -537,50 +538,60 @@ class TallerEstudianteController extends Controller
                   PDDebe::insert($datos);
                }
 
-            }elseif (count($debe['haber']) > 0) {
-                foreach ($debe['haber'] as $s=>$valores) {
-                  $datos=array(
-                     'partida_doble_regi_id' => $registros[$key]->id,
-                     'valor'            => $valores['valor'],
+            
+                foreach ($debe['haber'] as $s=>$valores2) {
+                  $datos2=array(
+                     'partida_doble_regi_id' => $registros[$key1]->id,
+                     'valor'            => $valores2['valor'],
                      'created_at'       => now(),
                      'updated_at'       => now(),
                   );
-                  PDHaber::insert($datos);
+                  PDHaber::insert($datos2);
                }
-            } 
+            
            }
-            $caja                   =   new PartidaDobleRegis; 
-            $caja->partida_doble_id =   $com->id;
-            $caja->cuenta           =   'Caja';           
-            $caja->total_debe       =   $request->caja['total_debe'];           
-            $caja->total_haber      =   $request->caja['total_haber'];           
-            $caja->save();
 
-
-       
-            if (count($request->caja['valor_debe']) > 0) {
-                foreach ($request->caja['valor_debe'] as $k=>$valores) {
-                  $datos=array(
-                     'partida_doble_regi_id' => $caja->id,
-                     'valor'            => $valores,
+           if (isset($request->estado_resultado)) {
+                foreach ($request->estado_resultado as $key3=>$estado) {
+                  $datos3=array(
+                     'partida_doble_id' => $com->id,
+                     'descripcion'      => $estado['descripcion'],
+                     'saldo1'           => $estado['saldo1'],
+                     'saldo2'           => $estado['saldo2'],
                      'created_at'       => now(),
                      'updated_at'       => now(),
                   );
-                  PDDebe::insert($datos);
+                  PartidaDobleEstado::insert($datos3);
                }
-
-            }
-            if (count($request->caja['valor_haber']) > 0) {
-                foreach ($request->caja['valor_haber'] as $s=>$valores) {
-                  $datos=array(
-                     'partida_doble_regi_id' => $caja->id,
-                     'valor'            => $valores,
-                     'created_at'       => now(),
-                     'updated_at'       => now(),
-                  );
-                  PDHaber::insert($datos);
-               }
-            } 
+           }
+            // $caja                   =   new PartidaDobleRegis; 
+            // $caja->partida_doble_id =   $com->id;
+            // $caja->cuenta           =   'Caja';           
+            // $caja->total_debe       =   $request->caja['total_debe'];           
+            // $caja->total_haber      =   $request->caja['total_haber'];           
+            // $caja->save();
+            // if (count($request->caja['valor_debe']) > 0) {
+            //     foreach ($request->caja['valor_debe'] as $k=>$valores) {
+            //       $datos=array(
+            //          'partida_doble_regi_id' => $caja->id,
+            //          'valor'            => $valores,
+            //          'created_at'       => now(),
+            //          'updated_at'       => now(),
+            //       );
+            //       PDDebe::insert($datos);
+            //    }
+            // }
+            // if (count($request->caja['valor_haber']) > 0) {
+            //     foreach ($request->caja['valor_haber'] as $s=>$valores) {
+            //       $datos=array(
+            //          'partida_doble_regi_id' => $caja->id,
+            //          'valor'            => $valores,
+            //          'created_at'       => now(),
+            //          'updated_at'       => now(),
+            //       );
+            //       PDHaber::insert($datos);
+            //    }
+            // } 
            
         $user= User::find($id);
         $user->tallers()->attach($request->id,['status'=> 'completado' , 'fecha_entregado' => now()]);
@@ -909,6 +920,7 @@ public function store11(Request $request, $idtaller)
     $taller15->suma  =   $request->input('suma');
     $taller15->lugar     =   $request->input('lugar');
     $taller15->fecha     =   $request->input('fecha'); 
+    $taller15->firma     =   $request->input('firma'); 
     $taller15->save();
 
     $user= User::find($id);
@@ -925,6 +937,7 @@ public function store11(Request $request, $idtaller)
         $taller16->enunciado =  $contenido->enunciado;                       
         $taller16->endoso        =   $request->input('endoso');
         $taller16->firma        =   $request->input('firma');
+        $taller16->firma2        =   $request->input('firma2');
         $taller16->save();
 
     $user= User::find($id);
@@ -941,6 +954,10 @@ public function store11(Request $request, $idtaller)
         $taller17->enunciado =  $contenido->enunciado;                       
         $taller17->endoso    =   $request->input('endoso');
         $taller17->firma     =   $request->input('firma');
+        $taller17->firma2    =   $request->input('firma2');
+        $taller17->espacio1  =   $request->input('espacio1');
+        $taller17->espacio2  =   $request->input('espacio2');
+
         $taller17->save();
 
     $user= User::find($id);
@@ -958,6 +975,7 @@ public function store11(Request $request, $idtaller)
          $taller18->vencimiento =   $request->input('vencimiento');
          $taller18->numero      =   $request->input('numero');
          $taller18->por         =   $request->input('por');
+         $taller18->interes     =   $request->input('interes');
          $taller18->ciudad      =   $request->input('ciudad');
          $taller18->fecha       =   $request->input('fecha');
          $taller18->orden_de    =   $request->input('orden_de');
@@ -1106,6 +1124,8 @@ public function store11(Request $request, $idtaller)
           $taller23->propiedad =   $request->input('propiedad');
           $taller23->situado   =   $request->input('situado');
           $taller23->hasta     =   $request->input('hasta');
+          $taller23->cubierto  =   $request->input('cubierto');
+          $taller23->espacio   =   $request->input('espacio');
           $taller23->firma     =   $request->input('firma');
             $taller23->save();
 
@@ -1160,6 +1180,7 @@ public function store11(Request $request, $idtaller)
                $taller25->subtotal_sin_imp =  $request->input('subtotal_sin_imp');
                $taller25->descuento_total  =  $request->input('descuento_total');
                $taller25->ice              =  $request->input('ice');
+               $taller25->emision              =  $request->input('emision');
                $taller25->iva12            =  $request->input('iva12');
                $taller25->irbpnr           =  $request->input('irbpnr');
                $taller25->propina          =  $request->input('propina');
@@ -1203,7 +1224,6 @@ public function store11(Request $request, $idtaller)
                    $taller26->ruc       =  $request->input('ruc');
                    $taller26->fecha     =  $request->input('fecha');
                    $taller26->total     =  $request->input('total');
-                   $taller26->valido    =  $request->input('valido');
                     $taller26->save();
 
 
@@ -1480,8 +1500,10 @@ public function store11(Request $request, $idtaller)
         foreach ($contenido as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
             $regis=array(
                      'tipo_saldo_id' => $a->id,
-                     'pregunta'     => $contenido[$key]->id,
+                     'pregunta'      => $contenido[$key]->id,
                      'respuesta'     => $request->saldo[$key],
+                     'total_debe'    => $request->total_debe[$key],
+                     'total_haber'   => $request->total_haber[$key],
                      'created_at'    => now(),
                      'updated_at'    => now(),
                   );

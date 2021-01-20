@@ -17,9 +17,10 @@ class CreateChequeEndososTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
-            $table->string('endoso');
-            $table->string('firma');
+            $table->longText('enunciado');
+            $table->string('endoso')->nullable();
+            $table->string('firma')->nullable();
+            $table->string('firma2')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

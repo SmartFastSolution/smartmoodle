@@ -21,7 +21,7 @@
                 <div class="row justify-content-center">
                     <h2 class="text-center font-weight-bold mt-2">Datos para elaborar la Nómina de Empleados</h2>
 
-                    <div class="col-7 border border-bottom-0 border-left-0 border-top-0 border-danger">
+                    <div class="col-7">
                         <ul class="nav nav-tabs" id="myTab" role="tablist" style="font-size: 12px;">
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link active" id="mn-sobretiempo-tab" data-toggle="tab" href="#mn-sobretiempo" role="tab" aria-controls="mn-sobretiempo" aria-selected="true">SOBRE TIEMPOS</a>
@@ -368,45 +368,15 @@
                         </div> --}}
                     </div>
 
-                    <div class="col-5" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                @if($datos->metodo == 'individual')
+                     <div class="col-5" style=" height:400px; overflow-y: scroll; overflow-x: hidden; border: double 8px #EE2E2E">
+                        <h3 class="text-center text-danger font-weight-bold mt-2">Datos para realizar la nomina de empleados</h3>
 
-                        <h3 class="text-center text-danger font-weight-bold mt-2">ENUNCIADOS</h3>
+                        {!! $transacciones->transacciones !!}
 
-                        <p>
-                            Se compra s/fra. #040 a Importadora “ELMARY” (contribuyente especial) - doce
-                            acondicionadores de aire en $ 550 c/u. Se cancela con ch/.# 050 Bco. Guayaquil. <br>
-                            <br>
-                            Se cancela la Fra.#023 a “Publicitas” (No Obligada a llevar Contabilidad) por
-                            servicios de publicidad $ 300 con ch/.#051 Bco. Guayaquil. <br> <br>
-
-                            Se vende S/. Fra. # 010 - cincuenta acondicionadores de aire en $ 1.200 c/u a
-                            Comercial “Felipao” (Obligado a llevar Contabilidad). Nos cancela con ch/. #082 Bco.
-                            Austro. <br> <br>
-
-                            Se deposita en cta. cte.# 3050 Bco. Guayaquil $ 60.000 <br> <br>
-
-                            Se cancela la Fra.#088 a “Servinet” (No Obligada a llevar Contabilidad) por
-                            servicios de internet $ 60 con ch/.#052 Bco. Guayaquil. <br> <br>
-
-                            Se compra s/fra. # 056 a Importadora “CASIRON” (contribuyente especial) - diez
-                            acondicionadores de aire en $ 555 c/u. con ch/.# 053 Bco. Guayaquil. <br> <br>
-
-                            De la última compra se devuelve dos acondicionadores de aire por no estar de acuerdo
-                            con el pedido (Fra. # 011). <br> <br>
-
-                            Se cancela a “CNT” la Fra. #073 por servicio telefónico $ 150 con ch/.# 054 Bco.
-                            Guayaquil. <br> <br>
-
-                            Se vende S/Fra. #012 - treinta acondicionadores de aire en $ 1.200 c/u a Comercial
-                            “INCOR” (Obligado a llevar Contabilidad). Se recibe ch/. #101 Bco. del Austro. <br>
-                            <br>
-
-                            De la última venta nos devuelven un acondicionador de aire por no estar de acuerdo
-                            con el pedido. Se cancela con ch/.#055 Bco. Guayaquil. (Fra. # 057) <br> <br>
-                        </p>
-                    </div>
+                     </div>
+                     @endif
                     <br>
-
                     <div class="col-12 mt-2 border border-bottom-0 border-left-0 border-right-0 border-danger" >
                         <h2 class="text-center">AGREGAR NÓMINA</h2>
 
@@ -438,7 +408,7 @@
                                     <td class="text-right" align="center" width="125"><input v-model="nomina.sueldo"
                                             type="number" class="form-control form-control-sm"></td>
                                     <td class="text-right" align="center" width="50"><input v-model="nomina.s_tiempo"
-                                            type="text" class="form-control form-control-sm"></td>
+                                            type="number" class="form-control form-control-sm"></td>
                                     <td class="text-right" align="center" width="150"><input v-model="nomina.ingresos"
                                             type="number" class="form-control form-control-sm"></td>
                                     <td class="text-right" align="center" width="150"><input v-model="nomina.iees"
@@ -503,8 +473,8 @@
 
                                 <tbody>
                                     <tr v-for="(n, index) in t_nomina">
-                                        <td align="center" width="300">@{{ n.nombre_e}}</td>
-                                        <td align="center" width="125">@{{ n.cargo}}</td>
+                                        <td align="left" width="300">@{{ n.nombre_e}}</td>
+                                        <td align="left" width="125">@{{ n.cargo}}</td>
                                         <td class="text-right" align="center" width="100">@{{ decimales(n.sueldo)}}</td>
                                         <td class="text-right" align="center" width="100">@{{ decimales(n.s_tiempo)}}
                                         </td>

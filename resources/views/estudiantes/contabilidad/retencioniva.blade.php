@@ -3,6 +3,7 @@
     <div class="row p-3  mb-2 justify-content-center ">
         <div class="col-5 mb-3">
             <h3 class="text-center font-weight-bold display-4">@{{ nombre_c }}</h3>
+            <h3 class="text-center font-weight-bold display-4">@{{ contribuyente }}</h3>
             <h3 class="text-center font-weight-bold display-4">@{{ ruc }}</h3>
             <h3 class="text-center font-weight-bold display-4">@{{ fecha }}</h3>
         </div>
@@ -117,19 +118,69 @@
     </tr>
 </tbody>
 </table>
-<div class="row p-4  mb-2 justify-content-center ">
-<div class="col-4 mb-3">
-    <input class="form-control  text-center" type="number" v-model="total.t_ivaventa"
-    placeholder="IVA EN VENTAS" name="">
-    <input class="form-control  text-center" type="number" v-model="total.t_ivacompra"
-    placeholder="- IVA EN COMPRAS" name="">
-    <input class="form-control  text-center" type="number" v-model="total.result_iva" placeholder="RES. IVA"
-    name="">
-    <input class="form-control  text-center" type="number" v-model="total.t_reten" placeholder="+ RET. IVA"
-    name="">
-    <input class="form-control  text-center" type="number" v-model="total.total_pagar"
-    placeholder="TOTAL A PAGAR" name="">
-</div>
-</div>
+    <div class="row p-4  mb-4 justify-content-center ">
+        <table>
+            <tbody>
+                <tr>
+                    <td> <label for="inputEmail3" class="col-sm col-form-label">IVA EN VENTAS</label></td>
+                    <td>
+                        <div class="col-sm-8">
+                            <input disabled="" class="form-control  text-right  form-control-sm"  type="number" step="0.01"
+                                v-model="total.t_ivaventa" placeholder="IVA EN VENTAS" name="">
+                        </div>
+                    </td>
+
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+
+                    <td><label for="inputEmail3" class="col-sm col-form-label"> -IVA EN COMPRAS</label></td>
+                    <td>
+
+                        <div class="col-sm-8">
+                            <input disabled="" class="form-control  text-right  form-control-sm" type="number" step="0.01"
+                                v-model="total.t_ivacompra" placeholder="- IVA EN COMPRAS" name="">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td> <label for="inputEmail3" class="col-sm col-form-label"></label></td>
+                    <td>
+                        <div class="col-sm-8">
+                            <input disabled="" class="form-control  text-right  form-control-sm" type="number" step="0.01"
+                                v-model="total.result_iva" placeholder="RES. IVA" name="">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td><label for="inputEmail3" class="col-sm col-form-label"> + RET. IVA</label></td>
+                    <td>
+
+                        <div class="col-sm-8">
+                            <input disabled="" class="form-control  text-right  form-control-sm" type="number" step="0.01"
+                                v-model="total.t_reten" placeholder="+ RET. IVA" name="">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td><label for="inputEmail3" class="col-sm col-form-label"> TOTAL A PAGAR</label></td>
+                    <td>
+                        <div class="col-sm-8">
+                            <input disabled="" class="form-control  text-right  form-control-sm" type="number" step="0.01"
+                                v-model="total.total_pagar" placeholder="TOTAL A PAGAR" name="">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 <br>
 </div>

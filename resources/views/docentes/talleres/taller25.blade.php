@@ -138,11 +138,11 @@
 					<div class="col-5">
 						<div class="row mb-3">
 							<div class="col-5"><label class="col-form-label">R.U.C/C.I. :</label></div>
-							<div class="col-7"><input disabled value="{{ $datos->ruc }}" name="ruc" type="text " class="form-control"></div>
+							<div class="col-7"><input disabled value="{{ $datos->ruc }}" name="ruc" type="text " class="form-control text-right"></div>
 						</div>
 						<div class="row">
 							<div class="col-5"><label class="col-form-label" for="">GUÍA DE REMISIÓN :</label></div>
-							<div class="col-7"><input disabled value="{{ $datos->emision }}" name="emision" type="text " class="form-control"></div>
+							<div class="col-7"><input disabled value="{{ $datos->emision }}" name="emision" type="text " class="form-control text-right"></div>
 						</div>
 					</div>
 				</div>
@@ -165,13 +165,13 @@
                   	@foreach ($datos->facturaDato as $dato)
 
 					  	<tr>
-					  		<td width="100"> <input disabled value="{{ $dato->codigo }}" type="text" name="codigo[]" class="form-control" required></td>
-					  		<td width="100"><input disabled value="{{ $dato->cod_aux }}" type="text" name="cod_aux[]" class="form-control" required></td>
-					  		<td width="50"><input disabled value="{{ $dato->cantidad }}" type="text" name="cantidad[]" class="form-control" required></td>
+					  		<td width="100"> <input disabled value="{{ $dato->codigo }}" type="text" name="codigo[]" class="form-control text-right" required></td>
+					  		<td width="100"><input disabled value="{{ $dato->cod_aux }}" type="text" name="cod_aux[]" class="form-control text-right" required></td>
+					  		<td width="50"><input disabled value="{{ $dato->cantidad }}" type="text" name="cantidad[]" class="form-control text-right" required></td>
 					  		<td ><textarea disabled name="descripcion[]" class="form-control" required>{{ $dato->descripcion }}</textarea> </td>
-					  		<td width="50"><input disabled value="{{ $dato->precio }}" type="text" name="precio[]" class="form-control" required></td>
-					  		<td width="50"><input disabled value="{{ $dato->descuento }}" type="text" name="descuento[]" class="form-control" required></td>
-					  		<td width="75"><input disabled value="{{ $dato->valor }}" type="text" name="valor[]" class="form-control" required></td>
+					  		<td width="50"><input disabled value="{{ $dato->precio }}" type="text" name="precio[]" class="form-control text-right" required></td>
+					  		<td width="50"><input disabled value="{{ $dato->descuento }}" type="text" name="descuento[]" class="form-control text-right" required></td>
+					  		<td width="75"><input disabled value="{{ $dato->valor }}" type="text" name="valor[]" class="form-control text-right" required></td>
 
 					  	</tr>
 					  	@endforeach
@@ -201,48 +201,48 @@
 					  <tbody>
 					    <tr>
 					      <th scope="row">SUBTOTAL {{ $datos->iva }}%</th>
-					      <td><input disabled value="{{ $datos->subtotal_12 }}" type="text" name="subtotal_12" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->subtotal_12 }}" type="number" name="subtotal_12" class="form-control text-right"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">SUBTOTAL 0%</th>
-					      <td><input disabled value="{{ $datos->subtotal_0 }}" type="text" name="subtotal_0" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->subtotal_0 }}" type="number" name="subtotal_0" class="form-control text-right"></td>
 					      
 					    </tr>
 					    <tr>
 					      <th scope="row">SUBTOTAL No objeto de IVA</th>
-					      <td><input disabled value="{{ $datos->subtotal_iva }}" type="text" name="subtotal_iva" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->subtotal_iva }}" type="number" name="subtotal_iva" class="form-control text-right"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">SUBTOTAL Exento de IVA</th>
-					      <td><input disabled value="{{ $datos->subtotal_siniva }}" type="text" name="subtotal_siniva" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->subtotal_siniva }}" type="number" name="subtotal_siniva" class="form-control text-right"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">SUBTOTAL SIN IMPUESTOS</th>
-					      <td><input disabled value="{{ $datos->subtotal_sin_imp }}" type="text" name="subtotal_sin_imp" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->subtotal_sin_imp }}" type="number" name="subtotal_sin_imp" class="form-control text-right"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">TOTAL DESCUENTO</th>
-					      <td><input disabled value="{{ $datos->descuento_total }}" type="text" name="descuento_total" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->descuento_total }}" type="number" name="descuento_total" class="form-control text-right"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">ICE</th>
-					      <td><input disabled value="{{ $datos->ice }}" type="text" name="ice" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->ice }}" type="number" name="ice" class="form-control text-right"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">IVA {{ $taller->iva }}%</th>
-					      <td><input disabled value="{{ $datos->iva12 }}" type="text" name="iva12" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->iva12 }}" type="number" name="iva12" class="form-control text-right"></td>
 					    </tr>
 					     <tr>
 					      <th scope="row">IRBPNR</th>
-					      <td><input disabled value="{{ $datos->irbpnr }}" type="text" name="irbpnr" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->irbpnr }}" type="number" name="irbpnr" class="form-control text-right"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">PROPINA</th>
-					      <td><input disabled value="{{ $datos->propina }}" type="text" name="propina" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->propina }}" type="number" name="propina" class="form-control text-right"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">VALOR TOTAL</th>
-					      <td><input disabled value="{{ $datos->valor_total }}" type="text" name="valor_total" class="form-control"></td>
+					      <td><input disabled value="{{ $datos->valor_total }}" type="number" name="valor_total" class="form-control text-right"></td>
 					    </tr>
 
 					  </tbody>
@@ -258,7 +258,7 @@
               <div class="form-group">
                 <label for="exampleFormControlInput1">Calificacion</label>
                 <input type="hidden" name="user_id" value="{{ $user->id }}">
-                <input type="text" value="{{ $update_imei->pivot->calificacion }}" class="form-control" name="calificacion" placeholder="Añada una nota al estudiante">
+                <input type="number" value="{{ $update_imei->pivot->calificacion }}" class="form-control" name="calificacion" placeholder="Añada una nota al estudiante">
               </div>
               <div class="form-group">
                 <label for="exampleFormControlTextarea1">Retroalimentacion</label>

@@ -8,18 +8,18 @@
                     class="brand-image img-circle elevation-4" style="opacity: .8">
                 <span class="brand-text font-weight-light">SmartMoodle</span>
             </a>
-   {{--          <ul class="navbar-nav">
-                <li class="nav-item d-none d-sm-inline-block">
+            <ul class="navbar-nav">
+                <!-- <li class="nav-item d-none d-sm-inline-block">
                     <a href="{{ url('/sistema/home') }}" class="nav-link">Administracion</a>
-                </li>
+                </li>  -->
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ url('/sistema/perfil') }}" class="nav-link">Perfil</a>
+                    <a href="{{ url('/sistema/perfile') }}" class="nav-link">Materias</a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
+                <!-- <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Actividades</a>
-                </li>
+                </li> -->
 
-                <li class="nav-item dropdown">
+                <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         Cursos
@@ -29,8 +29,8 @@
                         <a class="dropdown-item" href="#">Support</a>
                         <a class="dropdown-item" href="#">Contact</a>
                     </div>
-                </li>
-            </ul> --}}
+                </li> -->
+            </ul>
 
             <ul class="navbar-nav ml-auto">
                 @guest

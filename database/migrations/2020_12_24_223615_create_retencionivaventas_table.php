@@ -16,8 +16,8 @@ class CreateRetencionivaventasTable extends Migration
         Schema::create('retencionivaventas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('retencioniva_id');
-            $table->string('fecha_v');
-            $table->string('detalle');
+            $table->string('fecha_v')->nullable();
+            $table->string('detalle')->nullable();
             $table->string('cliente')->nullable();
             $table->string('base_im')->nullable();
             $table->string('porcentaje')->nullable();

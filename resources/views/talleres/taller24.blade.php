@@ -60,7 +60,7 @@
 								<label for="">Señor (es)</label>
 							</div>
 							<div class="col-9">
-								<input required type="text" name="señor" class="form-control">
+								<input  type="text" name="señor" class="form-control">
 							</div>
 						</div>
 
@@ -69,7 +69,7 @@
 								<label for="">Fecha</label>
 							</div>
 							<div class="col-9">
-								<input required type="date" name="fecha" class="form-control">
+								<input  type="date" name="fecha" class="form-control">
 							</div>
 						</div>
 						<div class="row">
@@ -95,12 +95,12 @@
 							  </thead>
 							  <tbody>
 							<tr>
-								<td><input required type="date" name="fecha_c" class="form-control"></td>
-								<td><input required type="text" name="numero" class="form-control"></td>
-								<td><input required type="text" name="tipo" class="form-control"></td>
-								<td><input required type="text" name="debe" class="form-control"></td>
-								<td><input required type="text" name="haber" class="form-control"></td>
-								<td><input required type="text" name="saldo" class="form-control"></td>
+								<td><input  type="date" name="fecha_c" class="form-control"></td>
+								<td><input  type="number" name="numero" class="form-control text-right"></td>
+								<td><input  type="text" name="tipo" class="form-control"></td>
+								<td><input  type="number" name="debe" class="form-control text-right"></td>
+								<td><input  type="number" name="haber" class="form-control text-right"></td>
+								<td><input  type="number" name="saldo" class="form-control text-right"></td>
 							</tr>
 							  </tbody>
 							</table>
@@ -123,9 +123,9 @@
 							  </thead>
 							  <tbody>
 							  	<tr>
-							  		<td><input required type="text" name="revisado" class="form-control"></td>
-							  		<td><input required type="text"  name="autorizado"class="form-control"></td>
-							  		<td><input required type="text" name="vto_bueno" class="form-control"></td>
+							  		<td><input  type="text" name="revisado" class="form-control"></td>
+							  		<td><input  type="text"  name="autorizado"class="form-control"></td>
+							  		<td><input  type="text" name="vto_bueno" class="form-control"></td>
 							  	</tr>
 							  </tbody>
 

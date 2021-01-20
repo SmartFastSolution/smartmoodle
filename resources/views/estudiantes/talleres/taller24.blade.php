@@ -100,11 +100,11 @@
 							  <tbody>
 							<tr>
 								<td><input disabled value="{{ $datos->fecha_c }}" type="date" name="fecha_c" class="form-control"></td>
-								<td><input disabled value="{{ $datos->numero }}" type="text" name="numero" class="form-control"></td>
+								<td><input disabled value="{{ $datos->numero }}" type="text" name="numero" class="form-control text-right"></td>
 								<td><input disabled value="{{ $datos->tipo }}" type="text" name="tipo" class="form-control"></td>
-								<td><input disabled value="{{ $datos->debe }}" type="text" name="debe" class="form-control"></td>
-								<td><input disabled value="{{ $datos->haber }}" type="text" name="haber" class="form-control"></td>
-								<td><input disabled value="{{ $datos->saldo }}" type="text" name="saldo" class="form-control"></td>
+								<td><input disabled value="{{ $datos->debe }}" type="text" name="debe" class="form-control text-right"></td>
+								<td><input disabled value="{{ $datos->haber }}" type="text" name="haber" class="form-control text-right"></td>
+								<td><input disabled value="{{ $datos->saldo }}" type="text" name="saldo" class="form-control text-right"></td>
 							</tr>
 							  </tbody>
 							</table>

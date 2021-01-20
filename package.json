@@ -29,7 +29,6 @@
         "@ckeditor/ckeditor5-vue2": "^1.0.5",
         "@fortawesome/fontawesome-free": "^5.14.0",
         "@sweetalert2/theme-dark": "^4.0.1",
-        "@tinymce/tinymce-vue": "^3.2.6",
         "admin-lte": "^3.0.5",
         "icheck-bootstrap": "^3.0.1",
         "overlayscrollbars": "^1.13.0",

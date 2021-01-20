@@ -16,7 +16,7 @@ class CreateTallerPagaresTable extends Migration
         Schema::create('taller_pagares', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('beneficiario');
             $table->string('deudor');
             $table->string('garante');

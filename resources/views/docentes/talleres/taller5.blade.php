@@ -56,7 +56,7 @@
 				      <th scope="row"></th>
 				      <td>{{ $data->concepto }}</td>
 				      <td>{{ $data->respuesta }}</td>
-				      <td width="200"> @if ($taller->options[$key]->respuesta == $data->respuesta )Correcta @else Incorrecta @endif</td>
+				      <td width="200"> @if ($taller->options[$key]->respuesta == $data->respuesta )<span class="badge badge-success">Correcta</span> @else <span class="badge badge-danger">Incorrecta</span @endif</td>
 				    </tr>
 				  	@endforeach
 				  </tbody>

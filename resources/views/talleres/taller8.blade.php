@@ -15,18 +15,18 @@
     @if ($datos->cantidad == 3)
         <div class="row justify-content-center">
             <div class="col-4 align-self-center mt-5">
-                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" name="respuesta1" required id="">
+                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" name="respuesta1"  id="">
             </div>
         </div>
     <div class="row row justify-content-md-center">
         <div class="col-4 align-self-center mt-5">
-            <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" required name="respuesta2" id="">
+            <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign"  name="respuesta2" id="">
         </div>
             <div class="col-3 text-center mt-3 mb-3 ">
                 <img class="img-fluid" width="200" style="border: double 5px #17D6E2; box-shadow: 3px 3px 3px 3px #28BEE4" src="{{ asset($datos->img) }}" alt="">
             </div>
         <div class="col-4 align-self-center mt-5">
-            <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" name="respuesta3" required id="">
+            <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" name="respuesta3"  id="">
         </div>
     </div>
    
@@ -34,77 +34,77 @@
     @elseif ($datos->cantidad == 4)
         <div class="row justify-content-center">
             <div class="col-4 align-self-center mt-5">
-                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" required name="respuesta1" id="">
+                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign"  name="respuesta1" id="">
             </div>
         </div>
     <div class="row row justify-content-md-center">
         <div class="col-4 align-self-center mt-5 ">
-            <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" required name="respuesta2" id="">
+            <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign"  name="respuesta2" id="">
         </div>
             <div class="col-3 text-center mt-3 mb-3 ">
                 <img class="img-fluid" width="200" style="border: double 5px #17D6E2; box-shadow: 3px 3px 3px 3px #28BEE4" src="{{ asset($datos->img) }}" alt="">
             </div>
         <div class="col-4 align-self-center mt-5 ">
-            <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" required name="respuesta3" id="">
+            <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign"  name="respuesta3" id="">
         </div>
     </div>
     <div class="row justify-content-center">
             <div class="col-4 align-self-center m-2">
-                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" required name="respuesta4" id="">
+                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign"  name="respuesta4" id="">
             </div>
     </div>
         
         @elseif($datos->cantidad == 5)
     <div class="row justify-content-center">
             <div class="col-4 align-self-center mt-5">
-                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" required name="respuesta1" id="">
+                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign"  name="respuesta1" id="">
             </div>
         </div>
     <div class="row row justify-content-md-center">
         <div class="col-4 align-self-center mt-5">
-            <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" required name="respuesta2" id="">
+            <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign"  name="respuesta2" id="">
         </div>
             <div class="col-3 text-center mt-3 mb-3 ">
                 <img class="img-fluid" width="200" style="border: double 5px #17D6E2; box-shadow: 3px 3px 3px 3px #28BEE4" src="{{ asset($datos->img) }}" alt="">
             </div>
         <div class="col-4 align-self-center mt-5">
-            <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" required name="respuesta3" id="">
+            <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign"  name="respuesta3" id="">
         </div>
     </div>
     <div class="row justify-content-center">
             <div class="col-4 align-self-center m-2">
-                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" required name="respuesta4" id="">
+                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign"  name="respuesta4" id="">
             </div>
             <div class="col-4 align-self-center m-2">
-                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" required name="respuesta5" id="">
+                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign"  name="respuesta5" id="">
             </div>
     </div>
     @elseif($datos->cantidad == 6)
     <div class="row justify-content-center">
             <div class="col-4 align-self-center mt-5">
-                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" required name="respuesta1" id="">
+                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign"  name="respuesta1" id="">
             </div>
             <div class="col-4 align-self-center mt-5">
-                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" required name="respuesta2" id="">
+                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign"  name="respuesta2" id="">
             </div>
         </div>
     <div class="row row justify-content-md-center">
         <div class="col-4 align-self-center mt-5">
-            <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" required name="respuesta3" id="">
+            <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign"  name="respuesta3" id="">
         </div>
             <div class="col-3 text-center mt-3 mb-3 ">
                 <img class="img-fluid" width="200" style="border: double 5px #17D6E2; box-shadow: 3px 3px 3px 3px #28BEE4" src="{{ asset($datos->img) }}" alt="">
             </div>
         <div class="col-4 align-self-center mt-5">
-            <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" required name="respuesta4" id="">
+            <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign"  name="respuesta4" id="">
         </div>
     </div>
     <div class="row justify-content-center">
             <div class="col-4 align-self-center m-2">
-                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" required name="respuesta5" id="">
+                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign"  name="respuesta5" id="">
             </div>
             <div class="col-4 align-self-center m-2">
-                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign" required name="respuesta6" id="">
+                <input style="box-shadow: 2px 3px 3px 5px #30E8F8" class="form-control inputdesign"  name="respuesta6" id="">
             </div>
     </div>
         @endif

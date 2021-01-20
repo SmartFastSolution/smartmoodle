@@ -17,8 +17,8 @@ class CreateArqueocajasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('totaldebe');
-            $table->string('totalhaber');
+            $table->string('totaldebe')->nullable();
+            $table->string('totalhaber')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

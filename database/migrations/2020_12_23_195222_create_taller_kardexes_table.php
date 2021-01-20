@@ -17,7 +17,7 @@ class CreateTallerKardexesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_modulo_contable_id');
             $table->string('tipo')->nullable();
-            $table->string('enunciado')->nullable();
+            $table->longText('enunciado')->nullable();
             $table->string('producto')->nullable();
             $table->text('transacciones')->nullable();
             $table->timestamps();

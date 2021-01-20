@@ -1,156 +1,82 @@
-
 @extends('layouts.nav')
 
-@section('title', 'Perfil | SmartMoodle')
-
-
-
-
+@section('title', 'Inicio | SmartMoodle')
 @section('title', 'Administracion - Docente')
-
 @section('content')
 
 <section class="content">
     <div class="container">
-
-
-        <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
+        <h1 class="font-weight-light" style="color:red;">
+        @isset ( auth()->user()->instituto->nombre)
+            {{ auth()->user()->instituto->nombre}}   
+        @endisset
+        </h1>
         <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}
         </h2>
         <h2 class="font-weight-light">
             @foreach(auth()->user()->roles as $role)
             {{$role->name}}
             @endforeach</h2>
-
-
-        <div class="card card-info card-outline">
+        <h2>Pagina Principal</h2>
+    </div>
+</section>
+<section class="content">
+    <div class="container">
+        @foreach($p as $post)
+        <div class="card gedf-card">
             <div class="card-header">
-                <h3 class="font-weight-light"> <strong> Materias</strong></h3>
-            </div>
-
-                @isset ($au->materias)
-            <div class="row">
-             
-
-                    @forelse($au->materias as $materia)
-                    @foreach($materia->distribucionmacus as $curso)
-                <!-- ./col -->
-                <div class="col-lg-3 col-5">
-                    <!-- small box -->
-                    <div class="small-box bg-gradient-info">
-                        <div class="inner">
-                            <h3> <i class="far fa-bookmark"></i></h3>
-                            <p>Curso:{{$curso->curso->nombre}} </p>
-                            <p> {{$materia->nombre}}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="ml-2">
+                            <div class="h5 m-0"> <strong>{{$post->user->name}}
+                                    {{$post->user->apellido}}</strong>
+                            </div>
+                            <div class="h7 text-muted">Publicado el {{$post->updated_at->format('d/m/y')}}</div>
                         </div>
-                        <div class="icon">
-                            <i class="far fa-bookmark"></i>
-                        </div>
-                        <a href="{{route('Contenidos', $materia->id)}}" class="small-box-footer">
-                            Acceder <i class="fas fa-arrow-circle-right"></i>
-                        </a>
                     </div>
                 </div>
-                <!-- ./col -->
-                @endforeach
-                @empty 
-                    <h1>No tienes cursos asignados</h1>
-                
-                @endforelse
-             
             </div>
-              @endisset
-              @empty($au->materias)
-               <h1>No tienes cursos Asignados</h1> 
-            @endempty
+            <div class="card-body">
+                <h1 class="mt-5">{{$post->nombre}}</h1>
+                <br>
+                <div class="media m-0">
+                    <div class="d-flex mr-3">
+                        <img class="img-fluid rounded" src="{{$post->image->url}}" alt="">
+                    </div>
+                </div>
+                <div>
+                    <p class="lead">{{$post->abstract}}</p>
+                </div>
+                <p class="card-text">
+                    {!!htmlspecialchars_decode($post->body)!!}
+                </p>
+
+                <div class="card-footer">
+                    <a href="#" class="card-link"><i class="fa fa-comment"></i> Comentarios</a>
+                </div>
+
+                <div class="card my-4">
+                    <h5 class="card-header">Comentar:</h5>
+                    <div class="card-body">
+                        {!! Form::open(['route'=>'comment.add', 'method'=>'POST']) !!}
+                        <form class="form-horizontal">
+                            @csrf
+                            <div class="input-group input-group-sm mb-0">
+                                <input type="hidden" name="post_id" value="{{$post->id}}">
+                                <textarea class="form-control" name="body" rows="2"></textarea>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-success">Comentar</button>
+                                </div>
+                            </div>
+
+                        </form>
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+                @include('Post._replies',['comments'=>$post->comments, 'post_id'=>$post->id])
+            </div>
         </div>
-
-@isset ($au->materias)
-         <h2>Talleres Por Calificar</h2>
-                  <div class="card-body">
-                        <table id="myTable" class="table table-hover">
-
-                            <thead>
-                                <tr>
-                                    <th>Curso</th>
-                                    <th>Materia</th>
-                                    <th width="100"> Taller </th>
-                                    <th>Alumno </th>
-                                    <th>Enunciado </th>
-                                    <th>Vista Taller</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($users as $taller)
-
-                                <tr>
-                                    <td>{{$taller->cur_nombre}} - {{ $taller->nivel_nombre }}</td>
-                                    <td>{{$taller->mate_nombre}}</td>
-                                    <td>{{$taller->nombre}}</td>
-                                    <td>{{$taller->alumno}}</td>
-                                    <td>{{$taller->enunciado}}</td>
-                                    <td class="table-button ">
-                                        <a class="btn btn-info"
-                                            href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
-                                                class="fas fa-eye"></i></a>
-
-                                    </td>
-                                </tr>
-                                @empty
-                                
-                                @endforelse
-                            </tbody>
-                        </table>
-                        @if ($users->count() >= 1)
-                              <div class="row justify-content-center">
-                        {{ $users->links() }}
-                            
-                        </div>
-                        @endif
-                        
-
-
-                    </div>
-
-                        <h2>Talleres Calificados</h2>
-                     <div class="card-body mb-5">
-                        <table id="myTable2" class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Curso</th>
-                                    <th>Materia</th>
-                                    <th width="100"> Taller </th>
-                                    <th>Alumno </th>
-                                    <th>Enunciado </th>
-                                    <th>Vista Taller</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    @foreach($calificado as $taller)
-                                <tr>
-                                    <td>{{$taller->cur_nombre}} - {{ $taller->nivel_nombre }}</td>
-                                    <td>{{$taller->mate_nombre}}</td>
-                                    <td>{{$taller->nombre}}</td>
-                                    <td>{{$taller->alumno}}</td>
-                                    <td>{{$taller->enunciado}}</td>
-                                    <td class="table-button ">
-                                        <a class="btn btn-info"
-                                            href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
-                                                class="fas fa-eye"></i></a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <div class="row justify-content-center">
-                        {{ $calificado->links() }}
-                            
-                        </div>
-                    </div>
-
-
- @endisset
-
+        @endforeach
     </div>
 </section>
 
@@ -162,21 +88,19 @@
 $(function() {
     $(document).ready(function() {
         $('#myTable').DataTable({
-                "info": true,
-                "autoWidth": true,
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-                }
+            "info": true,
+            "autoWidth": true,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
             }
-        );
-          $('#myTable2').DataTable({
-                "info": true,
-                "autoWidth": true,
-                "language": {
-                    "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-                }
+        });
+        $('#myTable2').DataTable({
+            "info": true,
+            "autoWidth": true,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
             }
-        );
+        });
     });
 });
 </script>

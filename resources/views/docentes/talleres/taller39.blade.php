@@ -47,12 +47,12 @@
               <div class="container">
               	<div class="row justify-content-center">
               		<div class="col-6">
-		                <p class="lead display-2">La palabra a ordenar es: {{ $taller->palabra }}</p>
-		                <p class="lead display-2">{{ $datos->palabra }}</p>
+		                <p class="lead font-weight-bold text-center">La palabra a ordenar es: {{ $taller->palabra }}</p>
+		                <p class="lead text-center" style="font-size: 50px">{{ $datos->palabra }}</p>
               		</div>
               		<div class="col-6">
-              			 <h1 class="">Respuesta</h1>
-                <p class="lead display-4 text-primary">{{ $datos->palabra }}</p>
+              			 <h1 class="text-center">Respuesta</h1>
+                <p class="lead display-4 text-primary font-weight-bold text-center" style="text-shadow: 0 2px 4px #9A0909">{{ $datos->palabra }}</p>
               		</div>
               	</div>
               </div>

@@ -17,13 +17,13 @@ class CreateCirculosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
-            $table->string('respuesta1')->nullable();
-            $table->string('respuesta2')->nullable();
-            $table->string('respuesta3')->nullable();
-            $table->string('respuesta4')->nullable();
-            $table->string('respuesta5')->nullable();
-            $table->string('respuesta6')->nullable();
+            $table->longText('enunciado');
+            $table->text('respuesta1')->nullable();
+            $table->text('respuesta2')->nullable();
+            $table->text('respuesta3')->nullable();
+            $table->text('respuesta4')->nullable();
+            $table->text('respuesta5')->nullable();
+            $table->text('respuesta6')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

@@ -18,16 +18,17 @@
                 </button>
             </div>
 
-            <div class="modal-body">
-            <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
-                
+            <div class="modal-body" style="height: 700px; overflow-y: scroll;  width: 100%;">
+                <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
+
                 <div class="row justify-content-center">
                     <h2 class="text-center font-weight-bold mt-2">Datos para elaborar la Retención del IVA</h2>
                     @if($datos->metodo == 'individual')
-                     <div class="col-12" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 4px red;">
+                    <div class="col-12"
+                        style=" height:200px; overflow-y: scroll; overflow-x: hidden; border: double 4px red;">
                         {!! $transacciones->transacciones !!}
-                     </div>
-                @elseif($datos->metodo == 'concatenado')
+                    </div>
+                    @elseif($datos->metodo == 'concatenado')
                     <div class="col-12">
                         <ul class="nav nav-tabs" id="diarioGeneral" role="tablist">
                             <li class="nav-item" role="presentation">
@@ -36,13 +37,14 @@
                                     aria-selected="true">Diario General</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link" id="ht-enunciado-retencion-tab" data-toggle="tab" href="#ht-enunciado-retencion"
-                                    role="tab" aria-controls="ht-enunciado-retencion" aria-selected="false">Enunciados</a>
+                                <a class="nav-link" id="ht-enunciado-retencion-tab" data-toggle="tab"
+                                    href="#ht-enunciado-retencion" role="tab" aria-controls="ht-enunciado-retencion"
+                                    aria-selected="false">Enunciados</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="diario">
                             <div class="tab-pane fade show active" id="ht-diario-general" role="tabpanel"
-                                aria-labelledby="ht-diario-general-tab" style=" height:400px; overflow-y: scroll;">
+                                aria-labelledby="ht-diario-general-tab" style=" height:200px; overflow-y: scroll;">
                                 <h1 class="text-center text-danger font-weight-bold mt-2">DIARIO GENERAL</h1>
 
                                 <table class="table table-bordered table-sm">
@@ -80,12 +82,13 @@
 
                             <div class="tab-pane fade" id="ht-enunciado-retencion" role="tabpanel"
                                 aria-labelledby="ht-enunciado-retencion-tab"
-                                style=" height:400px; overflow-y: scroll; overflow-x: hidden;">
-                                <h1 class="text-center text-danger font-weight-bold mt-2">ENUNCIADOS DEL DIARIO GENERAL</h1>
-                               @isset ($diariogeneral->transacciones)
-                                    {!! $diariogeneral->transacciones !!}
-                               @endisset
-                                 
+                                style=" height:200px; overflow-y: scroll; overflow-x: hidden;">
+                                <h1 class="text-center text-danger font-weight-bold mt-2">ENUNCIADOS DEL DIARIO GENERAL
+                                </h1>
+                                @isset ($diariogeneral->transacciones)
+                                {!! $diariogeneral->transacciones !!}
+                                @endisset
+
                             </div>
                         </div>
                     </div>
@@ -112,8 +115,8 @@
                             <div class="tab-content" id="compraretencion">
                                 {{--COMPRAS DE RETENCION --}}
                                 <div class="tab-pane fade show active" id="ht-retencion-compra" role="tabpanel"
-                                aria-labelledby="ht-retencion-compra-tab" style=" height:400px; overflow-y: scroll;">
-                                <h1 class="text-center text-danger font-weight-bold mt-2">COMPRAS</h1>
+                                    aria-labelledby="ht-retencion-compra-tab">
+                                    <h1 class="text-center text-danger font-weight-bold mt-2">COMPRAS</h1>
 
                                     <table class="table table-bordered table-sm">
                                         <thead class="bg-dark">
@@ -197,7 +200,7 @@
                                                 class="fa fa-window-close"></i></a>
                                     </div>
 
-                                    <div class="col-12 mt-2" v-if="t_compras.length > 0">
+                                    <div class="col-12 mt-2" v-if="t_compras.length > 0"  style=" height:200px; overflow-y: scroll;">
                                         <h2 class="text-center">REGISTRO DE COMPRAS</h2>
 
                                         <table class="table table-bordered table-sm">
@@ -239,9 +242,11 @@
                                                 <tr v-for="(c , index) in t_compras">
                                                     <td class="text-right" align="center" width="125">
                                                         @{{ formatoFecha(c.fecha_c)}}</td>
-                                                    <td class="text-right" align="center" width="300">@{{ c.detalle}}
+                                                    <td class="text-left" align="center" width="300">
+                                                        @{{ c.detalle}}
                                                     </td>
-                                                    <td class="text-right" align="center" width="100">@{{ c.proveedor}}
+                                                    <td class="text-left" align="center" width="100">
+                                                        @{{ c.proveedor}}
                                                     </td>
                                                     <td class="text-right" align="center" width="125">
                                                         @{{ decimales(c.base_im) }}</td>
@@ -263,7 +268,8 @@
                                                     <td class="text-right" align="center" width="125">
                                                         @{{ decimales(c.ret_100) }}</td>
                                                     <td align="center" width="50"><a @click.prevent="editCompra(index)"
-                                                            class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
+                                                            class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                                    </td>
                                                     <td align="center" width="50"><a
                                                             @click.prevent="WarningEliminarCompra(index)"
                                                             class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
@@ -272,14 +278,14 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+
                                     </div>
                                 </div>
 
                                 {{--VENTAS DE RETENCION --}}
                                 <div class="tab-pane fade" id="ht-retencion-venta" role="tabpanel"
-                                aria-labelledby="ht-retencion-venta-tab"
-                                style=" height:400px; overflow-y: scroll; overflow-x: hidden;">
-                                <h1 class="text-center text-danger font-weight-bold mt-2">VENTAS</h1>
+                                    aria-labelledby="ht-retencion-venta-tab">
+                                    <h1 class="text-center text-danger font-weight-bold mt-2">VENTAS</h1>
 
                                     <table class="table table-bordered table-sm">
                                         <thead class="bg-dark">
@@ -363,7 +369,8 @@
                                                 class="fa fa-window-close"></i></a>
                                     </div>
                                     <br>
-                                    <div class="col-12 mt-2" v-if="t_ventas.length > 0">
+                                    <div class="col-12 mt-2" v-if="t_ventas.length > 0"
+                                        style=" height:200px; overflow-y: scroll;">
                                         <h2 class="text-center">REGISTRO DE VENTAS</h2>
 
                                         <table class="table table-bordered table-sm">
@@ -405,9 +412,9 @@
                                                 <tr v-for="(v , index) in t_ventas">
                                                     <td class="text-right" align="center" width="125">
                                                         @{{ formatoFecha(v.fecha_v)}}</td>
-                                                    <td class="text-right" align="center" width="300">@{{ v.detalle}}
+                                                    <td class="text-left" align="center" width="300">@{{ v.detalle}}
                                                     </td>
-                                                    <td class="text-right" align="center" width="100">@{{ v.cliente}}
+                                                    <td class="text-left" align="center" width="100">@{{ v.cliente}}
                                                     </td>
                                                     <td class="text-right" align="center" width="125">
                                                         @{{ decimales(v.base_im) }}</td>
@@ -427,8 +434,7 @@
                                                         @{{ decimales(v.ret_70) }}</td>
                                                     <td class="text-right" align="center" width="125">
                                                         @{{ decimales(v.ret_100) }}</td>
-                                                    <td align="center" width="50"><a
-                                                            @click.prevent="editVenta(index)"
+                                                    <td align="center" width="50"><a @click.prevent="editVenta(index)"
                                                             class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
                                                     <td align="center" width="50"><a
                                                             @click.prevent="WarningEliminarVenta(index)"

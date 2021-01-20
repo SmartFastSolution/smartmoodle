@@ -44,8 +44,42 @@
           </div>
           <div class="card-body">
             <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{{ $datos->enunciado }}</h2>
-            	<h5 class="text-muted">Las respuestas que estan en verde, estan correctas</h5>
+            	{{-- <h5 class="text-muted">Las respuestas que estan en verde, estan correctas</h5> --}}
             <div class="row justify-content-center">
+           
+          <div class="col-8 p-3" style="box-shadow: 5px 5px 15px 0px  #E81853;">
+				<ul class="nav justify-content-center">
+<li  class="badge badge-primary nav-item m-2 text-wrap">Cheque</li>
+
+<li  class="badge badge-primary nav-item m-2 text-wrap">Cuenta</li>
+
+<li  class="badge badge-primary nav-item m-2 text-wrap">Factura</li>
+
+<li  class="badge badge-primary nav-item m-2 text-wrap">Artículos</li>
+
+<li  class="badge badge-primary nav-item m-2 text-wrap">Doctora</li>
+
+<li  class="badge badge-primary nav-item m-2 text-wrap">Factura</li>
+
+<li  class="badge badge-primary nav-item m-2 text-wrap">Presente</li>
+
+<li  class="badge badge-primary nav-item m-2 text-wrap">Economista</li>
+
+<li  class="badge badge-primary nav-item m-2 text-wrap">Factura</li>
+
+<li  class="badge badge-primary nav-item m-2 text-wrap">Cuenta corriente</li>
+
+<li  class="badge badge-primary nav-item m-2 text-wrap">Ustedes</li>
+
+<li  class="badge badge-primary nav-item m-2 text-wrap">Banco</li>
+
+<li  class="badge badge-primary nav-item m-2 text-wrap">Remesa</li>
+
+<li class="badge badge-primary nav-item m-2 text-wrap">Compañía</li>
+				</ul>
+				
+			</div>
+            	
             <div class="col-7 border border-danger mt-3">
 				<div class="row p-2">
 					<div class="col-4">
@@ -57,7 +91,7 @@
 						<h5>TELF: 2415287 - 2425689</h5>
 					</div>
 					<div class="col-6">
-						<p>Guayaquil, 25 de Octubre del 201</p>
+						<p>Guayaquil, 25 de Octubre del 201</p> 
 						<p>
 							Doctora  <br>
 							Carolina Robles <br>

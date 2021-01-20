@@ -1,6 +1,6 @@
 @extends('layouts.nav')
 
-@section('title', 'Perfil | SmartMoodle')
+@section('title', 'Inicio | SmartMoodle')
 
 
 
@@ -17,60 +17,83 @@
 </div>
 @endif
 
+
 <section class="content">
     <div class="container">
-
-
-        <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
-
+        <h1 class="font-weight-light" style="color:red;">  @isset ( auth()->user()->instituto->nombre)
+            {{ auth()->user()->instituto->nombre}}
+                
+            @endisset</h1>
         <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}
             @isset (auth()->user()->curso->nombre)
             <h2 class="font-weight-light"> <strong> {{auth()->user()->curso->nombre}} </strong>
             </h2>
             @endisset
-
-
-
-
-            <div class="card card-info card-outline">
-                <div class="card-header">
-                    <h3 class="font-weight-light"> <strong> Materias</strong></h3>
-                </div>
-
-                <div class="row">
-
-                    @foreach(auth()->user()->assignmets as $as)
-                    @foreach($as->materias as $materia)
-                    @foreach($materia->distribuciondos as $doc)
-                    @foreach($materia->distribucionmacus as $curso)
-                    <div class="col-lg-3 col-5">
-
-                        <div class="small-box bg-gradient-info">
-                            <div class="inner">
-                                <h3> <i class="far fa-bookmark"></i></h3>
-                                <p>Curso:{{$curso->curso->nombre}} </p>
-                                <p> {{$materia->nombre}} </p>
-                                <p> Docente: {{$doc->user->name}} {{$doc->user->apellido}}</p>
+    </div>
+</section>
+@foreach($p as $post)
+<section class="content">
+    <div class="container">
+        <div class="card gedf-card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="ml-2">
+                            <div class="h5 m-0"> <strong>{{$post->user->name}} {{$post->user->apellido}}</strong>
                             </div>
-                            <div class="icon">
-                                <i class="far fa-bookmark"></i>
-                            </div>
-                            <a href="{{route('Unidades', $materia->id)}}" class="small-box-footer">
-                                Acceder <i class="fas fa-arrow-circle-right"></i>
-                            </a>
+                            <div class="h7 text-muted">Publicado el {{$post->updated_at->format('d/m/y')}}</div>
                         </div>
                     </div>
-                    @endforeach
-                    @endforeach
-                    @endforeach
-                    @endforeach
-
 
                 </div>
             </div>
+            <div class="card-body">
+                <h1 class="mt-5">{{$post->nombre}}</h1>
+                <br>
+                <div class="media m-0">
+                    <div class="d-flex mr-3">
+                        <img class="img-fluid rounded" src="{{$post->image->url}}" alt="">
+                    </div>
+                </div>
+                <div>
+                    <p class="lead">{{$post->abstract}}</p>
+                </div>
+                <p class="card-text">
+                    {!!htmlspecialchars_decode($post->body)!!}
+                </p>
 
+                <div class="card-footer">
+                    <a href="#" class="card-link"><i class="fa fa-comment"></i> Comentarios</a>
+                </div>
+
+                <div class="card my-4">
+                    <h5 class="card-header">Comentar:</h5>
+                    <div class="card-body">
+                        {!! Form::open(['route'=>'comment.add', 'method'=>'POST']) !!}
+                        <form class="form-horizontal">
+                            @csrf
+                            <div class="input-group input-group-sm mb-0">
+                                <input type="hidden" name="post_id" value="{{$post->id}}">
+                                <textarea class="form-control" name="body" rows="2"></textarea>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-success">Comentar</button>
+                                </div>
+                            </div>
+
+                        </form>
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+                @include('Post._replies',['comments'=>$post->comments, 'post_id'=>$post->id])
+            </div>
+        </div>
     </div>
 </section>
+
+
+
+@endforeach
+
 
 
 

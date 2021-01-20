@@ -28,11 +28,11 @@
      			<div class="col-5" style="box-shadow: 5px 5px 15px 0px  #27F4AE">
      				<div class="row justify-content-center mt-3 mb-2">
      					<div class="col-8 text-center">
-     						<input type="text" name="endoso" class="form-control" required>
+     						<input type="text" name="endoso" class="form-control">
      						<label for="">Nombre</label>
      					</div>
      					<div class="col-8 text-center">
-     						<input type="text" name="firma" class="form-control" required>
+     						<input type="text" name="firma" class="form-control">
      						<label for="">Firma del endosante</label>
      						<h6>(1 beneficiario)</h6>
      					</div>
@@ -50,7 +50,7 @@
      			<div class="col-5" style="box-shadow: 5px 5px 15px 0px  #27F4AE">
      				<div class="row justify-content-center mt-3 mb-2">
      					<div class="col-8 text-center">
-     						<input type="text" disabled="" value="ING. JUAN PEREZ " class="form-control text-center">
+     						<input type="text" name="firma2" class="form-control text-center">
      						<label for="">Firma</label>
      					</div>
      					

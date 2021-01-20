@@ -16,7 +16,7 @@ class CreateTallerLetraCambiosTable extends Migration
         Schema::create('taller_letra_cambios', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->string('valor');
             $table->string('acreedor');
             $table->string('deudor');

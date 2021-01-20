@@ -19,8 +19,8 @@ class CreateBIPatrimoniosTable extends Migration
             $table->string('fecha')->nullable();
             $table->unsignedbigInteger('cuenta_id');
             
-            $table->string('nom_cuenta');
-            $table->string('saldo');
+            $table->string('nom_cuenta')->nullable();
+            $table->string('saldo')->nullable();
             $table->timestamps();
 
 

@@ -87,7 +87,6 @@
 <script type="text/javascript" src="{{asset('plugins/customfileinputs/js/custom-file-input.js')}}"></script>
 <div id="js">
 <script async = true src="{{asset('js/bootstrap-tagsinput.js')}}"></script>
-
 </div>
 
 @endsection

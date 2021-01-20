@@ -19,9 +19,10 @@
                     <h1 class="text-center font-weight-bold mt-2">Datos para elaborar hoja de trabajo</h1>
 
                     @if($datos->metodo == 'individual')
-                     <div class="col-12" style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;" >
+                    <div class="col-12"
+                        style=" height:300px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
                         {!! $transacciones->transacciones !!}
-                     </div>
+                    </div>
                     @elseif($datos->metodo == 'concatenado')
                     <div class="col-12" style="border: double 8px #E71822;">
                         <ul class="nav nav-tabs" id="datosHoja" role="tablist">
@@ -35,10 +36,11 @@
                                     role="tab" aria-controls="ht-mayor-general" aria-selected="false">Mayor General</a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="nav-link bg-dark" id="calculadoraht-tab" data-toggle="tab" href="#calculadoraht"
-                                    role="tab" aria-controls="calculadoraht" aria-selected="false" @click.prevent="calculadora()">CALCULADORA</a>
+                                <a class="nav-link bg-dark" id="calculadoraht-tab" data-toggle="tab"
+                                    href="#calculadoraht" role="tab" aria-controls="calculadoraht" aria-selected="false"
+                                    @click.prevent="calculadora()">CALCULADORA</a>
                             </li>
-                           
+
 
                         </ul>
                         <div class="tab-content" id="datosHojaContent">
@@ -65,13 +67,13 @@
                                     <tbody>
                                         <tr v-for="(balan, index) in balances">
                                             <td class="text-left">@{{ balan.cuenta}}</td>
-                                            <td class="text-right"  width="125">
+                                            <td class="text-right" width="125">
                                                 @{{ decimales(balan.suma_debe)}}</td>
                                             <td class="text-right" width="125">
                                                 @{{ decimales(balan.suma_haber) }}</td>
-                                            <td class="text-right"  width="125">
+                                            <td class="text-right" width="125">
                                                 @{{ decimales(balan.saldo_debe) }}</td>
-                                            <td class="text-right"  width="125">
+                                            <td class="text-right" width="125">
                                                 @{{ decimales(balan.saldo_haber) }}</td>
                                             {{--          <td align="center" width="50"><a @click.prevent="deleteBalance(index)"  class="btn btn-danger"><i
                                           class="fas fa-trash-alt"></i></a></td>
@@ -160,42 +162,66 @@
                         </div>
 
                         <table class="table table-bordered table-sm table-responsive">
-<thead class="bg-info">
-  <tr>
-    <th class="text-center" style="vertical-align: middle;" colspan="2">BALANCE DE COMPROBACION</th>
-    <th class="text-center" style="vertical-align: middle;" colspan="2">AJUSTES</th>
-    <th class="text-center" style="vertical-align: middle;" colspan="2">BALANCE AJUSTADO</th>
-    <th class="text-center" style="vertical-align: middle;" colspan="2">ESTADO DE RESULTADO</th>
-    <th class="text-center" style="vertical-align: middle;" colspan="2">BALANCE GENERAL</th>
-  </tr>
-  <tr>
-    <td class="text-center" width="125">DEBE</td>
-    <td class="text-center" width="125">HABER</td>
-    <td class="text-center" width="125">DEBE</td>
-    <td class="text-center" width="125">HABER</td>
-    <td class="text-center" width="125">DEBE</td>
-    <td class="text-center" width="125">HABER</td>
-    <td class="text-center" width="125">DEBE</td>
-    <td class="text-center" width="125">HABER</td>
-    <td class="text-center" width="125">DEBE</td>
-    <td class="text-center" width="125">HABER</td>
-  </tr>
-</thead>
-<tbody>
-     <tr>
-      <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.balance_comp.debe" type="number" class="form-control form-control-sm"></td>
-      <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.balance_comp.haber" type="number" class="form-control form-control-sm"></td>
-      <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.ajustes.debe" type="number" class="form-control form-control-sm"></td>
-      <td  class="text-right"align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.ajustes.haber" type="number" class="form-control form-control-sm"></td>
-      <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.balance_ajustado.debe" type="number" class="form-control form-control-sm"></td>
-      <td  class="text-right"align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.balance_ajustado.haber" type="number" class="form-control form-control-sm"></td>
-      <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.estado_resultado.debe" type="number" class="form-control form-control-sm"></td>
-      <td  class="text-right"align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.estado_resultado.haber" type="number" class="form-control form-control-sm"></td>
-      <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.balance_general.debe" type="number" class="form-control form-control-sm"></td>
-      <td  class="text-right"align="center" width="125"><input autocomplete="ÑÖcompletes" v-model="registro.balance_general.haber" type="number" class="form-control form-control-sm"></td>
-        </tr>
-</tbody>
-</table>
+                            <thead class="bg-info">
+                                <tr>
+                                    <th class="text-center" style="vertical-align: middle;" colspan="2">BALANCE DE
+                                        COMPROBACION</th>
+                                    <th class="text-center" style="vertical-align: middle;" colspan="2">AJUSTES</th>
+                                    <th class="text-center" style="vertical-align: middle;" colspan="2">BALANCE AJUSTADO
+                                    </th>
+                                    <th class="text-center" style="vertical-align: middle;" colspan="2">ESTADO DE
+                                        RESULTADO</th>
+                                    <th class="text-center" style="vertical-align: middle;" colspan="2">BALANCE GENERAL
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td class="text-center" width="125">DEBE</td>
+                                    <td class="text-center" width="125">HABER</td>
+                                    <td class="text-center" width="125">DEBE</td>
+                                    <td class="text-center" width="125">HABER</td>
+                                    <td class="text-center" width="125">DEBE</td>
+                                    <td class="text-center" width="125">HABER</td>
+                                    <td class="text-center" width="125">DEBE</td>
+                                    <td class="text-center" width="125">HABER</td>
+                                    <td class="text-center" width="125">DEBE</td>
+                                    <td class="text-center" width="125">HABER</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes"
+                                            v-model="registro.balance_comp.debe" type="number"
+                                            class="form-control form-control-sm"></td>
+                                    <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes"
+                                            v-model="registro.balance_comp.haber" type="number"
+                                            class="form-control form-control-sm"></td>
+                                    <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes"
+                                            v-model="registro.ajustes.debe" type="number"
+                                            class="form-control form-control-sm"></td>
+                                    <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes"
+                                            v-model="registro.ajustes.haber" type="number"
+                                            class="form-control form-control-sm"></td>
+                                    <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes"
+                                            v-model="registro.balance_ajustado.debe" type="number"
+                                            class="form-control form-control-sm"></td>
+                                    <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes"
+                                            v-model="registro.balance_ajustado.haber" type="number"
+                                            class="form-control form-control-sm"></td>
+                                    <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes"
+                                            v-model="registro.estado_resultado.debe" type="number"
+                                            class="form-control form-control-sm"></td>
+                                    <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes"
+                                            v-model="registro.estado_resultado.haber" type="number"
+                                            class="form-control form-control-sm"></td>
+                                    <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes"
+                                            v-model="registro.balance_general.debe" type="number"
+                                            class="form-control form-control-sm"></td>
+                                    <td class="text-right" align="center" width="125"><input autocomplete="ÑÖcompletes"
+                                            v-model="registro.balance_general.haber" type="number"
+                                            class="form-control form-control-sm"></td>
+                                </tr>
+                            </tbody>
+                        </table>
 
                         {{-- <h2 class="text-center font-weight-bold text-info">Balance Comprobacion</h2> --}}
                         {{--              <table class="table table-bordered table-sm mb-2">
@@ -308,71 +334,87 @@
                                     class="fa fa-window-close"></i></a>
                         </div>
 
-                  </div>
-              
-      <div class="col-12 mt-2" v-if="registros.length > 0" style=" height:400px; overflow-y: scroll; overflow-x: hidden;">
-                    <h2 class="text-center">REGISTROS</h2>
-         <table class="table table-bordered table-sm table-responsive">
-            <thead class="bg-dark">
-              <tr>
-                <th class="text-center " style="vertical-align: middle;"  rowspan="2">CUENTAS</th>
-                <th class="text-center" style="vertical-align: middle;" colspan="2">BALANCE DE COMPROBACION</th>
-                <th class="text-center" style="vertical-align: middle;" colspan="2">AJUSTES</th>
-                <th class="text-center" style="vertical-align: middle;" colspan="2">BALANCE AJUSTADO</th>
-                <th class="text-center" style="vertical-align: middle;" colspan="2">ESTADO DE RESULTADO</th>
-                <th class="text-center" style="vertical-align: middle;" colspan="2">BALANCE GENERAL</th>
-                <th class="text-center" style="vertical-align: middle;" rowspan="2" colspan="2">ACCIONES</th>
-              </tr>
-              <tr>
-                <td class="text-center" >DEBE</td>
-                <td class="text-center" >HABER</td>
-                <td class="text-center" >DEBE</td>
-                <td class="text-center" >HABER</td>
-                <td class="text-center" >DEBE</td>
-                <td class="text-center" >HABER</td>
-                <td class="text-center" >DEBE</td>
-                <td class="text-center" >HABER</td>
-                <td class="text-center" >DEBE</td>
-                <td class="text-center" >HABER</td>
-              </tr>
-            </thead>
-            <tbody is="draggable" group="cuentas" :list="registros" tag="tbody">
-                 <tr v-for="(balan, index) in registros" >
-                            <td class="text-left" width="300">@{{ balan.cuenta}}</td>
-                            <td class="text-right" align="center" width="100">@{{ decimales(balan.bc_debe)}}</td>
-                            <td class="text-right" align="center" width="100">@{{ decimales(balan.bc_haber) }}</td>
-                            <td class="text-right" align="center" width="100">@{{ decimales(balan.ajuste_debe) }}</td>
-                            <td  class="text-right"align="center" width="100">@{{ decimales(balan.ajuste_haber) }}</td>
-                            <td class="text-right" align="center" width="100">@{{ decimales(balan.ba_debe) }}</td>
-                            <td  class="text-right"align="center" width="100">@{{ decimales(balan.ba_haber) }}</td>
-                            <td class="text-right" align="center" width="100">@{{ decimales(balan.er_debe) }}</td>
-                            <td  class="text-right"align="center" width="100">@{{ decimales(balan.er_haber) }}</td>
-                            <td class="text-right" align="center" width="100">@{{ decimales(balan.bg_debe) }}</td>
-                            <td  class="text-right"align="center" width="100">@{{ decimales(balan.bg_haber) }}</td>
-                              <td align="center"  width="50"><a @click.prevent="editBalance(index)" class="btn btn-warning"><i
-                            class="fas fa-edit"></i></a></td>
-                <td align="center" width="50"><a @click.prevent="warningEliminar(index)"  class="btn btn-danger"><i
-                            class="fas fa-trash-alt"></i></a></td>
-                    </tr>
-          
-            </tbody>
-            <tbody>
-                    <tr>
-                 <td class="font-weight-bold">SUMAN</td>
-    <td class="text-right">@{{ suman.balance_comp.total_debe }}</td>
-    <td class="text-right">@{{ suman.balance_comp.total_haber }}</td>
-    <td class="text-right">@{{ suman.ajustes.total_debe }}</td>
-    <td class="text-right">@{{ suman.ajustes.total_haber }}</td>
-    <td class="text-right">@{{ suman.balance_ajustado.total_debe }}</td>
-    <td class="text-right">@{{ suman.balance_ajustado.total_haber }}</td>
-    <td class="text-right">@{{ suman.estado_resultado.total_debe }}</td>
-    <td class="text-right">@{{ suman.estado_resultado.total_haber }}</td>
-    <td class="text-right">@{{ suman.balance_general.total_debe }}</td>
-    <td class="text-right">@{{ suman.balance_general.total_haber }}</td>
-              </tr>
-            </tbody>
-            </table>
-      </div>
+                    </div>
+
+                    <div class="col-12 mt-2" v-if="registros.length > 0"
+                        style=" height:400px; overflow-y: scroll; overflow-x: hidden;">
+                        <h2 class="text-center">REGISTROS</h2>
+                        <table class="table table-bordered table-sm table-responsive">
+                            <thead class="bg-dark">
+                                <tr>
+                                    <th class="text-center " style="vertical-align: middle;" rowspan="2">CUENTAS</th>
+                                    <th class="text-center" style="vertical-align: middle;" colspan="2">BALANCE DE
+                                        COMPROBACION</th>
+                                    <th class="text-center" style="vertical-align: middle;" colspan="2">AJUSTES</th>
+                                    <th class="text-center" style="vertical-align: middle;" colspan="2">BALANCE AJUSTADO
+                                    </th>
+                                    <th class="text-center" style="vertical-align: middle;" colspan="2">ESTADO DE
+                                        RESULTADO</th>
+                                    <th class="text-center" style="vertical-align: middle;" colspan="2">BALANCE GENERAL
+                                    </th>
+                                    <th class="text-center" style="vertical-align: middle;" rowspan="2" colspan="2">
+                                        ACCIONES</th>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">DEBE</td>
+                                    <td class="text-center">HABER</td>
+                                    <td class="text-center">DEBE</td>
+                                    <td class="text-center">HABER</td>
+                                    <td class="text-center">DEBE</td>
+                                    <td class="text-center">HABER</td>
+                                    <td class="text-center">DEBE</td>
+                                    <td class="text-center">HABER</td>
+                                    <td class="text-center">DEBE</td>
+                                    <td class="text-center">HABER</td>
+                                </tr>
+                            </thead>
+                            <tbody is="draggable" group="cuentas" :list="registros" tag="tbody">
+                                <tr v-for="(balan, index) in registros">
+                                    <td class="text-left" width="300">@{{ balan.cuenta}}</td>
+                                    <td class="text-right" align="center" width="100">@{{ decimales(balan.bc_debe)}}
+                                    </td>
+                                    <td class="text-right" align="center" width="100">@{{ decimales(balan.bc_haber) }}
+                                    </td>
+                                    <td class="text-right" align="center" width="100">
+                                        @{{ decimales(balan.ajuste_debe) }}</td>
+                                    <td class="text-right" align="center" width="100">
+                                        @{{ decimales(balan.ajuste_haber) }}</td>
+                                    <td class="text-right" align="center" width="100">@{{ decimales(balan.ba_debe) }}
+                                    </td>
+                                    <td class="text-right" align="center" width="100">@{{ decimales(balan.ba_haber) }}
+                                    </td>
+                                    <td class="text-right" align="center" width="100">@{{ decimales(balan.er_debe) }}
+                                    </td>
+                                    <td class="text-right" align="center" width="100">@{{ decimales(balan.er_haber) }}
+                                    </td>
+                                    <td class="text-right" align="center" width="100">@{{ decimales(balan.bg_debe) }}
+                                    </td>
+                                    <td class="text-right" align="center" width="100">@{{ decimales(balan.bg_haber) }}
+                                    </td>
+                                    <td align="center" width="50"><a @click.prevent="editBalance(index)"
+                                            class="btn btn-warning"><i class="fas fa-edit"></i></a></td>
+                                    <td align="center" width="50"><a @click.prevent="warningEliminar(index)"
+                                            class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+                                </tr>
+
+                            </tbody>
+                            <tbody>
+                                <tr>
+                                    <td class="font-weight-bold">SUMAN</td>
+                                    <td class="text-right">@{{ suman.balance_comp.total_debe }}</td>
+                                    <td class="text-right">@{{ suman.balance_comp.total_haber }}</td>
+                                    <td class="text-right">@{{ suman.ajustes.total_debe }}</td>
+                                    <td class="text-right">@{{ suman.ajustes.total_haber }}</td>
+                                    <td class="text-right">@{{ suman.balance_ajustado.total_debe }}</td>
+                                    <td class="text-right">@{{ suman.balance_ajustado.total_haber }}</td>
+                                    <td class="text-right">@{{ suman.estado_resultado.total_debe }}</td>
+                                    <td class="text-right">@{{ suman.estado_resultado.total_haber }}</td>
+                                    <td class="text-right">@{{ suman.balance_general.total_debe }}</td>
+                                    <td class="text-right">@{{ suman.balance_general.total_haber }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

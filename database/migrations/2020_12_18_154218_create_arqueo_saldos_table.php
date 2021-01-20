@@ -16,7 +16,7 @@ class CreateArqueoSaldosTable extends Migration
         Schema::create('arqueo_saldos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('arqueocaja_id');
-            $table->string('detalle');
+            $table->longText('detalle');
             $table->string('s_debe')->nullable();
             $table->string('s_haber')->nullable();
             $table->timestamps();

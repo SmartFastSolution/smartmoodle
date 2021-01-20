@@ -16,7 +16,7 @@ class CreateTallerPalabrasTable extends Migration
         Schema::create('taller_palabras', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->text('letra');
             $table->timestamps();
             

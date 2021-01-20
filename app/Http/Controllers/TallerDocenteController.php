@@ -320,7 +320,7 @@ class TallerDocenteController extends Controller
         }elseif ($plant == 27) {
 
             $taller = TallerAbreviatura::where('taller_id', $consul->id)->firstOrFail();
-            $datos = Abreatura::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+            $datos = Abreviatura::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
             return view('docentes.talleres.taller27', compact('datos', 'd', 'update_imei', 'user', 'taller'));
 
         }elseif ($plant == 28) {
@@ -398,8 +398,12 @@ class TallerDocenteController extends Controller
                  'datos' => $datos,
                 ]);
             if ($datos->metodo == 'individual') {
-
-            return view('docentes.talleres.taller37', compact('datos', 'd', 'update_imei', 'user'));
+                  if ($datos->tipo == 'fifo' or $datos->tipo == 'promedio') {
+                    $transacciones = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->get();
+                }else{
+                    $transacciones = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->first();
+                }
+            return view('docentes.talleres.taller37', compact('datos', 'd', 'update_imei', 'user', 'transacciones'));
     
             }else{
                 $productos = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->where('tipo','fifo')->get();

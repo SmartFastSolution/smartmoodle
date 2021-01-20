@@ -11,16 +11,16 @@
         {{--         <div class="col-3 mb-2">
         <a class="btn btn-sm btn-danger" href="" @click.prevent="obtenerBalanceInicial()">Obtener Balance Inicial</a>
         </div> --}}
-@if ($rol === 'estudiante')
+        @if ($rol === 'estudiante')
         <div class="col-2 mb-2">
             <a href="#" class="btn btn-sm btn-outline-primary" @click.prevent="abrirTransaccion()">Crear Transaccion</a>
         </div>
-    @if($datos->metodo == 'concatenado')
+        @if($datos->metodo == 'concatenado')
         <div class="col-3">
             <a href="#" class="btn btn-sm btn-outline-danger" @click.prevent="llamarDiario()">Ir al Mayor General</a>
         </div>
-    @endif
-@endif
+        @endif
+        @endif
         <div class="col-12">
             <table class="table table-bordered table-sm">
                 <thead class="thead-dark">
@@ -96,19 +96,27 @@
             </table>
 
             <form action="">
-
                 @csrf
- @if ($rol === 'estudiante')
-                <div class="row justify-content-around mb-2">
-                    <a href="#" class="btn btn-outline-primary" @click.prevent="abrirTransaccion()">Crear
-                        Transaccion</a>
+
+                @if ($rol === 'estudiante')
+                <div class="row justify-content-center mb-2">
+                <div class="col-4 ">
+                <a href="#" class="btn btn-sm btn-outline-primary" @click.prevent="abrirTransaccion()">Crear Transaccion</a>
+                    </div>
+                    @if($datos->metodo == 'concatenado')
+                    <div class="col-3">
+                        <a href="#" class="btn btn-sm btn-outline-danger" @click.prevent="llamarDiario()">Ir al Mayor
+                            General</a>
+                    </div>
                 </div>
-                <div class="row justify-content-center">
+                @endif
+                <br>
+                <div class="row justify-content-center mb-2">
                     <a href="#" class="addDiario btn btn-danger" @click.prevent="guardarDiario()">Completar Asiento de
                         Cierre</a>
                 </div>
 
-@endif
+                @endif
             </form>
             <div class="row justify-content-center">
             </div>

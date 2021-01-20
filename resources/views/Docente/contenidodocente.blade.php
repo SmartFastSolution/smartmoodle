@@ -7,7 +7,10 @@
 
 <section class="content">
     <div class="container">
-        <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
+        <h1 class="font-weight-light" style="color:red;"> @isset ( auth()->user()->instituto->nombre)
+            {{ auth()->user()->instituto->nombre}}
+                
+            @endisset</h1>
         <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}
         </h2>
 
@@ -57,7 +60,11 @@
                         <td>{{$taller->mate_nombre}}</td>
                         <td>{{$taller->nombre}}</td>
                         <td>{{$taller->alumno}}</td>
-                        <td>{{$taller->enunciado}}</td>
+                        <td>@if ($taller->plantilla_id == 37)
+                                                    Taller de Modulos Contable
+                                                    @else
+                                                     {!!$taller->enunciado!!}
+                                                @endif</td>
                         <td class="table-button ">
                             <a class="btn btn-info"
                                 href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
@@ -68,7 +75,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $users->links() }}
+            {{-- {{ $users->links() }} --}}
 
 
         </div>
@@ -94,7 +101,11 @@
                         <td>{{$taller->mate_nombre}}</td>
                         <td>{{$taller->nombre}}</td>
                         <td>{{$taller->alumno}}</td>
-                        <td>{{$taller->enunciado}}</td>
+                        <td>@if ($taller->plantilla_id == 37)
+                                                    Taller de Modulos Contable
+                                                    @else
+                                                     {!!$taller->enunciado!!}
+                                                @endif</td>
                         <td class="table-button ">
                             <a class="btn btn-info"
                                 href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
@@ -104,7 +115,7 @@
                     @endforeach
                 </tbody>
             </table>
-            {{ $calificado->links() }}
+            {{-- {{ $calificado->links() }} --}}
         </div>
 
     </div>

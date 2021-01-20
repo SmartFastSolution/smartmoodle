@@ -16,7 +16,10 @@ class CreateTallerPartidaDoblesTable extends Migration
         Schema::create('taller_partida_dobles', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
+            $table->longText('transacciones');
+            $table->integer('n_t')->nullable();
+            $table->string('estado_resultado')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

@@ -17,13 +17,14 @@ class CreateChequesTable extends Migration
              $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
-            $table->string('girador');
-            $table->string('girado');
-            $table->string('cantidad');
-            $table->text('suma');
-            $table->string('lugar');
-            $table->string('fecha');
+            $table->longText('enunciado');
+            $table->string('girador')->nullable();
+            $table->string('girado')->nullable();
+            $table->string('cantidad')->nullable();
+            $table->text('suma')->nullable();
+            $table->string('lugar')->nullable();
+            $table->string('fecha')->nullable();
+            $table->string('firma')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

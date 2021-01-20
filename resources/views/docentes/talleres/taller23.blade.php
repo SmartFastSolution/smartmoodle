@@ -73,10 +73,10 @@
 				<h1 class="text-center">RECIBO</h1>
 				<div class="row justify-content-between">
 					<div class="col-4  form-inline">
-						No. <input type="text" name="no" size="5" class="form-control  form-control-sm" value="{{ $datos->no }}" disabled  name="">
+						No. <input type="text" name="no" size="5" class="form-control  form-control-sm text-right" value="{{ $datos->no }}" disabled  name="">
 					</div>
 					<div class="col-4 form-inline mb-2">
-						Por $  <input type="text" size="5" class="form-control  form-control-sm" value="{{ $datos->por }}" disabled  name="por">
+						Por $  <input type="text" size="5" class="form-control  form-control-sm text-right" value="{{ $datos->por }}" disabled  name="por">
 					</div>
 				</div>
 				<div class="row mb-2">			
@@ -128,7 +128,12 @@
 							
 							<div class="col-12 form-inline">
 						<p><input type="text" name="cubierto" class="form-control  form-control-sm" value="{{ $datos->cubierto }}" disabled   size="30"> Hasta el <input type="text" name="hasta" class="form-control  form-control-sm" value="{{ $datos->hasta }}" disabled  size="50"></p>
-								
+							</div>
+							
+						</div>
+						<div class="row justify-content-end mb-2">
+							<div class="col-4">
+								<input type="text" name="hasta" class="form-control  form-control-sm float-left" value="{{ $datos->espacio }}" disabled >
 							</div>
 						</div>
 

@@ -16,9 +16,9 @@ class CreateTallerPreguntasTable extends Migration
         Schema::create('taller_preguntas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
-            $table->string('pregunta1');
-            $table->string('pregunta2');
+            $table->longText('enunciado');
+            $table->longText('pregunta1');
+            $table->longText('pregunta2');
             $table->timestamps();
             
             $table->foreign('taller_id')

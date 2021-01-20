@@ -3,9 +3,7 @@
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
-// console.log(balancesinicial)
-// console.log(diariogeneral)
-// console.log(productos)
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////FUNCIONES/////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -177,21 +175,7 @@ const b_hori = new Vue({
                 edit:false,
                 total:''
               }
-        },
-        // balances:[],
-        // balance:{
-        //   cuenta:'',
-        //   suma_debe:'',
-        //   suma_haber:'',
-        //   saldo_debe:'',
-        //   saldo_haber:''
-        // },
-        // suman:{
-        //   sum_debe:'',
-        //   sum_haber:'',
-        //   sal_debe:'',
-        //   sal_haber:''
-        // }    
+        }, 
   },
   mounted: function(){
     this.cambioActivo();
@@ -271,7 +255,8 @@ const b_hori = new Vue({
           );
           this.a_corrientes.splice(index, 1);   
           this.cambioActivo();                  
-          this.TotalActivo();    
+          this.TotalActivo();  
+          this.limpiar();  
         }
       });
     },
@@ -298,6 +283,7 @@ const b_hori = new Vue({
       this.p_corrientes.splice(index, 1);
       this.cambioPasivo();
       this.TotalPasivo(); 
+      this.limpiar();
         }
       });
 
@@ -322,6 +308,7 @@ const b_hori = new Vue({
       this.a_nocorrientes.splice(index, 1);
       this.cambioActivoNo();
       this.TotalActivo();
+      this.limpiar();
         }
       });
 
@@ -346,6 +333,7 @@ const b_hori = new Vue({
       this.p_nocorrientes.splice(index, 1);
       this.cambioPasivoNo();
       this.TotalPasivo();
+      this.limpiar();
         }
       });
  
@@ -369,6 +357,7 @@ const b_hori = new Vue({
           );
       this.patrimonios.splice(index, 1);
       this.cambioPatrimonio();
+      this.limpiar();
         }
       });
     
@@ -418,7 +407,7 @@ const b_hori = new Vue({
 
     //EDITAR ELEMENTOS DE UN ARRAY
       editAcorriente(index){
-        this.limpiar();
+       this.limpiar();
        this.activo.a_corriente.edit      = true;
        this.registro.a_corriente         = index;
        this.bi.const_id                  = this.a_corrientes[index].cuenta_id;
@@ -814,202 +803,7 @@ const b_hori = new Vue({
       this.balance.saldo_haber =''
     }
     },
-//       deleteBalance(index){
-//       this.balances.splice(index, 1);
-//     },
-// //ELIMINAR ELEMENTOS DE UN ARRAY /////////
-//     deleteAcCooriente(index){
-//       this.a_corrientes.splice(index, 1);   //ELIMINAR UN ELEMENTO DEL ARRAY COMENZANDO DESDE SU INDEX
-//       this.cambioActivo();                  //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
-//       this.TotalActivo();                   //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
-//     },
-//      deletePaCooriente(index){
-//       this.p_corrientes.splice(index, 1);
-//       this.cambioPasivo();
-//       this.TotalPasivo();
-//     },
-//      deleteAcNoCooriente(index){
-//       this.a_nocorrientes.splice(index, 1);
-//       this.cambioActivoNo();
-//       this.TotalActivo();
-//     },
-//      deletePaNoCooriente(index){
-//       this.p_nocorrientes.splice(index, 1);
-//       this.cambioPasivoNo();
-//       this.TotalPasivo();
-//     },
-//      deletePatrimonio(index){
-//       this.patrimonios.splice(index, 1);
-//       this.cambioPatrimonio();
-//     },
-    // limpiar(){ //LIMPIAR TODOS LOS CAMPOS DE ACTIVOS PASIVOS Y PATRIMONIOS
-    //   this.pasivo.p_corriente.nom_cuenta = '';
-    //   this.pasivo.p_corriente.saldo = '';
-    //   this.pasivo.p_nocorriente.nom_cuenta = '';
-    //   this.pasivo.p_nocorriente.saldo = '';
-    //   this.activo.a_corriente.nom_cuenta = '';
-    //   this.activo.a_corriente.saldo = '';
-    //   this.activo.a_nocorriente.nom_cuenta = '';
-    //   this.activo.a_nocorriente.saldo = '';
-    //   this.bi.const_id = '';
-    //   },
-    //EDITAR ELEMENTOS DE UN ARRAY
-  //   editAcorriente(index){ //OBTENEMOS EL INDICE DEL ARRAY SELECCIONADO
-  //     this.update = index;                                                       //IGUALAMOS LA VARIABLE UPDATE CON EL INDICE DEL ARRAY
-  //     this.activo.a_corriente.saldo = this.a_corrientes[index].saldo;           //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
-  //     this.activo.a_corriente.nom_cuenta = this.a_corrientes[index].cuenta_id;
-  //     this.bi.const_id = this.a_corrientes[index].cuenta_id;
 
-  //      //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
-  //     $('#a_corriente_e').modal('show');                                        //MOSTRAR EL MODAL CON JS
-  //     //var activo = this.a_corrientes[index];
-  //   },
-  //   updateACorriente(){
-  //     let id = this.activo.a_corriente.nom_cuenta;
-  //          let verificar = this.verificarCuenta(id);
-  //            if (verificar == true) {
-  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-  //               "timeOut": "3000"
-  //               });
-  //            }else{
-  //     let nombre = funciones.obtenerNombre(id);
-  //     var i = this.update;                                                    //I SERA EL INDICE QUE SE ASIGNO EN EL METODO EDITAR
-  //     this.a_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-  //     this.a_corrientes[i].nom_cuenta = nombre;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-  //     this.a_corrientes[i].saldo = this.activo.a_corriente.saldo;             //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-  //     $('#a_corriente_e').modal('hide');                                      //OCULTAR EL MODAL
-  //     this.limpiar();
-  //     this.cambioActivo();
-  // }
-  //   },
-  //   editANocorriente(index){
-  //     this.update = index;
-  //     this.activo.a_nocorriente.saldo = this.a_nocorrientes[index].saldo;
-  //     this.activo.a_nocorriente.nom_cuenta = this.a_nocorrientes[index].cuenta_id;
-  //     this.bi.const_id = this.a_nocorrientes[index].cuenta_id;
-
-  //     $('#a_nocorriente_e').modal('show');
-  //     //var activo = this.a_nocorrientes[index];
-  //   },
-  //   updateANoCorriente(){
-  //     let id = this.activo.a_nocorriente.nom_cuenta;
-  //          let verificar = this.verificarCuenta(id);
-  //            if (verificar == true) {
-  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-  //               "timeOut": "3000"
-  //               });
-  //            }else{
-  //     let nombre = funciones.obtenerNombre(id);
-  //     var i = this.update;
-  //     this.a_nocorrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-  //     this.a_nocorrientes[i].nom_cuenta = nombre;
-  //     this.a_nocorrientes[i].saldo = this.activo.a_nocorriente.saldo;
-  //     $('#a_nocorriente_e').modal('hide');
-  //     this.limpiar();
-  //     this.cambioActivoNo();
-  //     this.TotalActivo();
-  //   }
-  //   },
-  //   editPcorriente(index){
-  //     this.update = index ;
-  //     this.pasivo.p_corriente.saldo = this.p_corrientes[index].saldo;
-  //     this.pasivo.p_corriente.nom_cuenta = this.p_corrientes[index].cuenta_id;
-  //     this.bi.const_id = this.p_corrientes[index].cuenta_id;
-
-  //     $('#p_corriente_e').modal('show');
-  //     //var activo = this.a_corrientes[index];
-  //   },
-  //   updatePCorriente(){
-  //     let id = this.pasivo.p_corriente.nom_cuenta;
-  //          let verificar = this.verificarCuenta(id);
-  //            if (verificar == true) {
-  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-  //               "timeOut": "3000"
-  //               });
-  //            }else{
-  //     let nombre = funciones.obtenerNombre(id);
-  //     var i = this.update;
-  //     this.p_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-  //     this.p_corrientes[i].nom_cuenta = nombre;
-  //     this.p_corrientes[i].saldo = this.pasivo.p_corriente.saldo;
-  //     $('#p_corriente_e').modal('hide');
-  //     this.limpiar();
-  //     this.cambioPasivo();
-  //     this.TotalPasivo();
-  //   }
-  //   },
-  //   editPNocorriente(index){
-  //     this.update = index ;
-  //     this.pasivo.p_nocorriente.saldo = this.p_nocorrientes[index].saldo;
-  //     this.pasivo.p_nocorriente.nom_cuenta = this.p_nocorrientes[index].cuenta_id;
-  //     this.bi.const_id = this.p_nocorrientes[index].cuenta_id;
-
-  //     $('#p_nocorriente_e').modal('show');
-  //     //var activo = this.a_corrientes[index];
-  //   },
-  //   updatePNoCorriente(){
-  //     let id = this.pasivo.p_nocorriente.nom_cuenta;
-  //          let verificar = this.verificarCuenta(id);
-  //            if (verificar == true) {
-  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-  //               "timeOut": "3000"
-  //               });
-  //            }else{
-  //     let nombre = funciones.obtenerNombre(id);
-  //     var i = this.update;
-  //     this.p_nocorrientes[i].cuenta_id = id;
-  //     this.p_nocorrientes[i].nom_cuenta = nombre;
-  //     this.p_nocorrientes[i].saldo = this.pasivo.p_nocorriente.saldo;
-  //     $('#p_nocorriente_e').modal('hide');
-  //     this.limpiar();
-  //     this.cambioPasivoNo();
-  //     this.TotalPasivo();
-  //   }
-  //   },
-  //   editPatrimonio(index){
-  //     this.update = index ;
-  //     this.patrimonio.saldo = this.patrimonios[index].saldo;
-  //     this.patrimonio.nom_cuenta = this.patrimonios[index].cuenta_id;
-  //     this.bi.const_id = this.patrimonios[index].cuenta_id;
-
-  //     $('#patrimonio_e').modal('show');
-  //     //var activo = this.a_corrientes[index];
-  //   },
-  //   updatePatrimonio(){
-  //      let id = this.patrimonio.nom_cuenta;
-  //           let verificar = this.verificarCuenta(id);
-  //            if (verificar == true) {
-  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-  //               "timeOut": "3000"
-  //               });
-  //            }else{
-  //     let nombre = funciones.obtenerNombre(id);
-  //     var i = this.update;
-  //     this.patrimonios[i].cuenta_id = id;
-  //     this.patrimonios[i].nom_cuenta = nombre;
-  //     this.patrimonios[i].saldo = this.patrimonio.saldo;
-  //     $('#patrimonio_e').modal('hide');
-  //     this.limpiar();
-  //     this.cambioPatrimonio();
-  //   }
-  //   },      
-         // ejemplo(){
-         //        let me =this;
-         //        var formdata = new FormData();
-         //        formdata.append('data', JSON.stringify(this.diarios))
-                
-         //        axios.post(url,formdata).then(function (response) {
-         //              console.log(response.data);
-         //        toastr.success("Asiento de Cierre guardado correctamente", "Smarmoddle", {
-         //            "timeOut": "3000"
-         //           });
-         //        diarios:[];
-         //        })
-         //        .catch(function (error) {
-         //            console.log(error);
-         //        });   
-                
-         //    },
         verificarCuenta(id){
             if (Number(this.bi.const_id) === id) {
               return false
@@ -1033,143 +827,7 @@ const b_hori = new Vue({
               return false
              }
           },
-            // agregarActivoCorriente(){
-              
-            //    if(this.activo.a_corriente.nom_cuenta == '' || this.activo.a_corriente.saldo === ''){
-            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-               
-            //  }else{
-            // let id = this.activo.a_corriente.nom_cuenta;
-            // let verificar = this.verificarCuenta(id);
-            //  if (verificar == true) {
-            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //  }else{
-            //   let nombre = funciones.obtenerNombre(id);
-            //     var a_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_corriente.saldo};
-            //     this.a_corrientes.push(a_corr);                               //añadimos el la variable persona al array
-            //       toastr.success("Registro agregado correctamente", "Smarmoddle", {
-            //         "timeOut": "3000"
-            //     });
-            //     //Limpiamos los campos
-            //     this.activo.a_corriente.nom_cuenta = '';
-            //     this.activo.a_corriente.saldo = '';
-            //     //SUMAR TOTALES
-                
-            //     this.cambioActivo();  
-            //   }
-            //   }
-            // },
-            //  agregarActivoNoCorriente(){
-
-            //     if(this.activo.a_nocorriente.nom_cuenta == '' || this.activo.a_nocorriente.saldo === ''){
-            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //  }else{
-            // let id = this.activo.a_nocorriente.nom_cuenta;
-            // let verificar = this.verificarCuenta(id);
-            //  if (verificar == true) {
-            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //  }else{
-            //   let nombre = funciones.obtenerNombre(id);
-            //       var a_nocorr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_nocorriente.saldo};//CREANDO EL OBJETO QUE SE AGREGARA AL ARRAY
-            //     this.a_nocorrientes.push(a_nocorr);//AGREGAR UNA NUEVA CUENTA AL ARRAY DE PASIVOS
-            //       //Limpiamos los campos
-            //       toastr.success("Registro agregado correctamente", "Smarmoddle", {
-            //         "timeOut": "3000"
-            //     });
-            //     this.activo.a_nocorriente.nom_cuenta = '';
-            //     this.activo.a_nocorriente.saldo = '';
-            //     this.cambioActivoNo();          
-            //   }
-            //    }
-            //  },
-            //    agregarPasivoCorriente(){
-            //     if(this.pasivo.p_corriente.nom_cuenta == '' || this.pasivo.p_corriente.saldo === ''){
-            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //   }else{
-            //     let id = this.pasivo.p_corriente.nom_cuenta;
-            //          let verificar = this.verificarCuenta(id);
-            //  if (verificar == true) {
-            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //  }else{
-            //     let nombre = funciones.obtenerNombre(id);
-
-            //     var p_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.pasivo.p_corriente.saldo};
-            //     this.p_corrientes.push(p_corr);//añadimos el la variable persona al array
-            //       //Limpiamos los campos
-            //       toastr.success("Registro agregado correctamente", "Smarmoddle", {
-            //         "timeOut": "3000"
-            //     });
-            //     this.pasivo.p_corriente.nom_cuenta = '';
-            //     this.pasivo.p_corriente.saldo = '';
-            //     this.cambioPasivo();          
-            //   }
-            // }
-            // },
-            //  agregarPasivoNoCorriente(){
-            //     if(this.pasivo.p_nocorriente.nom_cuenta == '' || this.pasivo.p_nocorriente.saldo === ''){
-            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //  }else{
-            //     let id = this.pasivo.p_nocorriente.nom_cuenta;
-            //          let verificar = this.verificarCuenta(id);
-            //  if (verificar == true) {
-            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //  }else{
-            //     let nombre = funciones.obtenerNombre(id);
-            //     let p_nocorr = {cuenta_id: id, nom_cuenta: nombre, saldo:this.pasivo.p_nocorriente.saldo};
-            //     this.p_nocorrientes.push(p_nocorr);//añadimos el la variable persona al array
-            //       //Limpiamos los campos
-            //     toastr.success("Registro agregado correctamente", "Smarmoddle", {
-            //         "timeOut": "3000"
-            //     });
-            //     this.pasivo.p_nocorriente.nom_cuenta = '';
-            //     this.pasivo.p_nocorriente.saldo = '';
-            //     this.cambioPasivoNo();
-            //     }  
-            //     } 
-            //  }, 
-            //  agregarPatrimonio(){
-            //     if(this.patrimonio.nom_cuenta == '' || this.patrimonio.saldo === ''){
-            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //  }else{
-            //    let id = this.patrimonio.nom_cuenta;
-            //         let verificar = this.verificarCuenta(id);
-            //  if (verificar == true) {
-            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //  }else{
-            //   let nombre = funciones.obtenerNombre(id);
-
-            //    let patri = {cuenta_id: id, nom_cuenta:nombre, saldo:this.patrimonio.saldo};
-            //     this.patrimonios.push(patri);//añadimos el la variable persona al array
-            //       //Limpiamos los campos
-            //     toastr.success("Registro agregado correctamente", "Smarmoddle", {
-            //         "timeOut": "3000"
-            //     });
-            //     this.patrimonio.nom_cuenta = '';
-            //     this.patrimonio.saldo = '';
-            //     this.cambioPatrimonio();
-            //   }
-            // }
-            //  },
+         
             //ACTUALIZAR SUMAS DE PASIVOS, ACTIVOS Y PATRIMONIO
              cambioActivo(){
               this.b_initotal.t_a_corriente = 0;
@@ -1365,6 +1023,7 @@ const b_ver = new Vue({
         },
         patrimonio:{ //Asignar Patrimonio
           nom_cuenta:'',
+          cuenta_id:'',
           saldo:'',
         },
         bi:{const_id:''},
@@ -1428,21 +1087,7 @@ const b_ver = new Vue({
                 edit:false,
                 total:''
               }
-        },
-        // balances:[],
-        // balance:{
-        //   cuenta:'',
-        //   suma_debe:'',
-        //   suma_haber:'',
-        //   saldo_debe:'',
-        //   saldo_haber:''
-        // },
-        // suman:{
-        //   sum_debe:'',
-        //   sum_haber:'',
-        //   sal_debe:'',
-        //   sal_haber:''
-        // }    
+        },   
   },
   mounted: function(){
     this.cambioActivo();
@@ -1473,7 +1118,6 @@ const b_ver = new Vue({
       this.limpiar();
       $('#biv-transaccion').modal('show');
       $('#nav-biv-activo-corriente-tab').tab('show')
-      // $('#kardex-promedio-ingreso-edit-tab').tab('show')
 
     },
       abrirActivoNoC(){
@@ -1990,26 +1634,7 @@ const b_ver = new Vue({
       this.patrimonio.saldo      =''
       this.patrimonio.edit      = false;
     },
-    //     abrirActivoC(){
-    //   this.limpiar();
-    //   $('#a_corriente2').modal('show')
-    // },
-    //   abrirActivoNoC(){
-    //     this.limpiar();
-    //   $('#a_nocorriente2').modal('show')
-    // },
-    //   abrirPasivoC(){
-    //     this.limpiar();
-    //   $('#p_corriente2').modal('show')
-    // },
-    //   abrirPasivoNoC(){
-    //     this.limpiar();
-    //   $('#p_nocorriente2').modal('show')
-    // },
-    //   abrirPatrimonio(){
-    //     this.limpiar();
-    //   $('#patrimonio2').modal('show')
-    // },
+   
     Agregar(){
     if(this.diario.nom_cuenta.trim() === ''){
       toastr.error("El campo Nombre de cuenta es obligatorio", "Smarmoddle", {
@@ -2083,202 +1708,6 @@ const b_ver = new Vue({
       this.balance.saldo_haber =''
     }
     },
-//       deleteBalance(index){
-//       this.balances.splice(index, 1);
-//     },
-// //ELIMINAR ELEMENTOS DE UN ARRAY /////////
-//     deleteAcCooriente(index){
-//       this.a_corrientes.splice(index, 1);   //ELIMINAR UN ELEMENTO DEL ARRAY COMENZANDO DESDE SU INDEX
-//       this.cambioActivo();                  //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
-//       this.TotalActivo();                   //LLAMAR FUNCION PARA ACTUALIZAR TOTALES
-//     },
-//      deletePaCooriente(index){
-//       this.p_corrientes.splice(index, 1);
-//       this.cambioPasivo();
-//       this.TotalPasivo();
-//     },
-//      deleteAcNoCooriente(index){
-//       this.a_nocorrientes.splice(index, 1);
-//       this.cambioActivoNo();
-//       this.TotalActivo();
-//     },
-//      deletePaNoCooriente(index){
-//       this.p_nocorrientes.splice(index, 1);
-//       this.cambioPasivoNo();
-//       this.TotalPasivo();
-//     },
-//      deletePatrimonio(index){
-//       this.patrimonios.splice(index, 1);
-//       this.cambioPatrimonio();
-//     },
-    // limpiar(){ //LIMPIAR TODOS LOS CAMPOS DE ACTIVOS PASIVOS Y PATRIMONIOS
-    //   this.pasivo.p_corriente.nom_cuenta = '';
-    //   this.pasivo.p_corriente.saldo = '';
-    //   this.pasivo.p_nocorriente.nom_cuenta = '';
-    //   this.pasivo.p_nocorriente.saldo = '';
-    //   this.activo.a_corriente.nom_cuenta = '';
-    //   this.activo.a_corriente.saldo = '';
-    //   this.activo.a_nocorriente.nom_cuenta = '';
-    //   this.activo.a_nocorriente.saldo = '';
-    //   this.bi.const_id = '';
-
-    //   },
-    //EDITAR ELEMENTOS DE UN ARRAY
-  //   editAcorriente(index){ //OBTENEMOS EL INDICE DEL ARRAY SELECCIONADO
-  //     this.update = index;                                                       //IGUALAMOS LA VARIABLE UPDATE CON EL INDICE DEL ARRAY
-  //     this.activo.a_corriente.saldo = this.a_corrientes[index].saldo;           //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
-  //     this.activo.a_corriente.nom_cuenta = this.a_corrientes[index].cuenta_id; //IGUALAMOS LA VARIABLE DEL V-MODEL CON LOS DATOS DEL ARRAY CORRESPONDIENTE
-  //     $('#a_corriente2').modal('show'); 
-  //      this.bi.const_id = this.a_corrientes[index].cuenta_id;  
-  //                                          //MOSTRAR EL MODAL CON JS
-  //     //var activo = this.a_corrientes[index];
-  //   },
-  // updateACorriente(){
-  //     let id = this.activo.a_corriente.nom_cuenta;
-  //          let verificar = this.verificarCuenta(id);
-  //            if (verificar == true) {
-  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-  //               "timeOut": "3000"
-  //               });
-  //            }else{
-  //     let nombre = funciones.obtenerNombre(id);
-  //     var i = this.update;                                                    //I SERA EL INDICE QUE SE ASIGNO EN EL METODO EDITAR
-  //     this.a_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-  //     this.a_corrientes[i].nom_cuenta = nombre;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-  //     this.a_corrientes[i].saldo = this.activo.a_corriente.saldo;             //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-  //     $('#a_corriente2').modal('hide');                                      //OCULTAR EL MODAL
-  //     this.limpiar();
-  //     this.cambioActivo();
-  // }
-  //   },
-  //   editANocorriente(index){
-  //     this.update = index;
-  //     this.activo.a_nocorriente.saldo = this.a_nocorrientes[index].saldo;
-  //     this.activo.a_nocorriente.nom_cuenta = this.a_nocorrientes[index].cuenta_id;
-  //     $('#a_nocorriente2').modal('show');
-  //      this.bi.const_id = this.a_nocorrientes[index].cuenta_id;
-
-  //     //var activo = this.a_nocorrientes[index];
-  //   },
-  //   updateANoCorriente(){
-  //     let id = this.activo.a_nocorriente.nom_cuenta;
-  //          let verificar = this.verificarCuenta(id);
-  //            if (verificar == true) {
-  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-  //               "timeOut": "3000"
-  //               });
-  //            }else{
-  //     let nombre = funciones.obtenerNombre(id);
-  //     var i = this.update;
-  //     this.a_nocorrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-  //     this.a_nocorrientes[i].nom_cuenta = nombre;
-  //     this.a_nocorrientes[i].saldo = this.activo.a_nocorriente.saldo;
-  //     $('#a_nocorriente2').modal('hide');
-  //     this.limpiar();
-  //     this.cambioActivoNo();
-  //     this.TotalActivo();
-  //   }
-  //   },
-  //   editPcorriente(index){
-  //     this.update = index ;
-  //     this.pasivo.p_corriente.saldo = this.p_corrientes[index].saldo;
-  //     this.pasivo.p_corriente.nom_cuenta = this.p_corrientes[index].cuenta_id;
-  //     $('#p_corriente2').modal('show');
-  //     this.bi.const_id = this.p_corrientes[index].cuenta_id;
-
-  //     //var activo = this.a_corrientes[index];
-  //   },
-  //   updatePCorriente(){
-  //     let id = this.pasivo.p_corriente.nom_cuenta;
-  //          let verificar = this.verificarCuenta(id);
-  //            if (verificar == true) {
-  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-  //               "timeOut": "3000"
-  //               });
-  //            }else{
-  //     let nombre = funciones.obtenerNombre(id);
-  //     var i = this.update;
-  //     this.p_corrientes[i].cuenta_id = id;   //BUSCAMOS EL ARRAY ESPECIFICO POR SU INDICE Y REMPLAZAMOS SU VALOR POR EL QUE TENEMOS ACTUALMENTE EN EL V-MODEL
-  //     this.p_corrientes[i].nom_cuenta = nombre;
-  //     this.p_corrientes[i].saldo = this.pasivo.p_corriente.saldo;
-  //     $('#p_corriente2').modal('hide');
-  //     this.limpiar();
-  //     this.cambioPasivo();
-  //     this.TotalPasivo();
-  //   }
-  //   },
-  //   editPNocorriente(index){
-  //     this.update = index ;
-  //     this.pasivo.p_nocorriente.saldo = this.p_nocorrientes[index].saldo;
-  //     this.pasivo.p_nocorriente.nom_cuenta = this.p_nocorrientes[index].cuenta_id;
-  //     $('#p_nocorriente2').modal('show');
-  //      this.bi.const_id = this.p_nocorrientes[index].cuenta_id;
-
-  //     //var activo = this.a_corrientes[index];
-  //   },
-  //   updatePNoCorriente(){
-  //     let id = this.pasivo.p_nocorriente.nom_cuenta;
-  //          let verificar = this.verificarCuenta(id);
-  //            if (verificar == true) {
-  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-  //               "timeOut": "3000"
-  //               });
-  //            }else{
-  //     let nombre = funciones.obtenerNombre(id);
-  //     var i = this.update;
-  //     this.p_nocorrientes[i].cuenta_id = id;
-  //     this.p_nocorrientes[i].nom_cuenta = nombre;
-  //     this.p_nocorrientes[i].saldo = this.pasivo.p_nocorriente.saldo;
-  //     $('#p_nocorriente2').modal('hide');
-  //     this.limpiar();
-  //     this.cambioPasivoNo();
-  //     this.TotalPasivo();
-  //   }
-  //   },
-  //   editPatrimonio(index){
-  //     this.update = index ;
-  //     this.patrimonio.saldo = this.patrimonios[index].saldo;
-  //     this.patrimonio.nom_cuenta = this.patrimonios[index].cuenta_id;
-  //     $('#patrimonio2').modal('show');
-  //     this.bi.const_id = this.patrimonios[index].cuenta_id;
-
-  //     //var activo = this.a_corrientes[index];
-  //   },
-  //   updatePatrimonio(){
-  //      let id = this.patrimonio.nom_cuenta;
-  //           let verificar = this.verificarCuenta(id);
-  //            if (verificar == true) {
-  //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-  //               "timeOut": "3000"
-  //               });
-  //            }else{
-  //     let nombre = funciones.obtenerNombre(id);
-  //     var i = this.update;
-  //     this.patrimonios[i].cuenta_id = id;
-  //     this.patrimonios[i].nom_cuenta = nombre;
-  //     this.patrimonios[i].saldo = this.patrimonio.saldo;
-  //     $('#patrimonio2').modal('hide');
-  //     this.limpiar();
-  //     this.cambioPatrimonio();
-  //   }
-  //   },      
-         // ejemplo(){
-         //        let me =this;
-         //        var formdata = new FormData();
-         //        formdata.append('data', JSON.stringify(this.diarios))
-                
-         //        axios.post(url,formdata).then(function (response) {
-         //              console.log(response.data);
-         //        toastr.success("Diario general guardado correctamente", "Smarmoddle", {
-         //            "timeOut": "3000"
-         //           });
-         //        diarios:[];
-         //        })
-         //        .catch(function (error) {
-         //            console.log(error);
-         //        });   
-                
-         //    },
         verificarCuenta(id){
            if (Number(this.bi.const_id) === id) {
               return false
@@ -2302,143 +1731,7 @@ const b_ver = new Vue({
               return false
              }
           },
-            // agregarActivoCorriente(){
-              
-            //    if(this.activo.a_corriente.nom_cuenta == '' || this.activo.a_corriente.saldo === ''){
-            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-               
-            //  }else{
-            // let id = this.activo.a_corriente.nom_cuenta;
-            // let verificar = this.verificarCuenta(id);
-            //  if (verificar == true) {
-            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //  }else{
-            //   let nombre = funciones.obtenerNombre(id);
-            //     var a_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_corriente.saldo};
-            //     this.a_corrientes.push(a_corr);                               //añadimos el la variable persona al array
-            //       toastr.success("Registro agregado correctamente", "Smarmoddle", {
-            //         "timeOut": "3000"
-            //     });
-            //     //Limpiamos los campos
-            //     this.activo.a_corriente.nom_cuenta = '';
-            //     this.activo.a_corriente.saldo = '';
-            //     //SUMAR TOTALES
-                
-            //     this.cambioActivo();  
-            //   }
-            //   }
-            // },
-            //  agregarActivoNoCorriente(){
-
-            //     if(this.activo.a_nocorriente.nom_cuenta == '' || this.activo.a_nocorriente.saldo === ''){
-            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //  }else{
-            // let id = this.activo.a_nocorriente.nom_cuenta;
-            // let verificar = this.verificarCuenta(id);
-            //  if (verificar == true) {
-            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //  }else{
-            //   let nombre = funciones.obtenerNombre(id);
-            //       var a_nocorr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.activo.a_nocorriente.saldo};//CREANDO EL OBJETO QUE SE AGREGARA AL ARRAY
-            //     this.a_nocorrientes.push(a_nocorr);//AGREGAR UNA NUEVA CUENTA AL ARRAY DE PASIVOS
-            //       //Limpiamos los campos
-            //       toastr.success("Registro agregado correctamente", "Smarmoddle", {
-            //         "timeOut": "3000"
-            //     });
-            //     this.activo.a_nocorriente.nom_cuenta = '';
-            //     this.activo.a_nocorriente.saldo = '';
-            //     this.cambioActivoNo();          
-            //   }
-            //    }
-            //  },
-            //    agregarPasivoCorriente(){
-            //     if(this.pasivo.p_corriente.nom_cuenta == '' || this.pasivo.p_corriente.saldo === ''){
-            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //   }else{
-            //     let id = this.pasivo.p_corriente.nom_cuenta;
-            //          let verificar = this.verificarCuenta(id);
-            //  if (verificar == true) {
-            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //  }else{
-            //     let nombre = funciones.obtenerNombre(id);
-
-            //     var p_corr = {cuenta_id: id, nom_cuenta:nombre, saldo:this.pasivo.p_corriente.saldo};
-            //     this.p_corrientes.push(p_corr);//añadimos el la variable persona al array
-            //       //Limpiamos los campos
-            //       toastr.success("Registro agregado correctamente", "Smarmoddle", {
-            //         "timeOut": "3000"
-            //     });
-            //     this.pasivo.p_corriente.nom_cuenta = '';
-            //     this.pasivo.p_corriente.saldo = '';
-            //     this.cambioPasivo();          
-            //   }
-            // }
-            // },
-            //  agregarPasivoNoCorriente(){
-            //     if(this.pasivo.p_nocorriente.nom_cuenta == '' || this.pasivo.p_nocorriente.saldo === ''){
-            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //  }else{
-            //     let id = this.pasivo.p_nocorriente.nom_cuenta;
-            //          let verificar = this.verificarCuenta(id);
-            //  if (verificar == true) {
-            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //  }else{
-            //     let nombre = funciones.obtenerNombre(id);
-            //     let p_nocorr = {cuenta_id: id, nom_cuenta: nombre, saldo:this.pasivo.p_nocorriente.saldo};
-            //     this.p_nocorrientes.push(p_nocorr);//añadimos el la variable persona al array
-            //       //Limpiamos los campos
-            //     toastr.success("Registro agregado correctamente", "Smarmoddle", {
-            //         "timeOut": "3000"
-            //     });
-            //     this.pasivo.p_nocorriente.nom_cuenta = '';
-            //     this.pasivo.p_nocorriente.saldo = '';
-            //     this.cambioPasivoNo();
-            //     }  
-            //     } 
-            //  }, 
-            //  agregarPatrimonio(){
-            //     if(this.patrimonio.nom_cuenta == '' || this.patrimonio.saldo === ''){
-            //     toastr.error("Estos campos son obligatorio", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //  }else{
-            //    let id = this.patrimonio.nom_cuenta;
-            //         let verificar = this.verificarCuenta(id);
-            //  if (verificar == true) {
-            //    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
-            //     "timeOut": "3000"
-            //     });
-            //  }else{
-            //   let nombre = funciones.obtenerNombre(id);
-
-            //    let patri = {cuenta_id: id, nom_cuenta:nombre, saldo:this.patrimonio.saldo};
-            //     this.patrimonios.push(patri);//añadimos el la variable persona al array
-            //       //Limpiamos los campos
-            //     toastr.success("Registro agregado correctamente", "Smarmoddle", {
-            //         "timeOut": "3000"
-            //     });
-            //     this.patrimonio.nom_cuenta = '';
-            //     this.patrimonio.saldo = '';
-            //     this.cambioPatrimonio();
-            //   }
-            // }
-            //  },
+          
             //ACTUALIZAR SUMAS DE PASIVOS, ACTIVOS Y PATRIMONIO
              cambioActivo(){
               this.b_initotal.t_a_corriente = 0;
@@ -2556,8 +1849,7 @@ const b_ver = new Vue({
                     _this.cambioPasivo();
                     _this.cambioPasivoNo();
                     _this.cambioPatrimonio();
-                    // diario.obtenerBalanceInicial();
-                    // $('#list-tab a:nth-child(3)').tab('show');
+                
                     console.log(response.data); 
                   } else {
                       toastr.success(response.data.message, "Smarmoddle", {
@@ -2568,7 +1860,7 @@ const b_ver = new Vue({
                     _this.cambioPasivo();
                     _this.cambioPasivoNo();
                     _this.cambioPatrimonio();
-                    // diario.obtenerBalanceInicial();
+                   
                   }                     
                 }).catch(function(error){
                   toastr.error(error.response.data.message, "Smarmoddle", {
@@ -2764,7 +2056,7 @@ transacciones:'',
       this.diario.debe.edit        = false;
     },
     valorPorcentual(porcentaje, valor){
-      // let porcentaje = this.cuentas[index].porcentaje;
+     
       let total = Number((valor * porcentaje) / 100);
       return total;
     },
@@ -2809,17 +2101,13 @@ transacciones:'',
             let inicial = response.data.inicial;
             inicial.debe[0].fecha = inicial.fecha;
             _this.registros.unshift(inicial);
-          // _this.balanceInicial.debe = response.data.activos;
-          // _this.balanceInicial.haber = response.data.pasivos;
-          // _this.nombre = response.data.nombre;
-          // _this.fechabalance = response.data.fecha;
-          // $('#list-tab a:nth-child(3)').tab('show');
+         
             console.log(response.data); 
              this.totalDebe();
               this.totalHaber();
             this.totalesFinales();
 
-            // this.obtenerDiarioGeneral();
+           
           }else{
              toastr.warning("Aun no has creado tu balance Inicial", "Smarmoddle", {
                 "timeOut": "3000"
@@ -2841,7 +2129,7 @@ transacciones:'',
       let id = this.diario.haber.nom_cuenta;
       let cuenta = this.cuentas.filter(x => x.id == id);
       let valor = this.diario.haber.saldo;
-      // console.log(cuenta)
+     
             if (cuenta[0].porcentual == 1) {
                   let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
                   let haber = {cuenta_id: cuenta[0].id, fecha:this.diario.haber.fecha, nom_cuenta: cuenta[0].nombre, saldo:calculo};
@@ -2861,39 +2149,12 @@ transacciones:'',
         }
     },
      agregarDebe(){
-      // let index = this.diario.debe.nom_cuenta;
+      
       let id = this.diario.debe.nom_cuenta;
       let cuenta = this.cuentas.filter(x => x.id == id);
       let valor = this.diario.debe.saldo;
 
-      // if (this.diarios.debe.length == 0) {
-      //   if (this.diario.debe.fecha.trim() === '') {
-      //     toastr.error("La fecha es obligatoria en la primera cuenta del registro", "Smarmoddle", {
-      //           "timeOut": "3000"
-      //       });
-      //   }else if(this.diario.debe.nom_cuenta === ''){
-      //      toastr.error("La cuenta es obligatoria", "Smarmoddle", {
-      //           "timeOut": "3000"
-      //       });
-      //   }else{
-      //     if (cuenta[0].porcentual == 1) {
-      //             let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
-                  
-      //             let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:calculo};
-      //             this.diarios.debe.push(debe);//añadimos el la variable persona al array
-      //       }else{
-      //             let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:this.diario.debe.saldo};
-      //             this.diarios.debe.push(debe);
-      //       }
-      //           //Limpiamos los campos
-      //           toastr.success("Activo agregado correctamente", "Smarmoddle", {
-      //           "timeOut": "3000"
-      //           });
-      //           this.diario.debe.fecha =''
-      //           this.diario.debe.nom_cuenta =''
-      //           this.diario.debe.saldo =''
-      //   }
-      // }else{
+     
           if(this.diario.debe.nom_cuenta === ''){
            toastr.error("La cuenta es obligatoria", "Smarmoddle", {
                 "timeOut": "3000"
@@ -2976,7 +2237,6 @@ transacciones:'',
             });
       }else{
         this.diarios.debe[0].fecha = this.diarios.fecha;
-           // let registro = {debe:this.diarios.debe, haber:this.diarios.haber, comentario:this.diarios.comentario, fecha: this.diarios.fecha};
 
               if (this.diarios.ajustado == true) {
                 let registro = {tipo: 'ajustado', debe:this.diarios.debe, haber:this.diarios.haber, comentario:this.diarios.comentario, fecha: this.diarios.fecha};
@@ -3025,7 +2285,7 @@ transacciones:'',
       }
       this.diarios.tipo = register[id].tipo;
 
-      // console.log(this.registros[id]);
+  
       $('#dg-transaccion').modal('show');
 
     },
@@ -3047,7 +2307,7 @@ transacciones:'',
       }
       this.diarios.tipo = register[id].tipo;
 
-      // console.log(this.registros[id]);
+  
       $('#dg-transaccion').modal('show');
 
     },
@@ -3135,7 +2395,7 @@ transacciones:'',
             });
       }else{
           if (this.diarios.tipo == 'ajustado' && this.diarios.ajustado == true) {
-            // let register = JSON.parse(JSON.stringify(this.ajustes));
+            
             this.diarios.debe.forEach(function(sal, id){
                 sal.fecha = '';
               });
@@ -3192,18 +2452,6 @@ transacciones:'',
 
 
           }
-          
-         
-
-          // if (this.diarios.ajustado = true) {
-          //     this.registros[id].tipo = 'ajustado';
-          // let register = JSON.parse(JSON.stringify(this.ajustes));
-
-
-          //     }else {
-          //   this.registros[id].tipo = 'normal';
-            
-          // }
           this.diarios.debe =   [];
           this.diarios.haber = [];
           this.diarios.comentario = '';
@@ -3219,41 +2467,7 @@ transacciones:'',
 
         }
     },
-  //   habereditRegister(id, index){
-  //     console.log(id);
-  //   console.log(index);
-  // },
-  // agregarEdit(){
-  //    var haber = {fecha:this.diario.haber.fecha, nom_cuenta:this.diario.haber.nom_cuenta, saldo:this.diario.haber.saldo};
-  //             this.edit.haber.push(haber);//añadimos el la variable persona al array
-  //               //Limpiamos los campos
-  //           toastr.success("Activo agregado correctamente", "Smarmoddle", {
-  //               "timeOut": "3000"
-  //           });
-  //               this.diario.haber.fecha =''
-  //               this.diario.haber.nom_cuenta =''
-  //               this.diario.haber.saldo =''
-  //  },
-   // agregarEditPasivo(){
-
-   //       var debe = {fecha:'', nom_cuenta:this.diario.debe.nom_cuenta, saldo:this.diario.debe.saldo};
-   //              this.edit.debe.push(debe);//añadimos el la variable persona al array
-   //              //Limpiamos los campos
-   //              toastr.success("Activo agregado correctamente", "Smarmoddle", {
-   //              "timeOut": "3000"
-   //              });
-   //              this.diario.debe.fecha =''
-   //              this.diario.debe.nom_cuenta =''
-   //              this.diario.debe.saldo =''
-             
-   // },
-    // haberEdit(index){
-    //   var edit = this.edit;
-    //   this.cuentaindex  = index;
-    //   this.diario.haber.nom_cuenta  = edit.haber[index].nom_cuenta;
-    //   this.diario.haber.saldo       = edit.haber[index].saldo;
-    //   $('#haber_a').modal('show'); 
-    // },
+  
     updateHaber(){
       let id     =  this.diario.haber.nom_cuenta;
       let index  = this.diario.haber.index;
@@ -3293,22 +2507,10 @@ transacciones:'',
         this.diario.haber.saldo      = this.diarios.haber[index].saldo;
       }
         this.diario.haber.edit       = true;
-      
-      // this.diario.haber.nom_cuenta  = this.diarios.haber[index].nom_cuenta;
-      // this.diario.haber.saldo       = this.diarios.haber[index].saldo;
+
       $('#haber-diario-tab').tab('show'); 
     },
-    //   updateHaber1(){
-    //   var id = this.cuentaindex;
-    //   this.diarios.haber[id].nom_cuenta  = this.diario.haber.nom_cuenta;
-    //   this.diarios.haber[id].saldo       = this.diario.haber.saldo;
-    //   $('#haber_d').modal('hide'); 
-    //     this.diario.haber.nom_cuenta = '';
-    //     this.diario.haber.saldo = '';
-    // },
-    // haberDelete(index){
-    //   this.edit.haber.splice(index, 1);
-    // },
+
    totalesFinales: function(){
         this.total.debe = 0;
         this.total.haber = 0;
@@ -3332,36 +2534,7 @@ transacciones:'',
 
 
       },
-    // comentarioEdit(){
-    //  this.diario.comentario = this.edit.comentario;
-    //  $('#comentario').modal('show'); 
-
-    // },
-    // comentarioUpdate(){
-    //   this.edit.comentario = this.diario.comentario;
-    //   $('#comentario').modal('hide'); 
-    //   this.diario.comentario = '';
-    // },
-    // debeEdit(index){
-    //   this.cuentaindex        = index;
-    //   if (index == 0) {
-    //   this.diario.debe.fecha  = this.edit.debe[index].fecha;  
-    //   }
-    //   this.diario.debe.nom_cuenta  = this.edit.debe[index].nom_cuenta;
-    //   this.diario.debe.saldo       = this.edit.debe[index].saldo;
-    //   $('#debe_a').modal('show'); 
-    // },
-    // updateDebe(){
-    //   var id                         = this.cuentaindex;
-    //    if (id == 0) {
-    //   this.edit.debe[id].fecha = this.diario.debe.fecha; 
-    //   }
-    //   this.edit.debe[id].nom_cuenta = this.diario.debe.nom_cuenta;
-    //   this.edit.debe[id].saldo      = this.diario.debe.saldo;
-    //   $('#debe_a').modal('hide'); 
-    //     this.diario.debe.nom_cuenta = '';
-    //     this.diario.debe.saldo = '';
-    // },
+    
      debediairoEdit(index){
        this.diario.haber.nom_cuenta = '';
         this.diario.haber.saldo      = '';
@@ -3491,8 +2664,7 @@ transacciones:'',
               nombre: _this.nombre,
               total_debe: _this.total.debe,
               total_haber: _this.total.haber,
-              // debe: _this.diarios.debe,
-              // haber: _this.diarios.haber
+             
         }).then(response => {
           if (response.data.success == false) {
                     toastr.error(response.data.message, "Smarmoddle", {
@@ -3503,17 +2675,23 @@ transacciones:'',
                 "timeOut": "3000"
                 });
            mayor_general.obtenerDiarioGeneral();
-
-            // this.obtenerDiarioGeneral();
+           librocaja.obtenerDiarioGeneral();
+           librosbanco.obtenerDiarioGeneral();
+           reten_iva.obtenerDiarioGeneral();
+           
           }else{
            toastr.success("Diario General Creado Correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
-          // _this.complete = response.data.success
+          
           _this.dato     = response.data;
-          // this.obtenerDiarioGeneral();
-            //console.log( _this.dato); 
+   
            mayor_general.obtenerDiarioGeneral();
+           librocaja.obtenerDiarioGeneral();
+           librosbanco.obtenerDiarioGeneral();
+           reten_iva.obtenerDiarioGeneral();
+
+
             //
             }          
         }).catch(function(error){
@@ -3629,9 +2807,7 @@ nombre_cierre:''
           if (response.data.datos == true) {
           _this.registros_cierres = response.data.registros;
           _this.nombre_cierre = response.data.nombre;  
-           // toastr.success("Diairo General cargado Correctamente", "Smarmoddle", {
-           //      "timeOut": "3000"
-           //      });
+       
             }          
         }).catch(function(error){
 
@@ -3654,7 +2830,7 @@ nombre_cierre:''
       this.mayores.registros =[];
       this.mayores.cierres   =[];
       this.mayores.cuenta   = '';
-      // this.mayor.cuenta   = id;
+     
       this.mayor.registro.cierre = false;
       this.mayor.registro.detalle = '';
       this.mayor.registro.fecha = '';
@@ -3802,13 +2978,7 @@ nombre_cierre:''
                 this.mayor.cuenta      = '';
                 this.mayor.seleccion   = '';
                 this.mayor.registro.cierre  = false;
-            //     this.totalDebe();
-            //     this.totalHaber();
-            // this.totalesFinales();
-
-      // $('#mg-transaccion').modal('hide');
-
-                
+          
       }
      
     },
@@ -3845,26 +3015,6 @@ nombre_cierre:''
       }else{
         cuenta[0].total_saldo = '';
       }
-      // if (this.mayores.registros.length == 0) {
-      //    toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
-      //           "timeOut": "3000"
-      //       });
-      // }else  if (this.mayor.cuenta == '') {
-      //    toastr.error("Debes seleccionar una cuenta", "Smarmoddle", {
-      //           "timeOut": "3000"
-      //       });
-      // }else{
-      //     let n = this.mayor.cuenta;
-
-      //     let nombre  = funciones.obtenerNombre(n);
-          
-      //     this.registros[id].registros   = this.mayores.registros;
-      //     this.registros[id].cierres     = this.mayores.cierres;
-      //     this.registros[id].cuenta      = nombre;
-      //     this.registros[id].cuenta_id   = n;
-      //     this.registros[id].total_debe  = tdebe;
-      //     this.registros[id].total_haber = thaber;
-
       this.mayores.registros =[];
       this.mayores.cierres   =[];
       this.mayor.cuenta      = '';
@@ -3876,8 +3026,6 @@ nombre_cierre:''
       this.mayor.registro.debe = '';
       this.mayor.registro.haber = '';
       this.mayor.registro.saldo = '';
-
-          // $('#mg-transaccion').modal('hide');
             toastr.success("Registro Actualizado Correctamente ", "Smarmoddle", {
                 "timeOut": "3000"
             });
@@ -3919,9 +3067,9 @@ nombre_cierre:''
             'success'
           );
           this.registros.splice(id, 1);
+          
         }
       });
-      // $('#eliminar-mg').modal('show');
 
     },
     eliminarRegistro(){
@@ -3954,7 +3102,7 @@ nombre_cierre:''
             toastr.success("Mayor General Actualizado Correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
-            // this.obtenerDiarioGeneral();
+         
             balance_comp.obtenerMayorGeneral();
             hoja_trabajo.obtenerMayorGeneral();
           }else{
@@ -3983,7 +3131,7 @@ nombre_cierre:''
           _this.nombre = response.data.nombre;
           console.log(response.data.registros)
          
-           toastr.success("Mayor Gneral cargado Correctamente", "Smarmoddle", {
+           toastr.success("Mayor General cargado Correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
             }          
@@ -4053,15 +3201,16 @@ const balance_comp = new Vue({
               return false
             }
           },
-        decimales(saldo){
-      if (saldo !== null && saldo !== '' && saldo !== 0) {
-         let total = Number(saldo).toFixed(2);
-      return total;
-    }else{
-      return
-    }
-     
-    },
+          decimales(saldo){
+            let vacio = '';
+          if (saldo !== null && saldo !== '' && saldo !== 0) {
+             let total = Number(saldo).toFixed(2);
+          return total;
+        }else{
+          return vacio
+        }
+         
+        },
         formatoFecha(fecha){
       if (fecha !== null) {
          let date = fecha.split('-').reverse().join('-');
@@ -4080,7 +3229,7 @@ const balance_comp = new Vue({
           if (response.data.datos == true) {
           _this.mayorgeneral = response.data.registros;
           _this.nombre_mayor = response.data.nombre;
-          // console.log(response.data.registros)
+         
          
                      }          
         }).catch(function(error){
@@ -4096,7 +3245,7 @@ const balance_comp = new Vue({
       this.balance.saldo_debe ='';
       this.balance.saldo_haber = '';
       $('#bc-transaccion').modal('show');
-      // $('#comentario-diario-tab').tab('show'); 
+      
 
 
     },
@@ -4159,10 +3308,6 @@ const balance_comp = new Vue({
         "timeOut": "3000"
     });
 
-    //  } else if(this.balance.suma_debe =='' && this.balance.suma_haber ==''){
-    //   toastr.error("No puedes dejar los campos de haber y debe vacios", "Smarmoddle", {
-    //     "timeOut": "3000"
-    // });
 
      }else {
       let id       = this.balance.cuenta;
@@ -4208,6 +3353,7 @@ const balance_comp = new Vue({
             'success'
           );
            this.balances.splice(index, 1);
+           this.cancelarEdicion();
         this.totales();
         }
       });
@@ -4245,7 +3391,7 @@ const balance_comp = new Vue({
         this.balance.suma_debe   =''
         this.balance.suma_haber  =''
         this.balance.saldo_haber =''
-        this.balance.saldo_haber =''
+        this.balance.saldo_debe =''
         this.balance.edit        = false;
      
     },
@@ -4255,10 +3401,6 @@ const balance_comp = new Vue({
         "timeOut": "3000"
     });
 
-    //  } else if(this.balance.suma_debe.trim() ==='' && this.balance.suma_haber.trim() ===''){
-    //   toastr.error("No puedes dejar los campos de haber y debe vacios", "Smarmoddle", {
-    //     "timeOut": "3000"
-    // });
 
      }else {
         // this.sumas();
@@ -4574,11 +3716,7 @@ let hoja_trabajo = new Vue({
     },
     abrirTransaccion(){
        this.update             = false;
-      //  this.diarios.debe      =[];
-      // this.diarios.haber      =[];
-      // this.diarios.fecha      =[];
-      // this.diarios.comentario =[];
-      // this.diarios.ajustado = false;
+     
 
       $('#ht-transaccion').modal('show');
     },
@@ -4738,9 +3876,11 @@ let hoja_trabajo = new Vue({
             'success'
           );
           this.registros.splice(id, 1);
+          this.cancelarEdicion();
+          this.sumasTotales();
         }
       });
-      // $('#eliminar-ht').modal('show');
+ 
 
     },
         obtenerBalanceCom: function() {
@@ -4767,7 +3907,7 @@ let hoja_trabajo = new Vue({
           if (response.data.datos == true) {
           _this.mayorgeneral = response.data.registros;
           _this.nombre_mayor = response.data.nombre;
-          // console.log(response.data.registros)
+          
          
                      }          
         }).catch(function(error){
@@ -4951,11 +4091,7 @@ const balance_ajustado = new Vue({
           }, 
     abrirTransaccion(){
        this.update             = false;
-      //  this.diarios.debe      =[];
-      // this.diarios.haber      =[];
-      // this.diarios.fecha      =[];
-      // this.diarios.comentario =[];
-      // this.diarios.ajustado = false;
+      
 
       $('#ba-transaccion').modal('show');
     },
@@ -4965,15 +4101,7 @@ const balance_ajustado = new Vue({
         "timeOut": "3000"
     });
 
-    //  } else if(this.balance.debe.trim() !='' && this.balance.haber.trim() !=''){
-    //   toastr.error("No puedes llenar ambos campos de debe y haber", "Smarmoddle", {
-    //     "timeOut": "3000"
-    // });
-
-    //  }else if(this.balance.debe.trim() ==='' && this.balance.haber.trim() ===''){
-    //   toastr.error("No puedes dejar ambos campos de debe y haber en blanco", "Smarmoddle", {
-    //     "timeOut": "3000"
-    // });
+ 
      }else {
        let id = this.balance.cuenta_id;
          let verificar = this.verificarCuenta(id);
@@ -5037,15 +4165,7 @@ const balance_ajustado = new Vue({
             "timeOut": "3000"
         });
 
-        //  } else if(this.balance.debe.trim() !='' && this.balance.haber.trim() !=''){
-        //   toastr.error("No puedes llenar ambos campos de debe y haber", "Smarmoddle", {
-        // "timeOut": "3000"
-        // });
-
-        // }else if(this.balance.debe.trim() ==='' && this.balance.haber.trim() ===''){
-        //   toastr.error("No puedes dejar ambos campos de debe y haber en blanco", "Smarmoddle", {
-        //   "timeOut": "3000"
-        // });
+    
 
         }else {
           let id = this.balance.cuenta_id;
@@ -5090,9 +4210,10 @@ const balance_ajustado = new Vue({
             'success'
           );
           this.balances_ajustados.splice(id, 1);
+          this.cancelarEdicion();
         }
       });
-      // $('#eliminar-ht').modal('show');
+      
 
     },
      guardarBalance: function() {
@@ -5204,10 +4325,7 @@ const estado_resultado = new Vue({
     },
     utilidades:[],
     utilidad:'',
-    // totales:{
-    //   ingreso:0,
-    //   gastos:0,
-    // },
+  
     update:false,
     registro:{
       ingreso:'',
@@ -5240,8 +4358,7 @@ const estado_resultado = new Vue({
       toastr.info("Datos agregados", "Smarmoddle", {
             "timeOut": "3000"
             });
-      // this.utilidad_bruta.venta       = '';
-      // this.utilidad_bruta.costo_venta = '';
+ 
 
       let suma_ventas = Number(this.venta - this.costo_venta);
       this.totales.utilidad_bruta_ventas = suma_ventas;
@@ -5275,7 +4392,7 @@ const estado_resultado = new Vue({
      this.subtotal();
         }
       });
-      // $('#eliminar-ht').modal('show');
+     
 
     },
       warningEliminarGastos(id){
@@ -5300,7 +4417,7 @@ const estado_resultado = new Vue({
           this.subtotal();
         }
       });
-      // $('#eliminar-ht').modal('show');
+      
 
     },
       warningEliminarUtilidad(id){
@@ -5323,7 +4440,7 @@ const estado_resultado = new Vue({
           this.utilidades.splice(id, 1);
         }
       });
-      // $('#eliminar-ht').modal('show');
+    
 
     },
    VueSweetAlert2(component,propsData)
@@ -6962,7 +6079,13 @@ const asientos_cierre = new Vue({
               t_patrimonio_pasivo:'',
           },
         },
-        b_initotal:{}
+        b_initotal:{
+          t_a_corriente:'', //Total de activo corriente
+          t_a_nocorriente:'', //Total de activo no corriente
+          t_p_corriente:'', //Total de pasivo corriente
+          t_p_no_corriente:'', //Total de pasivo no corriente
+          t_patrimonio:'' //Total de patrimonio
+      },
     },
     mounted: function () {
       this.obtenerAsientoCierre();
@@ -7094,7 +6217,7 @@ const asientos_cierre = new Vue({
 
       this.limpiar();
       $('#as-transaccion').modal('show');
-      $('#comentario-diario-tab').tab('show'); 
+      $('#comentario-asiento-tab').tab('show'); 
 
 
     },
@@ -7109,68 +6232,7 @@ const asientos_cierre = new Vue({
       let total = Number((valor * porcentaje) / 100);
       return total;
     },
-     //  obtenerKardexFifo: function() {
-     //    let _this = this;
-     //    let url = '/sistema/admin/taller/kardex-obtener-fifo';
-     //        axios.post(url,{
-     //          id: _this.id_taller,
-     //          producto_id: _this.producto_id
-     //    }).then(response => {
-     //      if (response.data.datos == true) {
-     //          _this.kardex = response.data.kardex_fifo;
-     //          _this.nombre_kardex =  response.data.informacion.nombre;
-     //          _this.producto_kardex = response.data.informacion.producto;         
-     //        }else{
-     //          _this.kardex = [];
-     //          _this.nombre =  '';
-     //          _this.producto = '';     
-     //        }        
-     //    }).catch(function(error){
-
-     //    }); 
-     // },
-    // obtenerBalanceInicial: function(){
-      
-    //   let verificar = this.registros.filter(x => x.tipo == 'inicial');
-
-    //   if (verificar.length >= 1) {
-    //       toastr.warning("Ya tienes cargado los datos del balance inicial", "Smarmoddle", {
-    //             "timeOut": "3000"
-    //             });
-    //       return
-    //   }
-
-    //   var _this = this;
-    //   var url = '/sistema/admin/taller/b_inicial_diario';
-    //     axios.post(url,{
-    //       id: _this.id_taller,
-    //     }).then(response => {
-    //       if (response.data.datos == true) {
-    //         let inicial = response.data.inicial;
-    //         inicial.debe[0].fecha = inicial.fecha;
-    //         _this.registros.unshift(inicial);
-    //       // _this.balanceInicial.debe = response.data.activos;
-    //       // _this.balanceInicial.haber = response.data.pasivos;
-    //       // _this.nombre = response.data.nombre;
-    //       // _this.fechabalance = response.data.fecha;
-    //       // $('#list-tab a:nth-child(3)').tab('show');
-    //         console.log(response.data); 
-    //          this.totalDebe();
-    //           this.totalHaber();
-    //         
-
-    //         // this.obtenerDiarioGeneral();
-    //       }else{
-    //          toastr.warning("Aun no has creado tu balance Inicial", "Smarmoddle", {
-    //             "timeOut": "3000"
-    //             });
-    //       }
-                    
-    //     }).catch(function(error){
-
-    //     });
-
-    // },
+    
     agregarHaber(){
       if (this.diario.haber.nom_cuenta === '') {
         toastr.error("No has registrado una cuenta", "Smarmoddle", {
@@ -7408,10 +6470,7 @@ const asientos_cierre = new Vue({
 
         }
     },
-  //   habereditRegister(id, index){
-  //     console.log(id);
-  //   console.log(index);
-  // },
+ 
   agregarEdit(){
      var haber = {fecha:this.diario.haber.fecha, nom_cuenta:this.diario.haber.nom_cuenta, saldo:this.diario.haber.saldo};
               this.edit.haber.push(haber);//añadimos el la variable persona al array
@@ -7483,8 +6542,7 @@ const asientos_cierre = new Vue({
       }
         this.diario.haber.edit       = true;
       
-      // this.diario.haber.nom_cuenta  = this.diarios.haber[index].nom_cuenta;
-      // this.diario.haber.saldo       = this.diarios.haber[index].saldo;
+   
       $('#haber-asiento-tab').tab('show'); 
     },
       updateHaber1(){
@@ -7498,45 +6556,7 @@ const asientos_cierre = new Vue({
     haberDelete(index){
       this.edit.haber.splice(index, 1);
     },
- // unction(){
-   //      this.total.debe  = 0;
-   //      this.total.haber = 0;
-   //      var regis        = this.ajustes;
-   //      var total        = 0;        
-   //      var total1       = 0;        
-   //      regis.forEach(function(obj, index){
-   //        obj.debe.forEach(function(sal, id){
-   //          total += Number(sal.saldo);
-   //        })
-   //      });
-   //      this.total.debe = Number(this.pasan.debe + total).toFixed(2);
-
-   //        regis.forEach(function(obj, index){
-   //        obj.haber.forEach(function(sal, id){
-   //          total1 += Number(sal.saldo);
-   //        })
-   //      });
-   //      this.total.haber = Number(this.pasan.haber + total1).toFixed(2);
-   //    },
-    // comentarioEdit(){
-    //  this.diario.comentario = this.edit.comentario;
-    //  $('#comentario').modal('show'); 
-
-    // },
-    // comentarioUpdate(){
-    //   this.edit.comentario = this.diario.comentario;
-    //   $('#comentario').modal('hide'); 
-    //   this.diario.comentario = '';
-    // },
-    // debeEdit(index){
-    //   this.cuentaindex        = index;
-    //   if (index == 0) {
-    //   this.diario.debe.fecha  = this.edit.debe[index].fecha;  
-    //   }
-    //   this.diario.debe.nom_cuenta  = this.edit.debe[index].nom_cuenta;
-    //   this.diario.debe.saldo       = this.edit.debe[index].saldo;
-    //   $('#debe_a').modal('show'); 
-    // },
+ 
      debediairoEdit(index){
         this.diario.haber.nom_cuenta = '';
         this.diario.haber.saldo      = '';
@@ -7832,10 +6852,10 @@ const kardex = new Vue({
 
     }
   },
-  //     mounted: function(){
-  //   this.obtenerKardexFifo();
+  mounted: function(){
+     this.obtenerKardexFifo();
     
-  // },
+  },
   methods:{
        VueSweetAlert2(component,propsData)
     {
@@ -7946,12 +6966,10 @@ const kardex = new Vue({
     },
     modalIngreso:function () {
       if (this.transacciones.length >= 1) {
-      //    let i =  this.transacciones.length - 1;
-      //     console.log(this.transacciones[i]);
-      // this.movimientos =  this.transacciones[i];
+   
       const existencias = JSON.parse(JSON.stringify(this.existencias));
       const ventas = JSON.parse(JSON.stringify(this.existencias));
-      // let existencias = this.existencias;
+      
 
       this.modales.modal_ingreso = existencias;
       this.modales.modal_devolucion_venta = ventas;
@@ -7971,33 +6989,16 @@ const kardex = new Vue({
       if (this.transacciones.length >= 1) {
         const existencias = JSON.parse(JSON.stringify(this.existencias));
         const compras = JSON.parse(JSON.stringify(this.existencias));
-      // let existencias = this.existencias;
+      
 
       this.modales.modal_egreso = existencias;
       this.modales.modal_devolucion_compra = compras;
 
-      //    let i =  this.transacciones.length - 1;
-      // console.log(this.transacciones[i]);
-      // this.movimientos =  this.transacciones[i];
+     
       }
       $('#egreso').modal('show');
     },
-    //   modalCompra:function () {
-    //   if (this.transacciones.length >= 1) {
-    //      let i =  this.transacciones.length - 1;
-    //   console.log(this.transacciones[i]);
-    //   this.movimientos =  this.transacciones[i];
-    //   }
-    //   $('#devolucion_compra').modal('show');
-    // },
-    //     modalVenta:function () {
-    //   if (this.transacciones.length >= 1) {
-    //      let i =  this.transacciones.length - 1;
-    //   console.log(this.transacciones[i]);
-    //   this.movimientos =  this.transacciones[i];
-    //   }
-    //   $('#devolucion_venta').modal('show');
-    // },
+    
     totalIng(id){
       let i = id;
       let exis = this.totales.total
@@ -8007,112 +7008,11 @@ const kardex = new Vue({
 
       
       let multiplicacion =  cantidad * precio;
-      // this.ejercicio[i].existencia_cantidad = cantidad;
-      // this.ejercicio[i].existencia_precio = precio;
+      
 
       this.ejercicio[i].ingreso_total = multiplicacion.toFixed(2);
 
-    // if (!this.actuingreso.estado) {
-    //   if (total1 > multiplicacion) {
-    //     let dife = total1 - multiplicacion;
-    //     let suma = exis - dife  
-    //     this.totales.total = suma
-    //   }else{
-    //     let adi = multiplicacion - total1 ;
-    //     let suma = adi + exis
-    //     this.totales.total = suma
-    //   }
-    // this.ejercicio[i].existencia_total = this.totales.total;
-    //     toastr.error("Datos Actualizado", "Smarmoddle", {
-    //     "timeOut": "3000"
-    //     });
-    // }else if(this.actuingreso.estado){
-    //   let transacciones = this.transacciones;
-    //   let index = this.actuingreso.index;
-    //   // let num = transacciones[index][i].identificador;
-
-    //   let identificador = transacciones.length - 1;
-
-    // if (index !== identificador) {
-    // if (total1 > multiplicacion) {
-    //   let ingretotal = JSON.parse(JSON.stringify(this.ejercicio[i].existencia_total));
-    //     let dife = total1 - multiplicacion;
-    // this.ejercicio[i].existencia_total =ingretotal - dife;
-
-    //    transacciones.forEach(function(transaccion, i){
-    //           transaccion.forEach(function(total, id){
-    //             let temp = total.existencia_total;
-    //             if (temp != null && temp !=='' && total.tipo !== 'inicial' && i >= index) {
-    //               total.existencia_total = temp - dife;
-    //               // console.log(temp);
-    //             } 
-    //           })
-    //         });
-    //     let ultimodato = transacciones[identificador];
-    //     let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso');
-    //       console.log(egreso);
-
-    //     if (egreso[0].tipo == 'egreso' ) {
-    //       let last = transacciones[identificador];
-    //       // console.log(ultimodato)
-
-    //       let final = last.length - 1;
-    //       this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-    //       }else if( egreso[0].tipo == 'ingreso' ){
-
-    //        this.totales.total = Number(egreso[0].existencia_total);
-    //       }
-    //  }else{
-    //     let adi = multiplicacion - total1;
-
-    //   let ingretotal = JSON.parse(JSON.stringify(this.ejercicio[i].existencia_total));
-
-    //     this.ejercicio[i].existencia_total = Number(ingretotal) + adi;
-
-          
-
-    //           transacciones.forEach(function(transaccion, i){
-    //           transaccion.forEach(function(total, id){
-    //             let temp = total.existencia_total;
-    //             if (temp != null && temp !=='' && total.tipo !== 'inicial'  && i >= index) {
-    //               total.existencia_total = temp + adi;
-    //               // console.log(temp);
-    //             } 
-                
-    //           })
-    //         });
-    //            let ultimodato = transacciones[identificador];
-    //   let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso');
-    //       console.log(egreso);
-    //      if (egreso[0].tipo == 'egreso' ) {
-    //       let last = transacciones[identificador];
-    //          let final = last.length - 1;
-    //         this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-          
-    //     }else if(egreso[0].tipo == 'ingreso' ){
-
-    //        this.totales.total = Number(egreso[0].existencia_total);
-    //       }
-    //        // this.totales.total = Number(egreso[0].existencia_total);
-    //   }
-    // }else{
-    //     if (total1 > multiplicacion) {
-    //     let dife = total1 - multiplicacion;
-    //     let suma = exis - dife  
-    //     this.totales.total = suma
-    //   }else{
-    //     let adi = multiplicacion - total1 ;
-    //     let suma = adi + exis
-    //     this.totales.total = suma
-    //   }
-    //    this.ejercicio[i].existencia_total = this.totales.total;
-    //     toastr.error("Datos Actualizado", "Smarmoddle", {
-    //     "timeOut": "3000"
-    //     });
-    // }
-    //   }
+    
     },
 
     ventaIng(id){
@@ -8124,111 +7024,10 @@ const kardex = new Vue({
 
       
       let multiplicacion =  cantidad * precio;
-      // this.ejercicio[i].existencia_cantidad = cantidad;
-      // this.ejercicio[i].existencia_precio = precio;
+
 
       this.ejercicio[i].ingreso_total = multiplicacion.toFixed(2);
-    // if (!this.actuingreso.estado) {
-    //   if (total1 > multiplicacion) {
-    //     let dife = total1 - multiplicacion;
-    //     let suma = exis - dife  
-    //     this.totales.total = suma
-    //   }else{
-    //     let adi = multiplicacion - total1 ;
-    //     let suma = adi + exis
-    //     this.totales.total = suma
-    //   }
-    // this.ejercicio[i].existencia_total = this.totales.total;
-    //     toastr.error("Datos Actualizado", "Smarmoddle", {
-    //     "timeOut": "3000"
-    //     });
-    // }else if(this.actuingreso.estado){
-    //   let transacciones = this.transacciones;
-    //   let index = this.actuingreso.index;
-    //   // let num = transacciones[index][i].identificador;
-
-    //   let identificador = transacciones.length - 1;
-
-    // if (index !== identificador) {
-    // if (total1 > multiplicacion) {
-    //   let ingretotal = JSON.parse(JSON.stringify(this.ejercicio[i].existencia_total));
-    //     let dife = total1 - multiplicacion;
-    // this.ejercicio[i].existencia_total =ingretotal - dife;
-
-    //    transacciones.forEach(function(transaccion, i){
-    //           transaccion.forEach(function(total, id){
-    //             let temp = total.existencia_total;
-    //             if (temp != null && temp !=='' && total.tipo !== 'inicial' && i >= index) {
-    //               total.existencia_total = temp - dife;
-    //               // console.log(temp);
-    //             } 
-    //           })
-    //         });
-    //     let ultimodato = transacciones[identificador];
-    //     let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso');
-    //       console.log(egreso);
-
-    //     if (egreso[0].tipo == 'egreso' ) {
-    //       let last = transacciones[identificador];
-    //       // console.log(ultimodato)
-
-    //       let final = last.length - 1;
-    //       this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-    //       }else if( egreso[0].tipo == 'ingreso' ){
-
-    //        this.totales.total = Number(egreso[0].existencia_total);
-    //       }
-    //  }else{
-    //     let adi = multiplicacion - total1;
-
-    //   let ingretotal = JSON.parse(JSON.stringify(this.ejercicio[i].existencia_total));
-
-    //     this.ejercicio[i].existencia_total = Number(ingretotal) + adi;
-
-          
-
-    //           transacciones.forEach(function(transaccion, i){
-    //           transaccion.forEach(function(total, id){
-    //             let temp = total.existencia_total;
-    //             if (temp != null && temp !=='' && total.tipo !== 'inicial'  && i >= index) {
-    //               total.existencia_total = temp + adi;
-    //               // console.log(temp);
-    //             } 
-                
-    //           })
-    //         });
-    //            let ultimodato = transacciones[identificador];
-    //   let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso');
-    //       console.log(egreso);
-    //      if (egreso[0].tipo == 'egreso' ) {
-    //       let last = transacciones[identificador];
-    //          let final = last.length - 1;
-    //         this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-          
-    //     }else if(egreso[0].tipo == 'ingreso' ){
-
-    //        this.totales.total = Number(egreso[0].existencia_total);
-    //       }
-    //        // this.totales.total = Number(egreso[0].existencia_total);
-    //   }
-    // }else{
-    //     if (total1 > multiplicacion) {
-    //     let dife = total1 - multiplicacion;
-    //     let suma = exis - dife  
-    //     this.totales.total = suma
-    //   }else{
-    //     let adi = multiplicacion - total1 ;
-    //     let suma = adi + exis
-    //     this.totales.total = suma
-    //   }
-    //    this.ejercicio[i].existencia_total = this.totales.total;
-    //     toastr.error("Datos Actualizado", "Smarmoddle", {
-    //     "timeOut": "3000"
-    //     });
-    // }
-    //   }
+    
     },
 
     actuaIng(id){
@@ -8238,20 +7037,13 @@ const kardex = new Vue({
       let precio = Number(this.modales.modal_ingreso[i].ingreso_precio);
       let total1 = this.modales.modal_ingreso[i].ingreso_total;
       let multiplicacion =  cantidad * precio;
-      // this.modales.modal_ingreso[i].existencia_cantidad = cantidad;
-      // this.modales.modal_ingreso[i].existencia_precio = precio;
+     
       this.modales.modal_ingreso[i].ingreso_total = multiplicacion.toFixed(2);
     
-      // if (total1 > multiplicacion) {
-      //   let dife = total1 - multiplicacion;
-      //   let suma = exis - dife  
-      //   this.totales.subtotal = suma
-      // }else{
-      //   let adi = multiplicacion - total1 ;
+
         let suma = multiplicacion + exis
         this.totales.subtotal = suma
-      // }
-    // this.modales.modal_ingreso[i].existencia_total = this.totales.subtotal;
+
         toastr.error("Datos Actualizado", "Smarmoddle", {
         "timeOut": "3000"
         });
@@ -8264,40 +7056,19 @@ const kardex = new Vue({
       let precio = Number(this.modales.modal_devolucion_venta[i].ingreso_precio);
       let total1 = this.modales.modal_devolucion_venta[i].ingreso_total;
       let multiplicacion =  cantidad * precio;
-      // this.modales.modal_devolucion_venta[i].existencia_cantidad = cantidad;
-      // this.modales.modal_devolucion_venta[i].existencia_precio = precio;
+
       this.modales.modal_devolucion_venta[i].ingreso_total = multiplicacion.toFixed(2);
     
-      // if (total1 > multiplicacion) {
-      //   let dife = total1 - multiplicacion;
-      //   let suma = exis - dife  
-      //   this.totales.subtotal = suma
-      // }else{
-      //   let adi = multiplicacion - total1 ;
+      
         let suma = multiplicacion + exis
         this.totales.subtotal = suma
-      // }
-    // this.modales.modal_devolucion_venta[i].existencia_total = this.totales.subtotal;
+    
         toastr.error("Datos Actualizado", "Smarmoddle",{
         "timeOut": "3000"
         });  
     },
     bajarExis(estado){
 
-    // if (estado == 'mostrar') {
-    //   this.modales.existencia_ingreso = true;
-    //   return
-    // }
-    //  if (estado == 'cerrar') {
-    //   this.modales.existencia_ingreso = false;
-    //   return
-    // }
-    
-    //   if( this.exis.cantidad.trim() ==='' || this.exis.precio.trim() ==='' ){
-    //   toastr.error("Todos lo campos son obligatorios", "Smarmoddle", {
-    //     "timeOut": "3000"
-    // });
-     // }else{
     let id = this.transacciones.length + 1;
     var existencia ={identificador: id, fecha:'', movimiento:'', tipo:'existencia', ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:'', egreso_precio:'', egreso_total:'', existencia_cantidad:this.exis.cantidad, existencia_precio:this.exis.precio, existencia_total:''}
       this.modales.modal_ingreso.unshift(existencia);
@@ -8307,7 +7078,7 @@ const kardex = new Vue({
       this.exis.cantidad = '';
       this.exis.precio = '';
       this.modales.existencia_ingreso = false;
-     // }
+     
     },
 
     actuExiIng(estado){
@@ -8326,18 +7097,17 @@ const kardex = new Vue({
         "timeOut": "3000"
     });
      }else {
-      // let fecha = this.formatoFecha(this.inicial.fecha);
+    
 
       this.inicial.total = Number(this.inicial.cantidad * this.inicial.precio).toFixed(2);
       let existencia = {tipo:'existencia', fecha:'', movimiento:'', tipo:'existencia', ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:'', egreso_precio:'', egreso_total:'',  existencia_cantidad:this.inicial.cantidad, existencia_precio:this.inicial.precio, existencia_total:''}
       this.existencias.push(existencia);
       let registro = [];
-      // this.sumas()
+     
       var array = {tipo:'inicial', fecha:this.inicial.fecha, movimiento:this.inicial.movimiento, ingreso_cantidad:'', ingreso_precio:'', egreso_total:'', egreso_cantidad:'', egreso_precio:'', ingreso_total:'', existencia_cantidad:this.inicial.cantidad, existencia_precio: this.inicial.precio, existencia_total:this.inicial.total};
       registro.push(array)
       this.transacciones.unshift(registro) ;
-    //   var balance ={ cuenta:this.balance.cuenta, debe:this.balance.debe, haber:this.balance.haber}
-    //   this.balances_ajustados.push(balance);
+   
       toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
         "timeOut": "3000"
     });
@@ -8403,86 +7173,7 @@ const kardex = new Vue({
       this.transacciones[0][0].existencia_total = newTotal.toFixed(2);
       let transacciones = (this.transacciones);
       let identificador = transacciones.length - 1;
-          //  if(transacciones.length == 1){
-
-          //   console.log(newTotal)
-              
-          //     // this.totales.total = newTotal
-      
-          //     toastr.error("Datos Actualizado", "Smarmoddle", {
-          //     "timeOut": "3000"
-          //     });
-          // }else{
-          //   if (newTotal > total  ) {
-          //   console.log('Mas de un array')
-
-          //   let dife = newTotal - total;
-
-          //    transacciones.forEach(function(transaccion, i){
-          //           transaccion.forEach(function(total, id){
-          //             let temp = total.existencia_total;
-          //             if (temp != null && temp !=='' && total.tipo !== 'inicial' && i >= 0) {
-          //               total.existencia_total = temp + dife;
-          //             }           
-          //           });
-          //         });
-             
-          //   let ultimodato = transacciones[identificador];
-          //   let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso' || x.tipo == 'ingreso_venta');
-          //       // console.log(egreso);
-          //        if (egreso[0].tipo == 'egreso' ) {
-          //         let last = transacciones[identificador];
-          //          let final = last.length - 1;
-          //         this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-          //     }else if(egreso[0].tipo == 'ingreso' ){
-
-          //        this.totales.total = Number(egreso[0].existencia_total);
-          //       }
-
-          //           // this.transaccion.egreso.edit = false;
-
-          //        // this.totales.total = Number(egreso[0].existencia_total);
-          //        // 
-          //  }else{
-          //       // let ingretotal = JSON.parse(JSON.stringify(this.egresos[i].existencia_total));
-          //     let adi =  total - newTotal;
-          //   // this.egresos[i].existencia_total =ingretotal + adi
-
-          //           transacciones.forEach(function(transaccion, i){
-          //           transaccion.forEach(function(total, id){
-          //             let temp = total.existencia_total;
-          //             if (temp != null && temp !=='' && total.tipo !== 'inicial'  && i >= 0) {
-          //               total.existencia_total = temp - adi;
-          //               // console.log(temp);
-          //             } 
-                      
-          //           })
-          //         });
-          //       let ultimodato = transacciones[identificador];
-          //       let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso' || x.tipo == 'ingreso_venta');
-          //       console.log(egreso);
-          //        if (egreso[0].tipo == 'egreso' ) {
-
-          //         let last = transacciones[identificador];
-          //          let final = last.length - 1;
-          //         this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-          //     }else if(egreso[0].tipo == 'ingreso' ){
-
-          //        this.totales.total = Number(egreso[0].existencia_total);
-
-          //       }else if(egreso[0].tipo == 'ingreso_venta' ){
-
-          //        let last = transacciones[identificador];
-          //       let final = last.length - 1;
-          //         this.totales.total = Number(transacciones[identificador][final].existencia_total);
-          //       }
-          //       this.transaccion.egreso.edit = false;
-
-          //        // this.totales.total = Number(egreso[0].existencia_total);     
-          //   }
-          // }
+          
 
       this.totales.cantidad      = this.inicial.cantidad;
       this.totales.precio        = this.inicial.precio;
@@ -8505,23 +7196,18 @@ const kardex = new Vue({
     });
      }else {
       let id = this.transacciones.length + 1;
-    
-      // let existencia = {id: id ,existencia_cantidad:this.transaccion.ingreso.cantidad, existencia_precio:this.transaccion.ingreso.precio}
-      // this.existencias.push(existencia);
-      // let registro = [];
+  
       this.transaccion.ingreso.total = Number(this.transaccion.ingreso.cantidad * this.transaccion.ingreso.precio).toFixed(2);
       let calculo = Number(this.transaccion.ingreso.total + this.totales.total);
 
       let array = {identificador: id, tipo:'ingreso', fecha: this.transaccion.fecha, movimiento:this.transaccion.movimiento, ingreso_cantidad:this.transaccion.ingreso.cantidad, ingreso_precio:this.transaccion.ingreso.precio, ingreso_total:this.transaccion.ingreso.total, egreso_cantidad:'', egreso_precio:'', egreso_total:'', existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total:''};
-      // this.transacciones.push(this.existencias);
-      
-      // this.ejercicio.push(array)
+     
       this.modales.modal_ingreso.push(array)
-      // this.transacciones.push(this.ejercicio);
+      
       toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
         "timeOut": "3000"
     });
-      // this.totales.total = calculo;
+      
       this.transaccion.fecha            = '';
       this.transaccion.movimiento       = '';
       this.transaccion.ingreso.cantidad = '';
@@ -8532,7 +7218,7 @@ const kardex = new Vue({
       this.transaccion.exis.precio = this.transaccion.existencia.precio;
       this.transaccion.existencia.cantidad          = '';
       this.transaccion.existencia.precio            = '';
-      // this.transaccion.ingreso.total    = '';
+      
 
     }
   },
@@ -8551,9 +7237,7 @@ const kardex = new Vue({
 
     if (tipo == 'venta') {
        if (this.modales.modal_devolucion_venta[id].tipo == 'ingreso_venta' ) {
-      // let existencia = this.totales.total;
-      // let newTotal =existencia - this.modales.modal_devolucion_venta[id].ingreso_total;
-      // this.totales.total = newTotal;
+     
 
       this.modales.modal_devolucion_venta.splice(index, 1);
       }else if(this.modales.modal_devolucion_venta[id].tipo == 'existencia' ){
@@ -8561,10 +7245,6 @@ const kardex = new Vue({
     }
     }else{
        if (this.modales.modal_ingreso[id].tipo == 'ingreso' ) {
-      // let existencia = this.totales.total;
-      // let newTotal =existencia - this.modales.modal_ingreso[id].ingreso_total;
-      // this.totales.total = newTotal;
-
       this.modales.modal_ingreso.splice(index, 1);
     }else if(this.modales.modal_ingreso[id].tipo == 'existencia' ){
       this.modales.modal_ingreso.splice(index, 1);
@@ -8590,8 +7270,7 @@ const kardex = new Vue({
 
       let filtro_existencias = this.modales.modal_ingreso.filter(x => x.tipo == 'existencia');
 
-      // let calculo = Number(this.transaccion.ingreso.total) +  Number(this.totales.total);
-      // 
+     
       let existencia = {tipo:'existencia', fecha:'', movimiento:'', ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:'', egreso_precio:'', egreso_total:'',  existencia_cantidad:ingreso[0].existencia_cantidad, existencia_precio:ingreso[0].existencia_precio, existencia_total:''}
 
 
@@ -8601,12 +7280,12 @@ const kardex = new Vue({
         let exi_total = 0;
 
         filtro_existencias.forEach(function(existencia, i){
-                    // transaccion.forEach(function(total, id){
+                   
             let cantidad = existencia.existencia_cantidad;
             let precio = existencia.existencia_precio;
 
             let subtotal = Number(cantidad) * Number(precio);
-                                                                  // in_total += Number(temp1)
+                                                                  
                 exi_total += Number(subtotal);
 
                   });
@@ -8621,7 +7300,6 @@ const kardex = new Vue({
 
       this.modales.modal_ingreso = [];
 
-      // this.totales.total = ingreso[0].existencia_total;
       this.totales.total = exi_total;
         console.log(exi_total);
         this.suman.muestra = exi_total;
@@ -8652,12 +7330,12 @@ const kardex = new Vue({
            let exi_total = 0;
 
           filtro_existencias.forEach(function(existencia, i){
-            // transaccion.forEach(function(total, id){
+          
             let cantidad = existencia.existencia_cantidad;
             let precio = existencia.existencia_precio;
 
             let subtotal = Number(cantidad) * Number(precio);
-                                                                  // in_total += Number(temp1)
+                                                                  
                 exi_total += Number(subtotal);
 
                   });
@@ -8667,16 +7345,9 @@ const kardex = new Vue({
         this.modales.modal_devolucion_venta[ultimo].existencia_total = exi_total.toFixed(2);
          this.totales.total = exi_total;
         console.log(exi_total);
-
-
-       // let ingresototal = JSON.parse(JSON.stringify(venta[0].existencia_total));
-       //  let total = Number(ingresototal);
-       //  let ultimo = this.modales.modal_devolucion_venta.length - 1;
-       //  venta[0].existencia_total = '';
-       //  this.modales.modal_devolucion_venta[ultimo].existencia_total = ingresototal;
         this.transacciones.push(this.modales.modal_devolucion_venta);
         this.modales.modal_devolucion_venta = [];
-        // this.totales.total = total;
+     
         this.transaccion.ingreso.cantidad = '';
         this.transaccion.ingreso.precio   = '';
         this.transaccion.ingreso.total    = '';
@@ -8690,22 +7361,15 @@ const kardex = new Vue({
   editarTransaccion(index, id){
     // let id = index;
      if (this.transacciones[index][id].tipo == 'inicial') {
-      // console.log('Esto es el inventario inicial')
+     
       this.update = true;
-       // let fecha =  this.reverseFecha(this.transacciones[index][id].fecha);
-      // this.inicial.fecha = fecha;
+
       this.inicial.fecha = this.transacciones[index][id].fecha;
       this.inicial.movimiento = this.transacciones[index][id].movimiento;
       this.inicial.cantidad = this.transacciones[index][id].existencia_cantidad;
       this.inicial.precio = this.transacciones[index][id].existencia_precio;
 
       $('#saldo_inicial').modal('show');
-
-      // let existencia = this.totales.total;
-      // let newTotal =existencia - this.transacciones[id].ingreso_total;
-      // this.totales.total = newTotal;
-
-      // this.transacciones.splice(index, 1);
     }
     else if(this.transacciones[index][id].tipo == 'ingreso'){
       this.actuingreso.index = index;
@@ -8761,20 +7425,20 @@ const kardex = new Vue({
     let multi = Number(ingreso[0].ingreso_cantidad * ingreso[0].ingreso_precio).toFixed(2);
     ingreso[0].ingreso_total = multi;
     let filtro_existencias = this.ejercicio.filter(x => x.tipo == 'existencia');
-      // let calculo = Number(this.transaccion.ingreso.total) +  Number(this.totales.total); 
+    
     let existencia = {identificador: id, tipo:'existencia', fecha:'', movimiento:'', tipo:'existencia', ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:'', egreso_precio:'', egreso_total:'',  existencia_cantidad:ingreso[0].existencia_cantidad, existencia_precio:ingreso[0].existencia_precio, existencia_total:''}
 
       filtro_existencias.push(existencia);
-        // this.existencias = JSON.parse(JSON.stringify(filtro_existencias));
+       
       let exi_total = 0;
 
       filtro_existencias.forEach(function(existencia, i){
-                    // transaccion.forEach(function(total, id){
+                   
             let cantidad = existencia.existencia_cantidad;
             let precio = existencia.existencia_precio;
 
             let subtotal = Number(cantidad) * Number(precio);
-                                                                  // in_total += Number(temp1)
+                                                                  
                 exi_total += Number(subtotal);
 
                   });
@@ -8810,7 +7474,7 @@ const kardex = new Vue({
       let id = this.transacciones.length + 1;
        let ultimo = egresos.length - 1;
         this.edit.egreso.total = Number(this.edit.egreso.cantidad * this.edit.egreso.precio);
-        // let calculo =  total - Number(this.edit.egreso.total);
+       
         let array = {identificacion: id, tipo:'egreso', fecha:'', movimiento:'', egreso_cantidad:this.edit.egreso.cantidad, egreso_precio:this.edit.egreso.precio, egreso_total:this.edit.egreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total: ''};
         this.modales.modal_egreso.splice(ultimo + 1, 0, array);
            this.edit.egreso.cantidad   = '';
@@ -8835,7 +7499,7 @@ const kardex = new Vue({
         let calculo = Number(this.totales.total) - Number(this.transaccion.egreso.total);
         let array = {identificacion: id, fecha:'', movimiento:'', tipo:'egreso_compra', fecha:this.transaccion.fecha, movimiento:this.transaccion.movimiento, ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:this.transaccion.egreso.cantidad, egreso_precio:this.transaccion.egreso.precio, egreso_total:this.transaccion.egreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total: ''};
         this.modales.modal_devolucion_compra.push(array)
-        // this.transacciones.push(registro) ;
+        
         toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
           "timeOut": "3000"
       });
@@ -8854,15 +7518,10 @@ const kardex = new Vue({
       let egreso = this.modales.modal_egreso.filter(x => x.tipo == 'egreso');
       let id = this.transacciones.length + 1;
       if (egreso.length == 0) {
-       
-        //  let existencia = {id: id ,cantidad:this.transaccion.egreso.cantidad, precio:this.transaccion.egreso.precio}
-        // this.existencias.push(existencia);
-        // let registro = [];
         this.transaccion.egreso.total = Number(this.transaccion.egreso.cantidad * this.transaccion.egreso.precio).toFixed(2);
         let calculo = Number(this.totales.total) - Number(this.transaccion.egreso.total);
         let array = {identificacion: id, fecha:'', movimiento:'', tipo:'egreso', fecha:this.transaccion.fecha, movimiento:this.transaccion.movimiento, ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:this.transaccion.egreso.cantidad, egreso_precio:this.transaccion.egreso.precio, egreso_total:this.transaccion.egreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total: ''};
         this.modales.modal_egreso.unshift(array)
-        // this.transacciones.push(registro) ;
         toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
           "timeOut": "3000"
       });
@@ -8880,16 +7539,13 @@ const kardex = new Vue({
       let egresos = this.modales.modal_egreso.filter(x => x.tipo == 'egreso');
 
         let ultimo = egresos.length - 1;
-        // let nuevo = egresos.length - 1;
+     
         let total = Number(this.modales.modal_egreso[ultimo].existencia_total);
         this.transaccion.egreso.total = Number(this.transaccion.egreso.cantidad * this.transaccion.egreso.precio).toFixed(2);
         let calculo =  total - Number(this.transaccion.egreso.total);
         let array = {identificacion: id, fecha:'', movimiento:'', tipo:'egreso', fecha:this.transaccion.fecha, movimiento:this.transaccion.movimiento, ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'',  egreso_cantidad:this.transaccion.egreso.cantidad, egreso_precio:this.transaccion.egreso.precio, egreso_total:this.transaccion.egreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total: ''};
         this.modales.modal_egreso.splice(ultimo + 1, 0, array);
-         
-         // this.modales.modal_egreso.push(array);
-         // this.modales.modal_egreso[ultimo].existencia_total = ''
-        // this.transacciones.push(registro) ;
+   
         toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
           "timeOut": "3000"
           });
@@ -8917,112 +7573,17 @@ const kardex = new Vue({
       let transacciones = this.transacciones;
 
         let index = this.actuegreso.index;
-           // let id = this.transacciones.length + 1;
-        // let egresos = this.egresos.filter(x => x.tipo == 'egreso');
+       
         let ultimo = this.egresos.length - 1;
-        // let nuevo = egresos.length - 1;
-        // let total = Number(this.egresos[ultimo].existencia_total);
+     
         this.transaccion.egreso.total = Number(this.transaccion.egreso.cantidad * this.transaccion.egreso.precio).toFixed(2);
-        // let calculo =  total - Number(this.transaccion.egreso.total);
+        
         let array = {identificacion: index, fecha:'', movimiento:'', tipo:'egreso', fecha:this.transaccion.fecha, movimiento:this.transaccion.movimiento, ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:this.transaccion.egreso.cantidad, egreso_precio:this.transaccion.egreso.precio, egreso_total:this.transaccion.egreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total: ''};
         this.egresos.splice(ultimo + 1, 0, array);
         this.transaccion.egreso.edit = false;
 
          
-         // this.egresos.push(array);
-         // this.egresos[ultimo].existencia_total = '';
-         // this.egresos[ultimo+1].existencia_total = calculo;
-
-
-          // let identificador = transacciones.length - 1;
-          // if (index !== identificador) {
-          //   if (total > calculo) {
-          //   let dife = total - calculo;
-
-          //    transacciones.forEach(function(transaccion, i){
-          //           transaccion.forEach(function(total, id){
-          //             let temp = total.existencia_total;
-          //             if (temp != null && temp !=='' && total.tipo !== 'inicial' && i >= index) {
-          //               total.existencia_total = temp + dife;
-          //             }           
-          //           });
-          //         });
-             
-          //   let ultimodato = transacciones[identificador];
-          //   let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso' || x.tipo == 'ingreso_venta');
-          //       // console.log(egreso);
-          //        if (egreso[0].tipo == 'egreso' ) {
-          //         let last = transacciones[identificador];
-          //          let final = last.length - 1;
-          //         this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-          //     }else if(egreso[0].tipo == 'ingreso' ){
-
-          //        this.totales.total = Number(egreso[0].existencia_total);
-          //       }
-
-          //           this.transaccion.egreso.edit = false;
-
-          //        // this.totales.total = Number(egreso[0].existencia_total);
-          //        // 
-          //  }else{
-          //       let ingretotal = JSON.parse(JSON.stringify(this.egresos[i].existencia_total));
-          //     let adi = calculo - total;
-          //   // this.egresos[i].existencia_total =ingretotal + adi
-
-          //           transacciones.forEach(function(transaccion, i){
-          //           transaccion.forEach(function(total, id){
-          //             let temp = total.existencia_total;
-          //             if (temp != null && temp !=='' && total.tipo !== 'inicial'  && i >= index) {
-          //               total.existencia_total = temp - adi;
-          //               // console.log(temp);
-          //             } 
-                      
-          //           })
-          //         });
-          //       let ultimodato = transacciones[identificador];
-          //       let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso' || x.tipo == 'ingreso_venta');
-          //       console.log(egreso);
-          //        if (egreso[0].tipo == 'egreso' ) {
-
-          //         let last = transacciones[identificador];
-          //          let final = last.length - 1;
-          //         this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-          //     }else if(egreso[0].tipo == 'ingreso' ){
-
-          //        this.totales.total = Number(egreso[0].existencia_total);
-
-          //       }else if(egreso[0].tipo == 'ingreso_venta' ){
-
-          //        let last = transacciones[identificador];
-          //       let final = last.length - 1;
-          //         this.totales.total = Number(transacciones[identificador][final].existencia_total);
-          //       }
-          //       this.transaccion.egreso.edit = false;
-
-          //        // this.totales.total = Number(egreso[0].existencia_total);     
-          //   }
-          // }else{
-          //   //   if (total > calculo) {
-          //   //   let dife = total - calculo;
-          //   //   let suma = exis + dife  
-          //   //   this.totales.total = suma
-          //   // }else{
-          //   //   let adi = calculo - total;
-          //   //   let suma = exis - adi
-          //     this.totales.total = calculo
-          //   // }
-          //     let f = this.egresos.length - 1;
-          //   this.transaccion.egreso.edit = false;
-            // this.egresos[i].existencia_total = '';
-            // this.egresos[f].existencia_total = this.totales.total;
-              // toastr.error("Datos Actualizado", "Smarmoddle", {
-              // "timeOut": "3000"
-              // });
-          
-
-        // this.transacciones.push(registro) ;
+       
         toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
           "timeOut": "3000"
           });
@@ -9053,46 +7614,7 @@ const kardex = new Vue({
       this.exis.cantidad = '';
       this.exis.precio = '';
       this.modales.existencia_ingreso = false;
-     // }
-      // if( this.exis.cantidad.trim() ==='' || this.exis.precio.trim() ==='' ){
-      //   toastr.error("Todos lo campos son obligatorios", "Smarmoddle", {
-      //     "timeOut": "3000"
-      //   });
-      //   }else{
-
-      //   if (this.egresos.length == 0) {
-      //      let id = this.transacciones.length + 1;
-      //     let existencia = {identificador: id, tipo:'existencia', existencia_cantidad:this.exis.cantidad, existencia_precio:this.exis.precio, existencia_total:''}
-      //     this.egresos.push(existencia);
-      //     toastr.success("Agregado", "Smarmoddle", {
-      //       "timeOut": "3000"
-      //       });
-      //     this.exis.cantidad               = '';
-      //     this.exis.precio                 = '';
-      //     this.transaccion.fecha           = '';
-      //     this.transaccion.movimiento      = '';
-      //     this.transaccion.egreso.cantidad = '';
-      //     this.transaccion.egreso.precio   = '';
-      //     this.transaccion.egreso.total    = '';
-      //   }else{
-      //     let id = this.transacciones.length + 1;
-      //     let ultimo = this.egresos.length - 1;
-      //     let total = this.egresos[ultimo].existencia_total;
-      //     let existencia ={identificador: id, tipo:'existencia', existencia_cantidad:this.exis.cantidad, existencia_precio:this.exis.precio, existencia_total:total}
-      //     this.egresos.push(existencia);
-      //     this.egresos[ultimo].existencia_total = '';
-      //     toastr.success("Agregado", "Smarmoddle", {
-      //       "timeOut": "3000"
-      //       });
-      //     this.exis.cantidad               = '';
-      //     this.exis.precio                 = '';
-      //     this.transaccion.fecha           = '';
-      //     this.transaccion.movimiento      = '';
-      //     this.transaccion.egreso.cantidad = '';
-      //     this.transaccion.egreso.precio   = '';
-      //     this.transaccion.egreso.total    = '';
-      //     }
-      //  }
+    
     },
         exisEgresoAct(tipo){
 
@@ -9117,35 +7639,25 @@ const kardex = new Vue({
       let u= egresos.length - 1;
       let existencia_total = JSON.parse(JSON.stringify(egresos[u].existencia_total));
       let iden = this.transacciones.length + 1;
-
-
       let exis = this.modales.modal_egreso.filter(x => x.tipo == 'existencia');
       let conteo = this.modales.modal_egreso.filter(x => x.tipo == 'existencia');
-     
-
-      // let ultimo         = this.modales.modal_egreso.length - 1;
-      // let total          = this.modales.modal_egreso[ultimo].existencia_total;
-      // this.totales.total = existencia_total;
-    
-   
-
       let existencias_egresos = this.modales.modal_egreso.filter(x => x.tipo == 'egreso' &&  x.existencia_cantidad > 0 && x.existencia_cantidad !== '');
         existencias_egresos.forEach(function(existencia, id){
           let agregar = {identificador: iden, tipo:'existencia', fecha:'', movimiento:'', tipo:'existencia', ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:'', egreso_precio:'', egreso_total:'',  existencia_cantidad:existencia.existencia_cantidad, existencia_precio:existencia.existencia_precio, existencia_total:''}
           exis.unshift(agregar);
             });
-          // existencias.push(existencias);
+       
           this.existencias = JSON.parse(JSON.stringify(exis));
 
           let exi_total = 0;
 
           exis.forEach(function(existencia, i){
-            // transaccion.forEach(function(total, id){
+           
             let cantidad = existencia.existencia_cantidad;
             let precio = existencia.existencia_precio;
 
             let subtotal = Number(cantidad) * Number(precio);
-                                                                  // in_total += Number(temp1)
+                                                                 
                 exi_total += Number(subtotal);
 
                   });
@@ -9157,18 +7669,11 @@ const kardex = new Vue({
         console.log(exi_total);
 
 
-      // if (conteo.length >=1 ) {
-      // let e= exis.length - 1;
-      //     exis[e].existencia_total = existencia_total
-      //   egresos[u].existencia_total = '';
-      //    console.log( exis[e].existencia_total)
-      // }
 
       this.transacciones.push(this.modales.modal_egreso);
       this.modales.modal_egreso = [];
       $('#egreso').modal('hide');
-      
-      // this.totales.total = calculo;
+
       this.transaccion.fecha      = '';
       this.transaccion.movimiento = '';
       this.transaccion.egreso.cantidad = '';
@@ -9191,10 +7696,7 @@ const kardex = new Vue({
       let conteo = this.modales.modal_devolucion_compra.filter(x => x.tipo == 'existencia');
      
 
-      // let ultimo         = this.modales.modal_egreso.length - 1;
-      // let total          = this.modales.modal_egreso[ultimo].existencia_total;
-      // this.totales.total = existencia_total;
-    
+
    
 
       let existencias_egresos = this.modales.modal_devolucion_compra.filter(x => x.tipo == 'egreso_compra' &&  x.existencia_cantidad > 0);
@@ -9202,17 +7704,16 @@ const kardex = new Vue({
           let agregar = {identificador: iden, tipo:'existencia', fecha:'', movimiento:'', tipo:'existencia', ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:'', egreso_precio:'', egreso_total:'',  existencia_cantidad:existencia.existencia_cantidad, existencia_precio:existencia.existencia_precio, existencia_total:''}
           exis.push(agregar);
             });
-          // existencias.push(existencias);
-          // 
+       
           let exi_total = 0;
 
           exis.forEach(function(existencia, i){
-            // transaccion.forEach(function(total, id){
+          
             let cantidad = existencia.existencia_cantidad;
             let precio = existencia.existencia_precio;
 
             let subtotal = Number(cantidad) * Number(precio);
-                                                                  // in_total += Number(temp1)
+                                                                 
                 exi_total += Number(subtotal);
 
                   });
@@ -9223,21 +7724,14 @@ const kardex = new Vue({
          this.totales.total = exi_total;
         console.log(exi_total);
        this.existencias = JSON.parse(JSON.stringify(exis));
-      //    if (conteo.length >=1 ) {
-      //   let e= exis.length - 1;
-      //     exis[e].existencia_total = existencia_total
-      //   egresos[u].existencia_total = '';
-      //    console.log( exis[e].existencia_total)
-      // }
-
+     
         
 
     
       this.transacciones.push(this.modales.modal_devolucion_compra);
       this.modales.modal_devolucion_compra = [];
       $('#egreso').modal('hide');
-      
-      // this.totales.total = calculo;
+    
       this.transaccion.fecha      = '';
       this.transaccion.movimiento = '';
       this.transaccion.egreso.cantidad = '';
@@ -9256,14 +7750,13 @@ const kardex = new Vue({
       let egresos = this.modales.modal_devolucion_compra.filter(x => x.tipo == 'egreso_compra');
       let ul = egresos.length - 1;
       let exis           =  Number(egresos[ul].existencia_total);
-      // let exis           = this.totales.total
+
       let cantidad       = Number(this.modales.modal_devolucion_compra[i].egreso_cantidad);
       let precio         = Number(this.modales.modal_devolucion_compra[i].egreso_precio);
       let total1         = this.modales.modal_devolucion_compra[i].egreso_total;
       let multiplicacion =  cantidad * precio;
 
-      // this.modales.modal_devolucion_compra[i].existencia_cantidad = cantidad;
-      // this.modales.modal_devolucion_compra[i].existencia_precio = precio;
+
 
     this.modales.modal_devolucion_compra[i].egreso_total = multiplicacion.toFixed(2);
       if (total1 > multiplicacion) {
@@ -9275,7 +7768,7 @@ const kardex = new Vue({
         let suma =exis - adi  
         this.totales.subtotal = suma
       }
-    // this.modales.modal_devolucion_compra[i].existencia_total = this.totales.subtotal;
+
         toastr.error("Datos Actualizado", "Smarmoddle", {
         "timeOut": "3000"
         });
@@ -9286,9 +7779,6 @@ const kardex = new Vue({
       let i = id;
       let totales = this.totales.total;
       let egresos = this.modales.modal_egreso.filter(x => x.tipo == 'egreso');
-      // let ul = egresos.length - 1;
-      // let exis           =  Number(egresos[ul].existencia_total);
-      // // let exis           = this.totales.total
       if (egresos.length >= 1) {
         let cantidad       = Number(this.modales.modal_egreso[i].egreso_cantidad);
       let precio         = Number(this.modales.modal_egreso[i].egreso_precio);
@@ -9310,146 +7800,17 @@ const kardex = new Vue({
       let total1         = this.egresos[i].egreso_total;
       let multiplicacion =  cantidad * precio;
 
-      // this.egresos[i].existencia_cantidad = cantidad;
-      // this.egresos[i].existencia_precio = precio;
+
 
       this.egresos[i].egreso_total = multiplicacion.toFixed(2);
 
-    // if (!this.actuegreso.estado) {
-
-    //   if (total1 > multiplicacion) {
-    //     let dife = total1 - multiplicacion;
-    //     let suma = exis - dife  
-    //     this.totales.total = suma
-    //   }else{
-    //     let adi = multiplicacion - total1 ;
-    //     let suma = adi + exis
-    //     this.totales.total = suma
-    //   }
-    // this.egresos[i].existencia_total = this.totales.total;
-    //     toastr.error("Datos Actualizado", "Smarmoddle", {
-    //     "timeOut": "3000"
-    //     });
-
-
-    // }else if(this.actuegreso.estado){
-    //   let transacciones = this.transacciones;
-    //   let index = this.actuegreso.index;
-    //   // let num = transacciones[index][i].identificador;
-
-    //   let identificador = transacciones.length - 1;
-    // }
-    // if (index !== identificador) {
-    //   if (total1 > multiplicacion) {
-
-    //   let laultima = this.egresos.filter(x => x.existencia_total > 0 && x.existencia_total !== '');
-    //   console.log('numero mayor')
-
-    // let ingretotal = laultima[0].existencia_total;
-    // let dife = total1 - multiplicacion;
-    // let b = this.egresos.length - 1;
-    // this.egresos[i].existencia_total = '';
-    // this.egresos[b].existencia_total = Number(ingretotal) + Number(dife);
-
-    //    transacciones.forEach(function(transaccion, i){
-    //           transaccion.forEach(function(total, id){
-    //             let temp = total.existencia_total;
-    //             if (temp != null && temp !=='' && total.tipo !== 'inicial' && i >= index) {
-    //               total.existencia_total = temp + dife;
-
-    //               // console.log(temp);
-    //             } 
-                
-    //           })
-    //         });
-
-    //   let ultimodato = transacciones[identificador];
-    //   let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso' || x.tipo == 'ingreso_venta');
-    //       // console.log(egreso);
-    //        if (egreso[0].tipo == 'egreso' ) {
-    //         let last = transacciones[identificador];
-    //          let final = last.length - 1;
-    //         this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-    //     }else if(egreso[0].tipo == 'ingreso' ){
-
-    //        this.totales.total = Number(egreso[0].existencia_total);
-    //       }
-    //        // this.totales.total = Number(egreso[0].existencia_total);
-           
-    //  }else{
-    //   let laultima = this.egresos.filter(x => x.existencia_total > 0 && x.existencia_total !== '');
-    //   let ingretotal = laultima[0].existencia_total;
-    //   let adi = multiplicacion - total1;
-    //   let b = this.egresos.length - 1;
-
-    // this.egresos[i].existencia_total = '';
-
-    // this.egresos[b].existencia_total = Number(ingretotal) - Number(adi);
-
-
-
-    //   // this.egresos[i].existencia_total =ingretotal + adi
-    //           transacciones.forEach(function(transaccion, i){
-    //           transaccion.forEach(function(total, id){
-    //             let temp = total.existencia_total;
-    //             if (temp != null && temp !=='' && total.tipo !== 'inicial'  && i >= index) {
-    //               total.existencia_total = temp - adi;
-    //               // console.log(temp);
-    //             } 
-                
-    //           })
-    //         });
-    //       let ultimodato = transacciones[identificador];
-    //       let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso' || x.tipo == 'ingreso_venta');
-    //       console.log(egreso);
-    //        if (egreso[0].tipo == 'egreso' ) {
-
-    //         let last = transacciones[identificador];
-    //          let final = last.length - 1;
-    //         this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-    //     }else if(egreso[0].tipo == 'ingreso' ){
-
-    //        this.totales.total = Number(egreso[0].existencia_total);
-
-    //       }else if(egreso[0].tipo == 'ingreso_venta' ){
-
-    //        let last = transacciones[identificador];
-    //       let final = last.length - 1;
-    //         this.totales.total = Number(transacciones[identificador][final].existencia_total);
-    //       }
-    //        // this.totales.total = Number(egreso[0].existencia_total);     
-    //   }
-    // }else{
-    //     if (total1 > multiplicacion) {
-    //     let dife = total1 - multiplicacion;
-    //     let suma = exis + dife  
-    //     this.totales.total = suma
-    //   }else{
-    //     let adi = multiplicacion - total1 ;
-    //     let suma = exis - adi
-    //     this.totales.total = suma
-    //   }
-    //     let f = this.egresos.length - 1;
-
-    //    this.egresos[i].existencia_total = '';
-    //    this.egresos[f].existencia_total = this.totales.total;
-    //     toastr.error("Datos Actualizado", "Smarmoddle", {
-    //     "timeOut": "3000"
-    //     });
-    // }
-
-    //   }
+    
 
     },
     ActualizarEgresos(){
-      // let ingreso = this.ejercicio.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'ingreso_venta' );
-    // let iden = this.egresos[0].id;
+    
 
    
-
-      // let calculo = Number(this.transaccion.ingreso.total) +  Number(this.totales.total);
     let exis = [];
     let existencias_egresos = this.egresos.filter(x => x.tipo == 'egreso'  &&  x.existencia_cantidad > 0 & x.existencia_cantidad !== '' || x.tipo == 'egreso_compra' &&  x.existencia_cantidad > 0 & x.existencia_cantidad !== '');
         existencias_egresos.forEach(function(existencia, id){
@@ -9466,8 +7827,7 @@ const kardex = new Vue({
             existencias_egresos[id].egreso_total = total.toFixed(2);
         });
 
-      // let existencia = {identificador: id, tipo:'existencia', existencia_cantidad:ingreso[0].existencia_cantidad, existencia_precio:ingreso[0].existencia_precio}
-      // filtro_existencias.push(existencia);
+   
     let existencias_filtro = this.egresos.filter(x => x.tipo == 'existencia');
     if (existencias_filtro.length >= 1) {  
       filtro_existencias = exis.concat(existencias_filtro);
@@ -9480,12 +7840,12 @@ const kardex = new Vue({
       let exi_total = 0;
       this.existencias = JSON.parse(JSON.stringify(filtro_existencias));
       filtro_existencias.forEach(function(existencia, i){
-                    // transaccion.forEach(function(total, id){
+                   
             let cantidad = existencia.existencia_cantidad;
             let precio = existencia.existencia_precio;
 
             let subtotal = Number(cantidad) * Number(precio);
-                                                                  // in_total += Number(temp1)
+                                                                  
                 exi_total += Number(subtotal);
 
                   });
@@ -9524,8 +7884,7 @@ const kardex = new Vue({
       }else if (id == ultimo && this.modales.egresos[id].tipo == 'egreso_compra') {
         console.log('No puede eliminar todos los egresos')
 
-        // let total =  this.modales.egresos[id].existencia_total;
-        // this.modales.egresos.splice(index, 1);
+     
       }
         return
     }
@@ -9534,168 +7893,31 @@ const kardex = new Vue({
 
                     //ELIMINAR UN EGRESO
       if ( this.egresos[id].tipo == 'existencia' && this.egresos[id].existencia_total > 0) {
-        // let total =  this.egresos[id].existencia_total;
-        // this.egresos[id - 1].existencia_total = total;
+     
         this.egresos.splice(index, 1);
 
       }else if ( this.egresos[id].tipo == 'existencia' && this.egresos[id].existencia_total == '') {
-        // let total =  this.egresos[id].existencia_total;
-        // this.egresos[id - 1].existencia_total = total;
+     
         this.egresos.splice(index, 1);
 
       }else if ( this.egresos[id].tipo == 'egreso' && egresos.length == 1) {
-        // let total =  this.egresos[id].existencia_total;
-        // this.egresos[id - 1].existencia_total = total;
+       
         console.log('No puede eliminar todos los egresos')
-        // this.egresos.splice(index, 1);
+      
 
       }else if (this.egresos[id].tipo == 'egreso' && this.egresos[id].existencia_total > 0) {
-        // let total = JSON.parse(JSON.stringify(this.egresos[id].existencia_total));
-        // let newTotal = Number(total) + Number(this.egresos[id].egreso_total);
-        // this.egresos[id - 1].existencia_total = newTotal;
-        // this.totales.total = newTotal;
+      
         this.egresos.splice(index, 1);
 
-    // let identificador = transacciones.length - 1;
-    // if (puesto !== identificador) {
-    // if (newTotal > total) {
-    // let dife = newTotal - total;
 
-    //    transacciones.forEach(function(transaccion, i){
-    //           transaccion.forEach(function(total, id){
-    //             let temp = total.existencia_total;
-    //             if (temp != null && temp !=='' && total.tipo !== 'inicial' && i >= puesto) {
-    //               total.existencia_total = temp + dife;
-    //             }           
-    //           });
-    //         });
-       
-    //   let ultimodato = transacciones[identificador];
-    //   let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso' || x.tipo == 'ingreso_venta');
-    //       // console.log(egreso);
-    //        if (egreso[0].tipo == 'egreso' ) {
-    //         let last = transacciones[identificador];
-    //          let final = last.length - 1;
-    //         this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-    //     }else if(egreso[0].tipo == 'ingreso' ){
-
-    //        this.totales.total = Number(egreso[0].existencia_total);
-    //       }
-    //        // this.totales.total = Number(egreso[0].existencia_total);
-    //  }else{
-    //       let ingretotal = JSON.parse(JSON.stringify(this.egresos[i].existencia_total));
-    //     let adi = total - newTotal;
-    //   // this.egresos[i].existencia_total =ingretotal + adi
-
-    //           transacciones.forEach(function(transaccion, i){
-    //           transaccion.forEach(function(total, id){
-    //             let temp = total.existencia_total;
-    //             if (temp != null && temp !=='' && total.tipo !== 'inicial'  && i >= puesto) {
-    //               total.existencia_total = temp - adi;
-    //               // console.log(temp);
-    //             } 
-                
-    //           })
-    //         });
-    //       let ultimodato = transacciones[identificador];
-    //       let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso' || x.tipo == 'ingreso_venta');
-    //       console.log(egreso);
-    //        if (egreso[0].tipo == 'egreso' ) {
-
-    //         let last = transacciones[identificador];
-    //          let final = last.length - 1;
-    //         this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-    //     }else if(egreso[0].tipo == 'ingreso' ){
-
-    //        this.totales.total = Number(egreso[0].existencia_total);
-
-    //       }else if(egreso[0].tipo == 'ingreso_venta' ){
-
-    //        let last = transacciones[identificador];
-    //       let final = last.length - 1;
-    //         this.totales.total = Number(transacciones[identificador][final].existencia_total);
-    //       }
-    //        // this.totales.total = Number(egreso[0].existencia_total);     
-    //   }
-    // }
 
 
 
       }else if (this.egresos[id].tipo == 'egreso' && this.egresos[id].existencia_total == ''){
-        // let ult = egresos.length - 1;
-        // let totalEgreso = JSON.parse(JSON.stringify(this.egresos[ult].existencia_total));
-        // let total = JSON.parse(JSON.stringify(this.egresos[id].egreso_total));
-        // let newSuma = Number(totalEgreso) + Number(total)
-        // this.egresos[ult].existencia_total = newSuma;
-        // this.totales.total = newSuma;
+  
         this.egresos.splice(index, 1);
 
-    // let identificador = transacciones.length - 1;
-    // if (puesto !== identificador) {
-    //   if (newTotal > total) {
-    //   let dife = newTotal - total;
-
-    //    transacciones.forEach(function(transaccion, i){
-    //           transaccion.forEach(function(total, id){
-    //             let temp = total.existencia_total;
-    //             if (temp != null && temp !=='' && total.tipo !== 'inicial' && i >= puesto) {
-    //               total.existencia_total = temp + dife;
-    //             }           
-    //           });
-    //         });
-       
-    //   let ultimodato = transacciones[identificador];
-    //   let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso' || x.tipo == 'ingreso_venta');
-    //       // console.log(egreso);
-    //        if (egreso[0].tipo == 'egreso' ) {
-    //         let last = transacciones[identificador];
-    //          let final = last.length - 1;
-    //         this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-    //     }else if(egreso[0].tipo == 'ingreso' ){
-
-    //        this.totales.total = Number(egreso[0].existencia_total);
-    //       }
-    //        // this.totales.total = Number(egreso[0].existencia_total);
-    //  }else{
-    //       let ingretotal = JSON.parse(JSON.stringify(this.egresos[i].existencia_total));
-    //     let adi = total - newTotal;
-    //   // this.egresos[i].existencia_total =ingretotal + adi
-
-    //           transacciones.forEach(function(transaccion, i){
-    //           transaccion.forEach(function(total, id){
-    //             let temp = total.existencia_total;
-    //             if (temp != null && temp !=='' && total.tipo !== 'inicial'  && i >= puesto) {
-    //               total.existencia_total = temp - adi;
-    //               // console.log(temp);
-    //             } 
-                
-    //           })
-    //         });
-    //       let ultimodato = transacciones[identificador];
-    //       let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso' || x.tipo == 'ingreso_venta');
-    //       console.log(egreso);
-    //        if (egreso[0].tipo == 'egreso' ) {
-
-    //         let last = transacciones[identificador];
-    //          let final = last.length - 1;
-    //         this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-    //     }else if(egreso[0].tipo == 'ingreso' ){
-
-    //        this.totales.total = Number(egreso[0].existencia_total);
-
-    //       }else if(egreso[0].tipo == 'ingreso_venta' ){
-
-    //        let last = transacciones[identificador];
-    //       let final = last.length - 1;
-    //         this.totales.total = Number(transacciones[identificador][final].existencia_total);
-    //       }
-    //        // this.totales.total = Number(egreso[0].existencia_total);     
-    //   }
-    // }
+    
 
         }
   },
@@ -9717,43 +7939,16 @@ const kardex = new Vue({
 
                     //ELIMINAR UN EGRESO
       if ( this.modales.modal_egreso[id].tipo == 'existencia') {
-        // let total =  this.modales.modal_egreso[id].existencia_total;
-        // this.modales.modal_egreso[id - 1].existencia_total = total;
+       
         this.modales.modal_egreso.splice(index, 1);
 
       }else if ( this.modales.modal_egreso[id].tipo == 'egreso' ) {
 
-        // let total =  this.modales.modal_egreso[id].existencia_total;
-        // this.modales.modal_egreso[id - 1].existencia_total = total;
+     
         this.modales.modal_egreso.splice(index, 1);
 
       }
-      // else if (this.modales.modal_egreso[id].tipo == 'egreso' && egresos.length == 1) {
-      // // else if (this.modales.modal_egreso[id].tipo == 'egreso' && this.modales.modal_egreso[id].existencia_total > 0) {
-      //   // let total = JSON.parse(JSON.stringify(this.modales.modal_egreso[id].existencia_total));
-      //   // let newTotal = Number(total) + Number(this.modales.modal_egreso[id].egreso_total);
-
-      //   // this.modales.modal_egreso[id - 1].existencia_total = newTotal
-
-      //   this.modales.modal_egreso.splice(index, 1);
-
-      // }
-      // else if (this.modales.modal_egreso[id].tipo == 'egreso' && this.modales.modal_egreso[id].existencia_total == ''){
-      //   let ult = egresos.length - 1;
-      //   let totalEgreso = JSON.parse(JSON.stringify(this.modales.modal_egreso[ult].existencia_total));
-      //   let total = JSON.parse(JSON.stringify(this.modales.modal_egreso[id].egreso_total));
-
-      //   // let newSuma = Number(totalEgreso) + Number(total)
-      //   // this.modales.modal_egreso[ult].existencia_total = newSuma;
-
-      //   // let existencia = this.totales.total;
-      //   // let newTotal =existencia + this.modales.modal_egreso[id].ingreso_total;
-      //   // this.totales.total = newTotal;
-      //   this.modales.modal_egreso.splice(index, 1);
-      //   }
-      // }else if(this.modales.modal_egreso[id].tipo == 'existencia'){
-      // //   this.modales.modal_egreso.splice(index, 1);
-      // // }
+     
     },
     agregarDevolucion(){
 
@@ -9763,18 +7958,13 @@ const kardex = new Vue({
     });
      }else {
       let id = this.transacciones.length + 1;
-      
-      // let existencia = {id: id ,existencia_cantidad:this.transaccion.ingreso.cantidad, existencia_precio:this.transaccion.ingreso.precio}
-      // this.existencias.push(existencia);
-      // let registro = [];
+     
       this.transaccion.ingreso.total = Number(this.transaccion.ingreso.cantidad * this.transaccion.ingreso.precio).toFixed(2);
       let calculo = Number(this.transaccion.ingreso.total) +  Number(this.totales.total);
       let array = {identificador: id, fecha:'', movimiento:'',  tipo:'ingreso_venta', fecha: this.transaccion.fecha, movimiento:this.transaccion.movimiento, ingreso_cantidad:this.transaccion.ingreso.cantidad, ingreso_precio:this.transaccion.ingreso.precio, ingreso_total:this.transaccion.ingreso.total, egreso_cantidad:'', egreso_precio:'', egreso_total:'', existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total:''};
-      // this.transacciones.push(this.existencias);
-      
-      // this.ejercicio.push(array);
+     
       this.modales.modal_devolucion_venta.unshift(array);
-      // this.transacciones.push(this.ejercicio);
+  
       toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
         "timeOut": "3000"
     });
@@ -9792,11 +7982,7 @@ const kardex = new Vue({
     },
 
     existenciaVenta(){
-    //   if( this.exis.cantidad.trim() ==='' || this.exis.precio.trim() ==='' ){
-    //   toastr.error("Todos lo campos son obligatorios", "Smarmoddle", {
-    //     "timeOut": "3000"
-    // });
-    //  }else{
+
     let id = this.transacciones.length + 1;
           let ultimo = this.modales.modal_devolucion_venta.length - 1;
           let total = this.modales.modal_devolucion_venta[ultimo].existencia_total;
@@ -9894,7 +8080,7 @@ const kardex = new Vue({
                _this.prueba.precio.ventas             = response.data.informacion.ventas_precio;
                _this.prueba.precio.inventario_final   = response.data.informacion.inv_final_precio;
 
-              // let datos = this.productos.filter(x => x.id == _this.producto_id);
+             
               _this.datos_transacciones =  response.data.transacciones.transacciones; 
               console.log('nO SE RECIBIO NADA')      
 
@@ -10015,19 +8201,12 @@ const kardex = new Vue({
         let consulta5 = ultima_transaccion.filter(x => x.tipo == 'inicial');
 
         if (consulta5.length >= 1) {
-              // let filtro_existencias = ultima_transaccion.filter(x => x.tipo == 'inicial');
-              // let existenciass = [];
-              // // let filtro_existencias = this.ultima_transaccion.filter(x => x.tipo == 'existencia');
-              // let existencia = { tipo:'existencia', existencia_cantidad:filtro_existencias[0].existencia_cantidad, existencia_precio:filtro_existencias[0].existencia_precio}
-              // existenciass.unshift(existencia);
+           
               this.existencias = [];
               this.sumasTotales();
               this.ultimaExistencia();
-              
-              // this.existencias = JSON.parse(JSON.stringify(existenciass));
               return
         }
-
       }else{
         this.transacciones.splice(index, 1);
         this.sumasTotales();
@@ -10040,148 +8219,8 @@ const kardex = new Vue({
 
         }
       });
-      // let ultimo = this.transacciones.length -1;
-      // let tipo = this.transacciones[index][id].tipo;
-      //  let  transacciones = this.transacciones;
-      // let identificador = transacciones.length - 1;
-    
 
 
-      // if (index == ultimo) {
-      //   if (tipo == 'ingreso' || tipo == 'ingreso_venta') {
-      //     let total = this.totales.total;
-      //     let ingreso_total = Number(this.transacciones[index][id].ingreso_total);
-      //     let resta = total - ingreso_total;
-      //     this.totales.total = resta;
-      //     this.transacciones.splice(index, 1);
-
-      //     let ultimo = this.existencias.length - 1;
-      //     this.existencias.splice(ultimo, 1);
-      //     console.log(resta);
-      //       this.sumasTotales();
-
-      //   }else if(tipo == 'egreso' || tipo == 'egreso_compra'){
-      //      let total =  JSON.parse(JSON.stringify(this.totales.total));
-      //       let egreso = this.transacciones[index].filter(x => x.tipo == 'egreso' || x.tipo == 'egreso_compra');
-      //       let egreso_total = 0;
-           
-      //       egreso.forEach(function(total, id){
-      //           // total += Number(obj.saldo);           //SUMAR EL SALDO DE CADA CUENTA EN EL ARRAY UNA Y OTRA VEZ
-      //           egreso_total += Number(total.egreso_total);      
-      //         });
-      //       // let egreso_total = Number(egreso[0].existencia_total);
-      //       console.log(egreso_total)
-      //       let suma = total + egreso_total;
-      //       this.totales.total = suma;
-      //       this.transacciones.splice(index, 1);
-
-      //       let ultimo = this.existencias.length - 1;
-      //       this.existencias.splice(ultimo, 1);
-      //       console.log(suma);
-      //       this.sumasTotales();
-
-      //   }
-      // }else{
-      //     if (tipo == 'ingreso' || tipo == 'ingreso_venta') {
-      //       // let total = this.totales.total;
-      //       let ingreso_total = Number(this.transacciones[index][id].ingreso_total);
-      //       // let resta = total - ingreso_total;
-      //       // this.totales.total = resta;
-                 
-      //       // let dife = newTotal - total;
-
-      //        transacciones.forEach(function(transaccion, i){
-      //               transaccion.forEach(function(total, id){
-      //                 let temp = total.existencia_total;
-      //                 if (temp != null && temp !=='' && total.tipo !== 'inicial' && i >= index) {
-      //                   if (ingreso_total > temp) {
-      //                   total.existencia_total =  ingreso_total - temp;
-
-      //                 }else{
-      //                   total.existencia_total = temp - ingreso_total;
-
-      //                 }
-      //                 }           
-      //               });
-      //             });
-             
-      //       let ultimodato = transacciones[identificador];
-      //       let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso' || x.tipo == 'ingreso_venta');
-      //           // console.log(egreso);
-      //            if (egreso[0].tipo == 'egreso' ) {
-      //             let last = transacciones[identificador];
-      //              let final = last.length - 1;
-      //             this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-      //         }else if(egreso[0].tipo == 'ingreso' ){
-
-      //            this.totales.total = Number(egreso[0].existencia_total);
-      //           }
-      //            // this.totales.total = Number(egreso[0].existencia_total);
-                   
-            
-      //       this.transacciones.splice(index, 1);
-
-      //       this.sumasTotales();
-
-      //       // let ultimo = this.existencias.length - 1;
-      //       // this.existencias.splice(ultimo, 1);
-      //       // console.log(resta);
-      //     }else if(tipo == 'egreso' || tipo == 'egreso_compra'){
-      //       let total =  JSON.parse(JSON.stringify(this.totales.total));
-      //       let egresos = this.transacciones[index].filter(x => x.tipo == 'egreso' || x.tipo == 'egreso_compra');
-      //       let egreso_total = 0;
-           
-      //         egresos.forEach(function(total, id){
-      //           // total += Number(obj.saldo);           //SUMAR EL SALDO DE CADA CUENTA EN EL ARRAY UNA Y OTRA VEZ
-      //           egreso_total += Number(total.egreso_total);      
-      //         });
-
-      //       transacciones.forEach(function(transaccion, i){
-      //         transaccion.forEach(function(total, id){
-      //           let temp = total.existencia_total;
-      //           if (temp != null && temp !=='' && total.tipo !== 'inicial'  && i >= index) {
-      //             total.existencia_total = temp + egreso_total;
-      //             // console.log(temp);
-      //           } 
-                
-      //         })
-      //       });
-
-      //     let ultimodato = transacciones[identificador];
-      //     let egreso = ultimodato.filter(x => x.tipo == 'ingreso' ||  x.tipo == 'egreso' || x.tipo == 'ingreso_venta');
-      //     console.log(egreso);
-      //      if (egreso[0].tipo == 'egreso' ) {
-
-      //       let last = transacciones[identificador];
-      //        let final = last.length - 1;
-      //       this.totales.total = Number(transacciones[identificador][final].existencia_total);
-
-      //       }else if(egreso[0].tipo == 'ingreso' ){
-
-      //      this.totales.total = Number(egreso[0].existencia_total);
-
-      //       }else if(egreso[0].tipo == 'ingreso_venta' ){
-
-      //      let last = transacciones[identificador];
-      //     let final = last.length - 1;
-      //       this.totales.total = Number(transacciones[identificador][final].existencia_total);
-      //     }
-      //      // this.totales.total = Number(egreso[0].existencia_total);     
-          
-
-      //       // let egreso_total = Number(egreso[0].existencia_total);
-      //       // console.log(egreso_total)
-      //       // let suma = total + egreso_total;
-      //       // this.totales.total = suma;
-
-      //       this.transacciones.splice(index, 1);
-      //       this.sumasTotales();
-
-      //       // let ultimo = this.existencias.length - 1;
-      //       // this.existencias.splice(ultimo, 1);
-      //       // console.log(suma);
-      //     }
         }   
 }
 });
@@ -10265,7 +8304,7 @@ const kardex_promedio = new Vue({
     }
   },
   mounted: function() {
-   // this.obtenerKardexPromedio();
+    this.obtenerKardexPromedio();
   },
   methods:{
   calculadora(){
@@ -10400,15 +8439,13 @@ const kardex_promedio = new Vue({
       this.transaccion.ingreso.cantidad    = '';
       this.transaccion.ingreso.precio      = '';
       this.transaccion.ingreso.total       = '';
-      // this.transaccion.existencia.cantidad = '';
-      // this.transaccion.existencia.precio   = '';
-      // this.transaccion.existencia.total    = '';
+   
 
      }
     },
       actuaIng(id){
       let i = id;
-      // let exis = this.totales.total
+      
       let cantidad = Number(this.modales.modal_ingreso[i].ingreso_cantidad);
       let precio = Number(this.modales.modal_ingreso[i].ingreso_precio);
       let total1 = this.modales.modal_ingreso[i].ingreso_total;
@@ -10421,7 +8458,7 @@ const kardex_promedio = new Vue({
     },
       actuaEgre(id){
       let i = id;
-      // let exis = this.totales.total
+     
       let cantidad = Number(this.modales.modal_egreso[i].egreso_cantidad);
       let precio = Number(this.modales.modal_egreso[i].egreso_precio);
       let total1 = this.modales.modal_egreso[i].egreso_total;
@@ -10446,7 +8483,7 @@ const kardex_promedio = new Vue({
       this.transaccion.egreso.cantidad    = '';
       this.transaccion.egreso.precio      = '';
       this.transaccion.egreso.total       = '';
-      // this.transaccion.egreso.total = Number(this.transaccion.egreso.cantidad * this.transaccion.egreso.precio).toFixed(2);
+   
 
      }
     },
@@ -10493,7 +8530,6 @@ const kardex_promedio = new Vue({
       this.inicial.precio     = '';
   },
     agregarIngreso(){
-      // let ingreso = {tipo:'ingreso', fecha: this.transaccion.ingreso.fecha, movimiento:this.transaccion.ingreso.movimiento, ingreso_cantidad:this.transaccion.ingreso.cantidad, ingreso_precio:this.transaccion.ingreso.precio, ingreso_total:this.transaccion.ingreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total:this.transaccion.existencia.total};
       
       this.transacciones.push(this.modales.modal_ingreso[0])
         toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
@@ -10527,19 +8563,6 @@ const kardex_promedio = new Vue({
 
         this.ingresos = [JSON.parse(JSON.stringify(this.transacciones[id]))];
         this.transaccion.ingreso.index = id;
-          // this.edicion.ingreso.fecha       = this.transacciones[id].fecha;
-          // this.edicion.ingreso.movimiento  = this.transacciones[id].movimiento;
-          // this.edicion.ingreso.cantidad    = this.transacciones[id].ingreso_cantidad;
-          // this.edicion.ingreso.precio      = this.transacciones[id].ingreso_precio;
-          // this.edicion.ingreso.total       = this.transacciones[id].ingreso_total;
-          // this.edicion.existencia.cantidad = this.transacciones[id].existencia_cantidad;
-          // this.edicion.existencia.precio   = this.transacciones[id].existencia_precio;
-          // this.edicion.existencia.total    = this.transacciones[id].existencias_total;
-          // this.transaccion.ingreso.edit     = true;
-          // this.transaccion.ingreso.index     = id;
-          // $('#ingreso-kardex-edit').modal('show');
-          // $('#kardex-promedio-ingreso-edit-tab').tab('show')
-
       }else if(tipo == 'egreso'){
         this.transaccion.egreso.edit = true;
         this.transaccion.ingreso.edit = false;
@@ -10571,7 +8594,7 @@ const kardex_promedio = new Vue({
       this.transacciones.splice(id, 1, ingreso);
       this.transaccion.ingreso.index = '';
 
-      // this.transacciones[id] = ingreso;
+   
       this.ingresos = [];
       this.exitenciaFinal();
           this.sumasTotales();
@@ -10589,7 +8612,7 @@ const kardex_promedio = new Vue({
       this.transacciones.splice(id, 1, egreso);
       this.transaccion.egreso.index = '';
 
-      // this.transacciones[id] = ingreso;
+ 
       this.egresos = [];
       this.exitenciaFinal();
           this.sumasTotales();
@@ -10772,172 +8795,13 @@ const kardex_promedio = new Vue({
 
 });
 
-const vm = new Vue({
-  el: '#calApp',
-  data: {
-    currentNum: 0,
-    decimalAdded: false,
-    total: 0,
-    prevOps: 0,
-    display: '',
-  },
-  ready: function() {
-    var target, ink, d, x, y;
-    $(".containerBox .row .cBox").click(function(e) {
-      target = $(this);
-      //create .ink element if it doesn't exist
-      if (target.find(".ink").length == 0)
-        target.prepend("<span class='ink'></span>");
-
-      ink = target.find(".ink");
-      //incase of quick double clicks stop the previous animation
-      ink.removeClass("animate");
-
-      //set size of .ink
-      if (!ink.height() && !ink.width()) {
-        //use parent's width or height whichever is larger for the diameter to make a circle which can cover the entire element.
-        d = Math.max(target.outerWidth(), target.outerHeight());
-        ink.css({
-          height: d,
-          width: d
-        });
-      }
-
-      //get click coordinates
-      //logic = click coordinates relative to page - parent's position relative to page - half of self height/width to make it controllable from the center;
-      x = e.pageX - target.offset().left - ink.width() / 2;
-      y = e.pageY - target.offset().top - ink.height() / 2;
-
-      //set the position and add class .animate
-      ink.css({
-        top: y + 'px',
-        left: x + 'px'
-      }).addClass("animate");
-    })
-  },
-  methods: {
-    addDecimal: function() {
-      if (this.decimalAdded == false) {
-        if (this.prevOps != 0) {
-          this.display = '0.';
-        } else {
-          this.display += '.';
-        }
-        this.decimalAdded = true;
-      }
-    },
-    clear: function() {
-      this.currentNum = 0;
-      this.decimalAdded = false;
-      this.total = 0;
-      this.display = '';
-      this.prevOps = 0;
-    },
-    del: function() {
-      if (this.currentNum > 0) {
-        if (this.decimalAdded == false) {
-          this.currentNum = parseInt(this.currentNum.toString().slice(0, -1), 10);
-        } else {
-          this.currentNum = parseFloat(this.currentNum.toString().slice(0, -1));
-        }
-
-        if (isNaN(this.currentNum))
-          this.currentNum = 0;
-        this.display = this.currentNum;
-      } else if (this.currentNum == 0) {
-        this.display = '';
-      }
-    },
-    enterNum: function(val) {
-      if (this.currentNum == 0) {
-        if (this.prevOps == 0)
-          this.total = 0;
-
-        if (this.decimalAdded == true) {
-          this.currentNum = val / 10;
-          this.display += val.toString();
-        } else {
-          this.currentNum = val;
-          this.display = val.toString();
-        }
-      } else {
-        if (this.decimalAdded == true) {
-          if (this.currentNum.toString().indexOf('.') == -1) {
-            this.currentNum = parseFloat(this.currentNum.toString() + '.' + val.toString());
-          } else {
-            this.currentNum += val.toString();
-            this.currentNum = parseFloat(this.currentNum);
-          }
-        } else {
-          this.currentNum *= 10;
-          this.currentNum += val;
-        }
-        this.display += val.toString();
-      }
-    },
-    enterOps: function(ops) {
-      if (this.total == 0 && this.currentNum == 0) {
-        return;
-      }
-      if (this.total == 0) {
-        this.total += this.currentNum;
-      }
-      switch (this.prevOps) {
-        case 1:
-          this.total += this.currentNum;
-          break;
-        case 2:
-          this.total -= this.currentNum;
-          break;
-        case 3:
-          this.total *= this.currentNum;
-          break;
-        case 4:
-          this.total /= this.currentNum;
-          break;
-        case 0:
-          break;
-      }
-
-      if (this.decimalAdded == true) {
-        this.decimalAdded = false;
-      }
-      this.currentNum = 0;
-      this.prevOps = ops;
-    },
-    sum: function() {
-      switch (this.prevOps) {
-        case 1:
-          this.total += this.currentNum;
-          break;
-        case 2:
-          this.total -= this.currentNum;
-          break;
-        case 3:
-          this.total *= this.currentNum;
-          break;
-        case 4:
-          this.total /= this.currentNum;
-          break;
-        case 0:
-          break;
-      }
-      this.display = this.total.toString();
-      this.prevOps = 0;
-      this.currentNum = 0;
-    }
-  }
-});
-
-
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////LIBRO CAJA ANEXO //////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-const librocaja = new Vue({
+let librocaja = new Vue({
   el: "#librocaja",
   data:{
     id_taller: taller,
@@ -10968,8 +8832,27 @@ const librocaja = new Vue({
   },
   mounted: function() {
     this.obtenerLibroCaja();
+    this.obtenerDiarioGeneral();
   },
   methods:{
+
+    obtenerDiarioGeneral: function(){
+      var _this = this;
+      var url = '/sistema/admin/taller/diariogeneral';
+          axios.post(url,{
+            id: _this.id_taller,
+      }).then(response => {
+        if (response.data.datos == true) {
+        _this.dgeneral = response.data.registros;
+        _this.nombre_dgral = response.data.nombre;
+        let inicial = response.data.inicial;
+          _this.dgeneral.unshift(inicial);
+          }          
+      }).catch(function(error){
+
+      }); 
+  },
+
   calculadora(){
     let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
     let component = 'example-component';
@@ -11112,19 +8995,7 @@ const librocaja = new Vue({
      
     },//fin de actualizar libro de caja
 
-    eliminarLibro(){
-      let id = this.eliminar.index;
-      this.libros_caja.splice(id, 1);
-      this.eliminar.index ='';
-      this.eliminar.nombre ='';
-      $('#eliminar-libro').modal('hide'); // en prueba para eliminar
-    }, //fin metodo eliminar compra 
-
-    deleteLibroCaja(index){
-      this.libros_caja.splice(index, 1);
-      this.totales();
-     },
-
+   
      WarningEliminarLibro(id){
       this.eliminar.index = id;
       this.eliminar.nombre = this.libros_caja[id].detalle;
@@ -11145,14 +9016,19 @@ const librocaja = new Vue({
             'success'
           );
           this.libros_caja.splice(id, 1);
-        }
+          this.totales();
+          }
+          
       });
     }, //fin metodo warningeliminarcompra
 
 
       guardarLibro : function(){
-
-        if(this.libros_caja.length == 0){
+        if(this.nombre.length == 0){
+          toastr.error("Debe Ingresar el Nombre Comercial", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+        } else if(this.libros_caja.length == 0){
           toastr.error("Debe haber al menos un registro en el Balance", "Smarmoddle", {
             "timeOut": "3000"
         });
@@ -11170,10 +9046,13 @@ const librocaja = new Vue({
                   toastr.success("Anexo creado correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
+                arqueo_caja.obtenerLibroCaja();
                 }else if (response.data.estado == 'actualizado') {
                   toastr.warning("Anexo actualizado correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
+                arqueo_caja.obtenerLibroCaja();
+                this.totales();
                 }        
             }).catch(function(error){
                });
@@ -11217,6 +9096,8 @@ const arqueo_caja = new Vue ({
   data:{
     id_taller : taller,
     libros_caja:[],
+    debe_lb:'',
+    haber_lb:'',
     nombre_lb:'',
     t_saldo:[], // array de saldos 
     saldo:{
@@ -11255,6 +9136,7 @@ const arqueo_caja = new Vue ({
     let component = 'example-component';
     funciones.VueSweetAlert2(component,propsData);
     },
+
     obtenerLibroCaja: function(){
       let _this = this;
       let url ='/sistema/admin/taller/anexo-obtener-caja';
@@ -11264,7 +9146,9 @@ const arqueo_caja = new Vue ({
                 if(response.data.datos == true){
                   
                     this.libros_caja = response.data.banexocaja;
-                    this.nombre_lb = response.data.nombre;
+                    this.nombre_lb   = response.data.nombre;
+                    this.debe_lb     = response.data.totaldebe;
+                    this.haber_lb     = response.data.totalhaber;
                    
                 }
               }).catch(function(error){
@@ -11366,6 +9250,90 @@ const arqueo_caja = new Vue ({
 
     },//fin metodo agregar saldo
 
+
+         
+    editSaldo(index){
+      this.registro_id = index;
+      this.saldo.edit= true;
+      this.saldo.detalle   = this.t_saldo[index].detalle;
+      this.saldo.s_debe    = this.t_saldo[index].s_debe;
+      this.saldo.s_haber   = this.t_saldo[index].s_haber;
+      $('#ht-dato-saldo-tab').tab('show');
+     
+    },//end edit saldos
+
+     editSaldoFuera(index){
+      this.registro_id = index;
+      this.saldo.edit= true;
+      this.saldo.detalle   = this.t_saldo[index].detalle;
+      this.saldo.s_debe    = this.t_saldo[index].s_debe;
+      this.saldo.s_haber   = this.t_saldo[index].s_haber;
+      $('#arqueo-caja').modal('show'); 
+      $('#ht-dato-saldo-tab').tab('show');    
+     
+    },//end edit saldos
+
+
+    cancelarEditSaldo(){
+      this.saldo.detalle =''
+      this.saldo.s_debe  =''
+      this.saldo.s_haber =''
+      this.saldo.edit       =false;
+     
+    }, //fin de cancelar edicion
+
+
+    actualizarSaldo (){
+      if(this.saldo.detalle == ''){
+        toastr.error("El campo Detalle es obligatorio", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+      }else {
+        
+        let index  = this.registro_id;
+        
+        this.t_saldo[index].detalle      =   this.saldo.detalle;
+        this.t_saldo[index].s_debe       =   this.saldo.s_debe;
+        this.t_saldo[index].s_haber      =   this.saldo.s_haber;
+        this.cancelarEditSaldo();
+        this.totales_s();
+        toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+          "timeOut": "3000"
+          });
+      }
+    }, //fin de function  actualizar 
+
+
+
+    
+    WarningEliminarSaldo(id){
+      this.eliminar.index = id;
+      this.eliminar.nombre = this.t_saldo[id].detalle;
+
+      Swal.fire({
+        title: 'Seguro que deseas eliminar este Registro '+this.eliminar.nombre ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminado!',
+            'El Registro de la cuenta '+this.eliminar.nombre,
+            'success'
+          );
+          this.t_saldo.splice(id, 1);
+          this.totales_s();
+        }
+      });
+    }, //fin metodo warningeliminarcompra
+
+
+
+
     agregarExistencia(){
        
       if(this.exis.detalle.trim()=== ''){
@@ -11392,36 +9360,14 @@ const arqueo_caja = new Vue ({
 
     },//fin metodo agregar existencia
 
-  
-
-        
-    editSaldo(index){
-      this.registro_id = index;
-      this.saldo.edit= true;
-      this.saldo.detalle   = this.t_saldo[index].detalle;
-      this.saldo.s_debe    = this.t_saldo[index].s_debe;
-      this.saldo.s_haber   = this.t_saldo[index].s_haber;
-     
-    },//end edit saldos
-
-     editSaldoFuera(index){
-      this.registro_id = index;
-      this.saldo.edit= true;
-      this.saldo.detalle   = this.t_saldo[index].detalle;
-      this.saldo.s_debe    = this.t_saldo[index].s_debe;
-      this.saldo.s_haber   = this.t_saldo[index].s_haber;
-      $('#arqueo-caja').modal('show');     
-     
-    },//end edit saldos
-
-     
-
+    
     editExis(index){
       this.exis.edit= true;
       this.registro_id = index;
       this.exis.detalle   = this.t_exis[index].detalle;
       this.exis.e_debe    = this.t_exis[index].e_debe;
       this.exis.e_haber   = this.t_exis[index].e_haber;
+      $('#ht-dato-exis-tab').tab('show');
       
     },//end edit EXISTENCIAS
    
@@ -11432,16 +9378,10 @@ const arqueo_caja = new Vue ({
       this.exis.e_debe    = this.t_exis[index].e_debe;
       this.exis.e_haber   = this.t_exis[index].e_haber;
       $('#arqueo-caja').modal('show');   
+      $('#ht-dato-exis-tab').tab('show');
     },//end edit EXISTENCIAS
     
-    cancelarEditSaldo(){
-      this.saldo.detalle =''
-      this.saldo.s_debe  =''
-      this.saldo.s_haber =''
-      this.saldo.edit       =false;
-     
-    }, //fin de cancelar edicion
-
+  
     cancelarEditExis(){
       this.exis.detalle =''
       this.exis.e_debe  =''
@@ -11452,27 +9392,7 @@ const arqueo_caja = new Vue ({
 
 
 
-    actualizarSaldo (){
-      if(this.saldo.detalle == ''){
-        toastr.error("El campo Detalle es obligatorio", "Smarmoddle", {
-          "timeOut": "3000"
-      });
-      }else {
-        
-        let index  = this.registro_id;
-        
-        this.t_saldo[index].detalle      =   this.saldo.detalle;
-        this.t_saldo[index].s_debe       =   this.saldo.s_debe;
-        this.t_saldo[index].s_haber      =   this.saldo.s_haber;
-       
-        this.cancelarEditSaldo();
-        this.totales_s();
-        toastr.error("Registro actualizado correctamente", "Smarmoddle", {
-          "timeOut": "3000"
-          });
-      }
-    }, //fin de function  actualizar 
-
+   
     actualizarExis (){
       if(this.exis.detalle == ''){
         toastr.error("El campo Detalle es obligatorio", "Smarmoddle", {
@@ -11481,7 +9401,6 @@ const arqueo_caja = new Vue ({
       }else {
         
         let index  = this.registro_id;
-        
         this.t_exis[index].detalle      =   this.exis.detalle;
         this.t_exis[index].e_debe       =   this.exis.e_debe;
         this.t_exis[index].e_haber      =   this.exis.e_haber;
@@ -11495,59 +9414,10 @@ const arqueo_caja = new Vue ({
     }, //fin de function  actualizar 
 
     
-    eliminarSaldo(){
-      let id = this.eliminar.index;
-      this.t_saldo.splice(id, 1);
-      this.eliminar.index ='';
-      this.eliminar.nombre ='';
-      $('#eliminar-arqueo').modal('hide'); // en prueba para eliminar
-    }, //fin metodo eliminar compra 
-
-    
-    eliminarExis(){
-      let id = this.eliminar.index;
-      this.t_exis.splice(id, 1);
-      this.eliminar.index ='';
-      this.eliminar.nombre ='';
-      $('#eliminar-arqueo2').modal('hide'); // en prueba para eliminar
-    }, //fin metodo eliminar compra 
-
-
-    deleteSaldo(index){
-      this.t_saldo.splice(index, 1);
-      this.totales_s();
-     },// delete saldo
-
-    deleteExis(index){
-      this.t_exis.splice(index, 1);
-      this.totales_s();
-     },// delete existencias
+  
 
 
 
-     WarningEliminarSaldo(id){
-      this.eliminar.index = id;
-      this.eliminar.nombre = this.t_saldo[id].detalle;
-
-      Swal.fire({
-        title: 'Seguro que deseas eliminar este Registro '+this.eliminar.nombre ,
-        text: "Esta accion no se puede revertir",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, eliminar!'
-          }).then((result) => {
-        if (result.isConfirmed) {
-          Swal.fire(
-            'Eliminado!',
-            'El Registro de la cuenta '+this.eliminar.nombre,
-            'success'
-          );
-          this.t_saldo.splice(id, 1);
-        }
-      });
-    }, //fin metodo warningeliminarcompra
 
     WarningEliminarExis(id){
       this.eliminar.index = id;
@@ -11569,6 +9439,7 @@ const arqueo_caja = new Vue ({
             'success'
           );
           this.t_exis.splice(id, 1);
+          this.totales_s();
         }
       });
     }, //fin metodo warningeliminarcompra
@@ -11642,7 +9513,7 @@ const arqueo_caja = new Vue ({
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////LIBRO BANCO ANEXO /////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const librosbanco = new Vue({
+let librosbanco = new Vue({
   el: "#librosbanco",
 
   data:{
@@ -11671,7 +9542,7 @@ const librosbanco = new Vue({
     },
     update: false,
     registro_id:'',
-        dgeneral:[],
+    dgeneral:[],
     registros_cierres:[],
     ajustes:[],
     nombre_cierre:''
@@ -11679,9 +9550,26 @@ const librosbanco = new Vue({
   },
   mounted: function() {
     this.obtenerLibroBanco();
+    this.obtenerDiarioGeneral();
   },
 
   methods:{
+    obtenerDiarioGeneral: function(){
+      var _this = this;
+      var url = '/sistema/admin/taller/diariogeneral';
+          axios.post(url,{
+            id: _this.id_taller,
+      }).then(response => {
+        if (response.data.datos == true) {
+        _this.dgeneral = response.data.registros;
+        _this.nombre_dgral = response.data.nombre;
+        let inicial = response.data.inicial;
+          _this.dgeneral.unshift(inicial);
+          }          
+      }).catch(function(error){
+
+      }); 
+  },
       calculadora(){
     let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
     let component = 'example-component';
@@ -11859,6 +9747,7 @@ const librosbanco = new Vue({
             'success'
           );
           this.lb_banco.splice(id, 1);
+          this.totales(); 
         }
       });
     }, //fin metodo warningeliminarcompra
@@ -11867,8 +9756,23 @@ const librosbanco = new Vue({
 
      guardarlbBAnco(){
      
-      if(this.lb_banco.length == 0){
-        toastr.error("Debe haber al menos un registro en el Balance", "Smarmoddle", {
+      if(this.nombre.length == 0){
+        toastr.error("Debe Ingresar el Nombre del Comercial", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+      }else if(this.n_banco.length == 0){
+        toastr.error("Debe Ingresar el Nombre del Banco", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+      }else if(this.c_banco.length == 0){
+        toastr.error("Debe Ingresar la Cuenta del Banco", "Smarmoddle", {
+          "timeOut": "3000"
+      });
+
+      }else if(this.lb_banco.length == 0){
+        toastr.error("Debe haber al menos un Registro", "Smarmoddle", {
           "timeOut": "3000"
       });
 
@@ -11889,10 +9793,13 @@ const librosbanco = new Vue({
             toastr.success("Arqueo Libro Banco creado correctamente", "Smarmoddle", {
             "timeOut": "3000"
           });
+          conciliacionb.obtenerLibroBanco();
           }else if (response.data.estado == 'actualizado') {
            toastr.warning("Arqueo Libro Banco actualizado correctamente", "Smarmoddle", {
           "timeOut": "3000"
         });
+        conciliacionb.obtenerLibroBanco();
+        this.totales(); 
         }  
 
       }).catch(function(error){
@@ -11942,6 +9849,8 @@ const conciliacionb = new Vue({
      lb_nombre:'',
     lb_n_banco:'',
     lb_c_banco:'',
+    debe_lbanco:'',
+    haber_lbanco:'',
 
      lb_banco:[],
      c_saldos:[],
@@ -11972,12 +9881,20 @@ const conciliacionb = new Vue({
        detalle:'',
        saldo:'',
      },
+     c_depositos:[],
+     deposito:{
+      edit:false,
+       fecha:'',
+       detalle:'',
+       saldo:'',
+     },
 
      suman:{
    
        saldo_c :0,
        saldo_ch:0,
        saldo_d :0,
+       saldo_depositos:0,
        total   :0,
 
      },
@@ -12007,6 +9924,8 @@ const conciliacionb = new Vue({
             this.lb_nombre = response.data.nombre;
             this.lb_n_banco = response.data.n_banco;
             this.lb_c_banco = response.data.c_banco;
+            this.debe_lbanco = response.data.totaldebe;
+            this.haber_lbanco = response.data.totalhaber;
             // this.totales();
         }
       }).catch(function(error){
@@ -12039,17 +9958,20 @@ const conciliacionb = new Vue({
        this.suman.saldo_c =0;
        this.suman.saldo_ch =0;
        this.suman.saldo_d =0;
+       this.suman.saldo_depositos=0;
        this.suman.total =0;
 
        let r1 = this.c_saldos;
        let r2 = this.c_debitos;
        let r3 = this.c_creditos;
        let r4 = this.c_cheques;
+       let r5 = this.c_depositos;
        
        let t1 =0;
        let t2 =0;
        let t3 =0;
        let t4 =0;
+       let t5 =0;
      
 
        r1.forEach(function(obj, index){
@@ -12068,7 +9990,11 @@ const conciliacionb = new Vue({
         t4 +=Number(obj.saldo);
      });
 
-      var tsd  = t1 + t2;
+      r5.forEach(function(obj, index){
+      t5 +=Number(obj.saldo);
+      });
+
+      var tsd  = t1 + t2 + t5;
       var tsdc = tsd - t3;
       var tch  = tsdc - t4;
      
@@ -12076,6 +10002,7 @@ const conciliacionb = new Vue({
       this.suman.saldo_d   = t2.toFixed(2);
       this.suman.saldo_c   = t3.toFixed(2);
       this.suman.saldo_ch  = t4.toFixed(2);
+      this.suman.saldo_depositos = t5.toFixed(2);
       this.suman.total     = tch.toFixed(2);
       
        
@@ -12109,6 +10036,132 @@ const conciliacionb = new Vue({
      $('#nav-bih-conciliacion-cheque-tab').tab('show');
     
    }, //fin de metodo abrirtransaccion
+
+   abrirDepositos(){ //solo para acceder al modal para agregar todo pilas 
+    this.limpiar(); 
+     $('#conciliacion-bancaria').modal('show');
+     $('#nav-bih-conciliacion-deposito-tab').tab('show');
+    
+   }, //fin de metodo abrirtransaccion
+
+
+   agregarDeposito(){
+       
+    if(this.deposito.fecha.trim() === ''){
+      toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+
+  }else if(this.deposito.detalle.trim() === ''){
+      toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+
+  }else if(this.deposito.saldo.trim() ===''){
+    toastr.error("El Saldo es Obligatorio ", "Smarmoddle", {
+      "timeOut": "3000"
+  });
+  } else{
+      var deposito ={fecha:this.deposito.fecha, detalle:this.deposito.detalle, saldo:this.deposito.saldo,}
+      this.c_depositos.push(deposito);
+      toastr.success("El Valor agregado correctamente", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+    this.deposito.fecha =''
+    this.deposito.detalle =''
+    this.deposito.saldo  =''
+    this.totales();
+    }
+
+  },//fin metodo agregar deposito
+
+  editDepositos(index){
+    this.deposito.edit =true;
+    this.registro_id  = index;
+    this.deposito.fecha     = this.c_depositos[index].fecha;
+    this.deposito.detalle   = this.c_depositos[index].detalle;
+    this.deposito.saldo     = this.c_depositos[index].saldo;
+    $('#nav-bih-conciliacion-deposito-tab').tab('show');
+     
+   
+  },//end edit saldos
+
+  editDepositoFuera(index){
+     
+    this.deposito.edit =true;
+    this.registro_id  = index;
+    this.deposito.fecha     = this.c_depositos[index].fecha;
+    this.deposito.detalle   = this.c_depositos[index].detalle;
+    this.deposito.saldo     = this.c_depositos[index].saldo;
+    $('#conciliacion-bancaria').modal('show');  
+    $('#nav-bih-conciliacion-deposito-tab').tab('show');
+
+   }, //fin udpate saldo
+
+
+   cancelarEditDeposito(){
+    this.deposito.fecha     =''
+    this.deposito.detalle   =''
+    this.deposito.saldo     =''
+    this.deposito.edit      =false;
+   },
+
+   EliminarDeposito(index){
+    let nombre = this.c_depositos[index].detalle;
+     Swal.fire({
+       title: 'Seguro que deseas eliminar la cuenta '+nombre ,
+       text: "Esta accion no se puede revertir",
+       icon: 'warning',
+       showCancelButton: true,
+       confirmButtonColor: '#3085d6',
+       cancelButtonColor: '#d33',
+       confirmButtonText: 'Si, eliminar!'
+         }).then((result) => {
+       if (result.isConfirmed) {
+         Swal.fire(
+           'Eliminado!',
+           'El Registro de la cuenta '+nombre,
+           'success'
+         );
+         this.c_depositos.splice(index, 1);   
+                         
+         this.totales();    
+       }
+     });
+   }, // fin eliminar deposito
+
+
+   actualizarDeposito(){
+
+    if(this.deposito.fecha.trim() === ''){
+      toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+
+  }else if(this.deposito.detalle.trim() === ''){
+      toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+        "timeOut": "3000"
+    });
+
+  }else if(this.deposito.saldo.trim() ===''){
+    toastr.error("El Saldo es Obligatorio ", "Smarmoddle", {
+      "timeOut": "3000"
+  });
+  } else{
+     let id                      = this.registro_id;
+     this.c_depositos[id].fecha     = this.deposito.fecha;
+     this.c_depositos[id].detalle   = this.deposito.detalle;
+     this.c_depositos[id].saldo     = this.deposito.saldo;
+   
+     this.cancelarEditDeposito();
+     this.totales();
+     toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+      "timeOut": "3000"
+      });
+    }
+   
+  },//fin de actualizar saldo
+
 
 
 
@@ -12586,6 +10639,7 @@ const conciliacionb = new Vue({
      
        this.cancelarEditCheque()
        this.totales();
+      
        toastr.error("Registro actualizado correctamente", "Smarmoddle", {
         "timeOut": "3000"
         });
@@ -12594,109 +10648,28 @@ const conciliacionb = new Vue({
     },//fin de actualizar debito
 
 
-      // deleteSaldo(index){
-      //   this.c_saldos.splice(index, 1);
-      //   this.totales();
-      // },// delete saldo
-      // deleteDebito(index){
-      //   this.c_debitos.splice(index, 1);
-      //   this.totales();
-      // },// delete debitos
-      // deleteCredito(index){
-      //   this.c_creditos.splice(index, 1);
-      //   this.totales();
-      // },// delete credito
-      // deleteCheque(index){
-      //   this.c_cheques.splice(index, 1);
-      //   this.totales();
-      // },// delete cheque
-
+    
  
       limpiar(){
-        this.saldo.fecha      ='';     
-        this.saldo.detalle    ='';
-        this.saldo.saldo      ='';
-        this.debito.fecha     ='';
-        this.debito.detalle   ='';
-        this.debito.saldo     ='';
-        this.credito.fecha    ='';
-        this.credito.detalle  ='';
-        this.credito.saldo    ='';
-        this.cheques.detalle  ='';
-        this.cheques.saldo    ='';
-        this.cheques.fecha    ='';
+        this.saldo.fecha       ='';     
+        this.saldo.detalle     ='';
+        this.saldo.saldo       ='';
+        this.debito.fecha      ='';
+        this.debito.detalle    ='';
+        this.debito.saldo      ='';
+        this.credito.fecha     ='';
+        this.credito.detalle   ='';
+        this.credito.saldo     ='';
+        this.cheques.detalle   ='';
+        this.cheques.saldo     ='';
+        this.cheques.fecha     ='';
+        this.deposito.detalle  ='';
+        this.deposito.saldo    ='';
+        this.deposito.fecha    ='';
   
       },//fin metodo limpiar todos los campos
 
-   
-
-      //  editDebitos(index){
-      //   this.update = index;
-      //   this.debito.fecha   = this.c_debitos[index].fecha;
-      //   this.debito.detalle   = this.c_debitos[index].detalle;
-      //   this.debito.saldo    = this.c_debitos[index].saldo;
        
-      //   $('#conciliacion_debitos').modal('show');     
-       
-      // },//end edit saldos
-  
-      //  updateDebitos(){
-      //    var i = this.update;
-      //    this.c_debitos[i].fecha = this.debito.fecha;
-      //    this.c_debitos[i].detalle = this.debito.detalle;
-      //    this.c_debitos[i].saldo  = this.debito.saldo;
-       
-      //    $('#conciliacion_debitos').modal('hide');  
-      //    this.limpiar();
-      //    this.totales();
-       
-  
-      //  }, //fin udpate saldo
-      //  editCreditos(index){
-      //   this.update = index;
-      //   this.credito.fecha   = this.c_creditos[index].fecha;
-      //   this.credito.detalle   = this.c_creditos[index].detalle;
-      //   this.credito.saldo     = this.c_creditos[index].saldo;
-       
-      //   $('#conciliacion_creditos').modal('show');     
-       
-      // },//end edit saldos
-  
-      //  updateCreditos(){
-      //    var i = this.update;
-      //    this.c_creditos[i].fecha = this.credito.fecha;
-      //    this.c_creditos[i].detalle = this.credito.detalle;
-      //    this.c_creditos[i].saldo   = this.credito.saldo;
-       
-      //    $('#conciliacion_creditos').modal('hide');  
-      //    this.limpiar();
-      //    this.totales();
-       
-      //  }, //fin udpate saldo
-
-      //  editCheques(index){
-      //   this.update = index;
-      //   this.cheques.fecha   = this.c_cheques[index].fecha;
-      //   this.cheques.detalle   = this.c_cheques[index].detalle;
-      //   this.cheques.saldo     = this.c_cheques[index].saldo;
-       
-      //   $('#conciliacion_cheques').modal('show');     
-       
-      // },//end edit saldos
-  
-      //  updateCheques(){
-      //    var i = this.update;
-      //    this.c_cheques[i].fecha = this.cheques.fecha;
-      //    this.c_cheques[i].detalle = this.cheques.detalle;
-      //    this.c_cheques[i].saldo   = this.cheques.saldo;
-       
-      //    $('#conciliacion_cheques').modal('hide');  
-      //    this.limpiar();
-      //    this.totales();
-       
-      //  }, //fin udpate saldo
-
-
        guardarConciliacionB(){
 
        
@@ -12720,6 +10693,10 @@ const conciliacionb = new Vue({
           toastr.error("Debe haber al menos un Débito Registrado", "Smarmoddle", {
             "timeOut": "3000"
         });
+        }else if (this.c_depositos.length == 0){
+          toastr.error("Debe haber al menos un Depósito Registrado", "Smarmoddle", {
+            "timeOut": "3000"
+        });
         }else if (this.c_creditos.length == 0){
           toastr.error("Debe haber al menos un Crédito Registrado", "Smarmoddle", {
             "timeOut": "3000"
@@ -12737,6 +10714,7 @@ const conciliacionb = new Vue({
             n_banco:  _this.n_banco,
               fecha:  _this.fecha,
             saldo_c:  _this.suman.saldo_c,
+    saldo_depositos:  _this.suman.saldo_depositos,
             saldo_d:  _this.suman.saldo_d,
            saldo_ch:  _this.suman.saldo_ch,
               total:  _this.suman.total,
@@ -12744,6 +10722,7 @@ const conciliacionb = new Vue({
           c_debitos:  _this.c_debitos,
          c_creditos:  _this.c_creditos,
           c_cheques:  _this.c_cheques,
+        c_depositos:  _this.c_depositos,
           
           }).then(response=>{
             if (response.data.estado == 'guardado') {
@@ -12754,6 +10733,7 @@ const conciliacionb = new Vue({
              toastr.warning("Conciliación Bancaria actualizado correctamente", "Smarmoddle", {
             "timeOut": "3000"
           });
+          this.totales(); 
           }  
   
         }).catch(function(error){
@@ -12774,6 +10754,7 @@ const conciliacionb = new Vue({
               });
               this.c_saldos   = response.data.saldo;
               this.c_debitos  = response.data.debito;
+              this.c_depositos  = response.data.deposito;
               this.c_creditos = response.data.credito;
               this.c_cheques  = response.data.cheque;
               this.nombre     = response.data.nombre;
@@ -12802,6 +10783,7 @@ let reten_iva = new Vue({
     id_taller: taller,
     nombre_c:'', 
     fecha:'',
+    contribuyente:'',
     ruc:'',
     dgeneral:[],
     eliminar:{
@@ -13079,10 +11061,18 @@ let reten_iva = new Vue({
         
         }, //fin de sumatotales
 
-        abrirRetencion(){ //solo para acceder al modal para agregar todo pilas 
-          this.update             = false;   
+        abrirCompra(){ //solo para acceder al modal para agregar todo pilas 
+         
          $('#modal-retencion').modal('show');
+         $('#ht-retencion-compra-tab').tab('show');
+
        }, //fin de metodo abrirtransaccion
+       abrirVenta(){ //solo para acceder al modal para agregar todo pilas 
+         
+        $('#modal-retencion').modal('show');
+        $('#ht-retencion-venta-tab').tab('show');
+
+      }, //fin de metodo abrirtransaccion
 
 
        agregarCompra(){
@@ -13133,6 +11123,8 @@ let reten_iva = new Vue({
         this.compra.ret_30        = this.t_compras[index].ret_30;
         this.compra.ret_70        = this.t_compras[index].ret_70;
         this.compra.ret_100       = this.t_compras[index].ret_100;
+    
+        $('#ht-retencion-compra-tab').tab('show');
        }, //fin de edit modal
 
        editCompraFuera(index){
@@ -13150,7 +11142,9 @@ let reten_iva = new Vue({
         this.compra.ret_30        = this.t_compras[index].ret_30;
         this.compra.ret_70        = this.t_compras[index].ret_70;
         this.compra.ret_100       = this.t_compras[index].ret_100;
+      
         $('#modal-retencion').modal('show');
+        $('#ht-retencion-compra-tab').tab('show');
        }, //fin de edit modal
 
        cancelarEditCompra(){
@@ -13204,20 +11198,7 @@ let reten_iva = new Vue({
         }
       }, //fin de function  actualizar 
    
-      eliminarCompra(){
-        let id = this.eliminar.index;
-        this.t_compras.splice(id, 1);
-        this.eliminar.index ='';
-        this.eliminar.nombre ='';
-        $('#eliminar-retencion').modal('hide'); // en prueba para eliminar
-      }, //fin metodo eliminar compra 
-
-      deleteCompra(index){
-       this.t_compras.splice(index, 1);
-       this.Totales();
-      
-      }, //fin metodo delete
-
+  
       WarningEliminarCompra(id){
         this.eliminar.index = id;
         this.eliminar.nombre = this.t_compras[id].detalle;
@@ -13238,6 +11219,7 @@ let reten_iva = new Vue({
               'success'
             );
             this.t_compras.splice(id, 1);
+            this.Totales();
           }
         });
       }, //fin metodo warningeliminarcompra
@@ -13291,6 +11273,8 @@ let reten_iva = new Vue({
         this.venta.ret_30        = this.t_ventas[index].ret_30;
         this.venta.ret_70        = this.t_ventas[index].ret_70;
         this.venta.ret_100       = this.t_ventas[index].ret_100;
+      
+        $('#ht-retencion-venta-tab').tab('show');
        }, //fin de edit modal
 
 
@@ -13309,7 +11293,9 @@ let reten_iva = new Vue({
         this.venta.ret_30        = this.t_ventas[index].ret_30;
         this.venta.ret_70        = this.t_ventas[index].ret_70;
         this.venta.ret_100       = this.t_ventas[index].ret_100;
+        
         $('#modal-retencion').modal('show');
+        $('#ht-retencion-venta-tab').tab('show');
        }, //fin de edit modal venta
 
        cancelarEditVenta(){
@@ -13363,19 +11349,7 @@ let reten_iva = new Vue({
         }
       }, //fin de function  actualizar 
 
-      eliminarVenta(){
-        let id = this.eliminar.index;
-        this.t_ventas.splice(id, 1);
-        this.eliminar.index ='';
-        this.eliminar.nombre ='';
-        $('#eliminar-retencion1').modal('hide'); // en prueba para eliminar
-      }, //fin metodo eliminar venta 
-
-      deleteVenta(index){
-        this.t_ventas.splice(index, 1);
-        this.Totales();
-       
-       }, //fin metodo delete
+      
 
 
        WarningEliminarVenta(id){
@@ -13398,6 +11372,7 @@ let reten_iva = new Vue({
               'success'
             );
             this.t_ventas.splice(id, 1);
+            this.Totales();
           }
         });
       }, //fin metodo warningeliminarcompra
@@ -13409,6 +11384,10 @@ let reten_iva = new Vue({
               });
             }else if(this.fecha.length == 0){
               toastr.error("Debe Ingresar la Fecha", "Smarmoddle", {
+                "timeOut": "3000"
+            });
+            }else if(this.contribuyente.length == 0){
+              toastr.error("Debe Ingresar El Contribuyente", "Smarmoddle", {
                 "timeOut": "3000"
             });
             }else if(this.ruc.length == 0){
@@ -13423,6 +11402,7 @@ let reten_iva = new Vue({
             axios.post(url,{
                      id:  _this.id_taller,
                nombre_c:  _this.nombre_c,
+          contribuyente:  _this.contribuyente,
                   fecha:  _this.fecha,
                     ruc:  _this.ruc,   
              sumac_base:  _this.suma_c.suma_base,
@@ -13458,6 +11438,7 @@ let reten_iva = new Vue({
             toastr.warning("Retención del Iva actualizado correctamente", "Smarmoddle", {
             "timeOut": "3000"
           });
+          this.Totales()
           }  
 
             }).catch(function(error){
@@ -13479,6 +11460,7 @@ let reten_iva = new Vue({
               this.t_ventas     = response.data.venta;
               this.nombre_c     = response.data.nombre;
               this.ruc          = response.data.ruc;
+              this.contribuyente= response.data.contribuyente;
               this.fecha        = response.data.fecha;
               this.total.t_ivacompra  = response.data.t_ivacompra;
               this.total.t_ivaventa   = response.data.t_ivaventa;
@@ -13685,40 +11667,10 @@ methods:{
               this.impuesto.iva = iva;
             }
       
-     
-
-          // let ingreso_mensual       = ingreso_liquido - deduccion;
-          // let ingreso_anual         = ingreso_mensual * 12;
-          // let fraccion_excedente    = ingreso_anual - Number(fraccion);
-          // let fraccion_excedenteiva = (fraccion_excedente * Number(interes)) / 100;
-          // let total_impuesto        = Number(impuesto_fraccion) + fraccion_excedenteiva;
-          // total                     = total_impuesto / 12;
-
-          // return Number(total).toFixed(2);
+             
           },
 
-          // impuestoAgregado(sueldo, comision, deduciones, fraccion, impuesto_fraccion, interes){
-          //   let total           = 0;
-          //   let deduccion       = 0;
-
-          //   let ingreso_gravable = sueldo - comision;
-          //   let iies            = (ingreso_gravable * 9.45) / 100;
-          //   let ingreso_liquido =  ingreso_gravable - iies;
-          //   deduciones.forEach(function(d){           
-          //   deduccion           += Number(d.valor); 
-          // });
-          //   console.log(deduccion)
-
-          // let ingreso_mensual       = ingreso_liquido - deduccion;
-          // let ingreso_anual         = ingreso_mensual * 12;
-          // let fraccion_excedente    = ingreso_anual - Number(fraccion);
-          // let fraccion_excedenteiva = (fraccion_excedente * Number(interes)) / 100;
-          // let total_impuesto        = Number(impuesto_fraccion) + fraccion_excedenteiva;
-          // total                     = total_impuesto / 12;
-
-          // return Number(total).toFixed(2);
-          // },
-
+         
 
 
           agregardeduccion(){
@@ -13763,11 +11715,7 @@ methods:{
           this.impuestoAgregado('deduccion')
           },
           impuestoRenta(){
-            // if (this.impuesto.sueldo == '') {
-            //    toastr.error("No has agregado el sueldo", "Smarmoddle", {
-            //         "timeOut": "3000"
-            //       });
-            // }else
+        
              if(this.impuesto.fraccion == ''){
                toastr.error("No has agregado la fraccion basica", "Smarmoddle", {
                     "timeOut": "3000"
@@ -13782,17 +11730,7 @@ methods:{
                   });
             }else{
             this.impuestoAgregado('final')
-            //   let deducciones = this.deducciones;
-            //   let comision = Number(this.impuesto.comisiones);
-            //   let impuesto = this.impuestoAgregado(this.impuesto.sueldo, comision, deducciones,  this.impuesto.fraccion, this.impuesto.impuesto_fraccion, this.impuesto.interes);
-            // console.log(impuesto);
-            // this.impuesto.total = impuesto
-            // this.impuesto.sueldo = '';
-            // this.impuesto.fraccion = '';
-            // this.impuesto.impuesto_fraccion = '';
-            // this.impuesto.interes = '';
-            // this.deducciones =[];
-            // this.impuesto.comisiones ='';
+            
             }
           },
 
@@ -14207,7 +12145,7 @@ abrirNomina(){ //solo para acceder al modal para agregar todo pilas
             "timeOut": "3000"
           });
             provision_b.obtenerNomina();
-
+            this.totales();
           
 
           }  

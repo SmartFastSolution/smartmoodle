@@ -290,7 +290,6 @@
                   </div>
                
                   <div class="col-6 mt-2 p-2"  style=" height:400px; overflow-y: scroll;">
-
                   <div> <strong>Utilidad Neta del Ejercicio: </strong> @{{ totales.utilidad_ejercicio }}</div>
                     <h2 class="text-center">Utilidades</h2>
               <div class="row justify-content-around mb-2">
@@ -300,11 +299,9 @@
                         <th>CUENTA</th>
                         <th width="200">SALDO</th>
                         <th class="text-center" colspan="2">ACCIONES</th>
-
                       </tr>
                     </thead>
                     <tbody is="draggable" group="people" :list="utilidades" tag="tbody">
-
                         <tr v-for="(balan, index) in utilidades">
                           <td align="center">@{{ balan.cuenta}}</td>
                           <td align="center">@{{ decimales(balan.saldo)}}</td>

@@ -16,7 +16,7 @@ class CreateTallerPartidaDobleEnunsTable extends Migration
         Schema::create('taller_partida_doble_enuns', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_partida_doble_id');
-            $table->string('enunciados')->nullable();
+            $table->longText('enunciados')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_partida_doble_id')

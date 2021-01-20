@@ -43,16 +43,9 @@
             <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{{ $datos->enunciado }}</h2>
             
         <div class="row justify-content-center">
-            @foreach ($taller->partidaDobleEnn as $key =>$element)
-                  <div class="col-6">
-                    <div class="card border border-info mb-3">
-                  <div class="card-header">Enunciado {{ $key +1 }}</div>
-                  <div class="card-body text-info">
-                    <p class="card-text">{{ $element->enunciados }}</p>
-                  </div>
-                </div>
-                </div>
-            @endforeach
+          <div class="col-10">
+             {!! $taller->transacciones !!}
+          </div>
         </div>
               <div class="row justify-content-between" > 
                 @foreach ($registros as $registro)    
@@ -63,7 +56,7 @@
                                   <th colspan="2" scope="col">
                                       <div class="row justify-content-around">
                                           <div class="col-2">D</div>
-                                          <div class="col-8 text-center" contenteditable="true">{{ $registro->cuenta }}</div>
+                                          <div class="col-8 text-center">{{ $registro->cuenta }}</div>
                                           <div class="col-2 text-right">H</div>
                                       </div>
                                   </th>
@@ -105,6 +98,31 @@
                   </div>
                 @endforeach
                 </div>
+                @if ($taller->estado_resultado == 'si')
+                 <h2 class="text-center font-weight-bold text-danger mt-2 display-4">ESTADO DE RESULTADO</h2>
+                   <div class="row mt-2 justify-content-center">
+                     <div class="col-10">
+                       <table class="table">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">Descripcion</th>
+                              <th class="text-center" scope="col" width="150">.</th>
+                              <th class="text-center" scope="col" width="150">.</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @foreach ($resultado = App\PartidaDobleEstado::where('partida_doble_id', $datos->id)->get() as $registro) 
+                            <tr>
+                              <td>{{ $registro->descripcion }}</td>
+                              <td class="text-right">{{ $registro->saldo1 }}</td>
+                              <td class="text-right">{{ $registro->saldo2 }}</td>
+                            </tr>
+                            @endforeach
+                          </tbody>
+                        </table>
+                     </div>
+                   </div>
+                 @endif
           </div>
             <div class="row justify-content-center">
             <div class="col-5">

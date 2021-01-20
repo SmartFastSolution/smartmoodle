@@ -17,10 +17,10 @@ class CreateIdentificarPersonasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
-            $table->string('girador');
-            $table->string('girado');
-            $table->string('beneficiario');
+            $table->longText('enunciado');
+            $table->string('girador')->nullable();
+            $table->string('girado')->nullable();
+            $table->string('beneficiario')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

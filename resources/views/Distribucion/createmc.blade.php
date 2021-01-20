@@ -7,7 +7,7 @@
 
 @if ($errors->any())
 <div class="alert alert-danger">
-    <strong>Whoops!</strong> Parece que hay porblemas  <br><br>
+    <strong>Whoops!</strong> Parece que hay porblemas <br><br>
     <ul>
         @foreach ($errors->all() as $error)
         <li>{{ $error }}</li>
@@ -31,8 +31,8 @@
 
                                 <div class="form-group">
                                     <label>Seleccionar Curso</label>
-                                    <select class="form-control select2" name="cursos" style="width: 99%;" >
-                                        <option selected disabled>Elija el Curso...</option >
+                                    <select class="form-control select2" name="cursos" style="width: 99%;">
+                                        <option selected disabled>Elija el Curso...</option>
                                         @foreach($cursos as $curso)
                                         <option value="{{$curso->id}}">
                                             {{$curso->nombre}}
@@ -41,18 +41,10 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <!-- <div class="form-group">
-                                    <label>Paralelos</label>
-                                    <select class="form-control select2" name="nivel" style="width: 99%;" >
-                                        @foreach($nivels as $nivel)
-                                        <option value="{{$nivel->id}}">{{$nivel->nombre}}</option>
-                                        @endforeach
-                                    </select>
-                                </div> -->
                                 <div class="form-group">
                                     <label>Unidad Educativa</label>
                                     <select class="form-control select" v-model="instituto" @change="onMateria()"
-                                        name="instituto" style="width: 99%;" >
+                                        name="instituto" style="width: 99%;">
                                         <option selected disabled>Elija una Unidad educativa...</option>
                                         @foreach($institutos as $instituto)
                                         <option value="{{$instituto->id}}">{{$instituto->nombre}}
@@ -64,7 +56,7 @@
                                 <div class="form-group">
                                     <label>Materias</label>
                                     <select class="select2" multiple="multiple" name="materia[]"
-                                        data-placeholder="Select a State" style="width: 100%;" >
+                                        data-placeholder="Select a State" style="width: 100%;">
                                         <option v-for="mater in materias" :value="mater.id">@{{ mater.nombre}}</option>
                                     </select>
                                 </div>
@@ -86,7 +78,7 @@
                                 <br>
                                 <a href="{{route('distribucionmacus.index')}}" class="btn btn-primary">Atras</a>
                                 <input type="submit" class="btn btn-dark " value="Guardar">
-                               
+
                             </div>
 
                         </form>
@@ -110,16 +102,14 @@
 @section('js')
 
 <script>
-
-$(function () {
+$(function() {
     //Initialize Select2 Elements
     $('.select2').select2({
-       
+
     })
 
-   
-  });
 
+});
 </script>
 <!-- script para select dinamico prueba 2  -->
 

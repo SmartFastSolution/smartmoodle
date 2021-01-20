@@ -17,8 +17,8 @@ class CreateCompletarsTable extends Migration
            $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
-            $table->string('respuesta');
+            $table->longText('enunciado');
+            $table->string('respuesta')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

@@ -16,8 +16,8 @@ class CreateAnalizarPreguntaDatosTable extends Migration
         Schema::create('analizar_pregunta_datos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('analizar_pregunta_id');
-            $table->string('enunciado')->nullable();
-            $table->string('respuesta')->nullable();
+            $table->longText('enunciado')->nullable();
+            $table->longText('respuesta')->nullable();
             $table->timestamps();
 
             $table->foreign('analizar_pregunta_id')

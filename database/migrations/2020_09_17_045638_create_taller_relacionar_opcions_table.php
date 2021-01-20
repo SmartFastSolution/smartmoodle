@@ -17,9 +17,9 @@ class CreateTallerRelacionarOpcionsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_relacionar_id');
             $table->integer('orden')->nullable();
-            $table->string('enunciado')->nullable();
-            $table->string('definicion')->nullable();
-            $table->string('definicion_aleatoria')->nullable();
+            $table->longText('enunciado')->nullable();
+            $table->text('definicion')->nullable();
+            $table->text('definicion_aleatoria')->nullable();
             $table->string('img')->nullable();
             $table->timestamps();
 

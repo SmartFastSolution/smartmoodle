@@ -430,7 +430,7 @@ class VistaEstudianteController extends Controller
             ->select('taller_user.*')
             ->get();
             $taller = TallerAbreviatura::where('taller_id', $consul->id)->firstOrFail();
-            $datos = Abreatura::where('user_id', $user)->where('taller_id', $consul->id)->firstOrFail();
+            $datos = Abreviatura::where('user_id', $user)->where('taller_id', $consul->id)->firstOrFail();
             return view('estudiantes.talleres.taller27', compact('datos', 'd', 'relacion', 'taller'));
 
         }elseif ($plant == 28) {
@@ -554,8 +554,12 @@ class VistaEstudianteController extends Controller
                  'datos' => $datos,
                 ]);
                  if ($datos->metodo == 'individual') {
-
-            return view('estudiantes.talleres.taller37', compact('datos', 'd' , 'relacion'));
+                       if ($datos->tipo == 'fifo' or $datos->tipo == 'promedio') {
+                    $transacciones = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->get();
+                }else{
+                    $transacciones = TallerModuloTransaccion::where('taller_modulo_contable_id', $datos->id)->first();
+                }
+            return view('estudiantes.talleres.taller37', compact('datos', 'd' , 'relacion', 'transacciones'));
            
     
             }else{

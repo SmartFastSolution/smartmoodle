@@ -17,7 +17,7 @@ class CreateTallerNotaVentaDatosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_nota_venta_id');
             $table->string('cantidad')->nullable();
-            $table->string('descripcion')->nullable();
+            $table->longText('descripcion')->nullable();
             $table->string('precio')->nullable();
             $table->timestamps();
 

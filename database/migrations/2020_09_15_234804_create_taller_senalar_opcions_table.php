@@ -16,10 +16,10 @@ class CreateTallerSenalarOpcionsTable extends Migration
         Schema::create('taller_senalar_opcions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_senalar_id');
-            $table->string('concepto');
-            $table->string('respuesta');
-            $table->string('alternativa1');
-            $table->string('alternativa2');
+            $table->text('concepto');
+            $table->text('respuesta');
+            $table->text('alternativa1');
+            $table->text('alternativa2');
             $table->timestamps();
 
 

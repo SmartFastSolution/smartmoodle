@@ -1,5 +1,5 @@
 @extends('layouts.nav')
-@section('title', {{ $datos->taller->nombre }})
+@section('title', $datos->taller->nombre)
 @section('content')
 
 <!--ESCRIBA  EN  LOS  CÍRCULOS  EJEMPLOS. -->

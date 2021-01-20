@@ -16,7 +16,7 @@ class CreateTallerDiarioGeneralsTable extends Migration
         Schema::create('taller_diario_generals', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_modulo_contable_id');
-            $table->string('enunciado')->nullable();
+            $table->longText('enunciado')->nullable();
             $table->text('transacciones')->nullable();
             $table->timestamps();
             

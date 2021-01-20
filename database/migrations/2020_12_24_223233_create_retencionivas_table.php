@@ -19,6 +19,7 @@ class CreateRetencionivasTable extends Migration
             $table->unsignedbigInteger('user_id');
             $table->string('nombre')->nullable();
             $table->string('fecha')->nullable();
+            $table->string('contribuyente')->nullable();
             $table->string('ruc')->nullable();
             $table->string('sumac_base')->nullable();
             $table->string('sumac_reten')->nullable();

@@ -15,7 +15,7 @@ class CreateTallerSubrayarsTable extends Migration
         Schema::create('taller_subrayars', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado')->nullable();
+            $table->longText('enunciado')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

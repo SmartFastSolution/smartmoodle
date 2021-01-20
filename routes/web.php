@@ -52,15 +52,7 @@ route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta e
 
 
  ////////////////////////////////////////////////
- ////////////////Reporte Vuejs///////////////////
- ////////////////////////////////////////////////
- ////////////////////////////////////////////////
- //rutas vue para reporte
 
-// Route::get('/reporte','PDFController@Reporte')->name('Reporte');
-// Route::post('informes','PDFController@Instituto')->name('informes');
-// Route::post('distinst1','PDFController@curso')->name('distinst1');  //filtro del select curso dependiente del select instituto
-// Route::post('cursoall','PDFController@Filtrocurso')->name('cursoall'); //filtro de curso por el select curso vmodel de curso
 
 ////////////////////////////////////////////////
  ////////////////Fin Reporte Vuejs//////////////
@@ -97,17 +89,20 @@ route::get('Documento-pdf/{contenido}', 'DocenteController@VerPDF')->name('Conte
 //rutas menu estudiante
 route::post('admin/cambiarestado','AdminController@status')->name('taller.status');
 route::post('admin/registro','DocenteController@registro')->name('taller.registro');
-route::get('perfil','EstudianteController@show')->name('perfile');
+route::get('perfile','EstudianteController@show')->name('perfile');
 route::get('unidad/{id}','EstudianteController@unidades')->name('Unidades');
 route::get('estudiante/password', 'EstudianteController@password')->name('AlumnoPass'); //para metodo get del password 
 route::post('estudiante/password','EstudianteController@updatep')->name('Estudiantes.updatep'); // para guardar el nuevo password
 route::get('Contenido-pdf/{contenido}', 'EstudianteController@VisualizacionPDF')->name('Contenido.alumno'); //para visualizar el documento en el menu estudiante
 
 ///rutas menu docente
-
+route::get('perfil', 'DocenteController@Perfil')->name('Perfil');
 route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
 route::get('contenido/{id}/talleres','DocenteController@talleres')->name('contenido.talleres');
 route::get('alumnos/{id}', 'DocenteController@cursos')->name('Alumnos');
+
+route::get('docente/password', 'DocenteController@password')->name('DocentePass'); //para metodo get del password 
+route::post('docente/password','DocenteController@updatep')->name('Docente.updatep'); // para guardar el nuevo password
 
 
  //permisoss
@@ -250,8 +245,6 @@ route::get('/sistema/homees/taller/vista/{plant}/{id}', 'VistaEstudianteControll
 route::get('/sistema/homedoc/taller/{plant}/{id}/{user}', 'TallerDocenteController@taller')->name('taller.docente');
 
 
-// route::post('/sistema/taller2', 'TallersController@store2')->name('taller2');
-// route::post('/sistema/taller3', 'TallersController@store3')->name('taller3');
 route::post('/sistema/admin/taller1/{idtaller}', 'TallerEstudianteController@store1')->name('taller1');
 route::post('/sistema/admin/taller2/{idtaller}', 'TallerEstudianteController@store2')->name('taller2');
 route::post('/sistema/admin/taller3/{idtaller}', 'TallerEstudianteController@store3')->name('taller3');
@@ -439,6 +432,7 @@ route::post('/sistema/admin/docente/mayorgeneral', 'TallerContabilidadDocenteCon
 route::post('/sistema/admin/docente/obtener-balance-general', 'TallerContabilidadDocenteController@obtenerbalanceGeneral')->name('balance-obtener-general');
 
 route::post('/sistema/admin/docente/obtenerbalance', 'TallerContabilidadDocenteController@obtenerbalance')->name('obtenerbalance');
+route::post('/sistema/admin/docente/balance-vertical', 'TallerContabilidadDocenteController@balance_vertical')->name('balance_vertical');
 
 route::post('/sistema/admin/docente/anexo-obtener-caja', 'TallerContabilidadDocenteController@obtenerLibroCaja')->name('anexocaja.obtener');
 
@@ -460,7 +454,9 @@ route::post('/sistema/admin/docente/provision-obtener-beneficio', 'TallerContabi
 
 route::post('/sistema/homedoc/respuesta/taller1/{idtaller}', 'TallerDocenteController@store1')->name('taller1.docente');
 route::get('/sistema/admin/create', 'AdminController@admin')->name('admin.create');
+route::get('/sistema/admin/leccion', 'AdminController@leccion')->name('leccion.create');
 route::post('/sistema/admin', 'AdminController@store')->name('admin');
 route::post('/sistema/delete', 'AdminController@delete')->name('delete');
 Route::post('/sistema/admin/ramdom','HomeController@ramdom')->name('ramdom');
+Route::post('/sistema/admin/leccion','AdminController@crear_leccion')->name('crear_leccion');
 // route::get('/sistema/taller33','TallersController@taller33')->name('taller33');

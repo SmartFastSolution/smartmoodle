@@ -18,7 +18,7 @@ class CreateDiarioGeneralsTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             // $table->unsignedbigInteger('balance_inicial_id');
-            $table->string('enunciado')->nullable();
+            $table->longText('enunciado')->nullable();
             $table->string('nombre')->nullable();
             $table->string('total_debe')->nullable();
             $table->string('total_haber')->nullable();

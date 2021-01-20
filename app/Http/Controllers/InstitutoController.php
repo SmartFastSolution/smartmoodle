@@ -39,12 +39,7 @@ class InstitutoController extends Controller
     public function clone(Request $request, $id)
     {
         $model              = Instituto::find($id);
-        // $model->nombre      = $request->nombre;
-        // $model->descripcion = $request->descripcion;
-        // $model->provincia   = $request->provincia;
-        // $model->canton      = $request->canton;
-        // $model->direccion   = $request->direccion;
-        // $model->telefono    = $request->telefono;
+     
         $model->email       = 'itsvr2gmail.com';
         // $model->estado      = $request->estado;
         $duplicatedModel    = $model->saveAsDuplicate();

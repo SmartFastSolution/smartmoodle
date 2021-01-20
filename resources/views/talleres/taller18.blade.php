@@ -37,7 +37,7 @@
 						<div class="row mb-2">
 							<div class="col-3 text-right"><label for="" class="col-form-label">Vence el:</label></div>
 							<div class="col-8">
-								<input type="date" name="vencimiento" class="form-control text-center" required>
+								<input type="date" name="vencimiento" class="form-control text-center" >
 							</div>
 						</div>
 						<div class="row">
@@ -45,7 +45,7 @@
 								<label for="" class="col-form-label">No:</label>
 							</div>
 							<div class="col-3">
-								<input type="text" name="numero" class="form-control" required>
+								<input type="number" name="numero" class="form-control" >
 							</div>
 							<div class="col-5 border border-info p-2">
 								<div class="row">
@@ -53,7 +53,7 @@
 										<label class="col-form-label" for="">POR:</label>
 									</div>
 									<div class="col-8">
-										<input type="text" name="por" class="form-control" required>
+										<input type="number" name="por" class="form-control text-right" >
 									</div>
 								</div>
 							</div>
@@ -64,36 +64,36 @@
 					<div class="col-12 text-center ">
 						<div class="row mb-1">
 							<div class="col-6">
-								<input type="text" name="ciudad" class="form-control" required>
+								<input type="text" name="ciudad" class="form-control" >
 							</div>
 							<div class="col-6">
-								<input type="date" name="fecha" class="form-control" required>
+								<input type="date" name="fecha" class="form-control" >
 							</div>
 						</div>				
 						<h6>Ciudad y fecha</h6>
 					</div>
 					<div class="col-12 ">						
-							<input type="text" name="orden_de" class="form-control" required>								
+							<input type="text" name="orden_de" class="form-control" >								
 						<h6>A la orden de</h6>
 					</div>
 					<div class="col-12 ">						
-							<input type="text" name="de" class="form-control" required>								
+							<input type="text" name="de" class="form-control" >								
 						<h6>De</h6>
 					</div>
 					<div class="col-12 ">						
-							<input type="text" name="cantidad" class="form-control" required>								
+							<input type="text" name="cantidad" class="form-control" >								
 						<h6>La Cantidad de</h6>
 					</div>
 					<div class="col-12 form-inline">						
-							<p class="col-form-label">Con  el  interés  del <input type="text" name="interes" class="form-control" required> por  ciento  anual,   desde <input name="desde" type="text" class="form-control" required> Sin protesto.   Exímese  de presentación  para  aceptación  y  pago  así  como  de  avisos  por  falta  de  estos  hechos.</p>
+							<p class="col-form-label">Con  el  interés  del <input type="number" name="interes" class="form-control" > por  ciento  anual,   desde <input name="desde" type="text" class="form-control" > Sin protesto.   Exímese  de presentación  para  aceptación  y  pago  así  como  de  avisos  por  falta  de  estos  hechos.</p>
 					</div>
 					<div class="col-12 ">						
 							<div class="row mb-1">
 								<div class="col-6">
-									<input type="text" name="direccion" class="form-control" required>
+									<input type="text" name="direccion" class="form-control" >
 								</div>
 								<div class="col-6">
-									<input type="text" name="ciudad2" class="form-control" required>
+									<input type="text" name="ciudad2" class="form-control" >
 								</div>
 							</div>	
 							<div class="row mb-1">
@@ -104,7 +104,7 @@
 				</div>
 				<div class="row justify-content-center">
 					<div class="col-5 text-center">
-						<input type="text" name="atentamente" class="form-control" required>
+						<input type="text" name="atentamente" class="form-control" >
 						<h1>Atentamente</h1>
 					</div>
 				</div>

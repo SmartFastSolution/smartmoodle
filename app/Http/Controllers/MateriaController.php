@@ -57,7 +57,7 @@ class MateriaController extends Controller
             'estado'      => 'required|in:on,off',
         ]);
 
-        //$materia = Materia::create($request->all());
+       
        $materia = new Materia;
        $materia->instituto_id = $request->instituto;
        $materia->nombre = $request->nombre;

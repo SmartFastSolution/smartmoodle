@@ -14,7 +14,7 @@
 			<div class="row">
 				@foreach ($datos->abreviaturaImg as $dato)
 					<div class="col-6 mb-3"><img class="img-fluid" width="250" style="box-shadow: 5px 5px 15px 0px  #27D5F4; border: outset;" src="{{ asset($dato->col_a) }}" alt=""></div>
-					<div class="col-6 align-self-center"><input style="box-shadow: 5px 5px 15px 0px  #27F4AE; background-color: #9FC6E7" required type="text" name="col_a[]" class="form-control font-weight-bold"></div>
+					<div class="col-6 align-self-center"><input style="box-shadow: 5px 5px 15px 0px  #27F4AE; background-color: #9FC6E7"  type="text" name="col_a[]" class="form-control font-weight-bold"></div>
 				@endforeach
 			</div>
 		</div>
@@ -22,7 +22,7 @@
 			<div class="row">
 				@foreach ($datos->abreviaturaImg as $dato)
 					<div class="col-6 mb-3"><img class="img-fluid" width="250" style="box-shadow: 5px 5px 15px 0px  #27D5F4; border: outset;" src="{{ asset($dato->col_b) }}" alt=""></div>
-					<div class="col-6 align-self-center"><input style="box-shadow: 5px 5px 15px 0px  #27F4AE; background-color: #9FC6E7" required type="text" name="col_b[]" class="form-control font-weight-bold"></div>
+					<div class="col-6 align-self-center"><input style="box-shadow: 5px 5px 15px 0px  #27F4AE; background-color: #9FC6E7"  type="text" name="col_b[]" class="form-control font-weight-bold"></div>
 				@endforeach
 			</div>
 		</div>

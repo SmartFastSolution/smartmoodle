@@ -17,14 +17,14 @@ class CreateValeCajasTable extends Migration
            $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('enunciado');
-            $table->string('por');
-            $table->string('deudor');
-            $table->string('cantidad');
-            $table->string('concepto');
-            $table->string('fecha');
-            $table->string('vto_bueno');
-            $table->string('conforme');
+            $table->longText('enunciado');
+            $table->string('por')->nullable();
+            $table->string('deudor')->nullable();
+            $table->string('cantidad')->nullable();
+            $table->string('concepto')->nullable();
+            $table->string('fecha')->nullable();
+            $table->string('vto_bueno')->nullable();
+            $table->string('conforme')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

@@ -14,8 +14,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-            <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
+            <div class="modal-body" style="height: 700px; overflow-y: scroll;  width: 100%;">
+                <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
 
                 <div class="row justify-content-center">
                     <div class="col-6 border border-bottom-0 border-left-0 border-top-0 border-danger">
@@ -84,12 +84,12 @@
                     </div>
                     @if($datos->metodo == 'individual')
 
-                     <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
+                    <div class="col-6" style=" height:300px; overflow-y: scroll; overflow-x: hidden;">
                         {!! $transacciones->transacciones !!}
-                     </div>
+                    </div>
                     @elseif($datos->metodo == 'concatenado')
-                <div class="col-6" style=" height:300px; overflow-y: scroll;">
-                        <h3 class="text-center font-weight-bold">Datos para realizar el Mayor General</h3>
+                    <div class="col-6" style=" height:300px; overflow-y: scroll;">
+                        <h3 class="text-center font-weight-bold">Datos para realizar el Libro Banco</h3>
                         <h3 class="text-center">Diario General</h3>
                         <table class="table table-bordered table-sm">
                             <thead class="thead-dark">
@@ -196,7 +196,7 @@
                     </div>
                     @endif
 
-                    <div class="col-12 mt-2" v-if="lb_banco.length > 0">
+                    <div class="col-12 mt-2" v-if="lb_banco.length > 0" style=" height:300px; overflow-y: scroll;">
                         <h2 class="text-center">REGISTROS</h2>
 
                         <table style="border: hidden" class="table table-bordered table-sm mb-2">
@@ -220,13 +220,13 @@
                                     <td align="right">@{{decimales(banco.haber)}}</td>
                                     <td align="right">@{{decimales(banco.saldo)}}</td>
                                     <td align="center" width="50">
-                                        <a @click.prevent="WarningEliminarLibro(index)" class="btn btn-danger">
-                                            <i class="fas fa-trash-alt"></i>
+                                        <a @click.prevent="editLibroBanco(index)" class="btn btn-warning">
+                                            <i class="fas fa-edit"></i>
                                         </a>
                                     </td>
                                     <td align="center" width="50">
-                                        <a @click.prevent="editLibroBanco(index)" class="btn btn-warning">
-                                            <i class="fas fa-edit"></i>
+                                        <a @click.prevent="WarningEliminarLibro(index)" class="btn btn-danger">
+                                            <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -254,7 +254,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Deseas eliminar el registro  @{{ eliminar.nombre }}?
+                Deseas eliminar el registro @{{ eliminar.nombre }}?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

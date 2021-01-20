@@ -34,4 +34,9 @@ class Conciliacionbancaria extends Model
         return $this->hasMany('App\Conciliacioncheque');
     }
 
+    public function conciliaciondepositos(){
+
+        return $this->hasMany('App\Conciliaciondeposito');
+    }
+
 }

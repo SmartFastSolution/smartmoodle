@@ -7,7 +7,10 @@
 
 <section class="content">
     <div class="container">
-        <h1 class="font-weight-light" style="color:red;"> {{ auth()->user()->instituto->nombre}}</h1>
+        <h1 class="font-weight-light" style="color:red;">  @isset ( auth()->user()->instituto->nombre)
+            {{ auth()->user()->instituto->nombre}}
+                
+            @endisset</h1>
         <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}
             <h3 class="  font-weight-bold text-success">{{ $materia->nombre }}</h3>
             <h2 class="text-center display-2 font-weight-bold text-primary">Administrador de Talleres</h2>
@@ -26,7 +29,8 @@
             @endforeach
 
         </ul>
-
+       
+      
         <div class="tab-content" id="myTabContent">
             @foreach ($contenidos as $c => $contenido)
             <div class="tab-pane fade show @if ($c== 0) active @endif " id="contenido{{ $contenido->id }}"
@@ -55,7 +59,8 @@
                                         <tr v-for="(taller, index) in talleres[{{ $c }}].talleres">
                                             <td>{{$contenido->nombre}}</td>
                                             <td>@{{taller.nombre}}</td>
-                                            <td>@{{taller.enunciado}}</td>
+                                            <td v-if="taller.plantilla_id == 37">TALLER DE MODULO CONTABLE</td>
+                                            <td v-else v-html="taller.enunciado">@{{taller.enunciado}}</td>
                                             <td>
                                                 <span v-if="taller.estado == 1"
                                                     class="badge-success badge">activo</span>
@@ -125,7 +130,6 @@
             </div>
         </div>
         @endforeach
-
         <div class="modal fade" id="fecha" tabindex="-1" aria-labelledby="fechaLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">

@@ -113,14 +113,24 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class=" tall_2">
+                            <div>
                             <div class="form-group">
-                                <label for="" class="col-form-label">Enunciado 1 <a href="#" class="btn btn-danger re_tall2"><span class="glyphicon glyphicon-remove">X</span></a></label>
-                                <textarea required="" class="form-control" name="enun[]"></textarea>
+                                <label for="" class="col-form-label">Enunciados</label>
+                                <textarea required="" class="form-control ckeditor" name="transacciones"></textarea>
                             </div>
+                            <div class="form-row">
+                                     <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">NUMERO DE T:</label>
+                                    <input required=""  name="n_t" type="number" class="form-control">
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Estado de Resultado:</label>
+                                <select required=""  name="estado_resultado" class="custom-select">
+                                    <option value="si">SI</option>
+                                    <option value="no">NO</option>
+                                </select>
+                                </div>
                             </div>
-                            <div class="row">
-                                  <a href="#" class="addTaller2 btn btn-outline-danger">Agregar Fila</a>
                             </div>
                             <div class="row justify-content-center">
                                 <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">

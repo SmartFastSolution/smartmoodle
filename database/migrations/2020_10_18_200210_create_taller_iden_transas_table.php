@@ -16,7 +16,7 @@ class CreateTallerIdenTransasTable extends Migration
         Schema::create('taller_iden_transas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
-            $table->string('enunciado');
+            $table->longText('enunciado');
             $table->timestamps();
             
             $table->foreign('taller_id')
