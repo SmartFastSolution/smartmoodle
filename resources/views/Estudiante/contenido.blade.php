@@ -57,7 +57,7 @@
                     <table id="myTable3" class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">Materia</th>
+                                <th scope="col">Nombre del Documento</th>
                                 <th scope="col">Descripcion</th>
                                 <th scope="col">Acción</th>
                                 <th scope="col" coldspan="1">Ver Documento</th>
@@ -101,7 +101,7 @@
                     <table id="myTable4" class="table table-hover">
                         <thead>
                             <tr>
-                                <th scope="col">Materia</th>
+                                <th scope="col">Nombre del Documento</th>
                                 <th scope="col">Descripcion</th>
                                 <th scope="col" coldspan="1">Ver Documento</th>
                             </tr>
