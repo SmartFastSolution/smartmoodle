@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Archivodocente;
 use App\Http\Controllers\Controller;
 use APp\User;
 use App\Contenido;
@@ -80,7 +82,8 @@ class EstudianteController extends Controller
  
          $materia =Materia::where('id', $id)->firstOrfail();
          $cons =Contenido::where('materia_id',$materia->id)->paginate(6);
-         return view ('Estudiante.contenido',['materia'=>$materia,'contenidos'=>$contenido,'institutomate'=>$institutomate,'tallers'=>$tallers,'cons'=>$cons]);
+         $cons2 =Archivodocente::where('materia_id',$materia->id)->paginate(6);
+         return view ('Estudiante.contenido',['materia'=>$materia,'contenidos'=>$contenido,'institutomate'=>$institutomate,'tallers'=>$tallers,'cons'=>$cons,'cons2'=>$cons2]);
 
        // return $tallers;
 
@@ -124,6 +127,14 @@ class EstudianteController extends Controller
        return \view('Estudiante.archivopdf',['contenido'=>$contenido]);
 
    }
+
+
+   public function VisualizacionPDF2($id){
+
+    $contenido =Archivodocente::where('id', $id)->firstOrfail();
+     return \view('Estudiante.archivopdf2',['contenido'=>$contenido]);
+
+ }
 
   public function PostE()
   {

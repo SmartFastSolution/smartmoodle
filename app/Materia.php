@@ -34,6 +34,10 @@ class Materia extends Model
         return $this->hasMany('App\Contenido');
     }
 
+    public function archivodocentes(){
+          
+        return $this->hasMany('App\Archivodocente');
+    }
 
     public function distribucionmacus(){
 

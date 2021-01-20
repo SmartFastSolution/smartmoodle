@@ -75,7 +75,7 @@
 
                                 </div>
 
-                
+
 
                                 <!-- fin de la prueba imagen en laravel  -->
 
@@ -97,7 +97,7 @@
                                     <br><br><br>
                                     <a href="{{route('contenidos.index')}}" class="btn btn-primary">Atras</a>
                                     <input type="submit" class="btn btn-dark " value="Guardar">
-                                  
+
                                 </div>
                         </form>
                     </div>
@@ -118,8 +118,8 @@
             <div class="modal-body mb-0 p-0">
 
                 <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-                    <iframe class="embed-responsive-item" width="1000" height="1000"
-                    src="{{$contenido->archivo->url}}" allowfullscreen></iframe>
+                    <iframe class="embed-responsive-item" width="1000" height="1000" src="{{$contenido->archivo->url}}"
+                        allowfullscreen></iframe>
                 </div>
 
             </div>

@@ -39,7 +39,7 @@
                 </li>
 
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ url('/sistema/archivos-update') }}" class="nav-link">Subir Archivos</a>
+                    <a href="{{ url('/sistema/docente/archivos-update') }}" class="nav-link">Documentos Docente</a>
                 </li>
 
                 <!-- <li class="nav-item dropdown">

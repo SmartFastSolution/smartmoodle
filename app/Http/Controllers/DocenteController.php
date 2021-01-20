@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Archivodocente;
 use App\Assignment;
 use APp\User;
 use App\Contenido;
@@ -26,13 +27,13 @@ class DocenteController extends Controller
 
   
 
-       public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('docente');
     }
 
-   public function Perfil()
+    public function Perfil()
     {
 
                 $au = User::find(Auth::id())->distribuciondos;
@@ -228,7 +229,6 @@ class DocenteController extends Controller
     }
 
 
-
     public function password(){
 
         return view('Docente.password');
@@ -258,7 +258,9 @@ class DocenteController extends Controller
 
      }
 
-
+      /////////////////////////////////////////////////////////////////////////////////////
+      //////////////////////////////////Post/////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////////////////////////
 
      
   public function PostD()
@@ -310,6 +312,159 @@ class DocenteController extends Controller
 
       return redirect('sistema/homedoc')->with('Post Eliminado!');
   }
+
+     /////////////////////////////////////////////////////////////////////////////////////
+      //////////////////////////////////FIN POST/////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////////////////////////
+
+
+       /////////////////////////////////////////////////////////////////////////////////////
+      //////////////////////////////////METODO ARCHIVOS DOCENTE/////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////////////////////////
+
+
+      public function Archivos_docente()
+      {
+            $doc = Archivodocente::all();
+         return \view('Docente.contenido.doc', compact('doc'));
+      }
+    
+      public function Doc_crear()
+      {
+        
+
+          $au = User::find(Auth::id())->distribuciondos;
+          $materias = $au->materias()->get();
+        // dd($und);
+           
+         return \view('Docente.contenido.creardoc', compact('au','materias'));
+      }
+    
+      public function Guardardoc(Request $request){
+
+        $request->validate([
+
+            'nombre'      => 'required|string|max:150',
+            'descripcion' => 'required|string|max:250',
+            'materia'     =>'required',
+            'archivo'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:50000',
+            
+        ]);
+     
+
+        if($request->hasFile('archivo')){
+
+            $archivo=$request->file('archivo');
+            $nombre=time().$archivo->getClientOriginalName();
+            $ruta= public_path().'/documentodoc';
+            $archivo->move($ruta,$nombre);
+            $urlarchivo['url']='/documentodoc/'.$nombre;
+         }
+        
+         $d = New Archivodocente;
+         $d->nombre = $request->nombre;
+         $d->descripcion =$request->descripcion;
+        
+         if($request->get('materia')){
+         
+            $d->materia_id = $request->materia;
+         }
+         $d->save();
+
+         $d->documentodoc()->create($urlarchivo);
+
+          
+         return redirect('sistema/docente/archivos-update')->with('success','Documento Subido Exitosamente!');
+
+      }
+
+
+      public function docshow(Archivodocente $archivodocente){
+       
+        $au = User::find(Auth::id())->distribuciondos;
+        $materias = $au->materias()->get();
+        
+        $ar = Archivodocente::find($archivodocente->id)->materia()->get();
+
+        return \view('Docente.contenido.showdoc', compact('au','materias','ar','archivodocente'));
+
+       
+      }
+
+      public function docedit(Archivodocente $archivodocente){
+
+        $au = User::find(Auth::id())->distribuciondos;
+        $materias = $au->materias()->get();
+
+        $ar = Archivodocente::find($archivodocente->id)->materia()->get();
+
+        return \view('Docente.contenido.editdoc', compact('au','materias','ar','archivodocente'));
+
+      }
+
+      public function docupdate(Request $request, Archivodocente $archivodocente){
+
+        $request->validate([
+
+            'nombre'      => 'string|max:150',
+            'descripcion' => 'string|max:250',
+    
+            'archivo'  => 'mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:50000',
+            
+        ]);
+
+        if($request->hasFile('archivo')){
+
+            $archivo=$request->file('archivo');
+            $nombre=time().$archivo->getClientOriginalName();
+            $ruta= public_path().'/documentodoc';
+            $archivo->move($ruta,$nombre);
+            $urlarchivo['url']='/documentodoc/'.$nombre;
+         }
+
+         $archivodocente->update($request->all());
+
+         if ($request->hasFile('archivo')){
+            $archivodocente->documentodoc()->delete();
+        }
+
+        $archivodocente->save();
+
+        if ($request->hasFile('archivo')){
+            $archivodocente->documentodoc()->create($urlarchivo);
+        }
+
+        if($request->get('materia')){
+           
+            $archivodocente->materia_id = $request->materia;
+         }
+         $archivodocente->save();
+
+
+         return redirect('sistema/docente/archivos-update')->with('success','Documento Actualizado Exitosamente!');
+
+     }
+
+
+      public function destroy(Archivodocente $archivodocente)
+      {
+          
+        $archivodocente =Archivodocente::findOrFail($archivodocente->id)->delete();
+
+       
+        return redirect('sistema/docente/archivos-update')->with('success','Documento Eliminado Exitosamente!');
+
+      }
+
+
+      public function VerDoc(Archivodocente $archivodocente){
+
+        $contenido =Archivodocente::where('id', $archivodocente->id)->firstOrfail();
+         return \view('Docente.contenido.documentos.documentopdf',compact('archivodocente','contenido'));
+  
+    }
+      
+  
 
 
 }

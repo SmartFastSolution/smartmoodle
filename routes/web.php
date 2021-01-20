@@ -84,7 +84,7 @@ Route::get('cursos-list-excel','PDFController@CursoExport')->name('curso.excel')
 
 ///rutas menu docente
 route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
-route::get('Documento-pdf/{contenido}', 'DocenteController@VerPDF')->name('Contenido.docente'); //para visualizar el documento en el menu estudiante
+route::get('docente/Documento-pdf/{contenido}', 'DocenteController@VerPDF')->name('Contenido.docente'); //para visualizar el documento en el menu estudiante
 
 //rutas menu estudiante
 route::post('admin/cambiarestado','AdminController@status')->name('taller.status');
@@ -93,7 +93,8 @@ route::get('perfile','EstudianteController@show')->name('perfile');
 route::get('unidad/{id}','EstudianteController@unidades')->name('Unidades');
 route::get('estudiante/password', 'EstudianteController@password')->name('AlumnoPass'); //para metodo get del password 
 route::post('estudiante/password','EstudianteController@updatep')->name('Estudiantes.updatep'); // para guardar el nuevo password
-route::get('Contenido-pdf/{contenido}', 'EstudianteController@VisualizacionPDF')->name('Contenido.alumno'); //para visualizar el documento en el menu estudiante
+route::get('Contenido-pdf/{contenido}', 'EstudianteController@VisualizacionPDF')->name('Contenido.alumno'); //para visualizar el documento del administrador en el menu estudiante
+route::get('Contenido-pdf/docente/{contenido}', 'EstudianteController@VisualizacionPDF2')->name('Contenido2.alumno'); //para visualizar el documento del docente en el menu estudiante
 route::get('post-estudiante', 'EstudianteController@PostE')->name('Post.alumno');
 route::post('estudiante/post/store', 'EstudianteController@storee')->name('storepost'); //guardar un post desde estudiante
 route::DELETE('estudiante/post/delete/{post}', 'EstudianteController@destroype')->name('deletepost');
@@ -109,8 +110,28 @@ route::post('docente/password','DocenteController@updatep')->name('Docente.updat
 route::get('post-docente', 'DocenteController@PostD')->name('Post.docente');
 route::post('docente/post/store', 'DocenteController@stored')->name('storepostd'); //guardar un post desde estudiante
 route::DELETE('docente/post/delete/{post}', 'DocenteController@destroyped')->name('deletepostd');
- //permisoss
+ //archivos docentes
  
+ route::get('docente/archivos-update', 'DocenteController@Archivos_docente')->name('documentacion.docente');
+
+ route::get('docente/documento/Documento-pdf/{archivodocente}', 'DocenteController@VerDoc')->name('Documentover.docente'); //ver documento que el docente sube en otra vista
+/////////////////////////////////////
+///////////DOCUMENTO DOCENTE/////////
+
+ route::get('docente/documento/archivos-crear', 'DocenteController@Doc_crear')->name('documentacion.docentecrear'); //ruta crear 
+ route::post('docente/archivo-guardar','DocenteController@Guardardoc')->name('documentacion.docentestore');
+ route::get('docente/documento/archivo-show/{archivodocente}','DocenteController@docshow')->name('documentaciondoc.show');
+
+ route::get('docente/documento/archivo-show/{archivodocente}/edit','DocenteController@docedit')->name('documentaciondoc.edit');
+ route::PUT('docente/archivo-actualizar/{archivodocente}','DocenteController@docupdate')->name('documentaciondoc.update');
+ route::delete('docente/archivos-update/{archivodocente}','DocenteController@destroy')->name('documentaciondoc.destroy');
+
+/////////////////////////////////////
+/////////////////////////////////////
+
+
+
+
 //////fin
 
 //rutas usuario

@@ -182,12 +182,8 @@ class ContenidoController extends Controller
     
            $contenido->delete();
           
-         
-
-            
+           
             return redirect('sistema/contenidos')->with('success','Haz eliminado un Contenido con exito');     
-
-
        
        
     }

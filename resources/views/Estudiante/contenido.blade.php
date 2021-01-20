@@ -77,14 +77,32 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-pane fade show active" id="mn-documentos-profesor" role="tabpanel"
+                <div class="tab-pane fade " id="mn-documentos-profesor" role="tabpanel"
                     aria-labelledby="mn-documentos-profesor-tab">
 
-                    documentos del profesor
+
+                    <table id="myTable4" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Materia</th>
+                                <th scope="col">Descripcion</th>
+                                <th scope="col" coldspan="1">Ver Documento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($cons2 as $c2)
+                            <tr>
+                                <td> {{$c2->nombre}}</td>
+                                <td> {{$c2->descripcion}}</td>
+                                <td><a class="btn btn-dark btn" href="{{route('Contenido2.alumno', $c2->id)}}"><i
+                                            class="fas fa-eye"></i></a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>
@@ -236,6 +254,13 @@ $(function() {
 
 
         $('#myTable3').DataTable({
+            "info": true,
+            "autoWidth": true,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+            }
+        });
+        $('#myTable4').DataTable({
             "info": true,
             "autoWidth": true,
             "language": {
