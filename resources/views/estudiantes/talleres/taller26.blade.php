@@ -16,11 +16,11 @@
             <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{{ $datos->enunciado }}</h2>
             	
 		<div class="row justify-content-center">
-			<div class="col-10">
+	{{-- 		<div class="col-10">
 						<h5 class="text-center">Datos</h5>
 				<div class="row">
 					<div class="col-6">
-						<h6><strong>Cliente</strong> {{ $taller->nombre }}</h6>
+						<h6><strong>Nombre</strong> {{ $taller->nombre }}</h6>
 						<h6><strong>RUC</strong> {{ $taller->ruc }}</h6>
 						<h6><strong>Fecha de emision </strong> {{ $taller->fecha }}</h6>
 					</div>
@@ -46,7 +46,7 @@
 
                   </tbody>
                 </table>
-			</div>
+			</div> --}}
 			<div class="col-8 border border-danger p-5">
 				<div class="row ">
 					<div class="col-6 text-center">
@@ -54,7 +54,6 @@
 						<h6>Ing. Diego Arcos Quezada <br>
 							Contribuyente Régimen Simplificado</h6>
 
-						<input type="text" name="titulo" disabled class="form-control">
 						<h5>Dirección  Matriz :  Malecón y Olmedo</h5>
 					</div>
 					<div class="col-6">
@@ -80,13 +79,12 @@
 					</div>
 				</div>
 				<div class="row mb-2">
-					<input type="text" disabled class="form-control">
 				</div>
 				<div class="row">
 					<div class="col-2 text-right"> <label>Sr (es):</label> </div>
 					<div class="col-4"> <input type="text" class="form-control" disabled value="{{ $datos->nombre }}" name="nombre"></div>
 					<div class="col-2 text-right"> <label>R.U.C/C.I. :</label> </div>
-					<div class="col-4"> <input type="text" class="form-control" disabled value="{{ $datos->ruc }}" name="ruc"></div>
+					<div class="col-4"> <input type="text" class="form-control text-right" disabled value="{{ $datos->ruc }}" name="ruc"></div>
 				</div>
 				<div class="row justify-content-start mt-2">
 					<div class="col-2 text-right">
@@ -111,10 +109,10 @@
 					  <tbody class="prin">
                   	@foreach ($datos->notavDatos as $dato)
 					    <tr>
-					      <th><input type="text" class="form-control" disabled value="{{ $dato->cantidad }}" name="cantidad[]"></th>
+					      <th><input type="text" class="form-control text-right" disabled value="{{ $dato->cantidad }}" name="cantidad[]"></th>
 					      <td><input type="text" class="form-control" disabled value="{{ $dato->descripcion }}" name="descripcion[]"></td>
-					      <td><input type="text" class="form-control" disabled value="{{ $dato->precio }}" name="precio[]"></td>
-					      <td><input type="text" class="form-control" disabled value="{{ $dato->valor_venta }}" name="valor_venta[]"></td>
+					      <td><input type="text" class="form-control text-right" disabled value="{{ $dato->precio }}" name="precio[]"></td>
+					      <td><input type="text" class="form-control text-right" disabled value="{{ $dato->valor_venta }}" name="valor_venta[]"></td>
 					    </tr>
 					   @endforeach
 					  </tbody>
@@ -122,10 +120,9 @@
 				</div>
 				<div class="row justify-content-end mb-2">
 					<div class="col-3 text-right"><label for="">VALOR TOTAL</label></div>
-					<div class="col-3"><input type="text" disabled value="{{ $datos->total }}" name="total" class="form-control"> </div>
+					<div class="col-3"><input type="text" disabled value="{{ $datos->total }}" name="total" class="form-control text-right"> </div>
 				</div>
 				<div class="row mb-2 justify-content-end">
-					<input type="text" disabled value="{{ $datos->valido }}" name="valido" class="form-control">
 					<label for="">VÁLIDO PARA SU EMISIÓN HASTA FEBRERO/2021</label>
 				</div>
 				<div class="row mb-2 justify-content-start">

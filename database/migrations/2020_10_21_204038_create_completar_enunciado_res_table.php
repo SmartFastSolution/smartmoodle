@@ -16,7 +16,7 @@ class CreateCompletarEnunciadoResTable extends Migration
         Schema::create('completar_enunciado_res', function (Blueprint $table) {
            $table->bigIncrements('id');
             $table->unsignedbigInteger('completar_enunciado_id');
-            $table->longText('respuesta');
+            $table->longText('respuesta')->nullable();
             $table->timestamps();
 
             $table->foreign('completar_enunciado_id')

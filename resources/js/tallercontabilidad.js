@@ -1838,6 +1838,8 @@ const b_ver = new Vue({
                     p_corriente: _this.p_corrientes,
                     p_nocorriente: _this.p_nocorrientes,
                     patrimonio: _this.patrimonios,
+                    totales_iniciales:_this.total_balance_inicial,
+                    totales_totales:_this.b_initotal,
                     t_patrimonio: _this.total_balance_inicial.t_patrimonio_pasivo
                 }).then(response => {
                   if (response.data.success == true) {
@@ -5172,7 +5174,8 @@ const balance_general = new Vue({
           );
           this.a_corrientes.splice(index, 1);   
           this.cambioActivo();                  
-          this.TotalActivo();    
+          this.TotalActivo();  
+          this.limpiar();  
         }
       });
     },
@@ -5199,6 +5202,8 @@ const balance_general = new Vue({
       this.p_corrientes.splice(index, 1);
       this.cambioPasivo();
       this.TotalPasivo(); 
+          this.limpiar();  
+
         }
       });
 
@@ -5223,6 +5228,8 @@ const balance_general = new Vue({
       this.a_nocorrientes.splice(index, 1);
       this.cambioActivoNo();
       this.TotalActivo();
+          this.limpiar();  
+
         }
       });
 
@@ -5247,6 +5254,8 @@ const balance_general = new Vue({
       this.p_nocorrientes.splice(index, 1);
       this.cambioPasivoNo();
       this.TotalPasivo();
+          this.limpiar();  
+
         }
       });
  
@@ -5270,20 +5279,32 @@ const balance_general = new Vue({
           );
       this.patrimonios.splice(index, 1);
       this.cambioPatrimonio();
+          this.limpiar();  
+
         }
       });
     
     },
     limpiar(){ //LIMPIAR TODOS LOS CAMPOS DE ACTIVOS PASIVOS Y PATRIMONIOS
-      this.pasivo.p_corriente.nom_cuenta = '';
+      this.pasivo.p_corriente.cuenta_id = '';
       this.pasivo.p_corriente.saldo = '';
-      this.pasivo.p_nocorriente.nom_cuenta = '';
+      this.pasivo.p_nocorriente.cuenta_id = '';
       this.pasivo.p_nocorriente.saldo = '';
-      this.activo.a_corriente.nom_cuenta = '';
+      this.activo.a_corriente.cuenta_id = '';
       this.activo.a_corriente.saldo = '';
-      this.activo.a_nocorriente.nom_cuenta = '';
+      this.activo.a_nocorriente.cuenta_id = '';
       this.activo.a_nocorriente.saldo = '';
       this.bi.const_id = '';
+       this.activo.a_corriente.edit      = false;
+
+       this.activo.a_nocorriente.edit       = false;
+
+       this.pasivo.p_corriente.edit      = false;
+
+       this.pasivo.p_nocorriente.edit      = false;
+
+       this.patrimonio.edit      = false;
+
 
       },
       agregarActivoCorriente(){
@@ -5571,7 +5592,7 @@ const balance_general = new Vue({
             this.pasivo.p_corriente.saldo      =''
             this.pasivo.p_corriente.edit       = false;
             this.registro.p_corriente          = '';
-          this.cambioPasivoNo();
+            this.cambioPasivo();
           }
       }
     },
@@ -9414,10 +9435,6 @@ const arqueo_caja = new Vue ({
     }, //fin de function  actualizar 
 
     
-  
-
-
-
 
     WarningEliminarExis(id){
       this.eliminar.index = id;

@@ -13,13 +13,13 @@
 				<img class="text-center" src="{{ asset('img/talleres/imagen-8.jpg') }}" alt="">
 			</div>
 			<div class="col-3 mt-5 rounded-circle bg-danger p-5">
-				<textarea required name="respuesta1" class="form-control border-0" id="" cols="5" rows="5"></textarea>
+				<textarea  name="respuesta1" class="form-control border-0" id="" cols="5" rows="5"></textarea>
 			</div>
 			<div class="col-3 mt-3 rounded-circle bg-info p-5">
-				<textarea required name="respuesta2" class="form-control border-0" id="" cols="5" rows="5"></textarea>
+				<textarea  name="respuesta2" class="form-control border-0" id="" cols="5" rows="5"></textarea>
 			</div>
 			<div class="col-3 rounded-circle bg-success p-5">
-				<textarea required name="respuesta3" class="form-control border-0" id="" cols="5" rows="5"></textarea>
+				<textarea  name="respuesta3" class="form-control border-0" id="" cols="5" rows="5"></textarea>
 			</div>
 		</div>
 		<div class="row justify-content-center">

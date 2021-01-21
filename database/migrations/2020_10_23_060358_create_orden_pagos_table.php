@@ -18,17 +18,17 @@ class CreateOrdenPagosTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->longText('enunciado');
-            $table->string('señor');
-            $table->string('fecha');
-            $table->string('fecha_c');
-            $table->string('numero');
-            $table->string('tipo');
-            $table->string('debe');
-            $table->string('haber');
-            $table->string('saldo');
-            $table->string('revisado');
-            $table->string('autorizado');
-            $table->string('vto_bueno');
+            $table->string('señor')->nullable();
+            $table->string('fecha')->nullable();
+            $table->string('fecha_c')->nullable();
+            $table->string('numero')->nullable();
+            $table->string('tipo')->nullable();
+            $table->string('debe')->nullable();
+            $table->string('haber')->nullable();
+            $table->string('saldo')->nullable();
+            $table->string('revisado')->nullable();
+            $table->string('autorizado')->nullable();
+            $table->string('vto_bueno')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

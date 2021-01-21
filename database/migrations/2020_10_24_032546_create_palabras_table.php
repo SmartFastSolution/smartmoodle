@@ -18,7 +18,7 @@ class CreatePalabrasTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->longText('enunciado');
-            $table->longText('palabra');
+            $table->longText('palabra')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

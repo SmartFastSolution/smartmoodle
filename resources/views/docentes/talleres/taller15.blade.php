@@ -43,6 +43,26 @@
           <div class="card-body">
             <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{{ $datos->enunciado }}</h2>
             <div class="row justify-content-center">
+            <div class="col-2" style="box-shadow: -5px 5px 15px 0px  #FB5EBA">
+				<h2>Datos</h2>
+				<label for="">Girador</label><br>
+
+					<p >{{ $taller->girador }}</p>
+
+				<label for="">Girado</label><br>
+
+					<p >{{ $taller->girado }}</p>
+
+				<label for="">Cantidad</label><br>
+
+					<p>{{ $taller->cantidad }}</p>
+
+				<label for="">Lugar y Fecha</label>	<br>
+				<p >{{ $taller->lugar }}</p>
+
+				<p>{{ $taller->fecha }}</p>
+
+			</div>
            		<div class="col-9 border">
 				<div class="row justify-content-center">
 					<div class="col-6">
@@ -99,7 +119,7 @@
 						</div>
 					</div>
 					<div class="col-6 col align-self-end text-center">
-						<input disabled class="form-control" value="Sra. Dana Lopez" type="text" >
+						<input disabled class="form-control" value="{{ $datos->firma }}" type="text" >
 						<label class="" for="">FIRMA</label>
 					</div>
 				</div>

@@ -67,7 +67,7 @@
                     </div>
             @endif
          <div class="col ">
-            <textarea required class="form-control inputdesign" name="respuesta" id="text"  cols="40" rows="10">{{ $datos->leyenda }}
+            <textarea  class="form-control inputdesign" name="respuesta" id="text"  cols="40" rows="10">{{ $datos->leyenda }}
 
             </textarea>
         </div>

@@ -90,7 +90,7 @@
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
-              <h3 class="text-center font-weight-bold text-dark" >Transacciones</h3>
+              {{-- <h3 class="text-center font-weight-bold text-dark" >Transacciones</h3> --}}
               <vue-ckeditor v-model="individuales.balance_vertical" :config="config"/>
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
@@ -105,7 +105,7 @@
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
-              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
               <vue-ckeditor v-model="individuales.balance_horizontal" :config="config"/>
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
@@ -123,7 +123,7 @@
                     <input autocomplete="ÑÖcompletes" type="text" name="" class="form-control" placeholder="Nombre del producto" v-model="individuales.kardex_fifo.nombre">
                 </div>
                   <div class="col-12 mb-2">
-                    <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+                    {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
                     {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.kardex_fifo.transacciones"></ckeditor> --}}
                     <vue-ckeditor v-model="individuales.kardex_fifo.transacciones" :config="config"/>
                       {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
@@ -162,7 +162,7 @@
                     <input autocomplete="ÑÖcompletes" type="text" name="" class="form-control" placeholder="Nombre del producto" v-model="individuales.kardex_promedio.nombre">
                 </div>
                   <div class="col-12 mb-2">
-                    <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+                    {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
                     {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.kardex_promedio.transacciones"></ckeditor> --}}
                     <vue-ckeditor v-model="individuales.kardex_promedio.transacciones" :config="config"/>
                       {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
@@ -198,7 +198,7 @@
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
-              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.diario_general"></ckeditor> --}}
               <vue-ckeditor v-model="individuales.diario_general" :config="config"/>
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
@@ -230,7 +230,7 @@
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
-              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
               <vue-ckeditor v-model="individuales.balance_comprobacion" :config="config"/>
 
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral"></ckeditor> --}}
@@ -248,7 +248,7 @@
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
-              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
               <vue-ckeditor v-model="individuales.hoja_trabajo" :config="config"/>
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral"></ckeditor> --}}
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
@@ -265,7 +265,7 @@
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
-              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
               <vue-ckeditor v-model="individuales.balance_comprobacion_ajustado" :config="config"/>
 
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral"></ckeditor> --}}
@@ -283,7 +283,7 @@
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
-              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
               <vue-ckeditor v-model="individuales.estado_resultado" :config="config"/>
 
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral"></ckeditor> --}}
@@ -301,7 +301,7 @@
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
-              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
               <vue-ckeditor v-model="individuales.balance_general" :config="config"/>
 
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral"></ckeditor> --}}
@@ -320,7 +320,7 @@
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
-              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
               <vue-ckeditor v-model="individuales.asientos_cierre" :config="config"/>
 
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral"></ckeditor> --}}
@@ -338,7 +338,7 @@
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
-              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
               <vue-ckeditor v-model="individuales.librocaja" :config="config"/>
 
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
@@ -355,7 +355,7 @@
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
-              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
               <vue-ckeditor v-model="individuales.conciliacionbancaria" :config="config"/>
 
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
@@ -372,7 +372,7 @@
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
-              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
               <vue-ckeditor v-model="individuales.arqueocaja" :config="config"/>
 
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
@@ -389,7 +389,7 @@
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
-              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
               <vue-ckeditor v-model="individuales.librobanco" :config="config"/>
 
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
@@ -406,7 +406,7 @@
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
-              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
               <vue-ckeditor v-model="individuales.retencioniva" :config="config"/>
 
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
@@ -423,7 +423,7 @@
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
-              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
               <vue-ckeditor v-model="individuales.nominaempleados" :config="config"/>
 
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
@@ -440,7 +440,7 @@
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">
-              <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+              {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
               <vue-ckeditor v-model="individuales.provisiondebeneficio" :config="config"/>
 
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
@@ -528,7 +528,7 @@
                           <div class="container">
                           <div class="row justify-content-center">
                               <div class="col-12 mb-2">
-                                <h3 class="text-center font-weight-bold text-dark" >Transacciones</h3>
+                                {{-- <h3 class="text-center font-weight-bold text-dark" >Transacciones</h3> --}}
                                 <vue-ckeditor v-model="concatenados.balance_horizontal" :config="config"/>
                                   {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
                               </div>
@@ -546,7 +546,7 @@
                                 <input autocomplete="ÑÖcompletes"  type="text" name="" class="form-control" placeholder="Nombre del producto" v-model="concatenados.kardex_fifo.nombre">
                             </div>
                               <div class="col-12 mb-2">
-                                <h3 class="text-center font-weight-bold text-info" >Transacciones</h3>
+                                {{-- <h3 class="text-center font-weight-bold text-info" >Transacciones</h3> --}}
                                 <vue-ckeditor v-model="concatenados.kardex_fifo.transacciones" :config="config"/>
                               </div>
                               <div class="col-2 mb-2">
@@ -574,7 +574,7 @@
                             <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-12 mb-2">
-                                  <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+                                  {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
                                   {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.diario_general"></ckeditor> --}}
                                   <vue-ckeditor v-model="concatenados.diario_general" :config="config"/>
                                     {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
@@ -588,7 +588,7 @@
                             <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-12 mb-2">
-                                  <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>
+                                  {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
                                   <vue-ckeditor v-model="concatenados.conciliacionbancaria" :config="config"/>
                                 </div>
                                 
@@ -600,7 +600,7 @@
                             <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-12 mb-2">
-                                  <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>                                 
+                                  {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3>                                  --}}
                                   <vue-ckeditor v-model="concatenados.arqueocaja" :config="config"/>                              
                                 </div>
                                 

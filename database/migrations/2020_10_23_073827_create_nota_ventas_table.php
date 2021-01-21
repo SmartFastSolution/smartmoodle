@@ -18,11 +18,11 @@ class CreateNotaVentasTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->longText('enunciado');
-            $table->string('nombre');
-            $table->string('ruc');
-            $table->string('fecha');
-            $table->string('total');
-            $table->string('valido');
+            $table->string('nombre')->nullable();
+            $table->string('ruc')->nullable();
+            $table->string('fecha')->nullable();
+            $table->string('total')->nullable();
+            $table->string('valido')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

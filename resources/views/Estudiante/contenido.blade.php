@@ -18,7 +18,7 @@
         <h3 class="font-weight-light"> <strong>Docente|{{$doc->user->name}} {{$doc->user->apellido}}</strong>
         </h3>
         @endforeach
-        <a class="btn btn-primary btn" href=""><i class="far fa-clipboard"></i> Calificaciones</i></a>
+        <!-- <a class="btn btn-primary btn" href=""><i class="far fa-clipboard"></i> Calificaciones</i></a> -->
     </div>
 </section>
 <br>
@@ -268,8 +268,6 @@ $(function() {
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
             }
         });
-
-
         $('#myTable3').DataTable({
             "info": true,
             "autoWidth": true,

@@ -32,7 +32,7 @@
 						<li class="list-inline mb-4">{{ $element->definicion }}</li>
 					</div>
 					<div class="col-2">
-						<input type="text" required class="form-control  text-center font-weight-bold" size="2" name="letra[]" style="outline: none; background-color: #94F0E4; box-shadow: 5px 5px 15px 0px  #18DEF0">
+						<input type="text"  class="form-control  text-center font-weight-bold" size="2" name="letra[]" style="outline: none; background-color: #94F0E4; box-shadow: 5px 5px 15px 0px  #18DEF0">
 					</div>
 				</div>
 			@endforeach

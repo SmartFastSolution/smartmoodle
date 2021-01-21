@@ -86,21 +86,21 @@
 					<div class="col-7">
 						<div class="row">
 							<div class="col-6"><h6>RAZÓN SOCIAL/NOMBRES Y APELLIDOS</h6></div>
-							<div class="col-6"><input required name="nombre" type="text " class="form-control"></div>
+							<div class="col-6"><input  name="nombre" type="text " class="form-control"></div>
 						</div>
 						<div class="row">
 							<div class="col-6"><label class="col-form-label" for="">FECHA EMISIÓN :</label></div>
-							<div class="col-6"><input required name="fecha_emision" type="text " class="form-control"></div>
+							<div class="col-6"><input  name="fecha_emision" type="text " class="form-control"></div>
 						</div>
 					</div>
 					<div class="col-5">
 						<div class="row mb-3">
 							<div class="col-5"><label class="col-form-label">R.U.C/C.I. :</label></div>
-							<div class="col-7"><input required name="ruc" type="text " class="form-control"></div>
+							<div class="col-7"><input  name="ruc" type="text " class="form-control"></div>
 						</div>
 						<div class="row">
 							<div class="col-5"><label class="col-form-label" for="">GUÍA DE REMISIÓN :</label></div>
-							<div class="col-7"><input required name="emision" type="text " class="form-control"></div>
+							<div class="col-7"><input  name="emision" type="text " class="form-control"></div>
 						</div>
 					</div>
 				</div>
@@ -121,13 +121,13 @@
 					  </thead>
 					  <tbody class="prin">
 					  	<tr>
-					  		<td width="100"> <input type="number" name="codigo[]" class="form-control" required></td>
-					  		<td width="100"><input type="number" name="cod_aux[]" class="form-control" required></td>
-					  		<td width="100"><input type="number" name="cantidad[]" class="form-control" required></td>
-					  		<td ><textarea  name="descripcion[]" class="form-control" required></textarea> </td>
-					  		<td width="50"><input type="number" name="precio[]" class="form-control" required></td>
-					  		<td width="50"><input type="number" name="descuento[]" class="form-control" required></td>
-					  		<td width="75"><input type="number" name="valor[]" class="form-control" required></td>
+					  		<td width="100"> <input type="number" name="codigo[]" class="form-control text-right" ></td>
+					  		<td width="100"><input type="text" name="cod_aux[]" class="form-control text-right" ></td>
+					  		<td width="100"><input type="number" name="cantidad[]" class="form-control text-right" ></td>
+					  		<td ><textarea  name="descripcion[]" class="form-control" ></textarea> </td>
+					  		<td width="50"><input type="number" name="precio[]" class="form-control text-right" ></td>
+					  		<td width="50"><input type="number" name="descuento[]" class="form-control text-right" ></td>
+					  		<td width="75"><input type="number" name="valor[]" class="form-control text-right" ></td>
                       		<td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>
 
 					  	</tr>
@@ -141,15 +141,15 @@
 					<h2 class="text-center">Informacion Adicional</h2>
 					<div class="row mb-2">
 						<div class="col-4"><label class="col-form-label" for="">Direccion</label></div>
-						<div class="col-8"><input required type="text" class="form-control" name="direccion"></div>
+						<div class="col-8"><input  type="text" class="form-control" name="direccion"></div>
 					</div>
 					<div class="row mb-2">
 						<div class="col-4"><label class="col-form-label" for="">Telefono</label></div>
-						<div class="col-8"><input required type="text" class="form-control" name="telefono"></div>
+						<div class="col-8"><input  type="text" class="form-control" name="telefono"></div>
 					</div>
 					<div class="row mb-2">
 						<div class="col-4"><label class="col-form-label" for="">Email</label></div>
-						<div class="col-8"><input required type="text" class="form-control" name="email"></div>
+						<div class="col-8"><input  type="text" class="form-control" name="email"></div>
 					</div>
 				</div>
 				<div class="col-6">
@@ -158,48 +158,48 @@
 					  <tbody>
 					    <tr>
 					      <th scope="row">SUBTOTAL {{ $datos->iva }}%</th>
-					      <td><input required type="NUMBER" name="subtotal_12" class="form-control"></td>
+					      <td><input  type="NUMBER" name="subtotal_12" class="form-control text-right"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">SUBTOTAL 0%</th>
-					      <td><input required type="NUMBER" name="subtotal_0" class="form-control"></td>
+					      <td><input  type="NUMBER" name="subtotal_0" class="form-control text-right"></td>
 					      
 					    </tr>
 					    <tr>
 					      <th scope="row">SUBTOTAL No objeto de IVA</th>
-					      <td><input required type="NUMBER" name="subtotal_iva" class="form-control"></td>
+					      <td><input  type="NUMBER" name="subtotal_iva" class="form-control text-right"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">SUBTOTAL Exento de IVA</th>
-					      <td><input required type="NUMBER" name="subtotal_siniva" class="form-control"></td>
+					      <td><input  type="NUMBER" name="subtotal_siniva" class="form-control text-right"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">SUBTOTAL SIN IMPUESTOS</th>
-					      <td><input required type="NUMBER" name="subtotal_sin_imp" class="form-control"></td>
+					      <td><input  type="NUMBER" name="subtotal_sin_imp" class="form-control text-right"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">TOTAL DESCUENTO</th>
-					      <td><input required type="NUMBER" name="descuento_total" class="form-control"></td>
+					      <td><input  type="NUMBER" name="descuento_total" class="form-control text-right"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">ICE</th>
-					      <td><input required type="NUMBER" name="ice" class="form-control"></td>
+					      <td><input  type="NUMBER" name="ice" class="form-control text-right"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">IVA {{ $datos->iva }}%</th>
-					      <td><input required type="NUMBER" name="iva12" class="form-control"></td>
+					      <td><input  type="NUMBER" name="iva12" class="form-control text-right"></td>
 					    </tr>
 					     <tr>
 					      <th scope="row">IRBPNR</th>
-					      <td><input required type="NUMBER" name="irbpnr" class="form-control"></td>
+					      <td><input  type="NUMBER" name="irbpnr" class="form-control text-right"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">PROPINA</th>
-					      <td><input required type="NUMBER" name="propina" class="form-control"></td>
+					      <td><input  type="NUMBER" name="propina" class="form-control text-right"></td>
 					    </tr>
 					    <tr>
 					      <th scope="row">VALOR TOTAL</th>
-					      <td><input required type="NUMBER" name="valor_total" class="form-control"></td>
+					      <td><input  type="NUMBER" name="valor_total" class="form-control text-right"></td>
 					    </tr>
 
 					  </tbody>
@@ -231,13 +231,13 @@
 		function addRow(){
 			
 			var tr='<tr>'+
-			'<td><input type="text" name="codigo[]" class="form-control" required></td>'+
-			'<td><input type="text" name="cod_aux[]" class="form-control" required></td>'+
-			'<td><input type="text" name="cantidad[]" class="form-control" required></td>'+
-			'<td><textarea  name="descripcion[]" class="form-control" required></textarea></td>'+
-			'<td><input type="text" name="precio[]" class="form-control" required></td>'+
-			'<td><input type="text" name="descuento[]" class="form-control" required></td>'+
-			'<td><input type="text" name="valor[]" class="form-control" required></td>'+
+			'<td><input type="text" name="codigo[]" class="form-control text-right" ></td>'+
+			'<td><input type="text" name="cod_aux[]" class="form-control text-right" ></td>'+
+			'<td><input type="text" name="cantidad[]" class="form-control" ></td>'+
+			'<td><textarea  name="descripcion[]" class="form-control" ></textarea></td>'+
+			'<td><input type="text" name="precio[]" class="form-control text-right" ></td>'+
+			'<td><input type="text" name="descuento[]" class="form-control text-right" ></td>'+
+			'<td><input type="text" name="valor[]" class="form-control text-right" ></td>'+
             '<td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>'
 			'</tr>';
 			$('.prin').append(tr);

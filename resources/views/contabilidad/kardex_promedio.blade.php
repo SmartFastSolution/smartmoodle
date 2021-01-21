@@ -72,7 +72,7 @@
 				<td style="vertical-align:middle" class="text-right">@{{ exist.egreso_total }}</td>
 				<td style="vertical-align:middle" class="text-right">@{{ exist.existencia_cantidad }}</td>
 				<td style="vertical-align:middle" class="text-right">@{{ decimales(exist.existencia_precio) }}</td>
-				<td style="vertical-align:middle" class="text-right">@{{ exist.existencia_total }}</td>
+				<td style="vertical-align:middle" class="text-right">@{{ decimales(exist.existencia_total) }}</td>
 				<td style="vertical-align:middle" v-if="transacciones.length >= 1 && transacciones[id].tipo == 'ingreso' || transacciones[id].tipo == 'inicial' || transacciones[id].tipo == 'egreso'"><a class="btn btn-sm btn-warning" href="" @click.prevent="editarTransaccion(id, exist.tipo)"><i class="fas fa-edit"></i></a></td>
 				<td style="vertical-align:middle" v-if="transacciones.length >= 1 && transacciones[id].tipo == 'ingreso'  || transacciones[id].tipo == 'inicial' || transacciones[id].tipo == 'egreso'"><a class="btn btn-sm btn-danger" href="" @click.prevent="borrarTransaccion(id)"><i class="fas fa-trash"></i></a></td>
 				<td style="vertical-align:middle" v-else colspan="2"></td>
@@ -118,23 +118,23 @@
 					<tbody>
 						<tr>
 							<td>Inventario Inicial de Mercaderias</td>
-							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.inventario_inicial" type="number" class="form-control form-control-sm"></td>
-							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.inventario_inicial" type="number" class="form-control form-control-sm"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.inventario_inicial" type="number" class="form-control form-control-sm text-right"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.inventario_inicial" type="number" class="form-control form-control-sm text-right"></td>
 						</tr>
 						<tr>
 							<td>Adquisiciones</td>
-							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.adquicisiones" type="number" placeholder="+" class="form-control form-control-sm text-right"></td>
-							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.adquicisiones" type="number" placeholder="+" class="form-control form-control-sm text-right"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.adquicisiones" type="number" placeholder="+" class="form-control form-control-sm text-right text-right"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.adquicisiones" type="number" placeholder="+" class="form-control form-control-sm text-right text-right"></td>
 						</tr>
 						<tr>
 							<td>(-) Ventas</td>
-							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.ventas" type="number" placeholder="-" class="form-control form-control-sm text-right"></td>
-							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.ventas" type="number" placeholder="-" class="form-control form-control-sm text-right"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.ventas" type="number" placeholder="-" class="form-control form-control-sm text-right text-right"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.ventas" type="number" placeholder="-" class="form-control form-control-sm text-right text-right"></td>
 						</tr>
 						<tr>
 							<td>Inv. Final Mercaderia</td>
-							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.inventario_final" type="number" class="form-control form-control-sm text-right"></td>
-							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.inventario_final" type="number" class="form-control form-control-sm text-right"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.cantidad.inventario_final" type="number" class="form-control form-control-sm text-right text-right"></td>
+							<td><input autocomplete="ÑÖcompletes" v-model="prueba.precio.inventario_final" type="number" class="form-control form-control-sm text-right text-right"></td>
 						</tr>
 					</tbody>
 				</table>

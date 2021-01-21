@@ -44,6 +44,11 @@
           </div>
           <div class="card-body">
             <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{{ $datos->enunciado }}</h2>
+                   <div class="row justify-content-center" >
+    <div class="col-12">
+      <p class="text-justify font-italic" style="font-size: 20px">{{ $taller->descripcion }} </p>    
+    </div>
+  </div>
 			<table class="table">
 			<thead >
 				<tr class=" text-center thead-dark">

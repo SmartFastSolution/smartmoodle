@@ -67,7 +67,7 @@
 						</div>
 					</div>
 					<div class="col-6 col align-self-end text-center">
-						<input disabled class="form-control" value="Sra. Dana Lopez" type="text" >
+						<input disabled class="form-control" value="{{ $datos->firma }}" type="text" >
 						<label class="" for="">FIRMA</label>
 					</div>
 				</div>

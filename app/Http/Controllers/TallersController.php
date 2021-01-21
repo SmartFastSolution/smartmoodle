@@ -104,8 +104,8 @@ class TallersController extends Controller
              $doble = $datos->partidaDobleEnn;
              $array =[];
              $recorrido = [];
-             foreach ($doble as $key => $value) {
-                 $array[$key] = [
+             for ($i = 0; $i < $datos->n_t; $i++) {
+                 $array[$i] = [
                     'cuenta' =>'',
                     'debe' => array(),
                     'haber' => array(),
@@ -114,12 +114,25 @@ class TallersController extends Controller
 
                  ];
              }
-              foreach ($doble as $key => $value) {
-                 $recorrido[$key] = [
+             // foreach ($doble as $key => $value) {
+             //     $array[$key] = [
+             //        'cuenta' =>'',
+             //        'debe' => array(),
+             //        'haber' => array(),
+             //        'total_debe' =>'',
+             //        'total_haber' =>'',
+
+             //     ];
+             // }
+             for ($i = 0; $i < $datos->n_t; $i++) {
+                 $recorrido[$i] = [
                     'debe' => '',
                     'haber' => ''
                  ];
              }
+             //  foreach ($doble as $key => $value) {
+                 
+             // }
             return view('talleres.taller2', compact('datos', 'd', 'array', 'recorrido'));
 
         }elseif ($plant == 3) {

@@ -18,17 +18,17 @@ class CreateAbreviaturaEditorialsTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->longText('enunciado');
-            $table->string('abreviatura1');
-            $table->string('abreviatura2');
-            $table->string('abreviatura3');
-            $table->string('abreviatura4');
-            $table->string('abreviatura5');
-            $table->string('abreviatura6');
-            $table->string('abreviatura7');
-            $table->string('abreviatura8');
-            $table->string('abreviatura9');
-            $table->string('abreviatura10');
-            $table->string('abreviatura11');
+            $table->string('abreviatura1')->nullable();
+            $table->string('abreviatura2')->nullable();
+            $table->string('abreviatura3')->nullable();
+            $table->string('abreviatura4')->nullable();
+            $table->string('abreviatura5')->nullable();
+            $table->string('abreviatura6')->nullable();
+            $table->string('abreviatura7')->nullable();
+            $table->string('abreviatura8')->nullable();
+            $table->string('abreviatura9')->nullable();
+            $table->string('abreviatura10')->nullable();
+            $table->string('abreviatura11')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

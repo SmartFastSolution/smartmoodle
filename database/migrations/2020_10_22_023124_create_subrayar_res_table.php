@@ -16,8 +16,8 @@ class CreateSubrayarResTable extends Migration
         Schema::create('subrayar_res', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('subrayar_id');
-            $table->longText('concepto');
-            $table->longText('respuesta');
+            $table->longText('concepto')->nullable();
+            $table->longText('respuesta')->nullable();
             $table->timestamps();
 
             $table->foreign('subrayar_id')

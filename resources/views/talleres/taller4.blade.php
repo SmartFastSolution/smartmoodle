@@ -49,9 +49,9 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 						 <input class="effect-1" type="text" name="diferencia_3a" autocomplete="ÑÖcompletes">
               			<span class="focus-border"></span>
 					</div>
-						{{-- <input required class="form-control mb-3 mt-3" name="diferencia_1a" type="text">
-				       <input required class="form-control mb-3" name="diferencia_2a" type="text">
-				      <input required class="form-control mb-3" name="diferencia_3a" type="text"> --}}
+						{{-- <input  class="form-control mb-3 mt-3" name="diferencia_1a" type="text">
+				       <input  class="form-control mb-3" name="diferencia_2a" type="text">
+				      <input  class="form-control mb-3" name="diferencia_3a" type="text"> --}}
 
 					
 				</div>
@@ -74,9 +74,9 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
               			<span class="focus-border"></span>
 					</div>
 					{{-- <div class="col">
-						<input required class="form-control mb-3 mt-3" name="diferencia_1b" type="text">
-				       <input required class="form-control mb-3" name="diferencia_2b" type="text">
-				      <input required class="form-control mb-3" name="diferencia_3b" type="text">
+						<input  class="form-control mb-3 mt-3" name="diferencia_1b" type="text">
+				       <input  class="form-control mb-3" name="diferencia_2b" type="text">
+				      <input  class="form-control mb-3" name="diferencia_3b" type="text">
 
 					</div> --}}
 				</div>

@@ -28,14 +28,14 @@
 						<h2>VALE DE CAJA</h2>
 					</div>
 					<div class="col-4 form-inline">
-						<label for="">Por $ </label> <input type="text" name="por" class="form-control" required size="20">
+						<label for="">Por $ </label> <input type="number" name="por" class="form-control text-right"  size="20">
 					</div>
 				</div>
 				<div class="row justify-content-center mt-1">
 					<div class="col-12">
 						<div class="row justify-content-start">
 							<div class="col-3"><label for="">A favor de </label> </div>
-							<div class="col-9"><input type="text" name="deudor" required class="form-control"></div>
+							<div class="col-9"><input type="text" name="deudor"  class="form-control"></div>
 						</div>
 						
 					</div>
@@ -44,7 +44,7 @@
 					<div class="col-12">
 						<div class="row justify-content-start">
 							<div class="col-3"><label for="">Por la cantidad de </label> </div>
-							<div class="col-9"><input name="cantidad" type="text" class="form-control" required></div>
+							<div class="col-9"><input name="cantidad" type="text" class="form-control" ></div>
 						</div>
 						
 					</div>
@@ -53,24 +53,24 @@
 					<div class="col-12">
 						<div class="row justify-content-start">
 							<div class="col-3"><label for="">A concepto de </label> </div>
-							<div class="col-9"><input required name="concepto" type="text" class="form-control"></div>
+							<div class="col-9"><input  name="concepto" type="text" class="form-control"></div>
 						</div>
 						
 					</div>
 				</div>
 				<div class="row justify-content-end mt-2">
 					<div class="col-6 text-center">
-						<input type="date" name="fecha" class="form-control" required>
+						<input type="date" name="fecha" class="form-control" >
 						<label for="">Fecha</label>
 					</div>
 				</div>
 				<div class="row justify-content-lg-between">
 					<div class="col-4 text-center">
-						<input name="vto_bueno" type="text" class="form-control" required >
+						<input name="vto_bueno" type="text" class="form-control"  >
 						<label >Vto. Bno.</label>
 					</div>
 					<div class="col-4 text-center">
-						<input required name="conforme" type="text" class="form-control" >
+						<input  name="conforme" type="text" class="form-control" >
 						<label >Recibi conforme</label>
 					</div>
 

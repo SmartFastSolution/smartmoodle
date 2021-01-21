@@ -17,7 +17,7 @@ class CreateDGRHabersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('d_g_registro_id');
             $table->unsignedbigInteger('cuenta_id');
-            $table->string('nom_cuenta');
+            $table->string('nom_cuenta')->nullable();
             $table->string('saldo')->nullable();
             $table->timestamps();
 

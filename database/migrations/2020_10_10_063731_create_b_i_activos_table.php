@@ -17,10 +17,10 @@ class CreateBIActivosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('balance_inicial_id');
             $table->string('fecha')->nullable();
-            $table->unsignedbigInteger('cuenta_id');
-            $table->string('nom_cuenta');
-            $table->string('saldo');
-            $table->string('tipo');
+            $table->unsignedbigInteger('cuenta_id')->nullable();
+            $table->string('nom_cuenta')->nullable();
+            $table->string('saldo')->nullable();
+            $table->string('tipo')->nullable();
             $table->timestamps();
 
 

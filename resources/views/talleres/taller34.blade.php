@@ -31,13 +31,13 @@
 							 			@foreach ($tipos->saldoDebe as $debe)
 							 				<h6>{{ $debe->nom_cuenta }}</h6>
 							 			@endforeach
-
 							 				<h4>TOTAL</h4>
 							 			</div>
 							 			<div class="col-6 ">
 							 			@foreach ($tipos->saldoDebe as $debesaldo)
-							 				<h6 >{{ $debesaldo->saldo }}</h6>
+							 				<h6  class="text-right">{{ $debesaldo->saldo }}</h6>
 							 			@endforeach
+							 			<input type="number" class="form-control form-control-sm text-right" name="total_debe[]">
 							 				{{-- <h6 >$ 2.100</h6>
 							 				<h6 class="border-left-0 border-right-0 border-top-0 border border-danger">$ 900</h6> --}}
 
@@ -54,8 +54,10 @@
 							 			</div>
 							 			<div class="col-6">
 							 			@foreach ($tipos->saldoHaber as $saldo)
-							 				<h6>{{ $saldo->saldo }}</h6>
+							 				<h6 class="text-right">{{ $saldo->saldo }}</h6>
 							 			@endforeach
+							 			<input type="number" class="form-control form-control-sm text-right" name="total_haber[]">
+
 							 				{{-- <h6 class="mb-4">$ 2.100</h6>
 							 				<h6 class="border-left-0 border-right-0 border-top-0 border border-danger">$ 900</h6> --}}
 							 			</div>
@@ -69,7 +71,7 @@
 						<div class="col-4 text-center align-self-center">
 							<div class="border bg-light p-2">
 								<h5>SALDO :</h5>
-								<input required type="text" name="saldo[]" class="form-control" style="box-shadow: 5px 5px 15px 0px  #087980;">
+								<input  type="text" name="saldo[]" class="form-control" style="box-shadow: 5px 5px 15px 0px  #087980;">
 							</div>
 
 						</div>

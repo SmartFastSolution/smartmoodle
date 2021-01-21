@@ -40,6 +40,30 @@
     </div>
 </div>
 <h2></h2>
+    <div class="row">
+        <div class="col-7">
+            <h3 class="text-left font-weight-bold text-danger"> + DEPÓSITOS NO ACREDITADOS POR EL BANCO</h3>
+            <draggable class="list-group list-group-flush" :list="c_depositos" group="people">
+                <div v-for="(element, index) in c_depositos" :key="element.name">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span class="badge-pill"> @{{formatoFecha(element.fecha)}}</span> @{{ element.detalle }}<span
+                            class="badge-pill">@{{ decimales(element.saldo) }} </span>
+                    </li>
+                </div>
+            </draggable>
+        </div>
+        <div class="col-12">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOTAL DEPÓSITOS. NO ACREDITADOS</td>
+                        <td style="font-size: 20px;" class="badge-success badge"> + @{{ decimales(suman.saldo_depositos) }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <h2></h2>
 <div class="row">
     <div class="col-7">
         <h3 class="text-left font-weight-bold text-danger"> + DÉBITOS BANCARIOS NO CONTABILIZADOS</h3>

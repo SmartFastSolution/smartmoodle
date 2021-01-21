@@ -102,8 +102,7 @@ route::get('post-estudiante', 'EstudianteController@PostE')->name('Post.alumno')
 route::post('estudiante/post/store', 'EstudianteController@storee')->name('storepost'); //guardar un post desde estudiante
 route::DELETE('estudiante/post/delete/{post}', 'EstudianteController@destroype')->name('deletepost');
 
-
-///rutas menu docente
+//rutas menu docente
 route::get('perfil', 'DocenteController@Perfil')->name('Perfil');
 route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
 route::get('contenido/{id}/talleres','DocenteController@talleres')->name('contenido.talleres');
@@ -133,6 +132,9 @@ route::DELETE('docente/post/delete/{post}', 'DocenteController@destroyped')->nam
 /////////////////////////////////////
 
 
+
+route::get('docente/password', 'DocenteController@password')->name('DocentePass'); //para metodo get del password 
+route::post('docente/password','DocenteController@updatep')->name('Docente.updatep'); // para guardar el nuevo password
 
 
 //////fin
@@ -460,6 +462,7 @@ route::post('/sistema/admin/docente/mayorgeneral', 'TallerContabilidadDocenteCon
 route::post('/sistema/admin/docente/obtener-balance-general', 'TallerContabilidadDocenteController@obtenerbalanceGeneral')->name('balance-obtener-general');
 
 route::post('/sistema/admin/docente/obtenerbalance', 'TallerContabilidadDocenteController@obtenerbalance')->name('obtenerbalance');
+route::post('/sistema/admin/docente/balance-vertical', 'TallerContabilidadDocenteController@balance_vertical')->name('balance_vertical');
 
 route::post('/sistema/admin/docente/anexo-obtener-caja', 'TallerContabilidadDocenteController@obtenerLibroCaja')->name('anexocaja.obtener');
 
@@ -481,7 +484,9 @@ route::post('/sistema/admin/docente/provision-obtener-beneficio', 'TallerContabi
 
 route::post('/sistema/homedoc/respuesta/taller1/{idtaller}', 'TallerDocenteController@store1')->name('taller1.docente');
 route::get('/sistema/admin/create', 'AdminController@admin')->name('admin.create');
+route::get('/sistema/admin/leccion', 'AdminController@leccion')->name('leccion.create');
 route::post('/sistema/admin', 'AdminController@store')->name('admin');
 route::post('/sistema/delete', 'AdminController@delete')->name('delete');
 Route::post('/sistema/admin/ramdom','HomeController@ramdom')->name('ramdom');
+Route::post('/sistema/admin/leccion','AdminController@crear_leccion')->name('crear_leccion');
 // route::get('/sistema/taller33','TallersController@taller33')->name('taller33');

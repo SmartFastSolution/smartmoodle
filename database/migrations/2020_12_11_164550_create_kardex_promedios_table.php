@@ -19,7 +19,7 @@ class CreateKardexPromediosTable extends Migration
             $table->unsignedbigInteger('user_id');
             $table->unsignedbigInteger('producto_id')->nullable();
             $table->string('nombre');
-            $table->string('producto');
+            $table->string('producto')->nullable();
             $table->string('inv_inicial_cantidad')->nullable();
             $table->string('adquisicion_cantidad')->nullable();
             $table->string('ventas_cantidad')->nullable();

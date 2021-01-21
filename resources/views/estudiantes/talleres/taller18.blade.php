@@ -30,7 +30,7 @@
 								<label for="" class="col-form-label">No:</label>
 							</div>
 							<div class="col-3">
-								<input disabled value="{{ $datos->numero }}" type="text" name="numero" class="form-control form-control-sm" required>
+								<input disabled value="{{ $datos->numero }}" type="text" name="numero" class="form-control form-control-sm text-right" required>
 							</div>
 							<div class="col-5 border border-info p-2">
 								<div class="row">
@@ -38,7 +38,7 @@
 										<label class="col-form-label" for="">POR:</label>
 									</div>
 									<div class="col-8">
-										<input disabled value="{{ $datos->por }}" type="text" name="por" class="form-control form-control-sm" required>
+										<input disabled value="{{ $datos->por }}" type="text" name="por" class="form-control form-control-sm text-right" required>
 									</div>
 								</div>
 							</div>

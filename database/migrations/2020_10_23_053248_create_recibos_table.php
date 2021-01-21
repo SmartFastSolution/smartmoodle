@@ -18,15 +18,17 @@ class CreateRecibosTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->longText('enunciado');
-            $table->string('no');
-            $table->string('por');
-            $table->string('recibi');
-            $table->string('cantidad');
-            $table->string('arriendo');
-            $table->string('propiedad');
-            $table->string('situado');
-            $table->string('hasta');
-            $table->string('firma');
+            $table->string('no')->nullable();
+            $table->string('por')->nullable();
+            $table->string('recibi')->nullable();
+            $table->string('cantidad')->nullable();
+            $table->string('arriendo')->nullable();
+            $table->string('propiedad')->nullable();
+            $table->string('situado')->nullable();
+            $table->string('cubierto')->nullable();
+            $table->string('espacio')->nullable();
+            $table->string('hasta')->nullable();
+            $table->string('firma')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

@@ -16,8 +16,8 @@ class CreateMovimientobancosTable extends Migration
         Schema::create('movimientobancos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('librobanco_id');
-            $table->string('fecha');
-            $table->string('detalle');
+            $table->string('fecha')->nullable();
+            $table->string('detalle')->nullable();
             $table->string('cheque')->nullable();
             $table->string('debe')->nullable();
             $table->string('haber')->nullable();

@@ -381,18 +381,16 @@
 
                     </div>
 
-                    @if($datos->metodo == 'individual')
-                    <div class="col-5"
-                        style=" height:400px; overflow-y: scroll; overflow-x: hidden; border: double 8px #EE2E2E">
-                        <h3 class="text-center text-danger font-weight-bold mt-2">Datos para realizar la nomina de
-                            empleados</h3>
+                @if($datos->metodo == 'individual')
+                     <div class="col-5" style=" height:400px; overflow-y: scroll; overflow-x: hidden; border: double 8px #EE2E2E">
+                        <h3 class="text-center text-danger font-weight-bold mt-2">Datos para realizar la nomina de empleados</h3>
 
                         {!! $transacciones->transacciones !!}
 
-                    </div>
-                    @endif
+                     </div>
+                     @endif
                     <br>
-                    <div class="col-12 mt-2 border border-bottom-0 border-left-0 border-right-0 border-danger">
+                    <div class="col-12 mt-2 border border-bottom-0 border-left-0 border-right-0 border-danger" >
                         <h2 class="text-center">AGREGAR NÓMINA</h2>
 
                         <table class="table table-bordered table-sm">

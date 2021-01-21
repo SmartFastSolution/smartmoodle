@@ -17,10 +17,10 @@ class CreateGusanillosTable extends Migration
            $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->longText('enunciado');
-            $table->string('respuesta1');
-            $table->string('respuesta2');
-            $table->string('respuesta3');
+            $table->longText('enunciado')->nullable();
+            $table->string('respuesta1')->nullable();
+            $table->string('respuesta2')->nullable();
+            $table->string('respuesta3')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

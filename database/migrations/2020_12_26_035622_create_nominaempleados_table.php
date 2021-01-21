@@ -17,7 +17,7 @@ class CreateNominaempleadosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('nombre');
+            $table->string('nombre')->nullable();
             $table->string('fecha')->nullable();
             $table->string('s_sueldo')->nullable();
             $table->string('s_sobretiempo')->nullable();

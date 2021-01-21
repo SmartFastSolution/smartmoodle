@@ -154,8 +154,8 @@
       <table>
         <tbody>
           <tr>
-            <td class="font-weight-bold" style="font-size: 20px;" width="750">TOT. PAS. Y PATRI.</td>
-            <td><input autocomplete="ÑÖcompletes" type="number" v-model="total_balance_inicial.t_patrimonio_pasivo" class="form-control"></td>
+            <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOT. PAS. Y PATRI.</td>
+            <td style="font-size: 20px;" class="badge-danger badge">@{{total_balance_inicial.t_patrimonio_pasivo}}</td>
           </tr>
         </tbody>
       </table>

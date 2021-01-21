@@ -33,7 +33,7 @@ class DocenteController extends Controller
         $this->middleware('docente');
     }
 
-    public function Perfil()
+   public function Perfil()
     {
 
                 $au = User::find(Auth::id())->distribuciondos;
@@ -62,7 +62,7 @@ class DocenteController extends Controller
                 // ->wherein('tallers.contenido_id','==', 1)
                 ->where('taller_user.status', 'completado')
                 ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre','nivels.nombre as nivel_nombre', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
-                ->paginate(10);
+                ->get();
             
 
                     $calificado = DB::table('tallers')
@@ -77,7 +77,7 @@ class DocenteController extends Controller
                     // ->wherein('tallers.contenido_id','==', 1)
                     ->where('taller_user.status', 'calificado')
                     ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre' ,'nivels.nombre as nivel_nombre',  'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
-                    ->paginate(10);
+                    ->get();
 
 
                     // return $users;
@@ -93,11 +93,13 @@ class DocenteController extends Controller
 
     }
     public function index()
-    {           
+    {
+            
                 $p = Post::all();
                
                 return view('Docente.indexd',compact('p'));
-      }
+     
+    }
     
     public function contenidos($id)
     {
@@ -121,7 +123,7 @@ class DocenteController extends Controller
             // ->wherein('tallers.contenido_id','==', 1)
             ->where('taller_user.status', 'completado')
             ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre', 'nivels.nombre as nivel_nombre','materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
-            ->paginate(10);
+            ->get();
 
             $calificado = DB::table('tallers')
             ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
@@ -135,7 +137,7 @@ class DocenteController extends Controller
             // ->wherein('tallers.contenido_id','==', 1)
             ->where('taller_user.status', 'calificado')
             ->select('tallers.*','taller_user.*' ,'cursos.nombre as cur_nombre','nivels.nombre as nivel_nombre', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
-            ->paginate(10);
+            ->get();
 
             // return $calificado;
                 return view ('Docente.contenidodocente',compact('user','institutomate','materia','contenidos', 'users', 'calificado','cons'));
@@ -472,6 +474,5 @@ class DocenteController extends Controller
     }
       
   
-
 
 }

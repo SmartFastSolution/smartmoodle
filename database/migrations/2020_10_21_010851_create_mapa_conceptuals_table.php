@@ -18,14 +18,14 @@ class CreateMapaConceptualsTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->longText('enunciado');
-            $table->string('vender');
-            $table->string('comprar');
-            $table->string('seccion1a');
-            $table->string('seccion1b');
-            $table->string('seccion2a');
-            $table->string('seccion2b');
-            $table->string('seccion3a');
-            $table->string('seccion3b');
+            $table->string('vender')->nullable();
+            $table->string('comprar')->nullable();
+            $table->string('seccion1a')->nullable();
+            $table->string('seccion1b')->nullable();
+            $table->string('seccion2a')->nullable();
+            $table->string('seccion2b')->nullable();
+            $table->string('seccion3a')->nullable();
+            $table->string('seccion3b')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

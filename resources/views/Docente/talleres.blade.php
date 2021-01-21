@@ -59,7 +59,8 @@
                                         <tr v-for="(taller, index) in talleres[{{ $c }}].talleres">
                                             <td>{{$contenido->nombre}}</td>
                                             <td>@{{taller.nombre}}</td>
-                                            <td v-html="taller.enunciado">@{{taller.enunciado}}</td>
+                                            <td v-if="taller.plantilla_id == 37">TALLER DE MODULO CONTABLE</td>
+                                            <td v-else v-html="taller.enunciado">@{{taller.enunciado}}</td>
                                             <td>
                                                 <span v-if="taller.estado == 1"
                                                     class="badge-success badge">activo</span>

@@ -18,37 +18,37 @@
 				<div class="row mb-2">
 					<div class="col-4 align-self-center">
 						<h5 class="bg-warning border border-secondary p-1 rounded text-center">VENDER</h5>
-						<input required="" type="text" class="form-control" name="vender">
+						<input  type="text" class="form-control" name="vender">
 					</div>
 					<div class="col-4 text-center">
 						<img class="img-fluid" src="{{ asset('img/talleres/imagen-32.jpg') }}" alt="">
 					</div>
 					<div class="col-4 align-self-center">
 						<h5 class="bg-warning border border-secondary p-1 rounded text-center">COMPRAR</h5>
-						<input required="" type="text" class="form-control" name="comprar">
+						<input  type="text" class="form-control" name="comprar">
 					</div>
 				</div>
 
 				<div class="row justify-content-lg-between">
 					<div class="col-3 align-self-center text-center p-3" style="box-shadow: 5px 5px 15px 0px  #087980;">
 						<h5>1</h5>
-						<input required="" type="text" class="form-control" name="seccion1a">
+						<input  type="text" class="form-control" name="seccion1a">
 						<img class="img-fluid mb-1 mt-1 " src="{{ asset('img/talleres/img-1.jpg') }}" alt="">
-						<input required="" type="text" class="form-control" name="seccion1b">
+						<input  type="text" class="form-control" name="seccion1b">
 					</div>
 					<div class="col-3 align-self-center text-center p-3" style="box-shadow: 5px 5px 15px 0px  #087980;">
 						<h5>2</h5>
 
-						<input required="" type="text" class="form-control" name="seccion2a">
+						<input  type="text" class="form-control" name="seccion2a">
 						<img class="img-fluid mb-1 mt-1 " src="{{ asset('img/talleres/img-2.jpg') }}" alt="">
-						<input required="" type="text" class="form-control" name="seccion2b">
+						<input  type="text" class="form-control" name="seccion2b">
 					</div>
 					<div class="col-3 align-self-center text-center p-3" style="box-shadow: 5px 5px 15px 0px  #087980;">
 						<h5>3</h5>
 
-						<input required="" type="text" class="form-control" name="seccion3a">
+						<input  type="text" class="form-control" name="seccion3a">
 						<img class="img-fluid mb-1 mt-1 " src="{{ asset('img/talleres/img-3.jpg') }}" alt="">
-						<input required="" type="text" class="form-control" name="seccion3b">
+						<input  type="text" class="form-control" name="seccion3b">
 					</div>
 				</div>
 		

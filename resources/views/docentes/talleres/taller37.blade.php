@@ -172,26 +172,9 @@
             <div class="row">
         <div class="col-12">
             @if ($datos->balance_inicial_vertical == 1)
-             {{--    <ul class="nav nav-tabs" id="bInicial" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#b_vertical" role="tab"
-                                aria-controls="b_vertical" aria-selected="false">Balance Inicial Vertical</a>
-                        </li>
-                    </ul> --}}
-                    <div class="tab-content" id="bInicialContent">
-                        @include('docentes.contabilidad.balanceinicial')
-                    </div>
-
+              @include('docentes.contabilidad.balance_inicial_vertical')
             @elseif ($datos->balance_inicial_horizontal == 1)
-        {{--     <ul class="nav nav-tabs" id="bInicial" role="tablist">
-                    <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#b_horizontal" role="tab"
-                                aria-controls="b_horizontal" aria-selected="true">Balance Inicial Horizontal</a>
-                        </li>
-                    </ul> --}}
-                    <div class="tab-content" id="bInicialContent">
                         @include('docentes.contabilidad.balanceinicial')
-                    </div>
             @elseif ($datos->kardex_fifo == 1)
                     @include('docentes.contabilidad.kardex')
                 @elseif ($datos->kardex_promedio == 1)
@@ -345,8 +328,8 @@ const b_hori = new Vue({
      
     },
       obtenerBalance:function(){
-    var _this = this;
-      var url = '/sistema/admin/docente/obtenerbalance';
+    let _this = this;
+      let url = '/sistema/admin/docente/obtenerbalance';
           axios.post(url,{
           id: _this.id_taller,
           tipo: _this.tipo,
@@ -388,8 +371,6 @@ if(document.getElementById('b_vertical')){
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const b_ver = new Vue({
         el: '#b_vertical',
-        
-
         data:{
         user_id:user,
         id_taller: taller,
@@ -441,28 +422,30 @@ const b_ver = new Vue({
      
     },
       obtenerBalance:function(){
-    var _this = this;
-      var url = '/sistema/admin/docente/obtenerbalance';
+    let _this = this;
+      let url = '/sistema/admin/docente/balance-vertical';
           axios.post(url,{
           id: _this.id_taller,
           tipo: _this.tipo,
           user: _this.user_id,
       }).then(response => {
-        if (response.data.tipo == _this.tipo || response.data.datos == true ) {
-            toastr.success(response.data.message, "Smarmoddle", {
-          "timeOut": "3000"
-         });
-          _this.balance_inicial.nombre = response.data.nombre
-          _this.balance_inicial.fecha = response.data.fecha
-          _this.a_corrientes = response.data.a_corriente;
-          _this.a_nocorrientes = response.data.a_nocorriente;
-          _this.p_corrientes = response.data.p_corriente;
-          _this.p_nocorrientes = response.data.p_nocorriente;
-          _this.patrimonios = response.data.patrimonios;
-          _this.total_balance_inicial.t_patrimonio_pasivo = response.data.total_pasivo_patrimonio;       
-        } else {
-
-        }
+    
+          _this.balance_inicial.nombre                    = response.data.nombre
+          _this.balance_inicial.fecha                     = response.data.fecha
+          _this.a_corrientes                              = response.data.a_corriente;
+          _this.a_nocorrientes                            = response.data.a_nocorriente;
+          _this.p_corrientes                              = response.data.p_corriente;
+          _this.p_nocorrientes                            = response.data.p_nocorriente;
+          _this.patrimonios                               = response.data.patrimonios;
+          _this.total_balance_inicial.t_patrimonio_pasivo = response.data.total_pasivo_patrimonio;
+          _this.total_balance_inicial.t_activo = response.data.completo.total_activo_corriente
+          _this.total_balance_inicial.t_pasivo = response.data.completo.total_activo_nocorriente
+          _this.b_initotal.t_a_corriente = response.data.completo.total_pasivo_corriente
+          _this.b_initotal.t_a_nocorriente = response.data.completo.total_pasivo_nocorriente
+          _this.b_initotal.t_p_corriente = response.data.completo.total_activo
+          _this.b_initotal.t_p_no_corriente = response.data.completo.total_pasivo
+          _this.b_initotal.t_patrimonio = response.data.completo.total_patrimonio       
+      
       }).catch(function(error){
       
       });
@@ -1086,8 +1069,8 @@ methods:{
      
     },
       obtenerMayorGeneral: function(){
-        var _this = this;
-        var url = '/sistema/admin/docente/mayorgeneral';
+        let _this = this;
+        let url = '/sistema/admin/docente/mayorgeneral';
             axios.post(url,{
               id: _this.id_taller,
               user: _this.user_id
@@ -1478,8 +1461,8 @@ const balance_general = new Vue({
      
     },
       obtenerBalance:function(){
-      var _this = this;
-        var url = '/sistema/admin/docente/obtener-balance-general';
+      let _this = this;
+        let url = '/sistema/admin/docente/obtener-balance-general';
             axios.post(url,{
             id: _this.id_taller,
             user: _this.user_id
@@ -1722,6 +1705,7 @@ const conciliacionb = new Vue({
      c_saldos:[],
      c_debitos:[],
      c_creditos:[],
+     c_depositos:[],
      c_cheques:[],
      suman:{
        saldo_c :0,
@@ -1752,38 +1736,56 @@ const conciliacionb = new Vue({
   }
    
   },// fin fecha
-      totales: function(){
+         totales: function(){
+      
        this.suman.saldo_c =0;
        this.suman.saldo_ch =0;
        this.suman.saldo_d =0;
+       this.suman.saldo_depositos=0;
        this.suman.total =0;
+
        let r1 = this.c_saldos;
        let r2 = this.c_debitos;
        let r3 = this.c_creditos;
        let r4 = this.c_cheques;
+       let r5 = this.c_depositos;
+       
        let t1 =0;
        let t2 =0;
        let t3 =0;
        let t4 =0;
+       let t5 =0;
+     
+
        r1.forEach(function(obj, index){
           t1 +=Number(obj.saldo);
        });
+
        r2.forEach(function(obj, index){
         t2 +=Number(obj.saldo);
        });
+
       r3.forEach(function(obj, index){
        t3 +=Number(obj.saldo);
       });
+
       r4.forEach(function(obj, index){
         t4 +=Number(obj.saldo);
      });
-      var tsd  = t1 + t2;
+
+      r5.forEach(function(obj, index){
+      t5 +=Number(obj.saldo);
+      });
+
+      var tsd  = t1 + t2 + t5;
       var tsdc = tsd - t3;
       var tch  = tsdc - t4;
-
+     
+     
       this.suman.saldo_d   = t2.toFixed(2);
       this.suman.saldo_c   = t3.toFixed(2);
       this.suman.saldo_ch  = t4.toFixed(2);
+      this.suman.saldo_depositos = t5.toFixed(2);
       this.suman.total     = tch.toFixed(2);
       
        
@@ -1801,6 +1803,7 @@ const conciliacionb = new Vue({
               });
               this.c_saldos   = response.data.saldo;
               this.c_debitos  = response.data.debito;
+              this.c_depositos  = response.data.deposito;
               this.c_creditos = response.data.credito;
               this.c_cheques  = response.data.cheque;
               this.nombre     = response.data.nombre;
@@ -1829,6 +1832,8 @@ let reten_iva = new Vue({
     user_id: user,
     nombre_c:'', 
     fecha:'',
+    contribuyente:'',
+    
     ruc:'',
     dgeneral:[],
 
@@ -2054,10 +2059,11 @@ let reten_iva = new Vue({
             toastr.info("Anexo Retencion del Iva cargado correctamente", "Smarmoddle", {
               "timeOut": "3000"
               });
-              this.t_compras    = response.data.compra;
+                      this.t_compras    = response.data.compra;
               this.t_ventas     = response.data.venta;
               this.nombre_c     = response.data.nombre;
               this.ruc          = response.data.ruc;
+              this.contribuyente= response.data.contribuyente;
               this.fecha        = response.data.fecha;
               this.total.t_ivacompra  = response.data.t_ivacompra;
               this.total.t_ivaventa   = response.data.t_ivaventa;

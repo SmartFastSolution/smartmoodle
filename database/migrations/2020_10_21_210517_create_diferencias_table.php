@@ -18,12 +18,12 @@ class CreateDiferenciasTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->longText('enunciado');
-            $table->string('diferencia_1a');
-            $table->string('diferencia_2a');
-            $table->string('diferencia_3a');
-            $table->string('diferencia_1b');
-            $table->string('diferencia_2b');
-            $table->string('diferencia_3b');
+            $table->string('diferencia_1a')->nullable();
+            $table->string('diferencia_2a')->nullable();
+            $table->string('diferencia_3a')->nullable();
+            $table->string('diferencia_1b')->nullable();
+            $table->string('diferencia_2b')->nullable();
+            $table->string('diferencia_3b')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

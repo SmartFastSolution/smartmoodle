@@ -19,7 +19,7 @@
 						<p style="font-size: 20px"><span class="badge badge-danger p-1" >{{ ++$a }}</span > {{ $enunciados->enunciado }}</p>
 					</div>
 					<div class="col-2">
-						<input required type="text" name="respuestas[]" style="box-shadow: 5px 5px 15px 0px  #087980; background-color: #75E3F7" class="form-control text-center font-weight-bold">
+						<input  type="text" name="respuestas[]" style="box-shadow: 5px 5px 15px 0px  #087980; background-color: #75E3F7" class="form-control text-center font-weight-bold">
 					</div>
 				</div>
 			@endforeach

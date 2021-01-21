@@ -17,6 +17,9 @@ class CreateTallerPartidaDoblesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->longText('enunciado');
+            $table->longText('transacciones');
+            $table->integer('n_t')->nullable();
+            $table->string('estado_resultado')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

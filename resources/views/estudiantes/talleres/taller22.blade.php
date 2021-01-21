@@ -25,10 +25,10 @@ ADECUADAMENTE. -->
 			                  <tbody>
 			                  	
 			                    <tr class="text-center">
-			                      <td>{{ $datos->pedido }}</td>
-			                      <td>{{ $datos->lugar }} {{ $datos->fecha }}</td>
-			                      <td>{{ $datos->firma }}</td>
-			                      <td>{{ $datos->plazo_entrega }}</td>
+			                      <td>{{ $taller->pedido }}</td>
+			                      <td>{{ $taller->lugar }} {{ $taller->fecha }}</td>
+			                      <td>{{ $taller->firma }}</td>
+			                      <td>{{ $taller->plazo_entrega }}</td>
 			                    </tr>
 			       
 

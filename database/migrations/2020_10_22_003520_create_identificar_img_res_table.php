@@ -16,7 +16,7 @@ class CreateIdentificarImgResTable extends Migration
         Schema::create('identificar_img_res', function (Blueprint $table) {
            $table->bigIncrements('id');
             $table->unsignedbigInteger('identificar_id');
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->timestamps();
 
             $table->foreign('identificar_id')

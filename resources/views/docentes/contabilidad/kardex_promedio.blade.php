@@ -57,7 +57,7 @@
 				<td style="vertical-align:middle" class="text-right">@{{ exist.egreso_total }}</td>
 				<td style="vertical-align:middle" class="text-right">@{{ exist.existencia_cantidad }}</td>
 				<td style="vertical-align:middle" class="text-right">@{{ decimales(exist.existencia_precio) }}</td>
-				<td style="vertical-align:middle" class="text-right">@{{ exist.existencia_total }}</td>
+				<td style="vertical-align:middle" class="text-right">@{{ decimales(exist.existencia_total) }}</td>
 			</tr>
 		</tbody>
 		<tbody>
@@ -76,4 +76,39 @@
 			</tr>
 		</tbody>
 	</table>
+			<div class="row justify-content-center">
+			<div class="col-6 border rounded border-danger">
+				<table class="table table-sm">
+					<thead>
+						<tr>
+							<th width="200">PRUEBA</th>
+							<th class="text-center text-danger">CANTIDAD</th>
+							<th class="text-center text-danger">TOTAL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Inventario Inicial de Mercaderias</td>
+							<td><input autocomplete="ÑÖcompletes" disabled="" v-model="prueba.cantidad.inventario_inicial" type="number" class="form-control form-control-sm text-right"></td>
+							<td><input autocomplete="ÑÖcompletes" disabled="" v-model="prueba.precio.inventario_inicial" type="number" class="form-control form-control-sm text-right"></td>
+						</tr>
+						<tr>
+							<td>Adquisiciones</td>
+							<td><input autocomplete="ÑÖcompletes" disabled="" v-model="prueba.cantidad.adquicisiones" type="number" placeholder="+" class="form-control form-control-sm text-right text-right"></td>
+							<td><input autocomplete="ÑÖcompletes" disabled="" v-model="prueba.precio.adquicisiones" type="number" placeholder="+" class="form-control form-control-sm text-right text-right"></td>
+						</tr>
+						<tr>
+							<td>(-) Ventas</td>
+							<td><input autocomplete="ÑÖcompletes" disabled="" v-model="prueba.cantidad.ventas" type="number" placeholder="-" class="form-control form-control-sm text-right text-right"></td>
+							<td><input autocomplete="ÑÖcompletes" disabled="" v-model="prueba.precio.ventas" type="number" placeholder="-" class="form-control form-control-sm text-right text-right"></td>
+						</tr>
+						<tr>
+							<td>Inv. Final Mercaderia</td>
+							<td><input autocomplete="ÑÖcompletes" disabled="" v-model="prueba.cantidad.inventario_final" type="number" class="form-control form-control-sm text-right text-right"></td>
+							<td><input autocomplete="ÑÖcompletes" disabled="" v-model="prueba.precio.inventario_final" type="number" class="form-control form-control-sm text-right text-right"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
 </div>

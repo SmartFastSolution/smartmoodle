@@ -17,9 +17,9 @@ class CreateAnexocajasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->string('nombre');
-            $table->string('totaldebe');
-            $table->string('totalhaber');
+            $table->string('nombre')->nullable();
+            $table->string('totaldebe')->nullable();
+            $table->string('totalhaber')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

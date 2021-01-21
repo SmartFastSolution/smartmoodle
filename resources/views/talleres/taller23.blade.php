@@ -28,10 +28,10 @@
 				<h1 class="text-center">RECIBO</h1>
 				<div class="row justify-content-between">
 					<div class="col-4  form-inline">
-						No. <input required type="text" name="no" size="5" class="form-control" name="">
+						No. <input  type="number" name="no" size="5" class="form-control text-right" name="">
 					</div>
 					<div class="col-4 form-inline mb-2">
-						Por $  <input required type="text" size="5" class="form-control" name="por">
+						Por $  <input  type="number" size="5" class="form-control text-right" name="por">
 					</div>
 				</div>
 				<div class="row mb-2">			
@@ -39,7 +39,7 @@
 						<label class="col-form-label" for="">Recibi de:</label>
 					</div>
 					<div class="col-8">
-						<input required type="text" name="recibi" class="form-control">
+						<input  type="text" name="recibi" class="form-control">
 					</div>
 				</div>
 
@@ -48,7 +48,7 @@
 								<label class="col-form-label" for="">La suma de:</label>
 							</div>
 							<div class="col-8">
-								<input required type="text" name="cantidad" class="form-control">
+								<input  type="text" name="cantidad" class="form-control">
 							</div>
 						</div>
 
@@ -57,7 +57,7 @@
 								<label class="col-form-label" for="">Por arriendo de</label>
 							</div>
 							<div class="col-8 form-inline">
-							<p><input required type="text" name="arriendo" class="form-control"> que ocupa <input type="text" name="ocupa" class="form-control"></p>
+							<p><input  type="text" name="arriendo" class="form-control"> que ocupa <input type="text" name="ocupa" class="form-control"></p>
 								
 							</div>
 						</div>
@@ -67,7 +67,7 @@
 								<label class="col-form-label" for="">En la casa de propiedad</label>
 							</div>
 							<div class="col-8">
-								<input required type="text" name="propiedad" class="form-control">
+								<input  type="text" name="propiedad" class="form-control">
 							</div>
 						</div>
 
@@ -76,20 +76,25 @@
 								<label class="col-form-label" for="">situado en</label>
 							</div>
 							<div class="col-8 form-inline">
-								<p><input required type="text" class="form-control" name="situado" size="40">  canon cubierto del</p>
+								<p><input  type="text" class="form-control" name="situado" size="40">  canon cubierto del</p>
 							</div>
 						</div>
 						<div class="row mb-2">			
-							
 							<div class="col-12 form-inline">
-						<p><input required type="text" name="cubierto" class="form-control"  size="30"> Hasta el <input required type="text" name="hasta" class="form-control" size="50"></p>
+						<p><input  type="text" name="cubierto" class="form-control"  size="30"> Hasta el <input  type="text" name="hasta" class="form-control" size="10"></p>
+
 								
+							</div>
+						</div>
+							<div class="row justify-content-end mb-2">
+							<div class="col-4">
+								<input type="text" name="hasta" class="form-control  form-control-sm "  name="espacio"   >
 							</div>
 						</div>
 
 						<div class="row mb-2 justify-content-center">			
 							<div class="col-6 text-center">
-								<p><input required type="text" name="firma" class="form-control" size="40">  FIRMA</p>
+								<p><input  type="text" name="firma" class="form-control" size="40">  FIRMA</p>
 							</div>
 						</div>
 			</div>

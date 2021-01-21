@@ -30,7 +30,7 @@
 									<span class="border border-right-0 border-left-0 border-success">No. 1</span>
 								</div>
 								<div class="col-4 form-inline">
-									<label for="">Por $<input required  name="cantidad" disabled value="{{ $datos->cantidad }}" type="text" class="form-control form-control-sm"></label>
+									<label for="">Por $<input required  name="cantidad" disabled value="{{ $datos->cantidad }}" type="text" class="form-control form-control-sm text-right"></label>
 								</div>
 							</div>
 							<div class="row">
@@ -60,6 +60,35 @@
 								</div>
 							
 							</div>
+							             <div class="row justify-content-end mt-3">
+                <div class="col-10">
+                  <p class="form-inline text-justify">Me <input disabled value="{{ $datos->resp21 }}" required   class="form-control mb-1 ml-1 mr-1" size="1" name="resp21" type="text">  constituy <input disabled value="{{ $datos->resp22 }}" required size="1"   class="form-control mb-1 ml-1 mr-1" name="resp22" type="text"> fiador <input disabled value="{{ $datos->resp23 }}" required  size="1"  class="form-control mb-1 ml-1 mr-1" name="resp23" type="text">  llano <input disabled value="{{ $datos->resp24 }}" required  size="1"  class="form-control mb-1 ml-1 mr-1" name="resp23" type="text"> pagador <input disabled value="{{ $datos->resp25 }}" required   class="form-control mb-1 ml-1 mr-1" size="1" name="resp24" type="text"> de <input disabled value="{{ $datos->resp25 }}" required   class="form-control mb-1 ml-1 mr-1" size="1" name="resp25" type="text">  señor <input disabled value="{{ $datos->resp26 }}" required   class="form-control mb-1 ml-1 mr-1" size="15" name="resp26" type="text"> por las obligaciones que he  <input disabled value="{{ $datos->resp27 }}" required   class="form-control mb-1 ml-1 mr-1" size="1" name="resp27" type="text">  ontraído en el pagaré anterior haciendo de deuda ajena deuda propia renunciando  los beneficios de orden y de excusión de bienes de <input disabled value="{{ $datos->resp28 }}" required   class="form-control mb-1 ml-1 mr-1" size="1" name="resp28" type="text"> deudor <input disabled value="{{ $datos->resp29 }}" required   class="form-control mb-1 ml-1 mr-1" size="1" name="resp29" type="text"> principal  <input disabled value="{{ $datos->resp30 }}" required   class="form-control mb-1 ml-1 mr-1" size="1" name="resp30" type="text"> el de división y cualquier ley, excepción o derecho que pueda favorecer <input disabled value="{{ $datos->resp31 }}" required   class="form-control mb-1 ml-1 mr-1" size="1" name="resp31" type="text"> así como la apelación y el recurso de hecho.  Quedo sometido a los jueces de  Provincia o de la que elija el acreedor. Sin protesto.</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6 ">
+                  <div class="form-group">
+                    <label >FECHA UT SUPRA <br>DEUDOR(ES)</label>
+                    <input disabled value="{{ $datos->resp32 }}" type="text" name="resp32" class="form-control" >
+                  </div>
+                </div>
+                <div class="col-6 mt-4">
+                  <div class="form-group">
+                    <label >GARANTE(ES)</label>
+                    <input disabled value="{{ $datos->resp33 }}" type="text" name="resp33" class="form-control">
+                  </div>
+                </div>
+                  <div class="col-6 ">
+                  <div class="form-group">
+                    <input disabled value="{{ $datos->resp34 }}" type="text" name="resp34" class="form-control form-control-sm" placeholder="CI">
+                  </div>
+                </div>
+                  <div class="col-6 ">
+                  <div class="form-group">
+                    <input disabled value="{{ $datos->resp35 }}" type="text" name="resp35" class="form-control form-control-sm" placeholder="CI">
+                  </div>
+                </div>
+              </div>
 						</div>
 					</div>
 				</div>

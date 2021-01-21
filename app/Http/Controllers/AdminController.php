@@ -71,6 +71,13 @@ use App\Admin\TallerVerdaFalsoOp;
 use App\Admin\TallerVerdaderoFalso;
 use App\Admin\TipoSaldoDebe;
 use App\Admin\TipoSaldoHaber;
+
+use App\Admin\Leccion\Leccion;
+use App\Admin\Leccion\LeccionCompletar;
+use App\Admin\Leccion\LeccionOpcion;
+use App\Admin\Leccion\LeccionAlternativa;
+use App\Admin\Leccion\LeccionVerdaderFalso;
+
 use App\Http\Controllers\Controller;
 use App\Plantilla;
 use App\Taller;
@@ -124,6 +131,11 @@ class AdminController extends Controller
             ->paginate(10);
    	  return view('admin.admin', compact('g', 'users'));
    }
+   function leccion()
+   {
+      return view('admin.lecciones');
+     
+   }
    public function index (){
 
         return view('welcome');
@@ -149,6 +161,80 @@ class AdminController extends Controller
    	  $plantilla->save();
 
    	   return redirect()->route('admin.create')->with('datos', 'Plantilla creada correctamente!'); 
+   }
+   function crear_leccion(Request $request)
+   {
+      $i = Leccion::where('contenido_id', $request->input('contenido_id'))->count();//cambios
+    //return $request->all();
+      $leccion                  = new Leccion;
+      $leccion->nombre          = 'Leccion '.++$i;
+      $leccion->enunciado       = $request->enunciado;
+      $leccion->plantilla_id    = $request->plantilla_id;
+      $leccion->contenido_id    = $request->contenido_id; //cambios 
+      $leccion->option_titulo   = $request->option_titulo; //cambios 
+      $leccion->option_correcta = $request->option_correcta; //cambios 
+      $leccion->fecha_entrega   = $request->fecha_entrega; //cambios 
+      $leccion->estado          = 0;
+      $leccion->save();
+      $a = Leccion::get()->last();
+
+      if (isset($request->completars )) {
+         foreach ($request->completars as $key1=>$enunciado1) {
+                  $datos1=array(
+                     'leccion_id' => $a->id,
+                     'enunciado'  => $request->enunciado,
+                     'enunciados' => $enunciado1['enunciado'],
+                     'created_at' => now(),
+                     'updated_at' => now(),
+                  );
+                  LeccionCompletar::insert($datos1);
+               }
+    }
+      if (isset($request->selecionars )) {
+         foreach ($request->selecionars as $key2=>$enunciado2) {
+                  $datos2=array(
+                     'leccion_id' => $a->id,
+                     'enunciado'  => $request->enunciado,
+                     'enunciados' => $enunciado2['enunciado'],
+                     'created_at' => now(),
+                     'updated_at' => now(),
+                  );
+                  LeccionOpcion::insert($datos2);
+               }
+    }
+       if (isset($request->alternativas )) {
+         foreach ($request->alternativas as $key3=>$enunciado3) {
+                  $datos3=array(
+                     'leccion_id' => $a->id,
+                     'enunciado'  => $request->enunciado,
+                     'titulo' => $enunciado3['titulo'],
+                     'respuesta' => $enunciado3['r_correcta'],
+                     'alternativa1' => $enunciado3['primera'],
+                     'alternativa2' => $enunciado3['segunda'],
+                     'created_at' => now(),
+                     'updated_at' => now(),
+                  );
+                  LeccionAlternativa::insert($datos3);
+               }
+        }
+        if (isset($request->verdader_falso )) {
+         foreach ($request->verdader_falso as $key4=>$enunciado4) {
+                  $datos4=array(
+                     'leccion_id' => $a->id,
+                     'enunciado'  => $request->enunciado,
+                     'titulo'     => $enunciado4['enunciado'],
+                     'respuesta'  => $enunciado4['r_correcta'],
+                     'created_at' => now(),
+                     'updated_at' => now(),
+                  );
+                  LeccionVerdaderFalso::insert($datos4);
+               }
+        }
+    return response(array(                                         //ENVIO DE RESPUESTA
+                        'success' => true,
+                        'estado' => 'guardado',
+                        'message' => 'Taller Creado'
+                    ),200,[]);
    }
    public function taller1(Request $request)
    {
@@ -197,22 +283,25 @@ class AdminController extends Controller
 
 
    if ($taller2 = true) {
-      $a = Taller::get()->last();
-      $taller_2 = new TallerPartidaDoble;
-      $taller_2->taller_id = $a->id;
-      $taller_2->enunciado = $request->input('enunciado');
+      $a                          = Taller::get()->last();
+      $taller_2                   = new TallerPartidaDoble;
+      $taller_2->taller_id        = $a->id;
+      $taller_2->enunciado        = $request->input('enunciado');
+      $taller_2->transacciones    = $request->input('transacciones');
+      $taller_2->n_t              = $request->input('n_t');
+      $taller_2->estado_resultado = $request->input('estado_resultado');
       $taller_2->save();
-      $o = TallerPartidaDoble::get()->last();
+    //   $o = TallerPartidaDoble::get()->last();
 
-         foreach ($request->enun as $key=>$v) {
-                  $datos=array(
-                     'taller_partida_doble_id'=> $o->id,
-                     'enunciados' => $request->enun[$key],
-                     'created_at'=> now(),
-                     'updated_at'=> now(),
-                  );
-                  TallerPartidaDobleEnun::insert($datos);
-               }
+    //      foreach ($request->enun as $key=>$v) {
+    //               $datos=array(
+    //                  'taller_partida_doble_id'=> $o->id,
+    //                  'enunciados' => $request->enun[$key],
+    //                  'created_at'=> now(),
+    //                  'updated_at'=> now(),
+    //               );
+    //               TallerPartidaDobleEnun::insert($datos);
+    //            }
     }
     return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
    }

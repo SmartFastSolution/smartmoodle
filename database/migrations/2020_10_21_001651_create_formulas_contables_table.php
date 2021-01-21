@@ -18,15 +18,15 @@ class CreateFormulasContablesTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->longText('enunciado');
-            $table->string('formula1');
-            $table->string('formula2');
-            $table->string('formula3');
-            $table->string('formula4');
-            $table->string('formula5');
-            $table->string('formula6');
-            $table->string('formula7');
-            $table->string('formula8');
-            $table->string('formula9');
+            $table->string('formula1')->nullable();
+            $table->string('formula2')->nullable();
+            $table->string('formula3')->nullable();
+            $table->string('formula4')->nullable();
+            $table->string('formula5')->nullable();
+            $table->string('formula6')->nullable();
+            $table->string('formula7')->nullable();
+            $table->string('formula8')->nullable();
+            $table->string('formula9')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

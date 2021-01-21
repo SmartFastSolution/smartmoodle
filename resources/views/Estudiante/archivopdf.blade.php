@@ -10,7 +10,7 @@
         <h3 class="font-weight-light">{{$contenido->nombre}}</h3>
 
         <p class="text-center">
-        <div id="pdf" >
+        <div id="pdf">
             @isset ($contenido->archivo->url)
 
             <object width="100%" height="650" type="application/pdf"
@@ -19,7 +19,6 @@
                 @endisset
         </div>
         </p>
-
     </div>
 </section>
 
@@ -30,14 +29,13 @@
 @stop
 @section('js')
 <script type="text/javascript">
-$(document).ready(function(){
+$(document).ready(function() {
     //disable full page
 
-    $("body").on("contextmenu", function(e){
-         return false;
+    $("body").on("contextmenu", function(e) {
+        return false;
     });
 })
-
 </script>
 
 @stop

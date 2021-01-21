@@ -17,7 +17,7 @@ class CreateIdentificarsTable extends Migration
              $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->longText('enunciado');
+            $table->longText('enunciado')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

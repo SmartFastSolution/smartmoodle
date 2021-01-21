@@ -49,7 +49,9 @@
      			<div class="border border-info p-2">
 				<div class="row ">
 					<div class="col-6">
-						<img class="img-fluid" src="{{ asset('img/talleres/imagen-15.jpg') }}" alt="">
+						<div class="alert alert-secondary" role="alert">
+									BANCO DE GUAYAQUIL
+									</div>
 					</div>	
 					<div class="col-2 align-self-center">
 						<p>16457 <br>
@@ -133,8 +135,9 @@
 				<div class="row justify-content-center">
      			    <div class="col-10 border-success border">
      				<div class="text-center">
-     					<h4>ESPACIO PARA ENDOSO</h4>
-     			<h6 class="mt-0">(en caso de requerirse)</h6>
+     			<div class="alert alert-secondary mt-2" role="alert">
+							 {{ $datos->espacio1 }}
+							</div>
      				</div>
 
      				<div class="text-justify">
@@ -166,7 +169,9 @@
      			<div class="row justify-content-center ">
 	     			<div class="col-10 border-success border ">
 	     				<div class="text-center mt-1">
-	     					<h5 class="text-gray-dark">ESPACIO PARA DEPOSITANTE O PERSONA QUE COBRA</h5>
+	     					<div class="alert alert-secondary" role="alert">
+							 {{ $datos->espacio2 }}
+							</div>
 	     				</div>
 					</div>
      			</div>
@@ -175,7 +180,7 @@
      				<div class="row justify-content-center mt-3 mb-2">
      					<div class="col-8 text-center">
      						<div class="alert alert-secondary" role="alert">
-							  ING. JUAN PEREZ
+							 {{ $datos->firma2 }}
 							</div>
      						
      						<label for="">Firma</label>

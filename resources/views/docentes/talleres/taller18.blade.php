@@ -45,6 +45,22 @@
           <div class="card-body">
             <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{{ $datos->enunciado }}</h2>
          				<div class="row justify-content-center">
+         							<div class="col-2" style="box-shadow: -5px 0px 15px 0px  #27F4AE">
+				 <h2>Datos</h2>				 
+				  <label for="">Valor</label><br>
+                    <p>{{ $taller->valor }}</p>
+                <label for="">Acreedor</label><br>
+                    <p >{{ $taller->acreedor }}</p>
+                <label for="">Deudor</label><br>
+                    <p > {{ $taller->deudor }}</p>
+                <label for="">Tasa de interes</label><br>
+                    <p >{{ $taller->tasa_de_interes }}</p>
+                    <label for="">Fecha de Vencimiento</label><br>
+                    <p >{{ $taller->fecha_de_vencimiento }}</p>
+                <label for="">Lugar y Fecha de emision</label>  <br>
+                <p > {{ $taller->lugar }}</p>
+                <p>{{ $taller->fecha_de_emision }}</p>
+			</div>
 			<div class="col-9 border border-info p-3">
 				<div class="row mb-2">
 					<div class="col-5 mt-3">
@@ -62,7 +78,7 @@
 								<label for="" class="col-form-label">No:</label>
 							</div>
 							<div class="col-3">
-								<input disabled value="{{ $datos->numero }}" type="text" name="numero" class="form-control form-control-sm" required>
+								<input disabled value="{{ $datos->numero }}" type="text" name="numero" class="form-control form-control-sm text-right" required>
 							</div>
 							<div class="col-5 border border-info p-2">
 								<div class="row">
@@ -70,7 +86,7 @@
 										<label class="col-form-label" for="">POR:</label>
 									</div>
 									<div class="col-8">
-										<input disabled value="{{ $datos->por }}" type="text" name="por" class="form-control form-control-sm" required>
+										<input disabled value="{{ $datos->por }}" type="text" name="por" class="form-control form-control-sm text-right" required>
 									</div>
 								</div>
 							</div>

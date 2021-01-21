@@ -18,8 +18,8 @@ class CreatePreguntasTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->longText('enunciado');
-            $table->string('respuesta1');
-            $table->string('respuesta2');
+            $table->string('respuesta1')->nullable();
+            $table->string('respuesta2')->nullable();
            
             $table->timestamps();
             
