@@ -1366,7 +1366,7 @@ public function store11(Request $request, $idtaller)
           {
             $id                   = Auth::id();
             $contenido            = TallerCollage::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
-            $count = Collage::where('user_id', $id)->count(); 
+            $count = Collage::where('user_id', $id)->where('taller_id', $idtaller)->count(); 
             if ($count == 0) {
                 $taller31                                    = new Collage; 
                 $taller31->taller_id                         = $idtaller;
@@ -1376,7 +1376,7 @@ public function store11(Request $request, $idtaller)
                 $user                                        = User::find($id);
                 $user->tallers()->attach($idtaller,['status' => 'completado' , 'fecha_entregado' => now()]);
 
-                $id                                          = Collage::where('user_id', $id)->first();
+                $id                                          = Collage::where('user_id', $id)->where('taller_id', $idtaller)->first();
                 $imagen = $request->file('file');
                 $nombre                                      = time().'_'.$imagen->getClientOriginalName();
                 $ruta                                        = public_path().'/img/talleres';
@@ -1388,7 +1388,7 @@ public function store11(Request $request, $idtaller)
                 $taller_31->save();
                 return $taller_31;
             }else {
-                $id                                          = Collage::where('user_id', $id)->first();
+                $id                                          = Collage::where('user_id', $id)->where('taller_id', $idtaller)->first();
                 $imagen = $request->file('file');
                 $nombre                                      = time().'_'.$imagen->getClientOriginalName();
                 $ruta                                        = public_path().'/img/talleres';
@@ -1802,58 +1802,59 @@ public function store11(Request $request, $idtaller)
 
         }
 
+        
         public function store48(Request $request, $idtaller)
-          {
-            $id                   = Auth::id();
-            $contenido            = TallerArchivo::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
-            $count = RespuestaArchivo::where('user_id', $id)->count(); 
-            if ($count == 0) {
-                $taller48                                    = new RespuestaArchivo; 
-                $taller48->taller_id                         = $idtaller;
-                $taller48->user_id                           = $id;           
-                $taller48->enunciado                         = $contenido->enunciado; 
-                $taller48->save();
-                $user                                        = User::find($id);
-                $user->tallers()->attach($idtaller,['status' => 'completado' , 'fecha_entregado' => now()]);
+        {
+          $id                   = Auth::id();
+          $contenido            = TallerArchivo::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+          $count = RespuestaArchivo::where('user_id', $id)->where('taller_id', $idtaller)->count(); 
+          if ($count == 0) {
+              $taller48                                    = new RespuestaArchivo; 
+              $taller48->taller_id                         = $idtaller;
+              $taller48->user_id                           = $id;           
+              $taller48->enunciado                         = $contenido->enunciado; 
+              $taller48->save();
+              $user                                        = User::find($id);
+              $user->tallers()->attach($idtaller,['status' => 'completado' , 'fecha_entregado' => now()]);
 
 
-                $o                                          = RespuestaArchivo::where('user_id', $id)->first();
-                $archivo = $request->file('file');
-                $nombre                                      = time().'_'.$archivo->getClientOriginalName();
-                $ruta                                        = public_path().'/archivos/talleres';
-                $archivo->move($ruta, $nombre);
-                $urlarchivo                                   = '/archivos/talleres/'.$nombre;
-                $extension = pathinfo($urlarchivo, PATHINFO_EXTENSION);
-                $nombre = basename($archivo->getClientOriginalName(),  '.'.$extension); 
+              $o                                          = RespuestaArchivo::where('user_id', $id)->where('taller_id', $idtaller)->first();
+              $archivo = $request->file('file');
+              $nombre                                      = time().'_'.$archivo->getClientOriginalName();
+              $ruta                                        = public_path().'/archivos/talleres';
+              $archivo->move($ruta, $nombre);
+              $urlarchivo                                   = '/archivos/talleres/'.$nombre;
+              $extension = pathinfo($urlarchivo, PATHINFO_EXTENSION);
+              $nombre = basename($archivo->getClientOriginalName(),  '.'.$extension); 
 
-                $user                                        = User::find($id);
-                $taller_48                                   = new RArchivo; 
-                $taller_48->respuesta_archivo_id             =  $o->id;
-                $taller_48->urlarchivo                       =  $urlarchivo; 
-                $taller_48->extension                       =  $extension;
-                $taller_48->nombre                          =  $nombre;
-                $taller_48->save();
-                return $taller_48;
-            }else {
-                $o                                          = RespuestaArchivo::where('user_id', $id)->first();
-                $archivo = $request->file('file');
-                $nombre                                      = time().'_'.$archivo->getClientOriginalName();
-                $ruta                                        = public_path().'/archivos/talleres';
-                $archivo->move($ruta, $nombre);
-                $urlarchivo                                  = '/archivos/talleres/'.$nombre;
-                $extension = pathinfo($urlarchivo, PATHINFO_EXTENSION);
-                $nombre = basename($archivo->getClientOriginalName(),  '.'.$extension); 
+              $user                                        = User::find($id);
+              $taller_48                                   = new RArchivo; 
+              $taller_48->respuesta_archivo_id             =  $o->id;
+              $taller_48->urlarchivo                       =  $urlarchivo; 
+              $taller_48->extension                       =  $extension;
+              $taller_48->nombre                          =  $nombre;
+              $taller_48->save();
+              return $taller_48;
+          }else {
+              $o                                          = RespuestaArchivo::where('user_id', $id)->where('taller_id', $idtaller)->first();
+              $archivo = $request->file('file');
+              $nombre                                      = time().'_'.$archivo->getClientOriginalName();
+              $ruta                                        = public_path().'/archivos/talleres';
+              $archivo->move($ruta, $nombre);
+              $urlarchivo                                  = '/archivos/talleres/'.$nombre;
+              $extension = pathinfo($urlarchivo, PATHINFO_EXTENSION);
+              $nombre = basename($archivo->getClientOriginalName(),  '.'.$extension); 
 
-                $user                                        = User::find($id);
-                $taller_48                                   = new RArchivo; 
-                $taller_48->respuesta_archivo_id             =  $o->id;
-                $taller_48->urlarchivo                       =  $urlarchivo; 
-                $taller_48->extension                       =  $extension;
-                $taller_48->nombre                          =  $nombre;
-                $taller_48->save();
-                return $taller_48;
-            }
-    }
+              $user                                        = User::find($id);
+              $taller_48                                   = new RArchivo; 
+              $taller_48->respuesta_archivo_id             =  $o->id;
+              $taller_48->urlarchivo                       =  $urlarchivo; 
+              $taller_48->extension                       =  $extension;
+              $taller_48->nombre                          =  $nombre;
+              $taller_48->save();
+              return $taller_48;
+          }
+  }
 
 
 

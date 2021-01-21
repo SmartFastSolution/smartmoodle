@@ -17,7 +17,7 @@
 							<div id='puzzle'></div>
 						</div>
 						<div class="col-5 align-self-start">
-							<h4 class="text-info">Palabras relacionadas al comercio </h4>
+							<h4 class="text-info">Encierre en un circulo las siguientes palabras: </h4>
 							<div id='words'></div>
 						</div>
 					</div>
