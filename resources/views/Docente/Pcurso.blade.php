@@ -116,10 +116,10 @@
                         <td>{{$taller->nombre}}</td>
                         <td>{{$taller->alumno}}</td>
                         <td>@if ($taller->plantilla_id == 37)
-                                                    Taller de Modulos Contable
-                                                    @else
-                                                     {!!$taller->enunciado!!}
-                                                @endif</td>
+                            Taller de Modulos Contable
+                            @else
+                            {!!$taller->enunciado!!}
+                            @endif</td>
                         <td class="table-button ">
                             <a class="btn btn-info"
                                 href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
@@ -134,8 +134,8 @@
             </table>
             @if ($users->count() >= 1)
             <div class="row justify-content-center">
-               {{-- {{ $users->links() }}
---}} 
+                {{-- {{ $users->links() }}
+                --}}
             </div>
             @endif
         </div>
@@ -174,10 +174,10 @@
                         <td>{{$taller->nombre}}</td>
                         <td>{{$taller->alumno}}</td>
                         <td>@if ($taller->plantilla_id == 37)
-                                                    Taller de Modulos Contable
-                                                    @else
-                                                     {!!$taller->enunciado!!}
-                                                @endif</td>
+                            Taller de Modulos Contable
+                            @else
+                            {!!$taller->enunciado!!}
+                            @endif</td>
                         <td class="table-button ">
                             <a class="btn btn-info"
                                 href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
@@ -188,7 +188,7 @@
                 </tbody>
             </table>
             <div class="row justify-content-center">
-             {{--   {{ $calificado->links() }}--}}
+                {{--   {{ $calificado->links() }}--}}
 
             </div>
         </div>

@@ -76,16 +76,16 @@
                                 </td>
 
                                 <td>
-                                @if($c['accion']== '1')
-                                <!-- descarganle -->
-                                <a class="btn btn-dark btn" href="{{route('Contenido3.alumno', $c->id)}}"><i
+                                    @if($c['accion']== '1')
+                                    <!-- descarganle -->
+                                    <a class="btn btn-dark btn" href="{{route('Contenido3.alumno', $c->id)}}"><i
                                             class="fas fa-eye"></i></a>
-                               
-                                @else
-                                  <!-- no descarganle -->
-                                <a class="btn btn-dark btn" href="{{route('Contenido.alumno', $c->id)}}"><i
+
+                                    @else
+                                    <!-- no descarganle -->
+                                    <a class="btn btn-dark btn" href="{{route('Contenido.alumno', $c->id)}}"><i
                                             class="fas fa-eye"></i></a>
-                                @endif
+                                    @endif
                                 </td>
 
                             </tr>
@@ -161,7 +161,13 @@
                             <tr>
                                 <td>{{$taller->contenido->nombre}}</td>
                                 <td>{{$taller['nombre']}}</td>
-                                <td>{!!$taller->enunciado!!}</td>
+                                
+                                <td>@if ($taller->plantilla_id == 37)
+                                    Taller de Modulos Contable
+                                    @else
+                                    {!!$taller->enunciado!!}
+                                    @endif
+                                </td>
                                 <td class="text-center">
                                     {{Carbon\Carbon::parse($taller->fecha_entrega)->formatLocalized('%d, %B %Y ') }}
                                 </td>
@@ -224,7 +230,13 @@
                                 <th scope="row">{{-- {{$taller->materia['id']}} --}}</th>
                                 <td>{{$taller->contenido->nombre}}</td>
                                 <td>{{$taller['nombre']}}</td>
-                                <td>{!!$taller->enunciado!!}</td>
+                                <td>
+                                    @if($taller->plantilla_id == 37)
+                                    Taller de Modulos Contable
+                                    @else
+                                    {!!$taller->enunciado!!}
+                                    @endif
+                                </td>
                                 <td align="center"> <span
                                         class="badge @if($taller->pivot->status =='completado')badge-warning @elseif($taller->pivot->status == 'calificado') badge-success @endif ">{{$taller->pivot->status}}</span>
                                 </td>

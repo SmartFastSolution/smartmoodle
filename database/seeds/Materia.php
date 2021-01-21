@@ -37,15 +37,15 @@ class Materia extends Seeder
           DB::table('contenidos')->insert([
           'materia_id'  => 1,
           'nombre'      => 'UNIDAD 1',
+          'accion'      =>0,
           'descripcion' => 'Unidad # 1',
           'estado'      => 'on',
         ]);
-             DB::table('contenidos')->insert([
+             DB::table('archivos')->insert([
           'url'              => 'prueba',
           'archivoable_type' => 'App\Contenido',
           'archivoable_id'   => 1,
-          'created_at'       => now(),
-          'updated_at'       => now(),
+        
         ]);
 
 

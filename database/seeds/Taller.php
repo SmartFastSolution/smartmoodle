@@ -76,7 +76,7 @@ class Taller extends Seeder
             DB::table('tallers')->insert([
          'id'           => 7,
          'plantilla_id' => 46,
-         'nombre'       => 'Taller 1',
+         'nombre'       => 'Taller 7',
          'enunciado'    => 'RELATA  LOS  ENUNCIADOS  EN  LA  SIGUIENTE  RUEDA  LÓGICA, ADECUADAMENTE.',
          'contenido_id' => 1,
          'estado'       => 0,
