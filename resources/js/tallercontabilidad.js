@@ -9435,10 +9435,6 @@ const arqueo_caja = new Vue ({
     }, //fin de function  actualizar 
 
     
-  
-
-
-
 
     WarningEliminarExis(id){
       this.eliminar.index = id;

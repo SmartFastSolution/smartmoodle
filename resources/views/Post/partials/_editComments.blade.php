@@ -15,15 +15,7 @@
                     {!! Form::label('body','Comentario') !!}
                     {!! Form::textarea('body', null, ['class'=>'form-control', 'rows'=>'2']) !!}
 				</div>
-				<!-- <div class="form-group">
-					s{!! Form::label('status', 'Estado') !!}
-					<label >
-						{!! Form::radio('status', 'PUBLISHED') !!} Publicado
-					</label>
-					<label >
-						{!! Form::radio('status', 'DRAFT') !!} Borrador
-					</label>
-				</div> -->
+			
 			</div>
 		</div>
 		<div class="modal-footer justify-content-between">

@@ -55,12 +55,7 @@
                                 <!-- subir imagen en laravel prueba 1 -->
                                 <div class="form-group">
                                     <label for="documentod">
-                                        <!-- <br>
-                                    {{$contenido->documentod}}
-                                    <br> -->
-                                        <!-- <a target="_blank"
-                                        href="{{Storage::url($contenido['documentod'])}}">{{ $contenido['nombre']}}</a>
-                                    <br> -->
+
                                         Vizualizar Documento
                                         <br>
                                         <button type="button" class="btn btn-secondary" data-toggle="modal"
@@ -75,30 +70,36 @@
 
                                 </div>
 
-                
+                            </div>
+                            <div class="form-group">
+                                <label for="cuenta">Documento Descargable</label>
+                                <input type="checkbox" value="1" @if($contenido['accion']=="1" ) checked
+                                    @else($contenido['accion']=="0" ) @endif name="accion" class="custom-checkbox">
+                            </div>
 
-                                <!-- fin de la prueba imagen en laravel  -->
 
-                                <div class="form-group">
-                                    <label for="nombre">Estado </label>
-                                    <br>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="estadoon" name="estado" class="custom-control-input"
-                                            value="on" @if($contenido['estado']=="on" ) checked
-                                            @elseif(old('estado')=="on" ) checked @endif>
-                                        <label class="custom-control-label" for="estadoon">Activo</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="estadooff" name="estado" class="custom-control-input"
-                                            value="off" @if($contenido['estado']=="off" ) checked
-                                            @elseif(old('estado')=="off" ) checked @endif>
-                                        <label class="custom-control-label" for="estadooff">No Activo</label>
-                                    </div>
-                                    <br><br><br>
-                                    <a href="{{route('contenidos.index')}}" class="btn btn-primary">Atras</a>
-                                    <input type="submit" class="btn btn-dark " value="Guardar">
-                                  
+                            <!-- fin de la prueba imagen en laravel  -->
+
+                            <div class="form-group">
+                                <label for="nombre">Estado </label>
+                                <br>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estadoon" name="estado" class="custom-control-input"
+                                        value="on" @if($contenido['estado']=="on" ) checked @elseif(old('estado')=="on"
+                                        ) checked @endif>
+                                    <label class="custom-control-label" for="estadoon">Activo</label>
                                 </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="estadooff" name="estado" class="custom-control-input"
+                                        value="off" @if($contenido['estado']=="off" ) checked
+                                        @elseif(old('estado')=="off" ) checked @endif>
+                                    <label class="custom-control-label" for="estadooff">No Activo</label>
+                                </div>
+                                <br><br><br>
+                                <a href="{{route('contenidos.index')}}" class="btn btn-primary">Atras</a>
+                                <input type="submit" class="btn btn-dark " value="Guardar">
+
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -118,8 +119,8 @@
             <div class="modal-body mb-0 p-0">
 
                 <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-                    <iframe class="embed-responsive-item" width="1000" height="1000"
-                    src="{{$contenido->archivo->url}}" allowfullscreen></iframe>
+                    <iframe class="embed-responsive-item" width="1000" height="1000" src="{{$contenido->archivo->url}}"
+                        allowfullscreen></iframe>
                 </div>
 
             </div>

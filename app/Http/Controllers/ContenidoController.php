@@ -51,7 +51,7 @@ class ContenidoController extends Controller
             'nombre'      => 'required|string|max:150',
             'descripcion' => 'required|string|max:250',
             'materia'     =>'required',
-            'archivo'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:50000',
+            'archivo'     => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:50000',
             'estado'      => 'required|in:on,off',
         ]);
      
@@ -65,11 +65,22 @@ class ContenidoController extends Controller
             $archivo->move($ruta,$nombre);
             $urlarchivo['url']='/archivos/'.$nombre;
          }
-
+       
+       
 
          $contenido = New Contenido;
          $contenido->nombre = $request->nombre;
          $contenido->descripcion =$request->descripcion;
+       
+         if($request->accion == 1){
+          
+            $contenido->accion = true;
+         }elseif($request->accion == 0){
+          
+            $contenido->accion = false;
+         }
+       
+         
          $contenido->estado = $request->estado;
 
          if($request->get('materia')){
@@ -147,6 +158,14 @@ class ContenidoController extends Controller
             $urlarchivo['url']='/archivos/'.$nombre;
          }
 
+         if($request->accion == 1){
+          
+            $contenido->accion = true;
+         }elseif($request->accion == 0){
+          
+            $contenido->accion = false;
+         }
+
         $contenido->update($request->all());
       
 
@@ -182,12 +201,8 @@ class ContenidoController extends Controller
     
            $contenido->delete();
           
-         
-
-            
+           
             return redirect('sistema/contenidos')->with('success','Haz eliminado un Contenido con exito');     
-
-
        
        
     }

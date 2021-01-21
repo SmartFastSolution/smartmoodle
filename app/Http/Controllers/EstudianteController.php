@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Archivodocente;
 use App\Http\Controllers\Controller;
 use APp\User;
 use App\Contenido;
@@ -80,7 +82,8 @@ class EstudianteController extends Controller
  
          $materia =Materia::where('id', $id)->firstOrfail();
          $cons =Contenido::where('materia_id',$materia->id)->paginate(6);
-         return view ('Estudiante.contenido',['materia'=>$materia,'contenidos'=>$contenido,'institutomate'=>$institutomate,'tallers'=>$tallers,'cons'=>$cons]);
+         $cons2 =Archivodocente::where('materia_id',$materia->id)->paginate(6);
+         return view ('Estudiante.contenido',['materia'=>$materia,'contenidos'=>$contenido,'institutomate'=>$institutomate,'tallers'=>$tallers,'cons'=>$cons,'cons2'=>$cons2]);
 
        // return $tallers;
 
@@ -119,10 +122,82 @@ class EstudianteController extends Controller
 
 
      public function VisualizacionPDF($id){
-
+     //documento no descargable 
       $contenido =Contenido::where('id', $id)->firstOrfail();
+
        return \view('Estudiante.archivopdf',['contenido'=>$contenido]);
 
+   }
+   public function VisualizacionPDF3($id){
+    //documento  descargable 
+      $contenido =Contenido::where('id', $id)->firstOrfail();
+
+      return \view('Estudiante.archivopdf3',['contenido'=>$contenido]);
+
   }
+
+
+   public function VisualizacionPDF2($id){
+  //visualizar documento del docente
+    $contenido =Archivodocente::where('id', $id)->firstOrfail();
+     return \view('Estudiante.archivopdf2',['contenido'=>$contenido]);
+
+ }
+
+  public function PostE()
+  {
+
+     return \view('Estudiante.postestudiante');
+
+  }
+
+
+  public function storee(Request $request)
+  {
+      $request->validate([
+          'nombre'              =>  'required|string|max:60',
+          'user_id'             =>  'required|integer',
+          'abstract'            =>  'required|max:500',
+          'body'                =>  'required',    
+          'image'            =>  'image|dimensions:min_width=1200, max_with=1200, min_height=490, max_height=490|mimes:jpeg,jpg,png',
+        
+      ]);
+
+        $urlimage=[];
+      if($request->hasFile('image')){
+
+          $image=$request->file('image');
+          $nombre=time().$image->getClientOriginalName();
+          $ruta= public_path().'/imagenes';
+          $image->move($ruta,$nombre);
+          $urlimage['url']='/imagenes/'.$nombre;
+      }
+
+      $post =New Post;
+      $post->user_id  = e($request->user_id);
+      $post->nombre   = e($request->nombre);
+      $post->abstract = e($request->abstract);
+      $post->body = e($request->body);
+
+      $post->save();
+
+      $post->image()->create($urlimage);
+
+      return redirect('sistema/homees')->with('Post Creado!');
+
+  }
+
+
+  public function destroype(Post $post)
+    {
+        $post = Post::findOrFail($post->id)->delete();
+   
+
+        return redirect('sistema/homees')->with('Post Eliminado!');
+    }
+
+
+
+ 
 
 }

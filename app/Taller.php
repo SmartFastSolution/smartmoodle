@@ -400,7 +400,14 @@ class Taller extends Model
     public function provisionsocial(){
         return $this->hasMany('App\Provisionsocial');
      }
-    
+      public function tallerArchivo()
+    {
+        return $this->belongsTo('App\TallerArchivo');
+    }
+         public function  archivoRes()
+    {
+        return $this->belongsTo('App\RespuestaArchivo');
+    }
     
 }
 

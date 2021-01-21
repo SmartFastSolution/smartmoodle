@@ -50,7 +50,7 @@
             </ul>
 
             <!-- SEARCH FORM -->
-           {{--  <form class="form-inline ml-3">
+            {{--  <form class="form-inline ml-3">
                 <div class="input-group input-group-sm">
                     <input class="form-control form-control-navbar" type="search" placeholder="Search"
                         aria-label="Search">
@@ -411,7 +411,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                    <li class="nav-item">
+                                <li class="nav-item">
                                     <a href="{{route('admin.create')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Crear Talleres</p>
@@ -483,7 +483,7 @@
         @elseif($rol ==='docente')
 
         @include('layouts.docapp')
-        
+
         @endif
         @endif
     </div>
@@ -498,6 +498,7 @@
     <script src="{{asset('https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js')}}"></script>
     <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>
 
+   
 
 
 

@@ -4,59 +4,100 @@
 @section('title', 'Administracion - Docente')
 @section('content')
 
+@if ($errors->any())
+<div class="alert alert-danger">
+    <strong>Whoops!</strong> Parece que hay porblemas o Malas decisiones <br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 <section class="content">
     <div class="container">
         <h1 class="font-weight-light" style="color:red;">
-        @isset ( auth()->user()->instituto->nombre)
-            {{ auth()->user()->instituto->nombre}}   
-        @endisset
+            @isset ( auth()->user()->instituto->nombre)
+            {{ auth()->user()->instituto->nombre}}
+            <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }}
+                {{ auth()->user()->apellido, }}
+            </h2>
+            @endisset
         </h1>
-        <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}
-        </h2>
+
         <h2 class="font-weight-light">
-            @foreach(auth()->user()->roles as $role)
+            PÁGINA PRINCIPAL| @foreach(auth()->user()->roles as $role)
             {{$role->name}}
             @endforeach</h2>
-        <h2>Pagina Principal</h2>
+
     </div>
 </section>
-<section class="content">
-    <div class="container">
-        @foreach($p as $post)
-        <div class="card gedf-card">
-            <div class="card-header">
-                <div class="d-flex justify-content-between align-items-center">
+
+@foreach($p as $post)
+<div class="container-fluid gedf-wrapper">
+    <div class="row">
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-6 gedf-main">
+
+
+            <!--- \\\\\\\Post-->
+            <div class="card gedf-card">
+                <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
-                        <div class="ml-2">
-                            <div class="h5 m-0"> <strong>{{$post->user->name}}
-                                    {{$post->user->apellido}}</strong>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="ml-2">
+                                <div class="h5 m-0">{{$post->user->name}} {{$post->user->apellido}}</div>
+                                <div class="h7 text-muted"></div>
                             </div>
-                            <div class="h7 text-muted">Publicado el {{$post->updated_at->format('d/m/y')}}</div>
                         </div>
+                        <div>
+                            @if($post->user_id == Auth::id())
+                            <div class="dropdown">
+                                <button class="btn btn-link-dark dropdown-toggle" type="button" id="gedf-drop1"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                    {!! Form::open(['route'=>['deletepostd',$post->id], 'method'=>'DELETE']) !!}
+                                    <button class="dropdown-item" title="Eliminar">
+                                        Eliminar
+                                    </button>
+                                    {!! Form::close() !!}
+                                </div>
+                            </div>
+                        </div>
+                        @endif
                     </div>
                 </div>
-            </div>
-            <div class="card-body">
-                <h1 class="mt-5">{{$post->nombre}}</h1>
-                <br>
-                <div class="media m-0">
-                    <div class="d-flex mr-3">
-                        <img class="img-fluid rounded" src="{{$post->image->url}}" alt="">
-                    </div>
-                </div>
-                <div>
-                    <p class="lead">{{$post->abstract}}</p>
-                </div>
-                <p class="card-text">
-                    {!!htmlspecialchars_decode($post->body)!!}
-                </p>
+                <div class="card-body">
+                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>Publicado el
+                        {{$post->updated_at->format('d/m/y')}}</div>
 
+                    <h5 class="card-title">{{$post->nombre}}</h5>
+
+
+                    <p class="card-text">
+                        @isset($post->image->url)
+                        <img class="img-fluid rounded" src="{{$post->image->url}}" width="850" height="800" alt="">
+                        @endisset
+                    <div>
+                        <p class="lead">{{$post->abstract}}</p>
+                    </div>
+                    <p class="card-text">
+                        {!!htmlspecialchars_decode($post->body)!!}
+                    </p>
+                    </p>
+                </div>
                 <div class="card-footer">
-                    <a href="#" class="card-link"><i class="fa fa-comment"></i> Comentarios</a>
-                </div>
 
-                <div class="card my-4">
-                    <h5 class="card-header">Comentar:</h5>
+                    <a class="card-link" data-toggle="collapse" href="#collapseExample" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Comentarios
+                    </a>
+                </div>
+                <div class="collapse" id="collapseExample">
                     <div class="card-body">
                         {!! Form::open(['route'=>'comment.add', 'method'=>'POST']) !!}
                         <form class="form-horizontal">
@@ -65,43 +106,28 @@
                                 <input type="hidden" name="post_id" value="{{$post->id}}">
                                 <textarea class="form-control" name="body" rows="2"></textarea>
                                 <div class="input-group-append">
-                                    <button type="submit" class="btn btn-success">Comentar</button>
+                                    <button type="submit" class="btn btn-dark">Comentar</button>
                                 </div>
                             </div>
 
                         </form>
                         {!! Form::close() !!}
+                        @include('Post._replies',['comments'=>$post->comments, 'post_id'=>$post->id])
                     </div>
+
                 </div>
-                @include('Post._replies',['comments'=>$post->comments, 'post_id'=>$post->id])
             </div>
+            <!-- Post /////-->
         </div>
-        @endforeach
+        <div class="col-md-3">
+        </div>
     </div>
-</section>
+</div>
+@endforeach
 
 @stop
 @section('css')
 @stop
 @section('js')
-<script>
-$(function() {
-    $(document).ready(function() {
-        $('#myTable').DataTable({
-            "info": true,
-            "autoWidth": true,
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            }
-        });
-        $('#myTable2').DataTable({
-            "info": true,
-            "autoWidth": true,
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            }
-        });
-    });
-});
-</script>
+
 @stop

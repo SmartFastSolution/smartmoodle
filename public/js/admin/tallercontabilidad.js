@@ -2680,7 +2680,7 @@ transacciones:'',
            reten_iva.obtenerDiarioGeneral();
            
           }else{
-           toastr.success("Diario General Creado Correctamente", "Smarmoddle", {
+           toastr.success("Diairo General Creado Correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
           
@@ -11732,9 +11732,7 @@ methods:{
             this.impuestoAgregado('final')
             
             }
-          },
-
-          //impuesto agregado
+          },   //impuesto agregado
 
 
 

@@ -3,9 +3,6 @@
 
 @section('title', 'Administracion - Inicio')
 
-
-
-
 @section('content')
 
 <div class="container">
@@ -21,7 +18,8 @@
                 <div class="icon">
                     <i class="fas fa-school"></i>
                 </div>
-                <a href="#" class="small-box-footer">Ver Todos <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('institutos.index') }}" class="small-box-footer">Ver Todos <i
+                        class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -34,9 +32,10 @@
                     <p>Materias Creadas</p>
                 </div>
                 <div class="icon">
-                <i class="fas fa-newspaper"></i>
+                    <i class="fas fa-newspaper"></i>
                 </div>
-                <a href="{{ route('materias.index') }}" class="small-box-footer">Ver Todas <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('materias.index') }}" class="small-box-footer">Ver Todas <i
+                        class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -47,6 +46,43 @@
                     <h3>{{ App\User::get()->count() }}</h3>
 
                     <p>Usuarios Registrados</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <a href="{{ route('users.index') }}" class="small-box-footer">Ver todos <i
+                        class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <!-- ./col -->
+      
+        <div class="col-lg-4 col-6">
+            <!-- small box -->
+            <div class="small-box bg-dark">
+                <div class="inner">
+                    <h3>
+                        {{$alumnos}}
+                    </h3>
+                    <p>Estudiantes Registrados Activos</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <a href="{{ route('users.index') }}" class="small-box-footer">Ver todos <i
+                        class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+      
+        <!-- ./col -->
+        <!-- ./col -->
+        <div class="col-lg-4 col-6">
+            <!-- small box -->
+            <div class="small-box bg-secondary">
+                <div class="inner">
+                    <h3>  {{$docente}}</h3>
+
+                    <p>Docentes Registrados Activos</p>
                 </div>
                 <div class="icon">
                     <i class="fas fa-user"></i>
