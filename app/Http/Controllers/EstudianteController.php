@@ -40,11 +40,9 @@ class EstudianteController extends Controller
          return view('errors.error'); //ruta estudiante //ruta estudiante       
              
         }
-        $p = Post::all();
-        
+        $p = Post::orderBy('id','Desc')->paginate(5);
+       
         return view('Estudiante.indexes',compact('p'));
-
-
            
     }
 

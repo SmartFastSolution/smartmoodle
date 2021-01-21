@@ -95,8 +95,8 @@ class DocenteController extends Controller
     public function index()
     {
             
-                $p = Post::all();
-               
+                $p = Post::orderBy('id','Desc')->paginate(5);
+             
                 return view('Docente.indexd',compact('p'));
      
     }

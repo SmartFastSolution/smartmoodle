@@ -14,7 +14,7 @@
             @isset ($contenido->documentodoc->url)
 
             <object width="100%" height="650" type="application/pdf"
-                data="{{$contenido->documentodoc->url}}#zoom=85&scrollbar=0&toolbar=0&navpanes=0" id="pdf_content"
+                data="{{$contenido->documentodoc->url}}#zoom=85&scrollbar=0&toolbar=0&navpanes=1" id="pdf_content"
                 style="pointer-events: none;">
                 @endisset
         </div>

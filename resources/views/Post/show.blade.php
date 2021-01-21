@@ -18,8 +18,6 @@
 @endif
 
 
-
-
 <section class="content">
     <div class="container">
         <div class="card gedf-card">
@@ -27,7 +25,11 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="ml-2">
-                            <div class="h5 m-0"> <strong>{{$post->user->name}} {{$post->user->apellido}}</strong>
+                            <div class="h5 m-0"> <strong>{{$post->user->name}} {{$post->user->apellido}} 
+                            @isset($post->user->curso->nombre)
+                            {{$post->user->curso->nombre}}
+                            @endisset
+                            </strong>
                             </div>
                             <div class="h7 text-muted">Publicado el {{$post->updated_at->format('d/m/y')}}</div>
                         </div>

@@ -183,7 +183,7 @@ class ContenidoController extends Controller
            
               $contenido->materia_id = $request->materia;
            }
-          // hasta aqui 
+           $contenido->save();
          
   
           return redirect('sistema/contenidos');
