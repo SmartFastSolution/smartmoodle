@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\User;
+use App\Instituto;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -26,8 +27,9 @@ class PostController extends Controller
 
   
     public function create()
-    {
-        return view('Post.create');
+    { 
+        $institutos=Instituto::get();
+        return view('Post.create',compact('institutos'));
     }
 
    
@@ -56,7 +58,7 @@ class PostController extends Controller
 
      $post =New Post;
      $post->user_id  = e($request->user_id);
-     
+     $post->instituto_id = $request->instituto;
      $post->nombre   = e($request->nombre);
      $post->abstract = e($request->abstract);
      $post->body = e($request->body);
@@ -78,11 +80,15 @@ class PostController extends Controller
     }
 
   
-    public function edit( $id)
+    public function edit(Post $post)
     {
-        $post=Post::where('id',$id)->firstOrFail();
+        $post=Post::where('id',$post->id)->firstOrFail();
 
-       return view('Post.edit',compact('post'));
+        $institutos = Instituto::get(); // todos los datos de la bd
+        $institutopost = Post::find($post->id)->instituto()->get(); //llama al instituto que este relacionado a un usuario 
+
+
+       return view('Post.edit',compact('post','institutos','institutopost'));
     }
 
   
@@ -109,11 +115,17 @@ class PostController extends Controller
            $urlimage['url']='/imagenes/'.$nombre;
         }
 
+
         $post->update($request->all());
 
         if ($request->hasFile('image')){
             $post->image()->delete();
         }
+        
+        if($request->get('instituto')){
+          
+            $post->instituto_id = $request->instituto;
+          }
 
         $post->save();
         if ($request->hasFile('image')){
