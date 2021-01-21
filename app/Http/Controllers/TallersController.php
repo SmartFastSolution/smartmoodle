@@ -54,6 +54,7 @@ use App\Materia;
 use App\Pcuenta;
 use App\TalleLocalizarAbreRe;
 use App\Taller;
+use App\TallerArchivo;
 use App\TallerAbreviaturaDatoRe;
 use App\TallerAbreviaturaRe;
 use App\TallerCertificadoDepositoRe;
@@ -496,9 +497,12 @@ class TallersController extends Controller
 
 
             return view('talleres.taller47', compact('datos', 'd', 'letra', 'numero', 'miniscula', 'numer'));
+
         }elseif ($plant == 48) {
+
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
+             $datos = TallerArchivo::where('taller_id', $consul->id)->firstOrFail();
+             
             return view('talleres.taller48', compact('datos', 'd'));
         }elseif ($plant == 49) {
             $consul = Taller::findorfail($id);

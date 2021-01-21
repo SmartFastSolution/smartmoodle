@@ -112,6 +112,9 @@ use App\Taller;
 use App\TallerChequeRe;
 use App\User;
 use JavaScript;
+use App\TallerArchivo;
+use App\RespuestaArchivo;
+use App\RArchivo;
 use App\Admin\TallerModuloContable;
 use App\Admin\TallerModuloTransaccion;
 
@@ -679,9 +682,14 @@ class VistaEstudianteController extends Controller
                 $datos = RAlternativa::where('taller_id', $consul->id)->firstOrFail();
                 return view('estudiantes.talleres.taller47', compact('datos', 'd', 'relacion', 'taller', 'letra', 'miniscula', 'numero', 'numer'));
         }elseif ($plant == 48) {
-            
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
-            return view('docente.talleres.taller48', compact('datos', 'd'));
+                                $relacion = DB::table('taller_user')
+            ->where('taller_user.user_id', $user)
+            ->where('taller_user.taller_id', $id)
+            ->select('taller_user.*')
+            ->get();
+            $taller = TallerArchivo::where('taller_id', $consul->id)->firstOrFail();
+             $datos = RespuestaArchivo::where('user_id', $user)->where('taller_id', $consul->id)->firstOrFail();
+            return view('estudiantes.talleres.taller48', compact('datos', 'd', 'relacion', 'taller'));
         }elseif ($plant == 49) {
             
              $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();

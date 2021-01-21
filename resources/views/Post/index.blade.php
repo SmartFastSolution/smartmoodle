@@ -27,6 +27,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
+                                <th scope="col">Unidad Educativa</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Resumen</th>
                                 <th scope="col">Tools</th>
@@ -37,6 +38,11 @@
                             @foreach($posts as $post)
                             <tr>
                                 <th scope="row">{{$post['id']}}</th>
+                                <td>
+                                @isset($post->instituto->nombre)
+                                {{$post->instituto->nombre}} 
+                                @endisset
+                                </td>
                                 <td>{{$post->nombre}} </td>
                                 <td>{{$post->abstract}} </td>
                                 <td class="table-button ">

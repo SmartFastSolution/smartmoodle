@@ -213,36 +213,32 @@
                     <table class="table table-hover myTable">
                         <thead>
                             <tr>
-                                <th scope="col" width="50">#</th>
-                                <th scope="col" width="100">Unidad</th>
-                                <th scope="col" width="80"> Taller </th>
-                                <th scope="col">Enunciado </th>
-                                <th scope="col">Estado </th>
-                                <th scope="col">Calificacion </th>
+                                <th class="text-center" scope="col" width="100">Unidad</th>
+                                <th class="text-center" scope="col" width="80"> Taller </th>
+                                <th class="text-center" scope="col">Enunciado </th>
+                                <th class="text-center" scope="col">Estado </th>
+                                <th class="text-center" scope="col">Calificacion </th>
 
-                                {{-- <th scope="col">Vista Taller</th> --}}
+                                {{-- <th class="text-center" scope="col">Vista Taller</th> --}}
                             </tr>
                         </thead>
                         <tbody>
                             @foreach(auth()->user()->tallers->where('contenido_id', $contenido->id) as
                             $taller)
                             <tr>
-                                <th scope="row">{{-- {{$taller->materia['id']}} --}}</th>
                                 <td>{{$taller->contenido->nombre}}</td>
                                 <td>{{$taller['nombre']}}</td>
-                                <td>
-                                    @if($taller->plantilla_id == 37)
-                                    Taller de Modulos Contable
-                                    @else
-                                    {!!$taller->enunciado!!}
-                                    @endif
-                                </td>
+                                <td>@if ($taller->plantilla_id == 37)
+                            Taller de Modulos Contable
+                            @else
+                            {!!$taller->enunciado!!}
+                            @endif</td>
                                 <td align="center"> <span
                                         class="badge @if($taller->pivot->status =='completado')badge-warning @elseif($taller->pivot->status == 'calificado') badge-success @endif ">{{$taller->pivot->status}}</span>
                                 </td>
 
                                 <td class="text-center"> <span
-                                        class="badge @isset($taller->pivot->calificacion) @elsebadge-danger  @endisset">@isset($taller->pivot->calificacion)
+                                        class="badge @isset($taller->pivot->calificacion) @else badge-danger  @endisset">@isset($taller->pivot->calificacion)
                                         <a class="btn btn-info"
                                             href="{{route('vista.taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
                                                 class="fas fa-eye"></i></a> @else pendiente

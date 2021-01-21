@@ -265,6 +265,7 @@ route::post('/taller43', 'AdminController@taller43')->name('admin.taller43');
 route::post('/taller44', 'AdminController@taller44')->name('admin.taller44');
 route::post('/taller45', 'AdminController@taller45')->name('admin.taller45');
 route::post('/taller47', 'AdminController@taller47')->name('admin.taller47');
+route::post('/taller48', 'AdminController@taller48')->name('admin.taller48');
 // route::post('/taller57', 'AdminController@taller57')->name('admin.taller57');
 	});
 
@@ -322,7 +323,9 @@ route::post('/sistema/admin/taller44/{idtaller}', 'TallerEstudianteController@st
 route::post('/sistema/admin/taller45/{idtaller}', 'TallerEstudianteController@store45')->name('taller45');
 route::post('/sistema/admin/taller46/{idtaller}', 'TallerEstudianteController@store46')->name('taller46');
 route::post('/sistema/admin/taller47/{idtaller}', 'TallerEstudianteController@store47')->name('taller47');
-route::post('/sistema/admin/taller37/{idtaller}', 'TallerEstudianteController@store37')->name('taller_37');
+// route::post('/sistema/admin/taller37/{idtaller}', 'TallerEstudianteController@store37')->name('taller_37');
+route::post('/sistema/admin/taller48/{idtaller}', 'TallerEstudianteController@store48')->name('taller48');
+
 
 route::post('/sistema/admin/taller/balance_inicial', 'TallerContabilidadController@balance_inicial')->name('balance_inicial');
 

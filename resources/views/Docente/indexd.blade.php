@@ -124,6 +124,7 @@
     </div>
 </div>
 @endforeach
+
 <div class="row justify-content-center">
  {{ $p->links() }}
 </div>

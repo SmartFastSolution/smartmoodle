@@ -56,6 +56,7 @@ class PostController extends Controller
 
      $post =New Post;
      $post->user_id  = e($request->user_id);
+     
      $post->nombre   = e($request->nombre);
      $post->abstract = e($request->abstract);
      $post->body = e($request->body);

@@ -3443,3 +3443,66 @@
 
 
 
+<!-- FORMULARIO PARA PLANTILLA 48 -->
+<div class="modal fade" id="taller48" tabindex="-1" role="dialog" aria-labelledby="taller48Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="taller48Label">CARGAR ARCHIVOS</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller48') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="48" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-4">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-4">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
+                                <div class="form-group col-4">
+                                   <label for="recipient-name" class="col-form-label">Numero de archivos:</label>
+                                <input required="" type="text" class="form-control"  name="ar_num">
+                                </div>
+                            </div>
+                            
+                            <div class="row justify-content-center">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

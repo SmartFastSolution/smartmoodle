@@ -401,6 +401,14 @@ class Plantilla extends Seeder
                           'created_at' => now(),
                           'updated_at' => now(),
                           ]);
+                          DB::table('plantillas')->insert([
+                          'id' => 48,
+                          'nombre' => 'PLANTILLA 41 - CARGAR ARCHIVOS',
+                          'descripcion' => 'Plantilla para cargar Archivos ',
+                          'plantilla' => 'si',
+                          'created_at' => now(),
+                          'updated_at' => now(),
+                          ]);
   
     }
 }

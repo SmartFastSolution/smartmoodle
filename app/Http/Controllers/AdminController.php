@@ -81,6 +81,7 @@ use App\Admin\Leccion\LeccionVerdaderFalso;
 use App\Http\Controllers\Controller;
 use App\Plantilla;
 use App\Taller;
+use App\TallerArchivo;
 use App\TallerCompletarEnunRe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -2334,6 +2335,28 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
                  return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');
              }
+      }
+      public function taller48(Request $request)
+      {
+          $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $taller48 = new Taller;
+         $taller48->nombre = 'Taller '.++$i;
+         $taller48->enunciado            = $request->input('enunciado');
+         $taller48->plantilla_id = $request->input('id_plantilla');
+         $taller48->contenido_id = $request->input('contenido_id');
+         $taller48->estado = 0;
+         $taller48->save();
+          if ($taller48 = true) {
+            $a                               = Taller::get()->last();
+            $taller_48                       = new TallerArchivo;
+            $taller_48->taller_id            = $a->id;
+            $taller_48->enunciado            = $request->input('enunciado');
+            $taller_48->ar_num            = $request->input('ar_num');
+            $taller_48->save();
+         }
+      return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');  
+         
+
       }
 
 }
