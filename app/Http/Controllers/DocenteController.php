@@ -356,7 +356,7 @@ class DocenteController extends Controller
             'nombre'      => 'required|string|max:150',
             'descripcion' => 'required|string|max:250',
             'materia'     =>'required',
-            'archivo'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:50000',
+            'archivo'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:100000',
             
         ]);
      

@@ -74,11 +74,7 @@
                                     class="fas fa-eye"></i></a>
                             @endif
                         </td>
-
-
-
                     </tr>
-
                     @endforeach
                 </tbody>
             </table>
@@ -224,6 +220,23 @@ $(function() {
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
             }
+        });
+
+
+        $('#myTable3 thead tr').clone(true).appendTo('#myTable3 thead');
+        $('#myTable3 thead tr:eq(1) th').each(function(i) {
+
+            var title = $(this).text(); //es el nombre de la columna
+            $(this).html('<input type="text" placeholder="Buscar..." />');
+
+            $('input', this).on('keyup change', function() {
+                if (table.column(i).search() !== this.value) {
+                    table
+                        .column(i)
+                        .search(this.value)
+                        .draw();
+                }
+            });
         });
     });
 });

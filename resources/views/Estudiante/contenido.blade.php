@@ -294,6 +294,40 @@ $(function() {
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
             }
         });
+
+
+        $('#myTable3 thead tr').clone(true).appendTo('#myTable3 thead');
+        $('#myTable3 thead tr:eq(1) th').each(function(i) {
+
+            var title = $(this).text(); //es el nombre de la columna
+            $(this).html('<input type="text" placeholder="Buscar..." />');
+
+            $('input', this).on('keyup change', function() {
+                if (table.column(i).search() !== this.value) {
+                    table
+                        .column(i)
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+
+        $('#myTable4 thead tr').clone(true).appendTo('#myTable4 thead');
+        $('#myTable4 thead tr:eq(1) th').each(function(i) {
+
+            var title = $(this).text(); //es el nombre de la columna
+            $(this).html('<input type="text" placeholder="Buscar..." />');
+
+            $('input', this).on('keyup change', function() {
+                if (table.column(i).search() !== this.value) {
+                    table
+                        .column(i)
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+
     });
 });
 </script>
