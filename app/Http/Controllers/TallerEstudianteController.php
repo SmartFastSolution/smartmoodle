@@ -1046,6 +1046,21 @@ public function store11(Request $request, $idtaller)
          $taller20->resp18    =   $request->input('resp18');
          $taller20->resp19    =   $request->input('resp19');  
          $taller20->resp20    =   $request->input('resp20');  
+         $taller20->resp21    =   $request->input('resp21');  
+         $taller20->resp22    =   $request->input('resp22');  
+         $taller20->resp23    =   $request->input('resp23');  
+         $taller20->resp24    =   $request->input('resp24');  
+         $taller20->resp25    =   $request->input('resp25');  
+         $taller20->resp26    =   $request->input('resp26');  
+         $taller20->resp27    =   $request->input('resp27');  
+         $taller20->resp28    =   $request->input('resp28');  
+         $taller20->resp29    =   $request->input('resp29');  
+         $taller20->resp30    =   $request->input('resp30');  
+         $taller20->resp31    =   $request->input('resp31');  
+         $taller20->resp32    =   $request->input('resp32');  
+         $taller20->resp33    =   $request->input('resp33');  
+         $taller20->resp34    =   $request->input('resp34');  
+         $taller20->resp35    =   $request->input('resp35');  
          $taller20->save();
 
     $user= User::find($id);

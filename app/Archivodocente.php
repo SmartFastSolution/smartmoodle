@@ -19,6 +19,13 @@ class Archivodocente extends Model
     }
 
 
+    public function user(){
+          
+        return $this->belongsTo('App\User');
+
+    }
+
+
     public function documentodoc(){
 
         return $this->morphOne('App\Documentodoc','documentable');

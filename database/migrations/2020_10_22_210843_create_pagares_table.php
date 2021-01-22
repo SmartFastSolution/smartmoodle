@@ -18,7 +18,7 @@ class CreatePagaresTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->longText('enunciado');
-            $table->string('cantidad');
+            $table->string('cantidad')->nullable();
             $table->string('resp1')->nullable();
             $table->string('resp2')->nullable();
             $table->string('resp3')->nullable();

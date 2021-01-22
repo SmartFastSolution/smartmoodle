@@ -30,9 +30,9 @@
 					<div class="col-6">
 						<label>Valor :</label>
 						<span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->valor }}')" ondragend="this.classList.add('text-muted');">
-							{{ $datos->beneficiario }}
+							{{ $datos->valor }}
 						</span>
-						${{ $datos->valor }}<br>
+						<br>
 						<label>Plazo de Pago :</label>
 						<span draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->plazo_pago }}')" ondragend="this.classList.add('text-muted');">
 							{{ $datos->plazo_pago }}

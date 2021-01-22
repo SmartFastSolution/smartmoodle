@@ -244,7 +244,8 @@ class DocenteController extends Controller
     }
   
 
-    public function updatep(Request $request){
+    public function updatep(Request $request)
+    {
 
             //dd($request);
       /////////////////////////////////////////////////////////////////////////////////////
@@ -265,7 +266,7 @@ class DocenteController extends Controller
         return redirect('sistema/homedoc')->with('Password actualizado');
           
 
-     }
+    }
 
       /////////////////////////////////////////////////////////////////////////////////////
       //////////////////////////////////Post/////////////////////////////////////////
@@ -335,8 +336,10 @@ class DocenteController extends Controller
 
       public function Archivos_docente()
       {
-            $doc = Archivodocente::all();
-         return \view('Docente.contenido.doc', compact('doc'));
+        $doc = Archivodocente::where('user_id', Auth::id())->get();
+         //   $doc = Archivodocente::all();
+        // return $doc;
+       return \view('Docente.contenido.doc', compact('doc'));
       }
     
       public function Doc_crear()
@@ -372,7 +375,9 @@ class DocenteController extends Controller
          }
         
          $d = New Archivodocente;
+         $d->user_id= Auth::id();
          $d->nombre = $request->nombre;
+       
          $d->descripcion =$request->descripcion;
         
          if($request->get('materia')){
