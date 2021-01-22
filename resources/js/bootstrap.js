@@ -13,8 +13,8 @@ try {
    
     require('bootstrap');
  	require('overlayscrollbars');
- 	require('../../vendor/almasaeed2010/adminlte/plugins/bootstrap/js/bootstrap.bundle.min');
-	require('../../vendor/almasaeed2010/adminlte/dist/js/adminlte');
+ 	require('../plugins/bootstrap/js/bootstrap.bundle.min');
+	require('../dist/js/adminlte');
 } catch (e) {}
 
 
