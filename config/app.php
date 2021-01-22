@@ -169,7 +169,6 @@ return [
          * Package Service Providers...
          */
 
-        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
        
 
         /*
@@ -180,7 +179,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Yajra\DataTables\DataTablesServiceProvider::class,
+        
         Barryvdh\DomPDF\ServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         
