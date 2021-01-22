@@ -35,7 +35,7 @@
 							 			@foreach ($tipos->saldoDebe as $debesaldo)
 							 				<h6  class="text-right">{{ $debesaldo->saldo }}</h6>
 							 			@endforeach
-							 				<h4 class="text-right font-weight-bold text-info">{{ $datos->saldoDato[$key]->total_haber }}</h4>
+							 				<h4 class="text-right font-weight-bold text-info">{{ $datos->saldoDato[$key]->total_debe }}</h4>
 							 				{{-- <h6 >$ 2.100</h6>
 							 				<h6 class="border-left-0 border-right-0 border-top-0 border border-danger">$ 900</h6> --}}
 							 			</div>
@@ -53,7 +53,7 @@
 							 			@foreach ($tipos->saldoHaber as $saldo)
 							 				<h6 class="text-right">{{ $saldo->saldo }}</h6>
 							 			@endforeach
-							 				<h4 class="text-right font-weight-bold text-info">{{ $datos->saldoDato[$key]->total_debe }}</h4>
+							 				<h4 class="text-right font-weight-bold text-info">{{ $datos->saldoDato[$key]->total_haber }}</h4>
 
 							 				{{-- <h6 class="mb-4">$ 2.100</h6>
 							 				<h6 class="border-left-0 border-right-0 border-top-0 border border-danger">$ 900</h6> --}}
