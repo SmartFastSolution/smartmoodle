@@ -1,7 +1,7 @@
 {{-- @extends('layouts.estapp') --}}
-
 @extends('layouts.nav')
-@section('title', 'Documentación| SmartMoodle')
+@section('title', 'Unidades | SmartMoodle')
+
 @section('content')
 
 <section class="content">
@@ -9,29 +9,25 @@
         <h1 class="font-weight-light">Visualización de Documento|Descargable</h1>
         <h3 class="font-weight-light">{{$contenido->nombre}}</h3>
 
-        <p class="text-center">
-        <div id="pdf">
+      
             @isset ($contenido->archivo->url)
-
-            <object width="100%" height="650" type="application/pdf"
-                data="{{$contenido->archivo->url}}#zoom=85&scrollbar=1&toolbar=1&navpanes=1" id="pdf_content"
-                style="pointer-events: none;">
-            </object>
+            <iframe class="embed-responsive-item" width="800" height="700" src="{{$contenido->archivo->url}}"
+                allowfullscreen></iframe>
             @endisset
-        </div>
-        </p>
+
+
+            <!-- <iframe class="embed-responsive-item" width="800" height="700" src="{{$contenido->archivo->url}}"
+                allowfullscreen></iframe> -->
+
+
+
+      
 
     </div>
 </section>
-
-
-
-
-
 
 @stop
 @section('css')
 @stop
 @section('js')
-
 @stop
