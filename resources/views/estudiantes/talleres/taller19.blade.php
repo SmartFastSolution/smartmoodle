@@ -57,7 +57,7 @@ ADECUADAMENTE -->
 									<h6>FIRMA AUTORIZADA</h6>
 								</div>
 								<div class="col-5 text-center">
-									<input required  type="text" value="ING. JUAN PEREZ" disabled="" class="form-control form-control-sm text-center" disabled value="">
+									<input required  type="text" value="ING. JOSÉ MAYA" disabled="" class="form-control form-control-sm text-center" disabled value="">
 									<h6>FIRMA AUTORIZADA</h6>
 								</div>
 							</div>

@@ -168,6 +168,7 @@ route::resource('cursos','CursoController');
 route::resource('materias','MateriaController');
 //ver documento pdf en el archivo
 Route::get('Unidad-pdf/{contenido}','HomeController@Verdocumento')->name('Unidad.contenido');
+Route::get('Unidad-pdf2/{contenido}','HomeController@Verdocumento2')->name('Unidad2.contenido');
 
 
 //Ruta Resource de Materias que va aliada con el curso

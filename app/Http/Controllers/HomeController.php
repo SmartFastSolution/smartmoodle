@@ -147,6 +147,14 @@ class HomeController extends Controller
 
     }
 
+    public function Verdocumento2($id){
+
+        $contenido =Contenido::where('id', $id)->firstOrfail();
+         return \view('Materias.archivomateria2',['contenido'=>$contenido]);
+
+    }
+
+
 
    
 }

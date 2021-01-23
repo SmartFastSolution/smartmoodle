@@ -64,7 +64,7 @@ ADECUADAMENTE. -->
 								<label class="col-form-label" for="">Fecha:</label>
 							</div>
 							<div class="col-8">
-								<input  type="email" name="fecha" class="form-control">
+								<input  type="text" name="fecha" class="form-control">
 							</div>
 						</div>
 						<div class="row mb-2">			

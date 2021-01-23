@@ -22,7 +22,7 @@
                          </div>
 
                          <div class="text-justify">
-                              ENSOSO A: 
+                              ENDOSO A: 
                          </div>
                     
                   </div>
