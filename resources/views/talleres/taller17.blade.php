@@ -14,7 +14,9 @@
      			<div class=" p-2" style="box-shadow: 5px 5px 15px 0px  #27A4F4">
 				<div class="row ">
 					<div class="col-6">
-						<input type="text" disabled="" name="girador" value="Banco de Guayaquil" class="form-control mt-2" >
+					<h3 class="font-weight-bold text-danger">{{ $datos->tipo_cheque}}</h3>
+						
+						<input type="text" disabled="" value="{{ $datos->n_banco}}" class="form-control mt-2" >
 					</div>	
 					<div class="col-2 align-self-center">
 						<p>16457 <br>
@@ -105,6 +107,7 @@
      			<div class="row justify-content-center ">
 	     			<div class="col-10 border-success border ">
 	     				<div class="text-center mt-1">
+						 <h5>Espacio para depositante o persona que cobra</h5>
      				<textarea name="espacio2" class="form-control mt-2 mb-2"></textarea>
 	     					
 	     				</div>

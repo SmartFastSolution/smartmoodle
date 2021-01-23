@@ -22,6 +22,8 @@ class CreateTallerConvertirChequesTable extends Migration
             $table->string('numero');
             $table->string('lugar');
             $table->string('fecha');
+            $table->string('n_banco');
+            $table->string('tipo_cheque');
             $table->timestamps();
             
             $table->foreign('taller_id')

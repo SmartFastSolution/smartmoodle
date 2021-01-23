@@ -8,7 +8,7 @@
 	 		<h1 class="text-center text-danger  display-1">{{ $datos->taller->nombre }}</h1>
         <div class="card border border-danger mb-3" >
           <div class="card-header font-weight-bold" style="font-size: 25px;"> 
-            <h1 class="display-3">{{ auth()->user()->name }}{{ auth()->user()->apellido }}</h1></div>
+            <h1 class="display-3">{{ auth()->user()->name }} {{ auth()->user()->apellido }}</h1></div>
 
           <div class="card-body">
             <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{{ $datos->enunciado }}</h2>
@@ -17,9 +17,12 @@
      			<div class="border border-info p-2">
 				<div class="row ">
 					<div class="col-6">
-						<div class="alert alert-secondary" role="alert">
-									BANCO DE GUAYAQUIL
-									</div>
+					<div class="alert alert-secondary" role="alert">
+							 {{ $taller->tipo_cheque }}
+							</div>
+							<div class="alert alert-secondary" role="alert">
+							 {{ $taller->n_banco }}
+							</div>
 					</div>	
 					<div class="col-2 align-self-center">
 						<p>16457 <br>
@@ -141,6 +144,7 @@
 	     			<div class="col-10 border-success border ">
 	     				<div class="text-center mt-1">
 	     					<div class="text-center mt-1">
+							 <h5>Espacio para depositante o persona que cobra</h5>
 	     					<div class="alert alert-secondary" role="alert">
 							 {{ $datos->espacio2 }}
 							</div>

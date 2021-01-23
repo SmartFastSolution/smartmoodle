@@ -7,7 +7,7 @@
 		<div class="row justify-content-center">
 			<div class="card border border-danger mb-3" >
           <div class="card-header font-weight-bold" style="font-size: 25px;"> 
-            <h1 class="display-3">{{ auth()->user()->name }}{{ auth()->user()->apellido }}</h1></div>
+            <h1 class="display-3">{{ auth()->user()->name }} {{ auth()->user()->apellido }}</h1></div>
 
           <div class="card-body">
             <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{{ $datos->enunciado }}</h2>
