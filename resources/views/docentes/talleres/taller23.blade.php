@@ -133,7 +133,7 @@
 						</div>
 						<div class="row justify-content-end mb-2">
 							<div class="col-4">
-								<input type="text" name="hasta" class="form-control  form-control-sm float-left" value="{{ $datos->espacio }}" disabled >
+								<input type="text" name="espacio" class="form-control  form-control-sm float-left" value="{{ $datos->espacio }}" disabled >
 							</div>
 						</div>
 

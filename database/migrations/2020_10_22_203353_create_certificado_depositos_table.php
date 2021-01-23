@@ -28,6 +28,8 @@ class CreateCertificadoDepositosTable extends Migration
             $table->string('interes_anual')->nullable();
             $table->string('plazo_de_vencimiento')->nullable();
             $table->string('lugar_fecha_emision')->nullable();
+            $table->string('firma_uno')->nullable();
+            $table->string('firma_dos')->nullable();
             
             $table->timestamps();
             

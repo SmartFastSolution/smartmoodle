@@ -960,6 +960,7 @@ public function store11(Request $request, $idtaller)
         $taller17->firma2    =   $request->input('firma2');
         $taller17->espacio1  =   $request->input('espacio1');
         $taller17->espacio2  =   $request->input('espacio2');
+        $taller17->tipo_cheque  =   $request->input('tipo_cheque');
 
         $taller17->save();
 
@@ -979,6 +980,7 @@ public function store11(Request $request, $idtaller)
          $taller18->numero      =   $request->input('numero');
          $taller18->por         =   $request->input('por');
          $taller18->interes     =   $request->input('interes');
+         $taller18->desde     =   $request->input('desde');
          $taller18->ciudad      =   $request->input('ciudad');
          $taller18->fecha       =   $request->input('fecha');
          $taller18->orden_de    =   $request->input('orden_de');
@@ -1010,6 +1012,8 @@ public function store11(Request $request, $idtaller)
          $taller19->interes_anual        =   $request->input('interes_anual');
          $taller19->plazo_de_vencimiento =   $request->input('plazo_de_vencimiento');
          $taller19->lugar_fecha_emision  =   $request->input('lugar_fecha_emision');
+         // $taller19->firma_uno            =   $request->input('firma_uno');
+         // $taller19->firma_dos            =   $request->input('firma_dos');
          $taller19->save();
 
     $user= User::find($id);
@@ -1145,6 +1149,7 @@ public function store11(Request $request, $idtaller)
           $taller23->cubierto  =   $request->input('cubierto');
           $taller23->espacio   =   $request->input('espacio');
           $taller23->firma     =   $request->input('firma');
+          $taller23->ocupa     =   $request->input('ocupa');
             $taller23->save();
 
     $user= User::find($id);

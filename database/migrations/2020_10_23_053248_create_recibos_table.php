@@ -29,6 +29,7 @@ class CreateRecibosTable extends Migration
             $table->string('espacio')->nullable();
             $table->string('hasta')->nullable();
             $table->string('firma')->nullable();
+            $table->string('ocupa')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

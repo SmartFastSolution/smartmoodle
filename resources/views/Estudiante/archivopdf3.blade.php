@@ -9,19 +9,19 @@
         <h1 class="font-weight-light">Visualización de Documento|Descargable</h1>
         <h3 class="font-weight-light">{{$contenido->nombre}}</h3>
 
-      
-            @isset ($contenido->archivo->url)
-            <iframe class="embed-responsive-item" width="800" height="700" src="{{$contenido->archivo->url}}"
-                allowfullscreen></iframe>
-            @endisset
+
+        @isset ($contenido->archivo->url)
+        <iframe class="embed-responsive-item" width="800" height="700" src="{{$contenido->archivo->url}}"
+            allowfullscreen></iframe>
+        @endisset
 
 
-            <!-- <iframe class="embed-responsive-item" width="800" height="700" src="{{$contenido->archivo->url}}"
+        <!-- <iframe class="embed-responsive-item" width="800" height="700" src="{{$contenido->archivo->url}}"
                 allowfullscreen></iframe> -->
 
 
 
-      
+
 
     </div>
 </section>

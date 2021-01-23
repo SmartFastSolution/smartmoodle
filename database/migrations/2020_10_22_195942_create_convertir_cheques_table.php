@@ -23,6 +23,7 @@ class CreateConvertirChequesTable extends Migration
             $table->string('firma2')->nullable();
             $table->text('espacio1')->nullable();
             $table->text('espacio2')->nullable();
+            $table->text('tipo_cheque')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

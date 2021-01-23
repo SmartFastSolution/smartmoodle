@@ -18,7 +18,7 @@
 				<div class="row ">
 					<div class="col-6">
 					<div class="alert alert-secondary" role="alert">
-							 {{ $taller->tipo_cheque }}
+							 {{ $datos->tipo_cheque }}
 							</div>
 							<div class="alert alert-secondary" role="alert">
 							 {{ $taller->n_banco }}
@@ -115,7 +115,7 @@
      				</div>
 
      				<div class="text-justify">
-     					ENSOSO A: 
+     					ENDOSO A: 
      				</div>
      			
 		        </div>

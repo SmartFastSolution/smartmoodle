@@ -83,11 +83,11 @@ ADECUADAMENTE -->
 							</div>
 							<div class="row justify-content-between">
 								<div class="col-5 text-center">
-									<input   type="text" value="ING. JUAN PEREZ" disabled="" class="form-control text-center" name="">
+									<input   type="text" class="form-control text-center" value="ING. JUAN PEREZ" disabled="" >
 									<h6>FIRMA AUTORIZADA</h6>
 								</div>
 								<div class="col-5 text-center">
-									<input   type="text" value="ING. JOSÉ MAYA" disabled="" class="form-control text-center" name="">
+									<input   type="text" class="form-control text-center" value="ING. JOSE MAYA" disabled="" >
 									<h6>FIRMA AUTORIZADA</h6>
 								</div>
 							</div>
