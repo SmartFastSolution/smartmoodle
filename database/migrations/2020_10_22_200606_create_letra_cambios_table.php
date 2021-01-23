@@ -24,6 +24,7 @@ class CreateLetraCambiosTable extends Migration
             $table->string('interes')->nullable();
             $table->string('ciudad')->nullable();
             $table->string('fecha')->nullable();
+            $table->string('desde')->nullable();
             $table->string('orden_de')->nullable();
             $table->string('cantidad')->nullable();
             $table->string('direccion')->nullable();

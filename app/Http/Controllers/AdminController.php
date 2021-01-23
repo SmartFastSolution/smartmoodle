@@ -835,6 +835,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
             $taller_17->numero = $request->input('numero');
             $taller_17->lugar = $request->input('lugar');
             $taller_17->fecha = $request->input('fecha');
+            $taller_17->n_banco = $request->input('n_banco');
             $taller_17->save();
       return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
       }

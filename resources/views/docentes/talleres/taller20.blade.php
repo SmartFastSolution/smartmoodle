@@ -66,9 +66,9 @@
           <div class="col-6">
             <label>Valor :</label>
             <span>
-              {{ $taller->beneficiario }}
+              {{ $taller->valor }}
             </span>
-            ${{ $taller->valor }}<br>
+           <br>
             <label>Plazo de Pago :</label>
             <span>
               {{ $taller->plazo_pago }}

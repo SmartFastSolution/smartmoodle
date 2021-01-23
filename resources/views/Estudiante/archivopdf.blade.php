@@ -14,9 +14,10 @@
             @isset ($contenido->archivo->url)
 
             <object width="100%" height="650" type="application/pdf"
-                data="{{$contenido->archivo->url}}#zoom=85&scrollbar=0&toolbar=0&navpanes=0" id="pdf_content"
+                data="{{$contenido->archivo->url}}#zoom=85&scrollbar=0&toolbar=1&navpanes=0" id="pdf_content"
                 style="pointer-events: none;">
-                @endisset
+            </object>
+            @endisset
         </div>
         </p>
     </div>
@@ -28,14 +29,5 @@
 @section('css')
 @stop
 @section('js')
-<script type="text/javascript">
-$(document).ready(function() {
-    //disable full page
-
-    $("body").on("contextmenu", function(e) {
-        return false;
-    });
-})
-</script>
 
 @stop

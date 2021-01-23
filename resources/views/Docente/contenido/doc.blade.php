@@ -66,6 +66,7 @@
                     </tr>
                 </thead>
                 <tbody>
+               
                     @foreach ($doc as $d)
                     <tr>
                         <td>{{ $d->materia->nombre}}</td>
@@ -89,6 +90,7 @@
                         </td>
                     </tr>
                     @endforeach
+                
                 </tbody>
                 <!--Table body-->
             </table>

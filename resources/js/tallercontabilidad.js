@@ -2932,7 +2932,7 @@ nombre_cierre:''
          let total = Number(saldo).toFixed(2);
       return total;
     }else{
-      return
+      return '';
     }
      
     },

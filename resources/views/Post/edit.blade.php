@@ -29,12 +29,29 @@
                         !!}
                         <div class="card-body ">
                             @include('Post.form.form')
+                            
+                            <div class="form-group">
+                                    <label>Instituto</label>
+                                    <select class="form-control select" name="instituto" style="width: 99%;">
+                                        @foreach($institutopost as $instuser)
+                                        <option selected disabled value="{{ $instuser->id }}">
+                                            {{ $instuser->nombre }}
+                                        </option>
+                                        @endforeach
+                                        @foreach($institutos as $instituto)
+                                        <option value="{{$instituto->id}}">{{$instituto->nombre}}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+                            
                             <div class="card bg-dark text-white">
                                 <img class="card-img" src="{{$post->image->url}}" alt="Card image">
                                 <div class="card-img-overlay">
                                    
                                 </div>
                             </div>
+
                         </div>
 
                       

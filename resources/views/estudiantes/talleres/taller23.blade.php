@@ -8,7 +8,7 @@
 		<h1 class="text-center text-danger  display-1">{{ $datos->taller->nombre }}</h1>
         <div class="card border border-danger mb-3" >
           <div class="card-header font-weight-bold" style="font-size: 25px;"> 
-            <h1 class="display-3">{{ auth()->user()->name }}{{ auth()->user()->apellido }}</h1></div>
+            <h1 class="display-3">{{ auth()->user()->name }} {{ auth()->user()->apellido }}</h1></div>
           	
             <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{{ $datos->enunciado }}</h2>
              		<table class="table table-borderless">
@@ -99,6 +99,12 @@
 								
 							</div>
 						</div>
+							<div class="row justify-content-end mb-2">
+							<div class="col-4">
+								<input type="text" name="espacio" class="form-control  form-control-sm float-left" value="{{ $datos->espacio }}" disabled >
+							</div>
+						</div>
+
 
 						<div class="row mb-2 justify-content-center">			
 							<div class="col-6 text-center">

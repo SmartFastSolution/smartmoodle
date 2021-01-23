@@ -8,7 +8,7 @@
         {{-- <h1 class="text-center text-danger  display-1">{{ $datos->taller->nombre }}</h1> --}}
         <div class="card border border-danger mb-3" >
           <div class="card-header font-weight-bold" style="font-size: 25px;"> 
-            <h1 class="display-3">{{ auth()->user()->name }}{{ auth()->user()->apellido }}</h1></div>
+            <h1 class="display-3">{{ auth()->user()->name }} {{ auth()->user()->apellido }}</h1></div>
           <div class="card-body">
             <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{!! $datos->enunciado !!}</h2>
          @if ($datos->metodo == 'concatenado')
@@ -304,21 +304,21 @@ const b_hori = new Vue({
           user: _this.user_id,
       }).then(response => {
         if (response.data.tipo == _this.tipo || response.data.datos == true ) {
-          _this.balance_inicial.nombre = response.data.nombre
-          _this.balance_inicial.fecha = response.data.fecha
-          _this.a_corrientes = response.data.a_corriente;
-          _this.a_nocorrientes = response.data.a_nocorriente;
-          _this.p_corrientes = response.data.p_corriente;
-          _this.p_nocorrientes = response.data.p_nocorriente;
-          _this.patrimonios = response.data.patrimonios;
-          _this.total_balance_inicial.t_patrimonio_pasivo = response.data.total_pasivo_patrimonio;
-          _this.total_balance_inicial.t_activo = response.data.completo.total_activo_corriente
-          _this.total_balance_inicial.t_pasivo = response.data.completo.total_activo_nocorriente
-          _this.b_initotal.t_a_corriente = response.data.completo.total_pasivo_corriente
-          _this.b_initotal.t_a_nocorriente = response.data.completo.total_pasivo_nocorriente
-          _this.b_initotal.t_p_corriente = response.data.completo.total_activo
-          _this.b_initotal.t_p_no_corriente = response.data.completo.total_pasivo
-          _this.b_initotal.t_patrimonio = response.data.completo.total_patrimonio
+              _this.balance_inicial.nombre                    = response.data.nombre
+              _this.balance_inicial.fecha                     = response.data.fecha
+              _this.a_corrientes                              = response.data.a_corriente;
+              _this.a_nocorrientes                            = response.data.a_nocorriente;
+              _this.p_corrientes                              = response.data.p_corriente;
+              _this.p_nocorrientes                            = response.data.p_nocorriente;
+              _this.patrimonios                               = response.data.patrimonios;
+              _this.total_balance_inicial.t_patrimonio_pasivo = response.data.total_pasivo_patrimonio;
+              _this.total_balance_inicial.t_activo            = response.data.completo.total_activo 
+              _this.total_balance_inicial.t_pasivo            = response.data.completo.total_pasivo 
+              _this.b_initotal.t_a_corriente                  = response.data.completo.total_activo_corriente 
+              _this.b_initotal.t_a_nocorriente                = response.data.completo.total_activo_nocorriente
+              _this.b_initotal.t_p_corriente                  = response.data.completo.total_pasivo_corriente
+              _this.b_initotal.t_p_no_corriente               = response.data.completo.total_pasivo_nocorriente
+              _this.b_initotal.t_patrimonio                   = response.data.completo.total_patrimonio
 
         } else {
 
@@ -335,7 +335,7 @@ const b_hori = new Vue({
 
 if(document.getElementById('b_vertical')){
  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////BALANCE INICIAL HORIZONTAL/////////////////////////////////////////////////
+//////////////////////////////////////////////////BALANCE INICIAL VERTICAL/////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const b_ver = new Vue({
         el: '#b_vertical',
@@ -403,21 +403,21 @@ const b_ver = new Vue({
             toastr.success(response.data.message, "Smarmoddle", {
           "timeOut": "3000"
          });
-          _this.balance_inicial.nombre = response.data.nombre
-          _this.balance_inicial.fecha = response.data.fecha
-          _this.a_corrientes = response.data.a_corriente;
-          _this.a_nocorrientes = response.data.a_nocorriente;
-          _this.p_corrientes = response.data.p_corriente;
-          _this.p_nocorrientes = response.data.p_nocorriente;
-          _this.patrimonios = response.data.patrimonios;
-         _this.total_balance_inicial.t_patrimonio_pasivo = response.data.total_pasivo_patrimonio;
-          _this.total_balance_inicial.t_activo = response.data.completo.total_activo_corriente
-          _this.total_balance_inicial.t_pasivo = response.data.completo.total_activo_nocorriente
-          _this.b_initotal.t_a_corriente = response.data.completo.total_pasivo_corriente
-          _this.b_initotal.t_a_nocorriente = response.data.completo.total_pasivo_nocorriente
-          _this.b_initotal.t_p_corriente = response.data.completo.total_activo
-          _this.b_initotal.t_p_no_corriente = response.data.completo.total_pasivo
-          _this.b_initotal.t_patrimonio = response.data.completo.total_patrimonio            
+                  _this.balance_inicial.nombre                    = response.data.nombre
+              _this.balance_inicial.fecha                     = response.data.fecha
+              _this.a_corrientes                              = response.data.a_corriente;
+              _this.a_nocorrientes                            = response.data.a_nocorriente;
+              _this.p_corrientes                              = response.data.p_corriente;
+              _this.p_nocorrientes                            = response.data.p_nocorriente;
+              _this.patrimonios                               = response.data.patrimonios;
+              _this.total_balance_inicial.t_patrimonio_pasivo = response.data.total_pasivo_patrimonio;
+              _this.total_balance_inicial.t_activo            = response.data.completo.total_activo 
+              _this.total_balance_inicial.t_pasivo            = response.data.completo.total_pasivo 
+              _this.b_initotal.t_a_corriente                  = response.data.completo.total_activo_corriente 
+              _this.b_initotal.t_a_nocorriente                = response.data.completo.total_activo_nocorriente
+              _this.b_initotal.t_p_corriente                  = response.data.completo.total_pasivo_corriente
+              _this.b_initotal.t_p_no_corriente               = response.data.completo.total_pasivo_nocorriente
+              _this.b_initotal.t_patrimonio                   = response.data.completo.total_patrimonio        
         } else {
 
         }
@@ -1030,7 +1030,7 @@ methods:{
          let total = Number(saldo).toFixed(2);
       return total;
     }else{
-      return
+      return '';
     }
      
     },

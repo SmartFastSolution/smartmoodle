@@ -1326,6 +1326,14 @@
                                     <input required="" type="date" name="fecha" class="form-control">
                                 </div>
                             </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="" class="col-form-label">Nombre del Banco:</label>
+                                    <input required="" type="text" name="n_banco" class="form-control">
+                                </div>
+                          
+                               
+                            </div>
                             <div class="row justify-content-center">
                                 <input  type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
                             </div>

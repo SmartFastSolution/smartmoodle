@@ -8,7 +8,7 @@
 			<h1 class="text-center text-danger display-1">{{ $datos->taller->nombre }}</h1>
         <div class="card border border-danger mb-3" >
           <div class="card-header font-weight-bold" style="font-size: 25px;"> 
-            <h1 class="display-3">{{ auth()->user()->name }}{{ auth()->user()->apellido }}</h1></div>
+            <h1 class="display-3">{{ auth()->user()->name }} {{ auth()->user()->apellido }}</h1></div>
 
           <div class="card-body">
             <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{{ $datos->enunciado }}</h2>
@@ -70,7 +70,7 @@
 						<h6>La Cantidad de</h6>
 					</div>
 					<div class="col-12 form-inline">						
-							<p class="col-form-label">Con  el  interés  del <input disabled value="{{ $datos->interes }}" type="text" name="interes" class="form-control form-control-sm" required> por  ciento  anual,   desde <input disabled value="{{ $datos->vencimiento }}" name="desde" type="text" class="form-control form-control-sm" required> Sin protesto.   Exímese  de presentación  para  aceptación  y  pago  así  como  de  avisos  por  falta  de  estos  hechos.</p>
+							<p class="col-form-label">Con  el  interés  del <input disabled value="{{ $datos->interes }}" type="text" name="interes" class="form-control form-control-sm" required> por  ciento  anual,   desde <input disabled value="{{ $datos->desde }}" name="desde" type="text" class="form-control form-control-sm" required> Sin protesto.   Exímese  de presentación  para  aceptación  y  pago  así  como  de  avisos  por  falta  de  estos  hechos.</p>
 					</div>
 					<div class="col-12 ">						
 							<div class="row mb-1">

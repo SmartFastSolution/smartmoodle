@@ -50,8 +50,11 @@
 				<div class="row ">
 					<div class="col-6">
 						<div class="alert alert-secondary" role="alert">
-									BANCO DE GUAYAQUIL
-									</div>
+							 {{ $datos->tipo_cheque }}
+							</div>
+							<div class="alert alert-secondary" role="alert">
+							 {{ $taller->n_banco }}
+							</div>				
 					</div>	
 					<div class="col-2 align-self-center">
 						<p>16457 <br>
@@ -141,7 +144,7 @@
      				</div>
 
      				<div class="text-justify">
-     					ENSOSO A: 
+     					ENDOSO A: 
      				</div>
      			
 		        </div>
@@ -169,6 +172,7 @@
      			<div class="row justify-content-center ">
 	     			<div class="col-10 border-success border ">
 	     				<div class="text-center mt-1">
+						 <h5>Espacio para depositante o persona que cobra</h5>
 	     					<div class="alert alert-secondary" role="alert">
 							 {{ $datos->espacio2 }}
 							</div>

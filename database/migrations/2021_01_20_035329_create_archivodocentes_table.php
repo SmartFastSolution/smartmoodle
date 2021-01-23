@@ -15,11 +15,12 @@ class CreateArchivodocentesTable extends Migration
     {
         Schema::create('archivodocentes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('materia_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('materia_id'); 
             $table->string('nombre');
             $table->string('descripcion');
             $table->timestamps();
-
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('materia_id')->references('id')->on('materias')->onDelete('cascade');
         });
     }

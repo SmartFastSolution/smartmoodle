@@ -34,7 +34,7 @@
     </div>
 </section>
 
-@foreach($p as $post)
+@foreach($p as $key=>$post)
 <div class="container-fluid gedf-wrapper">
     <div class="row">
         <div class="col-md-3">
@@ -92,12 +92,12 @@
                 </div>
                 <div class="card-footer">
 
-                    <a class="card-link" data-toggle="collapse" href="#collapseExample" role="button"
-                        aria-expanded="false" aria-controls="collapseExample">
+                    <a class="card-link" data-toggle="collapse" href="#collapseExample{{$key}}" role="button"
+                        aria-expanded="false" aria-controls="collapseExample{{$key}}">
                         Comentarios
                     </a>
                 </div>
-                <div class="collapse" id="collapseExample">
+                <div class="collapse" id="collapseExample{{$key}}">
                     <div class="card-body">
                         {!! Form::open(['route'=>'comment.add', 'method'=>'POST']) !!}
                         <form class="form-horizontal">
@@ -124,6 +124,10 @@
     </div>
 </div>
 @endforeach
+
+<div class="row justify-content-center">
+ {{ $p->links() }}
+</div>
 
 @stop
 @section('css')

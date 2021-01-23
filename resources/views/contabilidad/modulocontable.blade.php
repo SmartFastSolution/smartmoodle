@@ -351,7 +351,7 @@
       </div>
       </div>
             <div class="container border mt-1 mb-3  p-2 bg-info" v-else-if="taller_individual == 'conciliacionbancaria'">
-        <h2 class="text-center font-weight-bold text-danger">Consiliacion Bancaria</h2>
+        <h2 class="text-center font-weight-bold text-danger">Conciliacion Bancaria</h2>
         <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 mb-2">

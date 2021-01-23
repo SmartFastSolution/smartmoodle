@@ -110,11 +110,11 @@ ADECUADAMENTE -->
 							</div>
 							<div class="row justify-content-between">
 								<div class="col-5 text-center">
-									<input required  type="text" value="ING. JUAN PEREZ" disabled="" class="form-control form-control-sm text-center" disabled value="">
+									<input required  type="text" value="ING. JUAN PEREZ"  class="form-control form-control-sm text-center" disabled >
 									<h6>FIRMA AUTORIZADA</h6>
 								</div>
 								<div class="col-5 text-center">
-									<input required  type="text" value="ING. JUAN PEREZ" disabled="" class="form-control form-control-sm text-center" disabled value="">
+									<input required  type="text" value="ING. JOSE MAYA"  class="form-control form-control-sm text-center" disabled >
 									<h6>FIRMA AUTORIZADA</h6>
 								</div>
 							</div>

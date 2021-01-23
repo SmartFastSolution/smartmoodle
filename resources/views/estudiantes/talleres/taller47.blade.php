@@ -7,7 +7,7 @@
         <h1 class="text-center text-danger display-1">{{ $datos->taller->nombre }}</h1>
         <div class="card border border-danger mb-3" >
           <div class="card-header font-weight-bold" style="font-size: 25px;"> 
-            <h1 class="display-3">{{ auth()->user()->name }}{{ auth()->user()->apellido }}</h1></div>
+            <h1 class="display-3">{{ auth()->user()->name }} {{ auth()->user()->apellido }}</h1></div>
           <div class="card-body">
             <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{{ $datos->enunciado }}</h2>
         <div class="row">
@@ -22,16 +22,11 @@
            </div>
            <div class="col-8">
                <ul class="list-group list-group-flush ">
-                @foreach ($taller->definiciones as $definicion)
+               @foreach ($taller->definiciones as $definicion)
                  
-                  <li class="list-group-item bg-transparent border-bottom-0 text-justify"><span class="badge badge-info">{{ $letra++ }}. </span> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
-                    
-                @endforeach
+                 <li class="list-group-item bg-transparent border-bottom-0 text-justify" style="font-size: 20px"><span class="badge badge-info">{{ $letra++ }}. </span>  {{ $definicion->definicion }}</li>    
+                  
+              @endforeach
                 </ul>
            </div>
        </div>

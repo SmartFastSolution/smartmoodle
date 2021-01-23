@@ -94,9 +94,9 @@ class DocenteController extends Controller
     }
     public function index()
     {
-            
-                $p = Post::where('instituto', Auth::user()->instituto_id)->get();
-               
+        // $p = Post::where('instituto', Auth::user()->instituto_id)->get();
+             $p = Post::orderBy('id','Desc')->where('instituto_id', Auth::user()->instituto_id)->paginate(5);
+             
                 return view('Docente.indexd',compact('p'));
      
     }
@@ -244,7 +244,8 @@ class DocenteController extends Controller
     }
   
 
-    public function updatep(Request $request){
+    public function updatep(Request $request)
+    {
 
             //dd($request);
       /////////////////////////////////////////////////////////////////////////////////////
@@ -265,7 +266,7 @@ class DocenteController extends Controller
         return redirect('sistema/homedoc')->with('Password actualizado');
           
 
-     }
+    }
 
       /////////////////////////////////////////////////////////////////////////////////////
       //////////////////////////////////Post/////////////////////////////////////////
@@ -302,6 +303,7 @@ class DocenteController extends Controller
 
       $post =New Post;
       $post->user_id  = e($request->user_id);
+      $post->instituto_id= Auth::user()->instituto_id;
       $post->nombre   = e($request->nombre);
       $post->abstract = e($request->abstract);
       $post->body = e($request->body);
@@ -334,8 +336,10 @@ class DocenteController extends Controller
 
       public function Archivos_docente()
       {
-            $doc = Archivodocente::all();
-         return \view('Docente.contenido.doc', compact('doc'));
+        $doc = Archivodocente::where('user_id', Auth::id())->get();
+         //   $doc = Archivodocente::all();
+        // return $doc;
+       return \view('Docente.contenido.doc', compact('doc'));
       }
     
       public function Doc_crear()
@@ -356,7 +360,7 @@ class DocenteController extends Controller
             'nombre'      => 'required|string|max:150',
             'descripcion' => 'required|string|max:250',
             'materia'     =>'required',
-            'archivo'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:50000',
+            'archivo'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:100000',
             
         ]);
      
@@ -371,7 +375,9 @@ class DocenteController extends Controller
          }
         
          $d = New Archivodocente;
+         $d->user_id= Auth::id();
          $d->nombre = $request->nombre;
+       
          $d->descripcion =$request->descripcion;
         
          if($request->get('materia')){
