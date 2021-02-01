@@ -409,6 +409,14 @@ class Plantilla extends Seeder
                           'created_at' => now(),
                           'updated_at' => now(),
                           ]);
+                          DB::table('plantillas')->insert([
+                          'id' => 49,
+                          'nombre' => 'PLANTILLA 42 - PLAN DE CUENTAS',
+                          'descripcion' => 'Plantilla para elaborar un plan de cuentas correctamente ',
+                          'plantilla' => 'si',
+                          'created_at' => now(),
+                          'updated_at' => now(),
+                          ]);
   
     }
 }

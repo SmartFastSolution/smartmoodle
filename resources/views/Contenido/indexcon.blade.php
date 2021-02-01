@@ -115,7 +115,7 @@ $(function() {
         $('#myTable thead tr:eq(1) th').each(function(i) {
 
             var title = $(this).text(); //es el nombre de la columna
-            $(this).html('<input type="text" placeholder="Buscar..." />');
+            $(this).html('<input type="text" placeholder="Buscar..." class="form-control" />');
 
             $('input', this).on('keyup change', function() {
                 if (table.column(i).search() !== this.value) {

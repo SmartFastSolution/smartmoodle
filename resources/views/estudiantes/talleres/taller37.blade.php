@@ -692,10 +692,10 @@ methods:{
                _this.prueba.precio.adquicisiones      = response.data.informacion.adquisicion_precio;
                _this.prueba.precio.ventas             = response.data.informacion.ventas_precio;
                _this.prueba.precio.inventario_final   = response.data.informacion.inv_final_precio;
-
+               this.sumasTotales();
               let datos = this.productos.filter(x => x.id == _this.producto_id);
               _this.datos_transacciones =  datos[0].transacciones  
-              this.sumasTotales();
+            
             }else{
                  _this.transacciones = [];
               _this.nombre =  '';
@@ -708,9 +708,10 @@ methods:{
                _this.prueba.precio.adquicisiones      = '' ;
                _this.prueba.precio.ventas             = '' ;
                _this.prueba.precio.inventario_final   = '' ;
-                let datos = this.productos.filter(x => x.id == _this.producto_id);
+               this.sumasTotales();
+               let datos = this.productos.filter(x => x.id == _this.producto_id);
               _this.datos_transacciones =  datos[0].transacciones 
-              this.sumasTotales();
+            
                 
             }        
         }).catch(function(error){

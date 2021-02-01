@@ -37,8 +37,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                   
                                         @foreach ($permissions as $permiso)
+                                         <tr>
                                         <th scope="row">{{ $permiso['id']}}</th>
                                         <td>{{ $permiso['namep']}}</td>
                                         <td>{{ $permiso['slug']}}</td>

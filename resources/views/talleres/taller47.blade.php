@@ -1,6 +1,6 @@
 @extends('layouts.nav')
 
-@section('title', 'Taller 48')
+@section('title', $datos->nombre)
 @section('content')
 
 <h1 class="text-center  mt-5 text-danger font-weight-bold display-4"> {{ $datos->taller->nombre }}</h1>

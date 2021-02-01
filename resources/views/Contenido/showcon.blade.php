@@ -4,6 +4,46 @@
 
 @section('content')
 
+@section('css')
+<style type="text/css">
+    :root {
+  /* Not my favorite that line-height has to be united, but needed */
+  --lh: 1.4rem;
+}
+.truncate-overflow {
+  --max-lines: 3;
+  position: relative;
+  max-height: calc(var(--lh) * var(--max-lines));
+  overflow: hidden;
+  padding-right: 1rem; /* space for ellipsis */
+}
+.truncate-overflow::before {
+  position: absolute;
+  /*content: "...";*/
+  /* tempting... but shows when lines == content */
+  /* top: calc(var(--lh) * (var(--max-lines) - 1)); */
+  
+  /*
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  */
+  bottom: 0;
+  right: 0;
+}
+.truncate-overflow::after {
+  content: "";
+  position: absolute;
+  /*
+  inset-inline-end: 0;
+  */
+  right: 0;
+  /* missing bottom on purpose*/
+  width: 1rem;
+  height: 1rem;
+  background: white;
+}
+</style>
+@endsection
 
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -20,8 +60,8 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <a class="btn btn-info float-right" href="{{route('admin.create')}}"><i class="fas fa-plus"> Crear
-                        Talleres</i></a>
+                <a class="btn btn-info float-right" href="{{route('admin.create')}}"><i class="fas fa-plus"></i>Crear
+                        Talleres</a>
                 <h1 class="font-weight-light">Vista Unidad</h1>
                 <div class="row">
                     <div class="col-md-10">
@@ -145,11 +185,12 @@
                                                 <th scope="row"></th>
                                                 <td>{{$taller->contenido->nombre}}</td>
                                                 <td>{{$taller['nombre']}}</td>
-                                                <td>@if ($taller->plantilla_id == 37)
-                                                    Taller de Modulos Contables
-                                                    @else
-                                                    {!!$taller->enunciado!!}
-                                                    @endif</td>
+                                                <td >
+                                                    <div class="truncate-overflow ">
+                                                        {!!$taller->enunciado!!}
+                                                    </div>
+                                                    
+                                                   </td>
                                                 <td>
                                                     <div class="onoffswitch">
                                                         <input type="checkbox" name="onoffswitch"

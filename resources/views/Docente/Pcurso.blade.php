@@ -1,11 +1,46 @@
 @extends('layouts.nav')
 
 @section('title', 'Perfil | SmartMoodle')
-
-
-
-
-@section('title', 'Administracion - Docente')
+@section('css')
+<style type="text/css">
+    :root {
+  /* Not my favorite that line-height has to be united, but needed */
+  --lh: 1.4rem;
+}
+.truncate-overflow {
+  --max-lines: 3;
+  position: relative;
+  max-height: calc(var(--lh) * var(--max-lines));
+  overflow: hidden;
+  padding-right: 1rem; /* space for ellipsis */
+}
+.truncate-overflow::before {
+  position: absolute;
+  /*content: "...";*/
+  /* tempting... but shows when lines == content */
+  /* top: calc(var(--lh) * (var(--max-lines) - 1)); */
+  
+  /*
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  */
+  bottom: 0;
+  right: 0;
+}
+.truncate-overflow::after {
+  content: "";
+  position: absolute;
+  /*
+  inset-inline-end: 0;
+  */
+  right: 0;
+  /* missing bottom on purpose*/
+  width: 1rem;
+  height: 1rem;
+  background: white;
+}
+</style>
+@endsection
 
 @section('content')
 
@@ -51,7 +86,7 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3> {{$materia->nombre}}</h3>
+                            <h5 > <strong> {{$materia->nombre}}</strong></h5>
                             <p>{{$curso->curso->nombre}} </p>
 
                         </div>
@@ -99,11 +134,11 @@
 
                 <thead>
                     <tr>
-                        <th>Curso</th>
-                        <th>Materia</th>
-                        <th width="100"> Taller </th>
-                        <th>Alumno </th>
-                        <th>Enunciado </th>
+                        <th width="100">Curso</th>
+                        <th width="75">Materia</th>
+                        <th width="75"> Taller </th>
+                        <th width="100">Alumno </th>
+                        <th >Enunciado </th>
                         <th>Vista Taller</th>
                     </tr>
                 </thead>
@@ -115,11 +150,17 @@
                         <td>{{$taller->mate_nombre}}</td>
                         <td>{{$taller->nombre}}</td>
                         <td>{{$taller->alumno}}</td>
-                        <td>@if ($taller->plantilla_id == 37)
+                        <td>
+                            <div class="truncate-overflow">
+                            {!!$taller->enunciado!!}
+                                
+                            </div>
+                       {{--      @if ($taller->plantilla_id == 37)
                             Taller de Modulos Contable
                             @else
                             {!!$taller->enunciado!!}
-                            @endif</td>
+                            @endif --}}
+                        </td>
                         <td class="table-button ">
                             <a class="btn btn-info"
                                 href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
@@ -158,10 +199,10 @@
             <table id="myTable2" class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Curso</th>
-                        <th>Materia</th>
-                        <th width="100"> Taller </th>
-                        <th>Alumno </th>
+                        <th width="100">Curso</th>
+                        <th width="75">Materia</th>
+                        <th width="75"> Taller </th>
+                        <th width="100">Alumno </th>
                         <th>Enunciado </th>
                         <th>Vista Taller</th>
                     </tr>
@@ -173,11 +214,17 @@
                         <td>{{$taller->mate_nombre}}</td>
                         <td>{{$taller->nombre}}</td>
                         <td>{{$taller->alumno}}</td>
-                        <td>@if ($taller->plantilla_id == 37)
+                        <td>
+                            <div class="truncate-overflow">
+                            {!!$taller->enunciado!!}
+                                
+                            </div>
+                          {{--   @if ($taller->plantilla_id == 37)
                             Taller de Modulos Contable
                             @else
                             {!!$taller->enunciado!!}
-                            @endif</td>
+                            @endif --}}
+                        </td>
                         <td class="table-button ">
                             <a class="btn btn-info"
                                 href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i

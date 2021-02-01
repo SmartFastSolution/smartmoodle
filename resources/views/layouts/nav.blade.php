@@ -45,7 +45,7 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fad fa-bars"></i></a>
                 </li>
             </ul>
 
@@ -56,7 +56,7 @@
                         aria-label="Search">
                     <div class="input-group-append">
                         <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
+                            <i class="fad fa-search"></i>
                         </button>
                     </div>
                 </div>
@@ -70,11 +70,11 @@
                 @else
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->name }}</a>
+                        aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->name }} <i class="fad fa-sort-down"></i></a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
-                            <i class="fas fa-sign-in-alt"></i>Cerrar Sesión
+                            <i class="fad fa-sign-in-alt"></i>Cerrar Sesión
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
@@ -85,7 +85,6 @@
             </ul>
         </nav>
         <!-- /.navbar -->
-
 
 
 
@@ -115,16 +114,16 @@
 
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-lock"></i>
+                                <i class="fad 10f19c fa-user-shield"></i>
                                 <p>
                                     Roles
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fad fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('roles.index')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-circle nav-icon"></i>
                                         <p>Lista de Roles</p>
                                     </a>
                                 </li>
@@ -135,16 +134,16 @@
                         @can('haveaccess', 'user.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-shield"></i>
+                                <i class="fad fa-users"></i>
                                 <p>
                                     Usuarios
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fad fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('users.index')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-th-list"></i>
                                         <p>Lista de Usuarios</p>
                                     </a>
                                 </li>
@@ -155,16 +154,16 @@
                         @can('haveaccess', 'menu.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-cog"></i>
+                                <i class="fad fa-user-cog"></i>
                                 <p>
                                     Permisos de Acceso
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fad fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('permissions.index')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-circle nav-icon"></i>
                                         <p>Lista de Permisos</p>
                                     </a>
                                 </li>
@@ -174,16 +173,16 @@
                         @can('haveaccess', 'instituto.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-school"></i>
+                                <i class="fad fa-school"></i>
                                 <p>
                                     U. Educativa
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fad fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('institutos.index')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-circle nav-icon"></i>
                                         <p>Lista de Unidades</p>
                                     </a>
                                 </li>
@@ -193,16 +192,16 @@
                         <!-- @can('haveaccess', 'curso.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-cog"></i>
+                                <i class="fad fa-user-cog"></i>
                                 <p>
                                     Cursos
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fad fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('cursos.index')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-circle nav-icon"></i>
                                         <p>Lista de Cursos</p>
                                     </a>
                                 </li>
@@ -213,16 +212,16 @@
                         <!-- @can('haveaccess', 'nivel.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-cog"></i>
+                                <i class="fad fa-user-cog"></i>
                                 <p>
                                     Paralelos
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fad fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('nivels.index')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-circle nav-icon"></i>
                                         <p>Lista de Paralelos</p>
                                     </a>
                                 </li>
@@ -232,16 +231,16 @@
                         @can('haveaccess', 'nivel.clonacion')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-cog"></i>
+                                <i class="fad fa-clone"></i>
                                 <p>
                                     Clonacion
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fad fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('clinstitutos.create')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-circle nav-icon"></i>
                                         <p>Clonacion de Un. Educativa</p>
                                     </a>
                                 </li>
@@ -251,16 +250,16 @@
                         @can('haveaccess', 'materia.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-cog"></i>
+                                <i class="fad fa-bookmark"></i>
                                 <p>
                                     Materias
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fad fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('materias.index')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-circle nav-icon"></i>
                                         <p>Lista de Materias</p>
                                     </a>
                                 </li>
@@ -270,16 +269,16 @@
                         @can('haveaccess', 'contenido.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-cog"></i>
+                               <i class="fad fa-book-open"></i>
                                 <p>
                                     Unidades
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fad fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('contenidos.index')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-circle nav-icon"></i>
                                         <p>Lista de Unidades</p>
                                     </a>
                                 </li>
@@ -289,16 +288,16 @@
                         @can('haveaccess', 'asignacion.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-cog"></i>
+                                <i class="fad fa-users-class"></i>
                                 <p>
                                     Cursos
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fad fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('distribucionmacus.index')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-circle nav-icon"></i>
                                         <p>Lista de Cursos</p>
                                     </a>
                                 </li>
@@ -308,16 +307,16 @@
                         <!-- @can('haveaccess', 'asignacionma.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-cog"></i>
+                                <i class="fad fa-user-cog"></i>
                                 <p>
                                     Asignación Alumno
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fad fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('distrimas.index')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-circle nav-icon"></i>
                                         <p>Lista de Asignaciones</p>
                                     </a>
                                 </li>
@@ -327,16 +326,16 @@
                         @can('haveaccess', 'asignacionma.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-cog"></i>
+                                <i class="fad fa-chalkboard-teacher"></i>
                                 <p>
                                     Asignación Alumno
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fad fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('assignments.index')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-circle nav-icon"></i>
                                         <p>Lista de Asignaciones</p>
                                     </a>
                                 </li>
@@ -346,16 +345,16 @@
                         @can('haveaccess', 'asignacionma.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-cog"></i>
+                                <i class="fad fa-newspaper"></i>
                                 <p>
                                     Publicaciones
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fad fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('posts.index')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-circle nav-icon"></i>
                                         <p>Sección Post</p>
                                     </a>
                                 </li>
@@ -365,16 +364,16 @@
                         @can('haveaccess', 'reporte.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-cog"></i>
+                                <i class="fas fa-file-contract"></i>
                                 <p>
                                     Reportes
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fad fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('Reportes')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-circle nav-icon"></i>
                                         <p>Sección Reporte</p>
                                     </a>
                                 </li>
@@ -385,16 +384,16 @@
                         @can('haveaccess', 'asignacionma.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-cog"></i>
+                                <i class="fad fa-chalkboard-teacher"></i>
                                 <p>
                                     Asignación Docente
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fad fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('distribuciondos.index')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-circle nav-icon"></i>
                                         <p>Lista de Asignaciones</p>
                                     </a>
                                 </li>
@@ -404,22 +403,22 @@
                         @can('haveaccess', 'talleres.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-cog"></i>
+                                <i class="fad fa-tasks-alt"></i>
                                 <p>
                                     Talleres
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fad fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('admin.create')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-circle nav-icon"></i>
                                         <p>Crear Talleres</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{route('admin.tallercontable')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-circle nav-icon"></i>
                                         <p>Modulos Contables</p>
                                     </a>
                                 </li>
@@ -429,16 +428,16 @@
                         @can('haveaccess', 'cuentas.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="fas fa-user-cog"></i>
+                                <i class="fad fa-file-alt"></i>
                                 <p>
                                     Plan de Cuentas
-                                    <i class="fas fa-angle-left right"></i>
+                                    <i class="fad fa-angle-left right"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
                                     <a href="{{route('pcuentas.index')}}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
+                                        <i class="fad fa-circle nav-icon"></i>
                                         <p>Lista Plan de Cuentas</p>
                                     </a>
                                 </li>
@@ -490,10 +489,11 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="{{ asset('js/preloader.js') }}"></script>
+    <script src="{{ asset('js/fonts.js') }}"></script>
     <!-- datatables script -->
 
-    <script src="{{ asset('vendor/ckeditor/ckeditor.js')}}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <script src="{{ asset('dist/ckeditor/ckeditor.js')}}"></script>
+  
     <!-- <script src="{{asset('https://code.jquery.com/jquery-3.5.1.js')}}"></script> -->
     <script src="{{asset('https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js')}}"></script>
     <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script>

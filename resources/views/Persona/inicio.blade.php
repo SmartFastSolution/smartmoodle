@@ -5,7 +5,7 @@
 <section class="content-fluid" id="TabUser">
     <div class="container">
         <div class="btn-group float-right" role="group" aria-label="Basic example">
-            <a class="btn btn-info float-right btn" href="{{route('users.create')}}"><i class="fas fa-user-plus"></i>
+            <a class="btn btn-info float-right btn" href="{{route('users.create')}}"><i class="far fa-user-plus"></i>
                 Añadir Usuario</a>
         </div>
         <h1 class="font-weight-light">Gestión de Usuarios</h1>
@@ -31,7 +31,7 @@
                         {{$user->instituto->nombre}}
                         @endisset
                     </td>
-                    <td>
+                    <td class="text-center">
                         @foreach($user->roles as $role)
                         <span class="badge badge-danger"> {{$role->name}}
                         </span>
@@ -103,7 +103,7 @@ $(function() {
         $('#myTable thead tr:eq(1) th').each(function(i) {
 
             var title = $(this).text(); //es el nombre de la columna
-            $(this).html('<input type="text" placeholder="Buscar..." />');
+            $(this).html('<input type="text" placeholder="Buscar..." class="form-control" />');
 
             $('input', this).on('keyup change', function() {
                 if (table.column(i).search() !== this.value) {

@@ -40,7 +40,7 @@
                 @else
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->name }}</a>
+                        aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->name }} <i class="fad fa-sort-down"></a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="{{ url('sistema/estudiante/password') }}">
                         <i class="fas fa-lock"></i> Cambiar Contraseña

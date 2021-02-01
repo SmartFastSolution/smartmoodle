@@ -30,19 +30,19 @@
                     <th scope="col">Unidad Educativa</th>
                     <th scope="col">Docente</th>
                     <th scope="col">Materia(s)</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Tools</th>
+                    <th scope="col" width="75">Estado</th>
+                    <th scope="col" class="text-center">Tools</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
                     @foreach ($distribucions as $dis)
+                    <tr>
                     <td>{{$dis->instituto->nombre}} </td>
                     <td>
                         {{$dis->user->name}}
                         {{$dis->user->apellido}}
                     </td>
-                    <td>
+                    <td class="text-center">
                         @if($dis->materias != null)
                         @foreach($dis->materias as $dismacu)
                         <span class="badge badge-success">
@@ -52,8 +52,13 @@
                         @endforeach
                         @endif
                     </td>
-                    <td>{{ $dis['estado']}}</td>
-                    <td class="table-button ">
+                    <td class="text-center">
+                        
+                           {{ $dis['estado']}}
+                        
+                   
+                </td>
+                    <td class="table-button text-center">
                         <!--metodo delete funciona pero hay que almacenar la variable array en una variable temporal-->
                         <form method="POST" action="{{route('distribuciondos.destroy', $dis->id)}}}">
                             @method('DELETE')
@@ -104,7 +109,7 @@ $(function() {
         $('#myTable thead tr:eq(1) th').each(function(i) {
 
             var title = $(this).text(); //es el nombre de la columna
-            $(this).html('<input type="text" placeholder="Buscar..." />');
+            $(this).html('<input type="text" placeholder="Buscar..." class="form-control" />');
 
             $('input', this).on('keyup change', function() {
                 if (table.column(i).search() !== this.value) {

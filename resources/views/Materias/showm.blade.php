@@ -89,6 +89,7 @@
                                                 <th scope="col">Unidad</th>
                                                 <th scope="col">Descripción </th>
                                                 <th scope="col">Estado</th>
+                                                <th scope="col">Acción</th>
                                                 <th scope="col">Vista Unidad</th>
                                             </tr>
                                         </thead>
@@ -100,14 +101,26 @@
                                                 <td>{{$contenido['nombre']}}</td>
                                                 <td>{{$contenido['descripcion']}}</td>
                                                 <td>{{$contenido['estado']}}</td>
-                                                <td class="table-button ">
+                                                <td>@if($contenido['accion']== '1')
+                                                    <span class="badge-success badge">Descargable</span>
+                                                    @else
+                                                    <span v-else class="badge-info badge">No Descargable</span>
+                                                    @endif
+                                                </td>
+                                             
+                                                <td>
+                                                    @if($contenido['accion']== '1')
+                                                    <!-- descarganle -->
+                                                    <a class="btn btn-success btn"
+                                                        href="{{route('Unidad2.contenido', $contenido->id)}}"><i
+                                                            class="fas fa-eye"></i></a>
+
+                                                    @else
+                                                    <!-- no descarganle -->
                                                     <a class="btn btn-info btn"
                                                         href="{{route('Unidad.contenido', $contenido->id)}}"><i
                                                             class="fas fa-eye"></i></a>
-                                                    <!-- @isset($contenido->archivo->url)
-                                                    <a href="{{$contenido->archivo->url}}" target="_blank">
-                                                        <i class="fa fa-eye" aria-hidden="true"></i> </a>
-                                                        @endisset -->
+                                                    @endif
                                                 </td>
                                             </tr>
                                             @endforeach

@@ -49,7 +49,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="ml-2">
-                                <div class="h5 m-0">{{$post->user->name}} {{$post->user->apellido}}</div>
+                                <div class="h5 m-0" >{{$post->user->name}} {{$post->user->apellido}}</div>
                                 <div class="h7 text-muted"></div>
                             </div>
                         </div>

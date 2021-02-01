@@ -1,25 +1,4 @@
-<!DOCTYPE html>
-<html>
 
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@yield('titulo', 'SmartMoodle')</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <link rel="stylesheet" href="{{ asset('css/plugins.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-   
-
-    @yield('css')
-
-</head>
-
-<body class="  layout-fixed"> 
     <div class="wrapper">
         <!-- Navbar -->
         <nav class=" navbar navbar-expand navbar-light bg-light fixed-top">
@@ -63,7 +42,7 @@
                 @else
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->name }}</a>
+                        aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->name }} <i class="fad fa-sort-down"></a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item" href="{{ url('sistema/docente/password') }}">
                         <i class="fas fa-lock"></i> Cambiar Contraseña
@@ -88,17 +67,3 @@
     <section class="content">
             @yield('content')
     </section>
-
-
-
-{{--     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/plugins.js') }}"></script> --}}
-
-   
-    <!-- datatables script -->
-
-{{--     @yield('js')
-
-</body>
-
-</html> --}}

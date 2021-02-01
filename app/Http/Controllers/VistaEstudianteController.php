@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin\PlanCuenta;
+use App\Admin\PlanCuentaRespuesta;
 use App\Admin\Respuesta\Abreviatura;
 use App\Admin\Respuesta\AbreviaturaCarta;
 use App\Admin\Respuesta\AbreviaturaEconomica;
@@ -18,8 +20,6 @@ use App\Admin\Respuesta\Cheque;
 use App\Admin\Respuesta\ChequeEndoso;
 use App\Admin\Respuesta\Circulo;
 use App\Admin\Respuesta\Collage;
-use App\Admin\Respuesta\RAlternativa;
-use App\Admin\TallerRAlternativa;
 use App\Admin\Respuesta\CollageImg;
 use App\Admin\Respuesta\Completar;
 use App\Admin\Respuesta\CompletarEnunciado;
@@ -58,6 +58,7 @@ use App\Admin\Respuesta\PartidaDobleRegis;
 use App\Admin\Respuesta\Pasivo4;
 use App\Admin\Respuesta\Patrimonio4;
 use App\Admin\Respuesta\Pregunta;
+use App\Admin\Respuesta\RAlternativa;
 use App\Admin\Respuesta\Recibo;
 use App\Admin\Respuesta\Relacionar2;
 use App\Admin\Respuesta\Relacionar2Re;
@@ -91,6 +92,8 @@ use App\Admin\TallerIdenTransa;
 use App\Admin\TallerIdentificarPersona;
 use App\Admin\TallerLetraCambio;
 use App\Admin\TallerMConceptual;
+use App\Admin\TallerModuloContable;
+use App\Admin\TallerModuloTransaccion;
 use App\Admin\TallerNotaPedido;
 use App\Admin\TallerNotaVenta;
 use App\Admin\TallerOrdenIdea;
@@ -99,6 +102,7 @@ use App\Admin\TallerPagare;
 use App\Admin\TallerPalabra;
 use App\Admin\TallerPartidaDoble;
 use App\Admin\TallerPregunta;
+use App\Admin\TallerRAlternativa;
 use App\Admin\TallerRecibo;
 use App\Admin\TallerRelacionar;
 use App\Admin\TallerRelacionarOpcion;
@@ -108,19 +112,16 @@ use App\Admin\TallerTipoSaldo;
 use App\Admin\TallerValeCaja;
 use App\Admin\TallerVerdaderoFalso;
 use App\Admin\TallerescribirCuenta;
+use App\RArchivo;
+use App\RespuestaArchivo;
 use App\Taller;
+use App\TallerArchivo;
 use App\TallerChequeRe;
 use App\User;
-use JavaScript;
-use App\TallerArchivo;
-use App\RespuestaArchivo;
-use App\RArchivo;
-use App\Admin\TallerModuloContable;
-use App\Admin\TallerModuloTransaccion;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use JavaScript;
 
 class VistaEstudianteController extends Controller
 {
@@ -691,9 +692,14 @@ class VistaEstudianteController extends Controller
              $datos = RespuestaArchivo::where('user_id', $user)->where('taller_id', $consul->id)->firstOrFail();
             return view('estudiantes.talleres.taller48', compact('datos', 'd', 'relacion', 'taller'));
         }elseif ($plant == 49) {
-            
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
-            return view('docente.talleres.taller49', compact('datos', 'd'));
+             $relacion = DB::table('taller_user')
+            ->where('taller_user.user_id', $user)
+            ->where('taller_user.taller_id', $id)
+            ->select('taller_user.*')
+            ->get();
+            $taller = PlanCuenta::where('taller_id', $consul->id)->firstOrFail();
+             $datos = PlanCuentaRespuesta::where('user_id', $user)->where('taller_id', $consul->id)->firstOrFail();
+            return view('estudiantes.talleres.taller49', compact('datos', 'd',  'relacion', 'taller'));
         }elseif ($plant == 50) {
             
              $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();

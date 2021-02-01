@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin\PlanCuenta;
+use App\Admin\PlanCuentaRespuesta;
 use App\Admin\Respuesta\Abreviatura;
 use App\Admin\Respuesta\AbreviaturaCarta;
 use App\Admin\Respuesta\AbreviaturaEconomica;
@@ -28,13 +30,6 @@ use App\Admin\Respuesta\DefinirEnunciadoRe;
 use App\Admin\Respuesta\Diferencia;
 use App\Admin\Respuesta\EscribirCuenta;
 use App\Admin\Respuesta\Factura;
-use App\Admin\Respuesta\RAlternativa;
-use App\Admin\TallerRAlternativa;
-use App\Admin\TallerModuloContable;
-use App\Admin\TallerModuloTransaccion;
-use App\TallerArchivo;
-use App\RespuestaArchivo;
-use App\RArchivo;
 use App\Admin\Respuesta\FacturaDato;
 use App\Admin\Respuesta\FormulasContable;
 use App\Admin\Respuesta\Gusanillo;
@@ -63,6 +58,7 @@ use App\Admin\Respuesta\PartidaDobleRegis;
 use App\Admin\Respuesta\Pasivo4;
 use App\Admin\Respuesta\Patrimonio4;
 use App\Admin\Respuesta\Pregunta;
+use App\Admin\Respuesta\RAlternativa;
 use App\Admin\Respuesta\Recibo;
 use App\Admin\Respuesta\Relacionar2;
 use App\Admin\Respuesta\Relacionar2Re;
@@ -96,6 +92,8 @@ use App\Admin\TallerIdenTransa;
 use App\Admin\TallerIdentificarPersona;
 use App\Admin\TallerLetraCambio;
 use App\Admin\TallerMConceptual;
+use App\Admin\TallerModuloContable;
+use App\Admin\TallerModuloTransaccion;
 use App\Admin\TallerNotaPedido;
 use App\Admin\TallerNotaVenta;
 use App\Admin\TallerOrdenIdea;
@@ -104,6 +102,7 @@ use App\Admin\TallerPagare;
 use App\Admin\TallerPalabra;
 use App\Admin\TallerPartidaDoble;
 use App\Admin\TallerPregunta;
+use App\Admin\TallerRAlternativa;
 use App\Admin\TallerRecibo;
 use App\Admin\TallerRelacionar;
 use App\Admin\TallerRelacionarOpcion;
@@ -113,12 +112,15 @@ use App\Admin\TallerTipoSaldo;
 use App\Admin\TallerValeCaja;
 use App\Admin\TallerVerdaderoFalso;
 use App\Admin\TallerescribirCuenta;
+use App\RArchivo;
+use App\RespuestaArchivo;
 use App\Taller;
+use App\TallerArchivo;
 use App\TallerChequeRe;
 use App\User;
-use JavaScript;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use JavaScript;
 
 class TallerDocenteController extends Controller
 {
@@ -480,9 +482,10 @@ class TallerDocenteController extends Controller
              $datos = RespuestaArchivo::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
             return view('docentes.talleres.taller48', compact('datos', 'd', 'update_imei', 'user', 'taller'));
         }elseif ($plant == 49) {
-            
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
-            return view('docente.talleres.taller49', compact('datos', 'd', 'update_imei'));
+             $taller = PlanCuenta::where('taller_id', $consul->id)->firstOrFail();
+             $datos = PlanCuentaRespuesta::where('taller_id', $consul->id)->firstOrFail();
+            return view('docentes.talleres.taller49', compact('datos', 'd', 'update_imei', 'user', 'taller'));
+
         }elseif ($plant == 50) {
             
              $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();

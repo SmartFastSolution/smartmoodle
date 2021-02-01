@@ -45,7 +45,7 @@
 
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3> {{$materia->nombre}}</h3>
+                        <h5 > <strong> {{$materia->nombre}}</strong></h5>
                             <p> {{$doc->user->name}} {{$doc->user->apellido}} | {{$curso->curso->nombre}} </p>
 
                             
