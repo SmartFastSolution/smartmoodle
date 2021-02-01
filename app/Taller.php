@@ -408,7 +408,15 @@ class Taller extends Model
     {
         return $this->belongsTo('App\RespuestaArchivo');
     }
-    
+       public function plancuentas(){
+
+        return $this->hasMany('App\Admin\PlanCuenta');
+    }
+
+         public function plancuentasRes(){
+
+        return $this->hasMany('App\Admin\PlanCuentaRespuesta');
+    }
 }
 
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Admin\PlanCuenta;
 use App\Admin\Taller2Relacionar;
 use App\Admin\TallerALectura;
 use App\Admin\TallerALecturaOp;
@@ -21,8 +22,6 @@ use App\Admin\TallerContabilidad;
 use App\Admin\TallerConvertirCheque;
 use App\Admin\TallerDefinirEnunciado;
 use App\Admin\TallerDiferencia;
-use App\Admin\TallerModuloContable;
-use App\Admin\TallerModuloTransaccion;
 use App\Admin\TallerEscribirCuenta;
 use App\Admin\TallerFactura;
 use App\Admin\TallerGusanillo;
@@ -32,6 +31,8 @@ use App\Admin\TallerIdentificarImagen;
 use App\Admin\TallerIdentificarPersona;
 use App\Admin\TallerLetraCambio;
 use App\Admin\TallerMConceptual;
+use App\Admin\TallerModuloContable;
+use App\Admin\TallerModuloTransaccion;
 use App\Admin\TallerNotaPedido;
 use App\Admin\TallerNotaVenta;
 use App\Admin\TallerOrdenIdea;
@@ -54,9 +55,9 @@ use App\Materia;
 use App\Pcuenta;
 use App\TalleLocalizarAbreRe;
 use App\Taller;
-use App\TallerArchivo;
 use App\TallerAbreviaturaDatoRe;
 use App\TallerAbreviaturaRe;
+use App\TallerArchivo;
 use App\TallerCertificadoDepositoRe;
 use App\TallerChequeEndosoRe;
 use App\TallerChequeRe;
@@ -505,8 +506,10 @@ class TallersController extends Controller
              
             return view('talleres.taller48', compact('datos', 'd'));
         }elseif ($plant == 49) {
+
             $consul = Taller::findorfail($id);
-             $datos = TallerClasificar::where('taller_id', $consul->id)->firstOrFail();
+
+             $datos = PlanCuenta::where('taller_id', $consul->id)->firstOrFail();
             return view('talleres.taller49', compact('datos', 'd'));
         }elseif ($plant == 50) {
             $consul = Taller::findorfail($id);

@@ -1,6 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Admin\Leccion\Leccion;
+use App\Admin\Leccion\LeccionAlternativa;
+use App\Admin\Leccion\LeccionCompletar;
+use App\Admin\Leccion\LeccionOpcion;
+use App\Admin\Leccion\LeccionVerdaderFalso;
+use App\Admin\PlanCuenta;
 use App\Admin\RAAlternativa;
 use App\Admin\RADefinicion;
 use App\Admin\RAEnunciado;
@@ -12,6 +18,7 @@ use App\Admin\TallerAbreviatura;
 use App\Admin\TallerAbreviaturaImg;
 use App\Admin\TallerAnalizar;
 use App\Admin\TallerAnalizarOp;
+use App\Admin\TallerBalanceInicial;
 use App\Admin\TallerCelda;
 use App\Admin\TallerCeldaClasificacion;
 use App\Admin\TallerCeldaClasificar;
@@ -24,15 +31,11 @@ use App\Admin\TallerCollage;
 use App\Admin\TallerCompletar;
 use App\Admin\TallerCompletarEnunciado;
 use App\Admin\TallerContabilidad;
-use App\Admin\TallerModuloContable;
-use App\Admin\TallerBalanceInicial;
-use App\Admin\TallerModuloTransaccion;
-use App\Admin\TallerKardex;
-use App\Admin\TallerDiarioGeneral;
 use App\Admin\TallerContabilidadOp;
 use App\Admin\TallerConvertirCheque;
 use App\Admin\TallerDefinirEnunOp;
 use App\Admin\TallerDefinirEnunciado;
+use App\Admin\TallerDiarioGeneral;
 use App\Admin\TallerDiferencia;
 use App\Admin\TallerEscribirCuenta;
 use App\Admin\TallerFactura;
@@ -43,8 +46,11 @@ use App\Admin\TallerIdenTransaOp;
 use App\Admin\TallerIdentificarImagen;
 use App\Admin\TallerIdentificarImagenOpcion;
 use App\Admin\TallerIdentificarPersona;
+use App\Admin\TallerKardex;
 use App\Admin\TallerLetraCambio;
 use App\Admin\TallerMConceptual;
+use App\Admin\TallerModuloContable;
+use App\Admin\TallerModuloTransaccion;
 use App\Admin\TallerNPedidoDatos;
 use App\Admin\TallerNotaPedido;
 use App\Admin\TallerNotaVenta;
@@ -71,13 +77,6 @@ use App\Admin\TallerVerdaFalsoOp;
 use App\Admin\TallerVerdaderoFalso;
 use App\Admin\TipoSaldoDebe;
 use App\Admin\TipoSaldoHaber;
-
-use App\Admin\Leccion\Leccion;
-use App\Admin\Leccion\LeccionCompletar;
-use App\Admin\Leccion\LeccionOpcion;
-use App\Admin\Leccion\LeccionAlternativa;
-use App\Admin\Leccion\LeccionVerdaderFalso;
-
 use App\Http\Controllers\Controller;
 use App\Plantilla;
 use App\Taller;
@@ -2355,6 +2354,28 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
             $taller_48->enunciado            = $request->input('enunciado');
             $taller_48->ar_num            = $request->input('ar_num');
             $taller_48->save();
+         }
+      return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');  
+         
+
+      }
+        public function taller49(Request $request)
+      {
+          $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $taller49               = new Taller;
+         $taller49->nombre       = 'Taller '.++$i;
+         $taller49->enunciado    = $request->input('enunciado');
+         $taller49->plantilla_id = $request->input('id_plantilla');
+         $taller49->contenido_id = $request->input('contenido_id');
+         $taller49->estado       = 0;
+         $taller49->save();
+          if ($taller49 = true) {
+            $a                    = Taller::get()->last();
+            $taller_49            = new PlanCuenta;
+            $taller_49->taller_id = $a->id;
+            $taller_49->enunciado = $request->input('enunciado');
+            $taller_49->detalles  = $request->input('detalles');
+            $taller_49->save();
          }
       return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');  
          

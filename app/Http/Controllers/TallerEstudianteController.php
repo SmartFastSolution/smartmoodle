@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin\PlanCuenta;
+use App\Admin\PlanCuentaRespuesta;
 use App\Admin\Respuesta\Abreviatura;
 use App\Admin\Respuesta\AbreviaturaCarta;
 use App\Admin\Respuesta\AbreviaturaEconomica;
@@ -59,8 +61,8 @@ use App\Admin\Respuesta\PartidaDobleRegis;
 use App\Admin\Respuesta\Pasivo4;
 use App\Admin\Respuesta\Patrimonio4;
 use App\Admin\Respuesta\Pregunta;
-use App\Admin\Respuesta\Recibo;
 use App\Admin\Respuesta\RAlternativa;
+use App\Admin\Respuesta\Recibo;
 use App\Admin\Respuesta\Relacionar2;
 use App\Admin\Respuesta\Relacionar2Re;
 use App\Admin\Respuesta\Relacionar;
@@ -115,12 +117,12 @@ use App\Admin\TallerSubrayar;
 use App\Admin\TallerTipoSaldo;
 use App\Admin\TallerValeCaja;
 use App\Admin\TallerVerdaderoFalso;
+use App\PartidaDobleEstado;
+use App\RArchivo;
+use App\RespuestaArchivo;
 use App\Taller;
 use App\TallerArchivo;
-use App\RespuestaArchivo;
-use App\RArchivo;
 use App\TallerChequeRe;
-use App\PartidaDobleEstado;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -1875,6 +1877,30 @@ public function store11(Request $request, $idtaller)
               return $taller_48;
           }
   }
+           public function store49(Request $request)
+        {
+            $tallerid            = $request->id;
+            $contenido           = PlanCuenta::select('enunciado')->where('taller_id', $tallerid)->firstOrFail(); 
+            $id                  = Auth::id();
+            $taller47            =   new PlanCuentaRespuesta; 
+            $taller47->taller_id =   $tallerid;
+            $taller47->user_id   =   $id;           
+            $taller47->enunciado =  $contenido->enunciado; 
+            $taller47->activos   =  json_encode($request->activos);
+            $taller47->pasivos   =   json_encode($request->pasivos);
+            $taller47->save();
+
+            $user= User::find($id);
+            $user->tallers()->attach($tallerid,['status'=> 'completado' , 'fecha_entregado' => now()]);
+
+               return response(array(                                         //ENVIO DE RESPUESTA
+                'success' => true,
+                'estado' => 'completado',
+                'mensaje' => 'Taller Completado Correctamente'
+            ),200,[]);
+
+
+        }
 
 
 
