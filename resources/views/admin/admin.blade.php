@@ -13,8 +13,8 @@
 
 <div id="tallerlist">
     <div class="container">
-        <a class="btn btn-info " href="{{route('materias.index')}}"> <i class="fas fa-eye"> Materias</i></a>
-<a class="btn btn-info " href="{{route('contenidos.index')}}"> <i class="fas fa-eye"> Unidad</i></a>
+        <a class="btn btn-info " href="{{route('materias.index')}}"> <i class="fas fa-eye"> </i> Materias</a>
+<a class="btn btn-info " href="{{route('contenidos.index')}}"> <i class="fas fa-eye"> </i> Unidad</a>
         <div class="row justify-content-center mt-3">
             <div class="col-md-12" >
                 <div class="card text-center">
@@ -80,7 +80,7 @@
 
 @section('js')
 
-<script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
+{{-- <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script> --}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 
 <script type="text/javascript" src="{{ asset('js/admintalleres.js') }}"></script>

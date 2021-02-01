@@ -16,10 +16,10 @@
                     <p>Institutos</p>
                 </div>
                 <div class="icon">
-                    <i class="fas fa-school"></i>
+                    <i class="fad fa-school"></i>
                 </div>
                 <a href="{{ route('institutos.index') }}" class="small-box-footer">Ver Todos <i
-                        class="fas fa-arrow-circle-right"></i></a>
+                        class="fad fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -32,10 +32,10 @@
                     <p>Materias Creadas</p>
                 </div>
                 <div class="icon">
-                    <i class="fas fa-newspaper"></i>
+                    <i class="fad fa-bookmark"></i>
                 </div>
                 <a href="{{ route('materias.index') }}" class="small-box-footer">Ver Todas <i
-                        class="fas fa-arrow-circle-right"></i></a>
+                        class="fad fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -48,10 +48,10 @@
                     <p>Usuarios Registrados</p>
                 </div>
                 <div class="icon">
-                    <i class="fas fa-user"></i>
+                    <i class="fad fa-user"></i>
                 </div>
                 <a href="{{ route('users.index') }}" class="small-box-footer">Ver todos <i
-                        class="fas fa-arrow-circle-right"></i></a>
+                        class="fad fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->
@@ -67,10 +67,10 @@
                     <p>Estudiantes Registrados Activos</p>
                 </div>
                 <div class="icon">
-                    <i class="fas fa-user"></i>
+                    <i class="fad fa-user"></i>
                 </div>
                 <a href="{{ route('users.index') }}" class="small-box-footer">Ver todos <i
-                        class="fas fa-arrow-circle-right"></i></a>
+                        class="fad fa-arrow-circle-right"></i></a>
             </div>
         </div>
       
@@ -85,10 +85,10 @@
                     <p>Docentes Registrados Activos</p>
                 </div>
                 <div class="icon">
-                    <i class="fas fa-user"></i>
+                    <i class="fad fa-user"></i>
                 </div>
                 <a href="{{ route('users.index') }}" class="small-box-footer">Ver todos <i
-                        class="fas fa-arrow-circle-right"></i></a>
+                        class="fad fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->

@@ -20,7 +20,7 @@
         <h1 class="font-weight-light">Gestión de Publicaciones</h1>
 
         <div class="row justify-content-center">
-            <div class="col-md-15">
+            <div class="col-md-12">
 
                 <div class="card-body">
                     <table id="myTable" class="table table-hover">
@@ -29,8 +29,8 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Unidad Educativa</th>
                                 <th scope="col">Nombre</th>
-                                <th scope="col">Resumen</th>
-                                <th scope="col">Tools</th>
+                                <th scope="col" width="350">Resumen</th>
+                                <th scope="col" class="text-center">Tools</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,12 +51,12 @@
                                         @method('DELETE')
                                         @csrf
 
-                                        <a class="btn btn-info " href="{{route('posts.show',$post->id)}}"><i
+                                        <a class="btn btn-info btn-sm" href="{{route('posts.show',$post->id)}}"><i
                                                 class="fas fa-eye"></i></a>
-                                        <a class="btn btn-success btn" href="{{route('posts.edit', $post->id)}}"><i
+                                        <a class="btn btn-success btn-sm" href="{{route('posts.edit', $post->id)}}"><i
                                                 class=" fas fa-pencil-alt"></i></a>
 
-                                        <button type="submit" class="btn btn-danger "><i
+                                        <button type="submit" class="btn btn-danger btn-sm"><i
                                                 class="fas fa-trash"></i></button>
                                     </form>
                                 </td>

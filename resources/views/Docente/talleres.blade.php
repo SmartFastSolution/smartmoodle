@@ -2,7 +2,46 @@
 
 @extends('layouts.nav')
 @section('title', 'Unidades | SmartMoodle')
-
+@section('css')
+<style type="text/css">
+    :root {
+  /* Not my favorite that line-height has to be united, but needed */
+  --lh: 1.4rem;
+}
+.truncate-overflow {
+  --max-lines: 3;
+  position: relative;
+  max-height: calc(var(--lh) * var(--max-lines));
+  overflow: hidden;
+  padding-right: 1rem; /* space for ellipsis */
+}
+.truncate-overflow::before {
+  position: absolute;
+  /*content: "...";*/
+  /* tempting... but shows when lines == content */
+  /* top: calc(var(--lh) * (var(--max-lines) - 1)); */
+  
+  /*
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  */
+  bottom: 0;
+  right: 0;
+}
+.truncate-overflow::after {
+  content: "";
+  position: absolute;
+  /*
+  inset-inline-end: 0;
+  */
+  right: 0;
+  /* missing bottom on purpose*/
+  width: 1rem;
+  height: 1rem;
+  background: white;
+}
+</style>
+@endsection
 @section('content')
 
 <section class="content">
@@ -59,8 +98,12 @@
                                         <tr v-for="(taller, index) in talleres[{{ $c }}].talleres">
                                             <td>{{$contenido->nombre}}</td>
                                             <td>@{{taller.nombre}}</td>
-                                            <td v-if="taller.plantilla_id == 37">TALLER DE MODULO CONTABLE</td>
-                                            <td v-else v-html="taller.enunciado">@{{taller.enunciado}}</td>
+                                            {{-- <td v-if="taller.plantilla_id == 37">TALLER DE MODULO CONTABLE</td>
+                                            <td v-else v-html="taller.enunciado">@{{taller.enunciado}}</td> --}}
+                                            <td >   
+                                                <div v-html="taller.enunciado" class="truncate-overflow">
+                                                </div>
+                                            </td>
                                             <td>
                                                 <span v-if="taller.estado == 1"
                                                     class="badge-success badge">activo</span>

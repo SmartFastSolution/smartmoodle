@@ -3,7 +3,46 @@
 @extends('layouts.nav')
 @section('title', 'Perfil | SmartMoodle')
 
-
+@section('css')
+<style type="text/css">
+    :root {
+  /* Not my favorite that line-height has to be united, but needed */
+  --lh: 1.4rem;
+}
+.truncate-overflow {
+  --max-lines: 3;
+  position: relative;
+  max-height: calc(var(--lh) * var(--max-lines));
+  overflow: hidden;
+  padding-right: 1rem; /* space for ellipsis */
+}
+.truncate-overflow::before {
+  position: absolute;
+  /*content: "...";*/
+  /* tempting... but shows when lines == content */
+  /* top: calc(var(--lh) * (var(--max-lines) - 1)); */
+  
+  /*
+  inset-block-end: 0;
+  inset-inline-end: 0;
+  */
+  bottom: 0;
+  right: 0;
+}
+.truncate-overflow::after {
+  content: "";
+  position: absolute;
+  /*
+  inset-inline-end: 0;
+  */
+  right: 0;
+  /* missing bottom on purpose*/
+  width: 1rem;
+  height: 1rem;
+  background: white;
+}
+</style>
+@endsection
 
 @section('content')
 
@@ -54,32 +93,31 @@
                         <thead>
                             <tr>
                                 <th scope="col">Nombre del Documento</th>
-                                <th scope="col">Descripcion</th>
+                                <th width="500" scope="col">Descripcion</th>
                                 <th scope="col">Acción</th>
-                                <th scope="col" coldspan="1">Ver Documento</th>
+                                <th width="125" scope="col" coldspan="1">Ver Documento</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($cons as $c)
                             <tr>
                                 <td> {{$c->nombre}}</td>
-                                <td> {{$c->descripcion}}</td>
+                                <td > {{$c->descripcion}}</td>
                                 <td>@if($c['accion']== '1')
                                     <span class="badge-success badge">Descargable</span>
                                     @else
                                     <span v-else class="badge-info badge">No Descargable</span>
                                     @endif
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     @if($c['accion']== '1')
                                     <!-- descarganle -->
                                     <a class="btn btn-dark btn" href="{{route('Contenido3.alumno', $c->id)}}"><i
-                                            class="fas fa-eye"></i></a>
-
+                                    class="fas fa-file-pdf"></i></a>
                                     @else
                                     <!-- no descarganle -->
                                     <a class="btn btn-dark btn" href="{{route('Contenido.alumno', $c->id)}}"><i
-                                            class="fas fa-eye"></i></a>
+                                    class="fas fa-file-pdf"></i></a>
                                     @endif
                                 </td>
                             </tr>
@@ -89,26 +127,31 @@
                 </div>
                 <div class="tab-pane fade " id="mn-documentos-profesor" role="tabpanel"
                     aria-labelledby="mn-documentos-profesor-tab">
-                    <table id="myTable4" class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">Nombre del Documento</th>
-                                <th scope="col">Descripcion</th>
-                                <th scope="col" coldspan="1">Ver Documento</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($cons2 as $c2)
-                            <tr>
-                                <td> {{$c2->nombre}}</td>
-                                <td> {{$c2->descripcion}}</td>
-                                <td><a class="btn btn-dark btn" href="{{route('Contenido2.alumno', $c2->id)}}"><i
-                                class="fas fa-eye"></i></a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                    <div class="row">
+                        <div class="col-12">
+                            <table id="myTable4" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" scope="col">Nombre del Documento</th>
+                                        <th width="500" class="text-center" scope="col">Descripcion</th>
+                                        <th class="text-center" scope="col">Ver Documento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($cons2 as $c2)
+                                    <tr>
+                                        <td> {{$c2->nombre}}</td>
+                                        <td> {{$c2->descripcion}}</td>
+                                        <td class="text-center"><a class="btn btn-dark btn" href="{{route('Contenido2.alumno', $c2->id)}}"><i
+                                        class="fas fa-file-pdf"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>
@@ -157,11 +200,15 @@
                                 <td>{{$taller->contenido->nombre}}</td>
                                 <td>{{$taller['nombre']}}</td>
                                 
-                                <td>@if ($taller->plantilla_id == 37)
+                                <td>
+                                    <div class="truncate-overflow">
+                                        {!!$taller->enunciado!!}
+                                    </div>
+                                    {{--  @if ($taller->plantilla_id == 37)
                                     Taller de Modulos Contable
                                     @else
                                     {!!$taller->enunciado!!}
-                                    @endif
+                                    @endif --}}
                                 </td>
                                 <td class="text-center">
                                     {{Carbon\Carbon::parse($taller->fecha_entrega)->formatLocalized('%d, %B %Y ') }}
@@ -226,11 +273,16 @@
                             <tr>
                                 <td>{{$taller->contenido->nombre}}</td>
                                 <td>{{$taller['nombre']}}</td>
-                                <td>@if ($taller->plantilla_id == 37)
+                                <td>
+                                    <div class="truncate-overflow">
+                                        {!!$taller->enunciado!!}
+                                    </div>
+                                    {{--   @if ($taller->plantilla_id == 37)
                                     Taller de Modulos Contable
                                     @else
                                     {!!$taller->enunciado!!}
-                                @endif</td>
+                                    @endif --}}
+                                </td>
                                 <td align="center"> <span
                                 class="badge @if($taller->pivot->status =='completado')badge-warning @elseif($taller->pivot->status == 'calificado') badge-success @endif ">{{$taller->pivot->status}}</span>
                             </td>
@@ -289,7 +341,7 @@ $(function() {
         $('#myTable3 thead tr:eq(1) th').each(function(i) {
 
             var title = $(this).text(); //es el nombre de la columna
-            $(this).html('<input type="text" placeholder="Buscar..." />');
+            $(this).html('<input type="text" placeholder="Buscar..." class="form-control" />');
 
             $('input', this).on('keyup change', function() {
                 if (table.column(i).search() !== this.value) {
@@ -305,7 +357,7 @@ $(function() {
         $('#myTable4 thead tr:eq(1) th').each(function(i) {
 
             var title = $(this).text(); //es el nombre de la columna
-            $(this).html('<input type="text" placeholder="Buscar..." />');
+            $(this).html('<input type="text" placeholder="Buscar..." class="form-control" />');
 
             $('input', this).on('keyup change', function() {
                 if (table.column(i).search() !== this.value) {

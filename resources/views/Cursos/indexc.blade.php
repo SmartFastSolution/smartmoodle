@@ -44,8 +44,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                               
                                     @foreach ($cursos as $curso)
+                                     <tr>
                                     <th scope="row">{{ $curso['id']}}</th>
                                     <td>{{ $curso['nombre']}}</td>
                                     <td>{{ $curso['estado']}}</td>
