@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Archivodocente;
-use App\Http\Controllers\Controller;
-use APp\User;
+use App\Assignment;
 use App\Contenido;
 use App\Curso;
+use App\Distribuciondo;
 use App\Distribucionmacu;
 use App\Distrima;
-use App\Assignment;
+use App\Http\Controllers\Controller;
 use App\Instituto;
 use App\Materia;
 use App\Nivel;
-use App\Taller;
 use App\Post;
-use Illuminate\Support\Facades\Hash;
+use App\Taller;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Console\Input\Input;
 
@@ -49,16 +51,29 @@ class EstudianteController extends Controller
 
    
     public function show(User $user){
-                
-        $user= User::find($user->id);
-        $distrima= Distrima::get();
-        $instituto = Instituto::get();
-        $assignment=Assignment::get();
-        $materia=Materia::get();  
-        $curso=Curso::get();
-        $contenidos=Contenido::get();
+        $usuario = User::find(Auth::id());
+        $curso = Distribucionmacu::find($usuario->distribucionmacu_id);
+
+        $materias = Assignment::join("assignment_materia", "assignment_materia.assignment_id", "=", "assignments.id")
+        ->join("materias", "materias.id", "=", "assignment_materia.materia_id")
+        ->join("distribuciondos", "distribuciondos.materia_id", "=", "assignment_materia.materia_id")
+        ->join("distribuciondo_nivel", "distribuciondo_nivel.distribuciondo_id", "=", "distribuciondos.id")
+        ->join("users", "users.id", "=", "distribuciondos.user_id")
+        ->where('distribuciondo_nivel.nivel_id', $usuario->nivel_id)
+        ->select("assignment_materia.*","materias.nombre as nombre_materia", "users.name as nombre_docente", "users.apellido as apellido_docente")
+        ->get();
+
+        // return $materias;
+        // return $curso->curso->nombre;
+        // $user= User::find($user->id);
+        // $distrima= Distrima::get();
+        // $instituto = Instituto::get();
+        // $assignment=Assignment::get();
+        // $materia=Materia::get();  
+        // $curso=Curso::get();
+        // $contenidos=Contenido::get();
         
-        return view('Estudiante.perfile',compact('instituto','materia','contenidos','curso','user','distrima','assignment')); //ruta estudiante
+        return view('Estudiante.perfile',compact('curso','user', 'materias')); //ruta estudiante
 
     }
 
@@ -67,6 +82,14 @@ class EstudianteController extends Controller
               // todos los datos de la bd
          $user =  User::findorfail( Auth::id());
          $institutomate = Materia::find($id)->instituto()->get();
+          $curso = Distribucionmacu::find($user->distribucionmacu_id);
+          $docente = Distribuciondo::join("distribuciondo_nivel", "distribuciondo_nivel.distribuciondo_id", "=", "distribuciondos.id")
+          ->join("users", "users.id", "=", "distribuciondos.user_id")
+        ->where('distribuciondo_nivel.nivel_id', $user->nivel_id)
+        ->where('distribuciondos.materia_id', $id)
+        ->select("users.name as nombre_docente", "users.apellido as apellido_docente")
+          ->first();
+          
          $contenido=Contenido::get();
 
          $tallers=Taller::get();
@@ -82,7 +105,7 @@ class EstudianteController extends Controller
          $materia =Materia::where('id', $id)->firstOrfail();
          $cons =Contenido::where('materia_id',$materia->id)->paginate(6);
          $cons2 =Archivodocente::where('materia_id',$materia->id)->paginate(6);
-         return view ('Estudiante.contenido',['materia'=>$materia,'contenidos'=>$contenido,'institutomate'=>$institutomate,'tallers'=>$tallers,'cons'=>$cons,'cons2'=>$cons2]);
+         return view ('Estudiante.contenido',['materia'=>$materia, 'docente'=>$docente, 'curso'=>$curso,'contenidos'=>$contenido,'institutomate'=>$institutomate,'tallers'=>$tallers,'cons'=>$cons,'cons2'=>$cons2]);
 
        // return $tallers;
 

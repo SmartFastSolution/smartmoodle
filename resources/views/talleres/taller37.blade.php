@@ -89,6 +89,13 @@
     <h1 class="text-center text-danger font-weight-bold display-4">Modulo Contable</h1>
     {{-- <h1 class="text-center m-2">{{ $datos->taller->nombre }}</h1> --}}
     <h3 class="text-center mt-3">{!! $datos->enunciado !!}</h3>
+
+    @isset ($datos->archivo)
+    <div class="row justify-content-center mb-5">
+        <a target="_blank" class="btn btn-danger" href="{{ $datos->archivo }}"><i class="fad fa-file-pdf"></i> Descargar PDF</a>
+    </div>
+        
+    @endisset
             
  @if ($datos->metodo == 'concatenado')
     <div class="row justify-content-md-center">

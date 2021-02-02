@@ -16,8 +16,8 @@
             @endisset</h1>
 
         <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}
-            @isset (auth()->user()->curso->nombre)
-            <h2 class="font-weight-light"> <strong> {{auth()->user()->curso->nombre}} </strong>
+            @isset ($curso->curso->nombre)
+            <h2 class="font-weight-light"> <strong> {{$curso->curso->nombre}} - ({{ auth()->user()->nivel->nombre }})</strong>
             </h2>
             @endisset
 
@@ -36,7 +36,28 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="row">
+                <div class="row">
+                @foreach($materias as $materia)
+                          <div class="col-lg-4 col-6">
+
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                        <h5 > <strong> {{$materia->nombre_materia}}</strong></h5>
+                            <p> {{$materia->nombre_docente}} {{$materia->apellido_docente}} | {{$curso->curso->nombre}} </p>
+
+                            
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <a href="{{route('Unidades', $materia->materia_id)}}" class="small-box-footer">
+                            Acceder <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+{{--             <div class="row">
                 @foreach(auth()->user()->assignmets as $as)
                 @foreach($as->materias as $materia)
                 @foreach($materia->distribuciondos as $doc)
@@ -62,7 +83,7 @@
                 @endforeach
                 @endforeach
                 @endforeach
-            </div>
+            </div> --}}
 
         </div>
     </div>

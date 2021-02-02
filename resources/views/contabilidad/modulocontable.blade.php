@@ -94,6 +94,10 @@
               <vue-ckeditor v-model="individuales.balance_vertical" :config="config"/>
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
+                      <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
                 <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('balance-inicial-vertical')">Crear Taller</a>
             </div>
@@ -109,6 +113,10 @@
               <vue-ckeditor v-model="individuales.balance_horizontal" :config="config"/>
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
+                      <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
                 <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('balance-inicial-horizontal')">Crear Taller</a>
             </div>
@@ -148,6 +156,10 @@
             </div>
           </div>
           <div class="row justify-content-center">
+                      <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
                       <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('kardex-fifo')">CREAR TALLER</a>
                   </div>
@@ -187,6 +199,10 @@
             </div>
           </div>
            <div class="row justify-content-center">
+                      <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
               <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('kardex-promedio')">CREAR TALLER</a>
             </div>
@@ -203,6 +219,10 @@
               <vue-ckeditor v-model="individuales.diario_general" :config="config"/>
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
+                      <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
                 <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('diario-general')">Crear Taller</a>
             </div>
@@ -219,6 +239,10 @@
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral"></ckeditor> --}}
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
+                      <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
                 <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('mayor-general')">Crear Taller</a>
             </div>
@@ -236,6 +260,10 @@
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral"></ckeditor> --}}
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
+                      <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
                 <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('balance-comprobacion')">Crear Taller</a>
             </div>
@@ -253,6 +281,10 @@
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral"></ckeditor> --}}
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
+                      <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
                 <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('hoja-trabajo')">Crear Taller</a>
             </div>
@@ -271,6 +303,10 @@
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral"></ckeditor> --}}
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
+                      <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
                 <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('balance-comprobacion-ajustado')">Crear Taller</a>
             </div>
@@ -289,6 +325,10 @@
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral"></ckeditor> --}}
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
+                      <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
                 <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('estado-resultado')">Crear Taller</a>
             </div>
@@ -307,6 +347,10 @@
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral"></ckeditor> --}}
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
+                      <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
                 <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('balance-general')">Crear Taller</a>
             </div>
@@ -326,6 +370,10 @@
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral"></ckeditor> --}}
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
+                      <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
                 <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('asientos-cierre')">Crear Taller</a>
             </div>
@@ -344,6 +392,10 @@
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
+                      <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
                 <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('librocaja')">Crear Taller</a>
             </div>
@@ -361,6 +413,10 @@
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
+                      <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
                 <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('conciliacionbancaria')">Crear Taller</a>
             </div>
@@ -378,6 +434,10 @@
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
+                      <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
                 <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('arqueocaja')">Crear Taller</a>
             </div>
@@ -395,6 +455,10 @@
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
+                      <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
                 <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('librobanco')">Crear Taller</a>
             </div>
@@ -412,6 +476,10 @@
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
+                      <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
                 <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('retencioniva')">Crear Taller</a>
             </div>
@@ -426,9 +494,14 @@
               {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
               <vue-ckeditor v-model="individuales.nominaempleados" :config="config"/>
 
+
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
+                    <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
             <div class="col-2 mb-2">
                 <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('nominaempleados')">Crear Taller</a>
             </div>
@@ -442,6 +515,10 @@
             <div class="col-12 mb-2">
               {{-- <h3 class="text-center font-weight-bold text-ligth" >Transacciones</h3> --}}
               <vue-ckeditor v-model="individuales.provisiondebeneficio" :config="config"/>
+              <div class="form-group">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+              </div>
 
               {{-- <ckeditor style="height: 300px" class="form-control border" :config="editorConfig" v-model="individuales.mayorgeneral" @ready="onReady"></ckeditor> --}}
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
@@ -486,6 +563,12 @@
                   <label for="recipient-name" class="col-form-label">Enunciado:</label>
               <vue-ckeditor v-model="enunciado" :config="config"/>
                   
+               {{-- <textarea v-model="enunciado" name="" id="" cols="15" rows="5" class="form-control"></textarea> --}}
+              </div>
+                  <div class="form-group col-12">
+                  <label for="recipient-name" class="col-form-label">PDF:</label>
+                <input class="custom-file-control"  name="image" type="file" @change="getDoc">
+                              
                {{-- <textarea v-model="enunciado" name="" id="" cols="15" rows="5" class="form-control"></textarea> --}}
               </div>
           </div>
@@ -677,6 +760,7 @@
       ],
         contenido_id:'',
         enunciado:'',
+        document:'',
         individuales:{
           balance_vertical:'',
           balance_horizontal:'',
@@ -741,6 +825,17 @@
       }
       },
       methods:{
+            getDoc(event){
+        console.log(event)
+                //Asignamos la imagen a  nuestra data
+                this.document = event.target.files[0];
+                toastr.info("Documento cargado correctamente", "Smarmoddle", {
+                    "timeOut": "3000"
+                });
+                // this.updateAvatar()
+        console.log(this.document)
+                // 
+            },
           onMateria() {
             let set = this;
             set.materias = [];
@@ -834,14 +929,16 @@
                         "timeOut": "3000"
                     });
                 }else{
-                    axios.post(url,{
-                      id: set.id_taller,
-                      tipo: 'vertical',
-                      enunciado: set.enunciado,
-                      transacciones: set.individuales.balance_vertical,
-                      contenido_id: set.contenido_id,
-                      plantilla: 37,
-                }).then(response => {
+            let data = new  FormData();
+            data.append('documento', this.document);
+            data.append('id', this.id_taller);
+            data.append('tipo', 'vertical');
+            data.append('enunciado', this.enunciado);
+            data.append('transacciones', this.individuales.balance_vertica);
+            data.append('contenido_id', this.contenido_id);
+            data.append('plantilla', 37);
+     
+                    axios.post(url,data).then(response => {
                    window.location = "/sistema/home";
                      
                 }).catch(function(error){
@@ -865,14 +962,15 @@
                             "timeOut": "3000"
                         });
                     }else{
-                        axios.post(url,{
-                          id: set.id_taller,
-                          tipo: 'horizontal',
-                          enunciado: set.enunciado,
-                          transacciones: set.individuales.balance_horizontal,
-                          contenido_id: set.contenido_id,
-                          plantilla: 37,
-                    }).then(response => {
+                            let data = new  FormData();
+                      data.append('documento', this.document);
+                      data.append('id', this.id_taller);
+                      data.append('tipo', 'horizontal');
+                      data.append('enunciado', this.enunciado);
+                      data.append('transacciones', this.individuales.balance_horizontal);
+                      data.append('contenido_id', this.contenido_id);
+                      data.append('plantilla', 37);
+                        axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
@@ -896,14 +994,15 @@
                               "timeOut": "3000"
                           });
                       }else{
-                          axios.post(url,{
-                            id: set.id_taller,
-                            tipo: 'fifo',
-                            enunciado: set.enunciado,
-                            productos: set.individuales.kardex_fifos,
-                            contenido_id: set.contenido_id,
-                            plantilla: 37,
-                      }).then(response => {
+                      let data = new  FormData();
+                      data.append('documento', this.document);
+                      data.append('id', this.id_taller);
+                      data.append('tipo', 'fifo');
+                      data.append('enunciado', this.enunciado);
+                      data.append('transacciones', this.individuales.kardex_fifos);
+                      data.append('contenido_id', this.contenido_id);
+                      data.append('plantilla', 37);
+                          axios.post(url,data).then(response => {
                          window.location = "/sistema/home";
                            
                       }).catch(function(error){
@@ -926,14 +1025,15 @@
                               "timeOut": "3000"
                           });
                       }else{
-                          axios.post(url,{
-                            id: set.id_taller,
-                            tipo: 'promedio',
-                            enunciado: set.enunciado,
-                            productos: set.individuales.kardex_promedios,
-                            contenido_id: set.contenido_id,
-                            plantilla: 37,
-                      }).then(response => {
+                        let data = new  FormData();
+                        data.append('documento', this.document);
+                        data.append('id', this.id_taller);
+                        data.append('tipo', 'promedio');
+                        data.append('enunciado', this.enunciado);
+                        data.append('transacciones', this.individuales.kardex_promedios);
+                        data.append('contenido_id', this.contenido_id);
+                        data.append('plantilla', 37);
+                          axios.post(url,data).then(response => {
                          window.location = "/sistema/home";
                            
                       }).catch(function(error){
@@ -957,14 +1057,16 @@
                             "timeOut": "3000"
                         });
                     }else{
-                        axios.post(url,{
-                          id: set.id_taller,
-                          enunciado: set.enunciado,
-                          transacciones: set.individuales.diario_general,
-                          contenido_id: set.contenido_id,
-                          plantilla: 37,
-                    }).then(response => {
-                       window.location = "/sistema/home";
+                        let data = new  FormData();
+                        data.append('documento', this.document);
+                        data.append('id', this.id_taller);
+                        data.append('enunciado', this.enunciado);
+                        data.append('transacciones', this.individuales.diario_general);
+                        data.append('contenido_id', this.contenido_id);
+                        data.append('plantilla', 37);
+
+                        axios.post(url,data).then(response => {
+                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
 
@@ -987,13 +1089,15 @@
                             "timeOut": "3000"
                         });
                     }else{
-                        axios.post(url,{
-                          id: set.id_taller,
-                          enunciado: set.enunciado,
-                          transacciones: set.individuales.mayorgeneral,
-                          contenido_id: set.contenido_id,
-                          plantilla: 37,
-                    }).then(response => {
+                        let data = new  FormData();
+                        data.append('documento', this.document);
+                        data.append('id', this.id_taller);
+                        data.append('enunciado', this.enunciado);
+                        data.append('transacciones', this.individuales.mayorgeneral);
+                        data.append('contenido_id', this.contenido_id);
+                        data.append('plantilla', 37);
+
+                        axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
@@ -1016,14 +1120,16 @@
                             "timeOut": "3000"
                         });
                     }else{
-                        axios.post(url,{
-                          id: set.id_taller,
-                          enunciado: set.enunciado,
-                          transacciones: set.individuales.balance_comprobacion,
-                          contenido_id: set.contenido_id,
-                          plantilla: 37,
-                    }).then(response => {
-                       window.location = "/sistema/home";
+                        let data = new  FormData();
+                        data.append('documento', this.document);
+                        data.append('id', this.id_taller);
+                        data.append('enunciado', this.enunciado);
+                        data.append('transacciones', this.individuales.balance_comprobacion);
+                        data.append('contenido_id', this.contenido_id);
+                        data.append('plantilla', 37);
+
+                        axios.post(url,data).then(response => {
+                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
 
@@ -1046,13 +1152,14 @@
                             "timeOut": "3000"
                         });
                     }else{
-                        axios.post(url,{
-                          id: set.id_taller,
-                          enunciado: set.enunciado,
-                          transacciones: set.individuales.hoja_trabajo,
-                          contenido_id: set.contenido_id,
-                          plantilla: 37,
-                    }).then(response => {
+                        let data = new  FormData();
+                        data.append('documento', this.document);
+                        data.append('id', this.id_taller);
+                        data.append('enunciado', this.enunciado);
+                        data.append('transacciones', this.individuales.hoja_trabajo);
+                        data.append('contenido_id', this.contenido_id);
+                        data.append('plantilla', 37);
+                        axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
@@ -1076,13 +1183,14 @@
                             "timeOut": "3000"
                         });
                     }else{
-                        axios.post(url,{
-                          id: set.id_taller,
-                          enunciado: set.enunciado,
-                          transacciones: set.individuales.balance_comprobacion_ajustado,
-                          contenido_id: set.contenido_id,
-                          plantilla: 37,
-                    }).then(response => {
+                        let data = new  FormData();
+                        data.append('documento', this.document);
+                        data.append('id', this.id_taller);
+                        data.append('enunciado', this.enunciado);
+                        data.append('transacciones', this.individuales.balance_comprobacion_ajustado);
+                        data.append('contenido_id', this.contenido_id);
+                        data.append('plantilla', 37);
+                        axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
@@ -1105,13 +1213,15 @@
                             "timeOut": "3000"
                         });
                     }else{
-                        axios.post(url,{
-                          id: set.id_taller,
-                          enunciado: set.enunciado,
-                          transacciones: set.individuales.estado_resultado,
-                          contenido_id: set.contenido_id,
-                          plantilla: 37,
-                    }).then(response => {
+                        let data = new  FormData();
+                        data.append('documento', this.document);
+                        data.append('id', this.id_taller);
+                        data.append('enunciado', this.enunciado);
+                        data.append('transacciones', this.individuales.estado_resultado);
+                        data.append('contenido_id', this.contenido_id);
+                        data.append('plantilla', 37);
+
+                        axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
@@ -1134,13 +1244,15 @@
                             "timeOut": "3000"
                         });
                     }else{
-                        axios.post(url,{
-                          id: set.id_taller,
-                          enunciado: set.enunciado,
-                          transacciones: set.individuales.balance_general,
-                          contenido_id: set.contenido_id,
-                          plantilla: 37,
-                    }).then(response => {
+                          let data = new  FormData();
+                        data.append('documento', this.document);
+                        data.append('id', this.id_taller);
+                        data.append('enunciado', this.enunciado);
+                        data.append('transacciones', this.individuales.balance_general);
+                        data.append('contenido_id', this.contenido_id);
+                        data.append('plantilla', 37);
+
+                        axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
@@ -1163,13 +1275,15 @@
                             "timeOut": "3000"
                         });
                     }else{
-                        axios.post(url,{
-                          id: set.id_taller,
-                          enunciado: set.enunciado,
-                          transacciones: set.individuales.asientos_cierre,
-                          contenido_id: set.contenido_id,
-                          plantilla: 37,
-                    }).then(response => {
+                               let data = new  FormData();
+                        data.append('documento', this.document);
+                        data.append('id', this.id_taller);
+                        data.append('enunciado', this.enunciado);
+                        data.append('transacciones', this.individuales.asientos_cierre);
+                        data.append('contenido_id', this.contenido_id);
+                        data.append('plantilla', 37);
+
+                        axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
@@ -1192,13 +1306,15 @@
                             "timeOut": "3000"
                         });
                     }else{
-                        axios.post(url,{
-                          id: set.id_taller,
-                          enunciado: set.enunciado,
-                          transacciones: set.individuales.librocaja,
-                          contenido_id: set.contenido_id,
-                          plantilla: 37,
-                    }).then(response => {
+                        let data = new  FormData();
+                        data.append('documento', this.document);
+                        data.append('id', this.id_taller);
+                        data.append('enunciado', this.enunciado);
+                        data.append('transacciones', this.individuales.librocaja);
+                        data.append('contenido_id', this.contenido_id);
+                        data.append('plantilla', 37);
+
+                        axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
@@ -1221,13 +1337,15 @@
                             "timeOut": "3000"
                         });
                     }else{
-                        axios.post(url,{
-                          id: set.id_taller,
-                          enunciado: set.enunciado,
-                          transacciones: set.individuales.conciliacionbancaria,
-                          contenido_id: set.contenido_id,
-                          plantilla: 37,
-                    }).then(response => {
+                        let data = new  FormData();
+                        data.append('documento', this.document);
+                        data.append('id', this.id_taller);
+                        data.append('enunciado', this.enunciado);
+                        data.append('transacciones', this.individuales.conciliacionbancaria);
+                        data.append('contenido_id', this.contenido_id);
+                        data.append('plantilla', 37); 
+
+                        axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
@@ -1250,13 +1368,15 @@
                             "timeOut": "3000"
                         });
                     }else{
-                        axios.post(url,{
-                          id: set.id_taller,
-                          enunciado: set.enunciado,
-                          transacciones: set.individuales.arqueocaja,
-                          contenido_id: set.contenido_id,
-                          plantilla: 37,
-                    }).then(response => {
+                       let data = new  FormData();
+                        data.append('documento', this.document);
+                        data.append('id', this.id_taller);
+                        data.append('enunciado', this.enunciado);
+                        data.append('transacciones', this.individuales.arqueocaja);
+                        data.append('contenido_id', this.contenido_id);
+                        data.append('plantilla', 37); 
+
+                        axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
@@ -1279,13 +1399,15 @@
                             "timeOut": "3000"
                         });
                     }else{
-                        axios.post(url,{
-                          id: set.id_taller,
-                          enunciado: set.enunciado,
-                          transacciones: set.individuales.librobanco,
-                          contenido_id: set.contenido_id,
-                          plantilla: 37,
-                    }).then(response => {
+                           let data = new  FormData();
+                        data.append('documento', this.document);
+                        data.append('id', this.id_taller);
+                        data.append('enunciado', this.enunciado);
+                        data.append('transacciones', this.individuales.librobanco);
+                        data.append('contenido_id', this.contenido_id);
+                        data.append('plantilla', 37); 
+
+                        axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
@@ -1308,13 +1430,15 @@
                             "timeOut": "3000"
                         });
                     }else{
-                        axios.post(url,{
-                          id: set.id_taller,
-                          enunciado: set.enunciado,
-                          transacciones: set.individuales.retencioniva,
-                          contenido_id: set.contenido_id,
-                          plantilla: 37,
-                    }).then(response => {
+                                     let data = new  FormData();
+                        data.append('documento', this.document);
+                        data.append('id', this.id_taller);
+                        data.append('enunciado', this.enunciado);
+                        data.append('transacciones', this.individuales.retencioniva);
+                        data.append('contenido_id', this.contenido_id);
+                        data.append('plantilla', 37); 
+
+                        axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
@@ -1337,13 +1461,15 @@
                             "timeOut": "3000"
                         });
                     }else{
-                        axios.post(url,{
-                          id: set.id_taller,
-                          enunciado: set.enunciado,
-                          transacciones: set.individuales.nominaempleados,
-                          contenido_id: set.contenido_id,
-                          plantilla: 37,
-                    }).then(response => {
+                                    let data = new  FormData();
+                        data.append('documento', this.document);
+                        data.append('id', this.id_taller);
+                        data.append('enunciado', this.enunciado);
+                        data.append('transacciones', this.individuales.nominaempleados);
+                        data.append('contenido_id', this.contenido_id);
+                        data.append('plantilla', 37); 
+
+                        axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
@@ -1366,13 +1492,15 @@
                             "timeOut": "3000"
                         });
                     }else{
-                        axios.post(url,{
-                          id: set.id_taller,
-                          enunciado: set.enunciado,
-                          transacciones: set.individuales.provisiondebeneficio,
-                          contenido_id: set.contenido_id,
-                          plantilla: 37,
-                    }).then(response => {
+                               let data = new  FormData();
+                        data.append('documento', this.document);
+                        data.append('id', this.id_taller);
+                        data.append('enunciado', this.enunciado);
+                        data.append('transacciones', this.individuales.provisiondebeneficio);
+                        data.append('contenido_id', this.contenido_id);
+                        data.append('plantilla', 37); 
+
+                        axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
@@ -1448,8 +1576,6 @@
         },
             tallerConcatenado(){
             let set = this;
-
-
             let url = '/sistema/admin/modulo/taller-concatenado';
             if (set.contenido_id == '' ) {
                  toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
@@ -1464,19 +1590,23 @@
                     "timeOut": "3000"
                 });
             }else{
-                axios.post(url,{
-                  id: set.id_taller,
-                  enunciado: set.enunciado,
-                  productos: set.concatenados.kardex_fifos,
-                  balance_horizontal: set.concatenados.balance_horizontal,
-                  diario_general: set.concatenados.diario_general,
-                  conciliacionbancaria: set.concatenados.conciliacionbancaria,
-                  arqueocaja: set.concatenados.arqueocaja,
-                  productos: set.concatenados.kardex_fifos,
-                  contenido_id: set.contenido_id,
-                  modulos:set.value,
-                  plantilla: 37,
-            }).then(response => {
+                let data = new  FormData();
+            
+            data.append('documento', this.document);
+            data.append('id', this.id_taller);
+            data.append('enunciado', this.enunciado);
+            data.append('productos', this.concatenados.kardex_fifos);
+            data.append('balance_horizontal', this.concatenados.balance_horizontal);
+            data.append('diario_general', this.concatenados.diario_general);
+            data.append('conciliacionbancaria', this.concatenados.conciliacionbancaria);
+            data.append('arqueocaja', this.concatenados.arqueocaja);
+            data.append('productos', this.concatenados.kardex_fifos);
+            data.append('contenido_id', this.contenido_id);
+            data.append('modulos', JSON.stringify( set.value));
+            data.append('plantilla', 37);
+     
+                axios.post(url, data).then(response => {
+             
                window.location = "/sistema/home";
                  
             }).catch(function(error){

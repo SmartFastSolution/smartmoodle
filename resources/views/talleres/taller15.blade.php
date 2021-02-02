@@ -6,7 +6,7 @@
 <h1 class="text-center  mt-5 text-danger font-weight-bold display-4">{{ $datos->taller->nombre }}</h1>
      <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
-<form action="{{ route('taller15', ['idtaller' => $d]) }}" method="POST">
+<form action="{{ route('taller15', ['idtaller' => $d]) }}" method="POST" id="taller15">
 	@csrf
 	<div class="container">
 		<div class="row justify-content-center">
@@ -16,6 +16,10 @@
 					<p style="cursor: move;" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->girador }}')" ondragend="this.classList.add('text-muted');">{{ $datos->girador }}</p>
 				<label for="">Girado</label><br>
 					<p style="cursor: move;" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->girado }}')" ondragend="this.classList.add('text-muted');">{{ $datos->girado }}</p>
+
+					<label for="">Beneficiario</label><br>
+					<p style="cursor: move;" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->beneficiario }}')" ondragend="this.classList.add('text-muted');">{{ $datos->beneficiario }}</p>
+
 				<label for="">Cantidad</label><br>
 					<p style="cursor: move;" draggable="true" ondragstart="event.dataTransfer.setData('text/plain', '{{ $datos->cantidad }}')" ondragend="this.classList.add('text-muted');">{{ $datos->cantidad }}</p>
 				<label for="">Lugar y Fecha</label>	<br>
@@ -86,8 +90,34 @@
 			
 		</div>
 		<div class="row justify-content-center">
-        	<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
+        	<input type="button" id="button" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
     	</div>
 	</div>
 </form>
+@endsection
+
+@section('js')
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script type="text/javascript">
+
+ $( "#button" ).click(function( event ) {
+  event.preventDefault();
+  Swal.fire({
+  title: 'Seguro que deseas completar el taller?',
+  text: "Esta accion ya no se puede revertir!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Si, Completar!',
+  cancelButtonText: 'Cancelar!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    $( "#taller15" ).submit();
+  }
+})
+});
+
+</script>
 @endsection

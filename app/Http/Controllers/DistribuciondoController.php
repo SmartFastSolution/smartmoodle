@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 use App\Materia;
 use App\User;
 use App\Instituto;
+use App\Nivel;
 use App\Distribuciondo;
+use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -29,6 +31,8 @@ class DistribuciondoController extends Controller
         
         $institutos = Instituto::get();
         $materias=Materia::get();
+
+        // $paralelos=
         $user=User::get();
       
       
@@ -45,25 +49,29 @@ class DistribuciondoController extends Controller
     {
         $request->validate([ 
             'instituto' =>['required'],
-            'docente' => ['required','unique:distribuciondos,user_id'],
-            'materia' =>    ['required'],
-            'estado' =>   ['required' ,'in:on,off'],
+            'docente'   => ['required'],
+            'materia'   =>    ['required'],
+            'estado'    =>   ['required' ,'in:on,off'],
         ]);
 
         $distribuciondo =new  Distribuciondo;
         $distribuciondo ->instituto_id = $request->instituto;
         $distribuciondo ->user_id = $request->docente;
+        $distribuciondo ->materia_id = $request->materia;
         $distribuciondo ->estado = $request->estado;
-       
-          
-      
-
-       $distribuciondo->save();
+        $distribuciondo->save();
 
      
-       if($request->get('materia')){
-        $distribuciondo->materias()->sync($request->get('materia'));
-      }
+      //  if($request->get('paralelos')){
+
+
+      //   $distribuciondo->paralelos()->sync($request->get('materia'));
+      // }
+         foreach ($request->get('paralelos') as $group) { 
+            $nombre = Nivel::find($group);
+            $as =   DB::table('distribuciondo_nivel')->insert(
+                ['distribuciondo_id' => $distribuciondo->id, 'nivel_id' => $group, 'nivel_nombre' => $nombre->nombre]);
+        } 
         return redirect('sistema/distribuciondos ');
 
 
@@ -99,15 +107,35 @@ class DistribuciondoController extends Controller
     public function edit(Distribuciondo $distribuciondo)
     {
         $distd=Distribuciondo::find($distribuciondo->id);
+        $materia = Materia::find($distd->materia_id);
         $user=  $distd->user()->first();
         $instituto=Distribuciondo::find($distribuciondo->id)->instituto()->first();
-        $materias=  $distd->materias()->get();
+        $paralelos_docente=  $distd->paralelos()->get();
 
-        $materia_all = Materia::where('instituto_id', $instituto->id)->get();
+        $consulta = Distribuciondo::join("distribuciondo_nivel", "distribuciondo_nivel.distribuciondo_id", "=", "distribuciondos.id")
+        ->join("nivels", "nivels.id", "=", "distribuciondo_nivel.nivel_id")
+        ->where('distribuciondos.materia_id', $distd->materia_id)
+        ->select("nivels.id")
+        ->get();
+
+        $paralelos = [];
+        foreach ($consulta as $ids) {
+        $paralelos[] = $ids->id;
+        }
+
+         $paralelos_all = Nivel::whereNotIn('id', $paralelos)->get();
+
+        $ids = [];
+        // foreach ($paralelos_docente as $paralelo) {
+        //     $ids[] = $paralelo->id;
+        // }
+        // $paralelos_all = Nivel::whereNotIn('id', $ids)->get();
+         // return $paralelos_all;
+
        
       
 
-        return \view('DistribucionDocente.editdocente', compact('distribuciondo','user','instituto','distd','materias','materia_all'));
+        return \view('DistribucionDocente.editdocente', compact('distribuciondo','user','instituto','distd','materia','paralelos_docente', 'paralelos_all'));
     }
 
     /**
@@ -128,10 +156,15 @@ class DistribuciondoController extends Controller
 
         $distribuciondo->update($request->all());
 
-        if($request->get('materia')){
-            $distribuciondo->materias()->sync($request->get('materia'));
+          if($request->get('paralelos')){
+            $distribuciondo->paralelos()->detach();
           }
 
+          foreach ($request->get('paralelos') as $group) { 
+            $nombre = Nivel::find($group);
+            $as =   DB::table('distribuciondo_nivel')->insert(
+                ['distribuciondo_id' => $distribuciondo->id, 'nivel_id' => $group, 'nivel_nombre' => $nombre->nombre]);
+        } 
           $distribuciondo->save();
 
           return redirect('sistema/distribuciondos ');

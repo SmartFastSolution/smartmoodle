@@ -3953,6 +3953,8 @@ let hoja_trabajo = new Vue({
               balance_ajustado.obtenerHojita();
               estado_resultado.obtenerHojita();
               balance_general.obtenerHojita();
+              asientos_cierre.obtenerHojita();
+
 
             }else if (response.data.estado == 'actualizado') {
               toastr.warning("Hoja de Trabajo Actualizada correctamente", "Smarmoddle", {
@@ -3961,6 +3963,8 @@ let hoja_trabajo = new Vue({
               balance_ajustado.obtenerHojita();
               estado_resultado.obtenerHojita();
               balance_general.obtenerHojita();
+              asientos_cierre.obtenerHojita();
+
 
             }        
         }).catch(function(error){
@@ -6070,6 +6074,7 @@ const asientos_cierre = new Vue({
         },
         update:false,
         dato:[],
+
         estadoresultado:{
           nombre_e_resultado:'',
           fecha_e_resultado:'',
@@ -6100,6 +6105,8 @@ const asientos_cierre = new Vue({
               t_patrimonio_pasivo:'',
           },
         },
+        hojatrabajo:[],
+    nombre_hoja:'',
         b_initotal:{
           t_a_corriente:'', //Total de activo corriente
           t_a_nocorriente:'', //Total de activo no corriente
@@ -6110,12 +6117,27 @@ const asientos_cierre = new Vue({
     },
     mounted: function () {
       this.obtenerAsientoCierre();
-      this.obtenerEstadoResultado();
-      this.obtenerBalance();
+      this.obtenerHojita();
+      // this.obtenerBalance();
 
     },
 
     methods:{
+        obtenerHojita: function() {
+        let _this = this;
+        let url = '/sistema/admin/taller/hoja-obtener-trabajo';
+            axios.post(url,{
+              id: _this.id_taller,
+        }).then(response => {
+          if (response.data.datos == true) {
+              this.hojatrabajo = response.data.hojatrabajo;
+              this.nombre_hoja = response.data.nombre;
+             
+            }          
+        }).catch(function(error){
+
+        }); 
+     },
           calculadora(){
     let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
     let component = 'example-component';

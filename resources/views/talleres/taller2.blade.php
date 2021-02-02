@@ -133,7 +133,7 @@
     </div>
     @endif
     <div class="row justify-content-center mb-2">
-      <a href="" @click.prevent="guardarTaller" class="btn p-2 mt-3 btn-danger">Enviar Respuesta</a>
+      <a href="" @click.prevent="warning()" class="btn p-2 mt-3 btn-danger">Enviar Respuesta</a>
     </div>
   </div>
     </div>
@@ -155,6 +155,7 @@
 </div>
 @endsection
 @section('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script type="text/javascript">
 let taller = @json($d);
 let dobles = @json($array);
@@ -303,7 +304,24 @@ this.totalhaber();
 //   });
 //   this.caja.total_haber = total
 //  },
+warning(){
+  Swal.fire({
+  title: 'Seguro que deseas completar el taller?',
+  text: "Esta accion ya no se puede revertir!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Si, Completar!',
+  cancelButtonText: 'Cancelar!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    this.guardarTaller();
+  }
+})
+},
 guardarTaller: function(){
+
 let t_haber = this.partida_array;
 let t_debe = this.partida_array;
 let _this = this;

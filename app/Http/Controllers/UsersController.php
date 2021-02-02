@@ -13,6 +13,8 @@ use App\Instituto;
 use App\Modelos\Role;
 use App\User;
 use Auth;
+use DB;
+use App\Assignment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\facades\Hash;
@@ -75,20 +77,20 @@ class UsersController extends Controller
             'estado'      => 'required|in:on,off',
           
         ]);
-        $users = $request->all();
-        $user = new User;
-        $user->instituto_id = $request->instituto;  //relacion con el instituto y usuario     
-        $user->curso_id = $request->curso;
-        $user->nivel_id = $request->paralelo;
-        $user->cedula = $request->cedula;
-        $user->name = $request->name;
-        $user->apellido = $request->apellido;  
-        $user->domicilio = $request->domicilio;
-        $user->telefono = $request->telefono;
-        $user->celular = $request->celular;
-        $user->email = $request->email;
-        $user->estado = $request->estado;
-        $user->password = Hash::make($request->password);
+        $users                     = $request->all();
+        $user                      = new User;
+        $user->instituto_id        = $request->instituto;  //relacion con el instituto y usuario     
+        $user->distribucionmacu_id = $request->curso;
+        $user->nivel_id            = $request->paralelo;
+        $user->cedula              = $request->cedula;
+        $user->name                = $request->name;
+        $user->apellido            = $request->apellido;  
+        $user->domicilio           = $request->domicilio;
+        $user->telefono            = $request->telefono;
+        $user->celular             = $request->celular;
+        $user->email               = $request->email;
+        $user->estado              = $request->estado;
+        $user->password            = Hash::make($request->password);
        //agregados estudiantes y docente sen la misma tabla de persona 
          
         $user->save();
@@ -97,10 +99,34 @@ class UsersController extends Controller
 
         if ($request->get('role')) {
            
-
             $user->roles()->sync($request->get('role'));
         }
 
+     
+$rol = Role::find($request->role);
+
+if ($rol->descripcion == 'estudiante') {
+       $dis = Distribucionmacu::find($request->curso);
+        $curso = $dis->materias;
+        $ids =[];
+
+        foreach ($curso as $id) {
+           $ids[] = $id->id; 
+        }
+
+     $as                = new Assignment;
+        $as ->instituto_id = $request->instituto;
+        $as ->user_id      = $user->id;
+        $as ->estado       = $request->estado;
+        $as->save();
+
+        // $as->materias()->sync($ids);
+
+        foreach ($curso as $group) { 
+        $ag =   DB::table('assignment_materia')->insert(
+                ['assignment_id' => $as->id, 'materia_id' => $group->id, 'user_id' => $user->id]);
+        }      
+}
         return redirect('sistema/users/create ')->with('success','Usuario Creado Exitosamente!');
         //return redirect('sistema/admin');
 
@@ -200,7 +226,7 @@ class UsersController extends Controller
           }
           if($request->get('curso')){
           
-            $user->curso_id = $request->curso;
+            $user->distribucionmacu_id = $request->curso;
           }
           if($request->get('paralelo')){
           

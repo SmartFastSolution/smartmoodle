@@ -43,12 +43,14 @@ route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta e
 //rutas vue asignaciones////
 
  Route::post('materiainst','HomeController@buscarMateria')->name('materiainst');
+ Route::post('materiasdocentes','HomeController@materiaDocente')->name('materiaDocente');
  Route::post('materiasasig','HomeController@materia')->name('materiassig');
  Route::post('userinst','HomeController@buscarAlumno')->name('userinst');
  Route::post('docinst','HomeController@buscarDocente')->name('docinst');
  Route::post('distinst','HomeController@buscarAsignacion')->name('distinst');
  Route::post('contmateria','HomeController@buscarContenido')->name('contmateria');
-
+ Route::post('asignaciones','HomeController@asignacion')->name('asignacion');
+ Route::post('paralelosinst','HomeController@obtenerParalelos')->name('obtenerParalelos');
 
 
  ////////////////////////////////////////////////

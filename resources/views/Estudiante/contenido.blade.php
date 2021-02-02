@@ -51,11 +51,11 @@
         <h1 class="font-weight-light" style="color:red;"> @isset ( auth()->user()->instituto->nombre)
         {{ auth()->user()->instituto->nombre}}
         @endisset</h1>
-        <h2 class="font-weight-light"> <strong> {{auth()->user()->curso->nombre}} </strong></h2>
-        @foreach($materia->distribuciondos as $doc)
-        <h3 class="font-weight-light"> <strong>Docente|{{$doc->user->name}} {{$doc->user->apellido}}</strong>
+        <h2 class="font-weight-light"> <strong> {{$curso->curso->nombre}} - ({{ auth()->user()->nivel->nombre }})</strong></h2>
+        
+        <h3 class="font-weight-light"> <strong>Docente|{{$docente->nombre_docente}} {{$docente->apellido_docente}}</strong>
         </h3>
-        @endforeach
+       
         <!-- <a class="btn btn-primary btn" href=""><i class="far fa-clipboard"></i> Calificaciones</i></a> -->
     </div>
 </section>

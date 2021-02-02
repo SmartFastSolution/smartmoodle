@@ -24,9 +24,6 @@ use Illuminate\Support\Facades\Hash;
 
 class DocenteController extends Controller
 {
-
-  
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -35,12 +32,33 @@ class DocenteController extends Controller
 
    public function Perfil()
     {
+              $user = User::find(Auth::id());
 
-                $au = User::find(Auth::id())->distribuciondos;
+                $au = Distribuciondo::join('distribucionmacu_materia', 'distribucionmacu_materia.materia_id', '=', 'distribuciondos.materia_id')
+                ->join('distribucionmacus', 'distribucionmacus.id', '=', 'distribucionmacu_materia.distribucionmacu_id')
+                ->join('cursos', 'cursos.id', '=', 'distribucionmacus.curso_id')
+                ->join('materias', 'materias.id', '=', 'distribucionmacu_materia.materia_id')
+                ->select('distribuciondos.*','cursos.nombre as nombre_curso' ,'materias.nombre as nombre_materia')
+                ->where('distribuciondos.user_id', $user->id)
+                ->get();
+                // return $au;
+                
+
+                $materias =[];
+                foreach ($au as $materia) {
+                  $materias[] =array(
+                    "materia_id" => $materia->materia_id,
+                    'materia' => $materia->nombre_materia,
+                    "curso" => $materia->nombre_curso,
+                    "paralelos" => $paralelos = DB::table('distribuciondo_nivel')->select('nivel_nombre')->where('distribuciondo_id', $materia->id)->get(),
+                  );
+                }
+                // return $materias;
                 // if ($au == null) {
                 // return redirect()->route('welcome'); 
                 
                 // }
+                // return $au;
                 
                 if (isset($au->materias)) {
                     $ids =[];
@@ -81,11 +99,11 @@ class DocenteController extends Controller
 
 
                     // return $users;
-                            return view('Docente.Pcurso', compact('users','au', 'calificado')); //ruta docente
+                            return view('Docente.Pcurso', compact('users','au', 'calificado', 'materias')); //ruta docente
                             }else{
 
 
-                            return view('Docente.Pcurso'); //ruta docente
+                            return view('Docente.Pcurso', compact('materias')); //ruta docente
                 
                         } 
 

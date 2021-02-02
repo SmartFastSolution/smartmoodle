@@ -19,6 +19,7 @@ class CreateTallerChequesTable extends Migration
             $table->longText('enunciado');
             $table->string('girador');
             $table->string('girado');
+            $table->string('beneficiario');
             $table->string('cantidad');
             $table->string('lugar');
             $table->string('fecha');

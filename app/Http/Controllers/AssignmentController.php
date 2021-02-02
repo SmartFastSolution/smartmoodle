@@ -6,7 +6,9 @@ use App\Materia;
 use App\User;
 use App\Instituto;
 use App\Assignment;
+use App\Distribucionmacu;
 use Illuminate\Http\Request;
+use DB;
 
 class AssignmentController extends Controller
 {
@@ -74,10 +76,23 @@ class AssignmentController extends Controller
         $as1= Assignment::find($assignment->id);
         $user = $as1->user()->first();
         $instituto = Assignment::find($assignment->id)->instituto()->first();
-        $materias= $as1->materias()->get();
-        $materia_all = Materia::where('instituto_id', $instituto->id)->get();
+        $materias_user= $as1->materias()->get();
+        $materia = [];
+
+        $distribucion = Distribucionmacu::where('id', $user->distribucionmacu_id)->first();
+        $materias = $distribucion->materias;
+
+
+        // foreach($distribucion as $key => $value){
+        //     $materia[$key] =[
+        //         'id'=> $value->id,
+        //         'nombre' => $value->curso->nombre,
+        //         'materias' => $value->materias,
+        //     ];
+        // }
+        // $materia_all = Materia::where('instituto_id', $instituto->id)->get();
         
-        return view('Asignacion.edit', compact('assignment','as1','user','instituto','materias','materia_all'));
+        return view('Asignacion.edit', compact('assignment','as1','user','instituto','materias','materias_user'));
     }
 
   
@@ -91,10 +106,19 @@ class AssignmentController extends Controller
 
          
         if($request->get('materia')){
-            $assignment->materias()->sync($request->get('materia'));
+            $assignment->materias()->detach();
           }
 
-          $assignment->save();
+        $assignment->save();
+
+        // $dis = Distribucionmacu::find($request->curso);
+        // $curso = $dis->materias;
+        // $ids =[];
+
+        foreach ($request->get('materia') as $group) { 
+        $as =   DB::table('assignment_materia')->insert(
+                ['assignment_id' => $assignment->id, 'materia_id' => $group, 'user_id' => $assignment->user_id]);
+        } 
 
           return redirect('sistema/assignments ')->with('success','Haz Actualizado una Asignación con exito!');
 

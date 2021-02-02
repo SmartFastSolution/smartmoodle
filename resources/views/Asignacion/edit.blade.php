@@ -39,7 +39,7 @@
                                 <label>Actualización Materias</label>
                                 <select class="select2" :materias="2" multiple="multiple" name="materia[]"
                                     data-placeholder="Select a State" style="width: 100%;">
-                                    @foreach($materias as $materia)
+                                    @foreach($materias_user as $materia)
                                     <option selected value="{{$materia->id}}">{{$materia->nombre}}</option>
                                     @endforeach
                                     <option v-for="mate in newMateria" :value="mate.id">@{{mate.nombre}}</option>
@@ -91,8 +91,8 @@ $(function() {
 </script>
 
 <script>
-var materias = @json($materias);
-var materias_all = @json($materia_all);
+var materias = @json($materias_user);
+var materias_all = @json($materias);
 const materi = new Vue({
     el: '#mate',
     data: {

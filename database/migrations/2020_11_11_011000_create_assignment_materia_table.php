@@ -17,11 +17,13 @@ class CreateAssignmentMateriaTable extends Migration
             $table->id();
             $table->unsignedBigInteger('assignment_id');
             $table->unsignedBigInteger('materia_id');
+            $table->unsignedBigInteger('user_id');
                      
             $table->timestamps();
 
             $table->foreign('assignment_id')->references('id')->on('assignments')->onDelete('cascade'); 
             $table->foreign('materia_id')->references('id')->on('materias')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

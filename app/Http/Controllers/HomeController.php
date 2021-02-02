@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Contenido;
 use App\Curso;
 use App\Distribucionmacu;
+use App\Distribuciondo;
 use App\Distrima;
 use App\Materia;
+use App\Nivel;
 use App\Modelos\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -28,7 +30,18 @@ class HomeController extends Controller
 
     public function materia(Request $request){
 
-        $materias= Materia::where('instituto_id', $request->id)->get();
+        $consulta = Distribucionmacu::join("distribucionmacu_materia", "distribucionmacu_materia.distribucionmacu_id", "=", "distribucionmacus.id")
+        ->join("materias", "materias.id", "=", "distribucionmacu_materia.materia_id")
+        ->where('materias.instituto_id', $request->id)
+        ->select("materias.id")
+        ->get();
+
+        $ids = [];
+        foreach ($consulta as $id) {
+        $ids[] = $id->id;
+        }
+
+        $materias= Materia::where('instituto_id', $request->id)->whereNotIn('id', $ids)->get();
         $materia = [];
    
            foreach($materias as $key => $value){
@@ -38,6 +51,21 @@ class HomeController extends Controller
             ];
         }
         return $materia;
+        
+    }
+
+         public function asignacion(Request $request){
+
+        $asignaciones= Distribucionmacu::where('instituto_id', $request->id)->get();
+        $asignacion = [];
+   
+           foreach($asignaciones as $key => $value){
+            $asignacion[$key] =[
+                'id'=> $value->id,
+                'curso' => $value->curso->nombre,
+            ];
+        }
+        return $asignacion;
         
     }
 
@@ -57,6 +85,59 @@ class HomeController extends Controller
      
         return $materia;
         
+    }
+    function obtenerParalelos(Request $request)
+    {
+        $consulta = Distribuciondo::join("distribuciondo_nivel", "distribuciondo_nivel.distribuciondo_id", "=", "distribuciondos.id")
+        ->join("nivels", "nivels.id", "=", "distribuciondo_nivel.nivel_id")
+        ->where('distribuciondos.materia_id', $request->id)
+        ->select("nivels.id")
+        ->get();
+
+        // $distribucion = Distribuciondo::
+        // ->get();
+        $paralelos = [];
+        foreach ($consulta as $ids) {
+        $paralelos[] = $ids->id;
+        }
+
+         $disponibles = Nivel::whereNotIn('id', $paralelos)
+                // ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre','nivels.nombre as nivel_nombre', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
+                ->get();
+        return $disponibles;
+
+            
+    }
+    function materiaDocente(Request $request)
+    {
+        $materias= Materia::where('instituto_id', $request->id)->get();
+        $materia = [];
+
+        $distribuciondos = Distribuciondo::where('user_id', $request->user_id)->first();
+
+        $distribucion = Distribucionmacu::where('instituto_id', $request->id)->get();
+
+        if ($distribuciondos == null) {
+                foreach($distribucion as $key => $value){
+            $materia[$key] =[
+                'id'=> $value->id,
+                'nombre' => $value->curso->nombre,
+                'materias' => $value->materias,
+            ];
+            }
+        }else{
+            foreach($distribucion as $key => $value){
+            $materia[$key] =[
+                'id'=> $value->id,
+                'nombre' => $value->curso->nombre,
+                'materias' => $value->materias->where('id', '!=', $distribuciondos->materia_id),
+            ];
+            }
+
+        }
+    
+     
+        return $materia;   
     }
 
     

@@ -1152,13 +1152,17 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group col-6">
+                                <div class="form-group col-4">
                                     <label for="" class="col-form-label">Girador :</label>
                                     <input required="" type="text" name="girador" class="form-control">
                                 </div>
-                                <div class="form-group col-6">
+                                <div class="form-group col-4">
                                     <label for="" class="col-form-label">Girado :</label>
                                     <input required="" type="text" name="girado" class="form-control">
+                                </div>
+                                    <div class="form-group col-4">
+                                    <label for="" class="col-form-label">Beneficiario :</label>
+                                    <input required="" type="text" name="beneficiario" class="form-control">
                                 </div>
                             </div>
                             <div class="form-row">

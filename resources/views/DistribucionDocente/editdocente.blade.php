@@ -39,15 +39,28 @@
 
                                 </select>
                             </div>
+                               <div class="form-group">
+                                <label>Materia</label>
+                                <select class="form-control select" name="materia" disabled style="width: 99%;">
+
+                                    <option selected disabled value="{{ $materia->id }}">
+                                    {{ $materia->nombre }}
+                                    </option>
+
+
+                                </select>
+                            </div>
 
                             <div class="form-group">
-                                <label>Seleccione Materias</label>
-                                <select class="select2" :materias="2" multiple="multiple" name="materia[]"
+                                <label>Seleccione Paralelos</label>
+                                <select class="select2" :materias="2" multiple="multiple" name="paralelos[]"
                                     data-placeholder="Select a State" style="width: 100%;">
-                                    @foreach($materias as $materia)
-                                    <option selected value="{{$materia->id}}">{{$materia->nombre}}</option>
+                                    @foreach($paralelos_docente as $paralelo)
+                                    <option selected value="{{$paralelo->id}}">{{$paralelo->nombre}}</option>
                                     @endforeach
-                                    <option v-for="mate in newMateria" :value="mate.id">@{{mate.nombre}}</option>
+                                     @foreach($paralelos_all as $paralelo2)
+                                    <option  value="{{$paralelo2->id}}">{{$paralelo2->nombre}}</option>
+                                    @endforeach
 
                                 </select>
                             </div>
@@ -96,17 +109,16 @@ $(function() {
 </script>
 
 <script>
-var materias = @json($materias);
-var materias_all = @json($materia_all);
+
 const materi = new Vue({
     el: '#mate',
     data: {
-        materia: materias,
-        all_materia: materias_all,
+        materia: '',
+        all_materia: '',
         newMateria: [],
     },
     mounted() {
-        this.onMateria();
+        
     },
     methods: {
         onMateria() {
