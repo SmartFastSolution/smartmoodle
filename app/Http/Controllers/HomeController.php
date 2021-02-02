@@ -53,6 +53,20 @@ class HomeController extends Controller
         return $materia;
         
     }
+        public function materiaTalleres(Request $request){
+
+        $materias= Materia::where('instituto_id', $request->id)->get();
+        $materia = [];
+   
+           foreach($materias as $key => $value){
+            $materia[$key] =[
+                'id'=> $value->id,
+                'nombre' => $value->nombre
+            ];
+        }
+        return $materia;
+        
+    }
 
          public function asignacion(Request $request){
 

@@ -11,13 +11,10 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <h1 class="font-weight-light">Vista Asignación Docente/Materia</h1>
-                <div class="row">
+                <h1 class="font-weight-light text-center">Vista Asignación Docente/Materia</h1>
+                <div class="row justify-content-center">
                     <div class="col-md-10">
-                        <form method="POST" action="{{route('distribuciondos.update', $distribuciondo->id)}} ">
-                            @method('PUT')
-                            @csrf
-
+                    
                             <div class="form-group">
                                 <label>Unidad Educativa</label>
                                 <select class="form-control select" name="instituto" disabled style="width: 99%;">
@@ -39,13 +36,23 @@
 
                                 </select>
                             </div>
+                               <div class="form-group">
+                                <label>Materia</label>
+                                <select class="form-control select" name="user" disabled style="width: 99%;">
+                                    <option selected disabled value="">
+                                        {{ $materia->nombre }} 
+                                    </option>
+
+
+                                </select>
+                            </div>
 
                             <div class="form-group">
-                                <label>Seleccione Materias</label>
+                                <label>Paralelos Asignados</label>
                                 <select class="select2" :materias="2" multiple="multiple" name="materia[]"
                                     data-placeholder="Select a State" disabled style="width: 100%;">
-                                    @foreach($materias as $materia)
-                                    <option selected value="{{$materia->id}}">{{$materia->nombre}}</option>
+                                    @foreach($paralelos as $paralelo)
+                                    <option selected value="{{$paralelo->id}}">{{$paralelo->nombre}}</option>
                                     @endforeach
                                   
 
@@ -67,7 +74,6 @@
                                 </div>
                                 <br><br><br>
                                 <a href="{{route('distribuciondos.index')}}" class="btn btn-primary">Atras</a>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -92,34 +98,6 @@ $(function() {
 })
 </script>
 
-<script>
-var materias = @json($materias);
-var materias_all = @json($materia_all);
-const materi = new Vue({
-    el: '#mate',
-    data: {
-        materia: materias,
-        all_materia: materias_all,
-        newMateria: [],
-    },
-    mounted() {
-        this.onMateria();
-    },
-    methods: {
-        onMateria() {
-            let mate = this.all_materia;
-            let mat = this.materia;
-            let arr = [];
-            const results = mate.filter(({
-                id: id1
-            }) => !mat.some(({
-                id: id2
-            }) => id2 === id1));
-            this.newMateria = results;
 
-        }
-    }
-});
-</script>
 
 @stop

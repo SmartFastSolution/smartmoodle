@@ -839,7 +839,7 @@
           onMateria() {
             let set = this;
             set.materias = [];
-            axios.post('/sistema/materiasasig', {
+            axios.post('/sistema/materiataller', {
                 id: set.instituto
             }).then(response => {
                 set.materias = response.data;

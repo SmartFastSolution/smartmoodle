@@ -87,14 +87,15 @@ class DistribuciondoController extends Controller
     {
         $distd=Distribuciondo::find($distribuciondo->id);
         $user=  $distd->user()->first();
+        $materia=  Materia::find($distd->materia_id);
         $instituto=Distribuciondo::find($distribuciondo->id)->instituto()->first();
-        $materias=  $distd->materias()->get();
+        $paralelos=  $distd->paralelos()->get();
 
-        $materia_all = Materia::where('instituto_id', $instituto->id)->get();
+        // $materia_all = Materia::where('instituto_id', $instituto->id)->get();
        
       
 
-        return \view('DistribucionDocente.showdocente', compact('distribuciondo','user','instituto','distd','materias','materia_all'));
+        return \view('DistribucionDocente.showdocente', compact('distribuciondo','user','instituto','distd','paralelos', 'materia'));
    
     }
 

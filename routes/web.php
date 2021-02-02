@@ -45,6 +45,7 @@ route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta e
  Route::post('materiainst','HomeController@buscarMateria')->name('materiainst');
  Route::post('materiasdocentes','HomeController@materiaDocente')->name('materiaDocente');
  Route::post('materiasasig','HomeController@materia')->name('materiassig');
+ Route::post('materiataller','HomeController@materiaTalleres')->name('materiaTalleres');
  Route::post('userinst','HomeController@buscarAlumno')->name('userinst');
  Route::post('docinst','HomeController@buscarDocente')->name('docinst');
  Route::post('distinst','HomeController@buscarAsignacion')->name('distinst');
