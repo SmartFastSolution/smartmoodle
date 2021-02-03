@@ -29,7 +29,7 @@
 										<th scope="col" width="100"> Taller </th>
 										<th scope="col">Enunciado </th>
 										{{-- <th scope="col">Estado</th> --}}
-										<th scope="col">Fecha Entrega</th>
+										{{-- <th scope="col">Fecha Entrega</th> --}}
 										<th scope="col" colspan="2">Opciones</th>
 									</tr>
 								</thead>
@@ -38,7 +38,10 @@
 									<tr>
 										{{-- <td>{{$taller->contenido->nombre}}</td> --}}
 										<td>{{$taller['nombre']}}</td>
-										<td>{{$taller->enunciado}}</td>
+										<td >   <div class="truncate-overflow">
+                            {!!$taller['enunciado']!!}
+                                
+                            </div></td>
 										{{-- <td>
 											@if ($taller['estado'] == 1)
 											<span class="badge-success badge">activo</span>
@@ -56,7 +59,7 @@
 												</label>
 											</div>
 										</td> --}}
-										<td>{{$taller->fecha_entrega}}</td>
+										{{-- <td>{{$taller->fecha_entrega}}</td> --}}
 										<td class="table-button ">
 											<a class="btn btn-info"
 												href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
@@ -90,6 +93,17 @@
 						</button>
 					</div>
 					<div class="modal-body">
+						@if ($errors->any())
+					     <div class="alert alert-danger alert-has-icon">
+		                      <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+		                      <div class="alert-body">
+		                        <div class="alert-title">Alerta, tienes los siguientes errores</div>
+		                        @foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+		                      </div>
+		                    </div>
+					@endif
 						<div class="form-row justify-content-center">
 					{{-- 		<div class="form-group col-4">
 								<label for="" class="col-form-label">Estado :</label>
@@ -105,6 +119,15 @@
 							<div class="form-group col-12">
 								<label for="" class="col-form-label">Fecha de entrega:</label>
 								<input type="date" class="form-control" wire:model="date">
+							</div>
+							<div class="form-group col-12">
+								<label for="" class="col-form-label">Paralelos:</label>
+								<select  wire:model="paralelo_id" class="form-control"  >
+									<option value="" selected="" disabled="">SELECCIONA UN PARALELO</option>
+									@foreach ($paralelos as $paralelo)
+										<option value="{{ $paralelo->id }}">PARALELO {{ $paralelo->nombre }}</option>
+									@endforeach
+								</select>
 							</div>
 							<div class="col-4">
 							<a href="#" class="btn btn-danger text-center btn-block" wire:click.prevent="activar()">ACTIVAR</a>
@@ -130,6 +153,7 @@
 					<th scope="col" width="100">Unidad</th>
 					<th scope="col" width="100"> Taller </th>
 					<th scope="col">Enunciado </th>
+					<th scope="col">Paralelo </th>
 					<th scope="col">Estado</th>
 					<th  scope="col">Fecha Entrega</th>
 					<th scope="col" colspan="2">Opciones</th>
@@ -141,6 +165,7 @@
 					<td>{{ $activo->nombre_unidad }}</td>
 					<td>{{ $activo->nombre_taller }}</td>
 					<td>{{ $activo->enunciado_taller }}</td>
+					<td class="text-center">{{ $activo->paralelo }}</td>
 					<td class="text-center">
 						@if ($activo->estado == 1)
 							<span class="badge-success badge">activo</span>
