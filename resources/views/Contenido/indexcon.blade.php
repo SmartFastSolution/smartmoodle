@@ -36,7 +36,7 @@
                     <th scope="col">Materia</th>
                     <th scope="col">Descripcion</th>
                     <th scope="col">Estado</th>
-                    <th scope="col">Acción</th>
+                 
                     <th scope="col" coldspan="3">Tools</th>
 
                 </tr>
@@ -49,12 +49,7 @@
                     <td>{{ $contenido->materia->nombre}}</td>
                     <td>{{ $contenido['descripcion']}}</td>
                     <td>{{ $contenido['estado']}}</td>
-                    <td>@if($contenido['accion']== '1')
-                        <span class="badge-success badge">Descargable</span>
-                        @else
-                        <span v-else class="badge-info badge">No Descargable</span>
-                        @endif
-                    </td>
+                  
                     <td class="table-button ">
                         <!--metodo delete funciona pero hay que almacenar la variable array en una variable temporal-->
                         <form method="POST" action="{{route('contenidos.destroy',$contenido->id)}}}"

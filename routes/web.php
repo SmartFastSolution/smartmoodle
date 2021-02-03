@@ -181,6 +181,10 @@ Route::get('Unidad-pdf2/{contenido}','HomeController@Verdocumento2')->name('Unid
 route::resource('contenidos','ContenidoController');
 
 
+//Ruta Resource de Documentos-contenido que va aliada con el curso
+route::resource('documentos','DocumentoController');
+
+
 //Ruta Resource par asignacion de cursos y materias prueba 2 
 route::resource('distribucionmacus','DistribucionmacuController');
 

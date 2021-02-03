@@ -23,8 +23,11 @@ class Contenido extends Model
     }
 
 
-    public function archivo(){
-
-        return $this->morphOne('App\Archivo','archivoable');
+   public function documentos(){
+          
+        return $this->hasMany('App\Documento');
     }
+
+
+    
 }

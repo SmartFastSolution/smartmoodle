@@ -89,8 +89,8 @@
                                                 <th scope="col">Unidad</th>
                                                 <th scope="col">Descripción </th>
                                                 <th scope="col">Estado</th>
-                                                <th scope="col">Acción</th>
-                                                <th scope="col">Vista Unidad</th>
+                                              {{--   <th scope="col">Acción</th>
+                                                <th scope="col">Vista Unidad</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -101,27 +101,27 @@
                                                 <td>{{$contenido['nombre']}}</td>
                                                 <td>{{$contenido['descripcion']}}</td>
                                                 <td>{{$contenido['estado']}}</td>
-                                                <td>@if($contenido['accion']== '1')
+                                           {{--      <td>@if($contenido['accion']== '1')
                                                     <span class="badge-success badge">Descargable</span>
                                                     @else
                                                     <span v-else class="badge-info badge">No Descargable</span>
                                                     @endif
                                                 </td>
-                                             
-                                                <td>
+                                        
+                                              <td>
                                                     @if($contenido['accion']== '1')
-                                                    <!-- descarganle -->
+                                                    
                                                     <a class="btn btn-success btn"
                                                         href="{{route('Unidad2.contenido', $contenido->id)}}"><i
                                                             class="fas fa-eye"></i></a>
 
                                                     @else
-                                                    <!-- no descarganle -->
+                                                    
                                                     <a class="btn btn-info btn"
                                                         href="{{route('Unidad.contenido', $contenido->id)}}"><i
                                                             class="fas fa-eye"></i></a>
                                                     @endif
-                                                </td>
+                                                </td> --}} 
                                             </tr>
                                             @endforeach
                                         </tbody>

@@ -53,7 +53,7 @@
 
                            
                                 <!-- subir imagen en laravel prueba 1 -->
-                                <div class="form-group">
+                               {{-- <div class="form-group">
                                     <label for="archivo">Añadir Documento(s)</label>
                                     <input type="file" class="form-control-file" name="archivo" id="archivo">
                                     {!! $errors->first('documento','<span style="color:red">:message</span>')!!}
@@ -63,13 +63,14 @@
                                     </small>
                                 </div>
 
-                                <!-- fin de la prueba imagen en laravel  -->
+                                fin de la prueba imagen en laravel 
 
                                 </div>
                                    <div class="form-group">
                                     <label for="cuenta">Documento Descargable</label>
                                     <input type="checkbox" value="1" name="accion" class="custom-checkbox">
-                                </div>
+                                </div> --}}
+
 
 
                                 <div class="form-group">

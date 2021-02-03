@@ -97,15 +97,15 @@
                                     </select>
                                 </div>
 
-                                <!-- subir imagen en laravel prueba 1 -->
-                                <div class="form-group">
+                               {{--  subir imagen en laravel prueba 1 --}}
+                              {{--   <div class="form-group">
                                     <label for="documentod">
                                         Vizualizar Documento
                                         <br>
                                         <button type="button" class="btn btn-secondary" data-toggle="modal"
                                             data-target="#modalYT">{{ $contenido['nombre']}}</button>
                                     </label>
-                                </div>
+                                </div> --}}
 
 
                                 <!-- fin de la prueba imagen en laravel  -->
