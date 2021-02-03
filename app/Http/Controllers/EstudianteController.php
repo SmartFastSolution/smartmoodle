@@ -93,7 +93,18 @@ class EstudianteController extends Controller
          $contenido=Contenido::get();
 
          $tallers=Taller::get();
-         $completados = $user->tallers;
+         $realizar = Distribucionmacu::join('distribucionmacu_taller' , "distribucionmacu_taller.distribucionmacu_id", "=", "distribucionmacus.id")
+         ->join('contenidos', 'distribucionmacu_taller.contenido_id', '=', 'contenidos.id')
+        ->join('tallers', 'distribucionmacu_taller.taller_id', '=', 'tallers.id')
+         ->where('distribucionmacu_taller.distribucionmacu_id', $curso->id)
+         ->where('distribucionmacu_taller.nivel_id', $user->nivel_id)
+        ->select("distribucionmacu_taller.*", "contenidos.nombre as unidad", "tallers.nombre as nombre_taller", "tallers.enunciado")
+
+         ->get();
+
+
+         // return $realizar;
+                  $completados = $user->tallers;
          $con =Contenido::where('materia_id', $id)->first();
          $ids = [];
           foreach($completados as $act){
@@ -105,7 +116,7 @@ class EstudianteController extends Controller
          $materia =Materia::where('id', $id)->firstOrfail();
          $cons =Contenido::where('materia_id',$materia->id)->paginate(6);
          $cons2 =Archivodocente::where('materia_id',$materia->id)->paginate(6);
-         return view ('Estudiante.contenido',['materia'=>$materia, 'docente'=>$docente, 'curso'=>$curso,'contenidos'=>$contenido,'institutomate'=>$institutomate,'tallers'=>$tallers,'cons'=>$cons,'cons2'=>$cons2]);
+         return view ('Estudiante.contenido',['materia'=>$materia, 'docente'=>$docente, 'curso'=>$curso,'contenidos'=>$contenido,'institutomate'=>$institutomate,'tallers'=>$realizar,'cons'=>$cons,'cons2'=>$cons2]);
 
        // return $tallers;
 

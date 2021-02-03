@@ -52,7 +52,7 @@
             @endisset</h1>
         <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}
             <h3 class="  font-weight-bold text-success">{{ $materia->nombre }}</h3>
-            <h2 class="text-center display-2 font-weight-bold text-primary">Administrador de Talleres</h2>
+            <h2 class="font-weight-bold text-dark">Administrador de Talleres</h2>
         </h2>
         <br>
         <br>

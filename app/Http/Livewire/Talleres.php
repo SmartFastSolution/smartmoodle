@@ -17,7 +17,7 @@ class Talleres extends Component
 	  use WithPagination;
 	   protected $paginationTheme = 'bootstrap';
 
-	public $materia_id, $status, $date, $select_id, $buscador, $paralelo_id = '';
+	public $materia_id, $status, $date, $select_id, $buscador, $date_paralelo, $estado, $paralelo_id = '';
 
     public $perPage    = 10;
     public $search     = '';

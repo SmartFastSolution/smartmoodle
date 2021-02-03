@@ -9,7 +9,6 @@
 		@endforeach
 	</ul>
 	
-	
 	<div class="tab-content" id="myTabContent">
 		@foreach ($contenidos as $c => $contenido)
 		<div class="tab-pane fade show @if ($c== 0) active @endif " id="contenido{{ $contenido->id }}"
@@ -19,7 +18,7 @@
 					<!-- Inicio de Talleres -->
 					<div class="card card-gray-dark mt-2">
 						<div class="card-header">
-							<h3 class="card-title">Talleres</h3>
+							<h3 class="card-title">Talleres por activar</h3>
 						</div>
 						<div class="card-body">
 							<table class="table table-hover">
@@ -140,6 +139,55 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="modal fade" wire:ignore.self id="modal_activacion" tabindex="-1" aria-labelledby="modal_activacionLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="modal_activacionLabel">Opciones</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						@if ($errors->any())
+					     <div class="alert alert-danger alert-has-icon">
+		                      <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+		                      <div class="alert-body">
+		                        <div class="alert-title">Alerta, tienes los siguientes errores</div>
+		                        @foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+		                      </div>
+		                    </div>
+					@endif
+						<div class="form-row justify-content-center">
+							<div class="form-group col-4">
+								<label for="" class="col-form-label">Estado :</label>
+								<div class="onoffswitch" v-if="">
+									<input type="checkbox" wire:model="estado" name="onoffswitch"
+									class="onoffswitch-checkbox" id="myonoffswitch" tabindex="0">
+									<label class="onoffswitch-label" for="myonoffswitch">
+										<span class="onoffswitch-inner"></span>
+										<span class="onoffswitch-switch"></span>
+									</label>
+								</div>
+							</div>
+							<div class="form-group col-6">
+								<label for="" class="col-form-label">Fecha de entrega:</label>
+								<input type="date" class="form-control" wire:model="date_paralelo">
+							</div>
+							<div class="col-4">
+							<a href="#" class="btn btn-danger text-center btn-block" wire:click.prevent="activar()">MODIFICAR</a>
+								
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 <br>
 <br>
@@ -175,14 +223,14 @@
 					</td>
 					<td class="text-center">{{ $activo->fecha_entrega }}</td>
 					<td class="text-center">
-						<a data-toggle="modal" data-target="#fecha" class="btn btn-warning" href="#" wire:click.prevent="active({{ $activo->id }})">
+						<a data-toggle="modal" data-target="#modal_activacion" class="btn btn-warning" href="#" >
 							<i class="fas fa-edit"></i>
 						</a>
 					</td>
 						<td class="table-button text-center">
-						<a class="btn btn-info"
+						<a class="btn btn-danger"
 							href="{{route('taller',['plant'=>$activo->plantilla_id,'id'=>$activo->taller_id])}}"><i
-							class="fas fa-eye"></i>
+							class="far fa-trash"></i>
 						</a>
 					</td>
 				@endforeach

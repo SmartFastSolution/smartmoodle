@@ -74,29 +74,7 @@
             </div>
         </div>
         <div class="card-body">
-
-
-        </div>
-    </div>
-</div>
-
-@isset($au->materias)
-<!--  no lo quiten porq sino da error -->
-<div class="container">
-    <div class="card gedf-card">
-        <div class="card-header">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="ml-2">
-                        <div class="h5 m-0">Talleres Por Calificar</div>
-                        <div class="h7 text-muted"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card-body">
-
-            <table id="myTable" class="table table-hover">
+           <table id="myTable" class="table table-hover">
 
                 <thead>
                     <tr>
@@ -139,15 +117,11 @@
                     @endforelse
                 </tbody>
             </table>
-            @if ($users->count() >= 1)
-            <div class="row justify-content-center">
-                {{-- {{ $users->links() }}
-                --}}
-            </div>
-            @endif
+
         </div>
     </div>
 </div>
+
 
 <div class="container">
     <div class="card gedf-card">
@@ -208,7 +182,6 @@
     </div>
 </div>
 
-@endisset
 
 
 
