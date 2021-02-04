@@ -190,7 +190,7 @@
             </div>
         </div>
     </div>
-    @if ($rol === 'estudiante')
+    @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center mt-2">
         <a href="#" class="addDiario btn btn-outline-success" @click.prevent="guardarEstadoResultado()">Completar Estado
             de

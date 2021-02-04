@@ -94,7 +94,14 @@
               respuesta: _this.orden
         }).then(response => {
         	// console.log(response.data)
-        	window.location = "/sistema/homees";   
+        	// window.location = "/sistema/homees";
+        	 if (response.data.rol == 'docente') {
+  window.location = "/sistema/contenido/"+response.data.id+"/talleres/resueltos";
+
+} else if(response.data.rol == 'estudiante'){
+  window.location = "/sistema/unidad/"+response.data.id;
+}
+   
         }).catch(function(error){
 
         }); 

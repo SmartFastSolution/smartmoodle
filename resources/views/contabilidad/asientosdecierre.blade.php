@@ -11,7 +11,7 @@
         {{--         <div class="col-3 mb-2">
         <a class="btn btn-sm btn-danger" href="" @click.prevent="obtenerBalanceInicial()">Obtener Balance Inicial</a>
         </div> --}}
-        @if ($rol === 'estudiante')
+        @if ($rol === 'estudiante' or 'docente')
         <div class="col-3 mb-2">
             <a href="#" class="btn btn-sm btn-outline-primary" @click.prevent="abrirTransaccion()">Crear Asiento de
                         Cierre</a>
@@ -104,7 +104,7 @@
             <form action="">
                 @csrf
 
-                @if ($rol === 'estudiante')
+                @if ($rol === 'estudiante' or 'docente')
                 <div class="row justify-content-center mb-2">
                 <div class="col-4 ">
                 <a href="#" class="btn btn-sm btn-outline-primary" @click.prevent="abrirTransaccion()">Crear Asiento de

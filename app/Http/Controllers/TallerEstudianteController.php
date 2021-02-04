@@ -117,6 +117,8 @@ use App\Admin\TallerSubrayar;
 use App\Admin\TallerTipoSaldo;
 use App\Admin\TallerValeCaja;
 use App\Admin\TallerVerdaderoFalso;
+use App\Contenido;
+use App\Materia;
 use App\PartidaDobleEstado;
 use App\RArchivo;
 use App\RespuestaArchivo;
@@ -501,8 +503,21 @@ class TallerEstudianteController extends Controller
     $taller1->save();
 
         $user= User::find($id);
+
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now(), 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+
+        foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
      public function store2(Request $request){
 
@@ -601,7 +616,31 @@ class TallerEstudianteController extends Controller
         $user= User::find($id);
         $user->tallers()->attach($request->id,['status'=> 'completado' , 'fecha_entregado' => now()]);
         // return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamente');
-        return $request->caja['valor_debe'];
+             foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return response(array(
+                'success' => true,
+                'rol'     => 'estudiante',
+                'id'      => $taller->contenido_id,
+            ),200,[]);
+
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            // return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        // return $request->caja['valor_debe'];
+        
+              return response(array(
+                'success' => true,
+                'rol'     => 'docente',
+                'id'      => $contenido->materia_id,
+            ),200,[]);
+
+        }
+
     }
 
 
@@ -626,8 +665,18 @@ class TallerEstudianteController extends Controller
                }
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
-    //return response($content = 'Taller completado correctamente', $status = 200);
+             foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
 
     public function store4(Request $request, $idtaller){
@@ -647,8 +696,18 @@ class TallerEstudianteController extends Controller
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
-    //return response($content = 'Taller completado correctamente', $status = 200);
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
     public function store5(Request $request, $idtaller)
     {
@@ -677,7 +736,18 @@ class TallerEstudianteController extends Controller
                    }    
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+             foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
 
         public function store6(Request $request, $idtaller)
@@ -703,7 +773,18 @@ class TallerEstudianteController extends Controller
                    }    
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+             foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
 
     public function store7(Request $request, $idtaller)
@@ -722,7 +803,18 @@ class TallerEstudianteController extends Controller
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
 
     }
 
@@ -745,7 +837,18 @@ class TallerEstudianteController extends Controller
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
 
     public function store9(Request $request, $idtaller)
@@ -776,7 +879,18 @@ class TallerEstudianteController extends Controller
 
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+             foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
         public function store10(Request $request, $idtaller)
     {
@@ -807,7 +921,18 @@ class TallerEstudianteController extends Controller
                    
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+             foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
    }
 
 public function store11(Request $request, $idtaller)
@@ -835,7 +960,18 @@ public function store11(Request $request, $idtaller)
                    
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+             foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
    }
 
    public function store12(Request $request, $idtaller)
@@ -864,7 +1000,18 @@ public function store11(Request $request, $idtaller)
                    
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+             foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
    }
     public function store13(Request $request, $idtaller)
     {
@@ -892,7 +1039,18 @@ public function store11(Request $request, $idtaller)
                    
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+             foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
    }
 
       public function store14(Request $request, $idtaller)
@@ -911,7 +1069,18 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
 
        public function store15(Request $request, $idtaller)
@@ -934,7 +1103,18 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
          public function store16(Request $request, $idtaller)
     {
@@ -952,7 +1132,18 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
          public function store17(Request $request, $idtaller)
     {
@@ -974,7 +1165,18 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
           public function store18(Request $request, $idtaller)
     {
@@ -1001,7 +1203,18 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
      public function store19(Request $request, $idtaller)
     {
@@ -1028,7 +1241,18 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
 
       public function store20(Request $request, $idtaller)
@@ -1080,7 +1304,18 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
 
        public function store21(Request $request, $idtaller)
@@ -1103,7 +1338,18 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
 
     public function store22(Request $request, $idtaller)
@@ -1141,7 +1387,18 @@ public function store11(Request $request, $idtaller)
 
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+             foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
    }
     public function store23(Request $request, $idtaller)
           {
@@ -1168,7 +1425,18 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
 
      public function store24(Request $request, $idtaller)
@@ -1195,7 +1463,18 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
        public function store25(Request $request, $idtaller)
           {
@@ -1248,7 +1527,18 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
 
         public function store26(Request $request, $idtaller)
@@ -1288,7 +1578,18 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
 
      public function store27(Request $request, $idtaller)
@@ -1320,7 +1621,18 @@ public function store11(Request $request, $idtaller)
         }
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
 
 
@@ -1344,7 +1656,18 @@ public function store11(Request $request, $idtaller)
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
 
     public function store29(Request $request, $idtaller){
@@ -1374,7 +1697,18 @@ public function store11(Request $request, $idtaller)
 
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
     public function store30(Request $request, $idtaller){
     $id                      = Auth::id();
@@ -1400,7 +1734,18 @@ public function store11(Request $request, $idtaller)
 
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
 
         public function store31(Request $request, $idtaller)
@@ -1472,7 +1817,18 @@ public function store11(Request $request, $idtaller)
 
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
 
     public function store35(Request $request, $idtaller){
@@ -1497,7 +1853,18 @@ public function store11(Request $request, $idtaller)
 
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
         public function store33(Request $request, $idtaller)
           {
@@ -1530,7 +1897,18 @@ public function store11(Request $request, $idtaller)
             }
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
         public function store34(Request $request, $idtaller)
           {
@@ -1558,7 +1936,18 @@ public function store11(Request $request, $idtaller)
         }
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+             foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
      public function store36(Request $request, $idtaller)
           {
@@ -1587,18 +1976,55 @@ public function store11(Request $request, $idtaller)
         }
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
     public function store37(Request $request, $idtaller)
         {
             $id   = Auth::id();
+            $taller = Taller::where('id', $idtaller)->firstOrfail();
+
             $user = User::find($id);
             $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
             
-             return response(array(
-                        'success' => true,
-                        'estado'  => 'guardado',
-                    ),200,[]);
+        foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return response(array(
+                'success' => true,
+                'rol'     => 'estudiante',
+                'id'      => $taller->contenido_id,
+            ),200,[]);
+
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            // return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        // return $request->caja['valor_debe'];
+        
+              return response(array(
+                'success' => true,
+                'rol'     => 'docente',
+                'id'      => $contenido->materia_id,
+            ),200,[]);
+
+        }
+             // return response(array(
+             //            'success' => true,
+             //            'estado'  => 'guardado',
+             //        ),200,[]);
         }
         public function store38(Request $request, $idtaller)
           {
@@ -1627,12 +2053,25 @@ public function store11(Request $request, $idtaller)
         }
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
     public function store39(Request $request)
         {
             $array               =  $request->respuesta;
             $idtaller = $request->id;
+            $taller             =   Taller::where('id', $idtaller)->firstOrfail();
+
             $palabra             = implode($array);
             $id                  = Auth::id();
             $contenido           = TallerPalabra::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
@@ -1646,7 +2085,31 @@ public function store11(Request $request, $idtaller)
             $user= User::find($id);
             $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
-            return $taller39;
+             foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return response(array(
+                'success' => true,
+                'rol'     => 'estudiante',
+                'id'      => $taller->contenido_id,
+            ),200,[]);
+
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            // return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        // return $request->caja['valor_debe'];
+        
+              return response(array(
+                'success' => true,
+                'rol'     => 'docente',
+                'id'      => $contenido->materia_id,
+            ),200,[]);
+
+        }
+            // return $taller39;
         }
             public function store40(Request $request, $idtaller)
           {
@@ -1675,7 +2138,18 @@ public function store11(Request $request, $idtaller)
         }
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
 
 
@@ -1701,12 +2175,25 @@ public function store11(Request $request, $idtaller)
 
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
-    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+         foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
         public function store42(Request $request)
         {
             $ideas               =  $request->respuesta;
             $idtaller = $request->id;
+            $taller             =   Taller::where('id', $idtaller)->firstOrfail();
+
             $id                  = Auth::id();
             $contenido           = Taller::select('enunciado')->where('id', $idtaller)->firstOrFail(); 
             $taller42            = new OrdenIdea; 
@@ -1728,7 +2215,31 @@ public function store11(Request $request, $idtaller)
             $user= User::find($id);
             $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
-            return $taller42;
+              foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return response(array(
+                'success' => true,
+                'rol'     => 'estudiante',
+                'id'      => $taller->contenido_id,
+            ),200,[]);
+
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            // return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        // return $request->caja['valor_debe'];
+        
+              return response(array(
+                'success' => true,
+                'rol'     => 'docente',
+                'id'      => $contenido->materia_id,
+            ),200,[]);
+
+        }
+            // return $taller42;
         }
 
              public function store43(Request $request, $idtaller)
@@ -1757,7 +2268,18 @@ public function store11(Request $request, $idtaller)
 
             $user= User::find($id);
             $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
+                 foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
             return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
          public function store44(Request $request, $idtaller)
            {
@@ -1806,7 +2328,18 @@ public function store11(Request $request, $idtaller)
 
             $user= User::find($id);
             $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
+                 foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
             return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
     }
 
     public function store45(Request $request, $idtaller)
@@ -1815,7 +2348,18 @@ public function store11(Request $request, $idtaller)
             $taller             =   Taller::where('id', $idtaller)->firstOrfail();
             $user = User::find($id);
             $user->tallers()->attach($idtaller,['status'=> 'calificado', 'calificacion' => 10, 'retroalimentacion' => 'Bien Hecho']);
+                 foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
             return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
         }
         public function store46(Request $request, $idtaller)
         {
@@ -1832,7 +2376,18 @@ public function store11(Request $request, $idtaller)
             $taller46->save();
             $user= User::find($id);
             $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
+                 foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
             return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
 
 
         }
@@ -1850,7 +2405,18 @@ public function store11(Request $request, $idtaller)
             $taller47->save();
             $user= User::find($id);
             $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
+                 foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
             return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
+            
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        }
 
 
         }
@@ -1911,6 +2477,8 @@ public function store11(Request $request, $idtaller)
            public function store49(Request $request)
         {
             $tallerid            = $request->id;
+            $taller             =   Taller::where('id', $tallerid)->firstOrfail();
+
             $contenido           = PlanCuenta::select('enunciado')->where('taller_id', $tallerid)->firstOrFail(); 
             $id                  = Auth::id();
             $taller47            =   new PlanCuentaRespuesta; 
@@ -1924,11 +2492,39 @@ public function store11(Request $request, $idtaller)
             $user= User::find($id);
             $user->tallers()->attach($tallerid,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
-               return response(array(                                         //ENVIO DE RESPUESTA
+             foreach(auth()->user()->roles as $role){
+        $rol =$role->descripcion;
+        }
+
+        if ($rol == 'estudiante') {
+            return response(array(
                 'success' => true,
-                'estado' => 'completado',
+                'rol'     => 'estudiante',
+                'id'      => $taller->contenido_id,
                 'mensaje' => 'Taller Completado Correctamente'
+                
             ),200,[]);
+
+        }elseif($rol == 'docente'){
+            $contenido = Contenido::find($taller->contenido_id);
+
+            // return redirect()->route('contenido.resueltos', ['id' => $contenido->materia_id])->with('datos', 'Datos Enviados Correctamente');
+        // return $request->caja['valor_debe'];
+        
+              return response(array(
+                'success' => true,
+                'rol'     => 'docente',
+                'id'      => $contenido->materia_id,
+                'mensaje' => 'Taller Completado Correctamente'
+                
+            ),200,[]);
+
+        }
+            //    return response(array(                                         //ENVIO DE RESPUESTA
+            //     'success' => true,
+            //     'estado' => 'completado',
+            //     'mensaje' => 'Taller Completado Correctamente'
+            // ),200,[]);
 
 
         }

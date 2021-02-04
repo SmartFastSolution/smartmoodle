@@ -19,7 +19,7 @@
                     <input type="date" name="fecha" v-model="fecha" class="form-control text-center" required>
                 </div>
             </div>
-            @if ($rol === 'estudiante')
+            @if ($rol === 'estudiante' or 'docente')
             <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirNomina()">Agregar Nómina</a>
 
             <a href="#" class="addDiario btn btn-outline-success ml-1 " @click.prevent="guardarNomina()">Guardar
@@ -84,7 +84,7 @@
                     </tr>
                 </tbody>
             </table>
-            @if ($rol === 'estudiante')
+            @if ($rol === 'estudiante' or 'docente')
 
             <div class="row justify-content-center mb-2">
                 <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirNomina()">Agregar Nómina</a>

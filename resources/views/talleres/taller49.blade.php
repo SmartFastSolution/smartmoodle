@@ -122,7 +122,14 @@
             title: 'Smarmoddle',
             text: response.data.mensaje,
           }).then(function() {
-                window.location = "/sistema/homees";
+            if (response.data.rol == 'docente') {
+  window.location = "/sistema/contenido/"+response.data.id+"/talleres/resueltos";
+
+} else if(response.data.rol == 'estudiante'){
+  window.location = "/sistema/unidad/"+response.data.id;
+}
+
+                // window.location = "/sistema/homees";
             });
             
         }).catch(function(error){

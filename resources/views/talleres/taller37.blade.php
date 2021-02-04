@@ -334,7 +334,7 @@
       @endif
 
 
- @if ($rol === 'estudiante')
+ @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center" id="enviarTaller">
         <a href="" @click.prevent="CompletarTaller" class="btn p-2 mt-3 btn-danger">Completar Taller Contable</a>
         
@@ -378,7 +378,14 @@
             'Completado!',
             'success'
           );
-            window.location = "/sistema/homees"; 
+            if (response.data.rol == 'docente') {
+  window.location = "/sistema/contenido/"+response.data.id+"/talleres/resueltos";
+
+} else if(response.data.rol == 'estudiante'){
+  window.location = "/sistema/unidad/"+response.data.id;
+}
+
+            // window.location = "/sistema/homees"; 
             }          
         }).catch(function(error){
 

@@ -9,7 +9,7 @@
 
      {{-- <h4 class="text-center text-primary font-weight-bold mt-2">@{{ nombre }}</h4> --}}
      <div class="row p-3  mb-2 ">
- @if ($rol === 'estudiante')
+ @if ($rol === 'estudiante' or 'docente')
 
         @if ($datos->metodo == 'concatenado')
         <div class="col-3 mb-2">
@@ -262,7 +262,7 @@
                      <a href="#" class="addDiario btn btn-outline-warning" @click.prevent="updaterRegister()">Actualizar
                          Transaccion</a>
                  </div> --}}
- @if ($rol === 'estudiante')
+ @if ($rol === 'estudiante' or 'docente')
 
                  <div class="row justify-content-around mb-2">
                      <a href="#" class="btn btn-outline-primary" @click.prevent="abrirTransaccion()">Crear

@@ -11,7 +11,7 @@
         </div>
 
     </div>
- @if ($rol === 'estudiante')
+ @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-start mb-2">
         <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Cuentas</a>
         <a href="#" class="addDiario btn btn-outline-success ml-1" @click.prevent="guardarBalance()">Guardar Balance</a>
@@ -56,7 +56,7 @@
             </tr>
         </tbody>
     </table>
- @if ($rol === 'estudiante')
+ @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center mb-2">
         <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Cuentas</a>
     </div>

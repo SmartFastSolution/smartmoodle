@@ -249,6 +249,35 @@ class DocenteController extends Controller
      return view('Docente.talleres',compact('tallers', 'contenidos', 'talleres', 'id', 'materia'));
 
     }
+        public function resueltos($id)
+    {
+         $user =  User::findorfail( Auth::id());
+
+        $contenidos= Contenido::get();
+        $materia = Materia::where('id', $id)->first();
+      
+
+        $completados = $user->tallers;
+        // return $completados;
+          $ids = [];
+          foreach($completados as $act){
+                $ids[]=$act->id;
+            }
+
+        $tallers=Taller::whereNotIn('id', $ids)->get();
+        // return $tallers;
+
+        // $talleres =[];
+        // foreach ($contenidos as $key => $value) {
+        //     $talleres[$key] = array(
+        //     'nombre' => $value->nombre,
+        //     'talleres' =>$value->tallers
+        // );
+        // }
+       
+     return view('Docente.talleresresueltos',compact('tallers', 'contenidos', 'id', 'materia', 'completados'));
+
+    }
     public function registro(Request $request)
     {
             $contenidos=Contenido::where('materia_id', $request->materia)->get();

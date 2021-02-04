@@ -28,7 +28,7 @@
         <a  v-if="update" href="#" class="  addDiario btn btn-outline-danger  " @click.prevent="actualizarBalance()">Actualizar Registro</a>
 
   </div> --}}
-  @if ($rol === 'estudiante')
+  @if ($rol === 'estudiante' or 'docente')
    <div class="row justify-content-start mb-2">
       <a  href="#" class="addDiario btn btn-outline-info mr-2 " @click.prevent="abrirTransaccion()">Agregar Movimientos</a>
       <a  href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarBalance()">Guardar Balance</a>
@@ -69,7 +69,7 @@
   </tr>
 </tbody>
 </table>
- @if ($rol === 'estudiante')
+ @if ($rol === 'estudiante' or 'docente')
  <div class="row justify-content-center mb-2">
       <a  href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Movimientos</a>
   </div>

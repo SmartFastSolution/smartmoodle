@@ -50,6 +50,9 @@
 <script type="text/javascript" src="{{ asset('js/dropzone.min.js') }}"></script>
 <script type="text/javascript">
 
+  let rol = @json($rol);
+  let materia = @json($contenido->materia_id);
+  let contenido = @json($contenido->id);
   let numero = @json($datos->img_num);
   Dropzone.options.myAwesomeDropzone = {
     autoProcessQueue: false,
@@ -93,7 +96,14 @@
             title: 'Smarmoddle',
             text: 'Datos enviados correctamente',
           }).then(function() {
-                window.location = "/sistema/homees";
+              if (rol == 'estudiante') {
+  window.location = "/sistema/unidad/"+contenido;
+
+              } else if((rol == 'docente')) {
+  window.location = "/sistema/contenido/"+materia+"/talleres/resueltos";
+
+              }
+                // window.location = "/sistema/homees";
             });
         }
       });

@@ -227,7 +227,7 @@
         </button> --}}
         </div>
     </div>
-@if ($rol === 'estudiante')
+@if ($rol === 'estudiante' or 'docente')
 
     <div class="row justify-content-center">
         <a class="btn p-2 mt-3 btn-outline-info" @click.prevent="guardarBalanceInicial()">Guardar Balance Inicial</a>
@@ -475,7 +475,7 @@
         </button> --}}
         </div>
     </div>
- @if ($rol === 'estudiante')
+ @if ($rol === 'estudiante' or 'docente')
 
     <div class="row justify-content-center">
         <a class="btn p-2 mt-3 btn-outline-info" @click.prevent="guardarBalanceInicial()">Guardar Balance Inicial</a>

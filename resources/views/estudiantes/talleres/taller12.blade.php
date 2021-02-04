@@ -2,7 +2,13 @@
 
 @section('title',  $datos->taller->nombre)
 @section('content')
-
+   <li class="d-none">
+        @if (Auth::check())
+        @foreach (auth()->user()->roles as $role)
+        {{ $rol = $role->descripcion}}
+        @endforeach
+        @endif
+    </li>
 <!--IDENTIFICA  EL  ENUNCIADO  ESCRIBIENDO  (V) DE  VERDADERO   O  (F)  DE 
 FALSO,  CON  CERTEZA. -->
      	<div class="container">
@@ -31,6 +37,7 @@ FALSO,  CON  CERTEZA. -->
           </div>
         </div>
           </div>
+          @if ($rol === 'estudiante')
             <div class="row justify-content-center">
             <div class="col-5">
               <div class="form-group">
@@ -44,6 +51,7 @@ FALSO,  CON  CERTEZA. -->
               </div>   
             </div>
         </div>
+        @endif
         </div>
      	</div>
 

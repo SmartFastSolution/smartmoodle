@@ -51,9 +51,14 @@
                 
             @endisset</h1>
         <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}
-            <h3 class="  font-weight-bold text-success">{{ $materia->nombre }}</h3>
-            <h2 class="font-weight-bold text-dark">Administrador de Talleres</h2>
+           
         </h2>
+
+        <a class="btn btn-info btn" href="{{ route('contenido.resueltos',['id'=>$id]) }}"><i
+                class="fas fa-book-open"></i>
+            Talleres Resueltos</i></a>
+         <h3 class="  font-weight-bold text-success">{{ $materia->nombre }}</h3>
+            <h2 class="font-weight-bold text-dark">Administrador de Talleres</h2>
         <br>
         <br>
         @livewire('talleres',[$id])
@@ -67,8 +72,8 @@
 @livewireScripts
 <script type="text/javascript">
     window.addEventListener('activado', event => {
-     $('#fecha').modal('hide');
-      toastr.success('Taller Activado Correctamente', "Smarmoddle", {
+     $('#'+event.detail.modal).modal('hide');
+      toastr.success(event.detail.mensaje, "Smarmoddle", {
         "timeOut": "3000"
     });
 })

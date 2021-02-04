@@ -1,6 +1,6 @@
 <div id="provision_beneficio">
     <h1 class="text-center text-danger font-weight-bold mt-2">PROVISIÓN DE BENEFICIOS SOCIALES</h1>
-    @if ($rol === 'estudiante')
+    @if ($rol === 'estudiante' or 'docente')
     <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirProvision()">Agregar Provisión</a>
 
     <a href="#" class="addDiario btn btn-outline-success ml-1" @click.prevent="guardarProvision()">Guardar Provisión</a>
@@ -49,7 +49,7 @@
             </table>
         </div>
     </div>
-    @if ($rol === 'estudiante')
+    @if ($rol === 'estudiante' or 'docente')
 
     <div class="row justify-content-center mb-2">
         <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirProvision()">Agregar Provisión</a>

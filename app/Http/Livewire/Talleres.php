@@ -17,7 +17,7 @@ class Talleres extends Component
 	  use WithPagination;
 	   protected $paginationTheme = 'bootstrap';
 
-	public $materia_id, $status, $date, $select_id, $buscador, $date_paralelo, $estado, $paralelo_id = '';
+	public $materia_id, $status, $date, $select_id, $buscador, $date_paralelo, $estado, $paralelo_id = '', $search_paralelo = '';
 
     public $perPage    = 10;
     public $search     = '';
@@ -26,8 +26,9 @@ class Talleres extends Component
     public $curso_id   = '';
     public $curso;
     public $paralelos = [];
+    public $filtros_paralelos = [];
 
-	function mount($id)
+	public function mount($id)
 	{
         $user_id = Auth::id();
 		$this->materia_id = $id;
@@ -37,15 +38,38 @@ class Talleres extends Component
          ->first();
          $this->curso = $curso;
 
-        
+        $distribuciondo = Distribuciondo::where('user_id', $user_id)->where('materia_id', $this->materia_id)->first();
+
+         $this->filtros_paralelos = $distribuciondo->paralelos;
 		 // $materia = Materia::select('nombre')->where('id', $id)->first();
 		// $this->contenidos = $contenido;
 	}
     public function render()
     {
 		 $contenidos = Contenido::where('materia_id', $this->materia_id)->get();
+          $niveles = DB::table('distribucionmacu_taller')
+        ->join('nivels', 'distribucionmacu_taller.nivel_id', '=', 'nivels.id')
+        ->select('distribucionmacu_taller.*', 'nivels.nombre as nivel_nombre')
+        ->get();
 
+// dd($niveles);
 
+         if ($this->search_paralelo == '') {
+              $activados = DB::table('distribucionmacu_taller')
+            ->join('contenidos', 'distribucionmacu_taller.contenido_id', '=', 'contenidos.id')
+            ->join('tallers', 'distribucionmacu_taller.taller_id', '=', 'tallers.id')
+            ->join('nivels', 'distribucionmacu_taller.nivel_id', '=', 'nivels.id')
+            ->where(function ($query) {
+                       $query->where('tallers.enunciado', 'like', '%'.$this->buscador.'%')
+                            ->orWhere('contenidos.nombre', 'like', '%'.$this->buscador.'%');
+                 })
+            ->where('contenidos.materia_id', $this->materia_id)
+            ->select('distribucionmacu_taller.*', 'tallers.enunciado as enunciado_taller', 'tallers.nombre as nombre_taller','nivels.nombre as paralelo', 'contenidos.nombre as nombre_unidad')
+            ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
+            ->paginate($this->perPage);
+         }else {
+             
+         
 		 $activados = DB::table('distribucionmacu_taller')
     		->join('contenidos', 'distribucionmacu_taller.contenido_id', '=', 'contenidos.id')
             ->join('tallers', 'distribucionmacu_taller.taller_id', '=', 'tallers.id')
@@ -55,19 +79,21 @@ class Talleres extends Component
 		                   	->orWhere('contenidos.nombre', 'like', '%'.$this->buscador.'%');
 		         })
             ->where('contenidos.materia_id', $this->materia_id)
+            ->where('distribucionmacu_taller.nivel_id',$this->search_paralelo)
             ->select('distribucionmacu_taller.*', 'tallers.enunciado as enunciado_taller', 'tallers.nombre as nombre_taller','nivels.nombre as paralelo', 'contenidos.nombre as nombre_unidad')
             ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
-            ->paginate(5);
-
+            ->paginate($this->perPage);
+        }
 
         return view('livewire.talleres',[
         	'contenidos' => $contenidos,
-        	'activados' => $activados,
+            'activados' => $activados,
+        	'niveles' => $niveles,
             // 'paralelos' => $paralelos
         ]);
     }
 
-    function active($id)
+    public function active($id)
     {
         $user_id = Auth::id();
 
@@ -76,6 +102,7 @@ class Talleres extends Component
         ->where('taller_id', $id)
         ->select('nivel_id')
         ->get();
+       
 
         $ids =[];
         foreach ($activados as $id) {
@@ -88,7 +115,36 @@ class Talleres extends Component
 
 
     }
-    function activar()
+   public function modify($id)
+    {
+        $this->select_id     = $id;
+        $taller = DB::table('distribucionmacu_taller')
+        ->where('id', $id)
+        ->first();
+
+        $this->date_paralelo = $taller->fecha_entrega;
+        $this->estado        = $taller->estado;
+
+    }
+
+   public function actualizar()
+    {
+        $taller = DB::table('distribucionmacu_taller')
+        ->where('id', $this->select_id)
+        ->update(['estado' => $this->estado, 'fecha_entrega' => $this->date_paralelo]);
+
+        // $taller->estado        = $this->estado;
+        // $taller->fecha_entrega = $this->date_paralelo;
+        // $taller->save();
+        $this->estado          = '';
+        $this->date_paralelo   = '';
+        $this->dispatchBrowserEvent('activado', ['mensaje' => 'Asignacion de taller modificada correctamente', 'modal' => 'modal_activacion']);
+
+
+
+
+    }
+   public  function activar()
     {
         $c_id = $this->curso->id;
 
@@ -109,8 +165,16 @@ class Talleres extends Component
 
     	$taller = Taller::find($this->select_id);
         $taller->distribucionmacus()->attach($c_id,['estado'=> 1 , 'plantilla_id'=> $taller->plantilla_id , 'contenido_id'=> $taller->contenido_id, 'nivel_id' => $this->paralelo_id, 'fecha_entrega' => $this->date]);
-       	$this->dispatchBrowserEvent('activado', ['mensaje' => 'Taller activado correctamente']);
+       	$this->dispatchBrowserEvent('activado', ['mensaje' => 'Taller activado correctamente', 'modal' => 'fecha']);
         $this->select_id = '';
+        $this->paralelo_id = '';
+        $this->date = '';
     	// }
+    }
+    public function eliminar($id)
+    {
+        $delete = DB::table('distribucionmacu_taller')->where('id', $id)->delete();
+        $this->dispatchBrowserEvent('activado', ['mensaje' => 'Asignacion Eliminada']);
+
     }
 }

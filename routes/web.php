@@ -111,6 +111,7 @@ route::get('materia/{id}', 'DocenteController@contenidos')->name('Contenidos');
 
 route::get('materia/{id}/paralelo/{nivel}/', 'DocenteController@paralelo')->name('paralelo');
 route::get('contenido/{id}/talleres','DocenteController@talleres')->name('contenido.talleres');
+route::get('contenido/{id}/talleres/resueltos','DocenteController@resueltos')->name('contenido.resueltos');
 
 route::get('alumnos/{id}', 'DocenteController@cursos')->name('Alumnos');
 route::get('docente/password', 'DocenteController@password')->name('DocentePass'); //para metodo get del password 
@@ -286,6 +287,7 @@ route::get('/sistema/taller/{plant}/{id}', 'TallersController@taller')->name('ta
 route::get('/sistema/homees/taller/{plant}/{id}', 'TallerEstudianteController@taller')->name('taller.estudiante');
 route::get('/sistema/homees/taller/vista/{plant}/{id}', 'VistaEstudianteController@taller')->name('vista.taller');
 route::get('/sistema/homedoc/taller/{plant}/{id}/{user}', 'TallerDocenteController@taller')->name('taller.docente');
+route::get('/sistema/homedoc/tallerresuelto/{plant}/{id}/', 'VistaDocenteController@taller')->name('taller.resuelto');
 
 
 route::post('/sistema/admin/taller1/{idtaller}', 'TallerEstudianteController@store1')->name('taller1');
