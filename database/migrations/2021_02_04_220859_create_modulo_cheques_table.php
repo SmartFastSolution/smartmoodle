@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIdentificarPersonasTable extends Migration
+class CreateModuloChequesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,22 @@ class CreateIdentificarPersonasTable extends Migration
      */
     public function up()
     {
-        Schema::create('identificar_personas', function (Blueprint $table) {
+        Schema::create('modulo_cheques', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
-            $table->longText('enunciado');
-            $table->string('personas')->nullable();
+            // $table->longText('enunciado');
+            $table->string('modulo')->nullable();
+            $table->string('tipo_documento')->nullable();
+            $table->string('tipo_cheque')->nullable();
+            $table->text('banco')->nullable();
+            $table->string('girador')->nullable();
+            $table->string('cantidad')->nullable();
+            $table->string('n_cheque')->nullable();
+            $table->string('cantidad_letra')->nullable();
+            $table->string('ciudad')->nullable();
+            $table->string('fecha')->nullable();
+            $table->string('firma')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')
@@ -40,6 +50,6 @@ class CreateIdentificarPersonasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('identificar_personas');
+        Schema::dropIfExists('modulo_cheques');
     }
 }

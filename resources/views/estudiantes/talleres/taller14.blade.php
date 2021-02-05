@@ -20,16 +20,16 @@
 			<table class="table">
 			<thead >
 				<tr class=" text-center thead-dark">
-					 <th>Girador</th>
-					<th>Girado</th>
-					<th>Beneficiario</th>
+					 @foreach (json_decode($taller->intermediarios ) as $persona)
+            <th>{{ $persona }}</th>
+          @endforeach
 				</tr>
 			</thead>
 			<tbody>
 				<tr class="text-center">
-					<td>{{ $datos->girador }}</td>
-					<td>{{ $datos->girado }}</td>
-					<td>{{ $datos->beneficiario}}</td>
+					@foreach (json_decode($datos->personas)  as $respues)
+            <td>{{ $respues }}</td>
+          @endforeach
 				</tr>
 			</tbody>
 		</table>

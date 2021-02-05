@@ -94,9 +94,13 @@
     <div class="row justify-content-center mb-5">
         <a target="_blank" class="btn btn-danger" href="{{ $datos->archivo }}"><i class="fad fa-file-pdf"></i> Descargar PDF</a>
     </div>
-        
     @endisset
-            
+       <div class="row justify-content-center mb-5">
+        <a class="btn btn-success" href="#" data-toggle="modal" data-target="#m_cheque"><i class="far fa-money-bill"></i></i> CHEQUE</a>
+    </div>
+
+
+
  @if ($datos->metodo == 'concatenado')
     <div class="row justify-content-md-center">
         <div class="col-12 col-sm-12 col-md-2 mb-3">
@@ -332,8 +336,31 @@
     </div>
 
       @endif
+       <h2 class="text-center font-weight-bold">Aplicacion de Documentos</h2>
+        <div class="row justify-content-center mb-5" id="documentos"  style="height: 200px; overflow-y: scroll; overflow-x: hidden;">
+            <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      {{-- <th scope="col">#</th> --}}
+      <th scope="col">Tipo de Documento</th>
+      <th scope="col">Modulo</th>
+      <th  width="200" class="text-center">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="(cheque, index) in cheques">
+      {{-- <th scope="row">1</th> --}}
+      <td>@{{ cheque.tipo_documento }}</td>
+      <td>@{{ cheque.modulo }}</td>
+      <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="editarCheque(cheque.id, index)"><i class="fa fa-edit"></i></a>
+      <a class="btn btn-danger" href="" @click.prevent="warningEliminar(cheque.id, index, cheque.tipo_documento)"><i class="fa fa-trash"></i></a></td>
+    </tr>
+  </tbody>
+</table>
+@include('contabilidad.modales.modaldocumentos')
 
-
+        </div>
+            
  @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center" id="enviarTaller">
         <a href="" @click.prevent="CompletarTaller" class="btn p-2 mt-3 btn-danger">Completar Taller Contable</a>
@@ -371,7 +398,7 @@
         enviado: function() {
         let _this = this;
         let url = '/sistema/admin/taller37/'+taller_id;
-            axios.post(url,{
+        axios.post(url,{
         }).then(response => {
           if (response.data.success == true) {
             Swal.fire(
@@ -379,9 +406,9 @@
             'success'
           );
             if (response.data.rol == 'docente') {
-  window.location = "/sistema/contenido/"+response.data.id+"/talleres/resueltos";
+        window.location = "/sistema/contenido/"+response.data.id+"/talleres/resueltos";
 
-} else if(response.data.rol == 'estudiante'){
+            } else if(response.data.rol == 'estudiante'){
   window.location = "/sistema/unidad/"+response.data.id;
 }
 
@@ -391,6 +418,230 @@
 
         }); 
      } 
+      }
+    
+    });
+    const documentos = new Vue({
+      el: "#documentos",
+      data:{
+        modulo:'',
+        cheque:{
+            tipo_cheque:'',
+            banco:'',
+            girador:'',
+            cantidad:'',
+            n_cheque:'',
+            cantidad_letra:'',
+            ciudad:'',
+            fecha:'',
+            firma:'',
+            update:false,
+            cheque_id:'',
+            index:'',
+        },
+        factura:{
+
+        },
+        nota_credito:{
+
+        },
+        cheques:[],
+        documentos:[],
+        facturas:[],
+        nota_creditos:[],
+      },
+       mounted: function(){
+        this.getdocumentos();
+      },
+      methods:{
+        getdocumentos(){
+        let set = this;
+        let url = '/sistema/admin/modulo/documentos';
+            axios.post(url,{
+                id: taller_id,
+            }).then(response => {
+                // console.log(response.data.cheques)
+                this.cheques = response.data.cheques;
+            }).catch(function(error){
+
+            }); 
+        },
+        editarCheque(id, index){
+                let set                   = this;
+                let cheque                = this.cheques.filter(x => x.id == id);
+                set.cheque.cheque_id             = cheque[0].id;
+                set.cheque.index           = index;
+                set.modulo                = cheque[0].modulo;
+                set.cheque.tipo_cheque    = cheque[0].tipo_cheque;
+                set.cheque.banco          = cheque[0].banco;
+                set.cheque.girador        = cheque[0].girador;
+                set.cheque.cantidad       = cheque[0].cantidad;
+                set.cheque.n_cheque       = cheque[0].n_cheque;
+                set.cheque.cantidad_letra = cheque[0].cantidad_letra;
+                set.cheque.ciudad         = cheque[0].ciudad;
+                set.cheque.fecha          = cheque[0].fecha;
+                set.cheque.firma          = cheque[0].firma;
+                $('#m_cheque').modal('show');
+                set.cheque.update = true
+
+            // console.log(cheque);
+        },
+        warningEliminar(id, index, tipo){
+        Swal.fire({
+        title: 'Seguro que deseas eliminar este documento??' ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+            this.eliminarDocumento(id, index, tipo);
+        }
+      });
+        },
+        eliminarDocumento(id, index, tipo){
+            let set = this;
+            let url = '/sistema/admin/modulo/documento/delete';
+                axios.post(url,{
+                id: id,
+                tipo: tipo,
+            }).then(response => {
+                if (tipo === 'Cheque' ) {
+                 this.cheques.splice(index, 1); 
+
+                } 
+                toastr.info("Documento Eliminado Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+               
+            }).catch(function(error){
+
+            }); 
+        },
+        resetCheque(){
+                let set                   = this;
+                set.modulo                = '';
+                set.cheque.tipo_cheque    = '';
+                set.cheque.banco          = '';
+                set.cheque.girador        = '';
+                set.cheque.cantidad       = '';
+                set.cheque.n_cheque       = '';
+                set.cheque.cantidad_letra = '';
+                set.cheque.ciudad         = '';
+                set.cheque.fecha          = '';
+                set.cheque.firma          = '';
+                set.cheque.cheque_id      = '';
+                set.cheque.index          = '';
+                set.cheque.update         = false;
+        },
+        updateCheque(){
+               if (this.modulo === '') {
+                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+            } else {
+            let index = this.cheque.index;
+            let set = this;
+            let url = '/sistema/admin/modulo/documento/edit';
+                axios.post(url,{
+                id: set.cheque.cheque_id,
+                tipo: 'cheque',
+                modulo: set.modulo,
+                tipo_documento: 'Cheque',
+                tipo_cheque: set.cheque.tipo_cheque,
+                banco: set.cheque.banco,
+                girador: set.cheque.girador,
+                cantidad: set.cheque.cantidad,
+                n_cheque: set.cheque.n_cheque,
+                cantidad_letra: set.cheque.cantidad_letra,
+                ciudad: set.cheque.ciudad,
+                fecha: set.cheque.fecha,
+                firma: set.cheque.firma
+            }).then(response => {
+                $('#m_cheque').modal('hide');
+                set.cheques[index].modulo         = set.modulo;
+                set.cheques[index].tipo_cheque    = set.cheque.tipo_cheque;
+                set.cheques[index].banco          = set.cheque.banco;
+                set.cheques[index].girador        = set.cheque.girador;
+                set.cheques[index].cantidad       = set.cheque.cantidad;
+                set.cheques[index].n_cheque       = set.cheque.n_cheque;
+                set.cheques[index].cantidad_letra = set.cheque.cantidad_letra;
+                set.cheques[index].ciudad         = set.cheque.ciudad;
+                set.cheques[index].fecha          = set.cheque.fecha;
+                set.cheques[index].firma          = set.cheque.firma;
+                toastr.info("Cheque editado Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+               this.resetCheque();
+            }).catch(function(error){
+
+            }); 
+        }
+        },
+        guardarCheque(){
+            if (this.modulo === '') {
+                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+            } else {
+            let set = this;
+            let cheque = {
+                modulo: set.modulo,
+                tipo_documento: 'Cheque',
+                tipo_cheque: set.tipo_cheque,
+                banco: set.banco,
+                girador: set.girador,
+                cantidad: set.cantidad,
+                n_cheque: set.n_cheque,
+                cantidad_letra: set.cantidad_letra,
+                ciudad: set.ciudad,
+                fecha: set.fecha,
+                firma: set.firma
+                };
+
+            let url = '/sistema/admin/modulo/cheque';
+            axios.post(url,{
+                id: taller_id,
+                tipo: 'cheque',
+                modulo: set.modulo,
+                tipo_documento: 'Cheque',
+                tipo_cheque: set.cheque.tipo_cheque,
+                banco: set.cheque.banco,
+                girador: set.cheque.girador,
+                cantidad: set.cheque.cantidad,
+                n_cheque: set.cheque.n_cheque,
+                cantidad_letra: set.cheque.cantidad_letra,
+                ciudad: set.cheque.ciudad,
+                fecha: set.cheque.fecha,
+                firma: set.cheque.firma
+            }).then(response => {
+                $('#m_cheque').modal('hide');
+                // console.log(response.data.cheque)
+                this.cheques.push(response.data.cheque);
+                toastr.success("Cheque creado Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                set.modulo         = '';
+                set.cheque.tipo_cheque    = '';
+                set.cheque.banco          = '';
+                set.cheque.girador         = '';
+                set.cheque.cantidad       = '';
+                set.cheque.n_cheque       = '';
+                set.cheque.cantidad_letra = '';
+                set.cheque.ciudad         = '';
+                set.cheque.fecha          = '';
+                set.cheque.firma          = '';
+
+
+          
+            }).catch(function(error){
+
+            }); 
+            }
+            
+        }
       }
     
     })

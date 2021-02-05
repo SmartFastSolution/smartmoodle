@@ -1055,16 +1055,17 @@ public function store11(Request $request, $idtaller)
 
       public function store14(Request $request, $idtaller)
     {
+        // return $request->personas;
     $id                     = Auth::id();
     $taller             =   Taller::where('id', $idtaller)->firstOrfail();
     $contenido              = TallerIdentificarPersona::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
+
+
     $taller14               = new IdentificarPersona; 
-    $taller14->taller_id    = $idtaller;
-    $taller14->user_id      =   $id;           
+    $taller14->taller_id    =  $idtaller;
+    $taller14->user_id      =  $id;           
     $taller14->enunciado    =  $contenido->enunciado;                       
-    $taller14->girador      =   $request->input('girador');   
-    $taller14->girado       =   $request->input('girado');   
-    $taller14->beneficiario =   $request->input('beneficiario');    
+    $taller14->personas     =  json_encode($request->personas);      
     $taller14->save();
 
     $user= User::find($id);

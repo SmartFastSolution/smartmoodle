@@ -18,6 +18,7 @@ class CreateTallerIdentificarPersonasTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->longText('enunciado');
             $table->longText('descripcion');
+            $table->longText('intermediarios')->nullable();
             $table->timestamps();
             
             $table->foreign('taller_id')

@@ -250,7 +250,7 @@ class TallerDocenteController extends Controller
             return view('docentes.talleres.taller13', compact('datos', 'd', 'update_imei', 'user' , 'fecha', 'taller'));
 
         }elseif ($plant == 14) {
-
+            
             $taller = TallerIdentificarPersona::where('taller_id', $consul->id)->firstOrFail();
             $datos = IdentificarPersona::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrfail(); 
             return view('docentes.talleres.taller14', compact('datos', 'd', 'update_imei', 'taller', 'user' , 'fecha'));

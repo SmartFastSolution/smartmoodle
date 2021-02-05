@@ -421,6 +421,10 @@ $(function(document, window, index ) {
         evt.preventDefault();
         addTaller47_3()();
     });
+    $('.addTaller50').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller50();
+    });
     $('.addRow').on('click', function(evt) {
         evt.preventDefault();
         addRow();
@@ -445,19 +449,19 @@ $(function(document, window, index ) {
             '<textarea required="" class="form-control" name="enun[]"></textarea>'+
         '</div>';
         $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
-        if (tall2 == 10) {
-        function alert2(){
-            toastr.error("Limite de enunciados creados", "Smarmoddle", {
-                "timeOut": "1000"
-            });
-        }
-        } else {
+        // if (tall2 == 10) {
+        // function alert2(){
+        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //         "timeOut": "1000"
+        //     });
+        // }
+        // } else {
         $('.tall_2').append(t2);
         function alert2(){
         toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
             "timeOut": "1000"
         });
-        }
+        // }
 
         //console.log(enun)
            
@@ -512,13 +516,13 @@ $(function(document, window, index ) {
                               '</div>'+
                             '</div>';
         $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
-        if (tall9 == 10) {
-        function alert2(){
-            toastr.error("Limite de enunciados creados", "Smarmoddle", {
-                "timeOut": "1000"
-            });
-        }
-        } else {
+        // if (tall9 == 10) {
+        // function alert2(){
+        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //         "timeOut": "1000"
+        //     });
+        // }
+        // } else {
         $('.enc_9').append(ta);
 
       
@@ -527,7 +531,7 @@ $(function(document, window, index ) {
         toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
             "timeOut": "1000"
         });
-        }
+        // }
 
         //console.log(enun)
            
@@ -576,13 +580,13 @@ function addTaller10() {
                 '</div>';
 
            
-        if (tall10 == 10) {
-        function alert10(){
-            toastr.error("Limite de enunciados creados", "Smarmoddle", {
-                "timeOut": "1000"
-            });
-        }
-        } else {
+        // if (tall10 == 10) {
+        // function alert10(){
+        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //         "timeOut": "1000"
+        //     });
+        // }
+        // } else {
         $('.tall_10').append(t10);
          $(".custom-file-input").on("change", function() {
             var fileName = $(this).val().split("\\").pop();
@@ -592,7 +596,7 @@ function addTaller10() {
         toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
             "timeOut": "1000"
         });
-        }
+        // }
 
         //console.log(enun)
            
@@ -627,19 +631,19 @@ function addTaller11() {
                 '<span class="glyphicon glyphicon-remove">X</span></a> </label>'+
                 '<textarea required="" name="definicion[]" class="form-control" rows="5"></textarea>'+
             '</div>';
-        if (tall11 == 11) {
-        function alert11(){
-            toastr.error("Limite de enunciados creados", "Smarmoddle", {
-                "timeOut": "1100"
-            });
-        }
-        } else {
+        // if (tall11 == 11) {
+        // function alert11(){
+        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //         "timeOut": "1100"
+        //     });
+        // }
+        // } else {
         $('.tall_11').append(t11);
         function alert11(){
         toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
             "timeOut": "1100"
         });
-        }
+        // }
 
         //console.log(enun)
            
@@ -678,19 +682,19 @@ function addTaller11() {
                 '</div>'+
         '</div>';
         $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
-        if (tall12 == 10) {
-        function alert12(){
-            toastr.error("Limite de enunciados creados", "Smarmoddle", {
-                "timeOut": "1000"
-            });
-        }
-        } else {
+        // if (tall12 == 10) {
+        // function alert12(){
+        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //         "timeOut": "1000"
+        //     });
+        // }
+        // } else {
         $('.tall_12').append(t12);
         function alert12(){
         toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
             "timeOut": "1000"
         });
-        }
+        // }
 
         //console.log(enun)
            
@@ -725,19 +729,19 @@ function addTaller11() {
             '<label for="" class="col-form-label">Concepto '+(tall13 + 1)+' <a href="#" class="btn btn-danger re_tall13"><span class="glyphicon glyphicon-remove">X</span></a></label>'+
             '<input required="" type="text" name="concepto[]" class="form-control">'+
         '</div>';
-        if (tall13 == 10) {
-        function alert13(){
-            toastr.error("Limite de enunciados creados", "Smarmoddle", {
-                "timeOut": "1000"
-            });
-        }
-        } else {
+        // if (tall13 == 10) {
+        // function alert13(){
+        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //         "timeOut": "1000"
+        //     });
+        // }
+        // } else {
         $('.tall_13').append(t13);
         function alert13(){
         toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
             "timeOut": "1000"
         });
-        }
+        // }
 
         //console.log(enun)
            
@@ -771,13 +775,13 @@ function addTaller11() {
             '<td><input type="text" name="precio_unit[]" class="form-control" ></td>' +
             '<td><a href="#" class="btn btn-danger removeTaller22"><span class="glyphicon glyphicon-remove">X</span>' +
             '</tr>';
-        if (max == 10) {
-            toastr.error("Limite de columnas creadas", "Smarmoddle", {
-                "timeOut": "1000"
-            });
+        // if (max == 10) {
+        //     toastr.error("Limite de columnas creadas", "Smarmoddle", {
+        //         "timeOut": "1000"
+        //     });
 
 
-        } else {
+        // } else {
             $('.taller22').append(tr);
          
 
@@ -785,7 +789,7 @@ function addTaller11() {
                 "timeOut": "1000"
             });
             console.log(max)
-        }
+        // }
     }
 
     $('.removeTaller22').live('click', function() {
@@ -812,19 +816,19 @@ function addTaller11() {
             '<textarea required="" class="form-control" name="enun[]"></textarea>'+
         '</div>';
         $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
-        if (tall36 == 10) {
-        function alert36(){
-            toastr.error("Limite de enunciados creados", "Smarmoddle", {
-                "timeOut": "1000"
-            });
-        }
-        } else {
+        // if (tall36 == 10) {
+        // function alert36(){
+        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //         "timeOut": "1000"
+        //     });
+        // }
+        // } else {
         $('.tall_36').append(t36);
         function alert36(){
         toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
             "timeOut": "1000"
         });
-        }
+        // }
 
         //console.log(enun)
            
@@ -862,19 +866,19 @@ function addTaller11() {
             '<textarea required="" class="form-control" name="enun[]"></textarea>'+
         '</div>';
         $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
-        if (tall37 == 10) {
-        function alert37(){
-            toastr.error("Limite de enunciados creados", "Smarmoddle", {
-                "timeOut": "1000"
-            });
-        }
-        } else {
+        // if (tall37 == 10) {
+        // function alert37(){
+        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //         "timeOut": "1000"
+        //     });
+        // }
+        // } else {
         $('.tall_37').append(t37);
         function alert37(){
         toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
             "timeOut": "1000"
         });
-        }
+        // }
 
         //console.log(enun)
            
@@ -910,19 +914,19 @@ function addTaller38() {
             '<textarea required="" class="form-control" name="enun[]"></textarea>'+
         '</div>';
         $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
-        if (tall38 == 10) {
-        function alert38(){
-            toastr.error("Limite de enunciados creados", "Smarmoddle", {
-                "timeOut": "1000"
-            });
-        }
-        } else {
+        // if (tall38 == 10) {
+        // function alert38(){
+        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //         "timeOut": "1000"
+        //     });
+        // }
+        // } else {
         $('.tall_38').append(t38);
         function alert38(){
         toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
             "timeOut": "1000"
         });
-        }
+        // }
 
         //console.log(enun)
            
@@ -957,19 +961,19 @@ function addTaller38() {
             '<label for="" class="col-form-label">Enunciado '+(tall40 + 1)+' <a href="#" class="btn btn-danger re_tall40"><span class="glyphicon glyphicon-remove">X</span></a></label>'+
             '<textarea required="" class="form-control" name="enun[]"></textarea>'+
         '</div>';
-        if (tall40 == 10) {
-        function alert40(){
-            toastr.error("Limite de enunciados creados", "Smarmoddle", {
-                "timeOut": "1000"
-            });
-        }
-        } else {
+        // if (tall40 == 10) {
+        // function alert40(){
+        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //         "timeOut": "1000"
+        //     });
+        // }
+        // } else {
         $('.tall_40').append(t40);
         function alert40(){
         toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
             "timeOut": "1000"
         });
-        }
+        // }
 
         //console.log(enun)
            
@@ -1006,19 +1010,19 @@ function addTaller38() {
                               '  <input required="" class="form-control" name="enun[]" type="text">'+
             // '<textarea required="" class="form-control" name="enun[]"></textarea>'+
         '</div>';
-        if (tall42 == 10) {
-        function alert42(){
-            toastr.error("Limite de enunciados creados", "Smarmoddle", {
-                "timeOut": "1000"
-            });
-        }
-        } else {
+        // if (tall42 == 10) {
+        // function alert42(){
+        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //         "timeOut": "1000"
+        //     });
+        // }
+        // } else {
         $('.tall_42').append(t42);
         function alert42(){
         toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
             "timeOut": "1000"
         });
-        }
+        // }
 
         //console.log(enun)
            
@@ -1147,6 +1151,41 @@ function addTaller38() {
             $(this).parent().parent().remove();
         }
     });
+
+      function addTaller50() {
+
+        var max = $('.taller50 tr').length;
+        var tr = '<tr>' +
+            '<td><input name="cantidad[]" type="text" class="form-control" ></td>' +
+            '<td><input name="codigo[]" type="text" class="form-control" ></td>' +
+            '<td><input type="text" name="descripcion[]" class="form-control" ></td>' +
+            '<td><input type="text" name="precio_unit[]" class="form-control" ></td>' +
+            '<td><a href="#" class="btn btn-danger removeTaller50"><span class="glyphicon glyphicon-remove">X</span>' +
+            '</tr>';
+
+            $('.taller50').append(tr);
+         
+
+            toastr.success("Columna agregada correctamente", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+            console.log(max)
+        
+    }
+
+    $('.removeTaller50').live('click', function() {
+        var last = $('.taller50 tr').length;
+        if (last == 1) {
+            i = 1;
+            toastr.error("Esta columna no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        } else {
+            $(this).parent().parent().remove();
+            i = last;
+        }
+    });
+
 
      function addEnun() {
         var enun = $('.enun .form-row').length;

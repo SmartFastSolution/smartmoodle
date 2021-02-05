@@ -20,14 +20,15 @@
 		<div class="col-7">
 			<div class="row">
 				<div class="col-2">
-					<label class="mb-4 form-control-label" for="">Girador</label>
-					<label class="mb-4 form-control-label" for="">Girado</label>
-					<label class="mb-4 form-control-label" for="">Beneficiario</label>
+				@foreach (json_decode($datos->intermediarios)  as $persona)
+					<label class="mb-4 form-control-label" for="">{{ $persona }}</label>
+				@endforeach
 				</div>
 				<div class="col-8">
-					<input  type="text" name="girador" class="form-control mb-2 border-left-0 border-right-0 border-top-0 border-bottom border-success">
-					<input  type="text" name="girado" class="form-control mb-2 border-left-0 border-right-0 border-top-0 border-bottom border-success">
-					<input  type="text" name="beneficiario" class="form-control mb-2 border-left-0 border-right-0 border-top-0 border-bottom border-success">
+				@foreach (json_decode($datos->intermediarios)  as $persona)
+				<input  type="text" name="personas[]" class="form-control mb-2 border-left-0 border-right-0 border-top-0 border-bottom border-success">
+				@endforeach
+					
 				</div>
 			</div>
 		

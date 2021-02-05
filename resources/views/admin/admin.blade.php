@@ -82,13 +82,23 @@
 
 {{-- <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script> --}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-
+<script src="{{ asset('plugins/select2/js/select2.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/admintalleres.js') }}"></script>
 <script type="text/javascript" src="{{asset('plugins/customfileinputs/js/custom-file-input.js')}}"></script>
 <div id="js">
 <script async = true src="{{asset('js/bootstrap-tagsinput.js')}}"></script>
 </div>
 
+<script>
+$(function() {
+    //Initialize Select2 Elements
+    $('.select3').select2({
+
+    })
+
+
+});
+</script>
 @endsection
 
 @endsection

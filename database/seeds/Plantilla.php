@@ -417,6 +417,14 @@ class Plantilla extends Seeder
                           'created_at' => now(),
                           'updated_at' => now(),
                           ]);
+                          //  DB::table('plantillas')->insert([
+                          // 'id' => 50,
+                          // 'nombre' => 'PLANTILLA 43 - NOTA DE CREDITO',
+                          // 'descripcion' => 'Plantilla para elaborar una nota de debito ',
+                          // 'plantilla' => 'si',
+                          // 'created_at' => now(),
+                          // 'updated_at' => now(),
+                          // ]);
   
     }
 }

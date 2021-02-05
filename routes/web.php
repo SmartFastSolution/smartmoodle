@@ -279,6 +279,7 @@ route::post('/taller45', 'AdminController@taller45')->name('admin.taller45');
 route::post('/taller47', 'AdminController@taller47')->name('admin.taller47');
 route::post('/taller48', 'AdminController@taller48')->name('admin.taller48');
 route::post('/taller49', 'AdminController@taller49')->name('admin.taller49');
+// route::post('/taller50', 'AdminController@taller50')->name('admin.taller50');
 // route::post('/taller57', 'AdminController@taller57')->name('admin.taller57');
 	});
 
@@ -454,6 +455,11 @@ route::post('/sistema/admin/modulo/retencioniva', 'AdminController@retencionIva'
 route::post('/sistema/admin/modulo/nominaempleados', 'AdminController@crearNomina')->name('modulo.nominaempleados');
 route::post('/sistema/admin/modulo/provisiondebeneficio', 'AdminController@crearProvision')->name('modulo.provisiondebeneficio');
 route::post('/sistema/admin/modulo/taller-concatenado', 'AdminController@tallerConcatenado')->name('modulo.tallerconcatenado');
+
+route::post('/sistema/admin/modulo/cheque', 'ModuloDocumentoController@cheque')->name('modulo.cheque');
+route::post('/sistema/admin/modulo/documentos', 'ModuloDocumentoController@documentos')->name('modulo.documentos');
+route::post('/sistema/admin/modulo/documento/edit', 'ModuloDocumentoController@edicion')->name('modulo.editdocument');
+route::post('/sistema/admin/modulo/documento/delete', 'ModuloDocumentoController@eliminar')->name('modulo.eliminardocument');
 //FIN DE MODULOS CONTABLES
 //
 //

@@ -107,15 +107,13 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function nivel(){
-          
         return $this->belongsTo('App\Nivel');
     }
-    
-
-    
     public function assignmets(){
-          
         return $this->hasMany('App\Assignment');
+    }
+     public function cheques(){
+        return $this->hasMany('App\Modulo\ModuloCheque');
     }
     
 }
