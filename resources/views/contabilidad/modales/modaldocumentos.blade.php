@@ -107,13 +107,13 @@
           <div class="form-group row">
         <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
         <div class="col-sm-4">
-        <input type="text" class="form-control mb-2" placeholder="Modulo al que pertenece la nota de debito" v-model="modulo">
+        <input type="text" class="form-control mb-2" placeholder="Modulo al que pertenece la nota de credito" v-model="modulo">
           
         </div>
       </div>
         <div class="" style="box-shadow: 5px 5px 15px 0px  #F42787">
         <div class="row p-3 justify-content-between">
-          <div class="col-5">
+          <div class="col-lg-5 col-sm-12 mb-sm-3">
             <img class="img-fluid" src="{{ asset('img/nota-credito.png') }}" alt="">
             <div class="row">
               <div class="col-12 rounded border-success border text-left">
@@ -126,7 +126,7 @@
             </div>
           </div>
 
-          <div class="col-6 rounded border-success border text-left p-2">
+          <div class="col-lg-6 col-sm-12 rounded border-success border text-left p-2">
 
             <h6>R.U.C.  0925487699001</h6>
             <h5>NOTA DE CREDITO</h5>
@@ -140,43 +140,43 @@
           </div>
         </div>
         <div class="row p-3 m-0 mb-2 border border-info">
-          <div class="col-7">
+          <div class="col-lg-7 col-sm-12">
             <div class="row mb-1">
-              <div class="col-6"> <label>RAZÓN SOCIAL/NOMBRES Y APELLIDOS</label></div>
-              <div class="col-6"><input  name="nombre" type="text " v-model="nota_credito.razon_social" class="form-control"></div>
+              <div class="col-lg-6 col-sm-12"> <label>RAZÓN SOCIAL/NOMBRES Y APELLIDOS</label></div>
+              <div class="col-lg-6 col-sm-12"><input  name="nombre" type="text " v-model="nota_credito.razon_social" class="form-control"></div>
             </div>
             <div class="row  mb-1">
-              <div class="col-6 "><label for="">FECHA EMISIÓN :</label></div>
-              <div class="col-6"><input  name="fecha_emision" type="text " v-model="nota_credito.fecha_emision" class="form-control"></div>
+              <div class="col-lg-6 col-sm-12 "><label for="">FECHA EMISIÓN :</label></div>
+              <div class="col-lg-6 col-sm-12"><input  name="fecha_emision" type="text " v-model="nota_credito.fecha_emision" class="form-control"></div>
             </div>
           </div>
-          <div class="col-5">
+          <div class="col-lg-5 col-sm-12">
             <div class="row mb-3">
-              <div class="col-5"><label class="col-form-label">R.U.C/C.I. :</label></div>
-              <div class="col-7"><input  name="ruc" type="text " v-model="nota_credito.ruc" class="form-control"></div>
+              <div class="col-lg-5 col-sm-12"><label class="col-form-label">R.U.C/C.I. :</label></div>
+              <div class="col-lg-7 col-sm-12"><input  name="ruc" type="text " v-model="nota_credito.ruc" class="form-control"></div>
             </div>
             {{-- <div class="row">
               <div class="col-5"><label class="col-form-label" for="">GUÍA DE REMISIÓN :</label></div>
               <div class="col-7"><input  name="emision" type="text " v-model="nota_credito." class="form-control"></div>
             </div> --}}
           </div>
-            <div class="col-12 mt-2">
+            <div class="col-12 mt-2 col-sm-12">
             <div class="row mb-1">
-              <div class="col-6"><label for="">COMPROBANTE QUE MODIFICA</label></div>
-              <div class="col-6"><input  name="nombre" type="text " v-model="nota_credito.comprobante" class="form-control"></div>
+              <div class="col-lg-6 col-sm-12"><label for="">COMPROBANTE QUE MODIFICA</label></div>
+              <div class="col-lg-6 col-sm-12"><input  name="nombre" type="text " v-model="nota_credito.comprobante" class="form-control"></div>
             </div>
             <div class="row  mb-1">
-              <div class="col-6 "><label for="">FECHA EMISION(Comprobante a modificar) :</label></div>
-              <div class="col-6"><input  type="text " v-model="nota_credito.emision" class="form-control"></div>
+              <div class="col-lg-6 col-sm-12 "><label for="">FECHA EMISION(Comprobante a modificar) :</label></div>
+              <div class="col-lg-6 col-sm-12"><input  type="text " v-model="nota_credito.emision" class="form-control"></div>
             </div>
             <div class="row  mb-1">
-              <div class="col-6 "><label for="">RAZON DE MODIFICACION:</label></div>
-              <div class="col-6"><input  type="text " v-model="nota_credito.razon_modificacion" class="form-control"></div>
+              <div class="col-lg-6 col-sm-12 "><label for="">RAZON DE MODIFICACION:</label></div>
+              <div class="col-lg-6 col-sm-12"><input  type="text " v-model="nota_credito.razon_modificacion" class="form-control"></div>
             </div>
           </div>
         </div>
 
-        <div class="row p-3  mb-2 ">
+        <div class="row p-3  mb-2 table-responsive">
           <table class="table table-bordered table-sm">
             <thead>
               <tr align="center">
@@ -208,7 +208,7 @@
           <a href="#" class=" btn btn-outline-danger" @click.prevent="aggDatoNota()">Agregar Columna</a>
         </div>  
           <div class="row p-3  mb-2">
-        <div class="col-6 border-danger border align-self-end">
+        <div class="col-lg-6 col-sm-12 mb-sm-3 border-danger border align-self-end">
           <h2 class="text-center">Informacion Adicional</h2>
           <div class="row mb-2">
             <div class="col-4"><label class="col-form-label" for="">Direccion</label></div>
@@ -223,7 +223,7 @@
             <div class="col-8">ediciones_palacios@hotmail.com</div>
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-lg-6 col-sm-12">
           <table class="table table-bordered">
             
             <tbody>
@@ -307,7 +307,7 @@
       </div>
         <div class="" style="box-shadow: 5px 5px 15px 0px  #F42787">
         <div class="row p-3 justify-content-between">
-          <div class="col-5">
+          <div class="col-lg-5 col-sm-12 mb-sm-3">
             <img class="img-fluid" src="{{ asset('img/talleres/imagen-27.jpg') }}" alt="">
             <div class="row">
               <div class="col-12 rounded border-success border text-left">
@@ -319,7 +319,7 @@
               </div>
             </div>
           </div>
-          <div class="col-6 rounded border-success border text-left p-2">
+          <div class="col-lg-6 col-sm-12 rounded border-success border text-left p-2">
             <h6>R.U.C.  0925487699001</h6>
             <h5>FACTURA</h5>
             <h6>No. 001-001-000000002</h6>
@@ -332,28 +332,28 @@
           </div>
         </div>
         <div class="row p-3 m-0 mb-2 border border-info">
-          <div class="col-7">
+          <div class="col-lg-7 col-sm-12">
             <div class="row mb-3">
-              <div class="col-6"><label class="col-form-label" for="">RAZÓN SOCIAL/NOMBRES Y APELLIDOS :</label></div>
-              <div class="col-6"><input  name="nombre" type="text " v-model="factura.razon_social"  class="form-control"></div>
+              <div class="col-lg-6 col-sm-12"><label class="col-form-label" for="">RAZÓN SOCIAL/NOMBRES Y APELLIDOS :</label></div>
+              <div class="col-lg-6 col-sm-12"><input  name="nombre" type="text " v-model="factura.razon_social"  class="form-control"></div>
             </div>
             <div class="row">
-              <div class="col-6"><label class="col-form-label" for="">FECHA EMISIÓN :</label></div>
-              <div class="col-6"><input  name="fecha_emision" type="text " v-model="factura.fecha_emision" class="form-control"></div>
+              <div class="col-lg-6 col-sm-12"><label class="col-form-label" for="">FECHA EMISIÓN :</label></div>
+              <div class="col-lg-6 col-sm-12"><input  name="fecha_emision" type="text " v-model="factura.fecha_emision" class="form-control"></div>
             </div>
           </div>
-          <div class="col-5">
+          <div class="col-lg-5 col-sm-12">
             <div class="row mb-3">
-              <div class="col-5"><label class="col-form-label">R.U.C/C.I. :</label></div>
-              <div class="col-7"><input  name="ruc" type="text " v-model="factura.ruc" class="form-control"></div>
+              <div class="col-lg-5 col-sm-12"><label class="col-form-label">R.U.C/C.I. :</label></div>
+              <div class="col-lg-7 col-sm-12"><input  name="ruc" type="text " v-model="factura.ruc" class="form-control"></div>
             </div>
             <div class="row">
-              <div class="col-5"><label class="col-form-label" for="">GUÍA DE REMISIÓN :</label></div>
-              <div class="col-7"><input  name="emision" type="text " v-model="factura.guia_remision" class="form-control"></div>
+              <div class="col-lg-5 col-sm-12"><label class="col-form-label" for="">GUÍA DE REMISIÓN :</label></div>
+              <div class="col-lg-7 col-sm-12"><input  name="emision" type="text " v-model="factura.guia_remision" class="form-control"></div>
             </div>
           </div>
         </div>
-        <div class="row p-3  mb-2 ">
+        <div class="row p-3  mb-2 table-responsive">
           <table class="table table-bordered table-sm">
             <thead>
               <tr align="center">
@@ -383,7 +383,7 @@
           <a href="#" class="addRow btn btn-outline-danger" @click.prevent="aggDatoFactura()">Agregar Columna</a>
         </div>  
           <div class="row p-3  mb-2">
-        <div class="col-6 border-danger border align-self-end">
+        <div class="col-lg-6 col-sm-12 mb-sm-3 border-danger border align-self-end">
           <h2 class="text-center">Informacion Adicional</h2>
           <div class="row mb-2">
             <div class="col-4"><label class="col-form-label" for="">Direccion</label></div>
@@ -398,7 +398,7 @@
             <div class="col-8">ediciones_palacios@hotmail.com</div>
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-lg-6 col-sm-12 mb-sm-3 ">
           <table class="table table-bordered">
            <tbody>
               <tr>
