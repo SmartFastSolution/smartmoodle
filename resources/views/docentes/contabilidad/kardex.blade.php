@@ -93,7 +93,7 @@
 				<tbody>
 					<tr>
 						<td>Inventario Inicial de Mercaderias</td>
-						<td><input autocomplete="ÑÖcompletes" disabled="" v-model="prueba.cantidad.inventario_inicial" type="number" class="form-control form-control-sm text-right text-right></td>
+						<td><input autocomplete="ÑÖcompletes" disabled="" v-model="prueba.cantidad.inventario_inicial" type="number" class="form-control form-control-sm text-right"></td>
 						<td><input autocomplete="ÑÖcompletes" disabled="" v-model="prueba.precio.inventario_inicial" type="number" class="form-control form-control-sm text-right text-right"></td>
 					</tr>
 					<tr>

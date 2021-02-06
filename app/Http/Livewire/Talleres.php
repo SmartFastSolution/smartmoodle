@@ -27,6 +27,7 @@ class Talleres extends Component
     public $curso;
     public $paralelos = [];
     public $filtros_paralelos = [];
+    public $p = [];
 
 	public function mount($id)
 	{
@@ -41,6 +42,10 @@ class Talleres extends Component
         $distribuciondo = Distribuciondo::where('user_id', $user_id)->where('materia_id', $this->materia_id)->first();
 
          $this->filtros_paralelos = $distribuciondo->paralelos;
+           
+        foreach ($this->filtros_paralelos as $fp) {
+            $this->p[] = $fp->id;
+        }
 		 // $materia = Materia::select('nombre')->where('id', $id)->first();
 		// $this->contenidos = $contenido;
 	}
@@ -50,7 +55,10 @@ class Talleres extends Component
           $niveles = DB::table('distribucionmacu_taller')
         ->join('nivels', 'distribucionmacu_taller.nivel_id', '=', 'nivels.id')
         ->select('distribucionmacu_taller.*', 'nivels.nombre as nivel_nombre')
+        ->whereIn('nivel_id', $this->p)
         ->get();
+
+
 
 // dd($niveles);
 
@@ -64,6 +72,7 @@ class Talleres extends Component
                             ->orWhere('contenidos.nombre', 'like', '%'.$this->buscador.'%');
                  })
             ->where('contenidos.materia_id', $this->materia_id)
+            ->whereIn('nivel_id', $this->p)
             ->select('distribucionmacu_taller.*', 'tallers.enunciado as enunciado_taller', 'tallers.nombre as nombre_taller','nivels.nombre as paralelo', 'contenidos.nombre as nombre_unidad')
             ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
             ->paginate($this->perPage);
@@ -79,6 +88,7 @@ class Talleres extends Component
 		                   	->orWhere('contenidos.nombre', 'like', '%'.$this->buscador.'%');
 		         })
             ->where('contenidos.materia_id', $this->materia_id)
+            ->whereIn('nivel_id', $this->p)
             ->where('distribucionmacu_taller.nivel_id',$this->search_paralelo)
             ->select('distribucionmacu_taller.*', 'tallers.enunciado as enunciado_taller', 'tallers.nombre as nombre_taller','nivels.nombre as paralelo', 'contenidos.nombre as nombre_unidad')
             ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')

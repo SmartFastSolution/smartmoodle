@@ -399,7 +399,7 @@ class TallerDocenteController extends Controller
             return view('docentes.talleres.taller36', compact('datos', 'd', 'update_imei', 'a', 'user' , 'fecha', 'taller'));
 
         }elseif ($plant == 37) {
-          
+          // return $fecha;
             $consul = Taller::findorfail($id);
             $datos = TallerModuloContable::where('taller_id', $consul->id)->firstOrFail();
                   JavaScript::put([

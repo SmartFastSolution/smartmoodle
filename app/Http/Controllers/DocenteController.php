@@ -40,6 +40,7 @@ class DocenteController extends Controller
                 ->join('materias', 'materias.id', '=', 'distribucionmacu_materia.materia_id')
                 ->select('distribuciondos.*','cursos.nombre as nombre_curso' ,'materias.nombre as nombre_materia')
                 ->where('distribuciondos.user_id', $user->id)
+
               
                 ->get();
                 // return $au;
@@ -51,7 +52,7 @@ class DocenteController extends Controller
                     "materia_id" => $materia->materia_id,
                     'materia' => $materia->nombre_materia,
                     "curso" => $materia->nombre_curso,
-                    "paralelos" => $paralelos = DB::table('distribuciondo_nivel')->select('nivel_nombre')->where('distribuciondo_id', $materia->id)->get(),
+                    "paralelos" => $paralelos = DB::table('distribuciondo_nivel')->select('nivel_nombre')->where('distribuciondo_id', $materia->id)->orderBy('nivel_nombre', 'asc')->get(),
                   );
                 }
                 // return $materias;
@@ -142,6 +143,7 @@ class DocenteController extends Controller
           ->select('distribuciondo_nivel.*')
           ->where('distribuciondos.user_id', $user->id)
           ->where('distribuciondos.materia_id', $id)
+          ->orderBy('nivel_nombre', 'asc')
           ->get();
 
           // return $paralelos;

@@ -33,7 +33,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									@foreach ($talleres= App\Taller::where('contenido_id', $contenido->id)->where('estado', 1)->get() as $taller)
+									@foreach ($talleres= App\Taller::where('contenido_id', $contenido->id)->get() as $taller)
 									<tr>
 										{{-- <td>{{$taller->contenido->nombre}}</td> --}}
 										<td>{{$taller['nombre']}}</td>
@@ -196,7 +196,7 @@
 					<th scope="col">Enunciado </th>
 					<th scope="col">Paralelo </th>
 					<th scope="col">Estado</th>
-					<th  scope="col">Fecha Entrega</th>
+					<th  scope="col" width="100">Fecha Entrega</th>
 					<th scope="col" colspan="2">Opciones</th>
 				</tr>
 			</thead>

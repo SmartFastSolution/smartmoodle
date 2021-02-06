@@ -208,6 +208,43 @@
     </div>
     @endif
           </div>
+           <h2 class="text-center font-weight-bold">Aplicacion de Documentos</h2>
+        <div class="row justify-content-center mb-5 p-5" id="documentos"  style="height: 200px; overflow-y: scroll; overflow-x: hidden;">
+            <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      {{-- <th scope="col">#</th> --}}
+      <th scope="col">Tipo de Documento</th>
+      <th scope="col">Modulo</th>
+      <th  width="200" class="text-center">Ver Documento</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="(cheque, index) in cheques">
+      <td>@{{ cheque.tipo_documento }}</td>
+      <td>@{{ cheque.modulo }}</td>
+      <td class="text-center"><a class="btn btn-success" href="" @click.prevent="verCheque(cheque.id, index)"><i class="fa fa-money-bill"></i></a>
+      </td>
+    </tr>
+
+
+  <tr v-for="(nota_credito, index) in nota_creditos">
+      <td>@{{ nota_credito.tipo_documento }}</td>
+      <td>@{{ nota_credito.modulo }}</td>
+      <td class="text-center"><a class="btn btn-danger" href="" @click.prevent="verNota(nota_credito.id, index)"><i class="fa fa-file-invoice-dollar"></i></a>
+     </td>
+    </tr>  
+      <tr v-for="(factura, index) in facturas">
+      <td>@{{ factura.tipo_documento }}</td>
+      <td>@{{ factura.modulo }}</td>
+      <td class="text-center"><a class="btn btn-info" href="" @click.prevent="verFactura(factura.id, index)"><i class="fa fa-file-invoice-dollar"></i></a>
+   </td>
+    </tr>  
+</tbody>
+</table>
+@include('docentes.contabilidad.modales.modaldocumentos')
+
+        </div>
            @if ($rol === 'estudiante')
             <div class="row justify-content-center">
               <div class="col-5">
@@ -245,6 +282,306 @@ console.log(datos)
   //   }
   
   // })
+  // 
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////APLICACION DE DOCUMENTOS///////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    const documentos = new Vue({
+      el: "#documentos",
+      data:{
+        modulo:'',
+        user_id:user,
+        cheque:{
+            tipo_cheque:'',
+            banco:'',
+            girador:'',
+            cantidad:'',
+            n_cheque:'',
+            cantidad_letra:'',
+            ciudad:'',
+            fecha:'',
+            firma:'',
+            update:false,
+            cheque_id:'',
+            index:'',
+        },
+        nota_credito:{
+            razon_social:'',
+            fecha_emision:'',
+            razon_modificacion:'',
+            ruc:'',
+            comprobante:'',
+            emision:'',
+            update:false,
+            nota_id:'',
+            index:'',
+            dato:{
+                codigo:'',
+                cod_aux:'',
+                cantidad:'',
+                descripcion:'',
+                descuento:'',
+                p_unitario:'',
+                venta:'',
+            },
+            datos:[
+                {
+                codigo:'',
+                cod_aux:'',
+                cantidad:'',
+                descripcion:'',
+                p_unitario:'',
+                descuento:'',
+                venta:'', 
+                }
+            ],
+            totales:{
+                subtotal_12:'',
+                subtotal_0:'',
+                subtotal_no_iva:'',
+                subtotal_exe_iva:'',
+                subtotal_sin_va:'',
+                total_descuento:'',
+                ice:'',
+                iva_12:'',
+                irbpnr:'',
+                total:'',
+            }
+        },
+        factura:{
+            razon_social:'',
+            fecha_emision:'',
+            ruc:'',
+            guia_remision:'',
+            update:false,
+            nota_id:'',
+            index:'',
+            dato:{
+                codigo:'',
+                cod_aux:'',
+                cantidad:'',
+                descripcion:'',
+                descuento:'',
+                p_unitario:'',
+                venta:'',
+            },
+            datos:[
+                {
+                codigo:'',
+                cod_aux:'',
+                cantidad:'',
+                descripcion:'',
+                p_unitario:'',
+                descuento:'',
+                venta:'', 
+                }
+            ],
+            totales:{
+                subtotal_12:'',
+                subtotal_0:'',
+                subtotal_no_iva:'',
+                subtotal_exe_iva:'',
+                subtotal_sin_va:'',
+                total_descuento:'',
+                ice:'',
+                iva_12:'',
+                irbpnr:'',
+                total:'',
+            }
+        },
+        cheques:[],
+        documentos:[],
+        facturas:[],
+        nota_creditos:[],
+      },
+       mounted: function(){
+        this.getdocumentos();
+      },
+      methods:{
+               getdocumentos(){
+        let set = this;
+        let url = '/sistema/admin/modulo/documentos';
+            axios.post(url,{
+                id: taller,
+            }).then(response => {
+                // console.log(response.data.cheques)
+                this.cheques = response.data.cheques;
+                this.nota_creditos = response.data.creditos;
+                this.facturas = response.data.facturas;
+            }).catch(function(error){
+
+            }); 
+        },
+             verCheque(id, index){
+                let set                   = this;
+                let cheque                = this.cheques.filter(x => x.id == id);
+                set.cheque.cheque_id      = cheque[0].id;
+                set.cheque.index          = index;
+                set.modulo                = cheque[0].modulo;
+                set.cheque.tipo_cheque    = cheque[0].tipo_cheque;
+                set.cheque.banco          = cheque[0].banco;
+                set.cheque.girador        = cheque[0].girador;
+                set.cheque.cantidad       = cheque[0].cantidad;
+                set.cheque.n_cheque       = cheque[0].n_cheque;
+                set.cheque.cantidad_letra = cheque[0].cantidad_letra;
+                set.cheque.ciudad         = cheque[0].ciudad;
+                set.cheque.fecha          = cheque[0].fecha;
+                set.cheque.firma          = cheque[0].firma;
+                $('#m_cheque').modal('show');
+                set.cheque.update = true
+
+            // console.log(cheque);
+        },
+            verNota(id, index){
+                     let set                                   = this;
+                     let nota_credito                          = this.nota_creditos.filter(x => x.id == id);
+                     let obj                                   = JSON.parse(nota_credito[0].datos);
+                     let totales                               = JSON.parse(nota_credito[0].totales);
+                     set.nota_credito.nota_id                  = nota_credito[0].id;
+                     set.nota_credito.index                    = index;
+                     set.modulo                                = nota_credito[0].modulo;
+                     set.nota_credito.razon_social             = nota_credito[0].razon_social;
+                     set.nota_credito.fecha_emision            = nota_credito[0].fecha_emision;
+                     set.nota_credito.ruc                      = nota_credito[0].ruc;
+                     set.nota_credito.comprobante              = nota_credito[0].comprobante;
+                     set.nota_credito.razon_modificacion       = nota_credito[0].razon_modificacion;
+                     set.nota_credito.emision                  = nota_credito[0].emision;
+                     set.nota_credito.datos                    = JSON.parse(nota_credito[0].datos);
+                     set.nota_credito.totales.subtotal_12      = totales.subtotal_12;
+                     set.nota_credito.totales.subtotal_0       = totales.subtotal_0;
+                     set.nota_credito.totales.subtotal_no_iva  = totales.subtotal_no_iva;
+                     set.nota_credito.totales.subtotal_exe_iva = totales.subtotal_exe_iva;
+                     set.nota_credito.totales.subtotal_sin_va  = totales.subtotal_sin_va;
+                     set.nota_credito.totales.total_descuento  = totales.total_descuento;
+                     set.nota_credito.totales.ice              = totales.ice;
+                     set.nota_credito.totales.iva_12           = totales.iva_12;
+                     set.nota_credito.totales.irbpnr           = totales.irbpnr;
+                     set.nota_credito.totales.total            = totales.total;
+                     set.nota_credito.update                   = true;
+
+                       $('#m_credito').modal('show');
+
+            // console.log(obj);
+        },
+               verFactura(id, index){
+                     let set                                   = this;
+                     let factura                          = this.facturas.filter(x => x.id == id);
+                     let obj                                   = JSON.parse(factura[0].datos);
+                     let totales                               = JSON.parse(factura[0].totales);
+                     set.factura.factura_id                  = factura[0].id;
+                     set.factura.index                    = index;
+                     set.modulo                                = factura[0].modulo;
+                     set.factura.razon_social             = factura[0].razon_social;
+                     set.factura.fecha_emision            = factura[0].fecha_emision;
+                     set.factura.ruc                      = factura[0].ruc;
+                     set.factura.guia_remision              = factura[0].guia_remision;
+                     set.factura.datos                    = JSON.parse(factura[0].datos);
+                     set.factura.totales.subtotal_12      = totales.subtotal_12;
+                     set.factura.totales.subtotal_0       = totales.subtotal_0;
+                     set.factura.totales.subtotal_no_iva  = totales.subtotal_no_iva;
+                     set.factura.totales.subtotal_exe_iva = totales.subtotal_exe_iva;
+                     set.factura.totales.subtotal_sin_va  = totales.subtotal_sin_va;
+                     set.factura.totales.total_descuento  = totales.total_descuento;
+                     set.factura.totales.ice              = totales.ice;
+                     set.factura.totales.iva_12           = totales.iva_12;
+                     set.factura.totales.irbpnr           = totales.irbpnr;
+                     set.factura.totales.total            = totales.total;
+                     set.factura.update                   = true;
+
+                       $('#m_factura').modal('show');
+
+            // console.log(obj);
+        },
+               resetCheque(){
+                let set                   = this;
+                set.modulo                = '';
+                set.cheque.tipo_cheque    = '';
+                set.cheque.banco          = '';
+                set.cheque.girador        = '';
+                set.cheque.cantidad       = '';
+                set.cheque.n_cheque       = '';
+                set.cheque.cantidad_letra = '';
+                set.cheque.ciudad         = '';
+                set.cheque.fecha          = '';
+                set.cheque.firma          = '';
+                set.cheque.cheque_id      = '';
+                set.cheque.index          = '';
+                set.cheque.update         = false;
+        },
+     resetNota(){
+                    let set = this;
+                     set.modulo                                = '';
+                     set.nota_credito.razon_social             = '';
+                     set.nota_credito.fecha_emision            = '';
+                     set.nota_credito.ruc                      = '';
+                     set.nota_credito.comprobante              = '';
+                     set.nota_credito.razon_modificacion       = '';
+                     set.nota_credito.emision                  = '';
+                     set.nota_credito.datos                    = 
+                     [
+                         {
+                             codigo:'',
+                             cod_aux:'',
+                             cantidad:'',
+                             descripcion:'',
+                             p_unitario:'',
+                             descuento:'',
+                             venta:'', 
+                         }
+                     ];
+                     set.nota_credito.totales.subtotal_12      = '';
+                     set.nota_credito.totales.subtotal_0       = '';
+                     set.nota_credito.totales.subtotal_no_iva  = '';
+                     set.nota_credito.totales.subtotal_exe_iva = '';
+                     set.nota_credito.totales.subtotal_sin_va  = '';
+                     set.nota_credito.totales.total_descuento  = '';
+                     set.nota_credito.totales.ice              = '';
+                     set.nota_credito.totales.iva_12           = '';
+                     set.nota_credito.totales.irbpnr           = '';
+                     set.nota_credito.totales.total            = '';
+                    set.nota_credito.update = false
+                    set.nota_credito.nota_id = '';
+                    set.nota_credito.index = '';  
+        },
+            resetFactura(){
+                    let set = this;
+                     set.modulo                                = '';
+                     set.factura.razon_social             = '';
+                     set.factura.fecha_emision            = '';
+                     set.factura.ruc                      = '';
+                     set.factura.guia_remision            = '';
+                     set.factura.datos                    = 
+                     [
+                         {
+                             codigo:'',
+                             cod_aux:'',
+                             cantidad:'',
+                             descripcion:'',
+                             p_unitario:'',
+                             descuento:'',
+                             venta:'', 
+                         }
+                     ];
+                     set.factura.totales.subtotal_12      = '';
+                     set.factura.totales.subtotal_0       = '';
+                     set.factura.totales.subtotal_no_iva  = '';
+                     set.factura.totales.subtotal_exe_iva = '';
+                     set.factura.totales.subtotal_sin_va  = '';
+                     set.factura.totales.total_descuento  = '';
+                     set.factura.totales.ice              = '';
+                     set.factura.totales.iva_12           = '';
+                     set.factura.totales.irbpnr           = '';
+                     set.factura.totales.total            = '';
+                    set.factura.update = false
+                    set.factura.factura_id = '';
+                    set.factura.index = '';
+
+
+                    
+        }
+      }
+
+  });
  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////BALANCE INICIAL HORIZONTAL/////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

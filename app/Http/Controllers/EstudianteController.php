@@ -60,6 +60,7 @@ class EstudianteController extends Controller
         ->join("distribuciondo_nivel", "distribuciondo_nivel.distribuciondo_id", "=", "distribuciondos.id")
         ->join("users", "users.id", "=", "distribuciondos.user_id")
         ->where('distribuciondo_nivel.nivel_id', $usuario->nivel_id)
+        ->where('assignment_materia.user_id', $usuario->id)
         ->select("assignment_materia.*","materias.nombre as nombre_materia", "users.name as nombre_docente", "users.apellido as apellido_docente")
         ->get();
 
@@ -108,7 +109,9 @@ class EstudianteController extends Controller
         ->join('tallers', 'distribucionmacu_taller.taller_id', '=', 'tallers.id')
          ->where('distribucionmacu_taller.distribucionmacu_id', $curso->id)
          ->where('distribucionmacu_taller.nivel_id', $user->nivel_id)
+         ->where('distribucionmacu_taller.nivel_id', $user->nivel_id)
          ->whereNotIn('distribucionmacu_taller.taller_id', $ids)
+         ->where('distribucionmacu_taller.estado', 1)
         ->select("distribucionmacu_taller.*", "contenidos.nombre as unidad", "tallers.nombre as nombre_taller", "tallers.enunciado")
 
          ->get();

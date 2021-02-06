@@ -41,15 +41,19 @@ class AssignmentController extends Controller
             'estado' =>   ['required' ,'in:on,off'],
         ]);
 
-         $as = new Assignment;
+         $as                = new Assignment;
          $as ->instituto_id = $request->instituto;
-         $as ->user_id = $request->estudiante;
-         $as ->estado = $request->estado;
+         $as ->user_id      = $request->estudiante;
+         $as ->estado       = $request->estado;
          $as->save();
 
-         if($request->get('materia')){
-            $as->materias()->sync($request->get('materia'));
-          }
+         // if($request->get('materia')){
+         //    $as->materias()->sync($request->get('materia'));
+         //  }
+         foreach ($request->get('materia') as $group) { 
+        $ag =   DB::table('assignment_materia')->insert(
+                ['assignment_id' => $as->id, 'materia_id' => $group, 'user_id' => $request->estudiante]);
+        }      
             return redirect('sistema/assignments ')->with('success','Haz Creado una Asignación con exito!');
 
     }

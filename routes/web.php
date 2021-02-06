@@ -457,7 +457,10 @@ route::post('/sistema/admin/modulo/provisiondebeneficio', 'AdminController@crear
 route::post('/sistema/admin/modulo/taller-concatenado', 'AdminController@tallerConcatenado')->name('modulo.tallerconcatenado');
 
 route::post('/sistema/admin/modulo/cheque', 'ModuloDocumentoController@cheque')->name('modulo.cheque');
+route::post('/sistema/admin/modulo/factura', 'ModuloDocumentoController@factura')->name('modulo.factura');
+route::post('/sistema/admin/modulo/nota_credito', 'ModuloDocumentoController@nota_credito')->name('modulo.nota_credito');
 route::post('/sistema/admin/modulo/documentos', 'ModuloDocumentoController@documentos')->name('modulo.documentos');
+route::post('/sistema/admin/modulo/documento/show', 'ModuloDocumentoController@vista')->name('modulo.vistadocumento');
 route::post('/sistema/admin/modulo/documento/edit', 'ModuloDocumentoController@edicion')->name('modulo.editdocument');
 route::post('/sistema/admin/modulo/documento/delete', 'ModuloDocumentoController@eliminar')->name('modulo.eliminardocument');
 //FIN DE MODULOS CONTABLES
