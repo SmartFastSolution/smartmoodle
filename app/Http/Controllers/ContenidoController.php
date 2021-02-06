@@ -51,35 +51,19 @@ class ContenidoController extends Controller
             'nombre'      => 'required|string|max:150',
             'descripcion' => 'required|string|max:250',
             'materia'     =>'required',
-            'archivo'     => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:100000',
             'estado'      => 'required|in:on,off',
         ]);
      
     
          
-        if($request->hasFile('archivo')){
-
-            $archivo=$request->file('archivo');
-            $nombre=time().$archivo->getClientOriginalName();
-            $ruta= public_path().'/archivos';
-            $archivo->move($ruta,$nombre);
-            $urlarchivo['url']='/archivos/'.$nombre;
-         }
-       
+     
        
 
          $contenido = New Contenido;
          $contenido->nombre = $request->nombre;
          $contenido->descripcion =$request->descripcion;
        
-         if($request->accion == 1){
-          
-            $contenido->accion = true;
-         }elseif($request->accion == 0){
-          
-            $contenido->accion = false;
-         }
-       
+      
          
          $contenido->estado = $request->estado;
 
@@ -91,8 +75,7 @@ class ContenidoController extends Controller
          $contenido->save();
               
          
-         $contenido->archivo()->create($urlarchivo);
-     
+
 
         return redirect('sistema/contenidos')->with('success','Contenido Creado Exitosamente!');
   
@@ -148,8 +131,10 @@ class ContenidoController extends Controller
             'archivo'  => 'mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:100000',
             'estado'      => 'required|in:on,off',
         ]);
+
+          $contenido->update($request->all());
       
-        if($request->hasFile('archivo')){
+      /**  if($request->hasFile('archivo')){
 
             $archivo=$request->file('archivo');
             $nombre=time().$archivo->getClientOriginalName();
@@ -166,9 +151,8 @@ class ContenidoController extends Controller
             $contenido->accion = false;
          }
 
-        $contenido->update($request->all());
       
-
+      
         if ($request->hasFile('archivo')){
             $contenido->archivo()->delete();
         }
@@ -178,7 +162,7 @@ class ContenidoController extends Controller
         if ($request->hasFile('archivo')){
             $contenido->archivo()->create($urlarchivo);
         }
-     
+     **/
           if($request->get('materia')){
            
               $contenido->materia_id = $request->materia;

@@ -27,7 +27,7 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
      <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
 
-<form action="{{ route('taller4',['idtaller' => $d]) }}" method="POST">
+<form action="{{ route('taller4',['idtaller' => $d]) }}" method="POST" id="taller4">
     @csrf
 	<div class="container">
 		<div class="row">
@@ -84,9 +84,34 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 			</div>
 		</div>
 		<div class="row justify-content-center mb-2">
-        		<input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
+        		<input type="button" id="button" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
     	</div>
 	</div>
 
 </form>
+@endsection
+@section('js')
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script type="text/javascript">
+
+ $( "#button" ).click(function( event ) {
+  event.preventDefault();
+  Swal.fire({
+  title: 'Seguro que deseas completar el taller?',
+  text: "Esta accion ya no se puede revertir!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Si, Completar!',
+  cancelButtonText: 'Cancelar!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    $( "#taller4" ).submit();
+  }
+})
+});
+
+</script>
 @endsection

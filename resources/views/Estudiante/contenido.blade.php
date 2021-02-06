@@ -51,11 +51,11 @@
         <h1 class="font-weight-light" style="color:red;"> @isset ( auth()->user()->instituto->nombre)
         {{ auth()->user()->instituto->nombre}}
         @endisset</h1>
-        <h2 class="font-weight-light"> <strong> {{auth()->user()->curso->nombre}} </strong></h2>
-        @foreach($materia->distribuciondos as $doc)
-        <h3 class="font-weight-light"> <strong>Docente|{{$doc->user->name}} {{$doc->user->apellido}}</strong>
+        <h2 class="font-weight-light"> <strong> {{$curso->curso->nombre}} - ({{ auth()->user()->nivel->nombre }})</strong></h2>
+        
+        <h3 class="font-weight-light"> <strong>Docente|{{$docente->nombre_docente}} {{$docente->apellido_docente}}</strong>
         </h3>
-        @endforeach
+       
         <!-- <a class="btn btn-primary btn" href=""><i class="far fa-clipboard"></i> Calificaciones</i></a> -->
     </div>
 </section>
@@ -163,7 +163,7 @@
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="ml-2">
-                    <div class="h5 m-0"> <strong>Talleres</strong></div>
+                    <div class="h5 m-0"> <strong>Talleres Pendientes</strong></div>
                     <div class="h7 text-muted"></div>
                 </div>
             </div>
@@ -197,8 +197,8 @@
                             @foreach($tallers->where('contenido_id', $contenido->id)->where('estado', 1) as
                             $taller)
                             <tr>
-                                <td>{{$taller->contenido->nombre}}</td>
-                                <td>{{$taller['nombre']}}</td>
+                                <td>{{$taller['unidad']}}</td>
+                                <td>{{$taller['nombre_taller']}}</td>
                                 
                                 <td>
                                     <div class="truncate-overflow">
@@ -215,7 +215,7 @@
                                 </td>
                                 <td class="table-button ">
                                     <a class="btn btn-info"
-                                        href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
+                                        href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id])}}"><i
                                     class="fas fa-eye"></i></a>
                                 </td>
                             </tr>

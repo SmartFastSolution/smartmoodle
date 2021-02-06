@@ -27,6 +27,12 @@ class Distribucionmacu extends Model
         return $this->belongsTo('App\Curso');
 
     }
+
+    public function tallers(){
+        return $this->belongsToMany('App\Taller','distribucionmacu_taller')
+            ->withPivot('estado','contenido_id', 'fecha_entrega', 'plantilla_id');
+    }
+    
     
     public function instituto(){
           
@@ -35,7 +41,7 @@ class Distribucionmacu extends Model
     }
     public function users()
     {
-        return $this->hasManyThrough('App\User', 'App\Distrima');
+        return $this->hasMany('App\User');
     }
 
     public function nivel(){

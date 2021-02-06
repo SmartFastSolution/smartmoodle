@@ -100,7 +100,7 @@
                                 <template v-if="role =='2'">
                                     <div class="form-group">
                                         <label>Instituto</label>
-                                        <select class="form-control select" name="instituto" style="width: 99%;">
+                                        <select class="form-control select" v-model="instituto"  name="instituto" style="width: 99%;" @change="getDistrubucion">
                                             <option selected disabled>Elija una Unidad educativa...</option>
                                             @foreach($institutos as $instituto)
                                             <option value="{{$instituto->id}}">{{$instituto->nombre}}
@@ -115,10 +115,8 @@
                                         <label>Curso</label>
                                         <select class="form-control select" name="curso" style="width: 99%;">
                                             <option selected disabled>Elija el Curso...</option>
-                                            @foreach($cursos as $curso)
-                                            <option value="{{$curso->id}}">{{$curso->nombre}}
+                                            <option v-for="(asignacion, index) in asignaciones" :value="asignacion.id">@{{asignacion.curso}}
                                             </option>
-                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -195,10 +193,11 @@
 @section('js')
 <script type="text/javascript">
 var random = new Vue({
-    el: "#random",
     el: "#role",
     data: {
         password: '',
+        asignaciones:[],
+        instituto:'',
         role: '', //para la vista
     },
 
@@ -218,6 +217,18 @@ var random = new Vue({
             });
 
         },
+               getDistrubucion(){
+            let set = this;
+            set.asignaciones = [];
+            axios.post('/sistema/asignaciones', {
+                id: set.instituto
+            }).then(response => {
+                set.asignaciones = response.data;
+                console.log(set.asignaciones);
+            }).catch(e => {
+                console.log(e);
+            });
+        }
 
 
 

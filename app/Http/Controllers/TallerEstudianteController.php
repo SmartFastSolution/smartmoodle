@@ -502,7 +502,7 @@ class TallerEstudianteController extends Controller
 
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now(), 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamente');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
      public function store2(Request $request){
 
@@ -626,7 +626,7 @@ class TallerEstudianteController extends Controller
                }
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     //return response($content = 'Taller completado correctamente', $status = 200);
     }
 
@@ -647,7 +647,7 @@ class TallerEstudianteController extends Controller
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     //return response($content = 'Taller completado correctamente', $status = 200);
     }
     public function store5(Request $request, $idtaller)
@@ -677,7 +677,7 @@ class TallerEstudianteController extends Controller
                    }    
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
 
         public function store6(Request $request, $idtaller)
@@ -703,12 +703,13 @@ class TallerEstudianteController extends Controller
                    }    
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
 
     public function store7(Request $request, $idtaller)
     {
     $id                  = Auth::id();
+    $taller             =   Taller::where('id', $idtaller)->firstOrfail();
     $contenido           = TallerGusanillo::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
     $taller7             = new Gusanillo; 
     $taller7->taller_id  = $idtaller;
@@ -721,13 +722,14 @@ class TallerEstudianteController extends Controller
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
 
     }
 
     public function store8(Request $request, $idtaller)
     {
     $id                  = Auth::id();
+    $taller             =   Taller::where('id', $idtaller)->firstOrfail();
     $contenido           = TallerCirculo::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
     $taller8             = new Circulo; 
     $taller8->taller_id  = $idtaller;
@@ -743,7 +745,7 @@ class TallerEstudianteController extends Controller
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
 
     public function store9(Request $request, $idtaller)
@@ -774,7 +776,7 @@ class TallerEstudianteController extends Controller
 
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
         public function store10(Request $request, $idtaller)
     {
@@ -805,7 +807,7 @@ class TallerEstudianteController extends Controller
                    
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
    }
 
 public function store11(Request $request, $idtaller)
@@ -833,7 +835,7 @@ public function store11(Request $request, $idtaller)
                    
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
    }
 
    public function store12(Request $request, $idtaller)
@@ -862,7 +864,7 @@ public function store11(Request $request, $idtaller)
                    
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
    }
     public function store13(Request $request, $idtaller)
     {
@@ -890,12 +892,13 @@ public function store11(Request $request, $idtaller)
                    
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
    }
 
       public function store14(Request $request, $idtaller)
     {
     $id                     = Auth::id();
+    $taller             =   Taller::where('id', $idtaller)->firstOrfail();
     $contenido              = TallerIdentificarPersona::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
     $taller14               = new IdentificarPersona; 
     $taller14->taller_id    = $idtaller;
@@ -908,12 +911,13 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
 
        public function store15(Request $request, $idtaller)
     {
     $id                  = Auth::id();
+    $taller             =   Taller::where('id', $idtaller)->firstOrfail();
     $contenido           = TallerCheque::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
     $taller15            = new Cheque; 
     $taller15->taller_id = $idtaller;
@@ -930,11 +934,12 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
          public function store16(Request $request, $idtaller)
     {
         $id                  = Auth::id();
+        $taller             =   Taller::where('id', $idtaller)->firstOrfail();
         $contenido           = TallerChequeEndoso::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
         $taller16            = new ChequeEndoso; 
         $taller16->taller_id = $idtaller;
@@ -947,11 +952,12 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
          public function store17(Request $request, $idtaller)
     {
         $id                  = Auth::id();
+        $taller             =   Taller::where('id', $idtaller)->firstOrfail();
         $contenido           = TallerConvertirCheque::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
         $taller17            = new ConvertirCheque; 
         $taller17->taller_id = $idtaller;
@@ -968,11 +974,12 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
           public function store18(Request $request, $idtaller)
     {
          $id                    = Auth::id();
+         $taller             =   Taller::where('id', $idtaller)->firstOrfail();
          $contenido             = TallerLetraCambio::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
          $taller18              = new LetraCambio; 
          $taller18->taller_id   = $idtaller;
@@ -994,11 +1001,12 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
      public function store19(Request $request, $idtaller)
     {
          $id                             = Auth::id();
+         $taller             =   Taller::where('id', $idtaller)->firstOrfail();
          $contenido                      = TallerCertificadoDeposito::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
          $taller19                       = new CertificadoDeposito; 
          $taller19->taller_id            = $idtaller;
@@ -1020,12 +1028,13 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
 
       public function store20(Request $request, $idtaller)
     {
          $id                  = Auth::id();
+         $taller             =   Taller::where('id', $idtaller)->firstOrfail();
          $contenido           = TallerPagare::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
          $taller20            = new Pagare; 
          $taller20->taller_id = $idtaller;
@@ -1071,12 +1080,13 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
 
        public function store21(Request $request, $idtaller)
     {
          $id                  = Auth::id();
+         $taller             =   Taller::where('id', $idtaller)->firstOrfail();
          $contenido           = TallerValeCaja::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
          $taller21            = new ValeCaja; 
          $taller21->taller_id = $idtaller;
@@ -1093,12 +1103,13 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
 
     public function store22(Request $request, $idtaller)
     {
     $id                      =   Auth::id();
+    $taller             =   Taller::where('id', $idtaller)->firstOrfail();
     $taller                  =   Taller::where('id', $idtaller)->firstOrfail();
     $taller22                = new NotaPedido; 
     $taller22->taller_id     = $idtaller;
@@ -1130,11 +1141,12 @@ public function store11(Request $request, $idtaller)
 
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
    }
     public function store23(Request $request, $idtaller)
           {
           $id                  = Auth::id();
+          $taller             =   Taller::where('id', $idtaller)->firstOrfail();
           $contenido           = TallerRecibo::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
           $taller23            = new Recibo; 
           $taller23->taller_id = $idtaller;
@@ -1156,12 +1168,13 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
 
      public function store24(Request $request, $idtaller)
           {
             $id                   = Auth::id();
+            $taller             =   Taller::where('id', $idtaller)->firstOrfail();
             $contenido            = TallerOrdenPago::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
             $taller24             = new OrdenPago; 
             $taller24->taller_id  = $idtaller;
@@ -1182,11 +1195,12 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
        public function store25(Request $request, $idtaller)
           {
                $id                         = Auth::id();
+               $taller             =   Taller::where('id', $idtaller)->firstOrfail();
                $contenido                  = TallerFactura::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
                $taller25                   = new Factura; 
                $taller25->taller_id        = $idtaller;
@@ -1234,12 +1248,13 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
 
         public function store26(Request $request, $idtaller)
           {
                    $id                  = Auth::id();
+                   $taller             =   Taller::where('id', $idtaller)->firstOrfail();
                    $contenido           = TallerNotaVenta::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
                    $taller26            = new NotaVenta; 
                    $taller26->taller_id = $idtaller;
@@ -1273,12 +1288,13 @@ public function store11(Request $request, $idtaller)
 
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
 
      public function store27(Request $request, $idtaller)
           {
                    $id                  = Auth::id();
+                   $taller             =   Taller::where('id', $idtaller)->firstOrfail();
                    $contenido           = TallerAbreviatura::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
                    $taller27            = new Abreviatura; 
                    $taller27->taller_id = $idtaller;
@@ -1304,12 +1320,13 @@ public function store11(Request $request, $idtaller)
         }
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
 
 
     public function store28(Request $request, $idtaller){
     $id                     =   Auth::id();
+    $taller             =   Taller::where('id', $idtaller)->firstOrfail();
     $taller28               =   new IdentificarAbreviatura; 
     $taller28->taller_id    =   $idtaller;
     $taller28->user_id      =   $id;           
@@ -1327,11 +1344,12 @@ public function store11(Request $request, $idtaller)
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
-    return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamnete');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
 
     public function store29(Request $request, $idtaller){
     $id                      = Auth::id();
+    $taller             =   Taller::where('id', $idtaller)->firstOrfail();
     $taller29                =   new AbreviaturaCarta; 
     $taller29->taller_id     =   $idtaller;
     $taller29->user_id       =   $id;           
@@ -1356,10 +1374,11 @@ public function store11(Request $request, $idtaller)
 
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
-    return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamnete');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
     public function store30(Request $request, $idtaller){
     $id                      = Auth::id();
+    $taller             =   Taller::where('id', $idtaller)->firstOrfail();
     $taller30                =   new AbreviaturaEditorial; 
     $taller30->taller_id     =   $idtaller;
     $taller30->user_id       =   $id;           
@@ -1381,7 +1400,7 @@ public function store11(Request $request, $idtaller)
 
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
-    return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamnete');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
 
         public function store31(Request $request, $idtaller)
@@ -1427,6 +1446,7 @@ public function store11(Request $request, $idtaller)
 
      public function store32(Request $request, $idtaller){
     $id                      = Auth::id();
+    $taller             =   Taller::where('id', $idtaller)->firstOrfail();
     $taller32                =   new AbreviaturaEconomica; 
     $taller32->taller_id     =   $idtaller;
     $taller32->user_id       =   $id;           
@@ -1452,11 +1472,12 @@ public function store11(Request $request, $idtaller)
 
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
-    return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamnete');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
 
     public function store35(Request $request, $idtaller){
     $id                      = Auth::id();
+    $taller             =   Taller::where('id', $idtaller)->firstOrfail();
     $taller35                =   new FormulasContable; 
     $taller35->taller_id     =   $idtaller;
     $taller35->user_id       =   $id;           
@@ -1476,12 +1497,13 @@ public function store11(Request $request, $idtaller)
 
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
-    return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamnete');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
         public function store33(Request $request, $idtaller)
           {
             // return $request->all();
             $id                   = Auth::id();
+            $taller             =   Taller::where('id', $idtaller)->firstOrfail();
             $contenido            = TallerCelda::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
             $taller33             = new Celda; 
             $taller33->taller_id  = $idtaller;
@@ -1508,7 +1530,7 @@ public function store11(Request $request, $idtaller)
             }
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
         public function store34(Request $request, $idtaller)
           {
@@ -1536,11 +1558,12 @@ public function store11(Request $request, $idtaller)
         }
         $user= User::find($id);
         $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-        return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+        return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
      public function store36(Request $request, $idtaller)
           {
                $id                  = Auth::id();
+               $taller             =   Taller::where('id', $idtaller)->firstOrfail();
                $contenido           = TallerAnalizar::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
                $taller36            = new AnalizarPregunta; 
                $taller36->taller_id = $idtaller;
@@ -1564,7 +1587,7 @@ public function store11(Request $request, $idtaller)
         }
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
     public function store37(Request $request, $idtaller)
         {
@@ -1580,6 +1603,7 @@ public function store11(Request $request, $idtaller)
         public function store38(Request $request, $idtaller)
           {
                $id                  = Auth::id();
+               $taller             =   Taller::where('id', $idtaller)->firstOrfail();
                $contenido           = TallerALectura::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
                $taller38            = new Lectura; 
                $taller38->taller_id = $idtaller;
@@ -1603,7 +1627,7 @@ public function store11(Request $request, $idtaller)
         }
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
     public function store39(Request $request)
         {
@@ -1627,6 +1651,7 @@ public function store11(Request $request, $idtaller)
             public function store40(Request $request, $idtaller)
           {
                $id                  = Auth::id();
+               $taller             =   Taller::where('id', $idtaller)->firstOrfail();
                $contenido           = TallerIdenTransa::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
                $taller40            = new IdenTrasa; 
                $taller40->taller_id = $idtaller;
@@ -1650,13 +1675,14 @@ public function store11(Request $request, $idtaller)
         }
     $user= User::find($id);
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-    return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
 
 
     public function store41(Request $request, $idtaller)
     {
     $id                  = Auth::id();
+    $taller             =   Taller::where('id', $idtaller)->firstOrfail();
     $taller41            =   new MapaConceptual; 
     $taller41->taller_id =   $idtaller;
     $taller41->user_id   =   $id;           
@@ -1675,7 +1701,7 @@ public function store11(Request $request, $idtaller)
 
     $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
 
-    return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamnete');
+    return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
         public function store42(Request $request)
         {
@@ -1708,6 +1734,7 @@ public function store11(Request $request, $idtaller)
              public function store43(Request $request, $idtaller)
           {
             $id                   = Auth::id();
+            $taller             =   Taller::where('id', $idtaller)->firstOrfail();
             $contenido            = TallerMConceptual::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
             $taller43             = new MapaConceptual2; 
             $taller43->taller_id  = $idtaller;
@@ -1730,11 +1757,12 @@ public function store11(Request $request, $idtaller)
 
             $user= User::find($id);
             $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-            return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
          public function store44(Request $request, $idtaller)
            {
             $id                   = Auth::id();
+            $taller             =   Taller::where('id', $idtaller)->firstOrfail();
             $contenido            = TallerEscribirCuenta::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
             $taller44             = new EscribirCuenta; 
             $taller44->taller_id  = $idtaller;
@@ -1778,19 +1806,21 @@ public function store11(Request $request, $idtaller)
 
             $user= User::find($id);
             $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-            return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
     }
 
     public function store45(Request $request, $idtaller)
         {
             $id   = Auth::id();
+            $taller             =   Taller::where('id', $idtaller)->firstOrfail();
             $user = User::find($id);
             $user->tallers()->attach($idtaller,['status'=> 'calificado', 'calificacion' => 10, 'retroalimentacion' => 'Bien Hecho']);
-            return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
         }
         public function store46(Request $request, $idtaller)
         {
             $id                         = Auth::id();
+            $taller             =   Taller::where('id', $idtaller)->firstOrfail();
             $taller46                   =   new RuedaLogica; 
             $taller46->taller_id        =   $idtaller;
             $taller46->user_id          =   $id;           
@@ -1802,7 +1832,7 @@ public function store11(Request $request, $idtaller)
             $taller46->save();
             $user= User::find($id);
             $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-            return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
 
 
         }
@@ -1810,6 +1840,7 @@ public function store11(Request $request, $idtaller)
         {
             $contenido            = TallerRAlternativa::select('enunciado', 'alternativa_correcta')->where('taller_id', $idtaller)->firstOrFail(); 
             $id                         = Auth::id();
+            $taller             =   Taller::where('id', $idtaller)->firstOrfail();
             $taller47                   =   new RAlternativa; 
             $taller47->taller_id        =   $idtaller;
             $taller47->user_id          =   $id;           
@@ -1819,7 +1850,7 @@ public function store11(Request $request, $idtaller)
             $taller47->save();
             $user= User::find($id);
             $user->tallers()->attach($idtaller,['status'=> 'completado' , 'fecha_entregado' => now()]);
-            return redirect()->route('estudiante')->with('datos', 'Taller completado correctamente!');
+            return redirect()->route('Unidades', ['id' => $taller->contenido_id])->with('datos', 'Datos Enviados Correctamente');
 
 
         }

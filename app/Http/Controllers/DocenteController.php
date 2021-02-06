@@ -24,9 +24,6 @@ use Illuminate\Support\Facades\Hash;
 
 class DocenteController extends Controller
 {
-
-  
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -35,12 +32,34 @@ class DocenteController extends Controller
 
    public function Perfil()
     {
+              $user = User::find(Auth::id());
 
-                $au = User::find(Auth::id())->distribuciondos;
+                $au = Distribuciondo::join('distribucionmacu_materia', 'distribucionmacu_materia.materia_id', '=', 'distribuciondos.materia_id')
+                ->join('distribucionmacus', 'distribucionmacus.id', '=', 'distribucionmacu_materia.distribucionmacu_id')
+                ->join('cursos', 'cursos.id', '=', 'distribucionmacus.curso_id')
+                ->join('materias', 'materias.id', '=', 'distribucionmacu_materia.materia_id')
+                ->select('distribuciondos.*','cursos.nombre as nombre_curso' ,'materias.nombre as nombre_materia')
+                ->where('distribuciondos.user_id', $user->id)
+              
+                ->get();
+                // return $au;
+                
+
+                $materias =[];
+                foreach ($au as $materia) {
+                  $materias[] =array(
+                    "materia_id" => $materia->materia_id,
+                    'materia' => $materia->nombre_materia,
+                    "curso" => $materia->nombre_curso,
+                    "paralelos" => $paralelos = DB::table('distribuciondo_nivel')->select('nivel_nombre')->where('distribuciondo_id', $materia->id)->get(),
+                  );
+                }
+                // return $materias;
                 // if ($au == null) {
                 // return redirect()->route('welcome'); 
                 
                 // }
+                // return $au;
                 
                 if (isset($au->materias)) {
                     $ids =[];
@@ -81,11 +100,11 @@ class DocenteController extends Controller
 
 
                     // return $users;
-                            return view('Docente.Pcurso', compact('users','au', 'calificado')); //ruta docente
+                            return view('Docente.Pcurso', compact('users','au', 'calificado', 'materias')); //ruta docente
                             }else{
 
 
-                            return view('Docente.Pcurso'); //ruta docente
+                            return view('Docente.Pcurso', compact('materias')); //ruta docente
                 
                         } 
 
@@ -110,40 +129,98 @@ class DocenteController extends Controller
         $materia =Materia::where('id', $id)->firstOrfail();
         $contenidos=Contenido::get();
         $cons =Contenido::where('materia_id',$materia->id)->paginate(6);
+             $curso = Distribuciondo::join('distribucionmacu_materia', 'distribucionmacu_materia.materia_id', '=', 'distribuciondos.materia_id')
+                ->join('distribucionmacus', 'distribucionmacus.id', '=', 'distribucionmacu_materia.distribucionmacu_id')
+                ->join('cursos', 'cursos.id', '=', 'distribucionmacus.curso_id')
+                ->join('materias', 'materias.id', '=', 'distribucionmacu_materia.materia_id')
+                ->select('distribuciondos.*','cursos.nombre as nombre_curso' ,'materias.nombre as nombre_materia')
+                ->where('distribucionmacu_materia.materia_id', $id)
+                ->where('distribuciondos.user_id', $user->id)->first();
 
-        $users = DB::table('tallers')
+        $paralelos = Distribuciondo::join('distribuciondo_nivel', 'distribuciondo_nivel.distribuciondo_id', '=', 'distribuciondos.id')
+          // ->join('nivels', 'distribuciondo_nivel.nivel_id', '=', 'nivels.id')
+          ->select('distribuciondo_nivel.*')
+          ->where('distribuciondos.user_id', $user->id)
+          ->where('distribuciondos.materia_id', $id)
+          ->get();
+
+          // return $paralelos;
+
+
+        // $users = DB::table('tallers')
+        //     ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
+        //     ->join('users', 'users.id', '=', 'taller_user.user_id')
+        //     ->join('cursos', 'users.curso_id', '=', 'cursos.id')
+        //     ->join('nivels', 'users.nivel_id', '=', 'nivels.id')
+
+        //     ->join('contenidos', 'contenidos.id', '=', 'tallers.contenido_id')
+        //     ->join('materias', 'materias.id', '=', 'contenidos.materia_id')
+        //     ->where('contenidos.materia_id', $id)
+        //     // ->wherein('tallers.contenido_id','==', 1)
+        //     ->where('taller_user.status', 'completado')
+        //     ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre', 'nivels.nombre as nivel_nombre','materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
+        //     ->get();
+
+        //     $calificado = DB::table('tallers')
+        //     ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
+        //     ->join('users', 'users.id', '=', 'taller_user.user_id')
+        //     ->join('cursos', 'users.curso_id', '=', 'cursos.id')
+        //     ->join('nivels', 'users.nivel_id', '=', 'nivels.id')
+
+        //     ->join('contenidos', 'contenidos.id', '=', 'tallers.contenido_id')
+        //     ->join('materias', 'materias.id', '=', 'contenidos.materia_id')
+        //     ->where('contenidos.materia_id', $id)
+        //     // ->wherein('tallers.contenido_id','==', 1)
+        //     ->where('taller_user.status', 'calificado')
+        //     ->select('tallers.*','taller_user.*' ,'cursos.nombre as cur_nombre','nivels.nombre as nivel_nombre', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
+        //     ->get();
+
+            // return $calificado;
+                return view ('Docente.contenidodocente',compact('user','institutomate','materia','contenidos','cons', 'paralelos', 'curso'));
+
+    }
+
+    function paralelo($id, $nivel)
+    {
+      $paralelo = Nivel::find($nivel);
+      $materia = Materia::find($id);
+
+         $users = DB::table('tallers')
             ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
             ->join('users', 'users.id', '=', 'taller_user.user_id')
-            ->join('cursos', 'users.curso_id', '=', 'cursos.id')
+            ->join('distribucionmacus', 'distribucionmacus.id', '=', 'users.distribucionmacu_id')
+            ->join('cursos', 'cursos.id', '=', 'distribucionmacus.curso_id')
             ->join('nivels', 'users.nivel_id', '=', 'nivels.id')
 
             ->join('contenidos', 'contenidos.id', '=', 'tallers.contenido_id')
             ->join('materias', 'materias.id', '=', 'contenidos.materia_id')
             ->where('contenidos.materia_id', $id)
+            ->where('users.nivel_id', $nivel)
             // ->wherein('tallers.contenido_id','==', 1)
             ->where('taller_user.status', 'completado')
             ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre', 'nivels.nombre as nivel_nombre','materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
             ->get();
-
+            // return $users;
+            // 
             $calificado = DB::table('tallers')
             ->join('taller_user', 'tallers.id', '=', 'taller_user.taller_id')
             ->join('users', 'users.id', '=', 'taller_user.user_id')
-            ->join('cursos', 'users.curso_id', '=', 'cursos.id')
+            ->join('distribucionmacus', 'distribucionmacus.id', '=', 'users.distribucionmacu_id')
+            ->join('cursos', 'cursos.id', '=', 'distribucionmacus.curso_id')
             ->join('nivels', 'users.nivel_id', '=', 'nivels.id')
 
             ->join('contenidos', 'contenidos.id', '=', 'tallers.contenido_id')
             ->join('materias', 'materias.id', '=', 'contenidos.materia_id')
             ->where('contenidos.materia_id', $id)
+            ->where('users.nivel_id', $nivel)
             // ->wherein('tallers.contenido_id','==', 1)
             ->where('taller_user.status', 'calificado')
-            ->select('tallers.*','taller_user.*' ,'cursos.nombre as cur_nombre','nivels.nombre as nivel_nombre', 'materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
+            ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre', 'nivels.nombre as nivel_nombre','materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
             ->get();
-
-            // return $calificado;
-                return view ('Docente.contenidodocente',compact('user','institutomate','materia','contenidos', 'users', 'calificado','cons'));
-
+            
+     return view ('Docente.paralelo', compact('materia', 'paralelo', 'users', 'calificado'));
+      
     }
-
     public function cursos($id)
     {
         $materia =Materia::where('id', $id)->firstOrfail(); 

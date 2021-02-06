@@ -27,10 +27,11 @@
         <table id="myTable" class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Unidad Educativa</th>
-                    <th scope="col">Docente</th>
-                    <th scope="col">Materia(s)</th>
-                    <th scope="col" width="75">Estado</th>
+                    <th class="text-center" scope="col">Unidad Educativa</th>
+                    <th class="text-center" scope="col">Docente</th>
+                    <th class="text-center" scope="col">Materia</th>
+                    <th class="text-center" scope="col">Paralelos</th>
+                    <th class="text-center" scope="col" width="75">Estado</th>
                     <th scope="col" class="text-center">Tools</th>
                 </tr>
             </thead>
@@ -43,8 +44,11 @@
                         {{$dis->user->apellido}}
                     </td>
                     <td class="text-center">
-                        @if($dis->materias != null)
-                        @foreach($dis->materias as $dismacu)
+                       {{$dis->materia->nombre}}
+                    </td>
+                    <td class="text-center">
+                        @if($dis->paralelos != null)
+                        @foreach($dis->paralelos as $dismacu)
                         <span class="badge badge-success">
                             {{$dismacu->nombre}}
                         </span>

@@ -17,6 +17,10 @@ class Taller extends Model
         return $this->belongsToMany('App\User','taller_user')
             ->withPivot('status','calificacion', 'fecha_entregado');
     }
+         public function distribucionmacus(){
+        return $this->belongsToMany('App\Distribucionmacu','distribucionmacu_taller')
+            ->withPivot('estado','contenido_id', 'fecha_entrega', 'plantilla_id');
+    }
     public function Plantilla()
     {
     	return $this->belongsTo('App\Plantilla');

@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('instituto_id')->nullable();
-            $table->unsignedBigInteger('curso_id')->nullable();
+            $table->unsignedBigInteger('distribucionmacu_id')->nullable();
             $table->unsignedBigInteger('nivel_id')->nullable();
           
             $table->string('cedula');
@@ -32,9 +32,9 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
     
-            $table->foreign('instituto_id')->references('id')->on('institutos')->onDelete('cascade');
-            $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade');
-            $table->foreign('nivel_id')->references('id')->on('nivels')->onDelete('cascade');
+            $table->foreign('instituto_id')->references('id')->on('institutos')->onDelete('set null');
+            $table->foreign('distribucionmacu_id')->references('id')->on('distribucionmacus')->onDelete('set null');
+            $table->foreign('nivel_id')->references('id')->on('nivels')->onDelete('set null');
             
         });
     }

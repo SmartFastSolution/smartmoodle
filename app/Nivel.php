@@ -34,5 +34,10 @@ class Nivel extends Model
         return $this->hasMany('App\User');
 
     }
+     public function distribuciondos(){
+         
+        return $this->belongsToMany(Distribuciondo::class)->withPivot('distribuciondo_id', 'nivel_id')->withTimestamps();
+    }
+
 
 }

@@ -530,7 +530,7 @@ class TallerDocenteController extends Controller
         // // using ->sync for multiple messages
         // // $message2 = Messages::find(456); // for testing
         // $user->tallers()->updateExistingPivot([$tallerid => ['status' => 'completado', 'calificacion' => $request->califiacion, 'retroalimentacion' => $request->retroalimentacion ] ]);
-           return redirect()->route('docente')->with('datos', 'Datos Enviados Correctamnete');
+           return redirect()->route('Contenidos',['id' => $message->contenido_id])->with('datos', 'Taller Calificado');
         }
 
 }

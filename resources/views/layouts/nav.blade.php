@@ -285,6 +285,25 @@
                             </ul>
                         </li>
                         @endcan
+                      @can('haveaccess', 'documentos.index')
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                               <i class="fad fa-book-open"></i>
+                                <p>
+                                    Documentos
+                                    <i class="fad fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('documentos.index')}}" class="nav-link">
+                                        <i class="fad fa-circle nav-icon"></i>
+                                        <p>Lista de Documentos</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endcan
                         @can('haveaccess', 'asignacion.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">

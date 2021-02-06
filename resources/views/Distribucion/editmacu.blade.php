@@ -52,13 +52,17 @@
                                         @foreach($materias as $materia)
                                         <option selected value="{{$materia->id}}">{{$materia->nombre}}</option>
                                         @endforeach
-                                        <option v-for="mate in newMateria" :value="mate.id">@{{mate.nombre}}</option>
+
+                                        @foreach($materia_all as $materia)
+                                        <option  value="{{$materia['id']}}">{{$materia['nombre']}}</option>
+                                        @endforeach
+                                        
 
                                     </select>
                                 </div>
 
 
-                                <label for="nombre">Estado</label><br>
+                                <label for="'nombre']">Estado</label><br>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <input type="radio" id="estadoon" name="estado" class="custom-control-input"
                                         value="on" @if($distribucionmacu['estado']=="on" ) checked
@@ -101,17 +105,16 @@ $(function() {
 </script>
 
 <script>
-var materias = @json($materias);
-var materias_all = @json($materia_all);
+
 const materi = new Vue({
     el: '#mate',
     data: {
-        materia: materias,
-        all_materia: materias_all,
+        materia: '',
+        all_materia: '',
         newMateria: [],
     },
     mounted() {
-        this.onMateria();
+        // this.onMateria();
     },
     methods: {
         onMateria() {

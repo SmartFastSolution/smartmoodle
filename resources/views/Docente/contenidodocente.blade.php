@@ -121,9 +121,53 @@
     </div>
 </div>
 
-
-
 <div class="container">
+    <div class="card gedf-card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="ml-2">
+                        <div class="h5 m-0">PARALELOS</div>
+                        <div class="h7 text-muted"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            @isset ($paralelos)
+            <div class="row">
+@forelse($paralelos as $paralelo)
+          <div class="col-lg-4 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            {{-- <h5 class="text-center"> <strong> {{$paralelo['paralelo']}}</strong></h5> --}}
+                            <p>PARALELO</p>
+                            <h2 class="text-center font-weight-bold">{{ $paralelo['nivel_nombre'] }} </h2>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <a href="{{ route('paralelo', ['id' => $materia->id, 'nivel' => $paralelo['nivel_id']] ) }}" class="small-box-footer">
+                            Acceder <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+
+                    </div>
+                </div>
+      @empty
+                <h1>No tienes cursos asignados</h1>
+
+            @endforelse
+
+     @endisset
+        </div>
+    </div>
+</div>
+
+
+
+{{-- <div class="container">
     <div class="card gedf-card">
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
@@ -159,11 +203,11 @@
                             {!!$taller->enunciado!!}
                                 
                             </div>
-                            {{-- @if ($taller->plantilla_id == 37)
+                            @if ($taller->plantilla_id == 37)
                             Taller de Modulos Contable
                             @else
                             {!!$taller->enunciado!!}
-                            @endif --}}
+                            @endif
                         </td>
                         <td class="table-button ">
                             <a class="btn btn-info"
@@ -180,8 +224,8 @@
     </div>
 </div>
 
-
-
+ --}}
+{{-- 
 <div class="container">
     <div class="card gedf-card">
         <div class="card-header">
@@ -219,11 +263,11 @@
                             {!!$taller->enunciado!!}
                                 
                             </div>
-                      {{--       @if ($taller->plantilla_id == 37)
+                            @if ($taller->plantilla_id == 37)
                             Taller de Modulos Contable
                             @else
                             {!!$taller->enunciado!!}
-                            @endif --}}
+                            @endif
                         </td>
                         <td class="table-button ">
                             <a class="btn btn-info"
@@ -237,9 +281,9 @@
 
         </div>
     </div>
-</div>
+</div> 
 
-
+ --}}
 
 
 @stop

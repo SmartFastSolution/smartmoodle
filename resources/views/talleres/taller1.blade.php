@@ -53,7 +53,7 @@
 @section('titulo', $datos->taller->nombre)
 @section('content')
 
-<form action="{{ route('taller1', ['idtaller' => $d]) }}" method="POST">
+<form action="{{ route('taller1', ['idtaller' => $d]) }}" id="taller1" method="POST">
     @csrf
 	 <div class="container">
         
@@ -75,8 +75,34 @@
      </div>
 
      <div class="row justify-content-center">
-        <input type="submit" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
+        <input type="button" id="button" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
      </div>
  </div>
 </form>
+@endsection
+
+@section('js')
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script type="text/javascript">
+
+ $( "#button" ).click(function( event ) {
+  event.preventDefault();
+  Swal.fire({
+  title: 'Seguro que deseas completar el taller?',
+  text: "Esta accion ya no se puede revertir!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Si, Completar!',
+  cancelButtonText: 'Cancelar!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    $( "#taller1" ).submit();
+  }
+})
+});
+
+</script>
 @endsection

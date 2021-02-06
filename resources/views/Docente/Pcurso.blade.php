@@ -75,15 +75,42 @@
         </div>
         <div class="card-body">
 
-            @isset ($au->materias)
+            @isset ($materias)
             <div class="row">
-
-
-                @forelse($au->materias as $materia)
-                @foreach($materia->distribucionmacus as $curso)
-                <!-- ./col -->
-                <div class="col-lg-4 col-6">
+@forelse($materias as $materia)
+          <div class="col-lg-4 col-6">
                     <!-- small box -->
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h5 > <strong> {{$materia['materia']}}</strong></h5>
+                            <p>{{$materia['curso']}} </p>
+                            <h5 class="text-center font-weight-bold">Paralelos </h5>
+                            <div class="text-center">
+                                
+                            @foreach ($materia['paralelos'] as $key => $paralelo)
+                                <span> @if($key !== 0) - @endif {{ $paralelo->nivel_nombre }}</span>
+                            @endforeach
+                            </div>
+
+
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <a href="{{route('Contenidos', $materia['materia_id'])}}" class="small-box-footer">
+                            Acceder <i class="fas fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+      @empty
+                <h1>No tienes cursos asignados</h1>
+
+            @endforelse
+
+     @endisset
+                {{-- @forelse($au->materias as $materia)
+                @foreach($materia->distribucionmacus as $curso)
+                <div class="col-lg-4 col-6">
                     <div class="small-box bg-info">
                         <div class="inner">
                             <h5 > <strong> {{$materia->nombre}}</strong></h5>
@@ -98,7 +125,6 @@
                         </a>
                     </div>
                 </div>
-                <!-- ./col -->
                 @endforeach
                 @empty
                 <h1>No tienes cursos asignados</h1>
@@ -109,7 +135,7 @@
             @endisset
             @empty($au->materias)
             <h1>No tienes cursos Asignados</h1>
-            @endempty
+            @endempty --}}
 
         </div>
     </div>

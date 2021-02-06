@@ -9,8 +9,8 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <h1 class="font-weight-light">Show Asignación Estudiante</h1>
-                <div class="row">
+                <h1 class="font-weight-light text-center">Vista Asignación Estudiante</h1>
+                <div class="row justify-content-center">
                     <div class="col-md-10">
                         <form method="POST" action="{{route('assignments.update', $assignment->id)}} ">
                         
@@ -35,7 +35,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Actualización Materias</label>
+                                <label>Materias Asignadas</label>
                                 <select class="select2" :materias="2" multiple="multiple" name="materia[]" disabled
                                     data-placeholder="Select a State" style="width: 100%;">
                                     @foreach($materias as $materia)

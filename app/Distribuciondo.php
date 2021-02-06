@@ -23,12 +23,15 @@ class Distribuciondo extends Model
 
     }
 
-     public function materias(){
+     public function materia(){
          
-        return $this->belongsToMany(Materia::class)->withPivot('distribuciondo_id', 'materia_id')->withTimestamps();
+        return $this->belongsTo('App\Materia');
     }
     
-
+    public function paralelos(){
+         
+        return $this->belongsToMany(Nivel::class)->withPivot('distribuciondo_id', 'nivel_id')->withTimestamps();
+    }
 
 
 

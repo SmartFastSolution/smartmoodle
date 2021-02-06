@@ -54,6 +54,11 @@ class DistribucionmacuController extends Controller
             'estado' => ['required' ,'in:on,off'],
         ]);
 
+         $search = Distribucionmacu::where('instituto_id', $request->instituto)->where('curso_id', $request->cursos)->count();
+        if ($search >= 1) {
+            return back()->with('error','Esta asignacion ya existe en la base de datos');
+            
+        }else{
         $distribucionmacu =new  Distribucionmacu;
         $distribucionmacu ->instituto_id = $request->instituto;
         // $distribucionmacu ->nivel_id = $request->nivel;
@@ -69,7 +74,7 @@ class DistribucionmacuController extends Controller
         $distribucionmacu->materias()->sync($request->get('materia'));
       }
         return redirect('sistema/distribucionmacus ')->with('success','Haz Creado una Asignación con exito');
-
+}
     }
 
     /**
@@ -106,7 +111,28 @@ class DistribucionmacuController extends Controller
         $materias= $distcursos->materias()->get();
         
         $instituto=Distribucionmacu::find($distribucionmacu->id)->instituto()->first();
-        $materia_all = Materia::where('instituto_id', $instituto->id)->get();
+        $consulta = Distribucionmacu::join("distribucionmacu_materia", "distribucionmacu_materia.distribucionmacu_id", "=", "distribucionmacus.id")
+        ->join("materias", "materias.id", "=", "distribucionmacu_materia.materia_id")
+        ->where('materias.instituto_id', $instituto->id)
+        ->select("materias.id")
+        ->get();
+
+        $ids = [];
+        foreach ($consulta as $id) {
+        $ids[] = $id->id;
+        }
+
+        $materiaclasificadas= Materia::where('instituto_id', $instituto->id)->whereNotIn('id', $ids)->get();
+        $materia_all = [];
+   
+           foreach($materiaclasificadas as $key => $value){
+            $materia_all[$key] =[
+                'id'=> $value->id,
+                'nombre' => $value->nombre
+            ];
+        }
+
+        // $materia_all = Materia::where('instituto_id', $instituto->id)->get();
         $cursos =  $distcursos->curso()->first();//todos los datos de la bd de cursos
          //llama al curso que esta relacionado a esta distribucion
          $nivels= $distcursos->nivel()->first();

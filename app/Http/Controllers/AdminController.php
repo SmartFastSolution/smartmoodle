@@ -129,7 +129,7 @@ class AdminController extends Controller
             ->join('users', 'users.id', '=', 'taller_user.user_id')
             ->where('taller_user.status', 'completado')
             ->paginate(10);
-   	  return view('admin.admin', compact('g', 'users'));
+      return view('admin.admin', compact('g', 'users'));
    }
    function leccion()
    {
@@ -153,14 +153,14 @@ class AdminController extends Controller
    public function plantilla(Request $request)
    {
 
-   	$i = Plantilla::where('plantilla', 'si')->get()->count();
-   	  $plantilla = new Plantilla;
-   	  $plantilla->nombre = 'PLANTILLA '.++$i.' - '.$request->input('nombre');
+    $i = Plantilla::where('plantilla', 'si')->get()->count();
+      $plantilla = new Plantilla;
+      $plantilla->nombre = 'PLANTILLA '.++$i.' - '.$request->input('nombre');
         $plantilla->descripcion = $request->input('descripcion');
-   	  $plantilla->plantilla = $request->input('plantilla');
-   	  $plantilla->save();
+      $plantilla->plantilla = $request->input('plantilla');
+      $plantilla->save();
 
-   	   return redirect()->route('admin.create')->with('datos', 'Plantilla creada correctamente!'); 
+       return redirect()->route('admin.create')->with('datos', 'Plantilla creada correctamente!'); 
    }
    function crear_leccion(Request $request)
    {
@@ -238,8 +238,8 @@ class AdminController extends Controller
    }
    public function taller1(Request $request)
    {
-   	$i = Taller::where('contenido_id', $request->input('contenido_id'))->count();//cambios
-   	//return $request->all();
+    $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();//cambios
+    //return $request->all();
       $taller1               = new Taller;
       $taller1->nombre       = 'Taller '.++$i;
       $taller1->enunciado    = $request->input('enunciado');
@@ -248,31 +248,31 @@ class AdminController extends Controller
       $taller1->estado       = 0;
       $taller1->save();
 
-   	if ($taller1 = true) {
+    if ($taller1 = true) {
       $a = Taller::get()->last();
 
          $taller_1 = new TallerCompletar;
          $taller_1->taller_id = $a->id;
          $taller_1->enunciado = $request->input('enunciado');
          $taller_1->leyenda = $request->input('leyenda');
-   		if ($request->hasFile('imagen')) {
+      if ($request->hasFile('imagen')) {
             $imagen        = $request->file('imagen');
             $nombre        = time().'_'.$imagen->getClientOriginalName();
             $ruta          = public_path().'/img/talleres';
             $imagen->move($ruta, $nombre);
             $urlimagen     = '/img/talleres/'.$nombre;
             $taller_1->img = $urlimagen;
-   	   		}
-   		$taller_1->save();
+          }
+      $taller_1->save();
 
-   	}
+    }
     return redirect()->route('admin.create')->with('datos', 'Taller creado correctamente!'); 
    }
 
      public function taller2(Request $request)
    {
-   	$i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
-   	//return $request->all();
+    $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+    //return $request->all();
       $taller2               = new Taller;
       $taller2->nombre       = 'Taller '.++$i;
       $taller2->enunciado    = $request->input('enunciado');
@@ -308,17 +308,17 @@ class AdminController extends Controller
 
     public function taller3(Request $request)
    {
-   	$i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
-   	//return $request->all();
+    $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+    //return $request->all();
       $taller3 = new Taller;
       $taller3->nombre = 'Taller '.++$i;
-   	$taller3->enunciado = $request->input('enunciado');
-   	$taller3->plantilla_id = $request->input('id_plantilla');
-   	$taller3->contenido_id = $request->input('contenido_id');
-   	$taller3->estado = 0;
-   	$taller3->save();
+    $taller3->enunciado = $request->input('enunciado');
+    $taller3->plantilla_id = $request->input('id_plantilla');
+    $taller3->contenido_id = $request->input('contenido_id');
+    $taller3->estado = 0;
+    $taller3->save();
 
-   	if ($taller3 = true) {
+    if ($taller3 = true) {
       $a = Taller::get()->last();
       $taller_3 = new TallerCompletarEnunciado;
       $taller_3->taller_id = $a->id;
@@ -335,7 +335,7 @@ class AdminController extends Controller
                   );
                   TallerCompletarEnunRe::insert($datos);
                }
-   	}
+    }
     return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
    }
 
@@ -783,6 +783,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
             $taller_15->enunciado = $request->input('enunciado');
             $taller_15->girador = $request->input('girador');
             $taller_15->girado = $request->input('girado');
+            $taller_15->beneficiario = $request->input('beneficiario');
             $taller_15->cantidad = $request->input('cantidad');
             $taller_15->lugar = $request->input('lugar');
             $taller_15->fecha = $request->input('fecha');
@@ -1367,6 +1368,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->taller_id = $a->id;
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'individual';
+             if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          } 
         $taller_37->tipo   = $request->tipo;
           if ($request->tipo  == 'vertical') {
 
@@ -1425,6 +1434,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->taller_id = $a->id;
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'individual';
+             if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          } 
         $taller_37->tipo   = $request->tipo;
 
 
@@ -1490,6 +1507,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->taller_id = $a->id;
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'individual';
+             if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          } 
         $taller_37->diario_general = true;
         $taller_37->tipo   = 'diario_general';
 
@@ -1527,6 +1552,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->taller_id = $a->id;
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'individual';
+             if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          } 
         $taller_37->mayor_general = true;
         $taller_37->tipo   = 'mayor_general';
 
@@ -1564,6 +1597,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->taller_id = $a->id;
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'individual';
+             if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          } 
         $taller_37->balance_comprobacion = true;
         $taller_37->tipo   = 'balance_comprobacion';
 
@@ -1600,6 +1641,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->taller_id = $a->id;
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'individual';
+             if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          } 
         $taller_37->hoja_trabajo = true;
         $taller_37->tipo   = 'hoja_trabajo';   
         $taller_37->save();
@@ -1635,6 +1684,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->taller_id = $a->id;
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'individual';
+             if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          } 
         $taller_37->balance_comprobacion_ajustado = true;
         $taller_37->tipo   = 'balance_comprobacion_ajustado';   
         $taller_37->save();
@@ -1671,6 +1728,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->taller_id = $a->id;
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'individual';
+             if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          } 
         $taller_37->estado_resultado = true;
         $taller_37->tipo   = 'estado_resultado';       
         $taller_37->save();
@@ -1706,6 +1771,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->taller_id = $a->id;
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'individual';
+             if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          } 
         $taller_37->tipo   = 'balance_general';       
         $taller_37->balance_general = true;
         $taller_37->save();
@@ -1744,6 +1817,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->taller_id = $a->id;
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'individual';
+             if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          } 
         $taller_37->asientos_cierre = true;
         $taller_37->tipo   = 'asientos_cierre';       
 
@@ -1781,6 +1862,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->taller_id = $a->id;
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'individual';
+             if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          } 
         $taller_37->librocaja = true;
         $taller_37->tipo   = 'librocaja';       
 
@@ -1817,6 +1906,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->taller_id = $a->id;
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'individual';
+             if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          } 
         $taller_37->conciliacionbancaria = true;
         $taller_37->tipo   = 'conciliacionbancaria';       
 
@@ -1853,6 +1950,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->taller_id = $a->id;
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'individual';
+             if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          } 
         $taller_37->arqueocaja = true;
         $taller_37->tipo   = 'arqueocaja';       
 
@@ -1889,6 +1994,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->taller_id = $a->id;
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'individual';
+             if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          } 
         $taller_37->librobanco = true;
         $taller_37->tipo   = 'librobanco';       
 
@@ -1925,6 +2038,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->taller_id = $a->id;
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'individual';
+             if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          } 
         $taller_37->retencioniva = true;
         $taller_37->tipo   = 'retencioniva';       
 
@@ -1961,6 +2082,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->taller_id = $a->id;
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'individual';
+             if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          } 
         $taller_37->nominaempleados = true;
         $taller_37->tipo   = 'nominaempleados';       
 
@@ -1997,6 +2126,14 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->taller_id = $a->id;
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'individual';
+             if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          } 
         $taller_37->provisiondebeneficio = true;
         $taller_37->tipo   = 'provisiondebeneficio';       
 
@@ -2025,11 +2162,12 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$i;
          $balance_inicial->enunciado    = $request->enunciado;
+          
          $balance_inicial->plantilla_id = 37;
          $balance_inicial->contenido_id = $request->contenido_id;
          $balance_inicial->estado       = 0;
          $balance_inicial->save();
-         $modulos = $request->modulos;
+         // $modulos = $request->modulos;
 
         $a                    = Taller::get()->last();
         $taller_37            = new TallerModuloContable;
@@ -2037,9 +2175,15 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         $taller_37->enunciado = $request->enunciado;
         $taller_37->metodo    = 'concatenado';
         $taller_37->tipo      = 'concatenado';       
-        $taller_37->tipo      = 'concatenado';       
-        $taller_37->modulos      = json_encode($modulos);       
-
+        if ($request->hasFile('documento')) {
+            $archivo        = $request->file('documento');
+            $nombre        = time().'_'.$archivo->getClientOriginalName();
+            $ruta          = public_path().'/archivos/';
+            $archivo->move($ruta, $nombre);
+            $urlarchivo     = '/archivos/'.$nombre;
+            $taller_37->archivo   = $urlarchivo;
+          }     
+        $taller_37->modulos      = $request->modulos;       
         $taller_37->save();
 
         if ($taller_37 = true) {
@@ -2093,10 +2237,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
           $diariogeneral->save();
 }   
        }
+     
         return response(array(                                         //ENVIO DE RESPUESTA
                     'success' => true,
                     'estado' => 'guardado',
-                    'message' => 'Taller creado correctamente'
+                    'message' => 'Taller creado correctamente',
                 ),200,[]);
       }
 
@@ -2352,7 +2497,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
             $taller_48                       = new TallerArchivo;
             $taller_48->taller_id            = $a->id;
             $taller_48->enunciado            = $request->input('enunciado');
-            $taller_48->ar_num            = $request->input('ar_num');
+            $taller_48->ar_num                = $request->input('ar_num');
             $taller_48->save();
          }
       return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');  

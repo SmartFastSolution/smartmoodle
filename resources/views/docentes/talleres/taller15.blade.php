@@ -53,6 +53,11 @@
 
 					<p >{{ $taller->girado }}</p>
 
+				<label for="">Beneficiario</label><br>
+
+					<p >{{ $taller->beneficiario }}</p>
+
+
 				<label for="">Cantidad</label><br>
 
 					<p>{{ $taller->cantidad }}</p>

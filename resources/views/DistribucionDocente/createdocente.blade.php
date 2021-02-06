@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Docente</label>
-                                    <select class="form-control select2" name="docente" style="width: 99%;">
+                                    <select class="form-control usuario" name="docente" style="width: 99%;">
                                         <option selected disabled>Elija al Docente...</option>
                                         <option v-for="doce in users" :value="doce.id">@{{doce.name}} @{{doce.apellido}}
                                         </option>
@@ -52,13 +52,24 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Materias</label>
-                                    <select class="select2" multiple="multiple" name="materia[]"
-                                        data-placeholder="Select a State" style="width: 100%;">
+                                    <select class="form-control paralelos"  name="materia" style="width: 100%;">
+                                        <option selected disabled>Elija una materia...</option>
                                         <optgroup v-for="(curso, index) in materias" :label="curso.nombre">
                                             <option v-for="mater in materias[index].materias" :value="mater.id">@{{ mater.nombre}}</option>
                                         </optgroup>
                                     </select>
                                 </div>
+                                   <div class="form-group">
+                                    <label>Paralelos</label>
+                                    <select class="select2" multiple="multiple" name="paralelos[]"
+                                        data-placeholder="Selecciona los paralelo" style="width: 100%;">
+                                       
+                                        <option v-for="paralelo in paralelos" :value="paralelo.id">@{{ paralelo.nombre}}</option>
+                                       
+                                       
+                                    </select>
+                                </div>
+                               
                                
                              
                                 <div class="form-group">
@@ -96,15 +107,7 @@
 @stop
 @section('js')
 
-<script>
-$(function() {
-    //Initialize Select2 Elements
-    $(".select2").select2({
 
-    });
-
-})
-</script>
 
 </script>
 <!-- script para select dinamico prueba 2  -->
@@ -115,7 +118,9 @@ const inst = new Vue({
     data: {
         instituto: '',
         materias: [],
-        users:[]
+        users:[],
+        materia:'',
+        paralelos:[]
     },
     methods: {
         onMateria() {
@@ -132,19 +137,65 @@ const inst = new Vue({
                 console.log(e);
             });
 
-            set.materias = [];
-            axios.post('/sistema/materiainst', {
-                id: set.instituto
+
+        },
+        onMaterias(user){
+            var set = this;
+             set.materias = [];
+            axios.post('/sistema/materiasdocentes', {
+                id: set.instituto,
+                user_id: user
             }).then(response => {
                 set.materias = response.data;
                 console.log(set.materias);
             }).catch(e => {
                 console.log(e);
             });
-
+        },
+        obtenerParalelos(materia){
+            let set = this;
+            set.paralelos = [];
+            axios.post('/sistema/paralelosinst', {
+                id: materia
+            }).then(response => {
+                set.paralelos = response.data;
+                console.log(response.data);
+            }).catch(e => {
+                console.log(e);
+            });
         }
     }
 });
+
+
+</script>
+<script>
+$(function() {
+    //Initialize Select2 Elements
+    $(".select2").select2({
+
+    });
+var $eventSelect = $(".paralelos");
+
+$eventSelect.select2();
+$eventSelect.on("select2:select", function (e) { 
+  var select_val = $(e.currentTarget).val();
+  inst.obtenerParalelos(select_val)
+});
+
+let $usuarioid = $(".usuario");
+
+$usuarioid.select2();
+$usuarioid.on("select2:select", function (e) { 
+  var userid = $(e.currentTarget).val();
+  inst.onMaterias(userid)
+});
+
+
+
+
+})
+
 </script>
 
 @stop

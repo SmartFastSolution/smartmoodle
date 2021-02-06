@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="row justify-content-center mt-3">
-     <a href="" @click.prevent="completarTaller()" class="btn btn-danger">Enviar Respuesta</a>
+     <a href="" @click.prevent="warning()" class="btn btn-danger">Enviar Respuesta</a>
     </div>
   </div>
 </form>
@@ -46,6 +46,8 @@
 @endsection
 
 @section('js')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <script type="text/javascript">
   let taller_id = @json($d);
   const cuentas = new Vue({
@@ -90,6 +92,22 @@
       },
       borrarPasivo(index){
         this.pasivos.splice(index, 1);
+      },
+      warning(){
+         Swal.fire({
+  title: 'Seguro que deseas completar el taller?',
+  text: "Esta accion ya no se puede revertir!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Si, Completar!',
+  cancelButtonText: 'Cancelar!'
+}).then((result) => {
+  if (result.isConfirmed) {
+   this.completarTaller();
+  }
+})
       },
       completarTaller: function(){
         let set = this;

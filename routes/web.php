@@ -43,12 +43,15 @@ route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta e
 //rutas vue asignaciones////
 
  Route::post('materiainst','HomeController@buscarMateria')->name('materiainst');
+ Route::post('materiasdocentes','HomeController@materiaDocente')->name('materiaDocente');
  Route::post('materiasasig','HomeController@materia')->name('materiassig');
+ Route::post('materiataller','HomeController@materiaTalleres')->name('materiaTalleres');
  Route::post('userinst','HomeController@buscarAlumno')->name('userinst');
  Route::post('docinst','HomeController@buscarDocente')->name('docinst');
  Route::post('distinst','HomeController@buscarAsignacion')->name('distinst');
  Route::post('contmateria','HomeController@buscarContenido')->name('contmateria');
-
+ Route::post('asignaciones','HomeController@asignacion')->name('asignacion');
+ Route::post('paralelosinst','HomeController@obtenerParalelos')->name('obtenerParalelos');
 
 
  ////////////////////////////////////////////////
@@ -83,7 +86,7 @@ Route::get('cursos-list-excel','PDFController@CursoExport')->name('curso.excel')
 
 
 ///rutas menu docente
-route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
+route::get('materia/{id}', 'DocenteController@contenidos')->name('Contenidos');
 route::get('docente/Documento-pdf/{contenido}', 'DocenteController@VerPDF')->name('Contenido.docente'); //para visualizar el documento en el menu docente no descargable
 route::get('docente/Documento-pdf2/{contenido}', 'DocenteController@VerPDF2')->name('Contenido2.docente'); //para visualizar el documento en el menu estudiante descargable
 
@@ -104,8 +107,11 @@ route::DELETE('estudiante/post/delete/{post}', 'EstudianteController@destroype')
 
 //rutas menu docente
 route::get('perfil', 'DocenteController@Perfil')->name('Perfil');
-route::get('contenido/{id}', 'DocenteController@contenidos')->name('Contenidos');
+route::get('materia/{id}', 'DocenteController@contenidos')->name('Contenidos');
+
+route::get('materia/{id}/paralelo/{nivel}/', 'DocenteController@paralelo')->name('paralelo');
 route::get('contenido/{id}/talleres','DocenteController@talleres')->name('contenido.talleres');
+
 route::get('alumnos/{id}', 'DocenteController@cursos')->name('Alumnos');
 route::get('docente/password', 'DocenteController@password')->name('DocentePass'); //para metodo get del password 
 route::post('docente/password','DocenteController@updatep')->name('Docente.updatep'); // para guardar el nuevo password
@@ -173,6 +179,10 @@ Route::get('Unidad-pdf2/{contenido}','HomeController@Verdocumento2')->name('Unid
 
 //Ruta Resource de Materias que va aliada con el curso
 route::resource('contenidos','ContenidoController');
+
+
+//Ruta Resource de Documentos-contenido que va aliada con el curso
+route::resource('documentos','DocumentoController');
 
 
 //Ruta Resource par asignacion de cursos y materias prueba 2 
