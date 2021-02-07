@@ -53,15 +53,16 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Editar Materia</label>
-                                    <select class="form-control select" name="materia" style="width: 99%;">
-                                        @foreach($ar as $a)
-                                        <option selected disabled value="{{ $a->id }}">{{ $a->nombre }}
-                                        </option>
-                                        @endforeach
-                                        @foreach($materias as $materia)
-                                        <option value="{{$materia->id}}">{{$materia->nombre}}</option>
-                                        @endforeach
+                                    <label> Materia</label>
+                                    <select class="form-control select" name="materia" style="width: 99%;" disabled>                                  
+                                        <option value="{{$archivodocente->materia_id}}">{{$archivodocente->materia->nombre}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Paralelo</label>
+                                    <select class="form-control select" name="materia" style="width: 99%;" disabled>                                  
+                                        <option value="{{$archivodocente->nivel_id}}">{{$archivodocente->nivel->nombre}}</option>
                                     </select>
                                 </div>
 

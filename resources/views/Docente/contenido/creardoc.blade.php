@@ -27,14 +27,26 @@
 </section>
 
 
-<section class="content">
+<section class="content" id="dd">
     <div class="container">
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> Parece que hay porblemas o Malas decisiones <br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
                 <h1 class="font-weight-light">Subir Archivo</h1>
                 <div class="row">
                     <div class="col-md-10">
-                        <form method="POST" action="{{route('documentacion.docentestore')}} " enctype="multipart/form-data">
+                        <form method="POST" action="{{route('documentacion.docentestore')}} "
+                            enctype="multipart/form-data">
                             @csrf
                             <div class=" card-body">
                                 <div class="form-group">
@@ -50,37 +62,48 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Seleccionar Materia</label>
-                                    <select class="form-control select2" name="materia" style="width: 99%;">
+                                    <label for="materia">Seleccionar Materia</label>
+                                    <select class="form-control select2" name="materia" style="width: 99%;"
+                                         @change="onMateria()">
                                         <option selected disabled>Elija la Materia...</option>
-                                        @foreach($materias as $materia)
-                                        @foreach($materia->distribucionmacus as $d)
-                                        <option value="{{$materia->id}}">
-                                            {{$d->curso->nombre}} -{{$materia->nombre}}</option>
-                                        @endforeach
+                                        @foreach($materias as $a)
+                                        <option value="{{$a->materia_id}}">
+                                            {{$a->nombre_curso}}-{{$a->nombre_materia}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                                     
-                                <!-- subir imagen en laravel prueba 1 -->
                                 <div class="form-group">
-                                    <label for="archivo">Añadir Documento(s)</label>
-                                    <input type="file" class="form-control-file" name="archivo" id="archivo">
-                                    {!! $errors->first('documento','<span style="color:red">:message</span>')!!}
-
-                                    <small class="form-text text-muted">
-                                    Limite de 50MB por Documento
-                                    </small>
+                                    <label>Seleccione el Paralelos</label>
+                                    <select class="paralelos form-control" name="paralelos"
+                                        data-placeholder="Selecciona los paralelo" style="width: 100%;">
+                                        <option v-for="paralelo in paralelos" :value="paralelo.id">@{{ paralelo.nombre}}
+                                        </option>
+                                    </select>
                                 </div>
-
-                                <a href="{{route('documentacion.docente')}}" class="btn btn-primary">Atras</a>
-                                <input type="submit" class="btn btn-dark " value="Guardar">                              
                             </div>
-                        </form>
+
+
+
+
+                            <!-- subir imagen en laravel prueba 1 -->
+                            <div class="form-group">
+                                <label for="archivo">Añadir Documento(s)</label>
+                                <input type="file" class="form-control-file" name="archivo" id="archivo">
+                                {!! $errors->first('documento','<span style="color:red">:message</span>')!!}
+
+                                <small class="form-text text-muted">
+                                    Limite de 50MB por Documento
+                                </small>
+                            </div>
+
+                            <a href="{{route('documentacion.docente')}}" class="btn btn-primary">Atras</a>
+                            <input type="submit" class="btn btn-dark " value="Guardar">
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
 </section>
 
 
@@ -90,5 +113,48 @@
 @section('css')
 @stop
 @section('js')
+<script>
+const inst = new Vue({
+    el: '#dd',
+    data: {
+        materia: '',
+        paralelos: [],
+    },
+
+    methods: {
+        onMateria(id) {
+
+            var set = this;
+            set.paralelos = [];
+            axios.post('/sistema/buscarparalelo', {
+                id: id,
+            }).then(response => {
+                set.paralelos = response.data;
+                console.log(set.paralelos);
+            }).catch(e => {
+                console.log(e);
+            });
+        }
+    },
+
+});
+</script>
+
+<script>
+$(function() {
+    var $eventSelect = $(".select2");
+
+    $eventSelect.select2();
+    $eventSelect.on("select2:select", function(e) {
+        var select_val = $(e.currentTarget).val();
+
+        inst.onMateria(select_val);
+    });
+
+
+
+
+})
+</script>
 
 @stop

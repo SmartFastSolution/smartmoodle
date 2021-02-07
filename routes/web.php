@@ -52,6 +52,7 @@ route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta e
  Route::post('contmateria','HomeController@buscarContenido')->name('contmateria');
  Route::post('asignaciones','HomeController@asignacion')->name('asignacion');
  Route::post('paralelosinst','HomeController@obtenerParalelos')->name('obtenerParalelos');
+ Route::post('buscarparalelo','HomeController@buscarparalelo')->name('buscarparalelo');
 
 
  ////////////////////////////////////////////////
@@ -130,9 +131,10 @@ route::DELETE('docente/post/delete/{post}', 'DocenteController@destroyped')->nam
  route::post('docente/archivo-guardar','DocenteController@Guardardoc')->name('documentacion.docentestore');
  route::get('docente/documento/archivo-show/{archivodocente}','DocenteController@docshow')->name('documentaciondoc.show');
 
- route::get('docente/documento/archivo-show/{archivodocente}/edit','DocenteController@docedit')->name('documentaciondoc.edit');
+ route::get('docente/documento/archivo-edit/{archivodocente}/edit','DocenteController@docedit')->name('documentaciondoc.edit');
  route::PUT('docente/archivo-actualizar/{archivodocente}','DocenteController@docupdate')->name('documentaciondoc.update');
  route::delete('docente/archivos-update/{archivodocente}','DocenteController@destroy')->name('documentaciondoc.destroy');
+
 
 /////////////////////////////////////
 /////////////////////////////////////

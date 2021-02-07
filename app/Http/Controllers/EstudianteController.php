@@ -60,6 +60,7 @@ class EstudianteController extends Controller
         ->join("distribuciondo_nivel", "distribuciondo_nivel.distribuciondo_id", "=", "distribuciondos.id")
         ->join("users", "users.id", "=", "distribuciondos.user_id")
         ->where('distribuciondo_nivel.nivel_id', $usuario->nivel_id)
+        ->where('assignment_materia.user_id', $usuario->id)
         ->select("assignment_materia.*","materias.nombre as nombre_materia", "users.name as nombre_docente", "users.apellido as apellido_docente")
         ->get();
 

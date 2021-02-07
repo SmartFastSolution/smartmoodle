@@ -40,4 +40,9 @@ class Nivel extends Model
     }
 
 
+    public function archivodocentes(){
+          
+        return $this->hasMany('App\Archivodocente');
+    }
+
 }

@@ -12,6 +12,7 @@ use App\Nivel;
 use App\Modelos\Role;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
@@ -250,6 +251,13 @@ class HomeController extends Controller
     }
 
 
+    public function buscarparalelo(Request $request){
+        
+ 
+        $distribuciondo = Distribuciondo::where('user_id', Auth::id())->where('materia_id', $request->id)->first();
+        $paralelo = $distribuciondo->paralelos;
+        return $paralelo;
+    }
 
    
 }

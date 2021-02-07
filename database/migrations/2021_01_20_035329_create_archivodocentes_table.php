@@ -17,11 +17,13 @@ class CreateArchivodocentesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('materia_id'); 
+            $table->unsignedBigInteger('nivel_id'); 
             $table->string('nombre');
             $table->string('descripcion');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('materia_id')->references('id')->on('materias')->onDelete('cascade');
+            $table->foreign('nivel_id')->references('id')->on('nivels')->onDelete('cascade');
         });
     }
 

@@ -58,6 +58,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Materia</th>
+                        <th scope="col">Paralelo</th>
                         <th scope="col">Documento</th>
                         <th scope="col">Descripcion</th>
 
@@ -70,6 +71,7 @@
                     @foreach ($doc as $d)
                     <tr>
                         <td>{{ $d->materia->nombre}}</td>
+                        <td>{{ $d->nivel->nombre}}</td>
                         <td>{{ $d['nombre']}}</td>
                         <td>{{ $d['descripcion']}}</td>
 
