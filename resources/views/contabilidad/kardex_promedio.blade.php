@@ -28,7 +28,7 @@
 		</div>
 
 		
- @if ($rol === 'estudiante')
+ @if ($rol === 'estudiante' or 'docente')
  <div v-if="!transaccion.ingreso.edit && !transaccion.egreso.edit  && producto_id !== ''" class="col-12 text-center mb-3">
 	<a {{-- v-if="transacciones.length == 0" --}} class="btn btn-sm btn-success mr-2" @click.prevent="modalInicial()">Saldo Inicial</a>
 	<a  class="btn btn-sm btn-info mr-2" @click.prevent="modalTransacciones()">Agregar Ingreso / Egreso</a>
@@ -96,7 +96,7 @@
 		</tbody>
 </table>
  	@include('contabilidad.modales.modalkardex_promedio')
- @if ($rol === 'estudiante')
+ @if ($rol === 'estudiante' or 'docente')
  <div v-if="!transaccion.ingreso.edit && !transaccion.egreso.edit  && producto_id !== ''" class="text-center">
 
 	<a {{-- v-if="transacciones.length == 0" --}} class="btn btn-sm btn-success mr-2" @click.prevent="modalInicial()">Saldo Inicial</a>

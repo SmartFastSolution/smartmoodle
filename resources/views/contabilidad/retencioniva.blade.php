@@ -80,7 +80,7 @@
 
         </table>
     
-    @if ($rol === 'estudiante')
+    @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center mb-2">
         <a href="#" class="addDiario btn btn-outline-info btn-sm" @click.prevent="abrirCompra()">Agregar Compra</a>
     </div>
@@ -158,7 +158,7 @@
     
 
     </table>
-    @if ($rol === 'estudiante')
+    @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center mb-2">
         <a href="#" class="addDiario btn btn-outline-info btn-sm" @click.prevent="abrirVenta()">Agregar Venta</a>
     </div>
@@ -230,7 +230,7 @@
         </table>
     </div>
 
-    @if ($rol === 'estudiante')
+    @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center">
         <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardaretencioniva()">Guardar
             Retención</a>

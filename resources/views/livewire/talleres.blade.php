@@ -20,20 +20,20 @@
 						<div class="card-header">
 							<h3 class="card-title">Talleres por activar</h3>
 						</div>
-						<div class="card-body">
+						<div class="card-body" style="height: 400px; overflow-y: scroll; overflow-x: hidden;">
 							<table class="table table-hover">
 								<thead>
 									<tr class="text-center">
 										{{-- <th scope="col" width="100">Unidad</th> --}}
 										<th scope="col" width="100"> Taller </th>
 										<th scope="col">Enunciado </th>
-										{{-- <th scope="col">Estado</th> --}}
+										<th scope="col">Paralelos Activos</th>
 										{{-- <th scope="col">Fecha Entrega</th> --}}
 										<th scope="col" colspan="2">Opciones</th>
 									</tr>
 								</thead>
 								<tbody>
-									@foreach ($talleres= App\Taller::where('contenido_id', $contenido->id)->where('estado', 0)->paginate(3) as $taller)
+									@foreach ($talleres= App\Taller::where('contenido_id', $contenido->id)->where('estado', 1)->get() as $taller)
 									<tr>
 										{{-- <td>{{$taller->contenido->nombre}}</td> --}}
 										<td>{{$taller['nombre']}}</td>
@@ -58,7 +58,9 @@
 												</label>
 											</div>
 										</td> --}}
-										{{-- <td>{{$taller->fecha_entrega}}</td> --}}
+										<td width="150" class="text-center">@foreach ($niveles->where('taller_id', $taller->id) as $nivel)
+										<span class="badge badge-primary">{{ $nivel->nivel_nombre }}</span>
+										@endforeach</td>
 										<td class="table-button ">
 											<a class="btn btn-info"
 												href="{{route('taller',['plant'=>$taller->plantilla_id,'id'=>$taller->id])}}"><i
@@ -73,9 +75,9 @@
 									@endforeach
 								</tbody>
 							</table>
-							<div class="row justify-content-center mt-4">
+					{{-- 		<div class="row justify-content-center mt-4">
 								{{  $talleres->links() }}
-							</div>
+							</div> --}}
 						</div>
 					</div>
 				</div>
@@ -194,16 +196,20 @@
 					<th scope="col">Enunciado </th>
 					<th scope="col">Paralelo </th>
 					<th scope="col">Estado</th>
-					<th  scope="col">Fecha Entrega</th>
+					<th  scope="col" width="100">Fecha Entrega</th>
 					<th scope="col" colspan="2">Opciones</th>
 				</tr>
 			</thead>
 			<tbody>
 				@foreach ($activados as $activo)
 				<tr>
-					<td>{{ $activo->nombre_unidad }}</td>
-					<td>{{ $activo->nombre_taller }}</td>
-					<td>{{ $activo->enunciado_taller }}</td>
+					<td class="text-center">{{ $activo->nombre_unidad }}</td>
+					<td class="text-center">{{ $activo->nombre_taller }}</td>
+					<td >
+						 <div class="truncate-overflow">
+						{!!$activo->enunciado_taller !!}
+					</div>
+					</td>
 					<td class="text-center">{{ $activo->paralelo }}</td>
 					<td class="text-center">
 						@if ($activo->estado == 1)

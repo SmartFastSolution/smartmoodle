@@ -51,9 +51,19 @@
                 
             @endisset</h1>
         <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }} {{ auth()->user()->apellido, }}
+<<<<<<< HEAD
             <h3 class="  font-weight-bold text-success">{{ $materia->nombre }}</h3>
             <h2 class="font-weight-bold text-dark">Administrador de Talleres</h2>
+=======
+           
+>>>>>>> 618ceb09e19e1b3a3abfe1045b2cd3624380bfa2
         </h2>
+
+        <a class="btn btn-info btn" href="{{ route('contenido.resueltos',['id'=>$id]) }}"><i
+                class="fas fa-book-open"></i>
+            Talleres Resueltos</i></a>
+         <h3 class="  font-weight-bold text-success">{{ $materia->nombre }}</h3>
+            <h2 class="font-weight-bold text-dark">Administrador de Talleres</h2>
         <br>
         <br>
         @livewire('talleres',[$id])

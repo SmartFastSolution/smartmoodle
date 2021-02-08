@@ -112,6 +112,7 @@ route::get('materia/{id}', 'DocenteController@contenidos')->name('Contenidos');
 
 route::get('materia/{id}/paralelo/{nivel}/', 'DocenteController@paralelo')->name('paralelo');
 route::get('contenido/{id}/talleres','DocenteController@talleres')->name('contenido.talleres');
+route::get('contenido/{id}/talleres/resueltos','DocenteController@resueltos')->name('contenido.resueltos');
 
 route::get('alumnos/{id}', 'DocenteController@cursos')->name('Alumnos');
 route::get('docente/password', 'DocenteController@password')->name('DocentePass'); //para metodo get del password 
@@ -280,6 +281,7 @@ route::post('/taller45', 'AdminController@taller45')->name('admin.taller45');
 route::post('/taller47', 'AdminController@taller47')->name('admin.taller47');
 route::post('/taller48', 'AdminController@taller48')->name('admin.taller48');
 route::post('/taller49', 'AdminController@taller49')->name('admin.taller49');
+// route::post('/taller50', 'AdminController@taller50')->name('admin.taller50');
 // route::post('/taller57', 'AdminController@taller57')->name('admin.taller57');
 	});
 
@@ -288,6 +290,7 @@ route::get('/sistema/taller/{plant}/{id}', 'TallersController@taller')->name('ta
 route::get('/sistema/homees/taller/{plant}/{id}', 'TallerEstudianteController@taller')->name('taller.estudiante');
 route::get('/sistema/homees/taller/vista/{plant}/{id}', 'VistaEstudianteController@taller')->name('vista.taller');
 route::get('/sistema/homedoc/taller/{plant}/{id}/{user}', 'TallerDocenteController@taller')->name('taller.docente');
+route::get('/sistema/homedoc/tallerresuelto/{plant}/{id}/', 'VistaDocenteController@taller')->name('taller.resuelto');
 
 
 route::post('/sistema/admin/taller1/{idtaller}', 'TallerEstudianteController@store1')->name('taller1');
@@ -454,6 +457,14 @@ route::post('/sistema/admin/modulo/retencioniva', 'AdminController@retencionIva'
 route::post('/sistema/admin/modulo/nominaempleados', 'AdminController@crearNomina')->name('modulo.nominaempleados');
 route::post('/sistema/admin/modulo/provisiondebeneficio', 'AdminController@crearProvision')->name('modulo.provisiondebeneficio');
 route::post('/sistema/admin/modulo/taller-concatenado', 'AdminController@tallerConcatenado')->name('modulo.tallerconcatenado');
+
+route::post('/sistema/admin/modulo/cheque', 'ModuloDocumentoController@cheque')->name('modulo.cheque');
+route::post('/sistema/admin/modulo/factura', 'ModuloDocumentoController@factura')->name('modulo.factura');
+route::post('/sistema/admin/modulo/nota_credito', 'ModuloDocumentoController@nota_credito')->name('modulo.nota_credito');
+route::post('/sistema/admin/modulo/documentos', 'ModuloDocumentoController@documentos')->name('modulo.documentos');
+route::post('/sistema/admin/modulo/documento/show', 'ModuloDocumentoController@vista')->name('modulo.vistadocumento');
+route::post('/sistema/admin/modulo/documento/edit', 'ModuloDocumentoController@edicion')->name('modulo.editdocument');
+route::post('/sistema/admin/modulo/documento/delete', 'ModuloDocumentoController@eliminar')->name('modulo.eliminardocument');
 //FIN DE MODULOS CONTABLES
 //
 //

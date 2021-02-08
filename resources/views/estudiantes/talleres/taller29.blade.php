@@ -2,7 +2,13 @@
 
 @section('title',  $datos->nombre )
 @section('content')
-
+    <li class="d-none">
+        @if (Auth::check())
+        @foreach (auth()->user()->roles as $role)
+        {{ $rol = $role->descripcion}}
+        @endforeach
+        @endif
+    </li>
 	<div class="container mb-4">
 		<div class="row justify-content-center">
 			<div class="card border border-danger mb-3" >
@@ -11,7 +17,7 @@
 
           <div class="card-body">
             <h2 class="font-weight-bold "><span class="badge badge-danger">#</span>{{ $datos->enunciado }}</h2>
-            	<h5 class="text-muted">Las respuestas que estan en verde, estan correctas</h5>
+            	{{-- <h5 class="text-muted">Las respuestas que estan en verde, estan correctas</h5> --}}
             <div class="row justify-content-center">
             <div class="col-7 border border-danger mt-3">
 				<div class="row p-2">
@@ -33,9 +39,8 @@
 						</p>
 					</div>
 					<div class="col-12 form-inline">
-						<p>Estimada <span class="@if ($datos->abreviatura1 == 'Cheque')
-							badge badge-success @else badge badge-danger
-						@endif">{{ $datos->abreviatura1 }}</span></p>
+						<p>Estimada <span class="
+							badge badge-success ">{{ $datos->abreviatura1 }}</span></p>
 						
 					</div>
 					<div class="col-12 form-inline">
@@ -70,6 +75,7 @@
 			</div>
 		</div>
           </div>
+            @if ($rol === 'estudiante')
             <div class="row justify-content-center">
             <div class="col-5">
               <div class="form-group">
@@ -84,6 +90,7 @@
              
             </div>
         </div>
+        @endif
         </div>
 		</div>
 	</div>

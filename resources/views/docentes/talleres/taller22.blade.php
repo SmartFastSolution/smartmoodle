@@ -22,7 +22,9 @@ ADECUADAMENTE. -->
           			<table>
           				<tr>
           					<td width="200" class="font-weight-bold text-danger">Fecha de Entrega:</td>
-          					<td>{{Carbon\Carbon::parse($datos->taller->fecha_entrega)->formatLocalized('%d de %B %Y ') }}</td>
+          					<td>@isset($fecha->fecha_entrega)
+                         {{Carbon\Carbon::parse($fecha->fecha_entrega)->formatLocalized('%d de %B %Y ') }}
+                      @endisset</td>
           				</tr>
           				<tr>
           					<td width="200" class="font-weight-bold text-primary">Entregado:</td>
@@ -30,12 +32,13 @@ ADECUADAMENTE. -->
           				</tr>
           				<tr>
           					<td class="font-weight-bold text-info">Estado de entrega:</td>
-          					<td > @if ($update_imei->pivot->fecha_entregado <= $datos->taller->fecha_entrega)
-          						<span class="badge badge-success">PUNTUAL</span>
-          						@else
-          						<span class="badge badge-danger">ATRASADO</span>
-
-          					@endif </td>
+          					<td > @isset($fecha->fecha_entrega)
+                      @if ($update_imei->pivot->fecha_entregado <= $fecha->fecha_entrega)
+                      <span class="badge badge-success">PUNTUAL</span>
+                      @else
+                      <span class="badge badge-danger">ATRASADO</span>
+                      @endif 
+                     @endisset </td>
           				</tr>
           			</table>
           		</div>

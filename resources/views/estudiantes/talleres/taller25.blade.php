@@ -5,6 +5,13 @@
 
 @section('title', $datos->taller->nombre)
 @section('content')
+  <li class="d-none">
+        @if (Auth::check())
+        @foreach (auth()->user()->roles as $role)
+        {{ $rol = $role->descripcion}}
+        @endforeach
+        @endif
+    </li>
 
 		<div class="container">
 				<h1 class="text-center text-danger  display-1">{{ $datos->taller->nombre }}</h1>
@@ -223,6 +230,7 @@
 			</div>
 		</div>
           </div>
+          @if ($rol === 'estudiante')
             <div class="row justify-content-center">
             <div class="col-5">
               <div class="form-group">
@@ -237,6 +245,7 @@
                
             </div>
         </div>
+        @endif
         </div>
 
 @section('js')

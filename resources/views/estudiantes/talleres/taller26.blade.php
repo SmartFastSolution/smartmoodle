@@ -5,6 +5,13 @@
 @endsection
 @section('title', $datos->taller->nombre)
 @section('content')
+  <li class="d-none">
+        @if (Auth::check())
+        @foreach (auth()->user()->roles as $role)
+        {{ $rol = $role->descripcion}}
+        @endforeach
+        @endif
+    </li>
 
 <!-- LLENE  CON  LOS  SIGUIENTES  DATOS  LA  ORDEN  DE  PAGO CORRECTAMENTE-->
 	<div class="container">
@@ -135,6 +142,7 @@
 			</div>
 		</div>
           </div>
+          @if ($rol === 'estudiante')
             <div class="row justify-content-center">
             <div class="col-5">
               <div class="form-group">
@@ -148,6 +156,7 @@
               </div>   
             </div>
         </div>
+        @endif
         </div>
 
 

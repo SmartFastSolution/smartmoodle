@@ -1,7 +1,13 @@
 @extends('layouts.nav')
 @section('title', $datos->taller->nombre)
 @section('content')
-
+   <li class="d-none">
+        @if (Auth::check())
+        @foreach (auth()->user()->roles as $role)
+        {{ $rol = $role->descripcion}}
+        @endforeach
+        @endif
+    </li>
 <!-- CONVIERTA  Y  COMPLETE  EL  CHEQUE  CERTIFICADO  CORRECTAMENTE -->
 
 	 <div class="container">
@@ -172,6 +178,7 @@
      </div>
 
           </div>
+              @if ($rol === 'estudiante')
             <div class="row justify-content-center">
             <div class="col-5">
               <div class="form-group">
@@ -185,6 +192,7 @@
               </div>   
             </div>
         </div>
+        @endif
         </div>
 
 </div>

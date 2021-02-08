@@ -94,9 +94,15 @@
     <div class="row justify-content-center mb-5">
         <a target="_blank" class="btn btn-danger" href="{{ $datos->archivo }}"><i class="fad fa-file-pdf"></i> Descargar PDF</a>
     </div>
-        
     @endisset
-            
+       <div class="row justify-content-center mb-5">
+        <a class="btn btn-success btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_cheque"><i class="far fa-money-bill"></i> CHEQUE</a>
+        <a class="btn btn-danger btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_credito"><i class="fas fa-file-invoice-dollar"></i> NOTA DE CREDITO</a>
+        <a class="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#m_factura"><i class="fas fa-file-invoice-dollar"></i> FACTURA</a>
+    </div>
+
+
+
  @if ($datos->metodo == 'concatenado')
     <div class="row justify-content-md-center">
         <div class="col-12 col-sm-12 col-md-2 mb-3">
@@ -332,9 +338,45 @@
     </div>
 
       @endif
+       <h2 class="text-center font-weight-bold">Aplicacion de Documentos</h2>
+        <div class="row justify-content-center mb-5" id="documentos"  style="height: 200px; overflow-y: scroll; overflow-x: hidden;">
+            <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      {{-- <th scope="col">#</th> --}}
+      <th scope="col">Tipo de Documento</th>
+      <th scope="col">Modulo</th>
+      <th  width="200" class="text-center">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="(cheque, index) in cheques">
+      <td>@{{ cheque.tipo_documento }}</td>
+      <td>@{{ cheque.modulo }}</td>
+      <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="editarCheque(cheque.id, index)"><i class="fa fa-edit"></i></a>
+      <a class="btn btn-danger" href="" @click.prevent="warningEliminar(cheque.id, index, cheque.tipo_documento)"><i class="fa fa-trash"></i></a></td>
+    </tr>
 
 
- @if ($rol === 'estudiante')
+  <tr v-for="(nota_credito, index) in nota_creditos">
+      <td>@{{ nota_credito.tipo_documento }}</td>
+      <td>@{{ nota_credito.modulo }}</td>
+      <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="editarNota(nota_credito.id, index)"><i class="fa fa-edit"></i></a>
+      <a class="btn btn-danger" href="" @click.prevent="warningEliminar(nota_credito.id, index, nota_credito.tipo_documento)"><i class="fa fa-trash"></i></a></td>
+    </tr>  
+      <tr v-for="(factura, index) in facturas">
+      <td>@{{ factura.tipo_documento }}</td>
+      <td>@{{ factura.modulo }}</td>
+      <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="editarFactura(factura.id, index)"><i class="fa fa-edit"></i></a>
+      <a class="btn btn-danger" href="" @click.prevent="warningEliminar(factura.id, index, factura.tipo_documento)"><i class="fa fa-trash"></i></a></td>
+    </tr>  
+</tbody>
+</table>
+@include('contabilidad.modales.modaldocumentos')
+
+        </div>
+            
+ @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center" id="enviarTaller">
         <a href="" @click.prevent="CompletarTaller" class="btn p-2 mt-3 btn-danger">Completar Taller Contable</a>
         
@@ -371,19 +413,649 @@
         enviado: function() {
         let _this = this;
         let url = '/sistema/admin/taller37/'+taller_id;
-            axios.post(url,{
+        axios.post(url,{
         }).then(response => {
           if (response.data.success == true) {
             Swal.fire(
             'Completado!',
             'success'
           );
-            window.location = "/sistema/homees"; 
+            if (response.data.rol == 'docente') {
+        window.location = "/sistema/contenido/"+response.data.id+"/talleres/resueltos";
+
+            } else if(response.data.rol == 'estudiante'){
+  window.location = "/sistema/unidad/"+response.data.id;
+}
+
+            // window.location = "/sistema/homees"; 
             }          
         }).catch(function(error){
 
         }); 
      } 
+      }
+    
+    });
+    const documentos = new Vue({
+      el: "#documentos",
+      data:{
+        modulo:'',
+        cheque:{
+            tipo_cheque:'',
+            banco:'',
+            girador:'',
+            cantidad:'',
+            n_cheque:'',
+            cantidad_letra:'',
+            ciudad:'',
+            fecha:'',
+            firma:'',
+            update:false,
+            cheque_id:'',
+            index:'',
+        },
+        nota_credito:{
+            razon_social:'',
+            fecha_emision:'',
+            razon_modificacion:'',
+            ruc:'',
+            comprobante:'',
+            emision:'',
+            update:false,
+            nota_id:'',
+            index:'',
+            dato:{
+                codigo:'',
+                cod_aux:'',
+                cantidad:'',
+                descripcion:'',
+                descuento:'',
+                p_unitario:'',
+                venta:'',
+            },
+            datos:[
+                {
+                codigo:'',
+                cod_aux:'',
+                cantidad:'',
+                descripcion:'',
+                p_unitario:'',
+                descuento:'',
+                venta:'', 
+                }
+            ],
+            totales:{
+                subtotal_12:'',
+                subtotal_0:'',
+                subtotal_no_iva:'',
+                subtotal_exe_iva:'',
+                subtotal_sin_va:'',
+                total_descuento:'',
+                ice:'',
+                iva_12:'',
+                irbpnr:'',
+                total:'',
+            }
+        },
+        factura:{
+            razon_social:'',
+            fecha_emision:'',
+            ruc:'',
+            guia_remision:'',
+            update:false,
+            nota_id:'',
+            index:'',
+            dato:{
+                codigo:'',
+                cod_aux:'',
+                cantidad:'',
+                descripcion:'',
+                descuento:'',
+                p_unitario:'',
+                venta:'',
+            },
+            datos:[
+                {
+                codigo:'',
+                cod_aux:'',
+                cantidad:'',
+                descripcion:'',
+                p_unitario:'',
+                descuento:'',
+                venta:'', 
+                }
+            ],
+            totales:{
+                subtotal_12:'',
+                subtotal_0:'',
+                subtotal_no_iva:'',
+                subtotal_exe_iva:'',
+                subtotal_sin_va:'',
+                total_descuento:'',
+                ice:'',
+                iva_12:'',
+                irbpnr:'',
+                total:'',
+            }
+        },
+        cheques:[],
+        documentos:[],
+        facturas:[],
+        nota_creditos:[],
+      },
+       mounted: function(){
+        this.getdocumentos();
+      },
+      methods:{
+        aggDatoNota(){
+            let dato = {
+                codigo:'',
+                cod_aux:'',
+                cantidad:'',
+                descripcion:'',
+                p_unitario:'',
+                descuento:'',
+                venta:'', 
+                }
+                this.nota_credito.datos.push(dato);
+        },
+          aggDatoFactura(){
+            let dato = {
+                codigo:'',
+                cod_aux:'',
+                cantidad:'',
+                descripcion:'',
+                p_unitario:'',
+                descuento:'',
+                venta:'', 
+                }
+                this.factura.datos.push(dato);
+        },
+        eliminarDatoNota(index){
+             this.nota_credito.datos.splice(index, 1); 
+        },
+         eliminarDatoFactura(index){
+             this.factura.datos.splice(index, 1); 
+        },
+        getdocumentos(){
+        let set = this;
+        let url = '/sistema/admin/modulo/documentos';
+            axios.post(url,{
+                id: taller_id,
+            }).then(response => {
+                // console.log(response.data.cheques)
+                this.cheques = response.data.cheques;
+                this.nota_creditos = response.data.creditos;
+                this.facturas = response.data.facturas;
+            }).catch(function(error){
+
+            }); 
+        },
+        editarCheque(id, index){
+                let set                   = this;
+                let cheque                = this.cheques.filter(x => x.id == id);
+                set.cheque.cheque_id      = cheque[0].id;
+                set.cheque.index          = index;
+                set.modulo                = cheque[0].modulo;
+                set.cheque.tipo_cheque    = cheque[0].tipo_cheque;
+                set.cheque.banco          = cheque[0].banco;
+                set.cheque.girador        = cheque[0].girador;
+                set.cheque.cantidad       = cheque[0].cantidad;
+                set.cheque.n_cheque       = cheque[0].n_cheque;
+                set.cheque.cantidad_letra = cheque[0].cantidad_letra;
+                set.cheque.ciudad         = cheque[0].ciudad;
+                set.cheque.fecha          = cheque[0].fecha;
+                set.cheque.firma          = cheque[0].firma;
+                $('#m_cheque').modal('show');
+                set.cheque.update = true
+
+            // console.log(cheque);
+        },
+            editarNota(id, index){
+                     let set                                   = this;
+                     let nota_credito                          = this.nota_creditos.filter(x => x.id == id);
+                     let obj                                   = JSON.parse(nota_credito[0].datos);
+                     let totales                               = JSON.parse(nota_credito[0].totales);
+                     set.nota_credito.nota_id                  = nota_credito[0].id;
+                     set.nota_credito.index                    = index;
+                     set.modulo                                = nota_credito[0].modulo;
+                     set.nota_credito.razon_social             = nota_credito[0].razon_social;
+                     set.nota_credito.fecha_emision            = nota_credito[0].fecha_emision;
+                     set.nota_credito.ruc                      = nota_credito[0].ruc;
+                     set.nota_credito.comprobante              = nota_credito[0].comprobante;
+                     set.nota_credito.razon_modificacion       = nota_credito[0].razon_modificacion;
+                     set.nota_credito.emision                  = nota_credito[0].emision;
+                     set.nota_credito.datos                    = JSON.parse(nota_credito[0].datos);
+                     set.nota_credito.totales.subtotal_12      = totales.subtotal_12;
+                     set.nota_credito.totales.subtotal_0       = totales.subtotal_0;
+                     set.nota_credito.totales.subtotal_no_iva  = totales.subtotal_no_iva;
+                     set.nota_credito.totales.subtotal_exe_iva = totales.subtotal_exe_iva;
+                     set.nota_credito.totales.subtotal_sin_va  = totales.subtotal_sin_va;
+                     set.nota_credito.totales.total_descuento  = totales.total_descuento;
+                     set.nota_credito.totales.ice              = totales.ice;
+                     set.nota_credito.totales.iva_12           = totales.iva_12;
+                     set.nota_credito.totales.irbpnr           = totales.irbpnr;
+                     set.nota_credito.totales.total            = totales.total;
+                     set.nota_credito.update                   = true;
+
+                       $('#m_credito').modal('show');
+
+            // console.log(obj);
+        },
+               editarFactura(id, index){
+                     let set                                   = this;
+                     let factura                          = this.facturas.filter(x => x.id == id);
+                     let obj                                   = JSON.parse(factura[0].datos);
+                     let totales                               = JSON.parse(factura[0].totales);
+                     set.factura.factura_id                  = factura[0].id;
+                     set.factura.index                    = index;
+                     set.modulo                                = factura[0].modulo;
+                     set.factura.razon_social             = factura[0].razon_social;
+                     set.factura.fecha_emision            = factura[0].fecha_emision;
+                     set.factura.ruc                      = factura[0].ruc;
+                     set.factura.guia_remision              = factura[0].guia_remision;
+                     set.factura.datos                    = JSON.parse(factura[0].datos);
+                     set.factura.totales.subtotal_12      = totales.subtotal_12;
+                     set.factura.totales.subtotal_0       = totales.subtotal_0;
+                     set.factura.totales.subtotal_no_iva  = totales.subtotal_no_iva;
+                     set.factura.totales.subtotal_exe_iva = totales.subtotal_exe_iva;
+                     set.factura.totales.subtotal_sin_va  = totales.subtotal_sin_va;
+                     set.factura.totales.total_descuento  = totales.total_descuento;
+                     set.factura.totales.ice              = totales.ice;
+                     set.factura.totales.iva_12           = totales.iva_12;
+                     set.factura.totales.irbpnr           = totales.irbpnr;
+                     set.factura.totales.total            = totales.total;
+                     set.factura.update                   = true;
+
+                       $('#m_factura').modal('show');
+
+            // console.log(obj);
+        },
+        updateNota(){
+               if (this.modulo === '') {
+                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+            } else {
+            let index = this.nota_credito.index;
+            let set = this;
+            let url = '/sistema/admin/modulo/documento/edit';
+                axios.post(url,{
+                id: set.nota_credito.nota_id,
+                tipo: 'nota_credito',
+                modulo: set.modulo,
+                tipo_documento: 'Nota de Credito',
+                razon_social: set.nota_credito.razon_social,
+                fecha_emision: set.nota_credito.fecha_emision,
+                ruc: set.nota_credito.ruc,
+                comprobante: set.nota_credito.comprobante,
+                razon_modificacion: set.nota_credito.razon_modificacion,
+                emision: set.nota_credito.emision,
+                datos: set.nota_credito.datos,
+                totales: set.nota_credito.totales,
+
+            }).then(response => {
+                $('#m_credito').modal('hide');
+                set.nota_creditos[index].modulo        = set.modulo;
+                set.nota_creditos[index].razon_social  = set.nota_credito.razon_social;
+                set.nota_creditos[index].fecha_emision = set.nota_credito.fecha_emision;
+                set.nota_creditos[index].ruc           = set.nota_credito.ruc;
+                set.nota_creditos[index].comprobante   = set.nota_credito.comprobante;
+                set.nota_creditos[index].razon_modificacion   = set.nota_credito.razon_modificacion;
+                set.nota_creditos[index].emision       = set.nota_credito.emision;
+                set.nota_creditos[index].datos         = JSON.stringify(set.nota_credito.datos);
+                set.nota_creditos[index].totales       = JSON.stringify(set.nota_credito.totales);
+                toastr.info("Nota de credito editada Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+               this.resetNota();
+            }).catch(function(error){
+
+            }); 
+        }
+        },
+            updateFactura(){
+               if (this.modulo === '') {
+                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+            } else {
+            let index = this.factura.index;
+            let set = this;
+            let url = '/sistema/admin/modulo/documento/edit';
+                axios.post(url,{
+                id: set.factura.factura_id,
+                tipo: 'factura',
+                modulo: set.modulo,
+                tipo_documento: 'Factura',
+                razon_social: set.factura.razon_social,
+                fecha_emision: set.factura.fecha_emision,
+                ruc: set.factura.ruc,
+                guia_remision: set.factura.guia_remision,
+                datos: set.factura.datos,
+                totales: set.factura.totales,
+
+            }).then(response => {
+                $('#m_factura').modal('hide');
+                set.facturas[index].modulo        = set.modulo;
+                set.facturas[index].razon_social  = set.factura.razon_social;
+                set.facturas[index].fecha_emision = set.factura.fecha_emision;
+                set.facturas[index].ruc           = set.factura.ruc;
+                set.facturas[index].guia_remision   = set.factura.guia_remision;
+                set.facturas[index].datos         = JSON.stringify(set.factura.datos);
+                set.facturas[index].totales       = JSON.stringify(set.factura.totales);
+                toastr.info("Factura editada Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+               this.resetFactura();
+            }).catch(function(error){
+
+            }); 
+        }
+        },
+        warningEliminar(id, index, tipo){
+        Swal.fire({
+        title: 'Seguro que deseas eliminar este documento??' ,
+        text: "Esta accion no se puede revertir",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, eliminar!'
+          }).then((result) => {
+        if (result.isConfirmed) {
+            this.eliminarDocumento(id, index, tipo);
+        }
+      });
+        },
+        eliminarDocumento(id, index, tipo){
+            let set = this;
+            let url = '/sistema/admin/modulo/documento/delete';
+                axios.post(url,{
+                id: id,
+                tipo: tipo,
+            }).then(response => {
+                if (tipo === 'Cheque' ) {
+
+                    this.cheques.splice(index, 1); 
+
+                }else if (tipo === 'Nota de Credito') {
+
+                    this.nota_creditos.splice(index, 1); 
+
+                }else if (tipo === 'Factura') {
+
+                    this.facturas.splice(index, 1); 
+                }
+                toastr.info("Documento Eliminado Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+               
+            }).catch(function(error){
+
+            }); 
+        },
+        resetCheque(){
+                let set                   = this;
+                set.modulo                = '';
+                set.cheque.tipo_cheque    = '';
+                set.cheque.banco          = '';
+                set.cheque.girador        = '';
+                set.cheque.cantidad       = '';
+                set.cheque.n_cheque       = '';
+                set.cheque.cantidad_letra = '';
+                set.cheque.ciudad         = '';
+                set.cheque.fecha          = '';
+                set.cheque.firma          = '';
+                set.cheque.cheque_id      = '';
+                set.cheque.index          = '';
+                set.cheque.update         = false;
+        },
+        updateCheque(){
+               if (this.modulo === '') {
+                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+            } else {
+            let index = this.cheque.index;
+            let set = this;
+            let url = '/sistema/admin/modulo/documento/edit';
+                axios.post(url,{
+                id: set.cheque.cheque_id,
+                tipo: 'cheque',
+                modulo: set.modulo,
+                tipo_documento: 'Cheque',
+                tipo_cheque: set.cheque.tipo_cheque,
+                banco: set.cheque.banco,
+                girador: set.cheque.girador,
+                cantidad: set.cheque.cantidad,
+                n_cheque: set.cheque.n_cheque,
+                cantidad_letra: set.cheque.cantidad_letra,
+                ciudad: set.cheque.ciudad,
+                fecha: set.cheque.fecha,
+                firma: set.cheque.firma
+            }).then(response => {
+                $('#m_cheque').modal('hide');
+                set.cheques[index].modulo         = set.modulo;
+                set.cheques[index].tipo_cheque    = set.cheque.tipo_cheque;
+                set.cheques[index].banco          = set.cheque.banco;
+                set.cheques[index].girador        = set.cheque.girador;
+                set.cheques[index].cantidad       = set.cheque.cantidad;
+                set.cheques[index].n_cheque       = set.cheque.n_cheque;
+                set.cheques[index].cantidad_letra = set.cheque.cantidad_letra;
+                set.cheques[index].ciudad         = set.cheque.ciudad;
+                set.cheques[index].fecha          = set.cheque.fecha;
+                set.cheques[index].firma          = set.cheque.firma;
+                toastr.info("Cheque editado Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+               this.resetCheque();
+            }).catch(function(error){
+
+            }); 
+        }
+        },
+        guardarCheque(){
+            if (this.modulo === '') {
+                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+            } else {
+            let set = this;
+            let cheque = {
+                modulo: set.modulo,
+                tipo_documento: 'Cheque',
+                tipo_cheque: set.tipo_cheque,
+                banco: set.banco,
+                girador: set.girador,
+                cantidad: set.cantidad,
+                n_cheque: set.n_cheque,
+                cantidad_letra: set.cantidad_letra,
+                ciudad: set.ciudad,
+                fecha: set.fecha,
+                firma: set.firma
+                };
+
+            let url = '/sistema/admin/modulo/cheque';
+            axios.post(url,{
+                id: taller_id,
+                tipo: 'cheque',
+                modulo: set.modulo,
+                tipo_documento: 'Cheque',
+                tipo_cheque: set.cheque.tipo_cheque,
+                banco: set.cheque.banco,
+                girador: set.cheque.girador,
+                cantidad: set.cheque.cantidad,
+                n_cheque: set.cheque.n_cheque,
+                cantidad_letra: set.cheque.cantidad_letra,
+                ciudad: set.cheque.ciudad,
+                fecha: set.cheque.fecha,
+                firma: set.cheque.firma
+            }).then(response => {
+                $('#m_cheque').modal('hide');
+                // console.log(response.data.cheque)
+                this.cheques.push(response.data.cheque);
+                toastr.success("Cheque creado Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                set.modulo         = '';
+                set.cheque.tipo_cheque    = '';
+                set.cheque.banco          = '';
+                set.cheque.girador         = '';
+                set.cheque.cantidad       = '';
+                set.cheque.n_cheque       = '';
+                set.cheque.cantidad_letra = '';
+                set.cheque.ciudad         = '';
+                set.cheque.fecha          = '';
+                set.cheque.firma          = '';
+            }).catch(function(error){
+
+            }); 
+            }
+            
+        },
+            guardarNota(){
+            if (this.modulo === '') {
+                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+                "timeOut": "3000"
+          });
+            }else {
+            let set = this;
+            let url = '/sistema/admin/modulo/nota_credito';
+            axios.post(url,{
+                id: taller_id,
+                tipo: 'nota_credito',
+                modulo: set.modulo,
+                tipo_documento: 'Nota de Credito',
+                razon_social: set.nota_credito.razon_social,
+                fecha_emision: set.nota_credito.fecha_emision,
+                ruc: set.nota_credito.ruc,
+                comprobante: set.nota_credito.comprobante,
+                razon_modificacion: set.nota_credito.razon_modificacion,
+                emision: set.nota_credito.emision,
+                datos: set.nota_credito.datos,
+                totales: set.nota_credito.totales,
+            }).then(response => {
+                $('#m_credito').modal('hide');
+                // console.log(response.data.cheque)
+                this.nota_creditos.push(response.data.nota_credito);
+                toastr.success("Nota de Credito creada Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                    set.resetNota();
+                }).catch(function(error){
+
+                }); 
+            }
+            
+        },
+        resetNota(){
+                    let set = this;
+                     set.modulo                                = '';
+                     set.nota_credito.razon_social             = '';
+                     set.nota_credito.fecha_emision            = '';
+                     set.nota_credito.ruc                      = '';
+                     set.nota_credito.comprobante              = '';
+                     set.nota_credito.razon_modificacion       = '';
+                     set.nota_credito.emision                  = '';
+                     set.nota_credito.datos                    = 
+                     [
+                         {
+                             codigo:'',
+                             cod_aux:'',
+                             cantidad:'',
+                             descripcion:'',
+                             p_unitario:'',
+                             descuento:'',
+                             venta:'', 
+                         }
+                     ];
+                     set.nota_credito.totales.subtotal_12      = '';
+                     set.nota_credito.totales.subtotal_0       = '';
+                     set.nota_credito.totales.subtotal_no_iva  = '';
+                     set.nota_credito.totales.subtotal_exe_iva = '';
+                     set.nota_credito.totales.subtotal_sin_va  = '';
+                     set.nota_credito.totales.total_descuento  = '';
+                     set.nota_credito.totales.ice              = '';
+                     set.nota_credito.totales.iva_12           = '';
+                     set.nota_credito.totales.irbpnr           = '';
+                     set.nota_credito.totales.total            = '';
+                    set.nota_credito.update = false
+                    set.nota_credito.nota_id = '';
+                    set.nota_credito.index = '';
+
+
+                    
+        },
+        guardarFactura(){
+            if (this.modulo === '') {
+                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+                "timeOut": "3000"
+          });
+            }else {
+            let set = this;
+            let url = '/sistema/admin/modulo/factura';
+            axios.post(url,{
+                id: taller_id,
+                tipo: 'factura',
+                modulo: set.modulo,
+                tipo_documento: 'Factura',
+                razon_social: set.factura.razon_social,
+                fecha_emision: set.factura.fecha_emision,
+                ruc: set.factura.ruc,
+                guia_remision: set.factura.guia_remision,
+                datos: set.factura.datos,
+                totales: set.factura.totales,
+            }).then(response => {
+                $('#m_factura').modal('hide');
+                // console.log(response.data.cheque)
+                this.facturas.push(response.data.factura);
+                toastr.success("Factura creada Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                    set.resetNota();
+                }).catch(function(error){
+
+                }); 
+            }
+            
+        },
+               resetFactura(){
+                    let set = this;
+                     set.modulo                                = '';
+                     set.factura.razon_social             = '';
+                     set.factura.fecha_emision            = '';
+                     set.factura.ruc                      = '';
+                     set.factura.guia_remision            = '';
+                     set.factura.datos                    = 
+                     [
+                         {
+                             codigo:'',
+                             cod_aux:'',
+                             cantidad:'',
+                             descripcion:'',
+                             p_unitario:'',
+                             descuento:'',
+                             venta:'', 
+                         }
+                     ];
+                     set.factura.totales.subtotal_12      = '';
+                     set.factura.totales.subtotal_0       = '';
+                     set.factura.totales.subtotal_no_iva  = '';
+                     set.factura.totales.subtotal_exe_iva = '';
+                     set.factura.totales.subtotal_sin_va  = '';
+                     set.factura.totales.total_descuento  = '';
+                     set.factura.totales.ice              = '';
+                     set.factura.totales.iva_12           = '';
+                     set.factura.totales.irbpnr           = '';
+                     set.factura.totales.total            = '';
+                    set.factura.update = false
+                    set.factura.factura_id = '';
+                    set.factura.index = '';
+
+
+                    
+        }
       }
     
     })

@@ -20,7 +20,9 @@
           			<table>
           				<tr>
           					<td width="200" class="font-weight-bold text-danger">Fecha de Entrega:</td>
-          					<td>{{Carbon\Carbon::parse($datos->taller->fecha_entrega)->formatLocalized('%d de %B %Y ') }}</td>
+          					<td>@isset($fecha->fecha_entrega)
+                         {{Carbon\Carbon::parse($fecha->fecha_entrega)->formatLocalized('%d de %B %Y ') }}
+                      @endisset</td>
           				</tr>
           				<tr>
           					<td width="200" class="font-weight-bold text-primary">Entregado:</td>
@@ -28,12 +30,13 @@
           				</tr>
           				<tr>
           					<td class="font-weight-bold text-info">Estado de entrega:</td>
-          					<td > @if ($update_imei->pivot->fecha_entregado <= $datos->taller->fecha_entrega)
-          						<span class="badge badge-success">PUNTUAL</span>
-          						@else
-          						<span class="badge badge-danger">ATRASADO</span>
-
-          					@endif </td>
+          					<td > @isset($fecha->fecha_entrega)
+                      @if ($update_imei->pivot->fecha_entregado <= $fecha->fecha_entrega)
+                      <span class="badge badge-success">PUNTUAL</span>
+                      @else
+                      <span class="badge badge-danger">ATRASADO</span>
+                      @endif 
+                     @endisset </td>
           				</tr>
           			</table>
           		</div>
@@ -56,8 +59,8 @@
                     <tr>
                       <th scope="row">{{ $data->enunciado }}</th>
                       <td><img width="100" src="{{ $data->img }}" alt=""></td>
-                      <td>{{ $data->definicion }}</td>
-                      <td width="200"> @if ($data->definicion == $data->definicion_aleatoria )<span class="badge badge-success">Correcta</span> @else <span class="badge badge-danger">Incorrecta</span> @endif</td>
+                      <td>{{ $data->definicion_aleatoria }}</td>
+                      <td width="200" class="text-center"> @if ($data->definicion == $data->definicion_aleatoria )<span class="badge badge-success">Correcta</span> @else <span class="badge badge-danger">Incorrecta</span> @endif</td>
                     </tr>
                     @endforeach
                   </tbody>

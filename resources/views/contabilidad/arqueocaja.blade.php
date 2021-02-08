@@ -5,7 +5,7 @@
     <h2 class="text-center display-4 font-weight-bold text-danger">Arqueo de Caja</h2>
 
     <br>
-    @if ($rol === 'estudiante')
+    @if ($rol === 'estudiante' or 'docente')
         <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirArqueo()">Agregar Existencias</a>
         <a href="#" class="addDiario btn btn-outline-success ml-1 " @click.prevent="guardaArqueo()">Guardar Arqueo Caja</a>
 @endif
@@ -77,7 +77,7 @@
         </table>
   
 
-    @if ($rol === 'estudiante')
+    @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center mb-2">
         <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirArqueo()">Agregar Existencias</a>
     </div>

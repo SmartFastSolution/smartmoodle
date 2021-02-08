@@ -6,7 +6,7 @@
             placeholder="Nombre de la Empresa">
         </div>
     </div>
-    @if ($rol === 'estudiante')
+    @if ($rol === 'estudiante' or 'docente')
     <a href="#" v-if="registros.length >= 1" class="btn btn-outline-primary" @click.prevent="abrirTransaccion()">Transacciones</a>
     <a href="#" v-if="registros.length >= 1" class="addDiario btn btn-outline-secondary ml-1" @click.prevent="guardarMayor()">Completar Mayor General</a>
     @endif
@@ -55,7 +55,7 @@
             </table>
         </div>
     </div>
-    @if ($rol === 'estudiante')
+    @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-around mb-2">
         <a href="#" class="btn btn-outline-primary" @click.prevent="abrirTransaccion()">Transacciones</a>
     </div>

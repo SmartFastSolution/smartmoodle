@@ -2,6 +2,16 @@
 {{-- EN EL SIGUIENTE COLLAGE APLIQUE FIGURAS QUE SE  RELACIONEN CON CONTABILIDAD HOTELERA, CON EFICACIA --}}
 @section('title', $datos->taller->nombre)
 @section('content')
+<<<<<<< HEAD
+=======
+    <li class="d-none">
+        @if (Auth::check())
+        @foreach (auth()->user()->roles as $role)
+        {{ $rol = $role->descripcion}}
+        @endforeach
+        @endif
+    </li>
+>>>>>>> 618ceb09e19e1b3a3abfe1045b2cd3624380bfa2
 <div class="container">
   <h1 class="text-center text-danger display-1">{{ $datos->taller->nombre }}</h1>
   <div class="card border border-danger mb-3" >
@@ -34,7 +44,11 @@
     </div>
  
     
+<<<<<<< HEAD
     
+=======
+      @if ($rol === 'estudiante')
+>>>>>>> 618ceb09e19e1b3a3abfe1045b2cd3624380bfa2
     <div class="row justify-content-center">
       <div class="col-5">
         <div class="form-group">
@@ -48,6 +62,10 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
+=======
+    @endif
+>>>>>>> 618ceb09e19e1b3a3abfe1045b2cd3624380bfa2
   </div>
 </div>
 </div>

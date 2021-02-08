@@ -44,12 +44,12 @@
                                     </select>
                                 </div>
                             </div>
-                 {{--      <div class="form-group col-4">
+                      <div class="form-group col-4">
                                     <label for="" class="col-form-label">Imagen(Opcional):</label>
                                         <input type="file" class="inputfile inputfile-1" name="imagen" id="file-1">
                                         <label for="file-1"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>
                                    
-                                  </div> --}}
+                                  </div>
                       <div class="form-group">
                         <label for="" class="col-form-label">Leyenda(Usar cuando no hay imagen):</label>
                         <textarea  class="form-control" name="leyenda" ></textarea>
@@ -1045,7 +1045,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="taller14Label">IDENTIFICAR PERSONAS QUE INTERVIENEN EN CHEQUE</h5>
+                <h5 class="modal-title" id="taller14Label">IDENTIFICAR PERSONAS QUE INTERVIENEN</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -1089,6 +1089,20 @@
                             <div class="form-group">
                                 <label for="" class="col-form-label">Descripcion :</label>
                                 <textarea required="" name="descripcion" class="form-control" rows="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Elegir Intermediarios :</label>
+                                <select class="select3" multiple="multiple"  name="intermediarios[]" style="width: 100%;">
+                                    <option value="GIRADOR">GIRADOR</option>
+                                    <option value="GIRADO">GIRADO</option>
+                                    <option value="BENEFICIARIO">BENEFICIARIO</option>
+                                    <option value="TENEDOR">TENEDOR</option>
+                                    <option value="GARANTE">GARANTE</option>
+                                    <option value="DEUDOR">DEUDOR</option>
+                                    <option value="ACREEDOR">ACREEDOR</option>
+                                    <option value="CAJERO">CAJERO</option>
+                                    <option value="CONTADOR">CONTADOR</option>
+                                </select>
                             </div>
                             <div class="row justify-content-center">
 
@@ -3585,3 +3599,113 @@
         </div>
     </div>
 </div>
+
+<!-- FORMULARIO PARA PLANTILLA 50 -->
+{{-- <div class="modal fade" id="taller50" tabindex="-1" role="dialog" aria-labelledby="taller50Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="taller50Label">NOTA DE CREDITO</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller50') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="50" name="id_plantilla">
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                                  <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-4">
+                                    <label for="" class="col-form-label">Pedido :</label>
+                                    <input required="" type="text" name="pedido" class="form-control">
+                                </div>
+                                <div class="form-group col-4">
+                                    <label for="" class="col-form-label">Lugar :</label>
+                                    <input required="" type="text" name="lugar" class="form-control">
+                                </div>
+                                <div class="form-group col-4">
+                                    <label for="" class="col-form-label">Fecha :</label>
+                                    <input required="" type="date" name="fecha" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <table class="table table-bordered">
+                                  <thead>
+                                    <tr class="text-center">
+                                      <th scope="col">CANTIDAD</th>
+                                      <th scope="col">CODIGO</th>
+                                      <th scope="col">DESCRIPCION</th>
+                                      <th scope="col">PRECIO UNIT.</th>
+                                      <th scope="col">ACCION</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody class="taller50">
+                                    <tr>
+                                      <td><input name="cantidad[]" type="text" class="form-control" ></td>
+                                      <td><input name="codigo[]" type="text" class="form-control" ></td>
+                                      <td><input type="text" name="descripcion[]" class="form-control" ></td>
+                                      <td><input type="text" name="precio_unit[]" class="form-control" ></td>
+                                      <td><a href="#" class="btn btn-danger removeTaller50"><span class="glyphicon glyphicon-remove">X</span></a></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                            </div>
+                              <div class="row">
+                                <a href="#" class="addTaller50 btn btn-outline-danger">Agregar Columna</a>
+                            </div>   
+                            <div class="form-row">
+                                <div class="form-group col-8">
+                                    <label for="" class="col-form-label">Firma de Bodeguero :</label>
+                                    <input required="" type="text" name="firma" class="form-control">
+                                </div>
+                                <div class="form-group col-4">
+                                    <label for="" class="col-form-label">Plazo de entrega :</label>
+                                    <input required="" type="text" name="plazo_entrega" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+ --}}

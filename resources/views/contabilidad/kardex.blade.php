@@ -36,7 +36,7 @@
 
 	<example-component :nombres="'ANTHONY'">
 	</example-component> --}}
- @if ($rol === 'estudiante')
+ @if ($rol === 'estudiante' or 'docente')
 <div v-if="!actuingreso.estado && !actuegreso.estado && producto_id !== ''" class="row justify-content-center">
 	<a {{-- v-if="transacciones.length == 0" --}} class="btn btn-sm btn-success mr-2" @click.prevent="modalInicial()">Saldo Inicial</a>
 	<a  class="btn btn-sm btn-secondary mr-2" @click.prevent="modalIngreso()" href="#" data-toggle="modal" data-target="#ingreso">INGRESO</a>
@@ -107,7 +107,7 @@
 
  @include('contabilidad.modales.modalkardex')
 
- @if ($rol === 'estudiante')
+ @if ($rol === 'estudiante' or 'docente')
 <div v-if="!actuingreso.estado && !actuegreso.estado && producto_id !== ''" class="row justify-content-center">
 
 	
