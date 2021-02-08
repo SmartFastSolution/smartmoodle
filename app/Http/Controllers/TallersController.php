@@ -50,6 +50,7 @@ use App\Admin\TallerSopaLetra;
 use App\Admin\TallerSubrayar;
 use App\Admin\TallerValeCaja;
 use App\Admin\TallerVerdaderoFalso;
+use App\Contenido;
 use App\Http\Controllers\Controller;
 use App\Materia;
 use App\Pcuenta;
@@ -87,6 +88,7 @@ use App\TallerSubrayarRe;
 use App\TallerUtilizarAbreRe;
 use App\TallerValeCajaRe;
 use App\TallerVerdaderoFalsoRe;
+use App\User;
 use Auth;
 use Illuminate\Http\Request;
 use JavaScript;
@@ -314,10 +316,20 @@ class TallersController extends Controller
             return abort(404);   
              }
             }elseif ($plant == 31) {
-
             $consul = Taller::findorfail($id);
+
+            $user= User::find(Auth::id());
+            // return redirect()->route('estudiante')->with('datos', 'Datos Enviados Correctamente');
+             foreach(auth()->user()->roles as $role){
+            $rol =$role->descripcion;
+            }
+
+            $contenido = Contenido::find($consul->contenido_id);
+
+            // return $rol;
+
              $datos = TallerCollage::where('taller_id', $consul->id)->firstOrFail();
-            return view('talleres.taller31', compact('datos', 'd'));
+            return view('talleres.taller31', compact('datos', 'd', 'rol', 'contenido'));
 
         }elseif ($plant == 32) {
           $datos = Taller::findorfail($id);
@@ -502,9 +514,14 @@ class TallersController extends Controller
         }elseif ($plant == 48) {
 
             $consul = Taller::findorfail($id);
+              foreach(auth()->user()->roles as $role){
+            $rol =$role->descripcion;
+            }
+
+            $contenido = Contenido::find($consul->contenido_id);
              $datos = TallerArchivo::where('taller_id', $consul->id)->firstOrFail();
              
-            return view('talleres.taller48', compact('datos', 'd'));
+            return view('talleres.taller48', compact('datos', 'd', 'contenido', 'rol'));
         }elseif ($plant == 49) {
 
             $consul = Taller::findorfail($id);

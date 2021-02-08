@@ -28,7 +28,6 @@ class CreateDistribucionmacuTallerTable extends Migration
             $table->foreign('taller_id')->references('id')->on('tallers')->onDelete('cascade');
             $table->foreign('nivel_id')->references('id')->on('nivels')->onDelete('cascade');
 
-
         });
     }
 

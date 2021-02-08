@@ -18,9 +18,7 @@ class CreateIdentificarPersonasTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->longText('enunciado');
-            $table->string('girador')->nullable();
-            $table->string('girado')->nullable();
-            $table->string('beneficiario')->nullable();
+            $table->string('personas')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

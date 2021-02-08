@@ -52,7 +52,7 @@ class EstudianteController extends Controller
    
     public function show(User $user){
         $usuario = User::find(Auth::id());
-        $curso = Distribucionmacu::find($usuario->distribucionmacu_id);
+        $curso   = Distribucionmacu::find($usuario->distribucionmacu_id);
 
         $materias = Assignment::join("assignment_materia", "assignment_materia.assignment_id", "=", "assignments.id")
         ->join("materias", "materias.id", "=", "assignment_materia.materia_id")
@@ -93,26 +93,30 @@ class EstudianteController extends Controller
           
          $contenido=Contenido::get();
 
-         $tallers=Taller::get();
-         $realizar = Distribucionmacu::join('distribucionmacu_taller' , "distribucionmacu_taller.distribucionmacu_id", "=", "distribucionmacus.id")
-         ->join('contenidos', 'distribucionmacu_taller.contenido_id', '=', 'contenidos.id')
-        ->join('tallers', 'distribucionmacu_taller.taller_id', '=', 'tallers.id')
-         ->where('distribucionmacu_taller.distribucionmacu_id', $curso->id)
-         ->where('distribucionmacu_taller.nivel_id', $user->nivel_id)
-        ->select("distribucionmacu_taller.*", "contenidos.nombre as unidad", "tallers.nombre as nombre_taller", "tallers.enunciado")
-
-         ->get();
+  
 
 
          // return $realizar;
-                  $completados = $user->tallers;
+        $completados = $user->tallers;
          $con =Contenido::where('materia_id', $id)->first();
          $ids = [];
           foreach($completados as $act){
                 $ids[]=$act->id;
             }
+                   // $tallers=Taller::get();
+         $realizar = Distribucionmacu::join('distribucionmacu_taller' , "distribucionmacu_taller.distribucionmacu_id", "=", "distribucionmacus.id")
+         ->join('contenidos', 'distribucionmacu_taller.contenido_id', '=', 'contenidos.id')
+        ->join('tallers', 'distribucionmacu_taller.taller_id', '=', 'tallers.id')
+         ->where('distribucionmacu_taller.distribucionmacu_id', $curso->id)
+         ->where('distribucionmacu_taller.nivel_id', $user->nivel_id)
+         ->where('distribucionmacu_taller.nivel_id', $user->nivel_id)
+         ->whereNotIn('distribucionmacu_taller.taller_id', $ids)
+         ->where('distribucionmacu_taller.estado', 1)
+        ->select("distribucionmacu_taller.*", "contenidos.nombre as unidad", "tallers.nombre as nombre_taller", "tallers.enunciado")
 
-         $tallers = Taller::whereNotIn('id', $ids)->get();
+         ->get();
+
+         // $tallers = Taller::whereNotIn('id', $ids)->get();
  
          $materia =Materia::where('id', $id)->firstOrfail();
          $cons =Contenido::where('materia_id',$materia->id)->paginate(6);

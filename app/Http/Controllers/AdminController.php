@@ -743,6 +743,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
        public function taller14(Request $request)
       {
+        // return $request->intermediarios;
            $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
          $taller14 = new Taller;
          $taller14->nombre = 'Taller '.++$i;
@@ -759,6 +760,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
             $taller_14->taller_id = $a->id;
             $taller_14->enunciado = $request->input('enunciado');
             $taller_14->descripcion = $request->input('descripcion');
+            $taller_14->intermediarios = json_encode( $request->intermediarios);
             $taller_14->save();
       return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
 

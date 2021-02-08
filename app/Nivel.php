@@ -50,4 +50,5 @@ class Nivel extends Model
         return $this->hasMany('App\Post');
     }
 
+
 }
