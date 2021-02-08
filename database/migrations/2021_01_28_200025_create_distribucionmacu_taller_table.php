@@ -19,12 +19,14 @@ class CreateDistribucionmacuTallerTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('contenido_id')->nullable();
             $table->unsignedbigInteger('plantilla_id')->nullable();
+            $table->unsignedbigInteger('nivel_id')->nullable();
             $table->boolean('estado')->nullable();
             $table->string('fecha_entrega')->nullable();
             $table->timestamps();
             $table->foreign('distribucionmacu_id')->references('id')->on('distribucionmacus')->onDelete('cascade');
             $table->foreign('contenido_id')->references('id')->on('contenidos')->onDelete('cascade');
             $table->foreign('taller_id')->references('id')->on('tallers')->onDelete('cascade');
+            $table->foreign('nivel_id')->references('id')->on('nivels')->onDelete('cascade');
 
         });
     }

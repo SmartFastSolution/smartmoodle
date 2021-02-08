@@ -44,12 +44,12 @@
                                     </select>
                                 </div>
                             </div>
-                 {{--      <div class="form-group col-4">
+                      <div class="form-group col-4">
                                     <label for="" class="col-form-label">Imagen(Opcional):</label>
                                         <input type="file" class="inputfile inputfile-1" name="imagen" id="file-1">
                                         <label for="file-1"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>
                                    
-                                  </div> --}}
+                                  </div>
                       <div class="form-group">
                         <label for="" class="col-form-label">Leyenda(Usar cuando no hay imagen):</label>
                         <textarea  class="form-control" name="leyenda" ></textarea>

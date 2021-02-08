@@ -33,7 +33,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									@foreach ($talleres= App\Taller::where('contenido_id', $contenido->id)->get() as $taller)
+									@foreach ($talleres= App\Taller::where('contenido_id', $contenido->id)->where('estado', 1)->get() as $taller)
 									<tr>
 										{{-- <td>{{$taller->contenido->nombre}}</td> --}}
 										<td>{{$taller['nombre']}}</td>

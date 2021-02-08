@@ -6,9 +6,15 @@
 <h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>
      <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
+
 <form id="taller10" action="{{ route('taller10', ['idtaller' => $d]) }}" method="POST">
     @csrf
 	<div class="container">
+		@if (session('datos'))
+    <div class="alert alert-danger">
+        {{ session('datos') }}
+    </div>
+@endif
 		@foreach ($datos->relacionarOptions as $key => $opciones)
 		<div class="row justify-content-center align-items-center mb-5">
 			<div class="col-5 text-justify">
@@ -22,7 +28,7 @@
 					</div>
 					<div class="col-6 text-center ">
 						<label for="">{{ $opciones->enunciado }}</label><br>
-						<input type="text"  size="2" name="order[]" class=" font-weight-bold text-center" style="outline: none; background-color: #94F0E4; box-shadow: 5px 5px 15px 0px  #18DEF0;" >
+						<input type="number"  size="2" name="order[]" class="ml-5 font-weight-bold text-center form-control consul form-control-sm" style="outline: none; background-color: #94F0E4; box-shadow: 5px 5px 15px 0px  #18DEF0; width: 100px" >
 					</div>
 				</div>
 			</div>
@@ -41,7 +47,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script type="text/javascript">
-
+$('.consul').on("input", function() {
+  var dInput = this.value;
+  
+  console.log(dInput)
+  // $('#output').text(dInput);
+});
  $( "#button" ).click(function( event ) {
   event.preventDefault();
   Swal.fire({

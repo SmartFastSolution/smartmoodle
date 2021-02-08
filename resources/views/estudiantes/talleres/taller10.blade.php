@@ -31,8 +31,8 @@
                     <tr>
                       <th scope="row">{{ $data->enunciado }}</th>
                       <td><img width="100" src="{{ $data->img }}" alt=""></td>
-                      <td>{{ $data->definicion }}</td>
-                      <td width="200"> @if ($data->definicion == $data->definicion_aleatoria )Correcta @else Incorrecta @endif</td>
+                      <td>{{ $data->definicion_aleatoria }}</td>
+                      <td width="200" class="text-center"> @if ($data->definicion == $data->definicion_aleatoria ) <span class="badge  badge-success">Correcta</span> @else <span class="badge  badge-danger">Incorrecta</span> @endif</td>
                     </tr>
                     @endforeach
                   </tbody>

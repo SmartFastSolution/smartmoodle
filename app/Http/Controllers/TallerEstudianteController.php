@@ -894,6 +894,12 @@ class TallerEstudianteController extends Controller
     }
         public function store10(Request $request, $idtaller)
     {
+           $conteo =count($request->order);
+    // foreach ($request->order as  $cd) {
+    //     if ($cd > $conteo ) {
+    //        return back()->with('datos', 'Los valores no coinciden con los registros');
+    //     }
+    // }
     $id                  =   Auth::id();
     $taller              =   Taller::where('id', $idtaller)->firstOrfail();
     $taller10            = new Relacionar; 
@@ -905,14 +911,23 @@ class TallerEstudianteController extends Controller
     $com = Relacionar::where('user_id', $id)->get()->last();
     $enun = $alter->relacionarOptions;
     $alter2 = TallerRelacionarOpcion::select('definicion_aleatoria')->where('taller_relacionar_id', $alter->id)->get();
-    // $datos = [];
-        foreach ($request->order as $key => $value) {
+    $datos = [];
+
+      foreach ($request->order as $key2 => $cd) {
+        if ($cd > $conteo or null ) {
+          $datos[] =  null;
+        }else{
+           $datos[]= $alter2[$cd - 1]->definicion_aleatoria;
+        }
+    }
+    // return $datos;
+        foreach ($datos as $key => $value) {
                     $datos= array(
                         'relacionar_id' => $com->id,
                         'enunciado' => $enun[$key]->enunciado,
                         'definicion' => $enun[$key]->definicion,
                         'img' => $enun[$key]->img,
-                        'definicion_aleatoria' => $alter2[$value - 1]->definicion_aleatoria,
+                        'definicion_aleatoria' => $value,
                         'created_at'=> now(),
                         'updated_at'=> now(),
                     );

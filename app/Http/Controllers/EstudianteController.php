@@ -52,7 +52,7 @@ class EstudianteController extends Controller
    
     public function show(User $user){
         $usuario = User::find(Auth::id());
-        $curso = Distribucionmacu::find($usuario->distribucionmacu_id);
+        $curso   = Distribucionmacu::find($usuario->distribucionmacu_id);
 
         $materias = Assignment::join("assignment_materia", "assignment_materia.assignment_id", "=", "assignments.id")
         ->join("materias", "materias.id", "=", "assignment_materia.materia_id")
