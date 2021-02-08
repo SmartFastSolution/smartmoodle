@@ -42,7 +42,7 @@ class EstudianteController extends Controller
          return view('errors.error'); //ruta estudiante //ruta estudiante       
              
         }
-        $p = Post::orderBy('id','Desc')->where('instituto_id', Auth::user()->instituto_id)->paginate(5);
+        $p = Post::orderBy('id','Desc')->where('instituto_id', Auth::user()->instituto_id)->where('nivel_id',Auth::user()->nivel_id)->paginate(5);
         // $p = Post::orderBy('id','Desc')->paginate(5);
        
         return view('Estudiante.indexes',compact('p'));
@@ -210,6 +210,7 @@ class EstudianteController extends Controller
       $post =New Post;
       $post->user_id  = e($request->user_id);
       $post->instituto_id= Auth::user()->instituto_id;
+      $post->nivel_id= Auth::user()->nivel_id;
       $post->nombre   = e($request->nombre);
       $post->abstract = e($request->abstract);
       $post->body = e($request->body);

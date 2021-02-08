@@ -64,6 +64,13 @@ class Materia extends Model
         return $this->belongsToMany(Assignment::class)->withPivot('materia_id')->withTimestamps();
 
     }
+
+
+    public function posts(){
+          
+        return $this->hasMany('App\Post');
+    }
+
     
 
 }

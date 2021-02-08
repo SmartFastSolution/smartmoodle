@@ -352,7 +352,19 @@ class DocenteController extends Controller
      
   public function PostD()
   {
-     return \view('Docente.postdocente');
+
+     $materias = Distribuciondo::join('distribucionmacu_materia','distribucionmacu_materia.materia_id','=','distribuciondos.materia_id')
+     ->join('distribucionmacus','distribucionmacus.id','=','distribucionmacu_materia.distribucionmacu_id')
+     ->join('cursos', 'cursos.id', '=', 'distribucionmacus.curso_id')
+     ->join('materias','materias.id','=','distribucionmacus.curso_id')
+     ->select('distribuciondos.*','cursos.nombre as nombre_curso','materias.nombre as nombre_materia')
+     ->where('distribuciondos.user_id',Auth::id())
+     ->get();
+
+     //return $materias;
+     return \view('Docente.postdocente',compact('materias'));
+  
+  
   }
 
 
@@ -381,6 +393,8 @@ class DocenteController extends Controller
       $post =New Post;
       $post->user_id  = e($request->user_id);
       $post->instituto_id= Auth::user()->instituto_id;
+      $post->materia_id   = e($request->materia);
+      $post->nivel_id   = e($request->paralelos);
       $post->nombre   = e($request->nombre);
       $post->abstract = e($request->abstract);
       $post->body = e($request->body);

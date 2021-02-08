@@ -28,6 +28,14 @@ class Post extends Model
           
         return $this->belongsTo('App\User');
     }
+    public function materia(){
+          
+        return $this->belongsTo('App\Materia');
+    }
+    public function nivel(){
+          
+        return $this->belongsTo('App\Nivel');
+    }
 
     public function comments(){  //relacion polimorfica con comentario y post
           

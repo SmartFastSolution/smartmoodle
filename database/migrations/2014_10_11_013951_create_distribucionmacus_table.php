@@ -21,7 +21,7 @@ class CreateDistribucionmacusTable extends Migration
             $table->enum('estado',['on','off'])->nullable();
             $table->timestamps();
             $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade');
-            $table->foreign('nivel_id')->references('id')->on('nivels')->onDelete('cascade');
+          
             $table->foreign('instituto_id')->references('id')->on('institutos')->onDelete('cascade');
           
             

@@ -30,8 +30,29 @@
                         {!! Form::open(['route'=>'storepostd', 'method'=>'POST','files' => true]) !!}
                         <div class="card-body ">
                             @include('Post.form.form')
+
+                            <div class="form-group" id="dd">
+                                <label for="materia">Seleccionar Materia</label>
+                                <select class="form-control select2" name="materia" style="width: 99%;"
+                                    @change="onMateria()">
+                                    <option selected disabled>Elija la Materia...</option>
+                                    @foreach($materias as $a)
+                                    <option value="{{$a->materia_id}}">
+                                        {{$a->nombre_curso}}-{{$a->nombre_materia}}</option>
+                                    @endforeach
+                                </select>
+
+                                <label>Seleccione el Paralelos</label>
+                                <select class="paralelos form-control" name="paralelos"
+                                    data-placeholder="Selecciona los paralelo" style="width: 100%;">
+                                    <option v-for="paralelo in paralelos" :value="paralelo.id">@{{ paralelo.nombre}}
+                                    </option>
+                                </select>
+                            </div>
+
                         </div>
-                     
+
+
                         <a href="{{ url('/sistema/homedoc') }}" class="btn btn-primary">Atras</a>
                         <input type="submit" class="btn btn-dark " value="Guardar">
                         {!! Form::close() !!}
@@ -55,10 +76,55 @@
 
 {!! Html::script('vendor/ckeditor/ckeditor.js') !!}
 <script>
-    CKEDITOR.replace('body');
-       $(".custom-file-input").on("change", function() {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        });
+CKEDITOR.replace('body');
+$(".custom-file-input").on("change", function() {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
 </script>
+
+
+<script>
+const inst = new Vue({
+    el: '#dd',
+    data: {
+        materia: '',
+        paralelos: [],
+    },
+
+    methods: {
+        onMateria(id) {
+
+            var set = this;
+            set.paralelos = [];
+            axios.post('/sistema/buscarparalelo', {
+                id: id,
+            }).then(response => {
+                set.paralelos = response.data;
+                console.log(set.paralelos);
+            }).catch(e => {
+                console.log(e);
+            });
+        }
+    },
+
+});
+</script>
+
+<script>
+$(function() {
+    var $eventSelect = $(".select2");
+
+    $eventSelect.select2();
+    $eventSelect.on("select2:select", function(e) {
+        var select_val = $(e.currentTarget).val();
+
+        inst.onMateria(select_val);
+    });
+
+})
+</script>
+
+
+
 @stop
