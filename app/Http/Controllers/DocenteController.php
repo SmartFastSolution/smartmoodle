@@ -10,6 +10,7 @@ use App\Curso;
 use App\Distribuciondo;
 use App\Distribucionmacu;
 use App\Distrima;
+use App\Documento;
 use App\Http\Controllers\Controller;
 use App\Instituto;
 use App\Materia;
@@ -129,7 +130,9 @@ class DocenteController extends Controller
       
         $materia =Materia::where('id', $id)->firstOrfail();
         $contenidos=Contenido::get();
-        $cons =Contenido::where('materia_id',$materia->id)->paginate(6);
+
+        $contenido =Contenido::where('id', $id)->firstOrfail();
+         $cons =Documento::where('contenido_id',$contenido->id)->get();
              $curso = Distribuciondo::join('distribucionmacu_materia', 'distribucionmacu_materia.materia_id', '=', 'distribuciondos.materia_id')
                 ->join('distribucionmacus', 'distribucionmacus.id', '=', 'distribucionmacu_materia.distribucionmacu_id')
                 ->join('cursos', 'cursos.id', '=', 'distribucionmacus.curso_id')
@@ -333,14 +336,14 @@ class DocenteController extends Controller
 
     public function VerPDF($id){
 
-        $contenido =Contenido::where('id', $id)->firstOrfail();
+        $contenido =Documento::where('id', $id)->firstOrfail();
          return \view('Docente.archivopdf',['contenido'=>$contenido]);
   
     }
 
     public function VerPDF2($id){
 
-        $contenido =Contenido::where('id', $id)->firstOrfail();
+        $contenido =Documento::where('id', $id)->firstOrfail();
          return \view('Docente.archivopdf2',['contenido'=>$contenido]);
   
     }
@@ -487,7 +490,7 @@ class DocenteController extends Controller
     
       public function Guardardoc(Request $request){
 
-        return $request->all();
+       // return $request->all();
         $request->validate([
 
             'nombre'      => 'required|string|max:150',

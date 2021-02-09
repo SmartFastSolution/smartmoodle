@@ -28,6 +28,13 @@ class Post extends Model
           
         return $this->belongsTo('App\User');
     }
+
+    public function distribucionmacu(){
+          
+        return $this->belongsTo('App\Distribucionmacu');
+    }
+
+
     public function materia(){
           
         return $this->belongsTo('App\Materia');

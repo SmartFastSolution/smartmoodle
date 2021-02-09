@@ -57,34 +57,6 @@
                 </div>
                 @endforeach
             </div>
-{{--             <div class="row">
-                @foreach(auth()->user()->assignmets as $as)
-                @foreach($as->materias as $materia)
-                @foreach($materia->distribuciondos as $doc)
-                @foreach($materia->distribucionmacus as $curso)
-                <div class="col-lg-4 col-6">
-
-                    <div class="small-box bg-info">
-                        <div class="inner">
-                        <h5 > <strong> {{$materia->nombre}}</strong></h5>
-                            <p> {{$doc->user->name}} {{$doc->user->apellido}} | {{$curso->curso->nombre}} </p>
-
-                            
-                        </div>
-                        <div class="icon">
-                            <i class="fas fa-newspaper"></i>
-                        </div>
-                        <a href="{{route('Unidades', $materia->id)}}" class="small-box-footer">
-                            Acceder <i class="fas fa-arrow-circle-right"></i>
-                        </a>
-                    </div>
-                </div>
-                @endforeach
-                @endforeach
-                @endforeach
-                @endforeach
-            </div> --}}
-
         </div>
     </div>
 </div>
