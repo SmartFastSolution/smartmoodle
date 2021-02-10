@@ -19,6 +19,15 @@ class CreateArqueocajasTable extends Migration
             $table->unsignedbigInteger('user_id');
             $table->string('totaldebe')->nullable();
             $table->string('totalhaber')->nullable();
+            $table->string('saldo_ctcaja')->nullable();
+            $table->string('saldo_arqueocaja')->nullable();
+            $table->string('select_resultado')->nullable();
+            $table->string('select_valor')->nullable();
+            $table->string('cuenta1')->nullable();
+            $table->string('cuenta2')->nullable();
+            $table->string('valor1')->nullable();
+            $table->string('valor2')->nullable();
+
             $table->timestamps();
 
             $table->foreign('taller_id')

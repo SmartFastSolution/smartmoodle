@@ -162,7 +162,7 @@ class Plantilla extends Seeder
                           ]);
                           DB::table('plantillas')->insert([
                           'id' => 18,
-                          'nombre' => 'Plantilla 18 - LETRA  DE  CAMBIO',
+                          'nombre' => 'Plantilla 18 - LETRA  DE  CAMBIO',
                           'descripcion' => 'Plantilla designado para completar un resultado',
                           'plantilla' => 'si',
                           'created_at' => now(),

@@ -9138,6 +9138,8 @@ const arqueo_caja = new Vue ({
  
   data:{
     id_taller : taller,
+   
+
     libros_caja:[],
     debe_lb:'',
     haber_lb:'',
@@ -9149,7 +9151,16 @@ const arqueo_caja = new Vue ({
        s_debe   :'',
        s_haber  :'',
     },
-
+    pruebas:{
+      cuenta1:'',
+      cuenta2:'',
+      valor1 :'',
+      valor2:'',
+      saldo_ctcaja:'',
+      saldo_arqueocaja:'',
+      select_resultado:'',
+      select_valor:'',
+    },
     t_exis:[], // array de existencias
     exis:{
       edit:false,
@@ -9500,11 +9511,19 @@ const arqueo_caja = new Vue ({
     var _this = this;
     var url ='/sistema/admin/taller/arqueo_caja';
       axios.post(url,{
-             id:    _this.id_taller,
-        t_saldo:    _this.t_saldo,
-         t_exis:    _this.t_exis,
-             td:    _this.sumas.td,
-             th:    _this.sumas.th,
+             id:       _this.id_taller,
+        t_saldo:       _this.t_saldo,
+         t_exis:       _this.t_exis,
+             td:       _this.sumas.td,
+             th:       _this.sumas.th,
+        cuenta1:       _this.pruebas.cuenta1,
+        cuenta2:       _this.pruebas.cuenta2,
+        valor1 :       _this.pruebas.valor1,
+        valor2 :       _this.pruebas.valor2,
+   saldo_ctcaja:       _this.pruebas.saldo_ctcaja,
+    saldo_arqueocaja:  _this.pruebas.saldo_arqueocaja, 
+    select_resultado:  _this.pruebas.select_resultado,
+    select_valor:      _this.pruebas.select_valor,
       }).then(response =>{
         if (response.data.estado == 'guardado') {
           toastr.success("Arqueo Caja creado correctamente", "Smarmoddle", {
@@ -9534,8 +9553,16 @@ const arqueo_caja = new Vue ({
         toastr.info("Anexo Arqueo Caja cargado correctamente", "Smarmoddle", {
           "timeOut": "3000"
           });
-          this.t_saldo = response.data.saldo;
-          this.t_exis = response.data.exis;
+          this.t_saldo                   = response.data.saldo;
+          this.t_exis                    = response.data.exis;
+          this.pruebas.cuenta1           = response.data.cuenta1,
+          this.pruebas.cuenta2           = response.data.cuenta2,
+          this.pruebas.valor1            = response.data.valor1,
+          this.pruebas.valor2            = response.data.valor2,
+          this.pruebas.saldo_ctcaja      = response.data.saldo_ctcaja,
+          this.pruebas.saldo_arqueocaja  = response.data.saldo_arqueocaja, 
+          this.pruebas.select_resultado  = response.data.select_resultado,
+          this.pruebas.select_valor      = response.data.select_valor,
           this.totales_s();
       }
     }).catch(function(error){

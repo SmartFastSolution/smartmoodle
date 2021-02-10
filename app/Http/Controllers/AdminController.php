@@ -2160,6 +2160,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
        public function tallerConcatenado(Request $request)
       {
+         //return $request->productos;
          $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$i;
@@ -2199,7 +2200,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
           $binicial->save();
         }
           if (isset($request->productos)  ) {
-                  foreach ($request->productos as $key=>$v) {
+                  foreach ($request->productos  as $key=>$v) {
                     $datos=array(
                        'taller_modulo_contable_id' => $e->id,
                        'tipo'                      => 'fifo',
