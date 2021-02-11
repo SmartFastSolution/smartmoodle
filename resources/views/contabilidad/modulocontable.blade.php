@@ -999,7 +999,7 @@
                       data.append('id', this.id_taller);
                       data.append('tipo', 'fifo');
                       data.append('enunciado', this.enunciado);
-                      data.append('transacciones', this.individuales.kardex_fifos);
+                      data.append('transacciones', JSON.stringify(this.individuales.kardex_fifos));
                       data.append('contenido_id', this.contenido_id);
                       data.append('plantilla', 37);
                           axios.post(url,data).then(response => {
@@ -1030,7 +1030,7 @@
                         data.append('id', this.id_taller);
                         data.append('tipo', 'promedio');
                         data.append('enunciado', this.enunciado);
-                        data.append('transacciones', this.individuales.kardex_promedios);
+                        data.append('transacciones', JSON.stringify(this.individuales.kardex_promedios));
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
                           axios.post(url,data).then(response => {
@@ -1595,18 +1595,18 @@
             data.append('documento', this.document);
             data.append('id', this.id_taller);
             data.append('enunciado', this.enunciado);
-            data.append('productos', this.concatenados.kardex_fifos);
+            data.append('productos', JSON.stringify(this.concatenados.kardex_fifos));
             data.append('balance_horizontal', this.concatenados.balance_horizontal);
             data.append('diario_general', this.concatenados.diario_general);
             data.append('conciliacionbancaria', this.concatenados.conciliacionbancaria);
             data.append('arqueocaja', this.concatenados.arqueocaja);
-            data.append('productos', this.concatenados.kardex_fifos);
             data.append('contenido_id', this.contenido_id);
             data.append('modulos', JSON.stringify( set.value));
             data.append('plantilla', 37);
      
                 axios.post(url, data).then(response => {
              
+             // console.log(response.data)
                window.location = "/sistema/home";
                  
             }).catch(function(error){
