@@ -76,7 +76,6 @@
 
 {!! Html::script('vendor/ckeditor/ckeditor.js') !!}
 <script>
-<<<<<<< HEAD
 CKEDITOR.replace('body');
 $(".custom-file-input").on("change", function() {
     var fileName = $(this).val().split("\\").pop();
@@ -127,13 +126,4 @@ $(function() {
 </script>
 
 
-
-=======
-    CKEDITOR.replace('body');
-       $(".custom-file-input").on("change", function() {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        });
-</script>
->>>>>>> 618ceb09e19e1b3a3abfe1045b2cd3624380bfa2
 @stop

@@ -387,13 +387,13 @@ class DocenteController extends Controller
   public function PostD()
   {
 
-     $materias = Distribuciondo::join('distribucionmacu_materia','distribucionmacu_materia.materia_id','=','distribuciondos.materia_id')
-     ->join('distribucionmacus','distribucionmacus.id','=','distribucionmacu_materia.distribucionmacu_id')
-     ->join('cursos', 'cursos.id', '=', 'distribucionmacus.curso_id')
-     ->join('materias','materias.id','=','distribucionmacus.curso_id')
-     ->select('distribuciondos.*','cursos.nombre as nombre_curso','materias.nombre as nombre_materia')
-     ->where('distribuciondos.user_id',Auth::id())
-     ->get();
+    $materias = Distribuciondo::join('distribucionmacu_materia', 'distribucionmacu_materia.materia_id', '=', 'distribuciondos.materia_id')
+    ->join('distribucionmacus', 'distribucionmacus.id', '=', 'distribucionmacu_materia.distribucionmacu_id')
+    ->join('cursos', 'cursos.id', '=', 'distribucionmacus.curso_id')
+    ->join('materias', 'materias.id', '=', 'distribucionmacu_materia.materia_id')
+    ->select('distribuciondos.*', 'cursos.nombre as nombre_curso', 'materias.nombre as nombre_materia')
+    ->where('distribuciondos.user_id', Auth::id())
+    ->get();
 
      //return $materias;
      return \view('Docente.postdocente',compact('materias'));
