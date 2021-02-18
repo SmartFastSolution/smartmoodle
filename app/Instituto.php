@@ -77,4 +77,10 @@ class Instituto extends Model
           
         return $this->hasMany('App\Assignment');
     }
+
+    public function historials(){
+          
+        return $this->hasMany('App\Historial');
+    }
+    
 }

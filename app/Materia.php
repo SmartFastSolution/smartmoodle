@@ -73,4 +73,9 @@ class Materia extends Model
 
     
 
+    public function historials(){
+          
+        return $this->hasMany('App\Historial');
+    }
+
 }

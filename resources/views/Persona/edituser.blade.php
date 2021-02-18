@@ -15,7 +15,7 @@
 </div>
 @endif
 
-<section class="content">
+<section class="content" id="role">
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
@@ -70,32 +70,14 @@
 
                                 <br>
                                 @foreach($roluser as $role)
-                                @if($role['descripcion']=='estudiante')
+                                @if($role['descripcion']== 'estudiante' or 'docente')
                                 <div class="form-group">
                                     <label>Instituto</label>
-                                    <select class="form-control select" name="instituto" style="width: 99%;">
-                                        @foreach($institutouser as $instuser)
-                                        <option selected disabled value="{{ $instuser->id }}">
-                                            {{ $instuser->nombre }}
+                                    <select class="form-control select" v-model="instituto" name="instituto"  style="width: 99%;" @change="getDistrubucion">
+                                        <option selected :value="{{ $institutouser->id }}">
+                                            {{ $institutouser->nombre }}
                                         </option>
-                                        @endforeach
-                                        @foreach($institutos as $instituto)
-                                        <option value="{{$instituto->id}}">{{$instituto->nombre}}</option>
-                                        @endforeach
-
-                                    </select>
-                                </div>
-                                @elseif($role['descripcion']=='docente')
-                                <div class="form-group">
-                                    <label>Instituto</label>
-                                    <select class="form-control s
-                                    
-                                    elect" name="instituto" style="width: 99%;">
-                                        @foreach($institutouser as $instuser)
-                                        <option selected disabled value="{{ $instuser->id }}">
-                                            {{ $instuser->nombre }}
-                                        </option>
-                                        @endforeach
+                                       
                                         @foreach($institutos as $instituto)
                                         <option value="{{$instituto->id}}">{{$instituto->nombre}}</option>
                                         @endforeach
@@ -108,12 +90,9 @@
                                 <div class="form-group">
                                     <label>Rol</label>
                                     <select class="form-control" name="roles" id="roles">
+                                    <option value="{{ $rol['id']}}" selected>{{$rol['name']}}</option>
                                         @foreach($roles as $role)
-                                        <option value="{{ $role->id }}" @isset($user->roles[0]->name)
-                                            @if($role->name == $user->roles[0]->name)
-                                            selected
-                                            @endif
-                                            @endisset
+                                        <option value="{{ $role->id }}" 
                                             >{{ $role->name }}</option>
                                         @endforeach
                                     </select>
@@ -142,25 +121,19 @@
                                 <br><br>
 
 
-                                @foreach($roluser as $role)
-                                @if($role['descripcion']=='estudiante')
-
+                           
+                               
+<div class=" estudiante" v-if="estudiante">
                                 <hr>
                                 <h3 class="font-weight-light">Sección Estudiante</h3>
                                 <div class="form-group">
                                     <label>Actualizar Curso</label>
                                     <select class="form-control select" name="curso" style="width: 99%;">
-
-                                        @foreach($cursouser as $cuser)
-
-                                        <option selected disabled value="{{ $cuser->id }}">
-                                            {{ $cuser->nombre }}
+                            
+                                        <option v-for="(curso, index) in cursos" :selected="index == 0" :value="curso.id">
+                                            @{{ curso.curso }}
                                         </option>
-
-                                        @endforeach
-                                        @foreach($cursos as $curso)
-                                        <option value="{{$curso->id}}">{{$curso->nombre}}</option>
-                                        @endforeach
+                                
                                     </select>
                                 </div>
 
@@ -170,7 +143,7 @@
 
                                         @foreach($niveluser as $nvuser)
 
-                                        <option selected disabled value="{{ $nvuser->id }}">
+                                        <option selected  value="{{ $nvuser->id }}">
                                             {{ $nvuser->nombre }}
                                         </option>
 
@@ -183,8 +156,9 @@
                                     </select>
                                 </div>
 
-                                @endif
-                                @endforeach
+                             
+                            </div>
+                          
 
                                 <br><br>
                                 <a href="{{route('users.index')}}" class="btn btn-primary">Atras</a>
@@ -196,6 +170,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </section>
 
 
@@ -206,7 +181,81 @@
 @stop
 
 @section('js')
-<script>
-console.log('Hi!');
+
+<script type="text/javascript">
+    let curso = @json($curso);
+
+    let cursos = @json($asignacion);
+    let rol = @json($rol);
+    let instituto = @json($institutouser->id);
+const random = new Vue({
+    el: "#role",
+    data: {
+        password: '',
+        curso:  curso,
+        cursos:  cursos,
+        asignaciones:[],
+        instituto:instituto,
+        estudiante: false,
+        role: '', //para la vista
+    },
+    mounted: function(){
+        if (rol.id == 2) {
+            this.estudiante = true;
+            let c = {id:curso.id ,curso:curso.nombre}
+        this.cursos.unshift(c);
+        }
+        
+     
+
+    },
+
+    methods: {
+        generarPass: function() {
+            var _this = this;
+            var url = '/sistema/admin/ramdom';
+            axios.post(url, {
+
+            }).then(response => {
+                toastr.success("Clave Generada Satisfactoriamente", "Smarmoddle", {
+                    "timeOut": "3000"
+                });
+                _this.password = response.data;
+            }).catch(function(error) {
+
+            });
+
+        },
+        getDistrubucion(){
+            let set = this;
+            set.asignaciones = [];
+            axios.post('/sistema/asignaciones', {
+                id: set.instituto
+            }).then(response => {
+                set.cursos = response.data;
+                console.log(set.cursos);
+            }).catch(e => {
+                console.log(e);
+            });
+        }
+    }
+});
+
+$(function() {
+    $(document).ready(function() {
+$("#roles").on("change",function(){
+    let role = $("#roles").val(); 
+    console.log(role) 
+if (role == 2) {
+    random.estudiante = true;
+}else if(role == 3 || 1){
+    random.estudiante = false;
+}
+    });
+});
+});
+
+
 </script>
+
 @stop

@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Contenido;
-use App\Curso;
-use App\Distribucionmacu;
-use App\Distribuciondo;
-use App\Distrima;
-use App\Materia;
-use App\Nivel;
-use App\Modelos\Role;
 use App\User;
+use App\Curso;
+use App\Nivel;
+use App\Materia;
+use App\Distrima;
+use App\Contenido;
+use App\Assignment;
+use App\Modelos\Role;
+use App\Distribuciondo;
+use App\Distribucionmacu;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -86,6 +87,15 @@ class HomeController extends Controller
 
     
     public function buscarMateria(Request $request){
+            $user = User::find($request->user);
+            $dis = Distribucionmacu::find($user->distribucionmacu_id);
+            $materias = $dis->materias;
+        
+     
+        return $materias;
+        
+    }
+    public function asignacionUser(Request $request){
 
         $materias= Materia::where('instituto_id', $request->id)->get();
         $materia = [];
@@ -158,7 +168,7 @@ class HomeController extends Controller
     
     public function buscarAlumno(Request $request){
         $usrol = Role::where('descripcion','estudiante')->first();
-        $distrima = Distrima::select('user_id')->get();
+        $distrima = Assignment::select('user_id')->get();
 
         $users = $usrol->users()->whereNotIn('users.id',$distrima)->where('instituto_id', $request->id)->get();
         //$users= User::where('instituto_id', $request->id, 'and', '')->get();

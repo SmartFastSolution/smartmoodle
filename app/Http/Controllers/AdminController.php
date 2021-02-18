@@ -1456,9 +1456,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
         if ($taller_37 = true) {
           $e = TallerModuloContable::get()->last();
-
+           $productos = json_decode($request->transacciones, true);
+           
         if ($request->tipo  == 'fifo') {
-         foreach ($request->productos as $key=>$v) {
+         foreach ($productos as $key=>$v) {
               $datos=array(
                  'taller_modulo_contable_id' => $e->id,
                  'tipo'                      => 'fifo',
@@ -1471,7 +1472,7 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
               TallerModuloTransaccion::insert($datos);
            }
          }elseif($request->tipo  == 'promedio'){
-          foreach ($request->productos as $key=>$v) {
+          foreach ($productos as $key=>$v) {
             $datos=array(
                  'taller_modulo_contable_id' => $e->id,
                  'tipo'                      => 'promedio',
@@ -2160,7 +2161,8 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
        public function tallerConcatenado(Request $request)
       {
-         //return $request->productos;
+        
+
          $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$i;
@@ -2200,7 +2202,8 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
           $binicial->save();
         }
           if (isset($request->productos)  ) {
-                  foreach ($request->productos  as $key=>$v) {
+            $productos = json_decode($request->productos, true);
+                  foreach ($productos as $key=>$v) {
                     $datos=array(
                        'taller_modulo_contable_id' => $e->id,
                        'tipo'                      => 'fifo',
