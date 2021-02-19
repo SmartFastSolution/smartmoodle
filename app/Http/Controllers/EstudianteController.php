@@ -75,7 +75,7 @@ class EstudianteController extends Controller
     public function unidades($id){
               // todos los datos de la bd
          $user =  User::findorfail( Auth::id());
-         $institutomate = Materia::find($id)->instituto()->get();
+         //$institutomate = Materia::find($id)->instituto()->get();
           $curso = Distribucionmacu::find($user->distribucionmacu_id);
           $docente = Distribuciondo::join("distribuciondo_nivel", "distribuciondo_nivel.distribuciondo_id", "=", "distribuciondos.id")
           ->join("users", "users.id", "=", "distribuciondos.user_id")
@@ -112,10 +112,19 @@ class EstudianteController extends Controller
          // $tallers = Taller::whereNotIn('id', $ids)->get();
  
          $materia =Materia::where('id', $id)->firstOrfail();
-         $contenido =Contenido::where('id', $id)->firstOrfail();
-         $cons =Documento::where('contenido_id',$contenido->id)->get();
+         $conten =Contenido::join('documentos' , "documentos.contenido_id", "=", "contenidos.id")
+         ->where('contenidos.materia_id', $id)
+        ->select("documentos.*", "contenidos.nombre as nombre_contenido")
+
+         ->get();
+
+        //return $conten;
+
+
+        // $conten =Contenido::where('materia_id', $id)->firstOrfail();
+        // $cons =Documento::where('contenido_id',$conten->id)->get();
          $cons2 =Archivodocente::where('materia_id',$materia->id)->where('nivel_id', Auth::user()->nivel_id)->paginate(6);
-         return view ('Estudiante.contenido',['materia'=>$materia, 'docente'=>$docente, 'curso'=>$curso,'contenidos'=>$contenido,'institutomate'=>$institutomate,'tallers'=>$realizar,'cons'=>$cons,'cons2'=>$cons2,'contenido'=>$contenido]);
+         return view ('Estudiante.contenido',['materia'=>$materia, 'docente'=>$docente, 'curso'=>$curso,'contenidos'=>$contenido,'tallers'=>$realizar,'cons2'=>$cons2,'contenido'=>$conten]);
             
      
        // return $tallers;

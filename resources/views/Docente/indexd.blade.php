@@ -21,7 +21,7 @@
             @isset ( auth()->user()->instituto->nombre)
             {{ auth()->user()->instituto->nombre}}
             <h2 class="font-weight-light" style="color:blue;"> {{ auth()->user()->name, }}
-                {{ auth()->user()->apellido, }}
+                {{ auth()->user()->apellido, }} 
             </h2>
             @endisset
         </h1>
@@ -49,8 +49,8 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="ml-2">
-                                <div class="h5 m-0" >{{$post->user->name}} {{$post->user->apellido}}</div>
-                                <div class="h7 text-muted"></div>
+                                <div class="h5 m-0" >{{$post->user->name}} {{$post->user->apellido}}  </div>
+                                <div class="h7 text-muted">Paralelo ({{ $post->user->nivel->nombre }})</div>
                             </div>
                         </div>
                         <div>

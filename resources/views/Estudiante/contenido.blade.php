@@ -100,9 +100,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($cons as $c)
+                            @foreach($contenido as $c)
                             <tr>
-                                <td> {{$c->contenido->nombre}}</td>
+                                <td> {{$c->nombre_contenido}}</td>
                                 <td> {{$c->nombre}}</td>
                                 <td > {{$c->descripcion}}</td>
                                 <td>@if($c['accion']== '1')

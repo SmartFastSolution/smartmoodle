@@ -95,7 +95,7 @@
                 <tbody>
                     @foreach($cons as $c)
                     <tr>
-                        <td> {{$c->contenido->nombre}}</td>
+                        <td> {{$c->nombre_c}}</td>
                         <td> {{$c->nombre}}</td>
                         <td> {{$c->descripcion}}</td>
                         <td>@if($c['accion']== '1')

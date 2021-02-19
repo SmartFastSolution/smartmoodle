@@ -102,16 +102,13 @@ class DocenteController extends Controller
 
 
                     // return $users;
-                            return view('Docente.Pcurso', compact('users','au', 'calificado', 'materias')); //ruta docente
-                            }else{
+              return view('Docente.Pcurso', compact('users','au', 'calificado', 'materias')); //ruta docente
+      }else{
 
 
-                            return view('Docente.Pcurso', compact('materias')); //ruta docente
-                
-                        } 
+            return view('Docente.Pcurso', compact('materias')); //ruta docente
 
-
-
+      } 
     }
     public function index()
     {
@@ -126,28 +123,23 @@ class DocenteController extends Controller
     {
         // todos los datos de la bd
         $user =  User::findorfail( Auth::id());
-        $institutomate = Materia::find($id)->instituto()->get();
-      
-        $materia =Materia::where('id', $id)->firstOrfail();
-        $contenidos=Contenido::get();
+       
+    
+          $curso = Distribuciondo::join('distribucionmacu_materia', 'distribucionmacu_materia.materia_id', '=', 'distribuciondos.materia_id')
+            ->join('distribucionmacus', 'distribucionmacus.id', '=', 'distribucionmacu_materia.distribucionmacu_id')
+            ->join('cursos', 'cursos.id', '=', 'distribucionmacus.curso_id')
+            ->join('materias', 'materias.id', '=', 'distribucionmacu_materia.materia_id')
+            ->select('distribuciondos.*','cursos.nombre as nombre_curso' ,'materias.nombre as nombre_materia')
+            ->where('distribucionmacu_materia.materia_id', $id)
+            ->where('distribuciondos.user_id', $user->id)->first();
 
-        $contenido =Contenido::where('id', $id)->firstOrfail();
-         $cons =Documento::where('contenido_id',$contenido->id)->get();
-             $curso = Distribuciondo::join('distribucionmacu_materia', 'distribucionmacu_materia.materia_id', '=', 'distribuciondos.materia_id')
-                ->join('distribucionmacus', 'distribucionmacus.id', '=', 'distribucionmacu_materia.distribucionmacu_id')
-                ->join('cursos', 'cursos.id', '=', 'distribucionmacus.curso_id')
-                ->join('materias', 'materias.id', '=', 'distribucionmacu_materia.materia_id')
-                ->select('distribuciondos.*','cursos.nombre as nombre_curso' ,'materias.nombre as nombre_materia')
-                ->where('distribucionmacu_materia.materia_id', $id)
-                ->where('distribuciondos.user_id', $user->id)->first();
-
-        $paralelos = Distribuciondo::join('distribuciondo_nivel', 'distribuciondo_nivel.distribuciondo_id', '=', 'distribuciondos.id')
-          // ->join('nivels', 'distribuciondo_nivel.nivel_id', '=', 'nivels.id')
-          ->select('distribuciondo_nivel.*')
-          ->where('distribuciondos.user_id', $user->id)
-          ->where('distribuciondos.materia_id', $id)
-          ->orderBy('nivel_nombre', 'asc')
-          ->get();
+          $paralelos = Distribuciondo::join('distribuciondo_nivel', 'distribuciondo_nivel.distribuciondo_id', '=', 'distribuciondos.id')
+            // ->join('nivels', 'distribuciondo_nivel.nivel_id', '=', 'nivels.id')
+            ->select('distribuciondo_nivel.*')
+            ->where('distribuciondos.user_id', $user->id)
+            ->where('distribuciondos.materia_id', $id)
+            ->orderBy('nivel_nombre', 'asc')
+            ->get();
 
           // return $paralelos;
 
@@ -181,7 +173,17 @@ class DocenteController extends Controller
         //     ->get();
 
             // return $calificado;
-                return view ('Docente.contenidodocente',compact('user','institutomate','materia','contenidos','cons', 'paralelos', 'curso'));
+
+             $materia =Materia::where('id', $id)->firstOrfail();
+          
+            
+           $cons = Contenido::join('documentos',"documentos.contenido_id","=","contenidos.id")
+           ->where('contenidos.materia_id', $id)
+           ->select("documentos.*","contenidos.nombre as nombre_c")
+           ->get();
+
+             //return $cons;
+        return view ('Docente.contenidodocente',compact('user','materia','cons', 'paralelos', 'curso'));
 
     }
 
