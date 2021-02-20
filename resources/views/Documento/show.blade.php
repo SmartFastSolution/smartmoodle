@@ -19,7 +19,7 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <h1 class="font-weight-light">Visualizar Documentación</h1>
+                <h1 class="font-weight-light"> Documentación</h1>
                 <div class="row">
                     <div class="col-md-10">
 
@@ -42,13 +42,11 @@
                                 <div class="form-group">
                                     <label>Actualizar la Unidad</label>
                                     <select class="form-control select" name="unidad" style="width: 99%;" disabled="">
-                                        @foreach($cdoc as $cd)
-                                        <option selected disabled value="{{ $cd->id }}">{{ $cd->nombre }}
-                                        </option>
+                                        @foreach($cdoc as $cd)     
+                                        <option selected disabled value="{{ $cd->id }}">{{$cd->materia->nombre}}-{{ $cd->nombre }}
+                                        </option>          
                                         @endforeach
-                                        @foreach($contenidos as $c)
-                                        <option value="{{$c->id}}">{{$c->nombre}}</option>
-                                        @endforeach
+                                      
                                     </select>
                                 </div>
 

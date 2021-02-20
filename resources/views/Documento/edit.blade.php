@@ -43,11 +43,11 @@
                                     <label>Actualizar la Unidad</label>
                                     <select class="form-control select" name="unidad" style="width: 99%;">
                                         @foreach($cdoc as $cd)
-                                        <option selected disabled value="{{ $cd->id }}">{{ $cd->nombre }}
+                                        <option selected disabled value="{{ $cd->id }}">{{$cd->materia->nombre}}-{{ $cd->nombre }}
                                         </option>
                                         @endforeach
                                         @foreach($contenidos as $c)
-                                        <option value="{{$c->id}}">{{$c->nombre}}</option>
+                                        <option value="{{$c->id}}">{{$c->materia->nombre}}-{{$c->nombre}}</option>
                                         @endforeach
                                     </select>
                                 </div>

@@ -44,7 +44,7 @@
                                     <select class="form-control select2" name="unidad" style="width: 99%;">
                                         <option selected disabled>Elija la Unidad...</option>
                                         @foreach($contenidos as $c)
-                                        <option value="{{$c->id}}">{{$c->nombre}}</option>
+                                        <option value="{{$c->id}}">{{$c->materia->nombre}}-{{$c->nombre}}</option>
                                          @endforeach
                                     </select>
                                 </div>

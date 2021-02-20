@@ -20,7 +20,7 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <h1 class="font-weight-light">Show Materias</h1>
+                <h1 class="font-weight-light"> Materias</h1>
                 <div class="row">
                     <div class="col-md-8">
                         <form method="POST" action="{{route('materias.update', $materia->id)}} ">

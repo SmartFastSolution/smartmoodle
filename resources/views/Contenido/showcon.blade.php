@@ -62,7 +62,7 @@
             <div class="card-body p-5">
                 <a class="btn btn-info float-right" href="{{route('admin.create')}}"><i class="fas fa-plus"></i>Crear
                         Talleres</a>
-                <h1 class="font-weight-light">Vista Unidad</h1>
+                <h1 class="font-weight-light"> Unidad</h1>
                 <div class="row">
                     <div class="col-md-10">
 
