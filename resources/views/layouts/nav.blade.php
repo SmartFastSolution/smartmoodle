@@ -151,7 +151,7 @@
                             </ul>
                         </li>
                         @endcan
-                        @can('haveaccess', 'menu.index')
+                      {{--  @can('haveaccess', 'menu.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fad fa-user-cog"></i>
@@ -169,7 +169,7 @@
                                 </li>
                             </ul>
                         </li>
-                        @endcan
+                        @endcan --}}
                         @can('haveaccess', 'instituto.index')
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">

@@ -85,29 +85,17 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Editar Materia</label>
+                                    <label> Materia</label>
                                     <select class="form-control select" name="materia" style="width: 99%;" disabled>
                                         @foreach($materiacontenido as $materiac)
                                         <option selected disabled value="{{ $materiac->id }}">{{ $materiac->nombre }}
                                         </option>
                                         @endforeach
-                                        @foreach($materias as $materia)
-                                        <option value="{{$materia->id}}">{{$materia->nombre}}</option>
-                                        @endforeach
+                                      
                                     </select>
                                 </div>
 
-                               {{--  subir imagen en laravel prueba 1 --}}
-                              {{--   <div class="form-group">
-                                    <label for="documentod">
-                                        Vizualizar Documento
-                                        <br>
-                                        <button type="button" class="btn btn-secondary" data-toggle="modal"
-                                            data-target="#modalYT">{{ $contenido['nombre']}}</button>
-                                    </label>
-                                </div> --}}
-
-
+                          
                                 <!-- fin de la prueba imagen en laravel  -->
 
                                 <div class="form-group">
@@ -127,7 +115,7 @@
                                     </div>
 
 
-                                </div>
+                                </div> 
                         </form>
                     </div>
                 </div>
@@ -137,7 +125,8 @@
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
                                 aria-controls="nav-home" aria-selected="true">Talleres</a>
-
+                                <a class="nav-link " id="nav-documento-tab" data-toggle="tab" href="#nav-documento" role="tab"
+                                aria-controls="nav-documento" aria-selected="true">Documentos</a>
 
                         </div>
                     </nav>
@@ -158,7 +147,58 @@
                             </div>
                             <!-- fin de talleres -->
                         </div>
+                        <div class="tab-pane fade show" id="nav-documento" role="tabpanel"
+                            aria-labelledby="nav-documento-tab">
+                                <br>
+                        <!-- Inicio de documentacion -->
+                        <div class="card card-gray-dark">
+                                <div class="card-header">
+                                    <h3 class="card-title">Documentación</h3>
+                                </div>
+                                <div class="card-body">
+                                <table id="myTable3" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th width="100" scope="col">Unidad</th>
+                                <th scope="col">Nombre del Documento</th>
+                                <th width="300" scope="col">Descripción</th>
+                                <th scope="col">Acción</th>
+                                <th width="125" scope="col" coldspan="1">Ver Documento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($doc as $c)
+                            <tr>
+                                <td> {{$c->contenido->nombre}}</td>
+                                <td> {{$c->nombre}}</td>
+                                <td > {{$c->descripcion}}</td>
+                                <td>@if($c['accion']== '1')
+                                    <span class="badge-success badge">Descargable</span>
+                                    @else
+                                    <span v-else class="badge-info badge">No Descargable</span>
+                                    @endif
+                                </td>
+                                <td class="text-center">
+                                    @if($c['accion']== '1')
+                                    <!-- descarganle -->
+                                    <a class="btn btn-dark btn" href="{{route('Contenido3.alumno', $c->id)}}"><i
+                                    class="fas fa-file-pdf"></i></a>
+                                    @else
+                                    <!-- no descarganle -->
+                                    <a class="btn btn-dark btn" href="{{route('Contenido.alumno', $c->id)}}"><i
+                                    class="fas fa-file-pdf"></i></a>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
 
+
+                                </div> 
+                          </div>
+                        <!-- fin de documentacion -->
+                            </div>
                     </div>
                 </div>
 
@@ -168,33 +208,6 @@
     </div>
 </section>
 
-
-
-<!--Modal: Name-->
-<div class="modal fade" id="modalYT" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <!--Content-->
-        <div class="modal-content">
-            <!--Body-->
-            <div class="modal-body mb-0 p-0">
-                <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-                    @isset ($contenido->archivo->url)
-                    <iframe class="embed-responsive-item" width="1000" height="1000" src="{{$contenido->archivo->url}}"
-                        allowfullscreen></iframe>
-                    @endisset
-                </div>
-            </div>
-            <div class="modal-footer justify-content-center">
-                <span class="mr-4">{{ $contenido['nombre']}}</span>
-
-                <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4"
-                    data-dismiss="modal">Close</button>
-            </div>
-        </div>
-        <!--/.Content-->
-    </div>
-</div>
-<!--Modal: Name-->
 
 
 

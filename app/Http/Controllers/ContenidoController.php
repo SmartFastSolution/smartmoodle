@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contenido;
+use App\Documento;
 use App\Materia;
 use App\Taller;
 use App\Http\Controllers\Controller;
@@ -94,8 +95,9 @@ class ContenidoController extends Controller
         $contenido =Contenido::where('id', $id)->firstOrfail();
         $materiacontenido=Contenido::find($contenido->id)->materia()->get();
         // $tallers=Taller::where('contenido_id', $contenido->id)->paginate(10);
-      
-        return \view('Contenido.showcon',['contenido'=>$contenido,'materias'=>$materias,'materiacontenido'=> $materiacontenido]);
+
+        $doc =Documento::where('contenido_id', $contenido->id)->paginate(10);
+        return \view('Contenido.showcon',['contenido'=>$contenido,'materias'=>$materias,'materiacontenido'=> $materiacontenido,'doc'=>$doc]);
     
         
     }
