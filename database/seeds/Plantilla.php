@@ -162,7 +162,7 @@ class Plantilla extends Seeder
                           ]);
                           DB::table('plantillas')->insert([
                           'id' => 18,
-                          'nombre' => 'Plantilla 18 - LETRA  DE  CAMBIO',
+                          'nombre' => 'Plantilla 18 - LETRA  DE  CAMBIO',
                           'descripcion' => 'Plantilla designado para completar un resultado',
                           'plantilla' => 'si',
                           'created_at' => now(),
@@ -243,24 +243,24 @@ class Plantilla extends Seeder
                           ]);
                           DB::table('plantillas')->insert([
                           'id' => 28,
-                          'nombre' => 'PLANTILLA QUEMADA 1',
-                          'descripcion' => 'Una Plantilla quemada 1',
+                          'nombre' => 'PLANTILLA PRECONFIGURADA 1 - IDENTIFIQUE LAS ABREVIATURAS COMERCIALES', 
+                          'descripcion' => 'Una Plantilla PRECONFIGURADA 1',
                           'plantilla' => 'no',                     
                           'created_at' => now(),
                           'updated_at' => now(),
                           ]);
                            DB::table('plantillas')->insert([
                           'id' => 29,
-                          'nombre' => 'PLANTILLA QUEMADA 2',
-                          'descripcion' => 'Una Plantilla quemada 2',
+                          'nombre' => 'PLANTILLA PRECONFIGURADA 2 - UTILIZA LAS ABREVIATURAS COMERCIALES EN LA CARTA',
+                          'descripcion' => 'Una Plantilla PRECONFIGURADA 2',
                           'plantilla' => 'no',                     
                           'created_at' => now(),
                           'updated_at' => now(),
                           ]);
                           DB::table('plantillas')->insert([
                           'id' => 30,
-                          'nombre' => 'PLANTILLA QUEMADA 3',
-                          'descripcion' => 'Una Plantilla quemada 3',
+                          'nombre' => 'PLANTILLA PRECONFIGURADA 3 - LOCALIZA LAS ABREVIATURAS EN EL EDITORIAL',
+                          'descripcion' => 'Una Plantilla PRECONFIGURADA 3',
                           'plantilla' => 'no',                     
                           'created_at' => now(),
                           'updated_at' => now(),
@@ -275,8 +275,8 @@ class Plantilla extends Seeder
                           ]);
                            DB::table('plantillas')->insert([
                           'id' => 32,
-                          'nombre' => 'PLANTILLA QUEMADA 4',
-                          'descripcion' => 'Una Plantilla quemada 4',
+                          'nombre' => 'PLANTILLA PRECONFIGURADA 4 - ESCRIBA EN EL GUSANILLO ABREVIATURAS ECONÓMICAS',
+                          'descripcion' => 'Una Plantilla PRECONFIGURADA 4',
                           'plantilla' => 'no',
                           'created_at' => now(),
                           'updated_at' => now(),
@@ -299,8 +299,8 @@ class Plantilla extends Seeder
                           ]);
                           DB::table('plantillas')->insert([
                           'id' => 35,
-                          'nombre' => 'PLANTILLA QUEMADA 5',
-                          'descripcion' => 'Una Plantilla quemada 5',
+                          'nombre' => 'PLANTILLA PRECONFIGURADA 5 - DESARROLLE FÓRMULAS DE LA ECUACIÓN CONTABLE',
+                          'descripcion' => 'Una Plantilla PRECONFIGURADA 5',
                           'plantilla' => 'no',
                           'created_at' => now(),
                           'updated_at' => now(),
@@ -347,8 +347,8 @@ class Plantilla extends Seeder
                           ]);
                           DB::table('plantillas')->insert([
                           'id' => 41,
-                          'nombre' => 'PLANTILLA QUEMADA 6',
-                          'descripcion' => 'Plantilla Quemada #6',
+                          'nombre' => 'PLANTILLA PRECONFIGURADA 6 - DESARROLLE EL MAPA CONCEPTUAL',
+                          'descripcion' => 'Plantilla PRECONFIGURADA #6',
                           'plantilla' => 'no',
                           'created_at' => now(),
                           'updated_at' => now(),
@@ -387,8 +387,8 @@ class Plantilla extends Seeder
                           ]);
                           DB::table('plantillas')->insert([
                           'id' => 46,
-                          'nombre' => 'PLANTILLA QUEMADA 7',
-                          'descripcion' => 'Plantilla Quemada #7',
+                          'nombre' => 'PLANTILLA PRECONFIGURADA 7 - RELATA  LOS  ENUNCIADOS  EN  LA  SIGUIENTE  RUEDA  LÓGICA',
+                          'descripcion' => 'Plantilla PRECONFIGURADA #7',
                           'plantilla' => 'no',
                           'created_at' => now(),
                           'updated_at' => now(),
@@ -425,6 +425,7 @@ class Plantilla extends Seeder
                           // 'created_at' => now(),
                           // 'updated_at' => now(),
                           // ]);
+  
   
     }
 }

@@ -281,6 +281,8 @@ route::post('/taller45', 'AdminController@taller45')->name('admin.taller45');
 route::post('/taller47', 'AdminController@taller47')->name('admin.taller47');
 route::post('/taller48', 'AdminController@taller48')->name('admin.taller48');
 route::post('/taller49', 'AdminController@taller49')->name('admin.taller49');
+route::post('/tallerprecon', 'AdminController@tallerprecon')->name('admin.tallerprecon');
+
 // route::post('/taller50', 'AdminController@taller50')->name('admin.taller50');
 // route::post('/taller57', 'AdminController@taller57')->name('admin.taller57');
 	});

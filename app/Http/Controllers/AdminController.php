@@ -2532,5 +2532,18 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          
 
       }
+      public function tallerprecon(Request $request)
+      {
+        $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $preconnfifurado               = new Taller;
+         $preconnfifurado->nombre       = 'Taller '.++$i;
+         $preconnfifurado->enunciado    = $request->input('enunciado');
+         $preconnfifurado->plantilla_id = $request->input('id_plantilla');
+         $preconnfifurado->contenido_id = $request->input('contenido_id');
+         $preconnfifurado->estado       = 0;
+         $preconnfifurado->save();
+      return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!');  
+
+      }
 
 }
