@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Documento;
 use App\Contenido;
+use App\Documento;
+use App\Instituto;
 use Illuminate\Http\Request;
 
 class DocumentoController extends Controller
@@ -20,10 +21,23 @@ class DocumentoController extends Controller
   
     public function create()
     {
-        $contenidos=Contenido::get();
-        return \view('Documento.create',compact('contenidos'));
+        $contenidos =Contenido::get();
+        $institutos = Instituto::get();
+        return view('Documento.create',compact('contenidos', 'institutos'));
     }
 
+        public function getContenidos(Request $request)
+        {
+            $id = $request->id;
+            $contenidos = Contenido::join('materias' , "materias.id", "=", "contenidos.materia_id")
+            ->where('materias.instituto_id', $id)
+            ->select("contenidos.*", "materias.nombre as nombre_mate")
+
+            ->get();
+            return $contenidos;
+            
+            
+        }
    
     public function store(Request $request)
     {
@@ -98,10 +112,27 @@ class DocumentoController extends Controller
     {
         
 
-        $contenidos=Contenido::get();
-        $cdoc=Documento::find($documento->id)->contenido()->get();
+        // $cdoc=Documento::find($documento->id)->contenido()->get();
+        $contenido = Contenido::join('materias' , "materias.id", "=", "contenidos.materia_id")
+            ->where('contenidos.id', $documento->contenido_id)
+            ->select("contenidos.*", "materias.nombre as nombre_mate")
+            ->first();
+        $instituto = Instituto::find($contenido->materia->instituto_id);
+        $institutos = Instituto::whereNotIn('id', [$instituto->id])->get();
+        // $contenido = Contenido::find($documento->contenido_id);
+         $contenidos = Contenido::join('materias' , "materias.id", "=", "contenidos.materia_id")
+            ->where('materias.instituto_id', $instituto->id)
+            ->select("contenidos.*", "materias.nombre as nombre_mate")
+            ->whereNotIn('contenidos.id', [$contenido->id])
+            ->get();
+        // $contenidos=Contenido::whereNotIn('id', [$contenido->id])->get();
+
+
+
+
+        // return $contenido;
         
-        return \view('Documento.edit',compact('contenidos','cdoc','documento'));
+        return \view('Documento.edit',compact('contenidos', 'contenido','documento', 'instituto' , 'institutos'));
 
 
     }

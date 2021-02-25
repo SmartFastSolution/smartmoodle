@@ -15,7 +15,7 @@
     </ul>
 </div>
 @endif
-<section class="content">
+<section class="content" id="contenidos">
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
@@ -38,17 +38,21 @@
                                     <input type="text" class="form-control" name="descripcion" id="descripcion"
                                         value="{{$documento->descripcion}}" placeholder="Añadir una Descripción">
                                 </div>
-
+                                     <div class="form-group">
+                                    <label>Instituto</label>
+                                    <select class="form-control select" v-model="instituto"  name="instituto" style="width: 99%;" @change="getContenidos">
+                                        <option selected  value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @foreach($institutos as $institut)
+                                        <option value="{{$institut->id}}">{{$institut->nombre}}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="form-group">
                                     <label>Actualizar la Unidad</label>
                                     <select class="form-control select" name="unidad" style="width: 99%;">
-                                        @foreach($cdoc as $cd)
-                                        <option selected disabled value="{{ $cd->id }}">{{$cd->materia->nombre}}-{{ $cd->nombre }}
-                                        </option>
-                                        @endforeach
-                                        @foreach($contenidos as $c)
-                                        <option value="{{$c->id}}">{{$c->materia->nombre}}-{{$c->nombre}}</option>
-                                        @endforeach
+                                   {{--      <option selected disabled :value="contenido.id">@{{ contenido.nombre }} @{{ contenido.materia.nombre }}</option> --}}
+                                        <option v-for="contenido in contenidos" :value="contenido.id">@{{contenido.nombre_mate }} - @{{contenido.nombre }}</option>
                                     </select>
                                 </div>
 
@@ -149,5 +153,51 @@
 @stop
 
 @section('js')
+<script type="text/javascript">
+let instituto = @json($instituto);
+let contenido = @json($contenido);
+let contenidos = @json($contenidos);
+var random = new Vue({
+    el: "#contenidos",
+    data: {
+        contenidos:[],
+        contenido: contenido,
+        con: contenidos,
+        instituto:instituto.id,
+    },
+    mounted: function () {
+        this.setcontenido();
+    },
+    methods: {
+        getContenidos(){
+            let set = this;
+            set.contenidos = [];
+            axios.post('/sistema/getcontenidos', {
+                id: set.instituto
+            }).then(response => {
+                set.contenidos = response.data;
+                console.log(set.contenidos);
+            }).catch(e => {
+                console.log(e);
+            });
+        },
+        setcontenido(){
+            let contenido = {id:this.contenido.id, nombre: this.contenido.nombre, nombre_mate:this.contenido.materia.nombre}
+            let contenidos = []
+            contenidos.push(contenido);
+            this.contenidos = contenidos.concat(this.con);
 
+            // console.log(this.contenidos)
+        }
+
+    }
+})
+</script>
+<script>
+$(function() {
+//Initialize Select2 Elements
+$(".select2").select2({
+});
+})
+</script>
 @stop

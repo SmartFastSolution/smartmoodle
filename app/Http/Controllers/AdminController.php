@@ -490,35 +490,36 @@ class AdminController extends Controller
          return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
       }
      }
-      public function taller8(Request $request)
-      {
-      $i = Taller::get()->count();
-      $taller8 = new Taller;
-      $taller8->nombre = 'Taller '.++$i;
-      $taller8->enunciado = $request->input('enunciado');
-      $taller8->plantilla_id = $request->input('id_plantilla');
-      $taller8->contenido_id = $request->input('contenido_id');
-      $taller8->estado = 0;
-      $taller8->save();
+     public function taller8(Request $request)
+     {
+     $i = Taller::get()->count();
+     $taller8 = new Taller;
+     $taller8->nombre = 'Taller '.++$i;
+     $taller8->enunciado = $request->input('enunciado');
+     $taller8->plantilla_id = $request->input('id_plantilla');
+     $taller8->contenido_id = $request->input('contenido_id');
+     $taller8->estado = 0;
+     $taller8->save();
 
-      if ($taller8 = true) {
-          if ($request->hasFile('img')) {
-            $imagen = $request->file('img');
-            $nombre = time().'_'.$imagen->getClientOriginalName();
-            $ruta = public_path().'/img/talleres';
-            $imagen->move($ruta, $nombre);
-            $urlimagen = '/img/talleres/'.$nombre;
-         }
-         $a = Taller::get()->last();
-         $taller_8 = new TallerCirculo;
-         $taller_8->taller_id = $a->id;
-         $taller_8->enunciado = $request->input('enunciado');
-         $taller_8->img = $urlimagen;
-         $taller_8->cantidad = $request->input('cantidad');
-         $taller_8->save();
-         return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
-      }
-      }
+     if ($taller8 = true) {
+   
+       $a = Taller::get()->last();
+       $taller_8 = new TallerCirculo;
+       $taller_8->taller_id = $a->id;
+       $taller_8->enunciado = $request->input('enunciado');
+       if ($request->hasFile('img')) {
+           $imagen = $request->file('img');
+           $nombre = time().'_'.$imagen->getClientOriginalName();
+           $ruta = public_path().'/img/talleres';
+           $imagen->move($ruta, $nombre);
+           $urlimagen = '/img/talleres/'.$nombre;
+        $taller_8->img = $urlimagen;
+        }
+        $taller_8->cantidad = $request->input('cantidad');
+        $taller_8->save();
+        return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctamente!'); 
+     }
+     }
       public function taller9(Request $request)
       {
       $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();

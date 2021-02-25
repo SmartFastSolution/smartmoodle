@@ -74,55 +74,45 @@
             </div>
         </div>
         <div class="card-body">
-           <table id="myTable" class="table table-hover">
-
+            <table id="myTable" class="table table-hover">
                 <thead>
                     <tr>
                         <th width="100">Curso</th>
+                        <th width="100">Unidad</th>
                         <th width="75">Materia</th>
-                        <th width="75"> Taller </th>
-                        <th width="100">Alumno </th>
+                        <th width="100"> Taller </th>
+                        <th >Alumno </th>
                         <th >Enunciado </th>
-                        <th>Vista Taller</th>
+                        <th width="50">Vista Taller</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($users as $taller)
-
                     <tr>
                         <td>{{$taller->cur_nombre}} - {{ $taller->nivel_nombre }}</td>
+                        <td>{{$taller->conte_name}}</td>
                         <td>{{$taller->mate_nombre}}</td>
                         <td>{{$taller->nombre}}</td>
-                        <td>{{$taller->alumno}}</td>
+                        <td>{{$taller->alumno}} {{ $taller->apelli }}</td>
                         <td>
                             <div class="truncate-overflow">
-                            {!!$taller->enunciado!!}
+                                {!!$taller->enunciado!!}
                                 
                             </div>
-                       {{--      @if ($taller->plantilla_id == 37)
-                            Taller de Modulos Contable
-                            @else
-                            {!!$taller->enunciado!!}
-                            @endif --}}
                         </td>
-                        <td class="table-button ">
+                        <td class="table-button " width="50">
                             <a class="btn btn-info"
                                 href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
-                                    class="fas fa-eye"></i></a>
-
+                            class="fas fa-eye"></i></a>
                         </td>
                     </tr>
                     @empty
-
                     @endforelse
                 </tbody>
             </table>
-
         </div>
     </div>
 </div>
-
-
 <div class="container">
     <div class="card gedf-card">
         <div class="card-header">
@@ -140,48 +130,44 @@
                 <thead>
                     <tr>
                         <th width="100">Curso</th>
+                        <th width="100">Unidad</th>
                         <th width="75">Materia</th>
-                        <th width="75"> Taller </th>
-                        <th width="100">Alumno </th>
+                        <th width="100"> Taller </th>
+                        <th >Alumno </th>
                         <th>Enunciado </th>
-                        <th>Vista Taller</th>
+                        <th width="50">Vista Taller</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($calificado as $taller)
                     <tr>
                         <td>{{$taller->cur_nombre}} - {{ $taller->nivel_nombre }}</td>
+                        <td>{{$taller->conte_name}}</td>
                         <td>{{$taller->mate_nombre}}</td>
                         <td>{{$taller->nombre}}</td>
-                        <td>{{$taller->alumno}}</td>
+                        <td>{{$taller->alumno}} {{ $taller->apelli }}</td>
                         <td>
                             <div class="truncate-overflow">
-                            {!!$taller->enunciado!!}
+                                {!!$taller->enunciado!!}
                                 
                             </div>
-                          {{--   @if ($taller->plantilla_id == 37)
-                            Taller de Modulos Contable
-                            @else
-                            {!!$taller->enunciado!!}
-                            @endif --}}
+                            
                         </td>
                         <td class="table-button ">
                             <a class="btn btn-info"
                                 href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
-                                    class="fas fa-eye"></i></a>
+                            class="fas fa-eye"></i></a>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
             <div class="row justify-content-center">
-                {{--   {{ $calificado->links() }}--}}
-
+                
             </div>
         </div>
     </div>
 </div>
-
 
 
 
@@ -192,20 +178,62 @@
 <script>
 $(function() {
     $(document).ready(function() {
-        $('#myTable').DataTable({
-            "info": true,
-            "autoWidth": true,
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            }
-        });
-        $('#myTable2').DataTable({
-            "info": true,
-            "autoWidth": true,
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            }
-        });
+        var table1 = $('#myTable').DataTable({
+"fixedHeader": true,
+"orderCellsTop": false,
+"info": true,
+"autoWidth": true,
+"paging": true,
+"searching": true,
+"ordering": true,
+"responsive": true,
+"scrollX": true,
+
+"language": {
+"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+}
+});
+$('#myTable thead tr').clone(true).appendTo('#myTable thead');
+$('#myTable thead tr:eq(1) th').each(function(i) {
+var title = $(this).text(); //es el nombre de la columna
+$(this).html('<input type="text" placeholder="Buscar..." class="form-control" />');
+$('input', this).on('keyup change', function() {
+if (table1.column(i).search() !== this.value) {
+table1
+.column(i)
+.search(this.value)
+.draw();
+}
+});
+});
+var table = $('#myTable2').DataTable({
+"fixedHeader": true,
+"orderCellsTop": false,
+"info": true,
+"autoWidth": true,
+"paging": true,
+"searching": true,
+"ordering": true,
+"responsive": true,
+"scrollX": true,
+
+"language": {
+"url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+}
+});
+$('#myTable2 thead tr').clone(true).appendTo('#myTable2 thead');
+$('#myTable2 thead tr:eq(1) th').each(function(i) {
+var title = $(this).text(); //es el nombre de la columna
+$(this).html('<input type="text" placeholder="Buscar..." class="form-control" />');
+$('input', this).on('keyup change', function() {
+if (table.column(i).search() !== this.value) {
+table
+.column(i)
+.search(this.value)
+.draw();
+}
+});
+});
     });
 });
 </script>

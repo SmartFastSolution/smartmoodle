@@ -546,6 +546,7 @@
 
 <!-- FORMULARIO PARA PLANTILLA 8 -->
 
+
 <div class="modal fade" id="taller8" tabindex="-1" role="dialog" aria-labelledby="taller8Label" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -593,7 +594,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="" class="col-form-label">Imagen Central: </label>                          
-                                 <input type="file" class="inputfile inputfile-1" name="img" id="ta8-1">
+                                 <input type="file" required="" class="inputfile inputfile-1" name="img" id="ta8-1">
                                 <label for="ta8-1"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>                           
                             </div>
                                <div class="form-group">

@@ -53,6 +53,8 @@ route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta e
  Route::post('asignaciones','HomeController@asignacion')->name('asignacion');
  Route::post('paralelosinst','HomeController@obtenerParalelos')->name('obtenerParalelos');
  Route::post('buscarparalelo','HomeController@buscarparalelo')->name('buscarparalelo');
+ Route::post('getcontenidos','DocumentoController@getcontenidos')->name('contenidos.doc');
+
 
 
  ////////////////////////////////////////////////

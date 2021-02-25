@@ -95,14 +95,6 @@
         <a target="_blank" class="btn btn-danger" href="{{ $datos->archivo }}"><i class="fad fa-file-pdf"></i> Descargar PDF</a>
     </div>
     @endisset
-       <div class="row justify-content-center mb-5">
-        <a class="btn btn-success btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_cheque"><i class="far fa-money-bill"></i> CHEQUE</a>
-        <a class="btn btn-danger btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_credito"><i class="fas fa-file-invoice-dollar"></i> NOTA DE CREDITO</a>
-        <a class="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#m_factura"><i class="fas fa-file-invoice-dollar"></i> FACTURA</a>
-    </div>
-
-
-
  @if ($datos->metodo == 'concatenado')
     <div class="row justify-content-md-center">
         <div class="col-12 col-sm-12 col-md-2 mb-3">
@@ -338,43 +330,7 @@
     </div>
 
       @endif
-       <h2 class="text-center font-weight-bold">Aplicacion de Documentos</h2>
-        <div class="row justify-content-center mb-5" id="documentos"  style="height: 200px; overflow-y: scroll; overflow-x: hidden;">
-            <table class="table">
-  <thead class="thead-dark">
-    <tr>
-      {{-- <th scope="col">#</th> --}}
-      <th scope="col">Tipo de Documento</th>
-      <th scope="col">Modulo</th>
-      <th  width="200" class="text-center">Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="(cheque, index) in cheques">
-      <td>@{{ cheque.tipo_documento }}</td>
-      <td>@{{ cheque.modulo }}</td>
-      <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="editarCheque(cheque.id, index)"><i class="fa fa-edit"></i></a>
-      <a class="btn btn-danger" href="" @click.prevent="warningEliminar(cheque.id, index, cheque.tipo_documento)"><i class="fa fa-trash"></i></a></td>
-    </tr>
 
-
-  <tr v-for="(nota_credito, index) in nota_creditos">
-      <td>@{{ nota_credito.tipo_documento }}</td>
-      <td>@{{ nota_credito.modulo }}</td>
-      <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="editarNota(nota_credito.id, index)"><i class="fa fa-edit"></i></a>
-      <a class="btn btn-danger" href="" @click.prevent="warningEliminar(nota_credito.id, index, nota_credito.tipo_documento)"><i class="fa fa-trash"></i></a></td>
-    </tr>  
-      <tr v-for="(factura, index) in facturas">
-      <td>@{{ factura.tipo_documento }}</td>
-      <td>@{{ factura.modulo }}</td>
-      <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="editarFactura(factura.id, index)"><i class="fa fa-edit"></i></a>
-      <a class="btn btn-danger" href="" @click.prevent="warningEliminar(factura.id, index, factura.tipo_documento)"><i class="fa fa-trash"></i></a></td>
-    </tr>  
-</tbody>
-</table>
-@include('contabilidad.modales.modaldocumentos')
-
-        </div>
             
  @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center" id="enviarTaller">
@@ -439,7 +395,7 @@
     const documentos = new Vue({
       el: "#documentos",
       data:{
-        modulo:'',
+        modulo:'DIARIO GENERAL',
         cheque:{
             tipo_cheque:'',
             banco:'',
