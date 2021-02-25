@@ -534,12 +534,10 @@ class DocenteController extends Controller
       public function docshow(Archivodocente $archivodocente){
        
         $au = User::find(Auth::id())->distribuciondos;
-        $materias = $au->materias()->get();
-        
-        $ar = Archivodocente::find($archivodocente->id)->materia()->get();
+      
+        return \view('Docente.contenido.showdoc', compact('au','archivodocente'));
 
-        return \view('Docente.contenido.showdoc', compact('au','materias','ar','archivodocente'));
-
+      
        
       }
 

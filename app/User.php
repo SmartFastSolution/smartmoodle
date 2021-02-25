@@ -128,4 +128,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Historial');
     }
     
+    public function distribucionmacu(){
+        
+        return $this->belongsTo('App\Distribucionmacu');
+
+    }
+
 }
