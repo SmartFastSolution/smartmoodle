@@ -3,6 +3,7 @@
         <div class="row p-3  mb-2 justify-content-center ">
     <div class="col-5 mb-3">
             <h2 class="text-center font-weight-bold display-4">@{{ nombre }}</h2>
+            <h2 class="text-center font-weight-bold display-4">@{{ fecha }}</h2>
         </div>
    
 </div>

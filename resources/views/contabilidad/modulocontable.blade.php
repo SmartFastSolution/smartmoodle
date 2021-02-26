@@ -596,7 +596,6 @@
                 <a class="list-group-item list-group-item-action" id="list-balance-comprobacion-list" data-toggle="list" href="#list-balance-comprobacion" role="tab" aria-controls="balance-comprobacion">Balance de Comprobacion</a>
               <a class="list-group-item list-group-item-action" id="list-hoja-trabajo-list" data-toggle="list" href="#list-hoja-trabajo" role="tab" aria-controls="hoja-trabajo">Hoja de trabajo</a>
               <a class="list-group-item list-group-item-action" id="list-balance-comprobacion-ajustado-list" data-toggle="list" href="#list-balance-comprobacion-ajustado" role="tab" aria-controls="balance-comprobacion-ajustado">Balance Comprobacion Ajustado</a>
-
               <a class="list-group-item list-group-item-action" id="list-estado-resultado-list" data-toggle="list" href="#list-estado-resultado" role="tab" aria-controls="estado-resultado">Estado de Resultado</a>
               <a class="list-group-item list-group-item-action" id="list-balance-general-list" data-toggle="list" href="#list-balance-general" role="tab" aria-controls="balance-general">Balance General</a>
               <a class="list-group-item list-group-item-action" id="list-asientos-cierre-list" data-toggle="list" href="#list-asientos-cierre" role="tab" aria-controls="asientos-cierre">Asientos de cierre</a> --}}
@@ -725,7 +724,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.10.0/full/ckeditor.js"></script>
 <script type="text/javascript">
-
     let modulo_contable = new Vue({
       el: "#modulo",
   
@@ -738,7 +736,6 @@
       
       ],
       options: [
-
         { name: 'Balance Inicial Horizontal', code: 'diario' },
         { name: 'Kardex', code: 'kardex' },
         { name: 'Balance de Comprobacion', code: 'balance_comp' },
@@ -756,7 +753,6 @@
         { name: ' Retencion del IVA', code: 'retencion-iva' },
         // { name: ' Nomina Empleados', code: 'nomina-empleado' },
         // { name: ' Provisión de Benficios', code: 'provision-beneficio' },
-
       ],
         contenido_id:'',
         enunciado:'',
@@ -890,26 +886,19 @@
                 window.location = "/sistema/home";
                      
                 }).catch(function(error){
-
                 }); 
-
-
                 } 
             },
         elegirCategoria(){
             let tipo = this.categoria;
-
             if (tipo == 'individual') {
                 this.concatenado.active = false;
                 this.individual.active = true;
-
-
             }else if(tipo == 'secuencial'){
                 this.taller_individual = 'kardex-promedio';
                 this.individual.active = false;
                 this.concatenado.active = true;
              
-
             }
         },
           crearTaller(tipo){
@@ -934,7 +923,7 @@
             data.append('id', this.id_taller);
             data.append('tipo', 'vertical');
             data.append('enunciado', this.enunciado);
-            data.append('transacciones', this.individuales.balance_vertica);
+            data.append('transacciones', this.individuales.balance_vertical);
             data.append('contenido_id', this.contenido_id);
             data.append('plantilla', 37);
      
@@ -942,9 +931,7 @@
                    window.location = "/sistema/home";
                      
                 }).catch(function(error){
-
                 }); 
-
                 }
              
                 }else if(tipo == 'balance-inicial-horizontal'){
@@ -974,11 +961,8 @@
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
-
                     }); 
-
                     }
-
                 }else if(tipo == 'kardex-fifo'){
                       let url = '/sistema/admin/modulo/kardex-fifo';
                       if (set.individuales.kardex_fifos.length == 0 ) {
@@ -1006,9 +990,7 @@
                          window.location = "/sistema/home";
                            
                       }).catch(function(error){
-
                       }); 
-
                       }
                 }else if(tipo == 'kardex-promedio'){
                   let url = '/sistema/admin/modulo/kardex-fifo';
@@ -1037,11 +1019,8 @@
                          window.location = "/sistema/home";
                            
                       }).catch(function(error){
-
                       }); 
-
                       }
-
                 }else if(tipo == 'diario-general'){
                    let url = '/sistema/admin/modulo/diario-general';
                     if (set.individuales.diario_general.trim() === '' ) {
@@ -1064,16 +1043,12 @@
                         data.append('transacciones', this.individuales.diario_general);
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
-
                         axios.post(url,data).then(response => {
                         window.location = "/sistema/home";
                          
                     }).catch(function(error){
-
                     }); 
-
                     }
-
                 }else if(tipo == 'mayor-general'){
                        let url = '/sistema/admin/modulo/mayor-general';
                     if (set.individuales.mayorgeneral.trim() === '' ) {
@@ -1096,14 +1071,11 @@
                         data.append('transacciones', this.individuales.mayorgeneral);
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
-
                         axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
-
                     }); 
-
                     }
                 }else if(tipo == 'balance-comprobacion'){
                     let url = '/sistema/admin/modulo/balance-comprobacion';
@@ -1127,16 +1099,12 @@
                         data.append('transacciones', this.individuales.balance_comprobacion);
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
-
                         axios.post(url,data).then(response => {
                         window.location = "/sistema/home";
                          
                     }).catch(function(error){
-
                     }); 
-
                     }
-
                 }else if(tipo == 'hoja-trabajo'){
                     let url = '/sistema/admin/modulo/hoja-trabajo';
                     if (set.individuales.hoja_trabajo.trim() === '' ) {
@@ -1163,11 +1131,8 @@
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
-
                     }); 
-
                     }
-
                 }else if(tipo == 'balance-comprobacion-ajustado'){
                     let url = '/sistema/admin/modulo/balance-comprobacion-ajustado';
                     if (set.individuales.balance_comprobacion_ajustado.trim() === '' ) {
@@ -1194,9 +1159,7 @@
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
-
                     }); 
-
                     }
                 }else if(tipo == 'estado-resultado'){
                       let url = '/sistema/admin/modulo/estado-resultado';
@@ -1220,14 +1183,11 @@
                         data.append('transacciones', this.individuales.estado_resultado);
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
-
                         axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
-
                     }); 
-
                     }
                 }else if(tipo == 'balance-general'){
                     let url = '/sistema/admin/modulo/balance-general';
@@ -1251,14 +1211,11 @@
                         data.append('transacciones', this.individuales.balance_general);
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
-
                         axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
-
                     }); 
-
                     }
                 }else if(tipo == 'asientos-cierre'){
                     let url = '/sistema/admin/modulo/asiento-cierre';
@@ -1282,14 +1239,11 @@
                         data.append('transacciones', this.individuales.asientos_cierre);
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
-
                         axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
-
                     }); 
-
                     }
                 }else if(tipo == 'librocaja'){
                          let url = '/sistema/admin/modulo/librocaja';
@@ -1313,14 +1267,11 @@
                         data.append('transacciones', this.individuales.librocaja);
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
-
                         axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
-
                     }); 
-
                     }
                 }else if(tipo == 'conciliacionbancaria'){
                        let url = '/sistema/admin/modulo/conciliacionbancaria';
@@ -1344,14 +1295,11 @@
                         data.append('transacciones', this.individuales.conciliacionbancaria);
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37); 
-
                         axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
-
                     }); 
-
                     }
                 }else if(tipo == 'arqueocaja'){
                        let url = '/sistema/admin/modulo/arqueocaja';
@@ -1375,14 +1323,11 @@
                         data.append('transacciones', this.individuales.arqueocaja);
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37); 
-
                         axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
-
                     }); 
-
                     }
                 }else if(tipo == 'librobanco'){
                        let url = '/sistema/admin/modulo/librobanco';
@@ -1406,14 +1351,11 @@
                         data.append('transacciones', this.individuales.librobanco);
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37); 
-
                         axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
-
                     }); 
-
                     }
                 }else if(tipo == 'retencioniva'){
                        let url = '/sistema/admin/modulo/retencioniva';
@@ -1437,14 +1379,11 @@
                         data.append('transacciones', this.individuales.retencioniva);
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37); 
-
                         axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
-
                     }); 
-
                     }
                 }else if(tipo == 'nominaempleados'){
                        let url = '/sistema/admin/modulo/nominaempleados';
@@ -1468,14 +1407,11 @@
                         data.append('transacciones', this.individuales.nominaempleados);
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37); 
-
                         axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
-
                     }); 
-
                     }
                 }else if(tipo == 'provisiondebeneficio'){
                        let url = '/sistema/admin/modulo/provisiondebeneficio';
@@ -1499,17 +1435,13 @@
                         data.append('transacciones', this.individuales.provisiondebeneficio);
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37); 
-
                         axios.post(url,data).then(response => {
                        window.location = "/sistema/home";
                          
                     }).catch(function(error){
-
                     }); 
-
                     }
                 }
-
           },
         agregarProducto(){
           if (this.individuales.kardex_promedio.nombre.trim() === '') {
@@ -1521,7 +1453,6 @@
                 "timeOut": "3000"
                 });
           }else{
-
             let producto = {nombre: this.individuales.kardex_promedio.nombre, transacciones: this.individuales.kardex_promedio.transacciones}
             this.individuales.kardex_promedios.push(producto);
              toastr.success("Producto Agregado", "Smarmoddle", {
@@ -1530,7 +1461,6 @@
              this.individuales.kardex_promedio.nombre ='';
               this.individuales.kardex_promedio.transacciones ='';
           }
-
         },
         agregarProductoFifo(){
           if (this.individuales.kardex_fifo.nombre.trim() === '') {
@@ -1542,7 +1472,6 @@
                 "timeOut": "3000"
                 });
           }else{
-
             let producto = {nombre: this.individuales.kardex_fifo.nombre, transacciones: this.individuales.kardex_fifo.transacciones}
             this.individuales.kardex_fifos.push(producto);
              toastr.success("Producto Agregado", "Smarmoddle", {
@@ -1551,7 +1480,6 @@
              this.individuales.kardex_fifo.nombre ='';
               this.individuales.kardex_fifo.transacciones ='';
           }
-
         },
         agregarProductoC(){
           if (this.concatenados.kardex_fifo.nombre.trim() === '') {
@@ -1563,7 +1491,6 @@
                 "timeOut": "3000"
                 });
           }else{
-
             let producto = {nombre: this.concatenados.kardex_fifo.nombre, transacciones: this.concatenados.kardex_fifo.transacciones}
             this.concatenados.kardex_fifos.push(producto);
              toastr.success("Producto Agregado", "Smarmoddle", {
@@ -1572,7 +1499,6 @@
              this.concatenados.kardex_fifo.nombre ='';
               this.concatenados.kardex_fifo.transacciones ='';
           }
-
         },
             tallerConcatenado(){
             let set = this;
@@ -1592,7 +1518,7 @@
             }else{
                 let data = new  FormData();
             
-            data.append('documento', this.document);
+                data.append('documento', this.document);
             data.append('id', this.id_taller);
             data.append('enunciado', this.enunciado);
             data.append('productos', JSON.stringify(this.concatenados.kardex_fifos));
@@ -1606,13 +1532,10 @@
      
                 axios.post(url, data).then(response => {
              
-             // console.log(response.data)
-               window.location = "/sistema/home";
-                 
+              window.location = "/sistema/home";
+                 //console.log(response.data);
             }).catch(function(error){
-
             }); 
-
             }
          
            },

@@ -119,6 +119,7 @@ use App\RespuestaArchivo;
 use App\Taller;
 use App\TallerArchivo;
 use App\TallerChequeRe;
+use App\Talleres\TallerEcuacion;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -385,10 +386,11 @@ class TallerDocenteController extends Controller
             return view('docentes.talleres.taller34', compact('datos', 'd', 'update_imei', 'user' , 'fecha', 'taller')); 
 
         }elseif ($plant == 35) {
-    
+            $taller = TallerEcuacion::where('taller_id', $consul->id)->firstOrFail();
             $datos = FormulasContable::where('user_id', $user->id)->where('taller_id', $consul->id)->firstOrFail();
+            $respuestas = json_decode($datos->respuestas);
             if ($consul->plantilla_id == $plant && $consul->id = $id) {
-            return view('docentes.talleres.taller35', compact('datos', 'd', 'update_imei', 'user' , 'fecha'));  
+            return view('docentes.talleres.taller35', compact('datos', 'd', 'update_imei', 'user' , 'fecha', 'taller', 'respuestas'));  
              }else {
             return abort(404);   
              }

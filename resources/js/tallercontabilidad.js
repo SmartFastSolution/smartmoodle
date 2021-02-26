@@ -579,7 +579,7 @@ const b_hori = new Vue({
             this.pasivo.p_corriente.saldo      =''
             this.pasivo.p_corriente.edit       = false;
             this.registro.p_corriente          = '';
-          this.cambioPasivoNo();
+          this.cambioPasivo();
           }
       }
     },
@@ -857,12 +857,12 @@ const b_hori = new Vue({
                 cambioPasivo(){
               this.b_initotal.t_p_corriente = 0;
               var t_pasivo = this.p_corrientes;
-              //console.log(t_pasivo)
+              console.log(t_pasivo)
               var total = 0;
               t_pasivo.forEach(function(obj){
                 total += Number(obj.saldo);
               });
-              //console.log(total);
+              console.log(total);
               this.b_initotal.t_p_corriente = total;
                 this.TotalPasivo();
              },
@@ -1485,7 +1485,7 @@ const b_ver = new Vue({
             this.pasivo.p_corriente.saldo      =''
             this.pasivo.p_corriente.edit       = false;
             this.registro.p_corriente          = '';
-          this.cambioPasivoNo();
+            this.cambioPasivo();
           }
       }
     },
@@ -3995,7 +3995,7 @@ let hoja_trabajo = new Vue({
 });
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////BALANCE DE COMPROBACIO AJUSTADO /////////////////////////////////////////////
+////////////////////////////////////////////////BALANCE DE COMPROBACION AJUSTADO /////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const balance_ajustado = new Vue({
@@ -4007,6 +4007,7 @@ const balance_ajustado = new Vue({
     cuentas: cuentas,
       nombre_hoja:'',
       nombre:'',
+      fecha:'',
     balances_ajustados:[], //array del balance de COMPROBACION
     balance:{ //variables a utilizar para el balance de COMPROBACION
       cuenta_id:'',
@@ -4228,8 +4229,13 @@ const balance_ajustado = new Vue({
             "timeOut": "3000"
         });
 
-     }else    if(this.nombre == ''){
+     }else  if(this.nombre == ''){
           toastr.error("El nombre es obligatorio", "Smarmoddle", {
+            "timeOut": "3000"
+        });
+
+     }else  if(this.fecha == ''){
+          toastr.error("La fecha es obligatoria", "Smarmoddle", {
             "timeOut": "3000"
         });
 
@@ -4241,7 +4247,8 @@ const balance_ajustado = new Vue({
               balances: _this.balances_ajustados,
               total_debe: _this.suman.debe,
               total_haber: _this.suman.haber,
-              nombre: _this.nombre
+              nombre: _this.nombre,
+              fecha: _this.fecha
 
         }).then(response => {
           if (response.data.estado == 'guardado') {
@@ -4272,6 +4279,7 @@ const balance_ajustado = new Vue({
             });
               this.balances_ajustados = response.data.bcomprobacionAjustado;
               this.nombre = response.data.nombre;
+              this.fecha = response.data.fecha;
               this.totales();
             }          
         }).catch(function(error){
@@ -6286,14 +6294,14 @@ const asientos_cierre = new Vue({
       let cuenta = this.cuentas.filter(x => x.id == id);
       let valor = this.diario.haber.saldo;
 
-            if (cuenta[0].porcentual == 1) {
-                  let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
-                  let haber = {cuenta_id: cuenta[0].id, fecha:this.diario.haber.fecha, nom_cuenta: cuenta[0].nombre, saldo:calculo};
-                  this.diarios.haber.push(haber);//añadimos el la variable persona al array
-            }else{
+            // if (cuenta[0].porcentual == 1) {
+            //       let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
+            //       let haber = {cuenta_id: cuenta[0].id, fecha:this.diario.haber.fecha, nom_cuenta: cuenta[0].nombre, saldo:calculo};
+            //       this.diarios.haber.push(haber);//añadimos el la variable persona al array
+            // }else{
                   let haber = {cuenta_id: cuenta[0].id, fecha:this.diario.haber.fecha, nom_cuenta: cuenta[0].nombre, saldo:this.diario.haber.saldo};
                   this.diarios.haber.push(haber);
-            }
+            // }
                
                 //Limpiamos los campos
                 toastr.success("Activo agregado correctamente", "Smarmoddle", {
@@ -6315,15 +6323,15 @@ const asientos_cierre = new Vue({
                 "timeOut": "3000"
             });
         }else{
-            if (cuenta[0].porcentual == 1) {
-                  let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
+            // if (cuenta[0].porcentual == 1) {
+            //       let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
                   
-                  let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:calculo};
-                  this.diarios.debe.push(debe);
-            }else{
+            //       let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:calculo};
+            //       this.diarios.debe.push(debe);
+            // }else{
                   let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:this.diario.debe.saldo};
                   this.diarios.debe.push(debe);
-            }
+            // }
                 toastr.success("Activo agregado correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
@@ -6551,15 +6559,15 @@ const asientos_cierre = new Vue({
       let cuenta = this.cuentas.filter(x => x.id == id);
       console.log(cuenta)
       let valor  = this.diario.haber.saldo;
-      if (cuenta[0].porcentual == 1) {
-        let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
-        this.diarios.haber[index].nom_cuenta = cuenta[0].nombre;
-        this.diarios.haber[index].saldo      = calculo;
-      }else{
+      // if (cuenta[0].porcentual == 1) {
+      //   let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
+      //   this.diarios.haber[index].nom_cuenta = cuenta[0].nombre;
+      //   this.diarios.haber[index].saldo      = calculo;
+      // }else{
         this.diarios.haber[index].cuenta_id  = id;
         this.diarios.haber[index].nom_cuenta = cuenta[0].nombre;
         this.diarios.haber[index].saldo      = valor;
-      }
+      // }
         this.diario.haber.nom_cuenta = '';
         this.diario.haber.saldo      = '';
         this.diario.haber.edit       = false;
@@ -6574,15 +6582,15 @@ const asientos_cierre = new Vue({
 
       let cuenta = this.cuentas.filter(x => x.id == id_cuenta);
       console.log(cuenta)
-      if (cuenta[0].porcentual == 1){
+      // if (cuenta[0].porcentual == 1){
 
-        this.diario.haber.nom_cuenta = id_cuenta;
-        this.diario.haber.saldo      = '';
-      }else{
+      //   this.diario.haber.nom_cuenta = id_cuenta;
+      //   this.diario.haber.saldo      = '';
+      // }else{
 
         this.diario.haber.nom_cuenta = id_cuenta;
         this.diario.haber.saldo      = this.diarios.haber[index].saldo;
-      }
+      // }
         this.diario.haber.edit       = true;
       
    
@@ -6615,13 +6623,13 @@ const asientos_cierre = new Vue({
       }
       let cuenta = this.cuentas.filter(x => x.id == cuenta_id);
       // console.log(cuenta)
-      if (cuenta[0].porcentual == 1){
-        this.diario.debe.nom_cuenta = cuenta_id;
-        this.diario.debe.saldo      = '';
-      }else{
+      // if (cuenta[0].porcentual == 1){
+      //   this.diario.debe.nom_cuenta = cuenta_id;
+      //   this.diario.debe.saldo      = '';
+      // }else{
         this.diario.debe.nom_cuenta = cuenta_id;
         this.diario.debe.saldo      = this.diarios.debe[index].saldo;
-      }
+      // }
         this.diario.debe.edit       = true;
       $('#debe-asiento-tab').tab('show'); 
     },
@@ -6646,14 +6654,14 @@ const asientos_cierre = new Vue({
       if (this.diario.debe.fecha !== '') {
          this.diarios.debe[index].fecha = this.diario.debe.fecha; 
       }
-      if (cuenta[0].porcentual == 1) {
-        let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
-        this.diarios.debe[index].nom_cuenta = cuenta[0].nombre;
-        this.diarios.debe[index].saldo      = calculo;
-      }else{
+      // if (cuenta[0].porcentual == 1) {
+      //   let calculo = this.valorPorcentual(cuenta[0].porcentaje, valor);
+      //   this.diarios.debe[index].nom_cuenta = cuenta[0].nombre;
+      //   this.diarios.debe[index].saldo      = calculo;
+      // }else{
         this.diarios.debe[index].nom_cuenta = cuenta[0].nombre;
         this.diarios.debe[index].saldo      = valor;
-      }
+      // }
         this.diarios.debe[index].cuenta_id = id;
       
       if (this.diario.debe.fecha !== '') {
@@ -7018,6 +7026,8 @@ const kardex = new Vue({
       this.modales.modal_devolucion_venta = ventas;
       }
       $('#ingreso').modal('show');
+
+      $('#tableingreso-tab').tab('show')
     },
        modalInicial:function () {
         this.cerrarInicial();
@@ -7040,6 +7050,8 @@ const kardex = new Vue({
      
       }
       $('#egreso').modal('show');
+      $('#tablaegreso-tab').tab('show')
+
     },
     
     totalIng(id){

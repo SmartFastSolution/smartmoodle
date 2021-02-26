@@ -389,6 +389,10 @@ $(function(document, window, index ) {
         evt.preventDefault();
         addTaller22();
     });
+          $('.addTaller35').on('click', function(evt) {
+        evt.preventDefault();
+        addTaller35();
+    });
       $('.addTaller37').on('click', function(evt) {
         evt.preventDefault();
         addTaller37()();
@@ -794,6 +798,45 @@ function addTaller11() {
 
     $('.removeTaller22').live('click', function() {
         var last = $('.taller22 tr').length;
+        if (last == 1) {
+            i = 1;
+            toastr.error("Esta columna no se puede eliminar", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+        } else {
+            $(this).parent().parent().remove();
+            i = last;
+        }
+    });
+
+            function addTaller35() {
+
+        var max = $('.taller35 tr').length;
+        var tr = '<tr>' +
+            '<td><input type="number" class="form-control text-right" name="activo[]"></td>' +
+            '<td><input type="number" class="form-control text-right" name="pasivo[]"></td>' +
+            '<td><input type="number" class="form-control text-right" name="patrimonio[]"></td>' +
+            '<td><a href="#" class="btn btn-danger removeTaller35"><span class="glyphicon glyphicon-remove">X</span>' +
+            '</tr>';
+        // if (max == 10) {
+        //     toastr.error("Limite de columnas creadas", "Smarmoddle", {
+        //         "timeOut": "1000"
+        //     });
+
+
+        // } else {
+            $('.taller35').append(tr);
+         
+
+            toastr.success("Columna agregada correctamente", "Smarmoddle", {
+                "timeOut": "1000"
+            });
+            console.log(max)
+        // }
+    }
+
+    $('.removeTaller35').live('click', function() {
+        var last = $('.taller35 tr').length;
         if (last == 1) {
             i = 1;
             toastr.error("Esta columna no se puede eliminar", "Smarmoddle", {

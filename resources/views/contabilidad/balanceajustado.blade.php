@@ -2,8 +2,11 @@
         <h2 class="text-center display-4 font-weight-bold text-danger">Balance de Comprobacion Ajustado</h2>
         <div class="row p-3  mb-2 justify-content-center ">
     <div class="col-5 mb-3">
-          <input autocomplete="ÑÖcompletes" class="form-control text-center" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="" >
+          <input autocomplete="ÑÖcompletes" class="form-control text-center mb-2" type="text" v-model="nombre" placeholder="Nombre de la empresa" name="" >
+          <input autocomplete="ÑÖcompletes" class="form-control text-center" type="date" v-model="fecha" name="" >
+
         </div>
+
    
 </div>
         {{-- <h2 class="text-center">Agregar Cuenta</h2> --}}
@@ -31,7 +34,7 @@
   @if ($rol === 'estudiante' or 'docente')
    <div class="row justify-content-start mb-2">
       <a  href="#" class="addDiario btn btn-outline-info mr-2 " @click.prevent="abrirTransaccion()">Agregar Movimientos</a>
-      <a  href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarBalance()">Guardar Balance</a>
+      <a  href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarBalance()">Guardar Balance Ajustado</a>
   </div>
 @endif
   <table class="table table-bordered table-sm mb-2">
@@ -74,7 +77,7 @@
       <a  href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirTransaccion()">Agregar Movimientos</a>
   </div>
     <div class="row justify-content-center">
-        <a  href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarBalance()">Guardar Balance</a>
+        <a  href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarBalance()">Guardar Balance Ajustado</a>
         
     </div>
   @endif

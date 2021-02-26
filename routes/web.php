@@ -267,6 +267,7 @@ route::post('/taller29', 'AdminController@taller29')->name('admin.taller29');
 route::post('/taller31', 'AdminController@taller31')->name('admin.taller31');
 route::post('/taller33', 'AdminController@taller33')->name('admin.taller33');
 route::post('/taller34', 'AdminController@taller34')->name('admin.taller34');
+route::post('/taller35', 'AdminController@taller35')->name('admin.taller35');
 route::post('/taller36', 'AdminController@taller36')->name('admin.taller36');
 route::post('/taller37', 'AdminController@taller37')->name('admin.taller37');
 route::post('/taller38', 'AdminController@taller38')->name('admin.taller38');
@@ -279,6 +280,8 @@ route::post('/taller45', 'AdminController@taller45')->name('admin.taller45');
 route::post('/taller47', 'AdminController@taller47')->name('admin.taller47');
 route::post('/taller48', 'AdminController@taller48')->name('admin.taller48');
 route::post('/taller49', 'AdminController@taller49')->name('admin.taller49');
+route::post('/tallerprecon', 'AdminController@tallerprecon')->name('admin.tallerprecon');
+
 // route::post('/taller50', 'AdminController@taller50')->name('admin.taller50');
 // route::post('/taller57', 'AdminController@taller57')->name('admin.taller57');
 	});
@@ -459,6 +462,7 @@ route::post('/sistema/admin/modulo/taller-concatenado', 'AdminController@tallerC
 route::post('/sistema/admin/modulo/cheque', 'ModuloDocumentoController@cheque')->name('modulo.cheque');
 route::post('/sistema/admin/modulo/factura', 'ModuloDocumentoController@factura')->name('modulo.factura');
 route::post('/sistema/admin/modulo/nota_credito', 'ModuloDocumentoController@nota_credito')->name('modulo.nota_credito');
+route::post('/sistema/admin/modulo/letra-cambio', 'ModuloDocumentoController@letra_cambio')->name('modulo.letra_cambio');
 route::post('/sistema/admin/modulo/documentos', 'ModuloDocumentoController@documentos')->name('modulo.documentos');
 route::post('/sistema/admin/modulo/documento/show', 'ModuloDocumentoController@vista')->name('modulo.vistadocumento');
 route::post('/sistema/admin/modulo/documento/edit', 'ModuloDocumentoController@edicion')->name('modulo.editdocument');

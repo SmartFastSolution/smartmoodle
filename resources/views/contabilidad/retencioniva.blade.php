@@ -172,7 +172,7 @@
                 <tr>
                     <td> <label for="inputEmail3" class="col-sm col-form-label">IVA EN VENTAS</label></td>
                     <td>
-                        <div class="col-sm-8">
+                        <div class="col-sm-10">
                             <input class="form-control  text-right  form-control-sm"  type="number" step="0.01"
                                 v-model="total.t_ivaventa" placeholder="IVA EN VENTAS" name="">
                         </div>
@@ -183,10 +183,10 @@
             <tbody>
                 <tr>
 
-                    <td><label for="inputEmail3" class="col-sm col-form-label"> -IVA EN COMPRAS</label></td>
+                    <td><input class="form-control form-control-sm" type="text" placeholder=".form-control-sm"></td>
                     <td>
 
-                        <div class="col-sm-8">
+                        <div class="col-sm-10">
                             <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
                                 v-model="total.t_ivacompra" placeholder="- IVA EN COMPRAS" name="">
                         </div>
@@ -197,7 +197,7 @@
                 <tr>
                     <td> <label for="inputEmail3" class="col-sm col-form-label"></label></td>
                     <td>
-                        <div class="col-sm-8">
+                        <div class="col-sm-10">
                             <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
                                 v-model="total.result_iva" placeholder="RES. IVA" name="">
                         </div>
@@ -209,7 +209,7 @@
                     <td><label for="inputEmail3" class="col-sm col-form-label"> + RET. IVA</label></td>
                     <td>
 
-                        <div class="col-sm-8">
+                        <div class="col-sm-10">
                             <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
                                 v-model="total.t_reten" placeholder="+ RET. IVA" name="">
                         </div>
@@ -220,7 +220,7 @@
                 <tr>
                     <td><label for="inputEmail3" class="col-sm col-form-label"> TOTAL A PAGAR</label></td>
                     <td>
-                        <div class="col-sm-8">
+                        <div class="col-sm-10">
                             <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
                                 v-model="total.total_pagar" placeholder="TOTAL A PAGAR" name="">
                         </div>

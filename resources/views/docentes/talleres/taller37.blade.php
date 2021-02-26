@@ -246,43 +246,7 @@
 
       @endif
           </div>
-                 <h2 class="text-center font-weight-bold">Aplicacion de Documentos</h2>
-        <div class="row justify-content-center mb-5 p-5" id="documentos"  style="height: 200px; overflow-y: scroll; overflow-x: hidden;">
-            <table class="table">
-  <thead class="thead-dark">
-    <tr>
-      {{-- <th scope="col">#</th> --}}
-      <th scope="col">Tipo de Documento</th>
-      <th scope="col">Modulo</th>
-      <th  width="200" class="text-center">Ver Documento</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="(cheque, index) in cheques">
-      <td>@{{ cheque.tipo_documento }}</td>
-      <td>@{{ cheque.modulo }}</td>
-      <td class="text-center"><a class="btn btn-success" href="" @click.prevent="verCheque(cheque.id, index)"><i class="fa fa-money-bill"></i></a>
-      </td>
-    </tr>
 
-
-  <tr v-for="(nota_credito, index) in nota_creditos">
-      <td>@{{ nota_credito.tipo_documento }}</td>
-      <td>@{{ nota_credito.modulo }}</td>
-      <td class="text-center"><a class="btn btn-danger" href="" @click.prevent="verNota(nota_credito.id, index)"><i class="fa fa-file-invoice-dollar"></i></a>
-     </td>
-    </tr>  
-      <tr v-for="(factura, index) in facturas">
-      <td>@{{ factura.tipo_documento }}</td>
-      <td>@{{ factura.modulo }}</td>
-      <td class="text-center"><a class="btn btn-info" href="" @click.prevent="verFactura(factura.id, index)"><i class="fa fa-file-invoice-dollar"></i></a>
-   </td>
-    </tr>  
-</tbody>
-</table>
-@include('docentes.contabilidad.modales.modaldocumentos')
-
-        </div>
             
             <div class="row justify-content-center">
             <div class="col-5">
@@ -1614,6 +1578,7 @@ const balance_ajustado = new Vue({
       hojatrabajo:[],
       nombre_hoja:'',
       nombre:'',
+      fecha:'',
     balances_ajustados:[],
     suman:{ 
       debe:0,
@@ -1654,6 +1619,8 @@ const balance_ajustado = new Vue({
           this.balances_ajustados = response.data.bcomprobacionAjustado;
           this.suman.debe = response.data.t_debe;
           this.suman.haber = response.data.t_haber;
+          this.nombre = response.data.nombre;
+          this.fecha = response.data.fecha;
             }          
         }).catch(function(error){
 

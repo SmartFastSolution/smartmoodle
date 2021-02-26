@@ -192,9 +192,7 @@
     </div>
     @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center mt-2">
-        <a href="#" class="addDiario btn btn-outline-success" @click.prevent="guardarEstadoResultado()">Completar Estado
-            de
-            resultado</a>
+        <a href="#" class="addDiario btn btn-outline-success" @click.prevent="guardarEstadoResultado()">Guardar Estado De Resultado</a>
     </div>
     @endif
 

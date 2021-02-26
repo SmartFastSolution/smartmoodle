@@ -191,7 +191,7 @@
                                     </div>
                                     @if($datos->metodo == 'individual')
 
-                                    <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
                                         {!! $transacciones->transacciones !!}
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
@@ -235,7 +235,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr class="bg-secondary">
-                                                        <td class="text-left font-weight-bold">Total Activo Corriente
+                                                        <td class="text-left font-weight-bold">Total Activo No Corriente
                                                         </td>
                                                         <td class="text-right">
                                                             @{{ decimales(b_initotal.t_a_nocorriente) }}</td>
@@ -289,7 +289,7 @@
                                     </div>
                                     @if($datos->metodo == 'individual')
 
-                                    <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
                                         {!! $transacciones->transacciones !!}
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
@@ -333,9 +333,9 @@
                                                         </td>
                                                     </tr>
                                                     <tr class="bg-secondary">
-                                                        <td class="text-left font-weight-bold">Total Pasivo No Corriente
+                                                        <td class="text-left font-weight-bold">Total Pasivo Corriente
                                                         </td>
-                                                        <td class="text-right">@{{ b_initotal.t_p_corriente }}</td>
+                                                        <td class="text-right">@{{ decimales(b_initotal.t_p_corriente) }}</td>
                                                         <td></td>
                                                     </tr>
                                                 </tbody>
@@ -387,7 +387,7 @@
                                     </div>
                                     @if($datos->metodo == 'individual')
 
-                                    <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
                                         {!! $transacciones->transacciones !!}
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
@@ -433,7 +433,7 @@
                                                     <tr class="bg-secondary">
                                                         <td class="text-left font-weight-bold">Total Pasivo No corriente
                                                         </td>
-                                                        <td class="text-right">@{{ b_initotal.t_p_no_corriente }}</td>
+                                                        <td class="text-right">@{{ decimales(b_initotal.t_p_no_corriente) }}</td>
                                                         <td></td>
                                                     </tr>
                                                 </tbody>
@@ -484,7 +484,7 @@
                                     </div>
                                     @if($datos->metodo == 'individual')
 
-                                    <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden;">
+                                    <div class="col-6" style=" height:200px; overflow-y: scroll; overflow-x: hidden; border: double 8px #E71822;">
                                         {!! $transacciones->transacciones !!}
                                     </div>
                                     @elseif($datos->metodo == 'concatenado')
@@ -529,7 +529,7 @@
                                                     </tr>
                                                     <tr class="bg-secondary">
                                                         <td class="text-left font-weight-bold">Total Patrimonio</td>
-                                                        <td class="text-right">@{{ b_initotal.t_patrimonio }}</td>
+                                                        <td class="text-right">@{{ decimales(b_initotal.t_patrimonio) }}</td>
                                                         <td></td>
                                                     </tr>
                                                 </tbody>

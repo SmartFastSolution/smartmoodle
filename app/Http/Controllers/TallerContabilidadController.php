@@ -371,32 +371,31 @@ class TallerContabilidadController extends Controller
 
         public function balanceAjustado(Request $request)
             {
-                $id                 = Auth::id();
-                $taller_id          = $request->id;
-                $balances           = $request->balances;
-                $balanceCompro      = BalanceAjustado::where('user_id',$id)->where('taller_id', $taller_id)->count();
-                if ($balanceCompro  == 0) {
+                $id                    = Auth::id();
+                $taller_id             = $request->id;
+                $balances              = $request->balances;
+                $balanceCompro         = BalanceAjustado::where('user_id',$id)->where('taller_id', $taller_id)->count();
+                if ($balanceCompro     == 0) {
                 // $contenido          = TallerContabilidad::select('enunciado')->where('taller_id', $taller_id)->firstOrFail();
-                $balance            = new BalanceAjustado;
-                $balance->taller_id = $taller_id ;
-                $balance->user_id   = $id;
+                $balance               = new BalanceAjustado;
+                $balance->taller_id    = $taller_id ;
+                $balance->user_id      = $id;
                 // $balance->enunciado = $contenido->enunciado;
-                $balance->nombre = $request->nombre;
-                $balance->total_debe  = $request->total_debe;
-                $balance->total_haber = $request->total_haber;
+                $balance->nombre       = $request->nombre;
+                $balance->fecha        = $request->fecha;
+                $balance->total_debe   = $request->total_debe;
+                $balance->total_haber  = $request->total_haber;
                 $balance->save();
-
                 $o = BalanceAjustado::where('user_id', $id)->get()->last(); 
-
                 foreach ($balances as $key => $balance) {
                         $datos=array(
                             'balance_ajustado_id' => $o->id,
-                            'cuenta'                  => $balance['cuenta'],
-                            'cuenta_id'                  => $balance['cuenta_id'],
-                            'debe'                    => $balance['debe'],
-                            'haber'                   => $balance['haber'],
-                            'created_at'              => now(),
-                            'updated_at'              => now(),
+                            'cuenta'              => $balance['cuenta'],
+                            'cuenta_id'           => $balance['cuenta_id'],
+                            'debe'                => $balance['debe'],
+                            'haber'               => $balance['haber'],
+                            'created_at'          => now(),
+                            'updated_at'          => now(),
                         );
                         BCARegistro::insert($datos);
                     }
@@ -406,13 +405,13 @@ class TallerContabilidadController extends Controller
                         'message' => 'Balance de Comprobacion Ajustado creado correctamente'
                     ),200,[]);
                 }elseif($balanceCompro  == 1){
-                $ids                       = [];
-                $balanceComprob            = BalanceAjustado::where('user_id',$id)->where('taller_id', $taller_id)->first();
+                $ids                         = [];
+                $balanceComprob              = BalanceAjustado::where('user_id',$id)->where('taller_id', $taller_id)->first();
                 $balanceComprob->total_debe  = $request->total_debe;
-                $balanceComprob->nombre = $request->nombre;
+                $balanceComprob->nombre      = $request->nombre;
+                $balanceComprob->fecha       = $request->fecha;
                 $balanceComprob->total_haber = $request->total_haber;
                 $balanceComprob->save();
-
 
                 $registros= BCARegistro::where('balance_ajustado_id', $balanceComprob->id)->get();
                 
@@ -433,15 +432,11 @@ class TallerContabilidadController extends Controller
                         );
                         BCARegistro::insert($datos);
                     }
-
-
-
                     return response(array(
                         'success' => true,
                         'estado' => 'actualizado',
                         'message' => 'Balance de Comprobacion Ajustado actualizado correctamente'
                     ),200,[]);
-
                 }
             }
         public function obtenerBalanceAjustado(Request $request)
@@ -457,6 +452,7 @@ class TallerContabilidadController extends Controller
                     return response(array(
                         'datos' => true,
                         'nombre' => $balanceCompro->nombre,
+                        'fecha' => $balanceCompro->fecha,
                         'bcomprobacionAjustado' => $obtener
                     ),200,[]);
 
@@ -690,32 +686,32 @@ class TallerContabilidadController extends Controller
             }
 
         public function obtenerHojaTraba(Request $request)
+        {
+            $id         = Auth::id();
+            $taller_id  = $request->id;
+            $dioGeneral = HojaTrabajo::where('user_id',$id)->where('taller_id', $taller_id)->count();
+            // $registros  = [];
+            if ($dioGeneral  == 1) {
+                $balanceCompro = HojaTrabajo::where('user_id',$id)->where('taller_id', $taller_id)->first();
+                $obtener       = HTRegistro::select('cuenta','cuenta_id', 'bc_debe', 'bc_haber', 'ajuste_debe', 'ajuste_haber' , 'ba_debe', 'ba_haber', 'er_debe', 'er_haber', 'bg_debe', 'bg_haber')->where('hoja_trabajo_id', $balanceCompro->id)->get();
+            
+                return response(array(
+                    'datos' => true,
+                    'hojatrabajo' => $obtener,
+                    'nombre' => $balanceCompro->nombre,
+                ),200,[]);
+
+            }else{
+                return response(array(
+                    'datos' => false,
+                ),200,[]);
+
+            }
+        }
+
+
+        public function balance_inicial(Request $request)
             {
-                            $id         = Auth::id();
-                            $taller_id  = $request->id;
-                            $dioGeneral = HojaTrabajo::where('user_id',$id)->where('taller_id', $taller_id)->count();
-                            // $registros  = [];
-                            if ($dioGeneral  == 1) {
-                                $balanceCompro = HojaTrabajo::where('user_id',$id)->where('taller_id', $taller_id)->first();
-                                $obtener       = HTRegistro::select('cuenta','cuenta_id', 'bc_debe', 'bc_haber', 'ajuste_debe', 'ajuste_haber' , 'ba_debe', 'ba_haber', 'er_debe', 'er_haber', 'bg_debe', 'bg_haber')->where('hoja_trabajo_id', $balanceCompro->id)->get();
-                            
-                                return response(array(
-                                    'datos' => true,
-                                    'hojatrabajo' => $obtener,
-                                    'nombre' => $balanceCompro->nombre,
-                                ),200,[]);
-
-                            }else{
-                                return response(array(
-                                    'datos' => false,
-                                ),200,[]);
-
-                            }
-                        }
-
-
-                        public function balance_inicial(Request $request)
-                        {
                             $id            = Auth::id();
                             $taller_id     = $request->id;
                             $tipo          = $request->tipo;
@@ -2181,17 +2177,26 @@ class TallerContabilidadController extends Controller
 
         public function ArqueoCaja(Request $request)
         {
-            $uid           = Auth::id();
-            $taller_id     = $request->id;
-            $t_saldo       = $request->t_saldo;
-            $t_exis        = $request->t_exis;
+            $uid              = Auth::id();
+            $taller_id        = $request->id;
+            $t_saldo          = $request->t_saldo;
+            $t_exis           = $request->t_exis;
+           
             $ar  = Arqueocajas::where('user_id', $uid)->where('taller_id',$taller_id)->count();      
             if($ar == 0){
                 $a = new Arqueocajas;
-                $a->taller_id = $taller_id;
-                $a->user_id   = $uid;
-                $a->totaldebe = $request->td;
-                $a->totalhaber= $request->th;
+                $a->taller_id         = $taller_id;
+                $a->user_id           = $uid;              
+                $a->totaldebe         = $request->td;
+                $a->totalhaber        = $request->th;
+                $a->saldo_ctcaja      = $request->saldo_ctcaja;
+                $a->saldo_arqueocaja  = $request->saldo_arqueocaja;
+                $a->select_resultado  = $request->select_resultado;
+                $a->select_valor      = $request->select_valor;
+                $a->cuenta1           = $request->cuenta1;
+                $a->cuenta2           = $request->cuenta2;
+                $a->valor1            = $request->valor1;
+                $a->valor2            = $request->valor2;
                 $a->save();
 
                 $e= Arqueocajas::where('user_id', $uid)->get()->last();
@@ -2234,6 +2239,14 @@ class TallerContabilidadController extends Controller
                     $ar      = Arqueocajas::where('user_id', $uid)->where('taller_id',$taller_id)->first();
                     $ar->totaldebe      = $request->td;
                     $ar->totalhaber      = $request->th;
+                    $ar->saldo_ctcaja      = $request->saldo_ctcaja;
+                    $ar->saldo_arqueocaja  = $request->saldo_arqueocaja;
+                    $ar->select_resultado  = $request->select_resultado;
+                    $ar->select_valor      = $request->select_valor;
+                    $ar->cuenta1           = $request->cuenta1;
+                    $ar->cuenta2           = $request->cuenta2;
+                    $ar->valor1            = $request->valor1;
+                    $ar->valor2            = $request->valor2;
                     $ar->save();
 
                     $sa = ArqueoSaldo::where('arqueocaja_id', $ar->id)->get();        
@@ -2300,6 +2313,14 @@ class TallerContabilidadController extends Controller
             
                 return response(array(
                     'datos' => true,
+                    'saldo_ctcaja'     =>$a->saldo_ctcaja,
+                    'saldo_arqueocaja' =>$a->saldo_arqueocaja,
+                    'select_resultado' =>$a->select_resultado,
+                    'select_valor'     =>$a->select_valor,
+                    'cuenta1'          =>$a->cuenta1,
+                    'cuenta2'          =>$a->cuenta2,
+                    'valor1'           =>$a->valor1,
+                    'valor2'           =>$a->valor2,
                     'saldo' => $sa, 
                     'exis' =>  $ex, 
                 ),200,[]);

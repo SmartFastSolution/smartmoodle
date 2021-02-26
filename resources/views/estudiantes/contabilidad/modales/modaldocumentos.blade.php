@@ -11,13 +11,13 @@
       </div>
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">CHEQUE</h3>
-          <div class="form-group row">
+     {{--      <div class="form-group row">
         <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
         <div class="col-sm-4">
         <input disabled="" type="text" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
           
         </div>
-      </div>
+      </div> --}}
         <div class=" border p-2" style="box-shadow: 5px 5px 15px 0px  #27B8F4">
         <div class="row ">
           <div class="col-6 mb-2">
@@ -102,13 +102,13 @@
       </div>
       <div class="modal-body">
           <h3 class="text-center font-weight-bold">NOTA DE CREDITO</h3>
-          <div class="form-group row">
+  {{--         <div class="form-group row">
         <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
         <div class="col-sm-4">
         <input disabled="" type="text" class="form-control mb-2" placeholder="Modulo al que pertenece la nota de debito" v-model="modulo">
           
         </div>
-      </div>
+      </div> --}}
         <div class="" style="box-shadow: 5px 5px 15px 0px  #F42787">
         <div class="row p-3 justify-content-between">
           <div class="col-5">
@@ -291,13 +291,13 @@
       </div>
       <div class="modal-body">
                <h3 class="text-center font-weight-bold">FACTURA</h3>
-          <div class="form-group row">
+     {{--      <div class="form-group row">
         <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
         <div class="col-sm-4">
         <input disabled="" type="text" class="form-control mb-2" placeholder="Modulo al que pertenece la factura" v-model="modulo">
           
         </div>
-      </div>
+      </div> --}}
         <div class="" style="box-shadow: 5px 5px 15px 0px  #F42787">
         <div class="row p-3 justify-content-between">
           <div class="col-5">

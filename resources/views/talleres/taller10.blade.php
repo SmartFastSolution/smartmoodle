@@ -6,7 +6,6 @@
 <h1 class="text-center  mt-5 text-danger"> {{ $datos->taller->nombre }}</h1>
      <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }}</h3>
 
-
 <form id="taller10" action="{{ route('taller10', ['idtaller' => $d]) }}" method="POST">
     @csrf
 	<div class="container">
