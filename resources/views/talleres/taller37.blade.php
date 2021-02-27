@@ -95,6 +95,16 @@
         <a target="_blank" class="btn btn-danger" href="{{ $datos->archivo }}"><i class="fad fa-file-pdf"></i> Descargar PDF</a>
     </div>
     @endisset
+    {{--    <div class="row justify-content-center mb-5">
+        <a class="btn btn-success btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_cheque"><i class="far fa-money-bill"></i> CHEQUE</a>
+        <a class="btn btn-danger btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_credito"><i class="fas fa-file-invoice-dollar"></i> NOTA DE CREDITO</a>
+        <a class="btn btn-info btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_factura"><i class="fas fa-file-invoice-dollar"></i> FACTURA</a>
+        <a class="btn btn-warning btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_letra_cambio"><i class="fas fa-file-invoice-dollar"></i> LETRA DE CAMBIO</a>
+        <a class="btn btn-secondary btn-sm" href="#" data-toggle="modal" data-target="#m_papeleta"><i class="fas fa-file-invoice-dollar"></i> PAPELETA DE DEPOSITO</a>
+    </div>
+ --}}
+
+
  @if ($datos->metodo == 'concatenado')
     <div class="row justify-content-md-center">
         <div class="col-12 col-sm-12 col-md-2 mb-3">
@@ -330,8 +340,49 @@
     </div>
 
       @endif
+     {{--   <h2 class="text-center font-weight-bold">Aplicacion de Documentos</h2>
+        <div class="row justify-content-center mb-5" id="documentos"  style="height: 200px; overflow-y: scroll; overflow-x: hidden;">
+            <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Tipo de Documento</th>
+      <th scope="col">Modulo</th>
+      <th  width="200" class="text-center">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="(cheque, index) in cheques">
+      <td>@{{ cheque.tipo_documento }}</td>
+      <td>@{{ cheque.modulo }}</td>
+      <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="editarCheque(cheque.id, index)"><i class="fa fa-edit"></i></a>
+      <a class="btn btn-danger" href="" @click.prevent="warningEliminar(cheque.id, index, cheque.tipo_documento)"><i class="fa fa-trash"></i></a></td>
+    </tr>
 
-            
+
+  <tr v-for="(nota_credito, index) in nota_creditos">
+      <td>@{{ nota_credito.tipo_documento }}</td>
+      <td>@{{ nota_credito.modulo }}</td>
+      <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="editarNota(nota_credito.id, index)"><i class="fa fa-edit"></i></a>
+      <a class="btn btn-danger" href="" @click.prevent="warningEliminar(nota_credito.id, index, nota_credito.tipo_documento)"><i class="fa fa-trash"></i></a></td>
+    </tr>  
+      <tr v-for="(factura, index) in facturas">
+      <td>@{{ factura.tipo_documento }}</td>
+      <td>@{{ factura.modulo }}</td>
+      <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="editarFactura(factura.id, index)"><i class="fa fa-edit"></i></a>
+      <a class="btn btn-danger" href="" @click.prevent="warningEliminar(factura.id, index, factura.tipo_documento)"><i class="fa fa-trash"></i></a></td>
+    </tr>  
+    <tr v-for="(letra_cambio, index) in letra_cambios">
+      <td>@{{ letra_cambio.tipo_documento }}</td>
+      <td>@{{ letra_cambio.modulo }}</td>
+      <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="editarLetra(letra_cambio.id, index)"><i class="fa fa-edit"></i></a>
+      <a class="btn btn-danger" href="" @click.prevent="warningEliminar(letra_cambio.id, index, letra_cambio.tipo_documento)"><i class="fa fa-trash"></i></a></td>
+    </tr>  
+</tbody>
+</table>
+@include('contabilidad.modales.modaldocumentos')
+
+        </div>
+             --}}
  @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center" id="enviarTaller">
         <a href="" @click.prevent="CompletarTaller" class="btn p-2 mt-3 btn-danger">Completar Taller Contable</a>
@@ -408,6 +459,24 @@
             firma:'',
             update:false,
             cheque_id:'',
+            index:'',
+        },
+        letra_cambio:{
+            vencimiento:'',
+            numero:'',
+            por:'',
+            ciudad:'',
+            fecha:'',
+            orden_de:'',
+            de:'',
+            cantidad:'',
+            interes:'',
+            desde:'',
+            direccion:'',
+            ciudad2:'',
+            atentamente:'',
+            update:false,
+            letra_id:'',
             index:'',
         },
         nota_credito:{
@@ -495,6 +564,7 @@
             }
         },
         cheques:[],
+        letra_cambios:[],
         documentos:[],
         facturas:[],
         nota_creditos:[],
@@ -543,6 +613,7 @@
                 this.cheques = response.data.cheques;
                 this.nota_creditos = response.data.creditos;
                 this.facturas = response.data.facturas;
+                this.letra_cambios = response.data.letras;
             }).catch(function(error){
 
             }); 
@@ -566,6 +637,28 @@
                 set.cheque.update = true
 
             // console.log(cheque);
+        },
+        editarLetra(id, index){
+                let set                      = this;
+                let letra_cambio             = this.letra_cambios.filter(x => x.id == id);
+                set.letra_cambio.letra_id    = letra_cambio[0].id;
+                set.letra_cambio.index       = index;
+                set.modulo                   = letra_cambio[0].modulo;
+                set.letra_cambio.vencimiento = letra_cambio[0].vencimiento;
+                set.letra_cambio.numero      = letra_cambio[0].numero;
+                set.letra_cambio.por         = letra_cambio[0].por;
+                set.letra_cambio.ciudad      = letra_cambio[0].ciudad;
+                set.letra_cambio.fecha       = letra_cambio[0].fecha;
+                set.letra_cambio.orden_de    = letra_cambio[0].orden_de;
+                set.letra_cambio.de          = letra_cambio[0].de;
+                set.letra_cambio.cantidad    = letra_cambio[0].cantidad;
+                set.letra_cambio.interes     = letra_cambio[0].interes;
+                set.letra_cambio.desde       = letra_cambio[0].desde;
+                set.letra_cambio.direccion   = letra_cambio[0].direccion;
+                set.letra_cambio.ciudad2     = letra_cambio[0].ciudad2;
+                set.letra_cambio.atentamente = letra_cambio[0].atentamente;
+                $('#m_letra_cambio').modal('show');
+                set.letra_cambio.update = true;
         },
             editarNota(id, index){
                      let set                                   = this;
@@ -742,6 +835,9 @@
                 }else if (tipo === 'Factura') {
 
                     this.facturas.splice(index, 1); 
+                }else if (tipo === 'Letra de Cambio') {
+
+                    this.letra_cambios.splice(index, 1); 
                 }
                 toastr.info("Documento Eliminado Correctamente", "Smarmoddle", {
                 "timeOut": "3000"
@@ -811,12 +907,64 @@
             }); 
         }
         },
+            updateLetra(){
+               if (this.modulo === '') {
+                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+            } else {
+            let index = this.letra_cambio.index;
+            let set = this;
+            let url = '/sistema/admin/modulo/documento/edit';
+                axios.post(url,{
+                id:                 set.letra_cambio.letra_id,
+                tipo:               'letra_cambio',
+                modulo:             set.modulo,
+                tipo_documento:     'Letra de Cambio',
+                vencimiento:        set.letra_cambio.vencimiento,
+                numero:             set.letra_cambio.numero,
+                por:                set.letra_cambio.por,
+                ciudad:             set.letra_cambio.ciudad,
+                fecha:              set.letra_cambio.fecha,
+                orden_de:           set.letra_cambio.orden_de,
+                de:                 set.letra_cambio.de,
+                cantidad:           set.letra_cambio.cantidad,
+                interes:            set.letra_cambio.interes,
+                desde:              set.letra_cambio.desde,
+                direccion:          set.letra_cambio.direccion,
+                ciudad2:            set.letra_cambio.ciudad2,
+                atentamente:        set.letra_cambio.atentamente
+            }).then(response => {
+                $('#m_letra_cambio').modal('hide');
+                set.letra_cambios[index].modulo      = set.modulo;
+                set.letra_cambios[index].vencimiento = set.letra_cambio.vencimiento;
+                set.letra_cambios[index].numero      = set.letra_cambio.numero;
+                set.letra_cambios[index].por         = set.letra_cambio.por;
+                set.letra_cambios[index].ciudad      = set.letra_cambio.ciudad;
+                set.letra_cambios[index].fecha       = set.letra_cambio.fecha;
+                set.letra_cambios[index].orden_de    = set.letra_cambio.orden_de;
+                set.letra_cambios[index].de          = set.letra_cambio.de;
+                set.letra_cambios[index].cantidad    = set.letra_cambio.cantidad;
+                set.letra_cambios[index].interes     = set.letra_cambio.interes;
+                set.letra_cambios[index].desde       = set.letra_cambio.desde;
+                set.letra_cambios[index].direccion   = set.letra_cambio.direccion;
+                set.letra_cambios[index].ciudad2     = set.letra_cambio.ciudad2;
+                set.letra_cambios[index].atentamente = set.letra_cambio.atentamente;
+                toastr.info("Letra de cambio editada Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+               this.resetLetra();
+            }).catch(function(error){
+
+            }); 
+        }
+        },
         guardarCheque(){
             if (this.modulo === '') {
                  toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
               "timeOut": "3000"
           });
-            } else {
+            }else{
             let set = this;
             let cheque = {
                 modulo: set.modulo,
@@ -870,6 +1018,46 @@
             }
             
         },
+             guardarLetra(){
+            if (this.modulo === '') {
+                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+              "timeOut": "3000"
+          });
+            } else {
+            let set = this;
+            let url = '/sistema/admin/modulo/letra-cambio';
+            axios.post(url,{
+               id:                 taller_id,
+                tipo:               'letra_cambio',
+                modulo:             set.modulo,
+                tipo_documento:     'Letra de Cambio',
+                vencimiento:        set.letra_cambio.vencimiento,
+                numero:             set.letra_cambio.numero,
+                por:                set.letra_cambio.por,
+                ciudad:             set.letra_cambio.ciudad,
+                fecha:              set.letra_cambio.fecha,
+                orden_de:           set.letra_cambio.orden_de,
+                de:                 set.letra_cambio.de,
+                cantidad:           set.letra_cambio.cantidad,
+                interes:            set.letra_cambio.interes,
+                desde:              set.letra_cambio.desde,
+                direccion:          set.letra_cambio.direccion,
+                ciudad2:            set.letra_cambio.ciudad2,
+                atentamente:        set.letra_cambio.atentamente
+            }).then(response => {
+                $('#m_letra_cambio').modal('hide');
+                // console.log(response.data.cheque)
+                this.letra_cambios.push(response.data.letra_cambio);
+                toastr.success("Letra de Cambio creada Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.resetLetra();
+            }).catch(function(error){
+
+            }); 
+            }
+            
+        },
             guardarNota(){
             if (this.modulo === '') {
                  toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
@@ -903,7 +1091,26 @@
 
                 }); 
             }
-            
+        },
+                resetLetra(){
+                    let set                      = this;
+                    set.modulo                   = '';
+                    set.letra_cambio.vencimiento = '';
+                    set.letra_cambio.numero      = '';
+                    set.letra_cambio.por         = '';
+                    set.letra_cambio.ciudad      = '';
+                    set.letra_cambio.fecha       = '';
+                    set.letra_cambio.orden_de    = '';
+                    set.letra_cambio.de          = '';
+                    set.letra_cambio.cantidad    = '';
+                    set.letra_cambio.interes     = '';
+                    set.letra_cambio.desde       = '';
+                    set.letra_cambio.direccion   = '';
+                    set.letra_cambio.ciudad2     = '';
+                    set.letra_cambio.atentamente = '';
+                    set.nota_credito.update      = false
+                    set.nota_credito.nota_id     = '';
+                    set.nota_credito.index       = '';      
         },
         resetNota(){
                     let set = this;

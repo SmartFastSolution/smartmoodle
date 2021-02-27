@@ -2752,6 +2752,95 @@
     </div>
 </div>
 
+<!-- FORMULARIO PARA PLANTILLA 35 -->
+<div class="modal fade " id="taller35" tabindex="-1" role="dialog" aria-labelledby="taller35Label" aria-hidden="true">
+    <div class="modal-dialog modal-lg " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="taller35Label">FORMULAS DE LA ECUACION CONTABLE</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.taller35') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                <input required="" type="hidden" value="35" name="id_plantilla">
+                                <textarea required="" required="" name="enunciado" class="form-control" id=""
+                                    rows="5"></textarea>
+                            </div>
+                                 <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <table class="table table-borderless">
+                                    <thead>
+                                        <tr>
+                                            {{-- <th scope="col">#</th> --}}
+                                            <th scope="col">Activo</th>
+                                            <th scope="col">Pasivo</th>
+                                            <th scope="col">Patrimonio</th>
+                                            {{-- <th scope="col">Descripcion</th> --}}
+                                            {{-- <th scope="col">Precio Unitario</th> --}}
+                                        </tr>
+                                    </thead>
+                                    <tbody class="taller35">
+                                        <tr>
+                                            {{-- <th scope="row" id="num"></th> --}}
+                                            <td><input type="number" class="form-control text-right" name="activo[]"></td>
+                                            <td><input type="number" class="form-control text-right" name="pasivo[]"></td>
+                                            <td><input type="number" class="form-control text-right" name="patrimonio[]"></td>
+                                            {{-- <td><input type="text" class="form-control" name="desc[]"></td> --}}
+                                            {{-- <td><input type="text" class="form-control" name="precio[]"></td> --}}
+                                            <td><a href="#" class="btn btn-danger removeTaller35"><span class="glyphicon glyphicon-remove">X</span></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <a href="#" class="addTaller35 btn btn-outline-danger">Agregar Columna</a>
+                                </div>     
+                            </div>
+                            <div class="row justify-content-center">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- FORMULARIO PARA PLANTILLA 36 -->
 <div class="modal fade" id="taller36" tabindex="-1" role="dialog" aria-labelledby="taller36Label" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -3600,6 +3689,76 @@
         </div>
     </div>
 </div>
+<!-- FORMULARIO PARA PLANTILLA 49 -->
+<div class="modal fade" id="tallerprecon" tabindex="-1" role="dialog" aria-labelledby="tallerpreconLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="tallerpreconLabel">PLANTILLAS PRECONFIGURADOS</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <form action="{{ route('admin.tallerprecon') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Enunciado:</label>
+                                {{-- <input required="" type="hidden" value="49" name="id_plantilla"> --}}
+                                <textarea required="" name="enunciado" class="form-control" rows="5"></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Institucion:</label>
+                                    <select name="contenido_id" v-model="instituto" class="custom-select select2" @change="onMateria()">
+                                    <option v-if="materias.length == 0" selected disabled="">@{{ instituto }}</option>
+                                        @foreach ($institutos = App\Instituto::get() as $instituto)
+                                        <option value="{{ $instituto->id }}">{{ $instituto->nombre }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Materia:</label>
+                                    <select name="contenido_id" v-model="materia" class="custom-select" @change="onContenido()">
+                                        <option v-if="contenido.length == 0" disabled>@{{ materia }}</option>
+                                        <option v-for="mate in materias" :value="mate.id">@{{mate.nombre}}</option>  
+                                    </select>
+                                </div>
+                                 <div class="form-group col-6">
+                                    <label for="recipient-name" class="col-form-label">Unidad:</label>
+                                    <select name="contenido_id" class="custom-select">
+                                        
+                                       <option v-for="conte in contenido" :value="conte.id">@{{conte.nombre}}
+                                        </option> 
+                                    </select>
+                                </div>
+                                <div class="form-group col-12">
+                                    <label for="recipient-name" class="col-form-label">Plantilla Preconfigurada:</label>
+
+                                   <select class="custom-select" name="id_plantilla" id="">
+                                    <option disabled value="">SELECCIONE UNA PLANTILLA</option>
+                                    @foreach ($plantillas = App\Plantilla::where('plantilla', 'no')->get() as $plantilla)
+                                    <option class="text-uppercase" value="{{ $plantilla->id }}">{{ $plantilla->nombre }}</option>
+                                    @endforeach
+                                </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row justify-content-center">
+                                <input type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- FORMULARIO PARA PLANTILLA 49 -->
 <div class="modal fade" id="tallerprecon" tabindex="-1" role="dialog" aria-labelledby="tallerpreconLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">

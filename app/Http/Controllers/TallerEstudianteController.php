@@ -1880,21 +1880,23 @@ public function store11(Request $request, $idtaller)
     }
 
     public function store35(Request $request, $idtaller){
-    $id                      = Auth::id();
-    $taller             =   Taller::where('id', $idtaller)->firstOrfail();
-    $taller35                =   new FormulasContable; 
-    $taller35->taller_id     =   $idtaller;
-    $taller35->user_id       =   $id;           
-    $taller35->enunciado     =  'DESARROLLE FÓRMULAS DE LA ECUACIÓN CONTABLE, CON EXACTITUD'; 
-    $taller35->formula1  =   $request->input('formula1');   
-    $taller35->formula2  =   $request->input('formula2');   
-    $taller35->formula3  =   $request->input('formula3');   
-    $taller35->formula4  =   $request->input('formula4');   
-    $taller35->formula5  =   $request->input('formula5');   
-    $taller35->formula6  =   $request->input('formula6');   
-    $taller35->formula7  =   $request->input('formula7');   
-    $taller35->formula8  =   $request->input('formula8');   
-    $taller35->formula9  =   $request->input('formula9');   
+
+    // return $request->respuesta;
+    $id                    = Auth::id();
+    $taller                =   Taller::where('id', $idtaller)->firstOrfail();
+    $taller35              =   new FormulasContable; 
+    $taller35->taller_id   =   $idtaller;
+    $taller35->user_id     =   $id;           
+    $taller35->enunciado   =  'DESARROLLE FÓRMULAS DE LA ECUACIÓN CONTABLE, CON EXACTITUD'; 
+    $taller35->respuestas  =   json_encode($request->respuesta);   
+    // $taller35->formula2 =   $request->input('formula2');   
+    // $taller35->formula3 =   $request->input('formula3');   
+    // $taller35->formula4 =   $request->input('formula4');   
+    // $taller35->formula5 =   $request->input('formula5');   
+    // $taller35->formula6 =   $request->input('formula6');   
+    // $taller35->formula7 =   $request->input('formula7');   
+    // $taller35->formula8 =   $request->input('formula8');   
+    // $taller35->formula9 =   $request->input('formula9');   
     $taller35->save();
 
     $user= User::find($id);

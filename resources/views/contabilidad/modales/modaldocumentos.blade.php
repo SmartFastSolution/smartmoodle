@@ -10,7 +10,7 @@
       </div>
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">LLENAR CHEQUE</h3>
-        {{--     <div class="form-group row">
+  {{--       <div class="form-group row">
           <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
           <div class="col-sm-4">
             <input type="text" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
@@ -87,6 +87,306 @@
     </div>
   </div>
 </div>
+<!-- LETRA DE CAMBIO -->
+<div class="modal fade" id="m_letra_cambio" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="m_letra_cambioLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered modal-xl ">
+    <div class="modal-content bg-light">
+      <div class="modal-header">
+        <h5 class="modal-title" id="m_letra_cambioLabel">LETRA DE CAMBIO</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click.prevent="resetLetra()">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h3 class="text-center font-weight-bold">LLENAR LETRA DE CAMBIO</h3>
+   {{--      <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
+            
+          </div>
+        </div> --}}
+        <div class=" p-3" style="box-shadow: 5px 5px 15px 0px  #3A27F4">
+          <div class="row mb-2">
+            <div class="col-5 mt-3">
+              <h2>LETRA DE CAMBIO</h2>
+            </div>
+            <div class="col-7 align-self-center">
+              <div class="row mb-2">
+                <div class="col-3 text-right"><label for="" class="col-form-label">Vence el:</label></div>
+                <div class="col-8">
+                  <input type="date" v-model="letra_cambio.vencimiento" class="form-control text-center" >
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-3 text-right">
+                  <label for="" class="col-form-label">No:</label>
+                </div>
+                <div class="col-3">
+                  <input type="number" v-model="letra_cambio.numero" class="form-control" >
+                </div>
+                <div class="col-5 border border-info p-2">
+                  <div class="row">
+                    <div class="col-2">
+                      <label class="col-form-label" for="">POR:</label>
+                    </div>
+                    <div class="col-8">
+                      <input type="number" v-model="letra_cambio.por" class="form-control text-right" >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 text-center ">
+              <div class="row mb-1">
+                <div class="col-6">
+                  <input type="text" v-model="letra_cambio.ciudad" class="form-control" >
+                </div>
+                <div class="col-6">
+                  <input type="date" v-model="letra_cambio.fecha" class="form-control" >
+                </div>
+              </div>
+              <h6>Ciudad y fecha</h6>
+            </div>
+            <div class="col-12 ">
+              <input type="text" v-model="letra_cambio.orden_de" class="form-control" >
+              <h6>A la orden de</h6>
+            </div>
+            <div class="col-12 ">
+              <input type="text" v-model="letra_cambio.de" class="form-control" >
+              <h6>De</h6>
+            </div>
+            <div class="col-12 ">
+              <input type="text" v-model="letra_cambio.cantidad" class="form-control" >
+              <h6>La Cantidad de</h6>
+            </div>
+            <div class="col-12 form-inline">
+              <p class="col-form-label">Con  el  interés  del <input type="number" style="width: 100px;" v-model="letra_cambio.interes" class="form-control text-right" > por  ciento  anual,   desde <input v-model="letra_cambio.desde" type="text" class="form-control" > Sin protesto.   Exímese  de presentación  para  aceptación  y  pago  así  como  de  avisos  por  falta  de  estos  hechos.</p>
+            </div>
+            <div class="col-12 ">
+              <div class="row mb-1">
+                <div class="col-6">
+                  <input type="text" v-model="letra_cambio.direccion" class="form-control" >
+                </div>
+                <div class="col-6">
+                  <input type="text" v-model="letra_cambio.ciudad2" class="form-control" >
+                </div>
+              </div>
+              <div class="row mb-1">
+                <div class="col-6"><h6>Direccion</h6></div>
+                <div class="col-6 text-right"><h6>Ciudad</h6></div>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-5 text-center">
+              <input type="text" v-model="letra_cambio.atentamente" class="form-control" >
+              <h1>Atentamente</h1>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="modal-footer text-center">
+        {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+        <button v-if="!letra_cambio.update" type="button" class="btn btn-primary" @click.prevent="guardarLetra()">Guardar Letra De Cambio</button>
+        <button v-if="letra_cambio.update" type="button" class="btn btn-info" @click.prevent="updateLetra()">Actualizar Letra De Cambio</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- PAPELETA DE DEPOSITO -->
+<div class="modal fade" id="m_papeleta" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="m_letra_cambioLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered modal-xl ">
+    <div class="modal-content bg-light">
+      <div class="modal-header">
+        <h5 class="modal-title" id="m_letra_cambioLabel">PAPELETA DE DEPOSTIVO</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click.prevent="resetLetra()">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h3 class="text-center font-weight-bold">LLENAR PAPELETA DE DEPOSITO</h3>
+    {{--     <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
+            
+          </div>
+        </div> --}}
+        <div class=" p-3" style="box-shadow: 5px 5px 15px 0px  #2714E5">
+          <h2 class="text-center text-danger font-weight-bold">PAPELETA DE DEPOSITO</h2>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="row">
+                <div class="col-lg-2">
+                  <img src="{{ asset('img/nota-credito.png') }}" width="100" alt="">
+                </div>
+                <div class="col-lg-5 text-center">
+                  <h1 class="text-danger font-weight-bold">BANCO</h1>
+                  <input type="text" class="form-control form-control-sm">
+                </div>
+                <div class="col-lg-5 border">
+                  <div class="row">
+                    <div class="col-6">
+                      <h6>BANCO</h6>
+                      <input type="radio" name="tipo">Loja <br>
+                      <input type="radio" name="tipo">fomento
+                    </div>
+                    <div class="col-6">
+                      <h6>MONEDA</h6>
+                      <input type="radio" name="moneda">USD <br>
+                      <input type="radio" name="moneda">EUR
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="row mb-2">
+                <div class="col-12">
+                  <h6>Numero de cuenta o tarjeta</h6>
+                  <input type="number" class="form-control form-control-sm">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-3 col-form-label">Nombre</label>
+                <div class="col-sm-9">
+                  <input type="email" class="form-control" id="inputEmail3">
+                </div>
+              </div>
+              <div class="form-group row mb-2">
+                <label for="inputPassword3" class="col-sm-3 col-form-label">Lugar y Fecha</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="inputPassword3">
+                </div>
+              </div>
+
+            </div>
+            <div class="col-lg-6">
+              <div class="row justify-content-lg-end">
+                <div class="col-1">
+                  <h2 class="font-weight-bold">No</h2>
+                </div>
+                <div class="col-3">
+                  <input type="number" class="form-control form-control-sm text-right">
+                </div>
+              </div>
+              <div class="row justify-content-lg-end mb-2">
+                <div class="col-lg-10 border align-self-end p-2">
+                  <div class="form-check form-check-inline text-right">
+                    <input class="form-check-input" type="radio" name="tarjeta" id="inlineCheckbox1" value="dinners">
+                    <label class="form-check-label" for="inlineCheckbox1">Dinners Club</label>
+                  </div>
+                  <div class="form-check form-check-inline text-right">
+                    <input class="form-check-input" type="radio" name="tarjeta" id="inlineCheckbox2" value="visa">
+                    <label class="form-check-label" for="inlineCheckbox2">Visa</label>
+                  </div>
+                  <div class="form-check form-check-inline text-right">
+                    <input class="form-check-input" type="radio" name="tarjeta" id="inlineCheckbox3" value="mastercard">
+                    <label class="form-check-label" for="inlineCheckbox3">Mastercard</label>
+                  </div>
+                  <div class="form-check form-check-inline text-right">
+                    <input class="form-check-input" type="radio" name="tarjeta" id="inlineCheckbox4" value="otros">
+                    <label class="form-check-label" for="inlineCheckbox4">Otros Servicios</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-lg-end">
+                <div class="col-lg-10">
+                  <div class="row justify-content-lg-between">
+                    <div class="col-lg-3">
+                      <h6>N. Cheques</h6>
+                    </div>
+                    <div class="col-lg-1 align-self-end mr-3">
+                      <h6>Ctvs</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-lg-end ">
+                <div class="col-lg-5 border mr-1">
+                  <div class="form-group row mt-2">
+                    <div class="col-sm-6">
+                      <input type="number"  class="form-control  text-right" >
+                    </div>
+                    <label class="col-sm-6 col-form-label">CHEQUES</label>
+                  </div>
+                </div>
+                <div class="col-lg-5 border">
+                  <div class="form-group row mt-2">
+                    <div class="col-sm-8">
+                      <div class="input-group mb-2 mr-sm-2">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">USD</div>
+                        </div>
+                        <input type="number" class="form-control  text-right">
+                      </div>
+                      {{-- <input type="number"  class="form-control" > --}}
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="number"  class="form-control  text-right">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+            </div>
+            <div class="col-lg-6 align-self-end">
+              
+<div class="row mt-5 text-center">
+  <div class="col-lg-6">
+    <input type="text" class="form-control">
+    <h6>Firma del Depositante</h6>
+  </div>
+  <div class="col-lg-6 ">
+    <input type="text" class="form-control">
+    <h6>Sello y Rubica del cajero</h6>
+  </div>
+</div>
+
+            </div>
+            <div class="col-lg-6">
+                <div class="row mt-2">
+                <div class="col-lg-12">
+                  <table class="table table-bordered table-sm">
+                    <thead>
+                      <tr>
+                        <th colspan="4" class="text-center">DETALLE DE CHEQUES</th>
+                      </tr>
+                      <tr>
+                        <th scope="col" class="text-center">Banco</th>
+                        <th scope="col" class="text-center">Cuenta Numero</th>
+                        <th scope="col" class="text-center">Cheque Numero</th>
+                        <th scope="col" class="text-center">Valor</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th><input type="text" class="form-control-sm form-control text-right"></th>
+                        <td><input type="number" class="form-control-sm form-control text-right"></td>
+                        <td><input type="number" class="form-control-sm form-control text-right"></td>
+                        <td><input type="number" class="form-control-sm form-control text-right"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      <div class="modal-footer text-center">
+        {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+        <button v-if="!letra_cambio.update" type="button" class="btn btn-primary" @click.prevent="guardarLetra()">Guardar Papeleta de Deposito</button>
+        <button v-if="letra_cambio.update" type="button" class="btn btn-info" @click.prevent="updateLetra()">Actualizar Papeleta de Deposito</button>
+      </div>
+    </div>
+  </div>
+</div>
+{{-- NOTA DE CREDITO --}}
 <div class="modal fade" id="m_credito" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="m_creditoLabel" aria-hidden="true">
   <div class="modal-dialog  modal-dialog-centered modal-xl">
     <div class="modal-content">
@@ -98,7 +398,7 @@
       </div>
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">LLENAR NOTA DE CREDITO</h3>
-        {{--          <div class="form-group row">
+  {{--       <div class="form-group row">
           <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
           <div class="col-sm-4">
             <input type="text" class="form-control mb-2" placeholder="Modulo al que pertenece la nota de credito" v-model="modulo">
@@ -283,7 +583,7 @@
       </div>
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">LLENAR FACTURA</h3>
-      {{--   <div class="form-group row">
+     {{--    <div class="form-group row">
           <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
           <div class="col-sm-4">
             <input type="text" class="form-control mb-2" placeholder="Modulo al que pertenece la factura" v-model="modulo">

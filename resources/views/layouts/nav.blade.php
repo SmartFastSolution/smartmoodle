@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/plugins.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/preloader.css') }}">
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="img/png" href="{{ asset('dist/img/AdminLTELogo.png') }}">
 
 
     <!-- datatabes -->

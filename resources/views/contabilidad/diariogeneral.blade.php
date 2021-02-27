@@ -23,7 +23,7 @@
         @endif
         <div class="col-5 mb-2">
             <a href="#" class="btn btn-sm btn-outline-primary" @click.prevent="abrirTransaccion()">Crear Transaccion</a>
-            <a href="#" class="addDiario btn-sm btn btn-danger" @click.prevent="guardarDiario()">Completar Diario </a>
+            <a href="#" class="addDiario btn-sm btn btn-danger" @click.prevent="guardarDiario()">GUARDAR DIARIO GENERAL </a>
         </div>
         @endif
         <div class="col-12">
@@ -267,8 +267,7 @@
                     Transaccion</a> --}}
                 </div>
                 <div class="row justify-content-center">
-                    <a href="#" class="addDiario btn btn-outline-danger" @click.prevent="guardarDiario()">Completar Diario
-                    General</a>
+                    <a href="#" class="addDiario btn btn-outline-danger" @click.prevent="guardarDiario()">GUARDAR DIARIO GENERAL</a>
                 </div>
                 @endif
             </form>

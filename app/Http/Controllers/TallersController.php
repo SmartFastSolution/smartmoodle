@@ -88,6 +88,7 @@ use App\TallerSubrayarRe;
 use App\TallerUtilizarAbreRe;
 use App\TallerValeCajaRe;
 use App\TallerVerdaderoFalsoRe;
+use App\Talleres\TallerEcuacion;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -357,7 +358,9 @@ class TallersController extends Controller
         }elseif ($plant == 35) {
             $datos = Taller::findorfail($id);
             if ($datos->plantilla_id == $plant && $datos->id = $id) {
-            return view('talleres.taller35', compact('datos', 'd'));  
+
+            $taller = TallerEcuacion::where('taller_id', $id)->firstOrFail();
+            return view('talleres.taller35', compact('datos', 'd', 'taller'));  
              }else {
             return abort(404);   
              }

@@ -923,7 +923,7 @@
             data.append('id', this.id_taller);
             data.append('tipo', 'vertical');
             data.append('enunciado', this.enunciado);
-            data.append('transacciones', this.individuales.balance_vertica);
+            data.append('transacciones', this.individuales.balance_vertical);
             data.append('contenido_id', this.contenido_id);
             data.append('plantilla', 37);
      

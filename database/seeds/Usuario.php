@@ -39,7 +39,7 @@ class Usuario extends Seeder
 
            DB::table('users')->insert([
          
-           'cedula'          => '0943557611',
+           'cedula'          => '12345678',
            'name'            =>'Administrador',
            'apellido'        => 'SmartMoodle',
            'domicilio'       => 'Guayaqyil',

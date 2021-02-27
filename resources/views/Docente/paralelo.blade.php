@@ -61,7 +61,7 @@
         <h3 class="font-weight-light"> {{ $materia->nombre }}</h3>
     </div>
 </section>
-<div class="container">
+ <div class="container">
     <div class="card gedf-card">
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
@@ -178,7 +178,7 @@
 <script>
 $(function() {
     $(document).ready(function() {
-        var table1 = $('#myTable').DataTable({
+       var table1 = $('.myTable').DataTable({
 "fixedHeader": true,
 "orderCellsTop": false,
 "info": true,

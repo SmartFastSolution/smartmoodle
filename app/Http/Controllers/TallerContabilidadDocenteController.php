@@ -167,6 +167,7 @@ class TallerContabilidadDocenteController extends Controller
                     return response(array(
                         'datos' => true,
                         'nombre' => $balanceCompro->nombre,
+                        'fecha' => $balanceCompro->fecha,
                         't_debe' => $balanceCompro->total_debe,
                         't_haber' => $balanceCompro->total_haber,
                         'bcomprobacionAjustado' => $obtener

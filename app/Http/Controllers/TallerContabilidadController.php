@@ -371,32 +371,31 @@ class TallerContabilidadController extends Controller
 
         public function balanceAjustado(Request $request)
             {
-                $id                 = Auth::id();
-                $taller_id          = $request->id;
-                $balances           = $request->balances;
-                $balanceCompro      = BalanceAjustado::where('user_id',$id)->where('taller_id', $taller_id)->count();
-                if ($balanceCompro  == 0) {
+                $id                    = Auth::id();
+                $taller_id             = $request->id;
+                $balances              = $request->balances;
+                $balanceCompro         = BalanceAjustado::where('user_id',$id)->where('taller_id', $taller_id)->count();
+                if ($balanceCompro     == 0) {
                 // $contenido          = TallerContabilidad::select('enunciado')->where('taller_id', $taller_id)->firstOrFail();
-                $balance            = new BalanceAjustado;
-                $balance->taller_id = $taller_id ;
-                $balance->user_id   = $id;
+                $balance               = new BalanceAjustado;
+                $balance->taller_id    = $taller_id ;
+                $balance->user_id      = $id;
                 // $balance->enunciado = $contenido->enunciado;
-                $balance->nombre = $request->nombre;
-                $balance->total_debe  = $request->total_debe;
-                $balance->total_haber = $request->total_haber;
+                $balance->nombre       = $request->nombre;
+                $balance->fecha        = $request->fecha;
+                $balance->total_debe   = $request->total_debe;
+                $balance->total_haber  = $request->total_haber;
                 $balance->save();
-
                 $o = BalanceAjustado::where('user_id', $id)->get()->last(); 
-
                 foreach ($balances as $key => $balance) {
                         $datos=array(
                             'balance_ajustado_id' => $o->id,
-                            'cuenta'                  => $balance['cuenta'],
-                            'cuenta_id'                  => $balance['cuenta_id'],
-                            'debe'                    => $balance['debe'],
-                            'haber'                   => $balance['haber'],
-                            'created_at'              => now(),
-                            'updated_at'              => now(),
+                            'cuenta'              => $balance['cuenta'],
+                            'cuenta_id'           => $balance['cuenta_id'],
+                            'debe'                => $balance['debe'],
+                            'haber'               => $balance['haber'],
+                            'created_at'          => now(),
+                            'updated_at'          => now(),
                         );
                         BCARegistro::insert($datos);
                     }
@@ -406,13 +405,13 @@ class TallerContabilidadController extends Controller
                         'message' => 'Balance de Comprobacion Ajustado creado correctamente'
                     ),200,[]);
                 }elseif($balanceCompro  == 1){
-                $ids                       = [];
-                $balanceComprob            = BalanceAjustado::where('user_id',$id)->where('taller_id', $taller_id)->first();
+                $ids                         = [];
+                $balanceComprob              = BalanceAjustado::where('user_id',$id)->where('taller_id', $taller_id)->first();
                 $balanceComprob->total_debe  = $request->total_debe;
-                $balanceComprob->nombre = $request->nombre;
+                $balanceComprob->nombre      = $request->nombre;
+                $balanceComprob->fecha       = $request->fecha;
                 $balanceComprob->total_haber = $request->total_haber;
                 $balanceComprob->save();
-
 
                 $registros= BCARegistro::where('balance_ajustado_id', $balanceComprob->id)->get();
                 
@@ -433,15 +432,11 @@ class TallerContabilidadController extends Controller
                         );
                         BCARegistro::insert($datos);
                     }
-
-
-
                     return response(array(
                         'success' => true,
                         'estado' => 'actualizado',
                         'message' => 'Balance de Comprobacion Ajustado actualizado correctamente'
                     ),200,[]);
-
                 }
             }
         public function obtenerBalanceAjustado(Request $request)
@@ -457,6 +452,7 @@ class TallerContabilidadController extends Controller
                     return response(array(
                         'datos' => true,
                         'nombre' => $balanceCompro->nombre,
+                        'fecha' => $balanceCompro->fecha,
                         'bcomprobacionAjustado' => $obtener
                     ),200,[]);
 

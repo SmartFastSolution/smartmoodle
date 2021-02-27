@@ -117,6 +117,7 @@ use App\RespuestaArchivo;
 use App\Taller;
 use App\TallerArchivo;
 use App\TallerChequeRe;
+use App\Talleres\TallerEcuacion;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -525,10 +526,12 @@ class VistaDocenteController extends Controller
             ->where('taller_user.taller_id', $id)
             ->select('taller_user.*')
             ->get();
-            
+             $taller = TallerEcuacion::where('taller_id', $consul->id)->firstOrFail();
             $datos = FormulasContable::where('user_id', $user)->where('taller_id', $consul->id)->firstOrFail();
+            $respuestas = json_decode($datos->respuestas);
+            
             if ($consul->plantilla_id == $plant && $consul->id = $id) {
-            return view('estudiantes.talleres.taller35', compact('datos', 'd',  'relacion'));  
+            return view('estudiantes.talleres.taller35', compact('datos', 'd',  'relacion', 'taller', 'respuestas'));  
              }else {
             return abort(404);   
              }

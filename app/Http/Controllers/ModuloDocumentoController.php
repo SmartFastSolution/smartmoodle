@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ModuloLetraCambio;
 use App\Modulo\ModuloCheque;
 use App\Modulo\ModuloFactura;
 use App\Modulo\ModuloNotaCredito;
@@ -44,6 +45,37 @@ class ModuloDocumentoController extends Controller
     	// }
     	
     }
+        public function letra_cambio(Request $request)
+    {
+        $userID = Auth::id();
+        $tallerID = $request->id;
+            $letra_cambio                 = new  ModuloLetraCambio;
+            $letra_cambio->taller_id      =  $tallerID;
+            $letra_cambio->user_id        =  $userID;
+            $letra_cambio->modulo         =  $request->modulo;
+            $letra_cambio->tipo_documento =  $request->tipo_documento;
+            $letra_cambio->vencimiento    =  $request->vencimiento;
+            $letra_cambio->numero         =  $request->numero;
+            $letra_cambio->por            =  $request->por;
+            $letra_cambio->ciudad         =  $request->ciudad;
+            $letra_cambio->fecha          =  $request->fecha;
+            $letra_cambio->orden_de       =  $request->orden_de;
+            $letra_cambio->de             =  $request->de;
+            $letra_cambio->cantidad       =  $request->cantidad;
+            $letra_cambio->interes        =  $request->interes;
+            $letra_cambio->desde          =  $request->desde;
+            $letra_cambio->direccion      =  $request->direccion;
+            $letra_cambio->ciudad2        =  $request->ciudad2;
+            $letra_cambio->atentamente    =  $request->atentamente;
+            $letra_cambio->save();
+
+             return response(array(                                         //ENVIO DE RESPUESTA
+                    'success'      => true,
+                    'estado'       => 'guardado',
+                    'letra_cambio' => $letra_cambio,
+                    'message'      => 'Kardex Fifo actualizado correctamente'
+                ),200,[]);   
+    }
     public function documentos(Request $request)
     {
     	$user = User::find(Auth::id());
@@ -52,16 +84,18 @@ class ModuloDocumentoController extends Controller
     	$cheques = $user->cheques->where('taller_id', $tallerID);
         $nota_creditos = $user->creditos->where('taller_id', $tallerID);
         $facturas = $user->facturas->where('taller_id', $tallerID);
+        $letras = $user->letras->where('taller_id', $tallerID);
 
 
 
     	return response(array(                                         //ENVIO DE RESPUESTA
-                    'success' => true,
-                    'estado' => 'guardado',
-                    'cheques' => $cheques,
+                    'success'  => true,
+                    'estado'   => 'guardado',
+                    'cheques'  => $cheques,
                     'creditos' => $nota_creditos,
                     'facturas' => $facturas,
-                    'message' => 'Kardex Fifo actualizado correctamente'
+                    'letras'   => $letras,
+                    'message'  => 'Kardex Fifo actualizado correctamente'
                 ),200,[]);
     }
         public function vista(Request $request)
@@ -136,6 +170,29 @@ class ModuloDocumentoController extends Controller
 
             
         }
+          elseif ($tipo == 'letra_cambio') {
+
+            $letra_cambio                 =   ModuloLetraCambio::find($id);
+            $letra_cambio->modulo         =  $request->modulo;
+            $letra_cambio->tipo_documento =  $request->tipo_documento;
+            $letra_cambio->vencimiento    =  $request->vencimiento;
+            $letra_cambio->numero         =  $request->numero;
+            $letra_cambio->por            =  $request->por;
+            $letra_cambio->ciudad         =  $request->ciudad;
+            $letra_cambio->fecha          =  $request->fecha;
+            $letra_cambio->orden_de       =  $request->orden_de;
+            $letra_cambio->de             =  $request->de;
+            $letra_cambio->cantidad       =  $request->cantidad;
+            $letra_cambio->interes        =  $request->interes;
+            $letra_cambio->desde          =  $request->desde;
+            $letra_cambio->direccion      =  $request->direccion;
+            $letra_cambio->ciudad2        =  $request->ciudad2;
+            $letra_cambio->atentamente    =  $request->atentamente;
+            $letra_cambio->save();
+
+
+            
+        }
     	return response(array(                                         //ENVIO DE RESPUESTA
                     'success' => true,
                     'estado' => 'guardado',
@@ -161,6 +218,10 @@ class ModuloDocumentoController extends Controller
             $factura = ModuloFactura::find($id);
             $factura->delete();
         }
+        elseif ($tipo === 'Letra de Cambio') {
+            $letra_cambio = ModuloLetraCambio::find($id);
+            $letra_cambio->delete();
+        }
     	return response(array(                                         //ENVIO DE RESPUESTA
                     'success' => true,
                     'estado' => 'elimina',
@@ -174,7 +235,6 @@ class ModuloDocumentoController extends Controller
     {
         $userID = Auth::id();
         $tallerID = $request->id;
-  
             $nota_credito                     = new  ModuloNotaCredito;
             $nota_credito->taller_id          =  $tallerID;
             $nota_credito->user_id            =  $userID;
