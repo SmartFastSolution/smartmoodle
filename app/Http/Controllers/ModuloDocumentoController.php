@@ -78,13 +78,14 @@ class ModuloDocumentoController extends Controller
     }
     public function documentos(Request $request)
     {
-    	$user = User::find(Auth::id());
-    	$tallerID = $request->id;
+        $user          = User::find(Auth::id());
+        $tallerID      = $request->id;
+        
+        $cheques       = ModuloCheque::where('taller_id', $tallerID)->where('user_id', $user->id)->get();
+        $nota_creditos = ModuloNotaCredito::where('taller_id', $tallerID)->where('user_id', $user->id)->get();
+        $facturas      = ModuloFactura::where('taller_id', $tallerID)->where('user_id', $user->id)->get();
+        $letras        = ModuloLetraCambio::where('taller_id', $tallerID)->where('user_id', $user->id)->get();
 
-    	$cheques = $user->cheques->where('taller_id', $tallerID);
-        $nota_creditos = $user->creditos->where('taller_id', $tallerID);
-        $facturas = $user->facturas->where('taller_id', $tallerID);
-        $letras = $user->letras->where('taller_id', $tallerID);
 
 
 
@@ -103,9 +104,9 @@ class ModuloDocumentoController extends Controller
         $user = User::find($request->user);
         $tallerID = $request->id;
 
-        $cheques = $user->cheques->where('taller_id', $tallerID);
+        $cheques       = $user->cheques->where('taller_id', $tallerID);
         $nota_creditos = $user->creditos->where('taller_id', $tallerID);
-        $facturas = $user->facturas->where('taller_id', $tallerID);
+        $facturas      = $user->facturas->where('taller_id', $tallerID);
 
 
 

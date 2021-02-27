@@ -10,7 +10,7 @@
       </div>
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">LLENAR CHEQUE</h3>
-  {{--       <div class="form-group row">
+        {{--       <div class="form-group row">
           <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
           <div class="col-sm-4">
             <input type="text" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
@@ -99,7 +99,7 @@
       </div>
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">LLENAR LETRA DE CAMBIO</h3>
-   {{--      <div class="form-group row">
+        {{--      <div class="form-group row">
           <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
           <div class="col-sm-4">
             <input type="text" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
@@ -209,7 +209,7 @@
       </div>
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">LLENAR PAPELETA DE DEPOSITO</h3>
-    {{--     <div class="form-group row">
+        {{--     <div class="form-group row">
           <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
           <div class="col-sm-4">
             <input type="text" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
@@ -232,13 +232,13 @@
                   <div class="row">
                     <div class="col-6">
                       <h6>BANCO</h6>
-                      <input type="radio" name="tipo">Loja <br>
-                      <input type="radio" name="tipo">fomento
+                      <input type="radio" disabled="" name="tipo">Loja <br>
+                      <input type="radio" disabled="" name="tipo">fomento
                     </div>
                     <div class="col-6">
                       <h6>MONEDA</h6>
-                      <input type="radio" name="moneda">USD <br>
-                      <input type="radio" name="moneda">EUR
+                      <input type="radio" disabled="" name="moneda">USD <br>
+                      <input type="radio" disabled="" name="moneda">EUR
                     </div>
                   </div>
                 </div>
@@ -262,33 +262,32 @@
                   <input type="text" class="form-control" id="inputPassword3">
                 </div>
               </div>
-
             </div>
             <div class="col-lg-6">
-              <div class="row justify-content-lg-end">
+          {{--     <div class="row justify-content-lg-end">
                 <div class="col-1">
                   <h2 class="font-weight-bold">No</h2>
                 </div>
                 <div class="col-3">
                   <input type="number" class="form-control form-control-sm text-right">
                 </div>
-              </div>
+              </div> --}}
               <div class="row justify-content-lg-end mb-2">
                 <div class="col-lg-10 border align-self-end p-2">
                   <div class="form-check form-check-inline text-right">
-                    <input class="form-check-input" type="radio" name="tarjeta" id="inlineCheckbox1" value="dinners">
+                    <input class="form-check-input" disabled="" type="radio" name="tarjeta" id="inlineCheckbox1" value="dinners">
                     <label class="form-check-label" for="inlineCheckbox1">Dinners Club</label>
                   </div>
                   <div class="form-check form-check-inline text-right">
-                    <input class="form-check-input" type="radio" name="tarjeta" id="inlineCheckbox2" value="visa">
+                    <input class="form-check-input" disabled="" type="radio" name="tarjeta" id="inlineCheckbox2" value="visa">
                     <label class="form-check-label" for="inlineCheckbox2">Visa</label>
                   </div>
                   <div class="form-check form-check-inline text-right">
-                    <input class="form-check-input" type="radio" name="tarjeta" id="inlineCheckbox3" value="mastercard">
+                    <input class="form-check-input" disabled="" type="radio" name="tarjeta" id="inlineCheckbox3" value="mastercard">
                     <label class="form-check-label" for="inlineCheckbox3">Mastercard</label>
                   </div>
                   <div class="form-check form-check-inline text-right">
-                    <input class="form-check-input" type="radio" name="tarjeta" id="inlineCheckbox4" value="otros">
+                    <input class="form-check-input" disabled="" type="radio" name="tarjeta" id="inlineCheckbox4" value="otros">
                     <label class="form-check-label" for="inlineCheckbox4">Otros Servicios</label>
                   </div>
                 </div>
@@ -309,14 +308,14 @@
                 <div class="col-lg-5 border mr-1">
                   <div class="form-group row mt-2">
                     <div class="col-sm-6">
-                      <input type="number"  class="form-control  text-right" >
+                      <input type="number" disabled=""  class="form-control  text-right" >
                     </div>
                     <label class="col-sm-6 col-form-label">CHEQUES</label>
                   </div>
                 </div>
                 <div class="col-lg-5 border">
                   <div class="form-group row mt-2">
-                    <div class="col-sm-8">
+                    <div class="col-sm-9">
                       <div class="input-group mb-2 mr-sm-2">
                         <div class="input-group-prepend">
                           <div class="input-group-text">USD</div>
@@ -325,30 +324,29 @@
                       </div>
                       {{-- <input type="number"  class="form-control" > --}}
                     </div>
-                    <div class="col-sm-4">
-                      <input type="number"  class="form-control  text-right">
+                    <div class="col-sm-3">
+                      <input type="number" disabled=""  class="form-control  text-right">
                     </div>
                   </div>
                 </div>
               </div>
-            
+              
             </div>
             <div class="col-lg-6 align-self-end">
               
-<div class="row mt-5 text-center">
-  <div class="col-lg-6">
-    <input type="text" class="form-control">
-    <h6>Firma del Depositante</h6>
-  </div>
-  <div class="col-lg-6 ">
-    <input type="text" class="form-control">
-    <h6>Sello y Rubica del cajero</h6>
-  </div>
-</div>
-
+              <div class="row mt-5 text-center">
+                <div class="col-lg-6">
+                  <input type="text" class="form-control">
+                  <h6>Firma del Depositante</h6>
+                </div>
+                <div class="col-lg-6 ">
+                  <input type="text" class="form-control" disabled="">
+                  <h6>Sello y Rubica del cajero</h6>
+                </div>
+              </div>
             </div>
             <div class="col-lg-6">
-                <div class="row mt-2">
+              <div class="row mt-2">
                 <div class="col-lg-12">
                   <table class="table table-bordered table-sm">
                     <thead>
@@ -364,10 +362,10 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <th><input type="text" class="form-control-sm form-control text-right"></th>
-                        <td><input type="number" class="form-control-sm form-control text-right"></td>
-                        <td><input type="number" class="form-control-sm form-control text-right"></td>
-                        <td><input type="number" class="form-control-sm form-control text-right"></td>
+                        <th><input disabled="" type="text" class="form-control-sm form-control text-right"></th>
+                        <td><input disabled="" type="number" class="form-control-sm form-control text-right"></td>
+                        <td><input disabled="" type="number" class="form-control-sm form-control text-right"></td>
+                        <td><input disabled="" type="number" class="form-control-sm form-control text-right"></td>
                       </tr>
                     </tbody>
                   </table>
@@ -398,7 +396,7 @@
       </div>
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">LLENAR NOTA DE CREDITO</h3>
-  {{--       <div class="form-group row">
+        {{--       <div class="form-group row">
           <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
           <div class="col-sm-4">
             <input type="text" class="form-control mb-2" placeholder="Modulo al que pertenece la nota de credito" v-model="modulo">
@@ -583,7 +581,7 @@
       </div>
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">LLENAR FACTURA</h3>
-     {{--    <div class="form-group row">
+        {{--    <div class="form-group row">
           <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
           <div class="col-sm-4">
             <input type="text" class="form-control mb-2" placeholder="Modulo al que pertenece la factura" v-model="modulo">
