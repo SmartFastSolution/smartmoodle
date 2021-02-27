@@ -205,7 +205,7 @@ class DocenteController extends Controller
             ->where('users.nivel_id', $nivel)
             // ->wherein('tallers.contenido_id','==', 1)
             ->where('taller_user.status', 'completado')
-            ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre', 'nivels.nombre as nivel_nombre','materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
+            ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre', 'nivels.nombre as nivel_nombre','materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno','users.apellido as apelli')
             ->get();
             // return $users;
             // 
@@ -222,7 +222,7 @@ class DocenteController extends Controller
             ->where('users.nivel_id', $nivel)
             // ->wherein('tallers.contenido_id','==', 1)
             ->where('taller_user.status', 'calificado')
-            ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre', 'nivels.nombre as nivel_nombre','materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno')
+            ->select('tallers.*','taller_user.*','cursos.nombre as cur_nombre', 'nivels.nombre as nivel_nombre','materias.nombre as mate_nombre', 'contenidos.nombre as conte_name','users.name as alumno', 'users.apellido as apelli')
             ->get();
             
      return view ('Docente.paralelo', compact('materia', 'paralelo', 'users', 'calificado'));

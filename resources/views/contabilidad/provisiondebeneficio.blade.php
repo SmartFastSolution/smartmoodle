@@ -57,7 +57,7 @@
 
     <div class="row justify-content-center">
         <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarProvision()">Guardar
-            Provisión</a>
+            Provisión de Beneficio</a>
     </div>
     @endif
     @include ('contabilidad.modalprovision')

@@ -40,7 +40,7 @@
                             </li>
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link" id="mn-retencion-iva-tab" data-toggle="tab" href="#mn-retencion-iva"
-                                    role="tab" aria-controls="mn-retencion-iva" aria-selected="false">RETENCION IVA</a>
+                                    role="tab" aria-controls="mn-retencion-iva" aria-selected="false">IMPUESTO A LA RENTA</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">

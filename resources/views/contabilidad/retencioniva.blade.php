@@ -233,7 +233,7 @@
     @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center">
         <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardaretencioniva()">Guardar
-            Retención</a>
+            Retención Iva</a>
     </div>
     @endif
 
