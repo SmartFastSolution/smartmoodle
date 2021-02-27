@@ -95,14 +95,14 @@
         <a target="_blank" class="btn btn-danger" href="{{ $datos->archivo }}"><i class="fad fa-file-pdf"></i> Descargar PDF</a>
     </div>
     @endisset
-    {{--    <div class="row justify-content-center mb-5">
+ {{--       <div class="row justify-content-center mb-5">
         <a class="btn btn-success btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_cheque"><i class="far fa-money-bill"></i> CHEQUE</a>
         <a class="btn btn-danger btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_credito"><i class="fas fa-file-invoice-dollar"></i> NOTA DE CREDITO</a>
         <a class="btn btn-info btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_factura"><i class="fas fa-file-invoice-dollar"></i> FACTURA</a>
         <a class="btn btn-warning btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_letra_cambio"><i class="fas fa-file-invoice-dollar"></i> LETRA DE CAMBIO</a>
         <a class="btn btn-secondary btn-sm" href="#" data-toggle="modal" data-target="#m_papeleta"><i class="fas fa-file-invoice-dollar"></i> PAPELETA DE DEPOSITO</a>
-    </div>
- --}}
+    </div> --}}
+
 
 
  @if ($datos->metodo == 'concatenado')
@@ -479,6 +479,24 @@
             letra_id:'',
             index:'',
         },
+        papeleta_deposito:{
+            vencimiento:'',
+            numero:'',
+            por:'',
+            ciudad:'',
+            fecha:'',
+            orden_de:'',
+            de:'',
+            cantidad:'',
+            interes:'',
+            desde:'',
+            direccion:'',
+            ciudad2:'',
+            atentamente:'',
+            update:false,
+            letra_id:'',
+            index:'',
+        },
         nota_credito:{
             razon_social:'',
             fecha_emision:'',
@@ -564,6 +582,7 @@
             }
         },
         cheques:[],
+        papeleta_depositos:[],
         letra_cambios:[],
         documentos:[],
         facturas:[],
@@ -609,10 +628,10 @@
             axios.post(url,{
                 id: taller_id,
             }).then(response => {
-                // console.log(response.data.cheques)
-                this.cheques = response.data.cheques;
+                console.log(response.data.cheques)
+                this.cheques       = response.data.cheques;
                 this.nota_creditos = response.data.creditos;
-                this.facturas = response.data.facturas;
+                this.facturas      = response.data.facturas;
                 this.letra_cambios = response.data.letras;
             }).catch(function(error){
 
@@ -620,7 +639,7 @@
         },
         editarCheque(id, index){
                 let set                   = this;
-                let cheque                = this.cheques.filter(x => x.id == id);
+                let cheque                = set.cheques.filter(x => x.id == id);
                 set.cheque.cheque_id      = cheque[0].id;
                 set.cheque.index          = index;
                 set.modulo                = cheque[0].modulo;
@@ -790,7 +809,7 @@
                 set.facturas[index].razon_social  = set.factura.razon_social;
                 set.facturas[index].fecha_emision = set.factura.fecha_emision;
                 set.facturas[index].ruc           = set.factura.ruc;
-                set.facturas[index].guia_remision   = set.factura.guia_remision;
+                set.facturas[index].guia_remision = set.factura.guia_remision;
                 set.facturas[index].datos         = JSON.stringify(set.factura.datos);
                 set.facturas[index].totales       = JSON.stringify(set.factura.totales);
                 toastr.info("Factura editada Correctamente", "Smarmoddle", {
@@ -849,7 +868,7 @@
         },
         resetCheque(){
                 let set                   = this;
-                set.modulo                = '';
+                // set.modulo                = '';
                 set.cheque.tipo_cheque    = '';
                 set.cheque.banco          = '';
                 set.cheque.girador        = '';
@@ -1002,7 +1021,7 @@
                 toastr.success("Cheque creado Correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
-                set.modulo         = '';
+                // set.modulo         = '';
                 set.cheque.tipo_cheque    = '';
                 set.cheque.banco          = '';
                 set.cheque.girador         = '';
@@ -1094,7 +1113,7 @@
         },
                 resetLetra(){
                     let set                      = this;
-                    set.modulo                   = '';
+                    // set.modulo                   = '';
                     set.letra_cambio.vencimiento = '';
                     set.letra_cambio.numero      = '';
                     set.letra_cambio.por         = '';
@@ -1114,7 +1133,7 @@
         },
         resetNota(){
                     let set = this;
-                     set.modulo                                = '';
+                     // set.modulo                                = '';
                      set.nota_credito.razon_social             = '';
                      set.nota_credito.fecha_emision            = '';
                      set.nota_credito.ruc                      = '';
@@ -1185,7 +1204,7 @@
         },
                resetFactura(){
                     let set = this;
-                     set.modulo                                = '';
+                     // set.modulo                                = '';
                      set.factura.razon_social             = '';
                      set.factura.fecha_emision            = '';
                      set.factura.ruc                      = '';

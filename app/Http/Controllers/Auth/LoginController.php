@@ -42,6 +42,14 @@ class LoginController extends Controller
 
     public function authenticated($request , $user){
 
+  if ($user->estado == 'off') {
+
+    Auth::guard()->logout();
+
+    $request->session()->invalidate();
+
+    return redirect('/login')->withInput()->with('message', 'Tu cuenta esta desactivada por favor comunicate con el administrador');
+}
 
         if($user->roles[0]->descripcion=='administrador'){
            return redirect()->route('administrador') ;
@@ -57,10 +65,10 @@ class LoginController extends Controller
        return redirect()->route('administrador');
    }
    
-   protected function credentials(Request $request)
-    {
-     $credentials = $request->only($this->username(), 'password');
-     return array_merge($credentials, ['estado' => 'on']); 
-    }
+   // protected function credentials(Request $request)
+   //  {
+   //   $credentials = $request->only($this->username(), 'password');
+   //   return array_merge($credentials, ['estado' => 'on']); 
+   //  }
 
 }
