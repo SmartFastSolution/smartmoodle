@@ -48,7 +48,20 @@
           			<div class="row">
 			<div class="col-6 border-right border-info ">
 				<div class="row justify-content-cente mb-4">
-					<img class="mt-3 img-fluid img-thumbnail" with="100" src="{{ asset($taller->img1) }}" alt="">
+					@isset ($taller->img1)
+          <div class="col-8">
+          <img class="mt-3 img-fluid" style="border: solid 4px #2182FB;" width="400" src="{{ asset($taller->img1) }}" alt="">
+          </div>
+
+          @endisset
+
+          @isset ($taller->descripcion1)
+          <div class="col-11 text-center badge-primary mt-2 p-2" style="font-size: 30px;">
+            <p>{{ $taller->descripcion1 }} </p>
+            
+          </div>
+             
+          @endisset
 				</div>
 				<div class="row">
 					<div class="col">
@@ -62,7 +75,20 @@
 			</div>
 			<div class="col-6">
 				<div class="row justify-content-center mb-4">
-					<img class="mt-3 img-fluid img-thumbnail" with="100" src="{{ asset($taller->img2) }}" alt="">
+					@isset ($taller->img2)
+          <div class="col-8">
+          <img class="mt-3 img-fluid" style="border: solid 4px #2182FB;" width="400" src="{{ asset($taller->img2) }}" alt="">
+          </div>
+
+          @endisset
+
+          @isset ($taller->descripcion2)
+          <div class="col-11 text-center badge-primary mt-2 p-2" style="font-size: 30px;">
+            <p>{{ $taller->descripcion2 }} </p>
+            
+          </div>
+             
+          @endisset
 				</div>
 				<div class="row">
 					<div class="col">

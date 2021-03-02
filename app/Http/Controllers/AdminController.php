@@ -342,7 +342,7 @@ class AdminController extends Controller
 
    public function taller4(Request $request)
    {
-      $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+     $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
       $taller4 = new Taller;
       $taller4->nombre = 'Taller '.++$i;
       $taller4->enunciado = $request->input('enunciado');
@@ -352,34 +352,26 @@ class AdminController extends Controller
       $taller4->save();
 
       if ($taller4 = true) {
-
-         if ($request->hasFile('img1')) {
-            $imagen1 = $request->file('img1');
-            $nombre1 = time().'_'.$imagen1->getClientOriginalName();
-            $ruta1 = public_path().'/img/talleres';
+         $a                      = Taller::get()->last();
+         $taller_4               = new TallerDiferencia;
+         $taller_4->taller_id    = $a->id;
+         $taller_4->enunciado    = $request->input('enunciado');
+         $taller_4->descripcion1 = $request->input('desc1');
+         $taller_4->descripcion2 = $request->input('desc2');
+        if ($request->hasFile('img1')) {
+            $imagen1        = $request->file('img1');
+            $nombre1        = time().'_'.$imagen1->getClientOriginalName();
+            $ruta1          = public_path().'/img/talleres';
             $imagen1->move($ruta1, $nombre1);
-            $urlimagen1 = '/img/talleres/'.$nombre1;
-
-        }
-       
-         $a = Taller::get()->last();
-         $taller_4 = new TallerDiferencia;
-         $taller_4->taller_id = $a->id;
-         $taller_4->enunciado = $request->input('enunciado');
-            if ($request->hasFile('img1')) {
-            $imagen1 = $request->file('img1');
-            $nombre1 = time().'_'.$imagen1->getClientOriginalName();
-            $ruta1 = public_path().'/img/talleres';
-            $imagen1->move($ruta1, $nombre1);
-            $urlimagen1 = '/img/talleres/'.$nombre1;
+            $urlimagen1     = '/img/talleres/'.$nombre1;
             $taller_4->img1 = $urlimagen1;
         }
          if ($request->hasFile('img2')) {
-            $imagen2 = $request->file('img2');
-            $nombre2 = time().'_'.$imagen2->getClientOriginalName();
-            $ruta2 = public_path().'/img/talleres';
+            $imagen2        = $request->file('img2');
+            $nombre2        = time().'_'.$imagen2->getClientOriginalName();
+            $ruta2          = public_path().'/img/talleres';
             $imagen2->move($ruta2, $nombre2);
-            $urlimagen2 = '/img/talleres/'.$nombre2;
+            $urlimagen2     = '/img/talleres/'.$nombre2;
             $taller_4->img2 = $urlimagen2;
         }
         

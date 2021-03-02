@@ -11,15 +11,34 @@
   </div>
   <h2 class="text-center font-weight-bold text-danger">ACTIVOS</h2>
   <div class="row">
-    <div class="col-7">
+    <div class="col-9">
       <h3 class="text-primary">ACTIVOS CORRIENTE </h3><br>
-      <draggable class="list-group list-group-flush" :list="a_corrientes" group="people">
+           <table class="table table-borderless">
+                <tbody v-for="(element, index) in a_corrientes" :key="element.name">
+                    <tr>
+                        <td width="400">@{{ element.cuenta }}</td>
+                        <td class="text-right">@{{ decimales(element.saldo) }}</td>
+                        <td class="text-right">@{{ decimales(element.total_saldo) }}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr
+                        v-if="element.cuenta2 !== '' && element.saldo2 !== '' && element.total_saldo2 !=='' && element.cuenta2 !== null">
+                        <td>(-)@{{ element.cuenta2 }}</td>
+                        <td style="border-bottom: solid 2px" class="text-right border-danger">
+                            @{{ decimales(element.saldo2) }}</td>
+                        <td class="text-right">@{{ decimales(element.total_saldo2) }}</td>
+                        <td colspan="2"></td>
+                    </tr>
+                </tbody>
+            </table>
+     {{--  <draggable class="list-group list-group-flush" :list="a_corrientes" group="people">
       <div v-for="(element, index) in a_corrientes" :key="element.name">
         <li class="list-group-item d-flex justify-content-between align-items-center">
           @{{ element.cuenta }}<span class="badge-pill">@{{ decimales(element.saldo) }}</span>
         </li>
       </div>
-      </draggable>
+      </draggable> --}}
     </div>
     <div class="col-12">
       <table>
@@ -40,7 +59,6 @@
             <td width="400">@{{ element.cuenta }}</td>
             <td class="text-right">@{{ decimales(element.saldo) }}</td>
             <td class="text-right">@{{ decimales(element.total_saldo) }}</td>
-            
           </tr>
           <tr v-if="element.cuenta2 !== '' && element.saldo2 !== '' && element.total_saldo2 !=='' && element.cuenta2 !== null">
             <td >(-)@{{ element.cuenta2 }}</td>
@@ -155,7 +173,7 @@
         <tbody>
           <tr>
             <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOT. PAS. Y PATRI.</td>
-            <td style="font-size: 20px;" class="badge-danger badge">@{{total_balance_inicial.t_patrimonio_pasivo}}</td>
+            <td style="font-size: 20px;" class="badge-danger badge">@{{decimales(total_balance_inicial.t_patrimonio_pasivo)}}</td>
           </tr>
         </tbody>
       </table>
