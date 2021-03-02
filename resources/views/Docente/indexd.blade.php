@@ -50,7 +50,9 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="ml-2">
                                 <div class="h5 m-0" >{{$post->user->name}} {{$post->user->apellido}}  </div>
+                                @isset ( $post->user->nivel->nombre)
                                 <div class="h7 text-muted">Paralelo ({{ $post->user->nivel->nombre }})</div>
+                                @endisset
                             </div>
                         </div>
                         <div>

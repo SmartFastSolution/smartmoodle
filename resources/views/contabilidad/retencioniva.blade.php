@@ -82,7 +82,7 @@
     
     @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center mb-2">
-        <a href="#" class="addDiario btn btn-outline-info btn-sm" @click.prevent="abrirCompra()">Agregar Compra</a>
+        <a href="#" class="addDiario btn btn-outline-info btn-sm" @click.prevent="abrirCompra()">Agregar Registros de Compras </a>
     </div>
     @endif
 
@@ -160,7 +160,7 @@
     </table>
     @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center mb-2">
-        <a href="#" class="addDiario btn btn-outline-info btn-sm" @click.prevent="abrirVenta()">Agregar Venta</a>
+        <a href="#" class="addDiario btn btn-outline-info btn-sm" @click.prevent="abrirVenta()">Agregar Registros de Venta</a>
     </div>
     @endif
 
@@ -183,7 +183,7 @@
             <tbody>
                 <tr>
 
-                    <td><input class="form-control form-control-sm" type="text" placeholder=".form-control-sm"></td>
+                <td> <label for="inputEmail3" class="col-sm col-form-label">IVA EN COMPRAS</label></td>
                     <td>
 
                         <div class="col-sm-10">
@@ -232,8 +232,7 @@
 
     @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center">
-        <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardaretencioniva()">Guardar
-            Retención Iva</a>
+        <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardaretencioniva()">Guardar Cuadro de Retención</a>
     </div>
     @endif
 

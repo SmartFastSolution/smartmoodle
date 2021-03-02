@@ -14,22 +14,20 @@
         </thead>
         <tbody>
             @foreach ($doc as $do)
-            @if($do->materias != null)
-            @foreach($do->materias as $ma)
-            @if($ma->assignments != null)
-            @foreach($ma->assignments as $asig)
+            @foreach($do->materia->assignments as $asig)
             <tr>
                 <td>{{$do->instituto->nombre}}</td>
                 <td>{{$do->user->name}} {{$do->user->apellido}}</td>
-                <td>{{$ma->nombre}}</td>
+                <td class="text-center">
+                    {{$do->materia->nombre}}
+                </td>
                 <td>{{$asig->user->name}} {{$asig->user->apellido}}</td>
-                <td>{{$asig->user->curso->nombre}}-{{$asig->user->nivel->nombre}}</td>
+                <td>{{$asig->user->distribucionmacu->curso->nombre}}-({{$asig->user->nivel->nombre}})</td>
+               
                 <td> {{$asig->user->created_at->diffForHumans()}}</td>
             </tr>
+
             @endforeach
-            @endif
-            @endforeach
-            @endif
             @endforeach
         </tbody>
     </table>

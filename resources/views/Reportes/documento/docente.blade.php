@@ -7,26 +7,36 @@
                 <th scope="col">Unidad Educativa</th>
                 <th scope="col">Docente</th>
                 <th scope="col">Curso</th>
+                <th scope="col">Paralelos</th>
                 <th scope="col">Materia</th>
+                <th scope="col">Ultimo Acceso</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($doc as $do)
-            @if($do->materias != null)
-            @foreach($do->materias as $ma)
-
-            @if($ma->distribucionmacus != null)
-            @foreach($ma->distribucionmacus as $cur)
             <tr>
                 <td>{{$do->instituto->nombre}}</td>
                 <td>{{$do->user->name}} {{$do->user->apellido}}</td>
-                <td>{{$cur->curso->nombre}}</td>
-                <td>{{$ma->nombre}}</td>
+                <td>
+                    @foreach($do->materia->distribucionmacus as $c)
+                    {{$c->curso->nombre}}
+                    @endforeach
+                </td>
+                <td class="text-center">
+                    {{$do->materia->nombre}}
+                </td>
+                <td class="text-center">
+                    @if($do->paralelos != null)
+                    @foreach($do->paralelos as $dismacu)
+                    <span class="badge badge-success">
+                        {{$dismacu->nombre}}
+                    </span>
+
+                    @endforeach
+                    @endif
+                </td>
+                <td> {{$do->user->created_at->diffForHumans()}}</td>
             </tr>
-            @endforeach
-            @endif
-            @endforeach
-            @endif
             @endforeach
         </tbody>
     </table>

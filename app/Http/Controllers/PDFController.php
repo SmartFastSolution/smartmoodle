@@ -31,6 +31,7 @@ class PDFController extends Controller
         $est = Assignment::all();
        
         $users= User::all();
+        //return $doc;
         return view('Reportes.reportedocente', compact('dist', 'doc','est','users'));
     }
 

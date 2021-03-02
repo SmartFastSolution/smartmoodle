@@ -189,8 +189,7 @@
                                         </tbody>
                                     </table>
                                     <div v-if="!compra.edit" class="row justify-content-center">
-                                        <a href="#" class="btn btn-success" @click.prevent="agregarCompra()">Agregar
-                                            Compra</a>
+                                        <a href="#" class="btn btn-success" @click.prevent="agregarCompra()">Agregar Registros de Compra</a>
 
                                     </div>
                                     <div v-else class="row justify-content-center">
@@ -358,8 +357,7 @@
                                         </tbody>
                                     </table>
                                     <div v-if="!venta.edit" class="row justify-content-center">
-                                        <a href="#" class="btn btn-success" @click.prevent="agregarVenta()">Agregar
-                                            Venta</a>
+                                        <a href="#" class="btn btn-success" @click.prevent="agregarVenta()">Agregar Registros de Venta</a>
 
                                     </div>
                                     <div v-else class="row justify-content-center">

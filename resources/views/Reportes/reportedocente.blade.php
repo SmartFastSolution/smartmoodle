@@ -86,26 +86,37 @@
                             <th scope="col">Docente</th>
                             <th scope="col">Curso</th>
                             <th scope="col">Materia</th>
+                            <th scope="col">Paralelo</th>
                             <th scope="col">Ultimo Acceso</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($doc as $do)
-                        @if($do->materias != null)
-                        @foreach($do->materias as $ma)
-                        @if($ma->distribucionmacus != null)
-                        @foreach($ma->distribucionmacus as $cur)
+
                         <tr>
                             <td>{{$do->instituto->nombre}}</td>
                             <td>{{$do->user->name}} {{$do->user->apellido}}</td>
-                            <td>{{$cur->curso->nombre}}</td>
-                            <td>{{$ma->nombre}}</td>
+                            <td>
+                                @foreach($do->materia->distribucionmacus as $c)
+                                {{$c->curso->nombre}}
+                                @endforeach
+                            </td>
+                            <td class="text-center">
+                                {{$do->materia->nombre}}
+                            </td>
+                            <td class="text-center">
+                                @if($do->paralelos != null)
+                                @foreach($do->paralelos as $dismacu)
+                                <span class="badge badge-success">
+                                    {{$dismacu->nombre}}
+                                </span>
+
+                                @endforeach
+                                @endif
+                            </td>
                             <td> {{$do->user->created_at->diffForHumans()}}</td>
                         </tr>
-                        @endforeach
-                        @endif
-                        @endforeach
-                        @endif
+
                         @endforeach
                     </tbody>
                 </table>
@@ -205,38 +216,35 @@
                 </div>
                 <br>
                 <br>
-                <table id="myTable4" class="table table-hover" >
+                <table id="myTable4" class="table table-hover">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Unidad Educativa</th>
                             <th scope="col">Docente</th>
                             <th scope="col">Materia</th>
                             <th scope="col">Estudiante</th>
-                            <th scope="col">Curso</th>
-                            <th scope="col">Paralelo</th>
+                            <th scope="col">Curso/Paralelo</th>
+                        
                             <th scope="col">Ultimo Acceso</th>
 
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($doc as $do)
-                        @if($do->materias != null)
-                        @foreach($do->materias as $ma)
-                        @if($ma->assignments != null)
-                        @foreach($ma->assignments as $asig)
+                        @foreach($do->materia->assignments as $asig)
+                      
                         <tr>
                             <td>{{$do->instituto->nombre}}</td>
                             <td>{{$do->user->name}} {{$do->user->apellido}}</td>
-                            <td>{{$ma->nombre}}</td>
+                            <td class="text-center">
+                                {{$do->materia->nombre}}
+                            </td>
                             <td>{{$asig->user->name}} {{$asig->user->apellido}}</td>
-                            <td>{{$asig->user->curso->nombre}}</td>
-                            <td>{{$asig->user->nivel->nombre}}</td>
+                            <td>{{$asig->user->distribucionmacu->curso->nombre}}-({{$asig->user->nivel->nombre}})</td>
                             <td> {{$asig->user->created_at->diffForHumans()}}</td>
                         </tr>
+                      
                         @endforeach
-                        @endif
-                        @endforeach
-                        @endif
                         @endforeach
                     </tbody>
                 </table>
@@ -272,7 +280,7 @@ $(function() {
         $('#myTable thead tr:eq(1) th').each(function(i) {
 
             var title = $(this).text(); //es el nombre de la columna
-            $(this).html('<input type="text" placeholder="Buscar..." />');
+            $(this).html('<input type="text" placeholder="Buscar..." class="form-control-sm" />');
 
             $('input', this).on('keyup change', function() {
                 if (table.column(i).search() !== this.value) {
@@ -307,7 +315,7 @@ $(function() {
         $('#myTable1 thead tr:eq(1) th').each(function(i) {
 
             var title = $(this).text(); //es el nombre de la columna
-            $(this).html('<input type="text" placeholder="Buscar..." />');
+            $(this).html('<input type="text" placeholder="Buscar..." class="form-control-sm" />');
 
             $('input', this).on('keyup change', function() {
                 if (table.column(i).search() !== this.value) {
@@ -333,7 +341,7 @@ $(function() {
             "autoWidth": true,
             "searching": true,
             "responsive": true,
-           
+
 
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
@@ -344,7 +352,7 @@ $(function() {
         $('#myTable2 thead tr:eq(1) th').each(function(i) {
 
             var title = $(this).text(); //es el nombre de la columna
-            $(this).html('<input type="text" placeholder="Buscar..." />');
+            $(this).html('<input type="text" placeholder="Buscar..." class="form-control-sm" />');
 
             $('input', this).on('keyup change', function() {
                 if (table.column(i).search() !== this.value) {
@@ -382,7 +390,7 @@ $(function() {
         $('#myTable3 thead tr:eq(1) th').each(function(i) {
 
             var title = $(this).text(); //es el nombre de la columna
-            $(this).html('<input type="text" placeholder="Buscar..." />');
+            $(this).html('<input type="text" placeholder="Buscar..." class="form-control-sm" />');
 
             $('input', this).on('keyup change', function() {
                 if (table.column(i).search() !== this.value) {
@@ -409,7 +417,7 @@ $(function() {
             "searching": true,
             "responsive": true,
             "scrollX": true,
-           
+
 
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
@@ -420,7 +428,7 @@ $(function() {
         $('#myTable4 thead tr:eq(1) th').each(function(i) {
 
             var title = $(this).text(); //es el nombre de la columna
-            $(this).html('<input type="text" placeholder="Buscar..." />');
+            $(this).html('<input type="text" placeholder="Buscar..." class="form-control-sm" />');
 
             $('input', this).on('keyup change', function() {
                 if (table.column(i).search() !== this.value) {
