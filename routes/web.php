@@ -107,6 +107,7 @@ route::get('Contenido-pdf/docente/{contenido}', 'EstudianteController@Visualizac
 route::get('post-estudiante', 'EstudianteController@PostE')->name('Post.alumno');
 route::post('estudiante/post/store', 'EstudianteController@storee')->name('storepost'); //guardar un post desde estudiante
 route::DELETE('estudiante/post/delete/{post}', 'EstudianteController@destroype')->name('deletepost');
+route::get('post-docentes-estudiantes', 'EstudianteController@Postdocentes')->name('Post.docentes-alumnos');//post de docentes de los estudiantes
 
 //rutas menu docente
 route::get('perfil', 'DocenteController@Perfil')->name('Perfil');

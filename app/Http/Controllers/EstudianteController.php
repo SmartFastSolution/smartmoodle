@@ -44,15 +44,24 @@ class EstudianteController extends Controller
              
         }
       
-        $p = Post::orderBy('id','Desc')->where('instituto_id', Auth::user()->instituto_id)->where('distribucionmacu_id',Auth::user()->distribucionmacu_id)->where('nivel_id',Auth::user()->nivel_id)->paginate(5);
-        // $p = Post::orderBy('id','Desc')
-        // ->where('instituto_id', Auth::user()->instituto_id)
-        // //->where('distribucionmacu_id',Auth::user()->distribucionmacu_id)
-        // ->where('nivel_id',Auth::user()->nivel_id)->paginate(5);
-        // $p = Post::orderBy('id','Desc')->paginate(5);
+        $p = Post::orderBy('id','Desc')
+        ->where('instituto_id', Auth::user()->instituto_id)
+        ->where('distribucionmacu_id',Auth::user()->distribucionmacu_id)
+        ->where('nivel_id',Auth::user()->nivel_id)->paginate(5);
+      
        
         return view('Estudiante.indexes',compact('p'));
            
+    }
+
+    public function Postdocentes(){
+      $p2 = Post::orderBy('id','Desc')
+      ->where('instituto_id', Auth::user()->instituto_id)
+      //->where('distribucionmacu_id',Auth::user()->distribucionmacu_id)
+      ->where('nivel_id',Auth::user()->nivel_id)->paginate(5);
+  
+     
+      return view('Estudiante.postdocentes',compact('p2'));
     }
 
    
@@ -141,6 +150,7 @@ class EstudianteController extends Controller
         return view('Estudiante.password');
     }
   
+    
 
     public function updatep(Request $request){
 
