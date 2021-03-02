@@ -29,7 +29,7 @@
         <tbody>
           <tr>
             <td width="250">TOTAL ACT. CORR.</td>
-            <td class="text-right"><span style="font-size: 20px; margin-left: 35px;" class="badge badge-danger">@{{ b_initotal.t_a_corriente }}</span></td>
+            <td class="text-right"><span style="font-size: 20px; margin-left: 35px;" class="badge badge-danger">@{{ decimales(b_initotal.t_a_corriente) }}</span></td>
           </tr>
         </tbody>
       </table>
@@ -48,7 +48,7 @@
         <tbody>
           <tr>
             <td width="250">TOTAL ACT. NO CORR.</td>
-            <td class="text-right"><span style="font-size: 20px; margin-left: 35px;" class="badge badge-danger">@{{ b_initotal.t_a_nocorriente }}</span></td>
+            <td class="text-right"><span style="font-size: 20px; margin-left: 35px;" class="badge badge-danger">@{{ decimales(b_initotal.t_a_nocorriente) }}</span></td>
           </tr>
         </tbody>
       </table>
@@ -68,7 +68,7 @@
         <tbody>
           <tr>
             <td width="250">TOTAL PAS. CORR.</td>
-            <td class="text-right"><span style="font-size: 20px; margin-left: 35px;" class="badge badge-danger">@{{ b_initotal.t_p_corriente }}</span></td>
+            <td class="text-right"><span style="font-size: 20px; margin-left: 35px;" class="badge badge-danger">@{{ decimales(b_initotal.t_p_corriente) }}</span></td>
           </tr>
         </tbody>
       </table>
@@ -88,7 +88,7 @@
         <tbody>
           <tr>
             <td width="250">TOTAL PAS. CORR.</td>
-            <td class="text-right"> <span style="font-size: 20px; margin-left: 35px;" class="badge badge-danger">@{{ b_initotal.t_p_no_corriente }}</span></td>
+            <td class="text-right"> <span style="font-size: 20px; margin-left: 35px;" class="badge badge-danger">@{{ decimales(b_initotal.t_p_no_corriente) }}</span></td>
           </tr>
         </tbody>
       </table>
@@ -97,7 +97,7 @@
         <tbody>
           <tr>
             <td class="font-weight-bold" width="250">TOTAL PASIVO</td>
-            <td class="text-right"><span style="font-size: 20px; margin-left: 35px;" class="badge badge-danger">@{{ total_balance_inicial.t_pasivo }}</span></td>
+            <td class="text-right"><span style="font-size: 20px; margin-left: 35px;" class="badge badge-danger">@{{ decimales(total_balance_inicial.t_pasivo) }}</span></td>
           </tr>
         </tbody>
       </table>
@@ -115,7 +115,7 @@
         <tbody>
           <tr>
             <td width="250">TOTAL PATRIMONIO.</td>
-            <td class="text-right"> <span style="font-size: 20px; margin-left: 35px;" class="badge badge-danger">@{{ b_initotal.t_patrimonio }}</span></td>
+            <td class="text-right"> <span style="font-size: 20px; margin-left: 35px;" class="badge badge-danger">@{{ decimales(b_initotal.t_patrimonio) }}</span></td>
           </tr>
         </tbody>
       </table>
@@ -127,7 +127,7 @@
         <tbody>
           <tr>
             <td class="font-weight-bold" style="font-size: 20px;" width="250">TOTAL ACTIVO.</td>
-            <td class="text-right"><span style="font-size: 20px; margin-left: 35px;" class="badge badge-danger">@{{ total_balance_inicial.t_activo }}</span></td>
+            <td class="text-right"><span style="font-size: 20px; margin-left: 35px;" class="badge badge-danger">@{{ decimales(total_balance_inicial.t_activo) }}</span></td>
           </tr>
         </tbody>
       </table>
@@ -138,7 +138,7 @@
           <tr>
             <td class="font-weight-bold" style="font-size: 20px;" width="200">TOT. PAS. Y PATRI.</td>
             <td class="text-right">
-              <td class="text-right"><span style="font-size: 20px; margin-left: 35px;" class="badge badge-danger">@{{ total_balance_inicial.t_patrimonio_pasivo }}</span></td>
+              <td class="text-right"><span style="font-size: 20px; margin-left: 35px;" class="badge badge-danger">@{{ decimales(total_balance_inicial.t_patrimonio_pasivo) }}</span></td>
             </td>
           </tr>
         </tbody>

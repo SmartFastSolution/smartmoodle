@@ -144,6 +144,7 @@ if ($rol->descripcion == 'estudiante') {
        
        $us=User::find($user->id);
        $roles= Role::orderBy('name')->get();
+         $curso = Distribucionmacu::join('cursos', 'cursos.id', '=', 'distribucionmacus.curso_id')->select('distribucionmacus.*', 'cursos.nombre')->where('distribucionmacus.id', $us->distribucionmacu_id)->first();
         // $roles = Role::all();
         $cursos= Curso::get();
         $nivels= Nivel::get();
@@ -153,7 +154,7 @@ if ($rol->descripcion == 'estudiante') {
         $niveluser = User::find($user->id)->nivel()->get();
         $roluser=  $us->roles()->get();
      
-       return view('Persona.showu',compact('roles','institutos','cursos','nivels','institutouser','cursouser','niveluser','user','roluser'));
+       return view('Persona.showu',compact('roles','institutos','cursos','nivels','institutouser','cursouser','curso','niveluser','user','roluser'));
         
     
         

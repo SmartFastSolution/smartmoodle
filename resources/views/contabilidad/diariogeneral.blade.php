@@ -2,9 +2,10 @@
     <div class="row justify-content-center mb-5 mt-2">
         <a class="btn btn-success btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_cheque"><i class="far fa-money-bill"></i> CHEQUE</a>
         <a class="btn btn-danger btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_credito"><i class="fas fa-file-invoice-dollar"></i> NOTA DE CREDITO</a>
-        {{-- <a class="btn btn-warning btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_letra_cambio"><i class="fas fa-file-invoice-dollar"></i> LETRA DE CAMBIO</a> --}}
-        <a class="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#m_factura"><i class="fas fa-file-invoice-dollar"></i> FACTURA</a>
-         {{-- <a class="btn btn-secondary btn-sm" href="#" data-toggle="modal" data-target="#m_papeleta"><i class="fas fa-file-invoice-dollar"></i> PAPELETA DE DEPOSITO</a> --}}
+        <a class="btn btn-warning btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_letra_cambio"><i class="fas fa-file-invoice-dollar"></i> LETRA DE CAMBIO</a>
+        <a class="btn btn-info btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_factura"><i class="fas fa-file-invoice-dollar"></i> FACTURA</a>
+        <a class="btn btn-secondary btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_papeleta"><i class="fas fa-file-invoice-dollar"></i> PAPELETA DE DEPOSITO</a>
+        <a class="btn btn-primary btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_pagare"><i class="fas fa-file-invoice-dollar"></i> PAGARÉ</a>
     </div>
     <div id="diario" >
         <h1 class="text-center text-danger font-weight-bold mt-2">DIARIO GENERAL</h1>
@@ -285,34 +286,46 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Tipo de Documento</th>
-                    <th scope="col">Modulo</th>
+                    <th scope="col">Fecha</th>
                     <th  width="200" class="text-center">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(cheque, index) in cheques">
                     <td>@{{ cheque.tipo_documento }}</td>
-                    <td>@{{ cheque.modulo }}</td>
+                    <td>@{{ formatoFecha(cheque.modulo) }}</td>
                     <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="editarCheque(cheque.id, index)"><i class="fa fa-edit"></i></a>
                     <a class="btn btn-danger" href="" @click.prevent="warningEliminar(cheque.id, index, cheque.tipo_documento)"><i class="fa fa-trash"></i></a></td>
                 </tr>
                 <tr v-for="(nota_credito, index) in nota_creditos">
                     <td>@{{ nota_credito.tipo_documento }}</td>
-                    <td>@{{ nota_credito.modulo }}</td>
+                    <td>@{{ formatoFecha(nota_credito.modulo) }}</td>
                     <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="editarNota(nota_credito.id, index)"><i class="fa fa-edit"></i></a>
                     <a class="btn btn-danger" href="" @click.prevent="warningEliminar(nota_credito.id, index, nota_credito.tipo_documento)"><i class="fa fa-trash"></i></a></td>
                 </tr>
                 <tr v-for="(factura, index) in facturas">
                     <td>@{{ factura.tipo_documento }}</td>
-                    <td>@{{ factura.modulo }}</td>
+                    <td>@{{ formatoFecha(factura.modulo) }}</td>
                     <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="editarFactura(factura.id, index)"><i class="fa fa-edit"></i></a>
                     <a class="btn btn-danger" href="" @click.prevent="warningEliminar(factura.id, index, factura.tipo_documento)"><i class="fa fa-trash"></i></a></td>
                 </tr>
                 <tr v-for="(letra_cambio, index) in letra_cambios">
                     <td>@{{ letra_cambio.tipo_documento }}</td>
-                    <td>@{{ letra_cambio.modulo }}</td>
+                    <td>@{{ formatoFecha(letra_cambio.modulo) }}</td>
                     <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="editarLetra(letra_cambio.id, index)"><i class="fa fa-edit"></i></a>
                     <a class="btn btn-danger" href="" @click.prevent="warningEliminar(letra_cambio.id, index, letra_cambio.tipo_documento)"><i class="fa fa-trash"></i></a></td>
+                </tr>
+                <tr v-for="(pagare, index) in pagares">
+                    <td>@{{ pagare.tipo_documento }}</td>
+                    <td>@{{ formatoFecha(pagare.modulo) }}</td>
+                    <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="editarPagare(pagare.id, index)"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger" href="" @click.prevent="warningEliminar(pagare.id, index, pagare.tipo_documento)"><i class="fa fa-trash"></i></a></td>
+                </tr>
+                <tr v-for="(papeleta_deposito, index) in papeleta_depositos">
+                    <td>@{{ papeleta_deposito.tipo_documento }}</td>
+                    <td>@{{ formatoFecha(papeleta_deposito.modulo )}}</td>
+                    <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="editarPapeleta(papeleta_deposito.id, index)"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-danger" href="" @click.prevent="warningEliminar(papeleta_deposito.id, index, papeleta_deposito.tipo_documento)"><i class="fa fa-trash"></i></a></td>
                 </tr>
             </tbody>
         </table>

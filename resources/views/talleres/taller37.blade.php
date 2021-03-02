@@ -1,7 +1,18 @@
 @extends('layouts.nav')
 
 @section('css')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style type="text/css">
+
+        .input-css{
+        color:#495057;
+        background-color:#fff;
+        background-clip:padding-box;
+        border:1px solid #ced4da;
+        border-radius:.25rem;
+        box-shadow:inset 0 0 0 transparent;
+        transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    }
 #calApp {
     display: flex;
     align-items: center;
@@ -75,6 +86,7 @@
     color: #3fa9fc;
 }
 </style>
+
 @endsection
 @section('title', 'Talleres de contabilidad')
 @section('content')
@@ -395,8 +407,21 @@
 @include ('layouts.footer')
 @section('js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+{{--  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+          $("#m_cheque").draggable({
+      handle: ".modal-header"
+  });
+  } );
+  </script> --}}
+{{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
 <script type="text/javascript" src="{{ asset('js/tallercontabilidad.js') }}"></script>
 <script type="text/javascript">
+      //$("#m_cheque").draggable({
+      //handle: ".modal-header"
+  //});
     let taller_id = @json($d);
     let enviar = new Vue({
     
@@ -446,7 +471,7 @@
     const documentos = new Vue({
       el: "#documentos",
       data:{
-        modulo:'DIARIO GENERAL',
+        modulo:'',
         cheque:{
             tipo_cheque:'',
             banco:'',
@@ -480,21 +505,29 @@
             index:'',
         },
         papeleta_deposito:{
-            vencimiento:'',
-            numero:'',
+            banco:'',
+            cuenta:'',
+            nombre:'',
+            lugar_fecha:'',
+            cantidad:'',
+            depositante:'',
+            update:false,
+            papeleta_id:'',
+            index:'',
+        },
+        pagare:{
             por:'',
-            ciudad:'',
             fecha:'',
-            orden_de:'',
-            de:'',
+            nombre:'',
             cantidad:'',
             interes:'',
-            desde:'',
-            direccion:'',
-            ciudad2:'',
-            atentamente:'',
+            ciudad:'',
+            fecha_vencimiento:'',
+            señor:'',
+            deudor1:'',
+            garante:'',
             update:false,
-            letra_id:'',
+            pagare_id:'',
             index:'',
         },
         nota_credito:{
@@ -582,6 +615,7 @@
             }
         },
         cheques:[],
+        pagares:[],
         papeleta_depositos:[],
         letra_cambios:[],
         documentos:[],
@@ -592,6 +626,14 @@
         this.getdocumentos();
       },
       methods:{
+            formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+    },
         aggDatoNota(){
             let dato = {
                 codigo:'',
@@ -629,10 +671,12 @@
                 id: taller_id,
             }).then(response => {
                 console.log(response.data.cheques)
-                this.cheques       = response.data.cheques;
-                this.nota_creditos = response.data.creditos;
-                this.facturas      = response.data.facturas;
-                this.letra_cambios = response.data.letras;
+                this.cheques            = response.data.cheques;
+                this.nota_creditos      = response.data.creditos;
+                this.facturas           = response.data.facturas;
+                this.letra_cambios      = response.data.letras;
+                this.pagares            = response.data.pagares;
+                this.papeleta_depositos = response.data.papeleta_depositos;
             }).catch(function(error){
 
             }); 
@@ -741,7 +785,7 @@
         },
         updateNota(){
                if (this.modulo === '') {
-                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
               "timeOut": "3000"
           });
             } else {
@@ -784,7 +828,7 @@
         },
             updateFactura(){
                if (this.modulo === '') {
-                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
               "timeOut": "3000"
           });
             } else {
@@ -858,6 +902,14 @@
 
                     this.letra_cambios.splice(index, 1); 
                 }
+                else if (tipo === 'Pagare') {
+
+                    this.pagares.splice(index, 1); 
+                }
+                else if (tipo === 'Papeleta Deposito') {
+
+                    this.papeleta_depositos.splice(index, 1); 
+                }
                 toastr.info("Documento Eliminado Correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
@@ -868,7 +920,7 @@
         },
         resetCheque(){
                 let set                   = this;
-                // set.modulo                = '';
+                set.modulo                = '';
                 set.cheque.tipo_cheque    = '';
                 set.cheque.banco          = '';
                 set.cheque.girador        = '';
@@ -884,7 +936,7 @@
         },
         updateCheque(){
                if (this.modulo === '') {
-                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
               "timeOut": "3000"
           });
             } else {
@@ -928,7 +980,7 @@
         },
             updateLetra(){
                if (this.modulo === '') {
-                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
               "timeOut": "3000"
           });
             } else {
@@ -980,7 +1032,7 @@
         },
         guardarCheque(){
             if (this.modulo === '') {
-                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
               "timeOut": "3000"
           });
             }else{
@@ -1039,7 +1091,7 @@
         },
              guardarLetra(){
             if (this.modulo === '') {
-                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
               "timeOut": "3000"
           });
             } else {
@@ -1079,7 +1131,7 @@
         },
             guardarNota(){
             if (this.modulo === '') {
-                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
                 "timeOut": "3000"
           });
             }else {
@@ -1113,7 +1165,7 @@
         },
                 resetLetra(){
                     let set                      = this;
-                    // set.modulo                   = '';
+                    set.modulo                   = '';
                     set.letra_cambio.vencimiento = '';
                     set.letra_cambio.numero      = '';
                     set.letra_cambio.por         = '';
@@ -1133,7 +1185,7 @@
         },
         resetNota(){
                     let set = this;
-                     // set.modulo                                = '';
+                     set.modulo                                = '';
                      set.nota_credito.razon_social             = '';
                      set.nota_credito.fecha_emision            = '';
                      set.nota_credito.ruc                      = '';
@@ -1171,7 +1223,7 @@
         },
         guardarFactura(){
             if (this.modulo === '') {
-                 toastr.error("El campo Modulo es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
                 "timeOut": "3000"
           });
             }else {
@@ -1204,7 +1256,7 @@
         },
                resetFactura(){
                     let set = this;
-                     // set.modulo                                = '';
+                     set.modulo                                = '';
                      set.factura.razon_social             = '';
                      set.factura.fecha_emision            = '';
                      set.factura.ruc                      = '';
@@ -1221,26 +1273,246 @@
                              venta:'', 
                          }
                      ];
-                     set.factura.totales.subtotal_12      = '';
-                     set.factura.totales.subtotal_0       = '';
-                     set.factura.totales.subtotal_no_iva  = '';
-                     set.factura.totales.subtotal_exe_iva = '';
-                     set.factura.totales.subtotal_sin_va  = '';
-                     set.factura.totales.total_descuento  = '';
-                     set.factura.totales.ice              = '';
-                     set.factura.totales.iva_12           = '';
-                     set.factura.totales.irbpnr           = '';
-                     set.factura.totales.total            = '';
-                    set.factura.update = false
-                    set.factura.factura_id = '';
-                    set.factura.index = '';
+                        set.factura.totales.subtotal_12      = '';
+                        set.factura.totales.subtotal_0       = '';
+                        set.factura.totales.subtotal_no_iva  = '';
+                        set.factura.totales.subtotal_exe_iva = '';
+                        set.factura.totales.subtotal_sin_va  = '';
+                        set.factura.totales.total_descuento  = '';
+                        set.factura.totales.ice              = '';
+                        set.factura.totales.iva_12           = '';
+                        set.factura.totales.irbpnr           = '';
+                        set.factura.totales.total            = '';
+                        set.factura.update                   = false
+                        set.factura.factura_id               = '';
+                        set.factura.index                    = '';   
+        },
+        guardarPagare(){
+             if (this.modulo === '') {
+                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+                "timeOut": "3000"
+          });
+            }else {
+            let set = this;
+            let url = '/sistema/admin/modulo/pagare';
+            axios.post(url,{
+               id:                      taller_id,
+                tipo:                   'pagare',
+                modulo:                  set.modulo,
+                tipo_documento:         'Pagare',
+                por:                    set.pagare.por,
+                fecha:                  set.pagare.fecha,
+                nombre:                 set.pagare.nombre,
+                cantidad:               set.pagare.cantidad,
+                interes:                set.pagare.interes,
+                ciudad:                 set.pagare.ciudad,
+                fecha_vencimiento:      set.pagare.fecha_vencimiento,
+                señor:                  set.pagare.señor,
+                deudor1:                set.pagare.deudor1,
+                garante:                set.pagare.garante,
+            }).then(response => {
+                $('#m_pagare').modal('hide');
+                // console.log(response.data.cheque)
+                this.pagares.push(response.data.pagare);
+                toastr.success("Pagaré creado Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.resetPagare();
+            }).catch(function(error){
 
-
-                    
+            }); 
         }
+        },
+              editarPagare(id, index){
+                let set                      = this;
+                let pagare                   = this.pagares.filter(x => x.id == id);
+                set.pagare.pagare_id         = pagare[0].id;
+                set.pagare.index             = index;
+                set.modulo                   = pagare[0].modulo;
+                set.pagare.por               = pagare[0].por;
+                set.pagare.fecha             = pagare[0].fecha;
+                set.pagare.nombre            = pagare[0].nombre;
+                set.pagare.cantidad          = pagare[0].cantidad;
+                set.pagare.interes           = pagare[0].interes;
+                set.pagare.ciudad            = pagare[0].ciudad;
+                set.pagare.fecha_vencimiento = pagare[0].fecha_vencimiento;
+                set.pagare.señor             = pagare[0].señor;
+                set.pagare.deudor1           = pagare[0].deudor1;
+                set.pagare.garante           = pagare[0].garante;
+               
+                $('#m_pagare').modal('show');
+                set.pagare.update = true;
+        },
+        updatePagare(){
+             if (this.modulo === '') {
+                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+                "timeOut": "3000"
+          });
+            }else {
+            let index = this.pagare.index;
+            let set = this;
+            let url = '/sistema/admin/modulo/documento/edit';
+                axios.post(url,{
+                id:                 set.pagare.pagare_id,
+                tipo:               'pagare',
+                modulo:             set.modulo,
+                tipo_documento:     'Pagare',
+                por:                set.pagare.por,
+                fecha:              set.pagare.fecha,
+                nombre:             set.pagare.nombre,
+                cantidad:           set.pagare.cantidad,
+                interes:            set.pagare.interes,
+                ciudad:             set.pagare.ciudad,
+                fecha_vencimiento:  set.pagare.fecha_vencimiento,
+                señor:              set.pagare.señor,
+                deudor1:            set.pagare.deudor1,
+                garante:            set.pagare.garante,
+
+            }).then(response => {
+                $('#m_pagare').modal('hide');
+                set.pagares[index].modulo            = set.modulo;
+                set.pagares[index].por               = set.pagare.por;
+                set.pagares[index].fecha             = set.pagare.fecha;
+                set.pagares[index].nombre            = set.pagare.nombre;
+                set.pagares[index].cantidad          = set.pagare.cantidad;
+                set.pagares[index].interes           = set.pagare.interes;
+                set.pagares[index].ciudad            = set.pagare.ciudad;
+                set.pagares[index].fecha_vencimiento = set.pagare.fecha_vencimiento;
+                set.pagares[index].señor             = set.pagare.señor;
+                set.pagares[index].deudor1           = set.pagare.deudor1;
+                set.pagares[index].garante           = set.pagare.garante;
+                
+                toastr.info("Pagare Actualizado Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+               this.resetPagare();
+            }).catch(function(error){
+
+            }); 
+        }
+        
+        },
+        resetPagare(){
+            let set                      = this;
+            set.modulo = '';
+            set.pagare.por               = '';
+            set.pagare.fecha             = '';
+            set.pagare.nombre            = '';
+            set.pagare.cantidad          = '';
+            set.pagare.interes           = '';
+            set.pagare.ciudad            = '';
+            set.pagare.fecha_vencimiento = '';
+            set.pagare.señor             = '';
+            set.pagare.deudor1           = '';
+            set.pagare.garante           = '';
+            set.pagare.update            = false;
+            set.pagare.pagare_id         = '';
+            set.pagare.index             = '';         
+        },
+        guardarPapeleta(){
+             if (this.modulo === '') {
+                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+                "timeOut": "3000"
+          });
+            }else {
+            let set = this;
+            let url = '/sistema/admin/modulo/papeleta';
+            axios.post(url,{
+                id:                      taller_id,
+                tipo:                   'papeleta',
+                modulo:                  set.modulo,
+                tipo_documento:         'Papeleta Deposito',
+                banco:                  set.papeleta_deposito.banco,
+                cuenta:                 set.papeleta_deposito.cuenta,
+                nombre:                 set.papeleta_deposito.nombre,
+                lugar_fecha:            set.papeleta_deposito.lugar_fecha,
+                cantidad:               set.papeleta_deposito.cantidad,
+                depositante:            set.papeleta_deposito.depositante,
+            }).then(response => {
+                $('#m_papeleta').modal('hide');
+                // console.log(response.data.cheque)
+                this.papeleta_depositos.push(response.data.papeleta_deposito);
+                toastr.success("Papeleta de Deposito Creada Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+                this.resetPapeleta();
+            }).catch(function(error){
+
+            }); 
+        }
+        },
+              editarPapeleta(id, index){
+                let set                           = this;
+                let papeleta_deposito             = this.papeleta_depositos.filter(x => x.id == id);
+                set.papeleta_deposito.papeleta_id = papeleta_deposito[0].id;
+                set.papeleta_deposito.index       = index;
+                set.modulo                        = papeleta_deposito[0].modulo;
+                set.papeleta_deposito.banco       = papeleta_deposito[0].banco;
+                set.papeleta_deposito.cuenta      = papeleta_deposito[0].cuenta;
+                set.papeleta_deposito.nombre      = papeleta_deposito[0].nombre;
+                set.papeleta_deposito.lugar_fecha = papeleta_deposito[0].lugar_fecha;
+                set.papeleta_deposito.cantidad    = papeleta_deposito[0].cantidad;
+                set.papeleta_deposito.depositante = papeleta_deposito[0].depositante;
+                $('#m_papeleta').modal('show');
+                set.papeleta_deposito.update = true;
+        },
+        updatePapeleta(){
+             if (this.modulo === '') {
+                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+                "timeOut": "3000"
+          });
+            }else {
+          
+            let index = this.papeleta_deposito.index;
+            let set = this;
+            let url = '/sistema/admin/modulo/documento/edit';
+                axios.post(url,{
+                id:                 set.papeleta_deposito.papeleta_id,
+                tipo:               'papeleta_deposito',
+                modulo:             set.modulo,
+                tipo_documento:     'Papeleta De Deposito',
+                banco:                  set.papeleta_deposito.banco,
+                cuenta:                 set.papeleta_deposito.cuenta,
+                nombre:                 set.papeleta_deposito.nombre,
+                lugar_fecha:            set.papeleta_deposito.lugar_fecha,
+                cantidad:               set.papeleta_deposito.cantidad,
+                depositante:            set.papeleta_deposito.depositante,
+
+            }).then(response => {
+                $('#m_papeleta').modal('hide');
+                set.papeleta_depositos[index].modulo      = set.modulo;
+                set.papeleta_depositos[index].banco       = set.papeleta_deposito.banco;
+                set.papeleta_depositos[index].cuenta      = set.papeleta_deposito.cuenta;
+                set.papeleta_depositos[index].nombre      = set.papeleta_deposito.nombre;
+                set.papeleta_depositos[index].lugar_fecha = set.papeleta_deposito.lugar_fecha;
+                set.papeleta_depositos[index].cantidad    = set.papeleta_deposito.cantidad;
+                set.papeleta_depositos[index].depositante = set.papeleta_deposito.depositante;
+                
+                toastr.info("Papeleta De Deposito Actualizada Correctamente", "Smarmoddle", {
+                "timeOut": "3000"
+                });
+               this.resetPapeleta();
+            }).catch(function(error){
+
+            }); 
+            }
+        },
+        resetPapeleta(){
+            let set                           = this;
+            set.modulo = '';
+            set.papeleta_deposito.banco       = '';
+            set.papeleta_deposito.cuenta      = '';
+            set.papeleta_deposito.nombre      = '';
+            set.papeleta_deposito.lugar_fecha = '';
+            set.papeleta_deposito.cantidad    = '';
+            set.papeleta_deposito.depositante = '';
+            set.papeleta_deposito.update      = false;
+            set.papeleta_deposito.papeleta_id = '';
+            set.papeleta_deposito.index       = '';         
+        }
+
       }
-    
-    })
+    });
 </script>
 
 @endsection
