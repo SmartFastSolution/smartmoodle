@@ -15,11 +15,33 @@
     </div>
     <h2 class="text-center font-weight-bold text-danger">ACTIVOS</h2>
     <div class="row">
-        <div class="col-7">
+        <div class="col-9">
             <h3 class="text-primary">ACTIVOS CORRIENTE <a data-toggle="tooltip" data-placement="top"
                     title="Agregar Activo Corriente" @click="abrirActivoC()" class="btn btn-sm btn-info text-light"><i
                         class="fa fa-plus"></i></a></h3><br>
-            <draggable class="list-group list-group-flush" :list="a_corrientes" group="people" @change="cambioActivo">
+
+            <table class="table table-borderless">
+                <tbody v-for="(element, index) in a_corrientes" :key="element.name">
+                    <tr>
+                        <td width="400">@{{ element.cuenta }}</td>
+                        <td class="text-right">@{{ decimales(element.saldo) }}</td>
+                        <td class="text-right">@{{ decimales(element.total_saldo) }}</td>
+                        <td><a @click="editAcorriente(index)" class="btn btn-warning btn-sm mr-1"><i
+                                    class="fas fa-edit"></i></a></td>
+                        <td><a @click="deleteAcCooriente(index)" class="btn btn-danger btn-sm re_diario"><i
+                                    class="fas fa-trash-alt"></i></a></td>
+                    </tr>
+                    <tr
+                        v-if="element.cuenta2 !== '' && element.saldo2 !== '' && element.total_saldo2 !=='' && element.cuenta2 !== null">
+                        <td>(-)@{{ element.cuenta2 }}</td>
+                        <td style="border-bottom: solid 2px" class="text-right border-danger">
+                            @{{ decimales(element.saldo2) }}</td>
+                        <td class="text-right">@{{ decimales(element.total_saldo2) }}</td>
+                        <td colspan="2"></td>
+                    </tr>
+                </tbody>
+            </table>
+       {{--      <draggable class="list-group list-group-flush" :list="a_corrientes" group="people" @change="cambioActivo">
                 <div v-for="(element, index) in a_corrientes" :key="element.name">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         @{{ element.cuenta }}<span class="badge-pill">@{{ decimales(element.saldo) }} <a
@@ -28,7 +50,7 @@
                                 class="btn btn-danger btn-sm re_diario"><i class="fas fa-trash-alt"></i></a></span>
                     </li>
                 </div>
-            </draggable>
+            </draggable> --}}
         </div>
         <div class="col-12">
             <table>

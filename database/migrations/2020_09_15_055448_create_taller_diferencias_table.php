@@ -17,8 +17,10 @@ class CreateTallerDiferenciasTable extends Migration
             $table->id();
             $table->unsignedbigInteger('taller_id');
             $table->longText('enunciado');
-            $table->string('img1');
-            $table->string('img2');
+            $table->string('img1')->nullable();
+            $table->string('img2')->nullable();
+            $table->string('descripcion1')->nullable();
+            $table->string('descripcion2')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

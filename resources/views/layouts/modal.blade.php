@@ -283,6 +283,14 @@
                                         <label for="ta4-2"><i class="fas fa-upload"></i> <span>Elegir Archivo&hellip;</span></label>
                                     
                                 </div>
+                                       <div class="form-group col-md-5">
+                                    <label for="" class="col-form-label ">Descripcion 1:</label>
+                                    <input type="text" class="form-control" name="desc1" id="">
+                                </div>
+                                <div class="form-group col-md-5">
+                                    <label for="" class="col-form-label ">Descripcion 2:</label>
+                                    <input type="text" class="form-control" name="desc2" id="">
+                                </div>
                             </div>
                             <div class="row justify-content-center">
                                 <input required="" type="submit" value="Crear Taller" class="btn p-2 mt-3 btn-danger">

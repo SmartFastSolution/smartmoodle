@@ -280,6 +280,55 @@
                                                 <tr>
                                                     <th>Cuenta</th>
                                                     <th>Saldo</th>
+                                                    <th>Agregar Cuenta</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <model-select :options="options"
+                                                            v-model="activo.a_corriente.cuenta_id"
+                                                            placeholder="ELEGIR CUENTA"></model-select>
+
+                                                    </td>
+                                                    <td width="200">
+                                                        <input autocomplete="ÑÖcompletes" type="number"
+                                                            v-model="activo.a_corriente.saldo" class="form-control">
+
+                                                    </td>
+                                                    <td width="100" align="center">
+                                                        <a v-if="!activo.a_corriente.double"
+                                                            class="btn btn-sm btn-info" href=""
+                                                            @click.prevent="DoubleAcorriente()"><i
+                                                                class="fa fa-plus"></i></a>
+                                                        <a v-if="activo.a_corriente.double"
+                                                            class="btn btn-sm btn-danger" href=""
+                                                            @click.prevent="DoubleAcorrienteC()"><i
+                                                                class="fas fa-window-close"></i></a>
+                                                    </td>
+                                                </tr>
+
+                                                <tr v-if="activo.a_corriente.double">
+                                                    <td>
+                                                        <model-select :options="options"
+                                                            v-model="activo.a_corriente.cuenta_id2"
+                                                            placeholder="ELEGIR CUENTA"></model-select>
+
+                                                    </td>
+                                                    <td width="200">
+                                                        <input autocomplete="ÑÖcompletes" type="number"
+                                                            v-model="activo.a_corriente.saldo2" class="form-control">
+
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                      {{--   <table class="table">
+                                            <thead class="text-center">
+                                                <tr>
+                                                    <th>Cuenta</th>
+                                                    <th>Saldo</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -297,7 +346,7 @@
                                                     </td>
                                                 </tr>
                                             </tbody>
-                                        </table>
+                                        </table> --}}
                                         {{--         <div class="form-group row">
                             <label  class="col-sm-4 col-form-label">Selecciona la Cuenta</label>
                             <div class="col-sm-6">
@@ -323,7 +372,57 @@
                                     <div class="col-6 mt-2 p-2" style=" height:400px; overflow-y: scroll;">
                                         <h2 class="text-center">Activos Corrientes</h2>
                                         <div class="row justify-content-around mb-2">
-                                            <table class="table table-bordered table-sm mb-2 p-2">
+                                          <table class="table table-bordered table-sm mb-2 p-2">
+                                                <thead>
+                                                    <tr class="text-center bg-dark">
+                                                        <th>CUENTA</th>
+                                                        <th>SALDO</th>
+                                                        <th>TOTAL</th>
+                                                        <th class="text-center" colspan="2">ACCIONES</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody v-for="(balan, index) in a_corrientes">
+
+                                                    <tr>
+                                                        <td width="300" class="text-left">@{{ balan.cuenta}}</td>
+                                                        <td width="100" class="text-right">@{{ decimales(balan.saldo)}}
+                                                        </td>
+                                                        <td width="100" class="text-right">
+                                                            @{{ decimales(balan.total_saldo) }}</td>
+
+                                                        <td align="center" width="50">
+                                                            <a @click.prevent="editAcorriente(index)"
+                                                                class="btn btn-warning btn-sm">
+                                                                <i class="fas fa-edit"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td align="center" width="50">
+                                                            <a @click.prevent="deleteAcCooriente(index)"
+                                                                class="btn btn-danger btn-sm">
+                                                                <i class="fas fa-trash-alt"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr
+                                                        v-if="balan.cuenta2 !== '' && balan.saldo2 !== '' && balan.total_saldo2 !=='' && balan.cuenta2 !== null">
+                                                        <td class="text-left">(-)@{{ balan.cuenta2 }}</td>
+                                                        <td class="text-right">@{{ decimales(balan.saldo2) }}</td>
+                                                        <td class="text-right">@{{ decimales(balan.total_saldo2) }}</td>
+                                                        <td colspan="2"></td>
+                                                    </tr>
+                                                </tbody>
+                                                <tbody>
+                                                    <tr class="bg-secondary">
+                                                        <td class="text-left font-weight-bold">Total Activo Corriente
+                                                        </td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-right">@{{ decimales(b_initotal.t_a_corriente) }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            {{-- <table class="table table-bordered table-sm mb-2 p-2">
                                                 <thead>
                                                     <tr class="text-center bg-dark">
                                                         <th>CUENTA</th>
@@ -358,7 +457,7 @@
                                                         <td></td>
                                                     </tr>
                                                 </tbody>
-                                            </table>
+                                            </table> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -373,7 +472,7 @@
                                                 <tr>
                                                     <th>Cuenta</th>
                                                     <th>Saldo</th>
-                                                    <th>A. Cuenta</th>
+                                                    <th>Agregar Cuenta</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

@@ -33,9 +33,21 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 		<div class="row">
 			<div class="col-6 border-right border-info ">
 				<div class="row justify-content-center">
+					@isset ($datos->img1)
+					<div class="col-8">
 					<img class="mt-3 img-fluid" style="border: solid 4px #2182FB;" width="400" src="{{ asset($datos->img1) }}" alt="">
-				</div>
+					</div>
 
+					@endisset
+
+					@isset ($datos->descripcion1)
+					<div class="col-11 text-center badge-primary mt-2 p-2" style="font-size: 30px;">
+						<p>{{ $datos->descripcion1 }} </p>
+						
+					</div>
+					   
+					@endisset
+				</div>
 				<div class="row">
 					<div class="col-12 mt-4">
 						 <input class="effect-1" type="text" name="diferencia_1a" autocomplete="ÑÖcompletes">
@@ -58,7 +70,19 @@ input[type="text"]{font: 15px/24px "Lato", Arial, sans-serif; color: #333; width
 			</div>
 			<div class="col-6">
 				<div class="row justify-content-center">
+					@isset ($datos->img2)
+					<div class="col-8">
 					<img class="mt-3 img-fluid" style="border: solid 4px #2182FB;" width="400" src="{{ asset($datos->img2) }}" alt="">
+					</div>
+
+					@endisset
+					@isset ($datos->descripcion2)
+					<div class="col-11 text-center badge-success mt-2 p-2" style="font-size: 30px;">
+						<p>{{ $datos->descripcion2 }} </p>
+						
+					</div>
+					   
+					@endisset
 				</div>
 				<div class="row">
 								<div class="col-12 mt-4">
