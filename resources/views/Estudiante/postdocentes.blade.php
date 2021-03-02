@@ -51,7 +51,11 @@
                                 <div class="h5 m-0">{{$post->user->name}} {{$post->user->apellido}}
                                 
                                 </div>
-                                <div class="h7 text-muted"></div>
+                                <div class="h7 text-muted">
+                                @isset($post->materia->id)
+                                {{$post->materia->nombre}}
+                                @endisset
+                                </div>
                             </div>
                         </div>
                         <div>

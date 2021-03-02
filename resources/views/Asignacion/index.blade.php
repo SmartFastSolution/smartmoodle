@@ -26,6 +26,8 @@
                 <tr>
                     <th scope="col">Unidad Educativa</th>
                     <th scope="col">Estudiante</th>
+                    <th scope="col">Curso</th>
+                    <th scope="col">Paralelo</th>
                     <th scope="col">Materia(s)</th>
                     <th  scope="col" width="75">Estado</th>
                     <th scope="col" class="text-center">Tools</th>
@@ -39,6 +41,12 @@
                     <td>
                         {{$a->user->name}}
                         {{$a->user->apellido}}
+                    </td>
+                    <td>
+                       {{$a->user->distribucionmacu->curso->nombre}}
+                   </td>
+                    <td>
+                        {{$a->user->nivel->nombre}}
                     </td>
                     <td>
                         @if($a->materias != null)

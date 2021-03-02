@@ -113,7 +113,8 @@ class DocenteController extends Controller
     public function index()
     {
         // $p = Post::where('instituto', Auth::user()->instituto_id)->get();
-             $p = Post::orderBy('id','Desc')->where('instituto_id', Auth::user()->instituto_id)->paginate(5);
+      
+         $p = Post::orderBy('id','Desc')->where('instituto_id', Auth::user()->instituto_id)->paginate(5);
              
                 return view('Docente.indexd',compact('p'));
      
