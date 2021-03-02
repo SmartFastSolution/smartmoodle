@@ -463,6 +463,8 @@ route::post('/sistema/admin/modulo/cheque', 'ModuloDocumentoController@cheque')-
 route::post('/sistema/admin/modulo/factura', 'ModuloDocumentoController@factura')->name('modulo.factura');
 route::post('/sistema/admin/modulo/nota_credito', 'ModuloDocumentoController@nota_credito')->name('modulo.nota_credito');
 route::post('/sistema/admin/modulo/letra-cambio', 'ModuloDocumentoController@letra_cambio')->name('modulo.letra_cambio');
+route::post('/sistema/admin/modulo/pagare', 'ModuloDocumentoController@pagare')->name('modulo.pagare');
+route::post('/sistema/admin/modulo/papeleta', 'ModuloDocumentoController@papeleta')->name('modulo.papeleta');
 route::post('/sistema/admin/modulo/documentos', 'ModuloDocumentoController@documentos')->name('modulo.documentos');
 route::post('/sistema/admin/modulo/documento/show', 'ModuloDocumentoController@vista')->name('modulo.vistadocumento');
 route::post('/sistema/admin/modulo/documento/edit', 'ModuloDocumentoController@edicion')->name('modulo.editdocument');

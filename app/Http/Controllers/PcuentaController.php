@@ -72,6 +72,7 @@ class PcuentaController extends Controller
      */
     public function show(Pcuenta $pcuenta)
     {
+         // return $pcuenta;
         return \view('Cuentas.showcp',['pcuentas'=>$pcuenta]);
     }
 

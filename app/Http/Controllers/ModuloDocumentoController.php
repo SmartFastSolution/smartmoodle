@@ -6,6 +6,8 @@ use App\ModuloLetraCambio;
 use App\Modulo\ModuloCheque;
 use App\Modulo\ModuloFactura;
 use App\Modulo\ModuloNotaCredito;
+use App\Modulo\ModuloPagare;
+use App\Modulo\ModuloPapeleta;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
@@ -76,6 +78,56 @@ class ModuloDocumentoController extends Controller
                     'message'      => 'Kardex Fifo actualizado correctamente'
                 ),200,[]);   
     }
+    public function pagare(Request $request)
+    {
+            $userID                    = Auth::id();
+            $tallerID                  = $request->id;
+            $pagare                    = new  ModuloPagare;
+            $pagare->taller_id         =  $tallerID;
+            $pagare->user_id           =  $userID;
+            $pagare->modulo            =  $request->modulo;
+            $pagare->tipo_documento    =  $request->tipo_documento;
+            $pagare->por               =  $request->por;
+            $pagare->fecha             =  $request->fecha;
+            $pagare->nombre            =  $request->nombre;
+            $pagare->cantidad          =  $request->cantidad;
+            $pagare->interes           =  $request->interes;
+            $pagare->ciudad            =  $request->ciudad;
+            $pagare->fecha_vencimiento =  $request->fecha_vencimiento;
+            $pagare->señor             =  $request->señor;
+            $pagare->deudor1           =  $request->deudor1;
+            $pagare->garante           =  $request->garante;
+            $pagare->save();
+             return response(array(                                         //ENVIO DE RESPUESTA
+                    'success' => true,
+                    'estado'  => 'guardado',
+                    'pagare'  => $pagare,
+                    'message' => 'Kardex Fifo actualizado correctamente'
+                ),200,[]);   
+    }
+       public function papeleta(Request $request)
+    {
+            $userID                   = Auth::id();
+            $tallerID                 = $request->id;
+            $papeleta                 = new  ModuloPapeleta;
+            $papeleta->taller_id      =  $tallerID;
+            $papeleta->user_id        =  $userID;
+            $papeleta->modulo         =  $request->modulo;
+            $papeleta->tipo_documento =  $request->tipo_documento;
+            $papeleta->banco          =  $request->banco;
+            $papeleta->cuenta         =  $request->cuenta;
+            $papeleta->nombre         =  $request->nombre;
+            $papeleta->lugar_fecha    =  $request->lugar_fecha;
+            $papeleta->cantidad       =  $request->cantidad;
+            $papeleta->depositante    =  $request->depositante;
+            $papeleta->save();
+             return response(array(                                         //ENVIO DE RESPUESTA
+                    'success'           => true,
+                    'estado'            => 'guardado',
+                    'papeleta_deposito' => $papeleta,
+                    'message'           => 'Kardex Fifo actualizado correctamente'
+                ),200,[]);   
+    }
     public function documentos(Request $request)
     {
         $user          = User::find(Auth::id());
@@ -85,6 +137,8 @@ class ModuloDocumentoController extends Controller
         $nota_creditos = ModuloNotaCredito::where('taller_id', $tallerID)->where('user_id', $user->id)->get();
         $facturas      = ModuloFactura::where('taller_id', $tallerID)->where('user_id', $user->id)->get();
         $letras        = ModuloLetraCambio::where('taller_id', $tallerID)->where('user_id', $user->id)->get();
+        $pagares       = ModuloPagare::where('taller_id', $tallerID)->where('user_id', $user->id)->get();
+        $papeleta_depositos       = ModuloPapeleta::where('taller_id', $tallerID)->where('user_id', $user->id)->get();
 
 
 
@@ -96,6 +150,8 @@ class ModuloDocumentoController extends Controller
                     'creditos' => $nota_creditos,
                     'facturas' => $facturas,
                     'letras'   => $letras,
+                    'pagares'   => $pagares,
+                    'papeleta_depositos'   => $papeleta_depositos,
                     'message'  => 'Kardex Fifo actualizado correctamente'
                 ),200,[]);
     }
@@ -104,10 +160,16 @@ class ModuloDocumentoController extends Controller
         $user = User::find($request->user);
         $tallerID = $request->id;
 
-        $cheques       = $user->cheques->where('taller_id', $tallerID);
-        $nota_creditos = $user->creditos->where('taller_id', $tallerID);
-        $facturas      = $user->facturas->where('taller_id', $tallerID);
-
+        // $cheques       = $user->cheques->where('taller_id', $tallerID);
+        // $nota_creditos = $user->creditos->where('taller_id', $tallerID);
+        // $facturas      = $user->facturas->where('taller_id', $tallerID);
+        // $facturas      = $user->facturas->where('taller_id', $tallerID);
+        $cheques       = ModuloCheque::where('taller_id', $tallerID)->where('user_id', $user->id)->get();
+        $nota_creditos = ModuloNotaCredito::where('taller_id', $tallerID)->where('user_id', $user->id)->get();
+        $facturas      = ModuloFactura::where('taller_id', $tallerID)->where('user_id', $user->id)->get();
+        $letras        = ModuloLetraCambio::where('taller_id', $tallerID)->where('user_id', $user->id)->get();
+        $pagares       = ModuloPagare::where('taller_id', $tallerID)->where('user_id', $user->id)->get();
+        $papeleta_depositos       = ModuloPapeleta::where('taller_id', $tallerID)->where('user_id', $user->id)->get();
 
 
         return response(array(                                         //ENVIO DE RESPUESTA
@@ -116,6 +178,9 @@ class ModuloDocumentoController extends Controller
                     'cheques' => $cheques,
                     'creditos' => $nota_creditos,
                     'facturas' => $facturas,
+                    'letras'   => $letras,
+                    'pagares'   => $pagares,
+                    'papeleta_depositos'   => $papeleta_depositos,
                     'message' => 'Kardex Fifo actualizado correctamente'
                 ),200,[]);
     }
@@ -194,6 +259,34 @@ class ModuloDocumentoController extends Controller
 
             
         }
+           elseif ($tipo == 'pagare') {
+            $pagare                     =   ModuloPagare::find($id);
+            $pagare->modulo             =  $request->modulo;
+            $pagare->tipo_documento    =  $request->tipo_documento;
+            $pagare->por               =  $request->por;
+            $pagare->fecha             =  $request->fecha;
+            $pagare->nombre            =  $request->nombre;
+            $pagare->cantidad          =  $request->cantidad;
+            $pagare->interes           =  $request->interes;
+            $pagare->ciudad            =  $request->ciudad;
+            $pagare->fecha_vencimiento =  $request->fecha_vencimiento;
+            $pagare->señor             =  $request->señor;
+            $pagare->deudor1           =  $request->deudor1;
+            $pagare->garante           =  $request->garante;
+            $pagare->save();
+        }
+            elseif ($tipo == 'papeleta_deposito') {
+            $papeleta                 =   ModuloPapeleta::find($id);
+            $papeleta->modulo         =  $request->modulo;
+            $papeleta->tipo_documento =  $request->tipo_documento;
+            $papeleta->banco          =  $request->banco;
+            $papeleta->cuenta         =  $request->cuenta;
+            $papeleta->nombre         =  $request->nombre;
+            $papeleta->lugar_fecha    =  $request->lugar_fecha;
+            $papeleta->cantidad       =  $request->cantidad;
+            $papeleta->depositante    =  $request->depositante;
+            $papeleta->save();
+        }
     	return response(array(                                         //ENVIO DE RESPUESTA
                     'success' => true,
                     'estado' => 'guardado',
@@ -222,6 +315,14 @@ class ModuloDocumentoController extends Controller
         elseif ($tipo === 'Letra de Cambio') {
             $letra_cambio = ModuloLetraCambio::find($id);
             $letra_cambio->delete();
+        }
+          elseif ($tipo === 'Pagare') {
+            $pagare = ModuloPagare::find($id);
+            $pagare->delete();
+        }
+          elseif ($tipo === 'Papeleta Deposito') {
+            $papeleta = ModuloPapeleta::find($id);
+            $papeleta->delete();
         }
     	return response(array(                                         //ENVIO DE RESPUESTA
                     'success' => true,

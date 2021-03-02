@@ -738,19 +738,19 @@
       options: [
         { name: 'Balance Inicial Horizontal', code: 'diario' },
         { name: 'Kardex', code: 'kardex' },
-        { name: 'Balance de Comprobacion', code: 'balance_comp' },
         { name: 'Diario General', code: 'messages' },
-        { name: 'Balance Ajustado', code: 'balance-ajustado' },
         { name: 'Mayor General', code: 'mayor-general' },
+        { name: 'Balance de Comprobacion', code: 'balance_comp' },
         { name: 'Hoja de Trabajo', code: 'hoja-trabajo' },
+        { name: 'Balance Ajustado', code: 'balance-ajustado' },
         { name: 'Estado de Resultado', code: 'estado-resultado' },
         { name: 'Balance General', code: 'balance-general' },
         { name: 'Asientos de Cierre', code: 'asento-cierre' },
-        { name: ' Libro Caja', code: 'libro-caja' },
-        { name: ' Arqueo Caja', code: 'arqueo-caja' },
-        { name: ' Libro Banco', code: 'libro-banco' },
-        { name: ' Conciliación Bancaria', code: 'conciliacion-bancaria' },
-        { name: ' Retencion del IVA', code: 'retencion-iva' },
+        { name: 'Libro Caja', code: 'libro-caja' },
+        { name: 'Arqueo Caja', code: 'arqueo-caja' },
+        { name: 'Libro Banco', code: 'libro-banco' },
+        { name: 'Conciliación Bancaria', code: 'conciliacion-bancaria' },
+        { name: 'Retencion del IVA', code: 'retencion-iva' },
         // { name: ' Nomina Empleados', code: 'nomina-empleado' },
         // { name: ' Provisión de Benficios', code: 'provision-beneficio' },
       ],
@@ -883,7 +883,7 @@
                    toastr.success("Taller Creado Correctamente", "Smarmoddle", {
                         "timeOut": "3000"
                     });
-                window.location = "/sistema/home";
+                window.location = "/sistema/admin/plantilla/tallercontable";
                      
                 }).catch(function(error){
                 }); 
@@ -928,7 +928,7 @@
             data.append('plantilla', 37);
      
                     axios.post(url,data).then(response => {
-                   window.location = "/sistema/home";
+                   window.location = "/sistema/admin/plantilla/tallercontable";
                      
                 }).catch(function(error){
                 }); 
@@ -958,7 +958,7 @@
                       data.append('contenido_id', this.contenido_id);
                       data.append('plantilla', 37);
                         axios.post(url,data).then(response => {
-                       window.location = "/sistema/home";
+                       window.location = "/sistema/admin/plantilla/tallercontable";
                          
                     }).catch(function(error){
                     }); 
@@ -987,7 +987,7 @@
                       data.append('contenido_id', this.contenido_id);
                       data.append('plantilla', 37);
                           axios.post(url,data).then(response => {
-                         window.location = "/sistema/home";
+                         window.location = "/sistema/admin/plantilla/tallercontable";
                            
                       }).catch(function(error){
                       }); 
@@ -1016,7 +1016,7 @@
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
                           axios.post(url,data).then(response => {
-                         window.location = "/sistema/home";
+                         window.location = "/sistema/admin/plantilla/tallercontable";
                            
                       }).catch(function(error){
                       }); 
@@ -1044,7 +1044,7 @@
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
                         axios.post(url,data).then(response => {
-                        window.location = "/sistema/home";
+                        window.location = "/sistema/admin/plantilla/tallercontable";
                          
                     }).catch(function(error){
                     }); 
@@ -1072,7 +1072,7 @@
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
                         axios.post(url,data).then(response => {
-                       window.location = "/sistema/home";
+                       window.location = "/sistema/admin/plantilla/tallercontable";
                          
                     }).catch(function(error){
                     }); 
@@ -1100,7 +1100,7 @@
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
                         axios.post(url,data).then(response => {
-                        window.location = "/sistema/home";
+                        window.location = "/sistema/admin/plantilla/tallercontable";
                          
                     }).catch(function(error){
                     }); 
@@ -1128,7 +1128,7 @@
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
                         axios.post(url,data).then(response => {
-                       window.location = "/sistema/home";
+                       window.location = "/sistema/admin/plantilla/tallercontable";
                          
                     }).catch(function(error){
                     }); 
@@ -1156,7 +1156,7 @@
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
                         axios.post(url,data).then(response => {
-                       window.location = "/sistema/home";
+                       window.location = "/sistema/admin/plantilla/tallercontable";
                          
                     }).catch(function(error){
                     }); 
@@ -1184,7 +1184,7 @@
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
                         axios.post(url,data).then(response => {
-                       window.location = "/sistema/home";
+                       window.location = "/sistema/admin/plantilla/tallercontable";
                          
                     }).catch(function(error){
                     }); 
@@ -1212,7 +1212,7 @@
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
                         axios.post(url,data).then(response => {
-                       window.location = "/sistema/home";
+                       window.location = "/sistema/admin/plantilla/tallercontable";
                          
                     }).catch(function(error){
                     }); 
@@ -1240,7 +1240,7 @@
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
                         axios.post(url,data).then(response => {
-                       window.location = "/sistema/home";
+                       window.location = "/sistema/admin/plantilla/tallercontable";
                          
                     }).catch(function(error){
                     }); 
@@ -1268,7 +1268,7 @@
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37);
                         axios.post(url,data).then(response => {
-                       window.location = "/sistema/home";
+                       window.location = "/sistema/admin/plantilla/tallercontable";
                          
                     }).catch(function(error){
                     }); 
@@ -1296,7 +1296,7 @@
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37); 
                         axios.post(url,data).then(response => {
-                       window.location = "/sistema/home";
+                       window.location = "/sistema/admin/plantilla/tallercontable";
                          
                     }).catch(function(error){
                     }); 
@@ -1324,7 +1324,7 @@
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37); 
                         axios.post(url,data).then(response => {
-                       window.location = "/sistema/home";
+                       window.location = "/sistema/admin/plantilla/tallercontable";
                          
                     }).catch(function(error){
                     }); 
@@ -1352,7 +1352,7 @@
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37); 
                         axios.post(url,data).then(response => {
-                       window.location = "/sistema/home";
+                       window.location = "/sistema/admin/plantilla/tallercontable";
                          
                     }).catch(function(error){
                     }); 
@@ -1380,7 +1380,7 @@
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37); 
                         axios.post(url,data).then(response => {
-                       window.location = "/sistema/home";
+                       window.location = "/sistema/admin/plantilla/tallercontable";
                          
                     }).catch(function(error){
                     }); 
@@ -1408,7 +1408,7 @@
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37); 
                         axios.post(url,data).then(response => {
-                       window.location = "/sistema/home";
+                       window.location = "/sistema/admin/plantilla/tallercontable";
                          
                     }).catch(function(error){
                     }); 
@@ -1436,7 +1436,7 @@
                         data.append('contenido_id', this.contenido_id);
                         data.append('plantilla', 37); 
                         axios.post(url,data).then(response => {
-                       window.location = "/sistema/home";
+                       window.location = "/sistema/admin/plantilla/tallercontable";
                          
                     }).catch(function(error){
                     }); 
@@ -1532,7 +1532,7 @@
      
                 axios.post(url, data).then(response => {
              
-              window.location = "/sistema/home";
+              window.location = "/sistema/admin/plantilla/tallercontable";
                  //console.log(response.data);
             }).catch(function(error){
             }); 

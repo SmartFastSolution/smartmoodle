@@ -10,17 +10,17 @@
       </div>
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">LLENAR CHEQUE</h3>
-        {{--       <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
+              <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-1 col-form-label">FECHA</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
+            <input type="date" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
             
           </div>
-        </div> --}}
+        </div>
         <div class=" border p-2" style="box-shadow: 5px 5px 15px 0px  #27B8F4">
           <div class="row ">
             <div class="col-6 mb-2">
-              <input type="text" v-model="cheque.tipo_cheque" class="form-control mt-2" >
+              {{-- <input type="text" v-model="cheque.tipo_cheque" class="form-control mt-2" > --}}
               <input type="text" v-model="cheque.banco" class="form-control mt-2" >
             </div>
             <div class="col-2 align-self-center">
@@ -99,13 +99,13 @@
       </div>
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">LLENAR LETRA DE CAMBIO</h3>
-        {{--      <div class="form-group row">
+             <div class="form-group row">
           <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
+            <input type="date" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
             
           </div>
-        </div> --}}
+        </div>
         <div class=" p-3" style="box-shadow: 5px 5px 15px 0px  #3A27F4">
           <div class="row mb-2">
             <div class="col-5 mt-3">
@@ -209,13 +209,13 @@
       </div>
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">LLENAR PAPELETA DE DEPOSITO</h3>
-        {{--     <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
+            <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-1 col-form-label">FECHA</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
+            <input type="date" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
             
           </div>
-        </div> --}}
+        </div>
         <div class=" p-3" style="box-shadow: 5px 5px 15px 0px  #2714E5">
           <h2 class="text-center text-danger font-weight-bold">PAPELETA DE DEPOSITO</h2>
           <div class="row">
@@ -226,7 +226,7 @@
                 </div>
                 <div class="col-lg-5 text-center">
                   <h1 class="text-danger font-weight-bold">BANCO</h1>
-                  <input type="text" class="form-control form-control-sm">
+                  <input type="text" v-model="papeleta_deposito.banco" class="form-control form-control-sm">
                 </div>
                 <div class="col-lg-5 border">
                   <div class="row">
@@ -247,24 +247,24 @@
               <div class="row mb-2">
                 <div class="col-12">
                   <h6>Numero de cuenta o tarjeta</h6>
-                  <input type="number" class="form-control form-control-sm">
+                  <input type="number" v-model="papeleta_deposito.cuenta" class="form-control form-control-sm">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-3 col-form-label">Nombre</label>
                 <div class="col-sm-9">
-                  <input type="email" class="form-control" id="inputEmail3">
+                  <input type="text" v-model="papeleta_deposito.nombre" class="form-control" id="inputEmail3">
                 </div>
               </div>
               <div class="form-group row mb-2">
                 <label for="inputPassword3" class="col-sm-3 col-form-label">Lugar y Fecha</label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" id="inputPassword3">
+                  <input type="text" v-model="papeleta_deposito.lugar_fecha" class="form-control" id="inputPassword3">
                 </div>
               </div>
             </div>
             <div class="col-lg-6">
-          {{--     <div class="row justify-content-lg-end">
+              {{--     <div class="row justify-content-lg-end">
                 <div class="col-1">
                   <h2 class="font-weight-bold">No</h2>
                 </div>
@@ -320,7 +320,7 @@
                         <div class="input-group-prepend">
                           <div class="input-group-text">USD</div>
                         </div>
-                        <input type="number" class="form-control  text-right">
+                        <input type="number" v-model="papeleta_deposito.cantidad" class="form-control  text-right">
                       </div>
                       {{-- <input type="number"  class="form-control" > --}}
                     </div>
@@ -336,7 +336,7 @@
               
               <div class="row mt-5 text-center">
                 <div class="col-lg-6">
-                  <input type="text" class="form-control">
+                  <input type="text" v-model="papeleta_deposito.depositante" class="form-control">
                   <h6>Firma del Depositante</h6>
                 </div>
                 <div class="col-lg-6 ">
@@ -378,8 +378,8 @@
       </div>
       <div class="modal-footer text-center">
         {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
-        <button v-if="!letra_cambio.update" type="button" class="btn btn-primary" @click.prevent="guardarLetra()">Guardar Papeleta de Deposito</button>
-        <button v-if="letra_cambio.update" type="button" class="btn btn-info" @click.prevent="updateLetra()">Actualizar Papeleta de Deposito</button>
+        <button v-if="!papeleta_deposito.update" type="button" class="btn btn-primary" @click.prevent="guardarPapeleta()">Guardar Papeleta de Deposito</button>
+        <button v-if="papeleta_deposito.update" type="button" class="btn btn-info" @click.prevent="updatePapeleta()">Actualizar Papeleta de Deposito</button>
       </div>
     </div>
   </div>
@@ -396,13 +396,13 @@
       </div>
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">LLENAR NOTA DE CREDITO</h3>
-        {{--       <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
+              <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-1 col-form-label">FECHA</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control mb-2" placeholder="Modulo al que pertenece la nota de credito" v-model="modulo">
+            <input type="date" class="form-control mb-2" placeholder="Modulo al que pertenece la nota de credito" v-model="modulo">
             
           </div>
-        </div> --}}
+        </div>
         <div class="" style="box-shadow: 5px 5px 15px 0px  #F42787">
           <div class="row p-3 justify-content-between">
             <div class="col-lg-5 col-sm-12 mb-sm-3">
@@ -581,13 +581,13 @@
       </div>
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">LLENAR FACTURA</h3>
-        {{--    <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
+           <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-1 col-form-label">FECHA</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control mb-2" placeholder="Modulo al que pertenece la factura" v-model="modulo">
+            <input type="date" class="form-control mb-2" placeholder="Modulo al que pertenece la factura" v-model="modulo">
             
           </div>
-        </div> --}}
+        </div>
         <div class="" style="box-shadow: 5px 5px 15px 0px  #F42787">
           <div class="row p-3 justify-content-between">
             <div class="col-lg-5 col-sm-12 mb-sm-3">
@@ -738,3 +738,105 @@
     </div>
   </div>
 </div>
+<!-- PAGARE -->
+<div class="modal fade" id="m_pagare" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="m_pagareLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered modal-xl ">
+    <div class="modal-content bg-light">
+      <div class="modal-header">
+        <h5 class="modal-title" id="m_pagareLabel">PAGARÉ</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click.prevent="resetPagare()">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h3 class="text-center font-weight-bold">LLENAR PAGARÉ</h3>
+             <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-1 col-form-label">FECHA</label>
+          <div class="col-sm-4">
+            <input type="date" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
+            
+          </div>
+        </div>
+        <div class="p-3" style="box-shadow: 5px 5px 15px 0px  #27F4AE">
+          <div class="row justify-content-center">
+            <div class="col-10 p-2  ">
+              <div class="row justify-content-center">
+                <div class="col-4">
+                  <img class="img-fluid" src="{{ asset('img/talleres/imagen-19.jpg') }}" alt="">
+                </div>
+              </div>
+              <div class="row justify-content-around">
+                <div class="col-5">
+                  <span class="border border-right-0 border-left-0 border-success">No. 1</span>
+                </div>
+                <div class="col-4 form-inline">
+                  <label for="">Por $<input v-model="pagare.por" type="number" class="form-control text-right"></label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <p class=" text-justify">
+                    Debo y pagare de la fecha en <input  v-model="pagare.fecha" type="text" class=" input-css form-control-sm m-1" size="10"> fijos en esta ciudad o en el lugar en que se me reconvenga a la orden de <input  v-model="pagare.nombre" type="text" class=" input-css  form-control-sm " size="40"> la cantidad de <input  v-model="pagare.cantidad" type="text" class=" input-css form-control-sm" size="65"> por igual valor que tengo recibido, en calidad de préstamo y en dinero efectivo para destinarlo a negocios de comercio; esta cantidad me oblifo a devolveria al vencimiento del plazo expresado, enmonedas de este curso legal.
+                  </p>
+                  <p class=" text-justify">
+                    Tambien me obligo a pagar el interes del <input    type="text" v-model="pagare.interes" class=" input-css  form-control-sm m-1" size="1"> por ciento anual desde el vencimiento hasta la completa cancelacion y en el caso de mora, a pagar todos los gastos judiciales y extrajudiciales que ocasione el cobro, bastando para terminar el montode tales gastos la sola afirmacion del agreedor.</p>
+                    <p class=" text-justify">
+                      Al fiel cumplimiento de lo acordado me obligo con todos v bienes presentes y futuros, y ademas, renuncio domicilio y toda ley o excepcion que pudiera favorecerme en jucio o fuera de el.
+                    </p>
+                    <p class=" text-justify">
+                      Renuncio tambien al derecho de interponer el recurso de apelacion y el de hecho de las providencias que se expidieron en el juicio a que diere lugar, estipulado expresamente que el tenedor no podra ser obligado a recibir el pago por partes ni aun por mis herederos o sucesores, sin protesto
+                    </p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <label for="">Ciudad  -   Fecha</label><input    class="form-control form-control-sm" v-model="pagare.ciudad" type="text">
+                  </div>
+                  <div class="col-6">
+                    <label for="">Fecha Vencimiento</label><input   class="form-control form-control-sm" v-model="pagare.fecha_vencimiento" type="text">
+                    
+                  </div>
+                  
+                </div>
+                <div class="row justify-content-end mt-3">
+                  <div class="col-10">
+                    <p class=" text-justify">Me constituyo fiador llano pagador del señor <input    class=" input-css  form-control-sm mb-1 ml-1 mr-1" size="55" v-model="pagare.señor" type="text"> por las obligaciones que hemos contraído en el pagaré anterior haciendo de deuda ajena deuda propia renunciando  los beneficios de orden y de excusión de bienes del deudor principalmente el de división y cualquier ley, excepción o derecho que pueda favorecerme así como la apelación y el recurso de hecho.  Quedo sometido a los jueces de  Provincia o de la que elija el acreedor. Sin protesto.</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6 ">
+                    <div class="form-group">
+                      <label >FECHA UT SUPRA <br>DEUDOR(ES)</label>
+                      <input type="text" v-model="pagare.deudor1" class="form-control form-control-sm" >
+                    </div>
+                  </div>
+                  <div class="col-6 mt-4">
+                    <div class="form-group">
+                      <label >GARANTE(ES)</label>
+                      <input type="text" v-model="pagare.garante" class="form-control form-control-sm">
+                    </div>
+                  </div>
+                  <div class="col-6 ">
+                    <div class="form-group">
+                      1233049439
+                    </div>
+                  </div>
+                  <div class="col-6 ">
+                    <div class="form-group">
+                      0893569486
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="modal-footer text-center">
+          {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
+          <button v-if="!pagare.update" type="button" class="btn btn-primary" @click.prevent="guardarPagare()">Guardar Pagaré</button>
+          <button v-if="pagare.update" type="button" class="btn btn-info" @click.prevent="updatePagare()">Actualizar Pagaré</button>
+        </div>
+      </div>
+    </div>
+  </div>

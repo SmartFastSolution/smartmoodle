@@ -124,5 +124,11 @@ class User extends Authenticatable implements MustVerifyEmail
      public function letras(){
         return $this->hasMany('App\ModuloLetraCambio');
     }
+    public function pagares(){
+        return $this->hasMany('App\Modulo\ModuloPagare');
+    }
+        public function papeletas(){
+        return $this->hasMany('App\Modulo\ModuloPapeleta');
+    }
     
 }

@@ -99,38 +99,52 @@
 </div>
 <h2 class="text-center font-weight-bold">Aplicacion de Documentos</h2>
 <div class="row justify-content-center mb-5 p-5" id="documentos"  >
-<div class="col-12" style="height: 200px; overflow-y: scroll; overflow-x: hidden;">
-       <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                {{-- <th scope="col">#</th> --}}
-                <th scope="col">Tipo de Documento</th>
-                <th scope="col">Modulo</th>
-                <th  width="200" class="text-center">Ver Documento</th>
+    <div class="col-12" style="height: 200px; overflow-y: scroll; overflow-x: hidden;">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    {{-- <th scope="col">#</th> --}}
+                    <th scope="col">Tipo de Documento</th>
+                    <th scope="col">Fecha</th>
+                    <th  width="200" class="text-center">Ver Documento</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(cheque, index) in cheques">
+                    <td>@{{ cheque.tipo_documento }}</td>
+                    <td>@{{ formatoFecha(cheque.modulo) }}</td>
+                    <td class="text-center"><a class="btn btn-success" href="" @click.prevent="verCheque(cheque.id, index)"><i class="fa fa-money-bill"></i></a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            <tr v-for="(cheque, index) in cheques">
-                <td>@{{ cheque.tipo_documento }}</td>
-                <td>@{{ cheque.modulo }}</td>
-                <td class="text-center"><a class="btn btn-success" href="" @click.prevent="verCheque(cheque.id, index)"><i class="fa fa-money-bill"></i></a>
+            <tr v-for="(nota_credito, index) in nota_creditos">
+                <td>@{{ nota_credito.tipo_documento }}</td>
+                <td>@{{ formatoFecha(nota_credito.modulo) }}</td>
+                <td class="text-center"><a class="btn btn-danger" href="" @click.prevent="verNota(nota_credito.id, index)"><i class="fa fa-file-invoice-dollar"></i></a>
             </td>
         </tr>
-        <tr v-for="(nota_credito, index) in nota_creditos">
-            <td>@{{ nota_credito.tipo_documento }}</td>
-            <td>@{{ nota_credito.modulo }}</td>
-            <td class="text-center"><a class="btn btn-danger" href="" @click.prevent="verNota(nota_credito.id, index)"><i class="fa fa-file-invoice-dollar"></i></a>
+        <tr v-for="(factura, index) in facturas">
+            <td>@{{ factura.tipo_documento }}</td>
+            <td>@{{ formatoFecha(factura.modulo) }}</td>
+            <td class="text-center"><a class="btn btn-info" href="" @click.prevent="verFactura(factura.id, index)"><i class="fa fa-file-invoice-dollar"></i></a>
         </td>
     </tr>
-    <tr v-for="(factura, index) in facturas">
-        <td>@{{ factura.tipo_documento }}</td>
-        <td>@{{ factura.modulo }}</td>
-        <td class="text-center"><a class="btn btn-info" href="" @click.prevent="verFactura(factura.id, index)"><i class="fa fa-file-invoice-dollar"></i></a>
-    </td>
-</tr>
+    <tr v-for="(letra_cambio, index) in letra_cambios">
+        <td>@{{ letra_cambio.tipo_documento }}</td>
+        <td>@{{ formatoFecha(letra_cambio.modulo) }}</td>
+        <td class="text-center"><a class="btn btn-warning" href="" @click.prevent="verLetra(letra_cambio.id, index)"><i class="fa fa-file-invoice-dollar"></i></td>
+    </tr>
+    <tr v-for="(pagare, index) in pagares">
+        <td>@{{ pagare.tipo_documento }}</td>
+        <td>@{{ formatoFecha(pagare.modulo) }}</td>
+        <td class="text-center"><a class="btn btn-secondary" href="" @click.prevent="verPagare(pagare.id, index)"><i class="fa fa-file-invoice-dollar"></i></td>
+    </tr>
+    <tr v-for="(papeleta_deposito, index) in papeleta_depositos">
+        <td>@{{ papeleta_deposito.tipo_documento }}</td>
+        <td>@{{ formatoFecha(papeleta_deposito.modulo) }}</td>
+        <td class="text-center"><a class="btn btn-primary" href="" @click.prevent="verPapeleta(papeleta_deposito.id, index)"><i class="fa fa-file-invoice-dollar"></i></td>
+    </tr>
 </tbody>
-</table> 
+</table>
 </div>
-
-@include('docentes.contabilidad.modales.modaldocumentos')
+@include('estudiantes.contabilidad.modales.modaldocumentos')
 </div>

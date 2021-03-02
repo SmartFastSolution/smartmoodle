@@ -7,7 +7,7 @@
         </div>
     </div>
 
-    <div class="row p-3  mb-2 justify-content-center">
+    <div class="row p-3  mb-2 justify-content-around">
         {{--         <div class="col-3 mb-2">
         <a class="btn btn-sm btn-danger" href="" @click.prevent="obtenerBalanceInicial()">Obtener Balance Inicial</a>
         </div> --}}
@@ -101,30 +101,24 @@
                 </tbody>
             </table>
 
-            <form action="">
-                @csrf
-
-                @if ($rol === 'estudiante' or 'docente')
-                <div class="row justify-content-center mb-2">
-                <div class="col-4 ">
-                <a href="#" class="btn btn-sm btn-outline-primary" @click.prevent="abrirTransaccion()">Crear Asiento de
+   
+            <div class="row justify-content-around">
+                 @if ($rol === 'estudiante' or 'docente')
+        <div class="col-3 mb-2">
+            <a href="#" class="btn btn-sm btn-outline-primary" @click.prevent="abrirTransaccion()">Crear Asiento de
                         Cierre</a>
-                    </div>
-                    @if($datos->metodo == 'concatenado')
-                    <div class="col-3">
-                        <a href="#" class="btn btn-sm btn-outline-danger" @click.prevent="llamarDiario()">Ir al Mayor
-                            General</a>
-                    </div>
-                </div>
-                @endif
-                <br>
-                <div class="row justify-content-center mb-2">
+        </div>
+    
+         <div class="col-4 mb-2">
                     <a href="#" class="addDiario btn btn-danger" @click.prevent="guardarDiario()">GUARDAR ASIENTOS DE CIERRE</a>
-                </div>
-
-                @endif
-            </form>
-            <div class="row justify-content-center">
+             
+        </div>
+            @if($datos->metodo == 'concatenado')
+        <div class="col-3">
+            <a href="#" class="btn btn-sm btn-outline-danger" @click.prevent="llamarDiario()">Ir al Mayor General</a>
+        </div>
+        @endif
+        @endif
             </div>
 
         </div>

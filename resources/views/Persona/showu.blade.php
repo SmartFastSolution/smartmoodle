@@ -142,23 +142,21 @@
 
                                 @foreach($roluser as $role)
                                 @if($role['descripcion']=='estudiante')
-
                                 <hr>
                                 <h4 class="font-weight-light">Sección Estudiante</h4>
                                 <div class="form-group">
                                     <label> Curso</label>
                                     <select class="form-control select" name="curso" style="width: 99%;" disabled>
-                                        @foreach($cursouser as $cuser)
-                                        <option selected disabled value="{{ $cuser->id }}">
-                                            {{ $cuser->nombre }}
+                                        {{-- @foreach($cursouser as $cuser) --}}
+                                        <option selected disabled value="{{ $curso->id }}">
+                                            {{ $curso->nombre }}
                                         </option>
-                                        @endforeach
-                                        @foreach($cursos as $curso)
+                                       {{--  @endforeach --}}
+                                     {{--    @foreach($cursos as $curso)
                                         <option value="{{$curso->id}}">{{$curso->nombre}}</option>
-                                        @endforeach
+                                        @endforeach --}}
                                     </select>
                                 </div>
-
                                 <div class="form-group">
                                     <label>Paralelo</label>
                                     <select class="form-control select" name="paralelo" style="width: 99%;" disabled>

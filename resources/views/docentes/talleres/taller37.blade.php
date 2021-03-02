@@ -392,15 +392,70 @@ console.log(datos)
                 total:'',
             }
         },
+        letra_cambio:{
+            vencimiento:'',
+            numero:'',
+            por:'',
+            ciudad:'',
+            fecha:'',
+            orden_de:'',
+            de:'',
+            cantidad:'',
+            interes:'',
+            desde:'',
+            direccion:'',
+            ciudad2:'',
+            atentamente:'',
+            update:false,
+            letra_id:'',
+            index:'',
+        },
+        papeleta_deposito:{
+            banco:'',
+            cuenta:'',
+            nombre:'',
+            lugar_fecha:'',
+            cantidad:'',
+            depositante:'',
+            update:false,
+            papeleta_id:'',
+            index:'',
+        },
+        pagare:{
+            por:'',
+            fecha:'',
+            nombre:'',
+            cantidad:'',
+            interes:'',
+            ciudad:'',
+            fecha_vencimiento:'',
+            señor:'',
+            deudor1:'',
+            garante:'',
+            update:false,
+            pagare_id:'',
+            index:'',
+        },
         cheques:[],
         documentos:[],
         facturas:[],
+         pagares:[],
+        papeleta_depositos:[],
+        letra_cambios:[],
         nota_creditos:[],
       },
        mounted: function(){
         this.getdocumentos();
       },
       methods:{
+                 formatoFecha(fecha){
+      if (fecha !== null) {
+         let date = fecha.split('-').reverse().join('-');
+      return date;
+    }else{
+      return
+    }
+    },
                getdocumentos(){
         let set = this;
         let url = '/sistema/admin/modulo/documento/show';
@@ -409,9 +464,12 @@ console.log(datos)
                 user:this.user_id
             }).then(response => {
                 // console.log(response.data.cheques)
-                this.cheques = response.data.cheques;
-                this.nota_creditos = response.data.creditos;
-                this.facturas = response.data.facturas;
+                  this.cheques            = response.data.cheques;
+                this.nota_creditos      = response.data.creditos;
+                this.facturas           = response.data.facturas;
+                this.letra_cambios      = response.data.letras;
+                this.pagares            = response.data.pagares;
+                this.papeleta_depositos = response.data.papeleta_depositos;
             }).catch(function(error){
 
             }); 
@@ -582,7 +640,112 @@ console.log(datos)
 
 
                     
-        }
+        },
+           verLetra(id, index){
+                let set                      = this;
+                let letra_cambio             = this.letra_cambios.filter(x => x.id == id);
+                set.letra_cambio.letra_id    = letra_cambio[0].id;
+                set.letra_cambio.index       = index;
+                set.modulo                   = letra_cambio[0].modulo;
+                set.letra_cambio.vencimiento = letra_cambio[0].vencimiento;
+                set.letra_cambio.numero      = letra_cambio[0].numero;
+                set.letra_cambio.por         = letra_cambio[0].por;
+                set.letra_cambio.ciudad      = letra_cambio[0].ciudad;
+                set.letra_cambio.fecha       = letra_cambio[0].fecha;
+                set.letra_cambio.orden_de    = letra_cambio[0].orden_de;
+                set.letra_cambio.de          = letra_cambio[0].de;
+                set.letra_cambio.cantidad    = letra_cambio[0].cantidad;
+                set.letra_cambio.interes     = letra_cambio[0].interes;
+                set.letra_cambio.desde       = letra_cambio[0].desde;
+                set.letra_cambio.direccion   = letra_cambio[0].direccion;
+                set.letra_cambio.ciudad2     = letra_cambio[0].ciudad2;
+                set.letra_cambio.atentamente = letra_cambio[0].atentamente;
+                $('#m_letra_cambio').modal('show');
+                set.letra_cambio.update = true;
+        },
+            resetLetra(){
+                    let set                      = this;
+                    // set.modulo                   = '';
+                    set.letra_cambio.vencimiento = '';
+                    set.letra_cambio.numero      = '';
+                    set.letra_cambio.por         = '';
+                    set.letra_cambio.ciudad      = '';
+                    set.letra_cambio.fecha       = '';
+                    set.letra_cambio.orden_de    = '';
+                    set.letra_cambio.de          = '';
+                    set.letra_cambio.cantidad    = '';
+                    set.letra_cambio.interes     = '';
+                    set.letra_cambio.desde       = '';
+                    set.letra_cambio.direccion   = '';
+                    set.letra_cambio.ciudad2     = '';
+                    set.letra_cambio.atentamente = '';
+                    set.nota_credito.update      = false
+                    set.nota_credito.nota_id     = '';
+                    set.nota_credito.index       = '';      
+        },
+            verPagare(id, index){
+                let set                      = this;
+                let pagare                   = this.pagares.filter(x => x.id == id);
+                set.pagare.pagare_id         = pagare[0].id;
+                set.pagare.index             = index;
+                set.modulo                   = pagare[0].modulo;
+                set.pagare.por               = pagare[0].por;
+                set.pagare.fecha             = pagare[0].fecha;
+                set.pagare.nombre            = pagare[0].nombre;
+                set.pagare.cantidad          = pagare[0].cantidad;
+                set.pagare.interes           = pagare[0].interes;
+                set.pagare.ciudad            = pagare[0].ciudad;
+                set.pagare.fecha_vencimiento = pagare[0].fecha_vencimiento;
+                set.pagare.señor             = pagare[0].señor;
+                set.pagare.deudor1           = pagare[0].deudor1;
+                set.pagare.garante           = pagare[0].garante;
+               
+                $('#m_pagare').modal('show');
+                set.pagare.update = true;
+        },
+                resetPagare(){
+            let set                      = this;
+            set.pagare.por               = '';
+            set.pagare.fecha             = '';
+            set.pagare.nombre            = '';
+            set.pagare.cantidad          = '';
+            set.pagare.interes           = '';
+            set.pagare.ciudad            = '';
+            set.pagare.fecha_vencimiento = '';
+            set.pagare.señor             = '';
+            set.pagare.deudor1           = '';
+            set.pagare.garante           = '';
+            set.pagare.update            = false;
+            set.pagare.pagare_id         = '';
+            set.pagare.index             = '';         
+        },
+         verPapeleta(id, index){
+                let set                           = this;
+                let papeleta_deposito             = this.papeleta_depositos.filter(x => x.id == id);
+                set.papeleta_deposito.papeleta_id = papeleta_deposito[0].id;
+                set.papeleta_deposito.index       = index;
+                set.modulo                        = papeleta_deposito[0].modulo;
+                set.papeleta_deposito.banco       = papeleta_deposito[0].banco;
+                set.papeleta_deposito.cuenta      = papeleta_deposito[0].cuenta;
+                set.papeleta_deposito.nombre      = papeleta_deposito[0].nombre;
+                set.papeleta_deposito.lugar_fecha = papeleta_deposito[0].lugar_fecha;
+                set.papeleta_deposito.cantidad    = papeleta_deposito[0].cantidad;
+                set.papeleta_deposito.depositante = papeleta_deposito[0].depositante;
+                $('#m_papeleta').modal('show');
+                set.papeleta_deposito.update = true;
+        },
+        resetPapeleta(){
+            let set                           = this;
+            set.papeleta_deposito.banco       = '';
+            set.papeleta_deposito.cuenta      = '';
+            set.papeleta_deposito.nombre      = '';
+            set.papeleta_deposito.lugar_fecha = '';
+            set.papeleta_deposito.cantidad    = '';
+            set.papeleta_deposito.depositante = '';
+            set.papeleta_deposito.update      = false;
+            set.papeleta_deposito.papeleta_id = '';
+            set.papeleta_deposito.index       = '';         
+        },
       }
 
   });
