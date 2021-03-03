@@ -20,24 +20,24 @@
                     title="Agregar Activo Corriente" @click="abrirActivoC()" class="btn btn-sm btn-info text-light"><i
                         class="fa fa-plus"></i></a></h3><br>
 
-            <table class="table table-borderless">
+            <table class="table table-borderless table-sm">
                 <tbody v-for="(element, index) in a_corrientes" :key="element.name">
                     <tr>
                         <td width="400">@{{ element.cuenta }}</td>
                         <td class="text-right">@{{ decimales(element.saldo) }}</td>
                         <td class="text-right">@{{ decimales(element.total_saldo) }}</td>
-                        <td><a @click="editAcorriente(index)" class="btn btn-warning btn-sm mr-1"><i
+                        <td width="10"><a @click="editAcorriente(index)" class="btn btn-warning btn-sm mr-1"><i
                                     class="fas fa-edit"></i></a></td>
-                        <td><a @click="deleteAcCooriente(index)" class="btn btn-danger btn-sm re_diario"><i
+                        <td width="10"><a @click="deleteAcCooriente(index)" class="btn btn-danger btn-sm re_diario"><i
                                     class="fas fa-trash-alt"></i></a></td>
                     </tr>
                     <tr
                         v-if="element.cuenta2 !== '' && element.saldo2 !== '' && element.total_saldo2 !=='' && element.cuenta2 !== null">
-                        <td>(-)@{{ element.cuenta2 }}</td>
+                        <td width="400">(-)@{{ element.cuenta2 }}</td>
                         <td style="border-bottom: solid 2px" class="text-right border-danger">
                             @{{ decimales(element.saldo2) }}</td>
                         <td class="text-right">@{{ decimales(element.total_saldo2) }}</td>
-                        <td colspan="2"></td>
+                        <td width="20" colspan="2"></td>
                     </tr>
                 </tbody>
             </table>
@@ -68,20 +68,20 @@
                     title="Agregar Activo No Corriente" @click="abrirActivoNoC()"
                     class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3><br>
 
-            <table class="table table-borderless">
+            <table class="table table-borderless table-sm">
                 <tbody v-for="(element, index) in a_nocorrientes" :key="element.name">
                     <tr>
                         <td width="400">@{{ element.cuenta }}</td>
                         <td class="text-right">@{{ decimales(element.saldo) }}</td>
                         <td class="text-right">@{{ decimales(element.total_saldo) }}</td>
-                        <td><a @click="editNoAcorriente(index)" class="btn btn-warning btn-sm mr-1"><i
+                        <td width="10"><a @click="editNoAcorriente(index)" class="btn btn-warning btn-sm mr-1"><i
                                     class="fas fa-edit"></i></a></td>
-                        <td><a @click="deleteAcNoCooriente(index)" class="btn btn-danger btn-sm re_diario"><i
+                        <td width="10"><a @click="deleteAcNoCooriente(index)" class="btn btn-danger btn-sm re_diario"><i
                                     class="fas fa-trash-alt"></i></a></td>
                     </tr>
                     <tr
                         v-if="element.cuenta2 !== '' && element.saldo2 !== '' && element.total_saldo2 !=='' && element.cuenta2 !== null">
-                        <td>(-)@{{ element.cuenta2 }}</td>
+                        <td width="400">(-)@{{ element.cuenta2 }}</td>
                         <td style="border-bottom: solid 2px" class="text-right border-danger">
                             @{{ decimales(element.saldo2) }}</td>
                         <td class="text-right">@{{ decimales(element.total_saldo2) }}</td>
@@ -223,11 +223,11 @@
         </table>
     </div>
     <div class="col-12">
-        <table>
+        <table class="table table-borderless table-sm">
             <tbody>
                 <tr>
-                    <td class="font-weight-bold" style="font-size: 20px;" width="750">TOT. PAS. Y PATRI.</td>
-                    <td><input autocomplete="ÑÖcompletes" type="number"
+                    <td class="font-weight-bold" style="font-size: 20px;">TOT. PAS. Y PATRI.</td>
+                    <td width="250"><input autocomplete="ÑÖcompletes" type="number"
                             v-model="total_balance_inicial.t_patrimonio_pasivo" class="form-control text-right"></td>
                 </tr>
             </tbody>

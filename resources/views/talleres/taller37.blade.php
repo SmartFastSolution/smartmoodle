@@ -114,9 +114,6 @@
         <a class="btn btn-warning btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_letra_cambio"><i class="fas fa-file-invoice-dollar"></i> LETRA DE CAMBIO</a>
         <a class="btn btn-secondary btn-sm" href="#" data-toggle="modal" data-target="#m_papeleta"><i class="fas fa-file-invoice-dollar"></i> PAPELETA DE DEPOSITO</a>
     </div> --}}
-
-
-
  @if ($datos->metodo == 'concatenado')
     <div class="row justify-content-md-center">
         <div class="col-12 col-sm-12 col-md-2 mb-3">
@@ -407,11 +404,11 @@
 @include ('layouts.footer')
 @section('js')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-{{--  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+ {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> --}}
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
+{{--   <script>
   $( function() {
-          $("#m_cheque").draggable({
+          $("#m_letra_cambio").draggable({
       handle: ".modal-header"
   });
   } );
@@ -472,6 +469,7 @@
       el: "#documentos",
       data:{
         modulo:'',
+        show:true,
         cheque:{
             tipo_cheque:'',
             banco:'',
@@ -512,6 +510,7 @@
             cantidad:'',
             depositante:'',
             update:false,
+            show:true,
             papeleta_id:'',
             index:'',
         },
@@ -1036,6 +1035,7 @@
               "timeOut": "3000"
           });
             }else{
+                 this.show = false;
             let set = this;
             let cheque = {
                 modulo: set.modulo,
@@ -1068,6 +1068,7 @@
                 firma: set.cheque.firma
             }).then(response => {
                 $('#m_cheque').modal('hide');
+                 this.show = true;
                 // console.log(response.data.cheque)
                 this.cheques.push(response.data.cheque);
                 toastr.success("Cheque creado Correctamente", "Smarmoddle", {
@@ -1095,6 +1096,7 @@
               "timeOut": "3000"
           });
             } else {
+                 this.show = false;
             let set = this;
             let url = '/sistema/admin/modulo/letra-cambio';
             axios.post(url,{
@@ -1117,6 +1119,7 @@
                 atentamente:        set.letra_cambio.atentamente
             }).then(response => {
                 $('#m_letra_cambio').modal('hide');
+                 this.show = true;
                 // console.log(response.data.cheque)
                 this.letra_cambios.push(response.data.letra_cambio);
                 toastr.success("Letra de Cambio creada Correctamente", "Smarmoddle", {
@@ -1135,6 +1138,7 @@
                 "timeOut": "3000"
           });
             }else {
+                 this.show = false;
             let set = this;
             let url = '/sistema/admin/modulo/nota_credito';
             axios.post(url,{
@@ -1152,6 +1156,7 @@
                 totales: set.nota_credito.totales,
             }).then(response => {
                 $('#m_credito').modal('hide');
+                 this.show = true;
                 // console.log(response.data.cheque)
                 this.nota_creditos.push(response.data.nota_credito);
                 toastr.success("Nota de Credito creada Correctamente", "Smarmoddle", {
@@ -1179,9 +1184,9 @@
                     set.letra_cambio.direccion   = '';
                     set.letra_cambio.ciudad2     = '';
                     set.letra_cambio.atentamente = '';
-                    set.nota_credito.update      = false
-                    set.nota_credito.nota_id     = '';
-                    set.nota_credito.index       = '';      
+                    set.letra_cambio.update      = false
+                    set.letra_cambio.letra_id    = '';
+                    set.letra_cambio.index       = '';      
         },
         resetNota(){
                     let set = this;
@@ -1214,9 +1219,9 @@
                      set.nota_credito.totales.iva_12           = '';
                      set.nota_credito.totales.irbpnr           = '';
                      set.nota_credito.totales.total            = '';
-                    set.nota_credito.update = false
-                    set.nota_credito.nota_id = '';
-                    set.nota_credito.index = '';
+                     set.nota_credito.update                   = false
+                     set.nota_credito.nota_id                  = '';
+                     set.nota_credito.index                    = '';
 
 
                     
@@ -1227,6 +1232,7 @@
                 "timeOut": "3000"
           });
             }else {
+                 this.show = false;
             let set = this;
             let url = '/sistema/admin/modulo/factura';
             axios.post(url,{
@@ -1242,12 +1248,13 @@
                 totales: set.factura.totales,
             }).then(response => {
                 $('#m_factura').modal('hide');
+                 this.show = true;
                 // console.log(response.data.cheque)
                 this.facturas.push(response.data.factura);
                 toastr.success("Factura creada Correctamente", "Smarmoddle", {
                 "timeOut": "3000"
                 });
-                    set.resetNota();
+               this.resetFactura();
                 }).catch(function(error){
 
                 }); 
@@ -1293,6 +1300,7 @@
                 "timeOut": "3000"
           });
             }else {
+                 this.show = false;
             let set = this;
             let url = '/sistema/admin/modulo/pagare';
             axios.post(url,{
@@ -1312,6 +1320,7 @@
                 garante:                set.pagare.garante,
             }).then(response => {
                 $('#m_pagare').modal('hide');
+                 this.show = true;
                 // console.log(response.data.cheque)
                 this.pagares.push(response.data.pagare);
                 toastr.success("Pagaré creado Correctamente", "Smarmoddle", {
@@ -1416,6 +1425,7 @@
           });
             }else {
             let set = this;
+            this.show = false;
             let url = '/sistema/admin/modulo/papeleta';
             axios.post(url,{
                 id:                      taller_id,
@@ -1429,7 +1439,10 @@
                 cantidad:               set.papeleta_deposito.cantidad,
                 depositante:            set.papeleta_deposito.depositante,
             }).then(response => {
+           
+
                 $('#m_papeleta').modal('hide');
+                 this.show = true;
                 // console.log(response.data.cheque)
                 this.papeleta_depositos.push(response.data.papeleta_deposito);
                 toastr.success("Papeleta de Deposito Creada Correctamente", "Smarmoddle", {

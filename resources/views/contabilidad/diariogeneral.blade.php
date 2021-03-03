@@ -286,7 +286,7 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Tipo de Documento</th>
-                    <th scope="col">Fecha</th>
+                    <th scope="col">Fecha de la Transaccion</th>
                     <th  width="200" class="text-center">Acciones</th>
                 </tr>
             </thead>

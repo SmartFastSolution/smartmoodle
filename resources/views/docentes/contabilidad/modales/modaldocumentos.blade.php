@@ -12,7 +12,7 @@
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">CHEQUE</h3>
           <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-1 col-form-label">FECHA</label>
+        <label for="inputEmail3" class="col-sm-3 col-form-label">FECHA DE LA TRANSACCION</label>
         <div class="col-sm-4">
         <input disabled="" type="date" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
           
@@ -103,7 +103,7 @@
       <div class="modal-body">
           <h3 class="text-center font-weight-bold">NOTA DE CREDITO</h3>
           <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-1 col-form-label">FECHA</label>
+        <label for="inputEmail3" class="col-sm-3 col-form-label">FECHA DE LA TRANSACCION</label>
         <div class="col-sm-4">
         <input disabled="" type="date" class="form-control mb-2" placeholder="Modulo al que pertenece la nota de debito" v-model="modulo">
           
@@ -145,12 +145,12 @@
             </div>
             <div class="row  mb-1">
               <div class="col-6 "><label for="">FECHA EMISIÓN :</label></div>
-              <div class="col-6"><input disabled=""  name="fecha_emision" type="text " v-model="nota_credito.fecha_emision" class="form-control"></div>
+              <div class="col-6"><input disabled=""  name="fecha_emision" type="date" v-model="nota_credito.fecha_emision" class="form-control"></div>
             </div>
           </div>
           <div class="col-5">
             <div class="row mb-3">
-              <div class="col-5"><label class="col-form-label">R.U.C/C.I. :</label></div>
+              <div class="col-5"><label class="col-form-label">R.U.C/C.I.:</label></div>
               <div class="col-7"><input disabled=""  name="ruc" type="text " v-model="nota_credito.ruc" class="form-control text-right"></div>
             </div>
             {{-- <div class="row">
@@ -165,7 +165,7 @@
             </div>
             <div class="row  mb-1">
               <div class="col-6 "><label for="">FECHA EMISION(Comprobante a modificar) :</label></div>
-              <div class="col-6"><input disabled=""  type="text " v-model="nota_credito.emision" class="form-control"></div>
+              <div class="col-6"><input disabled=""  type="date" v-model="nota_credito.emision" class="form-control"></div>
             </div>
             <div class="row  mb-1">
               <div class="col-6 "><label for="">RAZON DE MODIFICACION:</label></div>
@@ -194,8 +194,8 @@
                 <td width="100"><input disabled="" type="number" v-model="dato.cantidad" name="cantidad[]" class="form-control text-right" ></td>
                 <td ><textarea disabled="" v-model="dato.descripcion" name="descripcion[]" class="form-control" ></textarea> </td>
                 <td width="50"><input disabled="" type="number" v-model="dato.descuento" name="precio[]" class="form-control text-right" ></td>
-                <td width="50"><input disabled="" type="number" v-model="dato.p_unitario" name="descuento[]" class="form-control text-right" ></td>
-                <td width="75" ><input disabled="" type="number" v-model="dato.venta" name="valor[]" class="form-control text-right" ></td>
+                <td width="75"><input disabled="" type="number" v-model="dato.p_unitario" name="descuento[]" class="form-control text-right" ></td>
+                <td width="125" ><input disabled="" type="number" v-model="dato.venta" name="valor[]" class="form-control text-right" ></td>
 
               </tr>
                   
@@ -292,7 +292,7 @@
       <div class="modal-body">
                <h3 class="text-center font-weight-bold">FACTURA</h3>
           <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-1 col-form-label">FECHA</label>
+        <label for="inputEmail3" class="col-sm-3 col-form-label">FECHA DE LA TRANSACCION</label>
         <div class="col-sm-4">
         <input disabled="" type="date" class="form-control mb-2" placeholder="Modulo al que pertenece la factura" v-model="modulo">
           
@@ -332,7 +332,7 @@
             </div>
             <div class="row">
               <div class="col-6"><label class="col-form-label" for="">FECHA EMISIÓN :</label></div>
-              <div class="col-6"><input disabled=""  name="fecha_emision" type="text " v-model="factura.fecha_emision" class="form-control"></div>
+              <div class="col-6"><input disabled=""  name="fecha_emision" type="date" v-model="factura.fecha_emision" class="form-control"></div>
             </div>
           </div>
           <div class="col-5">
@@ -366,8 +366,8 @@
                 <td width="100"><input disabled="" type="number" v-model="dato.cantidad" name="cantidad[]" class="form-control text-right" ></td>
                 <td ><textarea disabled="" v-model="dato.descripcion" name="descripcion[]" class="form-control" ></textarea> </td>
                 <td width="50"><input disabled="" type="number" v-model="dato.p_unitario" name="precio[]" class="form-control text-right" ></td>
-                <td width="50"><input disabled="" type="number" v-model="dato.descuento" name="descuento[]" class="form-control text-right" ></td>
-                <td width="75" ><input disabled="" type="number" v-model="dato.venta" name="valor[]" class="form-control text-right" ></td>
+                <td width="75"><input disabled="" type="number" v-model="dato.descuento" name="descuento[]" class="form-control text-right" ></td>
+                <td width="125" ><input disabled="" type="number" v-model="dato.venta" name="valor[]" class="form-control text-right" ></td>
               </tr> 
             </tbody>
           </table>
@@ -458,7 +458,7 @@
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">LLENAR PAGARÉ</h3>
              <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-1 col-form-label">FECHA</label>
+          <label for="inputEmail3" class="col-sm-3 col-form-label">FECHA DE LA TRANSACCION</label>
           <div class="col-sm-4">
             <input disabled="" type="date" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
             
@@ -550,15 +550,15 @@
   <div class="modal-dialog  modal-dialog-centered modal-xl ">
     <div class="modal-content bg-light">
       <div class="modal-header">
-        <h5 class="modal-title" id="m_letra_cambioLabel">PAPELETA DE DEPOSTIVO</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click.prevent="resetLetra()">
+        <h5 class="modal-title" id="m_letra_cambioLabel">PAPELETA DE DEPOSITO</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click.prevent="resetPapeleta()">
         <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">LLENAR PAPELETA DE DEPOSITO</h3>
             <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-1 col-form-label">FECHA</label>
+          <label for="inputEmail3" class="col-sm-3 col-form-label">FECHA DE LA TRANSACCION</label>
           <div class="col-sm-4">
             <input disabled="" type="date" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
             
@@ -569,10 +569,10 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="row">
-                <div class="col-lg-2">
+          {{--       <div class="col-lg-2">
                   <img src="{{ asset('img/nota-credito.png') }}" width="100" alt="">
-                </div>
-                <div class="col-lg-5 text-center">
+                </div> --}}
+                <div class="col-lg-7 text-center">
                   <h1 class="text-danger font-weight-bold">BANCO</h1>
                   <input type="text" disabled v-model="papeleta_deposito.banco" class="form-control form-control-sm">
                 </div>
@@ -742,7 +742,7 @@
       <div class="modal-body">
         <h3 class="text-center font-weight-bold">LLENAR LETRA DE CAMBIO</h3>
              <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-1 col-form-label">MODULO</label>
+          <label for="inputEmail3" class="col-sm-3 col-form-label">FECHA DE LA TRANSACCION</label>
           <div class="col-sm-4">
             <input disabled="" type="date" class="form-control mb-2" placeholder="Modulo al que pertenece el cheque" v-model="modulo">
             
