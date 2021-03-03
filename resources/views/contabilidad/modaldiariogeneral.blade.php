@@ -15,7 +15,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <a class="btn btn-dark mb-2" href="" @click.prevent="calculadora()">CALCULADORA</a>
+                    <div class="row justify-content-center mb-5 mt-2">
+                <a class="btn btn-dark btn-sm mr-1" href="" @click.prevent="calculadora()">CALCULADORA</a>
+
+        <a class="btn btn-success btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_cheque"><i class="far fa-money-bill"></i> CHEQUE</a>
+        <a class="btn btn-danger btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_credito"><i class="fas fa-file-invoice-dollar"></i> NOTA DE CREDITO</a>
+        <a class="btn btn-warning btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_letra_cambio"><i class="fas fa-file-invoice-dollar"></i> LETRA DE CAMBIO</a>
+        <a class="btn btn-info btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_factura"><i class="fas fa-file-invoice-dollar"></i> FACTURA</a>
+        <a class="btn btn-secondary btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_papeleta"><i class="fas fa-file-invoice-dollar"></i> PAPELETA DE DEPOSITO</a>
+        <a class="btn btn-primary btn-sm mr-1" href="#" data-toggle="modal" data-target="#m_pagare"><i class="fas fa-file-invoice-dollar"></i> PAGARÉ</a>
+    </div>
 
                 <div class="row justify-content-center">
                     <div class="col-6 ">

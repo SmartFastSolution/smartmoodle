@@ -444,11 +444,11 @@ class="fas fa-trash-alt"></i></a></span>
 </table>
 </div>
 <div class="col-12">
-<table class=" table-borderless">
+<table class="table table-borderless table-sm">
 <tbody>
 <tr>
 <td class="font-weight-bold" style="font-size: 20px;" width="950">TOT. PAS. Y PATRI.</td>
-<td class="text-right"><input autocomplete="ÑÖcompletes" type="number"
+<td width="250" class="text-right"><input autocomplete="ÑÖcompletes" type="number"
 v-model="total_balance_inicial.t_patrimonio_pasivo"
 class="form-control text-right font-weight-bold"></td>
 </tr>

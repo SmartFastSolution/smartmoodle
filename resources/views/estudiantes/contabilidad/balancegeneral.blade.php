@@ -22,7 +22,7 @@
             
           </tr>
           <tr v-if="element.cuenta2 !== '' && element.saldo2 !== '' && element.total_saldo2 !=='' && element.cuenta2 !== null">
-            <td >(-)@{{ element.cuenta2 }}</td>
+            <td width="400">(-)@{{ element.cuenta2 }}</td>
             <td style="border-bottom: solid 2px" class="text-right border-danger">@{{ decimales(element.saldo2) }}</td>
             <td class="text-right">@{{ decimales(element.total_saldo2) }}</td>
             <td colspan="2"></td>
@@ -52,7 +52,7 @@
             
           </tr>
           <tr v-if="element.cuenta2 !== '' && element.saldo2 !== '' && element.total_saldo2 !=='' && element.cuenta2 !== null">
-            <td >(-)@{{ element.cuenta2 }}</td>
+            <td width="400">(-)@{{ element.cuenta2 }}</td>
             <td style="border-bottom: solid 2px" class="text-right border-danger">@{{ decimales(element.saldo2) }}</td>
             <td class="text-right">@{{ decimales(element.total_saldo2) }}</td>
             <td colspan="2"></td>
