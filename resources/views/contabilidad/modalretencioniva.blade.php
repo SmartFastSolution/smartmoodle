@@ -10,7 +10,7 @@
                 </template>
                 <template v-else="!update">
                     <div>
-                        <h5 class="modal-title" id="bg-transaccionLabel">AGREGAR TRANSACCION</h5>
+                        <h5 class="modal-title" id="bg-transaccionLabel">AGREGAR REGISTRO DE COMPRAS Y VENTAS</h5>
                     </div>
                 </template>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -96,7 +96,7 @@
                     <div class="col-12 mt-2 border border-bottom-0 border-left-0 border-right-0 border-danger">
 
                         <br>
-                        <h2 class="text-center"> AGREGAR RETENCIÓN</h2>
+                        <h2 class="text-center"> AGREGAR REGISTRO DE COMPRAS Y VENTAS</h2>
                         <div class="col-12">
                             <ul class="nav nav-tabs" id="compra" role="tablist">
                                 <li class="nav-item" role="presentation">

@@ -55,7 +55,7 @@
                         <tr>
                             <td>{{$dis->instituto->nombre}}</td>
                             <td>{{$dis->curso->nombre}}</td>
-                            <td>{{$ma->nombre}}</td>
+                            <td class="text-left">{{$ma->nombre}}</td>
                             <td>{{$contenido->nombre}}</td>
                             <td>{{$tl->nombre}}</td>
 
@@ -101,7 +101,7 @@
                                 {{$c->curso->nombre}}
                                 @endforeach
                             </td>
-                            <td class="text-center">
+                            <td class="text-left">
                                 {{$do->materia->nombre}}
                             </td>
                             <td class="text-center">
@@ -155,7 +155,7 @@
                             <td>{{$es->user->name}} {{$es->user->apellido}}</td>
                             <td>{{$cur->curso->nombre}}</td>
                             <td>{{$es->user->nivel->nombre}}</td>
-                            <td>{{$ma->nombre}}</td>
+                            <td class="text-left">{{$ma->nombre}}</td>
                             <td> {{$es->user->created_at->diffForHumans()}}</td>
                         </tr>
                         @endforeach
@@ -236,7 +236,7 @@
                         <tr>
                             <td>{{$do->instituto->nombre}}</td>
                             <td>{{$do->user->name}} {{$do->user->apellido}}</td>
-                            <td class="text-center">
+                            <td class="text-left">
                                 {{$do->materia->nombre}}
                             </td>
                             <td>{{$asig->user->name}} {{$asig->user->apellido}}</td>

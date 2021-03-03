@@ -64,6 +64,7 @@
         <a class="btn btn-info btn" href="{{ route('contenido.talleres', $materia->id) }}"><i
                 class="fas fa-book-open"></i>
             Talleres</i></a>
+            <h3 class="text-center"> RECURSOS EDUCATIVOS DIGITALES</h3>
 
     </div>
 </section>
@@ -82,7 +83,7 @@
             </div>
         </div>
         <div class="card-body">
-        <h3> Recursos Educativos Digitales</h3>
+     
             <table id="myTable3" class="table table-hover">
                 <thead>
                     <th scope="col">Unidad</th>

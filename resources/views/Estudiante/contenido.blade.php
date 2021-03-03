@@ -61,7 +61,8 @@
         <h3 class="font-weight-light"> <strong>Docente|{{$docente->nombre_docente}}
                 {{$docente->apellido_docente}}</strong>
         </h3>
-
+        <br>
+        <h3 class="text-center"> RECURSOS EDUCATIVOS DIGITALES</h3>
         <!-- <a class="btn btn-primary btn" href=""><i class="far fa-clipboard"></i> Calificaciones</i></a> -->
     </div>
 </section>
@@ -80,7 +81,7 @@
             </div>
         </div>
         <div class="card-body">
-        <h3> Recursos Educativos Digitales</h3>
+      
             <ul class="nav nav-tabs" id="myTab" role="tablist" style="font-size: 20px;">
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active" id="mn-documentos-generales-tab" data-toggle="tab"

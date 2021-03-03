@@ -174,7 +174,7 @@
                     <td>
                         <div class="col-sm-10">
                             <input class="form-control  text-right  form-control-sm"  type="number" step="0.01"
-                                v-model="total.t_ivaventa" placeholder="IVA EN VENTAS" name="">
+                                v-model="total.t_ivaventa" placeholder="0,00" name="">
                         </div>
                     </td>
 
@@ -188,7 +188,7 @@
 
                         <div class="col-sm-10">
                             <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
-                                v-model="total.t_ivacompra" placeholder="- IVA EN COMPRAS" name="">
+                                v-model="total.t_ivacompra" placeholder="0,00" name="">
                         </div>
                     </td>
                 </tr>
@@ -199,7 +199,7 @@
                     <td>
                         <div class="col-sm-10">
                             <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
-                                v-model="total.result_iva" placeholder="RES. IVA" name="">
+                                v-model="total.result_iva" placeholder="0,00" name="">
                         </div>
                     </td>
                 </tr>
@@ -211,7 +211,7 @@
 
                         <div class="col-sm-10">
                             <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
-                                v-model="total.t_reten" placeholder="+ RET. IVA" name="">
+                                v-model="total.t_reten" placeholder="0,00" name="">
                         </div>
                     </td>
                 </tr>
@@ -222,7 +222,7 @@
                     <td>
                         <div class="col-sm-10">
                             <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
-                                v-model="total.total_pagar" placeholder="TOTAL A PAGAR" name="">
+                                v-model="total.total_pagar" placeholder="0,00" name="">
                         </div>
                     </td>
                 </tr>
@@ -235,8 +235,6 @@
         <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardaretencioniva()">Guardar Cuadro de Retención</a>
     </div>
     @endif
-
-
     <br>
     @include ('contabilidad.modalretencioniva')
 </div>
