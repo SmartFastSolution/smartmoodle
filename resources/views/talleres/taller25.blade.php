@@ -214,7 +214,7 @@
 		</div>
 		
 		<div class="row justify-content-center">
-        		<input type="button" id="button" value="Guardar Datos" class="btn p-2 mt-3 mb-5 btn-danger">
+        		<input type="button" id="button" value="Enviar Respuesta" class="btn p-2 mt-3 mb-5 btn-danger">
     		 </div>
 	</div>
 	</form>

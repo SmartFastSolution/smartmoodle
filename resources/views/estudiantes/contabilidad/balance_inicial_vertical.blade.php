@@ -15,14 +15,14 @@
   <h2 class="text-center font-weight-bold text-danger">ACTIVOS</h2>
   <div class="row">
     <div class="col-7">
-      <h3 class="text-primary">ACTIVOS CORRIENTE</h3><br>
-      <draggable class="list-group list-group-flush" :list="a_corrientes" group="people">
+      <h3 class="text-primary">ACTIVOS CORRIENTE</h3>
+      <ul class="list-group list-group-flush">
       <div v-for="(element, index) in a_corrientes" :key="element.name">
         <li class="list-group-item d-flex justify-content-between align-items-center">
           @{{ element.nom_cuenta }}<span class="badge-pill">@{{ decimales(element.saldo) }}</span>
         </li>
       </div>
-      </draggable>
+      </ul>
     </div>
     <div class="col-12">
       <table>
@@ -35,17 +35,17 @@
       </table>
     </div>
     <div class="col-7">
-      <h3 class="text-primary">ACTIVOS NO CORRIENTE</h3><br>
-      <draggable class="list-group list-group-flush" :list="a_nocorrientes" group="people">
+      <h3 class="text-primary">ACTIVOS NO CORRIENTE</h3>
+      <ul class="list-group list-group-flush" >
       <div v-for="(element, index) in a_nocorrientes" :key="element.name">
         <li class="list-group-item d-flex justify-content-between align-items-center">@{{ element.nom_cuenta }}
           <span class="badge-pill">@{{ decimales(element.saldo) }}</span>
         </li>
       </div>
-      </draggable>
+      </ul>
     </div>
     <div class="col-12">
-      <table>
+      <table class="table table-sm table-borderless">
         <tbody>
           <tr>
             <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOTAL ACT. NO CORR.</td>
@@ -67,14 +67,14 @@
   <div class="row">
     <div class="col-7 ">
       <h3 class="text-primary">PASIVOS CORRIENTE</h3>
-      <draggable class="list-group list-group-flush" :list="p_corrientes" group="people">
+      <ul class="list-group list-group-flush" >
       <div v-for="(element, index) in p_corrientes" :key="element.name">
         <li class="list-group-item d-flex justify-content-between align-items-center">
           @{{ element.nom_cuenta }}
           <span class=" badge-pill">@{{ decimales(element.saldo) }}</span>
         </li>
       </div>
-      </draggable>
+      </ul>
     </div>
     <div class="col-12">
       <table>
@@ -89,14 +89,14 @@
     <br><br>
     <div class="col-7 ">
       <h3 class="text-primary">NO CORRIENTE </h3>
-      <draggable class="list-group list-group-flush" :list="p_nocorrientes" group="people">
+      <ul class="list-group list-group-flush" >
       <div v-for="(element, index) in p_nocorrientes" :key="element.name">
         <li class="list-group-item d-flex justify-content-between align-items-center">
           @{{ element.nom_cuenta }}
           <span class=" badge-pill">@{{ decimales(element.saldo) }} </span>
         </li>
       </div>
-      </draggable>
+      </ul>
     </div>
     <div class="col-12">
       <table>
@@ -124,14 +124,14 @@
   
   <div class="row">
     <div class="col-7">
-      <draggable class="list-group list-group-flush" :list="patrimonios" group="people">
+      <ul class="list-group list-group-flush">
       <div v-for="(element, index) in patrimonios" :key="element.name">
         <li class="list-group-item d-flex justify-content-between align-items-center">
           @{{ element.nom_cuenta }}
           <span class="badge-pill">@{{ decimales(element.saldo) }}</span>
         </li>
       </div>
-      </draggable>
+      </ul>
     </div>
     <div class="col-12">
       <table>
@@ -143,12 +143,12 @@
         </tbody>
       </table>
     </div>
-    <div class="col-12">
+    <div class="col-12 mt-1">
       <table>
         <tbody>
           <tr>
-            <td class="font-weight-bold" style="font-size: 20px;" width="1500">TOT. PAS. Y PATRI.</td>
-            <td class="text-right"><span style="font-size: 20px; margin-left: 35px;" class="badge badge-danger">@{{ decimales(total_balance_inicial.t_patrimonio_pasivo) }}</span></td>
+            <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOT. PAS. Y PATRI.</td>
+            <td class="text-right"><span style="font-size: 20px;" class="badge badge-danger">@{{ decimales(total_balance_inicial.t_patrimonio_pasivo) }}</span></td>
           </tr>
         </tbody>
       </table>

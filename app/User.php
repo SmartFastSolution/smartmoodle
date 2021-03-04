@@ -2,12 +2,13 @@
 
 namespace App;
 
-use App\Modelos\Role;
 use App\Instituto;
+use App\Modelos\Role;
+use App\Notifications\ResetPassword;
+use App\Traits\UserTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Traits\UserTrait;
 
 
 
@@ -15,6 +16,10 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, UserTrait;
 
+     public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
+    }
     /**
      * The attributes that are mass assignable.
      *

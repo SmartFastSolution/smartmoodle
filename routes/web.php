@@ -30,7 +30,7 @@ Route::get('/', function () {
  Route::group(["prefix"=>"sistema","middleware"=>["auth"]],function(){
 //Route::group(["prefix"=>"sistema"],function(){ //por ahora sera la ruta hasta que se arregle lo del login
    
-route::get('/home','Controller@index')->name('administrador'); //ruta administracion
+route::get('/home','AdminController@index')->name('administrador'); //ruta administracion
 
 // route::get('home','AdminController@index')->name('administrador'); //ruta administracion
 

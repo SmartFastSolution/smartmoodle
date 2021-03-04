@@ -658,7 +658,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr class="bg-secondary">
-                                                        <td class="text-left font-weight-bold">Total Pasivo No Corriente
+                                                        <td class="text-left font-weight-bold">Total Pasivo Corriente
                                                         </td>
                                                         <td class="text-right">@{{ decimales(b_initotal.t_p_corriente) }}</td>
                                                         <td></td>

@@ -54,7 +54,7 @@
 			<div class="col-2 gusano18"><textarea style="box-shadow: 5px 5px 15px 0px  #087980;"  name="abreviaturaR5"  class="form-control  p-4 rounded-circle text-center align-text-bottom"></textarea></div>
 		</div>
 		<div class="row justify-content-center">
-			<input type="button" id="button" value="Guardar Datos" class="btn p-2 mt-3 btn-danger">
+			<input type="button" id="button" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
 		</div>
 	</div>
 </form>

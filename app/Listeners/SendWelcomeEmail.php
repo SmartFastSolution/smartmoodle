@@ -30,7 +30,7 @@ class SendWelcomeEmail
           $data = array('name' => $event->users['name'], 'apellido' => $event->users['apellido'], 'email' => $event->users['email'], 'clave'=> $event->users['password'], 'body' => 'Bienvenido a SmartMoodle');
  
         Mail::send('mails.userregister', $data, function($msj) use ($data) {
-            $msj->from("soporte@smartmoodle.com'","SmartMoodle");
+            $msj->from("soporte@smartmoodle.com","SmartMoodle");
             $msj->subject($data['body']);
             $msj->to($data['email']);
         });

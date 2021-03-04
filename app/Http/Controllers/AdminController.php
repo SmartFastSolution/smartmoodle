@@ -94,6 +94,25 @@ class AdminController extends Controller
         $this->middleware('estudiante');
         $this->middleware('docente');
     }
+     public function index (){
+
+        $alumnos = DB::table('users')
+        ->join('role_user', 'role_user.user_id', '=', 'users.id')
+        ->join('roles', 'roles.id', '=', 'role_user.role_id')
+        ->where('users.estado', 'on')
+        ->where('descripcion', 'estudiante')
+        ->count();
+
+        $docente = DB::table('users')
+        ->join('role_user', 'role_user.user_id', '=', 'users.id')
+        ->join('roles', 'roles.id', '=', 'role_user.role_id')
+        ->where('users.estado', 'on')
+        ->where('descripcion', 'docente')
+        ->count();
+        
+    return view('welcome',compact('alumnos','docente'));
+       
+    }
     public function status(Request $request)
     {
        $taller = Taller::find($request->id);
@@ -137,10 +156,10 @@ class AdminController extends Controller
       return view('admin.lecciones');
      
    }
-   public function index (){
+   // public function index (){
 
-        return view('welcome');
-    }
+   //      return view('welcome');
+   //  }
     public function delete(Request $request)
     {
       $taller = Taller::find($request->id);
@@ -239,10 +258,11 @@ class AdminController extends Controller
    }
    public function taller1(Request $request)
    {
-    $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();//cambios
+    $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
     //return $request->all();
       $taller1               = new Taller;
-      $taller1->nombre       = 'Taller '.++$i;
+      $taller1->nombre       = 'Taller '.++$valor[1];
       $taller1->enunciado    = $request->input('enunciado');
       $taller1->plantilla_id = $request->input('id_plantilla');
       $taller1->contenido_id = $request->input('contenido_id'); //cambios 
@@ -272,10 +292,10 @@ class AdminController extends Controller
 
      public function taller2(Request $request)
    {
-    $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
-    //return $request->all();
+    $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
       $taller2               = new Taller;
-      $taller2->nombre       = 'Taller '.++$i;
+      $taller2->nombre       = 'Taller '.++$valor[1];
       $taller2->enunciado    = $request->input('enunciado');
       $taller2->plantilla_id = $request->input('id_plantilla');
       $taller2->contenido_id = $request->input('contenido_id');
@@ -309,10 +329,10 @@ class AdminController extends Controller
 
     public function taller3(Request $request)
    {
-    $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
-    //return $request->all();
-      $taller3 = new Taller;
-      $taller3->nombre = 'Taller '.++$i;
+    $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
+    $taller3 = new Taller;
+    $taller3->nombre = 'Taller '.++$valor[1];
     $taller3->enunciado = $request->input('enunciado');
     $taller3->plantilla_id = $request->input('id_plantilla');
     $taller3->contenido_id = $request->input('contenido_id');
@@ -342,9 +362,10 @@ class AdminController extends Controller
 
    public function taller4(Request $request)
    {
-     $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+      $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
       $taller4 = new Taller;
-      $taller4->nombre = 'Taller '.++$i;
+      $taller4->nombre = 'Taller '.++$valor[1];
       $taller4->enunciado = $request->input('enunciado');
       $taller4->plantilla_id = $request->input('id_plantilla');
       $taller4->contenido_id = $request->input('contenido_id');
@@ -381,9 +402,10 @@ class AdminController extends Controller
    }
      public function taller5(Request $request)
    {
-      $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+      $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
       $taller5 = new Taller;
-      $taller5->nombre = 'Taller '.++$i;
+      $taller5->nombre = 'Taller '.++$valor[1];
       $taller5->enunciado   = $request->input('enunciado');
       $taller5->plantilla_id = $request->input('id_plantilla');
       $taller5->contenido_id   = $request->input('contenido_id');
@@ -422,9 +444,10 @@ class AdminController extends Controller
    }
    public function taller6(Request $request)
    {
-      $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+      $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
       $taller6 = new Taller;
-      $taller6->nombre = 'Taller '.++$i;
+      $taller6->nombre = 'Taller '.++$valor[1];
       $taller6->enunciado = $request->input('enunciado');
       $taller6->plantilla_id = $request->input('id_plantilla');
       $taller6->contenido_id = $request->input('contenido_id');
@@ -473,9 +496,10 @@ class AdminController extends Controller
    }
      public function taller7(Request $request)
      {
-      $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+      $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
       $taller7 = new Taller;
-      $taller7->nombre = 'Taller '.++$i;
+      $taller7->nombre = 'Taller '.++$valor[1];
       $taller7->enunciado = $request->input('enunciado');
       $taller7->plantilla_id = $request->input('id_plantilla');
       $taller7->contenido_id = $request->input('contenido_id');
@@ -493,9 +517,10 @@ class AdminController extends Controller
      }
       public function taller8(Request $request)
       {
-      $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+      $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
       $taller8 = new Taller;
-      $taller8->nombre = 'Taller '.++$i;
+      $taller8->nombre = 'Taller '.++$valor[1];
       $taller8->enunciado = $request->input('enunciado');
       $taller8->plantilla_id = $request->input('id_plantilla');
       $taller8->contenido_id = $request->input('contenido_id');
@@ -523,9 +548,10 @@ class AdminController extends Controller
       }
       public function taller9(Request $request)
       {
-      $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+      $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
       $taller9 = new Taller;
-      $taller9->nombre = 'Taller '.++$i;
+      $taller9->nombre = 'Taller '.++$valor[1];
       $taller9->enunciado = $request->input('enunciado');
       $taller9->plantilla_id = $request->input('id_plantilla');
       $taller9->contenido_id = $request->input('contenido_id');
@@ -562,10 +588,10 @@ class AdminController extends Controller
       public function taller10(Request $request)
       {
 if ($request->input('id_plantilla') == 10 ) {
-
-         $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+         $valor = explode(" ", $i->nombre);
          $taller10 = new Taller;
-         $taller10->nombre = 'Taller '.++$i;
+         $taller10->nombre = 'Taller '.++$valor[1];
          $taller10->enunciado = $request->input('enunciado');
          $taller10->plantilla_id = $request->input('id_plantilla');
          $taller10->contenido_id   = $request->input('contenido_id');
@@ -616,9 +642,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          }
 
 }elseif($request->input('id_plantilla') == 11 ) {
-         $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller11 = new Taller;
-         $taller11->nombre = 'Taller '.++$i;
+         $taller11->nombre = 'Taller '.++$valor[1];
          $taller11->enunciado = $request->input('enunciado');
          $taller11->plantilla_id = $request->input('id_plantilla');
          $taller11->contenido_id = $request->input('contenido_id');
@@ -671,9 +698,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
        public function taller12(Request $request)
       {
-         $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+          $valor = explode(" ", $i->nombre);
          $taller12 = new Taller;
-         $taller12->nombre = 'Taller '.++$i;
+         $taller12->nombre = 'Taller '.++$valor[1];
          $taller12->enunciado = $request->input('enunciado');
          $taller12->plantilla_id = $request->input('id_plantilla');
          $taller12->contenido_id = $request->input('contenido_id');
@@ -709,9 +737,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
       public function taller13(Request $request)
       {
-          $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+        $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller13 = new Taller;
-         $taller13->nombre = 'Taller '.++$i;
+         $taller13->nombre = 'Taller '.++$valor[1];
          $taller13->enunciado = $request->input('enunciado');
          $taller13->plantilla_id = $request->input('id_plantilla');
          $taller13->contenido_id = $request->input('contenido_id');
@@ -745,10 +774,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
        public function taller14(Request $request)
       {
-        // return $request->intermediarios;
-           $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+        $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller14 = new Taller;
-         $taller14->nombre = 'Taller '.++$i;
+         $taller14->nombre = 'Taller '.++$valor[1];
          $taller14->enunciado = $request->input('enunciado');
          $taller14->plantilla_id = $request->input('id_plantilla');
          $taller14->contenido_id = $request->input('contenido_id');
@@ -770,9 +799,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
       public function taller15(Request $request)
       {
-         $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $taller15 = new Taller;
-         $taller15->nombre = 'Taller '.++$i;
+         $taller15->nombre = 'Taller '.++$valor[1];
          $taller15->enunciado = $request->input('enunciado');
          $taller15->plantilla_id = $request->input('id_plantilla');
          $taller15->contenido_id = $request->input('contenido_id');
@@ -797,9 +827,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
    }
    public function taller16(Request $request)
       {
-         $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $taller16 = new Taller;
-         $taller16->nombre = 'Taller '.++$i;
+         $taller16->nombre = 'Taller '.++$valor[1];
          $taller16->enunciado = $request->input('enunciado');
          $taller16->plantilla_id = $request->input('id_plantilla');
          $taller16->contenido_id = $request->input('contenido_id');
@@ -819,9 +850,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
        public function taller17(Request $request)
       {
-         $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $taller17 = new Taller;
-         $taller17->nombre = 'Taller '.++$i;
+         $taller17->nombre = 'Taller '.++$valor[1];
          $taller17->enunciado = $request->input('enunciado');
          $taller17->plantilla_id = $request->input('id_plantilla');
          $taller17->contenido_id = $request->input('contenido_id');
@@ -848,9 +880,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
       public function taller18(Request $request)
       {
-         $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+          $valor = explode(" ", $i->nombre);
          $taller18 = new Taller;
-         $taller18->nombre = 'Taller '.++$i;
+         $taller18->nombre = 'Taller '.++$valor[1];
          $taller18->enunciado = $request->input('enunciado');
          $taller18->plantilla_id = $request->input('id_plantilla');
          $taller18->contenido_id = $request->input('contenido_id');
@@ -877,9 +910,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
       public function taller19(Request $request)
       {
-         $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller19 = new Taller;
-         $taller19->nombre = 'Taller '.++$i;
+         $taller19->nombre = 'Taller '.++$valor[1];
          $taller19->enunciado = $request->input('enunciado');
          $taller19->plantilla_id = $request->input('id_plantilla');
          $taller19->contenido_id = $request->input('contenido_id');
@@ -905,9 +939,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
         public function taller20(Request $request)
       {
-         $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller20 = new Taller;
-         $taller20->nombre = 'Taller '.++$i;
+         $taller20->nombre = 'Taller '.++$valor[1];
          $taller20->enunciado            = $request->input('enunciado');
          $taller20->plantilla_id = $request->input('id_plantilla');
          $taller20->contenido_id = $request->input('contenido_id');
@@ -935,9 +970,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
        public function taller21(Request $request)
       {
-         $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller21 = new Taller;
-         $taller21->nombre = 'Taller '.++$i;
+         $taller21->nombre = 'Taller '.++$valor[1];
          $taller21->enunciado            = $request->input('enunciado');
          $taller21->plantilla_id = $request->input('id_plantilla');
          $taller21->contenido_id = $request->input('contenido_id');
@@ -961,9 +997,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
         public function taller22(Request $request)
       {
-         $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $taller22 = new Taller;
-         $taller22->nombre = 'Taller '.++$i;
+         $taller22->nombre = 'Taller '.++$valor[1];
          $taller22->enunciado            = $request->input('enunciado');
          $taller22->plantilla_id = $request->input('id_plantilla');
          $taller22->contenido_id = $request->input('contenido_id');
@@ -1005,9 +1042,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
        public function taller23(Request $request)
       {
-         $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $taller23 = new Taller;
-         $taller23->nombre = 'Taller '.++$i;
+         $taller23->nombre = 'Taller '.++$valor[1];
          $taller23->enunciado            = $request->input('enunciado');
          $taller23->plantilla_id = $request->input('id_plantilla');
          $taller23->contenido_id = $request->input('contenido_id');
@@ -1033,9 +1071,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
        public function taller24(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $taller24               = new Taller;
-         $taller24->nombre       = 'Taller '.++$i;
+         $taller24->nombre       = 'Taller '.++$valor[1];
          $taller24->enunciado   = $request->input('enunciado');
          $taller24->plantilla_id = $request->input('id_plantilla');
          $taller24->contenido_id = $request->input('contenido_id');
@@ -1059,9 +1098,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
         public function taller25(Request $request)
       {
-         $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $taller25 = new Taller;
-         $taller25->nombre = 'Taller '.++$i;
+         $taller25->nombre = 'Taller '.++$valor[1];
          $taller25->enunciado            = $request->input('enunciado');
          $taller25->plantilla_id = $request->input('id_plantilla');
          $taller25->contenido_id = $request->input('contenido_id');
@@ -1104,9 +1144,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
        public function taller26(Request $request)
       {
-         $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller26 = new Taller;
-         $taller26->nombre = 'Taller '.++$i;
+         $taller26->nombre = 'Taller '.++$valor[1];
          $taller26->enunciado            = $request->input('enunciado');
          $taller26->plantilla_id = $request->input('id_plantilla');
          $taller26->contenido_id = $request->input('contenido_id');
@@ -1143,9 +1184,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
          public function taller27(Request $request)
       {
-           $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+        $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $taller27 = new Taller;
-         $taller27->nombre = 'Taller '.++$i;
+         $taller27->nombre = 'Taller '.++$valor[1];
          $taller27->enunciado  = $request->input('enunciado');
          $taller27->plantilla_id = $request->input('id_plantilla');
          $taller27->contenido_id = $request->input('contenido_id');
@@ -1200,9 +1242,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
    public function taller31(Request $request)
       {
-          $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller31 = new Taller;
-         $taller31->nombre = 'Taller '.++$i;
+         $taller31->nombre = 'Taller '.++$valor[1];
          $taller31->enunciado            = $request->input('enunciado');
          $taller31->plantilla_id = $request->input('id_plantilla');
          $taller31->contenido_id = $request->input('contenido_id');
@@ -1224,9 +1267,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       public function taller33(Request $request)
       {
 
-         $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller33               = new Taller;
-         $taller33->nombre       = 'Taller '.++$i;
+         $taller33->nombre       = 'Taller '.++$valor[1];
          $taller33->enunciado    = $request->input('enunciado');
          $taller33->plantilla_id = $request->input('id_plantilla');
          $taller33->contenido_id   = $request->input('contenido_id');
@@ -1271,9 +1315,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $registro               = $request->registro;
          $contenido              = $request->unidad;
          $plantilla              = $request->plantilla;
-         $i                      = Taller::where('contenido_id', $contenido)->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $taller34               = new Taller;
-         $taller34->nombre       = 'Taller '.++$i;
+         $taller34->nombre       = 'Taller '.++$valor[1];
          $taller34->plantilla_id = $plantilla;
          $taller34->enunciado    = $request->enunciado;
          $taller34->contenido_id = $contenido;
@@ -1324,9 +1369,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
            public function taller35(Request $request)
       {
-         $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+          $valor = explode(" ", $i->nombre);
          $taller35 = new Taller;
-         $taller35->nombre = 'Taller '.++$i;
+         $taller35->nombre = 'Taller '.++$valor[1];
          $taller35->enunciado            = $request->input('enunciado');
          $taller35->plantilla_id = $request->input('id_plantilla');
          $taller35->contenido_id = $request->input('contenido_id');
@@ -1361,9 +1407,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
        public function taller36(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $taller36               = new Taller;
-         $taller36->nombre       = 'Taller '.++$i;
+         $taller36->nombre       = 'Taller '.++$valor[1];
          $taller36->enunciado    = $request->input('enunciado');
          $taller36->plantilla_id = $request->input('id_plantilla');
          $taller36->contenido_id   = $request->input('contenido_id');
@@ -1395,9 +1442,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
    public function balance_inicial(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $balance_inicial               = new Taller;
-         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
          $balance_inicial->plantilla_id = 37;
          $balance_inicial->contenido_id = $request->contenido_id;
@@ -1461,9 +1509,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
          public function kardex(Request $request)
       {
-         $i                    = Taller::where('contenido_id', $request->contenido_id)->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $kardex               = new Taller;
-         $kardex->nombre       = 'Taller '.++$i;
+         $kardex->nombre       = 'Taller '.++$valor[1];
          $kardex->enunciado    = $request->enunciado;
          $kardex->plantilla_id = 37;
          $kardex->contenido_id = $request->contenido_id;
@@ -1535,9 +1584,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
        public function crearDiario(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $balance_inicial               = new Taller;
-         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
          $balance_inicial->plantilla_id = 37;
          $balance_inicial->contenido_id = $request->contenido_id;
@@ -1580,9 +1630,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
         public function crearMayor(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $balance_inicial               = new Taller;
-         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
          $balance_inicial->plantilla_id = 37;
          $balance_inicial->contenido_id = $request->contenido_id;
@@ -1625,9 +1676,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
        public function crearBalanceCompro(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $balance_inicial               = new Taller;
-         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
          $balance_inicial->plantilla_id = 37;
          $balance_inicial->contenido_id = $request->contenido_id;
@@ -1669,9 +1721,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
          public function crearHojaTrabajo(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+        $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $balance_inicial               = new Taller;
-         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
          $balance_inicial->plantilla_id = 37;
          $balance_inicial->contenido_id = $request->contenido_id;
@@ -1712,9 +1765,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
     public function crearBalanceAjustado(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $balance_inicial               = new Taller;
-         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
          $balance_inicial->plantilla_id = 37;
          $balance_inicial->contenido_id = $request->contenido_id;
@@ -1756,9 +1810,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
           public function crearEtadoResultado(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $balance_inicial               = new Taller;
-         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
          $balance_inicial->plantilla_id = 37;
          $balance_inicial->contenido_id = $request->contenido_id;
@@ -1799,9 +1854,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
       public function crearBalanceGeneral(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $balance_inicial               = new Taller;
-         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
          $balance_inicial->plantilla_id = 37;
          $balance_inicial->contenido_id = $request->contenido_id;
@@ -1845,9 +1901,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
       public function crearAsientosCierre(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $balance_inicial               = new Taller;
-         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
          $balance_inicial->plantilla_id = 37;
          $balance_inicial->contenido_id = $request->contenido_id;
@@ -1890,9 +1947,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
          public function crearLibroCaja(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+    $valor = explode(" ", $i->nombre);
          $balance_inicial               = new Taller;
-         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
          $balance_inicial->plantilla_id = 37;
          $balance_inicial->contenido_id = $request->contenido_id;
@@ -1934,9 +1992,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
       public function crearConciliacion(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $balance_inicial               = new Taller;
-         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
          $balance_inicial->plantilla_id = 37;
          $balance_inicial->contenido_id = $request->contenido_id;
@@ -1978,9 +2037,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
     public function crearArqueo(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+        $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $balance_inicial               = new Taller;
-         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
          $balance_inicial->plantilla_id = 37;
          $balance_inicial->contenido_id = $request->contenido_id;
@@ -2022,9 +2082,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
       public function libroBanco(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $balance_inicial               = new Taller;
-         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
          $balance_inicial->plantilla_id = 37;
          $balance_inicial->contenido_id = $request->contenido_id;
@@ -2066,9 +2127,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
        public function retencionIva(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $balance_inicial               = new Taller;
-         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
          $balance_inicial->plantilla_id = 37;
          $balance_inicial->contenido_id = $request->contenido_id;
@@ -2110,9 +2172,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
              public function crearNomina(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $balance_inicial               = new Taller;
-         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
          $balance_inicial->plantilla_id = 37;
          $balance_inicial->contenido_id = $request->contenido_id;
@@ -2154,9 +2217,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
         public function crearProvision(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+        $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $balance_inicial               = new Taller;
-         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
          $balance_inicial->plantilla_id = 37;
          $balance_inicial->contenido_id = $request->contenido_id;
@@ -2202,9 +2266,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       {
         
 
-         $i                      = Taller::where('contenido_id', $request->contenido_id)->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $balance_inicial               = new Taller;
-         $balance_inicial->nombre       = 'Taller '.++$i;
+         $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
           
          $balance_inicial->plantilla_id = 37;
@@ -2293,9 +2358,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
        public function taller38(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller38               = new Taller;
-         $taller38->nombre       = 'Taller '.++$i;
+         $taller38->nombre       = 'Taller '.++$valor[1];
          $taller38->enunciado    = $request->input('enunciado');
          $taller38->plantilla_id = $request->input('id_plantilla');
          $taller38->contenido_id   = $request->input('contenido_id');
@@ -2327,9 +2393,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
        public function taller39(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+        $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller39               = new Taller;
-         $taller39->nombre       = 'Taller '.++$i;
+         $taller39->nombre       = 'Taller '.++$valor[1];
          $taller39->enunciado    = $request->input('enunciado');
          $taller39->plantilla_id = $request->input('id_plantilla');
          $taller39->contenido_id   = $request->input('contenido_id');
@@ -2350,9 +2417,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
          public function taller40(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller40               = new Taller;
-         $taller40->nombre       = 'Taller '.++$i;
+         $taller40->nombre       = 'Taller '.++$valor[1];
          $taller40->enunciado    = $request->input('enunciado');
          $taller40->plantilla_id = $request->input('id_plantilla');
          $taller40->contenido_id   = $request->input('contenido_id');
@@ -2383,9 +2451,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
       public function taller42(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller42               = new Taller;
-         $taller42->nombre       = 'Taller '.++$i;
+         $taller42->nombre       = 'Taller '.++$valor[1];
          $taller42->enunciado    = $request->input('enunciado');
          $taller42->plantilla_id = $request->input('id_plantilla');
          $taller42->contenido_id   = $request->input('contenido_id');
@@ -2409,9 +2478,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
        public function taller43(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller43               = new Taller;
-         $taller43->nombre       = 'Taller '.++$i;
+         $taller43->nombre       = 'Taller '.++$valor[1];
          $taller43->enunciado    = $request->input('enunciado');
          $taller43->plantilla_id = $request->input('id_plantilla');
          $taller43->contenido_id   = $request->input('contenido_id');
@@ -2433,9 +2503,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
         public function taller44(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller44               = new Taller;
-         $taller44->nombre       = 'Taller '.++$i;
+         $taller44->nombre       = 'Taller '.++$valor[1];
          $taller44->enunciado    = $request->input('enunciado');
          $taller44->plantilla_id = $request->input('id_plantilla');
          $taller44->contenido_id   = $request->input('contenido_id');
@@ -2455,9 +2526,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
           public function taller45(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller45               = new Taller;
-         $taller45->nombre       = 'Taller '.++$i;
+         $taller45->nombre       = 'Taller '.++$valor[1];
          $taller45->enunciado    = $request->input('enunciado');
          $taller45->plantilla_id = $request->input('id_plantilla');
          $taller45->contenido_id   = $request->input('contenido_id');
@@ -2477,9 +2549,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
         public function taller47(Request $request)
       {
-         $i                      = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller47               = new Taller;
-         $taller47->nombre       = 'Taller '.++$i;
+         $taller47->nombre       = 'Taller '.++$valor[1];
          $taller47->enunciado    = $request->input('enunciado');
          $taller47->plantilla_id = $request->input('id_plantilla');
          $taller47->contenido_id   = $request->input('contenido_id');
@@ -2529,9 +2602,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
       public function taller48(Request $request)
       {
-          $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller48 = new Taller;
-         $taller48->nombre = 'Taller '.++$i;
+         $taller48->nombre = 'Taller '.++$valor[1];
          $taller48->enunciado            = $request->input('enunciado');
          $taller48->plantilla_id = $request->input('id_plantilla');
          $taller48->contenido_id = $request->input('contenido_id');
@@ -2551,9 +2625,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
         public function taller49(Request $request)
       {
-          $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $taller49               = new Taller;
-         $taller49->nombre       = 'Taller '.++$i;
+         $taller49->nombre       = 'Taller '.++$valor[1];
          $taller49->enunciado    = $request->input('enunciado');
          $taller49->plantilla_id = $request->input('id_plantilla');
          $taller49->contenido_id = $request->input('contenido_id');
@@ -2573,9 +2648,10 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       }
       public function tallerprecon(Request $request)
       {
-        $i = Taller::where('contenido_id', $request->input('contenido_id'))->count();
+        $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
+        $valor = explode(" ", $i->nombre);
          $preconnfifurado               = new Taller;
-         $preconnfifurado->nombre       = 'Taller '.++$i;
+         $preconnfifurado->nombre       = 'Taller '.++$valor[1];
          $preconnfifurado->enunciado    = $request->input('enunciado');
          $preconnfifurado->plantilla_id = $request->input('id_plantilla');
          $preconnfifurado->contenido_id = $request->input('contenido_id');

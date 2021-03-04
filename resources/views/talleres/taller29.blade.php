@@ -98,7 +98,7 @@
 			</div>
 		</div>
 		 <div class="row justify-content-center mb-3">
-        	<input style="box-shadow: 5px 5px 15px 0px  #5EE1E9;" type="button" id="button" value="Guardar Datos" class="btn p-2 mt-3 btn-danger">
+        	<input style="box-shadow: 5px 5px 15px 0px  #5EE1E9;" type="button" id="button" value="Enviar Respuesta" class="btn p-2 mt-3 btn-danger">
     	</div>
 	</div>
 </form>
