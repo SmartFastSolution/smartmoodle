@@ -405,11 +405,12 @@
         </div>
         <div class="" style="box-shadow: 5px 5px 15px 0px  #F42787">
           <div class="row p-3 justify-content-between">
-            <div class="col-lg-5 col-sm-12 mb-sm-3">
-              <img class="img-fluid" src="{{ asset('img/nota-credito.png') }}" alt="">
+            <div class="col-lg-5 col-sm-12 mb-sm-3 mb-3">
+              <h2 class="font-weight-bold text-danger">EMPRESA SA</h2>
+              {{-- <img class="img-fluid" src="{{ asset('img/nota-credito.png') }}" alt=""> --}}
               <div class="row">
                 <div class="col-12 rounded border-success border text-left">
-                  <h5>Distribuidora de Libros</h5>
+                  <h5>EMPRESA SA</h5>
                   <h6>Dirección Matriz :  Av. 17 de Septiembre</h6>
                   <h6>Dirección  Sucursal :  Juan  Montalvo  y  24  de  Mayo</h6>
                   <h6>Contribuyente Especial N°        25489</h6>
@@ -591,10 +592,11 @@
         <div class="" style="box-shadow: 5px 5px 15px 0px  #F42787">
           <div class="row p-3 justify-content-between">
             <div class="col-lg-5 col-sm-12 mb-sm-3">
-              <img class="img-fluid" src="{{ asset('img/talleres/imagen-27.jpg') }}" alt="">
+              <h2 class="font-weight-bold text-danger">EMPRESA SA</h2>
+              {{-- <img class="img-fluid" src="{{ asset('img/talleres/imagen-27.jpg') }}" alt=""> --}}
               <div class="row">
                 <div class="col-12 rounded border-success border text-left">
-                  <h5>Venta de materiales de construccion</h5>
+                  <h5>Empresa SA</h5>
                   <h6>Dirección Matriz :  Av. 17 de Septiembre</h6>
                   <h6>Dirección  Sucursal :  Juan  Montalvo  y  24  de  Mayo</h6>
                   <h6>Contribuyente Especial N°        25489</h6>

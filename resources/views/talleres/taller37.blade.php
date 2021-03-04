@@ -1431,7 +1431,7 @@
                 id:                      taller_id,
                 tipo:                   'papeleta',
                 modulo:                  set.modulo,
-                tipo_documento:         'Papeleta Deposito',
+                tipo_documento:         'Papeleta De Deposito',
                 banco:                  set.papeleta_deposito.banco,
                 cuenta:                 set.papeleta_deposito.cuenta,
                 nombre:                 set.papeleta_deposito.nombre,
