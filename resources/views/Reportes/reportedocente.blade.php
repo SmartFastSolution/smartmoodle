@@ -87,7 +87,7 @@
                             <th scope="col">Curso</th>
                             <th scope="col">Materia</th>
                             <th scope="col">Paralelo</th>
-                            <th scope="col">Ultimo Acceso</th>
+                            <th scope="col">Fecha Creación</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -141,7 +141,7 @@
                             <th scope="col">Curso</th>
                             <th scope="col">Paralelo</th>
                             <th scope="col">Materia</th>
-                            <th scope="col">Ultimo Acceso</th>
+                            <th scope="col">Fecha Creación</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -183,7 +183,7 @@
                             <th scope="col">Unidad Educativa</th>
                             <th scope="col">Nombre/Apellido</th>
                             <th scope="col">Rol</th>
-                            <th scope="col">Ultimo Acceso</th>
+                            <th scope="col">Fecha Creación</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -224,8 +224,7 @@
                             <th scope="col">Materia</th>
                             <th scope="col">Estudiante</th>
                             <th scope="col">Curso/Paralelo</th>
-                        
-                            <th scope="col">Ultimo Acceso</th>
+                            <th scope="col">Fecha Creación</th>
 
                         </tr>
                     </thead>
