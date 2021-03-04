@@ -34,7 +34,7 @@
                 <br>
                 <br>
                 <table id="myTable" class="table table-hover">
-                    <thead class="thead-dark">
+                    <thead >
                         <tr>
                             <th scope="col">Unidad Educativa</th>
                             <th scope="col">Curso</th>
@@ -80,7 +80,7 @@
                 <br>
                 <br>
                 <table id="myTable1" class="table table-hover">
-                    <thead class="thead-dark">
+                    <thead>
                         <tr>
                             <th scope="col">Unidad Educativa</th>
                             <th scope="col">Docente</th>
@@ -134,7 +134,7 @@
                 <br>
                 <br>
                 <table id="myTable2" class="table table-hover">
-                    <thead class="thead-dark">
+                    <thead >
                         <tr>
                             <th scope="col">Unidad Educativa</th>
                             <th scope="col">Estudiante</th>
@@ -178,7 +178,7 @@
                 <br>
                 <br>
                 <table id="myTable3" class="table table-hover">
-                    <thead class="thead-dark">
+                    <thead >
                         <tr>
                             <th scope="col">Unidad Educativa</th>
                             <th scope="col">Nombre/Apellido</th>
@@ -217,7 +217,7 @@
                 <br>
                 <br>
                 <table id="myTable4" class="table table-hover">
-                    <thead class="thead-dark">
+                    <thead >
                         <tr>
                             <th scope="col">Unidad Educativa</th>
                             <th scope="col">Docente</th>
