@@ -94,6 +94,25 @@ class AdminController extends Controller
         $this->middleware('estudiante');
         $this->middleware('docente');
     }
+     public function index (){
+
+        $alumnos = DB::table('users')
+        ->join('role_user', 'role_user.user_id', '=', 'users.id')
+        ->join('roles', 'roles.id', '=', 'role_user.role_id')
+        ->where('users.estado', 'on')
+        ->where('descripcion', 'estudiante')
+        ->count();
+
+        $docente = DB::table('users')
+        ->join('role_user', 'role_user.user_id', '=', 'users.id')
+        ->join('roles', 'roles.id', '=', 'role_user.role_id')
+        ->where('users.estado', 'on')
+        ->where('descripcion', 'docente')
+        ->count();
+        
+    return view('welcome',compact('alumnos','docente'));
+       
+    }
     public function status(Request $request)
     {
        $taller = Taller::find($request->id);
@@ -137,10 +156,10 @@ class AdminController extends Controller
       return view('admin.lecciones');
      
    }
-   public function index (){
+   // public function index (){
 
-        return view('welcome');
-    }
+   //      return view('welcome');
+   //  }
     public function delete(Request $request)
     {
       $taller = Taller::find($request->id);

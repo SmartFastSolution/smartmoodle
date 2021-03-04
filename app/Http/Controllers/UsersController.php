@@ -95,7 +95,6 @@ class UsersController extends Controller
          
         $user->save();
         
-        Mail::to($user->email)->send(new UserRegister($users));
         // event(new NewUserRegistered($users));
 
         if ($request->get('role')) {
@@ -128,6 +127,9 @@ if ($rol->descripcion == 'estudiante') {
                 ['assignment_id' => $as->id, 'materia_id' => $group->id, 'user_id' => $user->id]);
         }      
 }
+
+        Mail::to($user->email)->send(new UserRegister($users));
+
         return redirect('sistema/users/create ')->with('success','Usuario Creado Exitosamente!');
         //return redirect('sistema/admin');
 
