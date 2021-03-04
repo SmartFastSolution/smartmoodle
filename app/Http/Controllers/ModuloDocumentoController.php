@@ -320,7 +320,7 @@ class ModuloDocumentoController extends Controller
             $pagare = ModuloPagare::find($id);
             $pagare->delete();
         }
-          elseif ($tipo === 'Papeleta Deposito') {
+          elseif ($tipo === 'Papeleta De Deposito') {
             $papeleta = ModuloPapeleta::find($id);
             $papeleta->delete();
         }
