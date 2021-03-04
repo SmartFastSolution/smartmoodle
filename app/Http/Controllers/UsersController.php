@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Distribucionmacu;
-
-
+use App\Assignment;
 use App\Curso;
-use App\Nivel;
+use App\Distribucionmacu;
 use App\Events\NewUserRegistered;
 use App\Http\Controllers\Controller;
 use App\Instituto;
+use App\Mail\UserRegister;
 use App\Modelos\Role;
+use App\Nivel;
 use App\User;
 use Auth;
 use DB;
-use App\Assignment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -94,7 +94,8 @@ class UsersController extends Controller
        //agregados estudiantes y docente sen la misma tabla de persona 
          
         $user->save();
-               
+        
+        Mail::to($user->email)->send(new UserRegister($users));
         // event(new NewUserRegistered($users));
 
         if ($request->get('role')) {

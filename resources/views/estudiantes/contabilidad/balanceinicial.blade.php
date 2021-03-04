@@ -15,8 +15,8 @@
   <div class="row justify-content-between">
     <div class="col-6">
       <h3 class="text-danger">ACTIVOS</h3>
-      <h3 class="text-primary">CORRIENTE</h3><br>
-      <draggable class="list-group list-group-flush" :list="a_corrientes" group="people" >
+      <h3 class="text-primary">CORRIENTE</h3>
+      <ul class="list-group list-group-flush">
       <div v-for="(element, index) in a_corrientes" :key="element.name">
         <li class="list-group-item d-flex justify-content-between align-items-center">
           @{{ element.nom_cuenta }}
@@ -24,7 +24,7 @@
           <span class="badge-pill">@{{ decimales(element.saldo) }}</span>
         </li>
       </div>
-      </draggable>
+      </ul>
       <table class="table table-borderless">
         <tbody>
           <tr>
@@ -35,15 +35,15 @@
       </table>
       
       <br><br>
-      <h3 class="text-primary">NO CORRIENTE</h3><br>
-      <draggable class="list-group list-group-flush" :list="a_nocorrientes" group="people">
+      <h3 class="text-primary">NO CORRIENTE</h3>
+      <ul class="list-group list-group-flush" >
       <div v-for="(element, index) in a_nocorrientes" :key="element.name">
         <li class="list-group-item d-flex justify-content-between align-items-center">
           @{{ element.nom_cuenta }}
           <span class="badge-pill">@{{ decimales(element.saldo) }}</span>
         </li>
       </div>
-      </draggable>
+      </ul>
       <table class="table table-borderless">
         <tbody>
           <tr>
@@ -56,14 +56,14 @@
     <div class="col-6">
       <h3 class="text-danger">PASIVO</h3>
       <h3 class="text-primary">CORRIENTE</h3>
-      <draggable class="list-group list-group-flush" :list="p_corrientes" group="people">
+      <ul class="list-group list-group-flush" >
       <div v-for="(element, index) in p_corrientes" :key="element.name">
         <li class="list-group-item d-flex justify-content-between align-items-center">
           @{{ element.nom_cuenta }}
           <span class=" badge-pill">@{{ decimales(element.saldo) }}</span>
         </li>
       </div>
-      </draggable>
+      </ul>
       <table class="table table-borderless">
         <tbody>
           <tr>
@@ -75,14 +75,14 @@
       <br><br>
       
       <h3 class="text-primary">NO CORRIENTE </h3>
-      <draggable class="list-group list-group-flush" :list="p_nocorrientes" group="people" >
+      <ul class="list-group list-group-flush" >
       <div v-for="(element, index) in p_nocorrientes" :key="element.name">
         <li class="list-group-item d-flex justify-content-between align-items-center">
           @{{ element.nom_cuenta }}
           <span class=" badge-pill">@{{ decimales(element.saldo) }}</span>
         </li>
       </div>
-      </draggable>
+      </ul>
       
       <table class="table table-borderless">
         <tbody>
@@ -102,15 +102,15 @@
         </tbody>
       </table>
       <br><br>
-      <h3 class="text-danger">PATRIMONIO </h3><br>
-      <draggable class="list-group list-group-flush" :list="patrimonios" group="people">
+      <h3 class="text-danger">PATRIMONIO </h3>
+      <ul class="list-group list-group-flush">
       <div v-for="(element, index) in patrimonios" :key="element.name">
         <li class="list-group-item d-flex justify-content-between align-items-center">
           @{{ element.nom_cuenta }}
           <span class="badge-pill">@{{ decimales(element.saldo) }}</span>
         </li>
       </div>
-      </draggable>
+      </ul>
       <table class="table table-borderless">
         <tbody>
           <tr>
@@ -122,7 +122,7 @@
     </div>
   </div>
   <div class="row justify-content-between">
-    <div class="col-5">
+    <div class="col-6">
       <table class="table table-borderless">
         <tbody>
           <tr>
@@ -132,7 +132,7 @@
         </tbody>
       </table>
     </div>
-    <div class="col-5">
+    <div class="col-6">
       <table class="table table-borderless">
         <tbody>
           <tr>

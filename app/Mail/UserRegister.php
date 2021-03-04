@@ -12,13 +12,13 @@ class UserRegister extends Mailable
 {
     use Queueable, SerializesModels;
     public $user;
-    public $clave;
+    // public $clave;
    
     
-    public function __construct(User $user)
+    public function __construct($users)
     {
-        $this->user = $user;
-        $this->clave = $clave;
+        $this->user = $users;
+        // $this->clave = $clave;
     }
 
     /**
@@ -28,6 +28,13 @@ class UserRegister extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.userregister');
+        return $this->subject('Bienvenido a SmartMoodle')
+        ->view('mails.userregister1') 
+                ->with([
+                        'name'     => $this->user['name'],
+                        'apellido' => $this->user['apellido'],
+                        'email'    => $this->user['email'],
+                        'clave'    => $this->user['password'],
+                    ]);
     }
 }

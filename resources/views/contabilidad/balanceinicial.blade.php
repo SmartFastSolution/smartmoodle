@@ -57,7 +57,7 @@
                 <h3 class="text-danger">ACTIVOS</h3>
                 <h3 class="text-primary">CORRIENTE <a data-toggle="tooltip" data-placement="top"
                     title="Agregar Activo Corriente" @click="abrirActivoC()" class="btn btn-sm btn-info text-light"><i
-                class="fa fa-plus"></i></a></h3><br>
+                class="fa fa-plus"></i></a></h3>
                 <draggable class="list-group list-group-flush" :list="a_corrientes" group="people" @change="cambioActivo">
                 <div v-for="(element, index) in a_corrientes" :key="element.name">
                     <li class="list-group-item d-flex justify-content-between align-items-center" style=" font-size:14px">
@@ -82,7 +82,7 @@
             <br><br>
             <h3 class="text-primary">NO CORRIENTE <a data-toggle="tooltip" data-placement="top"
                 title="Agregar Activo No Corriente" @click="abrirActivoNoC()"
-            class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3><br>
+            class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3>
             <draggable class="list-group list-group-flush" :list="a_nocorrientes" group="people"
             @change="cambioActivoNo()">
             <div v-for="(element, index) in a_nocorrientes" :key="element.name">
@@ -168,7 +168,7 @@
 <br><br>
 <h3 class="text-danger">PATRIMONIO <a data-toggle="tooltip" data-placement="top" title="Agregar Patrimonio"
 @click="abrirPatrimonio()" class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a>
-</h3><br>
+</h3>
 <draggable class="list-group list-group-flush" :list="patrimonios" group="people"
 @change="cambioPatrimonio()">
 <div v-for="(element, index) in patrimonios" :key="element.name">
@@ -228,6 +228,9 @@ TOTAL
 @include ('contabilidad.modales.modalbalanceinicialhorizontal')
 {{-- @include ('contabilidad.modalbhorizontal') --}}
 </div>
+
+
+
 {{-- BALANCE VERTICAL --}}
 @if($datos->metodo == 'concatenado')
 <div class="tab-pane fade" id="b_vertical" role="tabpanel" aria-labelledby="b_vertical-tab">
@@ -287,7 +290,7 @@ placeholder="Agrega la fecha" name="">
 <div class="col-7">
 <h3 class="text-primary">ACTIVOS CORRIENTE <a data-toggle="tooltip" data-placement="top"
     title="Agregar Activo Corriente" @click="abrirActivoC()" class="btn btn-sm btn-info text-light"><i
-class="fa fa-plus"></i></a></h3><br>
+class="fa fa-plus"></i></a></h3>
 <draggable class="list-group list-group-flush" :list="a_corrientes" group="people" @change="cambioActivo">
 <div v-for="(element, index) in a_corrientes" :key="element.name">
     <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -312,7 +315,7 @@ class="fa fa-plus"></i></a></h3><br>
 <div class="col-7">
 <h3 class="text-primary">ACTIVOS NO CORRIENTE <a data-toggle="tooltip" data-placement="top"
 title="Agregar Activo No Corriente" @click="abrirActivoNoC()"
-class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3><br>
+class="btn btn-sm btn-info text-light"><i class="fa fa-plus"></i></a></h3>
 <draggable class="list-group list-group-flush" :list="a_nocorrientes" group="people"
 @change="cambioActivoNo()">
 <div v-for="(element, index) in a_nocorrientes" :key="element.name">
@@ -327,7 +330,7 @@ class="fas fa-trash-alt"></i></a></span>
 </draggable>
 </div>
 <div class="col-12">
-<table>
+<table class="table table-sm table-borderless">
 <tbody>
 <tr>
     <td class="font-weight-bold" style="font-size: 20px;" width="2000">TOTAL ACT. NO CORR.</td>
