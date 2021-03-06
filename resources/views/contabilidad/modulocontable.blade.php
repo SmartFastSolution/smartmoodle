@@ -99,7 +99,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('balance-inicial-vertical')">Crear Taller</a>
+                <button class="btn btn-danger btn-block" @click.prevent="crearTaller('balance-inicial-vertical')" :disabled="!show">Crear Taller</button>
             </div>
         </div>
       </div>
@@ -118,7 +118,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('balance-inicial-horizontal')">Crear Taller</a>
+                <button class="btn btn-danger btn-block" @click.prevent="crearTaller('balance-inicial-horizontal')" :disabled="!show">Crear Taller</button>
             </div>
         </div>
       </div>
@@ -161,7 +161,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-                      <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('kardex-fifo')">CREAR TALLER</a>
+                      <button class="btn btn-danger btn-block" @click.prevent="crearTaller('kardex-fifo')" :disabled="!show">CREAR TALLER</button>
                   </div>
           </div>
 
@@ -204,7 +204,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-              <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('kardex-promedio')">CREAR TALLER</a>
+              <button class="btn btn-danger btn-block" @click.prevent="crearTaller('kardex-promedio')" :disabled="!show">CREAR TALLER</button>
             </div>
           </div>
       </div>
@@ -224,7 +224,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('diario-general')">Crear Taller</a>
+                <button class="btn btn-danger btn-block" @click.prevent="crearTaller('diario-general')" :disabled="!show">Crear Taller</button>
             </div>
         </div>
       </div>
@@ -244,7 +244,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('mayor-general')">Crear Taller</a>
+                <button href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('mayor-general')" :disabled="!show">Crear Taller</button>
             </div>
         </div>
       </div>
@@ -265,7 +265,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('balance-comprobacion')">Crear Taller</a>
+                <button href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('balance-comprobacion')" :disabled="!show">Crear Taller</button>
             </div>
         </div>
       </div>
@@ -286,7 +286,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('hoja-trabajo')">Crear Taller</a>
+                <button href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('hoja-trabajo')" :disabled="!show">Crear Taller</button>
             </div>
         </div>
       </div>
@@ -308,7 +308,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('balance-comprobacion-ajustado')">Crear Taller</a>
+                <button href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('balance-comprobacion-ajustado')" :disabled="!show">Crear Taller</button>
             </div>
         </div>
       </div>
@@ -330,7 +330,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('estado-resultado')">Crear Taller</a>
+                <button href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('estado-resultado')" :disabled="!show">Crear Taller</button>
             </div>
         </div>
       </div>
@@ -352,7 +352,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('balance-general')">Crear Taller</a>
+                <button href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('balance-general')" :disabled="!show">Crear Taller</button>
             </div>
         </div>
       </div>
@@ -375,7 +375,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('asientos-cierre')">Crear Taller</a>
+                <button href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('asientos-cierre')" :disabled="!show">Crear Taller</button>
             </div>
         </div>
       </div>
@@ -397,7 +397,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('librocaja')">Crear Taller</a>
+                <button class="btn btn-danger btn-block" @click.prevent="crearTaller('librocaja')" :disabled="!show">Crear Taller</button>
             </div>
         </div>
       </div>
@@ -418,7 +418,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('conciliacionbancaria')">Crear Taller</a>
+                <button class="btn btn-danger btn-block" @click.prevent="crearTaller('conciliacionbancaria')" :disabled="!show">Crear Taller</button>
             </div>
         </div>
       </div>
@@ -439,7 +439,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('arqueocaja')">Crear Taller</a>
+                <button class="btn btn-danger btn-block" @click.prevent="crearTaller('arqueocaja')" :disabled="!show">Crear Taller</button>
             </div>
         </div>
       </div>
@@ -460,7 +460,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('librobanco')">Crear Taller</a>
+                <button class="btn btn-danger btn-block" @click.prevent="crearTaller('librobanco')" :disabled="!show">Crear Taller</button>
             </div>
         </div>
       </div>
@@ -481,7 +481,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('retencioniva')">Crear Taller</a>
+                <button class="btn btn-danger btn-block" @click.prevent="crearTaller('retencioniva')" :disabled="!show">Crear Taller</button>
             </div>
         </div>
       </div>
@@ -503,7 +503,7 @@
                 <input class="custom-file-control"  name="image" type="file" @change="getDoc">
               </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('nominaempleados')">Crear Taller</a>
+                <button class="btn btn-danger btn-block" @click.prevent="crearTaller('nominaempleados')" :disabled="!show">Crear Taller</button>
             </div>
         </div>
       </div>
@@ -524,7 +524,7 @@
                 {{-- <a href="" class="btn btn-danger" @click.prevent="agregar()">Agregar</a> --}}
             </div>
             <div class="col-2 mb-2">
-                <a href="" class="btn btn-danger btn-block" @click.prevent="crearTaller('provisiondebeneficio')">Crear Taller</a>
+                <button class="btn btn-danger btn-block" @click.prevent="crearTaller('provisiondebeneficio')" :disabled="!show">Crear Taller</button>
             </div>
         </div>
       </div>
@@ -713,7 +713,7 @@
      </div>
      <div class="row mt-2 justify-content-center">
        <div class="col-2 mb-2">
-            <a href="" class="btn btn-primary btn-block" @click.prevent="tallerConcatenado()">Crear Taller</a>
+            <button class="btn btn-primary btn-block" @click.prevent="tallerConcatenado()" :disabled="!show">Crear Taller</button>
         </div>
      </div>
  </div>
@@ -755,6 +755,7 @@
         // { name: ' Provisión de Benficios', code: 'provision-beneficio' },
       ],
         contenido_id:'',
+        show:true,
         enunciado:'',
         document:'',
         individuales:{
@@ -903,6 +904,7 @@
         },
           crearTaller(tipo){
             let set = this;
+            this.show = false;
             if (tipo == 'balance-inicial-vertical') {
                 let url = '/sistema/admin/modulo/balance-inicial';
                 if (set.individuales.balance_vertical.trim() === '' ) {
