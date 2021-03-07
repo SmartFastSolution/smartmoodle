@@ -1,31 +1,37 @@
-<table id="myTable3" class="table table-hover">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">Unidad Educativa</th>
-            <th scope="col">Nombre/Apellido</th>
-            <th scope="col">Rol</th>
-            <th scope="col">Ultimo Acceso</th>
-
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($users as $user)
-        <tr>
-            <td>
-                @isset($user->instituto->nombre)
-                {{$user->instituto->nombre}}
-                @endisset
-            </td>
-            <td>{{$user->name}} {{$user->apellido}}</td>
-            <td>
-                @foreach($user->roles as $role)
-                <span class="badge badge-primary"> {{$role->name}}
-                </span>
-                @endforeach
-            </td>
-            <td> {{$user->created_at->diffForHumans()}}</td>
-        </tr>
-
-        @endforeach
-    </tbody>
-</table>
+<div class="container">
+    <h5 style="text-align: center"><strong>TABLA DE MATERIAS</strong></h5>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="vertical-align: middle;" scope="col">Unidad Educativa</th>
+                <th style="vertical-align: middle;" scope="col">Nombres</th>
+                <th style="vertical-align: middle;" scope="col">Apellidos</th>
+                <th style="vertical-align: middle;" scope="col">Correo</th>
+                <th style="vertical-align: middle;" scope="col">Rol</th>
+                <th style="vertical-align: middle;" scope="col">Estado</th>
+                <th style="vertical-align: middle;" scope="col">Ultimo Acceso</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($usuarios as $element)
+            <tr>
+                <td>{{$element['instituto']}}</td>
+                <td>{{$element['user_nombre']}} </td>
+                <td>{{ $element['user_apellido'] }}</td>
+                <td>{{ $element['email'] }}</td>
+                <td class="text-center">{{ $element['role_name'] }}</td>
+                <td class="text-center">
+                    {{ $element['estado'] }}
+                </td>
+                <td>
+                    @isset ($element['access_at'])
+                    {{Carbon\Carbon::parse($element['access_at'])->diffForHumans()}}
+                    @else
+                    Sin Ingreso
+                    @endisset
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>

@@ -1,30 +1,39 @@
-<table id="myTable2" class="table table-hover">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">Unidad Educativa</th>
-            <th scope="col">Estudiante</th>
-            <th scope="col">Curso</th>
-            <th scope="col">Paralelo</th>
-            <th scope="col">Materia</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($est as $es)
-        @if($es->materias != null)
-        @foreach($es->materias as $ma)
-        @if($ma->distribucionmacus != null)
-        @foreach($ma->distribucionmacus as $cur)
-        <tr>
-            <td>{{$es->instituto->nombre}}</td>
-            <td>{{$es->user->name}} {{$es->user->apellido}}</td>
-            <td>{{$cur->curso->nombre}}</td>
-            <td>{{$es->user->nivel->nombre}}</td>
-            <td>{{$ma->nombre}}</td>
-        </tr>
-        @endforeach
-        @endif
-        @endforeach
-        @endif
-        @endforeach
-    </tbody>
-</table>
+<div class="container">
+    <h5 style="text-align: center"><strong>TABLA DE ESTUDIANTES</strong></h5>
+
+    <table id="myTable1" class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Unidad Educativa</th>
+                <th scope="col">Nombre Estudiante</th>
+                <th scope="col">Apellido Estudiante</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Curso</th>
+                <th scope="col">Materia</th>
+                <th scope="col">Ultimo Acceso</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($estudiantes as $element)
+            <tr>
+                <td>{{$element['instituto']}}</td>
+                <td>{{$element['user_nombre']}} </td>
+                <td>{{ $element['user_apellido'] }}</td>
+                <td>{{ $element['email'] }}</td>
+                <td class="text-center">{{ $element['estado'] }}</td>
+                <td>{{$element['nombre_curso']}}</td>
+                <td>{{$element['nombre_materia']}}</td>
+                <td>
+                    @isset ($element['access_at'])
+                    {{Carbon\Carbon::parse($element['access_at'])->diffForHumans()}}
+                    @else
+                    Sin Ingreso
+                    @endisset
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    
+</div>

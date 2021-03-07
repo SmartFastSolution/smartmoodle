@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 
-use App\Http\Controllers\Controller;
-
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use  Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
+use App\User;
+use Carbon\Carbon;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
 
@@ -38,10 +39,20 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+    public function verificarEstado($user)
+    {
+       $datos = User::selectRaw('timestampdiff(DAY, activated_at, curdate()) as dato')->where('id', $user->id)->first();
+       if ($datos->dato >= 12) {
+          $user->estado = 'off';
+          $user->save();
+       }
+      
+    }
 
 
     public function authenticated($request , $user){
 
+      $this->verificarEstado($user);
   if ($user->estado == 'off') {
 
     Auth::guard()->logout();
@@ -49,7 +60,10 @@ class LoginController extends Controller
     $request->session()->invalidate();
 
     return redirect('/login')->withInput()->with('message', 'Tu cuenta esta desactivada por favor comunicate con el administrador');
-}
+  }
+
+  $user->access_at = Carbon::now();
+  $user->save();
 
         if($user->roles[0]->descripcion=='administrador'){
            return redirect()->route('administrador') ;

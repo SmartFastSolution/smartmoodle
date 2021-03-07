@@ -5,7 +5,7 @@
 
 <section class="content-fluid">
     <div class="container-fluid">
-        <h1 class="font-weight-light" style="color:dark;"> Reportes Generales</h1>
+        <h1 class="font-weight-bold text-center text-danger display-4"> Reportes Generales</h1>
 
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -23,224 +23,21 @@
         </nav>
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                <!--aqui esta la seccion del reporte de la unidad educativa-->
-                <br>
-                <div class="btn-group float-right" role="group" aria-label="Basic example">
-
-                    <a class="btn btn-dark float-right" href="{{route('distribucion.excel')}}"> <i
-                            class="fas fa-save"></i>
-                        Generar Reporte</a>
-                </div>
-                <br>
-                <br>
-                <table id="myTable" class="table table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Unidad Educativa</th>
-                            <th scope="col">Curso</th>
-                            <th scope="col">Materia</th>
-                            <th scope="col">Unidad</th>
-                            <th scope="col">Taller</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($dist as $dis)
-                        @if($dis->materias != null)
-                        @foreach($dis->materias as $ma)
-                        @if($ma->contenidos != null)
-                        @foreach($ma->contenidos as $contenido)
-                        @if($contenido->tallers != null)
-                        @foreach($contenido->tallers as $tl)
-                        <tr>
-                            <td>{{$dis->instituto->nombre}}</td>
-                            <td>{{$dis->curso->nombre}}</td>
-                            <td>{{$ma->nombre}}</td>
-                            <td>{{$contenido->nombre}}</td>
-                            <td>{{$tl->nombre}}</td>
-
-                        </tr>
-                        @endforeach
-                        @endif
-                        @endforeach
-                        @endif
-                        @endforeach
-                        @endif
-                        @endforeach
-                    </tbody>
-                </table>
+            @livewire('admin.reporte-talleres')
             </div>
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                <!--aqui esta la seccion del reporte de docente-->
-                <br>
-                <div class="btn-group float-right" role="group" aria-label="Basic example">
-                    <a class="btn btn-dark float-right" href="{{route('docente.excel')}}"> <i class="fas fa-save"></i>
-                        Generar Reporte</a>
-                </div>
-                <br>
-                <br>
-                <table id="myTable1" class="table table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Unidad Educativa</th>
-                            <th scope="col">Docente</th>
-                            <th scope="col">Curso</th>
-                            <th scope="col">Materia</th>
-                            <th scope="col">Ultimo Acceso</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($doc as $do)
-                        @if($do->materias != null)
-                        @foreach($do->materias as $ma)
-                        @if($ma->distribucionmacus != null)
-                        @foreach($ma->distribucionmacus as $cur)
-                        <tr>
-                            <td>{{$do->instituto->nombre}}</td>
-                            <td>{{$do->user->name}} {{$do->user->apellido}}</td>
-                            <td>{{$cur->curso->nombre}}</td>
-                            <td>{{$ma->nombre}}</td>
-                            <td> {{$do->user->created_at->diffForHumans()}}</td>
-                        </tr>
-                        @endforeach
-                        @endif
-                        @endforeach
-                        @endif
-                        @endforeach
-                    </tbody>
-                </table>
+            @livewire('admin.reporte-docentes')
             </div>
             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+            @livewire('admin.reporte-estudiante')
 
-                <!--aqui esta la seccion del reporte de estudiante-->
-                <br>
-                <div class="btn-group float-right" role="group" aria-label="Basic example">
-
-                    <a class="btn btn-dark float-right" href="{{route('asignacion.excel')}}"> <i
-                            class="fas fa-save"></i>
-                        Generar Reporte</a>
-                </div>
-                <br>
-                <br>
-                <table id="myTable2" class="table table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Unidad Educativa</th>
-                            <th scope="col">Estudiante</th>
-                            <th scope="col">Curso</th>
-                            <th scope="col">Paralelo</th>
-                            <th scope="col">Materia</th>
-                            <th scope="col">Ultimo Acceso</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($est as $es)
-                        @if($es->materias != null)
-                        @foreach($es->materias as $ma)
-                        @if($ma->distribucionmacus != null)
-                        @foreach($ma->distribucionmacus as $cur)
-                        <tr>
-                            <td>{{$es->instituto->nombre}}</td>
-                            <td>{{$es->user->name}} {{$es->user->apellido}}</td>
-                            <td>{{$cur->curso->nombre}}</td>
-                            <td>{{$es->user->nivel->nombre}}</td>
-                            <td>{{$ma->nombre}}</td>
-                            <td> {{$es->user->created_at->diffForHumans()}}</td>
-                        </tr>
-                        @endforeach
-                        @endif
-                        @endforeach
-                        @endif
-                        @endforeach
-                    </tbody>
-                </table>
             </div>
             <div class="tab-pane fade" id="nav-users" role="tabpanel" aria-labelledby="nav-users-tab">
-
-                <!--aqui esta la seccion del reporte de usuarios-->
-                <br>
-                <div class="btn-group float-right" role="group" aria-label="Basic example">
-
-                    <a class="btn btn-dark float-right" href="{{route('users.excel')}}"> <i class="fas fa-save"></i>
-                        Generar Reporte</a>
-                </div>
-                <br>
-                <br>
-                <table id="myTable3" class="table table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Unidad Educativa</th>
-                            <th scope="col">Nombre/Apellido</th>
-                            <th scope="col">Rol</th>
-                            <th scope="col">Ultimo Acceso</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($users as $user)
-                        <tr>
-                            <td>
-                                @isset($user->instituto->nombre)
-                                {{$user->instituto->nombre}}
-                                @endisset
-                            </td>
-                            <td>{{$user->name}} {{$user->apellido}}</td>
-                            <td>
-                                @foreach($user->roles as $role)
-                                <span class="badge badge-primary"> {{$role->name}}
-                                </span>
-                                @endforeach
-                            </td>
-                            <td> {{$user->created_at->diffForHumans()}}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+            @livewire('admin.reporte-usuarios')
             </div>
             <div class="tab-pane fade" id="nav-vigencia" role="tabpanel" aria-labelledby="nav-vigencia-tab">
-                <!--aqui esta la seccion del reporte de docente-->
-                <br>
-                <div class="btn-group float-right" role="group" aria-label="Basic example">
-                    <a class="btn btn-dark float-right" href="{{route('curso.excel')}}"> <i class="fas fa-save"></i>
-                        Generar Reporte</a>
-                </div>
-                <br>
-                <br>
-                <table id="myTable4" class="table table-hover" >
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Unidad Educativa</th>
-                            <th scope="col">Docente</th>
-                            <th scope="col">Materia</th>
-                            <th scope="col">Estudiante</th>
-                            <th scope="col">Curso</th>
-                            <th scope="col">Paralelo</th>
-                            <th scope="col">Ultimo Acceso</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($doc as $do)
-                        @if($do->materias != null)
-                        @foreach($do->materias as $ma)
-                        @if($ma->assignments != null)
-                        @foreach($ma->assignments as $asig)
-                        <tr>
-                            <td>{{$do->instituto->nombre}}</td>
-                            <td>{{$do->user->name}} {{$do->user->apellido}}</td>
-                            <td>{{$ma->nombre}}</td>
-                            <td>{{$asig->user->name}} {{$asig->user->apellido}}</td>
-                            <td>{{$asig->user->curso->nombre}}</td>
-                            <td>{{$asig->user->nivel->nombre}}</td>
-                            <td> {{$asig->user->created_at->diffForHumans()}}</td>
-                        </tr>
-                        @endforeach
-                        @endif
-                        @endforeach
-                        @endif
-                        @endforeach
-                    </tbody>
-                </table>
-
+            @livewire('admin.reporte-alumnos')
+            
             </div>
             <!-- hasta aqui los tab -->
         </div>
@@ -251,191 +48,137 @@
 
 @stop
 @section('js')
+<script type="text/javascript">
 
-<script>
-$(function() {
-    $(document).ready(function() {
-        var table = $('#myTable').DataTable({
-            "fixedHeader": true,
-            "orderCellsTop": true,
-            "info": true,
-            "autoWidth": true,
-            "searching": true,
-            "responsive": true,
+    const reportes = new Vue({
+      el: "#demo",
+      data:{
 
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            }
+      },
+      methods:{
+        reporteTalleres: function (talleres) {
+
+           // console.log(talleres)
+        let _this = this;
+        let url = '/sistema/distribucion-list-excel';
+            axios.post(url,{
+            datos: talleres
+        },{responseType: 'arraybuffer'}).then(response => {
+
+            let fileURL = window.URL.createObjectURL(new Blob([response.data]));
+            let fileLink = document.createElement('a');
+            fileLink.href = fileURL;
+            fileLink.setAttribute('download', Date.now()+'-talleres.xlsx');
+           document.body.appendChild(fileLink);
+           fileLink.click();
+            // console.log(response.data); 
+
+        }).catch(function(error){
+
         });
+        },
 
-        $('#myTable thead tr').clone(true).appendTo('#myTable thead');
-        $('#myTable thead tr:eq(1) th').each(function(i) {
+    reporteDocentes: function (docentes) {
+           // console.log(talleres)
+        let _this = this;
+        let url = '/sistema/docentes-list-excel';
+            axios.post(url,{
+            datos: docentes
+        },{responseType: 'arraybuffer'}).then(response => {
 
-            var title = $(this).text(); //es el nombre de la columna
-            $(this).html('<input type="text" placeholder="Buscar..." />');
+            let fileURL = window.URL.createObjectURL(new Blob([response.data]));
+            let fileLink = document.createElement('a');
+            fileLink.href = fileURL;
+            fileLink.setAttribute('download', Date.now()+'-docentes.xlsx');
+           document.body.appendChild(fileLink);
+           fileLink.click();
+            // console.log(response.data); 
 
-            $('input', this).on('keyup change', function() {
-                if (table.column(i).search() !== this.value) {
-                    table
-                        .column(i)
-                        .search(this.value)
-                        .draw();
-                }
-            });
+        }).catch(function(error){
+
         });
+        },
+        reporteEstudiantes: function (estudiantes) {
+           // console.log(talleres)
+        let _this = this;
+        let url = '/sistema/asignaciones-list-excel';
+            axios.post(url,{
+            datos: estudiantes
+        },{responseType: 'arraybuffer'}).then(response => {
 
+            let fileURL = window.URL.createObjectURL(new Blob([response.data]));
+            let fileLink = document.createElement('a');
+            fileLink.href = fileURL;
+            fileLink.setAttribute('download', Date.now()+'-estudiantes.xlsx');
+           document.body.appendChild(fileLink);
+           fileLink.click();
+            // console.log(response.data); 
+
+        }).catch(function(error){
+
+        });
+        },
+        reporteAlumnos: function (alumnos) {
+           // console.log(talleres)
+        let _this = this;
+        let url = '/sistema/cursos-list-excel';
+            axios.post(url,{
+            datos: alumnos
+        },{responseType: 'arraybuffer'}).then(response => {
+
+            let fileURL = window.URL.createObjectURL(new Blob([response.data]));
+            let fileLink = document.createElement('a');
+            fileLink.href = fileURL;
+            fileLink.setAttribute('download', Date.now()+'-alumnos.xlsx');
+           document.body.appendChild(fileLink);
+           fileLink.click();
+            // console.log(response.data); 
+
+        }).catch(function(error){
+
+        });
+        },
+         reportesUsuarios: function (usuarios) {
+           // console.log(talleres)
+        let _this = this;
+        let url = '/sistema/users-list-excel';
+            axios.post(url,{
+            datos: usuarios
+        },{responseType: 'arraybuffer'}).then(response => {
+
+            let fileURL = window.URL.createObjectURL(new Blob([response.data]));
+            let fileLink = document.createElement('a');
+            fileLink.href = fileURL;
+            fileLink.setAttribute('download', Date.now()+'-usuarios.xlsx');
+           document.body.appendChild(fileLink);
+           fileLink.click();
+            // console.log(response.data); 
+
+        }).catch(function(error){
+
+        });
+        },
+      }
     });
-});
-</script>
-<script>
-$(function() {
-    $(document).ready(function() {
-        var table = $('#myTable1').DataTable({
-            "fixedHeader": true,
-            "orderCellsTop": true,
-            "info": true,
-            "autoWidth": true,
-            "searching": true,
-            "responsive": true,
-
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            }
-        });
-
-        $('#myTable1 thead tr').clone(true).appendTo('#myTable1 thead');
-        $('#myTable1 thead tr:eq(1) th').each(function(i) {
-
-            var title = $(this).text(); //es el nombre de la columna
-            $(this).html('<input type="text" placeholder="Buscar..." />');
-
-            $('input', this).on('keyup change', function() {
-                if (table.column(i).search() !== this.value) {
-                    table
-                        .column(i)
-                        .search(this.value)
-                        .draw();
-                }
-            });
-        });
-
+    Livewire.on('talleres', function (data) {
+       reportes.reporteTalleres(data.talleres)
     });
-});
-</script>
 
-<script>
-$(function() {
-    $(document).ready(function() {
-        var table = $('#myTable2').DataTable({
-            "fixedHeader": true,
-            "orderCellsTop": true,
-            "info": true,
-            "autoWidth": true,
-            "searching": true,
-            "responsive": true,
-           
-
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            }
-        });
-
-        $('#myTable2 thead tr').clone(true).appendTo('#myTable2 thead');
-        $('#myTable2 thead tr:eq(1) th').each(function(i) {
-
-            var title = $(this).text(); //es el nombre de la columna
-            $(this).html('<input type="text" placeholder="Buscar..." />');
-
-            $('input', this).on('keyup change', function() {
-                if (table.column(i).search() !== this.value) {
-                    table
-                        .column(i)
-                        .search(this.value)
-                        .draw();
-                }
-            });
-        });
-
+     Livewire.on('docentes', function (data) {
+       reportes.reporteDocentes(data.docentes)
     });
-});
-</script>
 
-</script>
-
-<script>
-$(function() {
-    $(document).ready(function() {
-        var table = $('#myTable3').DataTable({
-            "fixedHeader": true,
-            "orderCellsTop": true,
-            "info": true,
-            "autoWidth": true,
-            "searching": true,
-            "responsive": true,
-
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            }
-        });
-
-        $('#myTable3 thead tr').clone(true).appendTo('#myTable3 thead');
-        $('#myTable3 thead tr:eq(1) th').each(function(i) {
-
-            var title = $(this).text(); //es el nombre de la columna
-            $(this).html('<input type="text" placeholder="Buscar..." />');
-
-            $('input', this).on('keyup change', function() {
-                if (table.column(i).search() !== this.value) {
-                    table
-                        .column(i)
-                        .search(this.value)
-                        .draw();
-                }
-            });
-        });
-
+    Livewire.on('estudiantes', function (data) {
+       reportes.reporteEstudiantes(data.estudiantes)
     });
-});
-</script>
 
-<script>
-$(function() {
-    $(document).ready(function() {
-        var table = $('#myTable4').DataTable({
-            "fixedHeader": true,
-            "orderCellsTop": true,
-            "info": true,
-            "autoWidth": true,
-            "searching": true,
-            "responsive": true,
-            "scrollX": true,
-           
-
-            "language": {
-                "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-            }
-        });
-
-        $('#myTable4 thead tr').clone(true).appendTo('#myTable4 thead');
-        $('#myTable4 thead tr:eq(1) th').each(function(i) {
-
-            var title = $(this).text(); //es el nombre de la columna
-            $(this).html('<input type="text" placeholder="Buscar..." />');
-
-            $('input', this).on('keyup change', function() {
-                if (table.column(i).search() !== this.value) {
-                    table
-                        .column(i)
-                        .search(this.value)
-                        .draw();
-                }
-            });
-        });
-
+    Livewire.on('alumnos', function (data) {
+       reportes.reporteAlumnos(data.alumnos)
     });
-});
+    Livewire.on('usuarios', function (data) {
+       reportes.reportesUsuarios(data.usuarios)
+    });
+
+
 </script>
-
-
-
 @stop

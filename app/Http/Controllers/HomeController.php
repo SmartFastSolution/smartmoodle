@@ -127,12 +127,12 @@ class HomeController extends Controller
         $materias= Materia::where('instituto_id', $request->id)->get();
         $materia = [];
 
-        $distribuciondos = Distribuciondo::where('user_id', $request->user_id)->first();
+        $distribuciondos = Distribuciondo::where('user_id', $request->user_id)->count();
 
         $distribucion = Distribucionmacu::where('instituto_id', $request->id)->get();
 
-        if ($distribuciondos == null) {
-                foreach($distribucion as $key => $value){
+        if ($distribuciondos == 0) {
+        foreach($distribucion as $key => $value){
             $materia[$key] =[
                 'id'=> $value->id,
                 'nombre' => $value->curso->nombre,
@@ -140,17 +140,21 @@ class HomeController extends Controller
             ];
             }
         }else{
+        $distribuciondos = Distribuciondo::where('user_id', $request->user_id)->get();
+        $mat = [];
+        foreach ($distribuciondos as $key => $mater) {
+            $mat[] = $mater->materia_id;
+        }
+
             foreach($distribucion as $key => $value){
             $materia[$key] =[
                 'id'=> $value->id,
                 'nombre' => $value->curso->nombre,
-                'materias' => $value->materias->where('id', '!=', $distribuciondos->materia_id),
+                'materias' => $value->materias->whereNotIn('id', $mat),
             ];
             }
 
         }
-    
-     
         return $materia;   
     }
 
