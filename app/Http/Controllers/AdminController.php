@@ -258,8 +258,14 @@ class AdminController extends Controller
    }
    public function taller1(Request $request)
    {
+    // $valor;
     $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+    
+    if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
     //return $request->all();
       $taller1               = new Taller;
       $taller1->nombre       = 'Taller '.++$valor[1];
@@ -293,7 +299,11 @@ class AdminController extends Controller
      public function taller2(Request $request)
    {
     $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
       $taller2               = new Taller;
       $taller2->nombre       = 'Taller '.++$valor[1];
       $taller2->enunciado    = $request->input('enunciado');
@@ -330,7 +340,11 @@ class AdminController extends Controller
     public function taller3(Request $request)
    {
     $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
     $taller3 = new Taller;
     $taller3->nombre = 'Taller '.++$valor[1];
     $taller3->enunciado = $request->input('enunciado');
@@ -363,7 +377,11 @@ class AdminController extends Controller
    public function taller4(Request $request)
    {
       $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
       $taller4 = new Taller;
       $taller4->nombre = 'Taller '.++$valor[1];
       $taller4->enunciado = $request->input('enunciado');
@@ -403,7 +421,11 @@ class AdminController extends Controller
      public function taller5(Request $request)
    {
       $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
       $taller5 = new Taller;
       $taller5->nombre = 'Taller '.++$valor[1];
       $taller5->enunciado   = $request->input('enunciado');
@@ -445,7 +467,11 @@ class AdminController extends Controller
    public function taller6(Request $request)
    {
       $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
       $taller6 = new Taller;
       $taller6->nombre = 'Taller '.++$valor[1];
       $taller6->enunciado = $request->input('enunciado');
@@ -497,7 +523,11 @@ class AdminController extends Controller
      public function taller7(Request $request)
      {
       $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
       $taller7 = new Taller;
       $taller7->nombre = 'Taller '.++$valor[1];
       $taller7->enunciado = $request->input('enunciado');
@@ -518,7 +548,11 @@ class AdminController extends Controller
       public function taller8(Request $request)
       {
       $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
       $taller8 = new Taller;
       $taller8->nombre = 'Taller '.++$valor[1];
       $taller8->enunciado = $request->input('enunciado');
@@ -549,7 +583,11 @@ class AdminController extends Controller
       public function taller9(Request $request)
       {
       $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
       $taller9 = new Taller;
       $taller9->nombre = 'Taller '.++$valor[1];
       $taller9->enunciado = $request->input('enunciado');
@@ -589,7 +627,11 @@ class AdminController extends Controller
       {
 if ($request->input('id_plantilla') == 10 ) {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-         $valor = explode(" ", $i->nombre);
+            if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller10 = new Taller;
          $taller10->nombre = 'Taller '.++$valor[1];
          $taller10->enunciado = $request->input('enunciado');
@@ -643,7 +685,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
 
 }elseif($request->input('id_plantilla') == 11 ) {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller11 = new Taller;
          $taller11->nombre = 'Taller '.++$valor[1];
          $taller11->enunciado = $request->input('enunciado');
@@ -699,7 +745,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
        public function taller12(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-          $valor = explode(" ", $i->nombre);
+             if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller12 = new Taller;
          $taller12->nombre = 'Taller '.++$valor[1];
          $taller12->enunciado = $request->input('enunciado');
@@ -738,7 +788,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       public function taller13(Request $request)
       {
         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller13 = new Taller;
          $taller13->nombre = 'Taller '.++$valor[1];
          $taller13->enunciado = $request->input('enunciado');
@@ -775,7 +829,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
        public function taller14(Request $request)
       {
         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller14 = new Taller;
          $taller14->nombre = 'Taller '.++$valor[1];
          $taller14->enunciado = $request->input('enunciado');
@@ -800,7 +858,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       public function taller15(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller15 = new Taller;
          $taller15->nombre = 'Taller '.++$valor[1];
          $taller15->enunciado = $request->input('enunciado');
@@ -828,7 +890,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
    public function taller16(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller16 = new Taller;
          $taller16->nombre = 'Taller '.++$valor[1];
          $taller16->enunciado = $request->input('enunciado');
@@ -851,7 +917,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
        public function taller17(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller17 = new Taller;
          $taller17->nombre = 'Taller '.++$valor[1];
          $taller17->enunciado = $request->input('enunciado');
@@ -881,7 +951,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       public function taller18(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-          $valor = explode(" ", $i->nombre);
+             if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller18 = new Taller;
          $taller18->nombre = 'Taller '.++$valor[1];
          $taller18->enunciado = $request->input('enunciado');
@@ -911,7 +985,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       public function taller19(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller19 = new Taller;
          $taller19->nombre = 'Taller '.++$valor[1];
          $taller19->enunciado = $request->input('enunciado');
@@ -940,7 +1018,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         public function taller20(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller20 = new Taller;
          $taller20->nombre = 'Taller '.++$valor[1];
          $taller20->enunciado            = $request->input('enunciado');
@@ -971,7 +1053,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
        public function taller21(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller21 = new Taller;
          $taller21->nombre = 'Taller '.++$valor[1];
          $taller21->enunciado            = $request->input('enunciado');
@@ -998,7 +1084,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         public function taller22(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller22 = new Taller;
          $taller22->nombre = 'Taller '.++$valor[1];
          $taller22->enunciado            = $request->input('enunciado');
@@ -1043,7 +1133,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
        public function taller23(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller23 = new Taller;
          $taller23->nombre = 'Taller '.++$valor[1];
          $taller23->enunciado            = $request->input('enunciado');
@@ -1072,7 +1166,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
        public function taller24(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller24               = new Taller;
          $taller24->nombre       = 'Taller '.++$valor[1];
          $taller24->enunciado   = $request->input('enunciado');
@@ -1099,7 +1197,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         public function taller25(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller25 = new Taller;
          $taller25->nombre = 'Taller '.++$valor[1];
          $taller25->enunciado            = $request->input('enunciado');
@@ -1145,7 +1247,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
        public function taller26(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller26 = new Taller;
          $taller26->nombre = 'Taller '.++$valor[1];
          $taller26->enunciado            = $request->input('enunciado');
@@ -1185,7 +1291,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          public function taller27(Request $request)
       {
         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller27 = new Taller;
          $taller27->nombre = 'Taller '.++$valor[1];
          $taller27->enunciado  = $request->input('enunciado');
@@ -1243,7 +1353,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
    public function taller31(Request $request)
       {
           $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller31 = new Taller;
          $taller31->nombre = 'Taller '.++$valor[1];
          $taller31->enunciado            = $request->input('enunciado');
@@ -1268,7 +1382,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       {
 
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller33               = new Taller;
          $taller33->nombre       = 'Taller '.++$valor[1];
          $taller33->enunciado    = $request->input('enunciado');
@@ -1316,7 +1434,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          $contenido              = $request->unidad;
          $plantilla              = $request->plantilla;
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller34               = new Taller;
          $taller34->nombre       = 'Taller '.++$valor[1];
          $taller34->plantilla_id = $plantilla;
@@ -1370,7 +1492,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
            public function taller35(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-          $valor = explode(" ", $i->nombre);
+             if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller35 = new Taller;
          $taller35->nombre = 'Taller '.++$valor[1];
          $taller35->enunciado            = $request->input('enunciado');
@@ -1408,7 +1534,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
        public function taller36(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller36               = new Taller;
          $taller36->nombre       = 'Taller '.++$valor[1];
          $taller36->enunciado    = $request->input('enunciado');
@@ -1443,7 +1573,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
    public function balance_inicial(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
@@ -1510,7 +1644,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          public function kardex(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $kardex               = new Taller;
          $kardex->nombre       = 'Taller '.++$valor[1];
          $kardex->enunciado    = $request->enunciado;
@@ -1585,7 +1723,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
        public function crearDiario(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
@@ -1631,7 +1773,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         public function crearMayor(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
@@ -1677,7 +1823,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
        public function crearBalanceCompro(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
@@ -1722,7 +1872,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          public function crearHojaTrabajo(Request $request)
       {
         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
@@ -1766,7 +1920,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
     public function crearBalanceAjustado(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
@@ -1811,7 +1969,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
           public function crearEtadoResultado(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
@@ -1855,7 +2017,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       public function crearBalanceGeneral(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
@@ -1902,7 +2068,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       public function crearAsientosCierre(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
@@ -1948,7 +2118,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          public function crearLibroCaja(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-    $valor = explode(" ", $i->nombre);
+       if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
@@ -1993,7 +2167,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       public function crearConciliacion(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
@@ -2038,7 +2216,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
     public function crearArqueo(Request $request)
       {
         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
@@ -2083,7 +2265,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       public function libroBanco(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
@@ -2128,7 +2314,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
        public function retencionIva(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
@@ -2173,7 +2363,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
              public function crearNomina(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
@@ -2218,7 +2412,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         public function crearProvision(Request $request)
       {
         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
@@ -2267,7 +2465,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         
 
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $balance_inicial               = new Taller;
          $balance_inicial->nombre       = 'Taller '.++$valor[1];
          $balance_inicial->enunciado    = $request->enunciado;
@@ -2359,7 +2561,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
        public function taller38(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller38               = new Taller;
          $taller38->nombre       = 'Taller '.++$valor[1];
          $taller38->enunciado    = $request->input('enunciado');
@@ -2394,7 +2600,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
        public function taller39(Request $request)
       {
         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller39               = new Taller;
          $taller39->nombre       = 'Taller '.++$valor[1];
          $taller39->enunciado    = $request->input('enunciado');
@@ -2418,7 +2628,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
          public function taller40(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller40               = new Taller;
          $taller40->nombre       = 'Taller '.++$valor[1];
          $taller40->enunciado    = $request->input('enunciado');
@@ -2452,7 +2666,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       public function taller42(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller42               = new Taller;
          $taller42->nombre       = 'Taller '.++$valor[1];
          $taller42->enunciado    = $request->input('enunciado');
@@ -2479,7 +2697,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
        public function taller43(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller43               = new Taller;
          $taller43->nombre       = 'Taller '.++$valor[1];
          $taller43->enunciado    = $request->input('enunciado');
@@ -2504,7 +2726,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         public function taller44(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller44               = new Taller;
          $taller44->nombre       = 'Taller '.++$valor[1];
          $taller44->enunciado    = $request->input('enunciado');
@@ -2527,7 +2753,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
           public function taller45(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller45               = new Taller;
          $taller45->nombre       = 'Taller '.++$valor[1];
          $taller45->enunciado    = $request->input('enunciado');
@@ -2550,7 +2780,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         public function taller47(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller47               = new Taller;
          $taller47->nombre       = 'Taller '.++$valor[1];
          $taller47->enunciado    = $request->input('enunciado');
@@ -2603,7 +2837,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       public function taller48(Request $request)
       {
           $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller48 = new Taller;
          $taller48->nombre = 'Taller '.++$valor[1];
          $taller48->enunciado            = $request->input('enunciado');
@@ -2626,7 +2864,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
         public function taller49(Request $request)
       {
          $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $taller49               = new Taller;
          $taller49->nombre       = 'Taller '.++$valor[1];
          $taller49->enunciado    = $request->input('enunciado');
@@ -2649,7 +2891,11 @@ return redirect()->route('admin.create')->with('datos', 'Taller Creado Correctam
       public function tallerprecon(Request $request)
       {
         $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
-        $valor = explode(" ", $i->nombre);
+           if ($i) {
+      $valor = explode(" ", $i->nombre);
+    }else{
+      $valor[1] = 0;
+    }
          $preconnfifurado               = new Taller;
          $preconnfifurado->nombre       = 'Taller '.++$valor[1];
          $preconnfifurado->enunciado    = $request->input('enunciado');

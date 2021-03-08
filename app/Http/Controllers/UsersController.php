@@ -13,6 +13,7 @@ use App\Modelos\Role;
 use App\Nivel;
 use App\User;
 use Auth;
+use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -87,6 +88,8 @@ class UsersController extends Controller
         $user->celular             = $request->celular;
         $user->email               = $request->email;
         $user->estado              = $request->estado;
+        $user->activated_at         =Carbon::now();
+        
         $user->password            = Hash::make($request->password);
        //agregados estudiantes y docente sen la misma tabla de persona 
          
@@ -230,6 +233,8 @@ if ($rol->descripcion == 'estudiante') {
           
 
         ]);
+        $estado = $user->estado;
+         // return $estado;
         $user->update($request->all());
      //validacion de passowrd
         //omitir hecho de actualizar materia y que se mantenga la misma 
@@ -300,6 +305,11 @@ if ($rol->descripcion == 'estudiante') {
           
             $user->distribucionmacu_id = $request->curso;
           }
+
+        if ($request->estado == 'on' and $estado == 'off') {
+        $user->activated_at         =Carbon::now();
+            
+        }
 
         $user->save();
     

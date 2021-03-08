@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Curso;
-use App\Nivel;
-use App\Materia;
-use App\Distrima;
-use App\Contenido;
 use App\Assignment;
-use App\Modelos\Role;
+use App\Contenido;
+use App\Curso;
 use App\Distribuciondo;
 use App\Distribucionmacu;
-use Illuminate\Support\Str;
+use App\Distrima;
+use App\Materia;
+use App\Modelos\Role;
+use App\Nivel;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -135,15 +136,15 @@ class HomeController extends Controller
     }
     function materiaDocente(Request $request)
     {
-        $materias= Materia::where('instituto_id', $request->id)->get();
+               $materias= Materia::where('instituto_id', $request->id)->get();
         $materia = [];
 
-        $distribuciondos = Distribuciondo::where('user_id', $request->user_id)->first();
+        $distribuciondos = Distribuciondo::where('user_id', $request->user_id)->count();
 
         $distribucion = Distribucionmacu::where('instituto_id', $request->id)->get();
 
-        if ($distribuciondos == null) {
-                foreach($distribucion as $key => $value){
+        if ($distribuciondos == 0) {
+        foreach($distribucion as $key => $value){
             $materia[$key] =[
                 'id'=> $value->id,
                 'nombre' => $value->curso->nombre,
@@ -151,17 +152,21 @@ class HomeController extends Controller
             ];
             }
         }else{
+        $distribuciondos = Distribuciondo::where('user_id', $request->user_id)->get();
+        $mat = [];
+        foreach ($distribuciondos as $key => $mater) {
+            $mat[] = $mater->materia_id;
+        }
+
             foreach($distribucion as $key => $value){
             $materia[$key] =[
                 'id'=> $value->id,
                 'nombre' => $value->curso->nombre,
-                'materias' => $value->materias->where('id', '!=', $distribuciondos->materia_id),
+                'materias' => $value->materias->whereNotIn('id', $mat),
             ];
             }
 
         }
-    
-     
         return $materia;   
     }
 
@@ -227,6 +232,8 @@ class HomeController extends Controller
          
            if($estado === 'off'){
                $user->estado = 'on';
+                $user->activated_at =Carbon::now();
+
                $user->save();
                return response(array(
                 'success' => true,

@@ -72,8 +72,10 @@ class Materia extends Model
     
     }
 
-    
-
+     public function tallers()
+    {
+        return $this->hasManyThrough('App\Taller', 'App\Contenido');
+    }
     public function historials(){
           
         return $this->hasMany('App\Historial');

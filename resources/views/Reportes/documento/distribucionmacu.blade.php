@@ -1,39 +1,25 @@
-<table id="myTable" class="table table-hover">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Unidad Educativa</th>
-                            <th scope="col">Curso</th>
-                            <th scope="col">Materia</th>
-                            <th scope="col">Unidad</th>
-                            <th scope="col">Taller</th>
-                            <th scope="col">Promedio</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($dist as $dis)
-                        @if($dis->materias != null)
-                        @foreach($dis->materias as $ma)
-                        @if($ma->contenidos != null)
-                        @foreach($ma->contenidos as $contenido)
-                        @if($contenido->tallers != null)
-                        @foreach($contenido->tallers as $tl)
-                        <tr>
-                            <td>{{$dis->instituto->nombre}}</td>
-                            <td>{{$dis->curso->nombre}}</td>
-                            <td>{{$ma->nombre}}</td>
-                            <td>{{$contenido->nombre}}</td>
-                            <td>{{$tl->nombre}}</td>
-                            <td>promedio</td>
-
-                        </tr>
-                        @endforeach
-                        @endif
-                        @endforeach
-                        @endif
-                        @endforeach
-                        @endif
-                        @endforeach
-
-                    </tbody>
-                </table>
+<div class="container">
+    <h5 style="text-align: center"><strong>TABLA DE MATERIAS</strong></h5>
+    <table id="myTable" class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Unidad Educativa</th>
+                <th scope="col">Materia</th>
+                <th scope="col">Curso</th>
+                <th scope="col">CONTENIDO DE LA MATERIA</th>
+                <th scope="col">Taller Por Contenido</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($talleres as $element)
+            <tr>
+                <td>{{$element['instituto']}}</td>
+                <td>{{$element['nombre_materia']}}</td>
+                <td>{{$element['nombre_curso']}}</td>
+                <td>{{$element['unidad']}}</td>
+                <td class="text-center">{{$taller = App\Taller::where('contenido_id', $element['unidad_id'])->count()}}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
