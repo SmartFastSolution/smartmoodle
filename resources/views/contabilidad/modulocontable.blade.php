@@ -39,9 +39,9 @@
               <option value="balance-general">Balance General</option>
               <option value="asientos-cierre">Asientos de cierre</option>
               <option value="librocaja">Libro Caja</option>
-              <option value="conciliacionbancaria">Conciliacion Bancaria</option>
               <option value="arqueocaja">Arqueo Caja</option>
               <option value="librobanco">Libro Banco</option>
+              <option value="conciliacionbancaria">Conciliacion Bancaria</option>
               <option value="retencioniva">Retencion IVA</option>
               <option value="nominaempleados">Nomina Empleados</option>
               {{-- <option value="provisiondebeneficio">Probiciones de Beneficio</option> --}}

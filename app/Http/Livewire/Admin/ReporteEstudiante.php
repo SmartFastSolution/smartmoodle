@@ -10,23 +10,26 @@ use Livewire\WithPagination;
 class ReporteEstudiante extends Component
 {
 	use WithPagination;
+    protected $listeners = ['desbloquear'];
+    
 	protected $paginationTheme = 'bootstrap';
 	protected $queryString = [
         'page' => ['except' => 1],
     ];
 	// public $talleres  = [];
     public $curso     = '';
-    public $cursos  = [];
-
+    public $cursos    = [];
     public $nombre    = '';
-    public $apellido = '';
-    public $estado   = '';
+    public $apellido  = '';
+    public $estado    = '';
     public $usuario   = '';
     public $materia   = '';
     public $instituto = '';
-    public $correo = '';
+    public $correo    = '';
     public $unidad    = '';
     public $perPage   = 10;
+    public $show      = true;
+
     public function render()
     {
         $this->cursos = Curso::get();
@@ -72,6 +75,8 @@ class ReporteEstudiante extends Component
     }
          public function exportarExcel()
     {
+      $this->show = false;
+
      $estudiantes = User::join('role_user', 'users.id', '=', 'role_user.user_id')
                 ->join('institutos', 'users.instituto_id', '=', 'institutos.id')
                  ->leftJoin('assignments', 'users.id', '=', 'assignments.user_id')
@@ -109,5 +114,9 @@ class ReporteEstudiante extends Component
 
     	$this->emit('estudiantes',['estudiantes' => $estudiantes]);
     	// return (new ProductsExport(2018))->download('products.xlsx');
+    }
+      public function desbloquear()
+    {
+      $this->show = true;
     }
 }

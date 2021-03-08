@@ -71,7 +71,9 @@
             fileLink.setAttribute('download', Date.now()+'-talleres.xlsx');
            document.body.appendChild(fileLink);
            fileLink.click();
-            // console.log(response.data); 
+           Livewire.emit('desbloquear')
+           
+            
 
         }).catch(function(error){
 
@@ -92,6 +94,8 @@
             fileLink.setAttribute('download', Date.now()+'-docentes.xlsx');
            document.body.appendChild(fileLink);
            fileLink.click();
+           Livewire.emit('desbloquear')
+           
             // console.log(response.data); 
 
         }).catch(function(error){
@@ -112,6 +116,8 @@
             fileLink.setAttribute('download', Date.now()+'-estudiantes.xlsx');
            document.body.appendChild(fileLink);
            fileLink.click();
+           Livewire.emit('desbloquear')
+           
             // console.log(response.data); 
 
         }).catch(function(error){
@@ -132,6 +138,9 @@
             fileLink.setAttribute('download', Date.now()+'-alumnos.xlsx');
            document.body.appendChild(fileLink);
            fileLink.click();
+           Livewire.emit('desbloquear')
+           
+
             // console.log(response.data); 
 
         }).catch(function(error){
@@ -152,6 +161,8 @@
             fileLink.setAttribute('download', Date.now()+'-usuarios.xlsx');
            document.body.appendChild(fileLink);
            fileLink.click();
+           Livewire.emit('desbloquear')
+           
             // console.log(response.data); 
 
         }).catch(function(error){
@@ -161,22 +172,36 @@
       }
     });
     Livewire.on('talleres', function (data) {
-       reportes.reporteTalleres(data.talleres)
+      setTimeout(function(){ 
+        reportes.reporteTalleres(data.talleres)
+       }, 3000);
+       // reportes.reporteTalleres(data.talleres)
     });
 
      Livewire.on('docentes', function (data) {
+        setTimeout(function(){ 
        reportes.reporteDocentes(data.docentes)
+        
+       }, 3000);
     });
 
     Livewire.on('estudiantes', function (data) {
+        setTimeout(function(){ 
        reportes.reporteEstudiantes(data.estudiantes)
+        
+       }, 3000);
     });
 
     Livewire.on('alumnos', function (data) {
+        setTimeout(function(){ 
        reportes.reporteAlumnos(data.alumnos)
+      
+       }, 3000);
     });
     Livewire.on('usuarios', function (data) {
+        setTimeout(function(){ 
        reportes.reportesUsuarios(data.usuarios)
+       }, 3000);
     });
 
 

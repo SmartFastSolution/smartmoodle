@@ -16,7 +16,6 @@
                 <li class="nav-item active">
                     <a href="{{ url('/sistema/post-estudiante') }}" class="nav-link">Crear Post</a>
                 </li>
-             
             </ul>
             <ul class="navbar-nav ml-auto">
                 @guest
@@ -28,7 +27,7 @@
                     <a class="nav-link" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->name }} <i class="fad fa-sort-down"></i></a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="{{ url('sistema/docente/password') }}">
+                        <a class="dropdown-item" href="{{ url('sistema/estudiante/password') }}">
                             <i class="fas fa-lock"></i> Cambiar Contraseña
                         </a>
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();

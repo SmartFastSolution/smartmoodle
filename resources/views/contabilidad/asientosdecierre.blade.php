@@ -97,21 +97,18 @@
 
    
             <div class="row justify-content-center">
-                 @if ($rol === 'estudiante' or 'docente')
-        <div class="col-3 mb-2">
-            <a href="#" class="btn btn-sm btn-outline-primary" @click.prevent="abrirTransaccion()">Crear Asiento de
+@if ($rol === 'estudiante' or 'docente')
+        <div class="col-12 p-2">
+            <a href="#" class="btn btn-sm btn-outline-primary ml-1" @click.prevent="abrirTransaccion()">Crear Asiento de
                         Cierre</a>
-        </div>
-    
-         <div class="col-4 mb-2">
-                    <a href="#" class="addDiario btn btn-danger" @click.prevent="guardarDiario()">GUARDAR ASIENTOS DE CIERRE</a>
-             
-        </div>
+            <a href="#" class="addDiario btn-sm btn btn-danger ml-1" @click.prevent="guardarDiario()">GUARDAR ASIENTOS DE CIERRE</a>
+
             @if($datos->metodo == 'concatenado')
-        <div class="col-3">
-            <a href="#" class="btn btn-sm btn-outline-danger" @click.prevent="llamarDiario()">Ir al Mayor General</a>
-        </div>
+            <a href="#" class="btn btn-sm btn-outline-danger ml-1" @click.prevent="llamarDiario()">Ir al Mayor General</a>
+                       
         @endif
+        </div>
+            
         @endif
             </div>
 

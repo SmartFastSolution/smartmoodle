@@ -1,10 +1,17 @@
 <div>
 	<!--aqui esta la seccion del reporte de la unidad educativa-->
 	<br>
+	<br>
 	<div class="btn-group float-right" role="group" aria-label="Basic example">
-		<a class="btn btn-success float-right" href="" wire:click.prevent="exportarExcel()"> <i
-			class="fad fa-file-excel"></i>
-		Generar Reporte</a>
+@if ($show)
+	<button  class="btn btn-success float-right" wire:click.prevent="exportarExcel()"> <i class="fad fa-file-excel"></i>
+		Generar Reporte</button>
+@else
+	<button class="btn btn-success" type="button" disabled>
+  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  Exportando...
+</button>
+@endif
 	</div>
 	<br>
 	<br>

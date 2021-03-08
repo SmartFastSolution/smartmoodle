@@ -10,6 +10,10 @@ use Livewire\WithPagination;
 class ReporteUsuarios extends Component
 {
 		use WithPagination;
+    protected $listeners = ['desbloquear'];
+
+    public $show            = true;
+        
 	protected $paginationTheme = 'bootstrap';
 	protected $queryString = [
         'page' => ['except' => 1],
@@ -69,6 +73,8 @@ class ReporteUsuarios extends Component
 
              public function exportarExcel()
     {
+      $this->show = false;
+
      $usuarios = User::join('role_user', 'users.id', '=', 'role_user.user_id')
                 ->join('roles', 'role_user.role_id', '=', 'roles.id')
                 ->leftJoin('institutos', 'users.instituto_id', '=', 'institutos.id')
@@ -104,5 +110,9 @@ class ReporteUsuarios extends Component
                 ->get();
 
         $this->emit('usuarios',['usuarios' => $usuarios]);
+    }
+         public function desbloquear()
+    {
+      $this->show = true;
     }
 }

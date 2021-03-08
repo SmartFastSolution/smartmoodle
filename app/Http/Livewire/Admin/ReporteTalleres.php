@@ -11,6 +11,7 @@ use Livewire\WithPagination;
 class ReporteTalleres extends Component
 {
    	use WithPagination;
+    protected $listeners = ['desbloquear'];
 	protected $paginationTheme = 'bootstrap';
 	protected $queryString = [
         'page' => ['except' => 1],
@@ -22,6 +23,8 @@ class ReporteTalleres extends Component
     public $instituto = '';
     public $unidad    = '';
     public $perPage   = 10;
+    public $show            = true;
+
     // public $orderAsc = true;
     // public $orderBy = 'institutos.nombre';
 
@@ -58,6 +61,8 @@ class ReporteTalleres extends Component
 
     public function exportarExcel()
     {
+      $this->show = false;
+
               $talleres = Materia::leftJoin('contenidos', 'materias.id', '=', 'contenidos.materia_id')
                 ->join('institutos', 'institutos.id', '=', 'materias.instituto_id')
                 ->leftJoin('distribucionmacu_materia', 'materias.id', '=', 'distribucionmacu_materia.materia_id')
@@ -81,5 +86,9 @@ class ReporteTalleres extends Component
 
     	$this->emit('talleres',['talleres' => $talleres]);
     	// return (new ProductsExport(2018))->download('products.xlsx');
+    }
+         public function desbloquear()
+    {
+      $this->show = true;
     }
 }

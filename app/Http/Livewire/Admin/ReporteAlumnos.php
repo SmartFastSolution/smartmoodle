@@ -11,24 +11,25 @@ use Livewire\WithPagination;
 class ReporteAlumnos extends Component
 {
 		use WithPagination;
+    protected $listeners = ['desbloquear'];
 	protected $paginationTheme = 'bootstrap';
 	protected $queryString = [
         'page' => ['except' => 1],
     ];
-	// public $talleres  = [];
   public $curso           = '';
   public $cursos          = [];
-	public $nivels          = [];
-	public $nombre          = '';
-	public $apellido        = '';
-	public $alumno_nombre   = '';
-	public $alumno_apellido = '';
-	public $paralelo        = '';
-	public $usuario         = '';
-	public $materia         = '';
-	public $instituto       = '';
-	public $unidad          = '';
-	public $perPage         = 10;
+  public $nivels          = [];
+  public $nombre          = '';
+  public $apellido        = '';
+  public $alumno_nombre   = '';
+  public $alumno_apellido = '';
+  public $paralelo        = '';
+  public $usuario         = '';
+  public $materia         = '';
+  public $instituto       = '';
+  public $unidad          = '';
+  public $perPage         = 10;
+  public $show            = true;
     public function render()
     {
         $this->cursos = Curso::get();
@@ -96,6 +97,8 @@ class ReporteAlumnos extends Component
     }
             public function exportarExcel()
     {
+      $this->show = false;
+      
 		    $alumnos = User::join('role_user', 'users.id', '=', 'role_user.user_id')
    				->join('institutos', 'users.instituto_id', '=', 'institutos.id')
                 ->join('distribuciondos', 'users.id', '=', 'distribuciondos.user_id')
@@ -153,5 +156,9 @@ class ReporteAlumnos extends Component
 
     	$this->emit('alumnos',['alumnos' => $alumnos]);
     	// return (new ProductsExport(2018))->download('products.xlsx');
+    }
+    public function desbloquear()
+    {
+      $this->show = true;
     }
 }
