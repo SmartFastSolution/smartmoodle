@@ -96,6 +96,11 @@ use JavaScript;
 
 class TallersController extends Controller
 {
+           public function __construct()
+    {
+        $this->middleware('auth');
+     
+    }
     public function taller($plant, $id){
         $d = $id;
         if ($plant == 1) {

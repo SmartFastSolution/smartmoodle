@@ -132,6 +132,11 @@ use JavaScript;
 
 class TallerEstudianteController extends Controller
 {
+           public function __construct()
+    {
+        $this->middleware('auth');
+     
+    }
      public function taller($plant, $id){
         $d = $id;
         $resp= auth()->user()->tallers->where('id', $id)->count();
