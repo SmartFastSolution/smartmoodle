@@ -4,41 +4,45 @@
 @section('title', 'Unidades | SmartMoodle')
 @section('css')
 <style type="text/css">
-    :root {
-  /* Not my favorite that line-height has to be united, but needed */
-  --lh: 1.4rem;
+:root {
+    /* Not my favorite that line-height has to be united, but needed */
+    --lh: 1.4rem;
 }
+
 .truncate-overflow {
-  --max-lines: 3;
-  position: relative;
-  max-height: calc(var(--lh) * var(--max-lines));
-  overflow: hidden;
-  padding-right: 1rem; /* space for ellipsis */
+    --max-lines: 3;
+    position: relative;
+    max-height: calc(var(--lh) * var(--max-lines));
+    overflow: hidden;
+    padding-right: 1rem;
+    /* space for ellipsis */
 }
+
 .truncate-overflow::before {
-  position: absolute;
-  /*content: "...";*/
-  /* tempting... but shows when lines == content */
-  /* top: calc(var(--lh) * (var(--max-lines) - 1)); */
-  
-  /*
+    position: absolute;
+    /*content: "...";*/
+    /* tempting... but shows when lines == content */
+    /* top: calc(var(--lh) * (var(--max-lines) - 1)); */
+
+    /*
   inset-block-end: 0;
   inset-inline-end: 0;
   */
-  bottom: 0;
-  right: 0;
+    bottom: 0;
+    right: 0;
 }
+
 .truncate-overflow::after {
-  content: "";
-  position: absolute;
-  /*
+    content: "";
+    position: absolute;
+    /*
   inset-inline-end: 0;
   */
-  right: 0;
-  /* missing bottom on purpose*/
-  width: 1rem;
-  height: 1rem;
-  background: white;
+    right: 0;
+    /* missing bottom on purpose*/
+    width: 1rem;
+    height: 1rem;
+    background: white;
 }
 </style>
 @endsection
@@ -55,11 +59,12 @@
 
 
 
-        <a class="btn btn-dark btn" href="{{route('Alumnos', $materia->id)}}"><i class="fas fa-users"></i>
-            Estudiantes</i></a>
+        <!-- <a class="btn btn-dark btn" href="{{route('Alumnos', $materia->id)}}" ><i class="fas fa-users"></i>
+            Estudiantes</i></a> -->
         <a class="btn btn-info btn" href="{{ route('contenido.talleres', $materia->id) }}"><i
                 class="fas fa-book-open"></i>
             Talleres</i></a>
+            <h3 class="text-center"> RECURSOS EDUCATIVOS DIGITALES</h3>
 
     </div>
 </section>
@@ -78,29 +83,28 @@
             </div>
         </div>
         <div class="card-body">
-
+     
             <table id="myTable3" class="table table-hover">
                 <thead>
-                    <tr>
-                        <th scope="col">Nombre Documento</th>
-                        <th scope="col">Descripcion</th>
-                        <th scope="col">Acción</th>
-                        <th scope="col" coldspan="1">Ver Documento</th>
+                    <th scope="col">Unidad</th>
+                    <th scope="col">Nombre del Documento</th>
+                    <th width="500" scope="col">Descripcion</th>
+                    <th scope="col">Acción</th>
+                    <th width="125" scope="col" coldspan="1">Ver Documento</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($cons as $c)
                     <tr>
+                        <td> {{$c->nombre_c}}</td>
                         <td> {{$c->nombre}}</td>
                         <td> {{$c->descripcion}}</td>
-
                         <td>@if($c['accion']== '1')
                             <span class="badge-success badge">Descargable</span>
                             @else
                             <span v-else class="badge-info badge">No Descargable</span>
                             @endif
                         </td>
-
                         <td>
                             @if($c['accion']== '1')
                             <!-- descarganle -->
@@ -137,8 +141,8 @@
 
             @isset ($paralelos)
             <div class="row">
-@forelse($paralelos as $paralelo)
-          <div class="col-lg-4 col-6">
+                @forelse($paralelos as $paralelo)
+                <div class="col-lg-4 col-6">
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
@@ -149,25 +153,26 @@
                         <div class="icon">
                             <i class="fas fa-newspaper"></i>
                         </div>
-                        <a href="{{ route('paralelo', ['id' => $materia->id, 'nivel' => $paralelo['nivel_id']] ) }}" class="small-box-footer">
+                        <a href="{{ route('paralelo', ['id' => $materia->id, 'nivel' => $paralelo['nivel_id']] ) }}"
+                            class="small-box-footer">
                             Acceder <i class="fas fa-arrow-circle-right"></i>
                         </a>
 
                     </div>
                 </div>
-      @empty
+                @empty
                 <h1>No tienes cursos asignados</h1>
 
-            @endforelse
+                @endforelse
 
-     @endisset
+                @endisset
+            </div>
         </div>
     </div>
-</div>
 
 
 
-{{-- <div class="container">
+    {{-- <div class="container">
     <div class="card gedf-card">
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
@@ -195,36 +200,36 @@
                     @foreach($users as $taller)
                     <tr>
                         <td>{{$taller->cur_nombre}} - {{ $taller->nivel_nombre }}</td>
-                        <td>{{$taller->mate_nombre}}</td>
-                        <td>{{$taller->nombre}}</td>
-                        <td>{{$taller->alumno}}</td>
-                        <td>
-                             <div class="truncate-overflow">
-                            {!!$taller->enunciado!!}
-                                
-                            </div>
-                            @if ($taller->plantilla_id == 37)
-                            Taller de Modulos Contable
-                            @else
-                            {!!$taller->enunciado!!}
-                            @endif
-                        </td>
-                        <td class="table-button ">
-                            <a class="btn btn-info"
-                                href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
-                                    class="fas fa-eye"></i></a>
-
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+    <td>{{$taller->mate_nombre}}</td>
+    <td>{{$taller->nombre}}</td>
+    <td>{{$taller->alumno}}</td>
+    <td>
+        <div class="truncate-overflow">
+            {!!$taller->enunciado!!}
 
         </div>
-    </div>
+        @if ($taller->plantilla_id == 37)
+        Taller de Modulos Contable
+        @else
+        {!!$taller->enunciado!!}
+        @endif
+    </td>
+    <td class="table-button ">
+        <a class="btn btn-info"
+            href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
+                class="fas fa-eye"></i></a>
+
+    </td>
+    </tr>
+    @endforeach
+    </tbody>
+    </table>
+
+</div>
+</div>
 </div>
 
- --}}
+--}}
 {{-- 
 <div class="container">
     <div class="card gedf-card">
@@ -255,35 +260,35 @@
                     @foreach($calificado as $taller)
                     <tr>
                         <td>{{$taller->cur_nombre}} - {{ $taller->nivel_nombre }}</td>
-                        <td>{{$taller->mate_nombre}}</td>
-                        <td>{{$taller->nombre}}</td>
-                        <td>{{$taller->alumno}}</td>
-                        <td>
-                             <div class="truncate-overflow">
-                            {!!$taller->enunciado!!}
-                                
-                            </div>
-                            @if ($taller->plantilla_id == 37)
-                            Taller de Modulos Contable
-                            @else
-                            {!!$taller->enunciado!!}
-                            @endif
-                        </td>
-                        <td class="table-button ">
-                            <a class="btn btn-info"
-                                href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
-                                    class="fas fa-eye"></i></a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+<td>{{$taller->mate_nombre}}</td>
+<td>{{$taller->nombre}}</td>
+<td>{{$taller->alumno}}</td>
+<td>
+    <div class="truncate-overflow">
+        {!!$taller->enunciado!!}
 
-        </div>
     </div>
-</div> 
+    @if ($taller->plantilla_id == 37)
+    Taller de Modulos Contable
+    @else
+    {!!$taller->enunciado!!}
+    @endif
+</td>
+<td class="table-button ">
+    <a class="btn btn-info"
+        href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
+            class="fas fa-eye"></i></a>
+</td>
+</tr>
+@endforeach
+</tbody>
+</table>
 
- --}}
+</div>
+</div>
+</div>
+
+--}}
 
 
 @stop

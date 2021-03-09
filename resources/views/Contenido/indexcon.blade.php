@@ -31,9 +31,9 @@
         <table id="myTable" class="table table-hover" style="width:100%">
             <thead>
                 <tr>
-
+                <th scope="col">Unidad Educativa</th> 
+                   <th scope="col">Materia</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Materia</th>
                     <th scope="col">Descripcion</th>
                     <th scope="col">Estado</th>
                  
@@ -44,9 +44,9 @@
             <tbody>
                 @foreach ($contenidos as $contenido)
                 <tr>
-
+                <td>{{ $contenido->materia->instituto->nombre}}</td>   
+                   <td>{{ $contenido->materia->nombre}}</td>
                     <td>{{ $contenido['nombre']}}</td>
-                    <td>{{ $contenido->materia->nombre}}</td>
                     <td>{{ $contenido['descripcion']}}</td>
                     <td>{{ $contenido['estado']}}</td>
                   

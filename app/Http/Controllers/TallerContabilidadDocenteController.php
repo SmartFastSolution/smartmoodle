@@ -66,6 +66,11 @@ use Illuminate\Support\Facades\Auth;
 
 class TallerContabilidadDocenteController extends Controller
 {
+           public function __construct()
+    {
+        $this->middleware('auth');
+     
+    }
     public function obtenerKardexFifo(Request $request)
     {
         $id         = $request->user;

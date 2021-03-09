@@ -10,13 +10,13 @@ use Livewire\WithPagination;
 
 class ReporteTalleres extends Component
 {
-   	use WithPagination;
+    use WithPagination;
     protected $listeners = ['desbloquear'];
-	protected $paginationTheme = 'bootstrap';
-	protected $queryString = [
+  protected $paginationTheme = 'bootstrap';
+  protected $queryString = [
         'page' => ['except' => 1],
     ];
-	public $cursos  = [];
+  public $cursos  = [];
     public $curso     = '';
     public $taller    = '';
     public $materia   = '';
@@ -84,8 +84,8 @@ class ReporteTalleres extends Component
                 ->get();
 
 
-    	$this->emit('talleres',['talleres' => $talleres]);
-    	// return (new ProductsExport(2018))->download('products.xlsx');
+      $this->emit('talleres',['talleres' => $talleres]);
+      // return (new ProductsExport(2018))->download('products.xlsx');
     }
          public function desbloquear()
     {

@@ -1,7 +1,11 @@
 @extends('layouts.nav')
 
-@section('title', 'Cambiar Contraseña | SmartMoodle')
+@section('title', 'Password | SmartMoodle')
+
+
+
 @section('content')
+
 @if ($errors->any())
 <div class="alert alert-danger">
     <strong>Whoops!</strong> Parece que hay porblemas o Malas decisiones <br><br>

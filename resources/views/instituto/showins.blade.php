@@ -23,7 +23,7 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <h1 class="font-weight-light">Show Unidad Educativa</h1>
+                <h1 class="font-weight-light"> Unidad Educativa</h1>
                 <div class="row">
                     <div class="col-md-10">
 

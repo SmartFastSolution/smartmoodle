@@ -234,6 +234,7 @@ if ($rol->descripcion == 'estudiante') {
 
         ]);
         $estado = $user->estado;
+         // return $estado;
         $user->update($request->all());
      //validacion de passowrd
         //omitir hecho de actualizar materia y que se mantenga la misma 
@@ -305,7 +306,7 @@ if ($rol->descripcion == 'estudiante') {
             $user->distribucionmacu_id = $request->curso;
           }
 
-        if ($request->estado == 1 and $estado == 0) {
+        if ($request->estado == 'on' and $estado == 'off') {
         $user->activated_at         =Carbon::now();
             
         }

@@ -128,6 +128,11 @@ use JavaScript;
 
 class TallerDocenteController extends Controller
 {
+           public function __construct()
+    {
+        $this->middleware('auth');
+     
+    }
      public function taller($plant, $id, $us){
         foreach(auth()->user()->roles as $role){
         $rol =$role->descripcion;

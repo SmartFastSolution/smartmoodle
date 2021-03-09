@@ -10,6 +10,7 @@ use App\Curso;
 use App\Distribuciondo;
 use App\Distribucionmacu;
 use App\Distrima;
+use App\Documento;
 use App\Http\Controllers\Controller;
 use App\Instituto;
 use App\Materia;
@@ -101,21 +102,19 @@ class DocenteController extends Controller
 
 
                     // return $users;
-                            return view('Docente.Pcurso', compact('users','au', 'calificado', 'materias')); //ruta docente
-                            }else{
+              return view('Docente.Pcurso', compact('users','au', 'calificado', 'materias')); //ruta docente
+      }else{
 
 
-                            return view('Docente.Pcurso', compact('materias')); //ruta docente
-                
-                        } 
+            return view('Docente.Pcurso', compact('materias')); //ruta docente
 
-
-
+      } 
     }
     public function index()
     {
         // $p = Post::where('instituto', Auth::user()->instituto_id)->get();
-             $p = Post::orderBy('id','Desc')->where('instituto_id', Auth::user()->instituto_id)->paginate(5);
+      
+         $p = Post::orderBy('id','Desc')->where('instituto_id', Auth::user()->instituto_id)->paginate(5);
              
                 return view('Docente.indexd',compact('p'));
      
@@ -125,26 +124,23 @@ class DocenteController extends Controller
     {
         // todos los datos de la bd
         $user =  User::findorfail( Auth::id());
-        $institutomate = Materia::find($id)->instituto()->get();
-      
-        $materia =Materia::where('id', $id)->firstOrfail();
-        $contenidos=Contenido::get();
-        $cons =Contenido::where('materia_id',$materia->id)->paginate(6);
-             $curso = Distribuciondo::join('distribucionmacu_materia', 'distribucionmacu_materia.materia_id', '=', 'distribuciondos.materia_id')
-                ->join('distribucionmacus', 'distribucionmacus.id', '=', 'distribucionmacu_materia.distribucionmacu_id')
-                ->join('cursos', 'cursos.id', '=', 'distribucionmacus.curso_id')
-                ->join('materias', 'materias.id', '=', 'distribucionmacu_materia.materia_id')
-                ->select('distribuciondos.*','cursos.nombre as nombre_curso' ,'materias.nombre as nombre_materia')
-                ->where('distribucionmacu_materia.materia_id', $id)
-                ->where('distribuciondos.user_id', $user->id)->first();
+       
+    
+          $curso = Distribuciondo::join('distribucionmacu_materia', 'distribucionmacu_materia.materia_id', '=', 'distribuciondos.materia_id')
+            ->join('distribucionmacus', 'distribucionmacus.id', '=', 'distribucionmacu_materia.distribucionmacu_id')
+            ->join('cursos', 'cursos.id', '=', 'distribucionmacus.curso_id')
+            ->join('materias', 'materias.id', '=', 'distribucionmacu_materia.materia_id')
+            ->select('distribuciondos.*','cursos.nombre as nombre_curso' ,'materias.nombre as nombre_materia')
+            ->where('distribucionmacu_materia.materia_id', $id)
+            ->where('distribuciondos.user_id', $user->id)->first();
 
-        $paralelos = Distribuciondo::join('distribuciondo_nivel', 'distribuciondo_nivel.distribuciondo_id', '=', 'distribuciondos.id')
-          // ->join('nivels', 'distribuciondo_nivel.nivel_id', '=', 'nivels.id')
-          ->select('distribuciondo_nivel.*')
-          ->where('distribuciondos.user_id', $user->id)
-          ->where('distribuciondos.materia_id', $id)
-          ->orderBy('nivel_nombre', 'asc')
-          ->get();
+          $paralelos = Distribuciondo::join('distribuciondo_nivel', 'distribuciondo_nivel.distribuciondo_id', '=', 'distribuciondos.id')
+            // ->join('nivels', 'distribuciondo_nivel.nivel_id', '=', 'nivels.id')
+            ->select('distribuciondo_nivel.*')
+            ->where('distribuciondos.user_id', $user->id)
+            ->where('distribuciondos.materia_id', $id)
+            ->orderBy('nivel_nombre', 'asc')
+            ->get();
 
           // return $paralelos;
 
@@ -178,7 +174,17 @@ class DocenteController extends Controller
         //     ->get();
 
             // return $calificado;
-                return view ('Docente.contenidodocente',compact('user','institutomate','materia','contenidos','cons', 'paralelos', 'curso'));
+
+             $materia =Materia::where('id', $id)->firstOrfail();
+          
+            
+           $cons = Contenido::join('documentos',"documentos.contenido_id","=","contenidos.id")
+           ->where('contenidos.materia_id', $id)
+           ->select("documentos.*","contenidos.nombre as nombre_c")
+           ->get();
+
+             //return $cons;
+        return view ('Docente.contenidodocente',compact('user','materia','cons', 'paralelos', 'curso'));
 
     }
 
@@ -333,14 +339,14 @@ class DocenteController extends Controller
 
     public function VerPDF($id){
 
-        $contenido =Contenido::where('id', $id)->firstOrfail();
+        $contenido =Documento::where('id', $id)->firstOrfail();
          return \view('Docente.archivopdf',['contenido'=>$contenido]);
   
     }
 
     public function VerPDF2($id){
 
-        $contenido =Contenido::where('id', $id)->firstOrfail();
+        $contenido =Documento::where('id', $id)->firstOrfail();
          return \view('Docente.archivopdf2',['contenido'=>$contenido]);
   
     }
@@ -383,7 +389,19 @@ class DocenteController extends Controller
      
   public function PostD()
   {
-     return \view('Docente.postdocente');
+
+    $materias = Distribuciondo::join('distribucionmacu_materia', 'distribucionmacu_materia.materia_id', '=', 'distribuciondos.materia_id')
+    ->join('distribucionmacus', 'distribucionmacus.id', '=', 'distribucionmacu_materia.distribucionmacu_id')
+    ->join('cursos', 'cursos.id', '=', 'distribucionmacus.curso_id')
+    ->join('materias', 'materias.id', '=', 'distribucionmacu_materia.materia_id')
+    ->select('distribuciondos.*', 'cursos.nombre as nombre_curso', 'materias.nombre as nombre_materia')
+    ->where('distribuciondos.user_id', Auth::id())
+    ->get();
+
+     //return $materias;
+     return \view('Docente.postdocente',compact('materias'));
+  
+  
   }
 
 
@@ -412,6 +430,8 @@ class DocenteController extends Controller
       $post =New Post;
       $post->user_id  = e($request->user_id);
       $post->instituto_id= Auth::user()->instituto_id;
+      $post->materia_id   = e($request->materia);
+      $post->nivel_id   = e($request->paralelos);
       $post->nombre   = e($request->nombre);
       $post->abstract = e($request->abstract);
       $post->body = e($request->body);
@@ -455,19 +475,31 @@ class DocenteController extends Controller
         
 
           $au = User::find(Auth::id())->distribuciondos;
-          $materias = $au->materias()->get();
-        // dd($und);
+        //  $materias = Distribuciondo::where('materia_id', Auth::id())->get();
+          $materias = Distribuciondo::join('distribucionmacu_materia', 'distribucionmacu_materia.materia_id', '=', 'distribuciondos.materia_id')
+          ->join('distribucionmacus', 'distribucionmacus.id', '=', 'distribucionmacu_materia.distribucionmacu_id')
+          ->join('cursos', 'cursos.id', '=', 'distribucionmacus.curso_id')
+          ->join('materias', 'materias.id', '=', 'distribucionmacu_materia.materia_id')
+          ->select('distribuciondos.*', 'cursos.nombre as nombre_curso', 'materias.nombre as nombre_materia')
+          ->where('distribuciondos.user_id', Auth::id())
+          ->get();
+        // dd($au);
+       // return $materias;
+
+        //$materias= Distribuciondo::where('materia_id',Auth::id())->get();
            
          return \view('Docente.contenido.creardoc', compact('au','materias'));
       }
     
       public function Guardardoc(Request $request){
 
+       // return $request->all();
         $request->validate([
 
             'nombre'      => 'required|string|max:150',
             'descripcion' => 'required|string|max:250',
             'materia'     =>'required',
+            'paralelos'     =>'required',
             'archivo'  => 'required|mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:100000',
             
         ]);
@@ -482,16 +514,14 @@ class DocenteController extends Controller
             $urlarchivo['url']='/documentodoc/'.$nombre;
          }
         
-         $d = New Archivodocente;
+         $d = new Archivodocente;
          $d->user_id= Auth::id();
          $d->nombre = $request->nombre;
-       
-         $d->descripcion =$request->descripcion;
-        
-         if($request->get('materia')){
+         $d->nivel_id = $request->paralelos;
+         $d->descripcion =$request->descripcion;    
+         $d->materia_id = $request->materia;
          
-            $d->materia_id = $request->materia;
-         }
+             
          $d->save();
 
          $d->documentodoc()->create($urlarchivo);
@@ -505,23 +535,21 @@ class DocenteController extends Controller
       public function docshow(Archivodocente $archivodocente){
        
         $au = User::find(Auth::id())->distribuciondos;
-        $materias = $au->materias()->get();
-        
-        $ar = Archivodocente::find($archivodocente->id)->materia()->get();
+      
+        return \view('Docente.contenido.showdoc', compact('au','archivodocente'));
 
-        return \view('Docente.contenido.showdoc', compact('au','materias','ar','archivodocente'));
-
+      
        
       }
 
       public function docedit(Archivodocente $archivodocente){
 
         $au = User::find(Auth::id())->distribuciondos;
-        $materias = $au->materias()->get();
+        
 
-        $ar = Archivodocente::find($archivodocente->id)->materia()->get();
+       
 
-        return \view('Docente.contenido.editdoc', compact('au','materias','ar','archivodocente'));
+        return \view('Docente.contenido.editdoc', compact('au','archivodocente'));
 
       }
 
@@ -531,7 +559,6 @@ class DocenteController extends Controller
 
             'nombre'      => 'string|max:150',
             'descripcion' => 'string|max:250',
-    
             'archivo'  => 'mimes:jpg,jpeg,gif,png,xls,xlsx,doc,docx,pdf|max:50000',
             
         ]);
@@ -557,10 +584,7 @@ class DocenteController extends Controller
             $archivodocente->documentodoc()->create($urlarchivo);
         }
 
-        if($request->get('materia')){
-           
-            $archivodocente->materia_id = $request->materia;
-         }
+      
          $archivodocente->save();
 
 

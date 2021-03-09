@@ -23,7 +23,7 @@
             <a href="#" class="addDiario btn btn-outline-info " @click.prevent="abrirNomina()">Agregar Nómina</a>
 
             <a href="#" class="addDiario btn btn-outline-success ml-1 " @click.prevent="guardarNomina()">Guardar
-                Nómina</a>
+                Nómina Empleados</a>
 
             @endif
             <table class="table table-bordered table-sm">
@@ -92,7 +92,7 @@
 
             <div class="row justify-content-center">
                 <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardarNomina()">Guardar
-                    Nómina</a>
+                    Nómina Empleados</a>
             </div>
             @endif
             <br>

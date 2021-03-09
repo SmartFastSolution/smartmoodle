@@ -30,9 +30,9 @@
 
                                 <div class="form-group">
                                     <label>Unidad Educativa</label>
-                                    <select class="form-control select" v-model="instituto" @change="onMateria()"
+                                    <select class="form-control select" v-model="instituto" @change="onUser()"
                                         name="instituto" required style="width: 99%;">
-                                        <option selected disabled>Elija una Unidad educativa...</option>
+                                        <option selected disabled value="">Elija una Unidad educativa...</option>
                                         @foreach($institutos as $instituto)
                                         <option value="{{$instituto->id}}">{{$instituto->nombre}}
                                         </option>
@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Seleccione el Estudiante</label>
-                                    <select class="form-control select2" name="estudiante" style="width: 99%;">
+                                    <select class="form-control usuario" name="estudiante" style="width: 99%;">
                                         <option selected disabled>Elija al Estudiante...</option>
                                         <option v-for="doce in users" :value="doce.id">@{{doce.name}} @{{doce.apellido}}
                                         </option>
@@ -54,9 +54,9 @@
                                     <label>Seleccione las Materias</label>
                                     <select class="select2" multiple="multiple" name="materia[]"
                                         data-placeholder="Seleccione las Materias" style="width: 100%;">
-                                        <optgroup v-for="(curso, index) in materias" :label="curso.nombre">
-                                            <option v-for="mater in materias[index].materias" :value="mater.id">@{{ mater.nombre}}</option>
-                                        </optgroup>
+                                        
+                                            <option v-for="(mater, index) in materias" :value="mater.id">@{{ mater.nombre}}</option>
+                                        
                                     </select>
                                 </div>
                                
@@ -119,23 +119,26 @@ const inst = new Vue({
         users:[]
     },
     methods: {
-        onMateria() {
+        onUser(){
+            let set = this;
+
+        set.users = [];
+        axios.post('/sistema/userinst', {
+            id: set.instituto
+        }).then(response => {
+            set.users = response.data;
+            console.log(set.users); //no es necesario
+        }).catch(e => {
+            console.log(e);
+        });
+    },
+        onMateria(id) {
 
             var set = this;
-
-            set.users = [];
-            axios.post('/sistema/userinst', {
-                id: set.instituto
-            }).then(response => {
-                set.users = response.data;
-                console.log(set.users); //no es necesario
-            }).catch(e => {
-                console.log(e);
-            });
-
             set.materias = [];
             axios.post('/sistema/materiainst', {
-                id: set.instituto
+                id: set.instituto,
+                user: id
             }).then(response => {
                 set.materias = response.data;
                 console.log(set.materias);
@@ -147,5 +150,25 @@ const inst = new Vue({
     }
 });
 </script>
+<script>
+$(function() {
+    //Initialize Select2 Elements
+    $(".select2").select2({
 
+    });
+
+let $usuarioid = $(".usuario");
+
+$usuarioid.select2();
+$usuarioid.on("select2:select", function (e) { 
+  var userid = $(e.currentTarget).val();
+  inst.onMateria(userid)
+});
+
+
+
+
+})
+
+</script>
 @stop

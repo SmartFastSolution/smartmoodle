@@ -1,5 +1,5 @@
 @extends('layouts.nav')
-@section('title', 'Administracion - Inicio')
+@section('title', 'Administracion - Clonacion')
 @section('content')
 @if ($errors->any())
 <div class="alert alert-danger">
@@ -21,9 +21,9 @@
                     {{Session::get('success')}}
                 </div>
                 @endif
-                <h1 class="font-weight-light">Clonación de Unidad Educativa</h1>
+                <h1 class="font-weight-bold text-center">Clonación de Unidad Educativa</h1>
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-12">
                         <form method="POST" action="{{route('clinstitutos.p_clonainstituto')}} " id="clonacion">
                             @csrf
                             <div class="form-group">

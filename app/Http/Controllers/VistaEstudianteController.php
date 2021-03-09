@@ -126,6 +126,11 @@ use JavaScript;
 
 class VistaEstudianteController extends Controller
 {
+       public function __construct()
+    {
+        $this->middleware('auth');
+     
+    }
      public function taller($plant, $id){
      	foreach(auth()->user()->roles as $role){
         $rol =$role->descripcion;

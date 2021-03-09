@@ -14,6 +14,11 @@ use Illuminate\Http\Request;
 
 class ModuloDocumentoController extends Controller
 {
+public function __construct()
+    {
+        $this->middleware('auth');
+     
+    }
     public function cheque(Request $request)
     {
     	$userID = Auth::id();

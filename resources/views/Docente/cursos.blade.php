@@ -26,7 +26,7 @@
             <tbody>
                 @foreach($materia->assignments as $ass)
                 <tr>
-                    <td> {{$ass->user->curso->nombre}}</td>
+                    <td> {{$ass->user->distribucionmacu->curso->nombre}}</td>
                     <td>{{$ass->user->nivel->nombre}}</td>
                     <td> {{$materia->nombre}}</td>
                     <td> {{$ass->user->name}} {{$ass->user->apellido}}</td>

@@ -55,6 +55,13 @@ class Distribucionmacu extends Model
         return $this->hasMany('App\Distrima');
 
     }
+
+
+    
+    public function posts(){
+          
+        return $this->hasMany('App\Post');
+    }
   
 
 }

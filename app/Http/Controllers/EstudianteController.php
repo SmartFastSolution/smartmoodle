@@ -10,6 +10,7 @@ use App\Curso;
 use App\Distribuciondo;
 use App\Distribucionmacu;
 use App\Distrima;
+use App\Documento;
 use App\Http\Controllers\Controller;
 use App\Instituto;
 use App\Materia;
@@ -42,11 +43,25 @@ class EstudianteController extends Controller
          return view('errors.error'); //ruta estudiante //ruta estudiante       
              
         }
-        $p = Post::orderBy('id','Desc')->where('instituto_id', Auth::user()->instituto_id)->paginate(5);
-        // $p = Post::orderBy('id','Desc')->paginate(5);
+      
+        $p = Post::orderBy('id','Desc')
+        ->where('instituto_id', Auth::user()->instituto_id)
+        ->where('distribucionmacu_id',Auth::user()->distribucionmacu_id)
+        ->where('nivel_id',Auth::user()->nivel_id)->paginate(5);
+      
        
         return view('Estudiante.indexes',compact('p'));
            
+    }
+
+    public function Postdocentes(){
+      $p2 = Post::orderBy('id','Desc')
+      ->where('instituto_id', Auth::user()->instituto_id)
+      //->where('distribucionmacu_id',Auth::user()->distribucionmacu_id)
+      ->where('nivel_id',Auth::user()->nivel_id)->paginate(5);
+  
+     
+      return view('Estudiante.postdocentes',compact('p2'));
     }
 
    
@@ -64,16 +79,7 @@ class EstudianteController extends Controller
         ->select("assignment_materia.*","materias.nombre as nombre_materia", "users.name as nombre_docente", "users.apellido as apellido_docente")
         ->get();
 
-        // return $materias;
-        // return $curso->curso->nombre;
-        // $user= User::find($user->id);
-        // $distrima= Distrima::get();
-        // $instituto = Instituto::get();
-        // $assignment=Assignment::get();
-        // $materia=Materia::get();  
-        // $curso=Curso::get();
-        // $contenidos=Contenido::get();
-        
+              
         return view('Estudiante.perfile',compact('curso','user', 'materias')); //ruta estudiante
 
     }
@@ -82,7 +88,7 @@ class EstudianteController extends Controller
     public function unidades($id){
               // todos los datos de la bd
          $user =  User::findorfail( Auth::id());
-         $institutomate = Materia::find($id)->instituto()->get();
+         //$institutomate = Materia::find($id)->instituto()->get();
           $curso = Distribucionmacu::find($user->distribucionmacu_id);
           $docente = Distribuciondo::join("distribuciondo_nivel", "distribuciondo_nivel.distribuciondo_id", "=", "distribuciondos.id")
           ->join("users", "users.id", "=", "distribuciondos.user_id")
@@ -119,10 +125,21 @@ class EstudianteController extends Controller
          // $tallers = Taller::whereNotIn('id', $ids)->get();
  
          $materia =Materia::where('id', $id)->firstOrfail();
-         $cons =Contenido::where('materia_id',$materia->id)->paginate(6);
-         $cons2 =Archivodocente::where('materia_id',$materia->id)->paginate(6);
-         return view ('Estudiante.contenido',['materia'=>$materia, 'docente'=>$docente, 'curso'=>$curso,'contenidos'=>$contenido,'institutomate'=>$institutomate,'tallers'=>$realizar,'cons'=>$cons,'cons2'=>$cons2]);
+         $conten =Contenido::join('documentos' , "documentos.contenido_id", "=", "contenidos.id")
+         ->where('contenidos.materia_id', $id)
+        ->select("documentos.*", "contenidos.nombre as nombre_contenido")
 
+         ->get();
+
+        //return $conten;
+
+
+        // $conten =Contenido::where('materia_id', $id)->firstOrfail();
+        // $cons =Documento::where('contenido_id',$conten->id)->get();
+         $cons2 =Archivodocente::where('materia_id',$materia->id)->where('nivel_id', Auth::user()->nivel_id)->paginate(6);
+         return view ('Estudiante.contenido',['materia'=>$materia, 'docente'=>$docente, 'curso'=>$curso,'contenidos'=>$contenido,'tallers'=>$realizar,'cons2'=>$cons2,'contenido'=>$conten]);
+            
+     
        // return $tallers;
 
     }
@@ -133,6 +150,7 @@ class EstudianteController extends Controller
         return view('Estudiante.password');
     }
   
+    
 
     public function updatep(Request $request){
 
@@ -157,18 +175,20 @@ class EstudianteController extends Controller
 
      }
 
-
+  /////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////INICIO DOC ESTUDIANTE//////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////
 
      public function VisualizacionPDF($id){
      //documento no descargable 
-      $contenido =Contenido::where('id', $id)->firstOrfail();
+      $contenido =Documento::where('id', $id)->firstOrfail();
 
        return \view('Estudiante.archivopdf',['contenido'=>$contenido]);
 
    }
    public function VisualizacionPDF3($id){
     //documento  descargable 
-      $contenido =Contenido::where('id', $id)->firstOrfail();
+      $contenido =Documento::where('id', $id)->firstOrfail();
 
       return \view('Estudiante.archivopdf3',['contenido'=>$contenido]);
 
@@ -181,6 +201,11 @@ class EstudianteController extends Controller
      return \view('Estudiante.archivopdf2',['contenido'=>$contenido]);
 
  }
+
+      /////////////////////////////////////////////////////////////////////////////////////
+      //////////////////////////////////FIN DOC ESTUDIANTE/////////////////////////////////
+      /////////////////////////////////////////////////////////////////////////////////////
+
 
   public function PostE()
   {
@@ -214,6 +239,8 @@ class EstudianteController extends Controller
       $post =New Post;
       $post->user_id  = e($request->user_id);
       $post->instituto_id= Auth::user()->instituto_id;
+      $post->nivel_id= Auth::user()->nivel_id;
+      $post->distribucionmacu_id= Auth::user()->distribucionmacu_id;
       $post->nombre   = e($request->nombre);
       $post->abstract = e($request->abstract);
       $post->body = e($request->body);

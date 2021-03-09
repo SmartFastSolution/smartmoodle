@@ -82,7 +82,7 @@
     
     @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center mb-2">
-        <a href="#" class="addDiario btn btn-outline-info btn-sm" @click.prevent="abrirCompra()">Agregar Compra</a>
+        <a href="#" class="addDiario btn btn-outline-info btn-sm" @click.prevent="abrirCompra()">Agregar Registros de Compras </a>
     </div>
     @endif
 
@@ -160,7 +160,7 @@
     </table>
     @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center mb-2">
-        <a href="#" class="addDiario btn btn-outline-info btn-sm" @click.prevent="abrirVenta()">Agregar Venta</a>
+        <a href="#" class="addDiario btn btn-outline-info btn-sm" @click.prevent="abrirVenta()">Agregar Registros de Venta</a>
     </div>
     @endif
 
@@ -174,7 +174,7 @@
                     <td>
                         <div class="col-sm-10">
                             <input class="form-control  text-right  form-control-sm"  type="number" step="0.01"
-                                v-model="total.t_ivaventa" placeholder="IVA EN VENTAS" name="">
+                                v-model="total.t_ivaventa" placeholder="0,00" name="">
                         </div>
                     </td>
 
@@ -183,12 +183,12 @@
             <tbody>
                 <tr>
 
-                    <td><input class="form-control form-control-sm" type="text" placeholder=".form-control-sm"></td>
+                <td> <label for="inputEmail3" class="col-sm col-form-label">IVA EN COMPRAS</label></td>
                     <td>
 
                         <div class="col-sm-10">
                             <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
-                                v-model="total.t_ivacompra" placeholder="- IVA EN COMPRAS" name="">
+                                v-model="total.t_ivacompra" placeholder="0,00" name="">
                         </div>
                     </td>
                 </tr>
@@ -199,7 +199,7 @@
                     <td>
                         <div class="col-sm-10">
                             <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
-                                v-model="total.result_iva" placeholder="RES. IVA" name="">
+                                v-model="total.result_iva" placeholder="0,00" name="">
                         </div>
                     </td>
                 </tr>
@@ -211,7 +211,7 @@
 
                         <div class="col-sm-10">
                             <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
-                                v-model="total.t_reten" placeholder="+ RET. IVA" name="">
+                                v-model="total.t_reten" placeholder="0,00" name="">
                         </div>
                     </td>
                 </tr>
@@ -222,7 +222,7 @@
                     <td>
                         <div class="col-sm-10">
                             <input class="form-control  text-right  form-control-sm" type="number" step="0.01"
-                                v-model="total.total_pagar" placeholder="TOTAL A PAGAR" name="">
+                                v-model="total.total_pagar" placeholder="0,00" name="">
                         </div>
                     </td>
                 </tr>
@@ -232,12 +232,9 @@
 
     @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center">
-        <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardaretencioniva()">Guardar
-            Retención</a>
+        <a href="#" class="addDiario btn btn-outline-success " @click.prevent="guardaretencioniva()">Guardar Cuadro de Retención</a>
     </div>
     @endif
-
-
     <br>
     @include ('contabilidad.modalretencioniva')
 </div>

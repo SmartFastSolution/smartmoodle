@@ -19,7 +19,7 @@ class CreateDistribucionmacuTallerTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('contenido_id')->nullable();
             $table->unsignedbigInteger('plantilla_id')->nullable();
-            $table->unsignedbigInteger('nivel_id')->nullable();
+            $table->unsignedBigInteger('nivel_id');
             $table->boolean('estado')->nullable();
             $table->string('fecha_entrega')->nullable();
             $table->timestamps();

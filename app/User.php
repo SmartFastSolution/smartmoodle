@@ -135,5 +135,14 @@ class User extends Authenticatable implements MustVerifyEmail
         public function papeletas(){
         return $this->hasMany('App\Modulo\ModuloPapeleta');
     }
+    public function historials(){     
+        return $this->hasMany('App\Historial');
+    }
     
+    public function distribucionmacu(){
+        
+        return $this->belongsTo('App\Distribucionmacu');
+
+    }
+
 }

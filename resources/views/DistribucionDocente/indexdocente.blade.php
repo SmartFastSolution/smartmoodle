@@ -29,6 +29,7 @@
                 <tr>
                     <th class="text-center" scope="col">Unidad Educativa</th>
                     <th class="text-center" scope="col">Docente</th>
+                    <th class="text-center" scope="col">Curso</th>
                     <th class="text-center" scope="col">Materia</th>
                     <th class="text-center" scope="col">Paralelos</th>
                     <th class="text-center" scope="col" width="75">Estado</th>
@@ -36,15 +37,21 @@
                 </tr>
             </thead>
             <tbody>
-                    @foreach ($distribucions as $dis)
-                    <tr>
+                @foreach ($distribucions as $dis)
+
+                <tr>
                     <td>{{$dis->instituto->nombre}} </td>
                     <td>
                         {{$dis->user->name}}
                         {{$dis->user->apellido}}
                     </td>
+                    <td>
+                        @foreach($dis->materia->distribucionmacus as $c)
+                        {{$c->curso->nombre}}
+                        @endforeach
+                    </td>
                     <td class="text-center">
-                       {{$dis->materia->nombre}}
+                        {{$dis->materia->nombre}}
                     </td>
                     <td class="text-center">
                         @if($dis->paralelos != null)
@@ -57,11 +64,11 @@
                         @endif
                     </td>
                     <td class="text-center">
-                        
-                           {{ $dis['estado']}}
-                        
-                   
-                </td>
+
+                        {{ $dis['estado']}}
+
+
+                    </td>
                     <td class="table-button text-center">
                         <!--metodo delete funciona pero hay que almacenar la variable array en una variable temporal-->
                         <form method="POST" action="{{route('distribuciondos.destroy', $dis->id)}}}">
@@ -75,6 +82,7 @@
                         </form>
                     </td>
                 </tr>
+
                 @endforeach
             </tbody>
             <!--Table body-->
@@ -96,14 +104,14 @@
 <script>
 $(function() {
     $(document).ready(function() {
-     var table= $('#myTable').DataTable({
+        var table = $('#myTable').DataTable({
             "fixedHeader": true,
             "orderCellsTop": true,
             "info": true,
             "autoWidth": true,
             "searching": true,
             "responsive": true,
-          
+
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
             }

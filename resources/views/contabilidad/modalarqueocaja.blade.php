@@ -206,8 +206,8 @@
                         <tbody group="people" :list="t_saldo" tag="tbody" style="border: hidden">
                             <tr style="border: hidden" v-for="(s, index) in t_saldo">
                                 <td style="border: hidden;">@{{s.detalle}}</td>
-                                <td style="border: hidden" align="center">@{{decimales(s.s_debe)}}</td>
-                                <td style="border: hidden" align="center">@{{decimales(s.s_haber)}}</td>
+                                <td style="border: hidden" align="right">@{{decimales(s.s_debe)}}</td>
+                                <td style="border: hidden"  align="right">@{{decimales(s.s_haber)}}</td>
                                 <td style="border: hidden" align="center" width="50">
                                     <a @click.prevent="editSaldo(index)" class="btn btn-warning">
                                         <i class="fas fa-edit"></i>
@@ -230,8 +230,8 @@
                         <tbody is="draggable" group="people" :list="t_exis" tag="tbody">
                             <tr style="border: hidden" v-for="(e, index) in t_exis">
                                 <td style="padding-left:50px">@{{e.detalle}}</td>
-                                <td style="border: hidden" align="center">@{{decimales(e.e_debe)}}</td>
-                                <td style="border: hidden" align="center">@{{decimales(e.e_haber)}}</td>
+                                <td style="border: hidden"  align="right">@{{decimales(e.e_debe)}}</td>
+                                <td style="border: hidden"  align="right">@{{decimales(e.e_haber)}}</td>
 
                                 <td style="border: hidden" align="center" width="50">
                                     <a @click.prevent="editExis(index)" class="btn btn-warning">

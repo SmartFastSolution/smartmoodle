@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Assignment;
 use App\Contenido;
 use App\Curso;
-use App\Distribucionmacu;
 use App\Distribuciondo;
+use App\Distribucionmacu;
 use App\Distrima;
 use App\Materia;
-use App\Nivel;
 use App\Modelos\Role;
+use App\Nivel;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class HomeController extends Controller
@@ -85,6 +88,15 @@ class HomeController extends Controller
 
     
     public function buscarMateria(Request $request){
+            $user = User::find($request->user);
+            $dis = Distribucionmacu::find($user->distribucionmacu_id);
+            $materias = $dis->materias;
+        
+     
+        return $materias;
+        
+    }
+    public function asignacionUser(Request $request){
 
         $materias= Materia::where('instituto_id', $request->id)->get();
         $materia = [];
@@ -124,7 +136,7 @@ class HomeController extends Controller
     }
     function materiaDocente(Request $request)
     {
-        $materias= Materia::where('instituto_id', $request->id)->get();
+               $materias= Materia::where('instituto_id', $request->id)->get();
         $materia = [];
 
         $distribuciondos = Distribuciondo::where('user_id', $request->user_id)->count();
@@ -161,7 +173,7 @@ class HomeController extends Controller
     
     public function buscarAlumno(Request $request){
         $usrol = Role::where('descripcion','estudiante')->first();
-        $distrima = Distrima::select('user_id')->get();
+        $distrima = Assignment::select('user_id')->get();
 
         $users = $usrol->users()->whereNotIn('users.id',$distrima)->where('instituto_id', $request->id)->get();
         //$users= User::where('instituto_id', $request->id, 'and', '')->get();
@@ -220,6 +232,8 @@ class HomeController extends Controller
          
            if($estado === 'off'){
                $user->estado = 'on';
+                $user->activated_at =Carbon::now();
+
                $user->save();
                return response(array(
                 'success' => true,
@@ -254,6 +268,13 @@ class HomeController extends Controller
     }
 
 
+    public function buscarparalelo(Request $request){
+        
+ 
+        $distribuciondo = Distribuciondo::where('user_id', Auth::id())->where('materia_id', $request->id)->first();
+        $paralelo = $distribuciondo->paralelos;
+        return $paralelo;
+    }
 
    
 }

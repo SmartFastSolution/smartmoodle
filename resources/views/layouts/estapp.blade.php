@@ -16,6 +16,10 @@
                 <li class="nav-item active">
                     <a href="{{ url('/sistema/post-estudiante') }}" class="nav-link">Crear Post</a>
                 </li>
+                <li class="nav-item active">
+                    <a href="{{ url('/sistema/post-docentes-estudiantes') }}" class="nav-link">Publicaciones Generales</a>
+                </li>
+             
             </ul>
             <ul class="navbar-nav ml-auto">
                 @guest

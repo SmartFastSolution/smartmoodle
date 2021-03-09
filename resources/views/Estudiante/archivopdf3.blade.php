@@ -16,8 +16,7 @@
         @endisset
 
 
-        <!-- <iframe class="embed-responsive-item" width="800" height="700" src="{{$contenido->archivo->url}}"
-                allowfullscreen></iframe> -->
+      
 
 
 

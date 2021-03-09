@@ -33,9 +33,9 @@
     </thead>
     <tbody>
         <tr v-for="(c , index) in t_compras">
-            <td class="text-right" align="center" width="1">@{{ formatoFecha(c.fecha_c)}}</td>
-            <td class="text-right" align="center" width="300">@{{ c.detalle}}</td>
-            <td class="text-right" align="center" width="100">@{{ c.proveedor}}</td>
+            <td class="text-right" align="center" width="125">@{{ formatoFecha(c.fecha_c)}}</td>
+            <td class="text-left" align="center" width="300">@{{ c.detalle}}</td>
+            <td class="text-left" align="center" width="100">@{{ c.proveedor}}</td>
             <td class="text-right" align="center" width="125">@{{ decimales(c.base_im) }}</td>
             <td class="text-right" align="center" width="100">@{{ c.porcentaje }}</td>
             <td class="text-right" align="center" width="125">@{{ decimales(c.v_retenido) }}</td>
@@ -90,8 +90,8 @@
 <tbody>
     <tr v-for="(v , index) in t_ventas">
         <td class="text-right" align="center" width="125">@{{ formatoFecha(v.fecha_v)}}</td>
-        <td class="text-right" align="center" width="300">@{{ v.detalle}}</td>
-        <td class="text-right" align="center" width="100">@{{ v.cliente}}</td>
+        <td class="text-left" align="center" width="300">@{{ v.detalle}}</td>
+        <td class="text-left" align="center" width="100">@{{ v.cliente}}</td>
         <td class="text-right" align="center" width="125">@{{ decimales(v.base_im) }}</td>
         <td class="text-right" align="center" width="100">@{{ v.porcentaje }}</td>
         <td class="text-right" align="center" width="125">@{{ decimales(v.v_retenido) }}</td>
@@ -126,7 +126,7 @@
                     <td>
                         <div class="col-sm-8">
                             <input disabled class="form-control  text-right  form-control-sm"  type="number" step="0.01"
-                                v-model="total.t_ivaventa" placeholder="IVA EN VENTAS" name="">
+                                v-model="total.t_ivaventa" placeholder="0,00" name="">
                         </div>
                     </td>
 
@@ -140,7 +140,7 @@
 
                         <div class="col-sm-8">
                             <input disabled class="form-control  text-right  form-control-sm" type="number" step="0.01"
-                                v-model="total.t_ivacompra" placeholder="- IVA EN COMPRAS" name="">
+                                v-model="total.t_ivacompra" placeholder="0,00" name="">
                         </div>
                     </td>
                 </tr>
@@ -151,7 +151,7 @@
                     <td>
                         <div class="col-sm-8">
                             <input disabled class="form-control  text-right  form-control-sm" type="number" step="0.01"
-                                v-model="total.result_iva" placeholder="RES. IVA" name="">
+                                v-model="total.result_iva" placeholder="0,00" name="">
                         </div>
                     </td>
                 </tr>
@@ -163,7 +163,7 @@
 
                         <div class="col-sm-8">
                             <input disabled class="form-control  text-right  form-control-sm" type="number" step="0.01"
-                                v-model="total.t_reten" placeholder="+ RET. IVA" name="">
+                                v-model="total.t_reten" placeholder="0,00" name="">
                         </div>
                     </td>
                 </tr>
@@ -174,7 +174,7 @@
                     <td>
                         <div class="col-sm-8">
                             <input disabled class="form-control  text-right  form-control-sm" type="number" step="0.01"
-                                v-model="total.total_pagar" placeholder="TOTAL A PAGAR" name="">
+                                v-model="total.total_pagar" placeholder="0,00" name="">
                         </div>
                     </td>
                 </tr>

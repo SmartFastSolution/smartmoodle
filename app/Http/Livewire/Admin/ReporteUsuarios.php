@@ -9,13 +9,13 @@ use Livewire\WithPagination;
 
 class ReporteUsuarios extends Component
 {
-		use WithPagination;
+        use WithPagination;
     protected $listeners = ['desbloquear'];
 
     public $show            = true;
         
-	protected $paginationTheme = 'bootstrap';
-	protected $queryString = [
+    protected $paginationTheme = 'bootstrap';
+    protected $queryString = [
         'page' => ['except' => 1],
     ];
     public $curso     = '';
@@ -32,7 +32,7 @@ class ReporteUsuarios extends Component
     public function render()
     {
         $this->roles = Role::get();
-    	 $usuarios = User::join('role_user', 'users.id', '=', 'role_user.user_id')
+         $usuarios = User::join('role_user', 'users.id', '=', 'role_user.user_id')
                 ->join('roles', 'role_user.role_id', '=', 'roles.id')
                 ->leftJoin('institutos', 'users.instituto_id', '=', 'institutos.id')
                 ->where('users.name', 'like', '%'.$this->nombre.'%')
@@ -67,7 +67,7 @@ class ReporteUsuarios extends Component
                 ->paginate($this->perPage);
 
         return view('livewire.admin.reporte-usuarios',[
-        'usuarios' =>	$usuarios 
+        'usuarios' =>   $usuarios 
         ]);
     }
 

@@ -42,14 +42,10 @@
                                     @endforeach
                                 </select>
                             </div>
-
-
                         </div>
-
-
                         <a href="{{route('posts.index')}}" class="btn btn-primary">Atras</a>
                         <input type="submit" class="btn btn-dark " value="Guardar">
-                        {!! Form::close() !!}
+                        {!!Form::close()!!}
                     </div>
                 </div>
             </div>

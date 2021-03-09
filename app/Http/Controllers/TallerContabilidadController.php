@@ -64,6 +64,11 @@ use Illuminate\Support\Facades\Auth;
 
 class TallerContabilidadController extends Controller
 {
+           public function __construct()
+    {
+        $this->middleware('auth');
+     
+    }
       
        
          public function kardexFifo(Request $request)

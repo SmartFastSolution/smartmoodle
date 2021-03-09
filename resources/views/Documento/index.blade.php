@@ -31,6 +31,7 @@
         <table id="myTable" class="table table-hover" style="width:100%">
             <thead>
                 <tr>
+                    <th scope="col">Materia</th>
                     <th scope="col">Unidad</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Descripcion</th>
@@ -43,6 +44,8 @@
             <tbody>
                 @foreach ($documentos as $d)
                 <tr>
+
+                    <td>{{ $d->contenido->materia->nombre}}</td>
                     <td>{{ $d->contenido->nombre}}</td>
                     <td>{{ $d['nombre']}}</td>
                     <td>{{ $d['descripcion']}}</td>

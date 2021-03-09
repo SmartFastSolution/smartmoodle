@@ -52,22 +52,22 @@ route::get('/homees','EstudianteController@index')->name('estudiante'); //ruta e
  Route::post('contmateria','HomeController@buscarContenido')->name('contmateria');
  Route::post('asignaciones','HomeController@asignacion')->name('asignacion');
  Route::post('paralelosinst','HomeController@obtenerParalelos')->name('obtenerParalelos');
+ Route::post('buscarparalelo','HomeController@buscarparalelo')->name('buscarparalelo');
+ Route::post('getcontenidos','DocumentoController@getcontenidos')->name('contenidos.doc');
 
-
- ////////////////////////////////////////////////
 
 
 ////////////////////////////////////////////////
- ////////////////Fin Reporte Vuejs//////////////
- ////////////////////////////////////////////////
- ////////////////////////////////////////////////
+////////////////////////////////////////////////
+////////////////Fin Reporte Vuejs///////////////
+////////////////////////////////////////////////
+////////////////////////////////////////////////
 
 
  
 ////////////////////////////////////////////////
  //////////////// Reporte Eloquent//////////////
-
- Route::get('/reportes','PDFController@Reporteindex')->name('Reportes');
+Route::get('/reportes','PDFController@Reporteindex')->name('Reportes');
  
  ///////////////////////////////////////////////
  ////////////////Descargar Excel////////////////
@@ -78,7 +78,6 @@ Route::post('distribucion-list-excel','PDFController@DistribucionExport')->name(
 Route::post('asignaciones-list-excel','PDFController@AssigmentExport')->name('asignacion.excel');
 Route::post('docentes-list-excel','PDFController@DocenteExport')->name('docente.excel');
 Route::post('cursos-list-excel','PDFController@CursoExport')->name('curso.excel');
-
 
 
  ////////////////////////////////////////////////
@@ -105,6 +104,7 @@ route::get('Contenido-pdf/docente/{contenido}', 'EstudianteController@Visualizac
 route::get('post-estudiante', 'EstudianteController@PostE')->name('Post.alumno');
 route::post('estudiante/post/store', 'EstudianteController@storee')->name('storepost'); //guardar un post desde estudiante
 route::DELETE('estudiante/post/delete/{post}', 'EstudianteController@destroype')->name('deletepost');
+route::get('post-docentes-estudiantes', 'EstudianteController@Postdocentes')->name('Post.docentes-alumnos');//post de docentes de los estudiantes
 
 //rutas menu docente
 route::get('perfil', 'DocenteController@Perfil')->name('Perfil');
@@ -132,9 +132,10 @@ route::DELETE('docente/post/delete/{post}', 'DocenteController@destroyped')->nam
  route::post('docente/archivo-guardar','DocenteController@Guardardoc')->name('documentacion.docentestore');
  route::get('docente/documento/archivo-show/{archivodocente}','DocenteController@docshow')->name('documentaciondoc.show');
 
- route::get('docente/documento/archivo-show/{archivodocente}/edit','DocenteController@docedit')->name('documentaciondoc.edit');
+ route::get('docente/documento/archivo-edit/{archivodocente}/edit','DocenteController@docedit')->name('documentaciondoc.edit');
  route::PUT('docente/archivo-actualizar/{archivodocente}','DocenteController@docupdate')->name('documentaciondoc.update');
  route::delete('docente/archivos-update/{archivodocente}','DocenteController@destroy')->name('documentaciondoc.destroy');
+
 
 /////////////////////////////////////
 /////////////////////////////////////

@@ -11,7 +11,7 @@
     <div class="container">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
-                <h1 class="font-weight-light text-center">Vista Asignación Docente/Materia</h1>
+                <h1 class="font-weight-light text-center"> Asignación Docente/Materia</h1>
                 <div class="row justify-content-center">
                     <div class="col-md-10">
                     

@@ -9,14 +9,14 @@ use Livewire\WithPagination;
 
 class ReporteEstudiante extends Component
 {
-	use WithPagination;
+    use WithPagination;
     protected $listeners = ['desbloquear'];
     
-	protected $paginationTheme = 'bootstrap';
-	protected $queryString = [
+    protected $paginationTheme = 'bootstrap';
+    protected $queryString = [
         'page' => ['except' => 1],
     ];
-	// public $talleres  = [];
+    // public $talleres  = [];
     public $curso     = '';
     public $cursos    = [];
     public $nombre    = '';
@@ -34,7 +34,7 @@ class ReporteEstudiante extends Component
     {
         $this->cursos = Curso::get();
         
-    	 $estudiantes = User::join('role_user', 'users.id', '=', 'role_user.user_id')
+         $estudiantes = User::join('role_user', 'users.id', '=', 'role_user.user_id')
                 ->join('institutos', 'users.instituto_id', '=', 'institutos.id')
                  ->leftJoin('assignments', 'users.id', '=', 'assignments.user_id')
                  ->leftJoin('assignment_materia', 'assignments.id', '=', 'assignment_materia.assignment_id')
@@ -70,7 +70,7 @@ class ReporteEstudiante extends Component
                 ->paginate($this->perPage);
 
         return view('livewire.admin.reporte-estudiante',[
-        	'estudiantes' => $estudiantes
+            'estudiantes' => $estudiantes
         ]);
     }
          public function exportarExcel()
@@ -112,8 +112,8 @@ class ReporteEstudiante extends Component
                 ->select('users.name as user_nombre','users.apellido as user_apellido', 'users.email','users.access_at','cursos.nombre as nombre_curso' ,'materias.nombre as nombre_materia', 'nivels.nombre as paralelo', 'institutos.nombre as instituto', 'users.estado')
                 ->get();
 
-    	$this->emit('estudiantes',['estudiantes' => $estudiantes]);
-    	// return (new ProductsExport(2018))->download('products.xlsx');
+        $this->emit('estudiantes',['estudiantes' => $estudiantes]);
+        // return (new ProductsExport(2018))->download('products.xlsx');
     }
       public function desbloquear()
     {

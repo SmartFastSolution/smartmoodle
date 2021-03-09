@@ -10,11 +10,11 @@ use Livewire\WithPagination;
 
 class ReporteDocentes extends Component
 {
-   	use WithPagination;
+    use WithPagination;
     protected $listeners = ['desbloquear'];
     
-	protected $paginationTheme = 'bootstrap';
-	protected $queryString = [
+    protected $paginationTheme = 'bootstrap';
+    protected $queryString = [
         'page' => ['except' => 1],
     ];
     public $curso       = '';
@@ -63,7 +63,7 @@ class ReporteDocentes extends Component
                 ->select('distribuciondos.*','users.name as user_nombre','users.apellido as user_apellido','users.estado','users.access_at','cursos.nombre as nombre_curso' ,'materias.nombre as nombre_materia', 'institutos.nombre as instituto')  
                 ->paginate($this->perPage);
         return view('livewire.admin.reporte-docentes',[
-        	'docentes' => $docentes
+            'docentes' => $docentes
         ]);
     }
 
@@ -99,7 +99,7 @@ class ReporteDocentes extends Component
                 ->where('role_user.role_id', 3)
                 ->select('distribuciondos.*','users.name as user_nombre','users.apellido as user_apellido','users.estado','users.access_at','cursos.nombre as nombre_curso' ,'materias.nombre as nombre_materia', 'institutos.nombre as instituto')  
                 ->get();
-    	       $this->emit('docentes',['docentes' => $docentes]);
+               $this->emit('docentes',['docentes' => $docentes]);
     }
       public function desbloquear()
     {

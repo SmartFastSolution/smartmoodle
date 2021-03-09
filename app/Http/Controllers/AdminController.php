@@ -261,7 +261,7 @@ class AdminController extends Controller
     // $valor;
     $i = Taller::where('contenido_id', $request->input('contenido_id'))->get()->last();//cambios
     
-      if ($i) {
+    if ($i) {
       $valor = explode(" ", $i->nombre);
     }else{
       $valor[1] = 0;

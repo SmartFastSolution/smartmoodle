@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\FromView;
 
 class DistribucionExport implements FromView 
 {
-   	use Exportable;
+    use Exportable;
     protected $talleres;
     
     public function __construct(array $talleres)

@@ -10,7 +10,7 @@
                 </template>
                 <template v-else="!update">
                     <div>
-                        <h5 class="modal-title" id="bg-transaccionLabel">AGREGAR TRANSACCION</h5>
+                        <h5 class="modal-title" id="bg-transaccionLabel">AGREGAR REGISTRO DE COMPRAS Y VENTAS</h5>
                     </div>
                 </template>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -96,7 +96,7 @@
                     <div class="col-12 mt-2 border border-bottom-0 border-left-0 border-right-0 border-danger">
 
                         <br>
-                        <h2 class="text-center"> AGREGAR RETENCIÓN</h2>
+                        <h2 class="text-center"> AGREGAR REGISTRO DE COMPRAS Y VENTAS</h2>
                         <div class="col-12">
                             <ul class="nav nav-tabs" id="compra" role="tablist">
                                 <li class="nav-item" role="presentation">
@@ -189,8 +189,7 @@
                                         </tbody>
                                     </table>
                                     <div v-if="!compra.edit" class="row justify-content-center">
-                                        <a href="#" class="btn btn-success" @click.prevent="agregarCompra()">Agregar
-                                            Compra</a>
+                                        <a href="#" class="btn btn-success" @click.prevent="agregarCompra()">Agregar Registros de Compra</a>
 
                                     </div>
                                     <div v-else class="row justify-content-center">
@@ -358,8 +357,7 @@
                                         </tbody>
                                     </table>
                                     <div v-if="!venta.edit" class="row justify-content-center">
-                                        <a href="#" class="btn btn-success" @click.prevent="agregarVenta()">Agregar
-                                            Venta</a>
+                                        <a href="#" class="btn btn-success" @click.prevent="agregarVenta()">Agregar Registros de Venta</a>
 
                                     </div>
                                     <div v-else class="row justify-content-center">
