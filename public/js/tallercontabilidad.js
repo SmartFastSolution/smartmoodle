@@ -6658,7 +6658,7 @@ const asientos_cierre = new Vue({
                 "timeOut": "3000"
             });
       }else{
-    
+            this.diarios.debe[0].fecha    = this.diarios.fecha;
             this.registros[id].debe       = this.diarios.debe;
             this.registros[id].haber      = this.diarios.haber;
             this.registros[id].comentario = this.diarios.comentario;
