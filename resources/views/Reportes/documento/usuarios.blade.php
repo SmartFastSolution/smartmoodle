@@ -1,5 +1,5 @@
 <div class="container">
-    <h5 style="text-align: center"><strong>TABLA DE MATERIAS</strong></h5>
+    <h5 style="text-align: center"><strong>REPORTE DE USUARIOS</strong></h5>
     <table class="table table-striped">
         <thead>
             <tr>

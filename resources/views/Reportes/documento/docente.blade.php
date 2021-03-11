@@ -1,5 +1,5 @@
 <div class="container">
-    <h5 style="text-align: center"><strong>TABLA DE DOCENTES GENERALES</strong></h5>
+    <h5 style="text-align: center"><strong>REPORTE DE DOCENTES</strong></h5>
     <table id="myTable1" class="table table-hover">
         <thead class="thead-dark">
             <tr>

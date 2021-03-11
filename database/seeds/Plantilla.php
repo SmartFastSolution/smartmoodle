@@ -23,6 +23,8 @@ class Plantilla extends Seeder
                              'created_at'  => now(),
                              'updated_at'  => now()
                           ]);
+                          // factory(\App\Instituto::class)->times(10)->create();
+
                         
                           DB::table('plantillas')->insert([
                           'id' => 1,
