@@ -25,6 +25,7 @@ class CreateChequesTable extends Migration
             $table->string('lugar')->nullable();
             $table->string('fecha')->nullable();
             $table->string('firma')->nullable();
+            $table->boolean('cruzado')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')

@@ -904,7 +904,6 @@
         },
           crearTaller(tipo){
             let set = this;
-            this.show = false;
             if (tipo == 'balance-inicial-vertical') {
                 let url = '/sistema/admin/modulo/balance-inicial';
                 if (set.individuales.balance_vertical.trim() === '' ) {
@@ -920,6 +919,8 @@
                         "timeOut": "3000"
                     });
                 }else{
+            this.show = false;
+                  
             let data = new  FormData();
             data.append('documento', this.document);
             data.append('id', this.id_taller);
@@ -951,6 +952,8 @@
                             "timeOut": "3000"
                         });
                     }else{
+            this.show = false;
+                      
                             let data = new  FormData();
                       data.append('documento', this.document);
                       data.append('id', this.id_taller);
@@ -980,6 +983,8 @@
                               "timeOut": "3000"
                           });
                       }else{
+            this.show = false;
+                        
                       let data = new  FormData();
                       data.append('documento', this.document);
                       data.append('id', this.id_taller);
@@ -1009,6 +1014,8 @@
                               "timeOut": "3000"
                           });
                       }else{
+            this.show = false;
+                        
                         let data = new  FormData();
                         data.append('documento', this.document);
                         data.append('id', this.id_taller);
@@ -1038,6 +1045,8 @@
                             "timeOut": "3000"
                         });
                     }else{
+            this.show = false;
+                      
                         let data = new  FormData();
                         data.append('documento', this.document);
                         data.append('id', this.id_taller);
@@ -1066,6 +1075,8 @@
                             "timeOut": "3000"
                         });
                     }else{
+            this.show = false;
+                      
                         let data = new  FormData();
                         data.append('documento', this.document);
                         data.append('id', this.id_taller);
@@ -1094,6 +1105,8 @@
                             "timeOut": "3000"
                         });
                     }else{
+            this.show = false;
+                      
                         let data = new  FormData();
                         data.append('documento', this.document);
                         data.append('id', this.id_taller);
@@ -1122,6 +1135,8 @@
                             "timeOut": "3000"
                         });
                     }else{
+            this.show = false;
+                      
                         let data = new  FormData();
                         data.append('documento', this.document);
                         data.append('id', this.id_taller);
@@ -1150,6 +1165,8 @@
                             "timeOut": "3000"
                         });
                     }else{
+            this.show = false;
+                      
                         let data = new  FormData();
                         data.append('documento', this.document);
                         data.append('id', this.id_taller);
@@ -1178,6 +1195,8 @@
                             "timeOut": "3000"
                         });
                     }else{
+            this.show = false;
+                      
                         let data = new  FormData();
                         data.append('documento', this.document);
                         data.append('id', this.id_taller);
@@ -1206,6 +1225,8 @@
                             "timeOut": "3000"
                         });
                     }else{
+            this.show = false;
+                      
                           let data = new  FormData();
                         data.append('documento', this.document);
                         data.append('id', this.id_taller);
@@ -1234,6 +1255,8 @@
                             "timeOut": "3000"
                         });
                     }else{
+            this.show = false;
+                      
                                let data = new  FormData();
                         data.append('documento', this.document);
                         data.append('id', this.id_taller);
@@ -1262,6 +1285,8 @@
                             "timeOut": "3000"
                         });
                     }else{
+            this.show = false;
+                      
                         let data = new  FormData();
                         data.append('documento', this.document);
                         data.append('id', this.id_taller);
@@ -1290,6 +1315,8 @@
                             "timeOut": "3000"
                         });
                     }else{
+            this.show = false;
+                      
                         let data = new  FormData();
                         data.append('documento', this.document);
                         data.append('id', this.id_taller);
@@ -1318,6 +1345,8 @@
                             "timeOut": "3000"
                         });
                     }else{
+            this.show = false;
+                      
                        let data = new  FormData();
                         data.append('documento', this.document);
                         data.append('id', this.id_taller);
@@ -1346,6 +1375,8 @@
                             "timeOut": "3000"
                         });
                     }else{
+            this.show = false;
+                      
                            let data = new  FormData();
                         data.append('documento', this.document);
                         data.append('id', this.id_taller);
@@ -1374,6 +1405,8 @@
                             "timeOut": "3000"
                         });
                     }else{
+            this.show = false;
+                      
                                      let data = new  FormData();
                         data.append('documento', this.document);
                         data.append('id', this.id_taller);
@@ -1402,6 +1435,8 @@
                             "timeOut": "3000"
                         });
                     }else{
+            this.show = false;
+                      
                                     let data = new  FormData();
                         data.append('documento', this.document);
                         data.append('id', this.id_taller);
@@ -1430,6 +1465,8 @@
                             "timeOut": "3000"
                         });
                     }else{
+            this.show = false;
+                      
                                let data = new  FormData();
                         data.append('documento', this.document);
                         data.append('id', this.id_taller);
@@ -1504,6 +1541,7 @@
         },
             tallerConcatenado(){
             let set = this;
+
             let url = '/sistema/admin/modulo/taller-concatenado';
             if (set.contenido_id == '' ) {
                  toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
@@ -1518,6 +1556,7 @@
                     "timeOut": "3000"
                 });
             }else{
+              this.show = false;
                 let data = new  FormData();
             
                 data.append('documento', this.document);

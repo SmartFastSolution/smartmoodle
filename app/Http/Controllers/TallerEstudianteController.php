@@ -1121,6 +1121,8 @@ public function store11(Request $request, $idtaller)
 
        public function store15(Request $request, $idtaller)
     {
+    
+        
     $id                  = Auth::id();
     $taller             =   Taller::where('id', $idtaller)->firstOrfail();
     $contenido           = TallerCheque::select('enunciado')->where('taller_id', $idtaller)->firstOrFail(); 
@@ -1135,6 +1137,11 @@ public function store11(Request $request, $idtaller)
     $taller15->lugar     =   $request->input('lugar');
     $taller15->fecha     =   $request->input('fecha'); 
     $taller15->firma     =   $request->input('firma'); 
+      if ($request->input('cruzado')) {
+    $taller15->cruzado     =   1;     
+        }else{
+    $taller15->cruzado     =   0;   
+        }
     $taller15->save();
 
     $user= User::find($id);

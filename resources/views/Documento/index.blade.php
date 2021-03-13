@@ -23,7 +23,7 @@
 @endif
 
 <section class="content">
-    <div class="container">
+    <div class="container-fluid">
         <a class="btn btn-info float-right " href="{{route('documentos.create')}}"><i class="fas fa-plus"></i>
             Crear</a>
         <h1 class="font-weight-light">Gestión de Documentos</h1>
@@ -31,11 +31,12 @@
         <table id="myTable" class="table table-hover" style="width:100%">
             <thead>
                 <tr>
+                    <th scope="col">Unidad Educativa</th>
                     <th scope="col">Materia</th>
                     <th scope="col">Unidad</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Descripcion</th>
-                    <th scope="col">Estado</th>
+                    <th width="30" scope="col">Estado</th>
                     <th scope="col">Acción</th>
                     <th scope="col" coldspan="3">Tools</th>
 
@@ -45,11 +46,12 @@
                 @foreach ($documentos as $d)
                 <tr>
 
+                    <td>{{ $d->contenido->materia->instituto->nombre}}</td>
                     <td>{{ $d->contenido->materia->nombre}}</td>
                     <td>{{ $d->contenido->nombre}}</td>
                     <td>{{ $d['nombre']}}</td>
                     <td>{{ $d['descripcion']}}</td>
-                    <td>{{ $d['estado']}}</td>
+                    <td class="text-center">{{ $d['estado']}}</td>
                     <td>@if($d['accion']== '1')
                         <span class="badge-success badge">Descargable</span>
                         @else

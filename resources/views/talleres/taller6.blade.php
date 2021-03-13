@@ -46,13 +46,13 @@
  $( "#button" ).click(function( event ) {
   event.preventDefault();
   Swal.fire({
-  title: 'Seguro que deseas completar el taller?',
+    title: 'Seguro que deseas enviar el taller?',
   text: "Esta accion ya no se puede revertir!",
   icon: 'warning',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
   cancelButtonColor: '#d33',
-  confirmButtonText: 'Si, Completar!',
+  confirmButtonText: 'Si, Enviar!',
   cancelButtonText: 'Cancelar!'
 }).then((result) => {
   if (result.isConfirmed) {

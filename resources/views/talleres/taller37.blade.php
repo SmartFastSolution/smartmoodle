@@ -394,7 +394,7 @@
              --}}
  @if ($rol === 'estudiante' or 'docente')
     <div class="row justify-content-center" id="enviarTaller">
-        <a href="" @click.prevent="CompletarTaller" class="btn p-2 mt-3 btn-danger">Completar Taller Contable</a>
+        <a href="" @click.prevent="CompletarTaller" class="btn p-2 mt-3 btn-danger">Enviar Taller</a>
         
      </div>
 @endif
@@ -426,13 +426,14 @@
       methods:{
         CompletarTaller(){
         Swal.fire({
-        title: 'Seguro que deseas completar el taller??' ,
-        text: "Esta accion no se puede revertir",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Si, completar!'
+         title: 'Seguro que deseas enviar taller contable?',
+          text: "Esta accion ya no se puede revertir!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, Enviar!',
+          cancelButtonText: 'Cancelar!'
           }).then((result) => {
         if (result.isConfirmed) {
             this.enviado();

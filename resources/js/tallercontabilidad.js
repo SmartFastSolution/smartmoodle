@@ -5077,7 +5077,7 @@ const balance_general = new Vue({
     this.obtenerEstadoResultado();
   },
    methods:{
-        calculadora(){
+          calculadora(){
     let propsData = {title: 'Called from basic js', noteProp: ['Note number 1', 'Note number 2']};
     let component = 'example-component';
     funciones.VueSweetAlert2(component,propsData);
@@ -5400,7 +5400,7 @@ const balance_general = new Vue({
 
                  }else{
 
-            let a_corriente ={resta:'no',cuenta_id:this.activo.a_corriente.cuenta_id, cuenta:nombre, saldo:this.activo.a_corriente.saldo, cuenta2:'', saldo2:'', total_saldo:this.activo.a_corriente.saldo, cuenta_id2:this.activo.a_corriente.cuenta_id2,  total_saldo2: this.activo.a_corriente.total_saldo2}
+            let a_corriente ={resta:'no',cuenta_id:this.activo.a_corriente.cuenta_id, cuenta:nombre, saldo:'', cuenta2:'', saldo2:'', total_saldo:this.activo.a_corriente.saldo, cuenta_id2:this.activo.a_corriente.cuenta_id2,  total_saldo2: this.activo.a_corriente.total_saldo2}
             this.a_corrientes.push(a_corriente);
             toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
               "timeOut": "3000"
@@ -5424,12 +5424,16 @@ const balance_general = new Vue({
 
     //EDITAR ELEMENTOS DE UN ARRAY
       editAcorriente(index){
-      this.activo.a_corriente.edit       = true;
+       this.activo.a_corriente.edit       = true;
        this.registro.a_corriente          = index;
-       this.bi.const_id                     = this.a_corrientes[index].cuenta_id;
-       this.bi.const_id2                     = this.a_corrientes[index].cuenta_id2;
+       this.bi.const_id                   = this.a_corrientes[index].cuenta_id;
+       this.bi.const_id2                  = this.a_corrientes[index].cuenta_id2;
        this.activo.a_corriente.cuenta_id  = this.a_corrientes[index].cuenta_id;
+    if (this.a_corrientes[index].saldo != '' && this.a_corrientes[index].saldo != undefined) {
        this.activo.a_corriente.saldo      = this.a_corrientes[index].saldo;
+      }else{
+       this.activo.a_corriente.saldo      = this.a_corrientes[index].total_saldo;
+      }
        this.activo.a_corriente.cuenta_id2 = this.a_corrientes[index].cuenta_id2;
        this.activo.a_corriente.saldo2     = this.a_corrientes[index].saldo2;
        if (this.a_corrientes[index].resta == 'si') {
@@ -5470,7 +5474,6 @@ const balance_general = new Vue({
             let index                            = this.registro.a_corriente;
             this.a_corrientes[index].cuenta_id = this.activo.a_corriente.cuenta_id;
             this.a_corrientes[index].cuenta    = nombre;
-            this.a_corrientes[index].saldo     = this.activo.a_corriente.saldo;
           if (id2 !== '' && id2 !== undefined) {
               let verificar2 = this.verificarCuentaAct(id2);
               if (verificar2 == true) {
@@ -5482,17 +5485,22 @@ const balance_general = new Vue({
             let nombre2                           = funciones.obtenerNombre(id2);
             this.a_corrientes[index].cuenta_id2   = this.activo.a_corriente.cuenta_id2;
             this.a_corrientes[index].cuenta2      = nombre2;
+            this.a_corrientes[index].saldo     = this.activo.a_corriente.saldo;
+
             this.a_corrientes[index].saldo2       = this.activo.a_corriente.saldo2;
             this.a_corrientes[index].total_saldo  = '';
             let resta                             = Number(this.activo.a_corriente.saldo) - Number(this.activo.a_corriente.saldo2);
             this.a_corrientes[index].total_saldo2 = resta;
+            this.a_corrientes[index].resta        = 'si'
             console.log(resta)
              }else{
+            this.a_corrientes[index].saldo     = '';
              this.a_corrientes[index].cuenta_id2   = '';
              this.a_corrientes[index].cuenta2      ='' ;
              this.a_corrientes[index].saldo2       = '';
              this.a_corrientes[index].total_saldo2 = '';
              this.a_corrientes[index].total_saldo  = this.activo.a_corriente.saldo;
+             this.a_corrientes[index].resta        = 'no'
              }
              this.activo.a_corriente.cuenta_id     =''
              this.activo.a_corriente.saldo         =''
@@ -5590,7 +5598,7 @@ const balance_general = new Vue({
 
                  }else{
 
-            let a_nocorriente ={resta:'no',cuenta_id:this.activo.a_nocorriente.cuenta_id, cuenta:nombre, saldo:this.activo.a_nocorriente.saldo, cuenta2:'', saldo2:'', total_saldo:this.activo.a_nocorriente.saldo, cuenta_id2:this.activo.a_nocorriente.cuenta_id2,  total_saldo2: this.activo.a_nocorriente.total_saldo2}
+            let a_nocorriente ={resta:'no',cuenta_id:this.activo.a_nocorriente.cuenta_id, cuenta:nombre, saldo:'', cuenta2:'', saldo2:'', total_saldo:this.activo.a_nocorriente.saldo, cuenta_id2:this.activo.a_nocorriente.cuenta_id2,  total_saldo2: this.activo.a_nocorriente.total_saldo2}
             this.a_nocorrientes.push(a_nocorriente);
             toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
               "timeOut": "3000"
@@ -5619,7 +5627,14 @@ const balance_general = new Vue({
        this.bi.const_id                     = this.a_nocorrientes[index].cuenta_id;
        this.bi.const_id2                     = this.a_nocorrientes[index].cuenta_id2;
        this.activo.a_nocorriente.cuenta_id  = this.a_nocorrientes[index].cuenta_id;
+
+        if (this.a_nocorrientes[index].saldo != '' && this.a_nocorrientes[index].saldo != undefined) {
        this.activo.a_nocorriente.saldo      = this.a_nocorrientes[index].saldo;
+      }else{
+       this.activo.a_nocorriente.saldo      = this.a_nocorrientes[index].total_saldo;
+      }
+
+       // this.activo.a_nocorriente.saldo      = this.a_nocorrientes[index].saldo;
        this.activo.a_nocorriente.cuenta_id2 = this.a_nocorrientes[index].cuenta_id2;
        this.activo.a_nocorriente.saldo2     = this.a_nocorrientes[index].saldo2;
        if (this.a_nocorrientes[index].resta == 'si') {
@@ -5648,7 +5663,6 @@ const balance_general = new Vue({
             let index                            = this.registro.a_nocorriente;
             this.a_nocorrientes[index].cuenta_id = this.activo.a_nocorriente.cuenta_id;
             this.a_nocorrientes[index].cuenta    = nombre;
-            this.a_nocorrientes[index].saldo     = this.activo.a_nocorriente.saldo;
           if (id2 !== '' && id2 !== undefined) {
               let verificar2 = this.verificarCuentaAct(id2);
               if (verificar2 == true) {
@@ -5660,8 +5674,11 @@ const balance_general = new Vue({
             let nombre2                           = funciones.obtenerNombre(id2);
             this.a_nocorrientes[index].cuenta_id2 = this.activo.a_nocorriente.cuenta_id2;
             this.a_nocorrientes[index].cuenta2    = nombre2;
+            this.a_nocorrientes[index].saldo     = this.activo.a_nocorriente.saldo;
+
             this.a_nocorrientes[index].saldo2     = this.activo.a_nocorriente.saldo2;
             this.a_nocorrientes[index].total_saldo     = '';
+            this.a_nocorrientes[index].resta        = 'si'
 
             let resta = Number(this.activo.a_nocorriente.saldo) - Number(this.activo.a_nocorriente.saldo2);
 
@@ -5673,9 +5690,10 @@ const balance_general = new Vue({
              this.a_nocorrientes[index].cuenta_id2 = '';
             this.a_nocorrientes[index].cuenta2    ='' ;
             this.a_nocorrientes[index].saldo2     = '';
+            this.a_nocorrientes[index].resta        = 'no'
 
             this.a_nocorrientes[index].total_saldo2 = '';
-
+            this.a_nocorrientes[index].saldo     = '';
             this.a_nocorrientes[index].total_saldo = this.activo.a_nocorriente.saldo;
              }
             this.activo.a_nocorriente.cuenta_id  =''
@@ -9309,8 +9327,6 @@ const arqueo_caja = new Vue ({
  
   data:{
     id_taller : taller,
-   
-
     libros_caja:[],
     debe_lb:'',
     haber_lb:'',
@@ -9322,16 +9338,7 @@ const arqueo_caja = new Vue ({
        s_debe   :'',
        s_haber  :'',
     },
-    pruebas:{
-      cuenta1:'',
-      cuenta2:'',
-      valor1 :'',
-      valor2:'',
-      saldo_ctcaja:'',
-      saldo_arqueocaja:'',
-      select_resultado:'',
-      select_valor:'',
-    },
+
     t_exis:[], // array de existencias
     exis:{
       edit:false,
@@ -9682,19 +9689,11 @@ const arqueo_caja = new Vue ({
     var _this = this;
     var url ='/sistema/admin/taller/arqueo_caja';
       axios.post(url,{
-             id:       _this.id_taller,
-        t_saldo:       _this.t_saldo,
-         t_exis:       _this.t_exis,
-             td:       _this.sumas.td,
-             th:       _this.sumas.th,
-        cuenta1:       _this.pruebas.cuenta1,
-        cuenta2:       _this.pruebas.cuenta2,
-        valor1 :       _this.pruebas.valor1,
-        valor2 :       _this.pruebas.valor2,
-   saldo_ctcaja:       _this.pruebas.saldo_ctcaja,
-    saldo_arqueocaja:  _this.pruebas.saldo_arqueocaja, 
-    select_resultado:  _this.pruebas.select_resultado,
-    select_valor:      _this.pruebas.select_valor,
+             id:    _this.id_taller,
+        t_saldo:    _this.t_saldo,
+         t_exis:    _this.t_exis,
+             td:    _this.sumas.td,
+             th:    _this.sumas.th,
       }).then(response =>{
         if (response.data.estado == 'guardado') {
           toastr.success("Arqueo Caja creado correctamente", "Smarmoddle", {
@@ -9724,16 +9723,8 @@ const arqueo_caja = new Vue ({
         toastr.info("Anexo Arqueo Caja cargado correctamente", "Smarmoddle", {
           "timeOut": "3000"
           });
-          this.t_saldo                   = response.data.saldo;
-          this.t_exis                    = response.data.exis;
-          this.pruebas.cuenta1           = response.data.cuenta1,
-          this.pruebas.cuenta2           = response.data.cuenta2,
-          this.pruebas.valor1            = response.data.valor1,
-          this.pruebas.valor2            = response.data.valor2,
-          this.pruebas.saldo_ctcaja      = response.data.saldo_ctcaja,
-          this.pruebas.saldo_arqueocaja  = response.data.saldo_arqueocaja, 
-          this.pruebas.select_resultado  = response.data.select_resultado,
-          this.pruebas.select_valor      = response.data.select_valor,
+          this.t_saldo = response.data.saldo;
+          this.t_exis = response.data.exis;
           this.totales_s();
       }
     }).catch(function(error){
