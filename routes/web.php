@@ -78,6 +78,7 @@ Route::post('distribucion-list-excel','PDFController@DistribucionExport')->name(
 Route::post('asignaciones-list-excel','PDFController@AssigmentExport')->name('asignacion.excel');
 Route::post('docentes-list-excel','PDFController@DocenteExport')->name('docente.excel');
 Route::post('cursos-list-excel','PDFController@CursoExport')->name('curso.excel');
+Route::post('notas-list-excel','PDFController@Notasxport')->name('notas.excel');
 
 
  ////////////////////////////////////////////////
@@ -327,6 +328,7 @@ route::post('/sistema/admin/taller28/{idtaller}', 'TallerEstudianteController@st
 route::post('/sistema/admin/taller29/{idtaller}', 'TallerEstudianteController@store29')->name('taller29');
 route::post('/sistema/admin/taller30/{idtaller}', 'TallerEstudianteController@store30')->name('taller30');
 route::post('/sistema/admin/taller31/{idtaller}', 'TallerEstudianteController@store31')->name('taller31');
+route::post('/sistema/admin/taller31complete/{idtaller}', 'TallerEstudianteController@complete31')->name('taller31complete');
 route::post('/sistema/admin/taller32/{idtaller}', 'TallerEstudianteController@store32')->name('taller32');
 route::post('/sistema/admin/taller33/{idtaller}', 'TallerEstudianteController@store33')->name('taller33');
 route::post('/sistema/admin/taller34/{idtaller}', 'TallerEstudianteController@store34')->name('taller34');
@@ -345,6 +347,7 @@ route::post('/sistema/admin/taller46/{idtaller}', 'TallerEstudianteController@st
 route::post('/sistema/admin/taller47/{idtaller}', 'TallerEstudianteController@store47')->name('taller47');
 // route::post('/sistema/admin/taller37/{idtaller}', 'TallerEstudianteController@store37')->name('taller_37');
 route::post('/sistema/admin/taller48/{idtaller}', 'TallerEstudianteController@store48')->name('taller48');
+route::post('/sistema/admin/taller48complete/{idtaller}', 'TallerEstudianteController@complete48')->name('taller48complete');
 route::post('/sistema/admin/taller49/{idtaller}', 'TallerEstudianteController@store49')->name('taller49');
 
 

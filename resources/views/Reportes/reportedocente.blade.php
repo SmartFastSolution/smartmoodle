@@ -19,6 +19,9 @@
                     aria-controls="nav-users" aria-selected="false">Reporte Usuarios</a>
                 <a class="nav-link" id="nav-vigencia-tab" data-toggle="tab" href="#nav-vigencia" role="tab"
                     aria-controls="nav-vigencia" aria-selected="false">Docente/Estudiante</a>
+                <a class="nav-link" id="nav-talleres-tab" data-toggle="tab" href="#nav-talleres" role="tab"
+                    aria-controls="nav-talleres" aria-selected="false">Estudiante/Talleres</a>
+
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -39,6 +42,10 @@
             @livewire('admin.reporte-alumnos')
             
             </div>
+            <div class="tab-pane fade" id="nav-talleres" role="tabpanel" aria-labelledby="nav-talleres-tab">
+            @livewire('admin.reporte-notas')
+            
+            </div>
             <!-- hasta aqui los tab -->
         </div>
     </div>
@@ -51,7 +58,7 @@
 <script type="text/javascript">
 
     const reportes = new Vue({
-      el: "#demo",
+      // el: "#demo",
       data:{
 
       },
@@ -169,6 +176,24 @@
 
         });
         },
+      reportesNotas: function (notas) {
+           // console.log(talleres)
+        let _this = this;
+        let url = '/sistema/notas-list-excel';
+            axios.post(url,{
+            datos: notas
+        },{responseType: 'arraybuffer'}).then(response => {
+            let fileURL = window.URL.createObjectURL(new Blob([response.data]));
+            let fileLink = document.createElement('a');
+            fileLink.href = fileURL;
+            fileLink.setAttribute('download', Date.now()+'-notas.xlsx');
+           document.body.appendChild(fileLink);
+           fileLink.click();
+           Livewire.emit('desbloquear');
+        }).catch(function(error){
+
+        });
+        },
       }
     });
     Livewire.on('talleres', function (data) {
@@ -201,6 +226,11 @@
     Livewire.on('usuarios', function (data) {
         setTimeout(function(){ 
        reportes.reportesUsuarios(data.usuarios)
+       }, 3000);
+    });
+    Livewire.on('notas', function (data) {
+        setTimeout(function(){ 
+       reportes.reportesNotas(data.notas)
        }, 3000);
     });
 

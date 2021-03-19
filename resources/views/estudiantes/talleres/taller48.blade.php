@@ -21,7 +21,8 @@
 							<thead>
 								<tr>
 									<th>N°</th>
-									<th >NOMBRE DEL ARCHIVO</th>
+                  <th >NOMBRE DEL ARCHIVO</th>
+									<th class="text-center">ARCHIVO</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -29,6 +30,23 @@
 								<tr>
 									<td>{{ $key + 1 }}</td>
 									<td>{{ $archivo->nombre }}</td>
+                  <td class="text-center">
+                    @if ($archivo->extension == 'pdf')
+                    <a href="{{ $archivo->urlarchivo }}" target="_blanK" class="btn btn-outline-danger"><i class="fas fa-file-pdf"></i></a>
+                    @elseif ($archivo->extension == 'docx')
+                    <a href="{{ $archivo->urlarchivo }}" target="_blanK" class="btn btn-outline-primary"><i class="fas fa-file-word"></i></a>
+                    @elseif ($archivo->extension == 'txt')
+                    <a href="{{ $archivo->urlarchivo }}" target="_blanK" class="btn btn-outline-secondary"><i class="fas fa-file-alt"></i></a>
+                    @elseif ($archivo->extension == 'xlsx')
+                    <a href="{{ $archivo->urlarchivo }}" target="_blanK" class="btn btn-outline-success"><i class="fas fa-file-excel"></i></a>
+                    @elseif ($archivo->extension == 'ppt')
+                    <a href="{{ $archivo->urlarchivo }}" target="_blanK" class="btn btn-outline-danger"><i class="fas fa-file-powerpoint"></i></a>
+                    @elseif ($archivo->extension == 'png' || 'jpg' || 'jpge')
+                    <a href="{{ $archivo->urlarchivo }}" target="_blanK" class="btn btn-outline-primary"><i class="fas fa-file-image"></i></a>
+                    @else
+                    <a href="{{ $archivo->urlarchivo }}" target="_blanK" class="btn btn-outline-info"><i class="fas fa-file"></i></a>
+                    @endif
+                  </td>
 							
 								</tr>
 								@endforeach

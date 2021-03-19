@@ -10,6 +10,7 @@ use App\Exports\AssigmentExport;
 use App\Exports\CursoExport;
 use App\Exports\DistribucionExport;
 use App\Exports\DocenteExport;
+use App\Exports\NotasExport;
 use App\Exports\ReportExport;
 use App\Instituto;
 use App\Materia;
@@ -98,6 +99,10 @@ class PDFController extends Controller
     public function CursoExport(Request $request){
         $alumnos = $request->datos;
         return Excel::download(new  CursoExport($alumnos) , 'cursos-list.xlsx');
+    }
+       public function Notasxport(Request $request){
+        $notas = $request->datos;
+        return Excel::download(new  NotasExport($notas) , 'notas-list.xlsx');
     }
 
    

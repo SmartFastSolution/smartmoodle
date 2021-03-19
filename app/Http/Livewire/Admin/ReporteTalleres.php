@@ -24,6 +24,8 @@ class ReporteTalleres extends Component
     public $unidad    = '';
     public $perPage   = 10;
     public $show            = true;
+    public $orderBy      = 'institutos.nombre';
+    public $orderAsc     = 'asc';
 
     // public $orderAsc = true;
     // public $orderBy = 'institutos.nombre';
@@ -49,6 +51,8 @@ class ReporteTalleres extends Component
                     }
                  })
                 ->select('cursos.nombre as nombre_curso','materias.nombre as nombre_materia', 'contenidos.nombre as unidad', 'contenidos.id as unidad_id', 'institutos.nombre as instituto')
+            // ->orderBy($this->orderBy, $this->orderAsc)
+
                 // ->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')
                 ->paginate($this->perPage);
         return view('livewire.admin.reporte-talleres',
@@ -90,5 +94,15 @@ class ReporteTalleres extends Component
          public function desbloquear()
     {
       $this->show = true;
+    }
+
+       public function sortingBy($field)
+    {
+      if ($this->orderBy === $field) {
+        $this->orderAsc = $this->orderAsc === 'asc' ? 'desc' : 'asc';
+      }else{
+        $this->orderAsc = 'asc';
+      }
+      $this->orderBy = $field;
     }
 }

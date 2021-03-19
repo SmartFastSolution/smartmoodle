@@ -42,6 +42,10 @@
      <button class="btn btn-outline-danger mt-5 text-center" id="sendAll">Enviar Imagenes</button>
 		</div>
 	</div>
+  <form id="completar" method="POST" action="{{ route('taller31complete', ['idtaller' => $d]) }}">
+     @csrf
+    
+  </form>
 
  @endsection
 
@@ -96,13 +100,14 @@
             title: 'Smarmoddle',
             text: 'Datos enviados correctamente',
           }).then(function() {
-              if (rol == 'estudiante') {
-  window.location = "/sistema/unidad/"+contenido;
+             $( "#completar" ).submit();
+  //             if (rol == 'estudiante') {
+  // window.location = "/sistema/unidad/"+materia;
 
-              } else if((rol == 'docente')) {
-  window.location = "/sistema/contenido/"+materia+"/talleres/resueltos";
+  //             } else if((rol == 'docente')) {
+  // window.location = "/sistema/contenido/"+materia+"/talleres/resueltos";
 
-              }
+  //             }
                 // window.location = "/sistema/homees";
             });
         }

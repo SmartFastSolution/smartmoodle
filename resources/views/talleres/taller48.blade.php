@@ -38,6 +38,11 @@
 		</div>
 	</div>
 
+  <form id="completar" method="POST" action="{{ route('taller48complete', ['idtaller' => $d]) }}">
+     @csrf
+    
+  </form>
+
  @endsection
 
 
@@ -78,7 +83,7 @@
       //           });
       //   });
        this.on("removedfile", function(file) {
-            toastr.success("Imagen Eliminada Correctamente", "Smarmoddle",{
+            toastr.info("Archivo Eliminada Correctamente", "Smarmoddle",{
                    "timeOut": "1000"
                 });
         });
@@ -91,13 +96,14 @@
             title: 'Smarmoddle',
             text: 'Datos enviados correctamente',
           }).then(function() {
-             if (rol == 'estudiante') {
-  window.location = "/sistema/unidad/"+contenido;
+            $( "#completar" ).submit();
+             // if (rol == 'estudiante') {
+             //    window.location = "/sistema/unidad/"+materia;
 
-              } else if((rol == 'docente')) {
-  window.location = "/sistema/contenido/"+materia+"/talleres/resueltos";
+             //  } else if((rol == 'docente')) {
+             //    window.location = "/sistema/contenido/"+materia+"/talleres/resueltos";
 
-              }
+             //  }
                 // window.location = "/sistema/homees";
             });
         }
