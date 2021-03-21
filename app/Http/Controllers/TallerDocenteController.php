@@ -495,7 +495,7 @@ class TallerDocenteController extends Controller
             return view('docentes.talleres.taller48', compact('datos', 'd', 'update_imei', 'user' , 'fecha', 'taller'));
         }elseif ($plant == 49) {
              $taller = PlanCuenta::where('taller_id', $consul->id)->firstOrFail();
-             $datos = PlanCuentaRespuesta::where('taller_id', $consul->id)->firstOrFail();
+             $datos = PlanCuentaRespuesta::where('taller_id', $consul->id)->where('user_id', $user->id)->firstOrFail();
             return view('docentes.talleres.taller49', compact('datos', 'd', 'update_imei', 'user' , 'fecha', 'taller'));
 
         }elseif ($plant == 50) {

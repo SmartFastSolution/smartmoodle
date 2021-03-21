@@ -135,6 +135,7 @@
                         <th width="100"> Taller </th>
                         <th >Alumno </th>
                         <th>Enunciado </th>
+                        <th>Calificacion </th>
                         <th width="50">Vista Taller</th>
                     </tr>
                 </thead>
@@ -149,10 +150,9 @@
                         <td>
                             <div class="truncate-overflow">
                                 {!!$taller->enunciado!!}
-                                
                             </div>
-                            
                         </td>
+                        <td class="text-center">{{$taller->calificacion}}</td>
                         <td class="table-button ">
                             <a class="btn btn-info"
                                 href="{{route('taller.docente',['plant'=>$taller->plantilla_id,'id'=>$taller->taller_id, 'user'=>$taller->user_id])}}"><i
