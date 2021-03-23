@@ -57,7 +57,7 @@
   Dropzone.options.myAwesomeDropzone = {
     autoProcessQueue: false,
     dictDefaultMessage: "AGREGUE LOS ARCHIVOS EN EL RECUADRO",
-      maxFilesize: 50, // MB
+      maxFilesize: 5, // MB
       // acceptedFiles: "application/pdf",
       maxFiles: numero,
       parallelUploads:5,

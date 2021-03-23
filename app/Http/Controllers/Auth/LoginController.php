@@ -69,11 +69,11 @@ class LoginController extends Controller
            return redirect()->route('administrador') ;
        }
        elseif($user->roles[0]->descripcion=='docente'){
-           return redirect()->route('docente') ;
+           return redirect()->route('Perfil') ;
        }
 
        elseif($user->roles[0]->descripcion=='estudiante'){
-           return redirect()->route('estudiante') ;
+           return redirect()->route('perfile');
        }
 
        return redirect()->route('administrador');
