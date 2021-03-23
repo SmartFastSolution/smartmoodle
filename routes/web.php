@@ -73,6 +73,7 @@ Route::get('/reportes','PDFController@Reporteindex')->name('Reportes');
  ////////////////Descargar Excel////////////////
 ////////////////////////////////////////////////
  
+Route::post('calificaciones-list-excel','PDFController@CalificacionExport')->name('calificaciones.excel');
 Route::post('users-list-excel','PDFController@UserExport')->name('users.excel');
 Route::post('distribucion-list-excel','PDFController@DistribucionExport')->name('distribucion.excel');
 Route::post('asignaciones-list-excel','PDFController@AssigmentExport')->name('asignacion.excel');

@@ -11,6 +11,7 @@ use App\Exports\CursoExport;
 use App\Exports\DistribucionExport;
 use App\Exports\DocenteExport;
 use App\Exports\NotasExport;
+use App\Exports\CalificacionesExport;
 use App\Exports\ReportExport;
 use App\Instituto;
 use App\Materia;
@@ -103,6 +104,11 @@ class PDFController extends Controller
        public function Notasxport(Request $request){
         $notas = $request->datos;
         return Excel::download(new  NotasExport($notas) , 'notas-list.xlsx');
+    }
+    public function CalificacionExport(Request $request){
+        $calificaciones = $request->calificaciones;
+        $titulos        = $request->titulos;
+        return Excel::download(new  CalificacionesExport($calificaciones, $titulos) , 'calificaciones-list.xlsx');
     }
 
    
