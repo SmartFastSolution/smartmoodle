@@ -12,6 +12,7 @@
                         <th>Taller </th>
                         <th>Enunciado </th>
                         <th>Calificacion </th>
+                        <th>Observaciones </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,6 +29,7 @@
                             </div>
                         </td>
                         <td class="text-center">{{$taller1['calificacion']}}</td>
+                        <td class="text-center">{{$taller1['retroalimentacion']}}</td>
     
                     </tr>
                     @endforeach

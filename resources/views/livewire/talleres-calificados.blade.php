@@ -79,7 +79,8 @@
 						<th width="100">Unidad</th>
 						<th width="75"> Taller </th>
 						<th>Enunciado </th>
-						<th>Calificacion </th>
+						<th width="50">Calificacion </th>
+						<th>Observacion </th>
 						<th width="50">Vista Taller</th>
 					</tr>
 				</thead>
@@ -97,6 +98,7 @@
 							</div>
 						</td>
                         <td class="text-center">{{$taller1->calificacion}}</td>
+                        <td class="text-center">{{$taller1->retroalimentacion}}</td>
 						<td class="table-button " width="50">
 							<a class="btn btn-info"
 								href="{{route('taller.docente',['plant'=>$taller1->plantilla_id,'id'=>$taller1->taller_id, 'user'=>$taller1->user_id])}}"><i

@@ -101,11 +101,11 @@
 			</div>
 			<div class="col-9 border border-danger">
 				<div class="row p-3 justify-content-between">
-					<div class="col-5">
-					 	<img class="img-fluid" src="{{ asset('img/talleres/imagen-27.jpg') }}" alt="">
+						<div class="col-5">
+					 	<h1 class="font-weight-bold">EMPRESA SA</h1>
 					 	<div class="row">
 					 		<div class="col-12 rounded border-success border text-left">
-					 			<h5>Venta de materiales de construccion</h5>
+					 			<h5>EMPRESA SA</h5>
 					 			<h6>Dirección Matriz :  Av. 17 de Septiembre</h6>
 					 			<h6>Dirección  Sucursal :  Juan  Montalvo  y  24  de  Mayo</h6>
 					 			<h6>Contribuyente Especial N°        25489</h6>
@@ -135,7 +135,7 @@
 						</div>
 						<div class="row">
 							<div class="col-6"><label class="col-form-label" for="">FECHA EMISIÓN :</label></div>
-							<div class="col-6"><input disabled value="{{ $datos->fecha_emision }}" name="fecha_emision" type="text " class="form-control"></div>
+							<div class="col-6"><input disabled value="{{ $datos->fecha_emision }}" name="fecha_emision" type="date" class="form-control"></div>
 						</div>
 					</div>
 					<div class="col-5">

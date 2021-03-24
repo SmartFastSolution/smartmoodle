@@ -57,10 +57,10 @@
 			<div class="col-10" style="box-shadow: 5px 5px 15px 0px  #F42787">
 				<div class="row p-3 justify-content-between">
 					<div class="col-5">
-					 	<img class="img-fluid" src="{{ asset('img/talleres/imagen-27.jpg') }}" alt="">
+					 	<h1 class="font-weight-bold">EMPRESA SA</h1>
 					 	<div class="row">
 					 		<div class="col-12 rounded border-success border text-left">
-					 			<h5>Venta de materiales de construccion</h5>
+					 			<h5>EMPRESA SA</h5>
 					 			<h6>Dirección Matriz :  Av. 17 de Septiembre</h6>
 					 			<h6>Dirección  Sucursal :  Juan  Montalvo  y  24  de  Mayo</h6>
 					 			<h6>Contribuyente Especial N°        25489</h6>
@@ -90,7 +90,7 @@
 						</div>
 						<div class="row">
 							<div class="col-6"><label class="col-form-label" for="">FECHA EMISIÓN :</label></div>
-							<div class="col-6"><input  name="fecha_emision" type="text " class="form-control"></div>
+							<div class="col-6"><input  name="fecha_emision" type="date" class="form-control"></div>
 						</div>
 					</div>
 					<div class="col-5">
@@ -231,13 +231,13 @@
 		function addRow(){
 			
 			var tr='<tr>'+
-			'<td><input type="text" name="codigo[]" class="form-control text-right" ></td>'+
+			'<td><input type="number" name="codigo[]" class="form-control text-right" ></td>'+
 			'<td><input type="text" name="cod_aux[]" class="form-control text-right" ></td>'+
-			'<td><input type="text" name="cantidad[]" class="form-control" ></td>'+
+			'<td><input type="number" name="cantidad[]" class="form-control text-right" ></td>'+
 			'<td><textarea  name="descripcion[]" class="form-control" ></textarea></td>'+
-			'<td><input type="text" name="precio[]" class="form-control text-right" ></td>'+
-			'<td><input type="text" name="descuento[]" class="form-control text-right" ></td>'+
-			'<td><input type="text" name="valor[]" class="form-control text-right" ></td>'+
+			'<td><input type="number" name="precio[]" class="form-control text-right" ></td>'+
+			'<td><input type="number" name="descuento[]" class="form-control text-right" ></td>'+
+			'<td><input type="number" name="valor[]" class="form-control text-right" ></td>'+
             '<td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>'
 			'</tr>';
 			$('.prin').append(tr);
