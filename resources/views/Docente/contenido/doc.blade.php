@@ -60,7 +60,7 @@
                         <th scope="col">Materia</th>
                         <th scope="col">Paralelo</th>
                         <th scope="col">Documento</th>
-                        <th scope="col">Descripcion</th>
+                        <th scope="col">Descripción</th>
 
                         <th scope="col" coldspan="3">Tools</th>
 

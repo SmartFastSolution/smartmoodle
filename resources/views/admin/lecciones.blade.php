@@ -79,7 +79,7 @@
 									<tr>
 										<th scope="col">Enunciado</th>
 										<th width="125" scope="col">R. Correcta</th>
-										<th width="50" scope="col">Accion</th>
+										<th width="50" scope="col">Acción</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -171,7 +171,7 @@
 							  <thead class="table-dark">
 							    <tr>
 							      <th scope="col">Enunciado</th>
-							      <th width="50" scope="col">Accion</th>
+							      <th width="50" scope="col">Acción</th>
 							    </tr>
 							  </thead>
 							  <tbody>
@@ -204,7 +204,7 @@
 							  <thead class="table-dark">
 							    <tr>
 							      <th scope="col">Enunciado</th>
-							      <th width="50" scope="col">Accion</th>
+							      <th width="50" scope="col">Acción</th>
 							    </tr>
 							  </thead>
 							  <tbody>

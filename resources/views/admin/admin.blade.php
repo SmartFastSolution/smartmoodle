@@ -128,7 +128,7 @@
                                 <input class="form-control" name="nombre"></input>
                             </div>
                             <div class="form-group">
-                                <label for="message-text" class="col-form-label">Descripcion</label>
+                                <label for="message-text" class="col-form-label">Descripción</label>
                                 <textarea class="form-control" name="descripcion" required=""></textarea>
                             </div>
                         </div>

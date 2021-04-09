@@ -75,7 +75,7 @@ ADECUADAMENTE. -->
 			                      <th scope="col">#</th>
 			                      <th scope="col">Codigo</th>
 			                      <th scope="col">Cantidad</th>
-			                      <th scope="col">Descripcion</th>
+			                      <th scope="col">Descripción</th>
 			                      <th scope="col">Precio Unitario</th>
 			                    </tr>
 			                  </thead>
@@ -145,7 +145,7 @@ ADECUADAMENTE. -->
 					    <tr class="text-center">
 					      <th scope="col">CANTIDAD</th>
 					      <th scope="col">CODIGO</th>
-					      <th scope="col">DESCRIPCION</th>
+					      <th scope="col">DESCRIPCIÓN</th>
 					      <th scope="col">PRECIO UNIT.</th>
 					      <th scope="col">TOTAL</th>
 					    </tr>
@@ -188,12 +188,12 @@ ADECUADAMENTE. -->
             <div class="row justify-content-center">
             <div class="col-5">
               <div class="form-group">
-                <label for="exampleFormControlInput1">Calificacion</label>
+                <label for="exampleFormControlInput1">Calificación</label>
                 <input type="hidden" name="user_id" value="{{ $user->id }}">
                 <input type="text" value="{{ $update_imei->pivot->calificacion }}" class="form-control" name="calificacion" placeholder="Añada una nota al estudiante">
               </div>
               <div class="form-group">
-                <label for="exampleFormControlTextarea1">Retroalimentacion</label>
+                <label for="exampleFormControlTextarea1">Retroalimentación</label>
                 <textarea class="form-control" name="retroalimentacion" rows="3" placeholder="Agregue una retroalimentacion">{{ $update_imei->pivot->retroalimentacion }}</textarea>
               </div>   
                <div class="row justify-content-center mb-5">

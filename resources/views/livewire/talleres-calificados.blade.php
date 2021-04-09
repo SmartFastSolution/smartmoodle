@@ -79,8 +79,8 @@
 						<th width="100">Unidad</th>
 						<th width="75"> Taller </th>
 						<th>Enunciado </th>
-						<th width="50">Calificacion </th>
-						<th>Observacion </th>
+						<th width="50">Calificación </th>
+						<th>Observación </th>
 						<th width="50">Vista Taller</th>
 					</tr>
 				</thead>

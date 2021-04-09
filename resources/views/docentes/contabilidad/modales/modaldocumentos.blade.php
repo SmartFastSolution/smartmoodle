@@ -183,9 +183,9 @@
                 <th scope="col">CÓDIGO</th>
                 <th scope="col">CÓD. AUXILIAR</th>
                 <th scope="col">CANT.</th>
-                <th scope="col">DESCRIPCION.</th>
+                <th scope="col">DESCRIPCIÓN.</th>
                 <th>DESCUENTO</th>
-                <th scope="col">P. UNITARIO</th>
+                <th scope="col">PRECIO UNITARIO</th>
                 <th>VALOR VENTA</th>
               </tr>
             </thead>
@@ -206,13 +206,13 @@
         </div>  
           <div class="row p-3  mb-2">
         <div class="col-6 border-danger border align-self-end">
-          <h2 class="text-center">Informacion Adicional</h2>
+          <h2 class="text-center">Información Adicional</h2>
           <div class="row mb-2">
             <div class="col-4"><label class="col-form-label" for="">Direccion</label></div>
             <div class="col-8">Av 17 de Septiembre y Rumichaca esquina</div>
           </div>
           <div class="row mb-2">
-            <div class="col-4"><label class="col-form-label" for="">Telefono</label></div>
+            <div class="col-4"><label class="col-form-label" for="">Teléfono</label></div>
             <div class="col-8">2158674 - 21389472</div>
           </div>
           <div class="row mb-2">
@@ -357,8 +357,8 @@
                 <th scope="col">CÓDIGO</th>
                 <th scope="col">CÓD. AUXILIAR</th>
                 <th scope="col">CANT.</th>
-                <th scope="col">DESCRIPCION.</th>
-                <th scope="col">P. UNITARIO</th>
+                <th scope="col">DESCRIPCIÓN.</th>
+                <th scope="col">PRECIO UNITARIO</th>
                 <th>DESCUENTO</th>
                 <th>VALOR VENTA</th>
               </tr>
@@ -378,13 +378,13 @@
         </div>  
           <div class="row p-3  mb-2">
         <div class="col-6 border-danger border align-self-end">
-          <h2 class="text-center">Informacion Adicional</h2>
+          <h2 class="text-center">Información Adicional</h2>
           <div class="row mb-2">
             <div class="col-4"><label class="col-form-label" for="">Direccion</label></div>
             <div class="col-8">Av 17 de Septiembre y Rumichaca esquina</div>
           </div>
           <div class="row mb-2">
-            <div class="col-4"><label class="col-form-label" for="">Telefono</label></div>
+            <div class="col-4"><label class="col-form-label" for="">Teléfono</label></div>
             <div class="col-8">2158674 - 21389472</div>
           </div>
           <div class="row mb-2">

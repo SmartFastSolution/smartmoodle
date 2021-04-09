@@ -37,7 +37,7 @@
                     <tr class="text-center">
                       <th scope="col">#</th>
                       <th scope="col">Cantidad</th>
-                      <th scope="col">Descripcion</th>
+                      <th scope="col">Descripción</th>
                       <th scope="col">Precio Unitario</th>
                     </tr>
                   </thead>
@@ -108,7 +108,7 @@
 					    <tr align="center">
 					      <th scope="col">CANT.</th>
 					      <th scope="col">DESCRIPCIÓN</th>
-					      <th scope="col">P. UNITARIO </th>
+					      <th scope="col">PRECIO UNITARIO </th>
 					      <th scope="col">VALOR VENTA</th>
 					    </tr>
 
@@ -119,7 +119,7 @@
 					      <th><input type="text" class="form-control text-right" disabled value="{{ $dato->cantidad }}" name="cantidad[]"></th>
 					      <td><input type="text" class="form-control" disabled value="{{ $dato->descripcion }}" name="descripcion[]"></td>
 					      <td><input type="text" class="form-control text-right" disabled value="{{ $dato->precio }}" name="precio[]"></td>
-					      <td><input type="text" class="form-control text-right" disabled value="{{ $dato->valor_venta }}" name="valor_venta[]"></td>
+					      <td width="125"><input type="text" class="form-control text-right" disabled value="{{ $dato->valor_venta }}" name="valor_venta[]"></td>
 					    </tr>
 					   @endforeach
 					  </tbody>
@@ -146,12 +146,12 @@
             <div class="row justify-content-center">
             <div class="col-5">
               <div class="form-group">
-                <label for="exampleFormControlInput1">Calificacion</label>
+                <label for="exampleFormControlInput1">Calificación</label>
                 {{-- <input type="hidden" name="user_id" value="{{ $user->id }}"> --}}
                 <input type="text" disabled value="{{ $relacion[0]->calificacion }}"class="form-control" name="calificacion" placeholder="Añada una nota al estudiante">
               </div>
               <div class="form-group">
-                <label for="exampleFormControlTextarea1">Retroalimentacion</label>
+                <label for="exampleFormControlTextarea1">Retroalimentación</label>
                 <textarea disabled class="form-control" name="retroalimentacion" rows="3" placeholder="Agregue una retroalimentacion">{{ $relacion[0]->retroalimentacion }}</textarea>
               </div>   
             </div>

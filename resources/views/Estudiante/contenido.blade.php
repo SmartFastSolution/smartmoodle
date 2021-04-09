@@ -103,7 +103,7 @@
                             <tr>
                                 <th scope="col">Unidad</th>
                                 <th scope="col">Nombre del Documento</th>
-                                <th width="500" scope="col">Descripcion</th>
+                                <th width="500" scope="col">Descripción</th>
                                 <th scope="col">Acción</th>
                                 <th width="125" scope="col" coldspan="1">Ver Documento</th>
                             </tr>
@@ -144,7 +144,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center" scope="col">Nombre del Documento</th>
-                                        <th width="500" class="text-center" scope="col">Descripcion</th>
+                                        <th width="500" class="text-center" scope="col">Descripción</th>
                                         <th class="text-center" scope="col">Ver Documento</th>
                                     </tr>
                                 </thead>
@@ -251,7 +251,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="ml-2">
-                        <div class="h5 m-0"> <strong>Talleres Completados</strong></div>
+                        <div class="h5 m-0"> <strong>Talleres Calificados</strong></div>
                         <div class="h7 text-muted"></div>
                     </div>
                 </div>
@@ -279,7 +279,7 @@
                                     <th class="text-center" scope="col" width="80"> Taller </th>
                                     <th class="text-center" scope="col">Enunciado </th>
                                     <th class="text-center" scope="col">Estado </th>
-                                    <th class="text-center" scope="col">Calificacion </th>
+                                    <th class="text-center" scope="col">Calificación </th>
                                     {{-- <th class="text-center" scope="col">Vista Taller</th> --}}
                                 </tr>
                             </thead>

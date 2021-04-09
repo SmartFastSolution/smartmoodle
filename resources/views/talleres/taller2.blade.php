@@ -114,10 +114,10 @@
         <table class="table">
           <thead class="thead-dark">
             <tr>
-              <th class="text-center" scope="col">Descripcion</th>
+              <th class="text-center" scope="col">Descripción</th>
               <th class="text-center" scope="col" width="150">.</th>
               <th class="text-center" scope="col" width="150">.</th>
-              <th class="text-center" scope="col" width="50">Accion</th>
+              <th class="text-center" scope="col" width="50">Acción</th>
             </tr>
           </thead>
           <tbody>

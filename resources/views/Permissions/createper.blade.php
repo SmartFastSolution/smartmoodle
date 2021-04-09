@@ -43,7 +43,7 @@
                                         placeholder="Slug" value="{{old('slug')}}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="descripcionp">Descripcion</label>
+                                    <label for="descripcionp">Descripción</label>
                                     <input type="text" class="form-control" name="descripcionp" tag="descripcionp"
                                         id="descripcionp" placeholder="Descripcion" value="{{old('descripcionp')}}">
                                 </div>

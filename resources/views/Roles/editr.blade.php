@@ -39,7 +39,7 @@
                                         value="{{$role->name}}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="descripcion">Rol descripcion</label>
+                                    <label for="descripcion">Rol Descripción</label>
                                     <input type="text" class="form-control" name="descripcion" id="descripcion"
                                         placeholder="Rol descripcion" value="{{$role->descripcion}}">
                                 </div>

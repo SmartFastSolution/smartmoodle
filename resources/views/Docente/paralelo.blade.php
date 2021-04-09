@@ -7,7 +7,7 @@
 --lh: 1.4rem;
 }
 .truncate-overflow {
---max-lines: 3;
+--max-lines: 60;
 position: relative;
 max-height: calc(var(--lh) * var(--max-lines));
 overflow: hidden;

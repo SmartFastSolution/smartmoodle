@@ -51,10 +51,10 @@
                   <thead>
                     <tr class="text-center">
                       <th scope="col">#</th>
-                      <th scope="col">Codigo</th>
-                      <th scope="col">Cod. Auxiliar</th>
+                      <th scope="col">Código</th>
+                      <th scope="col">Código Auxiliar</th>
                       <th scope="col">Cantidad</th>
-                      <th scope="col">Descripcion</th>
+                      <th scope="col">Descripción</th>
                       <th scope="col">Precio Unitario</th>
                     </tr>
                   </thead>
@@ -131,8 +131,8 @@
 					      <th scope="col">CÓDIGO</th>
 					      <th scope="col">CÓD. AUXILIAR</th>
 					      <th scope="col">CANT.</th>
-					      <th scope="col">DESCRIPCION.</th>
-					      <th scope="col">P. UNITARIO</th>
+					      <th scope="col">DESCRIPCIÓN.</th>
+					      <th scope="col">PRECIO UNITARIO</th>
 					      <th>DESCUENTO</th>
 					      <th>VALOR VENTA</th>
 					      <th></th>
@@ -148,7 +148,7 @@
 					  		<td ><textarea disabled name="descripcion[]" class="form-control" required>{{ $dato->descripcion }}</textarea> </td>
 					  		<td width="50"><input disabled value="{{ $dato->precio }}" type="text" name="precio[]" class="form-control text-right" required></td>
 					  		<td width="50"><input disabled value="{{ $dato->descuento }}" type="text" name="descuento[]" class="form-control text-right" required></td>
-					  		<td width="75"><input disabled value="{{ $dato->valor }}" type="text" name="valor[]" class="form-control text-right" required></td>
+					  		<td width="125"><input disabled value="{{ $dato->valor }}" type="text" name="valor[]" class="form-control text-right" required></td>
 
 					  	</tr>
 					  	@endforeach
@@ -158,13 +158,13 @@
 				</div>	
 					<div class="row p-3  mb-2">
 				<div class="col-6 border-danger border align-self-end">
-					<h2 class="text-center">Informacion Adicional</h2>
+					<h2 class="text-center">Información Adicional</h2>
 					<div class="row mb-2">
 						<div class="col-4"><label class="col-form-label" for="">Direccion</label></div>
 						<div class="col-8"><input disabled value="{{ $datos->direccion }}" type="text" class="form-control" name="direccion"></div>
 					</div>
 					<div class="row mb-2">
-						<div class="col-4"><label class="col-form-label" for="">Telefono</label></div>
+						<div class="col-4"><label class="col-form-label" for="">Teléfono</label></div>
 						<div class="col-8"><input disabled value="{{ $datos->telefono }}" type="text" class="form-control" name="telefono"></div>
 					</div>
 					<div class="row mb-2">
@@ -234,12 +234,12 @@
             <div class="row justify-content-center">
             <div class="col-5">
               <div class="form-group">
-                <label for="exampleFormControlInput1">Calificacion</label>
+                <label for="exampleFormControlInput1">Calificación</label>
                 {{-- <input type="hidden" name="user_id" value="{{ $user->id }}"> --}}
                 <input type="text" disabled value="{{ $relacion[0]->calificacion }}" class="form-control" name="calificacion" placeholder="Añada una nota al estudiante">
               </div>
               <div class="form-group">
-                <label for="exampleFormControlTextarea1">Retroalimentacion</label>
+                <label for="exampleFormControlTextarea1">Retroalimentación</label>
                 <textarea class="form-control" disabled name="retroalimentacion" rows="3" placeholder="Agregue una retroalimentacion">{{ $relacion[0]->retroalimentacion }}</textarea>
               </div>   
                

@@ -56,7 +56,7 @@
 
 @section('title', 'Taller'.$consul->id)
 @section('content')
-<h1 class="text-center  mt-5 text-danger display-4 font-weight-bold text-dark">Taller {{ $consul->id }}</h1>
+<h1 class="text-center  mt-5 text-danger display-4 font-weight-bold text-dark"> {{ $datos->taller->nombre }}</h1>
 <h3 class="text-center mt-5 text-info">{{ $consul->enunciado }}</h3>
 <form action="{{ route('taller3', ['idtaller' => $d]) }}" method="POST" id="taller3">
     @csrf

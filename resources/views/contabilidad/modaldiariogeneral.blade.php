@@ -228,7 +228,7 @@
                                         <th scope="col " width="125">DEBE</th>
                                         <th scope="col">HABER</th>
                                         <th width="200" colspan="2"
-                                            v-if="diarios.debe.length > 0 || diarios.haber.length > 0">ACCION</th>
+                                            v-if="diarios.debe.length > 0 || diarios.haber.length > 0">ACCIÓN</th>
                                     </tr>
                                 </thead>
                                 <tbody is="draggable" group="people" :list="diarios.debe" tag="tbody" class="bg-light">

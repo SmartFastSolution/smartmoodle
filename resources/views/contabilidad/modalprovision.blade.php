@@ -136,7 +136,7 @@
                                         <th scope="col " style="vertical-align: middle;" width="125">Vacaciones</th>
                                         <th scope="col" style="vertical-align: middle;" width="125">Fondo de Reserva
                                         </th>
-                                        <th width="50" colspan="2" v-if="t_pro.length > 0">ACCION</th>
+                                        <th width="50" colspan="2" v-if="t_pro.length > 0">ACCIÓN</th>
                                     </tr>
                                 </thead>
                                 <tbody>

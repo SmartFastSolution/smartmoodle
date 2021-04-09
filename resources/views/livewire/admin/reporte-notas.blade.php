@@ -80,7 +80,7 @@
 						<th  style="vertical-align: middle;" scope="col">Materia</th>
 						<th  style="vertical-align: middle;" scope="col">Contenido</th>
 						<th  style="vertical-align: middle;" scope="col">Taller</th>
-						<th class="text-center" style="vertical-align: middle;" scope="col">Calificacion</th>
+						<th class="text-center" style="vertical-align: middle;" scope="col">Calificación</th>
 					</tr>
 				</thead>
 				<tbody>

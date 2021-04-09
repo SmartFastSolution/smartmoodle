@@ -29,7 +29,7 @@ ADECUADAMENTE. -->
 			                      <th scope="col">#</th>
 			                      <th scope="col">Codigo</th>
 			                      <th scope="col">Cantidad</th>
-			                      <th scope="col">Descripcion</th>
+			                      <th scope="col">Descripción</th>
 			                      <th scope="col">Precio Unitario</th>
 			                    </tr>
 			                  </thead>
@@ -100,10 +100,10 @@ ADECUADAMENTE. -->
 					    <tr class="text-center">
 					      <th scope="col">CANTIDAD</th>
 					      <th scope="col">CODIGO</th>
-					      <th scope="col">DESCRIPCION</th>
+					      <th scope="col">DESCRIPCIÓN</th>
 					      <th scope="col">PRECIO UNIT.</th>
 					      <th scope="col">TOTAL</th>
-					      <th scope="col">ACCION</th>
+					      <th scope="col">ACCIÓN</th>
 					    </tr>
 					  </thead>
 					  <tbody class="prin">

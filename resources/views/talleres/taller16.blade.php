@@ -6,7 +6,7 @@
 
 <!-- ENDOSE  EL  CHEQUE  A  NOMBRE DE  LA  ING. ISABEL  PANTOJA -->
 <h1 class="text-center  mt-5 text-danger font-weight-bold display-4"> {{ $datos->taller->nombre }}</h1>
-     <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }} LA {{ $datos->endoso }} </h3>
+     <h3 class="text-center mt-5 mb-3 text-info">{{ $datos->enunciado }} {{ $datos->endoso }} </h3>
 
      <form action="{{ route('taller16', ['idtaller' => $d]) }}" method="POST" id="taller16">
           @csrf

@@ -233,7 +233,7 @@
                         <tr>
                           <th>Venta</th>
                           <th>Costo de Venta</th>
-                          <th>Accion</th>
+                          <th>Acción</th>
                         </tr>
                       </thead>
                       <tbody>

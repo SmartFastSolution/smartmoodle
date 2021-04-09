@@ -21,7 +21,7 @@
 					<div class="col-6">
 						<h6 class="mb-4"><strong>Nombre:</strong> {{ $datos->nombre }}</h6>
 						<h6 class="mb-4"><strong>RUC:</strong> {{ $datos->ruc }}</h6>
-						<h6 class="mb-4"><strong>Fecha de emision: </strong> {{ $datos->fecha }}</h6>
+						<h6 class="mb-4"><strong>Fecha de emisión: </strong> {{ $datos->fecha }}</h6>
 					</div>
 				</div>
 				<table class="table table-borderless">
@@ -29,7 +29,7 @@
                     <tr class="text-center">
                       <th scope="col">#</th>
                       <th scope="col">Cantidad</th>
-                      <th scope="col">Descripcion</th>
+                      <th scope="col">Descripción</th>
                       <th scope="col">Precio Unitario</th>
                     </tr>
                   </thead>
@@ -101,9 +101,9 @@
 					    <tr align="center">
 					      <th scope="col">CANT.</th>
 					      <th scope="col">DESCRIPCIÓN</th>
-					      <th scope="col">P. UNITARIO </th>
+					      <th scope="col">PRECIO UNITARIO </th>
 					      <th scope="col">VALOR VENTA</th>
-					      <th scope="col">ACCION</th>
+					      <th scope="col">ACCIÓN</th>
 
 					    </tr>
 					  </thead>
@@ -112,7 +112,7 @@
 					      <th><input  type="number" class="form-control text-right" name="cantidad[]"></th>
 					      <td><input  type="text" class="form-control" name="descripcion[]"></td>
 					      <td><input  type="number" class="form-control text-right" name="precio[]"></td>
-					      <td><input  type="number" class="form-control text-right" name="valor_venta[]"></td>
+					      <td width="125"><input  type="number" class="form-control text-right" name="valor_venta[]"></td>
                       	<td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>
 
 					    </tr>

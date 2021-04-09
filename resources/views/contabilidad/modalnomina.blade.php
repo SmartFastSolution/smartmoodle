@@ -266,7 +266,7 @@
                                                 v-if="deducciones.length >= 1">
                                                 <thead class="bg-info">
                                                     <tr>
-                                                        <th class="text-center" width="300">Descripcion</th>
+                                                        <th class="text-center" width="300">Descripción</th>
                                                         <th class="text-center" width="300">Valor</th>
                                                         <th class="text-center">Eliminar</th>
                                                     </tr>

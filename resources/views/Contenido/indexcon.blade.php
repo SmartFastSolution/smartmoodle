@@ -34,7 +34,7 @@
                 <th scope="col">Unidad Educativa</th> 
                    <th scope="col">Materia</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Descripcion</th>
+                    <th scope="col">Descripción</th>
                     <th scope="col">Estado</th>
                  
                     <th scope="col" coldspan="3">Tools</th>

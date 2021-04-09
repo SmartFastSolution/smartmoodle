@@ -88,7 +88,7 @@
                 <thead>
                     <th scope="col">Unidad</th>
                     <th scope="col">Nombre del Documento</th>
-                    <th width="500" scope="col">Descripcion</th>
+                    <th width="500" scope="col">Descripción</th>
                     <th scope="col">Acción</th>
                     <th width="125" scope="col" coldspan="1">Ver Documento</th>
                     </tr>

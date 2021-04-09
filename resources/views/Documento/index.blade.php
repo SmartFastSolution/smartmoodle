@@ -35,7 +35,7 @@
                     <th scope="col">Materia</th>
                     <th scope="col">Unidad</th>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Descripcion</th>
+                    <th scope="col">Descripción</th>
                     <th width="30" scope="col">Estado</th>
                     <th scope="col">Acción</th>
                     <th scope="col" coldspan="3">Tools</th>

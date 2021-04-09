@@ -231,7 +231,7 @@
                                                     <th scope="col" width="125">DEBE</th>
                                                     <th scope="col">HABER</th>
                                                     <th scope="col">SALDO</th>
-                                                    {{-- <th width="75" colspan="2" v-if="registros.length > 0">ACCION</th> --}}
+                                                    {{-- <th width="75" colspan="2" v-if="registros.length > 0">ACCIÓN</th> --}}
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -287,7 +287,7 @@
                                         <th scope="col " width="125">DEBE</th>
                                         <th scope="col" width="125">HABER</th>
                                         <th scope="col" width="125">SALDO</th>
-                                        <th width="50" v-if="mayores.registros.length > 0 ">ACCION</th>
+                                        <th width="50" v-if="mayores.registros.length > 0 ">ACCIÓN</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-light" is="draggable" group="people" :list="mayores.registros"

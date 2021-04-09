@@ -39,7 +39,7 @@
                                         value="{{old('name')}}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="descripcion">Rol Descripcion</label>
+                                    <label for="descripcion">Rol Descripción</label>
                                     <input type="text" class="form-control" name="descripcion" tag="descripcion"
                                         id="descripcion" placeholder="Rol descripcion" value="{{old('descripcion')}}">
                                 </div>

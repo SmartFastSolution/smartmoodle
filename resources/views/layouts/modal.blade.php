@@ -1818,9 +1818,9 @@
                                     <tr class="text-center">
                                       <th scope="col">CANTIDAD</th>
                                       <th scope="col">CODIGO</th>
-                                      <th scope="col">DESCRIPCION</th>
+                                      <th scope="col">DESCRIPCIÓN</th>
                                       <th scope="col">PRECIO UNIT.</th>
-                                      <th scope="col">ACCION</th>
+                                      <th scope="col">ACCIÓN</th>
                                     </tr>
                                   </thead>
                                   <tbody class="taller22">
@@ -2129,7 +2129,7 @@
                                             <th scope="col">Codigo</th>
                                             <th scope="col">Codigo Auxiliar</th>
                                             <th scope="col">Cantidad</th>
-                                            <th scope="col">Descripcion</th>
+                                            <th scope="col">Descripción</th>
                                             <th scope="col">Precio Unitario</th>
                                         </tr>
                                     </thead>
@@ -2229,7 +2229,7 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Cantidad</th>
-                                            <th scope="col">Descripcion</th>
+                                            <th scope="col">Descripción</th>
                                             <th scope="col">Precio Unitario</th>
                                         </tr>
                                     </thead>
@@ -2651,7 +2651,7 @@
                                           <th scope="col">NOMBRE DE CUENTAS</th>
                                           <th width="125" scope="col">DEBE</th>
                                           <th  width="125" scope="col">HABER</th>
-                                          <th width="25" colspan="2" v-if="registros.length > 0 || ejercicios.debe.length > 0">ACCION</th>
+                                          <th width="25" colspan="2" v-if="registros.length > 0 || ejercicios.debe.length > 0">ACCIÓN</th>
                                         </tr>
                                       </thead>
                                           <tbody v-for="(registro, id) in registros">
@@ -2682,7 +2682,7 @@
                                              <th scope="col" width="450">NOMBRE DE CUENTAS</th>
                                              <th scope="col " width="125">DEBE</th>
                                              <th scope="col">HABER</th>
-                                             <th width="200" colspan="2"  v-if="ejercicios.debe.length > 0 || ejercicios.haber.length > 0">ACCION</th>
+                                             <th width="200" colspan="2"  v-if="ejercicios.debe.length > 0 || ejercicios.haber.length > 0">ACCIÓN</th>
                                          </tr>
                                      </thead>
                                      <tbody is="draggable" group="people" :list="ejercicios.debe" tag="tbody" class="bg-light">
@@ -2815,7 +2815,7 @@
                                             <th scope="col">Activo</th>
                                             <th scope="col">Pasivo</th>
                                             <th scope="col">Patrimonio</th>
-                                            {{-- <th scope="col">Descripcion</th> --}}
+                                            {{-- <th scope="col">Descripción</th> --}}
                                             {{-- <th scope="col">Precio Unitario</th> --}}
                                         </tr>
                                     </thead>
@@ -3903,9 +3903,9 @@
                                     <tr class="text-center">
                                       <th scope="col">CANTIDAD</th>
                                       <th scope="col">CODIGO</th>
-                                      <th scope="col">DESCRIPCION</th>
+                                      <th scope="col">DESCRIPCIÓN</th>
                                       <th scope="col">PRECIO UNIT.</th>
-                                      <th scope="col">ACCION</th>
+                                      <th scope="col">ACCIÓN</th>
                                     </tr>
                                   </thead>
                                   <tbody class="taller50">

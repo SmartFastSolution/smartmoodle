@@ -25,7 +25,7 @@
                         <th scope="col" width="125">DEBE</th>
                         <th scope="col">HABER</th>
                         <th scope="col">SALDO</th>
-                        {{-- <th width="75" colspan="2" v-if="registros.length > 0">ACCION</th> --}}
+                        {{-- <th width="75" colspan="2" v-if="registros.length > 0">ACCIÓN</th> --}}
                     </tr>
                 </thead>
                 <tbody>
