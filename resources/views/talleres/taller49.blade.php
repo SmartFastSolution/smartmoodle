@@ -19,7 +19,7 @@
         <ul class="list-group list-group-flush">
           <li v-for="(activo, index) in activos" class="list-group-item d-flex justify-content-between align-items-center">
             <input type="text" class="form-control form-control-plaintext" v-model="activo.cuenta">
-            <span class=""><a href="" class="btn btn-sm btn-danger" @click.prevent="borrarActivo"><i class="fa fa-trash"></i></a></span>
+            <span class=""><a href="" class="btn btn-sm btn-danger" @click.prevent="borrarActivo(index)"><i class="fa fa-trash"></i></a></span>
           </li>
         </ul>
       </div>
@@ -32,7 +32,7 @@
         <ul class="list-group list-group-flush">
           <li v-for="(pasivo, index) in pasivos" class="list-group-item d-flex justify-content-between align-items-center">
             <input type="text" class="form-control form-control-plaintext" v-model="pasivo.cuenta">
-            <span class=""><a href="" class="btn btn-sm btn-danger" @click.prevent="borrarPasivo"><i class="fa fa-trash"></i></a></span>
+            <span class=""><a href="" class="btn btn-sm btn-danger" @click.prevent="borrarPasivo(index)"><i class="fa fa-trash"></i></a></span>
           </li>
         </ul>
       </div>
