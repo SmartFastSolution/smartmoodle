@@ -130,7 +130,7 @@
         let set = this;
         let url = '/sistema/contenido/clone/1';
         if (set.nombre.trim() === '' || set.descripcion.trim() === '' || set.provincia.trim() === '' || set.canton.trim() === '' || set.direccion.trim() === '' || set.telefono.trim() === '' || set.email.trim() === '' || set.estado.trim() === '') {
-            toastr.error("No has ordenado todas las ideas", "Smarmoddle", {
+            toastr.error("No has ordenado todas las ideas", "SmartLearn", {
                 "timeOut": "3000"
               });
         } else {

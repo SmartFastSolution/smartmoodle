@@ -162,7 +162,7 @@
 					'<td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>'+
 				'</tr>';
 			$('.prin').append(tr);
-		  toastr.success("Columna agregada correctamente", "Smarmoddle",{
+		  toastr.success("Columna agregada correctamente", "SmartLearn",{
 		  	 "timeOut": "1000"
 		  });
 		}
@@ -170,7 +170,7 @@
 	evt.preventDefault();
       var last=$('.prin tr').length;
       if (last == 1) {
-        toastr.error("Esta columna no se puede eliminar", "Smarmoddle",{
+        toastr.error("Esta columna no se puede eliminar", "SmartLearn",{
          "timeOut": "1000"
       });
       }else{

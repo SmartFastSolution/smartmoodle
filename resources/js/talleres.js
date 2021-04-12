@@ -29,7 +29,7 @@ const llamartalleres = new Vue({
             }).then(response => {
                 set.contenido = response.data;
                 if (set.contenido == 0) {
-                     toastr.error("Esta Materia no tiene contenidos", "Smarmoddle", {
+                     toastr.error("Esta Materia no tiene contenidos", "SmartLearn", {
                     "timeOut": "3000"
                 });
                     set.materia = 'Seleccionar una materia';

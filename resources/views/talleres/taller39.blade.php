@@ -82,7 +82,7 @@
         let url = '/sistema/admin/taller39/'+taller_id;
 
         if (_this.letras.length !== 0) {
-        	toastr.error("No has completado toda la palabra", "Smarmoddle", {
+        	toastr.error("No has completado toda la palabra", "SmartLearn", {
                  "timeOut": "3000"
               });
         } else {

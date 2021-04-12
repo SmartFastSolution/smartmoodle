@@ -230,7 +230,7 @@ $(function() {
 <script type="text/javascript">
     window.addEventListener('activado', event => {
      $('#'+event.detail.modal).modal('hide');
-      toastr.success(event.detail.mensaje, "Smarmoddle", {
+      toastr.success(event.detail.mensaje, "SmartLearn", {
         "timeOut": "3000"
     });
 })
@@ -272,7 +272,7 @@ $(function() {
 //                 estado: set.estado,
 //                 fecha: set.fecha_entrega
 //             }).then(response => {
-//                 toastr.success(response.data.message, "Smarmoddle", {
+//                 toastr.success(response.data.message, "SmartLearn", {
 //                     "timeOut": "3000"
 //                 });
 //                 set.talleres = [];

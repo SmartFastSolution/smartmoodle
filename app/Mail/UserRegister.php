@@ -28,7 +28,7 @@ class UserRegister extends Mailable
      */
     public function build()
     {
-        return $this->subject('Bienvenido a SmartMoodle')
+        return $this->subject('Bienvenido a SmartLearn')
         ->view('mails.userregister1') 
                 ->with([
                         'name'     => $this->user['name'],

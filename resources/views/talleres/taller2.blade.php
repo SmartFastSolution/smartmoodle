@@ -191,13 +191,13 @@ insertarDebe(){
 // console.log(array);
 let id= this.crear;
 if(this.reco[id].debe.trim() ===''){
-toastr.error("El valor es obligatorio", "Smarmoddle", {
+toastr.error("El valor es obligatorio", "SmartLearn", {
 "timeOut": "3000"
 });
 }else {
 let debe ={ valor:this.reco[id].debe}
 this.partida_array[id].debe.push(debe);
-toastr.success("Valor agregado correctamente", "Smarmoddle", {
+toastr.success("Valor agregado correctamente", "SmartLearn", {
 "timeOut": "3000"
 });
 this.reco[id].debe = '';
@@ -208,13 +208,13 @@ this.cambioDebe(id);
 },
 eliminarRegistro(index){
 this.registros.splice(index, 1);
-toastr.info("Registro eliminado", "Smarmoddle", {
+toastr.info("Registro eliminado", "SmartLearn", {
 "timeOut": "3000"
 });
 },
 agregarRegistro(){
 if (this.estado.descripcion == '') {
-toastr.success("No has agregado una descripcion", "Smarmoddle", {
+toastr.success("No has agregado una descripcion", "SmartLearn", {
 "timeOut": "3000"
 });
 } else {
@@ -237,13 +237,13 @@ insertarHaber(){
 // console.log(array);
 let id= this.crear;
 if(this.reco[id].haber.trim() ===''){
-toastr.error("El valor es obligatorio", "Smarmoddle", {
+toastr.error("El valor es obligatorio", "SmartLearn", {
 "timeOut": "3000"
 });
 }else {
 let haber ={ valor:this.reco[id].haber}
 this.partida_array[id].haber.push(haber);
-toastr.success("Valor agregado correctamente", "Smarmoddle", {
+toastr.success("Valor agregado correctamente", "SmartLearn", {
 "timeOut": "3000"
 });
 this.reco[id].haber = '';

@@ -85,7 +85,7 @@
         let url = '/sistema/admin/taller42/'+taller_id;
 
         if (_this.ideas.length !== 0) {
-        	toastr.error("No has ordenado todas las ideas", "Smarmoddle", {
+        	toastr.error("No has ordenado todas las ideas", "SmartLearn", {
                 "timeOut": "3000"
               });
         } else {

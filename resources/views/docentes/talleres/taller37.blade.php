@@ -1018,7 +1018,7 @@ const asientos_cierre = new Vue({
           if (response.data.datos == true) {
           _this.registros = response.data.registros;
           _this.nombre = response.data.nombre;
-           toastr.success("Diairo General cargado Correctamente", "Smarmoddle", {
+           toastr.success("Diairo General cargado Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
            this.totalDebe()
@@ -1182,7 +1182,7 @@ methods:{
 
         }).then(response => {
           if (response.data.datos == true) {
-              toastr.info("Kardex Promedio cargado correctamente", "Smarmoddle", {
+              toastr.info("Kardex Promedio cargado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
               _this.transacciones = response.data.kardex_fifo;
@@ -1358,7 +1358,7 @@ const kardex_promedio = new Vue({
               user:_this.user_id
         }).then(response => {
           if (response.data.datos == true) {
-              toastr.info("Kardex Promedio cargado correctamente", "Smarmoddle", {
+              toastr.info("Kardex Promedio cargado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
               _this.transacciones = response.data.kardex_promedio;
@@ -1622,7 +1622,7 @@ const balance_comp = new Vue({
               user: _this.user_id
         }).then(response => {
           if (response.data.datos == true) {
-              toastr.info("Balance de Comprobacion cargado correctamente", "Smarmoddle", {
+              toastr.info("Balance de Comprobacion cargado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
               this.balances = response.data.bcomprobacion;
@@ -1951,7 +1951,7 @@ const balance_general = new Vue({
             user: _this.user_id
         }).then(response => {
           if ( response.data.datos == true ) {
-              toastr.success(response.data.message, "Smarmoddle", {
+              toastr.success(response.data.message, "SmartLearn", {
             "timeOut": "3000"
            });
             _this.balance_general.nombre                    = response.data.nombre
@@ -2024,7 +2024,7 @@ const librocaja = new Vue({
             user:_this.user_id
             }).then(response =>{
               if(response.data.datos == true){
-                toastr.info("Anexo Libro Caja cargado correctamente", "Smarmoddle", {
+                toastr.info("Anexo Libro Caja cargado correctamente", "SmartLearn", {
                   "timeOut": "3000"
                   });
                   this.libros_caja = response.data.banexocaja;
@@ -2092,7 +2092,7 @@ const arqueo_caja = new Vue ({
       user: _this.user_id,
     }).then(response =>{
       if(response.data.datos == true){
-        toastr.info("Anexo Arqueo Caja cargado correctamente", "Smarmoddle", {
+        toastr.info("Anexo Arqueo Caja cargado correctamente", "SmartLearn", {
           "timeOut": "3000"
           });
           this.t_saldo = response.data.saldo;
@@ -2155,7 +2155,7 @@ const librosbanco = new Vue({
          user: _this.user_id
        }).then(response=>{
         if(response.data.datos == true){
-          toastr.info("Anexo Libro Banco cargado correctamente", "Smarmoddle", {
+          toastr.info("Anexo Libro Banco cargado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
              this.lb_banco    = response.data.mb;
@@ -2281,7 +2281,7 @@ const conciliacionb = new Vue({
           user:_this.user_id
         }).then(response=>{
           if(response.data.datos == true){
-            toastr.info("Anexo Conciliación Bancaria cargado correctamente", "Smarmoddle", {
+            toastr.info("Anexo Conciliación Bancaria cargado correctamente", "SmartLearn", {
               "timeOut": "3000"
               });
               this.c_saldos   = response.data.saldo;
@@ -2539,7 +2539,7 @@ let reten_iva = new Vue({
           user:_this.user_id
         }).then(response=>{
            if(response.data.datos == true){
-            toastr.info("Anexo Retencion del Iva cargado correctamente", "Smarmoddle", {
+            toastr.info("Anexo Retencion del Iva cargado correctamente", "SmartLearn", {
               "timeOut": "3000"
               });
                       this.t_compras    = response.data.compra;
@@ -2612,7 +2612,7 @@ methods:{
             user:_this.user_id
           }).then(response =>{
             if(response.data.datos == true){
-              toastr.info("Anexo Nómina de Empleado cargado correctamente", "Smarmoddle", {
+              toastr.info("Anexo Nómina de Empleado cargado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.nombre       = response.data.nombre;
@@ -2812,7 +2812,7 @@ const provision_b = new Vue({
           user: _this.user_id
         }).then(response=>{
           if(response.data.datos == true){
-            toastr.success("Anexo Provisión Beneficio Social cargado correctamente", "Smarmoddle", {
+            toastr.success("Anexo Provisión Beneficio Social cargado correctamente", "SmartLearn", {
               "timeOut": "3000"
               });
 

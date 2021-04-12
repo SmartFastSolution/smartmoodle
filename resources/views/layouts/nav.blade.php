@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@yield('title', 'SmartMoodle')</title>
+    <title>@yield('title', 'SmartLearn')</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -94,7 +94,7 @@
             <a href="{{ url('/sistema/home') }}" class="brand-link">
                 <img src=" {{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-4" style="opacity: .8">
-                <span class="brand-text font-weight-light">SmartMoodle</span>
+                <span class="brand-text font-weight-light">SmartLearn</span>
             </a>
 
             <!-- Sidebar -->

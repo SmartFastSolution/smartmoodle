@@ -136,7 +136,7 @@ const User = new Vue({
             axios.post(url, {
                 id: user,
             }).then(response => {
-                toastr.success(response.data.message, "Smarmoddle", {
+                toastr.success(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                 });
             }).catch(function(error) {

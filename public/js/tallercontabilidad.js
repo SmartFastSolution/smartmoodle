@@ -381,21 +381,21 @@ const b_hori = new Vue({
       },
       agregarActivoCorriente(){
            if(this.activo.a_corriente.cuenta_id  ==''){
-            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
         }else {
              let id = this.activo.a_corriente.cuenta_id;
                let verificar = this.verificarCuenta(id);
                    if (verificar == true) {
-                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                     toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                       "timeOut": "3000"
                       });
                    }else{
             let nombre   = funciones.obtenerNombre(id);
             var a_corriente ={cuenta_id:this.activo.a_corriente.cuenta_id, nom_cuenta:nombre, saldo:this.activo.a_corriente.saldo}
             this.a_corrientes.push(a_corriente);
-            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+            toastr.success("Cuenta agregada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
            this.activo.a_corriente.cuenta_id =''
@@ -419,14 +419,14 @@ const b_hori = new Vue({
       },
       actualizarActivoC(){
           if(this.activo.a_corriente.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
           let id = this.activo.a_corriente.cuenta_id;
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -450,21 +450,21 @@ const b_hori = new Vue({
     },
     agregarActivoNoCorriente(){
          if(this.activo.a_nocorriente.cuenta_id  ==''){
-            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
         }else {
              let id = this.activo.a_nocorriente.cuenta_id;
                let verificar = this.verificarCuenta(id);
                    if (verificar == true) {
-                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                     toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                       "timeOut": "3000"
                       });
                    }else{
             let nombre   = funciones.obtenerNombre(id);
             var a_nocorriente ={cuenta_id:this.activo.a_nocorriente.cuenta_id, nom_cuenta:nombre, saldo:this.activo.a_nocorriente.saldo}
             this.a_nocorrientes.push(a_nocorriente);
-            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+            toastr.success("Cuenta agregada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
            this.activo.a_nocorriente.cuenta_id =''
@@ -487,14 +487,14 @@ const b_hori = new Vue({
       },
       actualizarActivoNC(){
         if(this.activo.a_nocorriente.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
           let id = this.activo.a_nocorriente.cuenta_id;
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -519,21 +519,21 @@ const b_hori = new Vue({
 
     agregarPasivoCorriente(){
            if(this.pasivo.p_corriente.cuenta_id  ==''){
-            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
         }else {
              let id = this.pasivo.p_corriente.cuenta_id;
                let verificar = this.verificarCuenta(id);
                    if (verificar == true) {
-                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                     toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                       "timeOut": "3000"
                       });
                    }else{
             let nombre   = funciones.obtenerNombre(id);
             var p_corriente ={cuenta_id:this.pasivo.p_corriente.cuenta_id, nom_cuenta:nombre, saldo:this.pasivo.p_corriente.saldo}
             this.p_corrientes.push(p_corriente);
-            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+            toastr.success("Cuenta agregada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
            this.pasivo.p_corriente.cuenta_id ='';
@@ -559,14 +559,14 @@ const b_hori = new Vue({
       },
       actualizarPasivoC(){
           if(this.pasivo.p_corriente.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
           let id = this.pasivo.p_corriente.cuenta_id;
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -591,21 +591,21 @@ const b_hori = new Vue({
 
     agregarPasivoNoCorriente(){
            if(this.pasivo.p_nocorriente.cuenta_id  ==''){
-            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
         }else {
              let id = this.pasivo.p_nocorriente.cuenta_id;
                let verificar = this.verificarCuenta(id);
                    if (verificar == true) {
-                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                     toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                       "timeOut": "3000"
                       });
                    }else{
             let nombre   = funciones.obtenerNombre(id);
             var p_nocorriente ={cuenta_id:this.pasivo.p_nocorriente.cuenta_id, nom_cuenta:nombre, saldo:this.pasivo.p_nocorriente.saldo}
             this.p_nocorrientes.push(p_nocorriente);
-            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+            toastr.success("Cuenta agregada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
            this.pasivo.p_nocorriente.cuenta_id ='';
@@ -631,14 +631,14 @@ const b_hori = new Vue({
       },
       actualizarPasivoNC(){
           if(this.pasivo.p_nocorriente.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
           let id = this.pasivo.p_nocorriente.cuenta_id;
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -662,21 +662,21 @@ const b_hori = new Vue({
     },
         agregarPatrimonio(){
            if(this.patrimonio.cuenta_id  ==''){
-            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
         }else {
              let id = this.patrimonio.cuenta_id;
                let verificar = this.verificarCuenta(id);
                    if (verificar == true) {
-                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                     toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                       "timeOut": "3000"
                       });
                    }else{
             let nombre   = funciones.obtenerNombre(id);
             var patrimonio ={cuenta_id:this.patrimonio.cuenta_id, nom_cuenta:nombre, saldo:this.patrimonio.saldo}
             this.patrimonios.push(patrimonio);
-            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+            toastr.success("Cuenta agregada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
            this.patrimonio.cuenta_id ='';
@@ -701,14 +701,14 @@ const b_hori = new Vue({
       },
       actualizarPatrimonio(){
           if(this.patrimonio.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
           let id = this.patrimonio.cuenta_id;
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -732,22 +732,22 @@ const b_hori = new Vue({
     },
     Agregar(){
     if(this.diario.nom_cuenta.trim() === ''){
-      toastr.error("El campo Nombre de cuenta es obligatorio", "Smarmoddle", {
+      toastr.error("El campo Nombre de cuenta es obligatorio", "SmartLearn", {
                 "timeOut": "3000"
             });
     }else if(this.diario.debe.trim() === '' && this.diario.haber.trim() === ''){
-      toastr.warning("Rellena el cambio de Debe o Haber, no puedes dejar ambos vacios", "Smarmoddle", {
+      toastr.warning("Rellena el cambio de Debe o Haber, no puedes dejar ambos vacios", "SmartLearn", {
                 "timeOut": "3000"
             });
     }else if(this.diario.debe.trim() != '' && this.diario.haber.trim() != ''){
-      toastr.warning("No pueden estar ambos campos llenos a mismo tiempo", "Smarmoddle", {
+      toastr.warning("No pueden estar ambos campos llenos a mismo tiempo", "SmartLearn", {
                 "timeOut": "3000"
             });
     }else{
       var diario = {fecha:this.diario.fecha, nom_cuenta:this.diario.nom_cuenta, gloza:this.diario.gloza, debe:this.diario.debe, haber:this.diario.haber};
       this.diarios.push(diario);//añadimos el la variable persona al array
       //Limpiamos los campos
-      toastr.success("Registro agregado correctamente", "Smarmoddle", {
+      toastr.success("Registro agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
             });
       this.diario.fecha =''
@@ -774,26 +774,26 @@ const b_hori = new Vue({
     },
     agregarBalance(){
     if (this.balance.cuenta.trim() === '' ) {
-       toastr.error("El campo cuenta es obligatorio", "Smarmoddle", {
+       toastr.error("El campo cuenta es obligatorio", "SmartLearn", {
                 "timeOut": "3000"
             });
     }else if(this.balance.suma_debe.trim() === '' && this.balance.suma_haber.trim() === ''){
-      toastr.warning("Rellena el cambio de Debe o Haber DE SUMAS, no puedes dejar ambos vacios", "Smarmoddle", {
+      toastr.warning("Rellena el cambio de Debe o Haber DE SUMAS, no puedes dejar ambos vacios", "SmartLearn", {
                 "timeOut": "3000"
             });
     }else if(this.balance.saldo_debe.trim() === '' && this.balance.saldo_haber.trim() === ''){
-      toastr.warning("Rellena el cambio de Debe o Haber de SALDOS, no puedes dejar ambos vacios", "Smarmoddle", {
+      toastr.warning("Rellena el cambio de Debe o Haber de SALDOS, no puedes dejar ambos vacios", "SmartLearn", {
                 "timeOut": "3000"
             });
     }else if(this.balance.saldo_debe.trim() != '' && this.balance.saldo_haber.trim() != ''){
-      toastr.warning("No pueden estar ambos campos llenos a mismo tiempo", "Smarmoddle", {
+      toastr.warning("No pueden estar ambos campos llenos a mismo tiempo", "SmartLearn", {
                 "timeOut": "3000"
             });
     }else{
       var balance = {cuenta:this.balance.cuenta, suma_debe:this.balance.suma_debe, suma_haber:this.balance.suma_haber, saldo_debe:this.balance.saldo_debe, saldo_haber:this.balance.saldo_haber};
       this.balances.push(balance);//añadimos el la variable persona al array
       //Limpiamos los campos
-      toastr.success("Registro agregado correctamente", "Smarmoddle", {
+      toastr.success("Registro agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
             });
       this.balance.cuenta =''
@@ -903,22 +903,22 @@ const b_hori = new Vue({
              },
                totalPasivoPatrimonio(){
                   $('#pasivo_patrimonio').modal('hide');
-                toastr.success("Total Agregado Correctamente", "Smarmoddle", {
+                toastr.success("Total Agregado Correctamente", "SmartLearn", {
                     "timeOut": "3000"
                    });
             },
             //GUARDAR BALANCE INICIAL
                 guardarBalanceInicial: function(){
                 if (this.balance_inicial.nombre.trim() === '') {
-                  toastr.error("Campo Nombre es obligatorio", "Smarmoddle", {
+                  toastr.error("Campo Nombre es obligatorio", "SmartLearn", {
                     "timeOut": "3000"
                    }); 
                 }else if (this.balance_inicial.fecha.trim() === '') {
-                  toastr.error("Campo Fecha es obligatorio", "Smarmoddle", {
+                  toastr.error("Campo Fecha es obligatorio", "SmartLearn", {
                     "timeOut": "3000"
                    }); 
                 }else if(this.total_balance_inicial.t_patrimonio_pasivo.trim() === ''){
-                  toastr.error("Debes calcular el Total del Pasivo + Patrimonio", "Smarmoddle", {
+                  toastr.error("Debes calcular el Total del Pasivo + Patrimonio", "SmartLearn", {
                     "timeOut": "3000"
                    }); 
                 }else{
@@ -939,7 +939,7 @@ const b_hori = new Vue({
                     t_patrimonio: _this.total_balance_inicial.t_patrimonio_pasivo
                 }).then(response => {
                   if (response.data.success == true) {
-                     toastr.success(response.data.message, "Smarmoddle", {
+                     toastr.success(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
                     _this.cambioActivo();
@@ -951,7 +951,7 @@ const b_hori = new Vue({
                     // $('#list-tab a:nth-child(3)').tab('show');
                     console.log(response.data); 
                   } else {
-                      toastr.success(response.data.message, "Smarmoddle", {
+                      toastr.success(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
                     _this.cambioActivo();
@@ -962,7 +962,7 @@ const b_hori = new Vue({
                     // diario.obtenerBalanceInicial();
                   }                     
                 }).catch(function(error){
-                  toastr.error(error.response.data.message, "Smarmoddle", {
+                  toastr.error(error.response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
                 });
@@ -976,7 +976,7 @@ const b_hori = new Vue({
                     tipo: _this.tipo
                 }).then(response => {
                   if (response.data.tipo == _this.tipo || response.data.datos == true ) {
-                      toastr.success(response.data.message, "Smarmoddle", {
+                      toastr.success(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
                     _this.balance_inicial.nombre                    = response.data.nombre
@@ -1290,21 +1290,21 @@ const b_ver = new Vue({
       },
       agregarActivoCorriente(){
            if(this.activo.a_corriente.cuenta_id  ==''){
-            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
         }else {
              let id = this.activo.a_corriente.cuenta_id;
                let verificar = this.verificarCuenta(id);
                    if (verificar == true) {
-                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                     toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                       "timeOut": "3000"
                       });
                    }else{
             let nombre   = funciones.obtenerNombre(id);
             var a_corriente ={cuenta_id:this.activo.a_corriente.cuenta_id, nom_cuenta:nombre, saldo:this.activo.a_corriente.saldo}
             this.a_corrientes.push(a_corriente);
-            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+            toastr.success("Cuenta agregada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
            this.activo.a_corriente.cuenta_id =''
@@ -1327,14 +1327,14 @@ const b_ver = new Vue({
       },
       actualizarActivoC(){
           if(this.activo.a_corriente.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
           let id = this.activo.a_corriente.cuenta_id;
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -1358,21 +1358,21 @@ const b_ver = new Vue({
     },
     agregarActivoNoCorriente(){
          if(this.activo.a_nocorriente.cuenta_id  ==''){
-            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
         }else {
              let id = this.activo.a_nocorriente.cuenta_id;
                let verificar = this.verificarCuenta(id);
                    if (verificar == true) {
-                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                     toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                       "timeOut": "3000"
                       });
                    }else{
             let nombre   = funciones.obtenerNombre(id);
             var a_nocorriente ={cuenta_id:this.activo.a_nocorriente.cuenta_id, nom_cuenta:nombre, saldo:this.activo.a_nocorriente.saldo}
             this.a_nocorrientes.push(a_nocorriente);
-            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+            toastr.success("Cuenta agregada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
            this.activo.a_nocorriente.cuenta_id =''
@@ -1394,14 +1394,14 @@ const b_ver = new Vue({
       },
       actualizarActivoNC(){
         if(this.activo.a_nocorriente.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
           let id = this.activo.a_nocorriente.cuenta_id;
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -1426,21 +1426,21 @@ const b_ver = new Vue({
 
     agregarPasivoCorriente(){
            if(this.pasivo.p_corriente.cuenta_id  ==''){
-            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
         }else {
              let id = this.pasivo.p_corriente.cuenta_id;
                let verificar = this.verificarCuenta(id);
                    if (verificar == true) {
-                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                     toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                       "timeOut": "3000"
                       });
                    }else{
             let nombre   = funciones.obtenerNombre(id);
             var p_corriente ={cuenta_id:this.pasivo.p_corriente.cuenta_id, nom_cuenta:nombre, saldo:this.pasivo.p_corriente.saldo}
             this.p_corrientes.push(p_corriente);
-            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+            toastr.success("Cuenta agregada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
            this.pasivo.p_corriente.cuenta_id ='';
@@ -1465,14 +1465,14 @@ const b_ver = new Vue({
       },
       actualizarPasivoC(){
           if(this.pasivo.p_corriente.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
           let id = this.pasivo.p_corriente.cuenta_id;
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -1497,21 +1497,21 @@ const b_ver = new Vue({
 
     agregarPasivoNoCorriente(){
            if(this.pasivo.p_nocorriente.cuenta_id  ==''){
-            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
         }else {
              let id = this.pasivo.p_nocorriente.cuenta_id;
                let verificar = this.verificarCuenta(id);
                    if (verificar == true) {
-                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                     toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                       "timeOut": "3000"
                       });
                    }else{
             let nombre   = funciones.obtenerNombre(id);
             var p_nocorriente ={cuenta_id:this.pasivo.p_nocorriente.cuenta_id, nom_cuenta:nombre, saldo:this.pasivo.p_nocorriente.saldo}
             this.p_nocorrientes.push(p_nocorriente);
-            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+            toastr.success("Cuenta agregada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
            this.pasivo.p_nocorriente.cuenta_id ='';
@@ -1536,14 +1536,14 @@ const b_ver = new Vue({
       },
       actualizarPasivoNC(){
           if(this.pasivo.p_nocorriente.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
           let id = this.pasivo.p_nocorriente.cuenta_id;
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -1567,21 +1567,21 @@ const b_ver = new Vue({
     },
         agregarPatrimonio(){
            if(this.patrimonio.cuenta_id  ==''){
-            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
         }else {
              let id = this.patrimonio.cuenta_id;
                let verificar = this.verificarCuenta(id);
                    if (verificar == true) {
-                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                     toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                       "timeOut": "3000"
                       });
                    }else{
             let nombre   = funciones.obtenerNombre(id);
             var patrimonio ={cuenta_id:this.patrimonio.cuenta_id, nom_cuenta:nombre, saldo:this.patrimonio.saldo}
             this.patrimonios.push(patrimonio);
-            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+            toastr.success("Cuenta agregada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
            this.patrimonio.cuenta_id ='';
@@ -1605,14 +1605,14 @@ const b_ver = new Vue({
       },
       actualizarPatrimonio(){
           if(this.patrimonio.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
           let id = this.patrimonio.cuenta_id;
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -1637,22 +1637,22 @@ const b_ver = new Vue({
    
     Agregar(){
     if(this.diario.nom_cuenta.trim() === ''){
-      toastr.error("El campo Nombre de cuenta es obligatorio", "Smarmoddle", {
+      toastr.error("El campo Nombre de cuenta es obligatorio", "SmartLearn", {
                 "timeOut": "3000"
             });
     }else if(this.diario.debe.trim() === '' && this.diario.haber.trim() === ''){
-      toastr.warning("Rellena el cambio de Debe o Haber, no puedes dejar ambos vacios", "Smarmoddle", {
+      toastr.warning("Rellena el cambio de Debe o Haber, no puedes dejar ambos vacios", "SmartLearn", {
                 "timeOut": "3000"
             });
     }else if(this.diario.debe.trim() != '' && this.diario.haber.trim() != ''){
-      toastr.warning("No pueden estar ambos campos llenos a mismo tiempo", "Smarmoddle", {
+      toastr.warning("No pueden estar ambos campos llenos a mismo tiempo", "SmartLearn", {
                 "timeOut": "3000"
             });
     }else{
       var diario = {fecha:this.diario.fecha, nom_cuenta:this.diario.nom_cuenta, gloza:this.diario.gloza, debe:this.diario.debe, haber:this.diario.haber};
       this.diarios.push(diario);//añadimos el la variable persona al array
       //Limpiamos los campos
-      toastr.success("Registro agregado correctamente", "Smarmoddle", {
+      toastr.success("Registro agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
             });
       this.diario.fecha =''
@@ -1679,26 +1679,26 @@ const b_ver = new Vue({
     },
     agregarBalance(){
     if (this.balance.cuenta.trim() === '' ) {
-       toastr.error("El campo cuenta es obligatorio", "Smarmoddle", {
+       toastr.error("El campo cuenta es obligatorio", "SmartLearn", {
                 "timeOut": "3000"
             });
     }else if(this.balance.suma_debe.trim() === '' && this.balance.suma_haber.trim() === ''){
-      toastr.warning("Rellena el cambio de Debe o Haber DE SUMAS, no puedes dejar ambos vacios", "Smarmoddle", {
+      toastr.warning("Rellena el cambio de Debe o Haber DE SUMAS, no puedes dejar ambos vacios", "SmartLearn", {
                 "timeOut": "3000"
             });
     }else if(this.balance.saldo_debe.trim() === '' && this.balance.saldo_haber.trim() === ''){
-      toastr.warning("Rellena el cambio de Debe o Haber de SALDOS, no puedes dejar ambos vacios", "Smarmoddle", {
+      toastr.warning("Rellena el cambio de Debe o Haber de SALDOS, no puedes dejar ambos vacios", "SmartLearn", {
                 "timeOut": "3000"
             });
     }else if(this.balance.saldo_debe.trim() != '' && this.balance.saldo_haber.trim() != ''){
-      toastr.warning("No pueden estar ambos campos llenos a mismo tiempo", "Smarmoddle", {
+      toastr.warning("No pueden estar ambos campos llenos a mismo tiempo", "SmartLearn", {
                 "timeOut": "3000"
             });
     }else{
       var balance = {cuenta:this.balance.cuenta, suma_debe:this.balance.suma_debe, suma_haber:this.balance.suma_haber, saldo_debe:this.balance.saldo_debe, saldo_haber:this.balance.saldo_haber};
       this.balances.push(balance);//añadimos el la variable persona al array
       //Limpiamos los campos
-      toastr.success("Registro agregado correctamente", "Smarmoddle", {
+      toastr.success("Registro agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
             });
       this.balance.cuenta =''
@@ -1807,22 +1807,22 @@ const b_ver = new Vue({
              },
                totalPasivoPatrimonio(){
                   $('#pasivo_patrimonio').modal('hide');
-                toastr.success("Total Agregado Correctamente", "Smarmoddle", {
+                toastr.success("Total Agregado Correctamente", "SmartLearn", {
                     "timeOut": "3000"
                    });
             },
             //GUARDAR BALANCE INICIAL
                 guardarBalanceInicial: function(){
                 if (this.balance_inicial.nombre.trim() === '') {
-                  toastr.error("Campo Nombre es obligatorio", "Smarmoddle", {
+                  toastr.error("Campo Nombre es obligatorio", "SmartLearn", {
                     "timeOut": "3000"
                    }); 
                 }else if (this.balance_inicial.fecha.trim() === '') {
-                  toastr.error("Campo Fecha es obligatorio", "Smarmoddle", {
+                  toastr.error("Campo Fecha es obligatorio", "SmartLearn", {
                     "timeOut": "3000"
                    }); 
                 }else if(this.total_balance_inicial.t_patrimonio_pasivo.trim() === ''){
-                  toastr.error("Debes calcular el Total del Pasivo + Patrimonio", "Smarmoddle", {
+                  toastr.error("Debes calcular el Total del Pasivo + Patrimonio", "SmartLearn", {
                     "timeOut": "3000"
                    }); 
                 }else{
@@ -1843,7 +1843,7 @@ const b_ver = new Vue({
                     t_patrimonio: _this.total_balance_inicial.t_patrimonio_pasivo
                 }).then(response => {
                   if (response.data.success == true) {
-                     toastr.success(response.data.message, "Smarmoddle", {
+                     toastr.success(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
                     _this.cambioActivo();
@@ -1854,7 +1854,7 @@ const b_ver = new Vue({
                 
                     console.log(response.data); 
                   } else {
-                      toastr.success(response.data.message, "Smarmoddle", {
+                      toastr.success(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
                     _this.cambioActivo();
@@ -1865,7 +1865,7 @@ const b_ver = new Vue({
                    
                   }                     
                 }).catch(function(error){
-                  toastr.error(error.response.data.message, "Smarmoddle", {
+                  toastr.error(error.response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
                 });
@@ -1879,7 +1879,7 @@ const b_ver = new Vue({
                     tipo: _this.tipo
                 }).then(response => {
                   if (response.data.tipo == _this.tipo || response.data.datos == true ) {
-                      toastr.success(response.data.message, "Smarmoddle", {
+                      toastr.success(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
                     _this.balance_inicial.nombre = response.data.nombre
@@ -2088,7 +2088,7 @@ transacciones:'',
       let verificar = this.registros.filter(x => x.tipo == 'inicial');
 
       if (verificar.length >= 1) {
-          toastr.warning("Ya tienes cargado los datos del balance inicial", "Smarmoddle", {
+          toastr.warning("Ya tienes cargado los datos del balance inicial", "SmartLearn", {
                 "timeOut": "3000"
                 });
           return
@@ -2111,7 +2111,7 @@ transacciones:'',
 
            
           }else{
-             toastr.warning("Aun no has creado tu balance Inicial", "Smarmoddle", {
+             toastr.warning("Aun no has creado tu balance Inicial", "SmartLearn", {
                 "timeOut": "3000"
                 });
           }
@@ -2123,7 +2123,7 @@ transacciones:'',
     },
     agregarHaber(){
       if (this.diario.haber.nom_cuenta === '') {
-        toastr.error("No has registrado una cuenta", "Smarmoddle", {
+        toastr.error("No has registrado una cuenta", "SmartLearn", {
                 "timeOut": "3000"
                 });
       }else{
@@ -2142,7 +2142,7 @@ transacciones:'',
             }
                
                 //Limpiamos los campos
-                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                toastr.success("Activo agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.diario.haber.fecha =''
@@ -2158,7 +2158,7 @@ transacciones:'',
 
      
           if(this.diario.debe.nom_cuenta === ''){
-           toastr.error("La cuenta es obligatoria", "Smarmoddle", {
+           toastr.error("La cuenta es obligatoria", "SmartLearn", {
                 "timeOut": "3000"
             });
         }else{
@@ -2171,7 +2171,7 @@ transacciones:'',
                   let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:this.diario.debe.saldo};
                   this.diarios.debe.push(debe);
             }
-                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                toastr.success("Activo agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.diario.debe.fecha =''
@@ -2222,19 +2222,19 @@ transacciones:'',
               });
 
       if (this.diarios.debe == 0) {
-         toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
+         toastr.error("No tienes transaccion para guardar", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else  if (this.diarios.comentario == '') {
-         toastr.error("Debes agregar un comentario", "Smarmoddle", {
+         toastr.error("Debes agregar un comentario", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else  if (this.diarios.fecha == '') {
-         toastr.error("Debes agregar la fecha", "Smarmoddle", {
+         toastr.error("Debes agregar la fecha", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else  if (total_haber.toFixed(2) != total_debe.toFixed(2)) {
-         toastr.error("El Total de Debe y Haber no coinciden", "Smarmoddle", {
+         toastr.error("El Total de Debe y Haber no coinciden", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else{
@@ -2251,7 +2251,7 @@ transacciones:'',
 
               }
                 //Limpiamos los campos
-                toastr.success("Registro agregado correctamente", "Smarmoddle", {
+                toastr.success("Registro agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.diarios.debe =[];
@@ -2380,19 +2380,19 @@ transacciones:'',
               });
 
       if (this.diarios.debe == 0) {
-         toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
+         toastr.error("No tienes transaccion para guardar", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else  if (this.diarios.comentario.trim() === '') {
-         toastr.error("Debes agregar un comentario", "Smarmoddle", {
+         toastr.error("Debes agregar un comentario", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else  if (this.diarios.fecha.trim() === '') {
-         toastr.error("Debes agregar la fecha", "Smarmoddle", {
+         toastr.error("Debes agregar la fecha", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else  if (total_haber != total_debe) {
-         toastr.error("El Total de Debe y Haber no coinciden", "Smarmoddle", {
+         toastr.error("El Total de Debe y Haber no coinciden", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else{
@@ -2653,7 +2653,7 @@ transacciones:'',
   guardarDiario: function(){
       const union = this.registros.concat(this.ajustes);
       if (union.length == 0) {
-           toastr.error('No tienes registros para guardar', "Smarmoddle", {
+           toastr.error('No tienes registros para guardar', "SmartLearn", {
                     "timeOut": "3000"
                    });
       }else{
@@ -2669,11 +2669,11 @@ transacciones:'',
              
         }).then(response => {
           if (response.data.success == false) {
-                    toastr.error(response.data.message, "Smarmoddle", {
+                    toastr.error(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
           }else if(response.data.success == 'act'){
-            toastr.success("Diario General Actualizado Correctamente", "Smarmoddle", {
+            toastr.success("Diario General Actualizado Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
            mayor_general.obtenerDiarioGeneral();
@@ -2682,7 +2682,7 @@ transacciones:'',
            reten_iva.obtenerDiarioGeneral();
            
           }else{
-           toastr.success("Diario General Creado Correctamente", "Smarmoddle", {
+           toastr.success("Diario General Creado Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
           
@@ -2723,7 +2723,7 @@ transacciones:'',
            this.totalDebe();
            this.totalHaber();
            this.totalesFinales();
-           toastr.success("Diairo General cargado Correctamente", "Smarmoddle", {
+           toastr.success("Diairo General cargado Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
             }          
@@ -2891,12 +2891,12 @@ nombre_cierre:''
     },
     agregarCelda(){
     if(this.mayor.registro.fecha == ''){
-      toastr.error("El campo fecha es obligatorio", "Smarmoddle", {
+      toastr.error("El campo fecha es obligatorio", "SmartLearn", {
         "timeOut": "3000"
     });
 
      } else if(this.mayor.registro.detalle == ''){
-      toastr.error("El campo detalle es obligatorio", "Smarmoddle", {
+      toastr.error("El campo detalle es obligatorio", "SmartLearn", {
         "timeOut": "3000"
     });
      }else{
@@ -2910,7 +2910,7 @@ nombre_cierre:''
           let registro = {tipo:'', fecha:this.mayor.registro.fecha, detalle:this.mayor.registro.detalle, debe:debe, haber:haber, saldo:saldo};
           this.mayores.registros.push(registro);
       }
-      toastr.success("Movimiento agregado correctamente", "Smarmoddle", {
+      toastr.success("Movimiento agregado correctamente", "SmartLearn", {
         "timeOut": "3000"
       });
                 this.mayor.registro.fecha ='';
@@ -2938,11 +2938,11 @@ nombre_cierre:''
     },
     guardarRegistro(){
       if (this.mayores.registros.length == 0) {
-         toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
+         toastr.error("No tienes transaccion para guardar", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else  if (this.mayor.cuenta == '') {
-         toastr.error("Debes seleccionar una cuenta", "Smarmoddle", {
+         toastr.error("Debes seleccionar una cuenta", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else{
@@ -2972,7 +2972,7 @@ nombre_cierre:''
     
 
                 //Limpiamos los campos
-                toastr.success("Registro agregado correctamente", "Smarmoddle", {
+                toastr.success("Registro agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.mayores.registros =[];
@@ -3028,7 +3028,7 @@ nombre_cierre:''
       this.mayor.registro.debe = '';
       this.mayor.registro.haber = '';
       this.mayor.registro.saldo = '';
-            toastr.success("Registro Actualizado Correctamente ", "Smarmoddle", {
+            toastr.success("Registro Actualizado Correctamente ", "SmartLearn", {
                 "timeOut": "3000"
             });
         
@@ -3085,7 +3085,7 @@ nombre_cierre:''
       guardarMayor: function(){
      
       if (this.registros.length == 0) {
-           toastr.error('No tienes registros para guardar', "Smarmoddle", {
+           toastr.error('No tienes registros para guardar', "SmartLearn", {
                     "timeOut": "3000"
                    });
       }else{
@@ -3097,18 +3097,18 @@ nombre_cierre:''
               nombre: _this.nombre,
         }).then(response => {
           if (response.data.success == false) {
-                    toastr.error(response.data.message, "Smarmoddle", {
+                    toastr.error(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
           }else if(response.data.success == 'act'){
-            toastr.success("Mayor General Actualizado Correctamente", "Smarmoddle", {
+            toastr.success("Mayor General Actualizado Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
          
             balance_comp.obtenerMayorGeneral();
             hoja_trabajo.obtenerMayorGeneral();
           }else{
-           toastr.success("Mayor General Creado Correctamente", "Smarmoddle", {
+           toastr.success("Mayor General Creado Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
              balance_comp.obtenerMayorGeneral();
@@ -3133,7 +3133,7 @@ nombre_cierre:''
           _this.nombre = response.data.nombre;
           console.log(response.data.registros)
          
-           toastr.success("Mayor General cargado Correctamente", "Smarmoddle", {
+           toastr.success("Mayor General cargado Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
             }          
@@ -3306,7 +3306,7 @@ const balance_comp = new Vue({
     agregarRegistro(){
 
      if(this.balance.cuenta ==''){
-      toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+      toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
         "timeOut": "3000"
     });
 
@@ -3315,7 +3315,7 @@ const balance_comp = new Vue({
       let id       = this.balance.cuenta;
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -3324,7 +3324,7 @@ const balance_comp = new Vue({
       // this.sumas()
       var balance ={ cuenta_id: id, cuenta:nombre, suma_debe:this.balance.suma_debe, suma_haber:this.balance.suma_haber, saldo_debe:this.balance.saldo_debe, saldo_haber:this.balance.saldo_haber}
       this.balances.push(balance);
-      toastr.success("Registro agregado correctamente", "Smarmoddle", {
+      toastr.success("Registro agregado correctamente", "SmartLearn", {
         "timeOut": "3000"
     });
 
@@ -3399,7 +3399,7 @@ const balance_comp = new Vue({
     },
     actualizarBalance(){
       if(this.balance.cuenta ==''){
-      toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+      toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
         "timeOut": "3000"
     });
 
@@ -3410,7 +3410,7 @@ const balance_comp = new Vue({
         let id       = this.balance.cuenta;
         let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -3435,12 +3435,12 @@ const balance_comp = new Vue({
     },
     guardarBalance: function() {
         if(this.balances.length == 0){
-          toastr.error("Debe haber al menos un registro en el Balance", "Smarmoddle", {
+          toastr.error("Debe haber al menos un registro en el Balance", "SmartLearn", {
             "timeOut": "3000"
         });
 
      }else if(this.fecha == '' || this.nombre == ''){
-          toastr.error("Fecha y Nombre son obligaorios", "Smarmoddle", {
+          toastr.error("Fecha y Nombre son obligaorios", "SmartLearn", {
             "timeOut": "3000"
         });
 
@@ -3459,13 +3459,13 @@ const balance_comp = new Vue({
 
         }).then(response => {
           if (response.data.estado == 'guardado') {
-              toastr.success("Balance creado correctamente", "Smarmoddle", {
+              toastr.success("Balance creado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
               hoja_trabajo.obtenerBalanceCom();
 
             }else if (response.data.estado == 'actualizado') {
-              toastr.warning("Balance actualizado correctamente", "Smarmoddle", {
+              toastr.warning("Balance actualizado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
 
@@ -3486,7 +3486,7 @@ const balance_comp = new Vue({
               id: _this.id_taller,
         }).then(response => {
           if (response.data.datos == true) {
-              toastr.info("Balance de Comprobacion cargado correctamente", "Smarmoddle", {
+              toastr.info("Balance de Comprobacion cargado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
               this.balances = response.data.bcomprobacion;
@@ -3724,14 +3724,14 @@ let hoja_trabajo = new Vue({
     },
   agregarRegistro(){
     if(this.registro.cuenta_id == ''){
-      toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+      toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
         "timeOut": "3000"
     });
     }else{
       let id = this.registro.cuenta_id;
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -3739,7 +3739,7 @@ let hoja_trabajo = new Vue({
       
       let balance ={ cuenta_id: id, cuenta:nombre, bc_debe:this.registro.balance_comp.debe, bc_haber:this.registro.balance_comp.haber, ajuste_debe:this.registro.ajustes.debe, ajuste_haber:this.registro.ajustes.haber, ba_debe:this.registro.balance_ajustado.debe, ba_haber:this.registro.balance_ajustado.haber, er_debe:this.registro.estado_resultado.debe, er_haber:this.registro.estado_resultado.haber, bg_debe:this.registro.balance_general.debe, bg_haber:this.registro.balance_general.haber}
       this.registros.push(balance);
-      toastr.success("Registro agregado correctamente", "Smarmoddle", {
+      toastr.success("Registro agregado correctamente", "SmartLearn", {
         "timeOut": "3000"
       });
       this.registro.cuenta_id              = '';
@@ -3810,7 +3810,7 @@ let hoja_trabajo = new Vue({
     },
      actualizarBalance(){
       if(this.registro.cuenta_id ==''){
-      toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+      toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
         "timeOut": "3000"
     });
      }else {
@@ -3818,7 +3818,7 @@ let hoja_trabajo = new Vue({
         let id    = this.registro.cuenta_id;
            let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
         }else{
@@ -3838,7 +3838,7 @@ let hoja_trabajo = new Vue({
         this.cancelarEdicion();
         this.sumasTotales();
 
-        toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+        toastr.error("Registro actualizado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
         // this.totales();
@@ -3918,12 +3918,12 @@ let hoja_trabajo = new Vue({
     },
     guardarHoja: function() {
         if(this.registros.length == 0){
-          toastr.error("Debe haber al menos un registro en la Hoja", "Smarmoddle", {
+          toastr.error("Debe haber al menos un registro en la Hoja", "SmartLearn", {
             "timeOut": "3000"
         });
 
      }else if(this.nombre == ''){
-          toastr.error("Nombre es obligaorios", "Smarmoddle", {
+          toastr.error("Nombre es obligaorios", "SmartLearn", {
             "timeOut": "3000"
         });
 
@@ -3947,7 +3947,7 @@ let hoja_trabajo = new Vue({
 
         }).then(response => {
           if (response.data.estado == 'guardado') {
-              toastr.success("Hoja de Trabajo Creada Correctamente", "Smarmoddle", {
+              toastr.success("Hoja de Trabajo Creada Correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
               balance_ajustado.obtenerHojita();
@@ -3957,7 +3957,7 @@ let hoja_trabajo = new Vue({
 
 
             }else if (response.data.estado == 'actualizado') {
-              toastr.warning("Hoja de Trabajo Actualizada correctamente", "Smarmoddle", {
+              toastr.warning("Hoja de Trabajo Actualizada correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
               balance_ajustado.obtenerHojita();
@@ -4104,7 +4104,7 @@ const balance_ajustado = new Vue({
     },
     agregarRegistro(){
      if(this.balance.cuenta_id  ==''){
-      toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+      toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
         "timeOut": "3000"
     });
 
@@ -4113,14 +4113,14 @@ const balance_ajustado = new Vue({
        let id = this.balance.cuenta_id;
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
       let nombre   = funciones.obtenerNombre(id);
       var balance ={cuenta_id:this.balance.cuenta_id, cuenta:nombre, debe:this.balance.debe, haber:this.balance.haber}
       this.balances_ajustados.push(balance);
-      toastr.success("Registro agregado correctamente", "Smarmoddle", {
+      toastr.success("Registro agregado correctamente", "SmartLearn", {
         "timeOut": "3000"
     });
 
@@ -4168,7 +4168,7 @@ const balance_ajustado = new Vue({
     },
       actualizarBalance(){
           if(this.balance.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
 
@@ -4178,7 +4178,7 @@ const balance_ajustado = new Vue({
           let id = this.balance.cuenta_id;
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -4225,17 +4225,17 @@ const balance_ajustado = new Vue({
     },
      guardarBalance: function() {
         if(this.balances_ajustados.length == 0){
-          toastr.error("Debe haber al menos un registro en el Balance", "Smarmoddle", {
+          toastr.error("Debe haber al menos un registro en el Balance", "SmartLearn", {
             "timeOut": "3000"
         });
 
      }else  if(this.nombre == ''){
-          toastr.error("El nombre es obligatorio", "Smarmoddle", {
+          toastr.error("El nombre es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
 
      }else  if(this.fecha == ''){
-          toastr.error("La fecha es obligatoria", "Smarmoddle", {
+          toastr.error("La fecha es obligatoria", "SmartLearn", {
             "timeOut": "3000"
         });
 
@@ -4252,11 +4252,11 @@ const balance_ajustado = new Vue({
 
         }).then(response => {
           if (response.data.estado == 'guardado') {
-              toastr.success("Balance creado correctamente", "Smarmoddle", {
+              toastr.success("Balance creado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
             }else if (response.data.estado == 'actualizado') {
-              toastr.warning("Balance actualizado correctamente", "Smarmoddle", {
+              toastr.warning("Balance actualizado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
             }        
@@ -4274,7 +4274,7 @@ const balance_ajustado = new Vue({
               id: _this.id_taller,
         }).then(response => {
           if (response.data.datos == true) {
-              toastr.info("Balance de Comprobacion Ajustado cargado correctamente", "Smarmoddle", {
+              toastr.info("Balance de Comprobacion Ajustado cargado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
               this.balances_ajustados = response.data.bcomprobacionAjustado;
@@ -4369,7 +4369,7 @@ const estado_resultado = new Vue({
     agregarBruta(){
       this.venta                      = this.utilidad_bruta.venta;
       this.costo_venta                = this.utilidad_bruta.costo_venta;
-      toastr.info("Datos agregados", "Smarmoddle", {
+      toastr.info("Datos agregados", "SmartLearn", {
             "timeOut": "3000"
             });
  
@@ -4621,21 +4621,21 @@ const estado_resultado = new Vue({
     },
     agregarIngreso(){
      if(this.ingreso.cuenta_id  ==''){
-      toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+      toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
         "timeOut": "3000"
     });
   }else {
        let id = this.ingreso.cuenta_id;
          let verificar = this.verificarCuentaIngreso(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
       let nombre   = funciones.obtenerNombre(id);
       var ingreso ={cuenta_id:this.ingreso.cuenta_id, cuenta:nombre, saldo:this.ingreso.saldo}
       this.ingresos.push(ingreso);
-      toastr.success("Ingreso agregado correctamente", "Smarmoddle", {
+      toastr.success("Ingreso agregado correctamente", "SmartLearn", {
         "timeOut": "3000"
       });
      this.ingreso.cuenta_id =''
@@ -4647,21 +4647,21 @@ const estado_resultado = new Vue({
       }, 
       agregarGasto(){
      if(this.gasto.cuenta_id  ==''){
-      toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+      toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
         "timeOut": "3000"
     });
   }else {
        let id = this.gasto.cuenta_id;
          let verificar = this.verificarCuentaGasto(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
       let nombre   = funciones.obtenerNombre(id);
       var gasto ={cuenta_id:this.gasto.cuenta_id, cuenta:nombre, saldo:this.gasto.saldo}
       this.gastos.push(gasto);
-      toastr.success("Gasto agregado correctamente", "Smarmoddle", {
+      toastr.success("Gasto agregado correctamente", "SmartLearn", {
         "timeOut": "3000"
       });
      this.gasto.cuenta_id =''
@@ -4673,21 +4673,21 @@ const estado_resultado = new Vue({
       }, 
     agregarUtilidad(){
      if(this.utilida.cuenta_id  ==''){
-      toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+      toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
         "timeOut": "3000"
     });
   }else {
        let id = this.utilida.cuenta_id;
          let verificar = this.verificarCuentaUtilidad(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
       let nombre   = funciones.obtenerNombre(id);
       var utilida ={cuenta_id:this.utilida.cuenta_id, cuenta:nombre, saldo:this.utilida.saldo}
       this.utilidades.push(utilida);
-      toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+      toastr.success("Cuenta agregada correctamente", "SmartLearn", {
         "timeOut": "3000"
       });
      this.utilida.cuenta_id =''
@@ -4727,14 +4727,14 @@ const estado_resultado = new Vue({
     },
       actualizarIngreso(){
           if(this.ingreso.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
           let id = this.ingreso.cuenta_id;
          let verificar = this.verificarCuentaIngreso(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -4782,14 +4782,14 @@ const estado_resultado = new Vue({
     },
       actualizarGasto(){
           if(this.gasto.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
           let id = this.gasto.cuenta_id;
          let verificar = this.verificarCuentaGasto(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -4838,14 +4838,14 @@ const estado_resultado = new Vue({
     },
       actualizarUtilidad(){
           if(this.utilida.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
           let id = this.utilida.cuenta_id;
          let verificar = this.verificarCuentaUtilidad(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -4867,11 +4867,11 @@ const estado_resultado = new Vue({
     },
               guardarEstadoResultado: function(){
                 if (this.nombre.trim() === '') {
-                  toastr.error("Campo Nombre es obligatorio", "Smarmoddle", {
+                  toastr.error("Campo Nombre es obligatorio", "SmartLearn", {
                     "timeOut": "3000"
                    }); 
                 }else if (this.fecha.trim() === '') {
-                  toastr.error("Campo Fecha es obligatorio", "Smarmoddle", {
+                  toastr.error("Campo Fecha es obligatorio", "SmartLearn", {
                     "timeOut": "3000"
                    }); 
                 }else{
@@ -4890,7 +4890,7 @@ const estado_resultado = new Vue({
                     costo_venta: _this.costo_venta,
                 }).then(response => {
                   if (response.data.success == 'actualizado') {
-                     toastr.success(response.data.message, "Smarmoddle", {
+                     toastr.success(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
                   balance_general.obtenerEstadoResultado();
@@ -4898,7 +4898,7 @@ const estado_resultado = new Vue({
 
 
                   }else{
-                      toastr.success(response.data.message, "Smarmoddle", {
+                      toastr.success(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
                   balance_general.obtenerEstadoResultado();
@@ -4907,7 +4907,7 @@ const estado_resultado = new Vue({
 
                   }                     
                 }).catch(function(error){
-                  toastr.error(error.response.data.message, "Smarmoddle", {
+                  toastr.error(error.response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
                 });
@@ -5331,21 +5331,21 @@ const balance_general = new Vue({
       },
       agregarActivoCorriente(){
         //    if(this.activo.a_corriente.cuenta_id  ==''){
-        //     toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+        //     toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
         //       "timeOut": "3000"
         //   });
         // }else {
         //      let id = this.activo.a_corriente.cuenta_id;
         //        let verificar = this.verificarCuenta(id);
         //            if (verificar == true) {
-        //              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+        //              toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
         //               "timeOut": "3000"
         //               });
         //            }else{
         //     let nombre   = funciones.obtenerNombre(id);
         //     var a_corriente ={resta:'', cuenta_id2:'', cuenta2:'', total_saldo2:'', saldo2:'', total_saldo:'', cuenta_id:this.activo.a_corriente.cuenta_id, cuenta:nombre, saldo:this.activo.a_corriente.saldo}
         //     this.a_corrientes.push(a_corriente);
-        //     toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+        //     toastr.success("Cuenta agregada correctamente", "SmartLearn", {
         //       "timeOut": "3000"
         //     });
         //    this.activo.a_corriente.cuenta_id =''
@@ -5355,14 +5355,14 @@ const balance_general = new Vue({
         //    }   
         //    
         if(this.activo.a_corriente.cuenta_id  ==''){
-            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
         }else {
              let id  = this.activo.a_corriente.cuenta_id;
              let id2 = this.activo.a_corriente.cuenta_id2;
               if (id == id2) {
-                    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                    toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                   "timeOut": "3000"
                   });
                return     
@@ -5370,7 +5370,7 @@ const balance_general = new Vue({
              if (id2 !== '') {
               let verificar2 = this.verificarCuenta(id2);
               if (verificar2 == true) {
-                    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                    toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                   "timeOut": "3000"
                   });
                return     
@@ -5380,7 +5380,7 @@ const balance_general = new Vue({
               let verificar = this.verificarCuenta(id);
 
                if (verificar == true) {
-                 toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                 toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                   "timeOut": "3000"
                   });
                }else{
@@ -5394,7 +5394,7 @@ const balance_general = new Vue({
 
                 let a_corriente ={resta:'si', cuenta_id:this.activo.a_corriente.cuenta_id, cuenta:nombre, saldo:this.activo.a_corriente.saldo, cuenta2:this.activo.a_corriente.nombre1,  total_saldo:this.activo.a_corriente.total_saldo, cuenta_id2:this.activo.a_corriente.cuenta_id2, saldo2:this.activo.a_corriente.saldo2, total_saldo2: this.activo.a_corriente.total_saldo2}
                 this.a_corrientes.push(a_corriente);
-                toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+                toastr.success("Cuenta agregada correctamente", "SmartLearn", {
                   "timeOut": "3000"
                 });
 
@@ -5402,7 +5402,7 @@ const balance_general = new Vue({
 
             let a_corriente ={resta:'no',cuenta_id:this.activo.a_corriente.cuenta_id, cuenta:nombre, saldo:'', cuenta2:'', saldo2:'', total_saldo:this.activo.a_corriente.saldo, cuenta_id2:this.activo.a_corriente.cuenta_id2,  total_saldo2: this.activo.a_corriente.total_saldo2}
             this.a_corrientes.push(a_corriente);
-            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+            toastr.success("Cuenta agregada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
 
@@ -5450,7 +5450,7 @@ const balance_general = new Vue({
       },
       actualizarActivoC(){
          if(this.activo.a_corriente.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
@@ -5458,7 +5458,7 @@ const balance_general = new Vue({
           let id  = this.activo.a_corriente.cuenta_id;
           let id2 = this.activo.a_corriente.cuenta_id2;
           if (id == id2) {
-              toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+              toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
             "timeOut": "3000"
             });
          return     
@@ -5466,7 +5466,7 @@ const balance_general = new Vue({
 
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -5477,7 +5477,7 @@ const balance_general = new Vue({
           if (id2 !== '' && id2 !== undefined) {
               let verificar2 = this.verificarCuentaAct(id2);
               if (verificar2 == true) {
-                    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                    toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                   "timeOut": "3000"
                   });
                return     
@@ -5513,14 +5513,14 @@ const balance_general = new Vue({
           }
       }
       //     if(this.activo.a_corriente.cuenta_id ==''){
-      //     toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+      //     toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
       //       "timeOut": "3000"
       //   });
       //   }else {
       //     let id = this.activo.a_corriente.cuenta_id;
       //    let verificar = this.verificarCuenta(id);
       //        if (verificar == true) {
-      //          toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+      //          toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
       //           "timeOut": "3000"
       //           });
       //        }else{
@@ -5559,7 +5559,7 @@ const balance_general = new Vue({
     },
     agregarActivoNoCorriente(){
            if(this.activo.a_nocorriente.cuenta_id  ==''){
-            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
         }else {
@@ -5568,7 +5568,7 @@ const balance_general = new Vue({
              if (id2 !== '') {
               let verificar2 = this.verificarCuenta(id2);
               if (verificar2 == true) {
-                    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                    toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                   "timeOut": "3000"
                   });
                return     
@@ -5578,7 +5578,7 @@ const balance_general = new Vue({
               let verificar = this.verificarCuenta(id);
 
                if (verificar == true) {
-                 toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                 toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                   "timeOut": "3000"
                   });
                }else{
@@ -5592,7 +5592,7 @@ const balance_general = new Vue({
 
                 let a_nocorriente ={resta:'si', cuenta_id:this.activo.a_nocorriente.cuenta_id, cuenta:nombre, saldo:this.activo.a_nocorriente.saldo, cuenta2:this.activo.a_nocorriente.nombre1,  total_saldo:this.activo.a_nocorriente.total_saldo, cuenta_id2:this.activo.a_nocorriente.cuenta_id2, saldo2:this.activo.a_nocorriente.saldo2, total_saldo2: this.activo.a_nocorriente.total_saldo2}
                 this.a_nocorrientes.push(a_nocorriente);
-                toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+                toastr.success("Cuenta agregada correctamente", "SmartLearn", {
                   "timeOut": "3000"
                 });
 
@@ -5600,7 +5600,7 @@ const balance_general = new Vue({
 
             let a_nocorriente ={resta:'no',cuenta_id:this.activo.a_nocorriente.cuenta_id, cuenta:nombre, saldo:'', cuenta2:'', saldo2:'', total_saldo:this.activo.a_nocorriente.saldo, cuenta_id2:this.activo.a_nocorriente.cuenta_id2,  total_saldo2: this.activo.a_nocorriente.total_saldo2}
             this.a_nocorrientes.push(a_nocorriente);
-            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+            toastr.success("Cuenta agregada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
 
@@ -5645,7 +5645,7 @@ const balance_general = new Vue({
       },
       actualizarActivoNC(){
           if(this.activo.a_nocorriente.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
@@ -5655,7 +5655,7 @@ const balance_general = new Vue({
 
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -5666,7 +5666,7 @@ const balance_general = new Vue({
           if (id2 !== '' && id2 !== undefined) {
               let verificar2 = this.verificarCuentaAct(id2);
               if (verificar2 == true) {
-                    toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                    toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                   "timeOut": "3000"
                   });
                return     
@@ -5719,21 +5719,21 @@ const balance_general = new Vue({
 
     agregarPasivoCorriente(){
            if(this.pasivo.p_corriente.cuenta_id  ==''){
-            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
         }else {
              let id = this.pasivo.p_corriente.cuenta_id;
                let verificar = this.verificarCuenta(id);
                    if (verificar == true) {
-                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                     toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                       "timeOut": "3000"
                       });
                    }else{
             let nombre   = funciones.obtenerNombre(id);
             var p_corriente ={cuenta_id:this.pasivo.p_corriente.cuenta_id, cuenta:nombre, saldo:this.pasivo.p_corriente.saldo}
             this.p_corrientes.push(p_corriente);
-            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+            toastr.success("Cuenta agregada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
            this.pasivo.p_corriente.cuenta_id ='';
@@ -5758,14 +5758,14 @@ const balance_general = new Vue({
       },
       actualizarPasivoC(){
           if(this.pasivo.p_corriente.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
           let id = this.pasivo.p_corriente.cuenta_id;
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -5790,21 +5790,21 @@ const balance_general = new Vue({
 
     agregarPasivoNoCorriente(){
            if(this.pasivo.p_nocorriente.cuenta_id  ==''){
-            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
         }else {
              let id = this.pasivo.p_nocorriente.cuenta_id;
                let verificar = this.verificarCuenta(id);
                    if (verificar == true) {
-                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                     toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                       "timeOut": "3000"
                       });
                    }else{
             let nombre   = funciones.obtenerNombre(id);
             var p_nocorriente ={cuenta_id:this.pasivo.p_nocorriente.cuenta_id, cuenta:nombre, saldo:this.pasivo.p_nocorriente.saldo}
             this.p_nocorrientes.push(p_nocorriente);
-            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+            toastr.success("Cuenta agregada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
            this.pasivo.p_nocorriente.cuenta_id ='';
@@ -5829,14 +5829,14 @@ const balance_general = new Vue({
       },
       actualizarPasivoNC(){
           if(this.pasivo.p_nocorriente.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
           let id = this.pasivo.p_nocorriente.cuenta_id;
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -5860,21 +5860,21 @@ const balance_general = new Vue({
     },
         agregarPatrimonio(){
            if(this.patrimonio.cuenta_id  ==''){
-            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
         }else {
              let id = this.patrimonio.cuenta_id;
                let verificar = this.verificarCuenta(id);
                    if (verificar == true) {
-                     toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+                     toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                       "timeOut": "3000"
                       });
                    }else{
             let nombre   = funciones.obtenerNombre(id);
             var patrimonio ={cuenta_id:this.patrimonio.cuenta_id, cuenta:nombre, saldo:this.patrimonio.saldo}
             this.patrimonios.push(patrimonio);
-            toastr.success("Cuenta agregada correctamente", "Smarmoddle", {
+            toastr.success("Cuenta agregada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
            this.patrimonio.cuenta_id ='';
@@ -5898,14 +5898,14 @@ const balance_general = new Vue({
       },
       actualizarPatrimonio(){
           if(this.patrimonio.cuenta_id ==''){
-          toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
           let id = this.patrimonio.cuenta_id;
          let verificar = this.verificarCuenta(id);
              if (verificar == true) {
-               toastr.error("No puedes agregar una cuenta repetida", "Smarmoddle", {
+               toastr.error("No puedes agregar una cuenta repetida", "SmartLearn", {
                 "timeOut": "3000"
                 });
              }else{
@@ -6066,42 +6066,42 @@ const balance_general = new Vue({
              },
                totalPasivoPatrimonio(){
                   $('#pasivo_patrimonio').modal('hide');
-                toastr.success("Total Agregado Correctamente", "Smarmoddle", {
+                toastr.success("Total Agregado Correctamente", "SmartLearn", {
                     "timeOut": "3000"
                    });
             },
             //GUARDAR BALANCE INICIAL
                 guardarBalanceGeneral: function(){
                 if (this.balance_general.nombre.trim() === '') {
-                  toastr.error("Campo Nombre es obligatorio", "Smarmoddle", {
+                  toastr.error("Campo Nombre es obligatorio", "SmartLearn", {
                     "timeOut": "3000"
                    }); 
                 }else if (this.balance_general.fecha.trim() === '') {
-                  toastr.error("Campo Fecha es obligatorio", "Smarmoddle", {
+                  toastr.error("Campo Fecha es obligatorio", "SmartLearn", {
                     "timeOut": "3000"
                    }); 
                 }else if(this.a_corrientes.length == 0){
-                  toastr.error("Debe haber al menos un Activo Corriente", "Smarmoddle", {
+                  toastr.error("Debe haber al menos un Activo Corriente", "SmartLearn", {
                     "timeOut": "3000"
                    }); 
                 }else if(this.a_nocorrientes.length == 0){
-                  toastr.error("Debe haber al menos un Activo No Corriente", "Smarmoddle", {
+                  toastr.error("Debe haber al menos un Activo No Corriente", "SmartLearn", {
                     "timeOut": "3000"
                    }); 
                 }else if(this.p_corrientes.length == 0){
-                  toastr.error("Debe haber al menos un Pasivo Corriente", "Smarmoddle", {
+                  toastr.error("Debe haber al menos un Pasivo Corriente", "SmartLearn", {
                     "timeOut": "3000"
                    }); 
                 }else if(this.p_nocorrientes.length == 0){
-                  toastr.error("Debe haber al menos un Pasivo No Corriente", "Smarmoddle", {
+                  toastr.error("Debe haber al menos un Pasivo No Corriente", "SmartLearn", {
                     "timeOut": "3000"
                    }); 
                 }else if(this.patrimonios.length == 0){
-                  toastr.error("Debe haber al menos un Patrimonio", "Smarmoddle", {
+                  toastr.error("Debe haber al menos un Patrimonio", "SmartLearn", {
                     "timeOut": "3000"
                    }); 
                 }else if(this.total_balance_inicial.t_patrimonio_pasivo.trim() === ''){
-                  toastr.error("Debes calcular el Total del Pasivo + Patrimonio", "Smarmoddle", {
+                  toastr.error("Debes calcular el Total del Pasivo + Patrimonio", "SmartLearn", {
                     "timeOut": "3000"
                    }); 
                 }else{
@@ -6122,7 +6122,7 @@ const balance_general = new Vue({
 
                 }).then(response => {
                   if (response.data.success == true) {
-                     toastr.success(response.data.message, "Smarmoddle", {
+                     toastr.success(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
                     _this.cambioActivo();
@@ -6133,7 +6133,7 @@ const balance_general = new Vue({
                     console.log(response.data); 
                     asientos_cierre.obtenerBalance();
                   } else {
-                      toastr.success(response.data.message, "Smarmoddle", {
+                      toastr.success(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
                     _this.cambioActivo();
@@ -6157,7 +6157,7 @@ const balance_general = new Vue({
                     id: _this.id_taller,
                 }).then(response => {
                   if ( response.data.datos == true ) {
-                      toastr.success(response.data.message, "Smarmoddle", {
+                      toastr.success(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
                     _this.balance_general.nombre                    = response.data.nombre
@@ -6381,7 +6381,7 @@ const asientos_cierre = new Vue({
                     id: _this.id_taller,
                 }).then(response => {
                   if ( response.data.datos == true ) {
-                      toastr.success(response.data.message, "Smarmoddle", {
+                      toastr.success(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
                     _this.balance_general.nombre                                    = response.data.nombre
@@ -6463,7 +6463,7 @@ const asientos_cierre = new Vue({
     
     agregarHaber(){
       if (this.diario.haber.nom_cuenta === '') {
-        toastr.error("No has registrado una cuenta", "Smarmoddle", {
+        toastr.error("No has registrado una cuenta", "SmartLearn", {
                 "timeOut": "3000"
                 });
       }else{
@@ -6481,7 +6481,7 @@ const asientos_cierre = new Vue({
             // }
                
                 //Limpiamos los campos
-                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                toastr.success("Activo agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.diario.haber.fecha =''
@@ -6496,7 +6496,7 @@ const asientos_cierre = new Vue({
       let cuenta = this.cuentas.filter(x => x.id == id);
       let valor = this.diario.debe.saldo;
           if(this.diario.debe.nom_cuenta === ''){
-           toastr.error("La cuenta es obligatoria", "Smarmoddle", {
+           toastr.error("La cuenta es obligatoria", "SmartLearn", {
                 "timeOut": "3000"
             });
         }else{
@@ -6509,7 +6509,7 @@ const asientos_cierre = new Vue({
                   let debe = {cuenta_id: cuenta[0].id, fecha:this.diario.debe.fecha, nom_cuenta: cuenta[0].nombre, saldo:this.diario.debe.saldo};
                   this.diarios.debe.push(debe);
             // }
-                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                toastr.success("Activo agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.diario.debe.fecha =''
@@ -6563,19 +6563,19 @@ const asientos_cierre = new Vue({
       console.log(total_haber);
 
       if (this.diarios.debe == 0) {
-         toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
+         toastr.error("No tienes transaccion para guardar", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else  if (this.diarios.comentario == '') {
-         toastr.error("Debes agregar un comentario", "Smarmoddle", {
+         toastr.error("Debes agregar un comentario", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else  if (this.diarios.fecha == '') {
-         toastr.error("Debes agregar la fecha", "Smarmoddle", {
+         toastr.error("Debes agregar la fecha", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else  if (total_haber.toFixed(2) != total_debe.toFixed(2)) {
-         toastr.error("El Total de Debe y Haber no coinciden", "Smarmoddle", {
+         toastr.error("El Total de Debe y Haber no coinciden", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else{
@@ -6583,7 +6583,7 @@ const asientos_cierre = new Vue({
                 let registro = {debe:this.diarios.debe, haber:this.diarios.haber, comentario:this.diarios.comentario, fecha: this.diarios.fecha};
                 this.registros.push(registro);//añadimos el la variable persona al array
                 //Limpiamos los campos
-                toastr.success("Registro agregado correctamente", "Smarmoddle", {
+                toastr.success("Registro agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.diarios.debe =[];
@@ -6660,19 +6660,19 @@ const asientos_cierre = new Vue({
               });
 
       if (this.diarios.debe == 0) {
-         toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
+         toastr.error("No tienes transaccion para guardar", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else  if (this.diarios.comentario.trim() === '') {
-         toastr.error("Debes agregar un comentario", "Smarmoddle", {
+         toastr.error("Debes agregar un comentario", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else  if (this.diarios.fecha.trim() === '') {
-         toastr.error("Debes agregar la fecha", "Smarmoddle", {
+         toastr.error("Debes agregar la fecha", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else  if (total_haber != total_debe) {
-         toastr.error("El Total de Debe y Haber no coinciden", "Smarmoddle", {
+         toastr.error("El Total de Debe y Haber no coinciden", "SmartLearn", {
                 "timeOut": "3000"
             });
       }else{
@@ -6703,7 +6703,7 @@ const asientos_cierre = new Vue({
      var haber = {fecha:this.diario.haber.fecha, nom_cuenta:this.diario.haber.nom_cuenta, saldo:this.diario.haber.saldo};
               this.edit.haber.push(haber);//añadimos el la variable persona al array
                 //Limpiamos los campos
-            toastr.success("Activo agregado correctamente", "Smarmoddle", {
+            toastr.success("Activo agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
             });
                 this.diario.haber.fecha =''
@@ -6715,7 +6715,7 @@ const asientos_cierre = new Vue({
          var debe = {fecha:'', nom_cuenta:this.diario.debe.nom_cuenta, saldo:this.diario.debe.saldo};
                 this.edit.debe.push(debe);//añadimos el la variable persona al array
                 //Limpiamos los campos
-                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                toastr.success("Activo agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.diario.debe.fecha =''
@@ -6901,7 +6901,7 @@ const asientos_cierre = new Vue({
           }, 
   guardarDiario: function(){
       if (this.registros.length == 0) {
-           toastr.error('No tienes registros para guardar', "Smarmoddle", {
+           toastr.error('No tienes registros para guardar', "SmartLearn", {
                     "timeOut": "3000"
           });
       }else{
@@ -6916,18 +6916,18 @@ const asientos_cierre = new Vue({
               total_haber: _this.pasan.haber,
         }).then(response => {
           if (response.data.success == false) {
-                    toastr.error(response.data.message, "Smarmoddle", {
+                    toastr.error(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                    });
 
           }else if(response.data.success == 'act'){
-            toastr.success("Asiento de Cierre Actualizado Correctamente", "Smarmoddle", {
+            toastr.success("Asiento de Cierre Actualizado Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
            mayor_general.obtenerDiarioGeneral();
            mayor_general.obtenerAsientoCierre();
           }else{
-           toastr.success("Asiento de Cierre Creado Correctamente", "Smarmoddle", {
+           toastr.success("Asiento de Cierre Creado Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
           _this.dato = response.data;
@@ -6952,7 +6952,7 @@ const asientos_cierre = new Vue({
            this.totalDebe();
            this.totalHaber();
            
-           toastr.success("Diairo General cargado Correctamente", "Smarmoddle", {
+           toastr.success("Diairo General cargado Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
             }          
@@ -7276,7 +7276,7 @@ const kardex = new Vue({
         let suma = multiplicacion + exis
         this.totales.subtotal = suma
 
-        toastr.error("Datos Actualizado", "Smarmoddle", {
+        toastr.error("Datos Actualizado", "SmartLearn", {
         "timeOut": "3000"
         });
     
@@ -7295,7 +7295,7 @@ const kardex = new Vue({
         let suma = multiplicacion + exis
         this.totales.subtotal = suma
     
-        toastr.error("Datos Actualizado", "Smarmoddle",{
+        toastr.error("Datos Actualizado", "SmartLearn",{
         "timeOut": "3000"
         });  
     },
@@ -7304,7 +7304,7 @@ const kardex = new Vue({
     let id = this.transacciones.length + 1;
     var existencia ={identificador: id, fecha:'', movimiento:'', tipo:'existencia', ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:'', egreso_precio:'', egreso_total:'', existencia_cantidad:this.exis.cantidad, existencia_precio:this.exis.precio, existencia_total:''}
       this.modales.modal_ingreso.unshift(existencia);
-      toastr.success("Agregado", "Smarmoddle", {
+      toastr.success("Agregado", "SmartLearn", {
         "timeOut": "3000"
     });
       this.exis.cantidad = '';
@@ -7318,14 +7318,14 @@ const kardex = new Vue({
     var existencia ={identificador: id, fecha:'', movimiento:'', tipo:'existencia', ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:'', egreso_precio:'', egreso_total:'', existencia_cantidad:this.exis.cantidad, existencia_precio:this.exis.precio, existencia_total:''}
 
       this.ejercicio.unshift(existencia);
-      toastr.success("Agregado", "Smarmoddle", {
+      toastr.success("Agregado", "SmartLearn", {
         "timeOut": "3000"
     });
     },
 
     agregarTran(){
     if(this.inicial.fecha.trim() ==='' || this.inicial.movimiento.trim() ==='' || this.inicial.cantidad.trim() ==='' || this.inicial.precio.trim() ==='' ){
-      toastr.error("Todos lo campos son obligatorios", "Smarmoddle", {
+      toastr.error("Todos lo campos son obligatorios", "SmartLearn", {
         "timeOut": "3000"
     });
      }else {
@@ -7340,7 +7340,7 @@ const kardex = new Vue({
       registro.push(array)
       this.transacciones.unshift(registro) ;
    
-      toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
+      toastr.success("Transaccion agregada correctamente", "SmartLearn", {
         "timeOut": "3000"
     });
       this.totales.cantidad      = this.inicial.cantidad;
@@ -7388,7 +7388,7 @@ const kardex = new Vue({
   },
   actualizarInicial(){
         if(this.inicial.fecha.trim() ==='' || this.inicial.movimiento.trim() ==='' || this.inicial.cantidad.trim() ==='' || this.inicial.precio.trim() ==='' ){
-      toastr.error("Todos lo campos son obligatorios", "Smarmoddle", {
+      toastr.error("Todos lo campos son obligatorios", "SmartLearn", {
         "timeOut": "3000"
     });
      }else {
@@ -7423,7 +7423,7 @@ const kardex = new Vue({
   agregarIngreso(){
    
     if(this.transaccion.fecha.trim() ==='' || this.transaccion.movimiento.trim() ==='' || this.transaccion.ingreso.cantidad.trim() ==='' || this.transaccion.ingreso.precio.trim() ==='' ){
-      toastr.error("Todos los campos son obligatorios", "Smarmoddle", {
+      toastr.error("Todos los campos son obligatorios", "SmartLearn", {
         "timeOut": "3000"
     });
      }else {
@@ -7436,7 +7436,7 @@ const kardex = new Vue({
      
       this.modales.modal_ingreso.push(array)
       
-      toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
+      toastr.success("Transaccion agregada correctamente", "SmartLearn", {
         "timeOut": "3000"
     });
       
@@ -7491,7 +7491,7 @@ const kardex = new Vue({
      if (tipo == 'ingreso') {
      let prueba1 = this.modales.modal_ingreso.filter(x => x.tipo == 'ingreso');
       if(prueba1.length == 0){
-          toastr.error("No puedes enviar solo existencias", "Smarmoddle", {
+          toastr.error("No puedes enviar solo existencias", "SmartLearn", {
           "timeOut": "3000"
       });
        return
@@ -7545,7 +7545,7 @@ const kardex = new Vue({
      }else{
        let prueba = this.modales.modal_devolucion_venta.filter(x => x.tipo == 'ingreso_venta');
      if (prueba.length == 0) {
-       toastr.error("No puedes enviar solo existencias", "Smarmoddle", {
+       toastr.error("No puedes enviar solo existencias", "SmartLearn", {
           "timeOut": "3000"
       });
        return
@@ -7697,7 +7697,7 @@ const kardex = new Vue({
        this.transaccion.egreso.add = false;
     }else if(metodo == 'crear'){
     if(this.edit.egreso.cantidad.trim() ==='' || this.edit.egreso.precio.trim() ==='' ){
-      toastr.error("Todos lo campos son obligatorios", "Smarmoddle", {
+      toastr.error("Todos lo campos son obligatorios", "SmartLearn", {
         "timeOut": "3000"
     });
     
@@ -7721,7 +7721,7 @@ const kardex = new Vue({
     agregarEgreso(tipo){
 
     if(this.transaccion.egreso.cantidad.trim() ==='' || this.transaccion.egreso.precio.trim() ==='' ){
-      toastr.error("Todos lo campos son obligatorios", "Smarmoddle", {
+      toastr.error("Todos lo campos son obligatorios", "SmartLearn", {
         "timeOut": "3000"
     });
     }else {
@@ -7732,7 +7732,7 @@ const kardex = new Vue({
         let array = {identificacion: id, fecha:'', movimiento:'', tipo:'egreso_compra', fecha:this.transaccion.fecha, movimiento:this.transaccion.movimiento, ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:this.transaccion.egreso.cantidad, egreso_precio:this.transaccion.egreso.precio, egreso_total:this.transaccion.egreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total: ''};
         this.modales.modal_devolucion_compra.push(array)
         
-        toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
+        toastr.success("Transaccion agregada correctamente", "SmartLearn", {
           "timeOut": "3000"
       });
         this.exis.cantidad                   = '';
@@ -7754,7 +7754,7 @@ const kardex = new Vue({
         let calculo = Number(this.totales.total) - Number(this.transaccion.egreso.total);
         let array = {identificacion: id, fecha:'', movimiento:'', tipo:'egreso', fecha:this.transaccion.fecha, movimiento:this.transaccion.movimiento, ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:this.transaccion.egreso.cantidad, egreso_precio:this.transaccion.egreso.precio, egreso_total:this.transaccion.egreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total: ''};
         this.modales.modal_egreso.unshift(array)
-        toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
+        toastr.success("Transaccion agregada correctamente", "SmartLearn", {
           "timeOut": "3000"
       });
         this.exis.cantidad                   = '';
@@ -7778,7 +7778,7 @@ const kardex = new Vue({
         let array = {identificacion: id, fecha:'', movimiento:'', tipo:'egreso', fecha:this.transaccion.fecha, movimiento:this.transaccion.movimiento, ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'',  egreso_cantidad:this.transaccion.egreso.cantidad, egreso_precio:this.transaccion.egreso.precio, egreso_total:this.transaccion.egreso.total, existencia_cantidad:this.transaccion.existencia.cantidad, existencia_precio: this.transaccion.existencia.precio, existencia_total: ''};
         this.modales.modal_egreso.splice(ultimo + 1, 0, array);
    
-        toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
+        toastr.success("Transaccion agregada correctamente", "SmartLearn", {
           "timeOut": "3000"
           });
         this.exis.cantidad                   = '';
@@ -7798,7 +7798,7 @@ const kardex = new Vue({
     agregarEgresoNew(tipo){
 
       if(this.transaccion.egreso.cantidad.trim() ==='' || this.transaccion.egreso.precio.trim() ==='' ){
-        toastr.error("Cantidad y Precio son obligatorios", "Smarmoddle", {
+        toastr.error("Cantidad y Precio son obligatorios", "SmartLearn", {
           "timeOut": "3000"
       });
         }else {
@@ -7816,7 +7816,7 @@ const kardex = new Vue({
 
          
        
-        toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
+        toastr.success("Transaccion agregada correctamente", "SmartLearn", {
           "timeOut": "3000"
           });
           this.exis.cantidad                   = '';
@@ -7840,7 +7840,7 @@ const kardex = new Vue({
       this.modales.modal_egreso.push(existencia);
     }
       
-      toastr.success("Agregado", "Smarmoddle", {
+      toastr.success("Agregado", "SmartLearn", {
         "timeOut": "3000"
     });
       this.exis.cantidad = '';
@@ -7858,7 +7858,7 @@ const kardex = new Vue({
       this.egresos.push(existencia);
     }
       
-      toastr.success("Agregado", "Smarmoddle", {
+      toastr.success("Agregado", "SmartLearn", {
         "timeOut": "3000"
     });
       this.exis.cantidad = '';
@@ -8001,7 +8001,7 @@ const kardex = new Vue({
         this.totales.subtotal = suma
       }
 
-        toastr.error("Datos Actualizado", "Smarmoddle", {
+        toastr.error("Datos Actualizado", "SmartLearn", {
         "timeOut": "3000"
         });
 
@@ -8185,7 +8185,7 @@ const kardex = new Vue({
     agregarDevolucion(){
 
     if(this.transaccion.fecha.trim() ==='' || this.transaccion.movimiento.trim() ==='' || this.transaccion.ingreso.cantidad.trim() ==='' || this.transaccion.ingreso.precio.trim() ===''){
-      toastr.error("Todos los campos son obligatorios", "Smarmoddle", {
+      toastr.error("Todos los campos son obligatorios", "SmartLearn", {
         "timeOut": "3000"
     });
      }else {
@@ -8197,7 +8197,7 @@ const kardex = new Vue({
      
       this.modales.modal_devolucion_venta.unshift(array);
   
-      toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
+      toastr.success("Transaccion agregada correctamente", "SmartLearn", {
         "timeOut": "3000"
     });
       this.transaccion.exis.cantidad = this.transaccion.existencia.cantidad;
@@ -8221,7 +8221,7 @@ const kardex = new Vue({
           let existencia ={identificador: id, fecha:'', movimiento:'', tipo:'existencia', ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:'', egreso_precio:'', egreso_total:'', existencia_cantidad:this.exis.cantidad, existencia_precio:this.exis.precio, existencia_total:''}
           this.modales.modal_devolucion_venta.push(existencia);
           this.modales.modal_devolucion_venta[ultimo].existencia_total = '';
-          toastr.success("Agregado", "Smarmoddle", {
+          toastr.success("Agregado", "SmartLearn", {
             "timeOut": "3000"
             });
           this.exis.cantidad                = '';
@@ -8245,12 +8245,12 @@ const kardex = new Vue({
     },
      guardarKardex: function() {
     if(this.transacciones.length == 0){
-          toastr.error("Debe haber al menos un registro en el Kardex", "Smarmoddle", {
+          toastr.error("Debe haber al menos un registro en el Kardex", "SmartLearn", {
             "timeOut": "3000"
         });
 
      }else if(this.nombre.trim() === ''  || this.producto.trim() === ''){
-          toastr.error("Nombre & Producto es Obligatorio", "Smarmoddle", {
+          toastr.error("Nombre & Producto es Obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
 
@@ -8274,11 +8274,11 @@ const kardex = new Vue({
 
         }).then(response => {
           if (response.data.estado == 'guardado') {
-              toastr.success("Kardex creado correctamente", "Smarmoddle", {
+              toastr.success("Kardex creado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
             }else if (response.data.estado == 'actualizado') {
-              toastr.warning("kardex actualizado correctamente", "Smarmoddle", {
+              toastr.warning("kardex actualizado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
             }        
@@ -8297,7 +8297,7 @@ const kardex = new Vue({
               producto_id: _this.producto_id
         }).then(response => {
           if (response.data.datos == true) {
-              toastr.info("Kardex Fifo cargado correctamente", "Smarmoddle", {
+              toastr.info("Kardex Fifo cargado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
               _this.transacciones = response.data.kardex_fifo;
@@ -8659,7 +8659,7 @@ const kardex_promedio = new Vue({
     },
     calcularTotalIngreso(){
     if(this.transaccion.ingreso.cantidad.trim() ==='' || this.transaccion.ingreso.precio.trim() ==='' ){
-      toastr.error("La Cantidad & Precio es Obligatoria", "Smarmoddle", {
+      toastr.error("La Cantidad & Precio es Obligatoria", "SmartLearn", {
         "timeOut": "3000"
       });
     }else {
@@ -8683,7 +8683,7 @@ const kardex_promedio = new Vue({
       let total1 = this.modales.modal_ingreso[i].ingreso_total;
       let multiplicacion =  cantidad * precio;
       this.modales.modal_ingreso[i].ingreso_total = multiplicacion.toFixed(2);
-        toastr.success("Datos Actualizado", "Smarmoddle", {
+        toastr.success("Datos Actualizado", "SmartLearn", {
         "timeOut": "3000"
         });
     
@@ -8696,14 +8696,14 @@ const kardex_promedio = new Vue({
       let total1 = this.modales.modal_egreso[i].egreso_total;
       let multiplicacion =  cantidad * precio;
       this.modales.modal_egreso[i].egreso_total = multiplicacion.toFixed(2);
-        toastr.success("Datos Actualizado", "Smarmoddle", {
+        toastr.success("Datos Actualizado", "SmartLearn", {
         "timeOut": "3000"
         });
     
     },
     calcularTotalEgreso(){
     if(this.transaccion.egreso.cantidad.trim() ==='' || this.transaccion.egreso.precio.trim() ==='' ){
-      toastr.error("La Cantidad & Precio es Obligatoria", "Smarmoddle", {
+      toastr.error("La Cantidad & Precio es Obligatoria", "SmartLearn", {
         "timeOut": "3000"
       });
     }else {
@@ -8722,7 +8722,7 @@ const kardex_promedio = new Vue({
 
     agregarInicial(){
       if(this.inicial.fecha.trim() ==='' || this.inicial.movimiento.trim() ==='' ||   this.inicial.cantidad.trim() ==='' || this.inicial.precio.trim() ==='' ){
-      toastr.error("Todos los campos son Obligatorios", "Smarmoddle", {
+      toastr.error("Todos los campos son Obligatorios", "SmartLearn", {
         "timeOut": "3000"
       });
     }else {
@@ -8732,7 +8732,7 @@ const kardex_promedio = new Vue({
 
       let inicial = {tipo:'inicial', fecha: this.inicial.fecha, movimiento:this.inicial.movimiento, ingreso_cantidad:'', ingreso_precio:'', ingreso_total:'', egreso_cantidad:'', egreso_precio:'', egreso_total:'',  existencia_cantidad:this.inicial.cantidad, existencia_precio: this.inicial.precio, existencia_total:this.inicial.total};
       this.transacciones.unshift(inicial)
-        toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
+        toastr.success("Transaccion agregada correctamente", "SmartLearn", {
         "timeOut": "3000"
           });
       this.update = false;
@@ -8764,7 +8764,7 @@ const kardex_promedio = new Vue({
     agregarIngreso(){
       
       this.transacciones.push(this.modales.modal_ingreso[0])
-        toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
+        toastr.success("Transaccion agregada correctamente", "SmartLearn", {
         "timeOut": "3000"
           });
           this.modales.modal_ingreso = [];
@@ -8778,7 +8778,7 @@ const kardex_promedio = new Vue({
       agregarEgreso(){
 
            this.transacciones.push(this.modales.modal_egreso[0])
-        toastr.success("Transaccion agregada correctamente", "Smarmoddle", {
+        toastr.success("Transaccion agregada correctamente", "SmartLearn", {
         "timeOut": "3000"
           });
           this.modales.modal_egreso = [];
@@ -8921,7 +8921,7 @@ const kardex_promedio = new Vue({
       this.transacciones.splice(index, 1);
 
      }
-       toastr.info("Transaccion eliminada correctamente", "Smarmoddle", {
+       toastr.info("Transaccion eliminada correctamente", "SmartLearn", {
         "timeOut": "3000"
           });
       this.sumasTotales();
@@ -8933,12 +8933,12 @@ const kardex_promedio = new Vue({
     },
       guardarKardex: function() {
     if(this.transacciones.length == 0){
-          toastr.error("Debe haber al menos un registro en el Kardex", "Smarmoddle", {
+          toastr.error("Debe haber al menos un registro en el Kardex", "SmartLearn", {
             "timeOut": "3000"
         });
 
      }else if(this.nombre.trim() === ''  || this.producto.trim() === ''){
-          toastr.error("Nombre & Producto es Obligatorio", "Smarmoddle", {
+          toastr.error("Nombre & Producto es Obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
 
@@ -8962,11 +8962,11 @@ const kardex_promedio = new Vue({
 
         }).then(response => {
           if (response.data.estado == 'guardado') {
-              toastr.success("Kardex creado correctamente", "Smarmoddle", {
+              toastr.success("Kardex creado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
             }else if (response.data.estado == 'actualizado') {
-              toastr.warning("kardex actualizado correctamente", "Smarmoddle", {
+              toastr.warning("kardex actualizado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
             }        
@@ -8985,7 +8985,7 @@ const kardex_promedio = new Vue({
               producto_id: _this.producto_id,
         }).then(response => {
           if (response.data.datos == true) {
-              toastr.info("Kardex Promedio cargado correctamente", "Smarmoddle", {
+              toastr.info("Kardex Promedio cargado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
               _this.transacciones = response.data.kardex_promedio;
@@ -9134,22 +9134,22 @@ let librocaja = new Vue({
     agregarRegistro(){
          
       if(this.caja.fecha.trim() === ''){
-        toastr.error("La fecha es obligatoria ", "Smarmoddle", {
+        toastr.error("La fecha es obligatoria ", "SmartLearn", {
           "timeOut": "3000"
       });
       }else if(this.caja.detalle.trim() === ''){
-          toastr.error("El campo Detalle es Obligatorio", "Smartmoodle", {
+          toastr.error("El campo Detalle es Obligatorio", "SmartLearn", {
             "timeOut": "3000"
           });
       }else if(this.caja.debe.trim() !='' && this.caja.haber.trim() !=''){
-          toastr.error("No puede llenar ambos campos de debe y haber", "Smartmoodle",{
+          toastr.error("No puede llenar ambos campos de debe y haber", "SmartLearn",{
             "timeOut": "30000"
           });
       }else {
 
         var caja = {fecha:this.caja.fecha, detalle:this.caja.detalle, debe:this.caja.debe, haber:this.caja.haber, saldo:this.caja.saldo  }
         this.libros_caja.push(caja);
-        toastr.success("Registro agregado correctamente", "Smarmoddle", {
+        toastr.success("Registro agregado correctamente", "SmartLearn", {
           "timeOut": "3000"
       });
       this.caja.fecha   =''
@@ -9203,11 +9203,11 @@ let librocaja = new Vue({
     actualizarLibroCaja(){
 
       if(this.caja.fecha.trim() === ''){
-        toastr.error("La fecha es obligatoria ", "Smarmoddle", {
+        toastr.error("La fecha es obligatoria ", "SmartLearn", {
           "timeOut": "3000"
       });
       }else if(this.caja.detalle.trim() === ''){
-          toastr.error("El campo Detalle es Obligatorio", "Smartmoodle", {
+          toastr.error("El campo Detalle es Obligatorio", "SmartLearn", {
             "timeOut": "3000"
           });
      
@@ -9220,7 +9220,7 @@ let librocaja = new Vue({
        this.libros_caja[id].saldo    = this.caja.saldo;
        this.cancelarEditlibro();
        this.totales();
-       toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+       toastr.error("Registro actualizado correctamente", "SmartLearn", {
         "timeOut": "3000"
         });
       }
@@ -9257,11 +9257,11 @@ let librocaja = new Vue({
 
       guardarLibro : function(){
         if(this.nombre.length == 0){
-          toastr.error("Debe Ingresar el Nombre Comercial", "Smarmoddle", {
+          toastr.error("Debe Ingresar el Nombre Comercial", "SmartLearn", {
             "timeOut": "3000"
         });
         } else if(this.libros_caja.length == 0){
-          toastr.error("Debe haber al menos un registro en el Balance", "Smarmoddle", {
+          toastr.error("Debe haber al menos un registro en el Balance", "SmartLearn", {
             "timeOut": "3000"
         });
         } else {
@@ -9275,12 +9275,12 @@ let librocaja = new Vue({
                  haber:        _this.suman.haber,
                }).then(response=>{
                 if (response.data.estado == 'guardado') {
-                  toastr.success("Anexo creado correctamente", "Smarmoddle", {
+                  toastr.success("Anexo creado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 arqueo_caja.obtenerLibroCaja();
                 }else if (response.data.estado == 'actualizado') {
-                  toastr.warning("Anexo actualizado correctamente", "Smarmoddle", {
+                  toastr.warning("Anexo actualizado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 arqueo_caja.obtenerLibroCaja();
@@ -9300,7 +9300,7 @@ let librocaja = new Vue({
                 id: _this.id_taller, 
                 }).then(response =>{
                   if(response.data.datos == true){
-                    toastr.info("Anexo Libro Caja cargado correctamente", "Smarmoddle", {
+                    toastr.info("Anexo Libro Caja cargado correctamente", "SmartLearn", {
                       "timeOut": "3000"
                       });
                       this.libros_caja = response.data.banexocaja;
@@ -9470,18 +9470,18 @@ const arqueo_caja = new Vue ({
     agregarsaldo(){
        
       if(this.saldo.detalle.trim() === ''){
-        toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+        toastr.error("El Detalle es Obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
 
     }else if(this.saldo.s_debe.trim() !='' && this.saldo.s_haber.trim() !=''){
-      toastr.error("No puede llenar ambos campos de debe y haber ", "Smarmoddle", {
+      toastr.error("No puede llenar ambos campos de debe y haber ", "SmartLearn", {
         "timeOut": "3000"
     });
     } else{
         var saldo ={detalle:this.saldo.detalle, s_debe:this.saldo.s_debe, s_haber:this.saldo.s_haber}
         this.t_saldo.push(saldo);
-        toastr.success("Saldo agregado correctamente", "Smarmoddle", {
+        toastr.success("Saldo agregado correctamente", "SmartLearn", {
           "timeOut": "3000"
       });
        
@@ -9528,7 +9528,7 @@ const arqueo_caja = new Vue ({
 
     actualizarSaldo (){
       if(this.saldo.detalle == ''){
-        toastr.error("El campo Detalle es obligatorio", "Smarmoddle", {
+        toastr.error("El campo Detalle es obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
       }else {
@@ -9540,7 +9540,7 @@ const arqueo_caja = new Vue ({
         this.t_saldo[index].s_haber      =   this.saldo.s_haber;
         this.cancelarEditSaldo();
         this.totales_s();
-        toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+        toastr.error("Registro actualizado correctamente", "SmartLearn", {
           "timeOut": "3000"
           });
       }
@@ -9580,18 +9580,18 @@ const arqueo_caja = new Vue ({
     agregarExistencia(){
        
       if(this.exis.detalle.trim()=== ''){
-        toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+        toastr.error("El Detalle es Obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
 
       }else if(this.exis.e_debe.trim() !='' && this.exis.e_haber.trim() !=''){
-        toastr.error("No puede llenar ambos campos de debe y haber ", "Smarmoddle", {
+        toastr.error("No puede llenar ambos campos de debe y haber ", "SmartLearn", {
           "timeOut": "3000"
       });
       } else{
         var exis ={detalle:this.exis.detalle, e_debe:this.exis.e_debe, e_haber:this.exis.e_haber}
         this.t_exis.push(exis);
-        toastr.success("Existencias agregado correctamente", "Smarmoddle", {
+        toastr.success("Existencias agregado correctamente", "SmartLearn", {
           "timeOut": "3000"
       });
        
@@ -9638,7 +9638,7 @@ const arqueo_caja = new Vue ({
    
     actualizarExis (){
       if(this.exis.detalle == ''){
-        toastr.error("El campo Detalle es obligatorio", "Smarmoddle", {
+        toastr.error("El campo Detalle es obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
       }else {
@@ -9650,7 +9650,7 @@ const arqueo_caja = new Vue ({
        
         this.cancelarEditExis();
         this.totales_s();
-        toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+        toastr.error("Registro actualizado correctamente", "SmartLearn", {
           "timeOut": "3000"
           });
       }
@@ -9688,11 +9688,11 @@ const arqueo_caja = new Vue ({
    guardaArqueo: function(){
 
     if(this.t_saldo.length == 0){
-      toastr.error("Debe haber al menos un Saldo Registrado", "Smarmoddle", {
+      toastr.error("Debe haber al menos un Saldo Registrado", "SmartLearn", {
         "timeOut": "3000"
     });
     }else if (this.t_exis.length == 0){
-      toastr.error("Debe haber al menos una Existencia Registrado", "Smarmoddle", {
+      toastr.error("Debe haber al menos una Existencia Registrado", "SmartLearn", {
         "timeOut": "3000"
     });
     }else{
@@ -9715,12 +9715,12 @@ const arqueo_caja = new Vue ({
     select_valor:      _this.pruebas.select_valor,
       }).then(response =>{
         if (response.data.estado == 'guardado') {
-          toastr.success("Arqueo Caja creado correctamente", "Smarmoddle", {
+          toastr.success("Arqueo Caja creado correctamente", "SmartLearn", {
           "timeOut": "3000"
         });
         this.totales_s();
       }else if (response.data.estado == 'actualizado') {
-        toastr.warning("Arqueo Caja actualizado correctamente", "Smarmoddle", {
+        toastr.warning("Arqueo Caja actualizado correctamente", "SmartLearn", {
        "timeOut": "3000"
      });
      this.totales_s();
@@ -9739,7 +9739,7 @@ const arqueo_caja = new Vue ({
       id: _this.id_taller,
     }).then(response =>{
       if(response.data.datos == true){
-        toastr.info("Anexo Arqueo Caja cargado correctamente", "Smarmoddle", {
+        toastr.info("Anexo Arqueo Caja cargado correctamente", "SmartLearn", {
           "timeOut": "3000"
           });
           this.t_saldo                   = response.data.saldo;
@@ -9870,22 +9870,22 @@ let librosbanco = new Vue({
 
       agregarBanco(){
         if(this.banco.fecha.trim() === ''){
-          toastr.error("La fecha es obligatoria ", "Smarmoddle", {
+          toastr.error("La fecha es obligatoria ", "SmartLearn", {
             "timeOut": "3000"
         });
         }else if(this.banco.detalle.trim() === ''){
-            toastr.error("El campo Detalle es Obligatorio", "Smartmoodle", {
+            toastr.error("El campo Detalle es Obligatorio", "SmartLearn", {
               "timeOut": "3000"
             });
         }else if(this.banco.debe.trim() !='' && this.banco.haber.trim() !=''){
-            toastr.error("No puede llenar ambos campos de debe y haber", "Smartmoodle",{
+            toastr.error("No puede llenar ambos campos de debe y haber", "SmartLearn",{
               "timeOut": "30000"
             });
         }else {
 
           var banco = {fecha:this.banco.fecha, detalle:this.banco.detalle,cheque:this.banco.cheque, debe:this.banco.debe, haber:this.banco.haber, saldo:this.banco.saldo  }
           this.lb_banco.push(banco);
-          toastr.success("Registro agregado correctamente", "Smarmoddle", {
+          toastr.success("Registro agregado correctamente", "SmartLearn", {
             "timeOut": "3000"
         });
         this.banco.fecha   =''
@@ -9940,11 +9940,11 @@ let librosbanco = new Vue({
     actualizarLibroBanco(){
 
       if(this.banco.fecha.trim() === ''){
-        toastr.error("La fecha es obligatoria ", "Smarmoddle", {
+        toastr.error("La fecha es obligatoria ", "SmartLearn", {
           "timeOut": "3000"
       });
       }else if(this.banco.detalle.trim() === ''){
-          toastr.error("El campo Detalle es Obligatorio", "Smartmoodle", {
+          toastr.error("El campo Detalle es Obligatorio", "SmartLearn", {
             "timeOut": "3000"
           });
     
@@ -9959,7 +9959,7 @@ let librosbanco = new Vue({
 
         this.cancelarEditlibroBanco();
         this.totales();
-        toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+        toastr.error("Registro actualizado correctamente", "SmartLearn", {
           "timeOut": "3000"
           });
       
@@ -10010,22 +10010,22 @@ let librosbanco = new Vue({
      guardarlbBAnco(){
      
       if(this.nombre.length == 0){
-        toastr.error("Debe Ingresar el Nombre del Comercial", "Smarmoddle", {
+        toastr.error("Debe Ingresar el Nombre del Comercial", "SmartLearn", {
           "timeOut": "3000"
       });
 
       }else if(this.n_banco.length == 0){
-        toastr.error("Debe Ingresar el Nombre del Banco", "Smarmoddle", {
+        toastr.error("Debe Ingresar el Nombre del Banco", "SmartLearn", {
           "timeOut": "3000"
       });
 
       }else if(this.c_banco.length == 0){
-        toastr.error("Debe Ingresar la Cuenta del Banco", "Smarmoddle", {
+        toastr.error("Debe Ingresar la Cuenta del Banco", "SmartLearn", {
           "timeOut": "3000"
       });
 
       }else if(this.lb_banco.length == 0){
-        toastr.error("Debe haber al menos un Registro", "Smarmoddle", {
+        toastr.error("Debe haber al menos un Registro", "SmartLearn", {
           "timeOut": "3000"
       });
 
@@ -10043,12 +10043,12 @@ let librosbanco = new Vue({
              haber:  _this.suman.haber,
         }).then(response=>{
           if (response.data.estado == 'guardado') {
-            toastr.success("Arqueo Libro Banco creado correctamente", "Smarmoddle", {
+            toastr.success("Arqueo Libro Banco creado correctamente", "SmartLearn", {
             "timeOut": "3000"
           });
           conciliacionb.obtenerLibroBanco();
           }else if (response.data.estado == 'actualizado') {
-           toastr.warning("Arqueo Libro Banco actualizado correctamente", "Smarmoddle", {
+           toastr.warning("Arqueo Libro Banco actualizado correctamente", "SmartLearn", {
           "timeOut": "3000"
         });
         conciliacionb.obtenerLibroBanco();
@@ -10068,7 +10068,7 @@ let librosbanco = new Vue({
          id: _this.id_taller,
        }).then(response=>{
         if(response.data.datos == true){
-          toastr.info("Anexo Libro Banco cargado correctamente", "Smarmoddle", {
+          toastr.info("Anexo Libro Banco cargado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
             this.lb_banco = response.data.mb;
@@ -10301,23 +10301,23 @@ const conciliacionb = new Vue({
    agregarDeposito(){
        
     if(this.deposito.fecha.trim() === ''){
-      toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+      toastr.error("La Fecha es Obligatorio", "SmartLearn", {
         "timeOut": "3000"
     });
 
   }else if(this.deposito.detalle.trim() === ''){
-      toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+      toastr.error("El Detalle es Obligatorio", "SmartLearn", {
         "timeOut": "3000"
     });
 
   }else if(this.deposito.saldo.trim() ===''){
-    toastr.error("El Saldo es Obligatorio ", "Smarmoddle", {
+    toastr.error("El Saldo es Obligatorio ", "SmartLearn", {
       "timeOut": "3000"
   });
   } else{
       var deposito ={fecha:this.deposito.fecha, detalle:this.deposito.detalle, saldo:this.deposito.saldo,}
       this.c_depositos.push(deposito);
-      toastr.success("El Valor agregado correctamente", "Smarmoddle", {
+      toastr.success("El Valor agregado correctamente", "SmartLearn", {
         "timeOut": "3000"
     });
     this.deposito.fecha =''
@@ -10387,17 +10387,17 @@ const conciliacionb = new Vue({
    actualizarDeposito(){
 
     if(this.deposito.fecha.trim() === ''){
-      toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+      toastr.error("La Fecha es Obligatorio", "SmartLearn", {
         "timeOut": "3000"
     });
 
   }else if(this.deposito.detalle.trim() === ''){
-      toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+      toastr.error("El Detalle es Obligatorio", "SmartLearn", {
         "timeOut": "3000"
     });
 
   }else if(this.deposito.saldo.trim() ===''){
-    toastr.error("El Saldo es Obligatorio ", "Smarmoddle", {
+    toastr.error("El Saldo es Obligatorio ", "SmartLearn", {
       "timeOut": "3000"
   });
   } else{
@@ -10408,7 +10408,7 @@ const conciliacionb = new Vue({
    
      this.cancelarEditDeposito();
      this.totales();
-     toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+     toastr.error("Registro actualizado correctamente", "SmartLearn", {
       "timeOut": "3000"
       });
     }
@@ -10421,23 +10421,23 @@ const conciliacionb = new Vue({
     agregarSaldo(){
        
       if(this.saldo.fecha.trim() === ''){
-        toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+        toastr.error("La Fecha es Obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
 
     }else if(this.saldo.detalle.trim() === ''){
-        toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+        toastr.error("El Detalle es Obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
 
     }else if(this.saldo.saldo.trim() ===''){
-      toastr.error("El Saldo es Obligatorio ", "Smarmoddle", {
+      toastr.error("El Saldo es Obligatorio ", "SmartLearn", {
         "timeOut": "3000"
     });
     } else{
         var saldo ={fecha:this.saldo.fecha, detalle:this.saldo.detalle, saldo:this.saldo.saldo,}
         this.c_saldos.push(saldo);
-        toastr.success("El Valor agregado correctamente", "Smarmoddle", {
+        toastr.success("El Valor agregado correctamente", "SmartLearn", {
           "timeOut": "3000"
       });
       this.saldo.fecha =''
@@ -10506,17 +10506,17 @@ const conciliacionb = new Vue({
      actualizarSaldo(){
 
       if(this.saldo.fecha.trim() === ''){
-        toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+        toastr.error("La Fecha es Obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
 
     }else if(this.saldo.detalle.trim() === ''){
-        toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+        toastr.error("El Detalle es Obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
 
     }else if(this.saldo.saldo.trim() ===''){
-      toastr.error("El Saldo es Obligatorio ", "Smarmoddle", {
+      toastr.error("El Saldo es Obligatorio ", "SmartLearn", {
         "timeOut": "3000"
     });
     } else{
@@ -10527,7 +10527,7 @@ const conciliacionb = new Vue({
      
        this.cancelarEditSaldo();
        this.totales();
-       toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+       toastr.error("Registro actualizado correctamente", "SmartLearn", {
         "timeOut": "3000"
         });
       }
@@ -10541,23 +10541,23 @@ const conciliacionb = new Vue({
     agregarCreditos(){
        
       if(this.credito.fecha.trim() === ''){
-        toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+        toastr.error("La Fecha es Obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
 
     }else if(this.credito.detalle.trim() === ''){
-        toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+        toastr.error("El Detalle es Obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
 
     }else if(this.credito.saldo.trim() ===''){
-      toastr.error("El Valor es Obligatorio ", "Smarmoddle", {
+      toastr.error("El Valor es Obligatorio ", "SmartLearn", {
         "timeOut": "3000"
     });
     } else{
         var credito ={fecha:this.credito.fecha, detalle:this.credito.detalle, saldo:this.credito.saldo,}
         this.c_creditos.push(credito);
-        toastr.success("El Credito agregado correctamente", "Smarmoddle", {
+        toastr.success("El Credito agregado correctamente", "SmartLearn", {
           "timeOut": "3000"
       });
       this.credito.fecha =''
@@ -10628,17 +10628,17 @@ const conciliacionb = new Vue({
      actualizarCredito(){
 
       if(this.credito.fecha.trim() === ''){
-        toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+        toastr.error("La Fecha es Obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
 
     }else if(this.credito.detalle.trim() === ''){
-        toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+        toastr.error("El Detalle es Obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
 
     }else if(this.credito.saldo.trim() ===''){
-      toastr.error("El Saldo es Obligatorio ", "Smarmoddle", {
+      toastr.error("El Saldo es Obligatorio ", "SmartLearn", {
         "timeOut": "3000"
     });
     } else{
@@ -10649,7 +10649,7 @@ const conciliacionb = new Vue({
      
        this.cancelarEditCredito();
        this.totales();
-       toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+       toastr.error("Registro actualizado correctamente", "SmartLearn", {
         "timeOut": "3000"
         });
       }
@@ -10663,23 +10663,23 @@ const conciliacionb = new Vue({
     agregarDebitos(){
        
       if(this.debito.fecha.trim() === ''){
-        toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+        toastr.error("La Fecha es Obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
 
     }else if(this.debito.detalle.trim() === ''){
-        toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+        toastr.error("El Detalle es Obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
 
     }else if(this.debito.saldo.trim() ===''){
-      toastr.error("El Valor es Obligatorio ", "Smarmoddle", {
+      toastr.error("El Valor es Obligatorio ", "SmartLearn", {
         "timeOut": "3000"
     });
     } else{
         var debito ={fecha:this.debito.fecha, detalle:this.debito.detalle, saldo:this.debito.saldo,}
         this.c_debitos.push(debito);
-        toastr.success("El Debito agregado correctamente", "Smarmoddle", {
+        toastr.success("El Debito agregado correctamente", "SmartLearn", {
           "timeOut": "3000"
       });
       this.debito.fecha =''
@@ -10750,17 +10750,17 @@ const conciliacionb = new Vue({
      actualizarDebito(){
 
       if(this.debito.fecha.trim() === ''){
-        toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+        toastr.error("La Fecha es Obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
 
     }else if(this.debito.detalle.trim() === ''){
-        toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+        toastr.error("El Detalle es Obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
 
     }else if(this.debito.saldo.trim() ===''){
-      toastr.error("El Saldo es Obligatorio ", "Smarmoddle", {
+      toastr.error("El Saldo es Obligatorio ", "SmartLearn", {
         "timeOut": "3000"
     });
     } else{
@@ -10771,7 +10771,7 @@ const conciliacionb = new Vue({
      
        this.cancelarEditDebito();
        this.totales();
-       toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+       toastr.error("Registro actualizado correctamente", "SmartLearn", {
         "timeOut": "3000"
         });
       }
@@ -10784,23 +10784,23 @@ const conciliacionb = new Vue({
     agregarCheques(){
           
         if(this.cheques.fecha.trim() === ''){
-          toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+          toastr.error("La Fecha es Obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
 
        }else if(this.cheques.detalle.trim() === ''){
-            toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+            toastr.error("El Detalle es Obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
 
         }else if(this.cheques.saldo.trim() ===''){
-          toastr.error("El Valor es Obligatorio ", "Smarmoddle", {
+          toastr.error("El Valor es Obligatorio ", "SmartLearn", {
             "timeOut": "3000"
         });
         } else{
             var cheques ={fecha:this.cheques.fecha,detalle:this.cheques.detalle, saldo:this.cheques.saldo,}
             this.c_cheques.push(cheques);
-            toastr.success("El Cheque agregado correctamente", "Smarmoddle", {
+            toastr.success("El Cheque agregado correctamente", "SmartLearn", {
               "timeOut": "3000"
           });
 
@@ -10871,17 +10871,17 @@ const conciliacionb = new Vue({
      actualizarCheque(){
 
       if(this.cheques.fecha.trim() === ''){
-        toastr.error("La Fecha es Obligatorio", "Smarmoddle", {
+        toastr.error("La Fecha es Obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
 
     }else if(this.cheques.detalle.trim() === ''){
-        toastr.error("El Detalle es Obligatorio", "Smarmoddle", {
+        toastr.error("El Detalle es Obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
 
     }else if(this.cheques.saldo.trim() ===''){
-      toastr.error("El Saldo es Obligatorio ", "Smarmoddle", {
+      toastr.error("El Saldo es Obligatorio ", "SmartLearn", {
         "timeOut": "3000"
     });
     } else{
@@ -10893,7 +10893,7 @@ const conciliacionb = new Vue({
        this.cancelarEditCheque()
        this.totales();
       
-       toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+       toastr.error("Registro actualizado correctamente", "SmartLearn", {
         "timeOut": "3000"
         });
       }
@@ -10927,35 +10927,35 @@ const conciliacionb = new Vue({
 
        
         if(this.nombre.length == 0){
-          toastr.error("Debe Registrar el Nombre del Comercial", "Smarmoddle", {
+          toastr.error("Debe Registrar el Nombre del Comercial", "SmartLearn", {
             "timeOut": "3000"
         });
         }else if(this.fecha.length == 0){
-          toastr.error("Debe Ingresar la Fecha", "Smarmoddle", {
+          toastr.error("Debe Ingresar la Fecha", "SmartLearn", {
             "timeOut": "3000"
         });
         }else if(this.n_banco.length == 0){
-          toastr.error("Debe Ingresar el Nombre del Banco", "Smarmoddle", {
+          toastr.error("Debe Ingresar el Nombre del Banco", "SmartLearn", {
             "timeOut": "3000"
         });
         }else if(this.c_saldos.length == 0){
-          toastr.error("Debe haber al menos un Saldo Registrado", "Smarmoddle", {
+          toastr.error("Debe haber al menos un Saldo Registrado", "SmartLearn", {
             "timeOut": "3000"
         });
         }else if (this.c_debitos.length == 0){
-          toastr.error("Debe haber al menos un Débito Registrado", "Smarmoddle", {
+          toastr.error("Debe haber al menos un Débito Registrado", "SmartLearn", {
             "timeOut": "3000"
         });
         }else if (this.c_depositos.length == 0){
-          toastr.error("Debe haber al menos un Depósito Registrado", "Smarmoddle", {
+          toastr.error("Debe haber al menos un Depósito Registrado", "SmartLearn", {
             "timeOut": "3000"
         });
         }else if (this.c_creditos.length == 0){
-          toastr.error("Debe haber al menos un Crédito Registrado", "Smarmoddle", {
+          toastr.error("Debe haber al menos un Crédito Registrado", "SmartLearn", {
             "timeOut": "3000"
         });
         }else if (this.c_cheques.length == 0){
-          toastr.error("Debe haber al menos un Cheque Registrado", "Smarmoddle", {
+          toastr.error("Debe haber al menos un Cheque Registrado", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
@@ -10979,11 +10979,11 @@ const conciliacionb = new Vue({
           
           }).then(response=>{
             if (response.data.estado == 'guardado') {
-              toastr.success("Conciliación Bancaria creada correctamente", "Smarmoddle", {
+              toastr.success("Conciliación Bancaria creada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
             }else if (response.data.estado == 'actualizado') {
-             toastr.warning("Conciliación Bancaria actualizado correctamente", "Smarmoddle", {
+             toastr.warning("Conciliación Bancaria actualizado correctamente", "SmartLearn", {
             "timeOut": "3000"
           });
           this.totales(); 
@@ -11002,7 +11002,7 @@ const conciliacionb = new Vue({
           id: _this.id_taller,
         }).then(response=>{
           if(response.data.datos == true){
-            toastr.info("Anexo Conciliación Bancaria cargado correctamente", "Smarmoddle", {
+            toastr.info("Anexo Conciliación Bancaria cargado correctamente", "SmartLearn", {
               "timeOut": "3000"
               });
               this.c_saldos   = response.data.saldo;
@@ -11331,17 +11331,17 @@ let reten_iva = new Vue({
        agregarCompra(){
         
         if(this.compra.fecha_c == ''){
-          toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Fecha es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else if(this.compra.detalle == ''){
-          toastr.error("El campo de Compra de Bienes y Servicios es obligatorio", "Smarmoddle", {
+          toastr.error("El campo de Compra de Bienes y Servicios es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         } else {
            let compra = {fecha_c:this.compra.fecha_c, detalle:this.compra.detalle, proveedor:this.compra.proveedor, base_im:this.compra.base_im, porcentaje:this.compra.porcentaje, v_retenido:this.compra.v_retenido, iva:this.compra.iva, ret_10:this.compra.ret_10,ret_20:this.compra.ret_20,ret_30:this.compra.ret_30,ret_70:this.compra.ret_70,ret_100:this.compra.ret_100,}
            this.t_compras.push(compra);
-           toastr.success("Registro agregado correctamente", "Smarmoddle", {
+           toastr.success("Registro agregado correctamente", "SmartLearn", {
             "timeOut": "3000"
           });
            this.compra.fecha_c    ='';
@@ -11420,11 +11420,11 @@ let reten_iva = new Vue({
       actualizarCompra (){
 
         if(this.compra.fecha_c == ''){
-          toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Fecha es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else if(this.compra.detalle == ''){
-          toastr.error("El campo de Compra de Bienes y Servicios es obligatorio", "Smarmoddle", {
+          toastr.error("El campo de Compra de Bienes y Servicios es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         } else {
@@ -11445,7 +11445,7 @@ let reten_iva = new Vue({
           this.t_compras[index].ret_100    =   this.compra.ret_100 ;
           this.cancelarEditCompra();
           this.Totales();
-          toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+          toastr.error("Registro actualizado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
         }
@@ -11481,17 +11481,17 @@ let reten_iva = new Vue({
       agregarVenta(){
         
         if(this.venta.fecha_v == ''){
-          toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Fecha es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else if(this.venta.detalle == ''){
-          toastr.error("El campo de Venta de Bienes y Servicios es obligatorio", "Smarmoddle", {
+          toastr.error("El campo de Venta de Bienes y Servicios es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         } else {
            let venta = {fecha_v:this.venta.fecha_v, detalle:this.venta.detalle, cliente:this.venta.cliente, base_im:this.venta.base_im, porcentaje:this.venta.porcentaje, v_retenido:this.venta.v_retenido, iva:this.venta.iva, ret_10:this.venta.ret_10,ret_20:this.venta.ret_20,ret_30:this.venta.ret_30,ret_70:this.venta.ret_70,ret_100:this.venta.ret_100,}
            this.t_ventas.push(venta);
-           toastr.success("Registro agregado correctamente", "Smarmoddle", {
+           toastr.success("Registro agregado correctamente", "SmartLearn", {
             "timeOut": "3000"
           });
            this.venta.fecha_v    ='';
@@ -11571,11 +11571,11 @@ let reten_iva = new Vue({
       actualizarVenta (){
 
         if(this.venta.fecha_v == ''){
-          toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+          toastr.error("El campo Fecha es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else if(this.venta.detalle == ''){
-          toastr.error("El campo de Venta de Bienes y Servicios es obligatorio", "Smarmoddle", {
+          toastr.error("El campo de Venta de Bienes y Servicios es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         } else {
@@ -11596,7 +11596,7 @@ let reten_iva = new Vue({
           this.t_ventas[index].ret_100    =   this.venta.ret_100 ;
           this.cancelarEditVenta();
           this.Totales();
-          toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+          toastr.error("Registro actualizado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
         }
@@ -11632,19 +11632,19 @@ let reten_iva = new Vue({
 
        guardaretencioniva(){
               if(this.nombre_c.length == 0){
-                toastr.error("Debe Registrar el Nombre del Comercial", "Smarmoddle", {
+                toastr.error("Debe Registrar el Nombre del Comercial", "SmartLearn", {
                   "timeOut": "3000"
               });
             }else if(this.fecha.length == 0){
-              toastr.error("Debe Ingresar la Fecha", "Smarmoddle", {
+              toastr.error("Debe Ingresar la Fecha", "SmartLearn", {
                 "timeOut": "3000"
             });
             }else if(this.contribuyente.length == 0){
-              toastr.error("Debe Ingresar El Contribuyente", "Smarmoddle", {
+              toastr.error("Debe Ingresar El Contribuyente", "SmartLearn", {
                 "timeOut": "3000"
             });
             }else if(this.ruc.length == 0){
-              toastr.error("Debe Ingresar el Ruc ", "Smarmoddle", {
+              toastr.error("Debe Ingresar el Ruc ", "SmartLearn", {
                 "timeOut": "3000"
             });
            
@@ -11684,11 +11684,11 @@ let reten_iva = new Vue({
 
           }).then(response=>{
             if (response.data.estado == 'guardado') {
-              toastr.success("Retención del Iva creada correctamente", "Smarmoddle", {
+              toastr.success("Retención del Iva creada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
             }else if (response.data.estado == 'actualizado') {
-            toastr.warning("Retención del Iva actualizado correctamente", "Smarmoddle", {
+            toastr.warning("Retención del Iva actualizado correctamente", "SmartLearn", {
             "timeOut": "3000"
           });
           this.Totales()
@@ -11706,7 +11706,7 @@ let reten_iva = new Vue({
           id: _this.id_taller,  
         }).then(response=>{
            if(response.data.datos == true){
-            toastr.info("Anexo Retencion del Iva cargado correctamente", "Smarmoddle", {
+            toastr.info("Anexo Retencion del Iva cargado correctamente", "SmartLearn", {
               "timeOut": "3000"
               });
               this.t_compras    = response.data.compra;
@@ -11848,7 +11848,7 @@ methods:{
     },
   calculoHora(){
     if (this.sobretiempo.sueldo == '') {
-        toastr.error("No ha agregado el sueldo", "Smarmoddle", {
+        toastr.error("No ha agregado el sueldo", "SmartLearn", {
           "timeOut": "3000"
         });
       }else{
@@ -11928,7 +11928,7 @@ methods:{
 
           agregardeduccion(){
             if (this.deduccion.valor == '') {
-                  toastr.error("No puede dejar el campo vacio", "Smarmoddle", {
+                  toastr.error("No puede dejar el campo vacio", "SmartLearn", {
                     "timeOut": "3000"
                   });
             }else{
@@ -11959,7 +11959,7 @@ methods:{
               this.impuesto.fraccion_excedente_iva = '';
               this.impuesto.total_impuesto         = '';
               this.impuesto.iva                    = '';
-               toastr.error("Limpiado Correctamente", "Smarmoddle", {
+               toastr.error("Limpiado Correctamente", "SmartLearn", {
                     "timeOut": "3000"
                   });
           },
@@ -11970,15 +11970,15 @@ methods:{
           impuestoRenta(){
         
              if(this.impuesto.fraccion == ''){
-               toastr.error("No has agregado la fraccion basica", "Smarmoddle", {
+               toastr.error("No has agregado la fraccion basica", "SmartLearn", {
                     "timeOut": "3000"
                   });
             }else if(this.impuesto.impuesto_fraccion == ''){
-               toastr.error("No has agregado el impuesto a fraccion basica", "Smarmoddle", {
+               toastr.error("No has agregado el impuesto a fraccion basica", "SmartLearn", {
                     "timeOut": "3000"
                   });
             }else if(this.impuesto.interes == ''){
-                 toastr.error("No has agregado el porcentaje", "Smarmoddle", {
+                 toastr.error("No has agregado el porcentaje", "SmartLearn", {
                     "timeOut": "3000"
                   });
             }else{
@@ -12009,15 +12009,15 @@ methods:{
 
 
             if (this.calculo.valor == '') {
-                toastr.error("No has agregado el valor", "Smarmoddle", {
+                toastr.error("No has agregado el valor", "SmartLearn", {
                     "timeOut": "3000"
                   });
             }else if(this.calculo.tiempo == ''){
-              toastr.error("No has agregado el tiempo", "Smarmoddle", {
+              toastr.error("No has agregado el tiempo", "SmartLearn", {
                   "timeOut": "3000"
                 });
             }else if(this.calculo.interes == ''){
-              toastr.error("Debe agregar el Interes", "Smarmoddle", {
+              toastr.error("Debe agregar el Interes", "SmartLearn", {
                   "timeOut": "3000"
                 });
             }else{
@@ -12047,15 +12047,15 @@ methods:{
         calculoquiro(){
 
           if (this.calculo1.valor == '') {
-            toastr.error("No has agregado el valor", "Smarmoddle", {
+            toastr.error("No has agregado el valor", "SmartLearn", {
                 "timeOut": "3000"
               });
         }else if(this.calculo1.mes == ''){
-          toastr.error("No has agregado el Mes", "Smarmoddle", {
+          toastr.error("No has agregado el Mes", "SmartLearn", {
               "timeOut": "3000"
             });
         }else if(this.calculo1.interes == ''){
-          toastr.error("Debe agregar el Interes", "Smarmoddle", {
+          toastr.error("Debe agregar el Interes", "SmartLearn", {
               "timeOut": "3000"
             });
         }else{
@@ -12195,18 +12195,18 @@ abrirNomina(){ //solo para acceder al modal para agregar todo pilas
     agregarNomina(){
 
       if(this.nomina.nombre_e == ''){
-        toastr.error("El Nombre del Empleado es obligatorio", "Smarmoddle", {
+        toastr.error("El Nombre del Empleado es obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
       }else if(this.nomina.cargo == ''){
-        toastr.error("El Cargo del Empleado es Obligatorio es obligatorio", "Smarmoddle", {
+        toastr.error("El Cargo del Empleado es Obligatorio es obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
       }else {
 
          let nomina ={nombre_e:this.nomina.nombre_e, cargo:this.nomina.cargo, sueldo:this.nomina.sueldo, s_tiempo:this.nomina.s_tiempo, ingresos:this.nomina.ingresos, iees:this.nomina.iees, pres_iees:this.nomina.pres_iees, pres_cia:this.nomina.pres_cia, anticipo:this.nomina.anticipo, imp_renta:this.nomina.imp_renta, egresos:this.nomina.egresos, neto_pagar:this.nomina.neto_pagar}
          this.t_nomina.push(nomina);
-         toastr.success("Registro agregado correctamente", "Smarmoddle", {
+         toastr.success("Registro agregado correctamente", "SmartLearn", {
           "timeOut": "3000"
         });
         this.nomina.nombre_e  ='';
@@ -12283,11 +12283,11 @@ abrirNomina(){ //solo para acceder al modal para agregar todo pilas
     actualizarNomina(){
 
       if(this.nomina.nombre_e == ''){
-        toastr.error("El Nombre del Empleado es obligatorio", "Smarmoddle", {
+        toastr.error("El Nombre del Empleado es obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
       }else if(this.nomina.cargo == ''){
-        toastr.error("El Cargo del Empleado es Obligatorio es obligatorio", "Smarmoddle", {
+        toastr.error("El Cargo del Empleado es Obligatorio es obligatorio", "SmartLearn", {
           "timeOut": "3000"
       });
       }else{
@@ -12307,7 +12307,7 @@ abrirNomina(){ //solo para acceder al modal para agregar todo pilas
         this.t_nomina[index].neto_pagar  = this.nomina.neto_pagar;
         this.cancelarEditNomina();
         this.totales();
-        toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+        toastr.error("Registro actualizado correctamente", "SmartLearn", {
           "timeOut": "3000"
           });
        }
@@ -12358,11 +12358,11 @@ abrirNomina(){ //solo para acceder al modal para agregar todo pilas
         guardarNomina(){
       
           if(this.nombre.length == 0){
-            toastr.error("Debe Registrar el Nombre del Comercial", "Smarmoddle", {
+            toastr.error("Debe Registrar el Nombre del Comercial", "SmartLearn", {
               "timeOut": "3000"
           });
         }else if(this.fecha.length == 0){
-          toastr.error("Debe Ingresar la Fecha", "Smarmoddle", {
+          toastr.error("Debe Ingresar la Fecha", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
@@ -12387,14 +12387,14 @@ abrirNomina(){ //solo para acceder al modal para agregar todo pilas
 
            }).then(response=>{
             if (response.data.estado == 'guardado') {
-              toastr.success("Nómina de Empleados creada correctamente", "Smarmoddle", {
+              toastr.success("Nómina de Empleados creada correctamente", "SmartLearn", {
               "timeOut": "3000"
             });
             provision_b.obtenerNomina();
           
             }else if (response.data.estado == 'actualizado') {
                
-            toastr.warning("Nómina de Empleados actualizado", "Smarmoddle", {
+            toastr.warning("Nómina de Empleados actualizado", "SmartLearn", {
             "timeOut": "3000"
           });
             provision_b.obtenerNomina();
@@ -12418,7 +12418,7 @@ abrirNomina(){ //solo para acceder al modal para agregar todo pilas
             id: _this.id_taller,
           }).then(response =>{
             if(response.data.datos == true){
-              toastr.info("Anexo Nómina de Empleado cargado correctamente", "Smarmoddle", {
+              toastr.info("Anexo Nómina de Empleado cargado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.nombre       = response.data.nombre;
@@ -12573,22 +12573,22 @@ const provision_b = new Vue({
       agregarProvision(){
 
         if(this.pro.nombre_em == ''){
-          toastr.error("El Nombre del Empleado es obligatorio", "Smarmoddle", {
+          toastr.error("El Nombre del Empleado es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else if(this.pro.dias == ''){
-          toastr.error("Este campo es obligatorio", "Smarmoddle", {
+          toastr.error("Este campo es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else if(this.pro.v_recibido == ''){
-          toastr.error("El Valor recibido es obligatorio", "Smarmoddle", {
+          toastr.error("El Valor recibido es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
  
           let pro ={nombre_em:this.pro.nombre_em, dias:this.pro.dias, v_recibido:this.pro.v_recibido, d_tercero:this.pro.d_tercero, d_cuarto:this.pro.d_cuarto, vacaciones:this.pro.vacaciones, f_reserva:this.pro.f_reserva}
           this.t_pro.push(pro);
-          toastr.success("Registro agregado correctamente", "Smarmoddle", {
+          toastr.success("Registro agregado correctamente", "SmartLearn", {
             "timeOut": "3000"
           });
           this.pro.nombre_em    ='';
@@ -12642,15 +12642,15 @@ const provision_b = new Vue({
       actualizarProvision(){
 
         if(this.pro.nombre_em == ''){
-          toastr.error("El Nombre del Empleado es obligatorio", "Smarmoddle", {
+          toastr.error("El Nombre del Empleado es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else if(this.pro.dias == ''){
-          toastr.error("Este campo es obligatorio", "Smarmoddle", {
+          toastr.error("Este campo es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else if(this.pro.v_recibido == ''){
-          toastr.error("El Valor recibido es obligatorio", "Smarmoddle", {
+          toastr.error("El Valor recibido es obligatorio", "SmartLearn", {
             "timeOut": "3000"
         });
         }else {
@@ -12665,7 +12665,7 @@ const provision_b = new Vue({
           this.t_pro[index].f_reserva     = this.pro.f_reserva;
           this.cancelarEditProvision();
           this.totales();
-          toastr.error("Registro actualizado correctamente", "Smarmoddle", {
+          toastr.error("Registro actualizado correctamente", "SmartLearn", {
             "timeOut": "3000"
             });
         }//end else
@@ -12716,7 +12716,7 @@ const provision_b = new Vue({
       guardarProvision(){
 
       if(this.t_pro.length == 0){
-          toastr.error("Debe haber al menos un  Registrado", "Smarmoddle", {
+          toastr.error("Debe haber al menos un  Registrado", "SmartLearn", {
             "timeOut": "3000"
         });
       }else {
@@ -12732,11 +12732,11 @@ const provision_b = new Vue({
               t_pro:   _this.t_pro,
         }).then(response=>{
           if (response.data.estado == 'guardado') {
-            toastr.success("Provisión de Beneficio creada correctamente", "Smarmoddle", {
+            toastr.success("Provisión de Beneficio creada correctamente", "SmartLearn", {
             "timeOut": "3000"
           });
           }else if (response.data.estado == 'actualizado') {
-          toastr.warning("Provisión de Beneficio actualizado correctamente", "Smarmoddle", {
+          toastr.warning("Provisión de Beneficio actualizado correctamente", "SmartLearn", {
           "timeOut": "3000"
         });
         }  
@@ -12755,7 +12755,7 @@ const provision_b = new Vue({
           id: _this.id_taller,  
         }).then(response=>{
           if(response.data.datos == true){
-            toastr.success("Anexo Provisión Beneficio Social cargado correctamente", "Smarmoddle", {
+            toastr.success("Anexo Provisión Beneficio Social cargado correctamente", "SmartLearn", {
               "timeOut": "3000"
               });
 

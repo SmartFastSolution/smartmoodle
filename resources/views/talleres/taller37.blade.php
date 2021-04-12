@@ -785,7 +785,7 @@
         },
         updateNota(){
                if (this.modulo === '') {
-                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
             } else {
@@ -817,7 +817,7 @@
                 set.nota_creditos[index].emision       = set.nota_credito.emision;
                 set.nota_creditos[index].datos         = JSON.stringify(set.nota_credito.datos);
                 set.nota_creditos[index].totales       = JSON.stringify(set.nota_credito.totales);
-                toastr.info("Nota de credito editada Correctamente", "Smarmoddle", {
+                toastr.info("Nota de credito editada Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                this.resetNota();
@@ -828,7 +828,7 @@
         },
             updateFactura(){
                if (this.modulo === '') {
-                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
             } else {
@@ -856,7 +856,7 @@
                 set.facturas[index].guia_remision = set.factura.guia_remision;
                 set.facturas[index].datos         = JSON.stringify(set.factura.datos);
                 set.facturas[index].totales       = JSON.stringify(set.factura.totales);
-                toastr.info("Factura editada Correctamente", "Smarmoddle", {
+                toastr.info("Factura editada Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                this.resetFactura();
@@ -910,7 +910,7 @@
 
                     this.papeleta_depositos.splice(index, 1); 
                 }
-                toastr.info("Documento Eliminado Correctamente", "Smarmoddle", {
+                toastr.info("Documento Eliminado Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                
@@ -936,7 +936,7 @@
         },
         updateCheque(){
                if (this.modulo === '') {
-                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
             } else {
@@ -969,7 +969,7 @@
                 set.cheques[index].ciudad         = set.cheque.ciudad;
                 set.cheques[index].fecha          = set.cheque.fecha;
                 set.cheques[index].firma          = set.cheque.firma;
-                toastr.info("Cheque editado Correctamente", "Smarmoddle", {
+                toastr.info("Cheque editado Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                this.resetCheque();
@@ -980,7 +980,7 @@
         },
             updateLetra(){
                if (this.modulo === '') {
-                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
             } else {
@@ -1021,7 +1021,7 @@
                 set.letra_cambios[index].direccion   = set.letra_cambio.direccion;
                 set.letra_cambios[index].ciudad2     = set.letra_cambio.ciudad2;
                 set.letra_cambios[index].atentamente = set.letra_cambio.atentamente;
-                toastr.info("Letra de cambio editada Correctamente", "Smarmoddle", {
+                toastr.info("Letra de cambio editada Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                this.resetLetra();
@@ -1032,7 +1032,7 @@
         },
         guardarCheque(){
             if (this.modulo === '') {
-                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
             }else{
@@ -1072,7 +1072,7 @@
                  this.show = true;
                 // console.log(response.data.cheque)
                 this.cheques.push(response.data.cheque);
-                toastr.success("Cheque creado Correctamente", "Smarmoddle", {
+                toastr.success("Cheque creado Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 // set.modulo         = '';
@@ -1093,7 +1093,7 @@
         },
              guardarLetra(){
             if (this.modulo === '') {
-                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
             } else {
@@ -1123,7 +1123,7 @@
                  this.show = true;
                 // console.log(response.data.cheque)
                 this.letra_cambios.push(response.data.letra_cambio);
-                toastr.success("Letra de Cambio creada Correctamente", "Smarmoddle", {
+                toastr.success("Letra de Cambio creada Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.resetLetra();
@@ -1135,7 +1135,7 @@
         },
             guardarNota(){
             if (this.modulo === '') {
-                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "SmartLearn", {
                 "timeOut": "3000"
           });
             }else {
@@ -1160,7 +1160,7 @@
                  this.show = true;
                 // console.log(response.data.cheque)
                 this.nota_creditos.push(response.data.nota_credito);
-                toastr.success("Nota de Credito creada Correctamente", "Smarmoddle", {
+                toastr.success("Nota de Credito creada Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                     set.resetNota();
@@ -1229,7 +1229,7 @@
         },
         guardarFactura(){
             if (this.modulo === '') {
-                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "SmartLearn", {
                 "timeOut": "3000"
           });
             }else {
@@ -1252,7 +1252,7 @@
                  this.show = true;
                 // console.log(response.data.cheque)
                 this.facturas.push(response.data.factura);
-                toastr.success("Factura creada Correctamente", "Smarmoddle", {
+                toastr.success("Factura creada Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                this.resetFactura();
@@ -1297,7 +1297,7 @@
         },
         guardarPagare(){
              if (this.modulo === '') {
-                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "SmartLearn", {
                 "timeOut": "3000"
           });
             }else {
@@ -1324,7 +1324,7 @@
                  this.show = true;
                 // console.log(response.data.cheque)
                 this.pagares.push(response.data.pagare);
-                toastr.success("Pagaré creado Correctamente", "Smarmoddle", {
+                toastr.success("Pagaré creado Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.resetPagare();
@@ -1355,7 +1355,7 @@
         },
         updatePagare(){
              if (this.modulo === '') {
-                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "SmartLearn", {
                 "timeOut": "3000"
           });
             }else {
@@ -1392,7 +1392,7 @@
                 set.pagares[index].deudor1           = set.pagare.deudor1;
                 set.pagares[index].garante           = set.pagare.garante;
                 
-                toastr.info("Pagare Actualizado Correctamente", "Smarmoddle", {
+                toastr.info("Pagare Actualizado Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                this.resetPagare();
@@ -1421,7 +1421,7 @@
         },
         guardarPapeleta(){
              if (this.modulo === '') {
-                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "SmartLearn", {
                 "timeOut": "3000"
           });
             }else {
@@ -1446,7 +1446,7 @@
                  this.show = true;
                 // console.log(response.data.cheque)
                 this.papeleta_depositos.push(response.data.papeleta_deposito);
-                toastr.success("Papeleta de Deposito Creada Correctamente", "Smarmoddle", {
+                toastr.success("Papeleta de Deposito Creada Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.resetPapeleta();
@@ -1472,7 +1472,7 @@
         },
         updatePapeleta(){
              if (this.modulo === '') {
-                 toastr.error("El campo Fecha es obligatorio", "Smarmoddle", {
+                 toastr.error("El campo Fecha es obligatorio", "SmartLearn", {
                 "timeOut": "3000"
           });
             }else {
@@ -1502,7 +1502,7 @@
                 set.papeleta_depositos[index].cantidad    = set.papeleta_deposito.cantidad;
                 set.papeleta_depositos[index].depositante = set.papeleta_deposito.depositante;
                 
-                toastr.info("Papeleta De Deposito Actualizada Correctamente", "Smarmoddle", {
+                toastr.info("Papeleta De Deposito Actualizada Correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                this.resetPapeleta();

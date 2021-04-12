@@ -224,13 +224,13 @@
 <script type="text/javascript">
 
     Livewire.on('postAdded', function () {
-         toastr.info('Taller Eliminado Correctamente', "Smarmoddle", {
+         toastr.info('Taller Eliminado Correctamente', "SmartLearn", {
                     "timeOut": "3000"
 
                 });
     })
         Livewire.on('Estado', function () {
-         toastr.info('Estado cambiado correctamente', "Smarmoddle", {
+         toastr.info('Estado cambiado correctamente', "SmartLearn", {
                     "timeOut": "3000"
 
                 });
@@ -253,7 +253,7 @@ const taller = new Vue({
             axios.post(url, {
                 id: taller,
             }).then(response => {
-                toastr.success(response.data.message, "Smarmoddle", {
+                toastr.success(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
                 });
                  // Livewire.emit('render')
@@ -269,7 +269,7 @@ const taller = new Vue({
             axios.post(url, {
                 id: taller,
             }).then(response => {
-                toastr.success(response.data.message, "Smarmoddle", {
+                toastr.success(response.data.message, "SmartLearn", {
                     "timeOut": "3000"
 
                 });

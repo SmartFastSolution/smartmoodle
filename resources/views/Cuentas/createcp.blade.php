@@ -123,12 +123,12 @@ let cuentas = new Vue({
 methods:{
       actualizar: function() {
         if (this.cuenta.nombre == '') {
-        toastr.error("Debes agregar el nombre de la cuenta", "Smarmoddle", {
+        toastr.error("Debes agregar el nombre de la cuenta", "SmartLearn", {
             "timeOut": "3000"
             });
              return    
         }else if(this.cuenta.tpcuenta == ''){
-        toastr.error("Debes elegir el tipo de cuenta", "Smarmoddle", {
+        toastr.error("Debes elegir el tipo de cuenta", "SmartLearn", {
             "timeOut": "3000"
             });
              return
@@ -138,7 +138,7 @@ methods:{
         if (this.porcentual == true){
 
             if (this.cuenta.porcentaje == '') {
-        toastr.error("Debes agregar un porcentaje", "Smarmoddle", {
+        toastr.error("Debes agregar un porcentaje", "SmartLearn", {
             "timeOut": "3000"
             });
              return

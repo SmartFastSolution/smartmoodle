@@ -274,11 +274,11 @@ methods:{
 				let set = this;
 
 			if (set.contenido_id == '' ) {
-                 toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                 toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                     "timeOut": "3000"
                 });
             }else if (set.enunciado == '' ) {
-                 toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                 toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                     "timeOut": "3000"
                 });
             }else{
@@ -319,7 +319,7 @@ methods:{
 			}).then(response => {
 			set.contenido = response.data;
 			if (set.contenido == 0) {
-			toastr.error("Esta Materia no tiene contenidos", "Smarmoddle", {
+			toastr.error("Esta Materia no tiene contenidos", "SmartLearn", {
 			"timeOut": "3000"
 			});
 			set.materia = 'Seleccionar una materia';
@@ -331,19 +331,19 @@ methods:{
 		},
 		agregarAlternativa(){
 			if(this.alternativa.titulo == ''){
-			toastr.error("No has agregado el titulo", "Smarmoddle", {
+			toastr.error("No has agregado el titulo", "SmartLearn", {
 			"timeOut": "3000"
 			});
 		}else if(this.alternativa.correcta == ''){
-			toastr.error("No has seleccionado la respuesta correcta", "Smarmoddle", {
+			toastr.error("No has seleccionado la respuesta correcta", "SmartLearn", {
 				"timeOut": "3000"
 			});
 		}else if(this.alternativa.primera == ''){
-			toastr.error("No has agregado la primera alternativa", "Smarmoddle", {
+			toastr.error("No has agregado la primera alternativa", "SmartLearn", {
 				"timeOut": "3000"
 			});
 		}else if(this.alternativa.segunda == ''){
-			toastr.error("No has agregado la primera alternativa", "Smarmoddle", {
+			toastr.error("No has agregado la primera alternativa", "SmartLearn", {
 				"timeOut": "3000"
 			});
 		}else {
@@ -357,7 +357,7 @@ methods:{
 		},
 			agregarSeleccionar(){
 			if(this.selecionar.enunciado == ''){
-			toastr.error("No has agregado el enunciado", "Smarmoddle", {
+			toastr.error("No has agregado el enunciado", "SmartLearn", {
 			"timeOut": "3000"
 			});
 		}else{
@@ -369,7 +369,7 @@ methods:{
 		},
 		agregarCompletar(){
 		if(this.completar.enunciado == ''){
-			toastr.error("No has agregado el enunciado", "Smarmoddle", {
+			toastr.error("No has agregado el enunciado", "SmartLearn", {
 			"timeOut": "3000"
 			});
 		}else{
@@ -380,29 +380,29 @@ methods:{
 		},
 		eliminarCompletar(index){
 			this.completars.splice(index,1);
-				toastr.info("Eliminado Correctamente", "Smarmoddle", {
+				toastr.info("Eliminado Correctamente", "SmartLearn", {
 				"timeOut": "3000"
 			});
 		},
 			eliminarSeleccion(index){
 			this.selecionars.splice(index,1);
-				toastr.info("Eliminado Correctamente", "Smarmoddle", {
+				toastr.info("Eliminado Correctamente", "SmartLearn", {
 				"timeOut": "3000"
 			});
 		},
 		eliminarAlternativa(index){
 			this.alternativas.splice(index,1);
-				toastr.info("Eliminado Correctamente", "Smarmoddle", {
+				toastr.info("Eliminado Correctamente", "SmartLearn", {
 				"timeOut": "3000"
 			});
 		},
 			agregarVF(){
 		if(this.vf.enunciado == ''){
-			toastr.error("No has agregado el enunciado", "Smarmoddle", {
+			toastr.error("No has agregado el enunciado", "SmartLearn", {
 			"timeOut": "3000"
 			});
 		}else if(this.vf.r_correcta == ''){
-			toastr.error("No has seleccionado la respuesta correcta", "Smarmoddle", {
+			toastr.error("No has seleccionado la respuesta correcta", "SmartLearn", {
 				"timeOut": "3000"
 			});
 		}else{
@@ -414,7 +414,7 @@ methods:{
 				},
 				eliminarVF(index){
 					this.verdader_falso.splice(index,1);
-						toastr.info("Eliminado Correctamente", "Smarmoddle", {
+						toastr.info("Eliminado Correctamente", "SmartLearn", {
 			"timeOut": "3000"
 			});
 				}

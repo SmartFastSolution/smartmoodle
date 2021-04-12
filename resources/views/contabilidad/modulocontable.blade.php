@@ -826,7 +826,7 @@
         console.log(event)
                 //Asignamos la imagen a  nuestra data
                 this.document = event.target.files[0];
-                toastr.info("Documento cargado correctamente", "Smarmoddle", {
+                toastr.info("Documento cargado correctamente", "SmartLearn", {
                     "timeOut": "3000"
                 });
                 // this.updateAvatar()
@@ -853,7 +853,7 @@
             }).then(response => {
                 set.contenido = response.data;
                 if (set.contenido == 0) {
-                     toastr.error("Esta Materia no tiene contenidos", "Smarmoddle", {
+                     toastr.error("Esta Materia no tiene contenidos", "SmartLearn", {
                     "timeOut": "3000"
                 });
                     set.materia = 'Seleccionar una materia';
@@ -867,11 +867,11 @@
                 let _this = this;
                 let url = '/sistema/admin/taller34';
                 if (_this.registros.length == 0 ) {
-                     toastr.error("No tienes registros para guardar el taller", "Smarmoddle", {
+                     toastr.error("No tienes registros para guardar el taller", "SmartLearn", {
                         "timeOut": "3000"
                     });
                 } else if (_this.taller.enunciado.trim() === ''){
-                    toastr.error("No puedes dejar campos en blanco", "Smarmoddle", {
+                    toastr.error("No puedes dejar campos en blanco", "SmartLearn", {
                         "timeOut": "3000"
                     });
                 }else {
@@ -881,7 +881,7 @@
                 enunciado: _this.taller.enunciado,
                 plantilla: _this.taller.plantilla_id,
                 }).then(response => {
-                   toastr.success("Taller Creado Correctamente", "Smarmoddle", {
+                   toastr.success("Taller Creado Correctamente", "SmartLearn", {
                         "timeOut": "3000"
                     });
                 window.location = "/sistema/admin/plantilla/tallercontable";
@@ -907,15 +907,15 @@
             if (tipo == 'balance-inicial-vertical') {
                 let url = '/sistema/admin/modulo/balance-inicial';
                 if (set.individuales.balance_vertical.trim() === '' ) {
-                     toastr.error("No has agregado las transacciones del balance", "Smarmoddle", {
+                     toastr.error("No has agregado las transacciones del balance", "SmartLearn", {
                         "timeOut": "3000"
                     });
                 }else if (set.enunciado == '' ) {
-                 toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                 toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                     "timeOut": "3000"
                 });
             }else if (set.contenido_id == '' ) {
-                     toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                     toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                         "timeOut": "3000"
                     });
                 }else{
@@ -940,15 +940,15 @@
                 }else if(tipo == 'balance-inicial-horizontal'){
                     let url = '/sistema/admin/modulo/balance-inicial';
                     if (set.individuales.balance_horizontal.trim() === '' ) {
-                         toastr.error("No has agregado las transacciones del balance", "Smarmoddle", {
+                         toastr.error("No has agregado las transacciones del balance", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else if (set.enunciado == '' ) {
-                 toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                 toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                     "timeOut": "3000"
                 });
             }else if (set.contenido_id == '' ) {
-                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                         toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else{
@@ -971,15 +971,15 @@
                 }else if(tipo == 'kardex-fifo'){
                       let url = '/sistema/admin/modulo/kardex-fifo';
                       if (set.individuales.kardex_fifos.length == 0 ) {
-                           toastr.error("No has agregado productos", "Smarmoddle", {
+                           toastr.error("No has agregado productos", "SmartLearn", {
                               "timeOut": "3000"
                           });
                       }else if (set.enunciado == '' ) {
-                 toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                 toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                     "timeOut": "3000"
                 });
             }else if (set.contenido_id == '' ) {
-                           toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                           toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                               "timeOut": "3000"
                           });
                       }else{
@@ -1002,15 +1002,15 @@
                 }else if(tipo == 'kardex-promedio'){
                   let url = '/sistema/admin/modulo/kardex-fifo';
                       if (set.individuales.kardex_promedios.length == 0 ) {
-                           toastr.error("No has agregado productos", "Smarmoddle", {
+                           toastr.error("No has agregado productos", "SmartLearn", {
                               "timeOut": "3000"
                           });
                       }else if (set.enunciado == '' ) {
-                 toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                 toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                     "timeOut": "3000"
                 });
             }else if (set.contenido_id == '' ) {
-                           toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                           toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                               "timeOut": "3000"
                           });
                       }else{
@@ -1033,15 +1033,15 @@
                 }else if(tipo == 'diario-general'){
                    let url = '/sistema/admin/modulo/diario-general';
                     if (set.individuales.diario_general.trim() === '' ) {
-                         toastr.error("No has agregado las transacciones del diario", "Smarmoddle", {
+                         toastr.error("No has agregado las transacciones del diario", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else if (set.enunciado == '' ) {
-                 toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                 toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                     "timeOut": "3000"
                 });
             }else if (set.contenido_id == '' ) {
-                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                         toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else{
@@ -1063,15 +1063,15 @@
                 }else if(tipo == 'mayor-general'){
                        let url = '/sistema/admin/modulo/mayor-general';
                     if (set.individuales.mayorgeneral.trim() === '' ) {
-                         toastr.error("No has agregado las transacciones del diario", "Smarmoddle", {
+                         toastr.error("No has agregado las transacciones del diario", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else if (set.enunciado == '' ) {
-                 toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                 toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                     "timeOut": "3000"
                 });
             }else if (set.contenido_id == '' ) {
-                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                         toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else{
@@ -1093,15 +1093,15 @@
                 }else if(tipo == 'balance-comprobacion'){
                     let url = '/sistema/admin/modulo/balance-comprobacion';
                     if (set.individuales.balance_comprobacion.trim() === '' ) {
-                         toastr.error("No has agregado las transacciones del balance", "Smarmoddle", {
+                         toastr.error("No has agregado las transacciones del balance", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else if (set.enunciado == '' ) {
-                 toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                 toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                     "timeOut": "3000"
                 });
             }else if (set.contenido_id == '' ) {
-                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                         toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else{
@@ -1123,15 +1123,15 @@
                 }else if(tipo == 'hoja-trabajo'){
                     let url = '/sistema/admin/modulo/hoja-trabajo';
                     if (set.individuales.hoja_trabajo.trim() === '' ) {
-                         toastr.error("No has agregado las transacciones a la hoja de trabajo", "Smarmoddle", {
+                         toastr.error("No has agregado las transacciones a la hoja de trabajo", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else if (set.enunciado == '' ) {
-                 toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                 toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                     "timeOut": "3000"
                 });
             }else if (set.contenido_id == '' ) {
-                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                         toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else{
@@ -1153,15 +1153,15 @@
                 }else if(tipo == 'balance-comprobacion-ajustado'){
                     let url = '/sistema/admin/modulo/balance-comprobacion-ajustado';
                     if (set.individuales.balance_comprobacion_ajustado.trim() === '' ) {
-                         toastr.error("No has agregado las transacciones al Balance Ajustado", "Smarmoddle", {
+                         toastr.error("No has agregado las transacciones al Balance Ajustado", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else if (set.enunciado == '' ) {
-                 toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                 toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                     "timeOut": "3000"
                 });
             }else if (set.contenido_id == '' ) {
-                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                         toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else{
@@ -1183,15 +1183,15 @@
                 }else if(tipo == 'estado-resultado'){
                       let url = '/sistema/admin/modulo/estado-resultado';
                     if (set.individuales.estado_resultado.trim() === '' ) {
-                         toastr.error("No has agregado las transacciones al Estado de Resultado", "Smarmoddle", {
+                         toastr.error("No has agregado las transacciones al Estado de Resultado", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else if (set.enunciado == '' ) {
-                 toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                 toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                     "timeOut": "3000"
                 });
             }else if (set.contenido_id == '' ) {
-                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                         toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else{
@@ -1213,15 +1213,15 @@
                 }else if(tipo == 'balance-general'){
                     let url = '/sistema/admin/modulo/balance-general';
                     if (set.individuales.balance_general.trim() === '' ) {
-                         toastr.error("No has agregado las transacciones al Balance General", "Smarmoddle", {
+                         toastr.error("No has agregado las transacciones al Balance General", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else if (set.enunciado == '' ) {
-                 toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                 toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                     "timeOut": "3000"
                 });
             }else if (set.contenido_id == '' ) {
-                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                         toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else{
@@ -1243,15 +1243,15 @@
                 }else if(tipo == 'asientos-cierre'){
                     let url = '/sistema/admin/modulo/asiento-cierre';
                     if (set.individuales.asientos_cierre.trim() === '' ) {
-                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "Smarmoddle", {
+                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else if (set.enunciado == '' ) {
-                     toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                     toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                               "timeOut": "3000"
                           });
                       }else if (set.contenido_id == '' ) {
-                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                         toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else{
@@ -1273,15 +1273,15 @@
                 }else if(tipo == 'librocaja'){
                          let url = '/sistema/admin/modulo/librocaja';
                     if (set.individuales.librocaja.trim() === '' ) {
-                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "Smarmoddle", {
+                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else if (set.enunciado == '' ) {
-                     toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                     toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                               "timeOut": "3000"
                           });
                       }else if (set.contenido_id == '' ) {
-                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                         toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else{
@@ -1303,15 +1303,15 @@
                 }else if(tipo == 'conciliacionbancaria'){
                        let url = '/sistema/admin/modulo/conciliacionbancaria';
                     if (set.individuales.conciliacionbancaria.trim() === '' ) {
-                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "Smarmoddle", {
+                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else if (set.enunciado == '' ) {
-                     toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                     toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                               "timeOut": "3000"
                           });
                       }else if (set.contenido_id == '' ) {
-                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                         toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else{
@@ -1333,15 +1333,15 @@
                 }else if(tipo == 'arqueocaja'){
                        let url = '/sistema/admin/modulo/arqueocaja';
                     if (set.individuales.arqueocaja.trim() === '' ) {
-                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "Smarmoddle", {
+                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else if (set.enunciado == '' ) {
-                     toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                     toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                               "timeOut": "3000"
                           });
                       }else if (set.contenido_id == '' ) {
-                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                         toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else{
@@ -1363,15 +1363,15 @@
                 }else if(tipo == 'librobanco'){
                        let url = '/sistema/admin/modulo/librobanco';
                     if (set.individuales.librobanco.trim() === '' ) {
-                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "Smarmoddle", {
+                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else if (set.enunciado == '' ) {
-                     toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                     toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                               "timeOut": "3000"
                           });
                       }else if (set.contenido_id == '' ) {
-                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                         toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else{
@@ -1393,15 +1393,15 @@
                 }else if(tipo == 'retencioniva'){
                        let url = '/sistema/admin/modulo/retencioniva';
                     if (set.individuales.retencioniva.trim() === '' ) {
-                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "Smarmoddle", {
+                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else if (set.enunciado == '' ) {
-                     toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                     toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                               "timeOut": "3000"
                           });
                       }else if (set.contenido_id == '' ) {
-                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                         toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else{
@@ -1423,15 +1423,15 @@
                 }else if(tipo == 'nominaempleados'){
                        let url = '/sistema/admin/modulo/nominaempleados';
                     if (set.individuales.nominaempleados.trim() === '' ) {
-                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "Smarmoddle", {
+                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else if (set.enunciado == '' ) {
-                     toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                     toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                               "timeOut": "3000"
                           });
                       }else if (set.contenido_id == '' ) {
-                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                         toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else{
@@ -1453,15 +1453,15 @@
                 }else if(tipo == 'provisiondebeneficio'){
                        let url = '/sistema/admin/modulo/provisiondebeneficio';
                     if (set.individuales.provisiondebeneficio.trim() === '' ) {
-                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "Smarmoddle", {
+                         toastr.error("No has agregado las transacciones al Asiento de Cierre", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else if (set.enunciado == '' ) {
-                     toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                     toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                               "timeOut": "3000"
                           });
                       }else if (set.contenido_id == '' ) {
-                         toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                         toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                             "timeOut": "3000"
                         });
                     }else{
@@ -1484,17 +1484,17 @@
           },
         agregarProducto(){
           if (this.individuales.kardex_promedio.nombre.trim() === '') {
-            toastr.error("No has agregado el nombre del producto", "Smarmoddle", {
+            toastr.error("No has agregado el nombre del producto", "SmartLearn", {
                 "timeOut": "3000"
                 });
           }else if(this.individuales.kardex_promedio.transacciones.trim() === '') {
-            toastr.error("No has agregado las transacciones", "Smarmoddle", {
+            toastr.error("No has agregado las transacciones", "SmartLearn", {
                 "timeOut": "3000"
                 });
           }else{
             let producto = {nombre: this.individuales.kardex_promedio.nombre, transacciones: this.individuales.kardex_promedio.transacciones}
             this.individuales.kardex_promedios.push(producto);
-             toastr.success("Producto Agregado", "Smarmoddle", {
+             toastr.success("Producto Agregado", "SmartLearn", {
                 "timeOut": "3000"
                 });
              this.individuales.kardex_promedio.nombre ='';
@@ -1503,17 +1503,17 @@
         },
         agregarProductoFifo(){
           if (this.individuales.kardex_fifo.nombre.trim() === '') {
-            toastr.error("No has agregado el nombre del producto", "Smarmoddle", {
+            toastr.error("No has agregado el nombre del producto", "SmartLearn", {
                 "timeOut": "3000"
                 });
           }else if(this.individuales.kardex_fifo.transacciones.trim() === '') {
-            toastr.error("No has agregado las transacciones", "Smarmoddle", {
+            toastr.error("No has agregado las transacciones", "SmartLearn", {
                 "timeOut": "3000"
                 });
           }else{
             let producto = {nombre: this.individuales.kardex_fifo.nombre, transacciones: this.individuales.kardex_fifo.transacciones}
             this.individuales.kardex_fifos.push(producto);
-             toastr.success("Producto Agregado", "Smarmoddle", {
+             toastr.success("Producto Agregado", "SmartLearn", {
                 "timeOut": "3000"
                 });
              this.individuales.kardex_fifo.nombre ='';
@@ -1522,17 +1522,17 @@
         },
         agregarProductoC(){
           if (this.concatenados.kardex_fifo.nombre.trim() === '') {
-            toastr.error("No has agregado el nombre del producto", "Smarmoddle", {
+            toastr.error("No has agregado el nombre del producto", "SmartLearn", {
                 "timeOut": "3000"
                 });
           }else if(this.concatenados.kardex_fifo.transacciones.trim() === '') {
-            toastr.error("No has agregado las transacciones", "Smarmoddle", {
+            toastr.error("No has agregado las transacciones", "SmartLearn", {
                 "timeOut": "3000"
                 });
           }else{
             let producto = {nombre: this.concatenados.kardex_fifo.nombre, transacciones: this.concatenados.kardex_fifo.transacciones}
             this.concatenados.kardex_fifos.push(producto);
-             toastr.success("Producto Agregado", "Smarmoddle", {
+             toastr.success("Producto Agregado", "SmartLearn", {
                 "timeOut": "3000"
                 });
              this.concatenados.kardex_fifo.nombre ='';
@@ -1544,15 +1544,15 @@
 
             let url = '/sistema/admin/modulo/taller-concatenado';
             if (set.contenido_id == '' ) {
-                 toastr.error("No has elegido la materia para el taller", "Smarmoddle", {
+                 toastr.error("No has elegido la materia para el taller", "SmartLearn", {
                     "timeOut": "3000"
                 });
             }else if (set.enunciado == '' ) {
-                 toastr.error("No has puesto el enunciado para el taller", "Smarmoddle", {
+                 toastr.error("No has puesto el enunciado para el taller", "SmartLearn", {
                     "timeOut": "3000"
                 });
             }else if (set.value.length == 0 ) {
-                 toastr.error("No has puesto elegido ni un modulo", "Smarmoddle", {
+                 toastr.error("No has puesto elegido ni un modulo", "SmartLearn", {
                     "timeOut": "3000"
                 });
             }else{

@@ -217,7 +217,7 @@ const random = new Vue({
             axios.post(url, {
 
             }).then(response => {
-                toastr.success("Clave Generada Satisfactoriamente", "Smarmoddle", {
+                toastr.success("Clave Generada Satisfactoriamente", "SmartLearn", {
                     "timeOut": "3000"
                 });
                 _this.password = response.data;

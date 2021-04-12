@@ -67,7 +67,7 @@
     methods:{
       agregarActivo(){
         if (this.activo.nombre === '') {
-            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
         }else{
@@ -78,7 +78,7 @@
       },
       agregarPasivo(){
           if (this.pasivo.nombre === '') {
-            toastr.error("El campo Cuenta es obligatorio", "Smarmoddle", {
+            toastr.error("El campo Cuenta es obligatorio", "SmartLearn", {
               "timeOut": "3000"
           });
         }else{
@@ -119,7 +119,7 @@
               pasivos: set.pasivos
         }).then(response => {
            Swal.fire({
-            title: 'Smarmoddle',
+            title: 'SmartLearn',
             text: response.data.mensaje,
           }).then(function() {
             if (response.data.rol == 'docente') {

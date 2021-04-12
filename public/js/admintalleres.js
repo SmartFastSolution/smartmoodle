@@ -87,7 +87,7 @@ $(function(document, window, index ) {
             }).then(response => {
                 set.contenido = response.data;
                 if (set.contenido == 0) {
-                     toastr.error("Esta Materia no tiene contenidos", "Smarmoddle", {
+                     toastr.error("Esta Materia no tiene contenidos", "SmartLearn", {
                     "timeOut": "3000"
                 });
                     set.materia = 'Seleccionar una materia';
@@ -101,7 +101,7 @@ $(function(document, window, index ) {
                 var debe = {nom_cuenta:this.ejercicio.debe.nom_cuenta, saldo:this.ejercicio.debe.saldo};
                 this.ejercicios.debe.push(debe);//añadimos el la variable persona al array
                 //Limpiamos los campos
-                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                toastr.success("Activo agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.ejercicio.debe.nom_cuenta ='';
@@ -111,7 +111,7 @@ $(function(document, window, index ) {
                 var haber = {nom_cuenta:this.ejercicio.haber.nom_cuenta, saldo:this.ejercicio.haber.saldo};
                 this.ejercicios.haber.push(haber);//añadimos el la variable persona al array
                 //Limpiamos los campos
-                toastr.success("Activo agregado correctamente", "Smarmoddle", {
+                toastr.success("Activo agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.ejercicio.haber.nom_cuenta ='';
@@ -137,7 +137,7 @@ $(function(document, window, index ) {
             },
             updateeEjeHaber(){
             if (this.ejercicio.haber.nom_cuenta.trim() === '' || this.ejercicio.haber.saldo.trim() === '') {
-                toastr.error("No tienes datos para actualizar", "Smarmoddle", {
+                toastr.error("No tienes datos para actualizar", "SmartLearn", {
                         "timeOut": "3000"
                     });
                 }else{
@@ -176,7 +176,7 @@ $(function(document, window, index ) {
             },
             updateEjeDebe(){
             if (this.ejercicio.debe.nom_cuenta.trim() === '' || this.ejercicio.debe.saldo.trim() === '') {
-                toastr.error("No tienes datos para actualizar", "Smarmoddle", {
+                toastr.error("No tienes datos para actualizar", "SmartLearn", {
                         "timeOut": "3000"
                     });
                 }else{
@@ -192,14 +192,14 @@ $(function(document, window, index ) {
             },
             guardarRegistro(){
               if (this.ejercicios.debe == 0) {
-                 toastr.error("No tienes transaccion para guardar", "Smarmoddle", {
+                 toastr.error("No tienes transaccion para guardar", "SmartLearn", {
                         "timeOut": "3000"
                     });
               }else{
             let registro = {debe:this.ejercicios.debe, haber:this.ejercicios.haber};
                 this.registros.push(registro);//añadimos el la variable persona al array
                 //Limpiamos los campos
-                toastr.success("Registro agregado correctamente", "Smarmoddle", {
+                toastr.success("Registro agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.ejercicios.debe            =[];
@@ -237,7 +237,7 @@ $(function(document, window, index ) {
             },
             updateHaber(){
             if (this.ejercicio.haber.nom_cuenta.trim() === '' || this.ejercicio.haber.saldo.trim() === '') {
-                toastr.error("No tienes datos para actualizar", "Smarmoddle", {
+                toastr.error("No tienes datos para actualizar", "SmartLearn", {
                         "timeOut": "3000"
                     });
                 }else{
@@ -258,7 +258,7 @@ $(function(document, window, index ) {
             },
             updateDebe(){
             if (this.ejercicio.debe.nom_cuenta.trim() === '' || this.ejercicio.debe.saldo.trim() === '') {
-                toastr.error("No tienes datos para actualizar", "Smarmoddle", {
+                toastr.error("No tienes datos para actualizar", "SmartLearn", {
                         "timeOut": "3000"
                     });
                 }else{
@@ -276,11 +276,11 @@ $(function(document, window, index ) {
                 let _this = this;
                 let url = '/sistema/admin/taller34';
                 if (_this.registros.length == 0 ) {
-                     toastr.error("No tienes registros para guardar el taller", "Smarmoddle", {
+                     toastr.error("No tienes registros para guardar el taller", "SmartLearn", {
                         "timeOut": "3000"
                     });
                 } else if (_this.taller.enunciado.trim() === ''){
-                    toastr.error("No puedes dejar campos en blanco", "Smarmoddle", {
+                    toastr.error("No puedes dejar campos en blanco", "SmartLearn", {
                         "timeOut": "3000"
                     });
                 }else {
@@ -290,7 +290,7 @@ $(function(document, window, index ) {
                 enunciado: _this.taller.enunciado,
                 plantilla: _this.taller.plantilla_id,
                 }).then(response => {
-                   toastr.success("Taller Creado Correctamente", "Smarmoddle", {
+                   toastr.success("Taller Creado Correctamente", "SmartLearn", {
                         "timeOut": "3000"
                     });
                 window.location = "/sistema/home";
@@ -311,7 +311,7 @@ $(function(document, window, index ) {
                 var clasifica = {item:this.clasificacion.item};
                 this.clasificaciones.push(clasifica);//añadimos el la variable persona al array
                 //Limpiamos los campos
-                toastr.success("Agregado correctamente", "Smarmoddle", {
+                toastr.success("Agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.clasificacion.item='';
@@ -322,7 +322,7 @@ $(function(document, window, index ) {
                 var clasificadou = {item:this.clasificado.item};
                 this.clasificados.push(clasificadou);//añadimos el la variable persona al array
                 //Limpiamos los campos
-                toastr.success("Agregado correctamente", "Smarmoddle", {
+                toastr.success("Agregado correctamente", "SmartLearn", {
                 "timeOut": "3000"
                 });
                 this.clasificado.item ='';
@@ -455,14 +455,14 @@ $(function(document, window, index ) {
         $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
         // if (tall2 == 10) {
         // function alert2(){
-        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //     toastr.error("Limite de enunciados creados", "SmartLearn", {
         //         "timeOut": "1000"
         //     });
         // }
         // } else {
         $('.tall_2').append(t2);
         function alert2(){
-        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+        toastr.success("Enunciado agregado correctamente", "SmartLearn", {
             "timeOut": "1000"
         });
         // }
@@ -482,7 +482,7 @@ $(function(document, window, index ) {
             });
             addTaller2();
         }else if($('.tall_2 .form-group').length == 1){
-             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+             toastr.error("Este enunciado no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         }else {
@@ -522,7 +522,7 @@ $(function(document, window, index ) {
         $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
         // if (tall9 == 10) {
         // function alert2(){
-        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //     toastr.error("Limite de enunciados creados", "SmartLearn", {
         //         "timeOut": "1000"
         //     });
         // }
@@ -532,7 +532,7 @@ $(function(document, window, index ) {
       
       
         function alert2(){
-        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+        toastr.success("Enunciado agregado correctamente", "SmartLearn", {
             "timeOut": "1000"
         });
         // }
@@ -552,7 +552,7 @@ $(function(document, window, index ) {
             });
             addTaller9();
         }else if($('.enc_9 .form-row').length == 1){
-             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+             toastr.error("Este enunciado no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         }else {
@@ -586,7 +586,7 @@ function addTaller10() {
            
         // if (tall10 == 10) {
         // function alert10(){
-        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //     toastr.error("Limite de enunciados creados", "SmartLearn", {
         //         "timeOut": "1000"
         //     });
         // }
@@ -597,7 +597,7 @@ function addTaller10() {
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
         function alert10(){
-        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+        toastr.success("Enunciado agregado correctamente", "SmartLearn", {
             "timeOut": "1000"
         });
         // }
@@ -617,7 +617,7 @@ function addTaller10() {
             });
             addTaller10();
         }else if($('.tall_10 .form-group').length == 1){
-             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+             toastr.error("Este enunciado no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         }else {
@@ -637,14 +637,14 @@ function addTaller11() {
             '</div>';
         // if (tall11 == 11) {
         // function alert11(){
-        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //     toastr.error("Limite de enunciados creados", "SmartLearn", {
         //         "timeOut": "1100"
         //     });
         // }
         // } else {
         $('.tall_11').append(t11);
         function alert11(){
-        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+        toastr.success("Enunciado agregado correctamente", "SmartLearn", {
             "timeOut": "1100"
         });
         // }
@@ -658,7 +658,7 @@ function addTaller11() {
         num = $('.tall_11 .form-group').toArray();
         //console.log(num);
        if($('.tall_11 .form-group').length == 2){
-             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+             toastr.error("Este enunciado no se puede eliminar", "SmartLearn", {
                 "timeOut": "1100"
             });
         }else {
@@ -688,14 +688,14 @@ function addTaller11() {
         $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
         // if (tall12 == 10) {
         // function alert12(){
-        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //     toastr.error("Limite de enunciados creados", "SmartLearn", {
         //         "timeOut": "1000"
         //     });
         // }
         // } else {
         $('.tall_12').append(t12);
         function alert12(){
-        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+        toastr.success("Enunciado agregado correctamente", "SmartLearn", {
             "timeOut": "1000"
         });
         // }
@@ -715,7 +715,7 @@ function addTaller11() {
             });
             addTaller12();
         }else if($('.tall_12 .form-group').length == 1){
-             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+             toastr.error("Este enunciado no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         }else {
@@ -735,14 +735,14 @@ function addTaller11() {
         '</div>';
         // if (tall13 == 10) {
         // function alert13(){
-        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //     toastr.error("Limite de enunciados creados", "SmartLearn", {
         //         "timeOut": "1000"
         //     });
         // }
         // } else {
         $('.tall_13').append(t13);
         function alert13(){
-        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+        toastr.success("Enunciado agregado correctamente", "SmartLearn", {
             "timeOut": "1000"
         });
         // }
@@ -762,7 +762,7 @@ function addTaller11() {
             });
             addTaller13();
         }else if($('.tall_13 .form-group').length == 1){
-             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+             toastr.error("Este enunciado no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         }else {
@@ -780,7 +780,7 @@ function addTaller11() {
             '<td><a href="#" class="btn btn-danger removeTaller22"><span class="glyphicon glyphicon-remove">X</span>' +
             '</tr>';
         // if (max == 10) {
-        //     toastr.error("Limite de columnas creadas", "Smarmoddle", {
+        //     toastr.error("Limite de columnas creadas", "SmartLearn", {
         //         "timeOut": "1000"
         //     });
 
@@ -789,7 +789,7 @@ function addTaller11() {
             $('.taller22').append(tr);
          
 
-            toastr.success("Columna agregada correctamente", "Smarmoddle", {
+            toastr.success("Columna agregada correctamente", "SmartLearn", {
                 "timeOut": "1000"
             });
             console.log(max)
@@ -800,7 +800,7 @@ function addTaller11() {
         var last = $('.taller22 tr').length;
         if (last == 1) {
             i = 1;
-            toastr.error("Esta columna no se puede eliminar", "Smarmoddle", {
+            toastr.error("Esta columna no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         } else {
@@ -819,7 +819,7 @@ function addTaller11() {
             '<td><a href="#" class="btn btn-danger removeTaller35"><span class="glyphicon glyphicon-remove">X</span>' +
             '</tr>';
         // if (max == 10) {
-        //     toastr.error("Limite de columnas creadas", "Smarmoddle", {
+        //     toastr.error("Limite de columnas creadas", "SmartLearn", {
         //         "timeOut": "1000"
         //     });
 
@@ -828,7 +828,7 @@ function addTaller11() {
             $('.taller35').append(tr);
          
 
-            toastr.success("Columna agregada correctamente", "Smarmoddle", {
+            toastr.success("Columna agregada correctamente", "SmartLearn", {
                 "timeOut": "1000"
             });
             console.log(max)
@@ -839,7 +839,7 @@ function addTaller11() {
         var last = $('.taller35 tr').length;
         if (last == 1) {
             i = 1;
-            toastr.error("Esta columna no se puede eliminar", "Smarmoddle", {
+            toastr.error("Esta columna no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         } else {
@@ -861,14 +861,14 @@ function addTaller11() {
         $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
         // if (tall36 == 10) {
         // function alert36(){
-        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //     toastr.error("Limite de enunciados creados", "SmartLearn", {
         //         "timeOut": "1000"
         //     });
         // }
         // } else {
         $('.tall_36').append(t36);
         function alert36(){
-        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+        toastr.success("Enunciado agregado correctamente", "SmartLearn", {
             "timeOut": "1000"
         });
         // }
@@ -888,7 +888,7 @@ function addTaller11() {
             });
             addTaller36();
         }else if($('.tall_36 .form-group').length == 1){
-             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+             toastr.error("Este enunciado no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         }else {
@@ -911,14 +911,14 @@ function addTaller11() {
         $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
         // if (tall37 == 10) {
         // function alert37(){
-        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //     toastr.error("Limite de enunciados creados", "SmartLearn", {
         //         "timeOut": "1000"
         //     });
         // }
         // } else {
         $('.tall_37').append(t37);
         function alert37(){
-        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+        toastr.success("Enunciado agregado correctamente", "SmartLearn", {
             "timeOut": "1000"
         });
         // }
@@ -938,7 +938,7 @@ function addTaller11() {
             });
             addTaller37();
         }else if($('.tall_37 .form-group').length == 1){
-             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+             toastr.error("Este enunciado no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         }else {
@@ -959,14 +959,14 @@ function addTaller38() {
         $.getScript( "../../js/bootstrap-tagsinput.js", function() {});
         // if (tall38 == 10) {
         // function alert38(){
-        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //     toastr.error("Limite de enunciados creados", "SmartLearn", {
         //         "timeOut": "1000"
         //     });
         // }
         // } else {
         $('.tall_38').append(t38);
         function alert38(){
-        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+        toastr.success("Enunciado agregado correctamente", "SmartLearn", {
             "timeOut": "1000"
         });
         // }
@@ -986,7 +986,7 @@ function addTaller38() {
             });
             addTaller38();
         }else if($('.tall_38 .form-group').length == 1){
-             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+             toastr.error("Este enunciado no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         }else {
@@ -1006,14 +1006,14 @@ function addTaller38() {
         '</div>';
         // if (tall40 == 10) {
         // function alert40(){
-        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //     toastr.error("Limite de enunciados creados", "SmartLearn", {
         //         "timeOut": "1000"
         //     });
         // }
         // } else {
         $('.tall_40').append(t40);
         function alert40(){
-        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+        toastr.success("Enunciado agregado correctamente", "SmartLearn", {
             "timeOut": "1000"
         });
         // }
@@ -1033,7 +1033,7 @@ function addTaller38() {
             });
             addTaller40();
         }else if($('.tall_40 .form-group').length == 1){
-             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+             toastr.error("Este enunciado no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         }else {
@@ -1055,14 +1055,14 @@ function addTaller38() {
         '</div>';
         // if (tall42 == 10) {
         // function alert42(){
-        //     toastr.error("Limite de enunciados creados", "Smarmoddle", {
+        //     toastr.error("Limite de enunciados creados", "SmartLearn", {
         //         "timeOut": "1000"
         //     });
         // }
         // } else {
         $('.tall_42').append(t42);
         function alert42(){
-        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+        toastr.success("Enunciado agregado correctamente", "SmartLearn", {
             "timeOut": "1000"
         });
         // }
@@ -1082,7 +1082,7 @@ function addTaller38() {
             });
             addTaller42();
         }else if($('.tall_42 .form-group').length == 1){
-             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+             toastr.error("Este enunciado no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         }else {
@@ -1103,7 +1103,7 @@ function addTaller38() {
      
         $('.tall_47_1').append(t47_1);
         function alert47_1(){
-        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+        toastr.success("Enunciado agregado correctamente", "SmartLearn", {
             "timeOut": "1100"
         });
         }
@@ -1117,7 +1117,7 @@ function addTaller38() {
         num = $('.tall_47_1 .form-group').toArray();
         //console.log(num);
        if($('.tall_47_1 .form-group').length == 1){
-             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+             toastr.error("Este enunciado no se puede eliminar", "SmartLearn", {
                 "timeOut": "1100"
             });
         }else {
@@ -1139,7 +1139,7 @@ function addTaller38() {
      
         $('.tall_47_2').append(t47_2);
         function alert47_2(){
-        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+        toastr.success("Enunciado agregado correctamente", "SmartLearn", {
             "timeOut": "1000"
         });
         }
@@ -1152,7 +1152,7 @@ function addTaller38() {
         num = $('.tall_47_2 .form-group').toArray();
         //console.log(num);
        if($('.tall_47_2 .form-group').length == 1){
-             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+             toastr.error("Este enunciado no se puede eliminar", "SmartLearn", {
                 "timeOut": "47_200"
             });
         }else {
@@ -1174,7 +1174,7 @@ function addTaller38() {
     
         $('.tall_47_3').append(t47_3);
         function alert47_3(){
-        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+        toastr.success("Enunciado agregado correctamente", "SmartLearn", {
             "timeOut": "1000"
         });
         }
@@ -1187,7 +1187,7 @@ function addTaller38() {
         num = $('.tall_47_3 .form-group').toArray();
         //console.log(num);
        if($('.tall_47_3 .form-group').length == 1){
-             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+             toastr.error("Este enunciado no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         }else {
@@ -1209,7 +1209,7 @@ function addTaller38() {
             $('.taller50').append(tr);
          
 
-            toastr.success("Columna agregada correctamente", "Smarmoddle", {
+            toastr.success("Columna agregada correctamente", "SmartLearn", {
                 "timeOut": "1000"
             });
             console.log(max)
@@ -1220,7 +1220,7 @@ function addTaller38() {
         var last = $('.taller50 tr').length;
         if (last == 1) {
             i = 1;
-            toastr.error("Esta columna no se puede eliminar", "Smarmoddle", {
+            toastr.error("Esta columna no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         } else {
@@ -1246,7 +1246,7 @@ function addTaller38() {
                 '</div>'
         if (enun == 10) {
         function alert(){
-            toastr.error("Limite de enunciados creados", "Smarmoddle", {
+            toastr.error("Limite de enunciados creados", "SmartLearn", {
                 "timeOut": "1000"
             });
         }
@@ -1254,7 +1254,7 @@ function addTaller38() {
         $('.enun').append(div);
        
         function alert(){
-        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+        toastr.success("Enunciado agregado correctamente", "SmartLearn", {
             "timeOut": "1000"
         });
         }
@@ -1274,7 +1274,7 @@ function addTaller38() {
             });
             addEnun();
         }else if($('.enun .form-row').length == 1){
-             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+             toastr.error("Este enunciado no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         }else {
@@ -1309,14 +1309,14 @@ function addTaller38() {
 
         if (con == 10) {
         function alert1(){
-            toastr.error("Limite de enunciados creados", "Smarmoddle", {
+            toastr.error("Limite de enunciados creados", "SmartLearn", {
                 "timeOut": "1000"
             });
         }
         } else {
         $('.taller5').append(div);
         function alert1(){
-        toastr.success("Enunciado agregado correctamente", "Smarmoddle", {
+        toastr.success("Enunciado agregado correctamente", "SmartLearn", {
             "timeOut": "1000"
         });
         }
@@ -1336,7 +1336,7 @@ function addTaller38() {
             });
             addCon();
         }else if($('.taller5 .form-group').length == 1){
-             toastr.error("Este enunciado no se puede eliminar", "Smarmoddle", {
+             toastr.error("Este enunciado no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         }else {
@@ -1366,7 +1366,7 @@ function addTaller38() {
         '</tr>';
 
         if (imgs == 5) {
-            toastr.error("Limite de columnas creadas", "Smarmoddle", {
+            toastr.error("Limite de columnas creadas", "SmartLearn", {
                 "timeOut": "1000"
             });
 
@@ -1377,7 +1377,7 @@ function addTaller38() {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
-            toastr.success("Columna agregada correctamente", "Smarmoddle", {
+            toastr.success("Columna agregada correctamente", "SmartLearn", {
                 "timeOut": "1000"
             });
         }
@@ -1388,7 +1388,7 @@ function addTaller38() {
     $('.re').live('click', function() {
 
         if ($('.img_id tr').length == 1) {
-            toastr.error("Esta columna no se puede eliminar", "Smarmoddle", {
+            toastr.error("Esta columna no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         } else {
@@ -1420,7 +1420,7 @@ function addTaller38() {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
-        toastr.success("Columna agregada correctamente", "Smarmoddle", {
+        toastr.success("Columna agregada correctamente", "SmartLearn", {
             "timeOut": "1000"
         });
 
@@ -1428,7 +1428,7 @@ function addTaller38() {
     $('.remover').live('click', function() {
 
         if ($('.prin tr').length == 1) {
-            toastr.error("Esta columna no se puede eliminar", "Smarmoddle", {
+            toastr.error("Esta columna no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         } else {
@@ -1450,7 +1450,7 @@ function addTaller38() {
             '<td><a href="#" class="btn btn-danger remove"><span class="glyphicon glyphicon-remove">X</span></a></td>' +
             '</tr>';
         if (max == 10) {
-            toastr.error("Limite de columnas creadas", "Smarmoddle", {
+            toastr.error("Limite de columnas creadas", "SmartLearn", {
                 "timeOut": "1000"
             });
 
@@ -1459,7 +1459,7 @@ function addTaller38() {
             $('.fac').append(tr);
          
 
-            toastr.success("Columna agregada correctamente", "Smarmoddle", {
+            toastr.success("Columna agregada correctamente", "SmartLearn", {
                 "timeOut": "1000"
             });
             console.log(max)
@@ -1470,7 +1470,7 @@ function addTaller38() {
         var last = $('.fac tr').length;
         if (last == 1) {
             i = 1;
-            toastr.error("Esta columna no se puede eliminar", "Smarmoddle", {
+            toastr.error("Esta columna no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         } else {
@@ -1490,7 +1490,7 @@ function addTaller38() {
             '<td><a href="#" class="btn btn-danger rem"><span class="glyphicon glyphicon-remove">X</span></a></td>'
         '</tr>';
         $('.nota_v').append(tr);
-        toastr.success("Columna agregada correctamente", "Smarmoddle", {
+        toastr.success("Columna agregada correctamente", "SmartLearn", {
             "timeOut": "1000"
         });
 
@@ -1499,7 +1499,7 @@ function addTaller38() {
         var not = $('.nota_v tr').length;
         if (not == 1) {
             i = 1;
-            toastr.error("Esta columna no se puede eliminar", "Smarmoddle", {
+            toastr.error("Esta columna no se puede eliminar", "SmartLearn", {
                 "timeOut": "1000"
             });
         } else {

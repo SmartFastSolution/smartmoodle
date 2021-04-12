@@ -129,7 +129,7 @@ methods:{
         if (this.porcentual == true){
 
             if (this.cuenta.porcentaje == null) {
-        toastr.info("Debes agregar un porcentaje", "Smarmoddle", {
+        toastr.info("Debes agregar un porcentaje", "SmartLearn", {
             "timeOut": "3000"
             });
              return

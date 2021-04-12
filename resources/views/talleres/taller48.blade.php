@@ -78,12 +78,12 @@
         myDropzone.processQueue();
       });
       // this.on("addedfile", function(file) {
-      //       toastr.success("Imagen Agregada Correctamente", "Smarmoddle",{
+      //       toastr.success("Imagen Agregada Correctamente", "SmartLearn",{
       //              "timeOut": "1000"
       //           });
       //   });
        this.on("removedfile", function(file) {
-            toastr.info("Archivo Eliminada Correctamente", "Smarmoddle",{
+            toastr.info("Archivo Eliminada Correctamente", "SmartLearn",{
                    "timeOut": "1000"
                 });
         });

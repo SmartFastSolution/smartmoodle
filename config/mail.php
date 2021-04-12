@@ -87,7 +87,7 @@ return [
     //     'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
     //     'name' => env('MAIL_FROM_NAME', 'Example'),
     // ],
-    'from' => ['address' => 'soporte@smartmoodle.com', 'name' => 'SmartMoodle'],
+    'from' => ['address' => 'soporte@smartlearn.com', 'name' => 'SmartLearn'],
 
     /*
     |--------------------------------------------------------------------------
