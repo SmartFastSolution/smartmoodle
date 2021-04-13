@@ -17,7 +17,7 @@
 			<table class="table table-bordered">
 			  <thead  class="bg-warning text-center">
 			    <tr >
-			      <th valign="middle" scope="col">COMERCIO</th>
+			      <th valign="middle" scope="col">{{ $datos->palabra_clasificar }}</th>
 			     	@foreach ($clasificaciones as $clasificacion)
 			      		<th scope="col">{{ $clasificacion->clasificaciones }}</th>
 			     	@endforeach

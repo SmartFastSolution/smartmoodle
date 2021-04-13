@@ -813,7 +813,7 @@ a.es-button {
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td class="esd-block-button es-p35t es-p35b es-p10r es-p10l" align="center"><span class="es-button-border" style="border-radius: 4px; border-color: #724915; background: #3da3c8;"><a href="https://smartmoodle/" class="es-button" target="_blank" style="border-width: 15px 25px; font-family: &quot;times new roman&quot;, times, baskerville, georgia, serif; font-size: 22px; font-weight: bold; background: #3da3c8; border-color: #3da3c8; color: #333333; border-radius: 4px;">Ir a SmartLearn</a></span></td>
+                                                                                    <td class="esd-block-button es-p35t es-p35b es-p10r es-p10l" align="center"><span class="es-button-border" style="border-radius: 4px; border-color: #724915; background: #3da3c8;"><a href="http://www.secontab.com/" class="es-button" target="_blank" style="border-width: 15px 25px; font-family: &quot;times new roman&quot;, times, baskerville, georgia, serif; font-size: 22px; font-weight: bold; background: #3da3c8; border-color: #3da3c8; color: #333333; border-radius: 4px;">Ir a SmartLearn</a></span></td>
                                                                                 </tr>
                                                                               {{--   <tr>
                                                                                     <td class="esd-block-text es-p20t es-p30r es-p30l es-m-txt-l" align="left">
@@ -859,7 +859,7 @@ a.es-button {
                                                                                 </tr> --}}
                                                                                 <tr>
                                                                                     <td align="center" class="esd-block-text es-p25t" esd-links-color="#d5410b" esd-links-underline="none">
-                                                                                        <p style="color: #0f0e0e; font-family: 'merriweather sans', 'helvetica neue', helvetica, arial, sans-serif; font-size: 16px;"><strong>Todos los derechos reservados.&nbsp;&nbsp;<a target="_blank" href="https://smartmoodle/" style="color: #d5410b; text-decoration: none; word-break: break-all; display: inline-block; font-family: 'merriweather sans', 'helvetica neue', helvetica, arial, sans-serif; font-size: 16px;">SmartMoodle</a>&nbsp;</strong></p>
+                                                                                        <p style="color: #0f0e0e; font-family: 'merriweather sans', 'helvetica neue', helvetica, arial, sans-serif; font-size: 16px;"><strong>Todos los derechos reservados.&nbsp;&nbsp;<a target="_blank" href="http://www.secontab.com/" style="color: #d5410b; text-decoration: none; word-break: break-all; display: inline-block; font-family: 'merriweather sans', 'helvetica neue', helvetica, arial, sans-serif; font-size: 16px;">SmartLearn</a>&nbsp;</strong></p>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>

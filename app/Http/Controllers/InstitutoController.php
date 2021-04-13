@@ -28,7 +28,7 @@ class InstitutoController extends Controller
         //Gate::authorize('haveaccess', 'instituto.index');
         $instituto= Instituto::all();
     
-        return view('Instituto.indexins',['institutos'=>$instituto]);
+        return view('instituto.indexins',['institutos'=>$instituto]);
     }
 
     /**

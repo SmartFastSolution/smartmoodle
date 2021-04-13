@@ -70,7 +70,7 @@
                 @else
                 <li class="nav-item dropdown">
                     <a class="nav-link" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->name }} <i class="fad fa-sort-down"></i></a>
+                        aria-haspopup="true" aria-expanded="false"> {{ Auth::user()->name }} {{ Auth::user()->apellido }}<i class="fad fa-sort-down"></i></a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
