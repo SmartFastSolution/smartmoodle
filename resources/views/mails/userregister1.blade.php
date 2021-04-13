@@ -813,7 +813,7 @@ a.es-button {
                                                                                     </td>
                                                                                 </tr>
                                                                                 <tr>
-                                                                                    <td class="esd-block-button es-p35t es-p35b es-p10r es-p10l" align="center"><span class="es-button-border" style="border-radius: 4px; border-color: #724915; background: #3da3c8;"><a href="https://smartmoodle/" class="es-button" target="_blank" style="border-width: 15px 25px; font-family: &quot;times new roman&quot;, times, baskerville, georgia, serif; font-size: 22px; font-weight: bold; background: #3da3c8; border-color: #3da3c8; color: #333333; border-radius: 4px;">Ir a SmartMoodle</a></span></td>
+                                                                                    <td class="esd-block-button es-p35t es-p35b es-p10r es-p10l" align="center"><span class="es-button-border" style="border-radius: 4px; border-color: #724915; background: #3da3c8;"><a href="https://smartmoodle/" class="es-button" target="_blank" style="border-width: 15px 25px; font-family: &quot;times new roman&quot;, times, baskerville, georgia, serif; font-size: 22px; font-weight: bold; background: #3da3c8; border-color: #3da3c8; color: #333333; border-radius: 4px;">Ir a SmartLearn</a></span></td>
                                                                                 </tr>
                                                                               {{--   <tr>
                                                                                     <td class="esd-block-text es-p20t es-p30r es-p30l es-m-txt-l" align="left">
@@ -823,7 +823,7 @@ a.es-button {
                                                                                 <tr>
                                                                                     <td class="esd-block-text es-p20t es-p40b es-p30r es-p30l es-m-txt-l" align="left">
                                                                                         <p>Atentamente,</p>
-                                                                                        <p>SmartMoodle</p>
+                                                                                        <p>SmartLearn</p>
                                                                                     </td>
                                                                                 </tr>
                                                                             </tbody>
