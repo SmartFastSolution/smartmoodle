@@ -41,11 +41,11 @@ class Unidades extends Component
     	$taller = Taller::find($id);
        $estado = $taller->estado;
       
-       if ($estado === 1) {
+       if ($estado == 1) {
          $taller->estado = 0; 
          $taller->save(); 
         
-       }elseif ($estado == 0) {
+       }else {
         $taller->estado = 1; 
         $taller->save();  
           

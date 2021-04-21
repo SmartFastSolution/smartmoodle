@@ -3,7 +3,7 @@
         <a href="{{ url('/sistema/homedoc') }}" class="brand-link">
             <img src=" {{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
             class="brand-image img-circle elevation-4" style="opacity: .8">
-            <span class="brand-text font-weight-bold text-light">SmartMoodle</span>
+            <span class="brand-text font-weight-bold text-light">SmartLearn</span>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

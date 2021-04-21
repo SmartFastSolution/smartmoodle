@@ -45,7 +45,7 @@ use App\Contabilidad\HojaTrabajo;
 use App\Contabilidad\KFRMovimiento;
 use App\Contabilidad\KFRegistro;
 use App\Contabilidad\KPRegistro;
-use App\Contabilidad\KardexFIfo;
+use App\Contabilidad\KardexFifo;
 use App\Contabilidad\KardexPromedio;
 use App\Librobanco;
 use App\Movimientobanco;

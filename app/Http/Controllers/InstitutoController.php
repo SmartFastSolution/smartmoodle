@@ -58,7 +58,7 @@ class InstitutoController extends Controller
     public function create()
     {
         //Gate::authorize('haveaccess', 'instituto.create');
-        return \view('Instituto.createins');
+        return \view('instituto.createins');
     }
 
     /**
