@@ -88,7 +88,7 @@
 	<div class="col-6 align-self-start pb-5">
 		<div class="row">
 			<div class="col-6"><input name="lugar" class="form-control" type="text" ></div>
-			<div class="col-6"><input name="fecha" class="form-control" type="date" ></div>
+			<div class="col-6"><input name="fecha" class="form-control" type="text" ></div>
 		</div>
 		<div class="row">
 			<div class="col-6"> <label for="">CIUDAD</label> </div>

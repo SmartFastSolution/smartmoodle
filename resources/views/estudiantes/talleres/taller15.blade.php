@@ -72,7 +72,7 @@
 			<div class="col-6 align-self-start pb-5">
 				<div class="row">
 					<div class="col-6"><input name="lugar" class="form-control" value="{{ $datos->lugar }}" type="text" disabled></div>
-					<div class="col-6"><input name="fecha" class="form-control" value="{{ $datos->fecha }}" type="date" disabled></div>
+					<div class="col-6"><input name="fecha" class="form-control" value="{{ $datos->fecha }}" type="text" disabled></div>
 				</div>
 				<div class="row">
 					<div class="col-6"> <label for="">CIUDAD</label> </div>

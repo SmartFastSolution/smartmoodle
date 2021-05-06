@@ -66,7 +66,7 @@
     <div class="col-6 align-self-start pb-5">
       <div class="row">
         <div class="col-6"><input name="lugar" v-model="cheque.ciudad" class="form-control" type="text" ></div>
-        <div class="col-6"><input name="fecha" v-model="cheque.fecha" class="form-control" type="date" ></div>
+        <div class="col-6"><input name="fecha" v-model="cheque.fecha" class="form-control" type="text" ></div>
       </div>
       <div class="row">
         <div class="col-6"> <label for="">CIUDAD</label> </div>

@@ -1200,7 +1200,7 @@
                                 </div>
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Fecha :</label>
-                                    <input required="" type="date" name="fecha" class="form-control">
+                                    <input required="" type="text" name="fecha" class="form-control">
                                 </div>
                             </div>
                             <div class="row justify-content-center">
@@ -1350,7 +1350,7 @@
                                 </div>
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Fecha :</label>
-                                    <input required="" type="date" name="fecha" class="form-control">
+                                    <input required="" type="text" name="fecha" class="form-control">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -1444,7 +1444,7 @@
                             <div class="form-row">
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Fecha de vencimiento :</label>
-                                    <input required="" type="date" name="fecha_de_vencimiento" class="form-control">
+                                    <input required="" type="text" name="fecha_de_vencimiento" class="form-control">
                                 </div>
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Lugar :</label>
@@ -1452,7 +1452,7 @@
                                 </div>
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Fecha de emision :</label>
-                                    <input required="" type="date" name="fecha_de_emision" class="form-control">
+                                    <input required="" type="text" name="fecha_de_emision" class="form-control">
                                 </div>
                             </div>
 
@@ -1731,7 +1731,7 @@
                                 </div>
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Fecha :</label>
-                                    <input required="" type="date" name="fecha" class="form-control">
+                                    <input required="" type="text" name="fecha" class="form-control">
                                 </div>
                             </div>
                             <div class="row justify-content-center">
@@ -1809,7 +1809,7 @@
                                 </div>
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Fecha :</label>
-                                    <input required="" type="date" name="fecha" class="form-control">
+                                    <input required="" type="text" name="fecha" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -1938,7 +1938,7 @@
                                 </div>
                                 <div class="form-group col-3">
                                     <label for="" class="col-form-label">Fecha :</label>
-                                    <input required="" type="date" name="fecha" class="form-control">
+                                    <input required="" type="text" name="fecha" class="form-control">
                                 </div>
                             </div>
                             <div class="row justify-content-center">
@@ -2022,7 +2022,7 @@
                                 </div>
                                 <div class="form-group col-4">
                                     <label for="" class="col-form-label">Fecha del comprobante de pago:</label>
-                                    <input required="" type="date" name="fecha" class="form-control">
+                                    <input required="" type="text" name="fecha" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -2220,7 +2220,7 @@
                                 </div>
                                 <div class="form-group col-6">
                                     <label for="" class="col-form-label">Fecha :</label>
-                                    <input required="" type="date" name="fecha" class="form-control">
+                                    <input required="" type="text" name="fecha" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
