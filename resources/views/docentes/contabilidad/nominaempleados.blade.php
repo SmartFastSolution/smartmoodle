@@ -26,11 +26,11 @@
                         <td class="text-center" width="125">SUELDO</td>
                         <td class="text-center" width="125">SOBRE TIEMPO</td>
                         <td class="text-center" style="vertical-align: middle;">T. INGRESOS</td>
-                        <td class="text-center" width="125">IESS 9.45%</td>
-                        <th class="text-center" style="vertical-align: middle;">PREST.IESS</th>
-                        <th class="text-center" style="vertical-align: middle;">PREST.CIA</th>
-                        <th class="text-center" style="vertical-align: middle;">ANTIC.</th>
-                        <th class="text-center" style="vertical-align: middle;">IMP. RENTA</th>
+                        <td class="text-center" width="100">IESS 9.45%  (-)</td>
+                        <th class="text-center" style="vertical-align: middle;">PREST.IESS (-)</th>
+                        <th class="text-center" style="vertical-align: middle;">PREST.CIA (-)</th>
+                        <th class="text-center" style="vertical-align: middle;">ANTIC. (-)</th>
+                        <th class="text-center" style="vertical-align: middle;">IMP. RENTA (-)</th>
                         <th class="text-center" style="vertical-align: middle;">T.EGRESOS</th>
                         <th class="text-center" style="vertical-align: middle;">V.NETO A PAGAR</th>
                     </tr>
@@ -42,7 +42,7 @@
                         <td class="text-right" align="center" width="125">@{{ decimales(n.sueldo)}}</td>
                         <td class="text-right" align="center" width="125">@{{ decimales(n.s_tiempo)}}</td>
                         <td class="text-right" align="center" width="125">@{{ decimales(n.ingresos)}}</td>
-                        <td class="text-right" align="center" width="125">@{{ decimales(n.iees)}}</td>
+                        <td class="text-right" align="center" width="100">@{{ decimales(n.iees)}}</td>
                         <td class="text-right" align="center" width="125">@{{ decimales(n.pres_iees)}}</td>
                         <td class="text-right" align="center" width="125">@{{ decimales(n.pres_cia)}}</td>
                         <td class="text-right" align="center" width="125">@{{ decimales(n.anticipo)}}</td>
