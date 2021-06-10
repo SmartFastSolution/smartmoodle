@@ -2060,7 +2060,7 @@ transacciones:'',
     valorPorcentual(porcentaje, valor){
      
       let total = Number((valor * porcentaje) / 100);
-      return total;
+      return total.toFixed(2);
     },
       obtenerKardexFifo: function() {
         let _this = this;
@@ -6458,7 +6458,7 @@ const asientos_cierre = new Vue({
     valorPorcentual(porcentaje, valor){
       // let porcentaje = this.cuentas[index].porcentaje;
       let total = Number((valor * porcentaje) / 100);
-      return total;
+      return total.toFixed(2);
     },
     
     agregarHaber(){
