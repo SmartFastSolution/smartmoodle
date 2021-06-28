@@ -14,7 +14,7 @@ class CreateKardexFifosTable extends Migration
     public function up()
     {
         Schema::create('kardex_fifos', function (Blueprint $table) {
-           $table->bigIncrements('id');
+            $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->unsignedbigInteger('producto_id')->nullable();
@@ -28,17 +28,18 @@ class CreateKardexFifosTable extends Migration
             $table->string('adquisicion_precio')->nullable();
             $table->string('ventas_precio')->nullable();
             $table->string('inv_final_precio')->nullable();
+            $table->longText('transacciones')->nullable();
             $table->timestamps();
-            
+
             $table->foreign('taller_id')
-            ->references('id')
-            ->on('tallers')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('tallers')
+                ->onDelete('cascade');
 
             $table->foreign('user_id')
-            ->references('id')
-            ->on('users')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

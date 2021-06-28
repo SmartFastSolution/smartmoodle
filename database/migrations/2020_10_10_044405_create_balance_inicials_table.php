@@ -29,17 +29,18 @@ class CreateBalanceInicialsTable extends Migration
             $table->string('total_pasivo')->nullable();
             $table->string('total_patrimonio')->nullable();
             $table->string('total_pasivo_patrimonio')->nullable();
+            $table->longText('datos')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')
-            ->references('id')
-            ->on('tallers')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('tallers')
+                ->onDelete('cascade');
 
             $table->foreign('user_id')
-            ->references('id')
-            ->on('users')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

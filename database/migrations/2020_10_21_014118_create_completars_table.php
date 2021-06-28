@@ -14,22 +14,22 @@ class CreateCompletarsTable extends Migration
     public function up()
     {
         Schema::create('completars', function (Blueprint $table) {
-           $table->bigIncrements('id');
+            $table->bigIncrements('id');
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->longText('enunciado');
-            $table->string('respuesta')->nullable();
+            $table->longText('respuesta')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')
-            ->references('id')
-            ->on('tallers')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('tallers')
+                ->onDelete('cascade');
 
             $table->foreign('user_id')
-            ->references('id')
-            ->on('users')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

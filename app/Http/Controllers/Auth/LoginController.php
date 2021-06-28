@@ -28,61 +28,58 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
 
-   //protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
 
-   ////////////////  
+    ////////////////
 
-//////////////////
-   
-   
+    //////////////////
+
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
     }
     public function verificarEstado($user)
     {
-       $datos = User::selectRaw('timestampdiff(DAY, activated_at, curdate()) as dato')->where('id', $user->id)->first();
-       if ($datos->dato >= 12) {
-          $user->estado = 'off';
-          $user->save();
-       }
-      
+        $datos = User::selectRaw('timestampdiff(DAY, activated_at, curdate()) as dato')->where('id', $user->id)->first();
+        if ($datos->dato >= 12) {
+            $user->estado = 'off';
+            $user->save();
+        }
     }
 
 
-    public function authenticated($request , $user){
+    public function authenticated($request, $user)
+    {
 
-      $this->verificarEstado($user);
-  if ($user->estado == 'off') {
+        //   $this->verificarEstado($user);
+        if ($user->estado == 'off') {
 
-    Auth::guard()->logout();
+            Auth::guard()->logout();
 
-    $request->session()->invalidate();
+            $request->session()->invalidate();
 
-    return redirect('/login')->withInput()->with('message', 'Tu cuenta esta desactivada por favor comunicate con el administrador');
-  }
+            return redirect('/login')->withInput()->with('message', 'Tu cuenta esta desactivada por favor comunicate con el administrador');
+        }
 
-  $user->access_at = Carbon::now();
-  $user->save();
+        $user->access_at = Carbon::now();
+        $user->save();
 
-        if($user->roles[0]->descripcion=='administrador'){
-           return redirect()->route('administrador') ;
-       }
-       elseif($user->roles[0]->descripcion=='docente'){
-           return redirect()->route('Perfil') ;
-       }
+        if ($user->roles[0]->descripcion == 'administrador') {
+            return redirect()->route('administrador');
+        } elseif ($user->roles[0]->descripcion == 'docente') {
+            return redirect()->route('Perfil');
+        } elseif ($user->roles[0]->descripcion == 'estudiante') {
+            return redirect()->route('perfile');
+        }
 
-       elseif($user->roles[0]->descripcion=='estudiante'){
-           return redirect()->route('perfile');
-       }
+        return redirect()->route('administrador');
+    }
 
-       return redirect()->route('administrador');
-   }
-   
-   // protected function credentials(Request $request)
-   //  {
-   //   $credentials = $request->only($this->username(), 'password');
-   //   return array_merge($credentials, ['estado' => 'on']); 
-   //  }
+    // protected function credentials(Request $request)
+    //  {
+    //   $credentials = $request->only($this->username(), 'password');
+    //   return array_merge($credentials, ['estado' => 'on']);
+    //  }
 
 }

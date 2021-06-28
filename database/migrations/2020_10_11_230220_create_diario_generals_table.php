@@ -22,18 +22,19 @@ class CreateDiarioGeneralsTable extends Migration
             $table->string('nombre')->nullable();
             $table->string('total_debe')->nullable();
             $table->string('total_haber')->nullable();
-            $table->string('completado')->nullable();   
+            $table->string('completado')->nullable();
+            $table->longText('datos')->nullable();
             $table->timestamps();
 
             $table->foreign('taller_id')
-            ->references('id')
-            ->on('tallers')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('tallers')
+                ->onDelete('cascade');
 
             $table->foreign('user_id')
-            ->references('id')
-            ->on('users')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
 
             // $table->foreign('balance_inicial_id')
             // ->references('id')

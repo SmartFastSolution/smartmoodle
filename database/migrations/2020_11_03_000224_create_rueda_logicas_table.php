@@ -18,21 +18,21 @@ class CreateRuedaLogicasTable extends Migration
             $table->unsignedbigInteger('taller_id');
             $table->unsignedbigInteger('user_id');
             $table->longText('enunciado');
-            $table->string('persona_juridica')->nullable();
-            $table->string('objetivo')->nullable();
-            $table->string('importancia')->nullable();
-            $table->string('persona_natural')->nullable();
+            $table->longText('persona_juridica')->nullable();
+            $table->longText('objetivo')->nullable();
+            $table->longText('importancia')->nullable();
+            $table->longText('persona_natural')->nullable();
             $table->timestamps();
-            
+
             $table->foreign('taller_id')
-            ->references('id')
-            ->on('tallers')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('tallers')
+                ->onDelete('cascade');
 
             $table->foreign('user_id')
-            ->references('id')
-            ->on('users')
-            ->onDelete('cascade');
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

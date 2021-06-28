@@ -16,19 +16,19 @@ class CreateCeldaClasificadosTable extends Migration
         Schema::create('celda_clasificados', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedbigInteger('celda_id');
-            $table->unsignedbigInteger('taller_celda_clasificacion_id');
+            $table->unsignedbigInteger('taller_celda_clasificacion_id')->nullable();
             $table->text('nombre')->nullable();
             $table->timestamps();
 
             $table->foreign('celda_id')
-            ->references('id')
-            ->on('celdas')
-            ->onDelete('cascade');  
+                ->references('id')
+                ->on('celdas')
+                ->onDelete('cascade');
 
             $table->foreign('taller_celda_clasificacion_id')
-            ->references('id')
-            ->on('taller_celda_clasificacions')
-            ->onDelete('cascade');   
+                ->references('id')
+                ->on('taller_celda_clasificacions')
+                ->onDelete('cascade');
         });
     }
 
