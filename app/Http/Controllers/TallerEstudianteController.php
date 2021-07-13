@@ -719,6 +719,7 @@ class TallerEstudianteController extends Controller
     }
     public function store6(Request $request, $idtaller)
     {
+        // return $request->all();
         $id                 =   Auth::id();
         $taller             =   Taller::where('id', $idtaller)->firstOrfail();
         $taller6            = new Identificar;
@@ -727,17 +728,19 @@ class TallerEstudianteController extends Controller
         $taller6->enunciado =   $taller->enunciado;
         $taller6->save();
 
-        $com   = Identificar::where('user_id', $id)->get()->last();
-
-        foreach ($request->imgs as $key => $value) {
-            $datos = array(
-                'identificar_id' => $com->id,
-                'img' => $request->imgs[$key],
-                'created_at' => now(),
-                'updated_at' => now(),
-            );
-            IdentificarImgRes::insert($datos);
+        // $com   = Identificar::where('user_id', $id)->get()->last();
+        if ($request->has('imgs')) {
+            foreach ($request->imgs as $key => $value) {
+                $datos = array(
+                    'identificar_id' => $taller6->id,
+                    'img' => $request->imgs[$key],
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                );
+                IdentificarImgRes::insert($datos);
+            }
         }
+
         $user = User::find($id);
         $user->tallers()->attach($idtaller, ['status' => 'completado', 'fecha_entregado' => now()]);
         foreach (auth()->user()->roles as $role) {
@@ -1840,7 +1843,7 @@ class TallerEstudianteController extends Controller
             foreach ($clasificaciones as $key => $value) {                         //RECORRER TODOS LOS REGISTROS EN EL ARRAY
                 $regis = array(
                     'celda_id'  => $c->id,
-                    'taller_celda_clasificacion_id'  => isset($request->clasificaciones[$key]) ? $request->clasificaciones[$key] : null,
+                    'taller_celda_clasificacion_id'  => isset($request->clasificacion[$key]) ? $request->clasificacion[$key] : null,
                     'nombre'  => $clasificaciones[$key]->clasificados,
                     'created_at' => now(),
                     'updated_at' => now(),
