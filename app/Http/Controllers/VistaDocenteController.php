@@ -160,7 +160,7 @@ class VistaDocenteController extends Controller
                 $taller = TallerPartidaDoble::where('taller_id', $consul->id)->firstOrfail();
                 $datos = PartidaDoble::where('user_id', $user)->where('taller_id', $consul->id)->firstOrfail();
                 // $registros = $datos->pdregistro;
-                $registros = PartidaDobleRegis::where('partida_doble_id', $datos->id)->orderBy('cuenta')->get();
+                $registros = PartidaDobleRegis::where('partida_doble_id', $datos->id)->get();
 
                 return view('estudiantes.talleres.taller2', compact('datos', 'd', 'taller', 'registros', 'relacion'));
             } elseif ($plant == 3) {
