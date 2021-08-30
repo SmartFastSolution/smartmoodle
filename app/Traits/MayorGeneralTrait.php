@@ -32,7 +32,12 @@ trait MayorGeneralTrait
     {
         $mayorGeneral = MayorGeneral::where('user_id', $id)->where('taller_id', $taller)->first();
         if (isset($mayorGeneral)) {
-            $registros = json_decode($mayorGeneral->registros);
+            if (isset($mayorGeneral->registros)) {
+                $registros =  json_decode($mayorGeneral->registros);
+            } else {
+                $registros = [];
+            }
+
 
             $array = array(
                 'datos'        => true,

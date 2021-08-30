@@ -32,7 +32,12 @@ trait DiarioGeneralTrait
     {
         $diarioGeneral = DiarioGeneral::where('user_id', $id)->where('taller_id', $taller)->first();
         if (isset($diarioGeneral)) {
-            $registers         =  json_decode($diarioGeneral->datos);
+            if (isset($diarioGeneral->registros)) {
+                $registers =  json_decode($diarioGeneral->registros);
+            } else {
+                $registers = [];
+            }
+            // $registers         =  json_decode($diarioGeneral->datos);
             $normal            =  $this->getRegistros('normal', $registers);
             $inicial           =  $this->getRegistros('inicial', $registers);
             $ajustado          =  $this->getRegistros('ajustado', $registers);
@@ -41,7 +46,7 @@ trait DiarioGeneralTrait
                 'nombre'       => $diarioGeneral->nombre,
                 'registros'    => $normal,
                 'tieneinicial' => count($inicial) > 0 ? true    : false,
-                'inicial'      => count($inicial)  ? $inicial[0] : [],
+                'inicial'      => count($inicial) > 0 ? $inicial[0] : [],
                 'ajustado'     => $ajustado,
                 't_haber'      => $diarioGeneral->total_haber,
                 't_debe'       => $diarioGeneral->total_debe,

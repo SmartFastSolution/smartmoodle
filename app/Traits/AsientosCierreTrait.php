@@ -30,7 +30,12 @@ trait AsientosCierreTrait
     {
         $asientoCierre = AsientoCierre::where('user_id', $id)->where('taller_id', $taller)->first();
         if (isset($asientoCierre)) {
-            $registers = $this->getRegistrosAsientoCierre(json_decode($asientoCierre->registros));
+            if (isset($asientoCierre->registros)) {
+                $registers = $this->getRegistrosAsientoCierre(json_decode($asientoCierre->registros));
+            } else {
+                $registers = [];
+            }
+
             $array = array(
                 'datos'        => true,
                 'nombre'       => $asientoCierre->nombre,

@@ -61,7 +61,12 @@ trait BalanceInicialTraits
     {
         $balanceInicial = BalanceInicial::where('user_id', $id)->where('taller_id', $taller)->where('tipo', $tipo)->first();
         if (isset($balanceInicial)) {
-            $cuenta = json_decode($balanceInicial->datos);
+            if (isset($balanceInicial->datos)) {
+                $cuenta =  json_decode($balanceInicial->datos);
+            } else {
+                $cuenta = [];
+            }
+            // $cuenta = json_decode($balanceInicial->datos);
             $array = array(
                 'datos'                   => true,
                 'completo'                   => $balanceInicial,

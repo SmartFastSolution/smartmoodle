@@ -44,9 +44,14 @@ trait kardexFifoTrait
         $kardexFifo = KardexFifo::where('user_id', $id)->where('taller_id', $taller)->where('producto_id', $producto)->first();
         if (isset($kardexFifo)) {
             $producto =  TallerModuloTransaccion::where('id', $producto)->first();
+            if (isset($kardexFifo->transacciones)) {
+                $transacciones =  json_decode($kardexFifo->transacciones);
+            } else {
+                $transacciones = [];
+            }
             return array(
                 'datos' => true,
-                'kardex_fifo' => json_decode($kardexFifo->transacciones),
+                'kardex_fifo' => $transacciones,
                 'informacion' => $kardexFifo,
                 'transacciones' => $producto
             );
